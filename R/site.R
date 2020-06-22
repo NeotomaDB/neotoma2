@@ -4,13 +4,15 @@
 
 site <- setClass("site",
   representation(siteid = "numeric",
-               sitename = "character",
-               location = "sf",
-               description = "character",
-               notes = "character"),
-             prototype(siteid = NA_integer_,
-               sitename = NA_character_,
-               location = NULL,
-               description = NA_character_,
-               notes = NA_character_),
-             validity = function(object) {!is.na(object@sitename) & !is.na(object@siteid)})
+    sitename = "character",
+    location = "sf",
+    description = "character",
+    notes = "character"),
+  prototype(siteid = NA_integer_,
+    sitename = NA_character_,
+    location = NULL,
+    description = NA_character_,
+    notes = NA_character_),
+  validity = function(object) {
+    !is.na(object@sitename) & !is.na(object@siteid)
+  })
