@@ -13,4 +13,4 @@ site <- setClass("site",
                location = NULL,
                description = NA_character_,
                notes = NA_character_),
-             validity = function(x) {!is.na(x@sitename) & !is.na(x@siteid)})
+             validity = function(object) {!is.na(object@sitename) & !is.na(object@siteid)})
