@@ -1,6 +1,14 @@
 #' An S4 class for site information from the Neotoma Paleoecology Database.
 #'
 #' @importFrom sf sf
+#' @importFrom purrr map
+
+
+datasets <- setClass("datasets",
+  representation(datasets = "list"),
+  validity = function(object) {
+    all(map(object, function(x) { class(x) == "dataset"}) %>% unlist())
+  })
 
 dataset <- setClass("dataset",
   representation(datasetid = "numeric",
