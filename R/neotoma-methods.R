@@ -12,16 +12,17 @@ dataset <- setClass("dataset",
                               datasettype = "character",
                               notes = NA_character_),
                     validity = function(object) {
-                      !is.na(object@datasetname) & !is.na(object@datasetid)
+                      !is.na(object@datasetid)
                     })
 
 
 datasets <- setClass("datasets",
                      representation(datasets = "list"),
                      validity = function(object) {
-                       all(map(object, function(x) { class(x) == "dataset"}) %>% unlist())
+                       all(object@datasets %>% 
+                         lapply(class) %>% 
+                         unlist(recursive = FALSE) ==  'dataset')
                      })
-
 
 collunit <- setClass("collunit",
                      representation(collunitid = "numeric",
