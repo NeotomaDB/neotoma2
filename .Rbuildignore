@@ -1,3 +1,5 @@
 ^LICENSE\.md$
 ^codecov\.yml$
 ^vignettes/articles$
+^.*\.Rproj$
+^\.Rproj\.user$
