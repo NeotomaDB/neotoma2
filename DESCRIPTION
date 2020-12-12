@@ -21,6 +21,7 @@ Suggests:
 Imports:
     magrittr,
     lifecycle,
-    sf
+    sf,
+    purrr
 RdMacros: lifecycle
 VignetteBuilder: knitr

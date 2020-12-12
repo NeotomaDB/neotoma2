@@ -4,7 +4,7 @@
 \alias{get_site}
 \title{Get Site Information for Fossil Sites}
 \usage{
-get_site(x, sitename, altmin, altmax, loc, gpid, ...)
+get_site(sitename, altmin, altmax, loc, gpid, ...)
 }
 \description{
 Get Site Information for Fossil Sites

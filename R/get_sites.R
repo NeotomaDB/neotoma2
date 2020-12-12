@@ -1,6 +1,7 @@
 #' @title Get Site Information for Fossil Sites
+#' @import lubridate
 #' @export
-get_site <- function(x, sitename, altmin, altmax, loc, gpid, ...) {
+get_site <- function(sitename, altmin, altmax, loc, gpid, ...) {
 
   UseMethod('get_site')
 
@@ -13,10 +14,34 @@ get_site.numeric <- function(sitename, ...) {
 
   result <- parseURL(baseURL)
 
+  location <- st_read(result$data[[1]]$geography, quiet = TRUE)
+
+  collunit <- map(result$data[[1]]$collectionunits,
+                  function(x) {
+                    x <- new("collunit",
+                             collunitid = x$collectionunitid,
+                             colldate = NA_Date_,
+                             handle = x$handle,
+                             datasets = new('datasets',
+                              datasets = map(x$datasets, function(y) {
+                                  ds = new('dataset',
+                                    datasetid = y$datasetid,
+                                    datasettype = y$datasettype,
+                                    datasetname = NA_character_,
+                                    notes = NA_character_)
+                                  return(ds)
+                               })))
+                    return(x)
+                  })
+
   output <- new("site", siteid = result$data[[1]]$siteid,
-                                sitename = result$data[[1]]$sitename,
-                                location = "sfg",
-                                description = "character",
-                                notes = "character",
-                                collunits = "collunits")
+                        sitename = result$data[[1]]$sitename,
+                        location = location,
+                        description = result$data[[1]]$sitedescription,
+                        notes = NA_character_,
+                        collunits = new("collunits",
+                                        collunits = collunit))
+
+  return(output)
+
 }

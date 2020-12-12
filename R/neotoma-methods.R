@@ -19,8 +19,8 @@ dataset <- setClass("dataset",
 datasets <- setClass("datasets",
                      representation(datasets = "list"),
                      validity = function(object) {
-                       all(object@datasets %>% 
-                         lapply(class) %>% 
+                       all(object@datasets %>%
+                         lapply(class) %>%
                          unlist(recursive = FALSE) ==  'dataset')
                      })
 
@@ -40,7 +40,7 @@ collunit <- setClass("collunit",
                                location = NA_character_,
                                datasets = NULL),
                      validity = function(object) {
-                       !is.na(object@datasetname) & !is.na(object@datasetid)
+                       !is.na(object@collunitid)
                      })
 
 #' An S4 class for site information from the Neotoma Paleoecology Database.
@@ -50,7 +50,7 @@ collunit <- setClass("collunit",
 collunits <- setClass("collunits",
                       representation(collunits = "list"),
                       validity = function(object) {
-                        all(map(object, function(x) { class(x) == "collunit"}) %>% 
+                        all(map(object@collunits, function(x) { class(x) == "collunit"}) %>%
                               unlist())
                       })
 
@@ -61,7 +61,7 @@ collunits <- setClass("collunits",
 site <- setClass("site",
                  representation(siteid = "numeric",
                                 sitename = "character",
-                                location = "sfg",
+                                location = "sf",
                                 description = "character",
                                 notes = "character",
                                 collunits = "collunits"),
