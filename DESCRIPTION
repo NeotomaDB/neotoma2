@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "goring@wisc.edu",
            comment = structure("0000-0002-2700-4605", .Names = "ORCID"))
-Description: What the package does (one paragraph).
+Description: Access and manipulate data from the Neotoma Paleoecology Database.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -22,6 +22,7 @@ Imports:
     magrittr,
     lifecycle,
     sf,
-    purrr
+    purrr,
+    lubridate
 RdMacros: lifecycle
 VignetteBuilder: knitr
