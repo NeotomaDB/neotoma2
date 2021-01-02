@@ -4,7 +4,7 @@
 \name{collunits-class}
 \alias{collunits-class}
 \alias{collunits}
-\title{An S4 class for site information from the Neotoma Paleoecology Database.}
+\title{An S4 class for Neotoma Collection Units}
 \description{
-An S4 class for site information from the Neotoma Paleoecology Database.
+An S4 class for Neotoma Collection Units
 }

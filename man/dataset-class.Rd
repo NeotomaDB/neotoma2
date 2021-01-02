@@ -4,7 +4,7 @@
 \name{dataset-class}
 \alias{dataset-class}
 \alias{dataset}
-\title{An S4 class for site information from the Neotoma Paleoecology Database.}
+\title{S4 class for dataset information}
 \description{
-An S4 class for site information from the Neotoma Paleoecology Database.
+The standard object class for datasets from the Neotoma Paleoecology Database.
 }
