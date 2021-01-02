@@ -1,5 +1,4 @@
 #' @title Get Site Information for Fossil Sites
-#' @import lubridate
 #' @export
 get_site <- function(sitename, altmin, altmax, loc, gpid, ...) {
 
@@ -8,8 +7,15 @@ get_site <- function(sitename, altmin, altmax, loc, gpid, ...) {
 }
 
 #' @title Get Site Information for Fossil Sites
+#' @import lubridate
+#' @importFrom methods new
 #' @export
 get_site.numeric <- function(sitename, ...) {
+
+  if (length(sitename) > 0) {
+    sitename <- paste0(sitename, collapse = ',')
+  }
+
   baseURL <- paste0('data/sites/', sitename)
 
   result <- parseURL(baseURL)
