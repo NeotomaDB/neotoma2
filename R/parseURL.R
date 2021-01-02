@@ -4,6 +4,8 @@
 #' @param x The HTTP path for the particular API call.
 #' @param dev Should the development API be used (for experimental endpoints), default \code{FALSE}
 #' @param ... Any query parameters passed from the function calling \code{parseURL}.
+#' @importFrom httr add_headers GET stop_for_status
+#' @importFrom jsonlite fromJSON
 #' @export
 
 parseURL <- function(x, dev = FALSE, ...) {
