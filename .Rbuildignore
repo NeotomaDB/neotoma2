@@ -3,3 +3,6 @@
 ^vignettes/articles$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+CODE_OF_CONDUCT.md
+.github
+.git

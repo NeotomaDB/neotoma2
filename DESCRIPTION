@@ -23,6 +23,9 @@ Imports:
     lifecycle,
     sf,
     purrr,
-    lubridate
+    lubridate,
+    httr,
+    jsonlite,
+    methods
 RdMacros: lifecycle
 VignetteBuilder: knitr
