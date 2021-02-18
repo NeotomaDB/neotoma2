@@ -4,12 +4,12 @@
 \alias{parseURL}
 \title{Make the HTTP request}
 \usage{
-parseURL(x, dev = FALSE, ...)
+parseURL(x, use = "neotoma", ...)
 }
 \arguments{
 \item{x}{The HTTP path for the particular API call.}
 
-\item{dev}{Should the development API be used (for experimental endpoints), default \code{FALSE}}
+\item{use}{By default use the neotoma server (\code{neotoma}), but supports either the development API server or a local server.}
 
 \item{...}{Any query parameters passed from the function calling \code{parseURL}.}
 }

@@ -2,19 +2,19 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP path for the particular API call.
-#' @param dev Should the development API be used (for experimental endpoints), default \code{FALSE}
+#' @param use By default use the neotoma server (\code{neotoma}), but supports either the development API server or a local server.
 #' @param ... Any query parameters passed from the function calling \code{parseURL}.
-#' @importFrom httr add_headers GET stop_for_status
+#' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @export
 
-parseURL <- function(x, dev = FALSE, ...) {
+parseURL <- function(x, use = 'neotoma', ...) {
 
-  if (dev == FALSE) {
-    baseurl <- 'https://api.neotomadb.org/v2.0/'
-  }  else {
-    baseurl <- 'https://api-dev.neotomadb.org/v2.0/'
-  }
+  baseurl <- switch(use,
+                    "dev" = "https://api-dev.neotomadb.org/v2.0/",
+                    "neotoma" = "https://api.neotomadb.org/v2.0/",
+                    "local" = "http://localhost:3005/v2.0/",
+                    use)
 
   response <- httr::GET(paste0(baseurl, x),
     add_headers("User-Agent" = "neotoma2 R package"),
@@ -26,7 +26,7 @@ parseURL <- function(x, dev = FALSE, ...) {
             http://data.neotomadb.org")
 
   if (response$status_code == 200) {
-    result <- jsonlite::fromJSON(content(response, as = 'text'),
+    result <- jsonlite::fromJSON(httr::content(response, as = 'text'),
       flatten = FALSE,
       simplifyVector = FALSE)
   }

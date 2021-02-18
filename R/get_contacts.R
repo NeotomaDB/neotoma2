@@ -6,7 +6,7 @@
 #' @param status The current status of the contributor (\code{active} or \code{retired})
 #' @export
 
-get_contacts <- function(x, ...) {
+get_contacts <- function(x = NA, ...) {
   UseMethod('get_contacts')
 }
 
@@ -16,29 +16,61 @@ get_contacts <- function(x, ...) {
 get_contacts.numeric <- function(x, ...) {
 
   if (length(x) > 0) {
-    contactname <- paste0(contactname, collapse = ',')
+    contactname <- paste0(x, collapse = ',')
   }
 
   baseURL <- paste0('data/contacts/', contactname)
 
-  result <- parseURL(baseURL)
+  result <- parseURL(baseURL) %>% cleanNULL()
 
-  contact <- map(result$data[[1]], function(x) {
+  contact <- map(result$data, function(x) {
+                  x[is.null(x)] <- NA_character_
+                  
                   new("contact",
                       contactid = x$contactid,
-                      familyname = x$lastname,
+                      familyname = as.character(x$lastname),
                       leadinginitials = NA_character_,
-                      givennames = x$firstname,
+                      givennames = as.character(x$firstname),
                       suffix = NA_character_,
                       ORCID = NA_character_,
                       title = NA_character_,
                       institution = NA_character_,
-                      email= x$email,
+                      email= as.character(x$email),
                       phone = NA_character_,
                       contactstatus = NA_character_,
                       fax = NA_character_,
-                      url = x$url,
-                      address = x$address,
+                      url = as.character(x$url),
+                      address = as.character(x$address),
                       notes = NA_character_) })
   return(contact)
+}
+
+#' @export
+get_contacts.character <- function(x, ...) {
+  
+  baseURL <- paste0('data/contacts')
+  
+  result <- parseURL(baseURL, ...) %>% cleanNULL()
+  
+  contact <- map(result$data$result, function(x) {
+    new("contact",
+        contactid = x$contactid,
+        familyname = as.character(x$familyname),
+        leadinginitials = NA_character_,
+        givennames = as.character(x$givennames),
+        suffix = NA_character_,
+        ORCID = NA_character_,
+        title = NA_character_,
+        institution = NA_character_,
+        email= as.character(x$email),
+        phone = NA_character_,
+        contactstatus = NA_character_,
+        fax = NA_character_,
+        url = as.character(x$url),
+        address = as.character(x$address),
+        notes = NA_character_) })
+  
+  contacts <- new("contacts", contacts = contact)
+  
+  return(contacts)
 }
