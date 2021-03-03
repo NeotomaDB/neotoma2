@@ -1,5 +1,19 @@
 #' @title An S4 class for Neotoma publications
 
+author <- setClass("author",
+                       representation(author = "contact",
+                                      order = "numeric"),
+                       prototype(author = NULL,
+                                 order = NA_integer_))
+
+authors <- setClass("authors",
+                   representation(authors = "list"),
+                   validity = function(object) {
+                     all(map(object@authors, function(x) { 
+                       class(x) == "author"}) %>%
+                           unlist())
+                   })
+
 publication <- setClass("publication",
                     representation(publicationid = "numeric",
                                    publicationtypeid = "numeric",
@@ -26,7 +40,7 @@ publication <- setClass("publication",
                                    country = "character",
                                    originallanguage = "character",
                                    notes = "character",
-                                   author = "contacts"),
+                                   author = "authors"),
                     prototype(publicationid = NA_integer_,
                               publicationtypeid = NA_integer_,
                               publicationtype = NA_character_,
@@ -52,7 +66,7 @@ publication <- setClass("publication",
                               country = NA_character_,
                               originallanguage = NA_character_,
                               notes = NA_character_,
-                              author = list()))
+                              author = NULL))
 
 setMethod(f = "names",
           signature= signature(x = "publication"),
@@ -85,12 +99,6 @@ setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
             object@publications[[i]]
-          })
-
-setMethod(f = "$",
-          signature= signature(x = "publications"),
-          definition = function(x, name){
-            slot(object@publications, name)
           })
 
 setMethod(f = "show",

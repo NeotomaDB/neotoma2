@@ -17,3 +17,11 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(neotoma2)
 ```
+
+## Publications
+
+Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
+
+### `get_publications()` from Neotoma
+
+Publications in Neotoma can be discovered using a number of parameters.  

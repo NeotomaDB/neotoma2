@@ -46,7 +46,7 @@ get_contacts.numeric <- function(x, ...) {
 }
 
 #' @export
-get_contacts.character <- function(x, ...) {
+get_contacts.default <- function(x, ...) {
   
   baseURL <- paste0('data/contacts')
   
