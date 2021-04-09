@@ -46,7 +46,7 @@ collunit <- setClass("collunit",
                      })
 
 #' An S4 class for Neotoma Collection Units
-#' @desciption Holds Collection unit information from the Neotoma Paleoecology Database.
+#' @description Holds Collection unit information from the Neotoma Paleoecology Database.
 #' @import sf
 #' @importFrom purrr map
 
