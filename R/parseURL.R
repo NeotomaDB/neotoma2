@@ -18,7 +18,7 @@ parseURL <- function(x, use = 'neotoma', ...) {
   cleanNull <- function(x, fn = function(x) if(is.null(x)) NA else x)
   {
     if(is.list(x)) {
-      lapply(x, simple_rapply, fn)
+      lapply(x, cleanNull, fn)
     } else {
       fn(x)
     }

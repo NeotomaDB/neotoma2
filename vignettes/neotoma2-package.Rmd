@@ -18,6 +18,36 @@ knitr::opts_chunk$set(
 library(neotoma2)
 ```
 
+## Neotoma Data Structure
+
+Data in Neotoma is associated with sites, specific locations with lat/long coordinates.  Within a site, there may be one or more **collection units**, which are loactions at which samples are physically collected.  For example, an archaeological **site** may have one or more **collection units**.  These may have higher resolution GPS locations, but are considered to be part of the broader site.  Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
+
+Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
+
+We often begin by searching for sites within our particular study area, whether that is defined by geographic or political boundaries.
+
+### Package Requirements
+
+The `neotoma2` package draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package.
+
+## Site Searches
+
+Sites can be searched using the `get_site()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object, effectively a `list()` of `site` objects.
+
+### Finding a site
+
+You can find a site by its unique numeric Neotoma site id (`x`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+
+#### Using a Site ID
+
+If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_site()`:
+
+```{r getSitex}
+# Wild Tussock Lake has site ID 10101:
+wildTussock = get_site(x=10101)
+swainSite =  get_site(x=100)
+```
+
 
 
 ## Publications
