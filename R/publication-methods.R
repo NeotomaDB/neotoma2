@@ -102,7 +102,7 @@ setMethod(f = "[[",
           })
 
 setMethod(f = "show",
-          signature= "publication",
+          signature = "publication",
           definition = function(object){
             print(data.frame(publicationid = object@publicationid,
                              citation = object@citation,
