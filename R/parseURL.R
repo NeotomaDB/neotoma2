@@ -6,10 +6,24 @@
 #' @param ... Any query parameters passed from the function calling \code{parseURL}.
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
+#' 
 #' @export
 
 parseURL <- function(x, use = 'neotoma', ...) {
 
+  clean <- function(x) {
+    ifelse(is.null(x), NA, x)
+  }
+  
+  cleanNull <- function(x, fn = function(x) if(is.null(x)) NA else x)
+  {
+    if(is.list(x)) {
+      lapply(x, simple_rapply, fn)
+    } else {
+      fn(x)
+    }
+  }
+  
   baseurl <- switch(use,
                     "dev" = "https://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
@@ -30,5 +44,7 @@ parseURL <- function(x, use = 'neotoma', ...) {
       flatten = FALSE,
       simplifyVector = FALSE)
   }
-  return(result)
+  
+  
+  return(cleanNull(result))
 }
