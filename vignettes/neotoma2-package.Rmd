@@ -49,11 +49,17 @@ swainSite =  get_site(x=100)
 ```
 
 
-
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
 
-### `get_publications()` from Neotoma
+### `get_publication()` from Neotoma
 
 Publications in Neotoma can be discovered using a number of parameters.  
+
+The most simple case is a search for a publication based on one or more publication IDs.  Most people do not know the unique publication ID of individual articles, but this provides a simple method to highlight the way Neotoma retrieves and presents publication information.
+
+#### Get Publication By ID
+
+```{r}
+```
