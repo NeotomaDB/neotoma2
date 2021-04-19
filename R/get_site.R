@@ -70,9 +70,9 @@ get_site.numeric <- function(x, ...) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
-      cat("hola", x)
+      cat("x is na", x)
     } else {
-      cat("adios", x)
+      cat("x is not na", x)
       return(x)
     }
   }
@@ -123,20 +123,34 @@ get_site.numeric <- function(x, ...) {
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
 #' @importFrom methods new
+#' @param sitename
 #' @export
-get_site.default <- function(...) {
+get_site.default <- function(sitename, ...) {
   
-  cat("I am in default")
-  g = st_sfc(st_point(1:2))
+  cat("I am in default \n")
   
-  site <- new("site",
-              siteid = 1,
-              sitename = "New",
-              location = st_sf(a=3,g),
-              description = "character",
-              notes = "character",
-              collunits= "collunits")
+  useNA <- function(sitename, type) {
+    if (is.na(sitename)) {
+      return(switch(type,
+                    "char" = NA_character_,
+                    "int" = NA_integer_))
+      cat("x is na", sitename)
+    } else {
+      cat("x is not na", sitename)
+      return(sitename)
+    }
+  }
   
+  if (length(sitename) > 0) {
+    sitename <- paste0(sitename, collapse = ',')
+  }
   
-  return(site)
+  x <- gsub(" ", "%20", sitename)
+  
+  baseURL <- paste0('data/sites?sitename=', x)
+  
+  result <- parseURL(baseURL)
+ 
+  
+  return(result)
 }
