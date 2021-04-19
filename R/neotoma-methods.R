@@ -75,6 +75,11 @@ site <- setClass("site",
                            notes = NA_character_,
                            collunits = NULL))
 
+setMethod(f = "get_site",
+          signature= signature(x = "site"),
+          definition = function(x){
+            slotNames(x)
+          })
 #' An S4 class for multi-site information from the Neotoma Paleoecology Database.
 #' @import sf
 

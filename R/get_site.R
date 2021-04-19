@@ -125,7 +125,7 @@ get_site.numeric <- function(x, ...) {
 #' @importFrom methods new
 #' @param sitename
 #' @export
-get_site.default <- function(sitename, ...) {
+get_site.default <- function(sitename = NA, lat = NA, ...) {
   
   cat("I am in default \n")
   
@@ -145,9 +145,21 @@ get_site.default <- function(sitename, ...) {
     sitename <- paste0(sitename, collapse = ',')
   }
   
+  if (length(lat) > 0) {
+    lat <- paste0(lat, collapse = ',')
+  }
+  
+  cl <- as.list(match.call())
+  print(cl)
+  
+  
   x <- gsub(" ", "%20", sitename)
   
+  # Add if for sitename, if sitename exists, append
   baseURL <- paste0('data/sites?sitename=', x)
+  
+  # Add if for lat, if lat exists, append - first make sure sitename works
+  
   
   result <- parseURL(baseURL)
  
