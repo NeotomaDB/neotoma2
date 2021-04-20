@@ -61,19 +61,30 @@ collunits <- setClass("collunits",
 #'
 #' @import sf
 
-site <- setClass("site",
-                 representation(siteid = "numeric",
-                                sitename = "character",
-                                location = "sf",
-                                description = "character",
-                                notes = "character",
-                                collunits = "collunits"),
-                 prototype(siteid = NA_integer_,
-                           sitename = NA_character_,
-                           location = NULL,
-                           description = NA_character_,
-                           notes = NA_character_,
-                           collunits = NULL))
+site <- setClass(
+  # Set the name for the class
+  "site",
+  
+  # Define the slots
+  slots = c(siteid = "numeric",
+            sitename = "character",
+            location = "sf",
+            description = "character",
+            notes = "character",
+            collunits = "collunits"),
+  
+  # Set the default values for the slot
+  prototype = list(siteid = NA_integer_,
+            sitename = NA_character_,
+            location = st_sf(st_sfc()),
+            description = NA_character_,
+            notes = NA_character_),
+            collunits = vector(mode = "list", length = 3)
+            
+  # Add a validity function that can test data consistency.
+  # This is not called if you have an initialize function defined!
+)
+
 
 setMethod(f = "get_site",
           signature= signature(x = "site"),
