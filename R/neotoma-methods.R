@@ -119,7 +119,7 @@ setMethod(f = "set_site",
 
 #' An S4 class for multi-site information from the Neotoma Paleoecology Database.
 #' @import sf
-
+# TODO Add area
 sites <- setClass("sites",
                   representation(sites = "list"),
                   validity = function(object) {

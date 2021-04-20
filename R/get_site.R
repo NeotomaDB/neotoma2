@@ -25,35 +25,56 @@ parse_site <- function(result) {
   
   result <- result %>% fixNull()
   
-  location <- st_read(result$geography, quiet = TRUE)
+  result_length <- length(result[2]$data)
+  cat("This is the length:", result_length, "\n")
   
-  collunit <- map(result$collectionunits,
-                  function(x) {
-                    x <- new("collunit",
-                             collunitid = x$collectionunitid,
-                             colldate = NA_Date_,
-                             handle = x$handle,
-                             datasets = new('datasets',
-                                            datasets = map(x$datasets, function(y) {
-                                              ds = new('dataset',
-                                                       datasetid = y$datasetid,
-                                                       datasettype = y$datasettype,
-                                                       datasetname = NA_character_,
-                                                       notes = NA_character_)
-                                              return(ds)
-                                            })))
-                    return(x)
-                  })
+  sites <- c()
+  for(i in 1:result_length) {
+  # i-th element result[2]$data[[i]]$
+    location <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+    siteid <- result[2]$data[[i]]$siteid
+    sitename <- result[2]$data[[i]]$sitename
+    description <- as.character(result[2]$data[[i]]$sitedescription)
+    notes <- NA_character_
+   # cat("Sitename", sitename, "\n")
+  #  cat("Siteid", siteid, "\n")
+   # cat("Location:")
+  #  print(location)
+    
+    collunit <- map(result[2]$data[[i]]$collectionunits,
+                    function(x) {
+                      x <- new("collunit",
+                               collunitid = x$collectionunitid,
+                               colldate = as.Date("2007-02-01"),
+                               handle = x$handle,
+                               datasets = new('datasets',
+                                              datasets = map(x$datasets, function(y) {
+                                                ds = new('dataset',
+                                                         datasetid = y$datasetid,
+                                                         datasettype = y$datasettype,
+                                                         datasetname = NA_character_,
+                                                         notes = NA_character_)
+                                                return(ds)
+                                              })))
+                      return(x)
+                    })
+
+    output <- new("site",
+                  siteid = siteid,
+                  sitename = sitename,
+                  location = location,      
+                  description = description,
+                  notes = NA_character_,
+                  collunits = new("collunits",
+                                  collunits = collunit))
   
-  output <- new("site", siteid = result$siteid,
-                sitename = result$sitename,
-                location = location,
-                description = as.character(result$sitedescription),
-                notes = NA_character_,
-                collunits = new("collunits",
-                                collunits = collunit))
+    
+    sites <- append(sites, output)
+    }
   
-  return(output)
+  
+  
+  return(sites)
   
 }
 
@@ -154,11 +175,45 @@ get_site.default <- function(sitename = NA, lat = NA, ...) {
   # Add if for sitename, if sitename exists, append
   baseURL <- paste0('data/sites?sitename=', x)
   
+  
+  
   # Add if for lat, if lat exists, append - first make sure sitename works
   
   
   result <- parseURL(baseURL)
+  
+  
+  location <- st_read(result$data[[1]]$geography, quiet = TRUE)
+  
+  collunit <- map(result$data[[1]]$collectionunits,
+                  function(x) {
+                    x <- new("collunit",
+                             collunitid = x$collectionunitid,
+                             colldate = NA_Date_,
+                             handle = x$handle,
+                             
+                             datasets = new('datasets',
+                                            datasets = map(x$datasets, function(y) {
+                                              ds = new('dataset',
+                                                       datasetid = y$datasetid,
+                                                       datasettype = y$datasettype,
+                                                       datasetname = NA_character_,
+                                                       notes = NA_character_)
+                                              return(ds)
+                                            })))
+                    return(x)
+                  })
+  
+  output <- new("site", siteid = result$data[[1]]$siteid,
+                sitename = result$data[[1]]$sitename,
+                location = location,
+                description = useNA(result$data[[1]]$sitedescription, "char"),
+                notes = NA_character_,
+                collunits = new("collunits",
+                                collunits = collunit))
+  
+  output <- new('sites', sites = list(output))
  
   
-  return(result)
+  return(output)
 }
