@@ -166,3 +166,13 @@ get_site.default <- function(sitename = NA, lat = NA, ...) {
   
   return(result)
 }
+
+
+
+set_site <- function(x = NA, ...) {
+  UseMethod('set_site')
+}
+
+set_site.default <- function(x){
+  site@name <- x
+}

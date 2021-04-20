@@ -78,19 +78,45 @@ site <- setClass(
             sitename = NA_character_,
             location = st_sf(st_sfc()),
             description = NA_character_,
-            notes = NA_character_),
-            collunits = rep(NA, 3)
+            notes = NA_character_,
+            collunits = NULL) # check what would really be a NA here
             
   # Add a validity function that can test data consistency.
   # This is not called if you have an initialize function defined!
 )
 
+# create a method to set a site
+setGeneric(name = "set_site",
+           def = function(the_site){
+             standardGeneric("set_site")
+           }
+           )
 
-setMethod(f = "get_site",
-          signature= signature(x = "site"),
-          definition = function(x){
-            slotNames(x)
-          })
+setMethod(f = "set_site",
+          signature = "site",
+          definition = function(the_site)
+          {
+            return(the_site@siteid)
+          }
+)
+
+setMethod(f = "set_site",
+          signature = "numeric",
+          definition = function(the_site)
+          {
+            return(the_site)
+          }
+)
+
+
+# setMethod(f = "get_site",
+#           signature = "get_site",
+#           definition = function(object){
+#             map(object@sites, function(x) {
+#               data.frame(siteid = x@siteid)
+#             })
+#           })
+
 #' An S4 class for multi-site information from the Neotoma Paleoecology Database.
 #' @import sf
 
