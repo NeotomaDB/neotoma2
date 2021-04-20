@@ -79,7 +79,7 @@ site <- setClass(
             location = st_sf(st_sfc()),
             description = NA_character_,
             notes = NA_character_),
-            collunits = vector(mode = "list", length = 3)
+            collunits = rep(NA, 3)
             
   # Add a validity function that can test data consistency.
   # This is not called if you have an initialize function defined!
