@@ -121,7 +121,7 @@ get_site.numeric <- function(x, ...) {
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
 #' @importFrom methods new
-#' @param sitename
+#' @param sitename gets sitename
 #' @export
 get_site.default <- function(sitename = NA, lat = NA, ...) {
   
@@ -161,20 +161,4 @@ get_site.default <- function(sitename = NA, lat = NA, ...) {
  
   
   return(result)
-}
-
-
-
-set_site <- function(x = NA, ...) {
-  UseMethod('set_site')
-}
-
-set_site.default <- function(siteid, sitename, location, description, notes, collunits){
-  x <- new("site")
-  x@siteid <- siteid
-  x@sitename <- sitename
-  x@location <- location
-  x@description <- description
-  x@notes <- notes
-  x@collunits <- collunits
 }
