@@ -8,7 +8,6 @@ get_site <- function(x = NA, ...) {
     UseMethod('get_site')
   }
 
-
 parse_site <- function(result) {
   
   fixNull <- function(x) {
@@ -57,7 +56,6 @@ parse_site <- function(result) {
   return(output)
   
 }
-
 
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
@@ -127,8 +125,6 @@ get_site.numeric <- function(x, ...) {
 #' @export
 get_site.default <- function(sitename = NA, lat = NA, ...) {
   
-  cat("I am in default \n")
-  
   useNA <- function(sitename, type) {
     if (is.na(sitename)) {
       return(switch(type,
@@ -173,6 +169,12 @@ set_site <- function(x = NA, ...) {
   UseMethod('set_site')
 }
 
-set_site.default <- function(x){
-  site@name <- x
+set_site.default <- function(siteid, sitename, location, description, notes, collunits){
+  x <- new("site")
+  x@siteid <- siteid
+  x@sitename <- sitename
+  x@location <- location
+  x@description <- description
+  x@notes <- notes
+  x@collunits <- collunits
 }
