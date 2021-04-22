@@ -4,7 +4,7 @@
 \alias{get_site.numeric}
 \title{Get Site Information for Fossil Sites}
 \usage{
-\method{get_site}{numeric}(sitename, ...)
+\method{get_site}{numeric}(x, ...)
 }
 \description{
 Get Site Information for Fossil Sites

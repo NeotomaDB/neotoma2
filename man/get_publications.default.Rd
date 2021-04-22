@@ -4,7 +4,7 @@
 \alias{get_publications.default}
 \title{Get contact information for Neotoma contributors}
 \usage{
-\method{get_publications}{default}(x, ...)
+\method{get_publications}{default}(...)
 }
 \description{
 Get contact information for Neotoma contributors

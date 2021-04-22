@@ -7,16 +7,24 @@
 #' @param pubtype The publication type, from `get_tables('publicationtypes')`.
 #' @param year The year the publication was released.
 #' @param search A plain text search string used to search the citation.
+#' @importFrom purrr pluck
+#' @examples 
+#' onePub <- get_publications(12)
 #' @export
 
 get_publications <- function(x = NA, ...) {
-  UseMethod('get_publications')
+  if(!missing(x)) {
+    UseMethod('get_publications', x)
+  } else {
+    UseMethod('get_publications', NA)
+  }
 }
 
 #' @title Get contact information for Neotoma contributors
 #' @importFrom methods new
+#' @importFrom purrr pluck
 #' @export
-get_publications.default <- function(x, ...) {
+get_publications.default <- function(...) {
   
   baseURL <- paste0('data/publications')
   result <- parseURL(baseURL, ...) %>% 
@@ -25,6 +33,8 @@ get_publications.default <- function(x, ...) {
     pluck("result")
   
   pubs <- map(result, function(x) {
+    
+    author <- 
     
     x[is.null(x)] <- NA_character_
     
@@ -48,6 +58,7 @@ get_publications.default <- function(x, ...) {
 
 #' @title Get contact information for Neotoma contributors
 #' @importFrom methods new
+#' @importFrom purrr pluck
 #' @export
 get_publications.numeric <- function(x, ...) {
 
@@ -55,12 +66,28 @@ get_publications.numeric <- function(x, ...) {
     pubids <- paste0(x, collapse = ',')
   }
 
+  testNull <- function(val, out) {
+    if(is.null(val)) { return(out)} else {return(val)}
+  }
+  
   baseURL <- paste0('data/publications/', pubids)
 
   result <- parseURL(baseURL) %>% cleanNULL()
 
+  newAuthors <- function(x) {
+    result <- new("authors",
+                        authors = map(x$author, function(y) {
+                          new("author",
+                              author = new("contact",
+                                           familyname =testNull(y$family, NA_character_),
+                                           givennames= testNull(y$given, NA_character_)),
+                                           order = 1)
+                                     }))
+    return(result)
+    }
+  
   pubs <- map(result$data, function(x) {
-    
+                  x <- x$publication
                   x[is.null(x)] <- NA_character_
                   
                   new("publication",
@@ -74,7 +101,7 @@ get_publications.numeric <- function(x, ...) {
                       pages = as.character(x$pages),
                       citation = as.character(x$citation),
                       doi = as.character(x$doi),
-                      author = x$author) 
+                      author = newAuthors(x)) 
                 }) %>% 
     new("publications", publications = .)
   return(pubs)
