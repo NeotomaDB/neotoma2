@@ -33,9 +33,7 @@ get_publications.default <- function(...) {
     pluck("result")
   
   pubs <- map(result, function(x) {
-    
-    author <- 
-    
+    x <- x$publication
     x[is.null(x)] <- NA_character_
     
     new("publication",
@@ -49,7 +47,7 @@ get_publications.default <- function(...) {
         pages = as.character(x$pages),
         citation = as.character(x$citation),
         doi = as.character(x$doi),
-        author = x$author) 
+        author = newAuthors(x)) 
   }) %>% 
     new("publications", publications = .)
   
@@ -75,16 +73,27 @@ get_publications.numeric <- function(x, ...) {
   result <- parseURL(baseURL) %>% cleanNULL()
 
   newAuthors <- function(x) {
+    if(is.null(x$author)) {
+      result <- new("authors",
+                          authors = list(
+                            new("author",
+                                author = new("contact",
+                                            familyname = NA_character_,
+                                            givennames= NA_character_,
+                                            order = 1)
+                                      )))
+    }
+
     result <- new("authors",
                         authors = map(x$author, function(y) {
                           new("author",
                               author = new("contact",
-                                           familyname =testNull(y$family, NA_character_),
-                                           givennames= testNull(y$given, NA_character_)),
-                                           order = 1)
+                                           familyname =as.character(y$family),
+                                           givennames= as.character(y$given)),
+                                           order = as.numeric(y$order))
                                      }))
     return(result)
-    }
+  }
   
   pubs <- map(result$data, function(x) {
                   x <- x$publication
@@ -105,4 +114,29 @@ get_publications.numeric <- function(x, ...) {
                 }) %>% 
     new("publications", publications = .)
   return(pubs)
+}
+
+#' @title newAuthors
+#' @description This function is a helper, not exported.
+newAuthors <- function(x) {
+  if(is.null(x$author)) {
+    result <- new("authors",
+                  authors = list(
+                    new("author",
+                        author = new("contact",
+                                     familyname = NA_character_,
+                                     givennames= NA_character_,
+                                     order = 1)
+                    )))
+  }
+  
+  result <- new("authors",
+                authors = map(x$author, function(y) {
+                  new("author",
+                      author = new("contact",
+                                   familyname =as.character(y$family),
+                                   givennames= as.character(y$given)),
+                      order = as.numeric(y$order))
+                }))
+  return(result)
 }
