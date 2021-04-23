@@ -68,20 +68,26 @@ publication <- setClass("publication",
                               notes = NA_character_,
                               author = NULL))
 
-setMethod(f = "names",
-          signature= signature(x = "publication"),
-          definition = function(x){
-            slotNames(x)
-          })
-
 #' An S4 class for multi-contact information from the Neotoma Paleoecology Database.
 
 publications <- setClass("publications",
-                     representation(publications  = "list"),
-                     validity = function(object) {
-                       all(map(object@publications, function(x) { class(x) == "publication"}) %>%
-                             unlist())
-                     })
+                         representation(publications  = "list"),
+                         validity = function(object) {
+                           all(map(object@publications, function(x) { class(x) == "publication"}) %>%
+                                 unlist())
+                         })
+
+setMethod(f = "names",
+          signature= signature(x = "publication"),
+          definition = function(x){
+            slotNames("publication")
+          })
+
+setMethod(f = "names",
+          signature= signature(x = "publications"),
+          definition = function(x){
+            slotNames("publication")
+          })
 
 setMethod(f = "show",
           signature= "publications",
@@ -98,7 +104,22 @@ setMethod(f = "show",
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
-            object@publications[[i]]
+            new('publications',
+            publications = x@publications[i])
+          })
+
+setMethod(f = "length",
+          signature= signature(x = "publications"),
+          definition = function(x){
+            length(x@publications)
+          })
+
+setMethod(f = "c",
+          signature = signature("publications"),
+          definition = function(x, y){
+            new('publications',
+                publications= unlist(c(x@publications, 
+                                       y@publications), recursive = FALSE))
           })
 
 setMethod(f = "show",
