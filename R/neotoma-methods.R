@@ -85,6 +85,8 @@ site <- setClass(
   # This is not called if you have an initialize function defined!
 )
 
+setGeneric("bind", function(x, y) standardGeneric("bind")) 
+
 # create a method to set a site
 setGeneric(name = "set_site",
            def = function(the_site){
