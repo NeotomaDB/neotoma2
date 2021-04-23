@@ -3,10 +3,13 @@
 #' @param contactname A full or partial name for an individual contributor to the database.
 #' @param familyname The full or partial last name for an individual contributor to the database.
 #' @export
-
 get_site <- function(x = NA, ...) {
-    UseMethod('get_site')
+  if(!missing(x)) {
+    UseMethod('get_site', x)
+  } else {
+    UseMethod('get_site', NA)
   }
+}
 
 parse_site <- function(result) {
   
@@ -73,29 +76,28 @@ parse_site <- function(result) {
   return(output)
 }
 
-#' @title Get Site Information for Fossil Sites
+#' @title Get Site Numeric
 #' @import lubridate
 #' @importFrom methods new
+#' @param x Use a single number to extract site information
 #' @export
-get_site.numeric <- function(x, ...) {
+get_site.numeric <- function(siteid, ...) {
   
-  useNA <- function(x, type) {
-    if (is.na(x)) {
+  useNA <- function(siteid, type) {
+    if (is.na(siteid)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
-      cat("x is na", x)
     } else {
-      cat("x is not na", x)
-      return(x)
+      return(siteid)
     }
   }
   
-  if (length(x) > 0) {
-    sitename <- paste0(x, collapse = ',')
+  if (length(siteid) > 0) {
+    sitename <- paste0(siteid, collapse = ',')
   }
   
-  baseURL <- paste0('data/sites/', x)
+  baseURL <- paste0('data/sites/', siteid)
   
   result <- parseURL(baseURL)
   
@@ -108,18 +110,18 @@ get_site.numeric <- function(x, ...) {
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
 #' @importFrom methods new
-#' @param sitename gets sitename
+#' @param sitename The site's name
+#' @param altmax The coordinates to create an sf object
+#' @param altmin The coordinates to create an sf object
 #' @export
-get_site.default <- function(sitename = NA, lat = NA, ...) {
+get_site.default <- function(sitename = NA, altmax = NA, altmin = NA) {
   
   useNA <- function(sitename, type) {
     if (is.na(sitename)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
-      cat("x is na", sitename)
     } else {
-      cat("x is not na", sitename)
       return(sitename)
     }
   }
@@ -128,8 +130,8 @@ get_site.default <- function(sitename = NA, lat = NA, ...) {
     sitename <- paste0(sitename, collapse = ',')
   }
   
-  if (length(lat) > 0) {
-    lat <- paste0(lat, collapse = ',')
+  if (length(altmax) > 0) {
+    altmax <- paste0(altmax, collapse = ',')
   }
   
   cl <- as.list(match.call())
@@ -137,16 +139,55 @@ get_site.default <- function(sitename = NA, lat = NA, ...) {
   
   
   x <- gsub(" ", "%20", sitename)
+
+  if(sitename == 'NA'){
+    baseURL <- paste0('data/sites?')
+    if(altmax == 'NA'){
+      baseURL 
+      if(is.na(altmin)){
+        cat("You need to pass some arguments")
+      }else{
+        baseURL <- paste0(baseURL, 'altmin=', altmin)
+      }
+    }else{
+      baseURL <- paste0(baseURL, 'altmax=', altmax)
+      if(is.na(altmin)){
+        print("This is url")
+      }else{
+        baseURL <- paste0(baseURL, 'altmin=', altmin)
+      }
+    }
+  }else{
+    baseURL <- paste0('data/sites?sitename=', x)
+    cat("entering sitename is given")
+    if(altmax == 'NA'){
+      cat("entering altmax is not given")
+      baseURL
+      if(is.na(altmin)){
+        print("This is url")
+      }else{
+        baseURL <- paste0(baseURL, 'altmin=', altmin)
+      }
+    }else{
+      baseURL <- paste0(baseURL, '&altmax=', altmax)
+      if(is.na(altmin)){
+        print("This is url")
+      }else{
+        baseURL <- paste0(baseURL, 'altmin=', altmin)
+      }
+    }
+  }
   
-  # Add if for sitename, if sitename exists, append
-  baseURL <- paste0('data/sites?sitename=', x)
-  
-  # Add if for lat, if lat exists, append - first make sure sitename works
-  
+  print(baseURL)
   
   result <- parseURL(baseURL)
   
-  output <- parse_site(result)
-  
-  return(output)
+  if(is.null(result$data[1][[1]])){
+    output <- cat("I can't find a site for you. Are you using the right spelling? \n")
+    return(output)
+  }else{
+    output <- parse_site(result)
+    return(output)
+  }
+
 }
