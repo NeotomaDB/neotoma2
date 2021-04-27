@@ -20,7 +20,7 @@ library(neotoma2)
 
 ## Neotoma Data Structure
 
-Data in Neotoma is associated with sites, specific locations with lat/long coordinates.  Within a site, there may be one or more **collection units**, which are loactions at which samples are physically collected.  For example, an archaeological **site** may have one or more **collection units**.  These may have higher resolution GPS locations, but are considered to be part of the broader site.  Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
+Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more **collection units**, which are locations at which samples are physically collected. For example, an archaeological **site** may have one or more **collection units**. These may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
 
 Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
 
@@ -32,7 +32,7 @@ The `neotoma2` package draws primarily on `dplyr` and `purrr` packages from the 
 
 ## Site Searches
 
-Sites can be searched using the `get_site()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object, effectively a `list()` of `site` objects.
+Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object, effectively a `list()` of `site` objects.
 
 ### Finding a site
 
@@ -46,6 +46,21 @@ If we're looking for a site and we know its specific site identifier, we can use
 # Wild Tussock Lake has site ID 10101:
 wildTussock = get_site(x=10101)
 swainSite =  get_site(x=100)
+```
+
+##### Using a Sitename
+
+If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = )`:
+
+```{r getsitename}
+alexanderLake = get_site(sitename = 'Alexander Lake')
+```
+##### Using an approximate name
+
+If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
+
+````{r getsitename placeholder}
+alexanderSomething = get_site(sitename = 'Alexander%')
 ```
 
 

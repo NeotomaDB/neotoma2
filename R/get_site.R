@@ -3,9 +3,9 @@
 #' @param contactname A full or partial name for an individual contributor to the database.
 #' @param familyname The full or partial last name for an individual contributor to the database.
 #' @export
-get_site <- function(x = NA, ...) {
-  if(!missing(x)) {
-    UseMethod('get_site', x)
+get_site <- function(siteid = NA, ...) {
+  if(!missing(siteid)) {
+    UseMethod('get_site', siteid)
   } else {
     UseMethod('get_site', NA)
   }
@@ -107,6 +107,7 @@ get_site.numeric <- function(siteid, ...) {
   
 }
 
+
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
 #' @importFrom methods new
@@ -114,80 +115,26 @@ get_site.numeric <- function(siteid, ...) {
 #' @param altmax The coordinates to create an sf object
 #' @param altmin The coordinates to create an sf object
 #' @export
-get_site.default <- function(sitename = NA, altmax = NA, altmin = NA) {
+get_site.default <- function(...) {
   
-  useNA <- function(sitename, type) {
-    if (is.na(sitename)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(sitename)
-    }
-  }
-  
-  if (length(sitename) > 0) {
-    sitename <- paste0(sitename, collapse = ',')
-  }
-  
-  if (length(altmax) > 0) {
-    altmax <- paste0(altmax, collapse = ',')
-  }
-  
-  cl <- as.list(match.call())
-  print(cl)
-  
-  
-  x <- gsub(" ", "%20", sitename)
-
-  if(sitename == 'NA'){
-    baseURL <- paste0('data/sites?')
-    if(altmax == 'NA'){
-      baseURL 
-      if(is.na(altmin)){
-        cat("You need to pass some arguments")
-      }else{
-        baseURL <- paste0(baseURL, 'altmin=', altmin)
-      }
-    }else{
-      baseURL <- paste0(baseURL, 'altmax=', altmax)
-      if(is.na(altmin)){
-        print("This is url")
-      }else{
-        baseURL <- paste0(baseURL, 'altmin=', altmin)
-      }
-    }
-  }else{
-    baseURL <- paste0('data/sites?sitename=', x)
-    cat("entering sitename is given")
-    if(altmax == 'NA'){
-      cat("entering altmax is not given")
-      baseURL
-      if(is.na(altmin)){
-        print("This is url")
-      }else{
-        baseURL <- paste0(baseURL, 'altmin=', altmin)
-      }
-    }else{
-      baseURL <- paste0(baseURL, '&altmax=', altmax)
-      if(is.na(altmin)){
-        print("This is url")
-      }else{
-        baseURL <- paste0(baseURL, 'altmin=', altmin)
-      }
-    }
-  }
-  
-  print(baseURL)
-  
-  result <- parseURL(baseURL)
+  baseURL <- paste0('data/sites')
+  result <- parseURL(baseURL, ...) %>% 
+    cleanNULL()
   
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n")
     return(output)
   }else{
     output <- parse_site(result)
+    print(paste0(...))
+    tracer = match.call()
+    tracer
     return(output)
   }
 
 }
+
+#' @title Check Arguments
+#' @import lubridate
+#' @param arguments get_site arguments
+check_args.default <- function(...) {}
