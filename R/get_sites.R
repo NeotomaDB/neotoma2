@@ -140,55 +140,53 @@ get_sites.default <- function(...) {
 #' @param arguments in ... form
 check_args <- function(...) {
   args <- match.call()
-  
+  length(args)
   arg_names <- c()
-  names_perms <- c()
   for(i in 2:length(names(args))){
     arg_names <- c(arg_names, names(args[i]))
-    arg_names <- mixedsort(arg_names)
   }
   
-  for(i in 1:length(arg_names)){
-    permutation <- permutations(n=length(arg_names),r=i,v=arg_names,repeats.allowed=F)
-    for(j in 1:length(arg_names)){
-      permutation <- permutations(n=length(arg_names),r=i,v=arg_names,repeats.allowed=F)[j,]
-      names_perms <- c(names_perms, c(permutation))
-    }
-    
-    
-  }
-  
-  print(names(args))
   for(i in 1:length(arg_names)){
     if(!(names(args)[i] %in% c("", 'sitename', 'altmax', 'altmin'))){
-      stop("Are you using one of the following arguments: sitename, altmax, altmin ?")
+      stop("Are you using the following arguments: sitename, altmax, altmin ?")
     }
   }
   
-  print(names_perms)
-  
   if(("sitename" %in% names(args))|("altmax" %in% names(args)) | ("altmin" %in% names(args))){
-    cat("let's try this")
-
-    if("sitename" == names(args)[2]){
-      if(class(args[[2]]) == 'character'){
-        cat("we're good")
-      }else{
-        cat("wrong dt")
-      }
-      
-    print(names(args)[2])
-    print(args[[2]])
     
-    }else{
-      print("not the right data type")
+    if(("sitename" %in% names(args))){
+
+      if("sitename" == names(args)[2]){
+        if(class(args[[2]]) != 'character'){
+          stop("Sitename should be a character")
+        }}
+    }
+    
+    if(("altmin" %in% names(args))){
+      
+      if("altmin" == names(args)[3]){
+        if(class(args[[3]]) != 'numeric'){
+          stop("Altmin should be a number")
+        }}
+    }
+    
+    if(("altmax" %in% names(args))){
+      
+      if("altmax" == names(args)[4]){
+        if(class(args[[4]]) != 'numeric'){
+          stop("Altmax should be a number")
+        }}
+    }
+    
+    if(("altmax" %in% names(args)) || ("altmin" %in% names(args))){
+      
+      if(args[[4]]<args[[3]]){
+        stop("altmax cannot be smaller than altmin")
+      }
     }
     
     
-    # some other code and operations
-    # that use the ellipsis-arguments as “native” variables…
-
   }else{
-    stop("Use 1 or more of the following arguments: sitename, altmax, altmin")
+    stop("You need to use at least 1 of the following arguments: sitename, altmax, altmin")
   }
 }
