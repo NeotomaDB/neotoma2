@@ -146,47 +146,42 @@ check_args <- function(...) {
     arg_names <- c(arg_names, names(args[i]))
   }
   
-  for(i in 1:length(arg_names)){
-    if(!(names(args)[i] %in% c("", 'sitename', 'altmax', 'altmin'))){
-      stop("Are you using the following arguments: sitename, altmax, altmin ?")
-    }
-  }
-  
-  if(("sitename" %in% names(args))|("altmax" %in% names(args)) | ("altmin" %in% names(args))){
-    
-    if(("sitename" %in% names(args))){
-
-      if("sitename" == names(args)[2]){
-        if(class(args[[2]]) != 'character'){
-          stop("Sitename should be a character")
-        }}
-    }
-    
-    if(("altmin" %in% names(args))){
-      
-      if("altmin" == names(args)[3]){
-        if(class(args[[3]]) != 'numeric'){
-          stop("Altmin should be a number")
-        }}
-    }
-    
-    if(("altmax" %in% names(args))){
-      
-      if("altmax" == names(args)[4]){
-        if(class(args[[4]]) != 'numeric'){
-          stop("Altmax should be a number")
-        }}
-    }
-    
-    if(("altmax" %in% names(args)) || ("altmin" %in% names(args))){
-      
-      if(args[[4]]<args[[3]]){
-        stop("altmax cannot be smaller than altmin")
+  if(length(arg_names)==0){
+    stop("You need to use at least 1 of the following arguments: sitename, altmax, altmin")
+  }else{
+    for(i in 1:length(arg_names)){
+      if(!(names(args)[i] %in% c("", 'sitename', 'altmax', 'altmin'))){
+        stop("Are you using the following arguments: sitename, altmax, altmin ?")
       }
     }
     
-    
-  }else{
-    stop("You need to use at least 1 of the following arguments: sitename, altmax, altmin")
+    if(("sitename" %in% names(args))|("altmax" %in% names(args)) | ("altmin" %in% names(args))){
+      if(("sitename" %in% names(args))){
+        
+          if(class(args$sitename) != 'character'){
+            stop("Sitename should be a character")
+          }
+      }
+      
+      if(("altmin" %in% names(args))){
+          if(class(args$altmin) != 'numeric'){
+            stop("Altmin should be a number")
+          }
+      }
+      
+      if(("altmax" %in% names(args))){
+          if(class(args$altmax) != 'numeric'){
+            stop("Altmax should be a number")
+          }
+      }
+      
+      # if(("altmax" %in% names(args)) || ("altmin" %in% names(args))){
+      #   if(args$altmax<args$altmin){
+      #     stop("altmax cannot be smaller than altmin")
+      #   }
+      # }
+      
+      
+    }
   }
 }
