@@ -24,6 +24,3 @@ get_publications(x = NA, ...)
 \description{
 Uses the Neotoma API to search and access information about publications associated with data in the Neotoma Paleoecology Database
 }
-\examples{
-onePub <- get_publications(12)
-}
