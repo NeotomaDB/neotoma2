@@ -4,46 +4,56 @@
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
 
-dataset <- setClass("dataset",
-                    representation(datasetid = "numeric",
-                                   datasetname = "character",
-                                   datasettype = "character",
-                                   notes = "character"),
-                    prototype(datasetid = NA_integer_,
-                              datasetname = NA_character_,
+dataset <- setClass(
+                    # Set the name for the class
+                    "dataset",
+                    
+                    # Define the slots
+                    slots = c(datasetid = "numeric",
+                              datasetname = "character",
                               datasettype = "character",
-                              notes = NA_character_),
+                              notes = "character"),
+                    # Set the default values for the slot
+                    prototype = list(datasetid = NA_integer_,
+                                     datasetname = NA_character_,
+                                     datasettype = "character",
+                                     notes = NA_character_),
+)
+
+datasets <- setClass(  
+                    # Set the name for the class
+                    "datasets",
+                    
+                    # Define the slots
+                    slots = c(datasets = "list"),
+                    
+                    # Validity functions
                     validity = function(object) {
-                      !is.na(object@datasetid)
+                      all(object@datasets %>%
+                            lapply(class) %>%
+                            unlist(recursive = FALSE) ==  'dataset')
+  })
+
+collunit <- setClass(
+                    # Set the name for the class
+                    "collunit",
+                    slots = c(collunitid = "numeric",
+                              handle = "character",
+                              collunitname = "character",
+                              colldate = "Date",
+                              substrate = "character",
+                              location = "character",
+                              datasets = "datasets"),
+                    prototype = list(collunitid = NA_integer_,
+                                     handle = NA_character_,
+                                     collunitname = NA_character_,
+                                     colldate = "Date",
+                                     substrate = NA_character_,
+                                     location = NA_character_,
+                                     datasets = NULL),
+                    validity = function(object) {
+                      !is.na(object@collunitid)
                     })
-
-
-datasets <- setClass("datasets",
-                     representation(datasets = "list"),
-                     validity = function(object) {
-                       all(object@datasets %>%
-                         lapply(class) %>%
-                         unlist(recursive = FALSE) ==  'dataset')
-                     })
-
-collunit <- setClass("collunit",
-                     representation(collunitid = "numeric",
-                                    handle = "character",
-                                    collunitname = "character",
-                                    colldate = "Date",
-                                    substrate = "character",
-                                    location = "character",
-                                    datasets = "datasets"),
-                     prototype(collunitid = NA_integer_,
-                               handle = NA_character_,
-                               collunitname = NA_character_,
-                               colldate = "Date",
-                               substrate = NA_character_,
-                               location = NA_character_,
-                               datasets = NULL),
-                     validity = function(object) {
-                       !is.na(object@collunitid)
-                     })
 
 #' An S4 class for Neotoma Collection Units
 #' @description Holds Collection unit information from the Neotoma Paleoecology Database.
@@ -85,37 +95,6 @@ site <- setClass(
   # This is not called if you have an initialize function defined!
 )
 
-# create a method to set a site
-setGeneric(name = "set_site",
-           def = function(the_site){
-             standardGeneric("set_site")
-           }
-           )
-
-setMethod(f = "set_site",
-          signature = "site",
-          definition = function(the_site)
-          {
-            return(the_site@siteid)
-          }
-)
-
-setMethod(f = "set_site",
-          signature = "numeric",
-          definition = function(the_site)
-          {
-            return(the_site)
-          }
-)
-
-
-# setMethod(f = "get_site",
-#           signature = "get_site",
-#           definition = function(object){
-#             map(object@sites, function(x) {
-#               data.frame(siteid = x@siteid)
-#             })
-#           })
 
 #' An S4 class for multi-site information from the Neotoma Paleoecology Database.
 #' @import sf

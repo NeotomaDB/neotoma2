@@ -26,6 +26,8 @@ Imports:
     lubridate,
     httr,
     jsonlite,
-    methods
+    methods,
+    dplyr,
+    gtools
 RdMacros: lifecycle
 VignetteBuilder: knitr

@@ -1,8 +1,6 @@
 #' @title Get Site Information for Fossil Sites
 #' @import gtools
-#' @param x integer A contact ID
-#' @param contactname A full or partial name for an individual contributor to the database.
-#' @param familyname The full or partial last name for an individual contributor to the database.
+#' @param siteid integer A site ID
 #' @export
 get_sites <- function(siteid = NA, ...) {
   if(!missing(siteid)) {
@@ -175,11 +173,11 @@ check_args <- function(...) {
           }
       }
       
-      # if(("altmax" %in% names(args)) || ("altmin" %in% names(args))){
-      #   if(args$altmax<args$altmin){
-      #     stop("altmax cannot be smaller than altmin")
-      #   }
-      # }
+      if(("altmax" %in% names(args)) & ("altmin" %in% names(args))){
+        if(args$altmax<args$altmin){
+          stop("altmax cannot be smaller than altmin")
+        }
+      }
       
       
     }
