@@ -26,14 +26,13 @@ parse_site <- function(result) {
   }
   
   result <- result %>% fixNull()
-  
   result_length <- length(result[2]$data)
-  cat("This is the length:", result_length, "\n")
   
   sites <- c()
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+    elev <- result[2]$data[[i]]$altitude
     siteid <- result[2]$data[[i]]$siteid
     sitename <- result[2]$data[[i]]$sitename
     description <- as.character(result[2]$data[[i]]$sitedescription)
@@ -60,7 +59,8 @@ parse_site <- function(result) {
     new_site <- new("site",
                   siteid = siteid,
                   sitename = sitename,
-                  location = place,      
+                  location = place, 
+                  altitude = elev,
                   description = description,
                   notes = NA_character_,
                   collunits = new("collunits",
@@ -71,6 +71,7 @@ parse_site <- function(result) {
     
     output <- new('sites', sites = sites)
   }
+  
   
   return(output)
 }
@@ -102,8 +103,12 @@ get_sites.numeric <- function(siteid, ...) {
   
   output <- parse_site(result)
   
-  return(output)
+  result_length <- length(result[2]$data)
   
+  cat("A site object containing", result_length, "sites and 6 parameters. \n")
+  
+  return(output)
+
 }
 
 
@@ -123,12 +128,16 @@ get_sites.default <- function(...) {
     cleanNULL()
  
   if(is.null(result$data[1][[1]])){
-    output <- cat("I can't find a site for you. Are you using the right spelling? \n")
+    output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
   }else{
     output <- parse_site(result)
     args <- list(...)
-    print(paste0(names(args)))
+    
+    result_length <- length(result[2]$data)
+    
+    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+
     return(output)
   }
 

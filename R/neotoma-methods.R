@@ -57,9 +57,7 @@ collunit <- setClass(
 
 #' An S4 class for Neotoma Collection Units
 #' @description Holds Collection unit information from the Neotoma Paleoecology Database.
-#' @import sf
 #' @importFrom purrr map
-
 collunits <- setClass("collunits",
                       representation(collunits = "list"),
                       validity = function(object) {
@@ -68,9 +66,6 @@ collunits <- setClass("collunits",
                       })
 
 #' An S4 class for site information from the Neotoma Paleoecology Database.
-#'
-#' @import sf
-
 site <- setClass(
   # Set the name for the class
   "site",
@@ -79,6 +74,7 @@ site <- setClass(
   slots = c(siteid = "numeric",
             sitename = "character",
             location = "sf",
+            altitude = "numeric",
             description = "character",
             notes = "character",
             collunits = "collunits"),
@@ -87,6 +83,7 @@ site <- setClass(
   prototype = list(siteid = NA_integer_,
             sitename = NA_character_,
             location = st_sf(st_sfc()),
+            altitude = NA_integer_,
             description = NA_character_,
             notes = NA_character_,
             collunits = NULL) # check what would really be a NA here
@@ -97,7 +94,6 @@ site <- setClass(
 
 
 #' An S4 class for multi-site information from the Neotoma Paleoecology Database.
-#' @import sf
 # TODO Add area
 sites <- setClass("sites",
                   representation(sites = "list"),
@@ -105,3 +101,33 @@ sites <- setClass("sites",
                     all(map(object@sites, function(x) { class(x) == "site"}) %>%
                           unlist())
                   })
+
+# Show result as a brief dataframe - as in Neotoma v1
+setMethod(f = "show",
+          signature= "sites",
+          definition = function(object){
+            map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                         sitename = x@sitename,
+                         lat = st_coordinates(x@location)[,1],
+                         long = st_coordinates(x@location)[,2],
+                         elev = x@altitude)
+            }) %>%
+              bind_rows() %>%
+              print(row.names=FALSE)
+          })
+# 
+# 
+# setMethod(f = "[[",
+#           signature= signature(x = "sites", i = "numeric"),
+#           definition = function(x, i){
+#             object@sites[[i]]
+#           })
+# 
+# 
+# setMethod(f = "show",
+#           signature = "site",
+#           definition = function(object){
+#             print(data.frame(siteid = object@siteid,
+#                              sitename = object@sitename))
+#           })
