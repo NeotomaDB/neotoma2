@@ -1,4 +1,4 @@
-#' @title Get Site
+#' @title Get Sites
 #' @import gtools
 #' @details
 #' Information for Fossil Sites
@@ -29,7 +29,8 @@
 #' alexander@sites[[1]]@siteid
 #' [1] 24
 #' @md
-get_sites <- function(siteid = NA, ...) {
+
+get_sites <- function(siteid=NA, ...) {
   if(!missing(siteid)) {
     UseMethod('get_sites', siteid)
   } else {

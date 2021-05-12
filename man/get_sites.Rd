@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites}
 \alias{get_sites}
-\title{Get Site}
+\title{Get Sites}
 \usage{
 get_sites(siteid = NA, ...)
 }
@@ -16,7 +16,7 @@ get_sites(siteid = NA, ...)
 \item{altmin}{The coordinates to create an sf object}
 }
 \description{
-Get Site
+Get Sites
 }
 \details{
 Information for Fossil Sites
