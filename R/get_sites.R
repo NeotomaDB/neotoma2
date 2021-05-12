@@ -1,7 +1,34 @@
-#' @title Get Site Information for Fossil Sites
+#' @title Get Site
 #' @import gtools
+#' @details
+#' Information for Fossil Sites
+#' Look for a site details using only a site ID or for multiple sites using possible sitenames, max latitudes or min latitudes.
+#' Displays a table with the following columns siteid, sitename, lat, long, and elev.
+#' Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
 #' @param siteid integer A site ID
+#' @param sitename The site's name
+#' @param altmax The coordinates to create an sf object
+#' @param altmin The coordinates to create an sf object
 #' @export
+#' @examples
+#' get_sites(24)
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' 
+#' alexander <- get_sites(sitename="Alexander Lake")
+#' alexander
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' 
+#' alexander@sites[[1]]@siteid
+#' [1] 24
+#' @md
 get_sites <- function(siteid = NA, ...) {
   if(!missing(siteid)) {
     UseMethod('get_sites', siteid)
@@ -80,7 +107,14 @@ parse_site <- function(result) {
 #' @import lubridate
 #' @importFrom methods new
 #' @param x Use a single number to extract site information
-#' @export
+#' @examples
+#' get_sites(24)
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' @md
 get_sites.numeric <- function(siteid, ...) {
   
   useNA <- function(siteid, type) {
@@ -118,6 +152,15 @@ get_sites.numeric <- function(siteid, ...) {
 #' @param sitename The site's name
 #' @param altmax The coordinates to create an sf object
 #' @param altmin The coordinates to create an sf object
+#' @examples
+#' get_sites(sitename = "Alexander Lake")
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' @md
+
 #' @export
 get_sites.default <- function(...) {
   

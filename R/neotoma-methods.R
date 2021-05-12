@@ -116,18 +116,21 @@ setMethod(f = "show",
               bind_rows() %>%
               print(row.names=FALSE)
           })
-# 
-# 
-# setMethod(f = "[[",
-#           signature= signature(x = "sites", i = "numeric"),
-#           definition = function(x, i){
-#             object@sites[[i]]
-#           })
-# 
-# 
-# setMethod(f = "show",
-#           signature = "site",
-#           definition = function(object){
-#             print(data.frame(siteid = object@siteid,
-#                              sitename = object@sitename))
-#           })
+
+
+setMethod(f = "[[",
+          signature= signature(x = "sites", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
+
+
+setMethod(f = "show",
+          signature = "site",
+          definition = function(object){
+            print(data.frame(siteid = object@siteid,
+                             sitename = object@sitename,
+                             lat = st_coordinates(object@location)[,1],
+                             long = st_coordinates(object@location)[,2],
+                             elev = object@altitude), row.names=FALSE)
+          })
