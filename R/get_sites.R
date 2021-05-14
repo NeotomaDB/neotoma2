@@ -1,6 +1,6 @@
 #' @title Get Site Information for Fossil Sites
 #' @import gtools
-#' @param x integer A contact ID
+#' @param siteid integer A unique (integer) site identifier from Neotoma.
 #' @param contactname A full or partial name for an individual contributor to the database.
 #' @param familyname The full or partial last name for an individual contributor to the database.
 #' @export
@@ -30,9 +30,9 @@ parse_site <- function(result) {
   result <- result %>% fixNull()
   
   result_length <- length(result[2]$data)
-  cat("This is the length:", result_length, "\n")
   
   sites <- c()
+  
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)

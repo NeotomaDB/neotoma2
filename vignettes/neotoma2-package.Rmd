@@ -44,8 +44,8 @@ If we're looking for a site and we know its specific site identifier, we can use
 
 ```{r getSitex}
 # Wild Tussock Lake has site ID 10101:
-wildTussock = get_site(x=10101)
-swainSite =  get_site(x=100)
+wildTussock = get_sites(siteid=10101)
+swainSite =  get_sites(siteid=100)
 ```
 
 ##### Using a Sitename
@@ -53,14 +53,15 @@ swainSite =  get_site(x=100)
 If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = )`:
 
 ```{r getsitename}
-alexanderLake = get_site(sitename = 'Alexander Lake')
+alexanderLake = get_sites(sitename = 'Alexander Lake')
 ```
+
 ##### Using an approximate name
 
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
 ````{r getsitename placeholder}
-alexanderSomething = get_site(sitename = 'Alexander%')
+alexanderSomething = get_sites(sitename = 'Alexander%')
 ```
 
 
