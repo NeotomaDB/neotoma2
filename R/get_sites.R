@@ -1,10 +1,36 @@
-#' @title Get Site Information for Fossil Sites
+#' @title Get Sites
 #' @import gtools
+#' @details
+#' Information for Fossil Sites
+#' Look for a site details using only a site ID or for multiple sites using possible sitenames, max latitudes or min latitudes.
+#' Displays a table with the following columns siteid, sitename, lat, long, and elev.
+#' Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
 #' @param siteid integer A unique (integer) site identifier from Neotoma.
-#' @param contactname A full or partial name for an individual contributor to the database.
-#' @param familyname The full or partial last name for an individual contributor to the database.
+#' @param sitename The site's name
+#' @param altmax The coordinates to create an sf object
+#' @param altmin The coordinates to create an sf object
 #' @export
-get_sites <- function(siteid = NA, ...) {
+#' @examples
+#' get_sites(24)
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' 
+#' alexander <- get_sites(sitename="Alexander Lake")
+#' alexander
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' 
+#' alexander@sites[[1]]@siteid
+#' [1] 24
+#' @md
+
+get_sites <- function(siteid=NA, ...) {
   if(!missing(siteid)) {
     UseMethod('get_sites', siteid)
   } else {
@@ -28,7 +54,6 @@ parse_site <- function(result) {
   }
   
   result <- result %>% fixNull()
-  
   result_length <- length(result[2]$data)
   
   sites <- c()
@@ -36,6 +61,7 @@ parse_site <- function(result) {
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+    elev <- result[2]$data[[i]]$altitude
     siteid <- result[2]$data[[i]]$siteid
     sitename <- result[2]$data[[i]]$sitename
     description <- as.character(result[2]$data[[i]]$sitedescription)
@@ -62,7 +88,8 @@ parse_site <- function(result) {
     new_site <- new("site",
                   siteid = siteid,
                   sitename = sitename,
-                  location = place,      
+                  location = place, 
+                  altitude = elev,
                   description = description,
                   notes = NA_character_,
                   collunits = new("collunits",
@@ -74,6 +101,7 @@ parse_site <- function(result) {
     output <- new('sites', sites = sites)
   }
   
+  
   return(output)
 }
 
@@ -81,7 +109,14 @@ parse_site <- function(result) {
 #' @import lubridate
 #' @importFrom methods new
 #' @param x Use a single number to extract site information
-#' @export
+#' @examples
+#' get_sites(24)
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' @md
 get_sites.numeric <- function(siteid, ...) {
   
   useNA <- function(siteid, type) {
@@ -104,8 +139,12 @@ get_sites.numeric <- function(siteid, ...) {
   
   output <- parse_site(result)
   
-  return(output)
+  result_length <- length(result[2]$data)
   
+  cat("A site object containing", result_length, "sites and 6 parameters. \n")
+  
+  return(output)
+
 }
 
 
@@ -115,6 +154,15 @@ get_sites.numeric <- function(siteid, ...) {
 #' @param sitename The site's name
 #' @param altmax The coordinates to create an sf object
 #' @param altmin The coordinates to create an sf object
+#' @examples
+#' get_sites(sitename = "Alexander Lake")
+#' 
+#' A site object containing 1 sites and 6 parameters. 
+#' | siteid  | sitename       |    lat    |   long   | elev |
+#' | :------ |:--------------:|:---------:|:--------:|-----:|
+#' | 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+#' @md
+
 #' @export
 get_sites.default <- function(...) {
   
@@ -125,12 +173,16 @@ get_sites.default <- function(...) {
     cleanNULL()
  
   if(is.null(result$data[1][[1]])){
-    output <- cat("I can't find a site for you. Are you using the right spelling? \n")
+    output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
   }else{
     output <- parse_site(result)
     args <- list(...)
-    print(paste0(names(args)))
+    
+    result_length <- length(result[2]$data)
+    
+    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+
     return(output)
   }
 
@@ -175,11 +227,11 @@ check_args <- function(...) {
           }
       }
       
-      # if(("altmax" %in% names(args)) || ("altmin" %in% names(args))){
-      #   if(args$altmax<args$altmin){
-      #     stop("altmax cannot be smaller than altmin")
-      #   }
-      # }
+      if(("altmax" %in% names(args)) & ("altmin" %in% names(args))){
+        if(args$altmax<args$altmin){
+          stop("altmax cannot be smaller than altmin")
+        }
+      }
       
       
     }

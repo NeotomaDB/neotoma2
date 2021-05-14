@@ -40,12 +40,11 @@ You can find a site by its unique numeric Neotoma site id (`x`), by name (`siten
 
 #### Using a Site ID
 
-If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_site()`:
+If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_sites()`:
 
 ```{r getSitex}
-# Wild Tussock Lake has site ID 10101:
-wildTussock = get_sites(siteid=10101)
-swainSite =  get_sites(siteid=100)
+alexanderLake = get_sites(siteid=24)
+alexanderLake
 ```
 
 ##### Using a Sitename
@@ -53,17 +52,68 @@ swainSite =  get_sites(siteid=100)
 If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = )`:
 
 ```{r getsitename}
-alexanderLake = get_sites(sitename = 'Alexander Lake')
+alexanderLake = get_sites(sitename = "Alexander Lake")
+alexanderLake
+```
+
+We can also access the different parameters for each site using S4 class marker `@`.
+
+Since the `sites` object is composed by smaller objects of class `site`, we do need to specify which ordered object we want to access. We do so with `[[ ]]` and place the index of the desired object.
+
+```{r}
+alexanderLake@sites[[1]]@siteid
 ```
 
 ##### Using an approximate name
 
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
+<<<<<<< HEAD
 ````{r getsitename placeholder}
 alexanderSomething = get_sites(sitename = 'Alexander%')
 ```
 
+Since this new `sites` object has 2 elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
+
+
+##### Accessing get_site documentation 
+
+If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
+
+````{r}
+alexanderSomething = get_sites(sitename = 'Alexander%')
+```
+
+
+```{r}
+# We mark [[1]] as we are entering the first site. 
+alexanderSomething@sites[[2]]@sitename
+```
+
+##### Accessing get_site documentation 
+
+If we ever need to see the documentation for examples, we can always access the help file using `?`
+
+````{r getsites_documentation}
+?get_sites
+```
+
+### Creating a Site
+
+You can create a site with the `set_site` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes. 
+
+```{r set_site}
+my_site <- set_site(sitename="My Lake", coordinates = c(10, -30), description = "my lake", altitude = 30)
+my_site
+```
+
+##### Accessing set_site documentation 
+
+If we ever need to see the documentation for examples, we can always access the help file using `?`
+
+````{r setsites_documentation}
+?set_site
+```
 
 ## Publications
 

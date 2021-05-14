@@ -2,17 +2,44 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites}
 \alias{get_sites}
-\title{Get Site Information for Fossil Sites}
+\title{Get Sites}
 \usage{
 get_sites(siteid = NA, ...)
 }
 \arguments{
 \item{siteid}{integer A unique (integer) site identifier from Neotoma.}
 
-\item{contactname}{A full or partial name for an individual contributor to the database.}
+\item{sitename}{The site's name}
 
-\item{familyname}{The full or partial last name for an individual contributor to the database.}
+\item{altmax}{The coordinates to create an sf object}
+
+\item{altmin}{The coordinates to create an sf object}
 }
 \description{
-Get Site Information for Fossil Sites
+Get Sites
+}
+\details{
+Information for Fossil Sites
+Look for a site details using only a site ID or for multiple sites using possible sitenames, max latitudes or min latitudes.
+Displays a table with the following columns siteid, sitename, lat, long, and elev.
+Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
+}
+\examples{
+get_sites(24)
+
+A site object containing 1 sites and 6 parameters. 
+| siteid  | sitename       |    lat    |   long   | elev |
+| :------ |:--------------:|:---------:|:--------:|-----:|
+| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+
+alexander <- get_sites(sitename="Alexander Lake")
+alexander
+
+A site object containing 1 sites and 6 parameters. 
+| siteid  | sitename       |    lat    |   long   | elev |
+| :------ |:--------------:|:---------:|:--------:|-----:|
+| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+
+alexander@sites[[1]]@siteid
+[1] 24
 }
