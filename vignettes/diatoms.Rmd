@@ -1,0 +1,19 @@
+---
+title: "Working with diatom data in the neotoma2 R package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with diatom data in the neotoma2 R package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(neotoma2)
+```
