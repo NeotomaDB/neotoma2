@@ -1,0 +1,64 @@
+---
+title: "Working with diatom data in the neotoma2 R package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with diatom data in the neotoma2 R package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(neotoma2)
+```
+
+
+One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
+
+### Diatoms
+
+```{r getDiatoms, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+
+neDiatoms <- get_datasets(dois=c(...))
+```
+
+* Pull diatom surface samples.
+  * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
+
+```{r getWaterChem, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+```
+
+* Look for water chemistry at the same site (or collection unit).
+
+Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
+
+* In theory collection dates are a good idea to use to filter, but collection dates might not be specific enough.
+
+* In some regional studies water chemistry was sampled multiple times during the summer (e.g.) but diatoms were sampled only a single time.
+
+* Was this going to be done in the aggregate dataset method?  Didn't happen.
+
+Then:
+* With one diatom record per water chemistry record
+* we need taxon name, we need water chemistry type & units
+
+Then we do some inference modeling (`rioja`).  Building e.g., transfer functions.
+
+* Then run predictions on cores & plot predicted values & error
+
+* We would extract an appendix of publications for the datasets we use.
+* We would want some maps of site locations
+* We would want some simple scatter plots
+* We would want to do something about understanding taxonomic differences (so we'd want to know who the analyst was, or who the PI was)
+* We might want to group or synonomize.  Can we pull those from Neotoma?
+* We want the stratigraphic diagrams for cores, and surface sample diagrams for surface sample sets
+* We want the lists of dataset DOIs.
+* Want abundances of taxa along a gradient (with superimposed curves?)

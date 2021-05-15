@@ -4,8 +4,28 @@
 \alias{set_site}
 \title{set Site Information for Fossil Sites}
 \usage{
-set_site(x = NA, ...)
+set_site(
+  siteid,
+  sitename = NA_character_,
+  coordinates = c(),
+  description = NA_character_,
+  notes = NA_character_,
+  collunits = new("collunits"),
+  altitude = NA_integer_
+)
+}
+\arguments{
+\item{siteid}{helps}
+
+\item{sitename}{helps}
 }
 \description{
 set Site Information for Fossil Sites
+}
+\examples{
+my_site <- set_site(sitename="My Lake", coordinates = c(10, -30), description = "my lake", altitude = 30)
+my_site
+| siteid  | sitename       |    lat    |   long   | elev   |
+| :------ |:--------------:|:---------:|:--------:|-------:|
+|   NA    |  My Lake       |     10    |    -30   |   30   |
 }
