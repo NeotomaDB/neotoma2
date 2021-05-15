@@ -20,11 +20,13 @@ library(neotoma2)
 
 ## Neotoma Data Structure
 
-Data in Neotoma is associated with sites, specific locations with lat/long coordinates.  Within a site, there may be one or more **collection units**, which are loactions at which samples are physically collected.  For example, an archaeological **site** may have one or more **collection units**.  These may have higher resolution GPS locations, but are considered to be part of the broader site.  Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
+Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more **collection units** -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
 
-Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
+Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
 
-We often begin by searching for sites within our particular study area, whether that is defined by geographic or political boundaries.
+Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries.  From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
+
+The `neotoma2` R package is intended to act as the intermediary to support these research activities using the Neotoma Paleoecology Database.
 
 ### Package Requirements
 
@@ -32,22 +34,89 @@ The `neotoma2` package draws primarily on `dplyr` and `purrr` packages from the 
 
 ## Site Searches
 
-Sites can be searched using the `get_site()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object, effectively a `list()` of `site` objects.
+Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods.
 
-### Finding a site
+### Finding sites
 
-You can find a site by its unique numeric Neotoma site id (`x`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+You can find a site by its unique numeric Neotoma site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
 
 #### Using a Site ID
 
-If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_site()`:
+If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
 
-```{r getSitex}
-# Wild Tussock Lake has site ID 10101:
-wildTussock = get_site(x=10101)
-swainSite =  get_site(x=100)
+```{r getSiteBySiteID}
+alex <- get_sites(siteid=24)
+alex
 ```
 
+#### Searching for sites by name
+
+If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
+
+```{r getsitename}
+alex <- get_sites(sitename = "Alexander Lake")
+alex
+```
+
+We can also access the different parameters for each site using S4 class marker `@`.
+
+Since the `sites` object is composed by smaller objects of class `site`, we do need to specify which ordered object we want to access. We do so with `[[ ]]` and place the index of the desired object.
+
+```{r extractElement}
+alexanderLake@sites[[1]]@siteid
+```
+
+#### Using approximate site names
+
+Neotoma uses the a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
+
+````{r getsitename placeholder}
+alex <- get_sites(sitename = 'Alexander%')
+```
+
+Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
+
+#### Accessing get_site documentation 
+
+If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
+
+````{r}
+alexanderSomething = get_sites(sitename = 'Alexander%')
+```
+
+
+```{r}
+# We mark [[1]] as we are entering the first site. 
+alexanderSomething@sites[[2]]@sitename
+```
+
+#### Accessing get_site documentation 
+
+If we ever need to see the documentation for examples, we can always access the help file using `?`
+
+````{r getsites_documentation}
+?get_sites
+```
+
+### Creating a Site
+
+As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes. 
+
+```{r set_site}
+my_site <- set_site(sitename="My Lake", 
+                    coordinates = c(10, -30), 
+                    description = "my lake", 
+                    altitude = 30)
+my_site
+```
+
+#### Accessing `set_site()` documentation 
+
+If we ever need to see the documentation for examples, we can always access the help file using `?`
+
+````{r setsites_documentation}
+?set_site
+```
 
 ## Publications
 
