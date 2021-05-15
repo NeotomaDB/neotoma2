@@ -63,7 +63,7 @@ We can also access the different parameters for each site using S4 class marker 
 Since the `sites` object is composed by smaller objects of class `site`, we do need to specify which ordered object we want to access. We do so with `[[ ]]` and place the index of the desired object.
 
 ```{r extractElement}
-alexanderLake@sites[[1]]@siteid
+alex@sites[[1]]@siteid
 ```
 
 #### Using approximate site names
@@ -94,7 +94,7 @@ alexanderSomething@sites[[2]]@sitename
 
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 
-````{r getsites_documentation}
+```
 ?get_sites
 ```
 
@@ -114,7 +114,7 @@ my_site
 
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 
-````{r setsites_documentation}
+```
 ?set_site
 ```
 
