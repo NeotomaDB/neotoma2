@@ -16,7 +16,10 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(neotoma2)
+library(neotoma)
 ```
+
+In the chunk to use neotoma::get_site(whatever) when using for Old neotoma package with new one 
 
 
 One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
