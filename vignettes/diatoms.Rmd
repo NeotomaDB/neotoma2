@@ -23,18 +23,21 @@ One of the main goals of Neotoma is to pull records out of Neotoma into the R wo
 
 ### Diatoms
 
+When working with diatoms there is surface and top-bottom and cores
+* Pull diatom surface samples.
 ```{r getDiatoms, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 
 neDiatoms <- get_datasets(dois=c(...))
 ```
 
-* Pull diatom surface samples.
+
   * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
 
 ```{r getWaterChem, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 ```
+
 
 * Look for water chemistry at the same site (or collection unit).
 
