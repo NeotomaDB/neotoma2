@@ -47,6 +47,10 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 
 ```
 *Creating fill in place for header 
+```{r getDiatomTopBot, eval=false}
+neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
+```
+Gets data for diatom Top-Bottom dataset types
 
 ### Top-Bottom Sampling 
 ``` {r getDiatomTopBot, eval=FALSE}
