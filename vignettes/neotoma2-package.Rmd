@@ -49,6 +49,15 @@ alex <- get_sites(siteid=24)
 alex
 ```
 
+#### Using Multiple Site IDs
+It might be of interest to pass a list of sites. You can do so using `c()`
+
+```{r get-multipe-sites}
+multiple_sites <- get_sites(c(24, 47))
+multiple_sites
+```
+
+
 #### Searching for sites by name
 
 If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
@@ -76,7 +85,7 @@ alex <- get_sites(sitename = 'Alexander%')
 
 Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
@@ -90,7 +99,7 @@ alexanderSomething = get_sites(sitename = 'Alexander%')
 alexanderSomething@sites[[2]]@sitename
 ```
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 

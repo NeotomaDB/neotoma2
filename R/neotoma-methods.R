@@ -12,11 +12,14 @@ dataset <- setClass(
                     slots = c(datasetid = "numeric",
                               datasetname = "character",
                               datasettype = "character",
+                              location = "sf",
                               notes = "character"),
+                    
                     # Set the default values for the slot
                     prototype = list(datasetid = NA_integer_,
                                      datasetname = NA_character_,
-                                     datasettype = "character",
+                                     datasettype = NA_character_,
+                                     location = st_sf(st_sfc()),
                                      notes = NA_character_),
 )
 
@@ -33,6 +36,41 @@ datasets <- setClass(
                             lapply(class) %>%
                             unlist(recursive = FALSE) ==  'dataset')
   })
+
+#' Show result as a brief dataframe - as in Neotoma v1
+setMethod(f = "show",
+          signature= "datasets",
+          definition = function(object){
+            map(object@datasets, function(x) {
+              df <- data.frame(dataset.id = x@datasetid,
+                               site.name = x@datasetname,
+                               lat = st_coordinates(x@location)[,1],
+                               long = st_coordinates(x@location)[,2],
+                               type = x@datasettype)
+            }) %>%
+              bind_rows() %>%
+              print(row.names=FALSE)
+          })
+
+
+#' Method 
+setMethod(f = "[[",
+          signature= signature(x = "sites", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
+
+ 
+#' Method
+setMethod(f = "show",
+          signature = "dataset",
+          definition = function(object){
+            print(data.frame(dataset.id = object@datasetid,
+                             site.name = object@datasetname,
+                             lat = st_coordinates(object@location)[,1],
+                             long = st_coordinates(object@location)[,2],
+                             type = object@datasettype), row.names=FALSE)
+          })
 
 collunit <- setClass(
                     # Set the name for the class

@@ -133,7 +133,14 @@ get_sites.numeric <- function(siteid, ...) {
 #' @export
 get_sites.default <- function(...) {
   
-  check_args(...)
+  cl <- as.list(match.call())
+  
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  #print(cl)
+  
+  
+  #check_args(...)
   
   baseURL <- paste0('data/sites')
   result <- parseURL(baseURL, ...) %>% 
