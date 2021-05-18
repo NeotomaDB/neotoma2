@@ -12,7 +12,7 @@ get_datasets <- function(datasetid = NA, ...) {
 }
 
 parse_dataset <- function(result) {
-  
+  now <- Sys.time()
   fixNull <- function(x) {
     for (i in 1:length(x)) {
       if (is.null(x[[i]])) {
@@ -30,8 +30,6 @@ parse_dataset <- function(result) {
   
   result_length <- length(result[2]$data)
   
-  cat('This is the length:', result_length, '\n')
-  
   dataset_list <- c()
   
   for(i in 1:result_length) {
@@ -42,11 +40,6 @@ parse_dataset <- function(result) {
     location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
     note <- NA_character_
 
-    #   datasetname <- "as.character(result[2]$data[[i]]$site$sitename)"
-    #   datasettype <- as.character(result$data[[i]]$site$datasets[[i]]$datasettype)
-    #   location = st_sf(st_sfc()),
-    #   notes <- NA_character_
-    
     new_dataset <- new('dataset',
                        datasetid = datasetid,
                        datasetname = datasetname,
@@ -60,9 +53,16 @@ parse_dataset <- function(result) {
     
   }
   
+  after <- Sys.time()
   
-
+  cat('A dataset_list containing', result_length, 'objects. \n')
   
+  cat(paste0('Accessed from ', 
+             format(as.POSIXct(now, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
+             'h to ',
+             format(as.POSIXct(after, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
+             'h. \n',
+             'Datasets:\n'))
   
   return(output)
 }
@@ -76,6 +76,7 @@ parse_dataset <- function(result) {
 #' @export
 get_datasets.numeric <- function(datasetid, ...) {
   
+
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
