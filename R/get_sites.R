@@ -106,10 +106,10 @@ get_sites.numeric <- function(siteid, ...) {
   }
   
   if (length(siteid) > 0) {
-    sitename <- paste0(siteid, collapse = ',')
+    siteids <- paste0(siteid, collapse = ',')
   }
   
-  baseURL <- paste0('data/sites/', siteid)
+  baseURL <- paste0('data/sites/', siteids)
   
   result <- parseURL(baseURL)
   

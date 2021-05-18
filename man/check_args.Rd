@@ -7,7 +7,7 @@
 check_args(...)
 }
 \arguments{
-\item{arguments}{in ... form}
+\item{...}{arguments in ellipse form}
 }
 \description{
 Check Arguments
