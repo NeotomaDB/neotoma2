@@ -48,6 +48,11 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 ```
 *Creating fill in place for header 
 
+``` {r getDiatomTopBot, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
+```
+Gets data for diatom Top-Bottom dataset types 
+
 Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
 
 * In theory collection dates are a good idea to use to filter, but collection dates might not be specific enough.
