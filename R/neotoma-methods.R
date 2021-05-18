@@ -101,7 +101,7 @@ sites <- setClass("sites",
                           unlist())
                   })
 
-# Show result as a brief dataframe - as in Neotoma v1
+#' Show result as a brief dataframe - as in Neotoma v1
 setMethod(f = "show",
           signature= "sites",
           definition = function(object){
@@ -117,13 +117,14 @@ setMethod(f = "show",
           })
 
 
+# Method 
 setMethod(f = "[[",
           signature= signature(x = "sites", i = "numeric"),
           definition = function(x, i){
             object@sites[[i]]
           })
 
-
+#' Method 
 setMethod(f = "show",
           signature = "site",
           definition = function(object){

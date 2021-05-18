@@ -15,17 +15,24 @@ set_site(
 )
 }
 \arguments{
-\item{siteid}{helps}
+\item{siteid}{site unique identificator if available}
 
-\item{sitename}{helps}
+\item{sitename}{actual site name}
+
+\item{coordinates}{coordinates to create sf object}
+
+\item{description}{description of site}
+
+\item{notes}{additional information of the site}
+
+\item{collunits}{collection units in the site}
+
+\item{altitude}{altitude/elevation of the site}
 }
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
-my_site <- set_site(sitename="My Lake", coordinates = c(10, -30), description = "my lake", altitude = 30)
-my_site
-| siteid  | sitename       |    lat    |   long   | elev   |
-| :------ |:--------------:|:---------:|:--------:|-------:|
-|   NA    |  My Lake       |     10    |    -30   |   30   |
+my_site <- set_site(sitename="My Lake", coordinates = c(10, -30),
+                    description = "my lake", altitude = 30)
 }

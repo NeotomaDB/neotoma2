@@ -7,16 +7,13 @@
 \method{get_sites}{numeric}(siteid, ...)
 }
 \arguments{
-\item{x}{Use a single number to extract site information}
+\item{siteid}{Use a single number to extract site information}
+
+\item{...}{arguments in ellipse form}
 }
 \description{
 Get Site Numeric
 }
 \examples{
-get_sites(24)
-
-A site object containing 1 sites and 6 parameters. 
-| siteid  | sitename       |    lat    |   long   | elev |
-| :------ |:--------------:|:---------:|:--------:|-----:|
-| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+get_sites(siteid = 24)
 }
