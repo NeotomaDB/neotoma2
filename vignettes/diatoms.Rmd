@@ -34,24 +34,40 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 neDiatoms <- get_datasets(dois=c(...))
 ```
 
-
   * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
-
+  
+### Water Chemistry 
 ```{r getWaterChem, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 ```
-
-
 * Look for water chemistry at the same site (or collection unit).
+
+### Browsing 
 ```{r get__, eval=FALSE}
 
 ```
 *Creating fill in place for header 
 
+### Top-Bottom Sampling 
 ``` {r getDiatomTopBot, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
 ```
 Gets data for diatom Top-Bottom dataset types 
+
+### Chronology
+```{r get_, eval=FALSE}
+
+```
+
+### Diatom Counts
+```{r get_, eval=FALSE}
+
+```
+
+
+```{r get_, eval=FALSE}
+
+```
 
 Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
 
