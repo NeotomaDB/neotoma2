@@ -25,48 +25,58 @@ parse_dataset <- function(result) {
     }
     return(x)
   }
-  
+
   result <- result %>% fixNull()
-  
+
   result_length <- length(result[2]$data)
-  
+
   dataset_list <- c()
-  
+
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     datasetid <- result[2]$data[[i]]$site$datasets[[1]]$datasetid
-    datasetname <- result[2]$data[[i]]$site$sitename
     datasettype <- result[2]$data[[i]]$site$datasets[[1]]$datasettype
-    location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
     note <- NA_character_
+    
+    if(is.null(result[2]$data[[i]]$site$sitename)){
+      datasetname <- result[2]$data[[i]]$sites$site$sitename
+    }else{
+      datasetname <- result[2]$data[[i]]$site$sitename
+    }
+
+    trial <- result[2]$data[[i]]$site$geography
+    if(is.null(trial)){
+      location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
+    }else{
+      location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
+    }
 
     new_dataset <- new('dataset',
                        datasetid = datasetid,
                        datasetname = datasetname,
-                       datasettype = datasettype,      
+                       datasettype = datasettype,
                        location = location,
                        notes = note)
-    
+
     dataset_list <- append(dataset_list, new_dataset)
-    
+
     output <- new('datasets', datasets = dataset_list)
-    
+
   }
-  
+
   after <- Sys.time()
-  
-  cat('A dataset_list containing', result_length, 'objects. \n')
-  
-  cat(paste0('Accessed from ', 
-             format(as.POSIXct(now, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-             'h to ',
-             format(as.POSIXct(after, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-             'h. \n',
-             'Datasets:\n'))
-  
+
+  # cat('A dataset_list containing', result_length, 'objects. \n')
+  #
+  # cat(paste0('Accessed from ',
+  #            format(as.POSIXct(now, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
+  #            'h to ',
+  #            format(as.POSIXct(after, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
+  #            'h. \n',
+  #            'Datasets:\n'))
+
   return(output)
 }
-
 
 #' @title Get Dataset Numeric
 #' @import lubridate
@@ -76,7 +86,6 @@ parse_dataset <- function(result) {
 #' @export
 get_datasets.numeric <- function(datasetid, ...) {
   
-
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -100,3 +109,28 @@ get_datasets.numeric <- function(datasetid, ...) {
   return(output)
 }
 
+
+#' @title Get Dataset Default
+#' @import lubridate
+#' @importFrom methods new
+#' @param datasetid Use a single number to extract site information
+#' @param ... arguments in ellipse form
+#' @export
+get_datasets.default <- function(...) {
+  
+  baseURL <- paste0('data/datasets/')
+  result <- parseURL(baseURL, ...) %>% 
+    cleanNULL()
+  
+  if(is.null(result$data[1][[1]])){
+    output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
+    return(output)
+  }else{
+    output <- parse_dataset(result)
+    args <- list(...)
+  }
+    
+  output <- parse_dataset(result)
+  
+  return(output)
+}

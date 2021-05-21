@@ -3,6 +3,7 @@
 S3method(check_contacts,contacts)
 S3method(get_contacts,default)
 S3method(get_contacts,numeric)
+S3method(get_datasets,default)
 S3method(get_datasets,numeric)
 S3method(get_publications,default)
 S3method(get_publications,numeric)
