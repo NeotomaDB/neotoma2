@@ -4,7 +4,7 @@
 \alias{get_datasets.default}
 \title{Get Dataset Default}
 \usage{
-\method{get_datasets}{default}(sitename, ...)
+\method{get_datasets}{default}(...)
 }
 \arguments{
 \item{...}{arguments in ellipse form}
