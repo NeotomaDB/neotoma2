@@ -18,7 +18,7 @@ get_publications <- function(x = NA, ...) {
   }
 }
 
-#' @title Get contact information for Neotoma contributors
+#' @title Get publication information from Neotoma  
 #' @importFrom methods new
 #' @importFrom purrr pluck
 #' @export
@@ -33,23 +33,19 @@ get_publications.default <- function(...) {
   testNull <- function(val, out) {
     if(is.null(val)) { return(out)} else {return(val)}
   }
-  
-  newAuthors <- function(x) {
-    result <- new("authors",
-                  authors = map(x$author, function(y) {
-                    new("author",
-                        author = new("contact",
-                                     familyname =testNull(y$family, NA_character_),
-                                     givennames= testNull(y$given, NA_character_)),
-                        order = 1)
-                  }))
-  }
-  
+    
   pubs <- map(result, function(x) {
+    
+    if ('match' %in% names(x)) {
+      match <- x$match
+    } else {
+      match <- NULL
+    }
+    
     x <- x$publication
     x[is.null(x)] <- NA_character_
     
-    new("publication",
+    output <- new("publication",
         publicationtype = as.character(x$pubtype),
         publicationid = as.numeric(x$publicationid),
         articletitle = as.character(x$articletitle),
@@ -60,7 +56,9 @@ get_publications.default <- function(...) {
         pages = as.character(x$pages),
         citation = as.character(x$citation),
         doi = as.character(x$doi),
-        author = newAuthors(x)) 
+        author = pubAuthors(x)) 
+    attr(output, "match") <- match    
+    return (output)
   }) %>% 
     new("publications", publications = .)
   
@@ -85,19 +83,9 @@ get_publications.numeric <- function(x, ...) {
 
   result <- parseURL(baseURL) %>% cleanNULL()
 
-  newAuthors <- function(x) {
-    result <- new("authors",
-                        authors = map(x$author, function(y) {
-                          new("author",
-                              author = new("contact",
-                                           familyname =testNull(y$family, NA_character_),
-                                           givennames= testNull(y$given, NA_character_)),
-                                           order = 1)
-                                     }))
-    }
-  
   pubs <- map(result$data, function(x) {
     
+                  x <- x$publication
                   x[is.null(x)] <- NA_character_
                   
                   new("publication",
@@ -111,8 +99,20 @@ get_publications.numeric <- function(x, ...) {
                       pages = as.character(x$pages),
                       citation = as.character(x$citation),
                       doi = as.character(x$doi),
-                      author = newAuthors(x)) 
+                      author = pubAuthors(x)) 
                 }) %>% 
     new("publications", publications = .)
   return(pubs)
+}
+
+#' @export
+get_publications.publications <- function(x, ...) {
+  for (i in 1:length(x)) {
+    pub <- x[[i]]@publications[[1]]
+    if(is.na(x[[i]]@publications[[1]]@publicationid)) {
+      if(!is.na(pub@citation)) {
+        test <- get_publications(search=pub@citation, limit = 3)
+      }
+    }
+  }
 }
