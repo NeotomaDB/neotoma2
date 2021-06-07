@@ -133,26 +133,28 @@ get_sites.numeric <- function(siteid, ...) {
 #' @export
 get_sites.default <- function(...) {
   
-  #cl <- as.list(match.call())
-  
-  #cl[[1]] <- NULL
-  #cl <- lapply(cl, eval, envir = parent.frame())
-  #print(cl)
-  
-  
-  check_args(...)
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+ 
+  error_check <- check_args(cl)
+
+  if (error_check[[2]]$flag == 1) {
+    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
+  } else {
+    cl <- error_check[[1]]
+  }
   
   baseURL <- paste0('data/sites')
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
  
   if(is.null(result$data[1][[1]])){
-    output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
-    return(output)
+    warning('I cannot find a site for you. Are you using the right spelling? \n')
+    return(NULL)
   }else{
     output <- parse_site(result)
-    args <- list(...)
-    
+
     result_length <- length(result[2]$data)
     
     cat("A site object containing", result_length, "sites and 6 parameters. \n")
@@ -160,54 +162,4 @@ get_sites.default <- function(...) {
     return(output)
   }
 
-}
-
-#' @title Check Arguments
-#' @param ... arguments in ellipse form
-check_args <- function(...) {
-  args <- match.call()
-  length(args)
-  arg_names <- c()
-  for(i in 2:length(names(args))){
-    arg_names <- c(arg_names, names(args[i]))
-  }
-  
-  if(length(arg_names)==0){
-    stop("You need to use at least 1 of the following arguments: sitename, altmax, altmin")
-  }else{
-    for(i in 1:length(arg_names)){
-      if(!(names(args)[i] %in% c("", 'sitename', 'altmax', 'altmin'))){
-        stop("Are you using the following arguments: sitename, altmax, altmin ?")
-      }
-    }
-    
-    if(("sitename" %in% names(args))|("altmax" %in% names(args)) | ("altmin" %in% names(args))){
-      if(("sitename" %in% names(args))){
-        
-          if(class(args$sitename) != 'character'){
-            stop("Sitename should be a character")
-          }
-      }
-      
-      if(("altmin" %in% names(args))){
-          if(class(args$altmin) != 'numeric'){
-            stop("Altmin should be a number")
-          }
-      }
-      
-      if(("altmax" %in% names(args))){
-          if(class(args$altmax) != 'numeric'){
-            stop("Altmax should be a number")
-          }
-      }
-      
-      if(("altmax" %in% names(args)) & ("altmin" %in% names(args))){
-        if(args$altmax<args$altmin){
-          stop("altmax cannot be smaller than altmin")
-        }
-      }
-      
-      
-    }
-  }
 }
