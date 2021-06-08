@@ -4,12 +4,12 @@
 \alias{get_sites.numeric}
 \title{Get Site Numeric}
 \usage{
-\method{get_sites}{numeric}(siteid, ...)
+\method{get_sites}{numeric}(x, ...)
 }
 \arguments{
-\item{siteid}{Use a single number to extract site information}
-
 \item{...}{arguments in ellipse form}
+
+\item{siteid}{Use a single number to extract site information}
 }
 \description{
 Get Site Numeric

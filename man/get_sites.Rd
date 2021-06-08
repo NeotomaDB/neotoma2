@@ -4,12 +4,12 @@
 \alias{get_sites}
 \title{Get Sites}
 \usage{
-get_sites(siteid = NA, ...)
+get_sites(x = NA, ...)
 }
 \arguments{
-\item{siteid}{Use a single number to extract site information}
-
 \item{...}{accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
+
+\item{siteid}{Use a single number to extract site information}
 }
 \description{
 Get Sites

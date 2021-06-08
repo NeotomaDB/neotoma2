@@ -61,6 +61,7 @@ parse_dataset <- function(result) {
     dataset_list <- append(dataset_list, new_dataset)
 
     output <- new('datasets', datasets = dataset_list)
+    
 
   }
 
@@ -105,8 +106,22 @@ get_datasets.numeric <- function(datasetid, ...) {
   result <- parseURL(baseURL)
   
   output <- parse_dataset(result)
+  new.output <- list()
   
-  return(output)
+  #TODO : edit to reflect API
+  new.output$site.data <- set_site(sitename="My Lake", 
+                                   coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
+                                   description = "my lake", 
+                                   altitude = 30)
+  
+
+  
+  new.output$site.meta <- output
+  
+  class(new.output) <- c('dataset', 'list')
+
+    
+  return(new.output)
 }
 
 

@@ -10,9 +10,9 @@
 #' @examples
 #' get_sites(siteid = 24)
 #' @export
-get_sites <- function(siteid=NA, ...) {
-  if(!missing(siteid)) {
-    UseMethod('get_sites', siteid)
+get_sites <- function(x=NA, ...) {
+  if(!missing(x)) {
+    UseMethod('get_sites', x)
   } else {
     UseMethod('get_sites', NA)
   }
@@ -60,7 +60,6 @@ parse_site <- function(result) {
                                                          datasettype = y$datasettype,
                                                          datasetname = NA_character_,
                                                          notes = NA_character_)
-                                                return(ds)
                                               })))
                       return(x)
                     })
@@ -85,6 +84,65 @@ parse_site <- function(result) {
   return(output)
 }
 
+
+#' @title Get Site Datasets
+#' @import lubridate
+#' @importFrom methods new
+#' @param x An object of class \code{dataset}.
+#' @param ... arguments in ellipse form
+#' @examples
+#' get_sites(datasets = 24)
+#' @export
+get_sites.datasets <- function(x, ...) {
+  x <- x[[1]]
+  print("access granted")
+  site <- x[[1]]
+  
+  return(site)
+}
+
+
+#' @title Get Site Information for Fossil Sites
+#' @import lubridate
+#' @importFrom methods new
+#' @param ... accepted arguments: siteid (site identifier from Neotoma), sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)
+#' @examples
+#' get_sites(sitename = "Alexander Lake")
+#' @export
+get_sites.default <- function(...) {
+  
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  
+  error_check <- check_args(cl)
+  
+  if (error_check[[2]]$flag == 1) {
+    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
+  } else {
+    cl <- error_check[[1]]
+  }
+  
+  baseURL <- paste0('data/sites')
+  result <- parseURL(baseURL, ...) %>% 
+    cleanNULL()
+  
+  if(is.null(result$data[1][[1]])){
+    warning('I cannot find a site for you. Are you using the right spelling? \n')
+    return(NULL)
+  }else{
+    output <- parse_site(result)
+    
+    result_length <- length(result[2]$data)
+    
+    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+    
+    return(output)
+  }
+  
+}
+
+
 #' @title Get Site Numeric
 #' @import lubridate
 #' @importFrom methods new
@@ -93,20 +151,21 @@ parse_site <- function(result) {
 #' @examples
 #' get_sites(siteid = 24)
 #' @export
-get_sites.numeric <- function(siteid, ...) {
+get_sites.numeric <- function(x, ...) {
   
-  useNA <- function(siteid, type) {
-    if (is.na(siteid)) {
+  
+  useNA <- function(x, type) {
+    if (is.na(x)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
     } else {
-      return(siteid)
+      return(x)
     }
   }
   
-  if (length(siteid) > 0) {
-    siteids <- paste0(siteid, collapse = ',')
+  if (length(x) > 0) {
+    siteids <- paste0(x, collapse = ',')
   }
   
   baseURL <- paste0('data/sites/', siteids)
@@ -124,42 +183,3 @@ get_sites.numeric <- function(siteid, ...) {
 }
 
 
-#' @title Get Site Information for Fossil Sites
-#' @import lubridate
-#' @importFrom methods new
-#' @param ... accepted arguments: siteid (site identifier from Neotoma), sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)
-#' @examples
-#' get_sites(sitename = "Alexander Lake")
-#' @export
-get_sites.default <- function(...) {
-  
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
-  cl <- lapply(cl, eval, envir = parent.frame())
- 
-  error_check <- check_args(cl)
-
-  if (error_check[[2]]$flag == 1) {
-    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
-  } else {
-    cl <- error_check[[1]]
-  }
-  
-  baseURL <- paste0('data/sites')
-  result <- parseURL(baseURL, ...) %>% 
-    cleanNULL()
- 
-  if(is.null(result$data[1][[1]])){
-    warning('I cannot find a site for you. Are you using the right spelling? \n')
-    return(NULL)
-  }else{
-    output <- parse_site(result)
-
-    result_length <- length(result[2]$data)
-    
-    cat("A site object containing", result_length, "sites and 6 parameters. \n")
-
-    return(output)
-  }
-
-}
