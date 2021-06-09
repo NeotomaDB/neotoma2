@@ -150,8 +150,25 @@ get_datasets.default <- function(...) {
     output <- parse_dataset(result)
     args <- list(...)
   }
-    
+  
   output <- parse_dataset(result)
   
-  return(output)
+  result_length <- length(result[2]$data)
+  
+  sites_list <- c()
+  
+  for(i in 1:result_length) {
+    siteid <- result$data[[i]]$sites$site$siteid
+    sites_list <- c(sites_list, siteid)
+    
+  }
+  
+  new.output <- c()
+  new.output$site.data <- get_sites(sites_list)
+  
+  new.output$site.meta <- output
+  
+  class(new.output) <- c('dataset', 'list')
+  
+  return(new.output)
 }

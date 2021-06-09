@@ -15,5 +15,5 @@
 Get Site Datasets
 }
 \examples{
-get_sites(datasets = 24)
+get_sites.datasets(24)
 }
