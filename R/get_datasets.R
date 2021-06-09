@@ -105,22 +105,27 @@ get_datasets.numeric <- function(datasetid, ...) {
   
   result <- parseURL(baseURL)
   
+
+  
   output <- parse_dataset(result)
   new.output <- list()
   
-  #TODO : edit to reflect API
-  new.output$site.data <- set_site(sitename="My Lake", 
-                                   coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
-                                   description = "my lake", 
-                                   altitude = 30)
+  result_length <- length(result[2]$data)
   
+  sites_list <- c()
+  
+  for(i in 1:result_length) {
+    siteid <- result$data[[i]]$site$siteid
+    sites_list <- c(sites_list, siteid)
 
+  }
+
+  new.output$site.data <- get_sites(sites_list)
   
   new.output$site.meta <- output
   
   class(new.output) <- c('dataset', 'list')
 
-    
   return(new.output)
 }
 

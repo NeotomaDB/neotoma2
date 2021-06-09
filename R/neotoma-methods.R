@@ -55,11 +55,17 @@ setMethod(f = "show",
 
 #' Method 
 setMethod(f = "[[",
-          signature= signature(x = "sites", i = "numeric"),
+          signature= signature(x = "datasets", i = "numeric"),
           definition = function(x, i){
             object@sites[[i]]
           })
 
+#' Method 
+setMethod(f = "[[",
+          signature= signature(x = "dataset", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
  
 #' Method
 setMethod(f = "show",

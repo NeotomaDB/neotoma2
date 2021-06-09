@@ -5,10 +5,10 @@
 #' Look for a site details using only a site ID or for multiple sites using possible sitenames, max latitudes or min latitudes.
 #' Displays a table with the following columns siteid, sitename, lat, long, and elev.
 #' Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
-#' @param siteid Use a single number to extract site information
+#' @param x Use a single number to extract site information
 #' @param ... accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)
 #' @examples
-#' get_sites(siteid = 24)
+#' get_sites(x = 24)
 #' @export
 get_sites <- function(x=NA, ...) {
   if(!missing(x)) {
@@ -84,24 +84,6 @@ parse_site <- function(result) {
   return(output)
 }
 
-
-#' @title Get Site Datasets
-#' @import lubridate
-#' @importFrom methods new
-#' @param x An object of class \code{dataset}.
-#' @param ... arguments in ellipse form
-#' @examples
-#' get_sites(datasets = 24)
-#' @export
-get_sites.datasets <- function(x, ...) {
-  x <- x[[1]]
-  print("access granted")
-  site <- x[[1]]
-  
-  return(site)
-}
-
-
 #' @title Get Site Information for Fossil Sites
 #' @import lubridate
 #' @importFrom methods new
@@ -110,6 +92,8 @@ get_sites.datasets <- function(x, ...) {
 #' get_sites(sitename = "Alexander Lake")
 #' @export
 get_sites.default <- function(...) {
+  
+  
   
   cl <- as.list(match.call())
   cl[[1]] <- NULL
@@ -141,7 +125,6 @@ get_sites.default <- function(...) {
   }
   
 }
-
 
 #' @title Get Site Numeric
 #' @import lubridate
@@ -183,3 +166,21 @@ get_sites.numeric <- function(x, ...) {
 }
 
 
+#get_sites.datasets <- function(...) {
+#  print("access granted")
+#  site <- x$site.data
+#  
+#  return(site)
+#}
+
+#' @title Get Site Datasets
+#' @param x An object of class \code{dataset}.
+#' @param ... arguments in ellipse form
+#' @examples
+#' get_sites.datasets(24)
+#' @export get_sites.datasets
+get_sites.datasets <- function(x, ...) {
+  site <- x$site.data
+
+  site
+}

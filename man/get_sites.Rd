@@ -7,9 +7,9 @@
 get_sites(x = NA, ...)
 }
 \arguments{
-\item{...}{accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
+\item{x}{Use a single number to extract site information}
 
-\item{siteid}{Use a single number to extract site information}
+\item{...}{accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
 }
 \description{
 Get Sites
@@ -21,5 +21,5 @@ Displays a table with the following columns siteid, sitename, lat, long, and ele
 Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
 }
 \examples{
-get_sites(siteid = 24)
+get_sites(x = 24)
 }
