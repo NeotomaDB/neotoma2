@@ -105,14 +105,33 @@ get_publications.numeric <- function(x, ...) {
   return(pubs)
 }
 
+#' @importFrom dplyr coalesce
+#' @export
+get_publications.publication <- function(x, ...) {
+  if(is.na(x@publicationid)) {
+    if(!is.na(x@citation)) {
+      test <- get_publications(search = x@citation, limit = 3)
+      attr(x, "matches") <- test
+    } else {
+      searchString <- dplyr::coalesce(x@citation, x@articletitle, x@booktitle)
+      test <- get_publications(search = searchString, limit = 3)
+      attr(x, "matches") <- test
+    }
+  }
+  return(x)
+}
+
 #' @export
 get_publications.publications <- function(x, ...) {
   for (i in 1:length(x)) {
-    pub <- x[[i]]@publications[[1]]
-    if(is.na(x[[i]]@publications[[1]]@publicationid)) {
+    pub <- x[[i]]
+    if(is.na(x[[i]]@publicationid)) {
       if(!is.na(pub@citation)) {
         test <- get_publications(search=pub@citation, limit = 3)
+        attr(pub, "matches") <- test
+        x@publications[[i]] <- pub
       }
     }
   }
+  return(x)
 }

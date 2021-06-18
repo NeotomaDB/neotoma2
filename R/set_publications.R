@@ -23,18 +23,69 @@
 #' @param country Country of publication.
 #' @param originallanguage Original language of publication.
 #' @param notes Publication notes.
+#' @export
 
-set_publication <- function(...) {
-    new("publication",
-        publicationtype = as.character(pubtype),
+set_publications <- function(
+    publicationid = NA_integer_,
+    publicationtypeid = NA_integer_,
+    publicationtype = NA_character_,
+    year = NA_character_,
+    citation = NA_character_,
+    articletitle = NA_character_,
+    journal = NA_character_,
+    volume = NA_character_,
+    issue = NA_character_,
+    pages = NA_character_,
+    citationnumber = NA_character_,
+    doi = NA_character_,
+    booktitle = NA_character_,
+    numvolumes = NA_character_,
+    edition = NA_character_,
+    volumetitle = NA_character_,
+    seriestitle = NA_character_,
+    seriesvolume = NA_character_,
+    publisher = NA_character_,
+    url = NA_character_,
+    city = NA_character_,
+    state = NA_character_,
+    country = NA_character_,
+    originallanguage = NA_character_,
+    notes = NA_character_,
+    author = NULL) {
+    
+    if(is.null(author)) {
+        author <- new("authors")
+    }
+    
+    if(is.na(citation)) {
+        citation <- paste0(articletitle, journal)
+    }
+    
+    new('publication',
         publicationid = as.numeric(publicationid),
-        articletitle = as.character(articletitle),
+        publicationtypeid = as.numeric(publicationtypeid),
+        publicationtype = as.character(publicationtype),
         year = as.character(year),
+        citation = as.character(citation),
+        articletitle = as.character(articletitle),
         journal = as.character(journal),
         volume = as.character(volume),
         issue = as.character(issue),
         pages = as.character(pages),
-        citation = as.character(citation),
+        citationnumber = as.character(citationnumber),
         doi = as.character(doi),
+        booktitle = as.character(booktitle),
+        numvolumes = as.character(numvolumes),
+        edition = as.character(edition),
+        volumetitle = as.character(volumetitle),
+        seriestitle = as.character(seriestitle),
+        seriesvolume = as.character(seriesvolume),
+        publisher = as.character(publisher),
+        url = as.character(url),
+        city = as.character(city),
+        state = as.character(state),
+        country = as.character(country),
+        originallanguage = as.character(originallanguage),
+        notes = as.character(notes),
         author = author)
 }

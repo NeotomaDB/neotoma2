@@ -68,7 +68,7 @@ publication <- setClass("publication",
                               notes = NA_character_,
                               author = NULL))
 
-#' An S4 class for multi-contact information from the Neotoma Paleoecology Database.
+#' An S4 class for multi-publication information from the Neotoma Paleoecology Database.
 
 publications <- setClass("publications",
                          representation(publications  = "list"),
@@ -104,8 +104,7 @@ setMethod(f = "show",
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
-            new('publications',
-            publications = x@publications[i])
+            new('publications', publications = x@publications[i])
           })
 
 setMethod(f = "length",
@@ -128,4 +127,22 @@ setMethod(f = "show",
             print(data.frame(publicationid = object@publicationid,
                              citation = object@citation,
                              doi = object@doi))
+          })
+
+
+setGeneric("matchScore", function(object) {
+  standardGeneric("matchScore")
+})
+
+setMethod(f = "matchScore",
+          signature = "publications",
+          definition = function(object){
+            purrr::map(function(x)attr(x, 'match')) %>% 
+              unlist()
+          })
+
+setMethod(f = "matchScore",
+          signature = "publication",
+          definition = function(object){
+            attr(x, 'match')
           })

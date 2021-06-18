@@ -1,7 +1,7 @@
 #' @title Reformat API author list to Neotoma contacts.
 #' @param x A list coming from the `author` element of the Neotoma publicaiton API
 #' @importFrom purrr map
-#' @NoRd
+#' @noRd
 pubAuthors <- function(x) {
   
   result <- new("authors",
