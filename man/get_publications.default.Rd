@@ -2,10 +2,10 @@
 % Please edit documentation in R/get_publications.R
 \name{get_publications.default}
 \alias{get_publications.default}
-\title{Get contact information for Neotoma contributors}
+\title{Get publication information from Neotoma}
 \usage{
 \method{get_publications}{default}(...)
 }
 \description{
-Get contact information for Neotoma contributors
+Get publication information from Neotoma
 }
