@@ -1,28 +1,29 @@
 #' @title set Site Information for Fossil Sites
 #' @import lubridate
+#' @import sf
 #' @importFrom methods new
-#' @param siteid helps 
-#' @param sitename helps
+#' @param siteid site unique identificator if available 
+#' @param sitename actual site name
+#' @param coordinates sf object
+#' @param description description of site
+#' @param notes additional information of the site
+#' @param collunits collection units in the site
+#' @param altitude altitude/elevation of the site
 #' @export
 #' @examples
-#' my_site <- set_site(sitename="My Lake", coordinates = c(10, -30), description = "my lake", altitude = 30)
-#' my_site
-#' | siteid  | sitename       |    lat    |   long   | elev   |
-#' | :------ |:--------------:|:---------:|:--------:|-------:|
-#' |   NA    |  My Lake       |     10    |    -30   |   30   |
-#' @md
+#' \dontrun{
+#' x = st_as_sf(st_sfc(st_point(c(5,5))))
+#' my_site <- set_site(sitename="My Lake", coordinates = x,
+#'                     description = "my lake", altitude = 30)
+#'                     }
 
-
-set_site <- function(siteid, sitename= NA_character_, 
-                             coordinates = c(),
+set_site <- function(sitename= NA_character_, 
+                             coordinates = st_as_sf(st_sfc()),
                              description = NA_character_, 
                              notes = NA_character_, collunits = new("collunits"), altitude = NA_integer_){
   x <- new("site")
-  #x@siteid <- siteid
   x@sitename <- sitename
-  xy = data.frame(x=coordinates[1], y=coordinates[2])
-  xy = st_as_sf(xy, coords=c("x","y"))
-  x@location <- xy
+  x@location <- coordinates
   x@description <- description
   x@notes <- notes
   x@collunits <- collunits

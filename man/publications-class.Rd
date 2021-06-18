@@ -4,7 +4,7 @@
 \name{publications-class}
 \alias{publications-class}
 \alias{publications}
-\title{An S4 class for multi-contact information from the Neotoma Paleoecology Database.}
+\title{An S4 class for multi-publication information from the Neotoma Paleoecology Database.}
 \description{
-An S4 class for multi-contact information from the Neotoma Paleoecology Database.
+An S4 class for multi-publication information from the Neotoma Paleoecology Database.
 }

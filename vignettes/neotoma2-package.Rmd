@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(neotoma2)
+library(sf)
 ```
 
 ## Neotoma Data Structure
@@ -49,6 +50,15 @@ alex <- get_sites(siteid=24)
 alex
 ```
 
+#### Using Multiple Site IDs
+It might be of interest to pass a list of sites. You can do so using `c()`
+
+```{r get-multipe-sites}
+multiple_sites <- get_sites(c(24, 47))
+multiple_sites
+```
+
+
 #### Searching for sites by name
 
 If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
@@ -76,12 +86,12 @@ alex <- get_sites(sitename = 'Alexander%')
 
 Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
 ````{r}
-alexanderSomething = get_sites(sitename = 'Alexander%')
+alexanderSomething <- get_sites(sitename = 'Alexander%')
 ```
 
 
@@ -90,11 +100,11 @@ alexanderSomething = get_sites(sitename = 'Alexander%')
 alexanderSomething@sites[[2]]@sitename
 ```
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 
-```
+```{r eval = FALSE}
 ?get_sites
 ```
 
@@ -104,7 +114,7 @@ As explained above, a `site` is the fundamental unit of the Neotoma Database.  I
 
 ```{r set_site}
 my_site <- set_site(sitename="My Lake", 
-                    coordinates = c(10, -30), 
+                    coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
                     altitude = 30)
 my_site
@@ -130,12 +140,20 @@ The most simple case is a search for a publication based on one or more publicat
 
 #### Get Publication By ID
 
-We can use a signle publication ID or multiple IDs.  In either case the API returns the publication(s) and creates a new `publications` object (which consists of multiple individual `publication`s).  
+We can use a single publication ID or multiple IDs.  In either case the API returns the publication(s) and creates a new `publications` object (which consists of multiple individual `publication`s).  
 
 ```{r}
 one <- get_publications(12)
 two <- get_publications(c(12,14))
 ```
+
+From there we can then then subset and extract elements from the list using the standard `[[` format.  For example:
+
+```{r}
+two[[2]]
+```
+
+Will return the second publication in the list, corresponding to the publication with `publicationid` 14 in this case.
 
 #### Get Publication using Search:
 
@@ -157,6 +175,14 @@ length(michPubs)
 ```
 
 This results in a set of `r length(michPubs)` publications from Neotoma.  Equal to the `limit` in this case.  If the number of matching publications is less than the limit then the `length()` will be smaller.
+
+Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
+
+```{r}
+noise <- get_publications(search="Canada Banada Nanada", limit = 5)
+```
+
+This returns a result set of length `r length(noise)`.  
 
 By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
 
@@ -182,8 +208,6 @@ while(run) {
 
 This gives us an object of length `r length(allPubs)`, the number of publications in Neotoma that reference Michigan.
 
-
-
 We can see a summary of the returned object by simply calling it:
 
 ```{r}
@@ -198,8 +222,73 @@ two[[1]]
 
 The output will look similar to the output for `two` above, however you will see that only a single result will be returned.  We can also select an array of objects using this method, either as a sequence (`1:10`, or as a numeric vector (`c(1,2,3)`)):
 
-```{r}
+```{r subsetPubs}
 pubArray <- get_publications(1:10)
 subPub <- pubArray[[1:5]]
 ```
 
+#### Create (or Import) New Publications
+
+Just as we can use the `set_sites()` function to set new site information, we can also create new publication information using `set_publications()`.  With `set_publications()` you can enter as much or as little of the article metadata as you'd like, but it's designed (in part) to use the CrossRef API to return information from a DOI.
+
+```{r setNewPub}
+new_pub <- set_publications(articletitle = 'Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota',
+                           journal = 'Canadian Journal of Botany',
+                           volume = 46)
+```
+
+A `publication` has a large number of slots that can be defined.  These may be left blank, they may be set directly after the publication is defined:
+
+```{r setPubValue}
+new_pub@pages <- '1397-1410'
+```
+
+
+#### Validate New Publications
+
+
+## Workflows
+
+One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
+
+### Diatoms
+
+```{r getDiatoms, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+
+neDiatoms <- get_datasets(dois=c(...))
+```
+
+* Pull diatom surface samples.
+  * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
+
+```{r getWaterChem, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+```
+
+* Look for water chemistry at the same site (or collection unit).
+
+Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
+
+* In theory collection dates are a good idea to use to filter, but collection dates might not be specific enough.
+
+* In some regional studies water chemistry was sampled multiple times during the summer (e.g.) but diatoms were sampled only a single time.
+
+* Was this going to be done in the aggregate dataset method?  Didn't happen.
+
+Then:
+* With one diatom record per water chemistry record
+* we need taxon name, we need water chemistry type & units
+
+Then we do some inference modeling (`rioja`).  Building e.g., transfer functions.
+
+* Then run predictions on cores & plot predicted values & error
+
+* We would extract an appendix of publications for the datasets we use.
+* We would want some maps of site locations
+* We would want some simple scatter plots
+* We would want to do something about understanding taxonomic differences (so we'd want to know who the analyst was, or who the PI was)
+* We might want to group or synonomize.  Can we pull those from Neotoma?
+* We want the stratigraphic diagrams for cores, and surface sample diagrams for surface sample sets
+* We want the lists of dataset DOIs.
+* Want abundances of taxa along a gradient (with superimposed curves?)

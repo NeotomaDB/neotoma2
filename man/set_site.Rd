@@ -5,9 +5,8 @@
 \title{set Site Information for Fossil Sites}
 \usage{
 set_site(
-  siteid,
   sitename = NA_character_,
-  coordinates = c(),
+  coordinates = st_as_sf(st_sfc()),
   description = NA_character_,
   notes = NA_character_,
   collunits = new("collunits"),
@@ -15,17 +14,27 @@ set_site(
 )
 }
 \arguments{
-\item{siteid}{helps}
+\item{sitename}{actual site name}
 
-\item{sitename}{helps}
+\item{coordinates}{sf object}
+
+\item{description}{description of site}
+
+\item{notes}{additional information of the site}
+
+\item{collunits}{collection units in the site}
+
+\item{altitude}{altitude/elevation of the site}
+
+\item{siteid}{site unique identificator if available}
 }
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
-my_site <- set_site(sitename="My Lake", coordinates = c(10, -30), description = "my lake", altitude = 30)
-my_site
-| siteid  | sitename       |    lat    |   long   | elev   |
-| :------ |:--------------:|:---------:|:--------:|-------:|
-|   NA    |  My Lake       |     10    |    -30   |   30   |
+\dontrun{
+x = st_as_sf(st_sfc(st_point(c(5,5))))
+my_site <- set_site(sitename="My Lake", coordinates = x,
+                    description = "my lake", altitude = 30)
+                    }
 }
