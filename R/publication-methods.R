@@ -104,7 +104,7 @@ setMethod(f = "show",
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
-            new('publications', publications = x@publications[i])
+            new('publication', x@publications[[i]])
           })
 
 setMethod(f = "length",
