@@ -6,6 +6,16 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+#Introduction and Overview
+The ultimate purpose of this document is to provide general guidance and specific code examples for those wanting to use Neotoma R2 to retrieve and work with Neotoma diatom data.  An initial purpose is to help programmers (Simon, Socorro) develop Neotoma2 resources by providing a structured description of how diatom researchers may wish to use N-R2, and specific tasks they may wish to accomplish.
+
+This document is organized to address two main goals of users, to browse the database to identify datasets that meet specified criteria, and to create output files that can be used for further analysis.  Other goals are to create plots and maps and to analyze data using R code.
+
+#Browse data
+The browse section includes examples of different ways to find available datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results.
+
+#Create data output files 
+This section provides examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  generally include all related data - amount of data can be reduced later includes several descriptive variables and is easily readable
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -47,6 +57,7 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 
 ```
 *Creating fill in place for header 
+
 ```{r getDiatomTopBot, eval=false}
 neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
 ```
