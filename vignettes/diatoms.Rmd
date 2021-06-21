@@ -94,6 +94,7 @@ Example of combining data and using the variable
 ```{r getDiatoms, eval=FALSE}
 neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
+
 neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb) #Not sure if combine or merge also may be rbind will check back on 
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
 
@@ -299,7 +300,7 @@ Example
 ```
 Example single site 
 ```{r get_, eval=FALSE}
-schrader <- get_site('Schrader Pond')
+schrader <- get_site('Schrader Pond') # % can be used to approximate sitenames
 schrader.data <- get_dataset(schrader)
 schrader.dl <- get_download(schrader.data)
 schrader.cnt <- counts(schrader.dl)
