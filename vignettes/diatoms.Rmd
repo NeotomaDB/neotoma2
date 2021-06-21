@@ -44,13 +44,27 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,-40,-65,48))
 ```{R Diatom Geographic Region,eval=FALSE}
 
 ```
+Example
+```{r Northeast Sites Get sites}
+library(dplyr)
+library(purrr)
+library(neotoma)
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+ne_sites <- map(gpids, function(x)
+get_site(gpid = x)) %>%
+bind()
+```
+
 #####Geopolitical units (e.g., states)
 ```{R Diatom GPID,eval=FALSE}
-
+LOC <- get_table(table.name='GeoPoliticalUnits')
+diat_geo <- get_dataset(gpid = X)
 ```
 Example
 ```{R Example}
-
+LOC <- get_table(table.name='GeoPoliticalUnits')
+Geo_PA <- get_dataset(gpid = "Pennsylvania")
+GEO_PA1 <- get_dataset(gpid = 8412 )
 ```
 
 #####Latitude and Longitude boxes
@@ -59,7 +73,7 @@ diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
 Example
 ```{R Example}
-
+diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,-40,-65,48)) 
 ```
 
 #####Elevation
@@ -93,7 +107,9 @@ diat_3<-get_site(siteid= x)
 ```
 Example
 ```{R Example}
-
+diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
+diat_2<-get_site(sitename= 'Schrader Pond')
+diat_3<-get_site(siteid= 27408)
 ```
 
 
@@ -144,11 +160,11 @@ Example
 
 #### Related to one or more publications
 ```{R Diatom Publication,eval=FALSE}
-
+diat_pub <- get_publication()
 ```
 Example
 ```{R Example}
-
+diat_pub <- get_publication()
 ```
 
 #### From sites with specified range of water chemistry characteristics
