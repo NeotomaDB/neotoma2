@@ -26,17 +26,15 @@ This document is organized to address two main goals of users, to browse the dat
 #Browse data
 The browse section describes ways of searching for available diatom datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results.
 
-## Find diatom datasets using one or more search criteria. General task specification format: “ “Find all diatom datasets that” meet the following criteria.”  [Followed by code specifying how to search / filter by this criterion] 
-``` {r getDiatom, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
-```
+## Find diatom datasets using one or more search criteria. General task specification format: “Find all diatom datasets that meet the following criteria.”  [Chunks below show generic code specifying how to search / filter by a single criterion, followed by an example] 
+
 
 
 ###[Generic format of a complete chunk to browse using a single criterion]
-```{R Diatom Generic Format}
-
-
+```{R Diatom Generic Format, eval = FALSE}
+diat_1 <- get_datasets(argument_1, argument_2)
 ```
+
 #### Geographic region
 ```{R Diatom Geographic Region}
 
@@ -46,8 +44,8 @@ neDiatoms <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 
 ```
 #####Latitude and Longitude boxes
-```{R Diatom Lat and Long}
-
+```{R Diatom Lat and Long, eval = FALSE}
+diat_1 <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
 #####Elevation
 ```{R Diatom Elevation}
