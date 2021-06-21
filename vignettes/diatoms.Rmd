@@ -45,6 +45,8 @@ neDiatoms <- get_datasets(dois=c(...))
 ```
 
   * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
+
+ 
   
 ### Water Chemistry 
 ```{r getWaterChem, eval=FALSE}
@@ -52,16 +54,24 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 ```
 * Look for water chemistry at the same site (or collection unit).
 
-### Browsing 
+# Browsing 
 ```{r get__, eval=FALSE}
 
 ```
 *Creating fill in place for header 
 
-```{r getDiatomTopBot, eval=false}
-neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
+### Diatom Sampling 
+Gets data for diatom dataset types general 
+``` {r getDiatom, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
-Gets data for diatom Top-Bottom dataset types
+
+
+### Surface Sampling 
+Gets data for diatom surface sample dataset types
+``` {r getDiatomSurf, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface", loc=BOUNDING BOX)
+```
 
 ### Top-Bottom Sampling 
 ``` {r getDiatomTopBot, eval=FALSE}
@@ -69,20 +79,52 @@ neDiatoms <- get_datasets(datasettype="diatom top bottom", loc=BOUNDING BOX)
 ```
 Gets data for diatom Top-Bottom dataset types 
 
+###Diatom compiled
+Gets all data for the diatom dataset types
+``` {r getDiatom, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom","diatom top bottom","diatom surface"), loc=BOUNDING BOX)
+```
+
 ### Chronology
 ```{r get_, eval=FALSE}
 
 ```
 
-### Diatom Counts
-```{r get_, eval=FALSE}
+# Output
 
+##Diatom taxa list
+To get list of taxa in diatom dataset 
+```{r get_dataset, eval=FALSE}
+diatoms <- get_dataset(datasettype="diatom")
+diatom.dl<- get_download(diatoms)
+diatom.taxa<- taxa(diatom.dl)
 ```
 
-
+## Diatom Counts
+To create diatom counts from Neotoma DB sites being a single site 
 ```{r get_, eval=FALSE}
-
+schrader <- get_site('Schrader Pond')
+schrader.data <- get_dataset(schrader)
+schrader.dl <- get_download(schrader.data)
+schrader.cnt <- counts(schrader.dl)
+sapply(schrader.cnt, dim) 
+print(schrader.dl)
 ```
+
+#Examples
+
+## Geolocation
+For Northeast example
+```{r get_, echo=FALSE}
+library(dplyr)
+library(purrr)
+library(neotoma)
+
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+ne_sites <- map(gpids, function(x) get_site(gpid = x)) %>%
+bind()
+```
+
 
 Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
 
