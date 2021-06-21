@@ -188,7 +188,7 @@ Example
 
 #### Diatom Sample analyst name
 ```{R Diatom Sample Analyst,eval=FALSE}
-
+<- get_contact()
 ```
 Example
 ```{R Example}
@@ -197,11 +197,12 @@ Example
 
 #### Investigator name / person name
 ```{R Diatom Investigator,eval=FALSE}
+Contact <- get_contact(contactname = 'X')
 
 ```
 Example
 ```{R Example}
-
+Don <- get_contact(contactname = 'Donald F. Charles')
 ```
 
 #### Diatom counts include one or more specified diatom taxa
@@ -210,7 +211,9 @@ Example
 ```
 Example
 ```{R Example}
-
+diatoms<- get_dataset(datasettype = 'diatoms')
+diat_dl <- get_download(diatoms)
+diat_taxa <- taxa(diat.dl)
 ```
 
 #### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
@@ -243,7 +246,7 @@ Example
 
 #### Chronology (y/n) and characteristics
 ```{R Chronology,eval=FALSE}
-
+<-get_chroncontrol(x) # Need to check if this relates to chronology or bacon 
 ```
 Example
 ```{R Example}
@@ -294,10 +297,17 @@ Example
 ```{R,eval=FALSE}
 
 ```
-Example
-```{R Example}
-
+Example single site 
+```{r get_, eval=FALSE}
+schrader <- get_site('Schrader Pond')
+schrader.data <- get_dataset(schrader)
+schrader.dl <- get_download(schrader.data)
+schrader.cnt <- counts(schrader.dl)
+sapply(schrader.cnt, dim) 
+print(schrader.dl)
 ```
+
+
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
 
@@ -395,10 +405,11 @@ Example
 
 ## Extract a list of publications for a set of datasets
 ```{R,eval=FALSE}
-
+<- get_publications(datasetid= x)
 ```
 Example
 ```{R Example}
+
 
 ```
 
