@@ -91,12 +91,14 @@ diat_el2 <- get_datasets(datasetid= diat_el)
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 neDiatoms <- get_datasets(dois=c(...))
 ```
-Example of combining data and using the variable
-```{r getDiatoms, eval=FALSE}
+Example of combining datatypes and using the variable 
+```{r getDiatoms, eval=FALSE} 
+# Get datasets by individual diatom datatype 
 neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
-
-neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb) #Not sure if combine or merge also may be rbind will check back on 
+neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+# Get datasets by multiple diatom datatypes 
+neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
 
 ```
