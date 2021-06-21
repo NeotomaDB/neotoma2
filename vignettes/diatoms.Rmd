@@ -76,13 +76,14 @@ Example
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,-40,-65,48)) 
 ```
 
-#####Elevation
+##### Elevation (m)
 ```{R Diatom Elevation,eval=FALSE}
-diat_el <- get_datasets(altmin(),altmax())
+diat_el <- get_sites(`altmin()`, `altmax()`)
 ```
 Example
 ```{R Example}
-
+diat_el <- get_sites("altmin(5000)","altmax(5500)") #Will need to look over at a later time 
+diat_el2 <- get_datasets(datasetid= diat_el)
 ```
 
 #### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
