@@ -34,97 +34,206 @@ The browse section describes ways of searching for available diatom datasets usi
 ```{R Diatom Generic Format, eval = FALSE}
 diat_1 <- get_datasets(argument_1, argument_2)
 ```
+Example for Dataset
+```{R Diatom Dataset, eval = FALSE}
+NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,-40,-65,48))
+```
+
 
 #### Geographic region
-```{R Diatom Geographic Region}
+```{R Diatom Geographic Region,eval=FALSE}
 
 ```
 #####Geopolitical units (e.g., states)
-```{R Diatom GPID}
+```{R Diatom GPID,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #####Latitude and Longitude boxes
 ```{R Diatom Lat and Long, eval = FALSE}
-diat_1 <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
-#####Elevation
-```{R Diatom Elevation}
+Example
+```{R Example}
 
 ```
+
+#####Elevation
+```{R Diatom Elevation,eval=FALSE}
+diat_el <- get_datasets(altmin(),altmax())
+```
+Example
+```{R Example}
+
+```
+
 #### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
 ```{r getDiatoms, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 neDiatoms <- get_datasets(dois=c(...))
 ```
+Example of combining data and using the variable
+```{r getDiatoms, eval=FALSE}
+neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
+neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb) #Not sure if combine or merge also may be rbind will check back on 
+neDiatoms_com <- get_datasets(neDiatoms_sstb)
 
-
+```
 
 #### Site - Name(s) or ID(s)
 ```{r get_site,eval=FALSE}
+diat_1<-get_site(gpid = x)
+diat_2<-get_site(sitename= x)
+diat_3<-get_site(siteid= x)
+```
+Example
+```{R Example}
 
 ```
+
+
 #### Collection type
-```{R Diatom Collection Type}
+```{R Diatom Collection Type,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Constituent database
-```{R Diatom Constituent Database}
+```{R Diatom Constituent Database,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Sample keyword
-```{R Diatom Keywords}
+```{R Diatom Keywords,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Within or intersecting a specified time interval 
-```{R Diatom Time Interval}
+```{R Diatom Time Interval,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Member of one or more aggregate datasets
-```{R Diatom Aggregate Dataset}
+```{R Diatom Aggregate Dataset,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Related to one or more publications
-```{R Diatom Publication}
+```{R Diatom Publication,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### From sites with specified range of water chemistry characteristics
 ```{r getWaterChem, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 ```
+Example
+```{R Example}
+
+```
+
 
 #### From sites where one or more specified water chemistry characteristics were measured
-```{R Diatom Multiple Water Chemistry}
+```{R Diatom Multiple Water Chemistry,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Diatom Sample analyst name
-```{R Diatom Sample Analyst}
+```{R Diatom Sample Analyst,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Investigator name / person name
-```{R Diatom Investigator}
+```{R Diatom Investigator,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Diatom counts include one or more specified diatom taxa
-```{R Diatom Taxa}
+```{R Diatom Taxa,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
-```{R Diatom Counts}
+```{R Diatom Counts,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 
 #### Site area larger or smaller than specified size
-```{R Diatom Site Area}
+```{R Diatom Site Area,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Depository in which diatom slides are located
-```{R Depository}
+```{R Depository,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 #### Chronology (y/n) and characteristics
-```{R Chronology}
+```{R Chronology,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 
 ### Format for browsing using multiple criteria.  Examples: [could get complicated]  General rules and tips.  [Add as they become known]
 #### Find all diatom datasets of any datatype
@@ -146,40 +255,78 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 
 ### Dataset:
 #### Dataset type - (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
-```{R}
+```{R,eval=FALSE}
+
+```
+Example
+```{R Example}
 
 ```
 # Create data output files  
 The create data output files section -  standard formats for diatom counts, metadata, chronology, water chemistry.  It provides examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, they should include all related data; the amount of data can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
 
 ## Basic files / matrices
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### Diatom counts - single sites and multiple sites; aggregate data set; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts.
-```{R}
+```{R,eval=FALSE}
+
+```
+Example
+```{R Example}
 
 ```
 ### List of diatom taxa - with name, authority, code, notes, etc.
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### Water chemistry
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### Chronology
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### Metadata - various options
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### Other types of data - LOI, geochemistry
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 
 Issues:  Put metadata in the same files as the data matrices?  How to combine related files (e.g., diatom counts and chronology)? [When is it best to convert diatom counts to percentages?]
 
@@ -200,30 +347,59 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 #Modify and analyze data 
 - and other miscellaneous tasks
 ## Ability to add to or modify data in Neotoma
-```{R}
+```{R,eval=FALSE}
 
 ```
 ### add aggregate datasets to Neotoma
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ### create new ecological groups and assign taxa to the groups
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ## Create and look for a table that explicitly matches water chemistry and diatom datasets.  This is especially important for cases where sites were sampled for water chemistry multiple times.
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ## Extract a list of publications for a set of datasets
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ## Extract a list of DOI’s for a set of datasets
-```{R}
+```{R,eval=FALSE}
 
 ```
+Example
+```{R Example}
+
+```
+
 ## Create standard sets of diatom taxa names that could be used to convert multiple synonyms to a standard name
-```{R}
+```{R,eval=FALSE}
+
+```
+Example
+```{R Example}
 
 ```
