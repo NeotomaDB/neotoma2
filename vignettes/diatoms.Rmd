@@ -42,6 +42,7 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,-40,-65,48))
 
 #### Geographic region
 ```{R Diatom Geographic Region,eval=FALSE}
+gpids <- get_table(table.name='GeoPoliticalUnits')
 
 ```
 Example
@@ -119,7 +120,7 @@ diat_3<-get_site(siteid= 27408)
 
 #### Collection type
 ```{R Diatom Collection Type,eval=FALSE}
-
+get_dataset(CollType
 ```
 Example
 ```{R Example}
@@ -164,7 +165,7 @@ Example
 
 #### Related to one or more publications
 ```{R Diatom Publication,eval=FALSE}
-diat_pub <- get_publication()
+diat_pub <- get_datasets(search())
 ```
 Example
 ```{R Example}
@@ -211,7 +212,9 @@ Don <- get_contact(contactname = 'Donald F. Charles')
 
 #### Diatom counts include one or more specified diatom taxa
 ```{R Diatom Taxa,eval=FALSE}
-
+diatoms<- get_dataset(datasettype = 'diatoms')
+diat_dl <- get_download(diatoms)
+diat_taxa <- taxa(diat.dl)
 ```
 Example
 ```{R Example}
@@ -314,11 +317,12 @@ print(schrader.dl)
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
-
+get_table(taxa)
+get_taxa()
 ```
 Example
 ```{R Example}
-
+get_dataset(taxonids = )
 ```
 
 ### Water chemistry
@@ -345,7 +349,8 @@ Example
 ```
 Example
 ```{R Example}
-
+get_download()
+get_dataset()
 ```
 
 ### Other types of data - LOI, geochemistry
@@ -354,7 +359,7 @@ Example
 ```
 Example
 ```{R Example}
-
+get_dataset(siteid=,)
 ```
 
 
