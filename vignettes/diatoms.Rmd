@@ -133,7 +133,7 @@ Browse('x')
 ```
 Example
 ```{R Example}
-Browse('Database') # Not actual code but browse seems right
+Browse('Database') # Not actual code but browse seems like a right choice
 ```
 
 #### Sample keyword
