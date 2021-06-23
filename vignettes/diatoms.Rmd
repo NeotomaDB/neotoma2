@@ -244,6 +244,8 @@ Example
 
 #### Depository in which diatom slides are located
 ```{R Depository,eval=FALSE}
+diat.data <- get_dataset(datasettype='diatom') # access to neotoma explorer but needs to specify 
+browse(diat.data)
 
 ```
 Example
