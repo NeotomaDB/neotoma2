@@ -120,29 +120,29 @@ diat_3<-get_site(siteid= 27408)
 
 #### Collection type
 ```{R Diatom Collection Type,eval=FALSE}
-get_dataset(CollType
+get_dataset(CollType='x') # Unsure
 ```
 Example
 ```{R Example}
-
+get_dataset(CollType='Core','Section')
 ```
 
 #### Constituent database
 ```{R Diatom Constituent Database,eval=FALSE}
-
+Browse('x')
 ```
 Example
 ```{R Example}
-
+Browse('Database') # Not actual code but browse seems right
 ```
 
 #### Sample keyword
 ```{R Diatom Keywords,eval=FALSE}
-
+get_dataset(search('x'))
 ```
 Example
 ```{R Example}
-
+get_dataset(search('keywords'))# Search could find so maybe
 ```
 
 #### Within or intersecting a specified time interval 
@@ -323,11 +323,12 @@ get_taxa()
 Example
 ```{R Example}
 get_dataset(taxonids = )
+get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
 
 ### Water chemistry
 ```{R,eval=FALSE}
-
+get_dataset(sitename='x',datasettype = 'diatom')
 ```
 Example
 ```{R Example}
@@ -336,7 +337,7 @@ Example
 
 ### Chronology
 ```{R,eval=FALSE}
-
+get_chroncontrol('x')# Can be thought like how bacon model is run through R
 ```
 Example
 ```{R Example}
@@ -345,7 +346,8 @@ Example
 
 ### Metadata - various options
 ```{R,eval=FALSE}
-
+get_download()# Options within diatoms to organize it 
+get_dataset()
 ```
 Example
 ```{R Example}
@@ -355,7 +357,7 @@ get_dataset()
 
 ### Other types of data - LOI, geochemistry
 ```{R,eval=FALSE}
-
+get_dataset(siteid='x')# Should be able to get the data from the siteid or dataset
 ```
 Example
 ```{R Example}
@@ -387,7 +389,7 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 ```
 ### add aggregate datasets to Neotoma
 ```{R,eval=FALSE}
-
+set_dataset(x)# not code but having aggregate creation with set function sounds useful
 ```
 Example
 ```{R Example}
@@ -396,7 +398,7 @@ Example
 
 ### create new ecological groups and assign taxa to the groups
 ```{R,eval=FALSE}
-
+set_taxa('x') # Not code but could be something
 ```
 Example
 ```{R Example}
@@ -405,7 +407,7 @@ Example
 
 ## Create and look for a table that explicitly matches water chemistry and diatom datasets.  This is especially important for cases where sites were sampled for water chemistry multiple times.
 ```{R,eval=FALSE}
-
+# I think this could be an if and else statement since you have to compare 
 ```
 Example
 ```{R Example}
@@ -424,7 +426,7 @@ Example
 
 ## Extract a list of DOI’s for a set of datasets
 ```{R,eval=FALSE}
-
+get_publications(datasetid=)# Not code seems to need to be a mix of get_dataset and get_publications
 ```
 Example
 ```{R Example}
@@ -433,7 +435,7 @@ Example
 
 ## Create standard sets of diatom taxa names that could be used to convert multiple synonyms to a standard name
 ```{R,eval=FALSE}
-
+get_dataset(taxonname = ,search())
 ```
 Example
 ```{R Example}
