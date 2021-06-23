@@ -316,6 +316,15 @@ sapply(schrader.cnt, dim)
 print(schrader.dl)
 ```
 
+```{R}
+library (neotoma)
+uwallface <- get_site (sitename = "Upper Wallface%")
+uwallface.dl<- get_dataset(uwallface)
+uwallface.dw <- get_download (32252)
+uwallface.ct <- counts (uwallface.dw)
+sapply(uwallface.ct, dim) 
+glimpse (uwallface.ct)
+```
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
