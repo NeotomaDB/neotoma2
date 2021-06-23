@@ -321,6 +321,7 @@ print(schrader.dl)
 ```{R,eval=FALSE}
 get_table(taxa)
 get_taxa()
+compile_taxa
 ```
 Example
 ```{R Example}
