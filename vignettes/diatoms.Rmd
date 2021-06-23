@@ -324,6 +324,7 @@ uwallface.dw <- get_download (32252)
 uwallface.ct <- counts (uwallface.dw)
 sapply(uwallface.ct, dim) 
 glimpse (uwallface.ct)
+str(uwallface.dl) # str is a useful function to see the overall data for a dataset 
 ```
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
