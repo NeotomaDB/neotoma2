@@ -133,7 +133,7 @@ Browse('x')
 ```
 Example
 ```{R Example}
-Browse('Database') # Not actual code but browse seems right
+Browse('Database') # Not actual code but browse seems like a right choice
 ```
 
 #### Sample keyword
@@ -330,12 +330,27 @@ uwallface.ct <- counts (uwallface.dw)
 sapply(uwallface.ct, dim)
 # Look at the matrix of diatom counts
 glimpse (uwallface.ct)
+str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
 ```
+```{R}
+#View sample metadata, list of taxa, and counts in Download dataframes 
+#View sample metadata,
+uwallface.dw[["32252"]][["sample.meta"]] 
+#View taxa list
+uwallface.dw[["32252"]][["taxon.list"]]
+#View diatom counts
+uwallface.dw[["32252"]][["counts"]]
+#View Chronology
+uwallface.dw[["32252"]][["chronologies"]]
+```
+
+
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
 get_table(taxa)
 get_taxa()
+compile_taxa
 ```
 Example
 ```{R Example}
