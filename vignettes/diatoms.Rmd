@@ -324,8 +324,21 @@ uwallface.dw <- get_download (32252)
 uwallface.ct <- counts (uwallface.dw)
 sapply(uwallface.ct, dim) 
 glimpse (uwallface.ct)
-str(uwallface.dl) # str is a useful function to see the overall data for a dataset 
+str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
 ```
+```{R}
+#View sample metadata, list of taxa, and counts in Download dataframes 
+#View sample metadata,
+uwallface.dw[["32252"]][["sample.meta"]] 
+#View taxa list
+uwallface.dw[["32252"]][["taxon.list"]]
+#View diatom counts
+uwallface.dw[["32252"]][["counts"]]
+#View Chronology
+uwallface.dw[["32252"]][["chronologies"]]
+```
+
+
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
