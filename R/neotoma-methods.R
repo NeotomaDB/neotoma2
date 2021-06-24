@@ -163,11 +163,11 @@ setMethod(f = "show",
           })
 
 #' @export
-setGeneric("plotSites", function(object) {
-  standardGeneric("plotSites")
+setGeneric("plot", function(object) {
+  standardGeneric("plot")
 })
 
-setMethod(f = "plotSites",
+setMethod(f = "plot",
           signature= "sites",
           definition = function(object){
             df1 <- map(object@sites, function(x) {
@@ -179,12 +179,8 @@ setMethod(f = "plotSites",
                                description = x@description)
               
             }) %>%
-              bind_rows() %>%
-              print(row.names=FALSE)
-            
-            print(df1$long)
-            print(df1$lat)
-            
+              bind_rows()
+
             map1 <- leaflet(df1) %>% 
               addProviderTiles(providers$Stamen.TerrainBackground) %>% 
               addTiles() %>%
