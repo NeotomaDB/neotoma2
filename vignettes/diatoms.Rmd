@@ -318,11 +318,17 @@ print(schrader.dl)
 
 ```{R}
 library (neotoma)
+# Find Neotoma Site Id for Upper Wallface Pond 
 uwallface <- get_site (sitename = "Upper Wallface%")
-uwallface.dl<- get_dataset(uwallface)
+# Find datasets and IDs associated with U Wallface Pond
+uwallface.dl<- get_dataset(uwallface)  # Review datasets available note ID of the one of interest
+# download data for diatom core dataset (Dataset 32252)
 uwallface.dw <- get_download (32252)
+# Get diatom counts for dataset 32252
 uwallface.ct <- counts (uwallface.dw)
-sapply(uwallface.ct, dim) 
+# Find the number of intervals and number of taxa in the count
+sapply(uwallface.ct, dim)
+# Look at the matrix of diatom counts
 glimpse (uwallface.ct)
 ```
 
