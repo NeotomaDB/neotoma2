@@ -3,6 +3,8 @@
 #' @import sf
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
+#' @import arulesViz
+#' @import leaflet
 
 dataset <- setClass(
                     # Set the name for the class
@@ -152,13 +154,51 @@ setMethod(f = "show",
             map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                          sitename = x@sitename,
-                         lat = st_coordinates(x@location)[,1],
-                         long = st_coordinates(x@location)[,2],
+                         lat = st_coordinates(x@location)[,2],
+                         long = st_coordinates(x@location)[,1],
                          elev = x@altitude)
             }) %>%
               bind_rows() %>%
               print(row.names=FALSE)
           })
+
+#' @export
+setGeneric("plotSites", function(object) {
+  standardGeneric("plotSites")
+})
+
+setMethod(f = "plotSites",
+          signature= "sites",
+          definition = function(object){
+            df1 <- map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = st_coordinates(x@location)[,2],
+                               long = st_coordinates(x@location)[,1],
+                               elev = x@altitude,
+                               description = x@description)
+              
+            }) %>%
+              bind_rows() %>%
+              print(row.names=FALSE)
+            
+            print(df1$long)
+            print(df1$lat)
+            
+            map1 <- leaflet(df1) %>% 
+              addProviderTiles(providers$Stamen.TerrainBackground) %>% 
+              addTiles() %>%
+              addCircleMarkers(lng = df1$long, lat = df1$lat,
+                               popup = paste0('<b>', df1$sitename, '</b><br><b>Description:</b> ', df1$description, '<br><a href=http://apps.neotomadb.org/explorer/?siteids=',df1$siteid,'>Explorer Link</a>'),
+                                     clusterOptions = markerClusterOptions(),
+                                     options = markerOptions(riseOnHover = TRUE))
+            map1
+            
+          })
+
+
+          
+
 
 
 # Method 

@@ -28,6 +28,8 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    gtools
+    gtools,
+    arulesViz,
+    leaflet
 RdMacros: lifecycle
 VignetteBuilder: knitr
