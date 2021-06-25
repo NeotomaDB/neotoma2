@@ -40,6 +40,8 @@ get_closest.default <- function(x, n, buffer, ...) {
   buff_sets <- suppressMessages(get_datasets(loc = geo_bbox, ...))
   
   
+
+  
   return(buff_sets)
 }
 

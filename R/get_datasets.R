@@ -65,7 +65,7 @@ parse_dataset <- function(result) {
 
   }
 
-  after <- Sys.time()
+  #after <- Sys.time()
 
   # cat('A dataset_list containing', result_length, 'objects. \n')
   #
@@ -87,6 +87,8 @@ parse_dataset <- function(result) {
 #' @export
 get_datasets.numeric <- function(datasetid, ...) {
   
+  # Delete print once it works properly
+  print("Getting in Datasets Numeric")
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -126,7 +128,8 @@ get_datasets.numeric <- function(datasetid, ...) {
   
   class(new.output) <- c('dataset', 'list')
 
-  return(new.output)
+  #return(new.output)
+  return(output)
 }
 
 
@@ -136,10 +139,22 @@ get_datasets.numeric <- function(datasetid, ...) {
 #' @importFrom methods new
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
+#' @param datasettype A character string corresponding to one of the allowed dataset types in the Neotoma Database.  Allowed types include: \code{"geochronologic"}, \code{"loss-on-ignition"}, \code{"pollen"}, \code{"plant macrofossils"}, \code{"vertebrate fauna"}, \code{"mollusks"}, and \code{"pollen surface sample"}.  See note in Details delow.
+#' @param piid Numeric value for the Principle Investigator's ID number.
+#' @param altmin Numeric value indicating the minimum altitude for the site (can be used alone or with \code{altmax}).
+#' @param altmax Numeric value indicating the maximum altitude for the site (can be used alone or with \code{altmin}).
+#' @param loc A GeoJson string \code'{'type':'Pollygon', 'coords':c(c(lat,long),c(lat, long),...,c(lat, long))}' representing the bounding box within which to search for sites.
+#' @param taxonids A numeric identifier for the taxon.  See \code{\link{get_table}} and use \code{get_tables('Taxa')} for a list of acceptable values.
+#' @param taxonname A character string corresponding to a valid taxon identity in the Neotoma Database.  See \code{\link{get_table}} and use \code{get_table('Taxa')} for a list of acceptable values.
+#' @param ageold The oldest date acceptable for the search (in years before present).
+#' @param ageyoung The youngest date acceptable for the search.
+#' @param ageof If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.
+#' @param subdate
 #' @export
 get_datasets.default <- function(...) {
   
-  print("Getting in Default")
+  print("Getting in Datasets Default")
+  
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
