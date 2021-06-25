@@ -34,8 +34,9 @@ parseURL <- function(x, use = 'neotoma', ...) {
     add_headers("User-Agent" = "neotoma2 R package"),
     query = list(...))
   
-  print("hopefully url\n")
-  print(response)
+  # When need to check API endpoint, uncomment below
+  #print("hopefully url\n")
+  #print(response)
   
   stop_for_status(response,
     task = "Could not connect to the Neotoma API. Check that the path is valid,
