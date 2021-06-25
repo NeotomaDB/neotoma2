@@ -93,8 +93,6 @@ parse_site <- function(result) {
 #' @export
 get_sites.default <- function(...) {
   
-  
-  
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())

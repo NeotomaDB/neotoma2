@@ -30,6 +30,7 @@ Imports:
     dplyr,
     gtools,
     arulesViz,
-    leaflet
+    leaflet,
+    geojsonsf
 RdMacros: lifecycle
 VignetteBuilder: knitr

@@ -33,7 +33,10 @@ parseURL <- function(x, use = 'neotoma', ...) {
   response <- httr::GET(paste0(baseurl, x),
     add_headers("User-Agent" = "neotoma2 R package"),
     query = list(...))
-
+  
+  print("hopefully url\n")
+  print(response)
+  
   stop_for_status(response,
     task = "Could not connect to the Neotoma API. Check that the path is valid,
             and check the current status of the Neotoma API services at

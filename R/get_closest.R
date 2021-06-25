@@ -32,19 +32,25 @@ get_closest.default <- function(x, n, buffer, ...) {
     sf::st_set_crs(4326) %>% 
     sf::st_transform(crs = proj) %>%
     sf::st_buffer(buffer * 1000) %>%
-    sf::st_transform(4326) %>%
-    sf::st_bbox() %>% 
-    as.numeric()
+    sf::st_transform(4326)
   
-  #buff_sets <- suppressMessages(get_datasets(loc = bbox, ...))
+  bbox <- st_sf(bbox)
+  geo_bbox <- geojsonsf::sf_geojson(bbox)
   
-  return(bbox)
+  buff_sets <- suppressMessages(get_datasets(loc = geo_bbox, ...))
+  
+  
+  return(buff_sets)
 }
 
 
 #' @export
-get_closest.site <- function(x, n, buffer, ...) {
-  coords <- c(x$long, x$lat)
+get_closest.sites <- function(x, n, buffer, ...) {
+  lat <- st_coordinates(x@sites[[1]]@location)[,2]
+  long <- st_coordinates(x@sites[[1]]@location)[,1]
+  
+  coords <- c(long, lat)
+  print(coords)
   get_closest(coords, n, buffer, ...)
 }
 

@@ -2,7 +2,7 @@
 
 S3method(check_contacts,contacts)
 S3method(get_closest,default)
-S3method(get_closest,site)
+S3method(get_closest,sites)
 S3method(get_contacts,default)
 S3method(get_contacts,numeric)
 S3method(get_datasets,default)

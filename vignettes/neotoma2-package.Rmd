@@ -128,6 +128,27 @@ If we ever need to see the documentation for examples, we can always access the 
 ?set_site
 ```
 
+
+## Datasets
+
+You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
+
+Accessing datasets by bounding box:
+
+```{r bounding box}
+brazil <- '{"type": "Polygon", 
+"coordinates": [[
+[-73.125, -9.102096738726443],
+[-56.953125,-33.137551192346145],
+[-36.5625,-7.710991655433217],
+[-68.203125,13.923403897723347],
+[-73.125,-9.102096738726443]
+]]}'
+
+brazil[1]
+
+get_datasets(type = "pollen", loc = brazil[1])
+```
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).

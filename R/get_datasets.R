@@ -139,9 +139,24 @@ get_datasets.numeric <- function(datasetid, ...) {
 #' @export
 get_datasets.default <- function(...) {
   
-  baseURL <- paste0('data/datasets/')
+  print("Getting in Default")
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  
+  error_check <- check_args(cl)
+  
+  if (error_check[[2]]$flag == 1) {
+    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
+  } else {
+    cl <- error_check[[1]]
+  }
+  
+  baseURL <- paste0('data/datasets')
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
+  
+  
   
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
