@@ -225,7 +225,7 @@ get_datasets.default <- function(...) {
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
   
-  print(result)
+  #print(result)
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
