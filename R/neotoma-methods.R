@@ -46,8 +46,8 @@ setMethod(f = "show",
             map(object@datasets, function(x) {
               df <- data.frame(dataset.id = x@datasetid,
                                site.name = x@datasetname,
-                               lat = st_coordinates(x@location)[,1],
-                               long = st_coordinates(x@location)[,2],
+                               lat = mean(st_coordinates(x@location)[,1]),
+                               long = mean(st_coordinates(x@location)[,2]),
                                type = x@datasettype)
             }) %>%
               bind_rows() %>%
@@ -154,8 +154,8 @@ setMethod(f = "show",
             map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                          sitename = x@sitename,
-                         lat = st_coordinates(x@location)[,2],
-                         long = st_coordinates(x@location)[,1],
+                         lat = mean(st_coordinates(x@location)[,2]),
+                         long = mean(st_coordinates(x@location)[,1]),
                          elev = x@altitude)
             }) %>%
               bind_rows() %>%
@@ -163,11 +163,11 @@ setMethod(f = "show",
           })
 
 #' @export
-setGeneric("plot", function(object) {
-  standardGeneric("plot")
+setGeneric("plotLeaflet", function(object) {
+  standardGeneric("plotLeaflet")
 })
 
-setMethod(f = "plot",
+setMethod(f = "plotLeaflet",
           signature= "sites",
           definition = function(object){
             df1 <- map(object@sites, function(x) {
@@ -210,7 +210,7 @@ setMethod(f = "show",
           definition = function(object){
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = st_coordinates(object@location)[,1],
-                             long = st_coordinates(object@location)[,2],
+                             lat = mean(st_coordinates(object@location)[,1]),
+                             long = mean(st_coordinates(object@location)[,2]),
                              elev = object@altitude), row.names=FALSE)
           })

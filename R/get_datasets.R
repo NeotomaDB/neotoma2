@@ -12,7 +12,6 @@ get_datasets <- function(datasetid = NA, ...) {
 }
 
 parse_dataset <- function(result) {
-  now <- Sys.time()
   fixNull <- function(x) {
     for (i in 1:length(x)) {
       if (is.null(x[[i]])) {
@@ -29,54 +28,128 @@ parse_dataset <- function(result) {
   result <- result %>% fixNull()
 
   result_length <- length(result[2]$data)
+  
+  sites <- c()
 
-  dataset_list <- c()
 
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
-    datasetid <- result[2]$data[[i]]$site$datasets[[1]]$datasetid
-    datasettype <- result[2]$data[[i]]$site$datasets[[1]]$datasettype
-    note <- NA_character_
+    coll_units <- c()
+    dataset_list <- c()
     
+    # Sites 
+    # Sitename
     if(is.null(result[2]$data[[i]]$site$sitename)){
-      datasetname <- result[2]$data[[i]]$sites$site$sitename
+      sitename <- result[2]$data[[i]]$sites$site$sitename
     }else{
-      datasetname <- result[2]$data[[i]]$site$sitename
+      sitename <- result[2]$data[[i]]$site$sitename
     }
-
-    trial <- result[2]$data[[i]]$site$geography
-    if(is.null(trial)){
+    
+    # Site ID
+    if(is.null(result[2]$data[[i]]$site$siteid)){
+      siteid <- result[2]$data[[i]]$sites$site$siteid
+    }else{
+      siteid <- result[2]$data[[i]]$site$siteid
+    }
+    
+    # Location
+    location <- result[2]$data[[i]]$site$geography
+    if(is.null(location)){
       location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
     }else{
       location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
     }
+    
+    # Altitude
+    if(is.null(result[2]$data[[i]]$site$altitude)){
+      elev <- result[2]$data[[i]]$sites$site$altitude
+    }else{
+      elev <- result[2]$data[[i]]$site$altitude
+    }
+    
+    # Description
+    if(is.null(result[2]$data[[i]]$site$sitedescription)){
+      description <- result[2]$data[[i]]$sites$site$sitedescription
+      description <- NA_character_
+    }else{
+      description <- result[2]$data[[i]]$site$sitedescription
+      description <- NA_character_
+    }
 
-    new_dataset <- new('dataset',
+    # Notes
+    if(is.null(result[2]$data[[i]]$site$sitenotes)){
+      notes <- result[2]$data[[i]]$sites$site$sitenotes
+    }else{
+      notes <- result[2]$data[[i]]$site$sitenotes
+    }
+    
+    # Datasets
+    # i-th element result[2]$data[[i]]$
+    datasets_length <- length(result[2]$data[[i]]$site$datasets)
+
+    for(j in 1:datasets_length) {
+      datasetid <- result[2]$data[[i]]$site$datasets[[j]]$datasetid
+      datasettype <- result[2]$data[[i]]$site$datasets[[j]]$datasettype
+      if(is.null(result[2]$data[[i]]$site$datasets[[j]]$datasetnotes)){
+        datasetnotes <- NA_character_
+      }else{
+        #datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
+        datasetnotes <- NA_character_
+      }
+
+      new_dataset <- new('dataset',
                        datasetid = datasetid,
-                       datasetname = datasetname,
+                       datasetname = sitename,
                        datasettype = datasettype,
                        location = location,
-                       notes = note)
-
+                       notes = datasetnotes)
+    }
     dataset_list <- append(dataset_list, new_dataset)
-
-    output <- new('datasets', datasets = dataset_list)
+    datasets_list <- new('datasets', datasets = dataset_list)
     
+    
+    ## Collunits
+    # Coll Unit ID
+    if(is.null(result[2]$data[[i]]$site$collectionunitid)){
+      collunitid <- result[2]$data[[i]]$sites$site$collectionunitid
+    }else{
+      collunitid <- result[2]$data[[i]]$site$collectionunitid
+    }
 
-  }
+    
+    colldate = as.Date("2007-02-01")
+    
+    # Coll Unit Handle
+    if(is.null(result[2]$data[[i]]$site$handle)){
+      handle <- result[2]$data[[i]]$sites$site$handle
+    }else{
+      handle <- result[2]$data[[i]]$site$handle
+    }
+    
+    new_collunit <- new("collunit",
+                        collunitid = collunitid,
+                        colldate = colldate,
+                        handle = handle,
+                        datasets = datasets_list)
+    
+    coll_units <- append(coll_units, new_collunit)
+    coll_units <- new('collunits', collunits = coll_units)
 
-  #after <- Sys.time()
+    new_site <- new("site",
+                    siteid = siteid,
+                    sitename = sitename,
+                    location = location, 
+                    altitude = elev,
+                    description = description,
+                    notes = NA_character_,
+                    collunits = coll_units)
+    sites <- append(sites, new_site)
+  }  
 
-  # cat('A dataset_list containing', result_length, 'objects. \n')
-  #
-  # cat(paste0('Accessed from ',
-  #            format(as.POSIXct(now, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-  #            'h to ',
-  #            format(as.POSIXct(after, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-  #            'h. \n',
-  #            'Datasets:\n'))
+    sites <- new('sites', sites = sites)
 
-  return(output)
+  return(sites)
+
 }
 
 #' @title Get Dataset Numeric
@@ -106,29 +179,9 @@ get_datasets.numeric <- function(datasetid, ...) {
   baseURL <- paste0('data/datasets/', dataset)
   
   result <- parseURL(baseURL)
-  
-
-  
+  print(result)
   output <- parse_dataset(result)
-  new.output <- list()
-  
-  result_length <- length(result[2]$data)
-  
-  sites_list <- c()
-  
-  for(i in 1:result_length) {
-    siteid <- result$data[[i]]$site$siteid
-    sites_list <- c(sites_list, siteid)
 
-  }
-
-  new.output$site.data <- get_sites(sites_list)
-  
-  new.output$site.meta <- output
-  
-  class(new.output) <- c('dataset', 'list')
-
-  #return(new.output)
   return(output)
 }
 
@@ -171,8 +224,7 @@ get_datasets.default <- function(...) {
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
   
-  
-  
+  print(result)
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
@@ -181,24 +233,6 @@ get_datasets.default <- function(...) {
     args <- list(...)
   }
   
-  output <- parse_dataset(result)
   
-  result_length <- length(result[2]$data)
-  
-  sites_list <- c()
-  
-  for(i in 1:result_length) {
-    siteid <- result$data[[i]]$sites$site$siteid
-    sites_list <- c(sites_list, siteid)
-    
-  }
-  
-  new.output <- c()
-  new.output$site.data <- get_sites(sites_list)
-  
-  new.output$site.meta <- output
-  
-  class(new.output) <- c('dataset', 'list')
-  
-  return(new.output)
+  return(output)
 }
