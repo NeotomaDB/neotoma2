@@ -85,8 +85,12 @@ parse_dataset <- function(result) {
     # Notes
     if(is.null(result[2]$data[[i]]$site$sitenotes)){
       notes <- result[2]$data[[i]]$sites$site$sitenotes
+      if(is.logical(notes)){
+        notes <- NA_character_}
     }else{
       notes <- result[2]$data[[i]]$site$sitenotes
+      if(is.logical(notes)){
+        notes <- NA_character_}
     }
     
     # Datasets
@@ -98,9 +102,13 @@ parse_dataset <- function(result) {
       datasettype <- result[2]$data[[i]]$site$datasets[[j]]$datasettype
       if(is.null(result[2]$data[[i]]$site$datasets[[j]]$datasetnotes)){
         datasetnotes <- NA_character_
+        if(is.logical(datasetnotes)){
+          datasetnotes <- NA_character_}
       }else{
         #datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
-        datasetnotes <- NA_character_
+        datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
+        if(is.logical(datasetnotes)){
+          datasetnotes <- NA_character_}
       }
 
       new_dataset <- new('dataset',
