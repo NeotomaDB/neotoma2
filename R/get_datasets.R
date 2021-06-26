@@ -161,7 +161,7 @@ parse_dataset <- function(result) {
 get_datasets.numeric <- function(datasetid, ...) {
   
   # Delete print once it works properly
-  print("Getting in Datasets Numeric")
+  #print("Getting in Datasets Numeric")
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -179,7 +179,8 @@ get_datasets.numeric <- function(datasetid, ...) {
   baseURL <- paste0('data/datasets/', dataset)
   
   result <- parseURL(baseURL)
-  print(result)
+  #Print when debugging
+  #print(result)
   output <- parse_dataset(result)
 
   return(output)
