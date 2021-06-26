@@ -63,17 +63,23 @@ parse_dataset <- function(result) {
     # Altitude
     if(is.null(result[2]$data[[i]]$site$altitude)){
       elev <- result[2]$data[[i]]$sites$site$altitude
+      if(is.logical(elev)){
+        elev <- NA_integer_}
     }else{
       elev <- result[2]$data[[i]]$site$altitude
+      if(is.logical(elev)){
+        elev <- NA_integer_}
     }
     
     # Description
     if(is.null(result[2]$data[[i]]$site$sitedescription)){
       description <- result[2]$data[[i]]$sites$site$sitedescription
-      description <- NA_character_
+      if(is.logical(description)){
+        description <- NA_character_}
     }else{
       description <- result[2]$data[[i]]$site$sitedescription
-      description <- NA_character_
+      if(is.logical(description)){
+        description <- NA_character_}
     }
 
     # Notes
