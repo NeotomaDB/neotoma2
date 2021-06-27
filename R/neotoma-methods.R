@@ -222,7 +222,7 @@ setMethod(f = "saveCSV",
           })
 
 #' @export
-setGeneric("showDatasets", function(object, path) {
+setGeneric("showDatasets", function(object) {
   standardGeneric("showDatasets")
 })
 
@@ -238,7 +238,32 @@ setMethod(f = "showDatasets",
               
             }
             print(my_datasets2)
+            return(my_datasets2)
           })
+
+#' @export
+setGeneric("datasetsCSV", function(object, path) {
+  standardGeneric("datasetsCSV")
+})
+
+setMethod(f = "datasetsCSV",
+          signature= "datasets",
+          definition = function(object, path){
+            df1 <- map(object@datasets, function(x) {
+              df <- data.frame(siteid = x@datasetid,
+                               sitename = x@datasetname,
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
+                               type = x@datasettype)
+              
+            }) %>%
+              bind_rows()
+            
+            write.csv(df1, path, row.names = FALSE)
+            
+          }
+)
+
 
 # Method 
 setMethod(f = "[[",
