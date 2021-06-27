@@ -222,6 +222,27 @@ setMethod(f = "saveCSV",
           })
 
 #' @export
+
+setClassUnion("missingOrNULL", c("missing", "NULL"))
+
+setGeneric("appendSites", function(siteI, siteII) {
+  standardGeneric("appendSites")
+})
+
+setMethod(f = "appendSites",
+          signature= "sites",
+          definition = function(siteI, siteII){
+            my_sites <- append(siteI@sites, siteII@sites)
+            
+            new_sites <- new("sites", sites = my_sites)
+            
+          return(new_sites)
+          })
+
+setMethod("appendSites","missingOrNULL",function(siteI ="missingORNULL" , siteII) siteII)
+
+
+#' @export
 setGeneric("showDatasets", function(object) {
   standardGeneric("showDatasets")
 })
