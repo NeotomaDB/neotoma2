@@ -31,6 +31,7 @@ Imports:
     gtools,
     arulesViz,
     leaflet,
-    geojsonsf
+    geojsonsf,
+    mapview
 RdMacros: lifecycle
 VignetteBuilder: knitr

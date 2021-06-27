@@ -5,6 +5,7 @@
 #' @importFrom dplyr bind_rows
 #' @import arulesViz
 #' @import leaflet
+#' @import mapview
 
 dataset <- setClass(
                     # Set the name for the class
@@ -75,8 +76,8 @@ setMethod(f = "show",
           definition = function(object){
             print(data.frame(dataset.id = object@datasetid,
                              site.name = object@datasetname,
-                             lat = st_coordinates(object@location)[,1],
-                             long = st_coordinates(object@location)[,2],
+                             lat = mean(st_coordinates(object@location)[,1]),
+                             long = mean(st_coordinates(object@location)[,2]),
                              type = object@datasettype), row.names=FALSE)
           })
 
@@ -163,18 +164,18 @@ setMethod(f = "show",
           })
 
 #' @export
-setGeneric("plotLeaflet", function(object) {
+setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
   standardGeneric("plotLeaflet")
 })
 
 setMethod(f = "plotLeaflet",
           signature= "sites",
-          definition = function(object){
+          definition = function(object, save_im=FALSE, path = ""){
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = st_coordinates(x@location)[,2],
-                               long = st_coordinates(x@location)[,1],
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
                                elev = x@altitude,
                                description = x@description)
               
@@ -188,14 +189,56 @@ setMethod(f = "plotLeaflet",
                                popup = paste0('<b>', df1$sitename, '</b><br><b>Description:</b> ', df1$description, '<br><a href=http://apps.neotomadb.org/explorer/?siteids=',df1$siteid,'>Explorer Link</a>'),
                                      clusterOptions = markerClusterOptions(),
                                      options = markerOptions(riseOnHover = TRUE))
+           
+            
+            if(save_im == TRUE){
+              #m2 <- mapview(map1)
+              mapshot(map1, file = path)
+            }
             map1
+          })
+
+#' @export
+setGeneric("saveCSV", function(object, path) {
+  standardGeneric("saveCSV")
+})
+
+setMethod(f = "saveCSV",
+          signature= "sites",
+          definition = function(object, path){
+            df1 <- map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
+                               elev = x@altitude,
+                               description = x@description)
+              
+            }) %>%
+              bind_rows()
+            
+            write.csv(df1, path, row.names = FALSE)
             
           })
 
+#' @export
+setGeneric("showDatasets", function(object, path) {
+  standardGeneric("showDatasets")
+})
 
-          
-
-
+setMethod(f = "showDatasets",
+          signature= "sites",
+          definition = function(object){
+            my_datasets <- c()
+            for(i in 1:length(object@sites)){
+              my_dataset <- object@sites[[i]]@collunits@collunits[[1]]@datasets@datasets[[1]]
+              
+              my_datasets <- append(my_datasets, my_dataset)
+              my_datasets2 <- new('datasets', datasets = my_datasets)
+              
+            }
+            print(my_datasets2)
+          })
 
 # Method 
 setMethod(f = "[[",
