@@ -164,14 +164,14 @@ setMethod(f="as.data.frame",
           })
 
 setMethod(f="as.data.frame", 
-          signature= signature("publication"),
-          definition = function(object){
-            slots = slotNames(object)
+          signature= signature(x = "publication"),
+          definition = function(x){
+            slots = slotNames(x)
             slots = slots[!slots == "author"]
-            table <- purrr::map(slots, function(x){
-              out <- data.frame(slot(object, x), 
+            table <- purrr::map(x, function(s){
+              out <- data.frame(slot(x, s), 
                          stringsAsFactors = FALSE)
-              colnames(out) <- x
+              colnames(out) <- s
               return(out)
               }) %>% bind_cols()
           })
