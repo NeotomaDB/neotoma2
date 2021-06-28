@@ -332,6 +332,7 @@ sapply(uwallface.ct, dim)
 glimpse (uwallface.ct)
 str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
 ```
+
 ```{R}
 #View sample metadata, list of taxa, and counts in Download dataframes 
 #View sample metadata,
@@ -344,7 +345,15 @@ uwallface.dw[["32252"]][["counts"]]
 uwallface.dw[["32252"]][["chronologies"]]
 ```
 
-
+```{r}
+library(neotoma)
+library(neotoma2)
+Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+new_sites <- c()
+for(i in 1:length(Names_744BH)){
+sites <- get_sites(i)
+new_sites <- appendSites(new_sites, sites)}
+```
 
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R,eval=FALSE}
