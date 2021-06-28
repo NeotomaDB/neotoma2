@@ -77,12 +77,14 @@ publications <- setClass("publications",
                                  unlist())
                          })
 
+#' @title Get slot names for a publication object.
 setMethod(f = "names",
           signature= signature(x = "publication"),
           definition = function(x){
             slotNames("publication")
           })
 
+#' @title Get slot names for a publication object.
 setMethod(f = "names",
           signature= signature(x = "publications"),
           definition = function(x){
@@ -101,12 +103,19 @@ setMethod(f = "show",
               print()
           })
 
+setMethod(f = "$",
+          signature= signature(x = "publication"),
+          definition = function(x, name){
+            slot(x, name)
+          })
+
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
             new('publication', x@publications[[i]])
           })
 
+#' @title Get the number of publications in a publications object.
 setMethod(f = "length",
           signature= signature(x = "publications"),
           definition = function(x){
@@ -130,19 +139,62 @@ setMethod(f = "show",
           })
 
 
-setGeneric("matchScore", function(object) {
-  standardGeneric("matchScore")
+setGeneric("showMatch", function(object) {
+  standardGeneric("showMatch")
 })
 
-setMethod(f = "matchScore",
-          signature = "publications",
+setMethod(f = "showMatch",
+          signature = signature("publication"),
           definition = function(object){
-            purrr::map(function(x)attr(x, 'match')) %>% 
-              unlist()
+            if(!is.null(attr(object, 'matches'))) {
+              print(attr(object, 'matches'))
+            }
           })
 
-setMethod(f = "matchScore",
-          signature = "publication",
-          definition = function(object){
-            attr(x, 'match')
+setMethod(f="as.data.frame", 
+          signature= signature("author"),
+          definition = function(x){
+            slots = slotNames(x)
+            table <- purrr::map(slots, function(x){
+              out <- data.frame(slot(object, x), 
+                                stringsAsFactors = FALSE)
+              colnames(out) <- x
+              return(out)
+            }) %>% bind_cols()
           })
+
+setMethod(f="as.data.frame", 
+          signature= signature("publication"),
+          definition = function(object){
+            slots = slotNames(object)
+            slots = slots[!slots == "author"]
+            table <- purrr::map(slots, function(x){
+              out <- data.frame(slot(object, x), 
+                         stringsAsFactors = FALSE)
+              colnames(out) <- x
+              return(out)
+              }) %>% bind_cols()
+          })
+
+setGeneric("selectMatch", function(x, n) {
+  standardGeneric("selectMatch")
+})
+
+setMethod(f = "selectMatch",
+          signature = signature(x = "publication", n = "numeric"),
+          definition = function(x, n) {
+            if(is.null(attr(x, 'matches'))) {
+              stop('There are no existing matches.')
+            } else if(n > length(attr(x, 'matches'))) {
+              stop('The requested match is not in the current list.')
+            } else if(n <= length(attr(x, 'matches'))) {
+              return(attr(x, 'matches')[[n]])
+            }
+          })
+
+setMethod(f = "selectMatch",
+          signature = signature(x = "publication", n = "logical"),
+          definition = function(x, n) {
+            attr(x, 'matches') <- NULL
+            return(x)
+            })

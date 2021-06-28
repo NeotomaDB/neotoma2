@@ -107,3 +107,22 @@ setMethod(f = "show",
                        notes = object@notes) %>%
               print()
           })
+
+setMethod(f='as.data.frame',
+          signature=signature("contact"),
+          definition = function(x){
+            data.frame(contactid = x@contactid,
+                       familyname = x@familyname,
+                       givennames = x@givennames,
+                       ORCID = NA,
+                       institution = NA,
+                       contactstatus = NA,
+                       notes = x@notes)
+          })
+
+setMethod(f='as.data.frame',
+          signature=signature("contacts"),
+          definition = function(x){
+            x@contacts %>% map(as.data.frame) %>% bind_rows()
+          })
+
