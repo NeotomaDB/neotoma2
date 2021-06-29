@@ -2,21 +2,18 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites.numeric}
 \alias{get_sites.numeric}
-\title{Get Site Numeric}
+\title{Get Site from a site ID}
 \usage{
-\method{get_sites}{numeric}(siteid, ...)
+\method{get_sites}{numeric}(x, ...)
 }
 \arguments{
-\item{x}{Use a single number to extract site information}
+\item{...}{arguments in ellipse form}
+
+\item{siteid}{The numeric site ID from Neotoma}
 }
 \description{
-Get Site Numeric
+Get Site from a site ID
 }
 \examples{
-get_sites(24)
-
-A site object containing 1 sites and 6 parameters. 
-| siteid  | sitename       |    lat    |   long   | elev |
-| :------ |:--------------:|:---------:|:--------:|-----:|
-| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
+get_sites(siteid = 24)
 }

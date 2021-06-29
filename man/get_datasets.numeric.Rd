@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{datasetid}{Use a single number to extract site information}
+
+\item{...}{arguments in ellipse form}
 }
 \description{
 Get Dataset Numeric

@@ -2,21 +2,17 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites}
 \alias{get_sites}
-\title{Get Sites}
+\title{Get Neotoma site metadata}
 \usage{
-get_sites(siteid = NA, ...)
+get_sites(x = NA, ...)
 }
 \arguments{
-\item{siteid}{integer A unique (integer) site identifier from Neotoma.}
+\item{x}{Use a single number to extract site information}
 
-\item{sitename}{The site's name}
-
-\item{altmax}{The coordinates to create an sf object}
-
-\item{altmin}{The coordinates to create an sf object}
+\item{...}{accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
 }
 \description{
-Get Sites
+Get Neotoma site metadata
 }
 \details{
 Information for Fossil Sites
@@ -26,20 +22,5 @@ Returns an object "sites" that contains multiple single "site" objects. Each of 
 }
 \examples{
 get_sites(24)
-
-A site object containing 1 sites and 6 parameters. 
-| siteid  | sitename       |    lat    |   long   | elev |
-| :------ |:--------------:|:---------:|:--------:|-----:|
-| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
-
-alexander <- get_sites(sitename="Alexander Lake")
-alexander
-
-A site object containing 1 sites and 6 parameters. 
-| siteid  | sitename       |    lat    |   long   | elev |
-| :------ |:--------------:|:---------:|:--------:|-----:|
-| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
-
-alexander@sites[[1]]@siteid
-[1] 24
+get_sites(altmin=12, altmax=15)
 }

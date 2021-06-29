@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(neotoma2)
+library(sf)
 ```
 
 ## Neotoma Data Structure
@@ -49,6 +50,15 @@ alex <- get_sites(siteid=24)
 alex
 ```
 
+#### Using Multiple Site IDs
+It might be of interest to pass a list of sites. You can do so using `c()`
+
+```{r get-multipe-sites}
+multiple_sites <- get_sites(c(24, 47))
+multiple_sites
+```
+
+
 #### Searching for sites by name
 
 If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
@@ -76,7 +86,7 @@ alex <- get_sites(sitename = 'Alexander%')
 
 Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
@@ -90,11 +100,11 @@ alexanderSomething <- get_sites(sitename = 'Alexander%')
 alexanderSomething@sites[[2]]@sitename
 ```
 
-#### Accessing get_site documentation 
+#### Accessing get_sites documentation 
 
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 
-```
+```{r eval = FALSE}
 ?get_sites
 ```
 
@@ -104,7 +114,7 @@ As explained above, a `site` is the fundamental unit of the Neotoma Database.  I
 
 ```{r set_site}
 my_site <- set_site(sitename="My Lake", 
-                    coordinates = c(10, -30), 
+                    coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
                     altitude = 30)
 my_site
@@ -118,6 +128,27 @@ If we ever need to see the documentation for examples, we can always access the 
 ?set_site
 ```
 
+
+## Datasets
+
+You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
+
+Accessing datasets by bounding box:
+
+```{r bounding box}
+brazil <- '{"type": "Polygon", 
+"coordinates": [[
+[-73.125, -9.102096738726443],
+[-56.953125,-33.137551192346145],
+[-36.5625,-7.710991655433217],
+[-68.203125,13.923403897723347],
+[-73.125,-9.102096738726443]
+]]}'
+
+brazil[1]
+
+get_datasets(type = "pollen", loc = brazil[1])
+```
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
@@ -210,11 +241,16 @@ This returns the (Neotoma) ID, the citation and the publication DOI (if that is 
 two[[1]]
 ```
 
-The output will look similar to the output for `two` above, however you will see that only a single result will be returned.  We can also select an array of objects using this method, either as a sequence (`1:10`, or as a numeric vector (`c(1,2,3)`)):
+The output will look similar to the output for `two` above, however you will see that only a single result will be returned and the class (for a single publication) will be of type `publication` (as opposed to `publications`).  
+
+We can select an array of `publication` objects using the `[[` method, either as a sequence (`1:10`, or as a numeric vector (`c(1,2,3)`)):
 
 ```{r subsetPubs}
+# Select publications with Neotoma Publication IDs 1 - 10.
 pubArray <- get_publications(1:10)
+# Select the first five publications:
 subPub <- pubArray[[1:5]]
+subPub
 ```
 
 #### Create (or Import) New Publications

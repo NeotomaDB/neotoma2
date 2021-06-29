@@ -7,20 +7,11 @@
 \method{get_sites}{default}(...)
 }
 \arguments{
-\item{sitename}{The site's name}
-
-\item{altmax}{The coordinates to create an sf object}
-
-\item{altmin}{The coordinates to create an sf object}
+\item{...}{accepted arguments: siteid (site identifier from Neotoma), sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
 }
 \description{
 Get Site Information for Fossil Sites
 }
 \examples{
 get_sites(sitename = "Alexander Lake")
-
-A site object containing 1 sites and 6 parameters. 
-| siteid  | sitename       |    lat    |   long   | elev |
-| :------ |:--------------:|:---------:|:--------:|-----:|
-| 24      | Alexander Lake | -60.58333 | 53.33333 |  143 |
 }

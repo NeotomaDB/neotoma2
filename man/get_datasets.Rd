@@ -7,7 +7,9 @@
 get_datasets(datasetid = NA, ...)
 }
 \arguments{
-\item{datasetid}{integer A collection unit ID}
+\item{datasetid}{integer An internal Neotoma dataset identifier}
+
+\item{...}{arguments in ellipse form}
 }
 \description{
 Get datasets - Data Sets Information for Fossil Sites
