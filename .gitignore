@@ -1,3 +1,6 @@
+.gitignore
+R/.gitignore
+.DS_Store
 .Rhistory
 .RData
 .Rproj.user

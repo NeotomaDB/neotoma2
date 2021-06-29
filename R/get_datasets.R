@@ -1,6 +1,6 @@
 #' @title Get datasets - Data Sets Information for Fossil Sites
 #' @import gtools
-#' @param datasetid integer A collection unit ID
+#' @param datasetid integer An internal Neotoma dataset identifier
 #' @param ... arguments in ellipse form
 #' @export
 get_datasets <- function(datasetid = NA, ...) {
@@ -12,7 +12,6 @@ get_datasets <- function(datasetid = NA, ...) {
 }
 
 parse_dataset <- function(result) {
-  now <- Sys.time()
   fixNull <- function(x) {
     for (i in 1:length(x)) {
       if (is.null(x[[i]])) {
@@ -29,54 +28,142 @@ parse_dataset <- function(result) {
   result <- result %>% fixNull()
 
   result_length <- length(result[2]$data)
+  
+  sites <- c()
 
-  dataset_list <- c()
 
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
-    datasetid <- result[2]$data[[i]]$site$datasets[[1]]$datasetid
-    datasettype <- result[2]$data[[i]]$site$datasets[[1]]$datasettype
-    note <- NA_character_
+    coll_units <- c()
+    dataset_list <- c()
     
+    # Sites 
+    # Sitename
     if(is.null(result[2]$data[[i]]$site$sitename)){
-      datasetname <- result[2]$data[[i]]$sites$site$sitename
+      sitename <- result[2]$data[[i]]$sites$site$sitename
     }else{
-      datasetname <- result[2]$data[[i]]$site$sitename
+      sitename <- result[2]$data[[i]]$site$sitename
     }
-
-    trial <- result[2]$data[[i]]$site$geography
-    if(is.null(trial)){
+    
+    # Site ID
+    if(is.null(result[2]$data[[i]]$site$siteid)){
+      siteid <- result[2]$data[[i]]$sites$site$siteid
+    }else{
+      siteid <- result[2]$data[[i]]$site$siteid
+    }
+    
+    # Location
+    location <- result[2]$data[[i]]$site$geography
+    if(is.null(location)){
       location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
     }else{
       location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
     }
+    
+    # Altitude
+    if(is.null(result[2]$data[[i]]$site$altitude)){
+      elev <- result[2]$data[[i]]$sites$site$altitude
+      if(is.logical(elev)){
+        elev <- NA_integer_}
+    }else{
+      elev <- result[2]$data[[i]]$site$altitude
+      if(is.logical(elev)){
+        elev <- NA_integer_}
+    }
+    
+    # Description
+    if(is.null(result[2]$data[[i]]$site$sitedescription)){
+      description <- result[2]$data[[i]]$sites$site$sitedescription
+      if(is.logical(description)){
+        description <- NA_character_}
+    }else{
+      description <- result[2]$data[[i]]$site$sitedescription
+      if(is.logical(description)){
+        description <- NA_character_}
+    }
 
-    new_dataset <- new('dataset',
+    # Notes
+    if(is.null(result[2]$data[[i]]$site$sitenotes)){
+      notes <- result[2]$data[[i]]$sites$site$sitenotes
+      if(is.logical(notes)){
+        notes <- NA_character_}
+    }else{
+      notes <- result[2]$data[[i]]$site$sitenotes
+      if(is.logical(notes)){
+        notes <- NA_character_}
+    }
+    
+    # Datasets
+    # i-th element result[2]$data[[i]]$
+    datasets_length <- length(result[2]$data[[i]]$site$datasets)
+
+    for(j in 1:datasets_length) {
+      datasetid <- result[2]$data[[i]]$site$datasets[[j]]$datasetid
+      datasettype <- result[2]$data[[i]]$site$datasets[[j]]$datasettype
+      if(is.null(result[2]$data[[i]]$site$datasets[[j]]$datasetnotes)){
+        datasetnotes <- NA_character_
+        if(is.logical(datasetnotes)){
+          datasetnotes <- NA_character_}
+      }else{
+        #datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
+        datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
+        if(is.logical(datasetnotes)){
+          datasetnotes <- NA_character_}
+      }
+
+      new_dataset <- new('dataset',
                        datasetid = datasetid,
-                       datasetname = datasetname,
+                       datasetname = sitename,
                        datasettype = datasettype,
                        location = location,
-                       notes = note)
-
+                       notes = datasetnotes)
+    }
     dataset_list <- append(dataset_list, new_dataset)
-
-    output <- new('datasets', datasets = dataset_list)
+    datasets_list <- new('datasets', datasets = dataset_list)
     
+    
+    ## Collunits
+    # Coll Unit ID
+    if(is.null(result[2]$data[[i]]$site$collectionunitid)){
+      collunitid <- result[2]$data[[i]]$sites$site$collectionunitid
+    }else{
+      collunitid <- result[2]$data[[i]]$site$collectionunitid
+    }
 
-  }
+    
+    colldate = as.Date("2007-02-01")
+    
+    # Coll Unit Handle
+    if(is.null(result[2]$data[[i]]$site$handle)){
+      handle <- result[2]$data[[i]]$sites$site$handle
+    }else{
+      handle <- result[2]$data[[i]]$site$handle
+    }
+    
+    new_collunit <- new("collunit",
+                        collunitid = collunitid,
+                        colldate = colldate,
+                        handle = handle,
+                        datasets = datasets_list)
+    
+    coll_units <- append(coll_units, new_collunit)
+    coll_units <- new('collunits', collunits = coll_units)
 
-  after <- Sys.time()
+    new_site <- new("site",
+                    siteid = siteid,
+                    sitename = sitename,
+                    location = location, 
+                    altitude = elev,
+                    description = description,
+                    notes = NA_character_,
+                    collunits = coll_units)
+    sites <- append(sites, new_site)
+  }  
 
-  # cat('A dataset_list containing', result_length, 'objects. \n')
-  #
-  # cat(paste0('Accessed from ',
-  #            format(as.POSIXct(now, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-  #            'h to ',
-  #            format(as.POSIXct(after, origin=Sys.time()-as.numeric(Sys.time())), "%Y-%m-%d %H:%M"),
-  #            'h. \n',
-  #            'Datasets:\n'))
+    sites <- new('sites', sites = sites)
 
-  return(output)
+  return(sites)
+
 }
 
 #' @title Get Dataset Numeric
@@ -87,6 +174,8 @@ parse_dataset <- function(result) {
 #' @export
 get_datasets.numeric <- function(datasetid, ...) {
   
+  # Delete print once it works properly
+  #print("Getting in Datasets Numeric")
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -104,29 +193,11 @@ get_datasets.numeric <- function(datasetid, ...) {
   baseURL <- paste0('data/datasets/', dataset)
   
   result <- parseURL(baseURL)
-  
-
-  
+  #Print when debugging
+  #print(result)
   output <- parse_dataset(result)
-  new.output <- list()
-  
-  result_length <- length(result[2]$data)
-  
-  sites_list <- c()
-  
-  for(i in 1:result_length) {
-    siteid <- result$data[[i]]$site$siteid
-    sites_list <- c(sites_list, siteid)
 
-  }
-
-  new.output$site.data <- get_sites(sites_list)
-  
-  new.output$site.meta <- output
-  
-  class(new.output) <- c('dataset', 'list')
-
-  return(new.output)
+  return(output)
 }
 
 
@@ -136,13 +207,39 @@ get_datasets.numeric <- function(datasetid, ...) {
 #' @importFrom methods new
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
+#' @param datasettype A character string corresponding to one of the allowed dataset types in the Neotoma Database.  Allowed types include: \code{"geochronologic"}, \code{"loss-on-ignition"}, \code{"pollen"}, \code{"plant macrofossils"}, \code{"vertebrate fauna"}, \code{"mollusks"}, and \code{"pollen surface sample"}.  See note in Details delow.
+#' @param piid Numeric value for the Principle Investigator's ID number.
+#' @param altmin Numeric value indicating the minimum altitude for the site (can be used alone or with \code{altmax}).
+#' @param altmax Numeric value indicating the maximum altitude for the site (can be used alone or with \code{altmin}).
+#' @param loc A GeoJSON string \code{\{'type':'Polygon', 'coords':c(c(lat,long),c(lat, long),...,c(lat, long))\}} representing the bounding box within which to search for sites.
+#' @param taxonids A numeric identifier for the taxon.  See \code{\link{get_table}} and use \code{get_tables('Taxa')} for a list of acceptable values.
+#' @param taxonname A character string corresponding to a valid taxon identity in the Neotoma Database.  See \code{\link{get_table}} and use \code{get_table('Taxa')} for a list of acceptable values.
+#' @param ageold The oldest date acceptable for the search (in years before present).
+#' @param ageyoung The youngest date acceptable for the search.
+#' @param ageof If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.
+#' @param subdate Date of dataset submission.
 #' @export
 get_datasets.default <- function(...) {
   
-  baseURL <- paste0('data/datasets/')
+  print("Getting in Datasets Default")
+  
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  
+  error_check <- check_args(cl)
+  
+  if (error_check[[2]]$flag == 1) {
+    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
+  } else {
+    cl <- error_check[[1]]
+  }
+  
+  baseURL <- paste0('data/datasets')
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
   
+  #print(result)
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
@@ -151,24 +248,6 @@ get_datasets.default <- function(...) {
     args <- list(...)
   }
   
-  output <- parse_dataset(result)
   
-  result_length <- length(result[2]$data)
-  
-  sites_list <- c()
-  
-  for(i in 1:result_length) {
-    siteid <- result$data[[i]]$sites$site$siteid
-    sites_list <- c(sites_list, siteid)
-    
-  }
-  
-  new.output <- c()
-  new.output$site.data <- get_sites(sites_list)
-  
-  new.output$site.meta <- output
-  
-  class(new.output) <- c('dataset', 'list')
-  
-  return(new.output)
+  return(output)
 }

@@ -112,7 +112,13 @@ setMethod(f = "$",
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
-            new('publication', x@publications[[i]])
+            if (length(i) == 1) {
+              out <- new('publication', x@publications[[i]])  
+            } else {
+              out <- purrr::map(i, function(z) new('publication', x@publications[[z]]))
+              out <- new('publications', publications=out)
+            }
+            return(out)
           })
 
 #' @title Get the number of publications in a publications object.

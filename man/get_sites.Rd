@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites}
 \alias{get_sites}
-\title{Get Sites}
+\title{Get Neotoma site metadata}
 \usage{
 get_sites(x = NA, ...)
 }
@@ -12,7 +12,7 @@ get_sites(x = NA, ...)
 \item{...}{accepted arguments: sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
 }
 \description{
-Get Sites
+Get Neotoma site metadata
 }
 \details{
 Information for Fossil Sites
@@ -21,5 +21,6 @@ Displays a table with the following columns siteid, sitename, lat, long, and ele
 Returns an object "sites" that contains multiple single "site" objects. Each of this objects has 6 parameters that can be accessed as well.
 }
 \examples{
-get_sites(x = 24)
+get_sites(24)
+get_sites(altmin=12, altmax=15)
 }
