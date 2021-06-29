@@ -6,4 +6,4 @@
 CODE_OF_CONDUCT.md
 .github
 .git
-*.tar.gz
+^.*.tar.gz
