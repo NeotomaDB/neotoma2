@@ -6,7 +6,6 @@
 #' @import arulesViz
 #' @import leaflet
 #' @import mapview
-
 dataset <- setClass(
                     # Set the name for the class
                     "dataset",
@@ -26,6 +25,9 @@ dataset <- setClass(
                                      notes = NA_character_),
 )
 
+
+#' @title S4 class for datasets information
+#' @description The grouped class for datasets from the Neotoma Paleoecology Database.
 datasets <- setClass(  
                     # Set the name for the class
                     "datasets",
@@ -40,67 +42,27 @@ datasets <- setClass(
                             unlist(recursive = FALSE) ==  'dataset')
   })
 
-#' Show result as a brief dataframe - as in Neotoma v1
-setMethod(f = "show",
-          signature= "datasets",
-          definition = function(object){
-            map(object@datasets, function(x) {
-              df <- data.frame(dataset.id = x@datasetid,
-                               site.name = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,1]),
-                               long = mean(st_coordinates(x@location)[,2]),
-                               type = x@datasettype)
-            }) %>%
-              bind_rows() %>%
-              print(row.names=FALSE)
-          })
-
-
-#' Method 
-setMethod(f = "[[",
-          signature= signature(x = "datasets", i = "numeric"),
-          definition = function(x, i){
-            object@sites[[i]]
-          })
-
-#' Method 
-setMethod(f = "[[",
-          signature= signature(x = "dataset", i = "numeric"),
-          definition = function(x, i){
-            object@sites[[i]]
-          })
- 
-#' Method
-setMethod(f = "show",
-          signature = "dataset",
-          definition = function(object){
-            print(data.frame(dataset.id = object@datasetid,
-                             site.name = object@datasetname,
-                             lat = mean(st_coordinates(object@location)[,1]),
-                             long = mean(st_coordinates(object@location)[,2]),
-                             type = object@datasettype), row.names=FALSE)
-          })
-
+#' @title S4 class for collunits information
 collunit <- setClass(
-                    # Set the name for the class
-                    "collunit",
-                    slots = c(collunitid = "numeric",
-                              handle = "character",
-                              collunitname = "character",
-                              colldate = "Date",
-                              substrate = "character",
-                              location = "character",
-                              datasets = "datasets"),
-                    prototype = list(collunitid = NA_integer_,
-                                     handle = NA_character_,
-                                     collunitname = NA_character_,
-                                     colldate = "Date",
-                                     substrate = NA_character_,
-                                     location = NA_character_,
-                                     datasets = NULL),
-                    validity = function(object) {
-                      !is.na(object@collunitid)
-                    })
+  # Set the name for the class
+  "collunit",
+  slots = c(collunitid = "numeric",
+            handle = "character",
+            collunitname = "character",
+            colldate = "Date",
+            substrate = "character",
+            location = "character",
+            datasets = "datasets"),
+  prototype = list(collunitid = NA_integer_,
+                   handle = NA_character_,
+                   collunitname = NA_character_,
+                   colldate = "Date",
+                   substrate = NA_character_,
+                   location = NA_character_,
+                   datasets = NULL),
+  validity = function(object) {
+    !is.na(object@collunitid)
+  })
 
 #' An S4 class for Neotoma Collection Units
 #' @description Holds Collection unit information from the Neotoma Paleoecology Database.
@@ -128,13 +90,13 @@ site <- setClass(
   
   # Set the default values for the slot
   prototype = list(siteid = NA_integer_,
-            sitename = NA_character_,
-            location = st_sf(st_sfc()),
-            altitude = NA_integer_,
-            description = NA_character_,
-            notes = NA_character_,
-            collunits = NULL) # check what would really be a NA here
-            
+                   sitename = NA_character_,
+                   location = st_sf(st_sfc()),
+                   altitude = NA_integer_,
+                   description = NA_character_,
+                   notes = NA_character_,
+                   collunits = NULL) # check what would really be a NA here
+  
   # Add a validity function that can test data consistency.
   # This is not called if you have an initialize function defined!
 )
@@ -148,21 +110,137 @@ sites <- setClass("sites",
                           unlist())
                   })
 
-#' Show result as a brief dataframe - as in Neotoma v1
+
+# Start "Show Method" for all Neotoma Objects
+#' @title Show Dataset Method
 setMethod(f = "show",
-          signature= "sites",
+          signature = "dataset",
           definition = function(object){
-            map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
-                         sitename = x@sitename,
-                         lat = mean(st_coordinates(x@location)[,2]),
-                         long = mean(st_coordinates(x@location)[,1]),
-                         elev = x@altitude)
+            print(data.frame(dataset.id = object@datasetid,
+                             site.name = object@datasetname,
+                             lat = mean(st_coordinates(object@location)[,1]),
+                             long = mean(st_coordinates(object@location)[,2]),
+                             type = object@datasettype), row.names=FALSE)
+          })
+
+#' @title Show Datasets object as a dataframe
+setMethod(f = "show",
+          signature= "datasets",
+          definition = function(object){
+            map(object@datasets, function(x) {
+              df <- data.frame(dataset.id = x@datasetid,
+                               site.name = x@datasetname,
+                               lat = mean(st_coordinates(x@location)[,1]),
+                               long = mean(st_coordinates(x@location)[,2]),
+                               type = x@datasettype)
             }) %>%
               bind_rows() %>%
               print(row.names=FALSE)
           })
 
+
+
+#' @title Show Site objects as a dataframe
+setMethod(f = "show",
+          signature = "site",
+          definition = function(object){
+            print(data.frame(siteid = object@siteid,
+                             sitename = object@sitename,
+                             lat = mean(st_coordinates(object@location)[,1]),
+                             long = mean(st_coordinates(object@location)[,2]),
+                             elev = object@altitude), row.names=FALSE)
+          })
+
+#' @title Show Sites objects as a dataframe
+setMethod(f = "show",
+          signature= "sites",
+          definition = function(object){
+            map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
+                               elev = x@altitude)
+            }) %>%
+              bind_rows() %>%
+              print(row.names=FALSE)
+          })
+
+# End of Show Methods
+
+# Start "SqBrackets" Methods
+#' @title Method
+setMethod(f = "[[",
+          signature= signature(x = "datasets", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
+
+#' Method 
+setMethod(f = "[[",
+          signature= signature(x = "dataset", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
+ 
+# Method 
+setMethod(f = "[[",
+          signature= signature(x = "sites", i = "numeric"),
+          definition = function(x, i){
+            object@sites[[i]]
+          })
+
+# End "SqBrackets" Methods
+
+
+# Start "length" Methods
+#' @title Length Method
+setMethod(f = "length",
+          signature= signature(x = "sites"),
+          definition = function(x){
+            length(x@sites)
+          })
+
+setMethod(f = "length",
+          signature= signature(x = "datasets"),
+          definition = function(x){
+            length(x@datasets)
+          })
+
+# End "length" methods
+
+# Start "c" methods
+setClassUnion("missingOrNULL", c("missing", "NULL"))
+
+#' @title c Method for NULL values
+setMethod(f = "c",
+signature = "missingOrNULL",
+definition = function(x ="missingORNULL" , y){
+  y
+})
+
+#' @title c Method for sites
+setMethod(f = "c",
+          signature = signature("sites"),
+          definition = function(x, y){
+            new('sites',
+                sites= unlist(c(x@sites, 
+                                       y@sites), recursive = FALSE))
+            })
+
+
+setMethod(f = "c",
+          signature = signature("datasets"),
+          definition = function(x, y){
+            new('datasets',
+                datasets= unlist(c(x@datasets, 
+                                   y@datasets), recursive = FALSE))
+          })
+
+# End "c" methods
+
+
+# Start plot methods
 #' @export
 setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
   standardGeneric("plotLeaflet")
@@ -197,7 +275,9 @@ setMethod(f = "plotLeaflet",
             }
             map1
           })
+# End plot methods
 
+# Start writeCSV methods - TODO2: Change name
 #' @export
 setGeneric("saveCSV", function(object, path) {
   standardGeneric("saveCSV")
@@ -221,27 +301,27 @@ setMethod(f = "saveCSV",
             
           })
 
-#' @export
-
-setClassUnion("missingOrNULL", c("missing", "NULL"))
-
-setGeneric("appendSites", function(siteI, siteII) {
-  standardGeneric("appendSites")
-})
-
-setMethod(f = "appendSites",
-          signature= "sites",
-          definition = function(siteI, siteII){
-            my_sites <- append(siteI@sites, siteII@sites)
+setMethod(f = "saveCSV",
+          signature= "datasets",
+          definition = function(object, path){
+            df1 <- map(object@datasets, function(x) {
+              df <- data.frame(siteid = x@datasetid,
+                               sitename = x@datasetname,
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
+                               type = x@datasettype)
+              
+            }) %>%
+              bind_rows()
             
-            new_sites <- new("sites", sites = my_sites)
+            write.csv(df1, path, row.names = FALSE)
             
-          return(new_sites)
-          })
+          }
+)
 
-setMethod("appendSites","missingOrNULL",function(siteI ="missingORNULL" , siteII) siteII)
+# End writeCSV methods - Finish TODO2
 
-
+# TODO1: Remove this showDatasets and show Datasets table when showing sites
 #' @export
 setGeneric("showDatasets", function(object) {
   standardGeneric("showDatasets")
@@ -261,45 +341,4 @@ setMethod(f = "showDatasets",
             print(my_datasets2)
             return(my_datasets2)
           })
-
-#' @export
-setGeneric("datasetsCSV", function(object, path) {
-  standardGeneric("datasetsCSV")
-})
-
-setMethod(f = "datasetsCSV",
-          signature= "datasets",
-          definition = function(object, path){
-            df1 <- map(object@datasets, function(x) {
-              df <- data.frame(siteid = x@datasetid,
-                               sitename = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
-                               type = x@datasettype)
-              
-            }) %>%
-              bind_rows()
-            
-            write.csv(df1, path, row.names = FALSE)
-            
-          }
-)
-
-
-# Method 
-setMethod(f = "[[",
-          signature= signature(x = "sites", i = "numeric"),
-          definition = function(x, i){
-            object@sites[[i]]
-          })
-
-#' Method 
-setMethod(f = "show",
-          signature = "site",
-          definition = function(object){
-            print(data.frame(siteid = object@siteid,
-                             sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[,1]),
-                             long = mean(st_coordinates(object@location)[,2]),
-                             elev = object@altitude), row.names=FALSE)
-          })
+# Finish TODO1
