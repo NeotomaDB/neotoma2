@@ -6,6 +6,9 @@
 \usage{
 \S4method{names}{publication}(x)
 }
+\arguments{
+\item{x}{A \code{publication} object.}
+}
 \description{
 Get slot names for a publication object.
 }
