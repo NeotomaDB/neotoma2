@@ -82,6 +82,8 @@ Download climate data from appropriate source.
 
 ```{r, eval=TRUE}
 worldTmin <- raster::getData('worldclim', var='tmin', res=10)
+
+raster::plot(worldTmin, 1)
 ```
 
 This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
