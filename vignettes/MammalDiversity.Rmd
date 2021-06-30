@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(neotoma2)
+library(raster)
 ```
 
 This is a model workflow to help understand and map assemblage diversity across time and space.
@@ -24,12 +25,50 @@ This is a model workflow to help understand and map assemblage diversity across 
 ## Obtain Data
 ### Obtain all Neotoma Mammal Data
 
-Download occurrence and age data from Neotoma: All vertebrate occurrences for XX region (North America, global) for a particular time window
+Download occurrence and age data from Neotoma: All vertebrate occurrences for XX region (North America, global) for a particular time window.
+
+By default the API calls have a `limit` of 25 records at a time. Given this the call:
 
 ```{r}
+faunal <- get_datasets(datasettype='vertebrate fauna')
+```
+
+would return only the first 25 records in Neotoma.  There are two ways of managing this issue.  One is to increase the `limit` parameter, for example, calling: 
+
+```{r}
+get_datasets(datasettype='vertebrate fauna', limit = 999999)
+```
+
+**Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
+
+One way of dealing with the issue of `offsets` and `limits` is the use of a `while` loop, that runs by increasing the `offset`, until the result returns less that 25 records (the default `limit`).  If we look at the code below we can imagine that if there were 31 total records the first return would have `offset` 0 (`counter` is 1, so `(counter - 1) * 25` is 0), and would return all 25 records.  The second loop would return 6 records, and result in a `break` since `length(mammalSet[[counter]]) < 25`.  Once we break, we put all the results together using the `c()` command.
+
+```{r downloadMammals}
 # This gives us 25 records (without setting 'limit')
 mammals <- get_datasets(datasettype='vertebrate fauna')
+
+# The 'while loop' approach:
+
+counter <- 1
+mammalSet <- list()
+while(TRUE) {
+  mammalSet[[counter]] <- get_datasets(datasettype='vertebrate fauna',
+                                       offset = (counter - 1) * 25)
+  if (length(mammalSet[[counter]]) < 25) {
+    break
+  } else {
+    counter = counter + 1
+  }
+}
+
+mammalSet <- c(mammalSet)
 ```
+
+```{r dummyBox, eval=TRUE, results='hide', echo=FALSE}
+mammalSet <- -9999
+```
+
+Now we have all our records, totaling `r length(mammalSet)` distinct mammal sites.  This accounts for `r length(mammalSet)` distinct datasets.  Note that these objects are all class `sites`, but that these `sites` contain `collectionunits` and `datasets`.  The `get_datasets()` command does not explicitly download the raw data.
 
 ### Obtain Secondary (Environmental) Data
 
@@ -38,6 +77,8 @@ Download climate data from appropriate source.
 ```{r}
 worldTmin <- raster::getData('worldclim', var='tmin', res=10)
 ```
+
+This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
 
 ## Cleaning Data
 
