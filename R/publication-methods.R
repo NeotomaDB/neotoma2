@@ -78,8 +78,6 @@ publications <- setClass("publications",
                          })
 
 #' @title Get slot names for a publication object.
-#' @param x A \code{publication} object.
-#' @importFrom methods slotNames
 setMethod(f = "names",
           signature= signature(x = "publication"),
           definition = function(x){
@@ -87,18 +85,12 @@ setMethod(f = "names",
           })
 
 #' @title Get slot names for a publication object.
-#' @param x A \code{publications} object.
-#' @importFrom methods slotNames
 setMethod(f = "names",
           signature= signature(x = "publications"),
           definition = function(x){
             slotNames("publication")
           })
 
-#' @title Show the contents of a publication object.
-#' @param object A \code{publications} object
-#' @importFrom purrr map
-#' @importFrom dplyr bind_rows
 setMethod(f = "show",
           signature= "publications",
           definition = function(object){
@@ -111,10 +103,6 @@ setMethod(f = "show",
               print()
           })
 
-#' @title Extract an element from a \code{publication}
-#' @param x A \code{publication} object.
-#' @param name The slot to obtain (e.g., \code{articletitle})
-#' @importFrom methods slot
 setMethod(f = "$",
           signature= signature(x = "publication"),
           definition = function(x, name){
@@ -169,11 +157,6 @@ setMethod(f = "showMatch",
             }
           })
 
-#' @title Convert a publication author to a \code{data.frame}
-#' @param x An author
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
 setMethod(f="as.data.frame", 
           signature= signature("author"),
           definition = function(x){
@@ -186,9 +169,6 @@ setMethod(f="as.data.frame",
             }) %>% bind_cols()
           })
 
-#' @title Convert a \code{publication} to a \code{data.frame}
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
 setMethod(f="as.data.frame", 
           signature= signature(x = "publication"),
           definition = function(x){
@@ -206,9 +186,6 @@ setGeneric("selectMatch", function(x, n) {
   standardGeneric("selectMatch")
 })
 
-#' @title Select the best match (between a local record and a Neotoma match)
-#' @param x A \code{publication} object
-#' @param n The match number.
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
@@ -221,9 +198,6 @@ setMethod(f = "selectMatch",
             }
           })
 
-#' @title Select the best match (between a local record and a Neotoma match)
-#' @param x A \code{publication} object
-#' @param n The match number (in the case an NA is returned).
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {
