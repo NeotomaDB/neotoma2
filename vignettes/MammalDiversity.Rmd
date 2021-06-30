@@ -1,0 +1,71 @@
+---
+title: "Mammal Diversity in the Holocene"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mammal Diversity in the Holocene}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup}
+library(neotoma2)
+```
+
+This is a model workflow to help understand and map assemblage diversity across time and space.
+
+## Obtain Data
+### Obtain all Neotoma Mammal Data
+
+Download occurrence and age data from Neotoma: All vertebrate occurrences for XX region (North America, global) for a particular time window
+
+```{r}
+# This gives us 25 records (without setting 'limit')
+mammals <- get_datasets(datasettype='vertebrate fauna')
+```
+
+### Obtain Secondary (Environmental) Data
+
+Download climate data from appropriate source.
+
+```{r}
+worldTmin <- raster::getData('worldclim', var='tmin', res=10)
+```
+
+## Cleaning Data
+
+### Clean ages
+
+  * ensure taxa are really within the target age range
+  * Assess what age controls are used for each species/occurrence?
+  * Exclude certain dating methods (e.g. 14C on apatite, or biostratigraphic data, or… high grade based on the narrowness of the date control or error bars)
+
+### Clean taxonomy
+
+  *  Determine possible taxonomic level (species, genus)
+account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
+
+### Clean Spatial Records
+  * For each species across all sites:
+  * Check for geographic/environmental outliers
+
+## Assemble Cleaned Data
+
+  * Create convex hulls (at multiple time bins?)
+Evaluate which convex hulls intersect with /come within a buffer of point of interest
+
+### Join Hulls with Environmental Data
+  
+  * Apply the convex hull to look at the environmental space occupied by the taxon
+
+## Build SDMs
+  
+  * Create SDMs for taxon with intersection convex hulls
+  * Assess which SDMs intersect with point of interest

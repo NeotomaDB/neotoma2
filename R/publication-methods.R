@@ -1,72 +1,72 @@
 #' @title An S4 class for Neotoma publications
 
 author <- setClass("author",
-                       representation(author = "contact",
-                                      order = "numeric"),
-                       prototype(author = NULL,
-                                 order = NA_integer_))
+                   representation(author = "contact",
+                                  order = "numeric"),
+                   prototype(author = NULL,
+                             order = NA_integer_))
 
 authors <- setClass("authors",
-                   representation(authors = "list"),
-                   validity = function(object) {
-                     all(map(object@authors, function(x) { 
-                       class(x) == "author"}) %>%
-                           unlist())
-                   })
+                    representation(authors = "list"),
+                    validity = function(object) {
+                      all(map(object@authors, function(x) { 
+                        class(x) == "author"}) %>%
+                          unlist())
+                    })
 
 publication <- setClass("publication",
-                    representation(publicationid = "numeric",
-                                   publicationtypeid = "numeric",
-                                   publicationtype = "character",
-                                   year = "character",
-                                   citation = "character",
-                                   articletitle = "character",
-                                   journal = "character",
-                                   volume = "character",
-                                   issue = "character",
-                                   pages = "character",
-                                   citationnumber = "character",
-                                   doi = "character",
-                                   booktitle = "character",
-                                   numvolumes = "character",
-                                   edition = "character",
-                                   volumetitle = "character",
-                                   seriestitle = "character",
-                                   seriesvolume = "character",
-                                   publisher = "character",
-                                   url = "character",
-                                   city = "character",
-                                   state = "character",
-                                   country = "character",
-                                   originallanguage = "character",
-                                   notes = "character",
-                                   author = "authors"),
-                    prototype(publicationid = NA_integer_,
-                              publicationtypeid = NA_integer_,
-                              publicationtype = NA_character_,
-                              year = NA_character_,
-                              citation = NA_character_,
-                              articletitle = NA_character_,
-                              journal = NA_character_,
-                              volume = NA_character_,
-                              issue = NA_character_,
-                              pages = NA_character_,
-                              citationnumber = NA_character_,
-                              doi = NA_character_,
-                              booktitle = NA_character_,
-                              numvolumes = NA_character_,
-                              edition = NA_character_,
-                              volumetitle = NA_character_,
-                              seriestitle = NA_character_,
-                              seriesvolume = NA_character_,
-                              publisher = NA_character_,
-                              url = NA_character_,
-                              city = NA_character_,
-                              state = NA_character_,
-                              country = NA_character_,
-                              originallanguage = NA_character_,
-                              notes = NA_character_,
-                              author = NULL))
+                        representation(publicationid = "numeric",
+                                       publicationtypeid = "numeric",
+                                       publicationtype = "character",
+                                       year = "character",
+                                       citation = "character",
+                                       articletitle = "character",
+                                       journal = "character",
+                                       volume = "character",
+                                       issue = "character",
+                                       pages = "character",
+                                       citationnumber = "character",
+                                       doi = "character",
+                                       booktitle = "character",
+                                       numvolumes = "character",
+                                       edition = "character",
+                                       volumetitle = "character",
+                                       seriestitle = "character",
+                                       seriesvolume = "character",
+                                       publisher = "character",
+                                       url = "character",
+                                       city = "character",
+                                       state = "character",
+                                       country = "character",
+                                       originallanguage = "character",
+                                       notes = "character",
+                                       author = "authors"),
+                        prototype(publicationid = NA_integer_,
+                                  publicationtypeid = NA_integer_,
+                                  publicationtype = NA_character_,
+                                  year = NA_character_,
+                                  citation = NA_character_,
+                                  articletitle = NA_character_,
+                                  journal = NA_character_,
+                                  volume = NA_character_,
+                                  issue = NA_character_,
+                                  pages = NA_character_,
+                                  citationnumber = NA_character_,
+                                  doi = NA_character_,
+                                  booktitle = NA_character_,
+                                  numvolumes = NA_character_,
+                                  edition = NA_character_,
+                                  volumetitle = NA_character_,
+                                  seriestitle = NA_character_,
+                                  seriesvolume = NA_character_,
+                                  publisher = NA_character_,
+                                  url = NA_character_,
+                                  city = NA_character_,
+                                  state = NA_character_,
+                                  country = NA_character_,
+                                  originallanguage = NA_character_,
+                                  notes = NA_character_,
+                                  author = NULL))
 
 #' An S4 class for multi-publication information from the Neotoma Paleoecology Database.
 
@@ -78,6 +78,8 @@ publications <- setClass("publications",
                          })
 
 #' @title Get slot names for a publication object.
+#' @param x A \code{publication} object.
+#' @importFrom methods slotNames
 setMethod(f = "names",
           signature= signature(x = "publication"),
           definition = function(x){
@@ -85,12 +87,18 @@ setMethod(f = "names",
           })
 
 #' @title Get slot names for a publication object.
+#' @param x A \code{publications} object.
+#' @importFrom methods slotNames
 setMethod(f = "names",
           signature= signature(x = "publications"),
           definition = function(x){
             slotNames("publication")
           })
 
+#' @title Show the contents of a publication object.
+#' @param object A \code{publications} object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows
 setMethod(f = "show",
           signature= "publications",
           definition = function(object){
@@ -103,6 +111,10 @@ setMethod(f = "show",
               print()
           })
 
+#' @title Extract an element from a \code{publication}
+#' @param x A \code{publication} object.
+#' @param name The slot to obtain (e.g., \code{articletitle})
+#' @importFrom methods slot
 setMethod(f = "$",
           signature= signature(x = "publication"),
           definition = function(x, name){
@@ -157,6 +169,11 @@ setMethod(f = "showMatch",
             }
           })
 
+#' @title Convert a publication author to a \code{data.frame}
+#' @param x An author
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
 setMethod(f="as.data.frame", 
           signature= signature("author"),
           definition = function(x){
@@ -169,6 +186,9 @@ setMethod(f="as.data.frame",
             }) %>% bind_cols()
           })
 
+#' @title Convert a \code{publication} to a \code{data.frame}
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
 setMethod(f="as.data.frame", 
           signature= signature(x = "publication"),
           definition = function(x){
@@ -176,16 +196,19 @@ setMethod(f="as.data.frame",
             slots = slots[!slots == "author"]
             table <- purrr::map(x, function(s){
               out <- data.frame(slot(x, s), 
-                         stringsAsFactors = FALSE)
+                                stringsAsFactors = FALSE)
               colnames(out) <- s
               return(out)
-              }) %>% bind_cols()
+            }) %>% bind_cols()
           })
 
 setGeneric("selectMatch", function(x, n) {
   standardGeneric("selectMatch")
 })
 
+#' @title Select the best match (between a local record and a Neotoma match)
+#' @param x A \code{publication} object
+#' @param n The match number.
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
@@ -198,9 +221,12 @@ setMethod(f = "selectMatch",
             }
           })
 
+#' @title Select the best match (between a local record and a Neotoma match)
+#' @param x A \code{publication} object
+#' @param n The match number (in the case an NA is returned).
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {
             attr(x, 'matches') <- NULL
             return(x)
-            })
+          })
