@@ -3,7 +3,7 @@
 #' @param x Table name (consult \url{https://open.neotomadb/dbschema} for a complete list of table names.
 #' @param limit Default 25 records
 #' @param offset Default 0.
-#' @example 
+#' @examples
 #' # Returns only the first 25 specimen records.
 #' someSpec <- get_table('specimens')
 #' dim(someTaxa) 
