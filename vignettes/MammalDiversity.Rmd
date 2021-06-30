@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, eval=TRUE}
 library(neotoma2)
 library(raster)
 ```
@@ -29,11 +29,17 @@ Download occurrence and age data from Neotoma: All vertebrate occurrences for XX
 
 By default the API calls have a `limit` of 25 records at a time. Given this the call:
 
-```{r}
+```{r getRecords, eval=TRUE, message=FALSE}
 faunal <- get_datasets(datasettype='vertebrate fauna')
 ```
 
-would return only the first 25 records in Neotoma.  There are two ways of managing this issue.  One is to increase the `limit` parameter, for example, calling: 
+would return only the first 25 records in Neotoma.  We can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
+
+```{r plotSmallSites, eval=TRUE}
+plotLeaflet(faunal)
+```
+
+The default for all calls to the Neotoma API is to set a `limit` of 25 for all records, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling: 
 
 ```{r}
 get_datasets(datasettype='vertebrate fauna', limit = 999999)
@@ -74,7 +80,7 @@ Now we have all our records, totaling `r length(mammalSet)` distinct mammal site
 
 Download climate data from appropriate source.
 
-```{r}
+```{r, eval=TRUE}
 worldTmin <- raster::getData('worldclim', var='tmin', res=10)
 ```
 
