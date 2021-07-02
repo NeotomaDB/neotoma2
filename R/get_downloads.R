@@ -35,7 +35,7 @@ parse_download <- function(result) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
-    
+    pi_list <- c()
     # Sites 
     # Sitename
     sitename <- result$data[[i]]$record$data$dataset$site$sitename
@@ -99,9 +99,44 @@ parse_download <- function(result) {
                   collunits = coll_units)
 
   sites <- append(sites, new_site)
+  
+  # PI Information
+  pi_length <- length(result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetpi)
+  
+  for(j in range(1:pi_length)){
+    pi <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[j]]$contactname
+    pi_list <- append(pi_list, pi)}
+  
+  print(pi_list)
+  
+  # Count Samples metadata
+  
+  if (result$data[[i]]$record$data$dataset == 'geochronologic') {
+    
+    message(paste0('The dataset ID ', dataset$dataset.meta$dataset.id,
+                   ' is associated with a geochronology object, not count data.'))
+    return(NULL)
+    
+  } else {
+    
+    # copy to make indexing below easier?
+    samples <- result$data[[i]]$record$data$samples
+    
+    # Build the metadata for each sample in the dataset.
+    sample.meta <- do.call(rbind.data.frame,
+                           lapply(samples, `[`,
+                                  c("depth",
+                                    "sampleid"
+                                  )))
+    print(sample.meta)
   }  
   
+ 
   sites <- new('sites', sites = sites)
+  
+
+  } 
+
   
   #return(result)
   return(sites)
