@@ -203,6 +203,13 @@ setMethod(f = "length",
             length(x@datasets)
           })
 
+# TODO : After show method for collunits
+# setMethod(f = "length",
+#           signature= signature(x = "collunits"),
+#           definition = function(x){
+#             length(x@collunits)
+#           })
+
 # End "length" methods
 
 # Start "c" methods
@@ -223,7 +230,6 @@ setMethod(f = "c",
                 sites= unlist(c(x@sites, 
                                        y@sites), recursive = FALSE))
             })
-
 
 setMethod(f = "c",
           signature = signature("datasets"),
@@ -266,7 +272,6 @@ setMethod(f = "plotLeaflet",
            
             
             if(save_im == TRUE){
-              #m2 <- mapview(map1)
               mapshot(map1, file = path)
             }
             map1
