@@ -123,9 +123,6 @@ get_publications.publication <- function(x, ...) {
 
 #' @export
 get_publications.publications <- function(x, ...) {
-  if ('verbose' %in% names(...)) {
-    
-  }
   for (i in 1:length(x)) {
     pub <- x[[i]]
     if(is.na(x[[i]]@publicationid)) {

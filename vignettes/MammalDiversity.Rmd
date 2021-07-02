@@ -54,20 +54,20 @@ One way of dealing with the issue of `offsets` and `limits` is the use of a `whi
 mammals <- get_datasets(datasettype='vertebrate fauna')
 
 # The 'while loop' approach:
-
 counter <- 1
-mammalSet <- list()
+mammalSet <- c()
+
 while(TRUE) {
-  mammalSet[[counter]] <- get_datasets(datasettype='vertebrate fauna',
+  mammals <- get_datasets(datasettype='vertebrate fauna',
                                        offset = (counter - 1) * 25)
-  if (length(mammalSet[[counter]]) < 25) {
+  if (length(mammals@sites) < 25 | counter > 4) {
     break
   } else {
+    mammalSet <- c(mammals, mammalSet)
     counter = counter + 1
   }
 }
 
-mammalSet <- c(mammalSet)
 ```
 
 ```{r dummyBox, eval=TRUE, results='hide', echo=FALSE}
@@ -86,7 +86,7 @@ worldTmin <- raster::getData('worldclim', var='tmin', res=10)
 raster::plot(worldTmin, 1)
 ```
 
-This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
+This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
 
 ## Cleaning Data
 
