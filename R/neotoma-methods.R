@@ -25,7 +25,6 @@ dataset <- setClass(
                                      notes = NA_character_),
 )
 
-
 #' @title S4 class for datasets information
 #' @description The grouped class for datasets from the Neotoma Paleoecology Database.
 datasets <- setClass(  
@@ -138,8 +137,6 @@ setMethod(f = "show",
               print(row.names=FALSE)
           })
 
-
-
 #' @title Show Site objects as a dataframe
 setMethod(f = "show",
           signature = "site",
@@ -191,7 +188,6 @@ setMethod(f = "[[",
           })
 
 # End "SqBrackets" Methods
-
 
 # Start "length" Methods
 #' @title Length Method
@@ -277,13 +273,8 @@ setMethod(f = "plotLeaflet",
           })
 # End plot methods
 
-# Start writeCSV methods - TODO2: Change name
-#' @export
-setGeneric("saveCSV", function(object, path) {
-  standardGeneric("saveCSV")
-})
-
-setMethod(f = "saveCSV",
+# Start writeCSV methods
+setMethod(f = "write.csv",
           signature= "sites",
           definition = function(object, path){
             df1 <- map(object@sites, function(x) {
@@ -301,7 +292,7 @@ setMethod(f = "saveCSV",
             
           })
 
-setMethod(f = "saveCSV",
+setMethod(f = "write.csv",
           signature= "datasets",
           definition = function(object, path){
             df1 <- map(object@datasets, function(x) {
@@ -338,7 +329,6 @@ setMethod(f = "showDatasets",
               my_datasets2 <- new('datasets', datasets = my_datasets)
               
             }
-            print(my_datasets2)
             return(my_datasets2)
           })
 # Finish TODO1
