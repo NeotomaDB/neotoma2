@@ -287,10 +287,18 @@ setMethod(f = "datasetsCSV",
 
 
 # Method 
+
+#' @export
 setMethod(f = "[[",
           signature= signature(x = "sites", i = "numeric"),
           definition = function(x, i){
-            object@sites[[i]]
+            if (length(i) == 1) {
+              out <- new('sites', x@sites[[i]])  
+            } else {
+              out <- purrr::map(i, function(z) new('site', x@sites[[z]]))
+              out <- new('sites', sites=out)
+            }
+            return(out)
           })
 
 #' Method 
@@ -302,4 +310,15 @@ setMethod(f = "show",
                              lat = mean(st_coordinates(object@location)[,1]),
                              long = mean(st_coordinates(object@location)[,2]),
                              elev = object@altitude), row.names=FALSE)
+          })
+
+#' @export
+setMethod(f = "c",
+          signature = signature("sites"),
+          definition = function(x, ...){
+            input <- list(x, ...) %>%
+              purrr::map(function(y) y@sites) %>% 
+              unlist(., recursive = FALSE)
+            new('sites',
+                sites = input)
           })

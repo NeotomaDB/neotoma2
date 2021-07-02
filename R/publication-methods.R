@@ -1,11 +1,11 @@
 #' @title An S4 class for Neotoma publications
-
+#' @export
 author <- setClass("author",
                    representation(author = "contact",
                                   order = "numeric"),
                    prototype(author = NULL,
                              order = NA_integer_))
-
+#' @export
 authors <- setClass("authors",
                     representation(authors = "list"),
                     validity = function(object) {
@@ -14,6 +14,7 @@ authors <- setClass("authors",
                           unlist())
                     })
 
+#' @export
 publication <- setClass("publication",
                         representation(publicationid = "numeric",
                                        publicationtypeid = "numeric",
@@ -69,7 +70,7 @@ publication <- setClass("publication",
                                   author = NULL))
 
 #' An S4 class for multi-publication information from the Neotoma Paleoecology Database.
-
+#' @export
 publications <- setClass("publications",
                          representation(publications  = "list"),
                          validity = function(object) {
@@ -80,6 +81,7 @@ publications <- setClass("publications",
 #' @title Get slot names for a publication object.
 #' @param x A \code{publication} object.
 #' @importFrom methods slotNames
+#' @export
 setMethod(f = "names",
           signature= signature(x = "publication"),
           definition = function(x){
@@ -89,6 +91,7 @@ setMethod(f = "names",
 #' @title Get slot names for a publication object.
 #' @param x A \code{publications} object.
 #' @importFrom methods slotNames
+#' @export
 setMethod(f = "names",
           signature= signature(x = "publications"),
           definition = function(x){
@@ -99,6 +102,7 @@ setMethod(f = "names",
 #' @param object A \code{publications} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
+#' @export
 setMethod(f = "show",
           signature= "publications",
           definition = function(object){
@@ -115,12 +119,14 @@ setMethod(f = "show",
 #' @param x A \code{publication} object.
 #' @param name The slot to obtain (e.g., \code{articletitle})
 #' @importFrom methods slot
+#' @export
 setMethod(f = "$",
           signature= signature(x = "publication"),
           definition = function(x, name){
             slot(x, name)
           })
 
+#' @export
 setMethod(f = "[[",
           signature= signature(x = "publications", i = "numeric"),
           definition = function(x, i){
@@ -133,13 +139,29 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @export
+setMethod(f = "[[<-",
+          signature= signature(x = "publications"),
+          definition = function(x, i, j, value){
+            if (length(i) == 1) {
+              out <- new('publication', value)  
+            } else {
+              out <- purrr::map(i, function(z) new('publication', x@publications[[z]]))
+              out <- new('publications', publications=out)
+            }
+            return(out)
+          })
+
+
 #' @title Get the number of publications in a publications object.
+#' @export
 setMethod(f = "length",
           signature= signature(x = "publications"),
           definition = function(x){
             length(x@publications)
           })
 
+#' @export
 setMethod(f = "c",
           signature = signature("publications"),
           definition = function(x, y){
@@ -148,6 +170,16 @@ setMethod(f = "c",
                                        y@publications), recursive = FALSE))
           })
 
+#' @export
+setMethod(f = "c",
+          signature = signature("publications"),
+          definition = function(x){
+            new('publications',
+                publications = unlist(c(x@publications, 
+                                       y@publications), recursive = FALSE))
+          })
+
+#' @export
 setMethod(f = "show",
           signature = "publication",
           definition = function(object){
@@ -157,10 +189,12 @@ setMethod(f = "show",
           })
 
 
+#' @export
 setGeneric("showMatch", function(object) {
   standardGeneric("showMatch")
 })
 
+#' @export
 setMethod(f = "showMatch",
           signature = signature("publication"),
           definition = function(object){
@@ -174,6 +208,7 @@ setMethod(f = "showMatch",
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols
+#' @export
 setMethod(f="as.data.frame", 
           signature= signature("author"),
           definition = function(x){
@@ -189,6 +224,7 @@ setMethod(f="as.data.frame",
 #' @title Convert a \code{publication} to a \code{data.frame}
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
+#' @export
 setMethod(f="as.data.frame", 
           signature= signature(x = "publication"),
           definition = function(x){
@@ -202,6 +238,7 @@ setMethod(f="as.data.frame",
             }) %>% bind_cols()
           })
 
+#' @export
 setGeneric("selectMatch", function(x, n) {
   standardGeneric("selectMatch")
 })
@@ -209,6 +246,7 @@ setGeneric("selectMatch", function(x, n) {
 #' @title Select the best match (between a local record and a Neotoma match)
 #' @param x A \code{publication} object
 #' @param n The match number.
+#' @export
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
@@ -224,6 +262,7 @@ setMethod(f = "selectMatch",
 #' @title Select the best match (between a local record and a Neotoma match)
 #' @param x A \code{publication} object
 #' @param n The match number (in the case an NA is returned).
+#' @export
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {
