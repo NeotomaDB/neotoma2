@@ -6,9 +6,9 @@
 get_downloads <- function(datasetid = NA, ...) {
   if(!missing(datasetid)) {
     UseMethod('get_downloads', datasetid)
-  } else {
-    UseMethod('get_downloads', NA)
-  }
+  } #else {
+    #UseMethod('get_downloads', NA)
+  #}
 }
 
 parse_download <- function(result) {
@@ -56,7 +56,6 @@ parse_download <- function(result) {
     notes <- NA_character_
 
   # Datasets
-
     datasetid <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetid
     datasettype <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasettype
     datasetnotes <- NA_character_
@@ -100,6 +99,8 @@ parse_download <- function(result) {
 
   sites <- append(sites, new_site)
   
+  
+  
   # PI Information
   pi_length <- length(result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetpi)
   
@@ -129,13 +130,19 @@ parse_download <- function(result) {
                                     "sampleid"
                                   )))
     print(sample.meta)
+    
+    #samples <- fromJSON(samples)
+    
   }  
   
- 
-  sites <- new('sites', sites = sites)
+  
+  
   
 
   } 
+  
+  sites <- new('sites', sites = sites) 
+  
 
   
   #return(result)
@@ -149,9 +156,7 @@ parse_download <- function(result) {
 #' @param ... arguments in ellipse form
 #' @export
 get_downloads.numeric <- function(datasetid, ...) {
-  
-  # Delete print once it works properly
-  #print("Getting in Datasets Numeric")
+
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -169,9 +174,9 @@ get_downloads.numeric <- function(datasetid, ...) {
   baseURL <- paste0('data/downloads/', dataset)
   
   result <- parseURL(baseURL)
-  #Print when debugging
-  #print(result)
+  
   output <- parse_download(result)
+  
   
   return(output)
 }
