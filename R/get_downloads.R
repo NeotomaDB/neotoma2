@@ -31,11 +31,12 @@ parse_download <- function(result) {
   result_length <- length(result$data)
   
   sites <- c()
+  pi_list <- c()
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
-    pi_list <- c()
+    
     # Sites 
     # Sitename
     sitename <- result$data[[i]]$record$data$dataset$site$sitename
@@ -102,13 +103,13 @@ parse_download <- function(result) {
   
   
   # PI Information
-  pi_length <- length(result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetpi)
+  pi_length <- length(result$data[[1]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[1]])
   
   for(j in range(1:pi_length)){
-    pi <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[j]]$contactname
+    pi <- result$data[[1]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[1]]$contactname
     pi_list <- append(pi_list, pi)}
   
-  print(pi_list)
+ 
   
   # Count Samples metadata
   
@@ -129,7 +130,7 @@ parse_download <- function(result) {
                                   c("depth",
                                     "sampleid"
                                   )))
-    print(sample.meta)
+    
     
     #samples <- fromJSON(samples)
     
@@ -141,12 +142,15 @@ parse_download <- function(result) {
 
   } 
   
+  #print(sample.meta)
+  #print(pi_list)
+  
   sites <- new('sites', sites = sites) 
   
 
   
-  #return(result)
-  return(sites)
+  return(result)
+  #return(sites)
 }
 
 #' @title Get Downloads

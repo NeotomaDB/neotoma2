@@ -149,6 +149,16 @@ brazil[1]
 
 get_datasets(type = "pollen", loc = brazil[1])
 ```
+
+
+```{r}
+Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+new_sites <- c()
+for(Number in Names_744BH){
+  sites <- get_sites(sitename=Number)
+  new_sites <- c(new_sites, sites)}
+new_sites
+```
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
