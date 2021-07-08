@@ -50,11 +50,11 @@ diat_1 <- get_datasets(argument_1, argument_2)
 Example for Dataset
 
 ```{R retrieveDiatoms, eval = FALSE}
-NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,-40,-65,48))
+NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 ```
 
 
-#### Geographic region
+### Geographic region
 
 ```{r getGeoPolUnits,eval=FALSE}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
@@ -71,7 +71,7 @@ ne_sites <- map(gpids, function(x)
   bind()
 ```
 
-#####  Geopolitical units (e.g., states)
+####  Geopolitical units (e.g., states)
 
 ```{R callDatasetsbygpid,eval=FALSE}
 LOC <- get_table(table.name='GeoPoliticalUnits')
@@ -85,34 +85,35 @@ Geo_PA <- get_dataset(gpid = "Pennsylvania")
 GEO_PA1 <- get_dataset(gpid = 8412 )
 ```
 
-##### Latitude and Longitude boxes
+#### Latitude and Longitude boxes
 
 ```{R diatomsbyBBox}
 diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
 
-Example of get_datasets by location with bounding box 
+Example of get_datasets by location with bounding box of lat & longs (West/South/East/North)
 
 ```{R diatomsbyBBoxExecuted}
-diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,-40,-65,48)) 
+diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
 ```
 
-##### Elevation (m)
+#### Elevation (m)
 
 ```{R sitesbyElev,eval=FALSE}
 diat_el <- get_sites(`altmin()`, `altmax()`)
 ```
-Example of setting elevations minimum and maximum for a site 
+Example of getting datasets for sites between minimum and maximum elevations 
 ```{R getSitesByElevExample}
 diat_el <- get_sites("altmin(5000)","altmax(5500)") #Will need to look over at a later time 
 diat_el2 <- get_datasets(datasetid= diat_el)
 ```
 
-#### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
+### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
 
 ```{r getDiatomsDSType, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-neDiatoms <- get_datasets(dois=c(...))
+
+neDiatoms <- get_datasets(dois=c(...)) # DOI's
 ```
 
 Example of combining datatypes and using the variable to get dataset 
@@ -125,6 +126,14 @@ neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
 ```
+
+### DOI's
+```{r getDiatomsDSType, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+
+neDiatoms <- get_datasets(dois=c(...)) # DOI's
+```
+
 
 #### Site - Name(s) or ID(s)
 ```{r get_site,eval=FALSE}
