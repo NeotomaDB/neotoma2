@@ -243,7 +243,7 @@ Example
 Contact <- get_contact(contactname = 'X')
 
 ```
-Example of returning a contact 
+Example of returning a contact id given the contact name
 ```{R}
 Don <- get_contact(contactname = 'Donald F. Charles')
 ```
@@ -438,6 +438,7 @@ library(neotoma2)
 sites <- get_sites(sitename=name)
 new_sites <- c(new_sites, sites)}
 ```
+
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R, eval=FALSE}
 get_table(taxa)
