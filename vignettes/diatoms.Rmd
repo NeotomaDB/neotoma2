@@ -22,7 +22,7 @@ library(neotoma)
 
 In this document some code was borrowed from the Neotoma2 markdown document prepared by Simon Goring and Socorro Dominguez and the Neotoma original package. 
 
-In the chunk to use neotoma::get_site(whatever) when using for Old neotoma package with new one 
+In chunks, use "neotoma::get_site(whatever)" when using old neotoma package with neotoma2 
 
 One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
 
@@ -60,7 +60,7 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,-40,-65,48))
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
 ```
 
-Example
+Example - get sites from multiple geopolitical units (e.g., states)
 ```{r retrieveByGeopol}
 library(dplyr)
 library(purrr)
@@ -78,7 +78,7 @@ LOC <- get_table(table.name='GeoPoliticalUnits')
 diat_geo <- get_dataset(gpid = X)
 ```
 
-Example
+Example - get_dataset for an individual state
 ```{R gpidExamplePenn}
 LOC <- get_table(table.name='GeoPoliticalUnits')
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
@@ -91,7 +91,7 @@ GEO_PA1 <- get_dataset(gpid = 8412 )
 diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 ```
 
-Example
+Example of get_datasets by location with bounding box 
 
 ```{R diatomsbyBBoxExecuted}
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,-40,-65,48)) 
@@ -102,7 +102,7 @@ diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,-40,-65,48))
 ```{R sitesbyElev,eval=FALSE}
 diat_el <- get_sites(`altmin()`, `altmax()`)
 ```
-Example
+Example of setting elevations minimum and maximum for a site 
 ```{R getSitesByElevExample}
 diat_el <- get_sites("altmin(5000)","altmax(5500)") #Will need to look over at a later time 
 diat_el2 <- get_datasets(datasetid= diat_el)
@@ -115,7 +115,7 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 neDiatoms <- get_datasets(dois=c(...))
 ```
 
-Example of combining datatypes and using the variable 
+Example of combining datatypes and using the variable to get dataset 
 ```{r getDiatoms, eval=FALSE} 
 # Get datasets by individual diatom datatype 
 neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
@@ -132,7 +132,7 @@ diat_1<-get_site(gpid = x)
 diat_2<-get_site(sitename= x)
 diat_3<-get_site(siteid= x)
 ```
-Example
+Examples of getting sites by geopolitical units, sitenames, and siteid
 ```{R SitebyName}
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
 diat_2<-get_site(sitename= 'Schrader Pond')
@@ -144,7 +144,7 @@ diat_3<-get_site(siteid= 27408)
 ```{R Diatom Collection Type,eval=FALSE}
 get_dataset(CollType='x') # Unsure
 ```
-Example
+Example of getting dataset by collection id
 ```{R sitesByCollType}
 get_dataset(CollType='Core','Section')
 ```
@@ -154,7 +154,7 @@ get_dataset(CollType='Core','Section')
 Browse('x')
 ```
 
-Example
+Example of finding constituent databases
 
 ```{R SitesbyConDBExample}
 Browse('Database') # Not actual code but browse seems like a right choice
@@ -165,7 +165,7 @@ Browse('Database') # Not actual code but browse seems like a right choice
 get_dataset(search('x'))
 ```
 
-Example
+Example of using the search function returning keywords 
 
 ```{R}
 get_dataset(search('keywords'))# Search could find so maybe
@@ -182,6 +182,9 @@ Example
 
 #### Member of one or more aggregate datasets
 ```{R Diatom Aggregate Dataset,eval=FALSE}
+library(neotoma)
+library(neotoma2)
+
 
 ```
 Example
@@ -231,7 +234,7 @@ Example
 Contact <- get_contact(contactname = 'X')
 
 ```
-Example
+Example of returning a contact 
 ```{R}
 Don <- get_contact(contactname = 'Donald F. Charles')
 ```
@@ -244,7 +247,7 @@ diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
 ```
 
-Example
+Example of getting  the downloads of a datasettype 
 
 ```{R datasetByTaxaExample}
 diatoms<- get_dataset(datasettype = 'diatoms')
@@ -357,7 +360,7 @@ Example
 ```{R,eval=FALSE}
 
 ```
-Example single site 
+Example of a single site with getting count data  
 
 ```{r get_singleSitebyName, eval=FALSE}
 schrader <- get_site('Schrader Pond') # % can be used to approximate sitenames
@@ -367,6 +370,7 @@ schrader.cnt <- counts(schrader.dl)
 sapply(schrader.cnt, dim) 
 print(schrader.dl)
 ```
+
 
 ```{R}
 library (neotoma)
@@ -402,18 +406,36 @@ library(neotoma)
 library(neotoma2)
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
 new_sites <- c()
-for(i in 1:length(Names_744BH)){
-sites <- get_sites(i)
-new_sites <- appendSites(new_sites, sites)}
+for(name in Names_744BH){
+sites <- get_sites(sitename=name)
+new_sites <- c(new_sites, sites)}
+new_sites
+
+```
+```{r}
+library(neotoma2)
+ Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+ new_sites <- c()
+ for(name in Names_744BH){
+sites <- get_sites(sitename=name)
+new_sites <- c(new_sites, sites)}
 ```
 
+```{r}
+library(neotoma2)
+ Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+ new_sites <- c()
+ for(name in Names_744BH){
+sites <- get_sites(sitename=name)
+new_sites <- c(new_sites, sites)}
+```
 ### List of diatom taxa - with name, authority, code, notes, etc.
 ```{R, eval=FALSE}
 get_table(taxa)
 get_taxa()
 compile_taxa
 ```
-Example
+Example of returning taxa 
 ```{R ListTaxaExample}
 get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
