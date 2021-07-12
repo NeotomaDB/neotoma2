@@ -144,14 +144,13 @@ setMethod(f = "[[<-",
           signature= signature(x = "publications"),
           definition = function(x, i, j, value){
             if (length(i) == 1) {
-              out <- new('publication', value)  
+              x@publications[[i]] <- new('publication', value)
+              out <- x
+              return(out)
             } else {
-              out <- purrr::map(i, function(z) new('publication', x@publications[[z]]))
-              out <- new('publications', publications=out)
+              warning("You can only reassign one publication at a time.")
             }
-            return(out)
           })
-
 
 #' @title Get the number of publications in a publications object.
 #' @export
@@ -167,15 +166,6 @@ setMethod(f = "c",
           definition = function(x, y){
             new('publications',
                 publications= unlist(c(x@publications, 
-                                       y@publications), recursive = FALSE))
-          })
-
-#' @export
-setMethod(f = "c",
-          signature = signature("publications"),
-          definition = function(x){
-            new('publications',
-                publications = unlist(c(x@publications, 
                                        y@publications), recursive = FALSE))
           })
 
