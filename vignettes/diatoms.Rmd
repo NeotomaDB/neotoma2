@@ -67,14 +67,13 @@ library(purrr)
 
 gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
 ne_sites <- map(gpids, function(x)
-  get_site(gpid = x)) %>%
-  bind()
+  neotoma:::get_site(gpid = x)) %>%
+  neotoma::bind()
 ```
 
 ####  Geopolitical units (e.g., states)
-
 ```{R callDatasetsbygpid,eval=FALSE}
-LOC <- get_table(table.name='GeoPoliticalUnits')
+LOC <- neotoma2::get_table(x='geopoliticalunits', limit = 10000)
 diat_geo <- get_dataset(gpid = X)
 ```
 
@@ -125,6 +124,42 @@ neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 # Get datasets by multiple diatom datatypes 
 neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
+```
+
+Example of getting surface sample through filtering 
+```{R datasetByTaxa,eval=FALSE}
+## Simon Edited this:
+diatomss<- get_dataset(datasettype = 'diatom surface sample')
+diatom<- get_dataset(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsetss <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
+
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') # It returns the file that is used 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
+}
+
+wideCounts <- compile_downloads(diat_dl) 
+#neotoma function converts multiple downloads into single object 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe 
+
+wideCounts %>% filter(!is.na(Eunotia.diodon))
+#dplyr function used to subset a data frame
+diat_taxa <- taxa(diat.dl)
 ```
 
 ### DOI's
