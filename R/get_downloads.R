@@ -134,9 +134,16 @@ parse_download <- function(result) {
     
     #samples <- fromJSON(samples)
     
+    depth <- modify_depth(alex_samples, 1, "depth") %>% as_vector()
+    
   }  
   
   
+  ## Alex Samples
+  # taxon.name <- modify_depth(alex_samples25datum, 1, "variablename")%>% as_vector()
+  # variable.units <- modify_depth(alex_samples25datum, 1, "units")%>% as_vector()
+  # variable.element <- modify_depth(alex_samples25datum, 1, "element")%>% as_vector()
+  # data.frame(taxon.name, variable.units, variable.element)
   
   
 
@@ -149,8 +156,8 @@ parse_download <- function(result) {
   
 
   
-  return(result)
-  #return(sites)
+  #return(result)
+  return(sites)
 }
 
 #' @title Get Downloads
@@ -181,6 +188,7 @@ get_downloads.numeric <- function(datasetid, ...) {
   
   output <- parse_download(result)
   
+  print(class(result))
   
   return(output)
 }
