@@ -32,6 +32,7 @@ parse_download <- function(result) {
   
   sites <- c()
   pi_list <- c()
+  df1 <- data.frame()
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -124,6 +125,7 @@ parse_download <- function(result) {
     # copy to make indexing below easier?
     samples <- result$data[[i]]$record$data$samples
     
+    
     # Build the metadata for each sample in the dataset.
     sample.meta <- do.call(rbind.data.frame,
                            lapply(samples, `[`,
@@ -136,6 +138,15 @@ parse_download <- function(result) {
     
     depth <- modify_depth(alex_samples, 1, "depth") %>% as_vector()
     
+    
+    # Taxon Table
+    length_datum <- length(result$data[[i]]$record$data$samples)
+    
+    for(j in 1:length_datum){
+      df <- result$data[[i]]$record$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
+      df1 <- rbind(df1, df)
+    }
+    
   }  
   
   
@@ -144,6 +155,7 @@ parse_download <- function(result) {
   # variable.units <- modify_depth(alex_samples25datum, 1, "units")%>% as_vector()
   # variable.element <- modify_depth(alex_samples25datum, 1, "element")%>% as_vector()
   # data.frame(taxon.name, variable.units, variable.element)
+  # alex_samples25datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
   
   
 
@@ -151,7 +163,7 @@ parse_download <- function(result) {
   
   #print(sample.meta)
   #print(pi_list)
-  
+  print(df1)
   sites <- new('sites', sites = sites) 
   
 
