@@ -134,7 +134,7 @@ diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
 subsetss <- sapply(diatomss, 
                  function(x) {
-                   x$dataset.meta$dataset.id
+                   x$dataset.meta$dataset.id # Location of the data
                    })[1:20]
 
 subset <- sapply(diatom, 
@@ -162,6 +162,30 @@ wideCounts %>% filter(!is.na(Eunotia.diodon))
 diat_taxa <- taxa(diat.dl)
 ```
 
+Example of getting top-bottom from filtering
+```{R datasetByTaxa,eval=FALSE}
+diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
+diatom<- get_dataset(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsettb <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id # Location of the data
+                   })[1:20]
+
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dltb <- get_download(subsettb)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename')
+}
+```
 ### DOI's
 ```{r getDiatomsDSType, eval=FALSE}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
@@ -171,13 +195,13 @@ neDiatoms <- get_datasets(dois=c(...)) # DOI's
 
 
 #### Site - Name(s) or ID(s)
-```{r get_site,eval=FALSE}
+```{r sitesbyName example,eval=FALSE}
 diat_1<-get_site(gpid = x)
 diat_2<-get_site(sitename= x)
 diat_3<-get_site(siteid= x)
 ```
 Examples of getting sites by geopolitical units, sitenames, and siteid
-```{R SitebyName}
+```{R sitsebyName}
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
 diat_2<-get_site(sitename= 'Schrader Pond')
 diat_3<-get_site(siteid= 27408)
@@ -185,7 +209,7 @@ diat_3<-get_site(siteid= 27408)
 
 
 #### Collection type
-```{R Diatom Collection Type,eval=FALSE}
+```{R diatombyColltype,eval=FALSE}
 get_dataset(CollType='x') # Unsure
 ```
 Example of getting dataset by collection id
@@ -250,8 +274,28 @@ diat_pub <- get_publication()
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 ```
 Example
-```{R}
+```{r getWaterChemEX}
+diatomss<- get_dataset(datasettype = 'diatom surface sample')
+diatom<- get_dataset(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsetss <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
 
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') # It returns the file that is used 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
+}
 ```
 
 
@@ -415,6 +459,34 @@ sapply(schrader.cnt, dim)
 print(schrader.dl)
 ```
 
+EXAMPLE TESTING OF FILTERING 
+```{R SCHRADEREXAMPLE ,eval=FALSE}
+schrader <-get_site('Schrader Pond') 
+sch <- get_dataset(27408)
+schrader.dl <- get_download(sch)
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsetSchr <- sapply(sch, 
+                   function(x) {
+                     x$dataset.meta$dataset.id
+                   })
+
+if('Schra' %in% list.files()) {
+  sch_dl <- readRDS('schra') # It returns the file that is used 
+} else {
+  SCHRA_dl <- get_download(subsetSchr)
+  saveRDS(SCHRA_dl, 'schra') # It saves this as an object of the download with file
+}
+
+wideCounts <- compile_downloads(SCHRA_dl) 
+#neotoma function converts multiple downloads into single object 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe 
+
+wideCounts %>% filter(!is.na(Eunotia.diodon))
+#dplyr function used to subset a data frame
+diat_taxa <- taxa(diat.dl)
+```
 
 ```{R}
 library (neotoma)
@@ -456,6 +528,7 @@ new_sites <- c(new_sites, sites)}
 new_sites
 
 ```
+
 ```{r}
 library(neotoma2)
  Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
