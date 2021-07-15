@@ -33,6 +33,7 @@ parse_download <- function(result) {
   sites <- c()
   pi_list <- c()
   df1 <- data.frame()
+  df3 <- data.frame()
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -136,15 +137,32 @@ parse_download <- function(result) {
     
     #samples <- fromJSON(samples)
     
-    depth <- modify_depth(alex_samples, 1, "depth") %>% as_vector()
+    #depth <- modify_depth(alex_samples, 1, "depth") %>% as_vector()
     
     
     # Taxon Table
     length_datum <- length(result$data[[i]]$record$data$samples)
     
     for(j in 1:length_datum){
+      depth <- result$data[[i]]$record$data$samples[[j]]$depth
+      sample_id <-result$data[[i]]$record$data$samples[[j]]$sampleid
+      dataset_id <- result$data[[i]]$datasetid
       df <- result$data[[i]]$record$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
+      
+      
       df1 <- rbind(df1, df)
+      
+      # Sample.Meta Table
+      df2 <- result$data[[i]]$record$data$samples[[j]]$ages %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
+      df2 <- df2 %>%
+        mutate(
+          depth = depth,
+          sample.id = sample_id,
+          datasetid = dataset_id)
+      df2 <- df2 %>%
+        select(depth, ageolder, age, ageyounger, chronologyname, agetype, chronologyid, sample.id, datasetid)
+      
+      df3 <- rbind(df3, df2)
     }
     
   }  
@@ -162,8 +180,9 @@ parse_download <- function(result) {
   } 
   
   #print(sample.meta)
-  #print(pi_list)
+  print(pi_list)
   print(df1)
+  print(df3)
   sites <- new('sites', sites = sites) 
   
 
