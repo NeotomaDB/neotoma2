@@ -164,7 +164,7 @@ diat_taxa <- taxa(diat_dl)
 ```
 
 Example of getting top-bottom from filtering
-```{R datasetByTaxa,eval=FALSE}
+```{R datasetByTB,eval=FALSE}
 diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
 diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
@@ -202,14 +202,14 @@ diat_2<-get_site(sitename= x)
 diat_3<-get_site(siteid= x)
 ```
 Examples of getting sites by geopolitical units, sitenames, and siteid
-```{R sitsebyName}
+```{R sitsebyNameMult}
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
 diat_2<-get_site(sitename= 'Schrader Pond')
 diat_3<-get_site(siteid= 27408)
 ```
 
 Example of getting information from a single site 
-```{R Example Single Site }
+```{R ExampleSingleSite }
 diatoma<- get_dataset(27408) 
 subsetda <- sapply(diatoma, 
                  function(x) {
@@ -233,7 +233,7 @@ minimumRow <- diatCount %>%
 get_dataset(CollType='x') # Unsure
 ```
 Example of getting dataset by collection id
-```{R sitesByCollType}
+```{R sitesByCollTypeMult}
 get_dataset(CollType='Core','Section')
 ```
 
@@ -412,7 +412,8 @@ Example
 ```
 
 
-### Format for browsing using multiple criteria.  Examples: [could get complicated]  General rules and tips.  [Add as they become known]
+### Format for browsing using multiple criteria. 
+Examples: [could get complicated]  General rules and tips.  [Add as they become known]
 
 #### Find all diatom datasets of any datatype
 
@@ -424,20 +425,25 @@ Example
 
 ### Other options / Misc:
 
-#### Is water chemistry available?  (List variables included) Is chronology available?  Upper and lower age bounds.  Aggregate dataset(s) of which the dataset is a member.
+#### Is water chemistry available? 
+(List variables included) Is chronology available?  Upper and lower age bounds.  Aggregate dataset(s) of which the dataset is a member.
 
-## Create output of browse results.  Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
+## Create output of browse results. 
+Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
  
 Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location on Tilia tabs):
 
 ### Site info:
-#### Neotoma Site ID, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics
+#### Neotoma Site ID
+, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics
 
 ### Collection unit:
-#### Collection unit type, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
+#### Collection unit type
+, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
 
 ### Dataset:
-#### Dataset type - (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
+#### Dataset type 
+- (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
 
 ```{R,eval=FALSE}
 
@@ -463,7 +469,8 @@ Example
 
 ```
 
-### Diatom counts - single sites and multiple sites; aggregate data set; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts.
+### Diatom counts
+- single sites and multiple sites; aggregate data set; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts.
 
 ```{R,eval=FALSE}
 
@@ -567,7 +574,8 @@ sites <- get_sites(sitename=name)
 new_sites <- c(new_sites, sites)}
 ```
 
-### List of diatom taxa - with name, authority, code, notes, etc.
+### List of diatom taxa 
+- with name, authority, code, notes, etc.
 ```{R, eval=FALSE}
 get_table(taxa)
 get_taxa()
@@ -608,7 +616,8 @@ get_download()
 get_dataset()
 ```
 
-### Other types of data - LOI, geochemistry
+### Other types of data 
+- LOI, geochemistry
 ```{R,eval=FALSE}
 get_dataset(siteid='x')# Should be able to get the data from the siteid or dataset
 ```
@@ -627,12 +636,18 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 ### Tidypaleo
 ### Others 
 
-#Make plots and maps (e.g., stratigraphic diagrams, maps of taxa distributions)
-###Plot of the abundance of multiple diatom taxa for a single core - vs depth or time
-###Plot of abundance of a single taxon for cores from multiple sites - vs time
-### Plot of abundance of a taxon vs an environmental characteristic (e.g., water chemistry variable)
-### Map of distribution of sites that are part of an aggregate dataset
-### Map of distribution of a diatom taxon; symbol size related to % abundance
+#Make plots and maps 
+(e.g., stratigraphic diagrams, maps of taxa distributions)
+###Plot of the abundance of multiple diatom taxa 
+for a single core - vs depth or time
+###Plot of abundance of a single taxon 
+for cores from multiple sites - vs time
+### Plot of abundance of a taxon vs an environmental characteristic 
+(e.g., water chemistry variable)
+### Map of distribution of sites 
+that are part of an aggregate dataset
+### Map of distribution of a diatom taxon
+; symbol size related to % abundance
 
 #Modify and analyze data 
 - and other miscellaneous tasks
@@ -658,7 +673,8 @@ Example
 
 ```
 
-## Create and look for a table that explicitly matches water chemistry and diatom datasets.  This is especially important for cases where sites were sampled for water chemistry multiple times.
+## Create and look for a table that explicitly matches water chemistry and diatom datasets.
+This is especially important for cases where sites were sampled for water chemistry multiple times.
 ```{R,eval=FALSE}
 # I think this could be an if and else statement since you have to compare 
 ```
