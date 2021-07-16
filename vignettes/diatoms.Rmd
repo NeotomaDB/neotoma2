@@ -69,6 +69,7 @@ gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
 ne_sites <- map(gpids, function(x)
   neotoma:::get_site(gpid = x)) %>%
   neotoma::bind()
+ne_down <- neotoma::get_download(ne_sites)
 ```
 
 ####  Geopolitical units (e.g., states)
@@ -159,7 +160,7 @@ minRow <- wideCounts %>%
 
 wideCounts %>% filter(!is.na(Eunotia.diodon))
 #dplyr function used to subset a data frame
-diat_taxa <- taxa(diat.dl)
+diat_taxa <- taxa(diat_dl)
 ```
 
 Example of getting top-bottom from filtering
@@ -207,6 +208,25 @@ diat_2<-get_site(sitename= 'Schrader Pond')
 diat_3<-get_site(siteid= 27408)
 ```
 
+Example of getting information from a single site 
+```{R Example Single Site }
+diatoma<- get_dataset(27408) 
+subsetda <- sapply(diatoma, 
+                 function(x) {
+                   x$dataset.meta$dataset.id 
+                   })
+
+if('filename' %in% list.files()) {
+  diat_da <- readRDS('filename') 
+} else {
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'filename')
+}
+diatCount <- compile_downloads(diat_da) 
+minimumRow <- diatCount %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
+```
 
 #### Collection type
 ```{R diatombyColltype,eval=FALSE}
