@@ -136,19 +136,19 @@ diatom<- get_dataset(datasettype = 'diatom')
 subsetss <- sapply(diatomss, 
                  function(x) {
                    x$dataset.meta$dataset.id # Location of the data
-                   })[1:20]
+                   })
 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
-                   })[1:20]
+                   })
 
 if('filename' %in% list.files()) {
   diat_dl <- readRDS('filename') # It returns the file that is used 
 } else {
   diat_dl <- get_download(subset)
   diat_dlss <- get_download(subsetss)
-  diat_dl <- bind(diat_dl, diat_dlss)
+  diat_dl <- setdiff(diat_dl, diat_dlss)
   saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
 }
 
@@ -210,7 +210,7 @@ diat_3<-get_site(siteid= 27408)
 
 Example of getting information from a single site 
 ```{R ExampleSingleSite }
-diatoma<- get_dataset(27408) 
+diatoma<- get_dataset(24) 
 subsetda <- sapply(diatoma, 
                  function(x) {
                    x$dataset.meta$dataset.id 
@@ -225,7 +225,7 @@ if('filename' %in% list.files()) {
 diatCount <- compile_downloads(diat_da) 
 minimumRow <- diatCount %>% 
   group_by(dataset) %>% 
-  summarise(min(depth)) 
+   summarise(min(depth))
 ```
 
 #### Collection type
@@ -239,13 +239,13 @@ get_dataset(CollType='Core','Section')
 
 #### Constituent database
 ```{R SitesbyConDB,eval=FALSE}
-Browse('x')
+
 ```
 
 Example of finding constituent databases
 
 ```{R SitesbyConDBExample}
-Browse('Database') # Not actual code but browse seems like a right choice
+ConDB <- 
 ```
 
 #### Sample keyword
@@ -261,6 +261,7 @@ get_dataset(search('keywords'))# Search could find so maybe
 
 #### Within or intersecting a specified time interval 
 ```{R Diatom Time Interval,eval=FALSE}
+#In this chunk I envision that we will use the metadata from the chronology or age depths to figure this out 
 
 ```
 Example
@@ -272,6 +273,10 @@ Example
 ```{R Diatom Aggregate Dataset,eval=FALSE}
 library(neotoma)
 library(neotoma2)
+aggr_set <- read.csv()# So if we are going to use the excel fi;e we should read it here and tham could use it to find information
+<- get_datasets()
+<- get_download()
+#General guideline steps when we do get info to use for other purposes 
 
 
 ```
@@ -317,6 +322,47 @@ if('filename' %in% list.files()) {
   saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
 }
 ```
+
+SIMON ASSISTED EXAMPLE 
+```{R datasetByTaxa,eval=FALSE}
+library(dplyr)
+library(purrr)
+
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+
+ne_diatom <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
+  neotoma::bind()   
+  
+ne_diatomSS <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
+  neotoma::bind() 
+ne_dataset<-bind(ne_diatom,ne_diatomSS)
+
+
+if('DiatomFil' %in% list.files()) {
+  Diatom_dl <- readRDS('DiatomFil') 
+} else {
+
+  allDatasets <- list()
+  
+  for(i in length(allDatasets):length(ne_dataset)) {
+    allDatasets[[i]] <- get_download(ne_dataset[[i]])
+  }
+  
+  ne_download <- neotoma::bind(allDatasets)
+  
+  saveRDS(ne_download, 'DiatomFil')
+}
+
+
+wideCounts <- compile_downloads(Diatoms_dl) 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
+
+```
+
 
 
 #### From sites where one or more specified water chemistry characteristics were measured
