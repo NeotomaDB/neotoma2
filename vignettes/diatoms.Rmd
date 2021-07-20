@@ -356,13 +356,43 @@ if('DiatomFil' %in% list.files()) {
 }
 
 
-wideCounts <- compile_downloads(Diatoms_dl) 
+wideCounts <- compile_downloads(Diatom_dl) 
 minRow <- wideCounts %>% 
   group_by(dataset) %>% 
   summarise(min(depth)) 
-
+write.csv()
 ```
 
+Jerrin Example of using just dataset ID 
+```{R ExampleDataset}
+V1 <-c(44786,44787,44787)
+#In this example we take these 3 sites with combine feature 
+V1_diatom <- map(V1, function(x)
+  neotoma:::get_dataset(x,datasettype="diatom")) %>%
+  neotoma::bind()   
+#In the get_dataset line whatever in the parenthesis is a parameter such as x or gpid in which it will take from V1 since it was stated in the line above it
+
+if('V1' %in% list.files()) {
+  V1_dl <- readRDS('V1') 
+} else {
+
+  V1Datasets <- list()
+  #
+  for(i in 1:length(V1_diatom)) {
+    V1Datasets[[i]] <- get_download(V1_diatom[[i]])
+  }
+  #For loop will being going through each step to first create the file and go through each site with the download
+  V1_download <- neotoma::bind(V1Datasets)
+  
+  saveRDS(V1_download, 'V1')
+}
+V1Counts <- compile_downloads(V1_dl) 
+V1Row <- V1Counts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth))
+#This last step is the way to create a table which can be written as csv to export out 
+
+```
 
 
 #### From sites where one or more specified water chemistry characteristics were measured
