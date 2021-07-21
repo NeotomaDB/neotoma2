@@ -261,11 +261,12 @@ get_dataset(search('keywords'))# Search could find so maybe
 
 #### Within or intersecting a specified time interval 
 ```{R Diatom Time Interval,eval=FALSE}
-#In this chunk I envision that we will use the metadata from the chronology or age depths to figure this out 
+ 
 
 ```
 Example
 ```{R}
+Interval <- filter(X, age_ad >= 1950)
 
 ```
 
@@ -273,7 +274,7 @@ Example
 ```{R Diatom Aggregate Dataset,eval=FALSE}
 library(neotoma)
 library(neotoma2)
-aggr_set <- read.csv()# So if we are going to use the excel fi;e we should read it here and tham could use it to find information
+aggr_set <- read.csv()# So if we are going to use the excel fi;e we should read it here and than could use it to find information
 <- get_datasets()
 <- get_download()
 #General guideline steps when we do get info to use for other purposes 
@@ -287,11 +288,16 @@ Example
 
 #### Related to one or more publications
 ```{R Diatom Publication,eval=FALSE}
-diat_pub <- get_datasets(search())
+diat_pub <- get_datasets()
 ```
 Example
 ```{R}
+diat <- get_datasets()
 diat_pub <- get_publication()
+pub_diat <- sapply(diat_pub, 
+                 function(x) {
+                   x$pi.data$ContactID
+                   })
 ```
 
 #### From sites with specified range of water chemistry characteristics
@@ -307,7 +313,7 @@ subsetss <- sapply(diatomss,
                  function(x) {
                    x$dataset.meta$dataset.id
                    })[1:20]
-
+#The $ is extracting the surface sample metadata from the name of it 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
@@ -390,6 +396,7 @@ V1Counts <- compile_downloads(V1_dl)
 V1Row <- V1Counts %>% 
   group_by(dataset) %>% 
   summarise(min(depth))
+
 #This last step is the way to create a table which can be written as csv to export out 
 
 ```
@@ -397,7 +404,29 @@ V1Row <- V1Counts %>%
 
 #### From sites where one or more specified water chemistry characteristics were measured
 ```{R Diatom Multiple Water Chemistry,eval=FALSE}
+WCH_Sites <-c()
 
+diatomss<- get_dataset(datasettype = 'diatom surface sample')
+diatom<- get_dataset(datasettype = 'diatom')
+
+subsetss <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })
+
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') 
+} else {
+
+  saveRDS(diat_dl, 'filename') 
+}
+WCH_Diat <- compile_downloads(diat_dl)
+```
 ```
 Example
 ```{R}
@@ -406,7 +435,13 @@ Example
 
 #### Diatom Sample analyst name
 ```{R Diatom Sample Analyst,eval=FALSE}
-<- get_contact()
+<- get_dataset
+Contact_diat <- get_dataset(datasettype = 'diatom')
+
+Analyst <- sapply(Contact_diat, 
+                 function(x) {
+                   x$pi.data$
+                   })
 ```
 Example
 ```{R}
@@ -695,7 +730,7 @@ get_dataset()
 ### Other types of data 
 - LOI, geochemistry
 ```{R,eval=FALSE}
-get_dataset(siteid='x')# Should be able to get the data from the siteid or dataset
+get_dataset(datasettype="")
 ```
 Example
 ```{R}
@@ -733,7 +768,7 @@ that are part of an aggregate dataset
 ```
 ### add aggregate datasets to Neotoma
 ```{R,eval=FALSE}
-set_dataset(x)# not code but having aggregate creation with set function sounds useful
+
 ```
 Example
 ```{R}
@@ -752,7 +787,7 @@ Example
 ## Create and look for a table that explicitly matches water chemistry and diatom datasets.
 This is especially important for cases where sites were sampled for water chemistry multiple times.
 ```{R,eval=FALSE}
-# I think this could be an if and else statement since you have to compare 
+
 ```
 Example
 ```{R}
@@ -762,6 +797,7 @@ Example
 ## Extract a list of publications for a set of datasets
 ```{R,eval=FALSE}
 <- get_publications(datasetid= x)
+#So it would involve contact name/ID, publication ID, datasets having publication  
 ```
 Example
 ```{R}
