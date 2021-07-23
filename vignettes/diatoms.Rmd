@@ -41,22 +41,22 @@ The browse section describes ways of searching for available diatom datasets usi
 
 General task specification format: “Find all diatom datasets that meet the following criteria.”  [Chunks below show generic code specifying how to search / filter by a single criterion, followed by an example] 
 
-### [Generic format of a complete chunk to browse using a single criterion]
+General format of a complete chunk to browse using a single criterion:
 
-```{R genericGetDataset, eval = FALSE}
+```{R genericGetDataset}
 diat_1 <- get_datasets(argument_1, argument_2)
 ```
 
 Example for Dataset
 
-```{R retrieveDiatoms, eval = FALSE}
+```{R retrieveDiatoms}
 NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 ```
 
 
 ### Geographic region
 
-```{r getGeoPolUnits,eval=FALSE}
+```{r getGeoPolUnits}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
 ```
 
@@ -73,14 +73,14 @@ ne_down <- neotoma::get_download(ne_sites)
 ```
 
 ####  Geopolitical units (e.g., states)
-```{R callDatasetsbygpid,eval=FALSE}
-LOC <- neotoma2::get_table(x='geopoliticalunits', limit = 10000)
+```{R callDatasetsbygpid}
+loc <- neotoma2::get_table(x='geopoliticalunits', limit = 10000)
 diat_geo <- get_dataset(gpid = X)
 ```
 
 Example - get_dataset for an individual state
 ```{R gpidExamplePenn}
-LOC <- get_table(table.name='GeoPoliticalUnits')
+loc <- get_table(table.name='GeoPoliticalUnits')
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
 GEO_PA1 <- get_dataset(gpid = 8412 )
 ```
@@ -188,7 +188,7 @@ if('filename' %in% list.files()) {
 }
 ```
 ### DOI's
-```{r getDiatomsDSType, eval=FALSE}
+```{r getDiatomsDSType}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 
 neDiatoms <- get_datasets(dois=c(...)) # DOI's
@@ -676,7 +676,7 @@ uwallface.dw[["32252"]][["counts"]]
 uwallface.dw[["32252"]][["chronologies"]]
 ```
 
-```{r eval=FALSE}
+```{r}
 library(neotoma)
 library(neotoma2)
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
