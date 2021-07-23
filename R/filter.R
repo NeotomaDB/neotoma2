@@ -53,6 +53,15 @@ filter.default <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA
     
   }
   
+  if(!is.na(longmin) & !is.na(longmax)){
+    for(i in 1: length(x@datasets)){
+      if(longmax > st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
+        dataset <- x@datasets[[i]]
+        datasets <- c(datasets, dataset)
+      }
+    }
+    
+  }
   if(!is.na(longmin)){
     for(i in 1: length(x@datasets)){
       if(st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
