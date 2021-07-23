@@ -1,5 +1,6 @@
 #' @title Get downloads - Data 
 #' @import gtools
+#' @import dplyr
 #' @param datasetid integer A collection unit ID
 #' @param ... arguments in ellipse form
 #' @export
@@ -33,7 +34,9 @@ parse_download <- function(result) {
   sites <- c()
   pi_list <- c()
   df1 <- data.frame()
+  df_lab1 <- data.frame()
   df3 <- data.frame()
+  df_counts <- data.frame()
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -147,10 +150,29 @@ parse_download <- function(result) {
       depth <- result$data[[i]]$record$data$samples[[j]]$depth
       sample_id <-result$data[[i]]$record$data$samples[[j]]$sampleid
       dataset_id <- result$data[[i]]$datasetid
-      df <- result$data[[i]]$record$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
+      df <- result$data[[i]]$record$data$samples[[j]]$datum %>% 
+        map(function(x){as.data.frame(x)}) %>% 
+        bind_rows()
       
+      df_sample <- df %>%
+        select(variablename, units, element, taxongroup, ecologicalgroup, taxonid) # uncomment for order selection
       
-      df1 <- rbind(df1, df)
+      df1 <- rbind(df1, df_sample) %>%
+        distinct()
+       
+      # Counts
+      df_count <- df %>%
+        select(variablename, value, taxonid)
+      
+      df_counts <- rbind(df_counts, df_count) %>%
+        distinct()
+      
+      # Lab Data
+      df_lab <- result$data[[i]]$record$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows() %>%
+        select(taxonid)
+      
+      df_lab1 <- rbind(df_lab, df_lab1) %>%
+        distinct()
       
       # Sample.Meta Table
       df2 <- result$data[[i]]$record$data$samples[[j]]$ages %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
@@ -158,34 +180,37 @@ parse_download <- function(result) {
         mutate(
           depth = depth,
           sample.id = sample_id,
-          datasetid = dataset_id)
-      df2 <- df2 %>%
+          datasetid = dataset_id) %>%
         select(depth, ageolder, age, ageyounger, chronologyname, agetype, chronologyid, sample.id, datasetid)
       
       df3 <- rbind(df3, df2)
     }
     
+    # Chronologies filtering
+    wang <- df3 %>%
+      filter(chronologyname == "Wang et al.")
+    
+    cohmap <- df3 %>%
+      filter(chronologyname == "COHMAP chron 2")
+    
+    napd <- df3 %>%
+      filter(chronologyname == "NAPD 1")
   }  
-  
-  
-  ## Alex Samples
-  # taxon.name <- modify_depth(alex_samples25datum, 1, "variablename")%>% as_vector()
-  # variable.units <- modify_depth(alex_samples25datum, 1, "units")%>% as_vector()
-  # variable.element <- modify_depth(alex_samples25datum, 1, "element")%>% as_vector()
-  # data.frame(taxon.name, variable.units, variable.element)
-  # alex_samples25datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
-  
-  
 
   } 
   
-  #print(sample.meta)
-  print(pi_list)
+  # DOUBT TODO : How should I save these tables?
+  #print(pi_list)
   print(df1)
-  print(df3)
-  sites <- new('sites', sites = sites) 
+  print(df_counts)
+  #print(df_lab1)
+  #print(df3)
+  #print(napd)
+  #print(cohmap)
+  #print(wang)
   
-
+  # Convert to sites element
+  sites <- new('sites', sites = sites) 
   
   #return(result)
   return(sites)
