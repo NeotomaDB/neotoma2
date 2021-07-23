@@ -20,15 +20,15 @@ library(neotoma2)
 library(neotoma)
 ```
 
-In this document some code was borrowed from the Neotoma2 markdown document prepared by Simon Goring and Socorro Dominguez and the Neotoma original package. 
-
-In chunks, use "neotoma::get_site(whatever)" when using old neotoma package with neotoma2 
+In this document some code was borrowed from the Neotoma2 markdown document prepared by Simon Goring and Socorro Dominguez and the original Neotoma R package. 
 
 One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
 
 # Introduction
 
-The ultimate purpose of this document is to provide general guidance and specific code examples for those wanting to use Neotoma R2 to retrieve and work with Neotoma diatom data.  An initial purpose is to help programmers (Simon, Socorro) develop Neotoma2 resources by providing a structured description of how diatom researchers may wish to use N-R2, and specific tasks they may wish to accomplish.
+The ultimate purpose of this document is to provide general guidance and specific code examples for those wanting to use Neotoma R2 to retrieve and work with Neotoma diatom data.  An initial purpose is to help programmers (Simon, Socorro) develop Neotoma2 resources by providing a structured description of how diatom researchers may wish to use N-R2, and specific tasks they may wish to accomplish.  
+
+Because N-R2 was being developed during the time this vignette documentation was being prepared, not all the original package functions were available in N-R2.  Therefore functions from both packages are used.  Over time, original package functions should be replaced with corresponding N-R2 functions. In the code chunks below, "neotoma::" is used to refer to functions in the original neotoma R package, for example, "neotoma::"get_site(whatever)"
 
 This document is organized to address two main goals of users, to browse the database to identify datasets that meet specified criteria, and to create output files that can be used for further analysis.  Other goals are to create plots and maps and to analyze data using R code.
 
