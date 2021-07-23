@@ -226,7 +226,29 @@ diatCount <- compile_downloads(diat_da)
 minimumRow <- diatCount %>% 
   group_by(dataset) %>% 
    summarise(min(depth))
+
 ```
+
+#### Dataset ID
+```{r}
+#dataset id from collection unit handle and analysis unit 
+
+```
+
+```{r}
+#Plotting stratigraphic plots and leaflet maps 
+```
+
+
+
+
+
+
+
+
+
+
+
 
 #### Collection type
 ```{R diatombyColltype,eval=FALSE}
@@ -366,7 +388,6 @@ wideCounts <- compile_downloads(Diatom_dl)
 minRow <- wideCounts %>% 
   group_by(dataset) %>% 
   summarise(min(depth)) 
-write.csv()
 ```
 
 Jerrin Example of using just dataset ID 
@@ -396,6 +417,7 @@ V1Counts <- compile_downloads(V1_dl)
 V1Row <- V1Counts %>% 
   group_by(dataset) %>% 
   summarise(min(depth))
+write_xlsx(V1Counts,  ".xlsx")
 
 #This last step is the way to create a table which can be written as csv to export out 
 
@@ -507,9 +529,8 @@ browse(diat.data)
 ```
 
 Example
-
 ```{R}
-
+library(neotoma)
 ```
 
 #### Chronology (y/n) and characteristics
@@ -546,7 +567,7 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 
 ### Site info:
 #### Neotoma Site ID
-, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics
+, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id 
 
 ### Collection unit:
 #### Collection unit type
