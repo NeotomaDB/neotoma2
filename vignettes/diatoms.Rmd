@@ -56,26 +56,50 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 Gettting a single site with sitename 
 ```{r sitesbyName example}
 diat_1 <-get_site(sitename = "Name of site")
-diat_1 <-get_site(sitename= 'Schrader Pond') # Example
+diat_2 <-get_site(sitename= 'Schrader Pond') # Example
 ```
+
+```{r multsitesbySitename example}
+library(neotoma)
+library(neotoma2)
+Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+new_sites <- c()
+for(name in Names_744BH){
+sites <- get_sites(sitename=name)
+new_sites <- c(new_sites, sites)}
+# Example for multiple sites 
+```
+
 ### Site ID
 Getting a single site by using siteid
 ```{r sitesbySiteID example}
-diat_2<-get_site(siteid= x)
-diat_3<-get_site(siteid= 27408) # Example
+diat_3<-get_site(siteid= x)
+diat_4<-get_site(siteid= 27408) # Example for single site 
 ```
+
+Getting multiple sites by using siteids 
+```{r multsitesbySiteIDs example}
+diat_5 <- c(25918,25919,25920)
+diat_6 <- get_sites(diat_5)
+```
+
 ### Dataset ID
 Getting a single dataset from a dataset id 
 ```{r get datasetID}
 diat_ID <- get_dataset(datasetid)
-diat_ID <- get_dataset(44764)
+diat_ID <- get_dataset(44764) # Example
 
+```
+Getting datasets with multiple dataset ids 
+```{r multdatsetid }
+multid <- c(44764,44765,44766)
+diat_multid <- get_dataset(multid) # Example
 ```
 
 Example of getting information from a single site ID using get_dataset with subsets to return counts
 ```{R ExampleSingleSite }
-diatoma<- get_dataset(24) 
-subsetda <- sapply(diatoma, 
+Alexander<- get_dataset(24) 
+subsetda <- sapply(Alexander, 
                  function(x) {
                    x$dataset.meta$dataset.id 
                    })
@@ -92,6 +116,7 @@ minimumRow <- diatCount %>%
    summarise(min(depth))
 
 ```
+
 
 
 #### Dataset ID [move to location above]
@@ -363,80 +388,6 @@ if('filename' %in% list.files()) {
 }
 ```
 
-SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
-Creates file with diatom counts for surface samples 
-```{R datasetByTaxa from Simon}
-library(dplyr)
-library(purrr)
-# Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
-gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
-
-ne_diatom <- map(gpids, function(x)
-  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
-  neotoma::bind()   
-  
-ne_diatomSS <- map(gpids, function(x)
-  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
-  neotoma::bind() 
-ne_dataset<-bind(ne_diatom,ne_diatomSS)
-
-
-if('DiatomFil' %in% list.files()) {
-  Diatom_dl <- readRDS('DiatomFil') 
-} else {
-
-  allDatasets <- list()
-  
-  for(i in length(allDatasets):length(ne_dataset)) {
-    allDatasets[[i]] <- get_download(ne_dataset[[i]])
-  }
-  
-  ne_download <- neotoma::bind(allDatasets)
-  
-  saveRDS(ne_download, 'DiatomFil')
-}
-
-# Create diatom count files
-wideCounts <- compile_downloads(Diatom_dl) 
-minRow <- wideCounts %>% 
-  group_by(dataset) %>% 
-  summarise(min(depth)) 
-```
-
-Jerrin Example of using just dataset ID
-# Example similar to above but starting with a set of dataset ID's
-```{R ExampleDataset}
-library(purrr)
-V1 <-c(44786,44787,44788)
-#In this example we take these 3 sites with combine function 
-V1_diatom <- map(V1, function(x)
-  neotoma:::get_dataset(x,datasettype="diatom")) %>%
-  neotoma::bind()   
-#In the get_dataset line whatever in the parenthesis is a parameter such as x or gpid in which it will take from V1 since it was stated in the line above it
-
-if('V1' %in% list.files()) {
-  V1_dl <- readRDS('V1') 
-} else {
-
-  V1Datasets <- list()
-  #
-  for(i in 1:length(V1_diatom)) {
-    V1Datasets[[i]] <- get_download(V1_diatom[[i]])
-  }
-  #For loop will being going through each step to first create the file and go through each site with the download
-  V1_download <- neotoma::bind(V1Datasets)
-  
-  saveRDS(V1_download, 'V1')
-}
-V1Counts <- compile_downloads(V1_download) 
-V1Row <- V1Counts %>% 
-  group_by(dataset) %>% 
-  summarise(min(depth))
-write_xlsx(V1Counts,  ".xlsx")
-
-#This last step is the way to create a table which can be written as csv to export out 
-
-```
 
 
 #### From sites where one or more specified water chemistry characteristics were measured
@@ -639,7 +590,6 @@ wideCounts %>% filter(!is.na(Eunotia.diodon))
 diat_taxa <- taxa(diat.dl)
 ```
 Upper Wallface Pond examples
-
 ```{R Upper Wallface EX}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
@@ -669,35 +619,6 @@ uwallface.dw[["32252"]][["counts"]]
 uwallface.dw[["32252"]][["chronologies"]]
 ```
 
-```{r getsites for loop}
-library(neotoma)
-library(neotoma2)
-Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
-new_sites <- c()
-for(name in Names_744BH){
-sites <- get_sites(sitename=name)
-new_sites <- c(new_sites, sites)}
-new_sites
-
-```
-
-```{r getsites for loop V1}
-library(neotoma2)
- Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
- new_sites <- c()
- for(name in Names_744BH){
-sites <- get_sites(sitename=name)
-new_sites <- c(new_sites, sites)}
-```
-
-```{r getsites for loop V2}
-library(neotoma2)
- Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
- new_sites <- c()
- for(name in Names_744BH){
-sites <- get_sites(sitename=name)
-new_sites <- c(new_sites, sites)}
-```
 
 ### List of diatom taxa 
 - with name, authority, code, notes, etc.
@@ -816,6 +737,81 @@ get_dataset(taxonname = ,search())
 # Examples - filtering and selecting
 # Create Output files
 ## Diatom counts
+SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
+Creates file with diatom counts for surface samples 
+```{R datasetByTaxa from Simon}
+library(dplyr)
+library(purrr)
+# Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+
+ne_diatom <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
+  neotoma::bind()   
+  
+ne_diatomSS <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
+  neotoma::bind() 
+ne_dataset<-bind(ne_diatom,ne_diatomSS)
+
+
+if('DiatomFil' %in% list.files()) {
+  Diatom_dl <- readRDS('DiatomFil') 
+} else {
+
+  allDatasets <- list()
+  
+  for(i in length(allDatasets):length(ne_dataset)) {
+    allDatasets[[i]] <- get_download(ne_dataset[[i]])
+  }
+  
+  ne_download <- neotoma::bind(allDatasets)
+  
+  saveRDS(ne_download, 'DiatomFil')
+}
+
+# Create diatom count files
+wideCounts <- compile_downloads(Diatom_dl) 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
+```
+
+Jerrin Example of using just dataset ID
+# Example similar to above but starting with a set of dataset ID's
+```{R ExampleDataset}
+library(purrr)
+V1 <-c(44786,44787,44788)
+#In this example we take these 3 sites with combine function 
+V1_diatom <- map(V1, function(x)
+  neotoma:::get_dataset(x,datasettype="diatom")) %>%
+  neotoma::bind()   
+#In the get_dataset line whatever in the parenthesis is a parameter such as x or gpid in which it will take from V1 since it was stated in the line above it
+
+if('V1' %in% list.files()) {
+  V1_dl <- readRDS('V1') 
+} else {
+
+  V1Datasets <- list()
+  #
+  for(i in 1:length(V1_diatom)) {
+    V1Datasets[[i]] <- get_download(V1_diatom[[i]])
+  }
+  #For loop will being going through each step to first create the file and go through each site with the download
+  V1_download <- neotoma::bind(V1Datasets)
+  
+  saveRDS(V1_download, 'V1')
+}
+V1Counts <- compile_downloads(V1_download) 
+V1Row <- V1Counts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth))
+write_xlsx(V1Counts,  ".xlsx")
+
+#This last step is the way to create a table which can be written as csv to export out 
+
+```
+
 ## Diatom Taxa
 ## Site information and environ data
 ## Water chemistry
