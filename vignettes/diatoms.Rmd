@@ -47,30 +47,32 @@ General format of a complete chunk to browse using a single criterion:
 diat_1 <- get_datasets(argument_1, argument_2)
 ```
 
-Example for Dataset
+Example for getting Dataset with dataset type and bounding box location
 
 ```{R retrieveDiatoms}
 NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 ```
 ### Site Name
+Gettting a single site with sitename 
 ```{r sitesbyName example}
 diat_1 <-get_site(sitename = "Name of site")
 diat_1 <-get_site(sitename= 'Schrader Pond') # Example
 ```
 ### Site ID
+Getting a single site by using siteid
 ```{r sitesbySiteID example}
 diat_2<-get_site(siteid= x)
 diat_3<-get_site(siteid= 27408) # Example
 ```
 ### Dataset ID
-JERRIN - move code for searching by dataset ID to this location
+Getting a single dataset from a dataset id 
 ```{r get datasetID}
 diat_ID <- get_dataset(datasetid)
 diat_ID <- get_dataset(44764)
 
 ```
 
-Example of getting information from a single site ID using get_dataset 
+Example of getting information from a single site ID using get_dataset with subsets to return counts
 ```{R ExampleSingleSite }
 diatoma<- get_dataset(24) 
 subsetda <- sapply(diatoma, 
@@ -104,7 +106,6 @@ minimumRow <- diatCount %>%
 
 
 ### Dataset DOI
-JERRIN - move code for searching by dataset DOI to this location
 JERRIN - Shouldn't the DOI line of code below be deleted?  It is duplicated in the DOI section below.
 JERRIN - Are there two separate "code chunks" below? One for dataset type and one for DOI?
 ```{r getDiatomsDSType}
@@ -118,9 +119,8 @@ neDiatoms <- get_datasets(dois=c(...)) # DOI's
 
 
 ### Dataset Type
-JERRIN - move code for searching by dataset Type to this location
  Diatom, Diatom Surface Sample, Diatom Top-Bottom
-Example of combining datatypes and using the variable to get dataset 
+Example of combining data set types and using the variable to get dataset metadata from the combined object
 ```{r getDiatoms, eval=FALSE} 
 # Get datasets by individual diatom datatype 
 neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
@@ -132,7 +132,7 @@ neDiatoms_com <- get_datasets(neDiatoms_sstb)
 ```
 
 #duplicate is in line 335 for watar chem 
-Example of getting surface sample through filtering ,getting multiple dataset type metadata 
+Example of getting surface sample through filtering and sung multiple data set type to get metadata 
 ```{R datasetByTaxa with DBT}
 ## Simon Edited this:
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
@@ -170,7 +170,7 @@ diat_taxa <- taxa(diat_dl)
 
  
 
-Example of using get_dataset to get diatom top-bottom samples 
+Example of using get_dataset to get diatom top-bottom samples (currently not usable since Top-Bottom not in package)
 ```{R datasetByTB,eval=FALSE}
 diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
 diatom<- get_dataset(datasettype = 'diatom')
@@ -198,11 +198,13 @@ if('filename' %in% list.files()) {
 
 
 ### Geographic region
+Using get_site to return a location in geopolitical table with gpid
 ```{r get site by gpid}
 diat_1<-get_site(gpid = x)
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
 ```
 
+The geopolitical table to search for locations 
 ```{r getGeoPolUnits}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
 ```
