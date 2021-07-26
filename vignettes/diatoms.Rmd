@@ -53,8 +53,17 @@ Example for Dataset
 NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 ```
 ### Site Name
-JERRIN - move code for searching by site name to this location
+```{r sitesbyName example}
+diat_1 <-get_site(sitename = "Name of site")
+diat_1 <-get_site(sitename= 'Schrader Pond') # Example
+```
+### Site ID
+```{r sitesbySiteID example}
+diat_2<-get_site(siteid= x)
+diat_3<-get_site(siteid= 27408) # Example
+```
 ### Dataset ID
+
 JERRIN - move code for searching by dataset ID to this location
 ### Dataset DOI
 JERRIN - move code for searching by dataset DOI to this location
@@ -214,8 +223,8 @@ diat_3<-get_site(siteid= x)
 Examples of getting sites by geopolitical units, sitenames, and siteid
 ```{R sitsebyNameMult}
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
-diat_2<-get_site(sitename= 'Schrader Pond')
-diat_3<-get_site(siteid= 27408)
+
+
 ```
 
 Example of getting information from a single site 
@@ -362,11 +371,12 @@ if('filename' %in% list.files()) {
 }
 ```
 
-SIMON ASSISTED EXAMPLE 
+SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
+Creates file with diatom counts for surface samples
 ```{R datasetByTaxa}
 library(dplyr)
 library(purrr)
-
+# Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
 gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
 
 ne_diatom <- map(gpids, function(x)
@@ -394,17 +404,19 @@ if('DiatomFil' %in% list.files()) {
   saveRDS(ne_download, 'DiatomFil')
 }
 
-
+# Create diatom count files
 wideCounts <- compile_downloads(Diatom_dl) 
 minRow <- wideCounts %>% 
   group_by(dataset) %>% 
   summarise(min(depth)) 
 ```
 
-Jerrin Example of using just dataset ID 
+Jerrin Example of using just dataset ID
+# Example similar to above but starting with a set of site ID's
 ```{R ExampleDataset}
-V1 <-c(44786,44787,44787)
-#In this example we take these 3 sites with combine feature 
+library(purrr)
+V1 <-c(44786,44787,44788)
+#In this example we take these 3 sites with combine function 
 V1_diatom <- map(V1, function(x)
   neotoma:::get_dataset(x,datasettype="diatom")) %>%
   neotoma::bind()   
@@ -424,7 +436,7 @@ if('V1' %in% list.files()) {
   
   saveRDS(V1_download, 'V1')
 }
-V1Counts <- compile_downloads(V1_dl) 
+V1Counts <- compile_downloads(V1_download) 
 V1Row <- V1Counts %>% 
   group_by(dataset) %>% 
   summarise(min(depth))
@@ -853,7 +865,7 @@ get_dataset(taxonname = ,search())
 # Examples - combined criteria for browsing
 # Examples - filtering and selecting
 # Create Output files
-##Diatom counts
+## Diatom counts
 ## Diatom Taxa
 ## Site information and environ data
 ## Water chemistry
