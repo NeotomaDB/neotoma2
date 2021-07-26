@@ -133,7 +133,7 @@ neDiatoms_com <- get_datasets(neDiatoms_sstb)
 
 #duplicate is in line 335 for watar chem 
 Example of getting surface sample through filtering ,getting multiple dataset type metadata 
-```{R datasetByTaxa,eval=FALSE}
+```{R datasetByTaxa with DBT}
 ## Simon Edited this:
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
 diatom<- get_dataset(datasettype = 'diatom')
@@ -362,8 +362,8 @@ if('filename' %in% list.files()) {
 ```
 
 SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
-Creates file with diatom counts for surface samples
-```{R datasetByTaxa}
+Creates file with diatom counts for surface samples 
+```{R datasetByTaxa from Simon}
 library(dplyr)
 library(purrr)
 # Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
