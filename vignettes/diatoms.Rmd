@@ -63,14 +63,145 @@ diat_2<-get_site(siteid= x)
 diat_3<-get_site(siteid= 27408) # Example
 ```
 ### Dataset ID
-
 JERRIN - move code for searching by dataset ID to this location
+```{r get datasetID}
+diat_ID <- get_dataset(datasetid)
+diat_ID <- get_dataset(44764)
+
+```
+
+Example of getting information from a single site ID using get_dataset 
+```{R ExampleSingleSite }
+diatoma<- get_dataset(24) 
+subsetda <- sapply(diatoma, 
+                 function(x) {
+                   x$dataset.meta$dataset.id 
+                   })
+
+if('filename' %in% list.files()) {
+  diat_da <- readRDS('filename') 
+} else {
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'filename')
+}
+diatCount <- compile_downloads(diat_da) 
+minimumRow <- diatCount %>% 
+  group_by(dataset) %>% 
+   summarise(min(depth))
+
+```
+
+
+#### Dataset ID [move to location above]
+```{r}
+#dataset id from collection unit handle and analysis unit 
+
+```
+
+```{r}
+#Plotting stratigraphic plots and leaflet maps 
+```
+
+
 ### Dataset DOI
 JERRIN - move code for searching by dataset DOI to this location
+JERRIN - Shouldn't the DOI line of code below be deleted?  It is duplicated in the DOI section below.
+JERRIN - Are there two separate "code chunks" below? One for dataset type and one for DOI?
+```{r getDiatomsDSType}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+
+neDiatoms <- get_datasets(dois=c(...)) # DOI's
+```
+
+   
+
+
+
 ### Dataset Type
 JERRIN - move code for searching by dataset Type to this location
+ Diatom, Diatom Surface Sample, Diatom Top-Bottom
+Example of combining datatypes and using the variable to get dataset 
+```{r getDiatoms, eval=FALSE} 
+# Get datasets by individual diatom datatype 
+neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
+neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+# Get datasets by multiple diatom datatypes 
+neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
+neDiatoms_com <- get_datasets(neDiatoms_sstb)
+```
+
+#duplicate is in line 335 for watar chem 
+Example of getting surface sample through filtering ,getting multiple dataset type metadata 
+```{R datasetByTaxa,eval=FALSE}
+## Simon Edited this:
+diatomss<- get_dataset(datasettype = 'diatom surface sample')
+diatom<- get_dataset(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsetss <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id # Location of the data
+                   })
+
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') # It returns the file that is used 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- setdiff(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
+}
+
+wideCounts <- compile_downloads(diat_dl) 
+#neotoma function converts multiple downloads into single object 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe 
+
+wideCounts %>% filter(!is.na(Eunotia.diodon))
+#dplyr function used to subset a data frame
+diat_taxa <- taxa(diat_dl)
+```
+
+ 
+
+Example of using get_dataset to get diatom top-bottom samples 
+```{R datasetByTB,eval=FALSE}
+diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
+diatom<- get_dataset(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+subsettb <- sapply(diatomss, 
+                 function(x) {
+                   x$dataset.meta$dataset.id # Location of the data
+                   })[1:20]
+
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })[1:20]
+
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dltb <- get_download(subsettb)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename')
+}
+```
+
+
 
 ### Geographic region
+```{r get site by gpid}
+diat_1<-get_site(gpid = x)
+diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
+```
 
 ```{r getGeoPolUnits}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
@@ -124,146 +255,6 @@ diat_el <- get_sites("altmin(5000)","altmax(5500)") #Will need to look over at a
 diat_el2 <- get_datasets(datasetid= diat_el)
 ```
 
-### Dataset type - (e.g., Diatom Surface Sample)
-     Diatom, Diatom Surface Sample, Diatom Top-Bottom
-JERRIN - Shouldn't the DOI line of code below be deleted?  It is duplicated in the DOI section below.
-```{r getDiatomsDSType, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-
-neDiatoms <- get_datasets(dois=c(...)) # DOI's
-```
-
-Example of combining datatypes and using the variable to get dataset 
-```{r getDiatoms, eval=FALSE} 
-# Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
-neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
-# Get datasets by multiple diatom datatypes 
-neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
-neDiatoms_com <- get_datasets(neDiatoms_sstb)
-```
-
-Example of getting surface sample through filtering 
-```{R datasetByTaxa,eval=FALSE}
-## Simon Edited this:
-diatomss<- get_dataset(datasettype = 'diatom surface sample')
-diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
-subsetss <- sapply(diatomss, 
-                 function(x) {
-                   x$dataset.meta$dataset.id # Location of the data
-                   })
-
-subset <- sapply(diatom, 
-                 function(x) {
-                   x$dataset.meta$dataset.id
-                   })
-
-if('filename' %in% list.files()) {
-  diat_dl <- readRDS('filename') # It returns the file that is used 
-} else {
-  diat_dl <- get_download(subset)
-  diat_dlss <- get_download(subsetss)
-  diat_dl <- setdiff(diat_dl, diat_dlss)
-  saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
-}
-
-wideCounts <- compile_downloads(diat_dl) 
-#neotoma function converts multiple downloads into single object 
-minRow <- wideCounts %>% 
-  group_by(dataset) %>% #dataset was returned from the table 
-  summarise(min(depth)) #dplyr function to create a dataframe 
-
-wideCounts %>% filter(!is.na(Eunotia.diodon))
-#dplyr function used to subset a data frame
-diat_taxa <- taxa(diat_dl)
-```
-
-Example of getting top-bottom from filtering
-```{R datasetByTB,eval=FALSE}
-diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
-diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
-subsettb <- sapply(diatomss, 
-                 function(x) {
-                   x$dataset.meta$dataset.id # Location of the data
-                   })[1:20]
-
-subset <- sapply(diatom, 
-                 function(x) {
-                   x$dataset.meta$dataset.id
-                   })[1:20]
-
-if('filename' %in% list.files()) {
-  diat_dl <- readRDS('filename') 
-} else {
-  diat_dl <- get_download(subset)
-  diat_dltb <- get_download(subsettb)
-  diat_dl <- bind(diat_dl, diat_dlss)
-  saveRDS(diat_dl, 'filename')
-}
-```
-### Dataset DOI [move to location above]
-     Digital Object Identifier
-JERRIN - Are there two separate "code chunks" below? One for dataset type and one for DOI?
-```{r getDiatomsDSType}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-
-neDiatoms <- get_datasets(dois=c(...)) # DOI's
-```
-
-
-#### Site - Name(s) or ID(s) [Move to location above]
-```{r sitesbyName example}
-diat_1<-get_site(gpid = x)
-diat_2<-get_site(sitename= x)
-diat_3<-get_site(siteid= x)
-```
-Examples of getting sites by geopolitical units, sitenames, and siteid
-```{R sitsebyNameMult}
-diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
-
-
-```
-
-Example of getting information from a single site 
-```{R ExampleSingleSite }
-diatoma<- get_dataset(24) 
-subsetda <- sapply(diatoma, 
-                 function(x) {
-                   x$dataset.meta$dataset.id 
-                   })
-
-if('filename' %in% list.files()) {
-  diat_da <- readRDS('filename') 
-} else {
-  diat_dla <- get_download(subsetda)
-  saveRDS(diat_dla, 'filename')
-}
-diatCount <- compile_downloads(diat_da) 
-minimumRow <- diatCount %>% 
-  group_by(dataset) %>% 
-   summarise(min(depth))
-
-```
-
-#### Dataset ID [move to location above]
-```{r}
-#dataset id from collection unit handle and analysis unit 
-
-```
-
-```{r}
-#Plotting stratigraphic plots and leaflet maps 
-```
-
-
-
-
-
-
-
 
 
 
@@ -296,9 +287,8 @@ get_dataset(search('x'))
 ```
 
 Example of using the search function returning keywords 
-JERRIN - make the example search for keyword "modern."
 ```{R}
-get_dataset(search('keywords'))# Search could find so maybe
+get_dataset(search('modern'))# Search could find so maybe
 ```
 
 ### Within or intersecting a specified time interval 
@@ -324,16 +314,16 @@ aggr_set <- read.csv()# If we are going to use the excel fi;e we should read it 
 
 ```
 Example
-```{R}
+```{R Diatom Aggregate Dataset Example}
 
 ```
 
 ### Related to one or more publications
-```{R Diatom Publication,eval=FALSE}
+```{R Diatom Publication}
 diat_pub <- get_datasets()
 ```
 Example
-```{R}
+```{R Diatom Publication example}
 diat <- get_datasets()
 diat_pub <- get_publication()
 pub_diat <- sapply(diat_pub, 
@@ -343,10 +333,10 @@ pub_diat <- sapply(diat_pub,
 ```
 ### Water chemistry
 #### From sites within range of water chemistry characteristics
-```{r getWaterChem, eval=FALSE}
+```{r getWaterChem,}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 ```
-Example
+Example of how to get water chemistry from the different dataset types
 ```{r getWaterChemEX}
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
 diatom<- get_dataset(datasettype = 'diatom')
@@ -412,7 +402,7 @@ minRow <- wideCounts %>%
 ```
 
 Jerrin Example of using just dataset ID
-# Example similar to above but starting with a set of site ID's
+# Example similar to above but starting with a set of dataset ID's
 ```{R ExampleDataset}
 library(purrr)
 V1 <-c(44786,44787,44788)
@@ -472,15 +462,11 @@ if('filename' %in% list.files()) {
 }
 WCH_Diat <- compile_downloads(diat_dl)
 ```
-```
-Example
-```{R}
 
-```
 
 #### Diatom Sample analyst name
-```{R Diatom Sample Analyst,eval=FALSE}
-<- get_dataset
+```{R Diatom Sample Analyst}
+Con_<- get_dataset
 Contact_diat <- get_dataset(datasettype = 'diatom')
 
 Analyst <- sapply(Contact_diat, 
@@ -489,7 +475,7 @@ Analyst <- sapply(Contact_diat,
                    })
 ```
 Example
-```{R}
+```{R Diatom Sample Analyst example}
 
 ```
 
@@ -499,13 +485,13 @@ Contact <- get_contact(contactname = 'X')
 
 ```
 Example of returning a contact id given the contact name
-```{R}
+```{R Diatom Investigator name}
 Don <- get_contact(contactname = 'Donald F. Charles')
 ```
 
 #### Diatom counts include one or more specified diatom taxa
 
-```{R datasetByTaxa,eval=FALSE}
+```{R datasetByTaxa}
 diatoms<- get_dataset(datasettype = 'diatoms')
 diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
@@ -521,13 +507,13 @@ diat_taxa <- taxa(diat.dl)
 
 #### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
 
-```{R Diatom Counts,eval=FALSE}
+```{R Diatom Counts}
 
 ```
 
 Example
 
-```{R}
+```{R Diatom Counts EX}
 
 ```
 
@@ -540,7 +526,7 @@ Example
 
 Example
 
-```{R}
+```{R Diatom Site Area EX}
 
 ```
 
@@ -552,7 +538,7 @@ browse(diat.data)
 ```
 
 Example
-```{R}
+```{R Depository EX}
 library(neotoma)
 ```
 
@@ -600,14 +586,6 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 #### Dataset type 
 - (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
 
-```{R,eval=FALSE}
-
-```
-
-Example
-```{R}
-
-```
 
 # Create data output files  
 
@@ -615,21 +593,9 @@ The create data output files section -  standard formats for diatom counts, meta
 
 ## Basic files / matrices
 
-```{R,eval=FALSE}
-
-```
-
-Example
-```{R}
-
-```
-
 ### Diatom counts
 - single sites and multiple sites; aggregate data set; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts.
 
-```{R,eval=FALSE}
-
-```
 Example of a single site with getting count data  
 
 ```{r get_singleSitebyName}
@@ -672,7 +638,7 @@ diat_taxa <- taxa(diat.dl)
 ```
 Upper Wallface Pond examples
 
-```{R}
+```{R Upper Wallface EX}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
 uwallface <- get_site (sitename = "Upper Wallface%")
@@ -689,7 +655,7 @@ glimpse (uwallface.ct)
 str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
 ```
 
-```{R}
+```{R Upper Wallface View counts}
 ### View sample metadata, list of taxa, and counts in Download dataframes 
 ### View sample metadata,
 uwallface.dw[["32252"]][["sample.meta"]] 
@@ -701,7 +667,7 @@ uwallface.dw[["32252"]][["counts"]]
 uwallface.dw[["32252"]][["chronologies"]]
 ```
 
-```{r}
+```{r getsites for loop}
 library(neotoma)
 library(neotoma2)
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
@@ -713,7 +679,7 @@ new_sites
 
 ```
 
-```{r}
+```{r getsites for loop V1}
 library(neotoma2)
  Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
  new_sites <- c()
@@ -722,7 +688,7 @@ sites <- get_sites(sitename=name)
 new_sites <- c(new_sites, sites)}
 ```
 
-```{r}
+```{r getsites for loop V2}
 library(neotoma2)
  Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
  new_sites <- c()
@@ -733,7 +699,7 @@ new_sites <- c(new_sites, sites)}
 
 ### List of diatom taxa 
 - with name, authority, code, notes, etc.
-```{R, eval=FALSE}
+```{R, diatom taxa out}
 get_table(taxa)
 get_taxa()
 compile_taxa
@@ -745,7 +711,7 @@ get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
 
 ### Water chemistry
-```{R,eval=FALSE}
+```{R WCHM Out}
 get_dataset(sitename='x',datasettype = 'diatom')
 ```
 Example
@@ -754,7 +720,7 @@ Example
 ```
 
 ### Chronology
-```{R}
+```{R Chron }
 get_chroncontrol('x')# Can be thought like how bacon model is run through R
 ```
 Example
@@ -763,7 +729,7 @@ Example
 ```
 
 ### Metadata - various options
-```{R}
+```{R Metadata}
 get_download()# Options within diatoms to organize it 
 get_dataset()
 ```
@@ -775,11 +741,11 @@ get_dataset()
 
 ### Other types of data 
 - LOI, geochemistry
-```{R}
+```{R ETC}
 get_dataset(datasettype="")
 ```
 Example
-```{R}
+```{R ETC EX}
 get_dataset(siteid=,)
 ```
 
@@ -809,57 +775,39 @@ that are part of an aggregate dataset
 #Modify and analyze data 
 - and other miscellaneous tasks
 ## Ability to add to or modify data in Neotoma
-```{R}
 
-```
 ### add aggregate datasets to Neotoma
-```{R}
-
-```
-Example
-```{R}
-
-```
 
 ### create new ecological groups and assign taxa to the groups
-```{R}
+```{R set taxa}
 set_taxa('x') # Not code but could be something
 ```
 Example
-```{R}
+```{R set taxa ex}
 
 ```
 
 ## Create and look for a table that explicitly matches water chemistry and diatom datasets.
 This is especially important for cases where sites were sampled for water chemistry multiple times.
-```{R}
-
-```
-Example
-```{R}
-
-```
 
 ## Extract a list of publications for a set of datasets
-```{R}
+```{R get pub out}
 <- get_publications(datasetid= x)
 ### JERRIN - review following example with me
 ### So it would involve contact name/ID, publication ID, datasets having publication  
 ```
-Example
-```{R}
 
 ## Extract a list of DOI’s for a set of datasets
-```{R}
+```{R DOIS}
 get_publications(datasetid=)# Not code seems to need to be a mix of get_dataset and get_publications
 ```
 Example
-```{R}
+```{R DOIS EX}
 
 ```
 
 ## Create standard sets of diatom taxa names that could be used to convert multiple synonyms to a standard name
-```{R}
+```{R standard set}
 get_dataset(taxonname = ,search())
 ```
 # Examples - combined criteria for browsing
