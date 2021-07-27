@@ -55,13 +55,14 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 #In the code it would get some metadata from Neotoma DB from the datasettype and location
 ```
 ### Site Name
-Gettting a single site with sitename 
+Getting a single site with sitename 
 ```{r sitesbyName example}
 diat_1 <-get_site(sitename = "Name of site")
-diat_2 <-get_site(sitename= 'Schrader Pond') # Example
+diat_1.5 <-get_site(sitename= '%Schrader Pond%')
+diat_2 <-get_site(sitename= 'Schrader Pond')# Example
 #The code would be finding a site by its name and could use a wildcard to get an approximate of the sitename
 ```
-
+Get multiple sites by site names
 ```{r multsitesbySitename example}
 library(neotoma)
 library(neotoma2)
@@ -697,6 +698,42 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 
 #Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
+
+```{r plot}
+library(leaflet)
+test <- c(44764, 44765, 44766)
+all_wi <- neotoma::get_dataset(test, datasettype = "diatom")
+# We're going to use this multiple times I think, so let's make it a function:
+leaflet_map <- function(dataset_in) {
+  dataset_summary <- do.call(rbind, lapply(dataset_in, 
+                        function(x){
+                          # here we pull out the site information from the `dataset` objects:
+                          data.frame(name = x$site.data$site.name,
+                                     lat  = x$site.data$lat + runif(1, -0.005, 0.005),
+                                     long = x$site.data$long + runif(1, -0.005, 0.005),
+                                     type = x$dataset.meta$dataset.type)
+                        }))
+  # The leaflet package documentation uses piping.  For the sake of this tutorial, I won't.
+  # First, define a color palette for the dataset type symbol plotting.
+  pal <- colorFactor("Dark2", domain = levels(dataset_summary$type))
+  # Now make the leaflet map, add base raster tiles and then add the markers for the records:
+  map <- leaflet(data = dataset_summary)
+  map <- leaflet::addTiles(map)
+  map <- leaflet::addCircleMarkers(map, ~long, ~lat, 
+                                   popup = ~paste0("Site: ", as.character(name), "<br>",
+                                                   "Type: ", 
+                                                   as.character(dataset_summary$type)),
+                                   color = ~pal(type),
+                                   stroke = FALSE, fillOpacity = 0.5)
+  # You need to explicitly call the `map` object to make it appear!
+  map
+}
+# Since that's all wrapped in a function, we can all it with any `dataset_list`:
+leaflet_map(all_wi)
+```
+
+
+
 ###Plot of the abundance of multiple diatom taxa 
 for a single core - vs depth or time
 ###Plot of abundance of a single taxon 
@@ -717,7 +754,7 @@ that are part of an aggregate dataset
 ### create new ecological groups and assign taxa to the groups
 ```{R set taxa}
 set_taxa('x') # Not code but could be something
-```
+
 Example
 ```{R set taxa ex}
 
