@@ -205,6 +205,7 @@ diat_taxa <- taxa(diat_dl)
 
 Example of using get_dataset to get diatom top-bottom samples (currently not usable since Top-Bottom not in package)
 ```{R datasetByTB,eval=FALSE}
+library(neotoma)
 diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
 diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss and with the function it is reading the metadata and select in dataset,id to query from first 20 lakes 
