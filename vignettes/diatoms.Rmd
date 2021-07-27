@@ -45,18 +45,21 @@ General format of a complete chunk to browse using a single criterion:
 
 ```{R genericGetDataset}
 diat_1 <- get_datasets(argument_1, argument_2)
+
 ```
 
 Example for getting Dataset with dataset type and bounding box location
 
 ```{R retrieveDiatoms}
 NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
+#In the code it would get some metadata from Neotoma DB from the datasettype and location
 ```
 ### Site Name
 Gettting a single site with sitename 
 ```{r sitesbyName example}
 diat_1 <-get_site(sitename = "Name of site")
 diat_2 <-get_site(sitename= 'Schrader Pond') # Example
+#The code would be finding a site by its name and could use a wildcard to get an approximate of the sitename
 ```
 
 ```{r multsitesbySitename example}
@@ -68,6 +71,7 @@ for(name in Names_744BH){
 sites <- get_sites(sitename=name)
 new_sites <- c(new_sites, sites)}
 # Example for multiple sites 
+# The multiple sitenames are combined into an object to be made in a for loop to run each name instead of doing it manually 
 ```
 
 ### Site ID
@@ -75,12 +79,14 @@ Getting a single site by using siteid
 ```{r sitesbySiteID example}
 diat_3<-get_site(siteid= x)
 diat_4<-get_site(siteid= 27408) # Example for single site 
+#The get_site function will give basic metadata returning the sitename,location and collection unit 
 ```
 
 Getting multiple sites by using siteids 
 ```{r multsitesbySiteIDs example}
 diat_5 <- c(25918,25919,25920)
 diat_6 <- get_sites(diat_5)
+#Creating an object to contain multiple sites to be used for get_sites 
 ```
 
 ### Dataset ID
@@ -88,12 +94,13 @@ Getting a single dataset from a dataset id
 ```{r get datasetID}
 diat_ID <- get_dataset(datasetid)
 diat_ID <- get_dataset(44764) # Example
-
+#get_dataset could use site id or dataset id  to return information on site, metadata, publication, and date submitted 
 ```
 Getting datasets with multiple dataset ids 
 ```{r multdatsetid }
 multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
+#Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
 Example of getting information from a single site ID using get_dataset with subsets to return counts
@@ -103,18 +110,19 @@ subsetda <- sapply(Alexander,
                  function(x) {
                    x$dataset.meta$dataset.id 
                    })
-
+# In the subset it would run the dataset and search for the parameters by the use of dollar signs 
 if('filename' %in% list.files()) {
   diat_da <- readRDS('filename') 
 } else {
   diat_dla <- get_download(subsetda)
   saveRDS(diat_dla, 'filename')
 }
+#In the if and else loops they work together that a file will be created and download the data from the subset
 diatCount <- compile_downloads(diat_da) 
 minimumRow <- diatCount %>% 
   group_by(dataset) %>% 
    summarise(min(depth))
-
+#In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
 ```
 
 
@@ -131,8 +139,8 @@ minimumRow <- diatCount %>%
 
 
 ### Dataset DOI
-JERRIN - Shouldn't the DOI line of code below be deleted?  It is duplicated in the DOI section below.
 JERRIN - Are there two separate "code chunks" below? One for dataset type and one for DOI?
+It would seem that they may interact with each other but would need to be tested 
 ```{r getDiatomsDSType}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 
@@ -165,9 +173,9 @@ diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
 subsetss <- sapply(diatomss, 
                  function(x) {
-                   x$dataset.meta$dataset.id # Location of the data
+                   x$dataset.meta$dataset.id 
                    })
-
+#In the subsets it would go through each dataset to match the search of the metadata location 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
@@ -187,7 +195,7 @@ wideCounts <- compile_downloads(diat_dl)
 minRow <- wideCounts %>% 
   group_by(dataset) %>% #dataset was returned from the table 
   summarise(min(depth)) #dplyr function to create a dataframe 
-
+#Overall count data is retrieved from this portion 
 wideCounts %>% filter(!is.na(Eunotia.diodon))
 #dplyr function used to subset a data frame
 diat_taxa <- taxa(diat_dl)
@@ -199,12 +207,12 @@ Example of using get_dataset to get diatom top-bottom samples (currently not usa
 ```{R datasetByTB,eval=FALSE}
 diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
 diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and select in dataset,id to query from first 20 lakes 
 subsettb <- sapply(diatomss, 
                  function(x) {
                    x$dataset.meta$dataset.id # Location of the data
                    })[1:20]
-
+#In the subsets it would go through each dataset to match the search of the metadata location
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
@@ -215,9 +223,10 @@ if('filename' %in% list.files()) {
 } else {
   diat_dl <- get_download(subset)
   diat_dltb <- get_download(subsettb)
-  diat_dl <- bind(diat_dl, diat_dlss)
+  diat_dl <- bind(diat_dl, diat_dltb)
   saveRDS(diat_dl, 'filename')
 }
+#It would return results of the top-bottom to bind them and present in a table format 
 ```
 
 
@@ -227,11 +236,13 @@ Using get_site to return a location in geopolitical table with gpid
 ```{r get site by gpid}
 diat_1<-get_site(gpid = x)
 diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
+#The gpid is found from the GeoPoliticalUnits table 
 ```
 
 The geopolitical table to search for locations 
 ```{r getGeoPolUnits}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
+#gpid is useful to find country and state boundaries 
 ```
 
 Example - get sites from multiple geopolitical units (e.g., states)
@@ -244,6 +255,7 @@ ne_sites <- map(gpids, function(x)
   neotoma:::get_site(gpid = x)) %>%
   neotoma::bind()
 ne_down <- neotoma::get_download(ne_sites)
+#The code will run each gpid with the get_site that will be binded and than downloaded to display the data 
 ```
 
 ####  Geopolitical units (e.g., states)
