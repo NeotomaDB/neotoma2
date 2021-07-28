@@ -57,15 +57,15 @@ NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
 ### Site Name
 Getting a single site using sitename 
 ```{r sitesbyName example}
-diat_1 <-get_site(sitename = "Name of site")  # Basic format
-diat_2 <-get_site(sitename= 'Schrader Pond')  # Example
-diat_1.5 <-get_site(sitename= '%Schrad%')  #Example using wildcards (%)
-
+diat_1 <-get_sites(sitename = "Name of site")  # Basic format
+diat_2 <-get_sites(sitename= 'Schrader Pond')  # Example
+diat_2.5 <-get_sites(sitename= '%Schra%')     # Example using wildcards (%)
+diat_2
 ```
 Get multiple sites by site names
 ```{r multsitesbySitename example}
 library(neotoma)
-# The get_site function (Neotoma R) can process only one lake at a time.  This code chunk allows retreiving data for multiple lakes.  It was created by Soccorro Dominguez.  The get_sites function being developed in Neotoma2 may allow processing multiple sites.
+# The get_site function (Neotoma R) can process only one lake at a time.  This code chunk retries data for multiple lakes.  It was created by Soccorro Dominguez.  The get_sites function being developed in Neotoma2 may allow processing multiple sites.
 # Create an object that contains namers of lakes in quotations and separated by commas.  A new object must be created for each new set of names.
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")  #Example set of lake names
 # Create object "new_sites".
@@ -78,14 +78,14 @@ new_sites <- c(new_sites, sites)}
 ```
 
 ### Site ID
-Getting a single site by using siteid
+Get single site by using siteid
 ```{r sitesbySiteID example}
-diat_3<-get_site(siteid= x)
-diat_4<-get_site(siteid= 27408) # Example for single site 
-#The get_site function will give basic metadata returning the sitename,location and collection unit 
+diat_3<-get_sites(siteid= x)
+diat_4<-get_sites(siteid= 27408) # Example for single site 
+#The get_site function will return basic metadata: sitename,location and collection unit 
 ```
 
-Getting multiple sites by using siteids 
+Get multiple sites by using siteids 
 ```{r multsitesbySiteIDs example}
 diat_5 <- c(25918,25919,25920)
 diat_6 <- get_sites(diat_5)
@@ -93,7 +93,7 @@ diat_6 <- get_sites(diat_5)
 ```
 
 ### Dataset ID
-Getting a single dataset from a dataset id 
+Getting a single dataset a dataset id 
 ```{r get datasetID}
 diat_ID <- get_dataset(datasetid)
 diat_ID <- get_dataset(44764) # Example
@@ -106,14 +106,15 @@ diat_multid <- get_dataset(multid) # Example
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
-Example of getting information from a single site ID using get_dataset with subsets to return counts
+Example of getting information for a single site ID using get_dataset with subsets to return counts.  Created by Simon Goring
+JERRIN - Who prepared this code?  What is "Subset"?
 ```{R ExampleSingleSite }
-Alexander<- get_dataset(24) 
+Alexander<- get_dataset(24) # Dataset ID for Alex. Lake is 24
 subsetda <- sapply(Alexander, 
                  function(x) {
                    x$dataset.meta$dataset.id 
                    })
-# In the subset it would run the dataset and search for the parameters by the use of dollar signs 
+# In the subset it would run the dataset and search for the parameters by the use of dollar signs JERRIN - is this a filter or select function
 if('filename' %in% list.files()) {
   diat_da <- readRDS('filename') 
 } else {
