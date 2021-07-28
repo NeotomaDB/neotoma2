@@ -52,27 +52,30 @@ Example for getting Dataset with dataset type and bounding box location
 
 ```{R retrieveDiatoms}
 NE_US_DTM<-get_dataset(datasettype='diatom', loc =c(-80,40,-65,48))
-#In the code it would get some metadata from Neotoma DB from the datasettype and location
+#This example code gets dataset metadata for datasettype "diatom" from sites within a latitude and longitude bounding box
 ```
 ### Site Name
-Getting a single site with sitename 
+Getting a single site using sitename 
 ```{r sitesbyName example}
-diat_1 <-get_site(sitename = "Name of site")
-diat_1.5 <-get_site(sitename= '%Schrader Pond%')
-diat_2 <-get_site(sitename= 'Schrader Pond')# Example
-#The code would be finding a site by its name and could use a wildcard to get an approximate of the sitename
+diat_1 <-get_site(sitename = "Name of site")  # Basic format
+diat_2 <-get_site(sitename= 'Schrader Pond')  # Example
+diat_1.5 <-get_site(sitename= '%Schrad%')  #Example using wildcards (%)
+
 ```
 Get multiple sites by site names
 ```{r multsitesbySitename example}
 library(neotoma)
 library(neotoma2)
-Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+# The get_site function can process only one lake at a time.  This code chunk allows retreiving data for multiple lakes.  It was created by Soccorro ....
+# Create an object that contains namers of lakes in quotations and separated by commas.  A new object must be created for each new set of names.
+Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")  #Example set of lake names
+# Create object "new_sites".
 new_sites <- c()
+# Run a loop that gets sites for each name in the object with lake names
 for(name in Names_744BH){
 sites <- get_sites(sitename=name)
 new_sites <- c(new_sites, sites)}
-# Example for multiple sites 
-# The multiple sitenames are combined into an object to be made in a for loop to run each name instead of doing it manually 
+
 ```
 
 ### Site ID
