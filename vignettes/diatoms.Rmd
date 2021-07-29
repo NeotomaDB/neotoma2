@@ -72,9 +72,9 @@ Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Littl
 new_sites <- c() 
 # Run a loop that gets sites for each name in the object with lake names
 for(name in Names_744BH){
-sites <- get_site(sitename = name)
+sites <- get_sites(sitename = name)
 new_sites <- c(new_sites, sites)}
-
+#Sites would create a new object from the the loop of all the lakes
 ```
 
 ### Site ID
@@ -106,28 +106,6 @@ diat_multid <- get_dataset(multid) # Example
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
-Example of getting information for a single site ID using get_dataset with subsets to return counts.  Created by Simon Goring
-JERRIN - Who prepared this code?  What is "Subset"?
-```{R ExampleSingleSite }
-Alexander<- get_dataset(24) # Dataset ID for Alex. Lake is 24
-subsetda <- sapply(Alexander, 
-                 function(x) {
-                   x$dataset.meta$dataset.id 
-                   })
-# In the subset it would run the dataset and search for the parameters by the use of dollar signs JERRIN - is this a filter or select function
-if('filename' %in% list.files()) {
-  diat_da <- readRDS('filename') 
-} else {
-  diat_dla <- get_download(subsetda)
-  saveRDS(diat_dla, 'filename')
-}
-#In the if and else loops they work together that a file will be created and download the data from the subset
-diatCount <- compile_downloads(diat_da) 
-minimumRow <- diatCount %>% 
-  group_by(dataset) %>% 
-   summarise(min(depth))
-#In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
-```
 
 
 
@@ -164,8 +142,11 @@ neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING 
 neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
 neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 # Get datasets by multiple diatom datatypes 
+
 neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
+#Returns the object neDiatoms_sstb to contain the datasets of the different data types in one place
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
+# neDiatoms_com would now get the dataset for all the data types 
 ```
 
 #duplicate is in line 335 for watar chem 
@@ -316,7 +297,7 @@ get_dataset(CollType='Core','Section')
 ### Constituent database
 JERRIN - Code needs to be added
 ```{R SitesbyConDB}
-
+#Getting constituent databases would need to be in metadata but not sure if it is 
 ```
 
 Example of finding constituent databases
@@ -569,7 +550,7 @@ The create data output files section -  standard formats for diatom counts, meta
 Example of a single site with getting count data  
 
 ```{r get_singleSitebyName}
-schrader <- get_site('Schrader Pond') # % can be used to approximate sitenames
+schrader <- get_sites(sitename = 'Schrader Pond') # % can be used to approximate sitenames
 schrader.data <- get_dataset(schrader)
 schrader.dl <- get_download(schrader.data)
 schrader.cnt <- counts(schrader.dl)
@@ -863,6 +844,29 @@ write_xlsx(V1Counts,  ".xlsx")
 
 #This last step is the way to create a table which can be written as csv to export out 
 
+```
+
+Example of getting information for a single site ID using get_dataset with subsets to return counts.  Created by Simon Goring
+add comments
+```{R ExampleSingleSite }
+Mirror<- get_dataset(39813) # Dataset ID for Mirror Lake, Newer dataset/ site ids does not seem to work 
+subsetda <- sapply(Mirror, 
+                 function(x) {
+                   x$dataset.meta$dataset.id 
+                   })
+# The subset is not a function but a way to filter the dataset to get the portions of interest and sapply is from R package  
+if('Mirror' %in% list.files()) {
+  diat_da <- readRDS('Mirror') 
+} else {
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'Mirror')
+}
+#In the if and else loops they work together that a file will be created and download the data from the subset
+diatCount <- compile_downloads(diat_da) 
+minimumRow <- diatCount %>% 
+  group_by(dataset) %>% 
+   summarise(min(depth))
+#In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
 ```
 
 ## Diatom Taxa
