@@ -62,7 +62,7 @@ diat_2 <-get_sites(sitename= 'Schrader Pond')  # Example
 diat_2.5 <-get_sites(sitename= '%Schra%')     # Example using wildcards (%)
 diat_2
 ```
-Get multiple sites by site names 
+Get multiple sites by site names
 ```{r multsitesbySitename example}
 library(neotoma)
 # The get_site function (Neotoma R) can process only one lake at a time.  This code chunk retries data for multiple lakes.  It was created by Soccorro Dominguez.  The get_sites function being developed in Neotoma2 may allow processing multiple sites.
