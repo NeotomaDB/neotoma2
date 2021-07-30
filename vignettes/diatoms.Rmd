@@ -65,12 +65,12 @@ diat_2
 Get multiple sites by site names
 ```{r multsitesbySitename example}
 library(neotoma)
-# The get_site function (Neotoma R) can process only one lake at a time.  This code chunk retries data for multiple lakes.  It was created by Soccorro Dominguez.  The get_sites function being developed in Neotoma2 may allow processing multiple sites.
-# Create an object that contains namers of lakes in quotations and separated by commas.  A new object must be created for each new set of names.
+# The get_site function (Neotoma R) can process only one lake at a time.  This code chunk retrieves data for multiple lakes.  It was created by Soccorro Dominguez.  The get_sites function being developed in Neotoma2 may allow processing of multiple sites.
+# Create an object that contains names of lakes in quotations and separated by commas.  A new object must be created for each new set of names.
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")  #Example set of lake names
 # Create object "new_sites".
 new_sites <- c() 
-# Run a loop that gets sites for each name in the object with lake names
+# Run a loop that gets sites for each name in the object containing lake names
 for(name in Names_744BH){
 sites <- get_sites(sitename = name)
 new_sites <- c(new_sites, sites)}
@@ -106,20 +106,6 @@ diat_multid <- get_dataset(multid) # Example
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
-
-
-
-#### Dataset ID [move to location above]
-```{r}
-#dataset id from collection unit handle and analysis unit 
-
-```
-
-```{r}
-#Plotting stratigraphic plots and leaflet maps 
-```
-
-
 ### Dataset DOI
 JERRIN - Are there two separate "code chunks" below? One for dataset type and one for DOI?
 It would seem that they may interact with each other but would need to be tested 
@@ -128,10 +114,6 @@ neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX
 
 neDiatoms <- get_datasets(dois=c(...)) # DOI's
 ```
-
-   
-
-
 
 ### Dataset Type
  Diatom, Diatom Surface Sample, Diatom Top-Bottom
@@ -149,13 +131,13 @@ neDiatoms_com <- get_datasets(neDiatoms_sstb)
 # neDiatoms_com would now get the dataset for all the data types 
 ```
 
-#duplicate is in line 335 for watar chem 
-Example of getting surface sample through filtering and sung multiple data set type to get metadata 
+#duplicate is in line 335 for water chem 
+Example of getting surface sample through filtering and usng multiple data set types to get metadata 
 ```{R datasetByTaxa with DBT}
 ## Simon Edited this:
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
 diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selecting dataset,id to query from first 20 lakes 
 subsetss <- sapply(diatomss, 
                  function(x) {
                    x$dataset.meta$dataset.id 
@@ -176,7 +158,7 @@ if('filename' %in% list.files()) {
 }
 
 wideCounts <- compile_downloads(diat_dl) 
-#neotoma function converts multiple downloads into single object 
+#neotoma function converts multiple downloads into a single object 
 minRow <- wideCounts %>% 
   group_by(dataset) %>% #dataset was returned from the table 
   summarise(min(depth)) #dplyr function to create a dataframe 
@@ -530,6 +512,10 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 , Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id 
 
 ### Collection unit:
+```{r}
+#dataset id from collection unit handle and analysis unit 
+
+```
 #### Collection unit type
 , Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
 
@@ -674,10 +660,7 @@ get_dataset(siteid=,)
 Issues:  Put metadata in the same files as the data matrices?  How to combine related files (e.g., diatom counts and chronology)? [When is it best to convert diatom counts to percentages?]
 
 ## Input files for data analysis programs
-### Bacon
-### Vegan
-### Rioja
-### Tidypaleo
+### Bacon, ### Vegan, ### Rioja, ### Tidypaleo
 ### Others 
 
 #Make plots and maps 
@@ -725,7 +708,7 @@ for cores from multiple sites - vs time
 ### Plot of abundance of a taxon vs an environmental characteristic 
 (e.g., water chemistry variable)
 ### Map of distribution of sites 
-that are part of an aggregate dataset
+For example, that are part of an aggregate dataset; GGPlot, Leaflet
 ### Map of distribution of a diatom taxon
 ; symbol size related to % abundance
 
