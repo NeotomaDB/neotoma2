@@ -17,81 +17,80 @@ filter <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmi
 }
 
 #' @export
-filter.default <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA, ...) {
+filter.default <- function(x, ...) { #latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA,
   datasets <- c()
   
-  if(!is.na(latmin) & !is.na(latmax)){
-    for(i in 1: length(x@datasets)){
-      if(latmax > st_coordinates(x@datasets[[i]]@location)[,1] > latmin){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  
+  print(names(cl))
+  error_check <- check_args(cl)
+  
+  if('type' %in% names(cl)){  
+      for(i in 1: length(x@datasets)){
+        if(x@datasets[[i]]@datasettype == type){
+          dataset <- x@datasets[[i]]
+          datasets <- c(datasets, dataset)
+        }
       }
-    }
-    
   }
   
   
-  if(!is.na(latmin)){
-    for(i in 1: length(x@datasets)){
-      if(st_coordinates(x@datasets[[i]]@location)[,1] > latmin){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
   
-  if(!is.na(latmax)){
-    for(i in 1: length(x@datasets)){
-      if(st_coordinates(x@datasets[[i]]@location)[,1] < latmax){
-        print(st_coordinates(x@datasets[[i]]@location)[,1])
-        print(latmax)
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
-  
-  if(!is.na(longmin) & !is.na(longmax)){
-    for(i in 1: length(x@datasets)){
-      if(longmax > st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
-  if(!is.na(longmin)){
-    for(i in 1: length(x@datasets)){
-      if(st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
-  
-  if(!is.na(longmax)){
-    for(i in 1: length(x@datasets)){
-      if(st_coordinates(x@datasets[[i]]@location)[,2] < longmax){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
+  # if(!is.na(latmin)){
+  #   for(i in 1: length(x@datasets)){
+  #     if(st_coordinates(x@datasets[[i]]@location)[,1] > latmin){
+  #       dataset <- x@datasets[[i]]
+  #       datasets <- c(datasets, dataset)
+  #     }
+  #   }
+  # 
+  # }
+  # 
+  # if(!is.na(latmax)){
+  #   for(i in 1: length(x@datasets)){
+  #     if(st_coordinates(x@datasets[[i]]@location)[,1] < latmax){
+  #       print(st_coordinates(x@datasets[[i]]@location)[,1])
+  #       print(latmax)
+  #       dataset <- x@datasets[[i]]
+  #       datasets <- c(datasets, dataset)
+  #     }
+  #   }
+  # 
+  # }
+  # 
+  # 
+  # if(!is.na(longmin)){
+  #   for(i in 1: length(x@datasets)){
+  #     if(st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
+  #       dataset <- x@datasets[[i]]
+  #       datasets <- c(datasets, dataset)
+  #     }
+  #   }
+  # 
+  # }
+  # 
+  # if(!is.na(longmax)){
+  #   for(i in 1: length(x@datasets)){
+  #     if(st_coordinates(x@datasets[[i]]@location)[,2] < longmax){
+  #       dataset <- x@datasets[[i]]
+  #       datasets <- c(datasets, dataset)
+  #     }
+  #   }
+  # 
+  # }
+  # 
+  # if(!is.na(type)){
+  #   for(i in 1: length(x@datasets)){
+  #     if(x@datasets[[i]]@datasettype == type){
+  #       dataset <- x@datasets[[i]]
+  #       datasets <- c(datasets, dataset)
+  #     }
+  #   }
+  # 
+  # }
 
-  if(!is.na(type)){
-    for(i in 1: length(x@datasets)){
-      if(x@datasets[[i]]@datasettype == type){
-        dataset <- x@datasets[[i]]
-        datasets <- c(datasets, dataset)
-      }
-    }
-    
-  }
-  
   # if(!is.na(elevmin)){
   #   for(i in 1: length(x@datasets)){
   #     if(st_coordinates(x@datasets[[i]]@location)[,2] > longmin){
@@ -113,7 +112,7 @@ filter.default <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA
   # }
   
   
-  return(datasets)
+  #return(datasets)
 }
 
 filter.sites <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA, ...) {

@@ -217,10 +217,17 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 
 #' @title c Method for NULL values
 setMethod(f = "c",
-signature = "missingOrNULL",
-definition = function(x ="missingORNULL" , y){
-  y
-})
+          signature = "missingOrNULL",
+          definition = function(x ="missingORNULL" , y){
+            y
+          })
+
+setMethod(f = "c",
+          signature = "missingOrNULL",
+          definition = function(y, x ="missingORNULL" ){
+            y
+          })
+
 
 #' @title c Method for sites
 setMethod(f = "c",
