@@ -12,7 +12,7 @@
 #' @param ... optional arguments to pass into \code{get_dataset}.
 #' @export
 
-filter <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA, ...) {
+filter <- function(x, ...) { #latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA,
   UseMethod('filter')
 }
 
@@ -28,14 +28,20 @@ filter.default <- function(x, ...) { #latmin = NA, latmax = NA, longmin=NA, long
   error_check <- check_args(cl)
   
   if('type' %in% names(cl)){  
-      for(i in 1: length(x@datasets)){
-        if(x@datasets[[i]]@datasettype == type){
-          dataset <- x@datasets[[i]]
-          datasets <- c(datasets, dataset)
+      for(i in 1: length(x@sites)){
+        for(j in 1:length(x@sites[[i]]@collunits@collunits)){
+          for(k in 1:length(x@sites[[i]]@collunits@collunits[[j]]@datasets@datasets)){
+            if(x@sites[[i]]@collunits@collunits[[j]]@datasets@datasets[[k]]@datasettype == cl$type){
+              dataset <- x@sites[[i]]@collunits@collunits[[j]]@datasets@datasets[[k]]
+              datasets <- append(datasets, dataset)
+            }
+          }
         }
       }
   }
-  
+ 
+  datasets_list <- new('datasets', datasets = datasets)
+  return(datasets_list) 
   
   
   # if(!is.na(latmin)){
@@ -112,7 +118,7 @@ filter.default <- function(x, ...) { #latmin = NA, latmax = NA, longmin=NA, long
   # }
   
   
-  #return(datasets)
+
 }
 
 filter.sites <- function(x, latmin = NA, latmax = NA, longmin=NA, longmax = NA, elevmin = NA, elevmax = NA, type = NA, ...) {

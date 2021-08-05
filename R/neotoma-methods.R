@@ -222,11 +222,11 @@ setMethod(f = "c",
             y
           })
 
-setMethod(f = "c",
-          signature = "missingOrNULL",
-          definition = function(y, x ="missingORNULL" ){
-            y
-          })
+#setMethod(f = "c",
+#          signature = "missingOrNULL",
+#          definition = function(y, x ="missingORNULL" ){
+#            y
+#          })
 
 
 #' @title c Method for sites
