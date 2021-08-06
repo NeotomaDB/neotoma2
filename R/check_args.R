@@ -21,11 +21,11 @@ check_args <- function(cl) {
 
   error <- list(flag = 0,
                 message = list())
-
-  print("let's check errors")
-
-  if("sitename" %in% names(cl)) {
-    if(!is.character(cl$sitename)) {
+  
+  message("Checking for errors")
+  
+  if('sitename' %in% names(cl)){
+    if(!is.character(cl$sitename)){
       error$flag <- 1
       error$message[[length(error$message) + 1]] <- paste0("Sitename should be a character")
     }

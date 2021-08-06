@@ -92,7 +92,7 @@ parse_site <- function(result) {
 #' @examples
 #' get_sites(sitename = "Alexander Lake")
 #' @export
-get_sites.default <- function(...) {
+get_sites.default <- function(..., verbose =0) {
   
   cl <- as.list(match.call())
   cl[[1]] <- NULL
@@ -118,7 +118,9 @@ get_sites.default <- function(...) {
     
     result_length <- length(result[2]$data)
     
-    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+    if(verbose == 1){
+      cat("A site object containing", result_length, "sites and 6 parameters. \n")
+    }
     
     return(output)
   }
@@ -133,7 +135,7 @@ get_sites.default <- function(...) {
 #' @examples
 #' get_sites(siteid = 24)
 #' @export
-get_sites.numeric <- function(x, ...) {
+get_sites.numeric <- function(x, ..., verbose =0) {
   
   useNA <- function(x, type) {
     if (is.na(x)) {
@@ -157,8 +159,10 @@ get_sites.numeric <- function(x, ...) {
   
   result_length <- length(result[2]$data)
   
-  cat("A site object containing", result_length, "sites and 6 parameters. \n")
-  
-  return(output)
+  if(verbose == 1){
+    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+  }
+
+    return(output)
 
 }

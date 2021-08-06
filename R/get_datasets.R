@@ -172,7 +172,7 @@ parse_dataset <- function(result) {
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_datasets.numeric <- function(datasetid, ...) {
+get_datasets.numeric <- function(datasetid, ..., verbose =0) {
   
   # Delete print once it works properly
   #print("Getting in Datasets Numeric")
@@ -196,6 +196,10 @@ get_datasets.numeric <- function(datasetid, ...) {
   #Print when debugging
   #print(result)
   output <- parse_dataset(result)
+  
+  if(verbose == 1){
+    cat("A site object containing", length(result[2]$data), "sites and 6 parameters. \n")
+  }
 
   return(output)
 }
@@ -219,9 +223,7 @@ get_datasets.numeric <- function(datasetid, ...) {
 #' @param ageof If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.
 #' @param subdate Date of dataset submission.
 #' @export
-get_datasets.default <- function(...) {
-  
-  print("Getting in Datasets Default")
+get_datasets.default <- function(..., verbose = 0) {
   
   cl <- as.list(match.call())
   cl[[1]] <- NULL
@@ -239,7 +241,6 @@ get_datasets.default <- function(...) {
   result <- parseURL(baseURL, ...) %>% 
     cleanNULL()
   
-  #print(result)
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
@@ -248,6 +249,9 @@ get_datasets.default <- function(...) {
     args <- list(...)
   }
   
+  if(verbose == 1){
+    cat("A site object containing", length(result[2]$data), "sites and 5 parameters. \n")
+  }
   
   return(output)
 }
