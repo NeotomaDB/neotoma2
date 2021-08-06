@@ -39,7 +39,7 @@ would return only the first 25 records in Neotoma.  We can create an interactive
 plotLeaflet(faunal)
 ```
 
-The default for all calls to the Neotoma API is to set a `limit` of 25 for all records, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling: 
+The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling: 
 
 ```{r}
 get_datasets(datasettype='vertebrate fauna', limit = 999999)
@@ -107,7 +107,7 @@ account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
 
 ## Assemble Cleaned Data
 
-  * Create convex hulls (at multiple time bins?)
+  * Create convex hulls (at     multiple time bins?)
 Evaluate which convex hulls intersect with /come within a buffer of point of interest
 
 ### Join Hulls with Environmental Data

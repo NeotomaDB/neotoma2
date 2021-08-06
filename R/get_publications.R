@@ -105,7 +105,7 @@ get_publications.publication <- function(x, ...) {
 }
 #' @export
 get_publications.publications <- function(x, ...) {
-  for (i in seq_len(x)) {
+  for (i in 1:length(x)) {
     pub <- x[[i]]
     if (is.na(x[[i]]@publicationid)) {
       if (!is.na(pub@citation)) {

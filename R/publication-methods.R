@@ -200,15 +200,15 @@ setMethod(f = "showMatch",
 #' @importFrom dplyr bind_cols
 #' @export
 setMethod(f="as.data.frame", 
-          signature= signature("author"),
+          signature= signature("authors"),
           definition = function(x){
-            slots = slotNames(x)
-            table <- purrr::map(slots, function(x){
-              out <- data.frame(slot(object, x), 
-                                stringsAsFactors = FALSE)
-              colnames(out) <- x
-              return(out)
-            }) %>% bind_cols()
+            authors <- x@authors %>% 
+              map(function(y) {
+                paste0(y@author@familyname, ', ', 
+                       y@author@givennames)
+                }) %>% 
+              paste0(collapse='; ')
+            return(authors)
           })
 
 #' @title Convert a \code{publication} to a \code{data.frame}
@@ -220,13 +220,25 @@ setMethod(f="as.data.frame",
           definition = function(x){
             slots = slotNames(x)
             slots = slots[!slots == "author"]
-            table <- purrr::map(x, function(s){
-              out <- data.frame(slot(x, s), 
-                                stringsAsFactors = FALSE)
-              colnames(out) <- s
-              return(out)
-            }) %>% bind_cols()
+            table <- slots %>% 
+              purrr::map(function(s){
+                out <- data.frame(slot(x, s), 
+                                  stringsAsFactors = FALSE)
+                colnames(out) <- s
+                return(out)
+              }) %>% bind_cols()
+            table$authors <- as.data.frame(x@author)
+            return(table)
           })
+
+#' @export
+setMethod(f="as.data.frame", 
+          signature= signature(x = "publications"),
+          definition = function(x){
+            full <- x@publications %>% map(function(y) as.data.frame(y)) %>% 
+              bind_rows()
+            return(full)
+})
 
 #' @export
 setGeneric("selectMatch", function(x, n) {

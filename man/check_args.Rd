@@ -8,7 +8,8 @@ check_args(cl)
 }
 \arguments{
 \item{cl}{called arguments.
-Arguments are going to be called by match_call inside \code{\link{get_sites}} or \code{\link{get_datasets}}}
+Arguments are going to be called by match_call inside
+\code{\link{get_sites}} or \code{\link{get_datasets}}}
 }
 \value{
 A list with two components:
@@ -17,7 +18,9 @@ A list with two components:
 \item{message}{A list of error messages.}
 }
 \description{
-Functions \code{\link{get_sites}}, \code{\link{get_datasets}} need passed arguments to be checked. \code{param_check} tells them if there's a problem.
+Functions \code{\link{get_sites}},
+\code{\link{get_datasets}} need passed arguments to be checked.
+\code{param_check} tells them if there's a problem.
 }
 \references{
 Neotoma Project Website: http://www.neotomadb.org
