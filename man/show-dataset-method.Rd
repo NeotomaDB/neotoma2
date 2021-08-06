@@ -2,10 +2,10 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{show,dataset-method}
 \alias{show,dataset-method}
-\title{Method}
+\title{Show Dataset Method}
 \usage{
 \S4method{show}{dataset}(object)
 }
 \description{
-Method
+Show Dataset Method
 }

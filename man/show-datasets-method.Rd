@@ -2,10 +2,10 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{show,datasets-method}
 \alias{show,datasets-method}
-\title{Show result as a brief dataframe - as in Neotoma v1}
+\title{Show Datasets object as a dataframe}
 \usage{
 \S4method{show}{datasets}(object)
 }
 \description{
-Show result as a brief dataframe - as in Neotoma v1
+Show Datasets object as a dataframe
 }

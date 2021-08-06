@@ -4,7 +4,7 @@
 \alias{get_sites.numeric}
 \title{Get Site from a site ID}
 \usage{
-\method{get_sites}{numeric}(x, ...)
+\method{get_sites}{numeric}(x, ..., verbose = 0)
 }
 \arguments{
 \item{...}{arguments in ellipse form}

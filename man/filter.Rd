@@ -4,20 +4,12 @@
 \alias{filter}
 \title{filter}
 \usage{
-filter(
-  x,
-  latmin = NA,
-  latmax = NA,
-  longmin = NA,
-  longmax = NA,
-  elevmin = NA,
-  elevmax = NA,
-  type = NA,
-  ...
-)
+filter(x, ...)
 }
 \arguments{
 \item{x}{A site, dataset or download.}
+
+\item{...}{optional arguments to pass into \code{get_dataset}.}
 
 \item{latmin}{Minimum latitude to filter by}
 
@@ -30,8 +22,6 @@ filter(
 \item{elevmax}{Maximum elevation to filter by}
 
 \item{type}{Type to filter by}
-
-\item{...}{optional arguments to pass into \code{get_dataset}.}
 }
 \description{
 filter

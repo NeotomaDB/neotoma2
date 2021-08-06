@@ -2,10 +2,10 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{show,sites-method}
 \alias{show,sites-method}
-\title{Show result as a brief dataframe - as in Neotoma v1}
+\title{Show Sites objects as a dataframe}
 \usage{
 \S4method{show}{sites}(object)
 }
 \description{
-Show result as a brief dataframe - as in Neotoma v1
+Show Sites objects as a dataframe
 }

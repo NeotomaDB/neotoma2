@@ -4,7 +4,7 @@
 \alias{get_datasets.numeric}
 \title{Get Dataset Numeric}
 \usage{
-\method{get_datasets}{numeric}(datasetid, ...)
+\method{get_datasets}{numeric}(datasetid, ..., verbose = 0)
 }
 \arguments{
 \item{datasetid}{Use a single number to extract site information}

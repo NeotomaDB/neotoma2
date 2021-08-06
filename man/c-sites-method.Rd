@@ -4,7 +4,7 @@
 \alias{c,sites-method}
 \title{c Method for sites}
 \usage{
-\S4method{c}{sites}(x, y)
+\S4method{c}{sites}(x, ...)
 }
 \description{
 c Method for sites

@@ -2,10 +2,14 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{show,site-method}
 \alias{show,site-method}
-\title{Method}
+\title{Show Site objects as a dataframe}
 \usage{
+\S4method{show}{site}(object)
+
 \S4method{show}{site}(object)
 }
 \description{
+Show Site objects as a dataframe
+
 Method
 }
