@@ -92,7 +92,10 @@ Get data on multiple sites by using siteids
 diat_5 <- c(25918,25919,25920)
 diat_6 <- get_sites(diat_5)
 #Creating an object to contain multiple sites to be used for get_sites
-# JERRIN / SIMON - this code does not work.  "Error: C stack usage  7970768 is too close to the limit".  Please try to fix.
+# JERRIN / SIMON - this code does not work.  "Error: C stack usage  7970768 is too close to the limit".  Please try to fix. 
+
+#Jerrin: The code should work and would return 3 sites and 6 parameters. It may have to with the difference of Windows and Mac OS. 
+
 ```
 
 ### Dataset ID
@@ -114,6 +117,8 @@ JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being
 ```{r getDiatomsDSType}
 neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
+
+#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
 ```
 
 ### Dataset Type
@@ -129,6 +134,8 @@ neDiatoms_dt <- get_datasets(datasettype="diatom", loc= -70, 48, -68, 48)
 neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
 #Returns the [Creates an?] object neDiatoms_sstb to contain the datasets of the different diatom data types in one place
 # JERRIN / SIMON - code seems to work up to this point, but the following line does not work.
+
+#Jerrin: The code for line 134 works but in Line 139 it is saying that it should be numerical and need to be siteID
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
 # neDiatoms_com includes dataset information for all three diatom data types 
 ```
@@ -472,7 +479,7 @@ The create data output files section -  standard formats for diatom counts, meta
 JERRIN / SIMON - code does not run - "Error in get_dataset.default(schrader) : siteid must be numeric."
 ```{r get_singleSitebyName}
 schrader <- get_sites(sitename = 'Schrader Pond') # % can be used to approximate sitenames
-schrader.data <- get_dataset(schrader)
+schrader.data <- get_datasets(schrader)
 schrader.dl <- get_download(schrader.data)
 schrader.cnt <- counts(schrader.dl)
 sapply(schrader.cnt, dim) 
