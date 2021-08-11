@@ -117,8 +117,8 @@ setMethod(f = "show",
           definition = function(object){
             print(data.frame(dataset.id = object@datasetid,
                              site.name = object@datasetname,
-                             lat = mean(st_coordinates(object@location)[,1]),
-                             long = mean(st_coordinates(object@location)[,2]),
+                             lat = mean(st_coordinates(object@location)[,2]),
+                             long = mean(st_coordinates(object@location)[,1]),
                              type = object@datasettype), row.names=FALSE)
           })
 
@@ -129,8 +129,8 @@ setMethod(f = "show",
             map(object@datasets, function(x) {
               df <- data.frame(dataset.id = x@datasetid,
                                site.name = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,1]),
-                               long = mean(st_coordinates(x@location)[,2]),
+                               lat = mean(st_coordinates(x@location)[,2]),
+                               long = mean(st_coordinates(x@location)[,1]),
                                type = x@datasettype)
             }) %>%
               bind_rows() %>%
@@ -143,8 +143,8 @@ setMethod(f = "show",
           definition = function(object){
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[,1]),
-                             long = mean(st_coordinates(object@location)[,2]),
+                             lat = mean(st_coordinates(object@location)[,2]),
+                             long = mean(st_coordinates(object@location)[,1]),
                              elev = object@altitude), row.names=FALSE)
           })
 
@@ -388,8 +388,8 @@ setMethod(f = "show",
           definition = function(object){
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[,1]),
-                             long = mean(st_coordinates(object@location)[,2]),
+                             lat = mean(st_coordinates(object@location)[,2]),
+                             long = mean(st_coordinates(object@location)[,1]),
                              elev = object@altitude), row.names=FALSE)
           })
 
