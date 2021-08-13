@@ -9,19 +9,7 @@ filter(x, ...)
 \arguments{
 \item{x}{A site, dataset or download.}
 
-\item{...}{optional arguments to pass into \code{get_dataset}.}
-
-\item{latmin}{Minimum latitude to filter by}
-
-\item{latmax}{Maximum latitude to filter by}
-
-\item{longmin}{Minimum longitude to filter by}
-
-\item{elevmin}{Minimum elevation to filter by}
-
-\item{elevmax}{Maximum elevation to filter by}
-
-\item{type}{Type to filter by}
+\item{...}{arguments to filter by: latmin, latmax, longmin, longmax, elevmin, elevmax, datasettype.}
 }
 \description{
 filter

@@ -88,23 +88,9 @@ Since this new `sites` object has `r length(alex@sites)` elements that belong to
 
 #### Accessing get_sites documentation 
 
-If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
-
-````{r}
-alexanderSomething <- get_sites(sitename = 'Alexander%')
-```
-
-
-```{r}
-# We mark [[1]] as we are entering the first site. 
-alexanderSomething@sites[[2]]@sitename
-```
-
-#### Accessing get_sites documentation 
-
 If we ever need to see the documentation for examples, we can always access the help file using `?`
 
-```{r eval = FALSE}
+```
 ?get_sites
 ```
 
@@ -128,9 +114,45 @@ If we ever need to see the documentation for examples, we can always access the 
 ?set_site
 ```
 
-
 ## Datasets
 
+If you need to get to a deeper level of the sites object, you may want to look at the `get_datasets()` function.
+
+With get_datasets, we make calls to the API to get each dataset information -DatasetID, location, datasettype and so on.
+
+Getting the datasets by id is the easiest call, you can also pass a vector of IDs or if you already have a `sites` object, you can pass a sites object. Be careful, get_datasets does not take `sitename` or `siteid` as inputs.
+
+```{r eval = TRUE}
+# Getting datasets by ID
+my_datasets <- get_datasets(c(5, 10, 15, 20))
+my_datasets
+```
+You can also retrieve datasets by type directly from the API.
+
+```{r eval = TRUE}
+# Getting datasets by type
+my_pollen_datasets <- get_datasets(type = "pollen")
+my_pollen_datasets
+```
+When the API has many responses, you can limit the quantity of sites by using the parameter `limit` or you can do a `while`/'for' loop with the parameter `offset` - which works like a pager.
+
+```{r eval = TRUE}
+# Getting just 5 pollen datasets
+my_5_pollen_datasets <- get_datasets(type = "pollen", limit = 5)
+my_5_pollen_datasets
+```
+```{r eval = TRUE}
+# Taking a look at the next 5
+offset_param <- c(1, 2, 3)
+
+my_offset_datasets <- c()
+for(i in offset_param){
+  my_pollen_datasets <- get_datasets(type = "pollen", limit = 5, offset = offset_param[[i]])
+  my_offset_datasets <- c(my_offset_datasets, my_pollen_datasets)
+}
+
+my_offset_datasets
+```
 You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
 
 Accessing datasets by bounding box:
@@ -147,7 +169,44 @@ brazil <- '{"type": "Polygon",
 
 brazil[1]
 
-get_datasets(type = "pollen", loc = brazil[1])
+brazil_datasets <- get_datasets(loc = brazil[1])
+brazil_datasets
+```
+
+You can plot these findings!
+
+```{r}
+plotLeaflet(brazil_datasets)
+```
+
+```{r}
+filter(brazil_datasets, datasettype == "geochronologic")
+```
+
+
+The filter function takes as the first argument, a datasets object, followed by the critieria we want to use to filter. Current supported criteria includes:
+
+* `lat`
+* `long`
+* `elev`
+* `datasettype`
+
+You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.
+
+If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of & and |. For example:
+
+```{r}
+filter(brazil_datasets, datasettype == "geochronologic" | datasettype == "pollen")
+```
+
+```{r}
+filter(brazil_datasets, lat > -18 & lat < -16)
+```
+
+You can also use the pipeline operator for these tasks:
+```{r}
+brazil_datasets %>%
+  filter(lat > -18 & lat < -16)
 ```
 
 
@@ -159,6 +218,18 @@ for(Number in Names_744BH){
   new_sites <- c(new_sites, sites)}
 new_sites
 ```
+
+## The filter Function
+
+Once you have made a call to the API and have the datasets that you want to work with, you can filter the object.
+
+For example, in the case of the Brazil datasets, we might just be interested in the "geochronologic" types of datasets.
+
+Rather than making a new API call, we can filter them using the `filter` function:
+
+
+
+
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).

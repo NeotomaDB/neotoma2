@@ -29,6 +29,7 @@ set_site <- function(sitename= NA_character_,
   x@collunits <- collunits
   x@altitude <- altitude
  
+  # TODO : change coordinates to sf_sfc or as is so user can define
   
   return(x)
 }

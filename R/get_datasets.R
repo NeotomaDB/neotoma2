@@ -31,7 +31,6 @@ parse_dataset <- function(result) {
   
   sites <- c()
 
-
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -254,4 +253,30 @@ get_datasets.default <- function(..., verbose = 0) {
   }
   
   return(output)
+}
+
+
+#' @title Get Dataset Sites
+#' @import lubridate
+#' @importFrom methods new
+#' @param datasetid Use a single number to extract site information
+#' @param ... arguments in ellipse form
+#' @export
+get_datasets.sites <- function(sites_o, ..., verbose =0) {
+
+  # List of datasets ids
+  dataset_list <- c()
+  for(i in 1:length(sites_o)){
+    for(j in 1:length(sites_o@sites[[i]]@collunits@collunits)){
+      for(k in 1:length(sites_o@sites[[i]]@collunits@collunits[[j]]@datasets@datasets)){
+        datasetid <- sites_o@sites[[i]]@collunits@collunits[[j]]@datasets@datasets[[k]]@datasetid
+        dataset_list <- c(dataset_list, datasetid)
+      }
+    }
+  }
+
+  output <- get_datasets(dataset_list)
+
+  return(output)
+
 }
