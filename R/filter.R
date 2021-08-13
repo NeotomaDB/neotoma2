@@ -21,7 +21,7 @@ filter.default <- function(x, ...) {
   
   calls_list <- c()
   for(i in 1:length(cl)){
-    txt <- paste0(cl[[i]], collapse=', ')
+    txt <- paste0(cl[[i]], collapse='')
     if(str_detect(txt, 'lat')){
       # Appending latitude call
       my_list = list(lat = cl[[i]])
