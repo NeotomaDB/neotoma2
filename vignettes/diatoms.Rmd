@@ -79,6 +79,19 @@ new_sites <- c(new_sites, sites)}
 # JERRIN / SIMON - Code above does not work.  "Error in check_args(...) : Sitename should be a character"  Please try to fix.
 ```
 
+Getting multiple sitenames and NLA Example to get siteIDS
+```{r NLA}
+library(neotoma)
+library(neotoma2)
+
+nlaxl <- c("Gardner Pond","George Wyth Lake","Goose Pond","Gorton Pond","Grassy Pond","Green Belt Lake","Grimes","Grist Millpond","Grittman Lake","Groton Reservoir","Half Moon Lake","Halfway Pond","Hannaberry Lake","Harper Lake","Haskell Lake","Heggs","Henry's Lake","Hert Lake","Highland Lake","Hi-Land Lake","Hinkley's Pond","Horsfall Lake","Hosmer Lake")
+nla_sites <- c() 
+# Run a loop that gets sites for each name in the object containing lake names
+for(name in nlaxl){
+sites <- get_sites(sitename = name)
+nla_sites <- c(nla_sites, sites)}
+```
+
 ### Site ID
 Get data on a single site by using siteid
 ```{r sitesbySiteID example}
