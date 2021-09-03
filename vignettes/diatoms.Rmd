@@ -521,11 +521,11 @@ subsetUWall <- sapply(uwall,
 if('UWall' %in% list.files()) {
   UWa_dl <- readRDS('schra') # It returns the file that is used 
 } else {
-  UWallf_dl <- get_download(subsetSchr)
+  UWallf_dl <- get_download(subsetUWall)
   saveRDS(UWallf_dl, 'schra') # It saves this as an object of the download with file
 }
 
-wideCounts <- compile_downloads(SCHRA_dl) 
+wideCounts <- compile_downloads(UWallf_dl) 
 ## neotoma function converts multiple downloads into single object 
 minRow <- wideCounts %>% 
   group_by(dataset) %>% #dataset was returned from the table 
