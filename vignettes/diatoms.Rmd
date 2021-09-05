@@ -102,9 +102,9 @@ diat_4<-get_sites(siteid= 27408) # Example for single site
 
 Get data on multiple sites by using siteids 
 ```{r multsitesbySiteIDs example}
-diat_5 <- c(25918,25919,25920)
+#Create an object to contain multiple Site IDs to be used as argument for get_sites function
+diat_5 <- c(25918,25919,25920) #Site IDs for Jackson P., Jellison Hill P., and Jimmie P.
 diat_6 <- get_sites(diat_5)
-#Creating an object to contain multiple sites to be used for get_sites
 # JERRIN / SIMON - this code does not work.  "Error: C stack usage  7970768 is too close to the limit".  Please try to fix. 
 
 #Jerrin: The code should work and would return 3 sites and 6 parameters. It may have to with the difference of Windows and Mac OS. 
@@ -115,8 +115,8 @@ diat_6 <- get_sites(diat_5)
 nlad<-c(8556,8556,10427,13527,23249,23250,23251,24214,23252,23253,23254,23255,23256,23259,23260,23261,23262,23263,23264,23265,9734,23272,23273,23274,9596,26597,23275,23276,23277,23278,23279,2625,9602,23280,23281,23282,23283,10113,10114,13393,10113,10114,13393,24385,23284,23287,23288,23289,23290,23296,23297,23298,23299,23300,23301,23302,23303,23305,23306,23307,23308,23309,9658,16646,23310,8566,9870,23311,23314,23315,23316,23317,23318,23319,23321,23322,27324,23323,23324,9903,23325,481,14085,22469,22812,23327,23328,500,502,7532,9667,23329,26516,23330,23331,24304,23332,2709,9927,10429,23333,2709,9927,10429,23333,23334,9929,23336,23343,23344,23345,23347,23348,23350,23351,23352,23353,23354,2688,9972,13354,23355,27622,762,9980,23357,27642,23358,23360,9679,23361,23362,23363,23364,23365,23366,23367,23368,23369,23370,23372,23373,10266,23374,23375,23376,22863,23377,23378,23379,23381,23382,23383,23384,23385,24387,24273,24390,24391,24392,2686,24394,24395,24397,24398,24399,24401,24402,24403,22900,24404,24405,24406,24408,24409)
 nla_1<-get_sites(nlad)
 nla_2<-get_datasets(datasettype="diatom surface samples",nlad)
-# An example showing how to get multiple site ID that match with diatom surface samples 
-#A current error will have to do with null altitudes so some may not work 
+# An example showing how to get multiple datasets of data type "diatom surface sample" using a set of site IDs.  
+#This code will not run if the value for the "altitude" variable is blank for any one lake. Soccorro is trying to fix this problem.
 ```
 ### Dataset ID
 Get data on a single dataset using datasetID 
@@ -133,11 +133,11 @@ diat_multid <- get_dataset(multid) # Example
 ```
 
 ### Dataset DOI
-JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
+
 ```{r getDiatomsDSType}
 neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
-
+#JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
 #Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
 ```
 
@@ -229,7 +229,7 @@ diat_el2 <- get_datasets(datasetid= diat_el)
 
 
 
-##### Collection type [secondary]
+### Collection type [secondary]
 ```{R diatombyColltype,eval=FALSE}
 get_dataset(CollType='x') # Unsure
 ```
@@ -250,7 +250,7 @@ Example of finding constituent databases
 ConDB <- 
 ```
 
-###### Sample keyword [secondary]
+### Sample keyword [secondary]
 ```{R SitesbyKW}
 get_dataset(search('x'))
 ```
@@ -275,7 +275,7 @@ Interval <- filter(X, age_ad >= 1950)
 ```{R Diatom Aggregate Dataset}
 library(neotoma)
 library(neotoma2)
-aggr_set <- read.csv()# If we are going to use the excel fi;e we should read it here and than could use it to find information
+aggr_set <- read.csv()# If we are going to use the excel file we should read it here and than could use it to find information
 <- get_datasets()
 <- get_download()
 #General guideline steps when we do get info to use for other purposes 
@@ -288,10 +288,11 @@ Example
 ```
 
 ### Related to one or more publications
+Get all dataset IDs associated with a particular publication
 ```{R Diatom Publication}
 diat_pub <- get_datasets()
 ```
-Example
+Example - [not sure what this code does...]
 ```{R Diatom Publication example}
 diat <- get_datasets()
 diat_pub <- get_publication()
@@ -301,6 +302,8 @@ pub_diat <- sapply(diat_pub,
                    })
 ```
 ### Water chemistry
+#### Is water chemistry available? 
+(List variables included) 
 #### From sites within range of water chemistry characteristics
 ```{r getWaterChem,}
 neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
@@ -359,7 +362,7 @@ WCH_Diat <- compile_downloads(diat_dl)
 ```
 
 
-#### Diatom Sample analyst name
+### Diatom Sample analyst name
 ```{R Diatom Sample Analyst}
 Con_<- get_dataset
 Contact_diat <- get_dataset(datasettype = 'diatom')
@@ -374,7 +377,7 @@ Example
 
 ```
 
-#### Investigator name / person name
+### Investigator name / person name
 ```{R Diatom Investigator}
 Contact <- get_contact(contactname = 'X')
 
@@ -383,7 +386,7 @@ Example of returning a contact id given the contact name
 ```{R Diatom Investigator name}
 Don <- get_contact(contactname = 'Donald F. Charles')
 ```
-
+### Diatom taxa
 #### Diatom counts include one or more specified diatom taxa
 
 ```{R datasetByTaxa}
@@ -412,7 +415,7 @@ Example
 
 ```
 
-
+### Site characteristics
 #### Site area larger or smaller than specified size
 
 ```{R Diatom Site Area}
@@ -425,7 +428,7 @@ Example
 
 ```
 
-#### Depository in which diatom slides are located
+### Depository in which diatom slides are located
 
 ```{R Depository}
 diat.data <- get_dataset(datasettype='diatom') # access to neotoma explorer but needs to specify 
@@ -436,7 +439,16 @@ Example
 ```{R Depository EX}
 library(neotoma)
 ```
+### Chronology
+Does a dataset have an associated chronology?  If so, what are metadata (e.g., upper and lower age bounds)?
+  Not sure of purpose of the following code
+```{R Chron }
+get_chroncontrol('x')# Can be thought like how bacon model is run through R
+```
+Example
+```{R AnotherChronExample}
 
+```
 #### Chronology (y/n) and characteristics
 ```{R Chronology}
 <-get_chroncontrol(x) # Need to check if this relates to chronology or bacon 
@@ -448,7 +460,7 @@ Example
 ```
 
 
-### Format for browsing using multiple criteria. 
+### Format for browsing using multiple criteria - Examples 
 Examples: [could get complicated]  General rules and tips.  [Add as they become known]
 
 #### Find all diatom datasets of any datatype
@@ -461,32 +473,19 @@ Examples: [could get complicated]  General rules and tips.  [Add as they become 
 
 ### Other options / Misc:
 
-#### Is water chemistry available? 
-(List variables included) Is chronology available?  Upper and lower age bounds.  Aggregate dataset(s) of which the dataset is a member.
 
-## Create output of browse results. 
+
+
+## Create output of browse results 
 Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
  
-Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location on Tilia tabs):
-
-### Site info:
-#### Neotoma Site ID
-, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id 
-
-### Collection unit:
-```{r}
-#dataset id from collection unit handle and analysis unit 
-
-```
-#### Collection unit type
-, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
-
-### Dataset:
-#### Dataset type 
-- (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
+Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location on Tilia tabs): 
+  1.  Site information: Site ID, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id
+  2. Collection unit information:  CU ID, Type, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
+  3.  Dataset information: Data Type (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
 
 
-# Create data output files  
+# Create output files for data analysis
 
 The create data output files section -  standard formats for diatom counts, metadata, chronology, water chemistry.  It provides examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, they should include all related data; the amount of data can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
 
@@ -647,6 +646,7 @@ Example of returning taxa
 get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
+## Site information and environ data
 
 ### Water chemistry
 ```{R WCHM Out}
@@ -656,15 +656,8 @@ Example
 ```{R ChemistryExample}
 
 ```
-
 ### Chronology
-```{R Chron }
-get_chroncontrol('x')# Can be thought like how bacon model is run through R
-```
-Example
-```{R AnotherChronExample}
 
-```
 
 ### Metadata - various options
 ```{R Metadata}
@@ -691,6 +684,7 @@ get_dataset(siteid=,)
 Issues:  Put metadata in the same files as the data matrices?  How to combine related files (e.g., diatom counts and chronology)? [When is it best to convert diatom counts to percentages?]
 
 ## Input files for data analysis programs
+  Some programs have no standard input format
 ### Bacon, ### Vegan, ### Rioja, ### Tidypaleo
 ### Others 
 
@@ -745,11 +739,11 @@ For example, that are part of an aggregate dataset; GGPlot, Leaflet
 
 #Modify and analyze data 
 - and other miscellaneous tasks
-## Ability to add to or modify data in Neotoma
+## Add to or modify data in Neotoma
 
-### add aggregate datasets to Neotoma
+### Add aggregate datasets to Neotoma
 
-### create new ecological groups and assign taxa to the groups
+### Create new ecological groups and assign taxa to the groups
 ```{R set taxa}
 set_taxa('x') # Not code but could be something
 
@@ -758,8 +752,8 @@ Example
 
 ```
 
-## Create and look for a table that explicitly matches water chemistry and diatom datasets.
-This is especially important for cases where sites were sampled for water chemistry multiple times.
+### Add to a table that explicitly matches water chemistry and diatom datasets
+This is especially important for cases where sites were sampled for water chemistry as part of more than one study.
 
 ## Extract a list of publications for a set of datasets
 ```{R get pub out}
@@ -777,13 +771,13 @@ Example
 
 ```
 
-## Create standard sets of diatom taxa names that could be used to convert multiple synonyms to a standard name
+## Add standard sets of diatom taxa names that could be used to convert multiple synonyms to another set of names
 ```{R standard set}
 get_dataset(taxonname = ,search())
 ```
-# Examples - combined criteria for browsing
-# Examples - filtering and selecting
+
 # Create Output files
+The following items will be moved to corresponding topics in the outline above
 ## Diatom counts
 SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
 Creates file with diatom counts for surface samples 
@@ -826,7 +820,7 @@ minRow <- wideCounts %>%
 ```
 
 Jerrin Example of using just dataset ID
-# Example similar to above but starting with a set of dataset ID's
+### Example similar to above but starting with a set of dataset ID's
 ```{R ExampleDataset}
 library(purrr)
 V1 <-c(44786,44787,44788)
@@ -883,8 +877,4 @@ minimumRow <- diatCount %>%
 #In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
 ```
 
-## Diatom Taxa
-## Site information and environ data
-## Water chemistry
-## Chronology
-## List of dataset IDs
+
