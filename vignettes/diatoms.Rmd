@@ -44,8 +44,9 @@ General task specification format: “Find all diatom datasets that meet the fol
 General format of a complete chunk to browse using a single criterion:
 
 ```{R genericGetDataset}
-diat_1 <- get_datasets(argument_1, argument_2)
-
+# Purpose of following line(s)
+# diat_1 <- get_datasets(argument_1, argument_2)
+# Additional explanations of code (optional)
 ```
 
 Example for getting Datasets by specifying dataset type and bounding box location
@@ -73,10 +74,10 @@ Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Littl
 new_sites <- c() 
 # Run a loop that gets sites for each name in the object containing lake names
 for(name in Names_744BH){
-sites <- get_sites(sitename = name)
+sites <- get_site(sitename = name)
 new_sites <- c(new_sites, sites)}
 #Sites would create a new object from the the loop of all the lakes
-# JERRIN / SIMON - Code above does not work.  "Error in check_args(...) : Sitename should be a character"  Please try to fix.
+# JERRIN / SIMON - Code above does not work using get_sites (Neotoma-r-2).  "Error in check_args(...) : Sitename should be a character"  Please try to fix.
 ```
 
 Getting multiple sitenames and NLA Example to get siteIDS
@@ -88,14 +89,14 @@ nlaxl <- c("Gardner Pond","George Wyth Lake","Goose Pond","Gorton Pond","Grassy 
 nla_sites <- c() 
 # Run a loop that gets sites for each name in the object containing lake names
 for(name in nlaxl){
-sites <- get_sites(sitename = name)
+sites <- get_site(sitename = name)
 nla_sites <- c(nla_sites, sites)}
 ```
 
 ### Site ID
 Get data on a single site by using siteid
 ```{r sitesbySiteID example}
-diat_3<-get_sites(siteid= x)
+# diat_3<-get_sites(siteid= x) - basic format
 diat_4<-get_sites(siteid= 27408) # Example for single site 
 #The get_site function will return basic metadata: sitename,location and collection unit 
 ```
@@ -121,14 +122,16 @@ nla_2<-get_datasets(datasettype="diatom surface samples",nlad)
 ### Dataset ID
 Get data on a single dataset using datasetID 
 ```{r get datasetID}
-diat_ID <- get_dataset(datasetid)
+# diat_ID <- get_dataset(datasetid) - basic format
 diat_ID <- get_dataset(44764) # Example
+diat_ID
 #get_dataset could use site id or dataset id  to return information on site, metadata, publication, and date submitted 
 ```
-Get datasets using multiple dataset ids 
+Get data on multiple datasets using multiple dataset IDs 
 ```{r multdatsetid }
 multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
+diat_multid
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
@@ -146,7 +149,7 @@ neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for
 Example of combining data set types and using the variable to get dataset metadata from the combined object.  Example "loc = bounding box" (W,S,E,N) is northern Maine.
 ```{r getDiatoms, eval=FALSE} 
 # Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc= -70, 48, -68, 48)
+neDiatoms_ss <- get_datasets(datasettype="diatom surface sample", loc= -70, 48, -68, 48)
 neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc= -70, 48, -68, 48)
 neDiatoms_dt <- get_datasets(datasettype="diatom", loc= -70, 48, -68, 48)
 # Get datasets by multiple diatom datatypes 
@@ -162,16 +165,18 @@ neDiatoms_com <- get_datasets(neDiatoms_sstb)
 
 
 ### Geographic region
-Using get_site to return a location in geopolitical table with gpid
+Using get_site to return a list of all sites located in a geopolitical unit as specified by gpid
 ```{r get site by gpid}
-diat_1<-get_site(gpid = x)
-diat_1<-get_site(gpid = 6198) # Geopolitical ID for Alaska from Table
-#The gpid is found from the GeoPoliticalUnits table 
+# diat_1<-get_site(gpid = x) - basic format
+diat_1<-get_site(gpid = 6198) # Example using geopolitical ID for Alaska. The gpid was retreived from the GeoPoliticalUnits table 
+diat_1
+#
 ```
 
-The geopolitical table to search for locations 
+View the geopolitical table to search for locations and gpids
 ```{r getGeoPolUnits}
 gpids <- neotoma::get_table(table.name='GeoPoliticalUnits')
+gpids
 #gpid is useful to find country and state boundaries 
 ```
 
@@ -204,19 +209,19 @@ GEO_PA1 <- get_dataset(gpid = 8412 )
 #### Latitude and Longitude boxes
 
 ```{R diatomsbyBBox}
-diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+# diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
 ```
 
 Example of get_datasets by location with bounding box of lat & longs (West/South/East/North)
 
 ```{R diatomsbyBBoxExecuted}
-diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
+diat_NE <- get_dataset(datasettype="diatom",loc =c(-80,40,-65,48)) 
 ```
 
 #### Elevation (m)
 
 ```{R sitesbyElev,eval=FALSE}
-diat_el <- get_sites(`altmin()`, `altmax()`)
+# diat_el <- get_sites(`altmin()`, `altmax()`) - basic format
 ```
 Example of getting datasets for sites between minimum and maximum elevations 
 ```{R getSitesByElevExample}
@@ -230,10 +235,11 @@ diat_el2 <- get_datasets(datasetid= diat_el)
 
 
 ### Collection type [secondary]
+Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
 ```{R diatombyColltype,eval=FALSE}
-get_dataset(CollType='x') # Unsure
+# get_dataset(CollType='x') basic format - # Unsure
 ```
-Example of getting dataset by collection id
+Example of getting dataset by Collection Type id
 ```{R sitesByCollTypeMult}
 get_dataset(CollType='Core','Section')
 ```
@@ -241,7 +247,6 @@ get_dataset(CollType='Core','Section')
 ### Constituent database
 JERRIN / SIMON - Code needs to be added
 ```{R SitesbyConDB}
-#Getting constituent databases would need to be in metadata but not sure if it is 
 ```
 
 Example of finding constituent databases
@@ -251,6 +256,7 @@ ConDB <-
 ```
 
 ### Sample keyword [secondary]
+Code to retreive datasets by keyword - usually would be one part of a larger code chunk or function
 ```{R SitesbyKW}
 get_dataset(search('x'))
 ```
