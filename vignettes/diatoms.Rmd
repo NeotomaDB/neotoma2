@@ -277,11 +277,13 @@ Interval <- filter(X, age_ad >= 1950)
 
 ```
 
-### Member of aggregate dataset(s)
+### Members of an aggregate dataset(s)
+Get dataset IDs of all members of an aggregate dataset
+Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
 library(neotoma)
 library(neotoma2)
-aggr_set <- read.csv()# If we are going to use the excel file we should read it here and than could use it to find information
+aggr_set <- read.csv()# If we are going to use the excel file we should read it in here and than could use it to find information
 <- get_datasets()
 <- get_download()
 #General guideline steps when we do get info to use for other purposes 
@@ -295,6 +297,7 @@ Example
 
 ### Related to one or more publications
 Get all dataset IDs associated with a particular publication
+  Soccorro is working on this
 ```{R Diatom Publication}
 diat_pub <- get_datasets()
 ```
@@ -308,22 +311,25 @@ pub_diat <- sapply(diat_pub,
                    })
 ```
 ### Water chemistry
-#### Is water chemistry available? 
-(List variables included) 
+#### Is water chemistry available?  If so, which parameters?
+Determine if any water chemistry data is available for one or more sites or diatom datasets for those sites
+If chem data are available, which parameters? (List variables included) 
 #### From sites within range of water chemistry characteristics
+Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
+Why is following code chunk here?
 ```{r getWaterChem,}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+neDiatoms <- get_datasets(datasettype="diatom surface sample", loc=BOUNDING BOX)
 ```
 Example of how to get water chemistry from the different dataset types
 ```{r getWaterChemEX}
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
 diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and selectind dataset,id to query from first 20 lakes 
+#Sapplyy function is used to return diatomss, read / extract the metadata and select dataset IDs for the first 20 lakes 
 subsetss <- sapply(diatomss, 
                  function(x) {
                    x$dataset.meta$dataset.id
                    })[1:20]
-#The $ is extracting the surface sample metadata from the name of it 
+#Sapplyy function is used to return diatom, read / extract the metadata and select dataset IDs for the first 20 lakes 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
@@ -336,12 +342,14 @@ if('filename' %in% list.files()) {
   diat_dlss <- get_download(subsetss)
   diat_dl <- bind(diat_dl, diat_dlss)
   saveRDS(diat_dl, 'filename') # It saves this as an object of the download with file
+#  Where is "filename"saved? - What directory?
 }
 ```
 
 
 
 #### From sites where one or more specified water chemistry characteristics were measured
+This code seems to run, but does not include selection for range of water chemistry variables.
 ```{R Diatom Multiple Water Chemistry}
 WCH_Sites <-c()
 
@@ -369,6 +377,9 @@ WCH_Diat <- compile_downloads(diat_dl)
 
 
 ### Diatom Sample analyst name
+Get all datasets associated with name of a sample analyst
+Currently seems to just get a list of people who analyzed surface samples
+Needs to be able to accept contact ID of a specific person
 ```{R Diatom Sample Analyst}
 Con_<- get_dataset
 Contact_diat <- get_dataset(datasettype = 'diatom')
@@ -394,9 +405,9 @@ Don <- get_contact(contactname = 'Donald F. Charles')
 ```
 ### Diatom taxa
 #### Diatom counts include one or more specified diatom taxa
-
+Code does not include possibility of specifying a particular diatom taxon
 ```{R datasetByTaxa}
-diatoms<- get_dataset(datasettype = 'diatoms')
+diatoms<- get_dataset(datasettype = 'diatom')
 diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
 ```
@@ -882,5 +893,6 @@ minimumRow <- diatCount %>%
    summarise(min(depth))
 #In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
 ```
+
 
 
