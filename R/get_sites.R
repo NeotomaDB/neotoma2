@@ -42,7 +42,10 @@ parse_site <- function(result) {
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
-    elev <- result[2]$data[[i]]$altitude
+    if(is.na(result[2]$data[[i]]$altitude)){
+      elev <- NA_integer_
+    }else{
+      elev <- result[2]$data[[i]]$altitude}
     siteid <- result[2]$data[[i]]$siteid
     sitename <- result[2]$data[[i]]$sitename
     description <- as.character(result[2]$data[[i]]$sitedescription)
