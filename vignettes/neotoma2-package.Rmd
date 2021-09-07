@@ -91,7 +91,8 @@ Since this new `sites` object has `r length(alex@sites)` elements that belong to
 If we just know part of the spelling of a sitename, we can use the `%` in the `sitename` argument operator to help us find the right option.
 
 ````{r}
-alexanderSomething <- get_sites(sitename = 'Alexander%')
+alexanderSomething <- get_sites(sitename = 'Alexander%') %>% 
+  # filter(datasettype == 'Pollen Surface Samples')
 ```
 
 
@@ -99,6 +100,8 @@ alexanderSomething <- get_sites(sitename = 'Alexander%')
 # We mark [[1]] as we are entering the first site. 
 alexanderSomething@sites[[2]]@sitename
 ```
+
+
 
 #### Accessing get_sites documentation 
 
@@ -110,7 +113,7 @@ If we ever need to see the documentation for examples, we can always access the 
 
 ### Creating a Site
 
-As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes. 
+As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
 ```{r set_site}
 my_site <- set_site(sitename="My Lake", 
@@ -127,7 +130,6 @@ If we ever need to see the documentation for examples, we can always access the 
 ```
 ?set_site
 ```
-
 
 ## Datasets
 
@@ -159,6 +161,7 @@ for(Number in Names_744BH){
   new_sites <- c(new_sites, sites)}
 new_sites
 ```
+
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
