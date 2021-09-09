@@ -81,7 +81,7 @@ Neotoma data is structured spatially.  Each sample location is assigned a **site
 
 Within a **site** there may be one or more **collection units**.  A collection unit is the specific location where samples were collected.  So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area.  The collection unit represents the material that was removed and analyzed.  The material is subdivided into **analysis units**, and groups of analysis units, sampled for a particular dataset type (e.g., diatoms, pollen, water chemistry) are then grouped into a **dataset**.
 
-## Data discovery
+## Data discovery - Browsing the neotoma database
 
 This section describes ways of searching for available diatom datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results.
 
@@ -238,6 +238,25 @@ neDiatoms_com <- get_datasets(neDiatoms_sstb)
 # neDiatoms_com includes dataset information for all three diatom data types 
 ```
 
+### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
+
+```{r getDiatomSurf, eval=FALSE}
+neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+
+neDiatoms <- get_datasets(dois=c(...)) # DOI's
+```
+
+Example of combining datatypes and using the variable to get dataset 
+
+```{r getDiatomComb, eval=FALSE} 
+# Get datasets by individual diatom datatype 
+neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
+neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+# Get datasets by multiple diatom datatypes 
+neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
+neDiatoms_com <- get_datasets(neDiatoms_sstb)
+```
 
 ### Geographic region
 Using get_site to return a list of all sites located in a geopolitical unit as specified by gpid
@@ -293,7 +312,7 @@ Example of get_datasets by location with bounding box of lat & longs (West/South
 diat_NE <- get_dataset(datasettype="diatom",loc =c(-80,40,-65,48)) 
 ```
 
-#### Elevation (m)
+### Elevation (m)
 
 ```{R sitesbyElev,eval=FALSE}
 diat_el <- get_sites(altmin=100, altmax=120)
@@ -306,31 +325,42 @@ diat_el <- get_sites(altmin=5000,altmax=5500) #Will need to look over at a later
 diat_el2 <- get_datasets(datasetid= diat_el)
 ```
 
-### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
 
-```{r getDiatomSurf, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
 
-neDiatoms <- get_datasets(dois=c(...)) # DOI's
+### Investigator name / person name
+```{R Diatom Investigator}
+Contact <- get_contact(contactname = 'X')
+
+```
+Example of returning a contact id given the contact name
+```{R Diatom Investigator name}
+Don <- get_contact(contactname = 'Donald F. Charles')
 ```
 
-Example of combining datatypes and using the variable to get dataset 
+### Within or intersecting a specified time interval 
+```{R Diatom Time Interval,eval=FALSE}
+ 
 
-```{r getDiatomComb, eval=FALSE} 
-# Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
-neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
-# Get datasets by multiple diatom datatypes 
-neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
-neDiatoms_com <- get_datasets(neDiatoms_sstb)
+```
+Example
+```{R}
+Interval <- filter(X, age_ad >= 1950)
+
 ```
 
-### DOI's
-```{r getDiatomsDSType, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
+### Taxon name or ID 
+```{R getTaxa}
+diat_nm<- get_dataset(datasettype = 'diatom',taxonname = 'Navicula minima')
+diat_nm1<- get_dataset(datasettype = 'diatom',taxonids = 11249)
+diat_taxa <- get_tables('Taxa')
+#To access the diatom taxa table use get_tables('Taxa'), Taxon name and Taxon ID can be used to find taxa by dataset types
 ```
 
+### Submission date
+```{r SubDate}
+subdate <-
+#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY.
+```
 
 ### Collection type [secondary]
 Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
@@ -364,16 +394,7 @@ Example of using the search function returning keywords
 get_dataset(search('modern'))# Search could find so maybe
 ```
 
-### Within or intersecting a specified time interval 
-```{R Diatom Time Interval,eval=FALSE}
- 
 
-```
-Example
-```{R}
-Interval <- filter(X, age_ad >= 1950)
-
-```
 
 ### Members of an aggregate dataset(s)
 Get dataset IDs of all members of an aggregate dataset
@@ -516,20 +537,12 @@ Example
 
 ```
 
-### Investigator name / person name
-```{R Diatom Investigator}
-Contact <- get_contact(contactname = 'X')
 
-```
-Example of returning a contact id given the contact name
-```{R Diatom Investigator name}
-Don <- get_contact(contactname = 'Donald F. Charles')
-```
 ### Diatom taxa
 #### Diatom counts include one or more specified diatom taxa
 Code does not include possibility of specifying a particular diatom taxon
 ```{R datasetByTaxa}
-diatoms<- get_dataset(datasettype = 'diatom')
+ 'diatom')
 diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
 ```
@@ -541,6 +554,7 @@ diatoms<- get_dataset(datasettype = 'diatoms')
 diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
 ```
+
 
 #### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
 
