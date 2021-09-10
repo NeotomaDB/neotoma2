@@ -206,7 +206,7 @@ Get data on multiple datasets using multiple dataset IDs
 multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
 diat_multid
-#Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
+#Multiple dataset ids combined to put in an object that will run get_dataset so less code needs to be created 
 ```
 
 ### Dataset DOI
