@@ -210,14 +210,7 @@ diat_multid
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
-### Dataset DOI
 
-```{r getDiatomsByDOI}
-neDiatoms <- get_datasets(dois=c(...)) # basic format
-neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
-#JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
-#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
-```
 
 ### Dataset Type
  Diatom, Diatom Surface Sample, Diatom Top-Bottom
@@ -358,23 +351,49 @@ diat_taxa <- get_tables('Taxa')
 
 ### Submission date
 ```{r SubDate}
-subdate <-
-#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY.
+subdate <- get_datasets(subdate= "04-05-2016")
+subdate <- get_dataset(subdate= 2016-04-04)
+#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY. 
+#Simon The above code does not work.
 ```
 
-### Collection type [secondary]
-Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
-```{R diatombyColltype,eval=FALSE}
-# get_dataset(CollType='x') basic format - # Unsure
+### Dataset DOI
+
+```{r getDiatomsByDOI}
+neDiatoms <- get_datasets(dois=c(...)) # basic format
+neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
+#JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
+#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
 ```
+
+### Collection unit type, ID or Handle [secondary]
+Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
+
+```{R diatombyColltype,eval=FALSE}
+Col<- get_datasets(CollType='Core')
+# SIMON/SOCORRO codes doesn't work for collection units  
+```
+
 Example of getting dataset by Collection Type id
-```{R sitesByCollTypeMult}
-get_dataset(CollType='Core','Section')
+```{R sitesByCollTypeMult,eval=FALSE}
+get_dataset(CollType='Core','section')
+```
+
+```{R sitesByCollID,eval=FALSE}
+get_dataset(CollUnitID='')
+#CollUnitID Unique database record identifier for the collection unit.
+```
+
+```{R sitesByCollUnitHandle,eval=FALSE}
+get_dataset(CollUnitHandle='')
+
+#CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by Collection Unit, and the Handle is used for file names.
 ```
 
 ### Constituent database
 JERRIN / SIMON - Code needs to be added
 ```{R SitesbyConDB}
+consDB <- get_
 ```
 
 Example of finding constituent databases
@@ -396,7 +415,7 @@ get_dataset(search('modern'))# Search could find so maybe
 
 
 
-### Members of an aggregate dataset(s)
+### Aggregate dataset(s)
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
@@ -414,7 +433,7 @@ Example
 
 ```
 
-### Related to one or more publications
+### Publications
 Get all dataset IDs associated with a particular publication
   Soccorro is working on this
 ```{R Diatom Publication}
@@ -703,6 +722,7 @@ sapply(uwallface.ct, dim)
 ### Look at the matrix of diatom counts
 glimpse (uwallface.ct)
 str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
+
 ```
 
 ```{R Upper Wallface View counts}
