@@ -198,25 +198,26 @@ Get data on a single dataset using datasetID
 ```{r get datasetID}
 # diat_ID <- get_dataset(datasetid) - basic format
 diat_ID <- get_dataset(44764) # Example
-diat_ID
+diat_dow <- get_download(diat_ID)
+diat_comp<- compile_downloads(diat_dow)
 #get_dataset could use site id or dataset id  to return information on site, metadata, publication, and date submitted 
 ```
 Get data on multiple datasets using multiple dataset IDs 
 ```{r multdatsetid }
 multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
+<<<<<<< HEAD
 diat_multid
 #Multiple dataset ids combined to put in an object that will run get_dataset so less code needs to be created 
+=======
+diat_down <- get_download(diat_multid)
+diat_tab <-compile_downloads(diat_down)
+write_xlsx(diat_tab,  ".xlsx")
+#Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
+>>>>>>> d4bc229e5d5a0e9d0b414192d40bc01987f31214
 ```
 
-### Dataset DOI
 
-```{r getDiatomsByDOI}
-neDiatoms <- get_datasets(dois=c(...)) # basic format
-neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
-#JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
-#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
-```
 
 ### Dataset Type
  Diatom, Diatom Surface Sample, Diatom Top-Bottom
@@ -234,6 +235,7 @@ neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt)
 
 #Jerrin: The code for line 134 works but in Line 139 it is saying that it should be numerical and need to be siteID
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
+
 # neDiatoms_com includes dataset information for all three diatom data types 
 ```
 
@@ -254,7 +256,9 @@ neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
 neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
 # Get datasets by multiple diatom datatypes 
 neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
+#The combine function would take all the datasettypes to form one object
 neDiatoms_com <- get_datasets(neDiatoms_sstb)
+
 ```
 
 ### Geographic region
@@ -283,6 +287,8 @@ ne_sites <- map(gpids, function(x)
   neotoma:::get_site(gpid = x)) %>%
   neotoma::bind()
 ne_down <- neotoma::get_download(ne_sites)
+
+#The gpids were found from Geopolitical units table 
 #The code will run each gpid with the get_site that will be binded and than downloaded to display the data 
 ```
 
@@ -357,23 +363,49 @@ diat_taxa <- get_tables('Taxa')
 
 ### Submission date
 ```{r SubDate}
-subdate <-
-#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY.
+subdate <- get_datasets(subdate= "04-05-2016")
+subdate <- get_dataset(subdate= 2016-04-04)
+#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY. 
+#SIMON The above code does not work.
 ```
 
-### Collection type [secondary]
-Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
-```{R diatombyColltype,eval=FALSE}
-# get_dataset(CollType='x') basic format - # Unsure
+### Dataset DOI
+
+```{r getDiatomsByDOI}
+neDiatoms <- get_datasets(dois=c(...)) # basic format
+neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
+#JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
+#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
 ```
+
+### Collection unit type, ID or Handle [secondary]
+Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
+
+```{R diatombyColltype,eval=FALSE}
+Col<- get_datasets(CollType='Core')
+# SIMON/SOCORRO codes doesn't work for collection units  
+```
+
 Example of getting dataset by Collection Type id
-```{R sitesByCollTypeMult}
-get_dataset(CollType='Core','Section')
+```{R sitesByCollTypeMult,eval=FALSE}
+get_dataset(CollType='Core','section')
+```
+
+```{R sitesByCollID,eval=FALSE}
+get_dataset(CollUnitID='')
+#CollUnitID Unique database record identifier for the collection unit.
+```
+
+```{R sitesByCollUnitHandle,eval=FALSE}
+get_dataset(CollUnitHandle='')
+
+#CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by Collection Unit, and the Handle is used for file names.
 ```
 
 ### Constituent database
 JERRIN / SIMON - Code needs to be added
 ```{R SitesbyConDB}
+consDB <- get_
 ```
 
 Example of finding constituent databases
@@ -395,7 +427,7 @@ get_dataset(search('modern'))# Search could find so maybe
 
 
 
-### Members of an aggregate dataset(s)
+### Aggregate dataset(s)
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
@@ -413,7 +445,7 @@ Example
 
 ```
 
-### Related to one or more publications
+### Publications
 Get all dataset IDs associated with a particular publication
   Soccorro is working on this
 ```{R Diatom Publication}
@@ -491,31 +523,38 @@ if('filename' %in% list.files()) {
 
 
 #### From sites where one or more specified water chemistry characteristics were measured
-This code seems to run, but does not include selection for range of water chemistry variables.
 ```{R Diatom Multiple Water Chemistry}
-WCH_Sites <-c()
+diatomwch<- get_dataset(datasettype = 'water chemistry')
+diatom<- get_dataset(datasettype = 'diatom surface sample')
 
-diatomss<- get_dataset(datasettype = 'diatom surface sample')
-diatom<- get_dataset(datasettype = 'diatom')
-
-subsetss <- sapply(diatomss, 
+subsetwch <- sapply(diatomwch, 
                  function(x) {
                    x$dataset.meta$dataset.id
-                   })
+                   })[1:20]
 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
-                   })
+                   })[1:20]
 
-if('filename' %in% list.files()) {
-  diat_dl <- readRDS('filename') 
-} else {
+if('fileWCH' %in% list.files()) {
+  diat_dl <- readRDS('fileWCH') # It returns the file that is used 
+} else 
+  diat_wch <- get_download(subsetwch)
+  diat_dls <- get_download(subset)
+  diat_dlb <- bind(diat_wch, diat_dls)
+  saveRDS(diat_dlb, 'fileWCH')
+  
+  wideWCH <- compile_downloads(diat_dlb) 
+## neotoma function converts multiple downloads into single object 
+minWCH <- wideWCH %>% 
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe
+  
+wideWCH %>% filter(is.na(depth))
 
-  saveRDS(diat_dl, 'filename') 
-}
-WCH_Diat <- compile_downloads(diat_dl)
 ```
+
 
 
 ### Diatom Sample analyst name
@@ -670,10 +709,10 @@ subsetUWall <- sapply(uwall,
                    })
 
 if('UWall' %in% list.files()) {
-  UWa_dl <- readRDS('schra') # It returns the file that is used 
+  UWa_dl <- readRDS('UWall') # It returns the file that is used 
 } else {
   UWallf_dl <- get_download(subsetUWall)
-  saveRDS(UWallf_dl, 'schra') # It saves this as an object of the download with file
+  saveRDS(UWallf_dl, 'UWall') # It saves this as an object of the download with file
 }
 
 wideCounts <- compile_downloads(UWallf_dl) 
@@ -702,6 +741,9 @@ sapply(uwallface.ct, dim)
 ### Look at the matrix of diatom counts
 glimpse (uwallface.ct)
 str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
+Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table 
+write_xlsx(uwallface.ct,  ".xlsx")
+
 ```
 
 ```{R Upper Wallface View counts}
@@ -729,12 +771,12 @@ diatom<- get_dataset(datasettype = 'diatom')
 subsetss <- sapply(diatomss, 
                  function(x) {
                    x$dataset.meta$dataset.id 
-                   })
+                   })[1:20]
 #In the subsets it would go through each dataset to match the search of the metadata location 
 subset <- sapply(diatom, 
                  function(x) {
                    x$dataset.meta$dataset.id
-                   })
+                   })[1:20]
 
 if('filename' %in% list.files()) {
   diat_dl <- readRDS('filename') # It returns the file that is used 
@@ -751,9 +793,9 @@ minRow <- wideCounts %>%
   group_by(dataset) %>% #dataset was returned from the table 
   summarise(min(depth)) #dplyr function to create a dataframe 
 #Overall count data is retrieved from this portion 
-wideCounts %>% filter(!is.na(Eunotia.diodon))
+wideCounts %>% filter(!is.na(Cornus)) # SIMON this line does not work 
 #dplyr function used to subset a data frame
-diat_taxa <- taxa(diat_dl)
+diat_taxa <- taxa(diat_dl)# The function taxa returns a data frame of taxa for an (object)
 ```
 
  
