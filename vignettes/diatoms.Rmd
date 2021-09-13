@@ -182,7 +182,7 @@ diat_6 <- get_sites(siteids)
 ```
 Get data on multiple sites by reading a text file of siteids
 
-The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a file called `NLAD.txt` with a list of site IDs in a plain text file for the NATIONAL Lakes Assessment.  The contents of the file look like this (the ellipsis would be replaced by other numbers):
+The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a file called `NLAD.txt` with a list of site IDs in a plain text file for the National Lakes Assessment.  The contents of the file look like this (the ellipsis would be replaced by other numbers):
 
 ```
 8556
@@ -202,7 +202,7 @@ There may well be many more lines with numbers representing each site identifer 
 ```{r NLAmultiplesiteID, eval=FALSE}
 nlad <- read.table('NLAD.txt', header=FALSE)
 nlaSites <- get_sites(nlad)
-#The text file will be located in your working directory which can be found with getwd()
+#This code assumes that the text file is located in your working directory, which can be found with getwd()
 ```
 
 ### Dataset ID
@@ -230,7 +230,17 @@ write_xlsx(diat_tab,  ".xlsx")
 >>>>>>> d4bc229e5d5a0e9d0b414192d40bc01987f31214
 ```
 
+(WORKING ON IT)
+```{rGETSampleID}
+CODE <-C()
+<- get_dataset()
+CD <- get_download()
+subsetwch <- sapply(diatomwch, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                   })
 
+```
 
 ### Dataset Type
 Get dataset IDs by dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
