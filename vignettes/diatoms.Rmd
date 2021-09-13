@@ -28,27 +28,27 @@ library(sf)
 
 ## Introduction
 
+This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database.  This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of  structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data, and some of the specific tasks they may wish to accomplish.  Researchers who would like to add examples, or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
+
 Some code in this document was borrowed from the `neotoma2` markdown document prepared by Simon Goring and Socorro Dominguez and the original Neotoma R package ([Goring et al. 2015](http://doi.org/10.5334/oq.ab)).
 
 One of the main goals of `neotoma2` is to pull records out of the Neotoma database and into a user's R workflow.  This will help diatomists and environmental scientists produce clear working documents, that use data from Neotoma, and allow them to combine it with their own data, or data from other sources.
 
-This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database.  This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of  structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data, and some of the specific tasks they may wish to accomplish.  Researchers who would like to add examples, or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
-
 > If you’re thinking without writing, you only think you’re thinking. — *Leslie Lamport*
 
-`neotoma2` was being developed while this vignette documentation was being prepared, not all the original package functions were available.  Currently, some functions from both `neotoma` and `neotoma2` are used.  Over time, original package functions should be replaced with corresponding `neotoma2` functions. In the code chunks below, `neotoma::` is used to refer to functions in the original neotoma R package, for example, **`neotoma::`**`get_site(whatever)`.
+`neotoma2` was being developed while this vignette documentation was being prepared, so not all the original package functions were available.  Currently, some functions from both `neotoma` and `neotoma2` are used.  Over time, original package functions should be replaced with corresponding `neotoma2` functions. In the code chunks below, `neotoma::` is used to refer to functions in the original neotoma R package, for example, **`neotoma::`**`get_site(whatever)`.
 
-This document is organized to address two main goals of users, to browse the database to identify datasets that meet specified criteria, and to create output files that can be used for further analysis.  Other goals are to create plots and maps and to analyze data using R code.
+This document is organized to address two main goals of users, to browse the database to discover datasets that meet specified criteria, and to create output files that can be used for further analysis.  Other goals are to create plots and maps and to analyze data using R code.
 
 ### Why `neotoma2` and not just an update?
 
-The Neotoma servers and all the back-end services recently migrated from a SQL Server Database on a lonely Windows N95 computer to a more robust server and set of services.  Because of this migration, a large number of the tools we use to access data are no longer accessible.  For this reason, we've made the choice to create a new package.  This is because code that is run using `neotoma` will not be directly comparable to code using `neotoma2`, since data objects and expected behaviours will be different.
+The Neotoma servers and all the back-end services recently [Simon - add month / year] migrated from a SQL Server Database on a lonely Windows N95 computer to a more robust server and set of services.  Because of this migration, a large number of the tools we use to access data are no longer accessible.  For this reason, we [Simon - Neotoma IT Team?] made the choice to create a new package.  This is because code that is run using `neotoma` will not be directly comparable to code using `neotoma2`, since data objects and expected behaviours will be different.
 
 ### Data Organization in Neotoma
 
-It's worth knowing a bit about how the Neotoma database is organized, and what we mean when we talk about things like "sites", "datasets" and "samples".  The database itself is a Postgres database.  People who are comfortable with SQL can download a snapshot of the database and run much of the analysis on their own directly.
+It's worth knowing a bit about how the Neotoma database is organized, and what we mean when we talk about things like "sites", "datasets" and "samples".  The database itself is a Postgres database.  People who are comfortable with SQL can download a snapshot of the database and run much of the analysis on their own [directly].
 
-#### What is the package doing?
+#### What is the R package doing?
 
 When you work with the `neotoma2` package you are working with data from the database, but it is mediated through R functions (like `get_sites()` to get site information) that themselves call public URLs, that are basically abstractions of database calls.  So, for example:
 
@@ -73,21 +73,25 @@ So, for most users, it's a lot easier to just use the R functions, since they cr
 
 #### What does the data look like?
 
-The Neotoma data model is available online at the [Database Schema](https://open.neotomadb.org/dbschema) page.  At the time of writing there are 150 different tables that store data for the database.  Some of these have particular kinds of data (for example, `agetypes`), some of these link tables together. The `neotoma2` package supports access to some tables directly, but not all.  For specialized cases a user may be required to directly access an entire table (using the `get_table()` function).
+The Neotoma data model is available online at the [Database Schema](https://open.neotomadb.org/dbschema) page.  [At the time of writing there are - DELETE] [ADD - As of September 2021,there were] 150 different tables that store data for the database.  Some of these have particular kinds of data (for example, `agetypes`), some of these link tables together. The `neotoma2` package supports access to some tables directly, but not all.  For specialized cases a user may be required to directly access an entire table (using the `get_table()` function).
 
-#### Sites, Datasets, &cetera
+#### Sites, Datasets, etcetera
 
 Neotoma data is structured spatially.  Each sample location is assigned a **site**.  A site is a spatial location, defined by either a point or a polygon.  It may be a lake, an archaeological site, a swamp, or some other location.
 
-Within a **site** there may be one or more **collection units**.  A collection unit is the specific location where samples were collected.  So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area.  The collection unit represents the material that was removed and analyzed.  The material is subdivided into **analysis units**, and groups of analysis units, sampled for a particular dataset type (e.g., diatoms, pollen, water chemistry) are then grouped into a **dataset**.
+Within a **site** there may be one or more **collection units**.  A collection unit is the specific location where samples were collected.  So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area.  The collection unit represents the material that was removed and analyzed.  The material is subdivided into **analysis units** (e.g., sediment intervals within a core), and groups of analysis units, sampled for a particular dataset type (e.g., diatoms, pollen, water chemistry) are then grouped into a **dataset**.  [Simon - describe "Samples" also?]
 
-## Data discovery - Browsing the neotoma database
+## Browsing - Data discovery
 
-This section describes ways of searching for available diatom datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results.
+This section describes ways of searching the Neotoma database for available diatom datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results. The primary purpose of each code chunk in this section is to find the Dataset IDs for datasets that meet the criteria specified in the code.  The sets of IDs that are returned can then be used as input to other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
 ### Finding Neotoma Sites
 
-A **site** may not be a diatom site, but **sites** do represent general "effort" in a region.  We can often use a site search to do some preliminary work, since the `site` object that `neotoma2` returns contains less information than the larger `dataset` or `download` objects, that contain full metadata.  We might want to generate a map of all sites, and superimpose our specific sites, for example.
+[Include brief explanation of differences between Neotoma R and Neotoma R2 ??.  Use R2!! Neotoma R@ Get_sites is working (totally?  altitude issues??) and provides more information than get_site.  Therefore, there is no reason to get use original R.]
+
+We can search for information on a single or multiple sites.  Sometimes it is useful to find locations of all sites within a region, whether or not they are diatom sites.  This can give us an indication of the level of paleoecological 'effort' in a region.[Delete following sentence - A **site** may not be a diatom site, but **sites** do represent general "effort" in a region.]  We can often use a site search to do some preliminary work, since the `site` object that `neotoma2` returns contains less information than the larger `dataset` or `download` objects, that contain full metadata.  We might want to generate a map of all sites, and superimpose specific sites we are interested in, for example.
+
+
 
 Sites can be searched using the following supported parameters:
 
@@ -101,7 +105,7 @@ Sites can be searched using the following supported parameters:
 | `limit` | integer > 0; default 25 |
 | `offset` | integer > 0; default 0 |
 
-Currently, the site search supports searches by elements such as location, altitude, name and other parameters.  We can also use the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects).  Here we create a matrix to represent the bounding box of the northeastern United States and then create a spatial polygon to use it with the `get_sites()` function.
+[Delete following sentence - duplicates sentence above]:Currently, the site search supports searches by elements such as location, altitude, name and other parameters.  We can also use the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects).  Here we create a matrix to represent the bounding box of the northeastern United States and then create a spatial polygon to use it with the `get_sites()` function.
 
 ```{R siteSpatialSearch, eval = FALSE}
 
@@ -115,65 +119,68 @@ neUSsites <- get_sites(loc = neus)
 
 ### Site Name
 
-If we know the set of existing sites that we are looking for, we can get site data for the site using the `sitename` parameter.
+If we know the names of one or more of the existing sites that we are looking for, we can get site data using the `sitename` parameter.
 
+Get data on a single site using sitename
 ```{r sitesbyName example}
-diat <- get_sites(sitename = "Name of site")  # Basic format
+# diat <- get_sites(sitename = "Name of site")  # Basic format
 diat <- get_sites(sitename = 'Schrader Pond')  # Example
 diat <- get_sites(sitename = '%Schra%')      # Example using wildcards (%)
 ```
+Get data on multiple sites using sitenames.
 
-You can also pass in a whole list of sitenames (if you know them), and then join the result together using the `bind()` command:
 
 ```{r multsitesbySitename example}
-
+# Join a list of site names together using the combine command, c()
 sitenameList <- c("Bald Hill", "Blake (sutton)", 
                   "High (sudbry)", "Holland", 
                   "Little Hosmer", "Long (grnsbo)", 
                   "Long (shefld)", "Round (shefld)")
-
+[[[Jerrin - the following code creates a map - shouldn't this be a separate code chunk? maybe it should be placed after the next code chunk]]]
 aa <- sitenameList %>% 
   map(function(x) get_sites(sitename=x))
 
 ```
 
-Getting multiple sitenames and NLA Example to get siteIDS
+Get data on multiple sites using sitenames - National Lakes Assessment Example
 
 ```{r NLA}
 library(neotoma)
 library(neotoma2)
-
+# Join a list of site names together using the combine command, c()
 nlaxl <- c("Gardner Pond","George Wyth Lake","Goose Pond","Gorton Pond","Grassy Pond","Green Belt Lake","Grimes","Grist Millpond","Grittman Lake","Groton Reservoir","Half Moon Lake","Halfway Pond","Hannaberry Lake","Harper Lake","Haskell Lake","Heggs","Henry's Lake","Hert Lake","Highland Lake","Hi-Land Lake","Hinkley's Pond","Horsfall Lake","Hosmer Lake")
 nla_sites <- c() 
-# Run a loop that gets sites for each name in the object containing lake names
+# Run a loop that gets sites for each name in the object containing lake names (nlaxl)
 for(name in nlaxl){
 sites <- get_site(sitename = name)
-nla_sites <- c(nla_sites, sites)}
+nla_sites <- c(nla_sites, sites)}  # ??Jerrin correct? - The object nla-sites now contains the get_sites results for all lakes listed in nlaxl
 ```
 
 ### Site ID
 
-Get data on a single site by using siteid
+Get data on a single site using siteid
 ```{r sitesbySiteID example}
 # diat_3<-get_sites(siteid= x) - basic format
-diat_4<-get_sites(siteid= 27408) # Example for single site 
-#The get_site function will return basic metadata: sitename,location and collection unit 
+diat_4<-get_sites(siteid= 27408) # Example for single site (Schrader Pond)
+#The get_site function will return basic metadata, e.g.,  sitename,location and collection unit 
 ```
 
-Get data on multiple sites by using siteids.  Here, we assume that an individual knows some sites beforehand, or has obtained site IDs from the Neotoma Explorer or the Neotoma Landing Pages.
+Get data on multiple sites by using siteids.  
+Here, we assume that an individual knows the siteids beforehand, or has obtained site IDs from the Neotoma Explorer or the Neotoma Landing Pages.
 
 | `sitename` |  `siteid` |
 | -- | -- |
 | Jackson Pond | 25918 |
 | Jellison Hill Pond | 25919 |
 | Jimmie Pond | 25920 |
-
+Get data on a multiple sites by using siteids
 ```{r multsitesbySiteIDs example}
 siteids <- c(25918,25919,25920)
 diat_6 <- get_sites(siteids)
 ```
+Get data on multiple sites by reading a text file of siteids
 
-The above code returns three sites.  We could use a larger set of site IDs if we had one, either by loading the IDs from a file, or by entering them ourselves.  Here we assume that there exists a file called `NLAD.txt` with a list of site IDs in a plain text file for the Northeastern Lakes Assessment.  The contents of the file look like this (the ellipsis would be replaced by other numbers):
+The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a file called `NLAD.txt` with a list of site IDs in a plain text file for the Northeastern [[NATIONAL?]] Lakes Assessment.  The contents of the file look like this (the ellipsis would be replaced by other numbers):
 
 ```
 8556
@@ -188,6 +195,7 @@ The above code returns three sites.  We could use a larger set of site IDs if we
 ```
 
 There may well be many more lines with numbers representing each site identifer in the set of records.  In this case we would load the data like so.:
+[[Jerrin - We should say something about where the .txt file is located]]
 
 ```{r NLAmultiplesiteID, eval=FALSE}
 nlad <- read.table('NLAD.txt', header=FALSE)
@@ -200,6 +208,7 @@ Get data on a single dataset using datasetID
 # diat_ID <- get_dataset(datasetid) - basic format
 diat_ID <- get_dataset(44764) # Example
 diat_dow <- get_download(diat_ID)
+browse (44764)
 diat_comp<- compile_downloads(diat_dow)
 #get_dataset could use site id or dataset id  to return information on site, metadata, publication, and date submitted 
 ```
@@ -216,7 +225,8 @@ write_xlsx(diat_tab,  ".xlsx")
 
 
 ### Dataset Type
- Diatom, Diatom Surface Sample, Diatom Top-Bottom
+Get dataset IDs by dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
+
 Example of combining data set types and using the variable to get dataset metadata from the combined object.  Example "loc = bounding box" (W,S,E,N) is northern Maine.
 ```{r getDiatoms, eval=FALSE} 
 # Get datasets by individual diatom datatype 
@@ -1066,6 +1076,8 @@ minimumRow <- diatCount %>%
    summarise(min(depth))
 #In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
 ```
+
+
 
 
 
