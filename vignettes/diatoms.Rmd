@@ -219,15 +219,10 @@ Get data on multiple datasets using multiple dataset IDs
 ```{r multdatsetid }
 multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
-<<<<<<< HEAD
-diat_multid
-#Multiple dataset ids combined to put in an object that will run get_dataset so less code needs to be created 
-=======
 diat_down <- get_download(diat_multid)
 diat_tab <-compile_downloads(diat_down)
 write_xlsx(diat_tab,  ".xlsx")
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
->>>>>>> d4bc229e5d5a0e9d0b414192d40bc01987f31214
 ```
 
 (WORKING ON IT)
