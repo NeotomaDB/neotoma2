@@ -225,16 +225,38 @@ write_xlsx(diat_tab,  ".xlsx")
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
 
+Get Sample IDs for Dataset IDs
+```{r GETSampleID for Dataset ID}
+CODE <-c(44764,44765,44766)
+C1<- get_dataset(CODE)
+CD <- get_download(C1)
+C2 <- sapply(CD, 
+                 function(x) {
+                   x$sample.meta$sample.id
+                   })
+C3 <-sapply(CD, 
+                 function(x) {
+                    x$dataset$dataset.meta
+                   })
+C4 <-sapply(CD, 
+                 function(x) {
+                  x$dataset$dataset.meta$dataset.id
+                   })
+
+```
+
 (WORKING ON IT)
-```{rGETSampleID}
-CODE <-C()
-<- get_dataset()
-CD <- get_download()
-subsetwch <- sapply(diatomwch, 
+```{r}
+s.data <- get_datasets(49223)
+s.dl <- get_download(s.data)
+S2 <- sapply(s.dl, 
+                 function(x) {
+                   x$sample.meta$sample.id
+                   })
+S3 <-sapply(s.dl, 
                  function(x) {
                    x$dataset.meta$dataset.id
                    })
-
 ```
 
 ### Dataset Type
