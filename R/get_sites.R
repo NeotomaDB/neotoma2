@@ -110,8 +110,12 @@ get_sites.default <- function(..., verbose =0) {
   }
   
   baseURL <- paste0('data/sites')
-  result <- parseURL(baseURL, ...) %>% 
-    cleanNULL()
+  
+  #result <- parseURL(baseURL, ...)
+  #pager(baseURL)
+  result <- parseURL(baseURL, ...)
+  
+  result <- result %>%  cleanNULL()
   
   if(is.null(result$data[1][[1]])){
     warning('I cannot find a site for you. Are you using the right spelling? \n')
