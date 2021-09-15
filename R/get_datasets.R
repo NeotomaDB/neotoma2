@@ -18,19 +18,19 @@ parse_dataset <- function(result) {
         x[[i]] <- NA
       } else {
         if (class(x[[i]]) == 'list') {
-         x[[i]] <- fixNull(x[[i]])
+          x[[i]] <- fixNull(x[[i]])
         }
       }
     }
     return(x)
   }
-
+  
   result <- result %>% fixNull()
-
+  
   result_length <- length(result[2]$data)
   
   sites <- c()
-
+  
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -53,8 +53,14 @@ parse_dataset <- function(result) {
     
     # Location
     location <- result[2]$data[[i]]$site$geography
+    location2 <- result[2]$data[[i]]$sites$site$geography
+    
     if(is.null(location)){
-      location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
+      if(is.na(location2)){
+        location <- st_sf(st_sfc())
+      }else{
+        location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
+      }
     }else{
       location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
     }
@@ -80,7 +86,7 @@ parse_dataset <- function(result) {
       if(is.logical(description)){
         description <- NA_character_}
     }
-
+    
     # Notes
     if(is.null(result[2]$data[[i]]$site$sitenotes)){
       notes <- result[2]$data[[i]]$sites$site$sitenotes
@@ -95,7 +101,7 @@ parse_dataset <- function(result) {
     # Datasets
     # i-th element result[2]$data[[i]]$
     datasets_length <- length(result[2]$data[[i]]$site$datasets)
-
+    
     for(j in 1:datasets_length) {
       datasetid <- result[2]$data[[i]]$site$datasets[[j]]$datasetid
       datasettype <- result[2]$data[[i]]$site$datasets[[j]]$datasettype
@@ -109,13 +115,13 @@ parse_dataset <- function(result) {
         if(is.logical(datasetnotes)){
           datasetnotes <- NA_character_}
       }
-
+      
       new_dataset <- new('dataset',
-                       datasetid = datasetid,
-                       datasetname = sitename,
-                       datasettype = datasettype,
-                       location = location,
-                       notes = datasetnotes)
+                         datasetid = datasetid,
+                         datasetname = sitename,
+                         datasettype = datasettype,
+                         location = location,
+                         notes = datasetnotes)
     }
     dataset_list <- append(dataset_list, new_dataset)
     datasets_list <- new('datasets', datasets = dataset_list)
@@ -128,7 +134,7 @@ parse_dataset <- function(result) {
     }else{
       collunitid <- result[2]$data[[i]]$site$collectionunitid
     }
-
+    
     
     colldate = as.Date("2007-02-01")
     
@@ -147,7 +153,7 @@ parse_dataset <- function(result) {
     
     coll_units <- append(coll_units, new_collunit)
     coll_units <- new('collunits', collunits = coll_units)
-
+    
     new_site <- new("site",
                     siteid = siteid,
                     sitename = sitename,
@@ -157,12 +163,13 @@ parse_dataset <- function(result) {
                     notes = NA_character_,
                     collunits = coll_units)
     sites <- append(sites, new_site)
+    
   }  
-
-    sites <- new('sites', sites = sites)
-
+  
+  sites <- new('sites', sites = sites)
+  
   return(sites)
-
+  
 }
 
 #' @title Get Dataset Numeric
@@ -199,7 +206,7 @@ get_datasets.numeric <- function(datasetid, ..., verbose =0) {
   if(verbose == 1){
     cat("A site object containing", length(result[2]$data), "sites and 6 parameters. \n")
   }
-
+  
   return(output)
 }
 
@@ -236,10 +243,39 @@ get_datasets.default <- function(..., verbose = 0) {
     cl <- error_check[[1]]
   }
   
-  baseURL <- paste0('data/datasets')
-  result <- parseURL(baseURL, ...) %>% 
-    cleanNULL()
   
+  if("loc" %in% names(cl)){
+    if(is.numeric(cl$loc)){
+      coords <- cl$loc
+      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]))
+      my_bbox <- st_as_sfc(my_bbox)
+      new_geojson <- geojsonsf::sfc_geojson(my_bbox)
+      new_geojson <- new_geojson[1]
+      baseURL <- paste0('data/datasets?loc=',new_geojson[1])
+      for(name in names(cl)){
+        if(!(name == "loc")){
+          baseURL <- paste0(baseURL, "&", name, "=", paste0(cl[name]))
+          #print(baseURL)
+          #result <- parseURL(baseURL, ...) %>% 
+          # reparse endpoint
+        }
+      }
+        result <- parseURL(baseURL) %>% 
+          cleanNULL()
+      
+    }else{
+    
+    baseURL <- paste0('data/datasets')
+    result <- parseURL(baseURL, ...) %>% 
+      cleanNULL()
+  }
+  }else{
+    
+    baseURL <- paste0('data/datasets')
+    result <- parseURL(baseURL, ...) %>% 
+      cleanNULL()
+  }
+
   if(is.null(result$data[1][[1]])){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
@@ -251,6 +287,8 @@ get_datasets.default <- function(..., verbose = 0) {
   if(verbose == 1){
     cat("A site object containing", length(result[2]$data), "sites and 5 parameters. \n")
   }
+  
+  
   
   return(output)
 }
