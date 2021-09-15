@@ -221,6 +221,7 @@ multid <- c(44764,44765,44766)
 diat_multid <- get_dataset(multid) # Example
 diat_down <- get_download(diat_multid)
 diat_tab <-compile_downloads(diat_down)
+
 write_xlsx(diat_tab,  ".xlsx")
 #Multiple dataset ids combined to put in a object will run get_dataset so less code needs to be created 
 ```
@@ -242,7 +243,6 @@ C4 <-sapply(CD,
                  function(x) {
                   x$dataset$dataset.meta$dataset.id
                    })
-
 ```
 
 (WORKING ON IT)
@@ -257,6 +257,26 @@ S3 <-sapply(s.dl,
                  function(x) {
                    x$dataset.meta$dataset.id
                    })
+```
+
+```{R}
+nla744<- read.table('VT744.txt', header=TRUE)
+
+```
+
+(IN PROGRESS)
+```{r GetSampleIDs by Dataset IDs}
+NL1 <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041)
+NL2 <- get_datasets(NL1) %>%
+       filter(datasettype == "Diatom")
+
+
+NL3 <- get_download(NL2)
+NL4 <- sapply(NL3, 
+                 function(x) {
+                   x$sample.meta$sample.id
+                   })
+
 ```
 
 ### Dataset Type
@@ -877,9 +897,29 @@ get_taxa()
 compile_taxa
 ```
 Example of returning taxa 
+(IN PROGRESS)
 ```{R ListTaxaExample}
 get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
+```
+```{R Upper Wallface EX}
+library (neotoma)
+### Find Neotoma Site Id for Upper Wallface Pond 
+uwallface <- get_site (sitename = "Upper Wallface%")
+### Find datasets and IDs associated with U Wallface Pond
+uwallface.dl<- get_dataset(uwallface)  # Review datasets available note ID of the one of interest
+### download data for diatom core dataset (Dataset 32252)
+uwallface.dw <- get_download (32252)
+### Get diatom counts for dataset 32252
+uwallface.ct <- counts (uwallface.dw)
+### Find the number of intervals and number of taxa in a count
+sapply(uwallface.ct, dim)
+### Look at the matrix of diatom counts
+glimpse (uwallface.ct)
+str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
+Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table 
+write_xlsx(uwallface.ct,  ".xlsx")
+
 ```
 ## Site information and environ data
 
