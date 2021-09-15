@@ -26,7 +26,7 @@ library(sf)
 ```
 
 ## Introduction
- 
+
 This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database.  This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of  structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data, and some of the specific tasks they may wish to accomplish.  Researchers who would like to add examples, or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
 
 Some code in this document was borrowed from the `neotoma2` markdown document prepared by Simon Goring and Socorro Dominguez and the original Neotoma R package ([Goring et al. 2015](http://doi.org/10.5334/oq.ab)).
