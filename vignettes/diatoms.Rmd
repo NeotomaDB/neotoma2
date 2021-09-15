@@ -786,7 +786,7 @@ wideCounts %>% filter(!is.na(Eunotia.diodon))
 ## dplyr function used to subset a data frame
 diat_taxa <- taxa(UWallf_dl)
 ```
-[Simon - Just wondering why full taxa names are pulled from the database instead of, or in addition to, taxa codes - Joy] 
+[Simon - Just wondering why full taxa names are pulled from the database instead of, or in addition to, taxa codes - Joy]  
 
 Upper Wallface Pond examples
 ```{R Upper Wallface EX}
