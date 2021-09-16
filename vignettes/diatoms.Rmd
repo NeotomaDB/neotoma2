@@ -260,6 +260,7 @@ A4 <- sapply(A2,
                  function(x) {
                    x$sample.meta$sample.id
                    })
+#[SIMON] We need code to determine sites with missing altitude values
 ```
 
 
@@ -381,7 +382,11 @@ Example - get_dataset for an individual state
 ```{R gpidExamplePenn}
 loc <- get_table(table.name='GeoPoliticalUnits')
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
-GEO_PA1 <- get_dataset(gpid = 8412, datasettype = "diatom" )
+GEO_PA1 <- get_dataset(gpid = 8412, datasettype = "diatom")
+GEO_PA1b <- get_dataset(gpid = 8412, datasettype = "diatom surface sample")
+
+GEO_PA1c <- get_dataset(gpid = 8412, datasettype = "diatom top-bottom")# Currently function will not retrieve data for diatom top-bottom data type Sept 16 2021 (Jerrin)
+
 Geo_PA2 <-get_download(GEO_PA1)
 Geo_PA3 <-compile_downloads(Geo_PA2)
 ```
