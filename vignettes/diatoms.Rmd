@@ -653,12 +653,17 @@ Contact_diat <- get_dataset(datasettype = 'diatom')
 
 Analyst <- sapply(Contact_diat, 
                  function(x) {
-                   x$pi.data$
+                   x$pi.data
                    })
 ```
 Example
 ```{R Diatom Sample Analyst example}
-
+Con_<- get_dataset(32252)
+Contact_diat <- get_dataset(datasettype = 'diatom')
+Con_U <- sapply(Con_, 
+                 function(x) {
+                   x$pi.data
+                   })
 ```
 
 
@@ -666,15 +671,16 @@ Example
 #### Diatom counts include one or more specified diatom taxa
 Code does not include possibility of specifying a particular diatom taxon
 ```{R datasetByTaxa}
- 'diatom')
-diat_dl <- get_download(diatoms)
-diat_taxa <- taxa(diat.dl)
+diat_tax <- get_dataset(32252)
+diat_dl <- get_download(diat_tax)
+diat_d2 <- compile_downloads(diat_dl)
+diat_taxa <- taxa(diat_dl)
 ```
 
 Example of getting  the downloads of a datasettype 
 
 ```{R datasetByTaxaExample}
-diatoms<- get_dataset(datasettype = 'diatoms')
+diatoms<- get_dataset(datasettype = 'diatom')
 diat_dl <- get_download(diatoms)
 diat_taxa <- taxa(diat.dl)
 ```
@@ -919,8 +925,11 @@ if('filename' %in% list.files()) {
 ### List of diatom taxa 
 - with name, authority, code, notes, etc.
 ```{R, diatom taxa out}
-get_table(taxa)
-get_taxa()
+x
+Taxa_hi <- sapply(x, 
+                 function(x) {
+                   x$taxa
+                   })
 compile_taxa
 ```
 Example of returning taxa 
