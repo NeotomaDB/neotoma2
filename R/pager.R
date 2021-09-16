@@ -4,15 +4,13 @@
 #' @param counter If TRUE, modify the response to contain all datapoints
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
-#' 
+#' @import roperators
 #' @export
 
-pager <- function(response, complete_response = FALSE, ...) {
+pager <- function(response, response_url, complete_response = FALSE, ...) {
   
   responses <- c()
   cl <- as.list(match.call())
-
-  response_url <- response$url
   
   if("offset" %in% names(cl)){
     param_offset <- cl$offset
@@ -20,61 +18,40 @@ pager <- function(response, complete_response = FALSE, ...) {
     param_offset <- 1
   }
   
-  if("limit" %in% names(cl)){
-    param_limit <- cl$limit
-  }else{
-    param_limit <- 500
-  }
+  param_limit <- 500
   
+  result <- response$data
   
-  total_responses <- param_limit
-  
-  if (response$status_code == 200) {
-    result <- jsonlite::fromJSON(httr::content(response, as = 'text'),
-                                 flatten = FALSE,
-                                 simplifyVector = FALSE)
-  }
+  param_offset = length(response$data)
+  param_offset_old = 0
   
   responses <- append(responses, result)
-  
-  print("length of data")
-  print(length(result$data))
+  while((length(result) > 0) & param_offset_old != param_offset){
+    if(grepl("\\?", response_url)){
+      response <- httr::GET(paste0(response_url, '&offset=', param_offset, '&limit=500'))
+    }else{
+      response <- httr::GET(paste0(response_url, '?offset=', param_offset, '&limit=500'))
+    }
 
-  while(length(result$data)>0){
-    
-    if(grepl("offset", response_url)){
-      response_url <- response_url %>% stringr::str_remove(paste0("\\?offset=", param_offset))
+    if (response$status_code == 200) {
+      result <- jsonlite::fromJSON(httr::content(response, as = 'text'),
+                                   flatten = FALSE,
+                                   simplifyVector = FALSE)
     }
+    new_response_url <- response$url
+    param_offset_old = param_offset
+    param_offset %+=% length(result$data)
     
-    if(grepl("limit", response_url)){
-      response_url <- response_url %>% stringr::str_remove(paste0("limit=", param_limit, "&"))
-    }
+    responses <- append(responses, result$data)
     
-    param_offset <- param_offset + param_limit
-    
-    response2 <- httr::GET(paste0(response_url, '?offset=', param_offset, '&limit=', param_limit))
-    print(response2$url)
-    
-    
-    result <- jsonlite::fromJSON(httr::content(response2, as = 'text'),
-                                  flatten = FALSE,
-                                  simplifyVector = FALSE)
-    
-    
-    responses <- append(responses, result)
-    
-    total_responses <- total_responses + length(result$data)
-    print("total responses in the loop")
-    print(total_responses)
   }
 
-  print("total responses")
-  print(total_responses)
   
-  if(complete_response == TRUE){
-    message(paste0("Complete response of ", total_responses, " elements."))
+  if(complete_data==TRUE){
+    message(paste0("Your search returned ", param_offset-1, " objects."))
     return(responses)
   }else{
-    return(message(paste0("This object contains ", total_responses, " elements.")))
+    message(paste0("Your search returned ", param_offset-1, " objects."))
   }
+  
 }

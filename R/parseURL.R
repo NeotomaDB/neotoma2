@@ -34,7 +34,8 @@ parseURL <- function(x, use = 'neotoma', ...) {
     add_headers("User-Agent" = "neotoma2 R package"),
     query = list(...))
   
-  #pager(response, ...)
+  response_url <- response$url
+
   # When need to check API endpoint, uncomment below
   #print("Response's URL \n")
   #print(response$url)
@@ -52,6 +53,8 @@ parseURL <- function(x, use = 'neotoma', ...) {
       simplifyVector = FALSE)
   }
   
+  
+  pager(result, response_url)
   # Remove if debug done
   #print(result)
   return(cleanNull(result))
