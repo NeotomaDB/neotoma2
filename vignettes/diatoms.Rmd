@@ -243,7 +243,25 @@ C4 <-sapply(CD,
                  function(x) {
                   x$dataset$dataset.meta$dataset.id
                    })
+write.csv(C2,file="C2.csv") # The file will be in the current working directory 
+#The code above will not work if a value for altitude is null - as of Sept 16 2021 (Jerrin) 
+
 ```
+Find sites where value for altitude are null
+```{r }
+
+```
+
+```{r}
+A1 <- c(44767,44768,44769,44770,44771,44772,44773,44774,44775,44776,44777,44778,44779,44780,44781,44782,44783,44784,44785,44786,44787,44788,44789,44790,44791)
+A2<-get_datasets(A1)
+A3 <-get_download(A2)
+A4 <- sapply(A2, 
+                 function(x) {
+                   x$sample.meta$sample.id
+                   })
+```
+
 
 (WORKING ON IT)
 ```{r}
@@ -268,7 +286,7 @@ nla744<- read.table('VT744.txt', header=TRUE)
 ```{r GetSampleIDs by Dataset IDs}
 NL1 <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041)
 NL2 <- get_datasets(NL1) %>%
-       filter(datasettype == "Diatom")
+       filterge(datasettype == "Diatom")
 
 
 NL3 <- get_download(NL2)
@@ -363,7 +381,9 @@ Example - get_dataset for an individual state
 ```{R gpidExamplePenn}
 loc <- get_table(table.name='GeoPoliticalUnits')
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
-GEO_PA1 <- get_dataset(gpid = 8412 )
+GEO_PA1 <- get_dataset(gpid = 8412, datasettype = "diatom" )
+Geo_PA2 <-get_download(GEO_PA1)
+Geo_PA3 <-compile_downloads(Geo_PA2)
 ```
 
 #### Latitude and Longitude boxes
