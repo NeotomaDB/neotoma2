@@ -287,7 +287,7 @@ nla744<- read.table('VT744.txt', header=TRUE)
 ```{r GetSampleIDs by Dataset IDs}
 NL1 <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041)
 NL2 <- get_datasets(NL1) %>%
-       filterge(datasettype == "Diatom")
+       filter(datasettype == "Diatom")
 
 
 NL3 <- get_download(NL2)
@@ -938,6 +938,7 @@ Example of returning taxa
 get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
+
 ```{R Upper Wallface EX}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
