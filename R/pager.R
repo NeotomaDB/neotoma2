@@ -7,10 +7,19 @@
 #' @import roperators
 #' @export
 
-pager <- function(response, response_url, complete_response = FALSE, ...) {
+pager <- function(response, response_url, ...) {
   
   responses <- c()
   cl <- as.list(match.call())
+  
+  cleanNull <- function(x, fn = function(x) if(is.null(x)) NA else x)
+  {
+    if(is.list(x)) {
+      lapply(x, cleanNull, fn)
+    } else {
+      fn(x)
+    }
+  }
   
   if("offset" %in% names(cl)){
     param_offset <- cl$offset
@@ -40,18 +49,13 @@ pager <- function(response, response_url, complete_response = FALSE, ...) {
     }
     new_response_url <- response$url
     param_offset_old = param_offset
-    param_offset %+=% length(result$data)
+    param_offset = param_offset + length(result$data)
     
-    responses <- append(responses, result$data)
+    
+    responses <- append(responses, cleanNull(result$data))
     
   }
 
-  
-  if(complete_data==TRUE){
     message(paste0("Your search returned ", param_offset-1, " objects."))
-    return(responses)
-  }else{
-    message(paste0("Your search returned ", param_offset-1, " objects."))
-  }
   
 }

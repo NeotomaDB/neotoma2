@@ -52,10 +52,16 @@ parseURL <- function(x, use = 'neotoma', ...) {
       flatten = FALSE,
       simplifyVector = FALSE)
   }
+
+  if(length(list(...)) != 0){
+    pager(result, response_url, complete_data = complete_data)
+  }else{
+    message(paste0("Your search returned ", length(result$data), " objects."))
+  }
   
-  
-  pager(result, response_url)
+  result <- cleanNull(result)
+
   # Remove if debug done
-  #print(result)
-  return(cleanNull(result))
+  #print(result[1][[1]])
+  return(result)
 }

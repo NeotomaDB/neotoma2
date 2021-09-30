@@ -229,7 +229,7 @@ get_datasets.numeric <- function(datasetid, ..., verbose =0) {
 #' @param ageof If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.
 #' @param subdate Date of dataset submission.
 #' @export
-get_datasets.default <- function(..., verbose = 0) {
+get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
   
   cl <- as.list(match.call())
   cl[[1]] <- NULL
@@ -247,17 +247,15 @@ get_datasets.default <- function(..., verbose = 0) {
   if("loc" %in% names(cl)){
     if(is.numeric(cl$loc)){
       coords <- cl$loc
-      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]))
+      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]), crs = st_crs(4326))
       my_bbox <- st_as_sfc(my_bbox)
       new_geojson <- geojsonsf::sfc_geojson(my_bbox)
       new_geojson <- new_geojson[1]
+      #print(new_geojson)
       baseURL <- paste0('data/datasets?loc=',new_geojson[1])
       for(name in names(cl)){
         if(!(name == "loc")){
           baseURL <- paste0(baseURL, "&", name, "=", paste0(cl[name]))
-          #print(baseURL)
-          #result <- parseURL(baseURL, ...) %>% 
-          # reparse endpoint
         }
       }
         result <- parseURL(baseURL) %>% 
@@ -275,11 +273,16 @@ get_datasets.default <- function(..., verbose = 0) {
     result <- parseURL(baseURL, ...) %>% 
       cleanNULL()
   }
+  
+  #print("I am result")
+  #print(result)
 
-  if(is.null(result$data[1][[1]])){
+  if(is.null(result$data[1][[1]]) | is.null(result[1][[1]])){
+ # if(is.null(result)){
     output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
     return(output)
   }else{
+    
     output <- parse_dataset(result)
     args <- list(...)
   }

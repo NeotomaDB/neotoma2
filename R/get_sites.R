@@ -111,8 +111,6 @@ get_sites.default <- function(..., verbose =0) {
   
   baseURL <- paste0('data/sites')
   
-  #result <- parseURL(baseURL, ...)
-  #pager(baseURL)
   result <- parseURL(baseURL, ...)
   
   result <- result %>%  cleanNULL()
