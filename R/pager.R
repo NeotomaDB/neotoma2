@@ -4,7 +4,6 @@
 #' @param counter If TRUE, modify the response to contain all datapoints
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
-#' @import roperators
 #' @export
 
 pager <- function(response, response_url, ...) {
@@ -35,6 +34,7 @@ pager <- function(response, response_url, ...) {
   param_offset_old = 0
   
   responses <- append(responses, result)
+  
   while((length(result) > 0) & param_offset_old != param_offset){
     if(grepl("\\?", response_url)){
       response <- httr::GET(paste0(response_url, '&offset=', param_offset, '&limit=500'))
@@ -51,8 +51,6 @@ pager <- function(response, response_url, ...) {
     param_offset_old = param_offset
     param_offset = param_offset + length(result$data)
     
-    
-    responses <- append(responses, cleanNull(result$data))
     
   }
 

@@ -9,7 +9,7 @@
 #' 
 #' @export
 
-parseURL <- function(x, use = 'neotoma', ...) {
+parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
 
   clean <- function(x) {
     ifelse(is.null(x), NA, x)
@@ -52,16 +52,57 @@ parseURL <- function(x, use = 'neotoma', ...) {
       flatten = FALSE,
       simplifyVector = FALSE)
   }
-
-  if(length(list(...)) != 0){
+  
+  if("limit" %in% names(cl)){
+    message(paste0("Your search returned ", length(result$data), " objects."))
+  }else if(length(list(...)) != 0){
     pager(result, response_url, complete_data = complete_data)
   }else{
     message(paste0("Your search returned ", length(result$data), " objects."))
   }
   
-  result <- cleanNull(result)
+  if(all_data==TRUE){
+    
+    responses <- c()
+    
+    # Leave this result to not break function for now
+    result <- cleanNull(result)
+  
+    param_offset = length(result$data)
+    param_offset_old = 0
+    
+    result1 <- result$data
+    responses <- c(responses, result1)
+    
+    while((length(result1) > 0) & param_offset_old != param_offset){
+      if(grepl("\\?", response_url)){
+        response <- httr::GET(paste0(response_url, '&offset=', param_offset, '&limit=500'))
+      }else{
+        response <- httr::GET(paste0(response_url, '?offset=', param_offset, '&limit=500'))
+      }
+      
+      if (response$status_code == 200) {
+        result2 <- jsonlite::fromJSON(httr::content(response, as = 'text'),
+                                     flatten = FALSE,
+                                     simplifyVector = FALSE)
+      }
+      
+      result2 <- cleanNull(result2)
+      new_response_url <- response$url
+      param_offset_old = param_offset
+      param_offset = param_offset + length(result2$data)
+      
+      
+      responses <- c(responses, result2$data)
+      
+     
+    }
 
-  # Remove if debug done
-  #print(result[1][[1]])
+    result$data <- responses
+
+   }else{
+    result <- cleanNull(result)
+  }
+  
   return(result)
 }
