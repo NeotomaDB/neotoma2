@@ -54,6 +54,6 @@ pager <- function(response, response_url, ...) {
     
   }
 
-    message(paste0("Your search returned ", param_offset-1, " objects."))
+    message(paste0("Your search returned ", param_offset, " objects."))
   
 }
