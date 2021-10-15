@@ -193,6 +193,16 @@ setMethod(f = "showMatch",
             }
           })
 
+#' @title Get a publication DOI.
+#' @param x A \code{publication} object.
+#' @importFrom methods slotNames
+#' @export
+setMethod(f = "doi",
+          signature= signature(x = "publication"),
+          definition = function(x){
+            x@doi
+          })
+
 #' @title Convert a publication author to a \code{data.frame}
 #' @param x An author
 #' @importFrom methods slotNames slot

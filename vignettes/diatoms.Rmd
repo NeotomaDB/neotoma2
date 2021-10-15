@@ -20,7 +20,7 @@ library(neotoma2)
 library(neotoma)
 ```
 
-In this document some code was borrowed from the Neotoma2 markdown document prepared by Simon Goring and Socorro Dominguez and the Neotoma original package. 
+In this document some code was borrowed from the Neotoma2 markdown document prepared by Simon Goring and Socorro Dominguez and the Neotoma original package.
 
 In the chunk to use neotoma::get_site(whatever) when using for Old neotoma package with new one 
 
@@ -33,7 +33,7 @@ The ultimate purpose of this document is to provide general guidance and specifi
 This document is organized to address two main goals of users, to browse the database to identify datasets that meet specified criteria, and to create output files that can be used for further analysis.  Other goals are to create plots and maps and to analyze data using R code.
 
 
-# Browse data
+## Browse data
 
 The browse section describes ways of searching for available diatom datasets using a variety of criteria, either alone or in combination.  Criteria include those available in Neotoma Explorer, plus several more. Examples also include options for viewing and saving output results.
 
@@ -88,7 +88,7 @@ GEO_PA1 <- get_dataset(gpid = 8412 )
 ##### Latitude and Longitude boxes
 
 ```{R diatomsbyBBox}
-diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
+diat_LL <- get_datasets(datasettype="diatom", loc=c(20))
 ```
 
 Example
