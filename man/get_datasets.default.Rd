@@ -4,7 +4,7 @@
 \alias{get_datasets.default}
 \title{Get Dataset Default}
 \usage{
-\method{get_datasets}{default}(..., verbose = 0)
+\method{get_datasets}{default}(..., complete_data = FALSE, verbose = 0)
 }
 \arguments{
 \item{...}{arguments in ellipse form}

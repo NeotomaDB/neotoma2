@@ -2,6 +2,17 @@ Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
 Version: 0.0.0.9000
 Authors@R:
+    c(person(given = "Dominguez Vidana",
+           family = "Socorro",
+           role = c("aut"),
+           email = "sedv8808@gmail.com",
+           comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
+           person(given = "Simon",
+           family = "Goring",
+           role = c("aut", "cre"),
+           email = "goring@wisc.edu",
+           comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
+Maintainers@R:
     person(given = "Simon",
            family = "Goring",
            role = c("aut", "cre"),

@@ -178,7 +178,6 @@ setMethod(f = "show",
                              doi = object@doi))
           })
 
-
 #' @export
 setGeneric("showMatch", function(object) {
   standardGeneric("showMatch")
@@ -193,14 +192,19 @@ setMethod(f = "showMatch",
             }
           })
 
+#' @export
+setGeneric("doi", function(object) {
+  standardGeneric("doi")
+})
+
 #' @title Get a publication DOI.
 #' @param x A \code{publication} object.
 #' @importFrom methods slotNames
 #' @export
 setMethod(f = "doi",
-          signature= signature(x = "publication"),
-          definition = function(x){
-            x@doi
+          signature = signature("publication"),
+          definition = function(object) {
+            object@doi
           })
 
 #' @title Convert a publication author to a \code{data.frame}

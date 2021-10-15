@@ -6,7 +6,7 @@ R/.gitignore
 .Rproj.user
 inst/doc
 *.Rproj
-
+..Rcheck
 *.gz
 
 wc10/
