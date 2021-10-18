@@ -279,7 +279,11 @@ diat_el <- get_sites(altmin=100, altmax=120)
 
 ### Find datasets (using get_dataset)
 #### Dataset ID
+<<<<<<< HEAD
 Get meta data on a single dataset using datasetID 
+=======
+Get data on a single dataset using datasetID 
+>>>>>>> c20f40bf03734e1fe6083ec5bee7604b6e43d1d1
 
 ```{r get datasetID}
 # diat_ID <- get_dataset(datasetid) - basic format
@@ -328,10 +332,14 @@ write.csv(C2,file="C2.csv") # The C2.csv file will be in the current working dir
 
 ```
 Find sites where value for altitude is null
+<<<<<<< HEAD
 [SIMON] We need code to determine sites with missing altitude values
   [add below]
 ```{r Find sites where elev is null}
 diat_el <- get_sites(altmin=NULL,altmax=NULL)
+```
+```{r  }
+
 ```
 Simon - Soccorro - What is the purpose of the following code chunk?
 ```{r}
@@ -392,10 +400,16 @@ neDiatoms_ss <- get_dataset(datasettype="diatom surface sample", loc= -70, 45, -
 neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc= -70, 45, -68, 48)
 neDiatoms_dt <- get_datasets(datasettype="diatom", loc= -70, 45, -68, 48)
 # Get datasets by multiple diatom datatypes 
+<<<<<<< HEAD
 # Combine results of search for three individual datatypes into one
 neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt)
 neDiatoms_sstb
 #Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one geographic location box [NOTE: SIMON - dataset returned is one pollen surface sample]
+=======
+
+neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
+#Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one place
+>>>>>>> c20f40bf03734e1fe6083ec5bee7604b6e43d1d1
 # JERRIN / SIMON - code seems to work up to this point, but the following line does not work.
 
 #Jerrin: The code for line 134 works but in Line 139 it is saying that it should be numerical and needs to be siteID
