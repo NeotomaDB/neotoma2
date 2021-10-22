@@ -281,9 +281,6 @@ diat_el <- get_sites(altmin=100, altmax=120)
 #### Dataset ID
 <<<<<<< HEAD
 Get meta data on a single dataset using datasetID 
-=======
-Get data on a single dataset using datasetID 
->>>>>>> c20f40bf03734e1fe6083ec5bee7604b6e43d1d1
 
 ```{r get datasetID}
 # diat_ID <- get_dataset(datasetid) - basic format
@@ -498,7 +495,9 @@ Contact <- get_contact(contactname = 'X')
 Example of returning a contact id given the contact name
 ```{R Diatom Investigator name}
 Don <- get_contact(contactname = 'Charles, Donald F.')
+Don
 # Note format of name - "last name, comma, first name, middle initial
+# In addition to contactname, other possible arguments are: contactid, contactstatus, are familyname
 ```
 
 #### Within or intersecting a specified time interval 
@@ -540,7 +539,7 @@ subdate <- get_dataset(subdate= 2016-04-04)
 neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
 #JERRIN / SIMON - This code chunk does not work.  Is the DOI function still being developed?
-#Jerrin: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
+#Jerrin's reply: I think it may have to with there being 3 dataset IDS not complying with the code and maybe that it is not ready yet. 
 ```
 
 #### Collection unit type, ID or Handle [secondary]
@@ -564,11 +563,11 @@ get_dataset(CollUnitID='')
 ```
 
 ```{R sitesByCollUnitHandle,eval=FALSE}
-get_dataset(CollUnitHandle='')
+get_datasets(CollUnitHandle='')
 
 #CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by [?] Collection Unit, and the Handle is used for file names.
 ```
-### Find datasets (complex)
+### Find datasets (multiple functions)
 #### Constituent database
 JERRIN / SIMON - Code needs to be added
 ```{R SitesbyConDB}
@@ -579,20 +578,21 @@ Example of finding constituent databases
 
 ```{R SitesbyConDBExample}
 ConDB <- 
+
 ```
 
 #### Sample keyword [secondary]
 Code to retreive datasets by keyword - usually would be one part of a larger code chunk or function
+[Code needs to be written]
 ```{R SitesbyKW}
 get_dataset(search('x'))
 ```
 
 Example of using the search function returning keywords 
 ```{R}
-get_dataset(search('modern'))# Search could find so maybe
+get_dataset(search('modern'))
+# SIMON - Code does not work; I am not sure who wrote it
 ```
-
-
 
 #### Aggregate dataset(s)
 Get dataset IDs of all members of an aggregate dataset
@@ -600,12 +600,10 @@ Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
 library(neotoma)
 library(neotoma2)
-aggr_set <- read.csv()# If we are going to use the excel file we should read it in here and than could use it to find information
-<- get_datasets()
+aggr_set <- read.csv()# If we are going to use the Excel file that contains sampleids for each aggregate dataset, we should read it in here
+<- get_datasets() # Do we need to use get_datasets if we already know sampleids?
 <- get_download()
-#General guideline steps when we do get info to use for other purposes 
-
-
+# Code needs to be written
 ```
 Example
 ```{R Diatom Aggregate Dataset Example}
@@ -613,7 +611,7 @@ Example
 ```
 
 #### Publications
-Get all dataset IDs associated with a particular publication
+Get all datasetids associated with a particular publication
   Soccorro is working on this
 ```{R Diatom Publication}
 diat_pub <- get_datasets()
@@ -628,19 +626,20 @@ pub_diat <- sapply(diat_pub,
                    })
 ```
 #### Water chemistry
-##### Is water chemistry available?  If so, which parameters?
+##### Is water chemistry available?
 Determine if any water chemistry data is available for one or more sites or diatom datasets for those sites
-If chem data are available, which parameters? (List variables included) 
+If chem data are available, which parameters? (List variables included)
+[SIMON - Code chunks in this section do not work]
 
 ##### From sites within range of water chemistry characteristics
 Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
-Why is following code chunk here?
 
+Why is following code chunk here?
 ```{r getWaterChem,}
 neDiatoms <- get_datasets(datasettype="diatom surface sample", loc=BOUNDING BOX)
 ```
 
-Example of how to get water chemistry from the different dataset types
+Example of how to get water chemistry from the different dataset types [includes snippets of code, none of which work]
 
 ```{r getWaterChemEX}
 diatomss <- get_datasets(datasettype = 'diatom surface sample') %>% 
@@ -663,7 +662,7 @@ aligned <- align_sites(diatomss, waterss)
 
 ```{r fixing}
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
-waterss<- get_datasets(datasettype = 'water chemistry')
+waterss<- get_dataset(datasettype = 'water chemistry')
 diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss, read / extract the metadata and select dataset IDs for the first 20 lakes 
 subsetss <- sapply(diatomss, 
@@ -691,6 +690,7 @@ if('filename' %in% list.files()) {
 
 ##### From sites where one or more specified water chemistry characteristics were measured
 ```{R Diatom Multiple Water Chemistry}
+# [SIMON - SOCCORRO - The code below works, but retreives data for different sets of lakes.  Water chemistry for one set of 20 lakes and diatom data for a different set of 20 lakes.  We need code that will get count data and water chemistry data for the same lakes.  May require reading a file that has lists of corresponding diatom and water chemistry sample ids]
 diatomwch<- get_dataset(datasettype = 'water chemistry')
 diatom<- get_dataset(datasettype = 'diatom surface sample')
 
@@ -711,22 +711,23 @@ if('fileWCH' %in% list.files()) {
   diat_dls <- get_download(subset)
   diat_dlb <- bind(diat_wch, diat_dls)
   saveRDS(diat_dlb, 'fileWCH')
-  
-  wideWCH <- compile_downloads(diat_dlb) 
+  # fileWCH will be created in the working directory
+  wideWCH_DTM <- compile_downloads(diat_dlb) 
 ## neotoma function converts multiple downloads into single object 
 minWCH <- wideWCH %>% 
   group_by(dataset) %>% #dataset was returned from the table 
   summarise(min(depth)) #dplyr function to create a dataframe
   
-wideWCH %>% filter(is.na(depth))
-
+wideWCH_DTM %>% filter(is.na(depth))
+# Write data to an Excel file, which will be created in the working directory
+WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 ```
 
 
 
 #### Diatom Sample analyst name
 Get all datasets associated with name of a sample analyst
-Currently seems to just get a list of people who analyzed surface samples
+[SIMON - Currently seems to just get a list of people who analyzed surface samples
 Needs to be able to accept contact ID of a specific person
 ```{R Diatom Sample Analyst}
 Con_<- get_dataset
@@ -738,6 +739,7 @@ Analyst <- sapply(Contact_diat,
                    })
 ```
 Example
+[Simon - Can this code be modified so it retrieves all dataset IDs associated with an specific example person?]
 ```{R Diatom Sample Analyst example}
 Con_<- get_dataset(32252)
 Contact_diat <- get_dataset(datasettype = 'diatom')
@@ -749,21 +751,24 @@ Con_U <- sapply(Con_,
 
 
 #### Diatom taxa
-##### Diatom counts include one or more specified diatom taxa
-Code does not include possibility of specifying a particular diatom taxon
+##### Diatom counts include one or more specific diatom taxa
+[SIMON - Code does not include possibility of specifying a particular diatom taxon
+
+Get list of taxa found in a single dataset (core)
+
 ```{R datasetByTaxa}
-diat_tax <- get_dataset(32252)
+diat_tax <- get_dataset(32252) # Datasetid for U Wallface P core 1
 diat_dl <- get_download(diat_tax)
 diat_d2 <- compile_downloads(diat_dl)
 diat_taxa <- taxa(diat_dl)
 ```
 
-Example of getting  the downloads of a datasettype 
+Get list of all taxa associated with single datasettype 
 
 ```{R datasetByTaxaExample}
 diatoms<- get_dataset(datasettype = 'diatom')
 diat_dl <- get_download(diatoms)
-diat_taxa <- taxa(diat.dl)
+diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
 ```
 
 
@@ -1003,8 +1008,9 @@ if('filename' %in% list.files()) {
 ```
 
 
-#### List of diatom taxa 
-- with name, authority, code, notes, etc.
+#### List of diatom taxa
+[Simon - following code does not work - (Error: object 'x' not found)
+Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
 ```{R, diatom taxa out}
 x
 Taxa_hi <- sapply(x, 
@@ -1013,7 +1019,7 @@ Taxa_hi <- sapply(x,
                    })
 compile_taxa
 ```
-Example of returning taxa 
+Example of returning taxa [Not sure what this code is supposed to do = DFC]
 (IN PROGRESS)
 ```{R ListTaxaExample}
 get_dataset(taxonids = )
@@ -1036,7 +1042,7 @@ sapply(uwallface.ct, dim)
 glimpse (uwallface.ct)
 str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
 Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table 
-write_xlsx(uwallface.ct,  ".xlsx")
+WriteXLS(uwallface.ct,  "count_file.xlsx")
 
 ```
 ### Site information and environ data
