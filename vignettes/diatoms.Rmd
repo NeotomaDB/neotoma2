@@ -1025,13 +1025,13 @@ Example of returning taxa [Not sure what this code is supposed to do = DFC]
 get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
-
+Get count data for a single core
 ```{R Upper Wallface EX}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
 uwallface <- get_site (sitename = "Upper Wallface%")
 ### Find datasets and IDs associated with U Wallface Pond
-uwallface.dl<- get_dataset(uwallface)  # Review datasets available note ID of the one of interest
+uwallface.dl<- get_dataset(uwallface)  # Review datasets available; note ID of the one of interest
 ### download data for diatom core dataset (Dataset 32252)
 uwallface.dw <- get_download (32252)
 ### Get diatom counts for dataset 32252
@@ -1090,11 +1090,19 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 ## Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
 
+### Map of distribution of sites 
+Map, for example, all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
+
+
 ```{r plot}
+# Written by Simon goring
 library(leaflet)
-test <- c(44764, 44765, 44766)
+# Create object that contains datasetids
+test <- c(44764, 44765, 44766) # Datasetids
+# Run get_dataset for specified datasetids
 all_wi <- neotoma::get_dataset(test, datasettype = "diatom")
-# We're going to use this multiple times I think, so let's make it a function:
+# [SIMON - What is appropriate code to include more than one datasettype (e.g., diatom AND diatom surface sample?)  Also, since datasetids are specified, is it also necessary to specify datasettype?]
+# Since we're going to use this multiple times, let's make it a function:
 leaflet_map <- function(dataset_in) {
   dataset_summary <- do.call(rbind, lapply(dataset_in, 
                         function(x){
@@ -1118,34 +1126,35 @@ leaflet_map <- function(dataset_in) {
                                    stroke = FALSE, fillOpacity = 0.5)
   # You need to explicitly call the `map` object to make it appear!
   map
+  # [SIMON, how can we save or copy the map to move it to another location?  Is this possible or do we need to just take a snapshot of the picture?]
 }
-# Since that's all wrapped in a function, we can all it with any `dataset_list`:
+# Since that's all wrapped in a function, we can call it with any `dataset_list`:
 leaflet_map(all_wi)
 ```
 
+### Map of distribution of a diatom taxon
+Option 1 - basic map showing occurrence of a taxon
+Option 2 - basic map showing occurrence of multiple taxa
+Option 3 - same as option 1, but with symbol size proportional to % abundance
+Option 4 - same as option 2, but with symbol size proportional to % abundance
 
-
-### Plot of the abundance of multiple diatom taxa 
-for a single core - vs depth or time
-### Plot of abundance of a single taxon 
-for cores from multiple sites - vs time
+### Plot of the abundance of diatom taxa in a single core
+single or multiple taxa - vs depth or time
+### Plot of abundance of a single taxon in multiple cores
+single or multiple taxa from multiple sites - vs depth or time
 ### Plot of abundance of a taxon vs an environmental characteristic 
 (e.g., water chemistry variable)
-### Map of distribution of sites 
-For example, that are part of an aggregate dataset; GGPlot, Leaflet
-
-### Map of distribution of a diatom taxon
-; symbol size related to % abundance
 
 ## Modify and analyze data 
 - and other miscellaneous tasks
 ### Add to or modify data in Neotoma
+Code bein writtent for Neotoma 2
 
 ### Add aggregate datasets to Neotoma
 
 ### Create new ecological groups and assign taxa to the groups
 ```{R set taxa}
-set_taxa('x') # Not code but could be something
+set_taxa('x') # No code yet, but planned
 
 Example
 ```{R set taxa ex}
@@ -1153,18 +1162,19 @@ Example
 ```
 
 ### Add to a table that explicitly matches water chemistry and diatom datasets
-This is especially important for cases where sites were sampled for water chemistry as part of more than one study.
+This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 
 ### Extract a list of publications for a set of datasets
+Returns publicationid, citation, and DOI for pub if there is one
 ```{R get pub out}
-<- get_publications(datasetid= x)
-### JERRIN - review following example with me
-### So it would involve contact name/ID, publication ID, datasets having publication  
+# get_publications(datasetid= x)  # Basic format
+uwall_pubs <- get_publications(datasetid=32252) # Example - U Wallface P datasetid
+uwall_pubs
 ```
 
 ### Extract a list of DOI’s for a set of datasets
 ```{R DOIS}
-get_publications(datasetid=)# Not code seems to need to be a mix of get_dataset and get_publications
+# Code needs to be written
 ```
 Example
 ```{R DOIS EX}
@@ -1172,6 +1182,7 @@ Example
 ```
 
 ### Add standard sets of diatom taxa names that could be used to convert multiple synonyms to another set of names
+A complicated task - synonym lists need to be prepared and code written
 ```{R standard set}
 get_dataset(taxonname = ,search())
 ```
@@ -1186,7 +1197,7 @@ library(dplyr)
 library(purrr)
 # Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
 gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
-
+# gpids for all New England states plus NY and NJ
 ne_diatom <- map(gpids, function(x)
   neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
   neotoma::bind()   
@@ -1196,7 +1207,7 @@ ne_diatomSS <- map(gpids, function(x)
   neotoma::bind() 
 ne_dataset<-bind(ne_diatom,ne_diatomSS)
 
-
+# [Simon, there is an error in one of the following lines of code]
 if('DiatomFil' %in% list.files()) {
   Diatom_dl <- readRDS('DiatomFil') 
 } else {
@@ -1223,12 +1234,13 @@ Jerrin Example of using just dataset ID
 ### Example similar to above but starting with a set of dataset ID's
 ```{R ExampleDataset}
 library(purrr)
-V1 <-c(44786,44787,44788)
-#In this example we take these 3 sites with combine function 
+V1 <-c(44786,44787,44788) # Datasetids
+#In this example we combine datasets from 3 sites
 V1_diatom <- map(V1, function(x)
   neotoma:::get_dataset(x,datasettype="diatom")) %>%
   neotoma::bind()   
-#In the get_dataset line, whatever is in the parenthesis is a parameter such as x or gpid in which it will take from V1 since it was stated in the line above it
+#In the get_dataset line, whatever is in the parenthesis (a parameter such as x or gpid), will be whatever is in the object V1, defined in the line above.
+# [SIMON - Why does datasettype need to be specified above, given that input data are datasetids?  The code seems to run fine with "datasettype="diatom" removed.]
 
 if('V1' %in% list.files()) {
   V1_dl <- readRDS('V1') 
@@ -1239,42 +1251,41 @@ if('V1' %in% list.files()) {
   for(i in 1:length(V1_diatom)) {
     V1Datasets[[i]] <- get_download(V1_diatom[[i]])
   }
-  #For loop will being going through each step to first create the file and go through each site with the download
+  #For loop will go through each step to first create the file and then download data for each site
   V1_download <- neotoma::bind(V1Datasets)
   
   saveRDS(V1_download, 'V1')
 }
-V1Counts <- compile_downloads(V1_download) 
+V1Counts <- compile_downloads(V1_dl)
 V1Row <- V1Counts %>% 
   group_by(dataset) %>% 
   summarise(min(depth))
-write_xlsx(V1Counts,  ".xlsx")
+WriteXLS(V1Counts,  "VL_dl.xlsx")
 
-#This last step is the way to create a table which can be written as csv to export out 
-
+#This last step creates a tabel in an Excel file which will be saved in the working directory
 ```
 
-Example of getting information for a single site ID using get_dataset with subsets to return counts.  Created by Simon Goring
+Example of how to get information for a single datasetid using get_dataset using subsets to return counts.  Created by Simon Goring
 add comments
 ```{R ExampleSingleSite }
-Mirror<- get_dataset(39813) # Dataset ID for Mirror Lake, Newer dataset/ site ids does not seem to work 
+Mirror<- get_dataset(39813) # Dataset ID for Mirror Lake; newer dataset/ site ids do not seem to work 
 subsetda <- sapply(Mirror, 
                  function(x) {
                    x$dataset.meta$dataset.id 
                    })
-# The subset is not a function but a way to filter the dataset to get the portions of interest and sapply is from R package  
+# The subset is not a function but a way to filter the dataset to get the portions of interest; sapply is a function in the R package  
 if('Mirror' %in% list.files()) {
   diat_da <- readRDS('Mirror') 
 } else {
   diat_dla <- get_download(subsetda)
   saveRDS(diat_dla, 'Mirror')
 }
-#In the if and else loops they work together that a file will be created and download the data from the subset
-diatCount <- compile_downloads(diat_da) 
+#The if and else loops work together to create a file containing downloaded data for the subset
+diatCount <- compile_downloads(diat_dla) 
 minimumRow <- diatCount %>% 
   group_by(dataset) %>% 
-   summarise(min(depth))
-#In compiling downloads it displays the information in a table format and could be organized with group_by and summarise function
+   summarise(min(depth)) 
+#In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
 ```
 
 
