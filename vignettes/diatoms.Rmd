@@ -856,7 +856,7 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 
 ## Create output files for data analysis
 
-The create data output files section -  standard formats for diatom counts, metadata, chronology, water chemistry.  It provides examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, they should include all related data; the amount of data can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
+Code chunks in this section are designed to create output files for diatom counts, metadata, chronology, water chemistry, and other kinds of data.  They provide examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, though they do not do so now, basic output files should include all related data; the number of variables can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
 
 ### Basic files / matrices
 
@@ -876,12 +876,12 @@ uwallface.dw[["32252"]][["counts"]]
 ### View Chronology
 uwallface.dw[["32252"]][["chronologies"]]
 ```
-##### Count file for one or more sites using datasetid
+##### Count data for one or more datasetids
 Gets count data for one or more datasets and writes data to an Excel file.
 ```{R ExampleDataset}
 library(purrr)
 V1 <-c(44786,44787,44788) # Datasetids
-# In this example we combine datasets from 3 sites (New England lakes)
+# In this example we combine datasets from 3 sites (New England lakes).  To get output for aggregate datasets, a file with all the datasetids for an aggregate dataset could be used as input.
 V1_diatom <- map(V1, function(x)
   neotoma:::get_dataset(x,datasettype="diatom")) %>%
   neotoma::bind()   
@@ -924,9 +924,36 @@ sapply(schrader.cnt, dim)
 print(schrader.dl)
 ```
 
-##### Count data using site or datasetid - if taxon x included
+#### Count data for one dataset ID - subsets
+Example of using just dataset ID [Jerrin]
+Example of how to get information for a single datasetid using get_dataset using subsets to return counts.  Created by Simon Goring
+SIMON - Please add comments to document this code chunk
+```{R ExampleSingleSite }
+Mirror<- get_dataset(39813) # Dataset ID for a diatom surface sample from Mirror Lake; newer dataset/ site ids do not seem to work 
+subsetda <- sapply(Mirror, 
+                 function(x) {
+                   x$dataset.meta$dataset.id 
+                   })
+# The subset is not a function but a way to filter the dataset to get the portions of interest; sapply is a function in the R package  [explanation not clear to me - DFC]
+## [SIMON - please document the code below - what is its purpose?]
+if('Mirror' %in% list.files()) {
+  diat_da <- readRDS('Mirror') 
+} else {
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'Mirror')
+}
+#The if and else loops work together to create a file containing downloaded data for the subset
+diatCount <- compile_downloads(diat_dla) 
+## SIMON - please explain the purpose of the following code.  Seems like maybe this overall code chunk was designed to be able to do more than just get count data for one surface sample.
+minimumRow <- diatCount %>% 
+  group_by(dataset) %>% 
+   summarise(min(depth)) 
+#In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
+```
+
+##### Count data using site name or datasetid - if taxon x included
 Following code uses Neotoma R - Upper Wallface Pond example
-The last few lines of code seem to have the purpose of getting count data only id a particular taxon is present - but it does not sem to work.
+The last few lines of code seem to have the purpose of getting count data only if a particular taxon is present - but it does not seem to work.
 ```{R getCountsSingleSiteUWallfaceEXAMPLE}
 uwallface <-get_site('Upper Wallface%') # find datasetid for UW
 uwall <- get_dataset(32252) # diatom datasetid for UWall is 32252
@@ -957,7 +984,7 @@ wideCounts %>% filter(!is.na(Eunotia.diodon))
 ```
 [Simon - Just wondering why full taxa names are pulled from the database instead of, or in addition to, taxa codes - Joy]
 
-##### Count data using site or datasetid
+##### Count data for a single site name or datasetid
 
 Upper Wallface Pond examples
 ```{R Upper Wallface EX}
@@ -979,10 +1006,51 @@ Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table
 WriteXLS(uwallface.ct,"UWallDtmCount.xlsx", col.names=TRUE, row.names=TRUE)
 
 ```
-##### Get count data for diatom and diatom surface sample datasets
-Get data from from all datasets of "diatom" and "diatom surface sample dataset types"
-Example of getting surface sample through filtering and usng multiple data set types to get metadata
-Note: similar code for getting output of water chmistry data is below, around line 350 [not correct]
+### Count data for sites in gpids and specific datasettypes
+SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
+Creates file with diatom counts for surface samples 
+```{R datasetByTaxa from Simon}
+library(dplyr)
+library(purrr)
+# Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+# gpids for all New England states plus NY and NJ
+ne_diatom <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
+  neotoma::bind()   
+  
+ne_diatomSS <- map(gpids, function(x)
+  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
+  neotoma::bind() 
+ne_dataset<-bind(ne_diatom,ne_diatomSS)
+
+# [Simon, there is an error in one of the following lines of code]
+if('DiatomFil' %in% list.files()) {
+  Diatom_dl <- readRDS('DiatomFil') 
+} else {
+
+  allDatasets <- list()
+  
+  for(i in length(allDatasets):length(ne_dataset)) {
+    allDatasets[[i]] <- get_download(ne_dataset[[i]])
+  }
+  
+  ne_download <- neotoma::bind(allDatasets)
+  
+  saveRDS(ne_download, 'DiatomFil')
+}
+
+# Create diatom count files
+wideCounts <- compile_downloads(Diatom_dl) 
+minRow <- wideCounts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
+```
+
+##### Count data for all "diatom" and "diatom surface sample" datasettypes
+Get data from from all datasets of "diatom" and "diatom surface sample" dataset types. Code should eventually be modified to include "diatom top=bottom" datasettype.  That datasettype is not currently recognized by Neotoma R packages.
+Example of getting surface sample through filtering and using multiple data set types to get metadata
+Note: similar code for getting output of water chemistry data is below, around line 350 [not correct]
 ```{R datasetByTaxa with DBT}
 ## Simon Edited this:
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
@@ -1016,35 +1084,6 @@ minRow <- wideCounts %>%
 wideCounts %>% filter(!is.na(Cornus)) # SIMON this line does not work 
 #dplyr function used to subset a data frame
 diat_taxa <- taxa(diat_dl)# The function taxa returns a data frame of taxa for an (object)
-```
-
- 
-
-Example of using get_dataset to get diatom top-bottom samples (currently not usable since Top-Bottom not in package)
-```{R datasetByTB,eval=FALSE}
-library(neotoma)
-diatomss<- get_dataset(datasettype = 'diatom top-bottom') # top-bottom not a dataset yet
-diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss and with the function it is reading the metadata and select in dataset,id to query from first 20 lakes 
-subsettb <- sapply(diatomss, 
-                 function(x) {
-                   x$dataset.meta$dataset.id # Location of the data
-                   })[1:20]
-#In the subsets it would go through each dataset to match the search of the metadata location
-subset <- sapply(diatom, 
-                 function(x) {
-                   x$dataset.meta$dataset.id
-                   })[1:20]
-
-if('filename' %in% list.files()) {
-  diat_dl <- readRDS('filename') 
-} else {
-  diat_dl <- get_download(subset)
-  diat_dltb <- get_download(subsettb)
-  diat_dl <- bind(diat_dl, diat_dltb)
-  saveRDS(diat_dl, 'filename')
-}
-#It would return results of the top-bottom to bind them and present in a table format 
 ```
 
 
@@ -1085,11 +1124,14 @@ Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table
 WriteXLS(uwallface.ct,  "count_file.xlsx")
 
 ```
-### Site information and environ data
+#### Site information and environmental data
+Needs to be written
 
 #### Water chemistry
 ```{R WCHM Out}
-get_dataset(sitename='x',datasettype = 'diatom')
+## get_dataset(sitename='x',datasettype = 'water chemistry') # format
+get_dataset(sitename="%Wallface%",datasettype = 'water chemistry') # example
+
 ```
 Example
 ```{R ChemistryExample}
@@ -1226,79 +1268,3 @@ A complicated task - synonym lists need to be prepared and code written
 ```{R standard set}
 get_dataset(taxonname = ,search())
 ```
-
-## Create Output files
-The following items will be moved to corresponding topics in the outline above
-### Diatom counts
-SIMON ASSISTED EXAMPLE [Example provided by Simon Goring - date]
-Creates file with diatom counts for surface samples 
-```{R datasetByTaxa from Simon}
-library(dplyr)
-library(purrr)
-# Get diatom datasets (Diatom and Diatom Surface Sample data types) for all sites in the northeast US, defined as a set of states.
-gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
-# gpids for all New England states plus NY and NJ
-ne_diatom <- map(gpids, function(x)
-  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
-  neotoma::bind()   
-  
-ne_diatomSS <- map(gpids, function(x)
-  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
-  neotoma::bind() 
-ne_dataset<-bind(ne_diatom,ne_diatomSS)
-
-# [Simon, there is an error in one of the following lines of code]
-if('DiatomFil' %in% list.files()) {
-  Diatom_dl <- readRDS('DiatomFil') 
-} else {
-
-  allDatasets <- list()
-  
-  for(i in length(allDatasets):length(ne_dataset)) {
-    allDatasets[[i]] <- get_download(ne_dataset[[i]])
-  }
-  
-  ne_download <- neotoma::bind(allDatasets)
-  
-  saveRDS(ne_download, 'DiatomFil')
-}
-
-# Create diatom count files
-wideCounts <- compile_downloads(Diatom_dl) 
-minRow <- wideCounts %>% 
-  group_by(dataset) %>% 
-  summarise(min(depth)) 
-```
-
-Jerrin Example of using just dataset ID
-
-
-Example of how to get information for a single datasetid using get_dataset using subsets to return counts.  Created by Simon Goring
-add comments
-```{R ExampleSingleSite }
-Mirror<- get_dataset(39813) # Dataset ID for a diatom surface sample from Mirror Lake; newer dataset/ site ids do not seem to work 
-subsetda <- sapply(Mirror, 
-                 function(x) {
-                   x$dataset.meta$dataset.id 
-                   })
-# The subset is not a function but a way to filter the dataset to get the portions of interest; sapply is a function in the R package
-## [SIMON - please document the code below - what is its purpose?]
-if('Mirror' %in% list.files()) {
-  diat_da <- readRDS('Mirror') 
-} else {
-  diat_dla <- get_download(subsetda)
-  saveRDS(diat_dla, 'Mirror')
-}
-#The if and else loops work together to create a file containing downloaded data for the subset
-diatCount <- compile_downloads(diat_dla) 
-## SIMON - please explain the purpose of the following code
-minimumRow <- diatCount %>% 
-  group_by(dataset) %>% 
-   summarise(min(depth)) 
-#In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
-```
-
-
-
-
-
