@@ -218,7 +218,7 @@ The above code returns data for three sites.  We could use a larger set of site 
 There may well be many more lines with numbers representing each site identifer in the set of records.  In this case we would load the data like so.:
 
 
-```{r NLAmultiplesiteID, eval=FALSE}
+```{r NLAmultiplesiteID}
 nlad <- read.table('NLAD.txt', header=FALSE)
 nlaSites <- get_sites(nlad)
 #This code assumes that the text file is located in your working directory, which can be found with getwd()
@@ -260,26 +260,25 @@ Find all sites within a user-specified spatial polygon
 
 We can use the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects).  In the example below, we first create a matrix to represent the corners of a bounding box of the northeastern United States. We then create a spatial polygon ("neus") based on the co-ordinates.  Finally, we to use "neus" as input to the `get_sites()` function.
 
-```{R siteSpatialSearch, eval = FALSE}
+```{R siteSpatialSearch}
 
-northeastUS <- rbind(c(-80,40), c(-80,48), 
+northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
 
 neus <- sf::st_polygon(list(northeastUS))
-
+## SIMON - following line does not work - 500 Internal Server Error]
 neUSsites <- get_sites(loc = neus)
 ``` 
 
 #### Elevation
-Find sites between minimum and maximum elevations 
+Find sites between minimum and maximum elevations (m) 
 
-```{R sitesbyElev,eval=FALSE}
+```{R sitesbyElev}
 diat_el <- get_sites(altmin=100, altmax=120)
 ```
 
 ### Find datasets (using get_dataset)
 #### Dataset ID
-<<<<<<< HEAD
 Get meta data on a single dataset using datasetID 
 
 ```{r get datasetID}
@@ -386,57 +385,28 @@ NL4 <- sapply(NL3,
 ```
 
 #### Dataset Type
-Get dataset IDs by dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
+Get datasetids by dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
+Example below gets dataset information for individual dataset types and then combines results into one object.
 
-Usually, code would include criteria in addition to selecting by sample type
+Usually, code would include selection criteria in addition to datasettype. For example, all datasets of a particular dataset type within a specific geographic region.  Originally, this vignette included code to specify sites within a location box, but the bounding box feature currently (Oct 2021) does not work; it could potentially be replace by the sf polygon feature (see above).
 
-Example of combining data set types and using the variable to get dataset metadata from the combined object.  Example "loc = bounding box" (W,S,E,N) is northern Maine.
-```{r getDiatoms, eval=FALSE} 
+[old text - should be deleted: Example "loc = bounding box" (West,South,East,North) is northern Maine.]
+```{r getDiatomsByDatasettype} 
 # Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_dataset(datasettype="diatom surface sample", loc= -70, 45, -68, 48)
-neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc= -70, 45, -68, 48)
-neDiatoms_dt <- get_datasets(datasettype="diatom", loc= -70, 45, -68, 48)
-# Get datasets by multiple diatom datatypes 
-<<<<<<< HEAD
+neDiatoms_ss <- get_dataset(datasettype="diatom surface sample")
+# neDiatoms_tb <- get_dataset(datasettype="diatom top-bottom") # This code will not work because "diatom top-bottom" is not on the list of acceptable dataset types that neotoma R accesses.
+neDiatoms_dt <- get_dataset(datasettype="diatom")
 # Combine results of search for three individual datatypes into one
 neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt)
 neDiatoms_sstb
-#Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one geographic location box [NOTE: SIMON - dataset returned is one pollen surface sample]
-=======
-
+#Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one geographic location box
 neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
 #Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one place
->>>>>>> c20f40bf03734e1fe6083ec5bee7604b6e43d1d1
-# JERRIN / SIMON - code seems to work up to this point, but the following line does not work.
+# JERRIN / SIMON - code seems to work up to this point, but the following line does not work. "Error in get_dataset.default(neDiatoms_sstb) : siteid must be numeric."
 
-#Jerrin: The code for line 134 works but in Line 139 it is saying that it should be numerical and needs to be siteID
-neDiatoms_com <- get_datasets(neDiatoms_sstb)
+neDiatoms_com <- get_dataset(neDiatoms_sstb)
 
-# neDiatoms_com includes dataset information for all three diatom data types 
-```
-
-#### Dataset type - Diatom, Diatom Surface Sample, Diatom Top Bottom
-
-```{r getDiatomSurf, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc= BOUNDING BOX) # basic format
-neDiatoms <- get_dataset(datasettype="diatom surface samples", loc= -70, 45, -68, 48) #Example
-# SIMON - SOCCORRO Problem with above code - only gets data for pollen surface samples
-# neDiatoms <- get_datasets(dois=c(...)) # DOI's
-# SIMON - code still needs to be developed
-```
-
-Example of combining datatypes and using the variable to get dataset 
-
-```{r getDiatomComb, eval=FALSE} 
-# Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom", loc=BOUNDING BOX)
-neDiatoms_dt <- get_datasets(datasettype="diatom", loc=BOUNDING BOX)
-# Get datasets by multiple diatom datatypes 
-neDiatoms_sstb <- combine(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
-#The combine function would take all the datasettypes to form one object
-neDiatoms_com <- get_datasets(neDiatoms_sstb)
-
+# neDiatoms_com is intended to include dataset information for all three diatom data types 
 ```
 
 #### Geographic region
@@ -470,7 +440,7 @@ Geo_PA3 <-compile_downloads(Geo_PA2)
 # diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
 ```
 
-Example of get_datasets by location with bounding box of lat & longs (West/South/East/North)
+Example of get_datasets by location with bounding box of lat & longs (West, South, East, North)
 
 ```{R diatomsbyBBoxExecuted}
 diat_NE <- get_dataset(datasettype="diatom",loc =c(-80,40,-65,48)) 
@@ -502,7 +472,7 @@ Don
 
 #### Within or intersecting a specified time interval 
 [Code still needs to be written]
-```{R Diatom Time Interval,eval=FALSE}
+```{R Diatom Time Interval}
  
 ```
 Example
@@ -545,24 +515,24 @@ neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for
 #### Collection unit type, ID or Handle [secondary]
 Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
 
-```{R diatombyColltype,eval=FALSE}
-Col<- get_datasets(CollType='Core')
+```{R diatombyColltype}
+Col<- get_datasets(CollType= "Core")
 # SIMON/SOCORRO code doesn't work for collection units  
 ```
 
 Example of getting dataset by Collection Type id
-```{R sitesByCollTypeMult,eval=FALSE}
+```{R sitesByCollTypeMult}
 get_dataset(CollType='Core','section')
 SIMON - above code does not work
 ```
 
-```{R sitesByCollID,eval=FALSE}
+```{R sitesByCollID}
 get_dataset(CollUnitID='')
 #CollUnitID Unique database record identifier for the collection unit.
 #Does this code work?
 ```
 
-```{R sitesByCollUnitHandle,eval=FALSE}
+```{R sitesByCollUnitHandle}
 get_datasets(CollUnitHandle='')
 
 #CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by [?] Collection Unit, and the Handle is used for file names.
@@ -1105,7 +1075,7 @@ get_dataset(taxonids = )
 get_dataset(datasettype = 'Diatom',taxonname = 'x')
 ```
 Get count data for a single core
-```{R Upper Wallface EX}
+```{R Counts single dataset UWall EX}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
 uwallface <- get_site (sitename = "Upper Wallface%")
