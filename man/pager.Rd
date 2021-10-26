@@ -4,7 +4,7 @@
 \alias{pager}
 \title{pager}
 \usage{
-pager(response, complete_response = FALSE, ...)
+pager(response, response_url, ...)
 }
 \arguments{
 \item{x}{The result of the API call}

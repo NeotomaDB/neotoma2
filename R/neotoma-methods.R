@@ -15,14 +15,22 @@ dataset <- setClass(
                               datasetname = "character",
                               datasettype = "character",
                               location = "sf",
-                              notes = "character"),
+                              notes = "character",
+                              taxa_table = "ANY",
+                              pi_list = "ANY",
+                              analyst = "ANY",
+                              metadata = "ANY"),
                     
                     # Set the default values for the slot
                     prototype = list(datasetid = NA_integer_,
                                      datasetname = NA_character_,
                                      datasettype = NA_character_,
                                      location = st_sf(st_sfc()),
-                                     notes = NA_character_),
+                                     notes = NA_character_,
+                                     taxa_table = data.frame(),
+                                     pi_list = list(),
+                                     analyst = list(),
+                                     metadata = data.frame()),
 )
 
 #' @title S4 class for datasets information

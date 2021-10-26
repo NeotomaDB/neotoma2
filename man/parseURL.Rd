@@ -4,7 +4,7 @@
 \alias{parseURL}
 \title{Make the HTTP request}
 \usage{
-parseURL(x, use = "neotoma", ...)
+parseURL(x, use = "neotoma", all_data = FALSE, ...)
 }
 \arguments{
 \item{x}{The HTTP path for the particular API call.}
