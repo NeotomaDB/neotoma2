@@ -246,6 +246,14 @@ loc <- get_table(table.name ='geopoliticalunits')
 View (loc)
 # Use the filter at the top of the page to find name of a geopolitical Unit and its corresponding gpid
 ```
+View the sitegeopolitical table to find gpids associated with datasetids
+
+Run following code to open the sitegeopolitical table and then enter datasetid in filter box to find corresponding gpids
+```{R sitegeopoliticalTable}
+dataset_gpid <- get_table(table.name ='sitegeopolitical')
+view(dataset_gpid)
+# Table columns: GeoPoliticalID,  SiteID, SiteGeoPoliticalID
+```
 
 Example - get sites from multiple geopolitical units (e.g., states)
 ```{r retrieveByGeopol}
@@ -418,6 +426,7 @@ View (loc)
 get_dataset for an individual state - Pennsylvania examples
 ```{R gpidExamplePenn}
 loc <- get_table(table.name='GeoPoliticalUnits') # Find the gpid for Pennsylvania
+
 # Get_dataset by lakename
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
 # Get by gpid
@@ -431,6 +440,9 @@ GEO_PA1b <- get_dataset(gpid = 8412, datasettype = "diatom surface sample")
 Geo_PA2 <-get_download(GEO_PA1)
 # Compile downloaded data for all datasets in one object
 Geo_PA3 <-compile_downloads(Geo_PA2)
+
+loc <- get_table(table.name='sitegeopolitical') # Find the gpid for Pennsylvania
+loc
 ```
 
 ##### Latitude and Longitude boxes
@@ -1236,3 +1248,46 @@ A complicated task - synonym lists need to be prepared and code written
 ```{R standard set}
 get_dataset(taxonname = ,search())
 ```
+
+### Get DiatomBase data by taxaname
+
+`worrms` is an R client for the World Register of Marine Species (http://www.marinespecies.org/)
+
+See the taxize book (https://taxize.dev) for taxonomically focused work in this and similar packages.
+
+Install  Stable version from CRAN
+
+```r
+install.packages("worrms")
+```
+Development version from GitHub
+
+```r
+install.packages("remotes")
+remotes::install_github("ropensci/worrms")
+```
+
+```r
+library("worrms")
+```
+by a taxonomic name
+```{r DiatomBase1Taxon}
+dtmBase_taxon <- wm_records_name(name = 'Nitzschia minima', fuzzy = TRUE, marine_only = FALSE) 
+# Set fuzzy = true (default) to include varieties, etc.; set = true to get specified name only)
+# Set marine-only as false; default value is true
+view (dtmBase_taxon)
+```
+by many names
+
+```{r DiatomBaseTaxa}
+dtmBase_taxa <- wm_records_names(name = c('Navicula cryptocephala','Nitzschia palea', 'Navicula minima'), fuzzy = FALSE, marine_only = FALSE)
+# Set fuzzy = true (default) to include varieties, etc.; set = true to get specified name only)
+# Set marine-only as false; default value is true
+view (dtmBase_taxa)
+# Simon - this returns correct data, but output is not in a useful format; taxa results should appear under each other, not to the side.  Probably an easy fix for someone who knows what they are doing.
+```
+
+
+
+
+
