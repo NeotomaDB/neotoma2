@@ -1251,17 +1251,18 @@ get_dataset(taxonname = ,search())
 
 ### Get DiatomBase data by taxaname
 
+diatomBase API's are at: https://www.diatombase.org/aphia.php?p=rest&__route__/
+The following basic R code was copied on 29 Oct 2021 by DF Charles from: https://github.com/ropensci/worrms/blob/master/vignettes/worrms.Rmd
+-----------
 `worrms` is an R client for the World Register of Marine Species (http://www.marinespecies.org/)
 
 See the taxize book (https://taxize.dev) for taxonomically focused work in this and similar packages.
 
 Install  Stable version from CRAN
-
 ```r
 install.packages("worrms")
 ```
 Development version from GitHub
-
 ```r
 install.packages("remotes")
 remotes::install_github("ropensci/worrms")
@@ -1283,7 +1284,8 @@ by many names
 dtmBase_taxa <- wm_records_names(name = c('Navicula cryptocephala','Nitzschia palea', 'Navicula minima'), fuzzy = FALSE, marine_only = FALSE)
 # Set fuzzy = true (default) to include varieties, etc.; set = true to get specified name only)
 # Set marine-only as false; default value is true
-view (dtmBase_taxa)
+bind_rows(dtmBase_taxa)
+view(dtmBase_taxa)
 # Simon - this returns correct data, but output is not in a useful format; taxa results should appear under each other, not to the side.  Probably an easy fix for someone who knows what they are doing.
 ```
 
