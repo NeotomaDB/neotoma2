@@ -1251,14 +1251,20 @@ get_dataset(taxonname = ,search())
 
 ### Get DiatomBase data by taxaname
 
-diatomBase API's are at: https://www.diatombase.org/aphia.php?p=rest&__route__/
+DiatomBase is a subset of WORMS - World Register of Marine Species
+    https://www.diatombase.org/index.php
+    http://www.marinespecies.org/index.php
+    
+DiatomBase R code is the same as that for WORRMS, but functions are limited to records of diatom taxa only
+
+DiatomBase API's are at: https://www.diatombase.org/aphia.php?p=rest&__route__/
 The following basic R code was copied on 29 Oct 2021 by DF Charles from: https://github.com/ropensci/worrms/blob/master/vignettes/worrms.Rmd
 -----------
 `worrms` is an R client for the World Register of Marine Species (http://www.marinespecies.org/)
 
 See the taxize book (https://taxize.dev) for taxonomically focused work in this and similar packages.
 
-Install  Stable version from CRAN
+Install stable version from CRAN
 ```r
 install.packages("worrms")
 ```
@@ -1271,9 +1277,21 @@ remotes::install_github("ropensci/worrms")
 ```r
 library("worrms")
 ```
+Notes: 
+  The unique identifier for a taxon name in DiatomBase and Worms is called      "AphiaID"
+  The following website provides a useful way to convert a column of taxa names to a comma-separated list.  Change the preferences to get a list with quotes around each name:  https://convert.town/column-to-comma-separated-list
+  
+Code chunks below 
+  1.  Get AphiaID and taxonomic information by taxa names
+  2.  Create an object that includes the AphiaID's only [not written]
+  3.  Get source data, including original description, by AphiaID
+  4.  Combine results of 1 and 3 above to get all necessary information to populate all fields in the Neotoma taxa list [not yet written]
+
+
 by a taxonomic name
 ```{r DiatomBase1Taxon}
-dtmBase_taxon <- wm_records_name(name = 'Nitzschia minima', fuzzy = TRUE, marine_only = FALSE) 
+library("worrms")
+dtmBase_taxon <- wm_records_name(name = 'Fragilaria acidobiontica', fuzzy = TRUE, marine_only = FALSE) 
 # Set fuzzy = true (default) to include varieties, etc.; set = true to get specified name only)
 # Set marine-only as false; default value is true
 view (dtmBase_taxon)
@@ -1281,15 +1299,18 @@ view (dtmBase_taxon)
 by many names
 
 ```{r DiatomBaseTaxa}
+library("worrms")
 dtmBase_taxa <- wm_records_names(name = c('Navicula cryptocephala','Nitzschia palea', 'Navicula minima'), fuzzy = FALSE, marine_only = FALSE)
 # Set fuzzy = true (default) to include varieties, etc.; set = true to get specified name only)
 # Set marine-only as false; default value is true
-bind_rows(dtmBase_taxa)
-view(dtmBase_taxa)
-# Simon - this returns correct data, but output is not in a useful format; taxa results should appear under each other, not to the side.  Probably an easy fix for someone who knows what they are doing.
+dtmBase_out <- bind_rows(dtmBase_taxa)
+view(dtmBase_out)
+WriteXLS(dtmBase_out, ExcelFileName = "DtmBase_taxa_out.xlsx")
+# Unfortunately, the function does not return the citation for the original description; code to do that follows
 ```
+```{r DiatomBaseSources}
+dtmBase_source <- wm_sources_(id = c(661528, 149203)) # AphiaIDs
 
-
-
-
-
+# Returns sources for several variables, one of which is specified as "original description" in the "use" column
+view (dtmBase_source)
+```
