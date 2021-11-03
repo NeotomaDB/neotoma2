@@ -154,6 +154,23 @@ get_sites.default <- function(..., verbose=0) {
     if(is.numeric(cl$loc)){
       coords <- cl$loc
       my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]), crs = st_crs(4326))
+      
+      if(is.na(my_bbox$xmin)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      
+      if(is.na(my_bbox$xmax)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      
+      if(is.na(my_bbox$ymin)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      
+      if(is.na(my_bbox$ymax)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      
       my_bbox <- st_as_sfc(my_bbox)
       new_geojson <- geojsonsf::sfc_geojson(my_bbox)
       new_geojson <- new_geojson[1]
@@ -174,14 +191,13 @@ get_sites.default <- function(..., verbose=0) {
         cleanNULL()
     }
   }else{
- 
+    
     baseURL <- paste0('data/sites')
     
     result <- parseURL(baseURL, ...) %>%  cleanNULL()
   }
   
   if(is.null(result$data[1][[1]])){
-    warning('I cannot find a site for you. Are you using the right spelling? \n')
     return(NULL)
   }else{
     output <- parse_site(result)
@@ -219,14 +235,14 @@ get_sites.numeric <- function(x, ..., verbose =0) {
   
   result <- parseURL(baseURL)
   
-  output <- parse_site(result)
-  
   result_length <- length(result[2]$data)
-  
-  if(verbose == 1){
-    cat("A site object containing", result_length, "sites and 6 parameters. \n")
+  if(result_length==0){
+    return(NULL)
+  }else{
+    output <- parse_site(result)
+    if(verbose == 1){
+      cat("A site object containing", result_length, "sites and 6 parameters. \n")
+      return(output)
+    }
   }
-  
-  return(output)
-  
 }
