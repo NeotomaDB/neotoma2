@@ -55,7 +55,9 @@ parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
                                  simplifyVector = FALSE)
   }
 
+  
   if(all_data==TRUE){
+    
     responses <- c()
     result <- cleanNull(result)
     
@@ -83,7 +85,6 @@ parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
       }else{
-        print("I am in querying thing")
         query$offset <- NULL
         query = c(query, offset = param_offset)
         response <- httr::GET(paste0(response_url, '?limit=500'),
@@ -101,6 +102,7 @@ parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
       new_response_url <- response$url
       param_offset_old = param_offset
       param_offset = param_offset + length(result2$data)
+      
       responses <- c(responses, result2$data)
     }
     

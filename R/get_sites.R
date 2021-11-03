@@ -71,14 +71,37 @@ parse_site <- function(result) {
   sites <- c()
   
   for(i in 1:result_length) {
-    place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+    # Location
+    if(is.na(result[2]$data[[i]]$geography)){
+      location <- st_sf(st_sfc())
+    }else{
+      place <- st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+    }
+    #
+    
     if(is.na(result[2]$data[[i]]$altitude)){
       elev <- NA_integer_
     }else{
-      elev <- result[2]$data[[i]]$altitude}
-    siteid <- result[2]$data[[i]]$siteid
-    sitename <- result[2]$data[[i]]$sitename
-    description <- as.character(result[2]$data[[i]]$sitedescription)
+      elev <- result[2]$data[[i]]$altitude
+    }
+    
+    if(is.na(result[2]$data[[i]]$siteid)){
+      siteid <- NA_integer_
+    }else{
+      siteid <- result[2]$data[[i]]$siteid
+    }
+    
+    if(is.na(result[2]$data[[i]]$sitename)){
+      sitename <- NA_character_
+    }else{
+      sitename <- result[2]$data[[i]]$sitename
+    }
+    
+    if(is.na(result[2]$data[[i]]$sitedescription)){
+      description <- NA_character_
+    }else{
+      description <- as.character(result[2]$data[[i]]$sitedescription)
+    }
     
     if(!(is.null(result[2]$data[[i]]$sitenotes))){
       sitenotes <- as.character(result[2]$data[[i]]$sitenotes)
@@ -193,16 +216,14 @@ get_sites.default <- function(..., verbose=0) {
     baseURL <- paste0('data/sites')
     
     result <- parseURL(baseURL, ...) %>%  cleanNULL()
-
+    
   }
   
   if(is.null(result$data[1][[1]])){
     return(NULL)
   }else{
     output <- parse_site(result)
-    
     result_length <- length(result[2]$data)
-    
     if(verbose == 1){
       cat("A site object containing", result_length, "sites and 6 parameters. \n")
     }
