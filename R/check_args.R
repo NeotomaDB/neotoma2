@@ -55,7 +55,45 @@ check_args <- function(cl) {
         }
       }
       }
+  }
+  
+  
+  # Datasests accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
+  
+  if("contactid" %in% names(cl)){
+    if(!is.numeric(cl$contactid)){
+      error$flag <- 1
+      error$message[[length(error$message) + 1]] <- paste0("contactid should be a number")
     }
+  }
+  
+  if('datasettype' %in% names(cl)){
+    if(!is.character(cl$datasettype)){
+      error$flag <- 1
+      error$message[[length(error$message) + 1]] <- paste0("datasettype should be a character")
+    }
+  }
+  
+  if("ageyoung" %in% names(cl)){
+    if(!is.numeric(cl$ageyoung)){
+      error$flag <- 1
+      error$message[[length(error$message) + 1]] <- paste0("ageyoung should be a number")
+    }
+  }
+  
+  if("ageold" %in% names(cl)){
+    if(!is.numeric(cl$ageold)){
+      error$flag <- 1
+      error$message[[length(error$message) + 1]] <- paste0("ageold should be a number")
+    }
+  }
+  
+  if("ageof" %in% names(cl)){
+    if(!is.numeric(cl$ageof)){
+      error$flag <- 1
+      error$message[[length(error$message) + 1]] <- paste0("ageof should be a number")
+    }
+  }
 
   
   return(list(cl,error))

@@ -1,7 +1,62 @@
-#' @title Get datasets - Data Sets Information for Fossil Sites
+#' @title get_datasets
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
-#' @param datasetid integer An internal Neotoma dataset identifier
-#' @param ... arguments in ellipse form
+#' @import lubridate
+#' @importFrom methods new
+#' @description
+#' Information for Fossil Datasets
+#' Look for a dataset details using only a dataset ID or for multiple metadata.
+#' Displays a table with the following columns: siteid, sitename, lat, long, and elev.
+#' The function takes parameters defined by the user and returns a sites object
+#' with more detailed information regarding datasets.
+#' The user may define all or none of the possible fields.  
+#' The function contains data checks for each defined parameter.
+#' @param x Use a single number to extract site information
+#' @param ... accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
+#' @return The function returns either a single item of class \code{"try-error"} describing
+#'    the reason for failure (either mis-defined parameters or an error from the Neotoma API),
+#'    or a table of sites, with rows corresponding to the number of individual sites and datasets
+#'    returned by the Neotoma API.  
+#'    Each "site" object contains 6 parameters that can be accessed as well:
+#'    siteid, sitename, location, altitude, description, limited collection units information.
+#' \item{ \code{siteid} }{site ID number}
+#' \item{ \code{sitename} }{site's name}
+#' \item{ \code{location} }{sf object that describes site's location}    
+#' \item{ \code{description} }{}
+#' \item{ \code{collunits} }{limited information on collunits}  
+#'   Each "collection unit" embedded in the "sites" object contains 6 parameters that can be accessed as well:
+#' \item{ \code{collunitid}}{collection unit ID number}
+#' \item{ \code{handle} }{collection unit's handle}
+#' \item{ \code{collunitname} }{collection unit's name}    
+#' \item{ \code{colldate} }{date in collection unit}
+#' \item{ \code{substrate} }{substrate}  
+#' \item{ \code{location} }{sf object that describes site's location}    
+#' \item{ \code{datasets} }{detailed information regarding dataset}
+#'   Each "dataset" nested in the "collection unit" contains the following detail of information:
+#' \item{ \code{datasetid} }{dataset ID number}
+#' \item{ \code{datasetname} }{site's name}
+#' \item{ \code{datasettype} }{type of data found}    
+#' \item{ \code{location} }{sf object that describes site's location}
+#' \item{ \code{notes} }{notes on the dataset}
+#' \item{ \code{taxa table} }{taxa table}    
+#' \item{ \code{pi list} }{P.I. info}
+#' \item{ \code{analyst} }{analyst info}
+#' \item{ \code{metadata} }{dataset metadata}
+#' @examples \dontrun{
+#' To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#' 
+#' To find all datasets in Brazil
+#' brazil <- '{"type": "Polygon", 
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]
+#' ]]}'
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' }
 #' @export
 get_datasets <- function(datasetid = NA, ...) {
   if(!missing(datasetid)) {
@@ -26,11 +81,9 @@ parse_dataset <- function(result) {
   }
   
   result <- result %>% fixNull()
-  
   result_length <- length(result[2]$data)
   
   sites <- c()
-  
   for(i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
@@ -126,7 +179,6 @@ parse_dataset <- function(result) {
     dataset_list <- append(dataset_list, new_dataset)
     datasets_list <- new('datasets', datasets = dataset_list)
     
-    
     ## Collunits
     # Coll Unit ID
     if(is.null(result[2]$data[[i]]$site$collectionunitid)){
@@ -134,9 +186,7 @@ parse_dataset <- function(result) {
     }else{
       collunitid <- result[2]$data[[i]]$site$collectionunitid
     }
-    
-    
-    colldate = as.Date("2007-02-01")
+    colldate = as.Date(character(0))
     
     # Coll Unit Handle
     if(is.null(result[2]$data[[i]]$site$handle)){
@@ -172,16 +222,89 @@ parse_dataset <- function(result) {
   
 }
 
-#' @title Get Dataset Numeric
-#' @import lubridate
-#' @importFrom methods new
+#' @title Get Dataset Default
 #' @param datasetid Use a single number to extract site information
-#' @param ... arguments in ellipse form
+#' @param ... accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
-get_datasets.numeric <- function(datasetid, ..., verbose =0) {
+get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
   
-  # Delete print once it works properly
-  #print("Getting in Datasets Numeric")
+  cl <- as.list(match.call())
+  
+  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc", "ageyoung", "ageold", "ageof", "limit", "offset", "all_data")
+  
+  cl[[1]] <- NULL
+  
+  for(name in names(cl)){
+    if(!(name %in% possible_arguments)){
+      message(paste0(name, " is not an allowed argument. Argument will be ignored. Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+    }
+  }
+  
+  cl <- lapply(cl, eval, envir = parent.frame())
+  
+  error_check <- check_args(cl)
+  if (error_check[[2]]$flag == 1) {
+    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
+  } else {
+    cl <- error_check[[1]]
+  }
+  
+  # Location geojson / coords array
+  if("loc" %in% names(cl)){
+    if(is.numeric(cl$loc)){
+      coords <- cl$loc
+      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]), crs = st_crs(4326))
+      if(is.na(my_bbox$xmin)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      if(is.na(my_bbox$xmax)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      if(is.na(my_bbox$ymin)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      if(is.na(my_bbox$ymax)){
+        stop("Numeric coordinates need to be an array of 4 units.")
+      }
+      
+      my_bbox <- st_as_sfc(my_bbox)
+      new_geojson <- geojsonsf::sfc_geojson(my_bbox)
+      new_geojson <- new_geojson[1]
+      
+      baseURL <- paste0('data/datasets?loc=',new_geojson[1])
+      for(name in names(cl)){
+        if(!(name == "loc")){
+          baseURL <- paste0(baseURL, "&", name, "=", paste0(cl[name]))
+        }
+      }
+      result <- parseURL(baseURL) %>% 
+        cleanNULL()
+    }else{
+      baseURL <- paste0('data/datasets')
+      result <- parseURL(baseURL, ...) %>% 
+        cleanNULL()
+    }
+  }else{
+    baseURL <- paste0('data/datasets')
+    result <- parseURL(baseURL, ...) %>% 
+      cleanNULL()
+  }
+  
+  if(is.null(result$data[1][[1]]) | is.null(result[1][[1]])){
+    return(NULL)
+  }else{
+    output <- parse_dataset(result)
+    if(verbose == 1){
+      cat("A site object containing", length(result[2]$data), "sites and 5 parameters. \n")
+    }
+    return(output)
+  }
+}
+
+#' @title Get Dataset Numeric
+#' @param x Use a single number to extract site information
+#' @export
+get_datasets.numeric <- function(datasetid, ..., verbose=0){
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
@@ -197,114 +320,24 @@ get_datasets.numeric <- function(datasetid, ..., verbose =0) {
   }
   
   baseURL <- paste0('data/datasets/', dataset)
-  
   result <- parseURL(baseURL)
-  #Print when debugging
-  #print(result)
-  output <- parse_dataset(result)
+  result_length <- length(result[2]$data)
   
-  if(verbose == 1){
-    cat("A site object containing", length(result[2]$data), "sites and 6 parameters. \n")
-  }
-  
-  return(output)
-}
-
-
-
-#' @title Get Dataset Default
-#' @import lubridate
-#' @importFrom methods new
-#' @param datasetid Use a single number to extract site information
-#' @param ... arguments in ellipse form
-#' @param datasettype A character string corresponding to one of the allowed dataset types in the Neotoma Database.  Allowed types include: \code{"geochronologic"}, \code{"loss-on-ignition"}, \code{"pollen"}, \code{"plant macrofossils"}, \code{"vertebrate fauna"}, \code{"mollusks"}, and \code{"pollen surface sample"}.  See note in Details delow.
-#' @param piid Numeric value for the Principle Investigator's ID number.
-#' @param altmin Numeric value indicating the minimum altitude for the site (can be used alone or with \code{altmax}).
-#' @param altmax Numeric value indicating the maximum altitude for the site (can be used alone or with \code{altmin}).
-#' @param loc A GeoJSON string \code{\{'type':'Polygon', 'coords':c(c(lat,long),c(lat, long),...,c(lat, long))\}} representing the bounding box within which to search for sites.
-#' @param taxonids A numeric identifier for the taxon.  See \code{\link{get_table}} and use \code{get_tables('Taxa')} for a list of acceptable values.
-#' @param taxonname A character string corresponding to a valid taxon identity in the Neotoma Database.  See \code{\link{get_table}} and use \code{get_table('Taxa')} for a list of acceptable values.
-#' @param ageold The oldest date acceptable for the search (in years before present).
-#' @param ageyoung The youngest date acceptable for the search.
-#' @param ageof If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.
-#' @param subdate Date of dataset submission.
-#' @export
-get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
-  
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
-  cl <- lapply(cl, eval, envir = parent.frame())
-  
-  error_check <- check_args(cl)
-  
-  if (error_check[[2]]$flag == 1) {
-    stop(paste0(unlist(error_check[[2]]$message), collapse = '\n  '))
-  } else {
-    cl <- error_check[[1]]
-  }
-  
-  
-  if("loc" %in% names(cl)){
-    if(is.numeric(cl$loc)){
-      coords <- cl$loc
-      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], ymax = coords[3], ymin = coords[4]), crs = st_crs(4326))
-      my_bbox <- st_as_sfc(my_bbox)
-      new_geojson <- geojsonsf::sfc_geojson(my_bbox)
-      new_geojson <- new_geojson[1]
-      #print(new_geojson)
-      baseURL <- paste0('data/datasets?loc=',new_geojson[1])
-      for(name in names(cl)){
-        if(!(name == "loc")){
-          baseURL <- paste0(baseURL, "&", name, "=", paste0(cl[name]))
-        }
-      }
-        result <- parseURL(baseURL) %>% 
-          cleanNULL()
-      
-    }else{
-    
-    baseURL <- paste0('data/datasets')
-    result <- parseURL(baseURL, ...) %>% 
-      cleanNULL()
-  }
-  }else{
-    
-    baseURL <- paste0('data/datasets')
-    result <- parseURL(baseURL, ...) %>% 
-      cleanNULL()
-  }
-  
-  #print("I am result")
-  #print(result)
-
-  if(is.null(result$data[1][[1]]) | is.null(result[1][[1]])){
- # if(is.null(result)){
-    output <- cat("I can't find a site for you. Are you using the right spelling? \n\n")
+  if(result_length > 0){
+    output <- parse_dataset(result)
+    if(verbose == 1){
+      cat("A site object containing", result_length, "sites and 6 parameters. \n")
+    }
     return(output)
   }else{
-    
-    output <- parse_dataset(result)
-    args <- list(...)
+    return(NULL)
   }
-  
-  if(verbose == 1){
-    cat("A site object containing", length(result[2]$data), "sites and 5 parameters. \n")
-  }
-  
-  
-  
-  return(output)
 }
 
-
 #' @title Get Dataset Sites
-#' @import lubridate
-#' @importFrom methods new
 #' @param datasetid Use a single number to extract site information
-#' @param ... arguments in ellipse form
 #' @export
-get_datasets.sites <- function(sites_o, ..., verbose =0) {
-
+get_datasets.sites <- function(sites_o, verbose =0) {
   # List of datasets ids
   dataset_list <- c()
   for(i in 1:length(sites_o)){
@@ -315,9 +348,7 @@ get_datasets.sites <- function(sites_o, ..., verbose =0) {
       }
     }
   }
-
-  output <- get_datasets(dataset_list)
-
+  
+  output <- get_datasets(dataset_list, verbose=verbose)
   return(output)
-
 }

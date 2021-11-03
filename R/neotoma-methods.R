@@ -63,7 +63,7 @@ collunit <- setClass(
   prototype = list(collunitid = NA_integer_,
                    handle = NA_character_,
                    collunitname = NA_character_,
-                   colldate = "Date",
+                   colldate = as.Date(character(0)),
                    substrate = NA_character_,
                    location = st_sf(st_sfc()),
                    datasets = NULL),

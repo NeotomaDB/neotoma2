@@ -123,14 +123,12 @@ parse_site <- function(result) {
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc
-#' @examples
-#' get_sites(sitename = "Alexander Lake")
 #' @export
 get_sites.default <- function(..., verbose=0) {
   
   cl <- as.list(match.call())
   
-  possible_arguments <- c("sitename", "altmax", "altmin", "loc")
+  possible_arguments <- c("sitename", "altmax", "altmin", "loc", "limit", "offset", "all_data")
   
   cl[[1]] <- NULL
   
@@ -214,7 +212,7 @@ get_sites.default <- function(..., verbose=0) {
 }
 
 #' @title Get Site Information for Fossil Sites
-#' @param siteid The numeric site ID from Neotoma
+#' @param x The numeric site ID from Neotoma
 #' @export
 get_sites.numeric <- function(x, ..., verbose =0) {
   useNA <- function(x, type){

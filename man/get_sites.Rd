@@ -50,7 +50,7 @@ brazil <- '{"type": "Polygon",
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]
 ]]}'
-brazil_datasets <- get_sites(loc = brazil[1])
+brazil_sites <- get_sites(loc = brazil[1])
 }
 }
 \author{

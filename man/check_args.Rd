@@ -2,13 +2,13 @@
 % Please edit documentation in R/check_args.R
 \name{check_args}
 \alias{check_args}
-\title{Internal function to check passed arguments.}
+\title{check_args}
 \usage{
 check_args(cl)
 }
 \arguments{
 \item{cl}{called arguments.
-Arguments are going to be called by match_call inside
+Arguments are going to be called by match_call inside:
 \code{\link{get_sites}}
 \code{\link{get_datasets}}
 \code{\link{get_downloads}}}
@@ -19,9 +19,7 @@ A list with two components:
 \item{message}{A list of error messages.}
 }
 \description{
-Tests for arguments of the following functions
-\code{\link{get_sites}},
-\code{\link{get_datasets}} need passed arguments to be checked.
+Internal function to check passed arguments.
 }
 \references{
 Neotoma Project Website: http://www.neotomadb.org
