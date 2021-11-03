@@ -9,26 +9,23 @@ check_args(cl)
 \arguments{
 \item{cl}{called arguments.
 Arguments are going to be called by match_call inside
-\code{\link{get_sites}} or \code{\link{get_datasets}}}
+\code{\link{get_sites}}
+\code{\link{get_datasets}}
+\code{\link{get_downloads}}}
 }
 \value{
 A list with two components:
-
 \item{flag}{Returns a 0 if everything's fine, a 1 if there's a problem.}
 \item{message}{A list of error messages.}
 }
 \description{
-Functions \code{\link{get_sites}},
+Tests for arguments of the following functions
+\code{\link{get_sites}},
 \code{\link{get_datasets}} need passed arguments to be checked.
-\code{param_check} tells them if there's a problem.
 }
 \references{
 Neotoma Project Website: http://www.neotomadb.org
 }
 \author{
-Simon J. Goring \email{simon.j.goring@gmail.com}
-
 Socorro Dominguez \email{sedv8808@gmail.com}
 }
-\keyword{internal}
-\keyword{misc}

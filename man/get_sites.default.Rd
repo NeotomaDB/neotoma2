@@ -7,7 +7,7 @@
 \method{get_sites}{default}(..., verbose = 0)
 }
 \arguments{
-\item{...}{accepted arguments: siteid (site identifier from Neotoma), sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
+\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc}
 }
 \description{
 Get Site Information for Fossil Sites
