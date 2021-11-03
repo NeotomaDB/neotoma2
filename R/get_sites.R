@@ -236,13 +236,14 @@ get_sites.numeric <- function(x, ..., verbose =0) {
   result <- parseURL(baseURL)
   
   result_length <- length(result[2]$data)
-  if(result_length==0){
-    return(NULL)
-  }else{
+  
+  if(result_length > 0){
     output <- parse_site(result)
     if(verbose == 1){
       cat("A site object containing", result_length, "sites and 6 parameters. \n")
-      return(output)
     }
+    return(output)
+  }else{
+    return(NULL)
   }
 }
