@@ -12,7 +12,7 @@
 #' The user may define all or none of the possible fields.  
 #' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
-#' @param ... accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
+#' @param ... accepted arguments: sites_object, contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
 #' @return The function returns either a single item of class \code{"try-error"} describing
 #'    the reason for failure (either mis-defined parameters or an error from the Neotoma API),
 #'    or a table of sites, with rows corresponding to the number of individual sites and datasets
@@ -230,7 +230,7 @@ get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
   
   cl <- as.list(match.call())
   
-  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc", "ageyoung", "ageold", "ageof", "limit", "offset", "all_data")
+  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc", "ageyoung", "ageold", "ageof", "limit", "offset", "all_data", "sites_o")
   
   cl[[1]] <- NULL
   
@@ -353,4 +353,4 @@ get_datasets.sites <- function(sites_o, verbose =0) {
   return(output)
 }
 
-# TODO: Handle error of datasettypes - make sure only accepted types are passed
+# TODO: Handle error of datasettypes - make sure only accepted types are passed; table in API not working

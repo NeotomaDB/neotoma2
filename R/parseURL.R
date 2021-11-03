@@ -116,10 +116,20 @@ parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
     message(paste0("Your search returned ", length(result$data), " objects."))
   }else if("offset" %in% names(cl)){
     message(paste0("Your search returned ", length(result$data), " objects."))
+    # if("complete_data" %in% names & complete_data == FALSE){
+    #   message(paste0("Only 25 objects returned. Do all_data = TRUE for storing the complete set."))
+    # }
   } else if(length(list(...)) != 0){
     pager(result, response_url, complete_data = complete_data)
+    message(paste0("Your search returned ", length(result$data), " objects."))
+    # if("complete_data" %in% names & complete_data == FALSE){
+    #   message(paste0("Only 25 objects returned. Do all_data = TRUE for storing the complete set."))
+    # }
   }else{
     message(paste0("Your search returned ", length(result$data), " objects."))
+    # if("complete_data" %in% names & complete_data == FALSE){
+    #   message(paste0("Only 25 objects returned. Do all_data = TRUE for storing the complete set."))
+    # }
   }  
   
   return(result)

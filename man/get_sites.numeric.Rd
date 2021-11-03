@@ -7,7 +7,7 @@
 \method{get_sites}{numeric}(x, ..., verbose = 0)
 }
 \arguments{
-\item{siteid}{The numeric site ID from Neotoma}
+\item{x}{The numeric site ID from Neotoma}
 }
 \description{
 Get Site Information for Fossil Sites

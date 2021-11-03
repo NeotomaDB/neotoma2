@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_downloads.R
 \name{get_downloads.numeric}
 \alias{get_downloads.numeric}
-\title{Get Downloads}
+\title{get_downloads}
 \usage{
 \method{get_downloads}{numeric}(datasetid, ...)
 }
@@ -12,5 +12,5 @@
 \item{...}{arguments in ellipse form}
 }
 \description{
-Get Downloads
+get_downloads
 }

@@ -1,10 +1,66 @@
-#' @title Get downloads - Data 
+#' @title get_downloads
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
+#' @import lubridate
 #' @import dplyr
-#' @param datasetid integer A collection unit ID
-#' @param ... arguments in ellipse form
+#' @importFrom methods new
+#' @description
+#' Information for Fossil Datasets
+#' Look for the whole data details using only a dataset ID or for multiple metadata.
+#' Displays a site table with the following columns: siteid, sitename, lat, long, and elev.
+#' The function takes parameters defined by the user and returns a sites object
+#' with more detailed information regarding datasets and samples.
+#' The user may define all or none of the possible fields.  
+#' The function contains data checks for each defined parameter.
+#' @param x Use a single number to extract site information
+#' @param ... accepted arguments: sites, datasets
+#' @return The function returns either a single item of class \code{"try-error"} describing
+#'    the reason for failure (either mis-defined parameters or an error from the Neotoma API),
+#'    or a table of sites, with rows corresponding to the number of individual sites and datasets
+#'    returned by the Neotoma API.  
+#'    Each "site" object contains 6 parameters that can be accessed as well:
+#'    siteid, sitename, location, altitude, description, limited collection units information.
+#' \item{ \code{siteid} }{site ID number}
+#' \item{ \code{sitename} }{site's name}
+#' \item{ \code{location} }{sf object that describes site's location}    
+#' \item{ \code{description} }{}
+#' \item{ \code{collunits} }{limited information on collunits}  
+#'   Each "collection unit" embedded in the "sites" object contains 6 parameters that can be accessed as well:
+#' \item{ \code{collunitid}}{collection unit ID number}
+#' \item{ \code{handle} }{collection unit's handle}
+#' \item{ \code{collunitname} }{collection unit's name}    
+#' \item{ \code{colldate} }{date in collection unit}
+#' \item{ \code{substrate} }{substrate}  
+#' \item{ \code{location} }{sf object that describes site's location}    
+#' \item{ \code{datasets} }{detailed information regarding dataset}
+#'   Each "dataset" nested in the "collection unit" contains the following detail of information:
+#' \item{ \code{datasetid} }{dataset ID number}
+#' \item{ \code{datasetname} }{site's name}
+#' \item{ \code{datasettype} }{type of data found}    
+#' \item{ \code{location} }{sf object that describes site's location}
+#' \item{ \code{notes} }{notes on the dataset}
+#' \item{ \code{taxa table} }{taxa table}    
+#' \item{ \code{pi list} }{P.I. info}
+#' \item{ \code{analyst} }{analyst info}
+#' \item{ \code{metadata} }{dataset metadata}
+#' @examples \dontrun{
+#' To find the downloads object of dataset 24:
+#' downloads24 <- get_downloads(24)
+#' 
+#' To find all downloads in Brazil
+#' brazil <- '{"type": "Polygon", 
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]
+#' ]]}'
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' brazil_downloads <- get_downloads(brazil_datasets)
+#' }
 #' @export
-get_downloads <- function(datasetid = NA, ...) {
+get_downloads <- function(datasetid = NA, ..., complete_data = FALSE, verbose = 0) {
   if(!missing(datasetid)) {
     UseMethod('get_downloads', datasetid)
   } #else {
@@ -26,13 +82,10 @@ parse_download <- function(result) {
     return(x)
   }
   
-  #result <- result %>% fixNull()
   result <- result[2]
-  #print(result)
   result_length <- length(result$data)
   
   sites <- c()
-  
   taxon_table <- data.frame()
   df_lab1 <- data.frame()
   df_counts <- data.frame()
@@ -43,10 +96,19 @@ parse_download <- function(result) {
     
     # Sites 
     # Sitename
-    sitename <- result$data[[i]]$site$sitename
+    if(is.na(result$data[[i]]$site$sitename)){
+      sitename <- NA_character_
+    }else{
+      sitename <- result$data[[i]]$site$sitename
+    }
+    
     
     # Site ID
-    siteid <- result$data[[i]]$site$siteid
+    if(is.na(result$data[[i]]$site$siteid)){
+      siteid <- NA_integer_
+    }else{
+      siteid <- result$data[[i]]$site$siteid
+    }
     
     # Location
     location <- result$data[[i]]$site$geography
@@ -57,7 +119,11 @@ parse_download <- function(result) {
     }
     
     # Altitude
+    if(is.na(result$data[[i]]$site$altitude)){
+      elev <- NA_integer_
+      }else{
     elev <- result$data[[i]]$site$altitude
+      }
     
     # Description 
     description <- result$data[[i]]$site$sitedescription
@@ -68,6 +134,11 @@ parse_download <- function(result) {
     }
     
     # Notes
+    # if(is.na(result$data[[i]]$site$sitenotes)){
+    #   notes <- NA_character_
+    # }else{
+    #   notes <- result$data[[i]]$site$sitenotes
+    # }
     notes <- NA_character_
     
     # Datasets
@@ -131,7 +202,7 @@ parse_download <- function(result) {
       
       if(dim(meta_data_t1)[1] > 0){
         meta_data_t1 %>%
-        select("depth", "ageolder", "age", "ageyounger", "chronologyname", "agetype", "chronologyid", "sample.id", "datasetid")
+          select("depth", "ageolder", "age", "ageyounger", "chronologyname", "agetype", "chronologyid", "sample.id", "datasetid")
       }
       
       new_dataset <- new('dataset',
@@ -150,9 +221,6 @@ parse_download <- function(result) {
       dataset_list <- append(dataset_list, new_dataset)
       datasets_list <- new('datasets', datasets = dataset_list)
       
-      
-      
-      
       # Add to dataset publications information
       # Publications Information
       
@@ -161,7 +229,6 @@ parse_download <- function(result) {
       
       
       # Count Samples metadata
-      
       if (result$data[[i]]$site$collectionunit$dataset$datasettype == 'geochronologic') {
         
         message(paste0('The dataset ID ', result$data[[i]]$site$collectionunit$dataset$datasetid,
@@ -191,9 +258,6 @@ parse_download <- function(result) {
       
       
     }
-    
-    
-    
     
     ## Collunits
     # Coll Unit ID
@@ -228,51 +292,19 @@ parse_download <- function(result) {
                     collunits = coll_units)
     
     sites <- append(sites, new_site)
-    
-    
   }
-  
-  #     # Lab Data
-  #     df_lab <- result$data[[i]]$dataset$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows() %>%
-  #       select(taxonid)
-  #     
-  #     df_lab1 <- rbind(df_lab, df_lab1) %>%
-  #       distinct()
-  #   
-  #   # Chronologies filtering
-  #   wang <- df3 %>%
-  #     filter(chronologyname == "Wang et al.")
-  #   
-  #   cohmap <- df3 %>%
-  #     filter(chronologyname == "COHMAP chron 2")
-  #   
-  #   napd <- df3 %>%
-  #     filter(chronologyname == "NAPD 1")
-  # }  
-  # 
-  # } 
-  # 
-  # # DOUBT TODO : How should I save these tables?
-  #print(df_counts)
-  #print(df_lab1)
-  #print(napd)
-  #print(cohmap)
-  #print(wang)
   
   # Convert to sites element
   sites <- new('sites', sites = sites) 
-  
-  #return(result)
+
   return(sites)
 }
 
-#' @title Get Downloads
-#' @import lubridate
-#' @importFrom methods new
+#' @title get_downloads
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(datasetid, ...) {
+get_downloads.numeric <- function(datasetid, ......, complete_data = FALSE, verbose = 0) {
   
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
@@ -289,9 +321,7 @@ get_downloads.numeric <- function(datasetid, ...) {
   }
   
   baseURL <- paste0('data/downloads/', dataset)
-  
   result <- parseURL(baseURL)
-  #print(result)
   
   output <- parse_download(result)
   
@@ -299,4 +329,3 @@ get_downloads.numeric <- function(datasetid, ...) {
   
   return(output)
 }
-

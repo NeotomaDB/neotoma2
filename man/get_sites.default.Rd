@@ -12,6 +12,3 @@
 \description{
 Get Site Information for Fossil Sites
 }
-\examples{
-get_sites(sitename = "Alexander Lake")
-}

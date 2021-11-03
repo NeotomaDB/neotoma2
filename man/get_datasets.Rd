@@ -7,7 +7,7 @@
 get_datasets(datasetid = NA, ...)
 }
 \arguments{
-\item{...}{accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof}
+\item{...}{accepted arguments: sites_object, contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof}
 
 \item{x}{Use a single number to extract site information}
 }
