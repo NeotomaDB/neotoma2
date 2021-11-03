@@ -46,7 +46,7 @@ You can find a site by its unique numeric Neotoma site id (`siteid`), by name (`
 If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
 
 ```{r getSiteBySiteID}
-alex <- get_sites(siteid=24)
+alex <- get_sites(24)
 alex
 ```
 
@@ -131,14 +131,14 @@ You can also retrieve datasets by type directly from the API.
 
 ```{r eval = TRUE}
 # Getting datasets by type
-my_pollen_datasets <- get_datasets(type = "pollen")
+my_pollen_datasets <- get_datasets(datasettype = "pollen")
 my_pollen_datasets
 ```
 When the API has many responses, you can limit the quantity of sites by using the parameter `limit` or you can do a `while`/'for' loop with the parameter `offset` - which works like a pager.
 
 ```{r eval = TRUE}
 # Getting just 5 pollen datasets
-my_5_pollen_datasets <- get_datasets(type = "pollen", limit = 5)
+my_5_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 5)
 my_5_pollen_datasets
 ```
 ```{r eval = TRUE}
