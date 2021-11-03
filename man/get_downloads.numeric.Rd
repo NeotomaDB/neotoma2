@@ -4,7 +4,7 @@
 \alias{get_downloads.numeric}
 \title{get_downloads}
 \usage{
-\method{get_downloads}{numeric}(datasetid, ...)
+\method{get_downloads}{numeric}(datasetid, ..., complete_data = FALSE, verbose = 0)
 }
 \arguments{
 \item{datasetid}{Use a single number to extract site information}

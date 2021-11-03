@@ -101,8 +101,7 @@ parse_download <- function(result) {
     }else{
       sitename <- result$data[[i]]$site$sitename
     }
-    
-    
+ 
     # Site ID
     if(is.na(result$data[[i]]$site$siteid)){
       siteid <- NA_integer_
@@ -134,12 +133,11 @@ parse_download <- function(result) {
     }
     
     # Notes
-    # if(is.na(result$data[[i]]$site$sitenotes)){
-    #   notes <- NA_character_
-    # }else{
-    #   notes <- result$data[[i]]$site$sitenotes
-    # }
-    notes <- NA_character_
+    if(is.na(result$data[[i]]$site$notes)){
+      notes <- NA_character_
+    }else{
+      notes <- result$data[[i]]$site$notes
+    }
     
     # Datasets
     datasetid <- result$data[[i]]$site$collectionunit$dataset$datasetid
@@ -183,8 +181,6 @@ parse_download <- function(result) {
       for(k in 1:samples_length){
         analyst_length <- length(result$data[[i]]$site$collectionunit$dataset$samples[[k]]$sampleanalyst)
         for(j in 1:analyst_length){
-          #first_name <- result$data[[i]]$site$collectionunit$dataset$samples[[k]]$sampleanalyst[[j]]$firstname
-          #last_name <- result$data[[i]]$site$collectionunit$dataset$samples[[k]]$sampleanalyst[[j]]$familyname
           contact_name <- result$data[[i]]$site$collectionunit$dataset$samples[[k]]$sampleanalyst[[j]]$contactname
           analyst_list <- c(analyst_list, contact_name)}
       }
@@ -255,8 +251,6 @@ parse_download <- function(result) {
       
       df_counts <- rbind(df_counts, df_count) %>%
         distinct()
-      
-      
     }
     
     ## Collunits
@@ -304,7 +298,7 @@ parse_download <- function(result) {
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(datasetid, ......, complete_data = FALSE, verbose = 0) {
+get_downloads.numeric <- function(datasetid, ..., complete_data = FALSE, verbose = 0) {
   
   useNA <- function(datasetid, type) {
     if (is.na(datasetid)) {
@@ -316,6 +310,19 @@ get_downloads.numeric <- function(datasetid, ......, complete_data = FALSE, verb
     }
   }
   
+  cl <- as.list(match.call())
+  
+  possible_arguments <- c("offset", "all_data", "sites_o", "verbose", "datasetid")
+  
+  cl[[1]] <- NULL
+  
+  for(name in names(cl)){
+    if(!(name %in% possible_arguments)){
+      message(paste0(name, " is not an allowed argument. Argument will be ignored. Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+    }
+  }
+  
+  
   if (length(datasetid) > 0) {
     dataset <- paste0(datasetid, collapse = ',')
   }
@@ -324,8 +331,49 @@ get_downloads.numeric <- function(datasetid, ......, complete_data = FALSE, verb
   result <- parseURL(baseURL)
   
   output <- parse_download(result)
+
+  return(output)
+}
+
+#' @title get_downloads sites
+#' @param sites_o sites object
+#' @param ... arguments in ellipse form
+#' @export
+get_downloads.sites <- function(sites_o, ..., complete_data = FALSE, verbose = 0) {
   
-  #print(class(result))
+  useNA <- function(datasetid, type) {
+    if (is.na(datasetid)) {
+      return(switch(type,
+                    "char" = NA_character_,
+                    "int" = NA_integer_))
+    } else {
+      return(datasetid)
+    }
+  }
+  
+  cl <- as.list(match.call())
+  
+  possible_arguments <- c("offset", "all_data", "sites_o", "verbose", "datasetid")
+  
+  cl[[1]] <- NULL
+  
+  for(name in names(cl)){
+    if(!(name %in% possible_arguments)){
+      message(paste0(name, " is not an allowed argument. Argument will be ignored. Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+    }
+  }
+  
+  dataset_list <- c()
+  for(i in 1:length(sites_o)){
+    for(j in 1:length(sites_o@sites[[i]]@collunits@collunits)){
+      for(k in 1:length(sites_o@sites[[i]]@collunits@collunits[[j]]@datasets@datasets)){
+        datasetid <- sites_o@sites[[i]]@collunits@collunits[[j]]@datasets@datasets[[k]]@datasetid
+        dataset_list <- c(dataset_list, datasetid)
+      }
+    }
+  }
+  
+  output <- get_downloads(dataset_list, verbose=verbose)
   
   return(output)
 }

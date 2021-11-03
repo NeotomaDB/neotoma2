@@ -230,7 +230,7 @@ get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
   
   cl <- as.list(match.call())
   
-  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc", "ageyoung", "ageold", "ageof", "limit", "offset", "all_data", "sites_o")
+  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc", "ageyoung", "ageold", "ageof", "limit", "offset", "all_data", "sites_o", "verbose")
   
   cl[[1]] <- NULL
   
