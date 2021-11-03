@@ -352,3 +352,5 @@ get_datasets.sites <- function(sites_o, verbose =0) {
   output <- get_datasets(dataset_list, verbose=verbose)
   return(output)
 }
+
+# TODO: Handle error of datasettypes - make sure only accepted types are passed
