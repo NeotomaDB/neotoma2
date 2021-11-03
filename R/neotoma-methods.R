@@ -58,14 +58,14 @@ collunit <- setClass(
             collunitname = "character",
             colldate = "Date",
             substrate = "character",
-            location = "character",
+            location = "sf",
             datasets = "datasets"),
   prototype = list(collunitid = NA_integer_,
                    handle = NA_character_,
                    collunitname = NA_character_,
                    colldate = "Date",
                    substrate = NA_character_,
-                   location = NA_character_,
+                   location = st_sf(st_sfc()),
                    datasets = NULL),
   validity = function(object) {
     !is.na(object@collunitid)
@@ -91,8 +91,8 @@ site <- setClass(
             sitename = "character",
             location = "sf",
             altitude = "numeric",
-            description = "character",
             notes = "character",
+            description = "character",
             collunits = "collunits"),
   
   # Set the default values for the slot
@@ -100,8 +100,8 @@ site <- setClass(
                    sitename = NA_character_,
                    location = st_sf(st_sfc()),
                    altitude = NA_integer_,
-                   description = NA_character_,
                    notes = NA_character_,
+                   description = NA_character_,
                    collunits = NULL) # check what would really be a NA here
   
   # Add a validity function that can test data consistency.
