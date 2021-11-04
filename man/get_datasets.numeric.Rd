@@ -7,9 +7,7 @@
 \method{get_datasets}{numeric}(datasetid, ..., verbose = 0)
 }
 \arguments{
-\item{datasetid}{Use a single number to extract site information}
-
-\item{...}{arguments in ellipse form}
+\item{x}{Use a single number to extract site information}
 }
 \description{
 Get Dataset Numeric

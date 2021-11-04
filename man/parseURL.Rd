@@ -2,7 +2,7 @@
 % Please edit documentation in R/parseURL.R
 \name{parseURL}
 \alias{parseURL}
-\title{Make the HTTP request}
+\title{parseURL}
 \usage{
 parseURL(x, use = "neotoma", all_data = FALSE, ...)
 }
@@ -16,4 +16,9 @@ parseURL(x, use = "neotoma", all_data = FALSE, ...)
 \description{
 An internal helper function used to connect to the Neotoma API
 in a standard manner, and to provide basic validation of any response.
+}
+\author{
+Socorro Dominguez \email{sedv8808@gmail.com}
+
+Simon Goring \email{ }
 }

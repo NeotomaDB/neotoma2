@@ -4,11 +4,9 @@
 \alias{get_datasets.sites}
 \title{Get Dataset Sites}
 \usage{
-\method{get_datasets}{sites}(sites_o, ..., verbose = 0)
+\method{get_datasets}{sites}(sites_o, verbose = 0)
 }
 \arguments{
-\item{...}{arguments in ellipse form}
-
 \item{datasetid}{Use a single number to extract site information}
 }
 \description{

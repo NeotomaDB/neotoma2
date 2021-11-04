@@ -50,10 +50,6 @@ pager <- function(response, response_url, ...) {
     new_response_url <- response$url
     param_offset_old = param_offset
     param_offset = param_offset + length(result$data)
-    
-    
   }
-
     message(paste0("Your search returned ", param_offset, " objects."))
-  
 }

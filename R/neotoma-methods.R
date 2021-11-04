@@ -15,14 +15,22 @@ dataset <- setClass(
                               datasetname = "character",
                               datasettype = "character",
                               location = "sf",
-                              notes = "character"),
+                              notes = "character",
+                              taxa_table = "ANY",
+                              pi_list = "ANY",
+                              analyst = "ANY",
+                              metadata = "ANY"),
                     
                     # Set the default values for the slot
                     prototype = list(datasetid = NA_integer_,
                                      datasetname = NA_character_,
                                      datasettype = NA_character_,
                                      location = st_sf(st_sfc()),
-                                     notes = NA_character_),
+                                     notes = NA_character_,
+                                     taxa_table = data.frame(),
+                                     pi_list = list(),
+                                     analyst = list(),
+                                     metadata = data.frame()),
 )
 
 #' @title S4 class for datasets information
@@ -50,14 +58,14 @@ collunit <- setClass(
             collunitname = "character",
             colldate = "Date",
             substrate = "character",
-            location = "character",
+            location = "sf",
             datasets = "datasets"),
   prototype = list(collunitid = NA_integer_,
                    handle = NA_character_,
                    collunitname = NA_character_,
-                   colldate = "Date",
+                   colldate = as.Date(character(0)),
                    substrate = NA_character_,
-                   location = NA_character_,
+                   location = st_sf(st_sfc()),
                    datasets = NULL),
   validity = function(object) {
     !is.na(object@collunitid)
@@ -83,8 +91,8 @@ site <- setClass(
             sitename = "character",
             location = "sf",
             altitude = "numeric",
-            description = "character",
             notes = "character",
+            description = "character",
             collunits = "collunits"),
   
   # Set the default values for the slot
@@ -92,8 +100,8 @@ site <- setClass(
                    sitename = NA_character_,
                    location = st_sf(st_sfc()),
                    altitude = NA_integer_,
-                   description = NA_character_,
                    notes = NA_character_,
+                   description = NA_character_,
                    collunits = NULL) # check what would really be a NA here
   
   # Add a validity function that can test data consistency.
