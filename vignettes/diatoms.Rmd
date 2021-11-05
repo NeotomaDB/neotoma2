@@ -81,6 +81,7 @@ Following are descriptions of the main functions in `neotoma` and `neotoma2`. Te
 `neotoma2` was being developed while this vignette documentation was being prepared, so not all the package functions were available.  Currently (November 2021), some functions from both `neotoma` and `neotoma2` are used in this document.  Over time, original package functions should be replaced with corresponding `neotoma2` functions. In the code chunks below, `neotoma::` is used to refer to functions in the original neotoma R package, for example, **`neotoma::`**`get_site(whatever)`.
 
 ##### `neotoma` functions
+
 ###### get_site
 Usage: Sites can be searched using the following supported parameters, e.g., get_sites("Sitename"):
 
@@ -98,12 +99,25 @@ Values returned: A dataframe that includes: siteid, sitename, long [mean], lat [
 
 `limit` indicates the maximum number of records(?) that will be processed; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
 
+To see structure of function output, run the following lines of code:
+```{R structure_of_get_site_output}
+uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
+str (uwallf_site) # shows structure of uwallf_site
+```
+
 ###### get_dataset
 Usage: get_dataset(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
 
 x can be an "optional value, either a numeric site ID or object of class download, download_list or site."
 
 Values returned for each dataset:  dataset.id, dataset.name, Coll Unit Handle, Coll Unit Name, Coll Type, Dataset Type, AgeOldest, AgeYoungest, (Sub)mission Date(s), Dataset PIs, Site (object with site variables)
+
+To see structure of function output, run the following lines of code:
+```{R structure_of_get_dataset_output}
+uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
+uwallf_dataset <- get_dataset(32252) # finds dataset data for Upper Wallface (datasetid is 32252)
+str (uwallf_dataset) # shows structure of uwallf_datast
+```
   
 ###### get_download
 "Using the dataset ID, site object or dataset object, return all records associated with the data as a download_list.
@@ -111,7 +125,20 @@ Values returned for each dataset:  dataset.id, dataset.name, Coll Unit Handle, C
 Usage:  get_download(x, verbose = TRUE)"
 Arguments:x can be a "single numeric dataset ID or a vector of numeric dataset IDs as returned by get_datasets, or a site, dataset, or dataset_list; verbose, logical - should messages on API call be printed?"
 
-Values returned; "an object of class download_list, containing a set of download objects, each with relevant assemblage information and metadata: The download object is a list of lists and data frames that describe an assemblage, the constituent taxa, the chronology, site and PIs who contributed the data. The following are important components:" dataset, sample.meta, taxon list, counts, lab.data, chronologies"
+Values returned; "an object of class download_list, containing a set of download objects, each with relevant assemblage information and metadata: The download object is a list of lists and data frames that describe an assemblage, the constituent taxa, the chronology, site and PIs who contributed the data. The following are important components:" dataset, sample.meta, taxon.list, counts, lab.data, chronologies"
+
+To see structure of function output, run the following lines of code:
+```{R structure_of_get_download_output}
+uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
+uwallf_dataset <- get_dataset(32252) # finds dataset data for Upper Wallface (datasetid is 32252)
+uwallf_download <- get_download(uwallf_dataset)
+str (uwallf_download) # shows structure of uwallf_datast
+```
+
+uwallface <-get_site('Upper Wallface%') # find datasetid for UW
+uwall <- get_dataset(32252) # diatom datasetid for UWall is 32252
+uwallface.dl <- get_download(uwall)
+uwall
 
 ##### `neotoma2` functions
 [Similar to `neotoma` functions, but updated (e.g., returning more variables;  descriptions to be added when they are available]
