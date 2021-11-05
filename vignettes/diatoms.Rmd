@@ -1176,6 +1176,60 @@ Issues:  Put metadata in the same files as the data matrices?  How to combine re
 #### Bacon, ### Vegan, ### Rioja, ### Tidypaleo
 #### Others 
 
+
+
+## Modify and analyze data 
+- and other miscellaneous tasks
+### Add to or modify data in Neotoma
+Code being writtent for Neotoma 2
+
+### Add aggregate datasets to Neotoma
+
+### Transform raw diatom counts to percentages and other forms
+Use the tran function in the Analogue package to transform raw data.  See analogue package documentation for a list o possible transformations.
+
+``` {R TransformCountsToPct}
+library ("analogue")
+uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download filew with diatom counts for Upper Wallface Pond
+```
+
+Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neotoma R Workshop documentation
+
+### Create new ecological groups and assign taxa to the groups
+```{R set taxa}
+set_taxa('x') # No code yet, but planned
+
+Example
+```{R set taxa ex}
+
+```
+
+### Add to a table that explicitly matches water chemistry and diatom datasets
+This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
+
+### Extract a list of publications for a set of datasets
+Returns publicationid, citation, and DOI for pub if there is one
+```{R get pub out}
+# get_publications(datasetid= x)  # Basic format
+uwall_pubs <- get_publications(datasetid=32252) # Example - U Wallface P datasetid
+uwall_pubs
+```
+
+### Extract a list of DOI’s for a set of datasets
+```{R DOIS}
+# Code needs to be written
+```
+Example
+```{R DOIS EX}
+
+```
+
+### Add standard sets of diatom taxa names that could be used to convert multiple synonyms to another set of names
+A complicated task - synonym lists need to be prepared and code written
+```{R standard set}
+get_dataset(taxonname = ,search())
+```
+
 ## Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
 
@@ -1233,48 +1287,6 @@ single or multiple taxa - vs depth or time
 single or multiple taxa from multiple sites - vs depth or time
 ### Plot of abundance of a taxon vs an environmental characteristic 
 (e.g., water chemistry variable)
-
-## Modify and analyze data 
-- and other miscellaneous tasks
-### Add to or modify data in Neotoma
-Code bein writtent for Neotoma 2
-
-### Add aggregate datasets to Neotoma
-
-### Create new ecological groups and assign taxa to the groups
-```{R set taxa}
-set_taxa('x') # No code yet, but planned
-
-Example
-```{R set taxa ex}
-
-```
-
-### Add to a table that explicitly matches water chemistry and diatom datasets
-This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
-
-### Extract a list of publications for a set of datasets
-Returns publicationid, citation, and DOI for pub if there is one
-```{R get pub out}
-# get_publications(datasetid= x)  # Basic format
-uwall_pubs <- get_publications(datasetid=32252) # Example - U Wallface P datasetid
-uwall_pubs
-```
-
-### Extract a list of DOI’s for a set of datasets
-```{R DOIS}
-# Code needs to be written
-```
-Example
-```{R DOIS EX}
-
-```
-
-### Add standard sets of diatom taxa names that could be used to convert multiple synonyms to another set of names
-A complicated task - synonym lists need to be prepared and code written
-```{R standard set}
-get_dataset(taxonname = ,search())
-```
 
 ## Get taxonomic data from DiatomBase
 
