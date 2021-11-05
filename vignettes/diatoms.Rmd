@@ -1008,9 +1008,10 @@ uwallface.ct <- counts (uwallface.dw)
 sapply(uwallface.ct, dim)
 ### Look at the matrix of diatom counts
 glimpse (uwallface.ct)
-str(uwallface.dw) # str is a useful function to see the overall data structure for a dataset 
-Comp_UWall <- compile_downloads(uwallface.dw) # used for formatting into a table 
-WriteXLS(uwallface.ct,"UWallDtmCount.xlsx", col.names=TRUE, row.names=TRUE)
+uwallface_comp <- compile_downloads(uwallface.dw) 
+# Compile_downloads is used for combining multiple counts into one table
+uwallface_comp
+WriteXLS(uwallface_comp,"UWallDtmCount.xlsx", col.names=TRUE, row.names=TRUE)
 
 ```
 ### Count data for sites in gpids and specific datasettypes
