@@ -111,7 +111,9 @@ parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
     result <- cleanNull(result)
   }
   
-  if("limit" %in% names(cl)){
+  if(length(result$data) < 26){
+    message(paste0("Your search returned ", length(result$data), " objects."))
+  }else if("limit" %in% names(cl)){
     message(paste0("Your search returned ", length(result$data), " objects."))
   }else if("offset" %in% names(cl)){
     message(paste0("Your search returned ", length(result$data), " objects."))
