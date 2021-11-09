@@ -94,8 +94,6 @@ check_args <- function(cl) {
       error$message[[length(error$message) + 1]] <- paste0("ageof should be a number")
     }
   }
-
-  
   return(list(cl,error))
 
 }
