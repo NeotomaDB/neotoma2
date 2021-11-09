@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setOpts, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -80,7 +80,7 @@ alex@sites[[1]]@siteid
 
 Neotoma uses the a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
 
-````{r getsitename placeholder}
+```{r sitewithwildcardname}
 alex <- get_sites(sitename = 'Alexander%')
 ```
 
@@ -98,7 +98,7 @@ If we ever need to see the documentation for examples, we can always access the 
 
 As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
-```{r set_site}
+```{r setsitefunction}
 my_site <- set_site(sitename="My Lake", 
                     coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
@@ -175,14 +175,13 @@ brazil_datasets
 
 You can plot these findings!
 
-```{r}
+```{r leafletBrasil}
 plotLeaflet(brazil_datasets)
 ```
 
-```{r}
+```{r filterBrasil}
 filter(brazil_datasets, datasettype == "geochronologic")
 ```
-
 
 The filter function takes as the first argument, a datasets object, followed by the critieria we want to use to filter. Current supported criteria includes:
 
@@ -195,20 +194,19 @@ You also need to make sure that you accompany any of these terms with the follow
 
 If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of & and |. For example:
 
-```{r}
+```{r filterBrasilGeochron}
 filter(brazil_datasets, datasettype == "geochronologic" | datasettype == "pollen")
 ```
 
-```{r}
+```{r filterBrasilLoc}
 filter(brazil_datasets, lat > -18 & lat < -16)
 ```
 
 You can also use the pipeline operator for these tasks:
-```{r}
+```{r filterBrasildplyr}
 brazil_datasets %>%
   filter(lat > -18 & lat < -16)
 ```
-
 
 ```{r}
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
@@ -227,9 +225,6 @@ For example, in the case of the Brazil datasets, we might just be interested in 
 
 Rather than making a new API call, we can filter them using the `filter` function:
 
-
-
-
 ## Publications
 
 Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
@@ -244,20 +239,20 @@ The most simple case is a search for a publication based on one or more publicat
 
 We can use a single publication ID or multiple IDs.  In either case the API returns the publication(s) and creates a new `publications` object (which consists of multiple individual `publication`s).  
 
-```{r}
+```{r pubsbyid}
 one <- get_publications(12)
 two <- get_publications(c(12,14))
 ```
 
 From there we can then then subset and extract elements from the list using the standard `[[` format.  For example:
 
-```{r}
+```{r showSinglePub}
 two[[2]]
 ```
 
 Will return the second publication in the list, corresponding to the publication with `publicationid` 14 in this case.
 
-#### Get Publication using Search:
+#### Get Publication using Search
 
 We can also use search elements to search for publications.  The `get_publication` method uses the Neotoma API to search for publications.  We can search using the following properties:
 
@@ -271,7 +266,7 @@ We can also use search elements to search for publications.  The `get_publicatio
 * `limit`
 * `offset`
 
-```{r}
+```{r fulltestPubSearch}
 michPubs <- get_publications(search="Michigan", limit=2)
 length(michPubs)
 ```
@@ -280,7 +275,7 @@ This results in a set of `r length(michPubs)` publications from Neotoma.  Equal 
 
 Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
 
-```{r}
+```{r nonsenseSearch}
 noise <- get_publications(search="Canada Banada Nanada", limit = 5)
 ```
 
@@ -290,7 +285,7 @@ By default the `limit` for all queries is `25`.  The default `offset` is `0`.  T
 
 We can use that in a `while` loop in R in the following way:
 
-```{r}
+```{r searchOffset}
 run = TRUE
 offset <- 0
 
@@ -312,13 +307,13 @@ This gives us an object of length `r length(allPubs)`, the number of publication
 
 We can see a summary of the returned object by simply calling it:
 
-```{r}
+```{r getNumResults}
 one
 ```
 
 This returns the (Neotoma) ID, the citation and the publication DOI (if that is stored in Neotoma).  We can get the first publication using the standard `[[` nomenclature:
 
-```{r}
+```{r getSecondPub}
 two[[1]]
 ```
 
