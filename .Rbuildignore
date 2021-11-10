@@ -7,3 +7,5 @@ CODE_OF_CONDUCT.md
 .github
 .git
 ^.*.tar.gz
+vignettes/MammalDiversity.Rmd
+vignettes/diatoms.Rmd
