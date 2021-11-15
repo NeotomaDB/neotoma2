@@ -99,7 +99,7 @@ Values returned: A dataframe that includes: siteid, sitename, long [mean], lat [
 
 `limit` indicates the maximum number of records(?) that will be processed; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
 
-To see structure of function output, run the following lines of code:
+To see structure of get_site function output, run the following code:
 ```{R structure_of_get_site_output}
 uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
 str (uwallf_site) # shows structure of uwallf_site
@@ -112,7 +112,7 @@ x can be an "optional value, either a numeric site ID or object of class downloa
 
 Values returned for each dataset:  dataset.id, dataset.name, Coll Unit Handle, Coll Unit Name, Coll Type, Dataset Type, AgeOldest, AgeYoungest, (Sub)mission Date(s), Dataset PIs, Site (object with site variables)
 
-To see structure of function output, run the following lines of code:
+To see structure of get_dataset function output, run the following code:
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
 uwallf_dataset <- get_dataset(32252) # finds dataset data for Upper Wallface (datasetid is 32252)
@@ -127,7 +127,7 @@ Arguments:x can be a "single numeric dataset ID or a vector of numeric dataset I
 
 Values returned; "an object of class download_list, containing a set of download objects, each with relevant assemblage information and metadata: The download object is a list of lists and data frames that describe an assemblage, the constituent taxa, the chronology, site and PIs who contributed the data. The following are important components:" dataset, sample.meta, taxon.list, counts, lab.data, chronologies"
 
-To see structure of function output, run the following lines of code:
+To see structure of get_download function output, run the following code:
 ```{R structure_of_get_download_output}
 uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
 uwallf_dataset <- get_dataset(32252) # finds dataset data for Upper Wallface (datasetid is 32252)
@@ -143,6 +143,13 @@ uwall
 ##### `neotoma2` functions
 [Similar to `neotoma` functions, but updated (e.g., returning more variables;  descriptions to be added when they are available]
 ###### get_sites
+To see structure of get_sites function output, run the following code:
+```{R structure_of_get_sites_output}
+uwallf_site <- get_sites(siteid = 745) # finds site data for a site
+str (uwallf_site) # shows structure of uwallf_site
+# [Simon - Above code does not work.  Can it be fixed?]
+```
+
 ###### get_datasets
 ###### get_downloads
 
@@ -158,7 +165,7 @@ The "Find datasets" sections
 
 ### Find sites (using get_site)
 
-[Include brief explanation of differences between Neotoma R and Neotoma R2 ??.  Use R2!! `Neotoma2` R get_sites is working (totally?  altitude issues??) and provides more information than get_site.  Therefore, there is no reason to get_site. [SIMON - is this true?]]
+[Include brief explanation of differences between get_site (Neotoma R) and get_sites 9Neotoma R2).  `Neotoma2` R get_sites is working (totally?  altitude issues??) and provides more information than get_site.  Therefore, there is no reason to use get_site. [SIMON - is this true?]]
 
 We can search for information on a single or multiple sites.  Sometimes it is useful to find locations of all sites within a region, whether or not they are diatom sites.  This can give us an indication of the level of paleoecological 'effort' in a region.  We can often use a site search to do some preliminary work, since the `site` object that `neotoma2` returns contains less information than the larger `dataset` or `download` objects, that contain full metadata.  We might want to generate a map of all sites, and superimpose specific sites we are interested in, for example.
 
@@ -175,7 +182,7 @@ diat <- get_sites(sitename = '%Schra%')      # Example using wildcards (%)
 diat
 ```
 Get data on multiple sites using sitenames
-[Simon / Soccorro - the following code does not return the correct results; ir returns data for a different set of lakes]
+[Simon / Soccorro - the following code does not return the correct results; ir returns data for a different set of lakes - it seems to be getting sites by siteid and not site name]
 ```{r multsitesbySitename example}
 # Join a list of site names together using the combine command, c()
 sitenameList <- c("Bald Hill", "Blake (sutton)", 
@@ -229,7 +236,7 @@ Get data on a multiple sites by using siteids
 ```{r multsitesbySiteIDs example}
 siteids <- c(25918,25919,25920)
 diat_6 <- get_sites(siteid = siteids)
-# Above code does not work - Will it work with only one siteid?
+# [Simon - Above code does not work - Will it work with only one siteid?]
 ```
 Get data on multiple sites by reading a text file of siteids
 
@@ -287,14 +294,24 @@ Example - get sites from multiple geopolitical units (e.g., states)
 ```{r retrieveByGeopol}
 library(dplyr)
 library(purrr)
+# Get site data for all sites in all New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY
+# The gpids were obtained from the Geopolitical units table 
 
 gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
 ne_sites <- map(gpids, function(x)
   neotoma:::get_site(gpid = x)) %>%
   neotoma::bind()
-ne_down <- neotoma::get_download(ne_sites)
-# The gpids were obtained from the Geopolitical units table 
+ne_datasets <- get_dataset(ne_sites)
+ne_down_dtsts <- neotoma::get_download(ne_datasets)
+tst <- ne_down_dtsts 
+ne_datasetids <-sapply(ne_down_dtsts, 
+                 function(x) {               c(x$dataset$site.data$site.id, x$dataset$site.data$site.name, x$dataset$dataset.meta$dataset.id, x$dataset$dataset.meta$dataset.name,  x$dataset$dataset.meta$dataset.type, x[[6]][2][4])
+                   })
+tst1 <- ne_datasetids [[6]][5]
+tst1
+ne_down_sites <- neotoma::get_download(ne_sites)
 # The code will run get_site for each gpid, then will bind the results, and then downloaded data
+# [SIMON / Socorro - "Operation timed out" - what is the best way to get data?  Increase limits?  Run in batches?  Also, should add code to limit to diatom dataset types]
 ```
 Find all sites within a user-specified spatial polygon
 
@@ -455,7 +472,7 @@ get_dataset for an individual state - Pennsylvania examples
 ```{R gpidExamplePenn}
 loc <- get_table(table.name='GeoPoliticalUnits') # Find the gpid for Pennsylvania
 
-# Get_dataset by lakename
+# Get_dataset by name
 Geo_PA <- get_dataset(gpid = "Pennsylvania")
 # Get by gpid
 GEO_PA1 <- get_dataset(gpid = 8412) # Pennsylvania gpid = 8412
@@ -1146,8 +1163,22 @@ Example
 
 ```
 #### Chronology
+One way to get chronology data is to first run get_download to create a download file and then run get_chroncontrol to extract the chronology data.  The example below gets chronology data from a download files with data for all sites in the northeast US.
+```{R ExtractChroncontrol}
+ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRUE, add = FALSE)
 
-
+```
+```{R ChronMetadata}
+# Get chronology metadata
+ne_chronmeta <-sapply (ne_chroncontrol, 
+                 function(x) {               c(x$meta[7])
+                 })
+as.data.frame (ne_chronmeta)
+str(ne_chronmeta)
+view (ne_chronmeta)
+```
+                 #x$dataset$dataset.meta$dataset.id, #x$dataset$dataset.meta$dataset.name,  #x$dataset$dataset.meta$dataset.type, #x[[6]][2][4])
+                 
 #### Metadata - various options
 ```{R Metadata}
 get_download()# Options within diatoms to organize it 
