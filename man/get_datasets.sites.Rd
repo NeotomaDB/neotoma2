@@ -2,13 +2,10 @@
 % Please edit documentation in R/get_datasets.R
 \name{get_datasets.sites}
 \alias{get_datasets.sites}
-\title{Get Dataset Sites}
+\title{Get Dataset from a \code{sites} object.}
 \usage{
-\method{get_datasets}{sites}(sites_o, verbose = 0)
-}
-\arguments{
-\item{datasetid}{Use a single number to extract site information}
+\method{get_datasets}{sites}(sites, verbose = 0)
 }
 \description{
-Get Dataset Sites
+Get Dataset from a \code{sites} object.
 }

@@ -7,6 +7,10 @@
 \method{get_datasets}{numeric}(datasetid, ..., verbose = 0)
 }
 \arguments{
+\item{...}{Additional parameters to get_datasets}
+
+\item{verbose}{Should the function return diagnostic text.}
+
 \item{x}{Use a single number to extract site information}
 }
 \description{
