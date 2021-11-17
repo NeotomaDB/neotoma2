@@ -4,7 +4,7 @@
 \alias{doi,publication-method}
 \title{Get a publication DOI.}
 \usage{
-\S4method{doi}{publication}(object)
+\S4method{doi}{publication}(x)
 }
 \arguments{
 \item{x}{A \code{publication} object.}

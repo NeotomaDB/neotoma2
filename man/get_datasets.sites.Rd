@@ -6,6 +6,11 @@
 \usage{
 \method{get_datasets}{sites}(sites, verbose = 0)
 }
+\arguments{
+\item{sites}{An object of class \code{sites}.}
+
+\item{verbose}{Should the function post text as it executes?}
+}
 \description{
 Get Dataset from a \code{sites} object.
 }

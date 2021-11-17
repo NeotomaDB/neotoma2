@@ -24,6 +24,7 @@ get_publications <- function(x = NA, ...) {
 #' @importFrom purrr pluck
 #' @export
 get_publications.default <- function(...) {
+  . <- ""
   baseURL <- paste0("data/publications")
   result <- parseURL(baseURL, ...) %>%
     cleanNULL() %>%
@@ -55,7 +56,7 @@ get_publications.default <- function(...) {
     attr(output, "match") <- match
     return (output)
   }) %>%
-    new("publications", publications = .data)
+    new("publications", publications = .)
   return(pubs)
 }
 #' @title Get contact information for Neotoma contributors
@@ -63,6 +64,8 @@ get_publications.default <- function(...) {
 #' @importFrom purrr pluck
 #' @export
 get_publications.numeric <- function(x, ...) {
+  . <- ""
+  
   if (length(x) > 0) {
     pubids <- paste0(x, collapse = ",")
   }
@@ -91,7 +94,7 @@ get_publications.numeric <- function(x, ...) {
                       doi = as.character(x$doi),
                       author = pubAuthors(x))
                 }) %>%
-    new("publications", publications = .data)
+    new("publications", publications = .)
   return(pubs)
 }
 #' @importFrom dplyr coalesce

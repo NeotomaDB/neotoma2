@@ -15,7 +15,7 @@ get_publications(x = NA, ...)
 
 \item{familyname}{The full or partial last name for an individual author.}
 
-\item{pubtype}{The publication type, from \code{get_tables('publicationtypes')}.}
+\item{pubtype}{The publication type, from \code{get_tables("publicationtypes")}.}
 
 \item{year}{The year the publication was released.}
 

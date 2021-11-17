@@ -109,7 +109,7 @@ setMethod(f = "names",
 #' @importFrom dplyr bind_rows
 #' @export
 setMethod(f = "show",
-          signature = "publications",
+          signature = signature(object = "publications"),
           definition = function(object) {
             map(object@publications, function(x) {
               data.frame(publicationid = x@publicationid,
@@ -175,15 +175,15 @@ setMethod(f = "c",
           signature = signature(x = "publications"),
           definition = function(x, y) {
             new("publications",
-                publications= unlist(c(x@publications,
+                publications = unlist(c(x@publications,
                                        y@publications), recursive = FALSE))
           })
 
 #' @title Print publications to screen.
-#' @param x A \code{publication} object.
+#' @param object A \code{publication} object.
 #' @export
 setMethod(f = "show",
-          signature = signature(x = "publication"),
+          signature = signature(object = "publication"),
           definition = function(object) {
             print(data.frame(publicationid = object@publicationid,
                              citation = object@citation,
@@ -192,7 +192,7 @@ setMethod(f = "show",
 
 #' @title Show matches for objects.
 #' @export
-setGeneric("showMatch", function(object) {
+setGeneric("showMatch", function(x) {
   standardGeneric("showMatch")
 })
 
@@ -201,15 +201,15 @@ setGeneric("showMatch", function(object) {
 #' @export
 setMethod(f = "showMatch",
           signature = signature(x = "publication"),
-          definition = function(object) {
-            if(!is.null(attr(object, "matches"))) {
-              print(attr(object, "matches"))
+          definition = function(x) {
+            if(!is.null(attr(x, "matches"))) {
+              print(attr(x, "matches"))
             }
           })
 
 #' @title Obtain the DOI for publications.
 #' @export
-setGeneric("doi", function(object) {
+setGeneric("doi", function(x) {
   standardGeneric("doi")
 })
 
@@ -219,8 +219,8 @@ setGeneric("doi", function(object) {
 #' @export
 setMethod(f = "doi",
           signature = signature(x = "publication"),
-          definition = function(object) {
-            object@doi
+          definition = function(x) {
+            x@doi
           })
 
 #' @title Convert a publication author to a \code{data.frame}
@@ -257,7 +257,8 @@ setMethod(f = "as.data.frame",
                                   stringsAsFactors = FALSE)
                 colnames(out) <- s
                 return(out)
-              }) %>% bind_cols()
+              }) %>%
+              bind_cols()
             table$authors <- as.data.frame(x@author)
             return(table)
           })

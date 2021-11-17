@@ -57,7 +57,7 @@ To find all datasets with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_datasets(altmin=12, altmax=25)
 
 To find all datasets in Brazil
-brazil <- "{"type": "Polygon", 
+brazil <- "{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],
  [-56.953125,-33.137551192346145],
