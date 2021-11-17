@@ -37,15 +37,15 @@ There are some namespace overlaps, for example with the `filter()` function.  De
 
 ## Site Searches
 
-The highest level object in Neotoma is the site.  Sites have spatial coordinates and, in many cases, additional metadata related to lake parameters, or other site-specific properties.
+The highest level object in Neotoma is the **site**.  Sites have spatial coordinates and, in many cases, additional metadata related to lake parameters, or other site-specific properties.
 
-Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods.
+Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined with other sites into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods for printing, plotting and exporting information.
 
 ![closeup of several Neotoma sites in the carribean.](images/siteshot.png)
 
 ### Finding sites
 
-All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` funtion, by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` funtion by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
 
 If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
 
@@ -54,14 +54,14 @@ If we're looking for a site and we know its specific identifier, we can use the 
 alex <- get_sites(24)
 alex
 
-# Search for sites with multiple IDs:
+# Search for sites with multiple IDs using c():
 multiple_sites <- get_sites(c(24, 47))
 multiple_sites
 ```
 
 #### Searching for sites by name
 
-If we're looking for a site and we know its name or a part of its name, we can search using the function with the `sitename` argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
+Often we do not know the particular `siteid`.  If we're looking for a site and we know its name or a part of its name, we can search using the function with the `sitename` argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.  This does not support multiple text strings (i.e., you can't use `c()`).
 
 ```{r getsitename}
 alex <- get_sites(sitename = "Alexander Lake")
@@ -98,14 +98,6 @@ my_site <- set_site(sitename="My Lake",
 my_site
 ```
 
-#### Accessing `set_site()` documentation 
-
-If we ever need to see the documentation for examples, we can always access the help file using `?`
-
-```
-?set_site
-```
-
 ## Datasets
 
 If you need to get to a deeper level of the sites object, you may want to look at the `get_datasets()` function.
@@ -119,6 +111,7 @@ Getting the datasets by id is the easiest call, you can also pass a vector of ID
 my_datasets <- get_datasets(c(5, 10, 15, 20))
 my_datasets
 ```
+
 You can also retrieve datasets by type directly from the API.
 
 ```{r getdatasetsbytype}
@@ -149,7 +142,7 @@ while(run) {
 }
 ```
 
-Following this we can see that there are `r length(my_offset_datasets)` datasets returned.  Each call to 
+Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.
 
 You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
 
@@ -158,13 +151,13 @@ Accessing datasets by bounding box:
 ```{r bounding box}
 
 brazil <- '{"type": "Polygon", 
-"coordinates": [[
-    [-73.125, -9.102],
-    [-56.953, -33.138],
-    [-36.563, -7.711],
-    [-68.203, 13.923],
-    [-73.125, -9.102]
-  ]]}'
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
 
 # We can make the geojson a spatial object if we want to use the
 # functionality of the `sf` package.
