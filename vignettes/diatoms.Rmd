@@ -145,9 +145,8 @@ uwall
 ###### get_sites
 To see structure of get_sites function output, run the following code:
 ```{R structure_of_get_sites_output}
-uwallf_site <- get_sites(siteid = 745) # finds site data for a site
+uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for a site
 str (uwallf_site) # shows structure of uwallf_site
-# [Simon - Above code does not work.  Can it be fixed?]
 ```
 
 ###### get_datasets
@@ -294,14 +293,16 @@ Example - get sites from multiple geopolitical units (e.g., states)
 ```{r retrieveByGeopol}
 library(dplyr)
 library(purrr)
-# Get site data for all sites in all New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY
+# Get site data for all sites in three New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY [DFC - delete some states - only 3]
 # The gpids were obtained from the Geopolitical units table 
 
-gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+gpids <- c(8412, 7990, 7934)
 ne_sites <- map(gpids, function(x)
   neotoma:::get_site(gpid = x)) %>%
   neotoma::bind()
+ne_sites
 ne_datasets <- get_dataset(ne_sites)
+ne_datasets
 ne_down_dtsts <- neotoma::get_download(ne_datasets)
 tst <- ne_down_dtsts 
 ne_datasetids <-sapply(ne_down_dtsts, 
@@ -1163,21 +1164,19 @@ Example
 
 ```
 #### Chronology
-One way to get chronology data is to first run get_download to create a download file and then run get_chroncontrol to extract the chronology data.  The example below gets chronology data from a download files with data for all sites in the northeast US.
+One way to get chronology data is to first run get_download to create a download file and then run get_chroncontrol to extract the chronology data.  The example below gets chronology data from  download files with data for all sites in the northeast US.
 ```{R ExtractChroncontrol}
+# Get chroncontrol data from a download file using get_chroncontrol
 ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRUE, add = FALSE)
 
 ```
 ```{R ChronMetadata}
-# Get chronology metadata
+# Get chronology metadata from the .meta and .parent lists
 ne_chronmeta <-sapply (ne_chroncontrol, 
-                 function(x) {               c(x$meta[7])
+                 function(x) {               c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name, x$parent$dataset.id, x$parent$dataset.type)
                  })
-as.data.frame (ne_chronmeta)
 str(ne_chronmeta)
-view (ne_chronmeta)
 ```
-                 #x$dataset$dataset.meta$dataset.id, #x$dataset$dataset.meta$dataset.name,  #x$dataset$dataset.meta$dataset.type, #x[[6]][2][4])
                  
 #### Metadata - various options
 ```{R Metadata}
