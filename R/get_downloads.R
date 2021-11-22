@@ -327,7 +327,7 @@ get_downloads.numeric <- function(datasetid, ..., complete_data = FALSE) {
   }
 
   base_url <- paste0("data/downloads/", dataset)
-  result <- parseURL(base_url)
+  result <- parseURL(base_url) # nolint
 
   output <- parse_download(result)
 

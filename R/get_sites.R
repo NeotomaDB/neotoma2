@@ -169,7 +169,7 @@ get_sites.default <- function(...) {
 
   cl <- lapply(cl, eval, envir = parent.frame())
 
-  error_check <- check_args(cl)
+  error_check <- check_args(cl) # nolint
 
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
