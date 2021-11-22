@@ -1,5 +1,6 @@
 #' @title S4 class for dataset information
-#' @description The standard object class for datasets from the Neotoma Paleoecology Database.
+#' @description The standard object class for datasets
+#'  from the Neotoma Paleoecology Database.
 #' @import sf
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
@@ -9,7 +10,6 @@
 dataset <- setClass(
                     # Set the name for the class
                     "dataset",
-                    
                     # Define the slots
                     slots = c(datasetid = "numeric",
                               datasetname = "character",
@@ -20,7 +20,6 @@ dataset <- setClass(
                               pi_list = "ANY",
                               analyst = "ANY",
                               metadata = "ANY"),
-                    
                     # Set the default values for the slot
                     prototype = list(datasetid = NA_integer_,
                                      datasetname = NA_character_,
@@ -34,19 +33,18 @@ dataset <- setClass(
 )
 
 #' @title S4 class for datasets information
-#' @description The grouped class for datasets from the Neotoma Paleoecology Database.
-datasets <- setClass(  
+#' @description The grouped class for datasets from
+#'  the Neotoma Paleoecology Database.
+datasets <- setClass(
                     # Set the name for the class
                     "datasets",
-                    
                     # Define the slots
                     slots = c(datasets = "list"),
-                    
                     # Validity functions
                     validity = function(object) {
                       all(object@datasets %>%
                             lapply(class) %>%
-                            unlist(recursive = FALSE) ==  'dataset')
+                            unlist(recursive = FALSE) ==  "dataset")
   })
 
 #' @title S4 class for collunits information
@@ -72,20 +70,23 @@ collunit <- setClass(
   })
 
 #' An S4 class for Neotoma Collection Units
-#' @description Holds Collection unit information from the Neotoma Paleoecology Database.
+#' @description Holds Collection unit information
+#'  from the Neotoma Paleoecology Database.
 #' @importFrom purrr map
 collunits <- setClass("collunits",
                       representation(collunits = "list"),
                       validity = function(object) {
-                        all(map(object@collunits, function(x) { class(x) == "collunit"}) %>%
-                              unlist())
+                        all(map(object@collunits,
+                        function(x) {
+                          class(x) == "collunit"
+                        }) %>%
+                        unlist())
                       })
 
 #' An S4 class for site information from the Neotoma Paleoecology Database.
 site <- setClass(
   # Set the name for the class
   "site",
-  
   # Define the slots
   slots = c(siteid = "numeric",
             sitename = "character",
@@ -94,7 +95,6 @@ site <- setClass(
             notes = "character",
             description = "character",
             collunits = "collunits"),
-  
   # Set the default values for the slot
   prototype = list(siteid = NA_integer_,
                    sitename = NA_character_,
@@ -103,72 +103,73 @@ site <- setClass(
                    notes = NA_character_,
                    description = NA_character_,
                    collunits = NULL) # check what would really be a NA here
-  
   # Add a validity function that can test data consistency.
   # This is not called if you have an initialize function defined!
 )
 
-#' An S4 class for multi-site information from the Neotoma Paleoecology Database.
-# TODO Add area
+#' An S4 class for multi-site information from
+#'  the Neotoma Paleoecology Database.
+
 sites <- setClass("sites",
                   representation(sites = "list"),
                   validity = function(object) {
-                    all(map(object@sites, function(x) { class(x) == "site"}) %>%
-                          unlist())
+                    all(map(object@sites, function(x) {
+                      class(x) == "site"
+                      }) %>%
+                      unlist())
                   })
-
 
 # Start "Show Method" for all Neotoma Objects
 #' @title Show Dataset Method
 setMethod(f = "show",
           signature = "dataset",
-          definition = function(object){
+          definition = function(object) {
             print(data.frame(dataset.id = object@datasetid,
                              site.name = object@datasetname,
-                             lat = mean(st_coordinates(object@location)[,2]),
-                             long = mean(st_coordinates(object@location)[,1]),
-                             type = object@datasettype), row.names=FALSE)
+                             lat = mean(st_coordinates(object@location)[, 2]),
+                             long = mean(st_coordinates(object@location)[, 1]),
+                             type = object@datasettype), row.names = FALSE)
           })
 
 #' @title Show Datasets object as a dataframe
 setMethod(f = "show",
-          signature= "datasets",
-          definition = function(object){
+          signature = "datasets",
+          definition = function(object) {
             map(object@datasets, function(x) {
               df <- data.frame(dataset.id = x@datasetid,
                                site.name = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                type = x@datasettype)
             }) %>%
               bind_rows() %>%
-              print(row.names=FALSE)
+              print(row.names = FALSE)
           })
 
 #' @title Show Site objects as a dataframe
 setMethod(f = "show",
           signature = "site",
-          definition = function(object){
+          definition = function(object) {
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[,2]),
-                             long = mean(st_coordinates(object@location)[,1]),
-                             elev = object@altitude), row.names=FALSE)
+                             lat = mean(st_coordinates(object@location)[, 2]),
+                             long = mean(st_coordinates(object@location)[, 1]),
+                             elev = object@altitude), row.names = FALSE)
           })
 
 #' @title Show Sites objects as a dataframe
 setMethod(f = "show",
-          signature= "sites",
-          definition = function(object){
+          signature = "sites",
+          definition = function(object) {
             map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                elev = x@altitude)
             }) %>%
               bind_rows() %>%
-              print(row.names=FALSE)
+              print(row.names = FALSE)
           })
 
 # End of Show Methods
@@ -176,22 +177,22 @@ setMethod(f = "show",
 # Start "SqBrackets" Methods
 #' @title Method
 setMethod(f = "[[",
-          signature= signature(x = "datasets", i = "numeric"),
-          definition = function(x, i){
+          signature = signature(x = "datasets", i = "numeric"),
+          definition = function(x, i) {
             object@sites[[i]]
           })
 
-#' Method 
+#' Method
 setMethod(f = "[[",
-          signature= signature(x = "dataset", i = "numeric"),
-          definition = function(x, i){
+          signature = signature(x = "dataset", i = "numeric"),
+          definition = function(x, i) {
             object@sites[[i]]
           })
  
-# Method 
+# Method
 setMethod(f = "[[",
-          signature= signature(x = "sites", i = "numeric"),
-          definition = function(x, i){
+          signature = signature(x = "sites", i = "numeric"),
+          definition = function(x, i) {
             object@sites[[i]]
           })
 
@@ -200,22 +201,22 @@ setMethod(f = "[[",
 # Start "length" Methods
 #' @title Length Method
 setMethod(f = "length",
-          signature= signature(x = "sites"),
-          definition = function(x){
+          signature = signature(x = "sites"),
+          definition = function(x) {
             length(x@sites)
           })
 
 setMethod(f = "length",
-          signature= signature(x = "datasets"),
-          definition = function(x){
+          signature = signature(x = "datasets"),
+          definition = function(x) {
             length(x@datasets)
           })
 
 # TODO : After show method for collunits
 # setMethod(f = "length",
-#           signature= signature(x = "collunits"),
-#           definition = function(x){
-#             length(x@collunits)
+#           signature = signature(x = "collunits"),
+#           definition = function(x) {
+#             length(x@collunits) # nolint
 #           })
 
 # End "length" methods
@@ -226,13 +227,13 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 #' @title c Method for NULL values
 setMethod(f = "c",
           signature = "missingOrNULL",
-          definition = function(x ="missingORNULL" , y){
+          definition = function(x ="missingORNULL", y) {
             y
           })
 
 #setMethod(f = "c",
 #          signature = "missingOrNULL",
-#          definition = function(y, x ="missingORNULL" ){
+#          definition = function(y, x ="missingORNULL" ) {
 #            y
 #          })
 
@@ -240,22 +241,21 @@ setMethod(f = "c",
 #' @title c Method for sites
 setMethod(f = "c",
           signature = signature("sites"),
-          definition = function(x, y){
-            new('sites',
-                sites= unlist(c(x@sites, 
+          definition = function(x, y) {
+            new("sites",
+                sites = unlist(c(x@sites,
                                        y@sites), recursive = FALSE))
             })
 
 setMethod(f = "c",
           signature = signature("datasets"),
-          definition = function(x, y){
-            new('datasets',
-                datasets= unlist(c(x@datasets, 
+          definition = function(x, y) {
+            new("datasets",
+                datasets = unlist(c(x@datasets,
                                    y@datasets), recursive = FALSE))
           })
 
 # End "c" methods
-
 
 # Start plot methods
 #' @export
@@ -264,29 +264,31 @@ setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
 })
 
 setMethod(f = "plotLeaflet",
-          signature= "sites",
-          definition = function(object, save_im=FALSE, path = ""){
+          signature = "sites",
+          definition = function(object, save_im=FALSE, path = "") {
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                elev = x@altitude,
                                description = x@description)
-              
             }) %>%
               bind_rows()
-
-            map1 <- leaflet(df1) %>% 
-              addProviderTiles(providers$Stamen.TerrainBackground) %>% 
+            map1 <- leaflet(df1) %>%
+              addProviderTiles(providers$Stamen.TerrainBackground) %>%
               addTiles() %>%
               addCircleMarkers(lng = df1$long, lat = df1$lat,
-                               popup = paste0('<b>', df1$sitename, '</b><br><b>Description:</b> ', df1$description, '<br><a href=http://apps.neotomadb.org/explorer/?siteids=',df1$siteid,'>Explorer Link</a>'),
-                                     clusterOptions = markerClusterOptions(),
-                                     options = markerOptions(riseOnHover = TRUE))
-           
-            
-            if(save_im == TRUE){
+              popup = paste0("<b>", df1$sitename,
+              "</b><br><b>Description:</b> ",
+              df1$description,
+              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+              df1$siteid,
+              ">Explorer Link</a>"),
+              clusterOptions = markerClusterOptions(),
+              options = markerOptions(riseOnHover = TRUE))
+
+            if (save_im == TRUE) {
               mapshot(map1, file = path)
             }
             map1
@@ -295,38 +297,32 @@ setMethod(f = "plotLeaflet",
 
 # Start writeCSV methods
 setMethod(f = "write.csv",
-          signature= "sites",
-          definition = function(object, path){
+          signature = "sites",
+          definition = function(object, path) {
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                elev = x@altitude,
                                description = x@description)
-              
             }) %>%
               bind_rows()
-            
             write.csv(df1, path, row.names = FALSE)
-            
           })
 
 setMethod(f = "write.csv",
-          signature= "datasets",
-          definition = function(object, path){
+          signature = "datasets",
+          definition = function(object, path) {
             df1 <- map(object@datasets, function(x) {
               df <- data.frame(siteid = x@datasetid,
                                sitename = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                type = x@datasettype)
-              
             }) %>%
               bind_rows()
-            
             write.csv(df1, path, row.names = FALSE)
-            
           }
 )
 
@@ -337,15 +333,14 @@ setGeneric("showDatasets", function(object) {
 })
 
 setMethod(f = "showDatasets",
-          signature= "sites",
-          definition = function(object){
+          signature = "sites",
+          definition = function(object) {
             my_datasets <- c()
-            for(i in 1:length(object@sites)){
-              my_dataset <- object@sites[[i]]@collunits@collunits[[1]]@datasets@datasets[[1]]
-              
+            for (i in seq_len(length(object@sites))) {
+              collunits_call <- object@sites[[i]]@collunits@collunits[[1]]
+              my_dataset <- collunits_call@datasets@datasets[[1]]
               my_datasets <- append(my_datasets, my_dataset)
-              my_datasets2 <- new('datasets', datasets = my_datasets)
-              
+              my_datasets2 <- new("datasets", datasets = my_datasets)
             }
             return(my_datasets2)
           })
@@ -357,57 +352,53 @@ setGeneric("datasetsCSV", function(object, path) {
 })
 
 setMethod(f = "datasetsCSV",
-          signature= "datasets",
-          definition = function(object, path){
+          signature = "datasets",
+          definition = function(object, path) {
             df1 <- map(object@datasets, function(x) {
               df <- data.frame(siteid = x@datasetid,
                                sitename = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[,2]),
-                               long = mean(st_coordinates(x@location)[,1]),
+                               lat = mean(st_coordinates(x@location)[, 2]),
+                               long = mean(st_coordinates(x@location)[, 1]),
                                type = x@datasettype)
-              
             }) %>%
               bind_rows()
-            
             write.csv(df1, path, row.names = FALSE)
-            
           }
 )
 
 
-# Method 
-
+# Method
 #' @export
 setMethod(f = "[[",
-          signature= signature(x = "sites", i = "numeric"),
-          definition = function(x, i){
+          signature = signature(x = "sites", i = "numeric"),
+          definition = function(x, i) {
             if (length(i) == 1) {
-              out <- new('sites', x@sites[[i]])  
+              out <- new("sites", x@sites[[i]])
             } else {
-              out <- purrr::map(i, function(z) new('site', x@sites[[z]]))
-              out <- new('sites', sites=out)
+              out <- purrr::map(i, function(z) new("site", x@sites[[z]]))
+              out <- new("sites", sites = out)
             }
             return(out)
           })
 
-#' Method 
+#' Method
 setMethod(f = "show",
           signature = "site",
-          definition = function(object){
+          definition = function(object) {
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[,2]),
-                             long = mean(st_coordinates(object@location)[,1]),
-                             elev = object@altitude), row.names=FALSE)
+                             lat = mean(st_coordinates(object@location)[, 2]),
+                             long = mean(st_coordinates(object@location)[, 1]),
+                             elev = object@altitude), row.names = FALSE)
           })
 
 #' @export
 setMethod(f = "c",
           signature = signature("sites"),
-          definition = function(x, ...){
+          definition = function(x, ...) {
             input <- list(x, ...) %>%
-              purrr::map(function(y) y@sites) %>% 
+              purrr::map(function(y) y@sites) %>%
               unlist(., recursive = FALSE)
-            new('sites',
+            new("sites",
                 sites = input)
           })
