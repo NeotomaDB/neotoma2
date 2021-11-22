@@ -4,12 +4,12 @@
 \alias{get_downloads}
 \title{get_downloads}
 \usage{
-get_downloads(datasetid = NA, ..., complete_data = FALSE)
+get_downloads(x = NA, ..., complete_data = FALSE)
 }
 \arguments{
-\item{...}{accepted arguments: sites, datasets}
-
 \item{x}{Use a single number to extract site information}
+
+\item{...}{accepted arguments: sites, datasets}
 }
 \value{
 The function returns either a single item of class

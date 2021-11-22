@@ -47,7 +47,7 @@
 #' brazil_sites <- get_sites(loc = brazil[1])
 #' }
 #' @export
-get_sites <- function(x=NA, ...) {
+get_sites <- function(x = NA, ...) {
   if (!missing(x)) {
     UseMethod("get_sites", x)
   } else {

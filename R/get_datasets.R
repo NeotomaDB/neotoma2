@@ -62,9 +62,9 @@
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' }
 #' @export
-get_datasets <- function(datasetid = NA, ...) {
-  if (!missing(datasetid)) {
-    UseMethod("get_datasets", datasetid)
+get_datasets <- function(x = NA, ...) {
+  if (!missing(x)) {
+    UseMethod("get_datasets", x)
   } else {
     UseMethod("get_datasets", NA)
   }
@@ -235,11 +235,11 @@ parse_dataset <- function(result) { # nolint
 }
 
 #' @title Get Dataset Default
-#' @param datasetid Use a single number to extract site information
+#' @param x Use a single number to extract site information
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
-get_datasets.default <- function(..., complete_data = FALSE) { # nolint
+get_datasets.default <- function(x, ..., complete_data = FALSE) { # nolint
 
   cl <- as.list(match.call())
 
@@ -321,19 +321,19 @@ get_datasets.default <- function(..., complete_data = FALSE) { # nolint
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
 #' @export
-get_datasets.numeric <- function(datasetid, ...) {
-  use_na <- function(datasetid, type) {
-    if (is.na(datasetid)) {
+get_datasets.numeric <- function(x, ...) {
+  use_na <- function(x, type) {
+    if (is.na(x)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
     } else {
-      return(datasetid)
+      return(x)
     }
   }
 
-  if (length(datasetid) > 0) {
-    dataset <- paste0(datasetid, collapse = ",")
+  if (length(x) > 0) {
+    dataset <- paste0(x, collapse = ",")
   }
 
   base_url <- paste0("data/datasets/", dataset)
@@ -351,10 +351,10 @@ get_datasets.numeric <- function(datasetid, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param sites An object of class \code{sites}.
 #' @export
-get_datasets.sites <- function(sites) {
+get_datasets.sites <- function(x, ...) {
   # List of datasets ids
   dataset_list <- c()
-  colls <- sites@sites[[i]]@collunits@collunits
+  colls <- x@sites[[i]]@collunits@collunits
   for (i in seq_len(length(sites))) {
     for (j in seq_len(length(colls))) {
       dats <- colls[[j]]@datasets@datasets

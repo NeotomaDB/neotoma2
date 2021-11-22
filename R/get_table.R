@@ -3,10 +3,9 @@
 #' @param x Table name (consult \url{https://open.neotomadb/dbschema} for a complete list of table names.
 #' @param limit Default 25 records
 #' @param offset Default 0.
-#' @examples
+#' @examples \dontrun{
 #' # Returns only the first 25 specimen records.
 #' someSpec <- get_table('specimens')
-#' dim(someTaxa) 
 #' # Loop with the offset to get all specimens:
 #' okay <- TRUE
 #' counter <- 1
@@ -20,6 +19,7 @@
 #'   }
 #' }
 #' specimens <- specimens %>% dplyr::bind_rows()
+#' }
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map
 #' @export

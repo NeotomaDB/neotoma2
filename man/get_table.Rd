@@ -17,9 +17,9 @@ get_table(x, limit = 25, offset = 0)
 Call Neotoma and return a table (with limits & offsets for large tables)
 }
 \examples{
+\dontrun{
 # Returns only the first 25 specimen records.
 someSpec <- get_table('specimens')
-dim(someTaxa) 
 # Loop with the offset to get all specimens:
 okay <- TRUE
 counter <- 1
@@ -33,4 +33,5 @@ while(okay) {
   }
 }
 specimens <- specimens \%>\% dplyr::bind_rows()
+}
 }

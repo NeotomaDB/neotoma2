@@ -4,7 +4,7 @@
 \alias{get_datasets.sites}
 \title{Get Dataset from a \code{sites} object.}
 \usage{
-\method{get_datasets}{sites}(sites)
+\method{get_datasets}{sites}(x, ...)
 }
 \arguments{
 \item{sites}{An object of class \code{sites}.}

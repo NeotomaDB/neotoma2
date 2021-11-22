@@ -4,13 +4,13 @@
 \alias{get_datasets}
 \title{get_datasets}
 \usage{
-get_datasets(datasetid = NA, ...)
+get_datasets(x = NA, ...)
 }
 \arguments{
+\item{x}{Use a single number to extract site information}
+
 \item{...}{accepted arguments: sites_object, contactid, datasettype,
 altmin, altmax, loc, ageyoung, ageold, ageof}
-
-\item{x}{Use a single number to extract site information}
 }
 \value{
 The function returns either a single item of class

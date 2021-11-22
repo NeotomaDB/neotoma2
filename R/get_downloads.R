@@ -64,13 +64,15 @@
 #' brazil_downloads <- get_downloads(brazil_datasets)
 #' }
 #' @export
-get_downloads <- function(datasetid = NA, ..., complete_data = FALSE) {
-  if (!missing(datasetid)) {
-    UseMethod("get_downloads", datasetid)
+get_downloads <- function(x = NA, ..., complete_data = FALSE) {
+  if (!missing(x)) {
+    UseMethod("get_downloads", x)
   }
 }
 
 parse_download <- function(result) { # nolint
+  variablename <- element <- taxongroup <- NULL
+  ecologicalgroup <- taxonid <- value <- NULL
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
@@ -297,21 +299,21 @@ parse_download <- function(result) { # nolint
 #' @param datasetid Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(datasetid, ..., complete_data = FALSE) {
+get_downloads.numeric <- function(x, ..., complete_data = FALSE) {
 
-  use_na <- function(datasetid, type) {
-    if (is.na(datasetid)) {
+  use_na <- function(x, type) {
+    if (is.na(x)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
     } else {
-      return(datasetid)
+      return(x)
     }
   }
 
   cl <- as.list(match.call())
 
-  possible_arguments <- c("offset", "all_data", "sites_o", "datasetid")
+  possible_arguments <- c("offset", "all_data", "datasetid")
 
   cl[[1]] <- NULL
 
@@ -322,8 +324,8 @@ get_downloads.numeric <- function(datasetid, ..., complete_data = FALSE) {
     }
   }
 
-  if (length(datasetid) > 0) {
-    dataset <- paste0(datasetid, collapse = ",")
+  if (length(x) > 0) {
+    dataset <- paste0(x, collapse = ",")
   }
 
   base_url <- paste0("data/downloads/", dataset)
@@ -335,24 +337,24 @@ get_downloads.numeric <- function(datasetid, ..., complete_data = FALSE) {
 }
 
 #' @title get_downloads sites
-#' @param sites_o sites object
+#' @param x sites object
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.sites <- function(sites_o, ..., complete_data = FALSE) {
+get_downloads.sites <- function(x, ..., complete_data = FALSE) {
 
-  use_na <- function(datasetid, type) {
-    if (is.na(datasetid)) {
+  use_na <- function(x, type) {
+    if (is.na(x)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
     } else {
-      return(datasetid)
+      return(x)
     }
   }
 
   cl <- as.list(match.call())
 
-  possible_arguments <- c("offset", "all_data", "sites_o", "datasetid")
+  possible_arguments <- c("offset", "all_data", "datasetid")
 
   cl[[1]] <- NULL
 
@@ -364,8 +366,8 @@ get_downloads.sites <- function(sites_o, ..., complete_data = FALSE) {
     }
 
   dataset_list <- c()
-  for (i in seq_len(length(sites_o))) {
-    collunits_call <- sites_o@sites[[i]]@collunits@collunits
+  for (i in seq_len(length(x))) {
+    collunits_call <- x@sites[[i]]@collunits@collunits
     for (j in seq_len(length(collunits_call))) {
       for (k in seq_len(length(collunits_call[[j]]@datasets@datasets))) {
         datasetid <- collunits_call[[j]]@datasets@datasets[[k]]@datasetid
