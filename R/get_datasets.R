@@ -6,25 +6,28 @@
 #' @description
 #' Information for Fossil Datasets
 #' Look for a dataset details using only a dataset ID or for multiple metadata.
-#' Displays a table with the following columns: siteid, sitename, lat, long, and elev.
+#' Displays a table with the following columns:
+#' siteid, sitename, lat, long, and elev.
 #' The function takes parameters defined by the user and returns a sites object
 #' with more detailed information regarding datasets.
 #' The user may define all or none of the possible fields.
 #' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
-#' @param ... accepted arguments: sites_object, contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
-#' @return The function returns either a single item of class \code{"try-error"} describing
-#'    the reason for failure (either mis-defined parameters or an error from the Neotoma API),
-#'    or a table of sites, with rows corresponding to the number of individual sites and datasets
-#'    returned by the Neotoma API.
-#'    Each "site" object contains 6 parameters that can be accessed as well:
-#'    siteid, sitename, location, altitude, description, limited collection units information.
+#' @param ... accepted arguments: sites_object, contactid, datasettype,
+#' altmin, altmax, loc, ageyoung, ageold, ageof
+#' @return The function returns either a single item of class
+#' \code{"try-error"} describing the reason for failure
+#' (either mis-defined parameters or an error from the Neotoma API),
+#' or a table of sites, with rows corresponding to the number of individual
+#' sites and datasets returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
 #' \item{ \code{siteid} }{site ID number}
 #' \item{ \code{sitename} }{site"s name}
 #' \item{ \code{location} }{sf object that describes site"s location}
 #' \item{ \code{description} }{}
 #' \item{ \code{collunits} }{limited information on collunits}
-#'   Each "collection unit" embedded in the "sites" object contains 6 parameters that can be accessed as well:
+#' Each "collection unit" embedded in the "sites" object contains 6 parameters
+#' that can be accessed as well:
 #' \item{ \code{collunitid}}{collection unit ID number}
 #' \item{ \code{handle} }{collection unit"s handle}
 #' \item{ \code{collunitname} }{collection unit"s name}
@@ -32,7 +35,8 @@
 #' \item{ \code{substrate} }{substrate}
 #' \item{ \code{location} }{sf object that describes site"s location}
 #' \item{ \code{datasets} }{detailed information regarding dataset}
-#'   Each "dataset" nested in the "collection unit" contains the following detail of information:
+#' Each "dataset" nested in the "collection unit" contains the following detail
+#' of information:
 #' \item{ \code{datasetid} }{dataset ID number}
 #' \item{ \code{datasetname} }{site"s name}
 #' \item{ \code{datasettype} }{type of data found}
@@ -67,24 +71,25 @@ get_datasets <- function(datasetid = NA, ...) {
 }
 
 parse_dataset <- function(result) {
-  fixNull <- function(x) {
-    for (i in 1:length(x)) {
+  fix_null <- function(x) {
+    for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
         x[[i]] <- NA
       } else {
         if (class(x[[i]]) == "list") {
-          x[[i]] <- fixNull(x[[i]])
+          x[[i]] <- fix_null(x[[i]])
         }
       }
     }
     return(x)
   }
 
-  result <- result %>% fixNull()
+  result <- result %>%
+    fix_null()
   result_length <- length(result[2]$data)
 
   sites <- c()
-  for (i in 1:result_length) {
+  for (i in seq_len(result_length)) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
@@ -110,45 +115,51 @@ parse_dataset <- function(result) {
 
     if (is.null(location)) {
       if (is.na(location2)) {
-        location <- st_sf(st_sfc())
+        location <- sf::st_sf(sf::st_sfc())
       }else{
-        location <- st_read(result[2]$data[[i]]$sites$site$geography, quiet = TRUE)
+        location <- sf::st_read(location2, quiet = TRUE)
       }
     }else{
-      location <- st_read(result[2]$data[[i]]$site$geography, quiet = TRUE)
+      location <- sf::st_read(location, quiet = TRUE)
     }
 
     # Altitude
     if (is.null(result[2]$data[[i]]$site$altitude)) {
       elev <- result[2]$data[[i]]$sites$site$altitude
       if (is.logical(elev)) {
-        elev <- NA_integer_}
+        elev <- NA_integer_
+        }
     }else{
       elev <- result[2]$data[[i]]$site$altitude
       if (is.logical(elev)) {
-        elev <- NA_integer_}
+        elev <- NA_integer_
+        }
     }
 
     # Description
     if (is.null(result[2]$data[[i]]$site$sitedescription)) {
       description <- result[2]$data[[i]]$sites$site$sitedescription
       if (is.logical(description)) {
-        description <- NA_character_}
+        description <- NA_character_
+        }
     }else{
       description <- result[2]$data[[i]]$site$sitedescription
       if (is.logical(description)) {
-        description <- NA_character_}
+        description <- NA_character_
+        }
     }
 
     # Notes
     if (is.null(result[2]$data[[i]]$site$sitenotes)) {
       notes <- result[2]$data[[i]]$sites$site$sitenotes
       if (is.logical(notes)) {
-        notes <- NA_character_}
+        notes <- NA_character_
+        }
     }else{
       notes <- result[2]$data[[i]]$site$sitenotes
       if (is.logical(notes)) {
-        notes <- NA_character_}
+        notes <- NA_character_
+        }
     }
 
     # Datasets
@@ -161,9 +172,9 @@ parse_dataset <- function(result) {
       if (is.null(result[2]$data[[i]]$site$datasets[[j]]$datasetnotes)) {
         datasetnotes <- NA_character_
         if (is.logical(datasetnotes)) {
-          datasetnotes <- NA_character_}
+          datasetnotes <- NA_character_
+          }
       }else{
-        #datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
         datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
         if (is.logical(datasetnotes)) {
           datasetnotes <- NA_character_}
@@ -179,14 +190,14 @@ parse_dataset <- function(result) {
     dataset_list <- append(dataset_list, new_dataset)
     datasets_list <- new("datasets", datasets = dataset_list)
 
-    ## Collunits
+    # Collunits
     # Coll Unit ID
     if (is.null(result[2]$data[[i]]$site$collectionunitid)) {
       collunitid <- result[2]$data[[i]]$sites$site$collectionunitid
     }else{
       collunitid <- result[2]$data[[i]]$site$collectionunitid
     }
-    colldate <- as.Date(character (0))
+    colldate <- as.Date(character(0))
 
     # Coll Unit Handle
     if (is.null(result[2]$data[[i]]$site$handle)) {
@@ -224,21 +235,24 @@ parse_dataset <- function(result) {
 
 #' @title Get Dataset Default
 #' @param datasetid Use a single number to extract site information
-#' @param ... accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
+#' @param ... contactid, datasettype, 
+#' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
-get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
+get_datasets.default <- function(..., complete_data = FALSE) {
 
   cl <- as.list(match.call())
 
   possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
                           "ageyoung", "ageold", "ageof", "limit", "offset",
-                          "all_data", "sites_o", "verbose")
+                          "all_data", "sites_o")
 
   cl[[1]] <- NULL
 
   for (name in names(cl)) {
     if (!(name %in% possible_arguments)) {
-      message(paste0(name, " is not an allowed argument. Argument will be ignored. Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+      message1 <- " is not an allowed argument. \n
+      Allowed arguments: sitename, altmax, altmin, loc"
+      message(paste0(name, message1))
     }
   }
 
@@ -271,26 +285,26 @@ get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
 
-      my_bbox <- st_as_sfc(my_bbox)
+      my_bbox <- sf::st_as_sfc(my_bbox)
       new_geojson <- geojsonsf::sfc_geojson(my_bbox)
       new_geojson <- new_geojson[1]
 
-      baseURL <- paste0("data/datasets?loc=", new_geojson[1])
+      base_url <- paste0("data/datasets?loc=", new_geojson[1])
       for (name in names(cl)) {
         if (!(name == "loc")) {
-          baseURL <- paste0(baseURL, "&", name, "=", paste0(cl[name]))
+          base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
         }
       }
-      result <- parseURL(baseURL) %>%
+      result <- parseURL(base_url) %>%
         cleanNULL()
     } else {
-      baseURL <- paste0("data/datasets")
-      result <- parseURL(baseURL, ...) %>%
+      base_url <- paste0("data/datasets")
+      result <- parseURL(base_url, ...) %>%
         cleanNULL()
     }
   } else {
-    baseURL <- paste0("data/datasets")
-    result <- parseURL(baseURL, ...) %>%
+    base_url <- paste0("data/datasets")
+    result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
 
@@ -298,10 +312,6 @@ get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
     return(NULL)
   }else{
     output <- parse_dataset(result)
-    if (verbose == 1) {
-      cat("A site object containing", length(result[2]$data),
-          "sites and 5 parameters. \n")
-    }
     return(output)
   }
 }
@@ -309,10 +319,9 @@ get_datasets.default <- function(..., complete_data = FALSE, verbose = 0) {
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
-#' @param verbose Should the function return diagnostic text.
 #' @export
-get_datasets.numeric <- function(datasetid, ..., verbose = 0) {
-  useNA <- function(datasetid, type) {
+get_datasets.numeric <- function(datasetid, ...) {
+  use_na <- function(datasetid, type) {
     if (is.na(datasetid)) {
       return(switch(type,
                     "char" = NA_character_,
@@ -326,16 +335,12 @@ get_datasets.numeric <- function(datasetid, ..., verbose = 0) {
     dataset <- paste0(datasetid, collapse = ",")
   }
 
-  baseURL <- paste0("data/datasets/", dataset)
-  result <- parseURL(baseURL)
+  base_url <- paste0("data/datasets/", dataset)
+  result <- neotoma2::parseURL(base_url)
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
     output <- parse_dataset(result)
-    if (verbose == 1) {
-      cat("A site object containing", result_length,
-          "sites and 6 parameters. \n")
-    }
     return(output)
   }else{
     return(NULL)
@@ -344,22 +349,21 @@ get_datasets.numeric <- function(datasetid, ..., verbose = 0) {
 
 #' @title Get Dataset from a \code{sites} object.
 #' @param sites An object of class \code{sites}.
-#' @param verbose Should the function post text as it executes?
 #' @export
-get_datasets.sites <- function(sites, verbose = 0) {
+get_datasets.sites <- function(sites) {
   # List of datasets ids
   dataset_list <- c()
+  colls <- sites@sites[[i]]@collunits@collunits
   for (i in seq_len(length(sites))) {
-    for (j in seq_len(length(sites@sites[[i]]@collunits@collunits))) {
-      for (k in 1:length(sites@sites[[i]]@collunits@collunits[[j]]@datasets@datasets)) {
-        datasetid <- sites@sites[[i]]@collunits@collunits[[j]]@datasets@datasets[[k]]@datasetid
+    for (j in seq_len(length(colls))) {
+      dats <- colls[[j]]@datasets@datasets
+      for (k in seq_len(length(dats))) {
+        datasetid <- colls[[j]]@datasets@datasets[[k]]@datasetid
         dataset_list <- c(dataset_list, datasetid)
       }
     }
   }
 
-  output <- get_datasets(dataset_list, verbose = verbose)
+  output <- get_datasets(dataset_list)
   return(output)
 }
-
-# TODO: Handle error of datasettypes - make sure only accepted types are passed; table in API not working
