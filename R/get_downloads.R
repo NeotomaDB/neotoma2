@@ -70,7 +70,7 @@ get_downloads <- function(datasetid = NA, ..., complete_data = FALSE) {
   }
 }
 
-parse_download <- function(result) {
+parse_download <- function(result) { # nolint
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {

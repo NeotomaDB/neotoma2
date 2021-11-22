@@ -70,7 +70,7 @@ get_datasets <- function(datasetid = NA, ...) {
   }
 }
 
-parse_dataset <- function(result) {
+parse_dataset <- function(result) { # nolint
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
@@ -177,7 +177,8 @@ parse_dataset <- function(result) {
       }else{
         datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
         if (is.logical(datasetnotes)) {
-          datasetnotes <- NA_character_}
+          datasetnotes <- NA_character_
+          }
       }
 
       new_dataset <- new("dataset",
@@ -235,10 +236,10 @@ parse_dataset <- function(result) {
 
 #' @title Get Dataset Default
 #' @param datasetid Use a single number to extract site information
-#' @param ... contactid, datasettype, 
+#' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
-get_datasets.default <- function(..., complete_data = FALSE) {
+get_datasets.default <- function(..., complete_data = FALSE) { # nolint
 
   cl <- as.list(match.call())
 
@@ -269,8 +270,8 @@ get_datasets.default <- function(..., complete_data = FALSE) {
   if ("loc" %in% names(cl)) {
     if (is.numeric(cl$loc)) {
       coords <- cl$loc
-      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2], 
-                               ymax = coords[3], ymin = coords[4]), 
+      my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2],
+                               ymax = coords[3], ymin = coords[4]),
                                crs = st_crs(4326))
       if (is.na(my_bbox$xmin)) {
         stop("Numeric coordinates need to be an array of 4 units.")

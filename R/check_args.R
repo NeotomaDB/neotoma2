@@ -12,7 +12,7 @@
 #' @references
 #' Neotoma Project Website: http://www.neotomadb.org
 
-check_args <- function(cl) {
+check_args <- function(cl) { # nolint
 
   error <- list(flag = 0,
                 message = list())
@@ -21,28 +21,32 @@ check_args <- function(cl) {
   if ("sitename" %in% names(cl)) {
     if (!is.character(cl$sitename)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("Sitename should be a character")
+      error$message[[length(error$message) + 1]] <- paste0("Sitename
+       should be a character")
     }
   }
 
   if ("altmin" %in% names(cl)) {
     if (!is.numeric(cl$altmin)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("altmin should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("altmin
+       should be a number")
     }
   }
 
   if ("altmax" %in% names(cl)) {
     if (!is.numeric(cl$altmax)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("altmax should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("altmax
+       should be a number")
     }
   }
 
   if (("altmax" %in% names(cl)) & ("altmin" %in% names(cl))) {
     if (cl$altmax < cl$altmin) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("altmax cannot be smaller than altmin")
+      error$message[[length(error$message) + 1]] <- paste0("altmax
+       cannot be smaller than altmin")
     }
   }
 
@@ -51,49 +55,54 @@ check_args <- function(cl) {
       if (is.numeric(cl$loc)) {
         if (length(cl$loc) != 4) {
           error$flag <- 1
-          error$message[[length(error$message) + 1]] <- paste0("loc must be a geojson string or a 4 coordinate array")
+          error$message[[length(error$message) + 1]] <- paste0("loc
+           must be a geojson string or a 4 coordinate array")
         }
       }
       }
   }
 
-
-  # Datasests accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
+  # Datasests accepted arguments: contactid,
+  # datasettype, altmin, altmax, loc, ageyoung, ageold, ageof
 
   if ("contactid" %in% names(cl)) {
     if (!is.numeric(cl$contactid)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("contactid should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("contactid
+       should be a number")
     }
   }
 
   if ("datasettype" %in% names(cl)) {
     if (!is.character(cl$datasettype)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("datasettype should be a character")
+      error$message[[length(error$message) + 1]] <- paste0("datasettype
+       should be a character")
     }
   }
 
   if ("ageyoung" %in% names(cl)) {
     if (!is.numeric(cl$ageyoung)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("ageyoung should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("ageyoung
+       should be a number")
     }
   }
 
   if ("ageold" %in% names(cl)) {
     if (!is.numeric(cl$ageold)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("ageold should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("ageold
+       should be a number")
     }
   }
 
   if ("ageof" %in% names(cl)) {
     if (!is.numeric(cl$ageof)) {
       error$flag <- 1
-      error$message[[length(error$message) + 1]] <- paste0("ageof should be a number")
+      error$message[[length(error$message) + 1]] <- paste0("ageof
+       should be a number")
     }
   }
-  return(list(cl,error))
-
+  return(list(cl, error))
 }

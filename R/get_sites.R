@@ -151,7 +151,7 @@ parse_site <- function(result) {
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc
 #' @export
-get_sites.default <- function(...) {
+get_sites.default <- function(...) { # nolint
 
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin")
@@ -180,7 +180,7 @@ get_sites.default <- function(...) {
   if ("loc" %in% names(cl)) {
     if (is.numeric(cl$loc)) {
       coords <- cl$loc
-      boxx<- c(xmin = coords[1], xmax = coords[2])
+      boxx <- c(xmin = coords[1], xmax = coords[2])
       boxy <- c(ymax = coords[3], ymin = coords[4])
       box <- c(boxx, boxy)
       my_bbox <- sf::st_bbox(box, crs = sf::st_crs(4326))
@@ -206,7 +206,7 @@ get_sites.default <- function(...) {
       new_geojson <- new_geojson[1]
 
       base_url <- paste0("data/sites?loc=", new_geojson[1])
-      for(name in names(cl)) {
+      for (name in names(cl)) {
         if (!(name == "loc")) {
           base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
         }

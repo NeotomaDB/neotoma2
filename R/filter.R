@@ -13,7 +13,7 @@ filter <- function(x, ...) {
 }
 
 #' @export
-filter.default <- function(x, ...) {
+filter.default <- function(x, ...) {  # nolint
   # Naming the Dots
   cl <- as.list(match.call())
   cl[1] <- NULL
@@ -32,12 +32,12 @@ filter.default <- function(x, ...) {
       my_list <- list(long = cl[[i]])
       calls_list <- append(calls_list, my_list)
     }
-    if (str_detect(txt, 'elev')) {
+    if (str_detect(txt, "elev")) {
       # Appending elevation call
       my_list <- list(elev = cl[[i]])
       calls_list <- append(calls_list, my_list)
     }
-    if (str_detect(txt, 'datasettype')) {
+    if (str_detect(txt, "datasettype")) {
       # Appending datasettype call
       my_list <- list(datasettype = cl[[i]])
       calls_list <- append(calls_list, my_list)
@@ -46,8 +46,8 @@ filter.default <- function(x, ...) {
 
   for (i in names(calls_list)) {
     if (!(i %in% c("lat", "long", "elev", "datasettype", "loc")))
-      message(paste0(i, " is not a valid parameter. 
-      It will not be used for filtering"))
+      message(paste0(i, " is not a valid parameter.
+       It will not be used for filtering"))
   }
   sites <- c()
 
@@ -107,9 +107,9 @@ filter.default <- function(x, ...) {
         }
 
         # TODO: Check for loc element
-        datasets_names <- list(lat = datasets_lat,  
-                               long = datasets_long, 
-                               elev = datasets_elev, 
+        datasets_names <- list(lat = datasets_lat,
+                               long = datasets_long,
+                               elev = datasets_elev,
                                datasettype = datasets_type)
 
         if (!("datasettype" %in% names(calls_list))) {
@@ -158,10 +158,12 @@ filter.default <- function(x, ...) {
   }
 
   if (!is.null(sites)) {
-    sites <- new("sites", sites = sites)}
+    sites <- new("sites", sites = sites)
+    }
 
   if (exists("sites")) {
     return(sites)
     }else{
-      return(message("No datasets match your conditions."))}
+      return(message("No datasets match your conditions."))
+      }
 }
