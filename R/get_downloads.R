@@ -91,6 +91,7 @@ parse_download <- function(result) { # nolint
 
   sites <- c()
   taxon_table <- data.frame()
+  chron_table <- data.frame()
   df_counts <- data.frame()
   for (i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
@@ -278,9 +279,11 @@ parse_download <- function(result) { # nolint
 
           notes <- chron_call$chronology$notes
           agemodel <- chron_call$chronology$agemodel
-          older <- chron_call$chronology$agerange$ageboundolder
-          younger <- chron_call$chronology$agerange$ageboundyounger
-          agerange_list <- c(older, younger)
+          older_ <- chron_call$chronology$agerange$ageboundolder
+          younger_ <- chron_call$chronology$agerange$ageboundyounger
+          agerange_list <- c()
+          agerange_list$older <- older_
+          agerange_list$younger <- younger_
 
           dateprep <- as.Date(chron_call$chronology$dateprepared)
 
@@ -300,6 +303,22 @@ parse_download <- function(result) { # nolint
               }
             }
 
+        # Chroncontrols DF
+
+        df <- chronology_call[[j]]$chronology$chroncontrols %>%
+          map(function(x) {
+            as.data.frame(x)
+          }) %>%
+          bind_rows()
+
+        df_sample <- df %>%
+          select(depth, thickness, agelimitolder, chroncontrolid, 
+          agelimityounger, chroncontrolage, chroncontroltype)
+          chron_table <- rbind(chron_table, df_sample) %>%
+          distinct()
+
+        # End chronologies
+
         } else {
           notes <- NA_character_
           agemodel <- NA_character_
@@ -308,6 +327,7 @@ parse_download <- function(result) { # nolint
           modelagetype <- NA_character_
           chronologyname <- NA_character_
           contact_list <- c()
+          df_sample <- data.frame()
         }
 
         new_chronology <- new("chronology",
@@ -319,7 +339,7 @@ parse_download <- function(result) { # nolint
                             dateprepared = dateprep,
                             modelagetype = modelagetype,
                             chronologyname = chronologyname,
-                            chroncontrols = data.frame())
+                            chroncontrols = df_sample)
 
       chronology_list <- append(chronology_list, new_chronology)
       }
