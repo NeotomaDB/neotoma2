@@ -44,6 +44,55 @@ datasets <- setClass(
                             unlist(recursive = FALSE) ==  "dataset")
   })
 
+#' @title S4 class for chronologies information
+#' @description The grouped class for chronologies
+#'  frrom the Neotoma Paleoecology Database.
+chronology <- setClass(
+  # Set the name for the class
+  "chronology",
+
+  # Define the slots
+  slots = c(chronology = "numeric",
+            chronologyid = "numeric",
+            depth = "numeric",
+            geochron = "ANY",
+            thickness = "numeric",
+            chroncontrolid = "numeric",
+            agelimitolder = "numeric",
+            agelimityounger = "numeric",
+            chroncontrolage = "numeric",
+            chroncontroltype = "character"),
+
+  # Set the default values for the slot
+  prototype = list(chronology = NA_integer_,
+                   chronologyid = NA_integer_,
+                   depth = NA_integer_,
+                   geochron = data.frame(),
+                   thickness = NA_integer_,
+                   chroncontrolid = NA_integer_,
+                   agelimitolder = NA_integer_,
+                   agelimityounger = NA_integer_,
+                   chroncontrolage = NA_integer_,
+                   chroncontroltype = NA_character_),
+)
+
+#' @title S4 class for chronologies information
+#' @description The grouped class for datasets
+#'  from the Neotoma Paleoecology Database.
+chronologies <- setClass(
+  # Set the name for the class
+  "chronologies",
+
+  # Define the slots
+  slots = c(chronologies = "list"),
+
+  # Validity functions
+  validity = function(object) {
+    all(object@chronologies %>%
+          lapply(class) %>%
+          unlist(recursive = FALSE) ==  "chronology")
+  })
+
 #' @title S4 class for collunits information
 collunit <- setClass(
   # Set the name for the class
@@ -54,17 +103,17 @@ collunit <- setClass(
             colldate = "Date",
             substrate = "character",
             location = "sf",
-            datasets = "datasets"),
+            datasets = "datasets",
+            chronologies = "chronologies"),
   prototype = list(collunitid = NA_integer_,
                    handle = NA_character_,
                    collunitname = NA_character_,
                    colldate = as.Date(character(0)),
                    substrate = NA_character_,
                    location = st_sf(st_sfc()),
-                   datasets = NULL),
-  validity = function(object) {
-    !is.na(object@collunitid)
-  })
+                   datasets = NULL,
+                   chronologies = NULL)
+                   )
 
 #' An S4 class for Neotoma Collection Units
 #' @description Holds Collection unit information

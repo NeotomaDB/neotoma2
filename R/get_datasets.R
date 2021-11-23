@@ -211,7 +211,9 @@ parse_dataset <- function(result) { # nolint
                         collunitid = collunitid,
                         colldate = colldate,
                         handle = handle,
-                        datasets = datasets_list)
+                        datasets = datasets_list,
+                        chronologies = new("chronologies",
+                                 chronologies = list()))
 
     coll_units <- append(coll_units, new_collunit)
     coll_units <- new("collunits", collunits = coll_units)

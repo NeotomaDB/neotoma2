@@ -130,9 +130,11 @@ parse_site <- function(result) {
                                  datasetname = sitename,
                                  location = place,
                                  notes = NA_character_)
-                                 })))
-                                 return(x)
-                                 })
+                                 })),
+                                chronologies = new("chronologies",
+                                 chronologies = list()))
+                                return(x)
+                                })
     new_site <- new("site",
                     siteid = siteid,
                     sitename = sitename,
@@ -240,7 +242,7 @@ get_sites.default <- function(...) { # nolint
 
 #' @title Get Site Information for Fossil Sites
 #' @param x The numeric site ID from Neotoma
-#' @param ... accepted arguments: all_data
+#' @param ... accepted arguments if numeric all_data
 #' @export
 get_sites.numeric <- function(x, ...) {
   use_na <- function(x, type) {
