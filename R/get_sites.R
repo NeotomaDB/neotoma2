@@ -240,6 +240,7 @@ get_sites.default <- function(...) { # nolint
 
 #' @title Get Site Information for Fossil Sites
 #' @param x The numeric site ID from Neotoma
+#' @param ... accepted arguments: all_data
 #' @export
 get_sites.numeric <- function(x, ...) {
   use_na <- function(x, type) {

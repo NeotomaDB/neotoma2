@@ -4,7 +4,7 @@
 \alias{get_datasets.default}
 \title{Get Dataset Default}
 \usage{
-\method{get_datasets}{default}(x, ..., complete_data = FALSE)
+\method{get_datasets}{default}(x, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}

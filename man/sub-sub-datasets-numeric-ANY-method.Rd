@@ -2,10 +2,15 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{[[,datasets,numeric,ANY-method}
 \alias{[[,datasets,numeric,ANY-method}
-\title{Method}
+\title{Obtain one of the elements within a datasets list}
 \usage{
 \S4method{[[}{datasets,numeric,ANY}(x, i)
 }
+\arguments{
+\item{x}{datasets object}
+
+\item{i}{iteration in datasets list}
+}
 \description{
-Method
+in progress
 }

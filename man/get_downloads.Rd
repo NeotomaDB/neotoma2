@@ -4,7 +4,7 @@
 \alias{get_downloads}
 \title{get_downloads}
 \usage{
-get_downloads(x = NA, ..., complete_data = FALSE)
+get_downloads(x = NA, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}

@@ -6,6 +6,9 @@
 \usage{
 \S4method{show}{sites}(object)
 }
+\arguments{
+\item{object}{sites object}
+}
 \description{
 Show Sites objects as a dataframe
 }

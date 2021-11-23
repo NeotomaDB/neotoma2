@@ -2,7 +2,6 @@
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
-#' @param siteid site unique identificator if available
 #' @param sitename actual site name
 #' @param coordinates sf object
 #' @param description description of site

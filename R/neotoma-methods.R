@@ -4,9 +4,6 @@
 #' @import sf
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @import arulesViz
-#' @import leaflet
-#' @import mapview
 dataset <- setClass(
                     # Set the name for the class
                     "dataset",
@@ -121,6 +118,7 @@ sites <- setClass("sites",
 
 # Start "Show Method" for all Neotoma Objects
 #' @title Show Dataset Method
+#' @param object dataset object
 setMethod(f = "show",
           signature = "dataset",
           definition = function(object) {
@@ -132,6 +130,7 @@ setMethod(f = "show",
           })
 
 #' @title Show Datasets object as a dataframe
+#' @param object datasets object
 setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
@@ -147,6 +146,7 @@ setMethod(f = "show",
           })
 
 #' @title Show Site objects as a dataframe
+#' @param object site object
 setMethod(f = "show",
           signature = "site",
           definition = function(object) {
@@ -158,6 +158,7 @@ setMethod(f = "show",
           })
 
 #' @title Show Sites objects as a dataframe
+#' @param object sites object
 setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
@@ -175,37 +176,59 @@ setMethod(f = "show",
 # End of Show Methods
 
 # Start "SqBrackets" Methods
-#' @title Method
-setMethod(f = "[[",
-          signature = signature(x = "datasets", i = "numeric"),
-          definition = function(x, i) {
-            object@sites[[i]]
-          })
 
-#' Method
-setMethod(f = "[[",
-          signature = signature(x = "dataset", i = "numeric"),
-          definition = function(x, i) {
-            object@sites[[i]]
-          })
- 
-# Method
+#' @title Obtain one of the elements within a sites list
+#' @param x sites object
+#' @param i iteration in sites list
+#' @description  in progress
+#' @export
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
           definition = function(x, i) {
-            object@sites[[i]]
+            if (length(i) == 1) {
+              out <- new("sites", x@sites[[i]])
+            } else {
+              out <- purrr::map(i, function(z) {
+                new("site", x@sites[[z]])
+              })
+              out <- new("sites", sites = out)
+            }
+            return(out)
           })
 
+#' @title Obtain one of the elements within a datasets list
+#' @param x datasets object
+#' @param i iteration in datasets list
+#' @description  in progress
+#' @export
+setMethod(f = "[[",
+          signature = signature(x = "datasets", i = "numeric"),
+          definition = function(x, i) {
+            if (length(i) == 1) {
+              out <- new("datasets", x@datasets[[i]])
+            } else {
+              out <- purrr::map(i, function(z) {
+                new("datasets", x@datasets[[z]])
+              })
+              out <- new("datasets", sites = out)
+            }
+            return(out)
+          })
 # End "SqBrackets" Methods
 
 # Start "length" Methods
-#' @title Length Method
+#' @title Length Method Sites
+#' @export
+#' @param x sites object
 setMethod(f = "length",
           signature = signature(x = "sites"),
           definition = function(x) {
             length(x@sites)
           })
 
+#' @title Length Method Sites
+#' @export
+#' @param x datasets object
 setMethod(f = "length",
           signature = signature(x = "datasets"),
           definition = function(x) {
@@ -222,33 +245,36 @@ setMethod(f = "length",
 # End "length" methods
 
 # Start "c" methods
+#' @title c Method - Combine objects, including NULL
 setClassUnion("missingOrNULL", c("missing", "NULL"))
 
 #' @title c Method for NULL values
+#' @param x NULL object
+#' @param y sites/datasets object
 setMethod(f = "c",
           signature = "missingOrNULL",
           definition = function(x ="missingORNULL", y) {
             y
           })
 
-#setMethod(f = "c",
-#          signature = "missingOrNULL",
-#          definition = function(y, x ="missingORNULL" ) {
-#            y
-#          })
-
-
-#' @title c Method for sites
+#' @title c Method - Combine sites objects
+#' @param x sites object 1
+#' @param y sites object 2
+#' @export
 setMethod(f = "c",
-          signature = signature("sites"),
+          signature = signature(x = "sites"),
           definition = function(x, y) {
             new("sites",
                 sites = unlist(c(x@sites,
                                        y@sites), recursive = FALSE))
             })
 
+#' @title c Method - Combine datasets objects
+#' @param x datasets object 1
+#' @param y datasets object 2
+#' @export
 setMethod(f = "c",
-          signature = signature("datasets"),
+          signature = signature(x = "datasets"),
           definition = function(x, y) {
             new("datasets",
                 datasets = unlist(c(x@datasets,
@@ -256,44 +282,6 @@ setMethod(f = "c",
           })
 
 # End "c" methods
-
-# Start plot methods
-#' @export
-setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
-  standardGeneric("plotLeaflet")
-})
-
-setMethod(f = "plotLeaflet",
-          signature = "sites",
-          definition = function(object, save_im=FALSE, path = "") {
-            df1 <- map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
-                               sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
-                               elev = x@altitude,
-                               description = x@description)
-            }) %>%
-              bind_rows()
-            map1 <- leaflet(df1) %>%
-              addProviderTiles(providers$Stamen.TerrainBackground) %>%
-              addTiles() %>%
-              addCircleMarkers(lng = df1$long, lat = df1$lat,
-              popup = paste0("<b>", df1$sitename,
-              "</b><br><b>Description:</b> ",
-              df1$description,
-              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
-              df1$siteid,
-              ">Explorer Link</a>"),
-              clusterOptions = markerClusterOptions(),
-              options = markerOptions(riseOnHover = TRUE))
-
-            if (save_im == TRUE) {
-              mapshot(map1, file = path)
-            }
-            map1
-          })
-# End plot methods
 
 # Start writeCSV methods
 setMethod(f = "write.csv",
@@ -326,12 +314,23 @@ setMethod(f = "write.csv",
           }
 )
 
-# TODO1: Remove this showDatasets and show Datasets table when showing sites
+#' @title Convert sites object to a \code{data.frame}
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
 #' @export
+# Todo Convert to as.data.frame
 setGeneric("showDatasets", function(object) {
   standardGeneric("showDatasets")
 })
 
+#' @title Convert sites object to a \code{data.frame}
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
 setMethod(f = "showDatasets",
           signature = "sites",
           definition = function(object) {
@@ -343,62 +342,4 @@ setMethod(f = "showDatasets",
               my_datasets2 <- new("datasets", datasets = my_datasets)
             }
             return(my_datasets2)
-          })
-# Finish TODO1
-
-#' @export
-setGeneric("datasetsCSV", function(object, path) {
-  standardGeneric("datasetsCSV")
-})
-
-setMethod(f = "datasetsCSV",
-          signature = "datasets",
-          definition = function(object, path) {
-            df1 <- map(object@datasets, function(x) {
-              df <- data.frame(siteid = x@datasetid,
-                               sitename = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
-                               type = x@datasettype)
-            }) %>%
-              bind_rows()
-            write.csv(df1, path, row.names = FALSE)
-          }
-)
-
-
-# Method
-#' @export
-setMethod(f = "[[",
-          signature = signature(x = "sites", i = "numeric"),
-          definition = function(x, i) {
-            if (length(i) == 1) {
-              out <- new("sites", x@sites[[i]])
-            } else {
-              out <- purrr::map(i, function(z) new("site", x@sites[[z]]))
-              out <- new("sites", sites = out)
-            }
-            return(out)
-          })
-
-#' Method
-setMethod(f = "show",
-          signature = "site",
-          definition = function(object) {
-            print(data.frame(siteid = object@siteid,
-                             sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[, 2]),
-                             long = mean(st_coordinates(object@location)[, 1]),
-                             elev = object@altitude), row.names = FALSE)
-          })
-
-#' @export
-setMethod(f = "c",
-          signature = signature("sites"),
-          definition = function(x, ...) {
-            input <- list(x, ...) %>%
-              purrr::map(function(y) y@sites) %>%
-              unlist(., recursive = FALSE)
-            new("sites",
-                sites = input)
           })

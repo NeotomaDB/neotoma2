@@ -64,7 +64,7 @@
 #' brazil_downloads <- get_downloads(brazil_datasets)
 #' }
 #' @export
-get_downloads <- function(x = NA, ..., complete_data = FALSE) {
+get_downloads <- function(x = NA, ...) {
   if (!missing(x)) {
     UseMethod("get_downloads", x)
   }
@@ -296,10 +296,10 @@ parse_download <- function(result) { # nolint
 }
 
 #' @title get_downloads
-#' @param datasetid Use a single number to extract site information
+#' @param x Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(x, ..., complete_data = FALSE) {
+get_downloads.numeric <- function(x, ...) {
 
   use_na <- function(x, type) {
     if (is.na(x)) {
@@ -340,7 +340,7 @@ get_downloads.numeric <- function(x, ..., complete_data = FALSE) {
 #' @param x sites object
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.sites <- function(x, ..., complete_data = FALSE) {
+get_downloads.sites <- function(x, ...) {
 
   use_na <- function(x, type) {
     if (is.na(x)) {

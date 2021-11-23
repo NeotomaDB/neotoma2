@@ -10,6 +10,7 @@
 #' @param x The HTTP path for the particular API call.
 #' @param use By default use the neotoma server (\code{neotoma}),
 #' but supports either the development API server or a local server.
+#' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the function calling
 #' \code{parseURL}.
 #' @export

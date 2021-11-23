@@ -239,7 +239,7 @@ parse_dataset <- function(result) { # nolint
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
-get_datasets.default <- function(x, ..., complete_data = FALSE) { # nolint
+get_datasets.default <- function(x, ...) { # nolint
 
   cl <- as.list(match.call())
 
@@ -349,7 +349,8 @@ get_datasets.numeric <- function(x, ...) {
 }
 
 #' @title Get Dataset from a \code{sites} object.
-#' @param sites An object of class \code{sites}.
+#' @param x An object of class \code{sites}.
+#' @param ... accepted arguments: sites_object, contactid, datasettype,
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids

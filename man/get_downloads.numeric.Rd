@@ -4,12 +4,12 @@
 \alias{get_downloads.numeric}
 \title{get_downloads}
 \usage{
-\method{get_downloads}{numeric}(x, ..., complete_data = FALSE)
+\method{get_downloads}{numeric}(x, ...)
 }
 \arguments{
-\item{...}{arguments in ellipse form}
+\item{x}{Use a single number to extract site information}
 
-\item{datasetid}{Use a single number to extract site information}
+\item{...}{arguments in ellipse form}
 }
 \description{
 get_downloads

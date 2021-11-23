@@ -1,7 +1,8 @@
 #' @title pager
 #' @description An internal helper function to count through all offsets/limits
-#' @param x The result of the API call
-#' @param counter If TRUE, modify the response to contain all datapoints
+#' @param response The result of the API call
+#' @param response_url the url field of the http call
+#' @param ... If TRUE, modify the response to contain all datapoints
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @export

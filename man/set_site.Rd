@@ -25,8 +25,6 @@ set_site(
 \item{collunits}{collection units in the site}
 
 \item{altitude}{altitude/elevation of the site}
-
-\item{siteid}{site unique identificator if available}
 }
 \description{
 set Site Information for Fossil Sites

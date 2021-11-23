@@ -4,7 +4,7 @@
 \alias{get_downloads.sites}
 \title{get_downloads sites}
 \usage{
-\method{get_downloads}{sites}(x, ..., complete_data = FALSE)
+\method{get_downloads}{sites}(x, ...)
 }
 \arguments{
 \item{x}{sites object}

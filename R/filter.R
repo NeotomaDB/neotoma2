@@ -13,7 +13,7 @@ filter <- function(x, ...) {
 }
 
 #' @export
-filter.default <- function(x, ...) {  # nolint
+filter.sites <- function(x, ...) {  # nolint
   # Naming the Dots
   cl <- as.list(match.call())
   cl[1] <- NULL
