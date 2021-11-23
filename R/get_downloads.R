@@ -96,6 +96,7 @@ parse_download <- function(result) { # nolint
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
+    chronology_list <- c()
 
     # Sites
     # Sitename
@@ -253,6 +254,51 @@ parse_download <- function(result) { # nolint
         distinct()
     }
 
+    # Chronologies
+
+      chronology_call <- result$data[[i]]$site$collectionunit$chronologies
+      print(result)
+
+      for (j in seq_len(length(chronology_call))) {
+
+        chron_call <- chronology_call[[j]]$chronology
+
+        chronologyid <- chron_call$chronologyid
+
+        notes <- chron_call$chronology$notes
+
+        contact_list <- list()
+
+        agemodel <- chron_call$chronology$agemodel
+
+        older <- chron_call$chronology$agerange$ageboundolder
+        younger <- chron_call$chronology$agerange$ageboundyounger
+        agerange_list <- c(older, younger)
+
+        dateprep <- as.Date(chron_call$chronology$dateprepared)
+
+        modelagetype <- chron_call$chronology$modelagetype
+
+        chronologyname <- chron_call$chronology$chronologyname
+
+
+        new_chronology <- new("chronology",
+                            chronologyid = chronologyid,
+                            notes = notes,
+                            contact = contact_list,
+                            agemodel = agemodel,
+                            agerange = agerange_list,
+                            dateprepared = dateprep,
+                            modelagetype = modelagetype,
+                            chronologyname = chronologyname,
+                            chroncontrols = data.frame())
+
+      chronology_list <- append(chronology_list, new_chronology)
+      }
+
+      chronology_list <- new("chronologies", chronologies = chronology_list)
+      # End chronologies
+
     ## Collunits
     # Coll Unit ID
     collunit_call <- result$data[[i]]$site$collectionunit
@@ -272,7 +318,8 @@ parse_download <- function(result) { # nolint
                         collunitid = collunitid,
                         colldate = colldate,
                         handle = handle,
-                        datasets = datasets_list)
+                        datasets = datasets_list,
+                        chronologies = chronology_list)
 
     coll_units <- append(coll_units, new_collunit)
     coll_units <- new("collunits", collunits = coll_units)
@@ -313,7 +360,7 @@ get_downloads.numeric <- function(x, ...) {
 
   cl <- as.list(match.call())
 
-  possible_arguments <- c("offset", "all_data", "datasetid")
+  possible_arguments <- c("offset", "all_data", "x")
 
   cl[[1]] <- NULL
 
