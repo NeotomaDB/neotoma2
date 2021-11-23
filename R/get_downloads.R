@@ -257,7 +257,6 @@ parse_download <- function(result) { # nolint
     # Chronologies
 
       chronology_call <- result$data[[i]]$site$collectionunit$chronologies
-      print(result)
 
       for (j in seq_len(length(chronology_call))) {
 
@@ -267,7 +266,17 @@ parse_download <- function(result) { # nolint
 
         notes <- chron_call$chronology$notes
 
-        contact_list <- list()
+        # Contact Information
+        contact_length <- length(chron_call$chronology$contact)
+
+        contact_list <- c()
+
+        for (k in seq_len(contact_length)) {
+          if (!is.na(chron_call$chronology$contact)) {
+            cn <- chron_call$chronology$contact[[k]]$contactname
+            contact_list <- c(contact_list, cn)
+            }
+          }
 
         agemodel <- chron_call$chronology$agemodel
 
