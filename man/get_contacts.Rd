@@ -9,12 +9,17 @@ get_contacts(x = NA, ...)
 \arguments{
 \item{x}{integer A contact ID}
 
-\item{contactname}{A full or partial name for an individual contributor to the database.}
+\item{contactname}{A full or partial name for an individual
+contributor to the database.}
 
-\item{familyname}{The full or partial last name for an individual contributor to the database.}
+\item{familyname}{The full or partial last name for an
+individual contributor to the database.}
 
-\item{status}{The current status of the contributor (\code{active} or \code{retired})}
+\item{status}{The current status of the contributor
+(\code{active} or \code{retired})}
 }
 \description{
-Uses the Neotoma API to search and access information about individuals who have contributed to the data in the Neotoma Paleoecology Database
+Uses the Neotoma API to search and access
+information about individuals who have contributed to
+the data in the Neotoma Paleoecology Database
 }

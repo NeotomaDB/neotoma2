@@ -7,14 +7,16 @@
 get_table(x, limit = 25, offset = 0)
 }
 \arguments{
-\item{x}{Table name (consult \url{https://open.neotomadb/dbschema} for a complete list of table names.}
+\item{x}{Table name (consult \url{https://open.neotomadb/dbschema}
+for a complete list of table names.}
 
 \item{limit}{Default 25 records}
 
 \item{offset}{Default 0.}
 }
 \description{
-Call Neotoma and return a table (with limits & offsets for large tables)
+Call Neotoma and return a table
+(with limits & offsets for large tables)
 }
 \examples{
 \dontrun{
@@ -26,8 +28,8 @@ counter <- 1
 specimens <- list()
 while(okay) {
   specimens[[counter]] <- get_table('specimens', offset = (counter - 1) * 25)
-  if(nrow(specimens[[counter]]) < 25) { 
-    okay <- FALSE 
+  if(nrow(specimens[[counter]]) < 25) {
+    okay <- FALSE
   } else {
     counter <- counter + 1
   }

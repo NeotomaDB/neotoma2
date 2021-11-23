@@ -11,7 +11,8 @@ get_publications(x = NA, ...)
 
 \item{publicationid}{The unique numeric identifier associated with a publication in Neotoma.}
 
-\item{datasetid}{A unique identifier for a Neotoma dataset that is associated with a publication.}
+\item{datasetid}{A unique identifier for a Neotoma dataset that is associated
+with a publication.}
 
 \item{familyname}{The full or partial last name for an individual author.}
 

@@ -73,13 +73,16 @@ publication <- setClass("publication",
                                   author = NULL))
 
 #' @title
-#'   An S4 class for multi-publication information from the Neotoma Paleoecology Database.
+#'  An S4 class for multi-publication information
+#'  from the Neotoma Paleoecology Database.
 #' @export
 publications <- setClass("publications",
                          representation(publications  = "list"),
                          validity = function(object) {
                            all(map(object@publications,
-                                   function(x) { class(x) == "publication"}) %>%
+                                   function(x) {
+                                     class(x) == "publication"
+                                     }) %>%
                                  unlist())
                          })
 
@@ -202,7 +205,7 @@ setGeneric("showMatch", function(x) {
 setMethod(f = "showMatch",
           signature = signature(x = "publication"),
           definition = function(x) {
-            if(!is.null(attr(x, "matches"))) {
+            if (!is.null(attr(x, "matches"))) {
               print(attr(x, "matches"))
             }
           })
@@ -269,7 +272,8 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature(x = "publications"),
           definition = function(x) {
-            full <- x@publications %>% map(function(y) as.data.frame(y)) %>%
+            full <- x@publications %>%
+            map(function(y) as.data.frame(y)) %>%
               bind_rows()
             return(full)
 })
@@ -287,11 +291,11 @@ setGeneric("selectMatch", function(x, n) {
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
-            if(is.null(attr(x, "matches"))) {
+            if (is.null(attr(x, "matches"))) {
               stop("There are no existing matches.")
-            } else if(n > length(attr(x, "matches"))) {
+            } else if (n > length(attr(x, "matches"))) {
               stop("The requested match is not in the current list.")
-            } else if(n <= length(attr(x, "matches"))) {
+            } else if (n <= length(attr(x, "matches"))) {
               return(attr(x, "matches")[[n]])
             }
           })

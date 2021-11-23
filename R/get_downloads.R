@@ -312,7 +312,7 @@ parse_download <- function(result) { # nolint
           bind_rows()
 
         df_sample <- df %>%
-          select(depth, thickness, agelimitolder, chroncontrolid, 
+          select(depth, thickness, agelimitolder, chroncontrolid,
           agelimityounger, chroncontrolage, chroncontroltype)
           chron_table <- rbind(chron_table, df_sample) %>%
           distinct()
