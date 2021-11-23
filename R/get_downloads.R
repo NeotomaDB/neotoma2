@@ -256,40 +256,59 @@ parse_download <- function(result) { # nolint
 
     # Chronologies
 
+
       chronology_call <- result$data[[i]]$site$collectionunit$chronologies
 
       for (j in seq_len(length(chronology_call))) {
 
         chron_call <- chronology_call[[j]]$chronology
+        if (!is.na(chron_call$chronologyid)) {
+          chronologyid <- chron_call$chronologyid
+        } else {
+          chronologyid <- NA_integer_
+        }
 
-        chronologyid <- chron_call$chronologyid
+        if (length(chron_call$chronology) > 1) {
+          check_on <- chron_call$chronology[[1]]
+        } else {
+          check_on <- chron_call$chronology
+        }
 
-        notes <- chron_call$chronology$notes
+        if (!is.na(check_on)) {
+
+          notes <- chron_call$chronology$notes
+          agemodel <- chron_call$chronology$agemodel
+          older <- chron_call$chronology$agerange$ageboundolder
+          younger <- chron_call$chronology$agerange$ageboundyounger
+          agerange_list <- c(older, younger)
+
+          dateprep <- as.Date(chron_call$chronology$dateprepared)
+
+          modelagetype <- chron_call$chronology$modelagetype
+
+          chronologyname <- chron_call$chronology$chronologyname
 
         # Contact Information
         contact_length <- length(chron_call$chronology$contact)
 
         contact_list <- c()
 
-        for (k in seq_len(contact_length)) {
-          if (!is.na(chron_call$chronology$contact)) {
-            cn <- chron_call$chronology$contact[[k]]$contactname
-            contact_list <- c(contact_list, cn)
+          for (k in seq_len(contact_length)) {
+            if (!is.na(chron_call$chronology$contact)) {
+              cn <- chron_call$chronology$contact[[k]]$contactname
+              contact_list <- c(contact_list, cn)
+              }
             }
-          }
 
-        agemodel <- chron_call$chronology$agemodel
-
-        older <- chron_call$chronology$agerange$ageboundolder
-        younger <- chron_call$chronology$agerange$ageboundyounger
-        agerange_list <- c(older, younger)
-
-        dateprep <- as.Date(chron_call$chronology$dateprepared)
-
-        modelagetype <- chron_call$chronology$modelagetype
-
-        chronologyname <- chron_call$chronology$chronologyname
-
+        } else {
+          notes <- NA_character_
+          agemodel <- NA_character_
+          agerange_list <- list()
+          dateprep <- as.Date(character(0))
+          modelagetype <- NA_character_
+          chronologyname <- NA_character_
+          contact_list <- c()
+        }
 
         new_chronology <- new("chronology",
                             chronologyid = chronologyid,
