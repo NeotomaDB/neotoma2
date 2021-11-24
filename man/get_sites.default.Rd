@@ -4,14 +4,11 @@
 \alias{get_sites.default}
 \title{Get Site Information for Fossil Sites}
 \usage{
-\method{get_sites}{default}(..., verbose = 0)
+\method{get_sites}{default}(...)
 }
 \arguments{
-\item{...}{accepted arguments: siteid (site identifier from Neotoma), sitename, altmax (The coordinates to create an sf object), altmin (The coordinates to create an sf object)}
+\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc}
 }
 \description{
 Get Site Information for Fossil Sites
-}
-\examples{
-get_sites(sitename = "Alexander Lake")
 }

@@ -2,10 +2,13 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{length,sites-method}
 \alias{length,sites-method}
-\title{Length Method}
+\title{Length Method Sites}
 \usage{
 \S4method{length}{sites}(x)
 }
+\arguments{
+\item{x}{sites object}
+}
 \description{
-Length Method
+Length Method Sites
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/get_downloads.R
 \name{get_downloads.numeric}
 \alias{get_downloads.numeric}
-\title{Get Downloads}
+\title{get_downloads}
 \usage{
-\method{get_downloads}{numeric}(datasetid, ...)
+\method{get_downloads}{numeric}(x, ...)
 }
 \arguments{
-\item{datasetid}{Use a single number to extract site information}
+\item{x}{Use a single number to extract site information}
 
 \item{...}{arguments in ellipse form}
 }
 \description{
-Get Downloads
+get_downloads
 }

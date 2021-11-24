@@ -1,251 +1,477 @@
-#' @title Get downloads - Data 
+#' @title get_downloads
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
+#' @import lubridate
 #' @import dplyr
-#' @param datasetid integer A collection unit ID
-#' @param ... arguments in ellipse form
+#' @importFrom methods new
+#' @description
+#' Information for Fossil Datasets
+#' Look for the whole data details using only a dataset ID
+#' or for multiple metadata.
+#' Displays a site table with the following columns: siteid,
+#' sitename, lat, long, and elev.
+#' The function takes parameters defined by the user and
+#' returns a sites object
+#' with more detailed information regarding datasets and samples.
+#' The user may define all or none of the possible fields.
+#' The function contains data checks for each defined parameter.
+#' @param x Use a single number to extract site information
+#' @param ... accepted arguments: sites, datasets
+#' @return The function returns either a single item of class
+#' \code{"try-error"} describing the reason for failure
+#' (either mis-defined parameters or an error from the Neotoma API),
+#' or a table of sites, with rows corresponding to the number of
+#' individual sites and datasets returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
+#' \item{ \code{siteid} }{site ID number}
+#' \item{ \code{sitename} }{site's name}
+#' \item{ \code{location} }{sf object that describes site's location}
+#' \item{ \code{description} }{}
+#' \item{ \code{collunits} }{limited information on collunits}
+#' Each "collection unit" embedded in the "sites" object contains
+#' 6 parameters that can be accessed as well:
+#' \item{ \code{collunitid}}{collection unit ID number}
+#' \item{ \code{handle} }{collection unit's handle}
+#' \item{ \code{collunitname} }{collection unit's name}
+#' \item{ \code{colldate} }{date in collection unit}
+#' \item{ \code{substrate} }{substrate}
+#' \item{ \code{location} }{sf object that describes site's location}
+#' \item{ \code{datasets} }{detailed information regarding dataset}
+#' Each "dataset" nested in the "collection unit" contains the
+#' following detail of information:
+#' \item{ \code{datasetid} }{dataset ID number}
+#' \item{ \code{datasetname} }{site's name}
+#' \item{ \code{datasettype} }{type of data found}
+#' \item{ \code{location} }{sf object that describes site's location}
+#' \item{ \code{notes} }{notes on the dataset}
+#' \item{ \code{taxa table} }{taxa table}
+#' \item{ \code{pi list} }{P.I. info}
+#' \item{ \code{analyst} }{analyst info}
+#' \item{ \code{metadata} }{dataset metadata}
+#' @examples \dontrun{
+#' To find the downloads object of dataset 24:
+#' downloads24 <- get_downloads(24)
+#'
+#' To find all downloads in Brazil
+#' brazil <- '{"type": "Polygon",
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]]]}
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' brazil_downloads <- get_downloads(brazil_datasets)
+#' }
 #' @export
-get_downloads <- function(datasetid = NA, ...) {
-  if(!missing(datasetid)) {
-    UseMethod('get_downloads', datasetid)
-  } #else {
-    #UseMethod('get_downloads', NA)
-  #}
+get_downloads <- function(x = NA, ...) {
+  if (!missing(x)) {
+    UseMethod("get_downloads", x)
+  }
 }
 
-parse_download <- function(result) {
-  fixNull <- function(x) {
-    for (i in 1:length(x)) {
+parse_download <- function(result) { # nolint
+  variablename <- element <- taxongroup <- NULL
+  ecologicalgroup <- taxonid <- value <- NULL
+  fix_null <- function(x) {
+    for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
         x[[i]] <- NA
       } else {
-        if (class(x[[i]]) == 'list') {
-          x[[i]] <- fixNull(x[[i]])
+        if (class(x[[i]]) == "list") {
+          x[[i]] <- fix_null(x[[i]])
         }
       }
     }
     return(x)
   }
-  
-  #result <- result %>% fixNull()
+
   result <- result[2]
-  #print(result)
   result_length <- length(result$data)
-  
+
   sites <- c()
-  pi_list <- c()
-  df1 <- data.frame()
-  df_lab1 <- data.frame()
-  df3 <- data.frame()
+  taxon_table <- data.frame()
+  chron_table <- data.frame()
   df_counts <- data.frame()
-  for(i in 1:result_length) {
+  for (i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
-    
-    # Sites 
+    chronology_list <- c()
+
+    # Sites
     # Sitename
-    sitename <- result$data[[i]]$record$data$dataset$site$sitename
-    
+    if (is.na(result$data[[i]]$site$sitename)) {
+      sitename <- NA_character_
+    }else{
+      sitename <- result$data[[i]]$site$sitename
+    }
+
     # Site ID
-    siteid <- result$data[[i]]$record$data$dataset$site$siteid
-    
+    if (is.na(result$data[[i]]$site$siteid)) {
+      siteid <- NA_integer_
+    }else{
+      siteid <- result$data[[i]]$site$siteid
+    }
+
     # Location
-    location <- st_read(result$data[[i]]$record$data$dataset$site$geography, quiet = TRUE)
+    location <- result$data[[i]]$site$geography
+    if (is.null(location)) {
+      location <- sf::st_sf(sf::st_sfc())
+    }else{
+      location <- sf::st_read(result$data[[i]]$site$geography, quiet = TRUE)
+    }
 
     # Altitude
-    elev <- result$data[[i]]$record$data$dataset$site$altitude
+    if (is.na(result$data[[i]]$site$altitude)) {
+      elev <- NA_integer_
+      }else{
+    elev <- result$data[[i]]$site$altitude
+      }
 
-    # Description 
-    description <- result$data[[i]]$record$data$dataset$site$sitedescription
+    # Description
+    description <- result$data[[i]]$site$sitedescription
+    if (is.na(description)) {
+      description <- NA_character_
+    }else{
+      description <- result$data[[i]]$site$sitedescription
+    }
 
-    # Notes
-    notes <- NA_character_
+    # Site Notes
 
-  # Datasets
-    datasetid <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasetid
-    datasettype <- result$data[[i]]$record$data$dataset$site$collectionunit$dataset$datasettype
-    datasetnotes <- NA_character_
-    
-    new_dataset <- new('dataset',
-                       datasetid = datasetid,
-                       datasetname = sitename,
-                       datasettype = datasettype,
-                       location = location,
-                       notes = datasetnotes)
-  
-  dataset_list <- append(dataset_list, new_dataset)
-  datasets_list <- new('datasets', datasets = dataset_list)
+    # Datasets
+    dataset_call <- result$data[[i]]$site$collectionunit$dataset
+    datasetid <- dataset_call$datasetid
+    datasettype <- dataset_call$datasettype
 
-  ## Collunits
-  # Coll Unit ID
-  collunitid <- result$data[[i]]$record$data$dataset$site$collectionunit$collectionunitid
+    datasetnotes <- dataset_call$datasetnotes
+    if (is.na(datasetnotes)) {
+      datasetnotes <- NA_character_
+    }else{
+      datasetnotes <- dataset_call$datasetnotes
+    }
 
-  colldate = as.Date("2007-02-01")
-
-  # Coll Unit Handle
-  handle <- result$data[[i]]$record$data$dataset$site$collectionunit$handle
-
-  new_collunit <- new("collunit",
-                      collunitid = collunitid,
-                      colldate = colldate,
-                      handle = handle,
-                      datasets = datasets_list)
-  
-  coll_units <- append(coll_units, new_collunit)
-  coll_units <- new('collunits', collunits = coll_units)
-  
-  new_site <- new("site",
-                  siteid = siteid,
-                  sitename = sitename,
-                  location = location,
-                  altitude = elev,
-                  description = description,
-                  notes = NA_character_,
-                  collunits = coll_units)
-
-  sites <- append(sites, new_site)
-  
-  
-  
-  # PI Information
-  pi_length <- length(result$data[[1]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[1]])
-  
-  for(j in range(1:pi_length)){
-    pi <- result$data[[1]]$record$data$dataset$site$collectionunit$dataset$datasetpi[[1]]$contactname
-    pi_list <- append(pi_list, pi)}
-  
- 
-  
-  # Count Samples metadata
-  
-  if (result$data[[i]]$record$data$dataset == 'geochronologic') {
-    
-    message(paste0('The dataset ID ', dataset$dataset.meta$dataset.id,
-                   ' is associated with a geochronology object, not count data.'))
-    return(NULL)
-    
-  } else {
-    
-    # copy to make indexing below easier?
-    samples <- result$data[[i]]$record$data$samples
-    
-    
-    # Build the metadata for each sample in the dataset.
-    sample.meta <- do.call(rbind.data.frame,
-                           lapply(samples, `[`,
-                                  c("depth",
-                                    "sampleid"
-                                  )))
-    
-    
-    #samples <- fromJSON(samples)
-    
-    #depth <- modify_depth(alex_samples, 1, "depth") %>% as_vector()
-    
-    
     # Taxon Table
-    length_datum <- length(result$data[[i]]$record$data$samples)
-    
-    for(j in 1:length_datum){
-      depth <- result$data[[i]]$record$data$samples[[j]]$depth
-      sample_id <-result$data[[i]]$record$data$samples[[j]]$sampleid
-      dataset_id <- result$data[[i]]$datasetid
-      df <- result$data[[i]]$record$data$samples[[j]]$datum %>% 
-        map(function(x){as.data.frame(x)}) %>% 
+    length_datum <- length(dataset_call$samples)
+
+    for (j in 1:length_datum) {
+      depth <- dataset_call$samples[[j]]$depth
+      sample_id <- dataset_call$samples[[j]]$sampleid
+      df <- dataset_call$samples[[j]]$datum %>%
+        map(function(x) {
+          as.data.frame(x)
+        }) %>%
         bind_rows()
-      
+
       df_sample <- df %>%
-        select(variablename, units, element, taxongroup, ecologicalgroup, taxonid) # uncomment for order selection
-      
-      df1 <- rbind(df1, df_sample) %>%
+      select(variablename, units, element, taxongroup, ecologicalgroup, taxonid)
+      taxon_table <- rbind(taxon_table, df_sample) %>%
         distinct()
-       
+      # PI Information
+      pi_length <- length(dataset_call$datasetpi)
+      pi_list <- c()
+
+      for (j in seq_len(pi_length)) {
+        pi <- dataset_call$datasetpi[[j]]$contactname
+        pi_list <- c(pi_list, pi)
+        }
+
+      # Analyst Info
+      analyst_list <- list()
+      samples <- result$data[[1]]$site$collectionunit$dataset$samples
+
+      for (k in seq_len(length(samples))) {
+        analyst_length <- length(dataset_call$samples[[k]]$sampleanalyst)
+        for (j in 1:analyst_length) {
+          contact <- dataset_call$samples[[k]]$sampleanalyst[[j]]$contactname
+          analyst_list <- c(analyst_list, contact)
+          }
+      }
+
+      # Sample.Meta Table
+      meta_data_t1 <- dataset_call$samples[[j]]$ages %>%
+        map(function(x) {
+          as.data.frame(x)
+          }) %>%
+        bind_rows()
+
+      meta_data_t1 <- meta_data_t1 %>%
+        mutate(
+          datasetid = datasetid,
+          depth = depth,
+          sample.id = sample_id)
+
+      if (dim(meta_data_t1)[1] > 0) {
+        meta_data_t1 %>%
+        select("depth", "ageolder", "age", "ageyounger", "chronologyname",
+         "agetype", "chronologyid", "sample.id", "datasetid")
+      }
+
+      new_dataset <- new("dataset",
+                         datasetid = datasetid,
+                         datasetname = sitename,
+                         datasettype = datasettype,
+                         location = location,
+                         notes = datasetnotes,
+                         taxa_table = taxon_table,
+                         pi_list = pi_list,
+                         analyst = analyst_list,
+                         metadata = meta_data_t1)
+
+      dataset_list <- append(dataset_list, new_dataset)
+      datasets_list <- new("datasets", datasets = dataset_list)
+
+      # Add to dataset publications information
+      # Publications Information
+
+      # API endpoint is different
+      # https://api.neotomadb.org/v2.0/data/datasets/1/publications
+
+      # Count Samples metadata
+      if (dataset_call$datasettype == "geochronologic") {
+
+        message(paste0("The dataset ID ", dataset_call$datasetid,
+                       " is associated with a geochronology object,
+                       not count data."))
+        return(NULL)
+      } else {
+
+        # copy to make indexing below easier?
+        samples <- dataset_call$samples
+
+        # Build the metadata for each sample in the dataset.
+        sample.meta <- do.call(rbind.data.frame,
+                               lapply(samples, `[`,
+                                      c("depth",
+                                        "sampleid"
+                                      )))
+
+      }
       # Counts
       df_count <- df %>%
         select(variablename, value, taxonid)
-      
+
       df_counts <- rbind(df_counts, df_count) %>%
         distinct()
-      
-      # Lab Data
-      df_lab <- result$data[[i]]$record$data$samples[[j]]$datum %>% map(function(x){as.data.frame(x)}) %>% bind_rows() %>%
-        select(taxonid)
-      
-      df_lab1 <- rbind(df_lab, df_lab1) %>%
-        distinct()
-      
-      # Sample.Meta Table
-      df2 <- result$data[[i]]$record$data$samples[[j]]$ages %>% map(function(x){as.data.frame(x)}) %>% bind_rows()
-      df2 <- df2 %>%
-        mutate(
-          depth = depth,
-          sample.id = sample_id,
-          datasetid = dataset_id) %>%
-        select(depth, ageolder, age, ageyounger, chronologyname, agetype, chronologyid, sample.id, datasetid)
-      
-      df3 <- rbind(df3, df2)
     }
-    
-    # Chronologies filtering
-    wang <- df3 %>%
-      filter(chronologyname == "Wang et al.")
-    
-    cohmap <- df3 %>%
-      filter(chronologyname == "COHMAP chron 2")
-    
-    napd <- df3 %>%
-      filter(chronologyname == "NAPD 1")
-  }  
 
-  } 
-  
-  # DOUBT TODO : How should I save these tables?
-  #print(pi_list)
-  print(df1)
-  print(df_counts)
-  #print(df_lab1)
-  #print(df3)
-  #print(napd)
-  #print(cohmap)
-  #print(wang)
-  
+    # Chronologies
+
+
+      chronology_call <- result$data[[i]]$site$collectionunit$chronologies
+
+      for (j in seq_len(length(chronology_call))) {
+
+        chron_call <- chronology_call[[j]]$chronology
+        if (!is.na(chron_call$chronologyid)) {
+          chronologyid <- chron_call$chronologyid
+        } else {
+          chronologyid <- NA_integer_
+        }
+
+        if (length(chron_call$chronology) > 1) {
+          check_on <- chron_call$chronology[[1]]
+        } else {
+          check_on <- chron_call$chronology
+        }
+
+        if (!is.na(check_on)) {
+
+          notes <- chron_call$chronology$notes
+          agemodel <- chron_call$chronology$agemodel
+          older_ <- chron_call$chronology$agerange$ageboundolder
+          younger_ <- chron_call$chronology$agerange$ageboundyounger
+          agerange_list <- c()
+          agerange_list$older <- older_
+          agerange_list$younger <- younger_
+
+          dateprep <- as.Date(chron_call$chronology$dateprepared)
+
+          modelagetype <- chron_call$chronology$modelagetype
+
+          chronologyname <- chron_call$chronology$chronologyname
+
+        # Contact Information
+        contact_length <- length(chron_call$chronology$contact)
+
+        contact_list <- c()
+
+          for (k in seq_len(contact_length)) {
+            if (!is.na(chron_call$chronology$contact)) {
+              cn <- chron_call$chronology$contact[[k]]$contactname
+              contact_list <- c(contact_list, cn)
+              }
+            }
+
+        # Chroncontrols DF
+
+        df <- chronology_call[[j]]$chronology$chroncontrols %>%
+          map(function(x) {
+            as.data.frame(x)
+          }) %>%
+          bind_rows()
+
+        df_sample <- df %>%
+          select(depth, thickness, agelimitolder, chroncontrolid,
+          agelimityounger, chroncontrolage, chroncontroltype)
+          chron_table <- rbind(chron_table, df_sample) %>%
+          distinct()
+
+        # End chronologies
+
+        } else {
+          notes <- NA_character_
+          agemodel <- NA_character_
+          agerange_list <- list()
+          dateprep <- as.Date(character(0))
+          modelagetype <- NA_character_
+          chronologyname <- NA_character_
+          contact_list <- c()
+          df_sample <- data.frame()
+        }
+
+        new_chronology <- new("chronology",
+                            chronologyid = chronologyid,
+                            notes = notes,
+                            contact = contact_list,
+                            agemodel = agemodel,
+                            agerange = agerange_list,
+                            dateprepared = dateprep,
+                            modelagetype = modelagetype,
+                            chronologyname = chronologyname,
+                            chroncontrols = df_sample)
+
+      chronology_list <- append(chronology_list, new_chronology)
+      }
+
+      chronology_list <- new("chronologies", chronologies = chronology_list)
+      # End chronologies
+
+    ## Collunits
+    # Coll Unit ID
+    collunit_call <- result$data[[i]]$site$collectionunit
+    collunitid <- collunit_call$collectionunitid
+
+    colldate <- collunit_call$colldate
+    if (is.na(colldate)) {
+      colldate <- as.Date(character(0))
+    }else{
+      colldate <- as.Date(collunit_call$colldate)
+    }
+
+    # Coll Unit Handle
+    handle <- collunit_call$handle
+
+    new_collunit <- new("collunit",
+                        collunitid = collunitid,
+                        colldate = colldate,
+                        handle = handle,
+                        datasets = datasets_list,
+                        chronologies = chronology_list)
+
+    coll_units <- append(coll_units, new_collunit)
+    coll_units <- new("collunits", collunits = coll_units)
+
+    new_site <- new("site",
+                    siteid = siteid,
+                    sitename = sitename,
+                    location = location,
+                    altitude = elev,
+                    description = description,
+                    notes = NA_character_,
+                    collunits = coll_units)
+
+    sites <- append(sites, new_site)
+  }
+
   # Convert to sites element
-  sites <- new('sites', sites = sites) 
-  
-  #return(result)
+  sites <- new("sites", sites = sites)
+
   return(sites)
 }
 
-#' @title Get Downloads
-#' @import lubridate
-#' @importFrom methods new
-#' @param datasetid Use a single number to extract site information
+#' @title get_downloads
+#' @param x Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(datasetid, ...) {
+get_downloads.numeric <- function(x, ...) {
 
-  useNA <- function(datasetid, type) {
-    if (is.na(datasetid)) {
+  use_na <- function(x, type) {
+    if (is.na(x)) {
       return(switch(type,
                     "char" = NA_character_,
                     "int" = NA_integer_))
     } else {
-      return(datasetid)
+      return(x)
     }
   }
-  
-  if (length(datasetid) > 0) {
-    dataset <- paste0(datasetid, collapse = ',')
+
+  cl <- as.list(match.call())
+
+  possible_arguments <- c("offset", "all_data", "x")
+
+  cl[[1]] <- NULL
+
+  for (name in names(cl)) {
+    if (!(name %in% possible_arguments)) {
+      message(paste0(name, " is not an allowed argument.
+      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+    }
   }
-  
-  baseURL <- paste0('data/downloads/', dataset)
-  
-  result <- parseURL(baseURL)
-  
+
+  if (length(x) > 0) {
+    dataset <- paste0(x, collapse = ",")
+  }
+
+  base_url <- paste0("data/downloads/", dataset)
+  result <- parseURL(base_url) # nolint
+
   output <- parse_download(result)
-  
-  print(class(result))
-  
+
   return(output)
 }
 
+#' @title get_downloads sites
+#' @param x sites object
+#' @param ... arguments in ellipse form
+#' @export
+get_downloads.sites <- function(x, ...) {
+
+  use_na <- function(x, type) {
+    if (is.na(x)) {
+      return(switch(type,
+                    "char" = NA_character_,
+                    "int" = NA_integer_))
+    } else {
+      return(x)
+    }
+  }
+
+  cl <- as.list(match.call())
+
+  possible_arguments <- c("offset", "all_data", "datasetid")
+
+  cl[[1]] <- NULL
+
+  for (name in names(cl)) {
+    if (!(name %in% possible_arguments)) {
+      message(paste0(name, " is not an allowed argument.
+      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+    }
+    }
+
+  dataset_list <- c()
+  for (i in seq_len(length(x))) {
+    collunits_call <- x@sites[[i]]@collunits@collunits
+    for (j in seq_len(length(collunits_call))) {
+      for (k in seq_len(length(collunits_call[[j]]@datasets@datasets))) {
+        datasetid <- collunits_call[[j]]@datasets@datasets[[k]]@datasetid
+        dataset_list <- c(dataset_list, datasetid)
+      }
+    }
+  }
+
+  output <- get_downloads(dataset_list)
+
+  return(output)
+}

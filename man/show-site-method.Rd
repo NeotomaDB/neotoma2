@@ -5,11 +5,10 @@
 \title{Show Site objects as a dataframe}
 \usage{
 \S4method{show}{site}(object)
-
-\S4method{show}{site}(object)
+}
+\arguments{
+\item{object}{site object}
 }
 \description{
 Show Site objects as a dataframe
-
-Method
 }

@@ -2,18 +2,15 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites.numeric}
 \alias{get_sites.numeric}
-\title{Get Site from a site ID}
+\title{Get Site Information for Fossil Sites}
 \usage{
-\method{get_sites}{numeric}(x, ..., verbose = 0)
+\method{get_sites}{numeric}(x, ...)
 }
 \arguments{
-\item{...}{arguments in ellipse form}
+\item{x}{The numeric site ID from Neotoma}
 
-\item{siteid}{The numeric site ID from Neotoma}
+\item{...}{accepted arguments if numeric all_data}
 }
 \description{
-Get Site from a site ID
-}
-\examples{
-get_sites(siteid = 24)
+Get Site Information for Fossil Sites
 }

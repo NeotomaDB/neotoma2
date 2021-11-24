@@ -6,6 +6,11 @@
 \usage{
 \S4method{c}{missingOrNULL}(x = "missingORNULL", y)
 }
+\arguments{
+\item{x}{NULL object}
+
+\item{y}{sites/datasets object}
+}
 \description{
 c Method for NULL values
 }

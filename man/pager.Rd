@@ -7,9 +7,11 @@
 pager(response, response_url, ...)
 }
 \arguments{
-\item{x}{The result of the API call}
+\item{response}{The result of the API call}
 
-\item{counter}{If TRUE, modify the response to contain all datapoints}
+\item{response_url}{the url field of the http call}
+
+\item{...}{If TRUE, modify the response to contain all datapoints}
 }
 \description{
 An internal helper function to count through all offsets/limits

@@ -4,34 +4,13 @@
 \alias{get_datasets.default}
 \title{Get Dataset Default}
 \usage{
-\method{get_datasets}{default}(..., complete_data = FALSE, verbose = 0)
+\method{get_datasets}{default}(x, ...)
 }
 \arguments{
-\item{...}{arguments in ellipse form}
+\item{x}{Use a single number to extract site information}
 
-\item{datasetid}{Use a single number to extract site information}
-
-\item{datasettype}{A character string corresponding to one of the allowed dataset types in the Neotoma Database.  Allowed types include: \code{"geochronologic"}, \code{"loss-on-ignition"}, \code{"pollen"}, \code{"plant macrofossils"}, \code{"vertebrate fauna"}, \code{"mollusks"}, and \code{"pollen surface sample"}.  See note in Details delow.}
-
-\item{piid}{Numeric value for the Principle Investigator's ID number.}
-
-\item{altmin}{Numeric value indicating the minimum altitude for the site (can be used alone or with \code{altmax}).}
-
-\item{altmax}{Numeric value indicating the maximum altitude for the site (can be used alone or with \code{altmin}).}
-
-\item{loc}{A GeoJSON string \code{\{'type':'Polygon', 'coords':c(c(lat,long),c(lat, long),...,c(lat, long))\}} representing the bounding box within which to search for sites.}
-
-\item{taxonids}{A numeric identifier for the taxon.  See \code{\link{get_table}} and use \code{get_tables('Taxa')} for a list of acceptable values.}
-
-\item{taxonname}{A character string corresponding to a valid taxon identity in the Neotoma Database.  See \code{\link{get_table}} and use \code{get_table('Taxa')} for a list of acceptable values.}
-
-\item{ageold}{The oldest date acceptable for the search (in years before present).}
-
-\item{ageyoung}{The youngest date acceptable for the search.}
-
-\item{ageof}{If a taxon ID or taxon name is defined this parameter must be set to \code{"taxon"}, otherwise it may refer to \code{"sample"}, in which case the age bounds are for any samples within datasets or \code{"dataset"} if you want only datasets that are within the bounds of ageold and ageyoung.}
-
-\item{subdate}{Date of dataset submission.}
+\item{...}{contactid, datasettype,
+altmin, altmax, loc, ageyoung, ageold, ageof}
 }
 \description{
 Get Dataset Default

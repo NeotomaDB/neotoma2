@@ -6,5 +6,6 @@
 \alias{datasets}
 \title{S4 class for datasets information}
 \description{
-The grouped class for datasets from the Neotoma Paleoecology Database.
+The grouped class for datasets from
+the Neotoma Paleoecology Database.
 }

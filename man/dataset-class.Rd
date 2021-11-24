@@ -6,5 +6,6 @@
 \alias{dataset}
 \title{S4 class for dataset information}
 \description{
-The standard object class for datasets from the Neotoma Paleoecology Database.
+The standard object class for datasets
+from the Neotoma Paleoecology Database.
 }

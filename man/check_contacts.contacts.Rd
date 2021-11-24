@@ -6,6 +6,11 @@
 \usage{
 \method{check_contacts}{contacts}(x, similarity = 0.5, ...)
 }
+\arguments{
+\item{x}{contacts A \code{contacts} object associated with a set of names.}
+
+\item{similarity}{The similarity score between matched records (from 0 - 1).}
+}
 \description{
 Get contact information for Neotoma contributors
 }

@@ -2,15 +2,60 @@
 % Please edit documentation in R/get_downloads.R
 \name{get_downloads}
 \alias{get_downloads}
-\title{Get downloads - Data}
+\title{get_downloads}
 \usage{
-get_downloads(datasetid = NA, ...)
+get_downloads(x = NA, ...)
 }
 \arguments{
-\item{datasetid}{integer A collection unit ID}
+\item{x}{Use a single number to extract site information}
 
-\item{...}{arguments in ellipse form}
+\item{...}{accepted arguments: sites, datasets}
+}
+\value{
+The function returns either a single item of class
+\code{"try-error"} describing the reason for failure
+(either mis-defined parameters or an error from the Neotoma API),
+or a table of sites, with rows corresponding to the number of
+individual sites and datasets returned by the Neotoma API.
+Each "site" object contains 6 parameters that can be accessed as well:
+\item{ \code{siteid} }{site ID number}
+\item{ \code{sitename} }{site's name}
+\item{ \code{location} }{sf object that describes site's location}
+\item{ \code{description} }{}
+\item{ \code{collunits} }{limited information on collunits}
+Each "collection unit" embedded in the "sites" object contains
+6 parameters that can be accessed as well:
+\item{ \code{collunitid}}{collection unit ID number}
+\item{ \code{handle} }{collection unit's handle}
+\item{ \code{collunitname} }{collection unit's name}
+\item{ \code{colldate} }{date in collection unit}
+\item{ \code{substrate} }{substrate}
+\item{ \code{location} }{sf object that describes site's location}
+\item{ \code{datasets} }{detailed information regarding dataset}
+Each "dataset" nested in the "collection unit" contains the
+following detail of information:
+\item{ \code{datasetid} }{dataset ID number}
+\item{ \code{datasetname} }{site's name}
+\item{ \code{datasettype} }{type of data found}
+\item{ \code{location} }{sf object that describes site's location}
+\item{ \code{notes} }{notes on the dataset}
+\item{ \code{taxa table} }{taxa table}
+\item{ \code{pi list} }{P.I. info}
+\item{ \code{analyst} }{analyst info}
+\item{ \code{metadata} }{dataset metadata}
 }
 \description{
-Get downloads - Data
+Information for Fossil Datasets
+Look for the whole data details using only a dataset ID
+or for multiple metadata.
+Displays a site table with the following columns: siteid,
+sitename, lat, long, and elev.
+The function takes parameters defined by the user and
+returns a sites object
+with more detailed information regarding datasets and samples.
+The user may define all or none of the possible fields.
+The function contains data checks for each defined parameter.
+}
+\author{
+Socorro Dominguez \email{sedv8808@gmail.com}
 }
