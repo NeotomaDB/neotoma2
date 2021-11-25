@@ -134,6 +134,12 @@ setMethod(f = "$",
             slot(x, name)
           })
 
+setMethod(f = "$<-",
+          signature = signature(x = "publication"),
+          definition = function(x, name, y) {
+            slot(x, name) <- y
+          })
+
 #' @title Obtain one of the elements within a publication list.
 #' @export
 setMethod(f = "[[",

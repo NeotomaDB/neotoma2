@@ -1,0 +1,12 @@
+
+..Rcheck/
+
+.Rproj.user/
+
+wc10/
+
+neotoma2.Rproj
+
+*.Rproj
+
+.Rhistory
