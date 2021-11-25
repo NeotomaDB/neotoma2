@@ -10,3 +10,7 @@ neotoma2.Rproj
 *.Rproj
 
 .Rhistory
+
+checkout.txt
+
+lintoutput.txt
