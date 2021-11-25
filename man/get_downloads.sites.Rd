@@ -4,10 +4,10 @@
 \alias{get_downloads.sites}
 \title{get_downloads sites}
 \usage{
-\method{get_downloads}{sites}(sites_o, ..., complete_data = FALSE, verbose = 0)
+\method{get_downloads}{sites}(x, ...)
 }
 \arguments{
-\item{sites_o}{sites object}
+\item{x}{sites object}
 
 \item{...}{arguments in ellipse form}
 }

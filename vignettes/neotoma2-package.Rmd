@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setOpts, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(neotoma2)
 library(sf)
+library(neotoma2)
 ```
 
 ## Neotoma Data Structure
@@ -31,42 +31,52 @@ The `neotoma2` R package is intended to act as the intermediary to support these
 
 ### Package Requirements
 
-The `neotoma2` package draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package.
+The earlier `neotoma` package tried to use base R as much as possible.  Given the current ubiquity of the `tidyverse`, the `neotoma2` package now draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package.
+
+There are some namespace overlaps, for example with the `filter()` function.  Depending on the order with which packages are loaded you may get errors using these functions.  If that's the case, one way of bug-checking is to try calling the function explicitly: `neotoma2::filter(. . .)`.  This will ensure it is the `filter()` function from the `neotoma2` package.
 
 ## Site Searches
 
-Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods.
+The highest level object in Neotoma is the **site**.  Sites have spatial coordinates and, in many cases, additional metadata related to lake parameters, or other site-specific properties.
+
+Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined with other sites into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods for printing, plotting and exporting information.
+
+![closeup of several Neotoma sites in the carribean.](images/siteshot.png)
 
 ### Finding sites
 
-You can find a site by its unique numeric Neotoma site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` funtion by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
 
-#### Using a Site ID
-
-If we're looking for a site and we know its specific site identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
+If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
 
 ```{r getSiteBySiteID}
+# Search for site by a single numeric ID:
 alex <- get_sites(24)
 alex
-```
 
-#### Using Multiple Site IDs
-It might be of interest to pass a list of sites. You can do so using `c()`
-
-```{r get-multipe-sites}
+# Search for sites with multiple IDs using c():
 multiple_sites <- get_sites(c(24, 47))
 multiple_sites
 ```
 
-
 #### Searching for sites by name
 
-If we're looking for a site and we know its name or a part of its name, we can search using the function with the sitename argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.
+Often we do not know the particular `siteid`.  If we're looking for a site and we know its name or a part of its name, we can search using the function with the `sitename` argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.  This does not support multiple text strings (i.e., you can't use `c()`).
 
 ```{r getsitename}
 alex <- get_sites(sitename = "Alexander Lake")
 alex
 ```
+
+Neotoma uses a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
+
+```{r sitewithwildcardname}
+alex <- get_sites(sitename = 'Alexander%')
+```
+
+Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
+
+### Accessing `sites` metadata
 
 We can also access the different parameters for each site using S4 class marker `@`.
 
@@ -76,42 +86,16 @@ Since the `sites` object is composed by smaller objects of class `site`, we do n
 alex@sites[[1]]@siteid
 ```
 
-#### Using approximate site names
-
-Neotoma uses the a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
-
-````{r getsitename placeholder}
-alex <- get_sites(sitename = 'Alexander%')
-```
-
-Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
-
-#### Accessing get_sites documentation 
-
-If we ever need to see the documentation for examples, we can always access the help file using `?`
-
-```
-?get_sites
-```
-
 ### Creating a Site
 
 As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
-```{r set_site}
+```{r setsitefunction}
 my_site <- set_site(sitename="My Lake", 
                     coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
                     altitude = 30)
 my_site
-```
-
-#### Accessing `set_site()` documentation 
-
-If we ever need to see the documentation for examples, we can always access the help file using `?`
-
-```
-?set_site
 ```
 
 ## Datasets
@@ -122,93 +106,99 @@ With get_datasets, we make calls to the API to get each dataset information -Dat
 
 Getting the datasets by id is the easiest call, you can also pass a vector of IDs or if you already have a `sites` object, you can pass a sites object. Be careful, get_datasets does not take `sitename` or `siteid` as inputs.
 
-```{r eval = TRUE}
+```{r getdatasetsbyid}
 # Getting datasets by ID
 my_datasets <- get_datasets(c(5, 10, 15, 20))
 my_datasets
 ```
+
 You can also retrieve datasets by type directly from the API.
 
-```{r eval = TRUE}
+```{r getdatasetsbytype}
 # Getting datasets by type
-my_pollen_datasets <- get_datasets(datasettype = "pollen")
+my_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 25)
 my_pollen_datasets
 ```
-When the API has many responses, you can limit the quantity of sites by using the parameter `limit` or you can do a `while`/'for' loop with the parameter `offset` - which works like a pager.
 
-```{r eval = TRUE}
-# Getting just 5 pollen datasets
-my_5_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 5)
-my_5_pollen_datasets
-```
-```{r eval = TRUE}
-# Taking a look at the next 5
-offset_param <- c(1, 2, 3)
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
 
-my_offset_datasets <- c()
-for(i in offset_param){
-  my_pollen_datasets <- get_datasets(type = "pollen", limit = 5, offset = offset_param[[i]])
-  my_offset_datasets <- c(my_offset_datasets, my_pollen_datasets)
+We can use that in a `while` loop in R in the following way:
+
+```{r searchOffset, eval=FALSE}
+run = TRUE
+offset <- 0
+
+while(run) {
+  sites <- get_sites(offset=offset)
+  if(length(sites) == 0) {
+    run = FALSE
+  }
+  if(exists('allSites')) {
+    allSites <- c(allSites, sites)
+  } else {
+    allSites <- sites
+  }
+  offset <- offset + 25
 }
-
-my_offset_datasets
 ```
+
+Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.
+
 You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
 
 Accessing datasets by bounding box:
 
 ```{r bounding box}
-brazil <- '{"type": "Polygon", 
-"coordinates": [[
-[-73.125, -9.102096738726443],
-[-56.953125,-33.137551192346145],
-[-36.5625,-7.710991655433217],
-[-68.203125,13.923403897723347],
-[-73.125,-9.102096738726443]
-]]}'
 
-brazil[1]
+brazil <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+
+# We can make the geojson a spatial object if we want to use the
+# functionality of the `sf` package.
+brazil_sf <- geojsonsf::geojson_sf(brazil)
 
 brazil_datasets <- get_datasets(loc = brazil[1])
-brazil_datasets
 ```
+
+Now we have an object called `brazil_datasets` that contains `r length(brazil_datasets)`.  
 
 You can plot these findings!
 
-```{r}
+```{r leafletBrasil}
 plotLeaflet(brazil_datasets)
 ```
 
-```{r}
-filter(brazil_datasets, datasettype == "geochronologic")
+## Filtering Records
+
+Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brasil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
+
+```{r filterBrasil}
+brasil_dates <- neotoma2::filter(brazil_datasets, datasettype == "geochronologic")
+
+# or:
+
+brasil_dates <- brazil_datasets %>% 
+  neotoma2::filter(datasettype == "geochronologic")
+
+# With boolean operators:
+
+brasil_space <- brazil_datasets %>% filter(lat > -18 & lat < -16)
 ```
 
-
-The filter function takes as the first argument, a datasets object, followed by the critieria we want to use to filter. Current supported criteria includes:
+The `filter()` function takes as the first argument, a datasets object, followed by the critieria we want to use to filter. Current supported criteria includes:
 
 * `lat`
 * `long`
 * `elev`
 * `datasettype`
 
-You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.
-
-If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of & and |. For example:
-
-```{r}
-filter(brazil_datasets, datasettype == "geochronologic" | datasettype == "pollen")
-```
-
-```{r}
-filter(brazil_datasets, lat > -18 & lat < -16)
-```
-
-You can also use the pipeline operator for these tasks:
-```{r}
-brazil_datasets %>%
-  filter(lat > -18 & lat < -16)
-```
-
+You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.  If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of `&` and `|` operators.
 
 ```{r}
 Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
@@ -218,17 +208,6 @@ for(Number in Names_744BH){
   new_sites <- c(new_sites, sites)}
 new_sites
 ```
-
-## The filter Function
-
-Once you have made a call to the API and have the datasets that you want to work with, you can filter the object.
-
-For example, in the case of the Brazil datasets, we might just be interested in the "geochronologic" types of datasets.
-
-Rather than making a new API call, we can filter them using the `filter` function:
-
-
-
 
 ## Publications
 
@@ -244,20 +223,20 @@ The most simple case is a search for a publication based on one or more publicat
 
 We can use a single publication ID or multiple IDs.  In either case the API returns the publication(s) and creates a new `publications` object (which consists of multiple individual `publication`s).  
 
-```{r}
+```{r pubsbyid}
 one <- get_publications(12)
 two <- get_publications(c(12,14))
 ```
 
 From there we can then then subset and extract elements from the list using the standard `[[` format.  For example:
 
-```{r}
+```{r showSinglePub}
 two[[2]]
 ```
 
 Will return the second publication in the list, corresponding to the publication with `publicationid` 14 in this case.
 
-#### Get Publication using Search:
+#### Get Publication using Search
 
 We can also use search elements to search for publications.  The `get_publication` method uses the Neotoma API to search for publications.  We can search using the following properties:
 
@@ -271,54 +250,23 @@ We can also use search elements to search for publications.  The `get_publicatio
 * `limit`
 * `offset`
 
-```{r}
+```{r fulltestPubSearch}
 michPubs <- get_publications(search="Michigan", limit=2)
-length(michPubs)
 ```
 
-This results in a set of `r length(michPubs)` publications from Neotoma.  Equal to the `limit` in this case.  If the number of matching publications is less than the limit then the `length()` will be smaller.
+This results in a set of `r length(michPubs)` publications from Neotoma, equal to the `limit`.  If the number of matching publications is less than the limit then the `length()` will be smaller.
 
 Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
 
-```{r}
+```{r nonsenseSearch}
 noise <- get_publications(search="Canada Banada Nanada", limit = 5)
 ```
 
-This returns a result set of length `r length(noise)`.  
-
-By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
-
-We can use that in a `while` loop in R in the following way:
-
-```{r}
-run = TRUE
-offset <- 0
-
-while(run) {
-  newPubs <- get_publications(search="Michigan", offset=offset)
-  if(length(newPubs) == 0) {
-    run = FALSE
-  }
-  if(exists('allPubs')) {
-    allPubs <- c(allPubs, newPubs)
-  } else {
-    allPubs <- newPubs
-  }
-  offset <- offset + 25
-}
-```
-
-This gives us an object of length `r length(allPubs)`, the number of publications in Neotoma that reference Michigan.
-
-We can see a summary of the returned object by simply calling it:
-
-```{r}
-one
-```
+This returns a result set of length `r length(noise)`.
 
 This returns the (Neotoma) ID, the citation and the publication DOI (if that is stored in Neotoma).  We can get the first publication using the standard `[[` nomenclature:
 
-```{r}
+```{r getSecondPub}
 two[[1]]
 ```
 
@@ -350,52 +298,4 @@ A `publication` has a large number of slots that can be defined.  These may be l
 new_pub@pages <- '1397-1410'
 ```
 
-
 #### Validate New Publications
-
-
-## Workflows
-
-One of the main goals of Neotoma is to pull records out of Neotoma into the R workflow.  
-
-### Diatoms
-
-```{r getDiatoms, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-
-neDiatoms <- get_datasets(dois=c(...))
-```
-
-* Pull diatom surface samples.
-  * We may want to pull spatially, or pull by "National Assessment", or by other defined calibration set.
-
-```{r getWaterChem, eval=FALSE}
-neDiatoms <- get_datasets(datasettype="diatom surface samples", loc=BOUNDING BOX)
-```
-
-* Look for water chemistry at the same site (or collection unit).
-
-Look for a table that explicitly matches water chemistry and diatom datasets, in cases where records have been sampled multiple times.
-
-* In theory collection dates are a good idea to use to filter, but collection dates might not be specific enough.
-
-* In some regional studies water chemistry was sampled multiple times during the summer (e.g.) but diatoms were sampled only a single time.
-
-* Was this going to be done in the aggregate dataset method?  Didn't happen.
-
-Then:
-* With one diatom record per water chemistry record
-* we need taxon name, we need water chemistry type & units
-
-Then we do some inference modeling (`rioja`).  Building e.g., transfer functions.
-
-* Then run predictions on cores & plot predicted values & error
-
-* We would extract an appendix of publications for the datasets we use.
-* We would want some maps of site locations
-* We would want some simple scatter plots
-* We would want to do something about understanding taxonomic differences (so we'd want to know who the analyst was, or who the PI was)
-* We might want to group or synonomize.  Can we pull those from Neotoma?
-* We want the stratigraphic diagrams for cores, and surface sample diagrams for surface sample sets
-* We want the lists of dataset DOIs.
-* Want abundances of taxa along a gradient (with superimposed curves?)

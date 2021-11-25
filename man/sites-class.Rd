@@ -4,7 +4,9 @@
 \name{sites-class}
 \alias{sites-class}
 \alias{sites}
-\title{An S4 class for multi-site information from the Neotoma Paleoecology Database.}
+\title{An S4 class for multi-site information from
+the Neotoma Paleoecology Database.}
 \description{
-An S4 class for multi-site information from the Neotoma Paleoecology Database.
+An S4 class for multi-site information from
+the Neotoma Paleoecology Database.
 }

@@ -4,10 +4,12 @@
 \alias{get_sites.numeric}
 \title{Get Site Information for Fossil Sites}
 \usage{
-\method{get_sites}{numeric}(x, ..., verbose = 0)
+\method{get_sites}{numeric}(x, ...)
 }
 \arguments{
 \item{x}{The numeric site ID from Neotoma}
+
+\item{...}{accepted arguments if numeric all_data}
 }
 \description{
 Get Site Information for Fossil Sites

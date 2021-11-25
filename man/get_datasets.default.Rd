@@ -4,12 +4,13 @@
 \alias{get_datasets.default}
 \title{Get Dataset Default}
 \usage{
-\method{get_datasets}{default}(..., complete_data = FALSE, verbose = 0)
+\method{get_datasets}{default}(x, ...)
 }
 \arguments{
-\item{...}{accepted arguments: contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof}
+\item{x}{Use a single number to extract site information}
 
-\item{datasetid}{Use a single number to extract site information}
+\item{...}{contactid, datasettype,
+altmin, altmax, loc, ageyoung, ageold, ageof}
 }
 \description{
 Get Dataset Default

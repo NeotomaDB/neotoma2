@@ -6,6 +6,9 @@
 \usage{
 \S4method{show}{datasets}(object)
 }
+\arguments{
+\item{object}{datasets object}
+}
 \description{
 Show Datasets object as a dataframe
 }

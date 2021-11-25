@@ -12,26 +12,29 @@ get_sites(x = NA, ...)
 \item{...}{accepted arguments: sitename, altmax, altmin}
 }
 \value{
-The function returns either a single item of class \code{"try-error"} describing
-the reason for failure (either mis-defined parameters or an error from the Neotoma API),
-or a table of sites, with rows corresponding to the number of individual
-sites returned by the Neotoma API.
+The function returns either a single item of class \code{"try-error"}
+describing the reason for failure (either mis-defined parameters or an error
+from the Neotoma API), or a table of sites, with rows corresponding to the
+number of individual sites returned by the Neotoma API.
 Each "site" object contains 6 parameters that can be accessed as well:
-siteid, sitename, location, altitude, description, limited collection units information.
+siteid, sitename, location, altitude, description,
+limited collection units information.
 \item{ \code{siteid} }{site ID number}
-\item{ \code{sitename} }{site's name}
-\item{ \code{location} }{sf object that describes site's location}
+\item{ \code{sitename} }{site"s name}
+\item{ \code{location} }{sf object that describes site"s location}
 \item{ \code{description} }{}
 \item{ \code{collunits} }{limited information on collunits}
 }
 \description{
 Information for Fossil Sites
-Look for a site details using only a site ID or for multiple sites using possible sitenames, max latitudes or min latitudes.
-Displays a table with the following columns: siteid, sitename, lat, long, and elev.
+Look for a site details using only a site ID or for multiple sites
+using possible sitenames, max latitudes or min latitudes.
+Displays a table with the following columns: siteid, sitename, lat, long,
+and elev.
 The function takes parameters defined by the user and returns a list
 of contact information supplied by the Neotoma Paleoecological Database.
-The user may define all or none of the possible fields.  The function contains
-data checks for each defined parameter.
+The user may define all or none of the possible fields.
+The function contains data checks for each defined parameter.
 }
 \examples{
 \dontrun{
@@ -42,14 +45,14 @@ To find all sites that contain the string "Alex\%"
 alex.sites <- get_sites(sitename="Alex\%")
 
 To find all examples in Brazil
-brazil <- '{"type": "Polygon", 
+brazil <- "{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],
  [-56.953125,-33.137551192346145],
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]
-]]}'
+]]}"
 brazil_sites <- get_sites(loc = brazil[1])
 }
 }

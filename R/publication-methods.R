@@ -5,15 +5,18 @@ author <- setClass("author",
                                   order = "numeric"),
                    prototype(author = NULL,
                              order = NA_integer_))
+
+#' @title An S4 class for a set of Neotoma author objects.
 #' @export
 authors <- setClass("authors",
                     representation(authors = "list"),
                     validity = function(object) {
-                      all(map(object@authors, function(x) { 
+                      all(map(object@authors, function(x) {
                         class(x) == "author"}) %>%
                           unlist())
                     })
 
+#' @title An S4 class for a single Neotoma publication.
 #' @export
 publication <- setClass("publication",
                         representation(publicationid = "numeric",
@@ -69,12 +72,17 @@ publication <- setClass("publication",
                                   notes = NA_character_,
                                   author = NULL))
 
-#' An S4 class for multi-publication information from the Neotoma Paleoecology Database.
+#' @title
+#'  An S4 class for multi-publication information
+#'  from the Neotoma Paleoecology Database.
 #' @export
 publications <- setClass("publications",
                          representation(publications  = "list"),
                          validity = function(object) {
-                           all(map(object@publications, function(x) { class(x) == "publication"}) %>%
+                           all(map(object@publications,
+                                   function(x) {
+                                     class(x) == "publication"
+                                     }) %>%
                                  unlist())
                          })
 
@@ -83,8 +91,8 @@ publications <- setClass("publications",
 #' @importFrom methods slotNames
 #' @export
 setMethod(f = "names",
-          signature= signature(x = "publication"),
-          definition = function(x){
+          signature = signature(x = "publication"),
+          definition = function(x) {
             slotNames("publication")
           })
 
@@ -93,8 +101,8 @@ setMethod(f = "names",
 #' @importFrom methods slotNames
 #' @export
 setMethod(f = "names",
-          signature= signature(x = "publications"),
-          definition = function(x){
+          signature = signature(x = "publications"),
+          definition = function(x) {
             slotNames("publication")
           })
 
@@ -104,13 +112,13 @@ setMethod(f = "names",
 #' @importFrom dplyr bind_rows
 #' @export
 setMethod(f = "show",
-          signature= "publications",
-          definition = function(object){
+          signature = signature(object = "publications"),
+          definition = function(object) {
             map(object@publications, function(x) {
               data.frame(publicationid = x@publicationid,
                          citation = x@citation,
                          doi = x@doi)
-            }) %>% 
+            }) %>%
               bind_rows() %>%
               print()
           })
@@ -121,30 +129,40 @@ setMethod(f = "show",
 #' @importFrom methods slot
 #' @export
 setMethod(f = "$",
-          signature= signature(x = "publication"),
-          definition = function(x, name){
+          signature = signature(x = "publication"),
+          definition = function(x, name) {
             slot(x, name)
           })
 
+setMethod(f = "$<-",
+          signature = signature(x = "publication"),
+          definition = function(x, name, y) {
+            slot(x, name) <- y
+          })
+
+#' @title Obtain one of the elements within a publication list.
 #' @export
 setMethod(f = "[[",
-          signature= signature(x = "publications", i = "numeric"),
-          definition = function(x, i){
+          signature = signature(x = "publications", i = "numeric"),
+          definition = function(x, i) {
             if (length(i) == 1) {
-              out <- new('publication', x@publications[[i]])  
+              out <- new("publication", x@publications[[i]])
             } else {
-              out <- purrr::map(i, function(z) new('publication', x@publications[[z]]))
-              out <- new('publications', publications=out)
+              out <- purrr::map(i, function(z) {
+                new("publication", x@publications[[z]])
+                })
+              out <- new("publications", publications = out)
             }
             return(out)
           })
 
+#' @title Assign value to an element in a publication list.
 #' @export
 setMethod(f = "[[<-",
-          signature= signature(x = "publications"),
-          definition = function(x, i, j, value){
+          signature = signature(x = "publications"),
+          definition = function(x, i, j, value) {
             if (length(i) == 1) {
-              x@publications[[i]] <- new('publication', value)
+              x@publications[[i]] <- new("publication", value)
               out <- x
               return(out)
             } else {
@@ -155,45 +173,52 @@ setMethod(f = "[[<-",
 #' @title Get the number of publications in a publications object.
 #' @export
 setMethod(f = "length",
-          signature= signature(x = "publications"),
-          definition = function(x){
+          signature = signature(x = "publications"),
+          definition = function(x) {
             length(x@publications)
           })
 
+#' @title Combine publication objects.
 #' @export
 setMethod(f = "c",
-          signature = signature("publications"),
-          definition = function(x, y){
-            new('publications',
-                publications= unlist(c(x@publications, 
+          signature = signature(x = "publications"),
+          definition = function(x, y) {
+            new("publications",
+                publications = unlist(c(x@publications,
                                        y@publications), recursive = FALSE))
           })
 
+#' @title Print publications to screen.
+#' @param object A \code{publication} object.
 #' @export
 setMethod(f = "show",
-          signature = "publication",
-          definition = function(object){
+          signature = signature(object = "publication"),
+          definition = function(object) {
             print(data.frame(publicationid = object@publicationid,
                              citation = object@citation,
                              doi = object@doi))
           })
 
+#' @title Show matches for objects.
 #' @export
-setGeneric("showMatch", function(object) {
+setGeneric("showMatch", function(x) {
   standardGeneric("showMatch")
 })
 
+#' @title Show matched publication objects.
+#' @param x A \code{publication} object.
 #' @export
 setMethod(f = "showMatch",
-          signature = signature("publication"),
-          definition = function(object){
-            if(!is.null(attr(object, 'matches'))) {
-              print(attr(object, 'matches'))
+          signature = signature(x = "publication"),
+          definition = function(x) {
+            if (!is.null(attr(x, "matches"))) {
+              print(attr(x, "matches"))
             }
           })
 
+#' @title Obtain the DOI for publications.
 #' @export
-setGeneric("doi", function(object) {
+setGeneric("doi", function(x) {
   standardGeneric("doi")
 })
 
@@ -202,9 +227,9 @@ setGeneric("doi", function(object) {
 #' @importFrom methods slotNames
 #' @export
 setMethod(f = "doi",
-          signature = signature("publication"),
-          definition = function(object) {
-            object@doi
+          signature = signature(x = "publication"),
+          definition = function(x) {
+            x@doi
           })
 
 #' @title Convert a publication author to a \code{data.frame}
@@ -213,47 +238,53 @@ setMethod(f = "doi",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols
 #' @export
-setMethod(f="as.data.frame", 
-          signature= signature("authors"),
-          definition = function(x){
-            authors <- x@authors %>% 
+setMethod(f = "as.data.frame",
+          signature = signature(x = "authors"),
+          definition = function(x) {
+            authors <- x@authors %>%
               map(function(y) {
-                paste0(y@author@familyname, ', ', 
+                paste0(y@author@familyname, ", ",
                        y@author@givennames)
-                }) %>% 
-              paste0(collapse='; ')
+                }) %>%
+              paste0(collapse = "; ")
             return(authors)
           })
 
 #' @title Convert a \code{publication} to a \code{data.frame}
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
+#' @param x A \code{publication} object.
 #' @export
-setMethod(f="as.data.frame", 
-          signature= signature(x = "publication"),
-          definition = function(x){
-            slots = slotNames(x)
-            slots = slots[!slots == "author"]
-            table <- slots %>% 
-              purrr::map(function(s){
-                out <- data.frame(slot(x, s), 
+setMethod(f = "as.data.frame",
+          signature = signature(x = "publication"),
+          definition = function(x) {
+            slots <- slotNames(x)
+            slots <- slots[!slots == "author"]
+            table <- slots %>%
+              purrr::map(function(s) {
+                out <- data.frame(slot(x, s),
                                   stringsAsFactors = FALSE)
                 colnames(out) <- s
                 return(out)
-              }) %>% bind_cols()
+              }) %>%
+              bind_cols()
             table$authors <- as.data.frame(x@author)
             return(table)
           })
 
+#' @title Convert publications to a \code{data.frame}
+#' @param x A \code{publications} object.
 #' @export
-setMethod(f="as.data.frame", 
-          signature= signature(x = "publications"),
-          definition = function(x){
-            full <- x@publications %>% map(function(y) as.data.frame(y)) %>% 
+setMethod(f = "as.data.frame",
+          signature = signature(x = "publications"),
+          definition = function(x) {
+            full <- x@publications %>%
+            map(function(y) as.data.frame(y)) %>%
               bind_rows()
             return(full)
 })
 
+#' @title Select the best match for an object.
 #' @export
 setGeneric("selectMatch", function(x, n) {
   standardGeneric("selectMatch")
@@ -266,12 +297,12 @@ setGeneric("selectMatch", function(x, n) {
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
-            if(is.null(attr(x, 'matches'))) {
-              stop('There are no existing matches.')
-            } else if(n > length(attr(x, 'matches'))) {
-              stop('The requested match is not in the current list.')
-            } else if(n <= length(attr(x, 'matches'))) {
-              return(attr(x, 'matches')[[n]])
+            if (is.null(attr(x, "matches"))) {
+              stop("There are no existing matches.")
+            } else if (n > length(attr(x, "matches"))) {
+              stop("The requested match is not in the current list.")
+            } else if (n <= length(attr(x, "matches"))) {
+              return(attr(x, "matches")[[n]])
             }
           })
 
@@ -282,6 +313,6 @@ setMethod(f = "selectMatch",
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {
-            attr(x, 'matches') <- NULL
+            attr(x, "matches") <- NULL
             return(x)
           })

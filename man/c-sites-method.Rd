@@ -2,10 +2,15 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{c,sites-method}
 \alias{c,sites-method}
-\title{c Method for sites}
+\title{c Method - Combine sites objects}
 \usage{
-\S4method{c}{sites}(x, ...)
+\S4method{c}{sites}(x, y)
+}
+\arguments{
+\item{x}{sites object 1}
+
+\item{y}{sites object 2}
 }
 \description{
-c Method for sites
+c Method - Combine sites objects
 }

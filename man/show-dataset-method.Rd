@@ -6,6 +6,9 @@
 \usage{
 \S4method{show}{dataset}(object)
 }
+\arguments{
+\item{object}{dataset object}
+}
 \description{
 Show Dataset Method
 }

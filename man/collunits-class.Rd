@@ -6,5 +6,6 @@
 \alias{collunits}
 \title{An S4 class for Neotoma Collection Units}
 \description{
-Holds Collection unit information from the Neotoma Paleoecology Database.
+Holds Collection unit information
+from the Neotoma Paleoecology Database.
 }

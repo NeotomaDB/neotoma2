@@ -4,17 +4,14 @@
 \alias{check_contacts}
 \title{Check contact information for a record against Neotoma contributors}
 \usage{
-check_contacts(x)
+check_contacts(x, ...)
 }
 \arguments{
 \item{x}{contacts A \code{contacts} object associated with a set of names.}
 
-\item{contactname}{A full or partial name for an individual contributor to the database.}
-
-\item{familyname}{The full or partial last name for an individual contributor to the database.}
-
-\item{status}{The current status of the contributor (\code{active} or \code{retired})}
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
-Uses the Neotoma API to search and access information about individuals who have contributed to the data in the Neotoma Paleoecology Database
+Uses the Neotoma API to search and access information about individuals
+who have contributed to the data in the Neotoma Paleoecology Database
 }

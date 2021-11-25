@@ -4,7 +4,7 @@
 \alias{get_sites.default}
 \title{Get Site Information for Fossil Sites}
 \usage{
-\method{get_sites}{default}(..., verbose = 0)
+\method{get_sites}{default}(...)
 }
 \arguments{
 \item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc}

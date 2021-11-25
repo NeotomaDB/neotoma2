@@ -8,127 +8,130 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP path for the particular API call.
-#' @param use By default use the neotoma server (\code{neotoma}), but supports either the development API server or a local server.
-#' @param ... Any query parameters passed from the function calling \code{parseURL}.
+#' @param use By default use the neotoma server (\code{neotoma}),
+#' but supports either the development API server or a local server.
+#' @param all_data If TRUE return all possible API calls
+#' @param ... Any query parameters passed from the function calling
+#' \code{parseURL}.
 #' @export
-parseURL <- function(x, use = 'neotoma', all_data=FALSE, ...) {
+parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
   clean <- function(x) {
     ifelse(is.null(x), NA, x)
   }
-  
-  cleanNull <- function(x, fn = function(x) if(is.null(x)) NA else x)
-  {
-    if(is.list(x)) {
+
+  cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
+    if (is.list(x)) {
       lapply(x, cleanNull, fn)
     } else {
       fn(x)
     }
   }
-  
+
   baseurl <- switch(use,
                     "dev" = "https://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-  
-  query = list(...)
+
+  query <- list(...)
   response <- httr::GET(paste0(baseurl, x),
                         add_headers("User-Agent" = "neotoma2 R package"),
                         query = query)
-  
+
   response_url <- response$url
-  
+
   # When need to check API endpoint, uncomment below
-  #print("Response's URL \n")
-  #print(response$url)
-  
+
   cl <- as.list(match.call())
-  
+
   stop_for_status(response,
-                  task = "Could not connect to the Neotoma API. Check that the path is valid,
-            and check the current status of the Neotoma API services at
-            http://data.neotomadb.org")
-  
+                  task = "Could not connect to the Neotoma API.
+                  Check that the path is valid, and check the current
+                   status of the Neotoma API services at
+                    http://data.neotomadb.org")
   if (response$status_code == 200) {
-    result <- jsonlite::fromJSON(httr::content(response, as = 'text'),
+    result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                  flatten = FALSE,
                                  simplifyVector = FALSE)
   }
 
-  if(all_data==TRUE){
-    
+  if (all_data == TRUE) {
+
     responses <- c()
     result <- cleanNull(result)
-    
+
     result1 <- result$data
     responses <- c(responses, result1)
-    
-    if("offset" %in% names(query)){
-      param_offset = query$offset
-      param_offset_old = param_offset-1
+
+    if ("offset" %in% names(query)) {
+      param_offset <- query$offset
+      param_offset_old <- param_offset - 1
       query$offset <- NULL
     }else{
-      param_offset_old = 0
-      param_offset = length(result$data)
+      param_offset_old <- 0
+      param_offset <- length(result$data)
     }
-    
-    if("limit" %in% names(query)){
+
+    if ("limit" %in% names(query)) {
       stop("You cannot use the limit parameter when all_data=TRUE")
     }
-    
-    while((length(result1) > 0) & param_offset_old != param_offset){
-      if(grepl("\\?", response_url)){
+
+    while ((length(result1) > 0) & param_offset_old != param_offset) {
+      if (grepl("\\?", response_url)) {
         query$offset <- NULL
-        query = c(query, offset = param_offset)
-        response <- httr::GET(paste0(response_url, '&limit=500'),
+        query <- c(query, offset = param_offset)
+        response <- httr::GET(paste0(response_url, "&limit=500"),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
       }else{
         query$offset <- NULL
-        query = c(query, offset = param_offset)
-        response <- httr::GET(paste0(response_url, '?limit=500'),
+        query <- c(query, offset = param_offset)
+        response <- httr::GET(paste0(response_url, "?limit=500"),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
       }
-      
+
       if (response$status_code == 200) {
-        result2 <- jsonlite::fromJSON(httr::content(response, as = 'text'),
+        result2 <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                       flatten = FALSE,
                                       simplifyVector = FALSE)
       }
-    
+
       result2 <- cleanNull(result2)
-      new_response_url <- response$url
-      param_offset_old = param_offset
-      param_offset = param_offset + length(result2$data)
-      
+      param_offset_old <- param_offset
+      param_offset <- param_offset + length(result2$data)
+
       responses <- c(responses, result2$data)
     }
-    
+
     result$data <- responses
-    
+
   }else{
     result <- cleanNull(result)
   }
-  
-  if("limit" %in% names(cl)){
+
+  if (length(result$data) < 26) {
     message(paste0("Your search returned ", length(result$data), " objects."))
-  }else if("offset" %in% names(cl)){
+  }else if ("limit" %in% names(cl)) {
     message(paste0("Your search returned ", length(result$data), " objects."))
-    if(all_data == FALSE){
-      message(paste0("Printing only 25 objects returned. Use all_data = TRUE for storing the complete set."))
+  }else if ("offset" %in% names(cl)) {
+    message(paste0("Your search returned ", length(result$data), " objects."))
+    if (all_data == FALSE) {
+      message(paste0("Printing only 25 objects returned.
+       Use all_data = TRUE for storing the complete set."))
     }
-  } else if(length(list(...)) != 0){
-    pager(result, response_url)
-    if(all_data == FALSE){
-      message(paste0("Printing only 25 objects returned. Use all_data = TRUE for storing the complete set."))
+  } else if (length(list(...)) != 0) {
+    pager(result, response_url) # nolint
+    if (all_data == FALSE) {
+      message(paste0("Printing only 25 objects returned.
+       Use all_data = TRUE for storing the complete set."))
     }
   }else{
     message(paste0("Your search returned ", length(result$data), " objects."))
-    if(all_data == FALSE){
-      message(paste0("Printing only 25 objects. Use all_data = TRUE for storing the complete set."))
+    if (all_data == FALSE) {
+      message(paste0("Printing only 25 objects.
+       Use all_data = TRUE for storing the complete set."))
     }
-  }  
-  
+  }
   return(result)
 }

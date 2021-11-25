@@ -2,19 +2,22 @@
 #' @description Uses the Neotoma API to search and access information
 #' about publications associated with data in the Neotoma Paleoecology Database
 #' @param x integer A contact ID
-#' @param publicationid The unique numeric identifier associated with a publication in Neotoma.
-#' @param datasetid A unique identifier for a Neotoma dataset that is associated with a publication.
+#' @param publicationid
+#'    The unique numeric identifier associated with a publication in Neotoma.
+#' @param datasetid
+#'    A unique identifier for a Neotoma dataset that is associated
+#'    with a publication.
 #' @param familyname The full or partial last name for an individual author.
-#' @param pubtype The publication type, from `get_tables('publicationtypes')`.
+#' @param pubtype The publication type, from `get_tables("publicationtypes")`.
 #' @param year The year the publication was released.
 #' @param search A plain text search string used to search the citation.
 #' @importFrom purrr pluck
 #' @export
 get_publications <- function(x = NA, ...) {
   if (!missing(x)) {
-    UseMethod('get_publications', x)
+    UseMethod("get_publications", x)
   } else {
-    UseMethod('get_publications', NA)
+    UseMethod("get_publications", NA)
   }
 }
 #' @title Get publication information from Neotoma
@@ -22,16 +25,21 @@ get_publications <- function(x = NA, ...) {
 #' @importFrom purrr pluck
 #' @export
 get_publications.default <- function(...) {
-  baseURL <- paste0('data/publications')
+  . <- ""
+  baseURL <- paste0("data/publications") # nolint
   result <- parseURL(baseURL, ...) %>%
     cleanNULL() %>%
     pluck("data") %>%
     pluck("result")
-  testNull <- function(val, out) {
-    if (is.null(val)) { return(out)} else {return(val)}
+  testNull <- function(val, out) { # nolint
+    if (is.null(val)) {
+      return(out)
+    } else {
+      return(val)
+      }
   }
   pubs <- map(result, function(x) {
-    if ('match' %in% names(x)) {
+    if ("match" %in% names(x)) {
       match <- x$match
     } else {
       match <- NULL
@@ -51,7 +59,7 @@ get_publications.default <- function(...) {
         doi = as.character(x$doi),
         author = pubAuthors(x))
     attr(output, "match") <- match
-    return (output)
+    return(output)
   }) %>%
     new("publications", publications = .)
   return(pubs)
@@ -61,14 +69,20 @@ get_publications.default <- function(...) {
 #' @importFrom purrr pluck
 #' @export
 get_publications.numeric <- function(x, ...) {
+  . <- ""
+
   if (length(x) > 0) {
-    pubids <- paste0(x, collapse = ',')
+    pubids <- paste0(x, collapse = ",")
   }
-  testNull <- function(val, out) {
-    if (is.null(val)) { return(out)} else {return(val)}
+  testNull <- function(val, out) { # nolint
+    if (is.null(val)) {
+      return(out)
+    } else {
+      return(val)
+    }
   }
-  baseURL <- paste0("data/publications/", pubids)
-  result <- parseURL(baseURL) %>% cleanNULL()
+  baseURL <- paste0("data/publications/", pubids) # nolint
+  result <- parseURL(baseURL) %>% cleanNULL() # nolint
   pubs <- map(result$data, function(x) {
                   x <- x$publication
                   x[is.null(x)] <- NA_character_
@@ -96,7 +110,7 @@ get_publications.publication <- function(x, ...) {
       test <- get_publications(search = x@citation, limit = 3)
       attr(x, "matches") <- test
     } else {
-      searchString <- dplyr::coalesce(x@citation, x@articletitle, x@booktitle)
+      searchString <- dplyr::coalesce(x@citation, x@articletitle, x@booktitle) # nolint
       test <- get_publications(search = searchString, limit = 3)
       attr(x, "matches") <- test
     }
@@ -105,7 +119,7 @@ get_publications.publication <- function(x, ...) {
 }
 #' @export
 get_publications.publications <- function(x, ...) {
-  for (i in 1:length(x)) {
+  for (i in seq_len(length(x))) {
     pub <- x[[i]]
     if (is.na(x[[i]]@publicationid)) {
       if (!is.na(pub@citation)) {

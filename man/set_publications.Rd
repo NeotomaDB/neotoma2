@@ -34,7 +34,8 @@ set_publications(
 )
 }
 \arguments{
-\item{publicationtype}{A text string identifying the publication type within the Neotoma database.}
+\item{publicationtype}{A text string identifying the publication
+type within the Neotoma database.}
 
 \item{year}{The year of publication.}
 
