@@ -333,7 +333,7 @@ setMethod(f = "c",
 # Start writeCSV methods
 setMethod(f = "write.csv",
           signature = "sites",
-          definition = function(object, path) {
+          definition = function(object, file, ...) {
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
@@ -343,12 +343,12 @@ setMethod(f = "write.csv",
                                description = x@description)
             }) %>%
               bind_rows()
-            write.csv(df1, path, row.names = FALSE)
+            write.csv(df1, file, ...)
           })
 
 setMethod(f = "write.csv",
           signature = "datasets",
-          definition = function(object, path) {
+          definition = function(object, file, ...) {
             df1 <- map(object@datasets, function(x) {
               df <- data.frame(siteid = x@datasetid,
                                sitename = x@datasetname,
@@ -357,7 +357,7 @@ setMethod(f = "write.csv",
                                type = x@datasettype)
             }) %>%
               bind_rows()
-            write.csv(df1, path, row.names = FALSE)
+            write.csv(df1, file, ...)
           }
 )
 
