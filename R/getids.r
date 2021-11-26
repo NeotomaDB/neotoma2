@@ -1,4 +1,4 @@
-#' @title Get object IDs from a Neotoma site object.
+#' @title Get object IDs
 #' @param x A neotoma2 \code{sites} object.
 #' @description This function parses a site object, from \code{site} to
 #' \code{dataset} level and returns a \code{data.frame} that contains the
@@ -12,6 +12,7 @@ getids <- function(x) {
   }
 }
 
+#' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
 #' @export
 getids.sites <- function(x) {

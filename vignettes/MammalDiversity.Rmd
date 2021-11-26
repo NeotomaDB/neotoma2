@@ -81,7 +81,7 @@ Now we have all our records, totaling `r length(mammalSet)` distinct mammal site
 Download climate data from appropriate source.
 
 ```{r, eval=TRUE}
-worldTmin <- raster::getData('worldclim', var='tmin', res=10)
+worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
 
 raster::plot(worldTmin, 1)
 ```
@@ -102,9 +102,10 @@ plotLeaflet(mamData)
 mamDl <- get_downloads(mamData)
 
 ```
+
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?
-  * Exclude certain dating methods (e.g. 14C on apatite, or biostratigraphic data, or… high grade based on the narrowness of the date control or error bars)
+  * Exclude certain dating methods (e.g. $^{14}C$ on apatite, or biostratigraphic data, or… high grade based on the narrowness of the date control or error bars)
 
 ### Clean taxonomy
 
@@ -112,6 +113,7 @@ mamDl <- get_downloads(mamData)
 account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
 
 ### Clean Spatial Records
+
   * For each species across all sites:
   * Check for geographic/environmental outliers
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/getids.r
 \name{getids}
 \alias{getids}
-\title{Get object IDs from a Neotoma site object.}
+\title{Get object IDs}
 \usage{
 getids(x)
 }
