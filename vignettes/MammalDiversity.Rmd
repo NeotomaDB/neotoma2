@@ -20,7 +20,7 @@ library(neotoma2)
 library(raster)
 ```
 
-This is a model workflow to help understand and map assemblage diversity across time and space.
+This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more neotoma2 vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.
 
 ## Obtain Data
 ### Obtain all Neotoma Mammal Data
@@ -39,7 +39,7 @@ would return only the first 25 records in Neotoma.  We can create an interactive
 plotLeaflet(faunal)
 ```
 
-The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling: 
+The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling:
 
 ```{r}
 get_datasets(datasettype='vertebrate fauna', limit = 999999)
@@ -92,6 +92,16 @@ This is just an example of downloading one element of [WorldClim](https://www.wo
 
 ### Clean ages
 
+Lets begin again with downloading all records for mammals within the database that have a Holocene age:
+
+```{r}
+mamData <- get_datasets(datasettype = "vertebrate fauna", 
+                        ageold = 12000, 
+                        limit = 99999)
+plotLeaflet(mamData)
+mamDl <- get_downloads(mamData)
+
+```
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?
   * Exclude certain dating methods (e.g. 14C on apatite, or biostratigraphic data, or… high grade based on the narrowness of the date control or error bars)
