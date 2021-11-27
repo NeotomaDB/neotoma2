@@ -21,7 +21,7 @@ getids.sites <- function(x) {
         if (length(y@collunits) > 0) {
             collunits <- map(y@collunits@collunits, function(z) {
                 collunitid <- z@collunitid
-                if (length(y@datasets) > 0) {
+                if (length(z@datasets) > 0) {
                     datasetids <- map(z@datasets@datasets, function(a) {
                         a@datasetid
                     })
