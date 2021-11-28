@@ -37,7 +37,7 @@ set_site <- function(siteid = NA_integer_,
   x@area <- area
   x@geopolitical <- geopolitical
   x@sitename <- sitename
-  x@geography <- location
+  x@geography <- geography
   x@description <- description
   x@notes <- notes
   x@collunits <- collunits

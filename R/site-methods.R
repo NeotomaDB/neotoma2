@@ -44,8 +44,8 @@ setMethod(f = "show",
           definition = function(object) {
             print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
-                             lat = mean(st_coordinates(object@location)[, 2]),
-                             long = mean(st_coordinates(object@location)[, 1]),
+                             lat = mean(st_coordinates(object@geography)[, 2]),
+                             long = mean(st_coordinates(object@geography)[, 1]),
                              elev = object@altitude), row.names = FALSE)
           })
 
@@ -57,10 +57,30 @@ setMethod(f = "show",
             map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
                                elev = x@altitude)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
+          })
+
+
+#' @title Convert sites object to a \code{data.frame}
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+setMethod(f = "showDatasets",
+          signature = "sites",
+          definition = function(object) {
+            my_datasets <- c()
+            for (i in seq_len(length(object@sites))) {
+              collunits_call <- object@sites[[i]]@collunits@collunits[[1]]
+              my_dataset <- collunits_call@datasets@datasets[[1]]
+              my_datasets <- append(my_datasets, my_dataset)
+              my_datasets2 <- new("datasets", datasets = my_datasets)
+            }
+            return(my_datasets2)
           })
