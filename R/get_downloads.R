@@ -449,7 +449,7 @@ get_downloads.sites <- function(x, ...) {
 
   cl <- as.list(match.call())
 
-  possible_arguments <- c("offset", "all_data", "datasetid")
+  possible_arguments <- c("x", "offset", "all_data", "datasetid")
 
   cl[[1]] <- NULL
 
