@@ -59,7 +59,7 @@
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
-#'  [-73.125,-9.102096738726443]]]}
+#'  [-73.125,-9.102096738726443]]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' brazil_downloads <- get_downloads(brazil_datasets)
 #' }
@@ -71,56 +71,39 @@ get_downloads <- function(x = NA, ...) {
 }
 
 parse_download <- function(result) { # nolint
-  variablename <- element <- taxongroup <- NULL
-  ecologicalgroup <- taxonid <- value <- NULL
-  fix_null <- function(x) {
-    for (i in seq_len(length(x))) {
-      if (is.null(x[[i]])) {
-        x[[i]] <- NA
-      } else {
-        if (class(x[[i]]) == "list") {
-          x[[i]] <- fix_null(x[[i]])
-        }
+
+  newSites <- map(data, function(x) {
+    
+    if (is.na(x$site$geography)) {
+      geography <- st_as_sf(st_sfc())
+    } else {
+      geography <- try(geojson_sf(x$site$geography))
+      if ('try-error' %in% class(geography)) {
+        stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
+             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
+             'is invalid, contact a Neotoma administrator.')
       }
     }
-    return(x)
-  }
-
-  result <- result[2]
-  result_length <- length(result$data)
-
-  sites <- c()
-  taxon_table <- data.frame()
-  chron_table <- data.frame()
-  df_counts <- data.frame()
+    
+    collunits <- new('collunits', 
+                     collunits = list(build_collunit(x$site$collectionunit)))
+    
+    set_site(sitename = use_na(x$site$sitename, "char"),
+             siteid   = use_na(x$site$siteid, "int"),
+             geography = geography,
+             altitude = use_na(x$site$altitude, "int"),
+             description = use_na(x$site$sitedescription, "char"),
+             notes = use_na(x$site$notes, "char"),
+             collunits = collunits)
+  })
+  
+  sites <- new('sites', sites = newSites)
+  
   for (i in 1:result_length) {
     # i-th element result[2]$data[[i]]$
     coll_units <- c()
     dataset_list <- c()
     chronology_list <- c()
-
-    # Sites
-    # Sitename
-    if (is.na(result$data[[i]]$site$sitename)) {
-      sitename <- NA_character_
-    }else{
-      sitename <- result$data[[i]]$site$sitename
-    }
-
-    # Site ID
-    if (is.na(result$data[[i]]$site$siteid)) {
-      siteid <- NA_integer_
-    }else{
-      siteid <- result$data[[i]]$site$siteid
-    }
-
-    # Location
-    location <- result$data[[i]]$site$geography
-    if (is.null(location)) {
-      location <- sf::st_sf(sf::st_sfc())
-    }else{
-      location <- sf::st_read(result$data[[i]]$site$geography, quiet = TRUE)
-    }
 
     # Altitude
     if (is.na(result$data[[i]]$site$altitude)) {

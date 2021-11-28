@@ -30,7 +30,7 @@ Download occurrence and age data from Neotoma: All vertebrate occurrences for XX
 By default the API calls have a `limit` of 25 records at a time. Given this the call:
 
 ```{r getRecords, eval=TRUE, message=FALSE}
-faunal <- get_datasets(datasettype='vertebrate fauna')
+faunal <- get_datasets(datasettype = 'vertebrate fauna')
 ```
 
 would return only the first 25 records in Neotoma.  We can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
@@ -42,7 +42,7 @@ plotLeaflet(faunal)
 The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling:
 
 ```{r}
-get_datasets(datasettype='vertebrate fauna', limit = 999999)
+get_datasets(datasettype = 'vertebrate fauna', limit = 999999)
 ```
 
 **Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
@@ -51,15 +51,15 @@ One way of dealing with the issue of `offsets` and `limits` is the use of a `whi
 
 ```{r downloadMammals}
 # This gives us 25 records (without setting 'limit')
-mammals <- get_datasets(datasettype='vertebrate fauna')
+mammals <- get_datasets(datasettype = 'vertebrate fauna')
 
 # The 'while loop' approach:
 counter <- 1
 mammalSet <- c()
 
-while(TRUE) {
-  mammals <- get_datasets(datasettype='vertebrate fauna',
-                                       offset = (counter - 1) * 25)
+while (TRUE) {
+  mammals <- get_datasets(datasettype = 'vertebrate fauna',
+                          offset = (counter - 1) * 25)
   if (length(mammals@sites) < 25 | counter > 4) {
     break
   } else {
@@ -90,18 +90,19 @@ This is just an example of downloading one element of [WorldClim](https://www.wo
 
 ## Cleaning Data
 
-### Clean ages
-
-Lets begin again with downloading all records for mammals within the database that have a Holocene age:
+The basis of any workflow is downloading appropriate data. Lets begin again with downloading all records for mammals within the database that have a Holocene age.  Here we use the `get_datasets()` command, and set `ageold` to be `12000`.  Dates passed to the API are assumed to be in calibrated radiocarbon years before present.
 
 ```{r}
 mamData <- get_datasets(datasettype = "vertebrate fauna", 
                         ageold = 12000, 
                         limit = 99999)
 plotLeaflet(mamData)
-mamDl <- get_downloads(mamData)
-
+dsid <- getids(mamData)
+mamDl <- get_downloads(1001)
 ```
+
+### Clean ages
+
 
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?

@@ -71,6 +71,7 @@ get_datasets <- function(x = NA, ...) {
 }
 
 parse_dataset <- function(result) { # nolint
+  
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {

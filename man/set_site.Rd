@@ -5,34 +5,46 @@
 \title{set Site Information for Fossil Sites}
 \usage{
 set_site(
+  siteid = NA_integer_,
   sitename = NA_character_,
-  coordinates = st_as_sf(st_sfc()),
+  geography = st_as_sf(st_sfc()),
+  geopolitical = list(),
   description = NA_character_,
   notes = NA_character_,
   collunits = new("collunits"),
-  altitude = NA_integer_
+  altitude = NA_integer_,
+  area = NA_integer_
 )
 }
 \arguments{
-\item{sitename}{actual site name}
+\item{siteid}{The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).}
 
-\item{coordinates}{sf object}
+\item{sitename}{Actual site name as a character string.}
 
-\item{description}{description of site}
+\item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
+
+\item{geopolitical}{The geopolitical unit in which the site is located.}
+
+\item{description}{A character description of site.}
 
 \item{notes}{additional information of the site}
 
-\item{collunits}{collection units in the site}
+\item{collunits}{Collection units in the site}
 
-\item{altitude}{altitude/elevation of the site}
+\item{altitude}{altitude/elevation of the site.}
+
+\item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
 }
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
 \dontrun{
+# Create a site called "My Lake", to 
 x = st_as_sf(st_sfc(st_point(c(5,5))))
-my_site <- set_site(sitename="My Lake", coordinates = x,
-                    description = "my lake", altitude = 30)
-                    }
+my_site <- set_site(sitename = "My Lake",
+                    geography = x,
+                    description = "my lake", 
+                    altitude = 30)
+}
 }
