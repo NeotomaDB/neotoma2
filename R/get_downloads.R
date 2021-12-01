@@ -105,23 +105,6 @@ parse_download <- function(result) { # nolint
     dataset_list <- c()
     chronology_list <- c()
 
-    # Altitude
-    if (is.na(result$data[[i]]$site$altitude)) {
-      elev <- NA_integer_
-      }else{
-    elev <- result$data[[i]]$site$altitude
-      }
-
-    # Description
-    description <- result$data[[i]]$site$sitedescription
-    if (is.na(description)) {
-      description <- NA_character_
-    }else{
-      description <- result$data[[i]]$site$sitedescription
-    }
-
-    # Site Notes
-
     # Datasets
     dataset_call <- result$data[[i]]$site$collectionunit$dataset
     datasetid <- dataset_call$datasetid
@@ -355,21 +338,12 @@ parse_download <- function(result) { # nolint
     coll_units <- append(coll_units, new_collunit)
     coll_units <- new("collunits", collunits = coll_units)
 
-    new_site <- new("site",
-                    siteid = siteid,
-                    sitename = sitename,
-                    location = location,
-                    altitude = elev,
-                    description = description,
-                    notes = NA_character_,
-                    collunits = coll_units)
 
-    sites <- append(sites, new_site)
+  
   }
 
   # Convert to sites element
-  sites <- new("sites", sites = sites)
-
+  
   return(sites)
 }
 
