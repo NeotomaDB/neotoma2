@@ -11,22 +11,18 @@ dataset <- setClass(
                     slots = c(datasetid = "numeric",
                               datasetname = "character",
                               datasettype = "character",
-                              location = "sf",
                               notes = "character",
                               taxa_table = "ANY",
                               pi_list = "ANY",
-                              analyst = "ANY",
-                              metadata = "ANY"),
+                              analyst = "ANY"),
                     # Set the default values for the slot
                     prototype = list(datasetid = NA_integer_,
                                      datasetname = NA_character_,
                                      datasettype = NA_character_,
-                                     location = st_sf(st_sfc()),
                                      notes = NA_character_,
                                      taxa_table = data.frame(),
                                      pi_list = list(),
-                                     analyst = list(),
-                                     metadata = data.frame()),
+                                     analyst = list()),
 )
 
 #' @title S4 class for datasets information
@@ -145,8 +141,8 @@ setMethod(f = "show",
           definition = function(object) {
             print(data.frame(dataset.id = object@datasetid,
                              site.name = object@datasetname,
-                             lat = mean(st_coordinates(object@location)[, 2]),
-                             long = mean(st_coordinates(object@location)[, 1]),
+                             #lat = mean(st_coordinates(object@location)[, 2]),
+                             #long = mean(st_coordinates(object@location)[, 1]),
                              type = object@datasettype), row.names = FALSE)
           })
 
@@ -158,8 +154,8 @@ setMethod(f = "show",
             map(object@datasets, function(x) {
               df <- data.frame(dataset.id = x@datasetid,
                                site.name = x@datasetname,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
+                               #lat = mean(st_coordinates(x@location)[, 2]),
+                               #long = mean(st_coordinates(x@location)[, 1]),
                                type = x@datasettype)
             }) %>%
               bind_rows() %>%

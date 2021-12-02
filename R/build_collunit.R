@@ -9,6 +9,9 @@ build_collunit <- function(x) {
     location <- geojson_sf(x$gpslocation)
   }
   
+  datasets <- new('datasets', 
+                   datasets = list(build_dataset(x$dataset)))
+  
   new('collunit',
       collectionunitid = use_na(x$collectionunitid, "int"),
       handle = use_na(x$handle, "char"),
@@ -21,6 +24,6 @@ build_collunit <- function(x) {
       location = use_na(x$location, "char"),
       gpslocation = st_sf(st_sfc()),
       notes = use_na(x$notes, "char"),
-      datasets = new("datasets"),
+      datasets = datasets,
       chronologies = new("chronologies"))
 }

@@ -88,9 +88,11 @@ parse_download <- function(result) { # nolint
       }
     }
     
+    
     collunits <- new('collunits', 
                      collunits = list(build_collunit(x$site$collectionunit)))
     
+      
     set_site(sitename = use_na(x$site$sitename, "char"),
              siteid   = use_na(x$site$siteid, "int"),
              geography = geography,
