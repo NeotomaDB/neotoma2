@@ -56,18 +56,6 @@ get_sites <- function(x = NA, ...) {
 }
 
 parse_site <- function(result) {
-  fix_null <- function(x) {
-    for (i in seq_len(length(x))) {
-      if (is.null(x[[i]])) {
-        x[[i]] <- NA
-      } else {
-        if (class(x[[i]]) == "list") {
-          x[[i]] <- fix_null(x[[i]])
-        }
-      }
-    }
-    return(x)
-  }
 
   result <- result %>%
     fix_null()
@@ -156,17 +144,16 @@ parse_site <- function(result) {
 get_sites.default <- function(...) { # nolint
 
   cl <- as.list(match.call())
-  possible_args <- c("sitename", "altmax", "altmin")
-  possible_args2 <- c("loc", "limit", "offset", "all_data")
-  possible_args <- c(possible_args, possible_args2)
+
+  possible_args <- c("sitename", "altmax", "altmin",
+                     "loc", "limit", "offset", 
+                     "all_data")
 
   cl[[1]] <- NULL
 
-  for (name in names(cl)) {
-    if (!(name %in% possible_args)) {
-      message(paste0(name, " is not an allowed argument.\
-      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
-    }
+  if (any(!(name %in% possible_args))) {
+    message("Only allowed arguments for get_sites() are used:\n
+               sitename, altmax, altmin, loc, limit, offset, all_data.")
   }
 
   cl <- lapply(cl, eval, envir = parent.frame())
@@ -222,7 +209,7 @@ get_sites.default <- function(...) { # nolint
       result <- parseURL(base_url, ...) %>%
         cleanNULL()
     }
-  }else{
+  } else {
 
     base_url <- paste0("data/sites")
 
@@ -233,11 +220,10 @@ get_sites.default <- function(...) { # nolint
 
   if (is.null(result$data[1][[1]])) {
     return(NULL)
-  }else{
+  } else {
     output <- parse_site(result)
     return(output)
   }
-
 }
 
 #' @title Get Site Information for Fossil Sites
@@ -266,11 +252,11 @@ get_sites.numeric <- function(x, ...) {
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
-    
+
     output <- parse_site(result)
-    
+
     return(output)
-    
+
   } else {
     return(NULL)
   }
