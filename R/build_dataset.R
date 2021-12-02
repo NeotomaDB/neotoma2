@@ -40,7 +40,6 @@ build_dataset <- function(x) {
       })
     
     analyst_list <- c(analyst_list_helper)
-    
   }
   
   # PI Information
@@ -48,8 +47,6 @@ build_dataset <- function(x) {
     map(function(y) {
       y$contactname
     })
-  
-  
   
   new("dataset",
       datasetid = use_na(x$datasetid, "int"),

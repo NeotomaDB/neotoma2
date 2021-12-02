@@ -10,7 +10,15 @@ build_collunit <- function(x) {
   }
   
   datasets <- new('datasets', 
-                   datasets = list(build_dataset(x$dataset)))
+                  datasets = list(build_dataset(x$dataset)))
+  
+  if(length(x$chronologies)>1){
+  chronologies <- new('chronologies', 
+                      chronologies=build_chron(x$chronologies))
+  }else{
+    chronologies <- new('chronologies', 
+                        chronologies=list(build_chron(x$chronologies)))
+  }
   
   new('collunit',
       collectionunitid = use_na(x$collectionunitid, "int"),
@@ -25,5 +33,5 @@ build_collunit <- function(x) {
       gpslocation = st_sf(st_sfc()),
       notes = use_na(x$notes, "char"),
       datasets = datasets,
-      chronologies = new("chronologies"))
+      chronologies = chronologies)
 }

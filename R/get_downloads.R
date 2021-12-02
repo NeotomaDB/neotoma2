@@ -72,7 +72,9 @@ get_downloads <- function(x = NA, ...) {
 
 parse_download <- function(result) { # nolint
   
-  data <- result$data
+  data <- result$data %>%
+    cleanNULL()
+  
   newSites <- map(data, function(x) {
 
     if (is.na(x$site$geography)) {
@@ -122,73 +124,6 @@ parse_download <- function(result) { # nolint
   #     datasetnotes <- dataset_call$datasetnotes
   #   }
   # 
-  #   # Taxon Table
-  #   length_datum <- length(dataset_call$samples)
-  # 
-  #   for (j in 1:length_datum) {
-  #     depth <- dataset_call$samples[[j]]$depth
-  #     sample_id <- dataset_call$samples[[j]]$sampleid
-  #     df <- dataset_call$samples[[j]]$datum %>%
-  #       map(function(x) {
-  #         as.data.frame(x)
-  #       }) %>%
-  #       bind_rows()
-  # 
-  #     df_sample <- df %>%
-  #     select(variablename, units, element, taxongroup, ecologicalgroup, taxonid)
-  #     taxon_table <- rbind(taxon_table, df_sample) %>%
-  #       distinct()
-  #     # PI Information
-  #     pi_length <- length(dataset_call$datasetpi)
-  #     pi_list <- c()
-  # 
-  #     for (j in seq_len(pi_length)) {
-  #       pi <- dataset_call$datasetpi[[j]]$contactname
-  #       pi_list <- c(pi_list, pi)
-  #       }
-  # 
-  #     # Analyst Info
-  #     analyst_list <- list()
-  #     samples <- result$data[[1]]$site$collectionunit$dataset$samples
-  # 
-  #     for (k in seq_len(length(samples))) {
-  #       analyst_length <- length(dataset_call$samples[[k]]$sampleanalyst)
-  #       for (j in 1:analyst_length) {
-  #         contact <- dataset_call$samples[[k]]$sampleanalyst[[j]]$contactname
-  #         analyst_list <- c(analyst_list, contact)
-  #         }
-  #     }
-  # 
-  #     # Sample.Meta Table
-  #     meta_data_t1 <- dataset_call$samples[[j]]$ages %>%
-  #       map(function(x) {
-  #         as.data.frame(x)
-  #         }) %>%
-  #       bind_rows()
-  # 
-  #     meta_data_t1 <- meta_data_t1 %>%
-  #       mutate(
-  #         datasetid = datasetid,
-  #         depth = depth,
-  #         sample.id = sample_id)
-  # 
-  #     if (dim(meta_data_t1)[1] > 0) {
-  #       meta_data_t1 %>%
-  #       select("depth", "ageolder", "age", "ageyounger", "chronologyname",
-  #        "agetype", "chronologyid", "sample.id", "datasetid")
-  #     }
-  # 
-  #     new_dataset <- new("dataset",
-  #                        datasetid = datasetid,
-  #                        datasetname = sitename,
-  #                        datasettype = datasettype,
-  #                        location = location,
-  #                        notes = datasetnotes,
-  #                        taxa_table = taxon_table,
-  #                        pi_list = pi_list,
-  #                        analyst = analyst_list,
-  #                        metadata = meta_data_t1)
-  # 
   #     dataset_list <- append(dataset_list, new_dataset)
   #     datasets_list <- new("datasets", datasets = dataset_list)
   # 
@@ -198,34 +133,7 @@ parse_download <- function(result) { # nolint
   #     # API endpoint is different
   #     # https://api.neotomadb.org/v2.0/data/datasets/1/publications
   # 
-  #     # Count Samples metadata
-  #     if (dataset_call$datasettype == "geochronologic") {
-  # 
-  #       message(paste0("The dataset ID ", dataset_call$datasetid,
-  #                      " is associated with a geochronology object,
-  #                      not count data."))
-  #       return(NULL)
-  #     } else {
-  # 
-  #       # copy to make indexing below easier?
-  #       samples <- dataset_call$samples
-  # 
-  #       # Build the metadata for each sample in the dataset.
-  #       sample.meta <- do.call(rbind.data.frame,
-  #                              lapply(samples, `[`,
-  #                                     c("depth",
-  #                                       "sampleid"
-  #                                     )))
-  # 
-  #     }
-  #     # Counts
-  #     df_count <- df %>%
-  #       select(variablename, value, taxonid)
-  # 
-  #     df_counts <- rbind(df_counts, df_count) %>%
-  #       distinct()
-  #   }
-  # 
+ 
   #   # Chronologies
   # 
   # 
