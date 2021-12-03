@@ -166,25 +166,6 @@ setMethod(f = "show",
 
 # Start "SqBrackets" Methods
 
-#' @title Obtain one of the elements within a sites list
-#' @param x sites object
-#' @param i iteration in sites list
-#' @description  in progress
-#' @export
-setMethod(f = "[[",
-          signature = signature(x = "sites", i = "numeric"),
-          definition = function(x, i) {
-            if (length(i) == 1) {
-              out <- new("sites", x@sites[[i]])
-            } else {
-              out <- purrr::map(i, function(z) {
-                new("site", x@sites[[z]])
-              })
-              out <- new("sites", sites = out)
-            }
-            return(out)
-          })
-
 #' @title Obtain one of the elements within a datasets list
 #' @param x datasets object
 #' @param i iteration in datasets list
@@ -206,16 +187,9 @@ setMethod(f = "[[",
 # End "SqBrackets" Methods
 
 # Start "length" Methods
-#' @title Length Method Sites
-#' @export
-#' @param x sites object
-setMethod(f = "length",
-          signature = signature(x = "sites"),
-          definition = function(x) {
-            length(x@sites)
-          })
 
-#' @title Length Method Sites
+
+#' @title Length Method datasets
 #' @export
 #' @param x datasets object
 setMethod(f = "length",
@@ -246,17 +220,7 @@ setMethod(f = "c",
             y
           })
 
-#' @title c Method - Combine sites objects
-#' @param x sites object 1
-#' @param y sites object 2
-#' @export
-setMethod(f = "c",
-          signature = signature(x = "sites"),
-          definition = function(x, y) {
-            new("sites",
-                sites = unlist(c(x@sites,
-                                       y@sites), recursive = FALSE))
-            })
+
 
 #' @title c Method - Combine datasets objects
 #' @param x datasets object 1
@@ -273,20 +237,7 @@ setMethod(f = "c",
 # End "c" methods
 
 # Start writeCSV methods
-setMethod(f = "write.csv",
-          signature = "sites",
-          definition = function(object, file, ...) {
-            df1 <- map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
-                               sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
-                               elev = x@altitude,
-                               description = x@description)
-            }) %>%
-              bind_rows()
-            write.csv(df1, file, ...)
-          })
+
 
 setMethod(f = "write.csv",
           signature = "datasets",

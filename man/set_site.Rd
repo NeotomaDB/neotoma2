@@ -8,12 +8,10 @@ set_site(
   siteid = NA_integer_,
   sitename = NA_character_,
   geography = st_as_sf(st_sfc()),
-  geopolitical = list(),
   description = NA_character_,
   notes = NA_character_,
   collunits = new("collunits"),
-  altitude = NA_integer_,
-  area = NA_integer_
+  altitude = NA_integer_
 )
 }
 \arguments{
@@ -23,8 +21,6 @@ set_site(
 
 \item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
 
-\item{geopolitical}{The geopolitical unit in which the site is located.}
-
 \item{description}{A character description of site.}
 
 \item{notes}{additional information of the site}
@@ -32,6 +28,8 @@ set_site(
 \item{collunits}{Collection units in the site}
 
 \item{altitude}{altitude/elevation of the site.}
+
+\item{geopolitical}{The geopolitical unit in which the site is located.}
 
 \item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
 }

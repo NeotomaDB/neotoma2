@@ -13,7 +13,7 @@ build_chron(x)
 list parsed into datasets
 }
 \description{
-Helper function to build a dataset
+Helper function to bulld a dataset
 }
 \examples{
 \dontrun{

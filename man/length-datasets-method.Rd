@@ -2,7 +2,7 @@
 % Please edit documentation in R/neotoma-methods.R
 \name{length,datasets-method}
 \alias{length,datasets-method}
-\title{Length Method Sites}
+\title{Length Method datasets}
 \usage{
 \S4method{length}{datasets}(x)
 }
@@ -10,5 +10,5 @@
 \item{x}{datasets object}
 }
 \description{
-Length Method Sites
+Length Method datasets
 }
