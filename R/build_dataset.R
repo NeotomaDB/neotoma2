@@ -18,7 +18,7 @@ build_dataset <- function(x) {
   # Taxon Table
   taxon_table <- c()
   length_datum <- length(x$samples)
-  
+  analyst_list <- list()
   for (j in seq_len(length_datum)) {
     depth <- x$samples[[j]]$depth
     sample_id <- x$samples[[j]]$sampleid
@@ -34,6 +34,7 @@ build_dataset <- function(x) {
       distinct()
     
     # Analyst Info
+    
     analyst_list_helper <- x$samples[[j]]$sampleanalyst %>%
       map(function(y) {
         y$contactname
@@ -50,7 +51,7 @@ build_dataset <- function(x) {
   
   new("dataset",
       datasetid = use_na(x$datasetid, "int"),
-      datasetname = use_na(x$datasetname, "char"),
+      datasetname = NA_character_,
       datasettype = use_na(x$datasettype, "char"),
       notes = use_na(x$datasetnotes, "char"),
       taxa_table = taxon_table,
