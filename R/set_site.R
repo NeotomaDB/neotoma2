@@ -25,17 +25,13 @@
 set_site <- function(siteid = NA_integer_,
                      sitename= NA_character_,
                      geography = st_as_sf(st_sfc()),
-                     geopolitical = list(),
                      description = NA_character_,
                      notes = NA_character_,
                      collunits = new("collunits"),
-                     altitude = NA_integer_,
-                     area = NA_integer_) {
+                     altitude = NA_integer_) {
 
   x <- new("site")
   x@siteid <- siteid
-  x@area <- area
-  x@geopolitical <- geopolitical
   x@sitename <- sitename
   x@geography <- geography
   x@description <- description

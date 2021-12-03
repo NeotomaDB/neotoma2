@@ -68,117 +68,95 @@ parse_site <- function(result) {
     }
     return(x)
   }
-
-  result <- result %>%
+  
+  
+  data <- result$data %>%
     fix_null()
-  result_length <- length(result[2]$data)
+  
+  newSites <- map(data, function(x) {
 
-  sites <- c()
-
-  for (i in seq_len(result_length)) {
     # Location
-    if (is.na(result[2]$data[[i]]$geography)) {
+    if (is.na(x$geography)) {
       place <- sf::st_sf(sf::st_sfc())
     }else{
-      place <- sf::st_read(result[2]$data[[i]]$geography, quiet = TRUE)
+      place <- sf::st_read(x$geography, quiet = TRUE)
     }
-    #
-
-    if (is.na(result[2]$data[[i]]$altitude)) {
-      elev <- NA_integer_
-    }else{
-      elev <- result[2]$data[[i]]$altitude
-    }
-
-    if (is.na(result[2]$data[[i]]$siteid)) {
-      siteid <- NA_integer_
-    }else{
-      siteid <- result[2]$data[[i]]$siteid
-    }
-
-    if (is.na(result[2]$data[[i]]$sitename)) {
-      sitename <- NA_character_
-    }else{
-      sitename <- result[2]$data[[i]]$sitename
-    }
-
-    if (is.na(result[2]$data[[i]]$sitedescription)) {
-      description <- NA_character_
-    }else{
-      description <- as.character(result[2]$data[[i]]$sitedescription)
-    }
-
-    if (!(is.null(result[2]$data[[i]]$sitenotes))) {
-      sitenotes <- as.character(result[2]$data[[i]]$sitenotes)
+    
+    # Collunits
+    collunit <- map(x$collectionunits,
+                    function(x) {
+                      x <- new("collunit",
+                               collectionunitid = x$collectionunitid,
+                               colldate = as.Date(character(0)),
+                               collunittype = x$collectionunittype,
+                               handle = x$handle,
+                               # Datasets
+                               datasets = new("datasets",
+                                              datasets = map(x$datasets, function(y) {
+                                                ds <- new("dataset",
+                                                          datasetid = y$datasetid,
+                                                          datasettype = y$datasettype,
+                                                          notes = NA_character_)
+                                              })),
+                               chronologies = new("chronologies",
+                                                  chronologies = list()))
+                      
+                      return(x)
+                    })
+    
+    # Site
+    if (!(is.null(x$sitenotes))) {
+      sitenotes <- as.character(x$sitenotes)
     }else{
       sitenotes <- NA_character_
     }
-    collunit <- map(result[2]$data[[i]]$collectionunits,
-                    function(x) {
-                      x <- new("collunit",
-                               collunitid = x$collectionunitid,
-                               collunitname = sitename,
-                               colldate = as.Date(character(0)),
-                               substrate = x$collectionunittype,
-                               location = place,
-                               handle = x$handle,
-                               datasets = new("datasets",
-                               datasets = map(x$datasets, function(y) {
-                                 ds <- new("dataset",
-                                 datasetid = y$datasetid,
-                                 datasettype = y$datasettype,
-                                 datasetname = sitename,
-                                 location = place,
-                                 notes = NA_character_)
-                                 })),
-                                chronologies = new("chronologies",
-                                 chronologies = list()))
-                                return(x)
-                                })
-    new_site <- new("site",
-                    siteid = siteid,
-                    sitename = sitename,
-                    location = place,
-                    altitude = elev,
-                    notes = sitenotes,
-                    description = description,
-                    collunits = new("collunits",
-                    collunits = collunit))
-    sites <- append(sites, new_site)
-    output <- new("sites", sites = sites)
-  }
-  return(output)
+      
+    set_site(siteid = use_na(x$siteid, "int"),
+             sitename = use_na(x$sitename, "char"),
+             geography = place,
+             altitude = use_na(x$altitude, "int"),
+             notes = sitenotes,
+             description = use_na(x$sitedescription, "char"),
+             collunits = new("collunits",
+                             collunits = collunit))
+    
+  })
+  
+  sites <- new('sites', sites = newSites)
+  
+  return(sites)
 }
+
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc
 #' @export
 get_sites.default <- function(...) { # nolint
-
+  
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin")
   possible_args2 <- c("loc", "limit", "offset", "all_data")
   possible_args <- c(possible_args, possible_args2)
-
+  
   cl[[1]] <- NULL
-
+  
   for (name in names(cl)) {
     if (!(name %in% possible_args)) {
       message(paste0(name, " is not an allowed argument.\
       Choose from the allowed arguments: sitename, altmax, altmin, loc"))
     }
   }
-
+  
   cl <- lapply(cl, eval, envir = parent.frame())
-
+  
   error_check <- check_args(cl) # nolint
-
+  
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
     cl <- error_check[[1]]
   }
-
+  
   if ("loc" %in% names(cl)) {
     if (is.numeric(cl$loc)) {
       coords <- cl$loc
@@ -186,27 +164,27 @@ get_sites.default <- function(...) { # nolint
       boxy <- c(ymax = coords[3], ymin = coords[4])
       box <- c(boxx, boxy)
       my_bbox <- sf::st_bbox(box, crs = sf::st_crs(4326))
-
+      
       if (is.na(my_bbox$xmin)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
-
+      
       if (is.na(my_bbox$xmax)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
-
+      
       if (is.na(my_bbox$ymin)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
-
+      
       if (is.na(my_bbox$ymax)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
-
+      
       my_bbox <- sf::st_as_sfc(my_bbox)
       new_geojson <- geojsonsf::sfc_geojson(my_bbox)
       new_geojson <- new_geojson[1]
-
+      
       base_url <- paste0("data/sites?loc=", new_geojson[1])
       for (name in names(cl)) {
         if (!(name == "loc")) {
@@ -215,29 +193,29 @@ get_sites.default <- function(...) { # nolint
       }
       result <- parseURL(base_url) %>%
         cleanNULL()
-
+      
     }else{
-
+      
       base_url <- paste0("data/sites")
       result <- parseURL(base_url, ...) %>%
         cleanNULL()
     }
   }else{
-
+    
     base_url <- paste0("data/sites")
-
+    
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
-
+    
   }
-
+  
   if (is.null(result$data[1][[1]])) {
     return(NULL)
   }else{
     output <- parse_site(result)
     return(output)
   }
-
+  
 }
 
 #' @title Get Site Information for Fossil Sites
@@ -254,17 +232,17 @@ get_sites.numeric <- function(x, ...) {
       return(x)
     }
   }
-
+  
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
   }
-
+  
   base_url <- paste0("data/sites/", siteids)
-
+  
   result <- neotoma2::parseURL(base_url)
-
+  
   result_length <- length(result[2]$data)
-
+  
   if (result_length > 0) {
     
     output <- parse_site(result)
