@@ -70,7 +70,7 @@ get_downloads <- function(x = NA, ...) {
   }
 }
 
-parse_download <- function(result) { # nolint
+parse_download <- function(result) {
   
   data <- result$data %>%
     cleanNULL()
