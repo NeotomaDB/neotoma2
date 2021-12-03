@@ -5,7 +5,7 @@
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' Helper function to build a dataset
+#' Helper function to bulld a dataset
 #' @param x dataset list
 #' @return list parsed into datasets
 #' @examples \dontrun{
