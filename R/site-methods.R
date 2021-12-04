@@ -71,6 +71,17 @@ setMethod(f = "show",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols
 #' @export
+# Todo Convert to as.data.frame
+setGeneric("showDatasets", function(object) {
+  standardGeneric("showDatasets")
+})
+
+#' @title Convert sites object to a \code{data.frame}
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
 setMethod(f = "showDatasets",
           signature = "sites",
           definition = function(object) {

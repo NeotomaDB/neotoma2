@@ -51,11 +51,14 @@ build_dataset <- function(x) {
   
   new("dataset",
       datasetid = use_na(x$datasetid, "int"),
-      datasetname = NA_character_,
+      database = use_na(x$database, "char"),
+      doi = list(x$doi),
       datasettype = use_na(x$datasettype, "char"),
+      age_range_old = use_na(x$agerange[[1]]$ageold, "int"),
+      age_range_young = use_na(x$agerange[[1]]$ageyoung, "int"),
       notes = use_na(x$datasetnotes, "char"),
-      taxa_table = taxon_table,
       pi_list = pi_list,
+      taxa_table = taxon_table,
       analyst = analyst_list)
   
 }

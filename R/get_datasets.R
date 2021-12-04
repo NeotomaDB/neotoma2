@@ -90,9 +90,11 @@ parse_dataset <- function(result) { # nolint
 
   newSites <- map(data, function(x) {
     if(is.null(x$sites)){
+      print("I am in is null")
       call <- x$site
     }else{
       call <- x$sites$site
+      print("I am in not null")
     }
     
     if (is.na(call$geography)) {
@@ -216,6 +218,7 @@ get_datasets.default <- function(x, ...) { # nolint
   if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
     return(NULL)
   }else{
+    print(result)
     output <- parse_dataset(result)
     return(output)
   }
@@ -245,6 +248,7 @@ get_datasets.numeric <- function(x, ...) {
   result_length <- length(result[2]$data)
   
   if (result_length > 0) {
+    print(result)
     output <- parse_dataset(result)
     return(output)
   }else{
