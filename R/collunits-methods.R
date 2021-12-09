@@ -63,7 +63,7 @@ collunits <- setClass("collunits",
 setMethod(f = "show",
           signature = "collunit",
           definition = function(object) {
-            print(data.frame(collectionunitid = object@collectionunit,
+            print(data.frame(collectionunitid = object@collectionunitid,
                              notes = object@notes,
                              handle = object@handle,
                              colldate = object@colldate,
@@ -74,8 +74,6 @@ setMethod(f = "show",
                              collectiondevice = object@collectiondevice,
                              collectionunitname = object@collectionunitname,
                              depositionalenvironment = object@depositionalenvironment), row.names = FALSE)
-            print(object@datasets)
-            print(object@chronologies)
           })
 
 #' @title Show colunits object as a dataframe

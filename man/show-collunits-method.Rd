@@ -2,7 +2,7 @@
 % Please edit documentation in R/collunits-methods.R
 \name{show,collunits-method}
 \alias{show,collunits-method}
-\title{Show collunits object as a dataframe}
+\title{Show colunits object as a dataframe}
 \usage{
 \S4method{show}{collunits}(object)
 }
@@ -10,5 +10,5 @@
 \item{object}{collunits object}
 }
 \description{
-Show collunits object as a dataframe
+Show colunits object as a dataframe
 }

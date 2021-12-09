@@ -43,10 +43,6 @@ build_chron <- function(x) {
           }
         }
         
-        # Age Range
-        ar <- c()
-        ar$older <- x$chronology$chronology$agerange$ageboundolder
-        ar$younger_ <- x$chronology$chronology$agerange$ageboundyounger
         
         # Chroncontrols
         df <- y$chronology$chroncontrols %>%
@@ -67,14 +63,16 @@ build_chron <- function(x) {
             notes = use_na(y$chronology$chronology$notes, "char"),
             contact = contact_list,
             agemodel = use_na(y$chronology$chronology$agemodel, "char"),
-            agerange = ar,
+            ageboundolder = use_na(x$chronology$chronology$agerange$ageboundolder, "int"),
+            ageboundyounger = use_na(x$chronology$chronology$agerange$ageboundyounger, "int"),
+            is_default = use_na(as.numeric(x$chronology$chronology$isdefault), "int"),
             dateprepared = as.Date(y$chronology$chronology$dateprepared),
             modelagetype = use_na(y$chronology$chronology$modelagetype, "char"),
             chronologyname = use_na(y$chronology$chronology$chronologyname, "char"),
             chroncontrols = chron_table) 
       })
     
-    
+   
   }else{
     new("chronology",
         chronologyid = NA_integer_,

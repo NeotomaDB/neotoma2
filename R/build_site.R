@@ -38,12 +38,13 @@ build_sites <- function(x) {
           collunits = list())
     }
     
-    set_site(sitename = use_na(x$site$sitename, "char"),
-             siteid   = use_na(x$site$siteid, "int"),
+    set_site(siteid   = use_na(x$site$siteid, "int"),
+             sitename = use_na(x$site$sitename, "char"),
              geography = geography,
              altitude = use_na(x$site$altitude, "int"),
-             description = use_na(x$site$sitedescription, "char"),
+             geopolitical = x$site$geopolitical, 
              notes = use_na(testNull(x$site$notes, x$site$sitenotes), "char"),
+             description = use_na(x$site$sitedescription, "char"),
              collunits = collunits)
   })
 

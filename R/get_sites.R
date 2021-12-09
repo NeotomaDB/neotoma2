@@ -122,6 +122,9 @@ parse_site <- function(result) {
     
   })
   
+  # Function to use once API is in order.
+  #newSites <- map(data, build_sites)
+    
   sites <- new('sites', sites = newSites)
   
   return(sites)

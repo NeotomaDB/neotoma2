@@ -8,10 +8,12 @@ set_site(
   siteid = NA_integer_,
   sitename = NA_character_,
   geography = st_as_sf(st_sfc()),
-  description = NA_character_,
+  altitude = NA_integer_,
+  geopolitical = list(),
+  area = NA_integer_,
   notes = NA_character_,
-  collunits = new("collunits"),
-  altitude = NA_integer_
+  description = NA_character_,
+  collunits = new("collunits")
 )
 }
 \arguments{
@@ -21,17 +23,17 @@ set_site(
 
 \item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
 
-\item{description}{A character description of site.}
-
-\item{notes}{additional information of the site}
-
-\item{collunits}{Collection units in the site}
-
 \item{altitude}{altitude/elevation of the site.}
 
 \item{geopolitical}{The geopolitical unit in which the site is located.}
 
 \item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
+
+\item{notes}{additional information of the site}
+
+\item{description}{A character description of site.}
+
+\item{collunits}{Collection units in the site}
 }
 \description{
 set Site Information for Fossil Sites
