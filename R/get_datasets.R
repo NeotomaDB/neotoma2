@@ -90,11 +90,9 @@ parse_dataset <- function(result) { # nolint
 
   newSites <- map(data, function(x) {
     if(is.null(x$sites)){
-      print("I am in is null")
       call <- x$site
     }else{
       call <- x$sites$site
-      print("I am in not null")
     }
     
     if (is.na(call$geography)) {
@@ -116,6 +114,7 @@ parse_dataset <- function(result) { # nolint
                      collunits = list())
     
     # Collunits
+    # TODO: Implement build collunit
     new_collunit <- new("collunit",
                         collectionunitid = call$collectionunitid,
                         colldate = as.Date(character(0)),
@@ -126,6 +125,8 @@ parse_dataset <- function(result) { # nolint
     
     collunits <- new("collunits", collunits = list(new_collunit))
     
+    # Site
+    # Maybe use build_site instead
     set_site(sitename = use_na(call$sitename, "char"),
              siteid   = use_na(call$siteid, "int"),
              geography = geography,
@@ -218,7 +219,6 @@ get_datasets.default <- function(x, ...) { # nolint
   if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
     return(NULL)
   }else{
-    print(result)
     output <- parse_dataset(result)
     return(output)
   }
