@@ -75,38 +75,45 @@ parse_download <- function(result) {
   data <- result$data %>%
     cleanNULL()
   
-  newSites <- map(data, function(x) {
+  my_sites_list <- new('sites', sites = list())
+  for(i in seq_len(length(data))){
+    my_site <- build_sites(data[[i]])
+    my_sites_list <- c(my_sites_list, my_site)
+  }
+  
 
-    if (is.na(x$site$geography)) {
-      geography <- st_as_sf(st_sfc())
-    } else {
-      #geography <- try(sf::geojson_sf(x$site$geography))
-      geography <- try(sf::st_read(x$site$geography, quiet = TRUE))
-      
-      if ('try-error' %in% class(geography)) {
-        stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
-             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
-             'is invalid, contact a Neotoma administrator.')
-      }
-    }
-    
-    
-    collunits <- new('collunits', 
-                     collunits = list(build_collunit(x$site$collectionunit)))
-    
-      
-    set_site(sitename = use_na(x$site$sitename, "char"),
-             siteid   = use_na(x$site$siteid, "int"),
-             geography = geography,
-             altitude = use_na(x$site$altitude, "int"),
-             description = use_na(x$site$sitedescription, "char"),
-             notes = use_na(x$site$notes, "char"),
-             collunits = collunits)
-  })
+
+  # newSites <- map(data, function(x) {
+  # 
+  #   if (is.na(x$site$geography)) {
+  #     geography <- st_as_sf(st_sfc())
+  #   } else {
+  #     #geography <- try(sf::geojson_sf(x$site$geography))
+  #     geography <- try(sf::st_read(x$site$geography, quiet = TRUE))
+  #     
+  #     if ('try-error' %in% class(geography)) {
+  #       stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
+  #            '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
+  #            'is invalid, contact a Neotoma administrator.')
+  #     }
+  #   }
+  #   
+  #   
+  #   
+  #   
+  #     
+  #   set_site(sitename = use_na(x$site$sitename, "char"),
+  #            siteid   = use_na(x$site$siteid, "int"),
+  #            geography = geography,
+  #            altitude = use_na(x$site$altitude, "int"),
+  #            description = use_na(x$site$sitedescription, "char"),
+  #            notes = use_na(x$site$notes, "char"),
+  #            collunits = collunits)
+  # })
+  # 
+  # sites <- new('sites', sites = newSites)
   
-  sites <- new('sites', sites = newSites)
-  
-  return(sites)
+  return(my_sites_list)
 }
 
 #' @title get_downloads

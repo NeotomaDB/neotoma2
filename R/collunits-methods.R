@@ -23,7 +23,6 @@ collunit <- setClass(
             waterdepth = "numeric",
             gpslocation = "sf",
             collunittype = "character",
-            collectiondevice = "character",
             collectionunitname = "character",
             depositionalenvironment = "character",
             datasets = "datasets",
@@ -34,9 +33,9 @@ collunit <- setClass(
                    colldate = as.Date(character(0)),
                    location = NA_character_,
                    waterdepth = NA_integer_,
-                   gpslocation = st_sf(st_sfc()),
+                   gpslocation = sf::st_as_sf(sf::st_sfc()),
                    collunittype = NA_character_,
-                   collectiondevice = NA_character_,
+                   #collectiondevice = NA_character_,
                    collectionunitname = NA_character_,
                    depositionalenvironment = NA_character_,
                    datasets = NULL,
@@ -56,47 +55,7 @@ collunits <- setClass("collunits",
                         unlist())
                       })
 
-
-# Start "Show Method" for all Neotoma Objects
-#' @title Show collunit Method
-#' @param object collunit object
-setMethod(f = "show",
-          signature = "collunit",
-          definition = function(object) {
-            print(data.frame(collectionunitid = object@collectionunitid,
-                             notes = object@notes,
-                             handle = object@handle,
-                             colldate = object@colldate,
-                             location = object@location,
-                             waterdepth = object@waterdepth,
-                             gpslocation = object@gpslocation,
-                             collunittype = object@collunittype,
-                             collectiondevice = object@collectiondevice,
-                             collectionunitname = object@collectionunitname,
-                             depositionalenvironment = object@depositionalenvironment), row.names = FALSE)
-          })
-
-#' @title Show colunits object as a dataframe
-#' @param object collunits object
-setMethod(f = "show",
-          signature = "collunits",
-          definition = function(object) {
-            map(object@collunits, function(y) {
-              df <- data.frame(collectionunitid = y@collectionunit,
-                               notes = y@notes,
-                               handle = y@handle,
-                               colldate = y@colldate,
-                               location = y@location,
-                               waterdepth = y@waterdepth,
-                               gpslocation = y@gpslocation,
-                               collunittype = y@collunittype,
-                               collectiondevice = y@collectiondevice,
-                               collectionunitname = y@collectionunitname,
-                               depositionalenvironment = y@depositionalenvironment)
-            }) %>%
-              bind_rows() %>%
-              print(row.names = FALSE)
-          })
+# Show methods go here
 
 #' @title  Slicer
 #' @param x collunits object
@@ -156,7 +115,7 @@ setMethod(f = "as.data.frame",
                        waterdepth = object@waterdepth,
                        gpslocation = object@gpslocation,
                        collunittype = object@collunittype,
-                       collectiondevice = object@collectiondevice,
+                       #collectiondevice = object@collectiondevice,
                        collectionunitname = object@collectionunitname,
                        depositionalenvironment = object@depositionalenvironment)
           })

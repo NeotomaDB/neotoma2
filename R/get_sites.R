@@ -69,67 +69,17 @@ parse_site <- function(result) {
     return(x)
   }
   
-  
   data <- result$data %>%
     fix_null()
   
-  newSites <- map(data, function(x) {
-
-    # Location
-    if (is.na(x$geography)) {
-      place <- sf::st_sf(sf::st_sfc())
-    }else{
-      place <- sf::st_read(x$geography, quiet = TRUE)
-    }
-    
-    # Collunits
-    collunit <- map(x$collectionunits,
-                    function(x) {
-                      x <- new("collunit",
-                               collectionunitid = x$collectionunitid,
-                               colldate = as.Date(character(0)),
-                               collunittype = x$collectionunittype,
-                               handle = x$handle,
-                               # Datasets
-                               datasets = new("datasets",
-                                              datasets = map(x$datasets, function(y) {
-                                                ds <- new("dataset",
-                                                          datasetid = y$datasetid,
-                                                          datasettype = y$datasettype,
-                                                          notes = NA_character_)
-                                              })),
-                               chronologies = new("chronologies",
-                                                  chronologies = list()))
-                      
-                      return(x)
-                    })
-    
-    # Site
-    if (!(is.null(x$sitenotes))) {
-      sitenotes <- as.character(x$sitenotes)
-    }else{
-      sitenotes <- NA_character_
-    }
-      
-    set_site(siteid = use_na(x$siteid, "int"),
-             sitename = use_na(x$sitename, "char"),
-             geography = place,
-             altitude = use_na(x$altitude, "int"),
-             notes = sitenotes,
-             description = use_na(x$sitedescription, "char"),
-             collunits = new("collunits",
-                             collunits = collunit))
-    
-  })
-  
   # Function to use once API is in order.
-  #newSites <- map(data, build_sites)
+  # API - Site currently does not have any 'site' 
+  # keys. Might need modification afterwards
+  newSites <- build_sites(data)
     
-  sites <- new('sites', sites = newSites)
-  
-  return(sites)
-}
+  return(newSites)
 
+}
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc

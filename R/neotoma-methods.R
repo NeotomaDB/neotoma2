@@ -26,7 +26,7 @@ collunit <- setClass(
                    colldate = as.Date(character(0)),
                    depositionalenvironment = NA_character_,
                    location = NA_character_,
-                   gpslocation = st_sf(st_sfc()),
+                   gpslocation = sf::st_sf(sf::st_sfc()),
                    notes = NA_character_,
                    datasets = NULL,
                    chronologies = NULL))

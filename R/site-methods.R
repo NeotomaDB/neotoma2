@@ -15,7 +15,7 @@ site <- setClass(
   # Set the default values for the slot
   prototype = list(siteid = NA_integer_,
                    sitename = NA_character_,
-                   geography = st_sf(st_sfc()),
+                   geography = sf::st_sf(sf::st_sfc()),
                    geopolitical = list(),
                    altitude = NA_integer_,
                    area = NA_integer_,
