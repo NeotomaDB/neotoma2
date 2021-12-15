@@ -248,7 +248,7 @@ get_datasets.numeric <- function(x, ...) {
   result_length <- length(result[2]$data)
   
   if (result_length > 0) {
-    print(result)
+    #print(result)
     output <- parse_dataset(result)
     return(output)
   }else{

@@ -2,36 +2,48 @@
 #' @param x The structured JSON from a Neotoma API v2.0 response that returns a collection unit in any form.
 #' @return An object of class \code{collunit}
 #' @import sf
-build_collunit <- function(x) {
-  newCollunits <- purrr::map(x, function(x) {
-    
-    #datasets <- build_datasets(x$dataset)
-    print(length(x$dataset[1]))
-    datasets <- purrr::map(x$dataset, build_dataset)
-    datasets <- new('datasets', datasets = datasets)
-    #chronologies <- build_chron(x$chronologies)
-    
-    y <- new('collunit',
-             collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
-             handle = use_na(x$handle, "char"),
-             collectionunitid = use_na(testNull(x$collectionunitid, NA), "int"),
-             
-             collectiondevice = use_na(testNull(x$collectiondevice, NA), "char"),
-             collectionunitname = use_na(x$collectionunit, "char"),
-             
-             waterdepth = use_na(testNull(x$waterdepth, NA), "int"),
-             colldate = as.Date(character(0)),
-             depositionalenvironment = use_na(testNull(x$depositionalenvironment,NA), "char"),
-             location = use_na(testNull(x$location, NA), "char"),
-             gpslocation = sf::st_as_sf(sf::st_sfc()),
-             notes = use_na(testNull(x$notes,NA), "char"),
-             datasets = datasets,
-             #datasets = new('datasets', datasets = list()),
-             #chronologies = chronologies)
-             chronologies = new('chronologies', chronologies = list()))
-  })
+build_collunits <- function(x) {
+  print(length(x$datasets))
+  print(length(x$dataset))
+
   
-  collunits <- new('collunits', collunits = newCollunits)
+  if(length(x$datasets)==0){
+    # Downloads call
+    call_ds <- x$dataset
+    datasets <- build_dataset(call_ds)
+    datasets <- new("datasets", datasets = list(datasets))
+  }else{
+    # Sites call
+    call_ds <- x$datasets
+    datasets <- purrr::map(x$datasets, build_dataset)
+    datasets <- new("datasets", datasets = datasets)
+  }
   
-  return(collunits)
+
+  
+  # Case sites
+  #datasets <- purrr::map(x$dataset, build_dataset)
+  
+  
+  #chronologies <- build_chron(x$chronologies)
+  #chronologies <- testNull(x$chronologies, list())
+  #chronologies <- purrr::map(x$chronologies, build_chron)
+  
+  newCollunits <- new('collunit',
+                      collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
+                      handle = use_na(x$handle, "char"),
+                      collectionunitid = use_na(testNull(x$collectionunitid, NA), "int"),
+                      collectiondevice = use_na(testNull(x$collectiondevice, NA), "char"),
+                      collectionunitname = use_na(x$collectionunit, "char"),
+                      waterdepth = use_na(testNull(x$waterdepth, NA), "int"),
+                      colldate = as.Date(character(0)),
+                      depositionalenvironment = use_na(testNull(x$depositionalenvironment,NA), "char"),
+                      location = use_na(testNull(x$location, NA), "char"),
+                      gpslocation = sf::st_as_sf(sf::st_sfc()),
+                      notes = use_na(testNull(x$notes,NA), "char"),
+                      datasets = datasets,
+                      #datasets = new('datasets', datasets = list()),
+                      #chronologies = chronologies)
+                      chronologies = new('chronologies', chronologies = list()))
+
 }

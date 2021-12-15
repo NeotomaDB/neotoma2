@@ -31,19 +31,17 @@ build_sites <- function(x) {
       }
     }
     
-    
     if(is.null(x$collectionunits)){
-      print("dw call")
-      cu_call <- x$site$collectionunit
-      # map x[[i]] sites to build_collunits
-      #collunits <- new('collunits', collunits = list(build_collunit(x$site$collectionunit)))
-      collunits <- new("collunits", collunits = list())
+      # Dw call
+      cu_call <- x$collectionunit
+      collunits <- build_collunits(cu_call)
+      collunits <- new("collunits", collunits = list(collunits))
       
     }else{
-      print("sites call")
+      # Sites Call
       cu_call <- x$collectionunits
-      collunits <- build_collunit(cu_call)
-
+      collunits <- purrr::map(cu_call, build_collunits)
+      collunits <- new("collunits", collunits = collunits)
     }
     
     set_site(siteid   = use_na(x$siteid, "int"),
