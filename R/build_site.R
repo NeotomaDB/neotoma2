@@ -42,11 +42,17 @@ build_sites <- function(x) {
       collunits <- new("collunits", collunits = collunits)
     }
     
+    if(is.null(x$geopolitical)){
+      geopolitical <- list()
+    }else{
+      geopolitical <- list(x$geopolitical)
+    }
+    
     set_site(siteid   = use_na(x$siteid, "int"),
              sitename = use_na(x$sitename, "char"),
              geography = geography,
              altitude = use_na(x$altitude, "int"),
-             geopolitical = testNull(x$geopolitical, list()), 
+             geopolitical = geopolitical, 
              notes = use_na(testNull(x$notes, NA), "char"),
              description = use_na(x$sitedescription, "char"),
              collunits = collunits)

@@ -37,7 +37,12 @@ build_chron <- function(x) {
   #    contact_list <- c(contact_list, cn)
   #  }
   #}
-  if(!is.na(x$chronology$chronology)){
+  if(length(x$chronology$chronology)>1){
+    check_chron <- x$chronology$chronology[[1]]
+  } else{
+    check_chron <- x$chronology$chronology
+  }
+  if(!is.na(check_chron)){
   # Chroncontrols
   df <- x$chronology$chroncontrols %>%
     map(function(y) {

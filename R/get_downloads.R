@@ -196,7 +196,7 @@ get_downloads.sites <- function(x, ...) {
       }
     }
   }
-  print(dataset_list)
+  dataset_list <- unique(dataset_list)
 
   output <- get_downloads(dataset_list)
 

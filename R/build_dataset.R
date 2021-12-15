@@ -44,15 +44,18 @@ build_dataset <- function(x) {
   }
   
   # PI Information
-  pi_list <- list()
-  if(!is.na(x$datasetpi)){
-  pi_list <- x$datasetpi %>%
-    map(function(y) {
-      y$contactname
-    })}else{
-      pi_list <- list()
-    }
-  
+  pi_list <- testNull(x$datasetpi, list())
+  if(length(pi_list) != 0) {
+    pi_list <- pi_list %>%
+      map(function(y) {
+        if(is.na(y[1])){
+          NA_character_
+        }else{
+        y$contactname
+          }
+      })
+  }
+
   new("dataset",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
       database = use_na(testNull(x$database, NA), "char"),
