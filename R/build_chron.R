@@ -28,61 +28,41 @@ build_chron <- function(x) {
     }
     return(x)
   }
+  # Contact Information
+  #contact <- length(y$chronology$chronology$contact)
+  contact_list <- list()
+  #for (k in seq_len(length(contact))) {
+  #  if (!is.na(y$chronology$chronology$contact)) {
+  #    cn <- y$chronology$chronology$contact[[k]]$contactname
+  #    contact_list <- c(contact_list, cn)
+  #  }
+  #}
   
-  if(length(x)>1){
-    new_chrons <- x %>%
-      map(function(y) {
-        
-        # Contact Information
-        contact <- length(y$chronology$chronology$contact)
-        contact_list <- c()
-        for (k in seq_len(length(contact))) {
-          if (!is.na(y$chronology$chronology$contact)) {
-            cn <- y$chronology$chronology$contact[[k]]$contactname
-            contact_list <- c(contact_list, cn)
-          }
-        }
-        
-        
-        # Chroncontrols
-        df <- y$chronology$chroncontrols %>%
-          map(function(x) {
-            as.data.frame(x)
-          }) %>%
-          bind_rows()
-        
-        chron_table <- data.frame()
-        df_sample <- df %>%
-          select(depth, thickness, agelimitolder, chroncontrolid,
-                 agelimityounger, chroncontrolage, chroncontroltype)
-        chron_table <- rbind(chron_table, df_sample) %>%
-          distinct()
-        
-        new("chronology",
-            chronologyid = use_na(y$chronology$chronologyid, "int"),
-            notes = use_na(y$chronology$chronology$notes, "char"),
-            contact = contact_list,
-            agemodel = use_na(y$chronology$chronology$agemodel, "char"),
-            ageboundolder = use_na(x$chronology$chronology$agerange$ageboundolder, "int"),
-            ageboundyounger = use_na(x$chronology$chronology$agerange$ageboundyounger, "int"),
-            is_default = use_na(as.numeric(x$chronology$chronology$isdefault), "int"),
-            dateprepared = as.Date(y$chronology$chronology$dateprepared),
-            modelagetype = use_na(y$chronology$chronology$modelagetype, "char"),
-            chronologyname = use_na(y$chronology$chronology$chronologyname, "char"),
-            chroncontrols = chron_table) 
-      })
-    
-   
-  }else{
-    new("chronology",
-        chronologyid = NA_integer_,
-        notes = NA_character_,
-        contact = list(), #contact_list,
-        agemodel = NA_character_,
-        agerange = list(), #agerange_list,
-        dateprepared = as.Date(character(0)),
-        modelagetype = NA_character_,
-        chronologyname = NA_character_,
-        chroncontrols = data.frame()) 
-  }
+  # Chroncontrols
+  df <- x$chronology$chroncontrols %>%
+    map(function(y) {
+      as.data.frame(y)
+    }) %>%
+    bind_rows()
+  
+  chron_table <- data.frame()
+  df_sample <- df %>%
+    select(depth, thickness, agelimitolder, chroncontrolid,
+           agelimityounger, chroncontrolage, chroncontroltype)
+  chron_table <- rbind(chron_table, df_sample) %>%
+    distinct()
+  
+  new("chronology",
+      chronologyid = use_na(x$chronology$chronologyid, "int"),
+      notes = use_na(x$chronology$chronology$notes, "char"),
+      contact = contact_list,
+      agemodel = use_na(x$chronology$chronology$agemodel, "char"),
+      ageboundolder = use_na(testNull(x$chronology$chronology$agerange$ageboundolder, NA), "int"),
+      ageboundyounger = use_na(testNull(x$chronology$chronology$agerange$ageboundyounger, NA), "int"),
+      isdefault = use_na(as.numeric(testNull(x$chronology$chronology$isdefault, NA)), "int"),
+      dateprepared = as.Date(x$chronology$chronology$dateprepared),
+      modelagetype = use_na(testNull(x$chronology$chronology$modelagetype, NA), "char"),
+      chronologyname = use_na(testNull(x$chronology$chronology$chronologyname,NA), "char"),
+      chroncontrols = chron_table) 
+  
 }

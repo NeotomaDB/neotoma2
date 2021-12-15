@@ -47,29 +47,15 @@ get_datasets(datasettype = 'vertebrate fauna', limit = 999999)
 
 **Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
 
-One way of dealing with the issue of `offsets` and `limits` is the use of a `while` loop, that runs by increasing the `offset`, until the result returns less that 25 records (the default `limit`).  If we look at the code below we can imagine that if there were 31 total records the first return would have `offset` 0 (`counter` is 1, so `(counter - 1) * 25` is 0), and would return all 25 records.  The second loop would return 6 records, and result in a `break` since `length(mammalSet[[counter]]) < 25`.  Once we break, we put all the results together using the `c()` command.
+One way of dealing with the issue of `offsets` and `limits` is the use of the `all_data` argument. When set to `TRUE`, a `while` loop will be performed. This will result in returning all the data for your usecase.
 
 ```{r downloadMammals}
 # This gives us 25 records (without setting 'limit')
 mammals <- get_datasets(datasettype = 'vertebrate fauna')
 
-# The 'while loop' approach:
-counter <- 1
-mammalSet <- c()
-
+# The 'all_data' approach:
 mammals <- get_datasets(datasettype = 'vertebrate fauna', all_data = TRUE)
 mammals
-#while (TRUE) {
-#  mammals <- get_datasets(datasettype = 'vertebrate fauna',
-#                          offset = (counter - 1) * 25)
-#  if (length(mammals@sites) < 25 | counter > 4) {
-#    break
-#  } else {
-#    mammalSet <- c(mammals, mammalSet)
-#    counter = counter + 1
-#  }
-#}
-
 ```
 
 ```{r dummyBox, eval=TRUE, results='hide', echo=FALSE}
@@ -97,7 +83,7 @@ The basis of any workflow is downloading appropriate data. Lets begin again with
 ```{r}
 mamData <- get_datasets(datasettype = "vertebrate fauna", 
                         ageold = 12000, 
-                        limit = 99999)
+                        all_data = TRUE)
 plotLeaflet(mamData)
 dsid <- getids(mamData)
 mamDl <- get_downloads()

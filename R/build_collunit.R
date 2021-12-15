@@ -3,31 +3,22 @@
 #' @return An object of class \code{collunit}
 #' @import sf
 build_collunits <- function(x) {
-  print(length(x$datasets))
-  print(length(x$dataset))
-
-  
   if(length(x$datasets)==0){
     # Downloads call
     call_ds <- x$dataset
     datasets <- build_dataset(call_ds)
     datasets <- new("datasets", datasets = list(datasets))
+    #chronologies <- build_chron(x$chronologies)
+    #
+    chronologies <- purrr::map(x$chronologies, build_chron)
+    chronologies <- new("chronologies", chronologies = chronologies)
   }else{
     # Sites call
     call_ds <- x$datasets
     datasets <- purrr::map(x$datasets, build_dataset)
     datasets <- new("datasets", datasets = datasets)
+    chronologies <- new('chronologies', chronologies = list())
   }
-  
-
-  
-  # Case sites
-  #datasets <- purrr::map(x$dataset, build_dataset)
-  
-  
-  #chronologies <- build_chron(x$chronologies)
-  #chronologies <- testNull(x$chronologies, list())
-  #chronologies <- purrr::map(x$chronologies, build_chron)
   
   newCollunits <- new('collunit',
                       collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
@@ -42,8 +33,5 @@ build_collunits <- function(x) {
                       gpslocation = sf::st_as_sf(sf::st_sfc()),
                       notes = use_na(testNull(x$notes,NA), "char"),
                       datasets = datasets,
-                      #datasets = new('datasets', datasets = list()),
-                      #chronologies = chronologies)
-                      chronologies = new('chronologies', chronologies = list()))
-
+                      chronologies = chronologies)
 }

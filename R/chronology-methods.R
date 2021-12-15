@@ -46,43 +46,7 @@ chronologies <- setClass(
   })
 
 
-# Start "Show Method" for all Neotoma Objects
-#' @title Show Dataset Method
-#' @param object chronology object
-setMethod(f = "show",
-          signature = "chronology",
-          definition = function(object) {
-            print(data.frame(chronologyid = object@chronologyid,
-                             notes = object@notes,
-                             agemodel = object@agemodel,
-                             ageboundolder = object@ageboundolder,
-                             ageboundyounger = object@ageboundyounger,
-                             isdefault = object@isdefault,
-                             dateprepared = object@date,
-                             modelagetype = object@modelagetype,
-                             chronologyname = object@chronologyname), row.names = FALSE)
-          })
-
-#' @title Show chronologies object as a dataframe
-#' @param object chronologies object
-setMethod(f = "show",
-          signature = "chronologies",
-          definition = function(object) {
-            map(object@chronologies, function(y) {
-              df <- data.frame(chronologyid = y@chronologyid,
-                               notes = y@notes,
-                               agemodel = y@agemodel,
-                               ageboundolder = y@ageboundolder,
-                               ageboundyounger = y@ageboundyounger,
-                               isdefault = y@isdefault,
-                               dateprepared = y@date,
-                               modelagetype = y@modelagetype,
-                               chronologyname = y@chronologyname)
-            }) %>%
-              bind_rows() %>%
-              print(row.names = FALSE)
-          })
-
+# Show methods
 #' @title  Slicer
 #' @param x chronologies object
 #' @param i iteration in chronologies list
