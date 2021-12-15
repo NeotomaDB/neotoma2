@@ -49,10 +49,10 @@
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
 #' @examples \dontrun{
-#' To find the downloads object of dataset 24:
+#' # To find the downloads object of dataset 24:
 #' downloads24 <- get_downloads(24)
 #'
-#' To find all downloads in Brazil
+#' # To find all downloads in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
@@ -70,281 +70,50 @@ get_downloads <- function(x = NA, ...) {
   }
 }
 
-parse_download <- function(result) { # nolint
-
-  newSites <- map(data, function(x) {
-    
-    if (is.na(x$site$geography)) {
-      geography <- st_as_sf(st_sfc())
-    } else {
-      geography <- try(geojson_sf(x$site$geography))
-      if ('try-error' %in% class(geography)) {
-        stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
-             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
-             'is invalid, contact a Neotoma administrator.')
-      }
-    }
-    
-    collunits <- new('collunits', 
-                     collunits = list(build_collunit(x$site$collectionunit)))
-    
-    set_site(sitename = use_na(x$site$sitename, "char"),
-             siteid   = use_na(x$site$siteid, "int"),
-             geography = geography,
-             altitude = use_na(x$site$altitude, "int"),
-             description = use_na(x$site$sitedescription, "char"),
-             notes = use_na(x$site$notes, "char"),
-             collunits = collunits)
-  })
+parse_download <- function(result) {
   
-  sites <- new('sites', sites = newSites)
+  data <- result$data %>%
+    cleanNULL()
   
-  for (i in 1:result_length) {
-    # i-th element result[2]$data[[i]]$
-    coll_units <- c()
-    dataset_list <- c()
-    chronology_list <- c()
-
-    # Datasets
-    dataset_call <- result$data[[i]]$site$collectionunit$dataset
-    datasetid <- dataset_call$datasetid
-    datasettype <- dataset_call$datasettype
-
-    datasetnotes <- dataset_call$datasetnotes
-    if (is.na(datasetnotes)) {
-      datasetnotes <- NA_character_
-    }else{
-      datasetnotes <- dataset_call$datasetnotes
-    }
-
-    # Taxon Table
-    length_datum <- length(dataset_call$samples)
-
-    for (j in 1:length_datum) {
-      depth <- dataset_call$samples[[j]]$depth
-      sample_id <- dataset_call$samples[[j]]$sampleid
-      df <- dataset_call$samples[[j]]$datum %>%
-        map(function(x) {
-          as.data.frame(x)
-        }) %>%
-        bind_rows()
-
-      df_sample <- df %>%
-      select(variablename, units, element, taxongroup, ecologicalgroup, taxonid)
-      taxon_table <- rbind(taxon_table, df_sample) %>%
-        distinct()
-      # PI Information
-      pi_length <- length(dataset_call$datasetpi)
-      pi_list <- c()
-
-      for (j in seq_len(pi_length)) {
-        pi <- dataset_call$datasetpi[[j]]$contactname
-        pi_list <- c(pi_list, pi)
-        }
-
-      # Analyst Info
-      analyst_list <- list()
-      samples <- result$data[[1]]$site$collectionunit$dataset$samples
-
-      for (k in seq_len(length(samples))) {
-        analyst_length <- length(dataset_call$samples[[k]]$sampleanalyst)
-        for (j in 1:analyst_length) {
-          contact <- dataset_call$samples[[k]]$sampleanalyst[[j]]$contactname
-          analyst_list <- c(analyst_list, contact)
-          }
-      }
-
-      # Sample.Meta Table
-      meta_data_t1 <- dataset_call$samples[[j]]$ages %>%
-        map(function(x) {
-          as.data.frame(x)
-          }) %>%
-        bind_rows()
-
-      meta_data_t1 <- meta_data_t1 %>%
-        mutate(
-          datasetid = datasetid,
-          depth = depth,
-          sample.id = sample_id)
-
-      if (dim(meta_data_t1)[1] > 0) {
-        meta_data_t1 %>%
-        select("depth", "ageolder", "age", "ageyounger", "chronologyname",
-         "agetype", "chronologyid", "sample.id", "datasetid")
-      }
-
-      new_dataset <- new("dataset",
-                         datasetid = datasetid,
-                         datasetname = sitename,
-                         datasettype = datasettype,
-                         location = location,
-                         notes = datasetnotes,
-                         taxa_table = taxon_table,
-                         pi_list = pi_list,
-                         analyst = analyst_list,
-                         metadata = meta_data_t1)
-
-      dataset_list <- append(dataset_list, new_dataset)
-      datasets_list <- new("datasets", datasets = dataset_list)
-
-      # Add to dataset publications information
-      # Publications Information
-
-      # API endpoint is different
-      # https://api.neotomadb.org/v2.0/data/datasets/1/publications
-
-      # Count Samples metadata
-      if (dataset_call$datasettype == "geochronologic") {
-
-        message(paste0("The dataset ID ", dataset_call$datasetid,
-                       " is associated with a geochronology object,
-                       not count data."))
-        return(NULL)
-      } else {
-
-        # copy to make indexing below easier?
-        samples <- dataset_call$samples
-
-        # Build the metadata for each sample in the dataset.
-        sample.meta <- do.call(rbind.data.frame,
-                               lapply(samples, `[`,
-                                      c("depth",
-                                        "sampleid"
-                                      )))
-
-      }
-      # Counts
-      df_count <- df %>%
-        select(variablename, value, taxonid)
-
-      df_counts <- rbind(df_counts, df_count) %>%
-        distinct()
-    }
-
-    # Chronologies
-
-
-      chronology_call <- result$data[[i]]$site$collectionunit$chronologies
-
-      for (j in seq_len(length(chronology_call))) {
-
-        chron_call <- chronology_call[[j]]$chronology
-        if (!is.na(chron_call$chronologyid)) {
-          chronologyid <- chron_call$chronologyid
-        } else {
-          chronologyid <- NA_integer_
-        }
-
-        if (length(chron_call$chronology) > 1) {
-          check_on <- chron_call$chronology[[1]]
-        } else {
-          check_on <- chron_call$chronology
-        }
-
-        if (!is.na(check_on)) {
-
-          notes <- chron_call$chronology$notes
-          agemodel <- chron_call$chronology$agemodel
-          older_ <- chron_call$chronology$agerange$ageboundolder
-          younger_ <- chron_call$chronology$agerange$ageboundyounger
-          agerange_list <- c()
-          agerange_list$older <- older_
-          agerange_list$younger <- younger_
-
-          dateprep <- as.Date(chron_call$chronology$dateprepared)
-
-          modelagetype <- chron_call$chronology$modelagetype
-
-          chronologyname <- chron_call$chronology$chronologyname
-
-        # Contact Information
-        contact_length <- length(chron_call$chronology$contact)
-
-        contact_list <- c()
-
-          for (k in seq_len(contact_length)) {
-            if (!is.na(chron_call$chronology$contact)) {
-              cn <- chron_call$chronology$contact[[k]]$contactname
-              contact_list <- c(contact_list, cn)
-              }
-            }
-
-        # Chroncontrols DF
-
-        df <- chronology_call[[j]]$chronology$chroncontrols %>%
-          map(function(x) {
-            as.data.frame(x)
-          }) %>%
-          bind_rows()
-
-        df_sample <- df %>%
-          select(depth, thickness, agelimitolder, chroncontrolid,
-          agelimityounger, chroncontrolage, chroncontroltype)
-          chron_table <- rbind(chron_table, df_sample) %>%
-          distinct()
-
-        # End chronologies
-
-        } else {
-          notes <- NA_character_
-          agemodel <- NA_character_
-          agerange_list <- list()
-          dateprep <- as.Date(character(0))
-          modelagetype <- NA_character_
-          chronologyname <- NA_character_
-          contact_list <- c()
-          df_sample <- data.frame()
-        }
-
-        new_chronology <- new("chronology",
-                            chronologyid = chronologyid,
-                            notes = notes,
-                            contact = contact_list,
-                            agemodel = agemodel,
-                            agerange = agerange_list,
-                            dateprepared = dateprep,
-                            modelagetype = modelagetype,
-                            chronologyname = chronologyname,
-                            chroncontrols = df_sample)
-
-      chronology_list <- append(chronology_list, new_chronology)
-      }
-
-      chronology_list <- new("chronologies", chronologies = chronology_list)
-      # End chronologies
-
-    ## Collunits
-    # Coll Unit ID
-    collunit_call <- result$data[[i]]$site$collectionunit
-    collunitid <- collunit_call$collectionunitid
-
-    colldate <- collunit_call$colldate
-    if (is.na(colldate)) {
-      colldate <- as.Date(character(0))
-    }else{
-      colldate <- as.Date(collunit_call$colldate)
-    }
-
-    # Coll Unit Handle
-    handle <- collunit_call$handle
-
-    new_collunit <- new("collunit",
-                        collunitid = collunitid,
-                        colldate = colldate,
-                        handle = handle,
-                        datasets = datasets_list,
-                        chronologies = chronology_list)
-
-    coll_units <- append(coll_units, new_collunit)
-    coll_units <- new("collunits", collunits = coll_units)
-
-
-  
+  my_sites_list <- new('sites', sites = list())
+  for(i in seq_len(length(data))){
+    my_site <- build_sites(data[[i]])
+    my_sites_list <- c(my_sites_list, my_site)
   }
-
-  # Convert to sites element
   
-  return(sites)
+
+
+  # newSites <- map(data, function(x) {
+  # 
+  #   if (is.na(x$site$geography)) {
+  #     geography <- st_as_sf(st_sfc())
+  #   } else {
+  #     #geography <- try(sf::geojson_sf(x$site$geography))
+  #     geography <- try(sf::st_read(x$site$geography, quiet = TRUE))
+  #     
+  #     if ('try-error' %in% class(geography)) {
+  #       stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
+  #            '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
+  #            'is invalid, contact a Neotoma administrator.')
+  #     }
+  #   }
+  #   
+  #   
+  #   
+  #   
+  #     
+  #   set_site(sitename = use_na(x$site$sitename, "char"),
+  #            siteid   = use_na(x$site$siteid, "int"),
+  #            geography = geography,
+  #            altitude = use_na(x$site$altitude, "int"),
+  #            description = use_na(x$site$sitedescription, "char"),
+  #            notes = use_na(x$site$notes, "char"),
+  #            collunits = collunits)
+  # })
+  # 
+  # sites <- new('sites', sites = newSites)
+  
+  return(my_sites_list)
 }
 
 #' @title get_downloads
@@ -427,6 +196,7 @@ get_downloads.sites <- function(x, ...) {
       }
     }
   }
+  dataset_list <- unique(dataset_list)
 
   output <- get_downloads(dataset_list)
 

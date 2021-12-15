@@ -15,7 +15,7 @@ site <- setClass(
   # Set the default values for the slot
   prototype = list(siteid = NA_integer_,
                    sitename = NA_character_,
-                   geography = st_sf(st_sfc()),
+                   geography = sf::st_sf(sf::st_sfc()),
                    geopolitical = list(),
                    altitude = NA_integer_,
                    area = NA_integer_,
@@ -65,6 +65,16 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
+#' @title Convert sites object to a \code{data.frame}
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+# Todo Convert to as.data.frame
+setGeneric("showDatasets", function(object) {
+  standardGeneric("showDatasets")
+})
 
 #' @title Convert sites object to a \code{data.frame}
 #' @param object A sites object
@@ -83,4 +93,105 @@ setMethod(f = "showDatasets",
               my_datasets2 <- new("datasets", datasets = my_datasets)
             }
             return(my_datasets2)
+          })
+
+#' @title  Slicer
+#' @param x sites object
+#' @param i iteration in sites list
+#' @description Obtain one of the elements within a sites list
+#' @export
+setMethod(f = "[[",
+          signature = signature(x = "sites", i = "numeric"),
+          definition = function(x, i) {
+            if (length(i) == 1) {
+              out <- new("site", x@sites[[i]])
+            } else {
+              out <- purrr::map(i, function(z) {
+                new("site", x@sites[[z]])
+              })
+              out <- new("sites", sites = out)
+            }
+            return(out)
+          })
+
+#' @title  $
+#' @param x site object
+#' @description Obtain slots of a site without using at-mark
+#' @export
+setMethod(f = "$",
+          signature = signature(x = "site"),
+          definition = function(x, name) {
+            slot(x, name)
+          })
+
+#' @title  $ for sites
+#' @param x sites object
+#' @description Obtain slots of a site without using at-mark
+#' @export
+setMethod(f = "$",
+          signature = signature(x = "sites"),
+          definition = function(x, name) {
+            x %>%
+              map(function(y) {
+                slot(y, name)
+              }) %>%
+              unlist()
+          })
+
+#' @title  as.data.frame site
+#' @param x site object
+#' @description show as dataframe as prep to save as csv
+#' @export
+setMethod(f = "as.data.frame",
+          signature = signature("site"),
+          definition = function(x) {
+            data.frame(siteid = x@siteid,
+                       sitename = x@sitename,
+                       lat = mean(st_coordinates(x@geography)[, 2]),
+                       long = mean(st_coordinates(x@geography)[, 1]),
+                       area = x@area,
+                       notes = x@notes,
+                       description = x@description,
+                       elev = x@altitude)
+          })
+
+#' @title  as.data.frame sites
+#' @param x sites object
+#' @description show as dataframe as prep to save as csv
+#' @export
+setMethod(f = "as.data.frame",
+          signature = signature("sites"),
+          definition = function(x) {
+            x@sites %>% map(as.data.frame) %>% bind_rows()
+          })
+
+#' @title Length Method Sites
+#' @export
+#' @param x sites object
+setMethod(f = "length",
+          signature = signature(x = "sites"),
+          definition = function(x) {
+            length(x@sites)
+          })
+
+#' @title c Method - Combine sites objects
+#' @param x sites object 1
+#' @param y sites object 2
+#' @export
+setMethod(f = "c",
+          signature = signature(x = "sites"),
+          definition = function(x, y) {
+            new("sites",
+                sites = unlist(c(x@sites,
+                                 y@sites), recursive = FALSE))
+          })
+
+#' @title write CSV
+#' @param x sites object 1
+#' @export
+setMethod(f = "write.csv",
+          signature = "sites",
+          definition = function(x, ...) {
+            df1 <- as.data.frame(x)
+            write.csv(df1, ...)
           })
