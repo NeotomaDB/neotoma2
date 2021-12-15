@@ -94,7 +94,6 @@ parse_dataset <- function(result) { # nolint
     }else{
       call <- x$sites$site
     }
-    
     if (is.na(call$geography)) {
       geography <- st_as_sf(st_sfc())
     } else {
@@ -107,9 +106,13 @@ parse_dataset <- function(result) { # nolint
       }
     }
     
-    datasets_ <- map(call$datasets, build_dataset)
-    datasets_ <- new("datasets", datasets=datasets_)
-    
+    if(length(x$sites$datasets) == 0){
+      datasets_ <- map(x$site$datasets, build_dataset)
+      datasets_ <- new("datasets", datasets=datasets_)
+    }else{
+      datasets_ <- map(x$sites$datasets, build_dataset)
+      datasets_ <- new("datasets", datasets=datasets_)
+    }    
     collunits <- new('collunits', 
                      collunits = list())
     
@@ -126,7 +129,7 @@ parse_dataset <- function(result) { # nolint
     collunits <- new("collunits", collunits = list(new_collunit))
     
     # Site
-    # Maybe use build_site instead
+    # API error does not allow for bulid site usage yet.
     set_site(sitename = use_na(call$sitename, "char"),
              siteid   = use_na(call$siteid, "int"),
              geography = geography,
@@ -248,7 +251,6 @@ get_datasets.numeric <- function(x, ...) {
   result_length <- length(result[2]$data)
   
   if (result_length > 0) {
-    #print(result)
     output <- parse_dataset(result)
     return(output)
   }else{

@@ -75,7 +75,7 @@ filter.sites <- function(x, ...) {  # nolint
 
         # Check for lat
         if ("lat" %in% names(calls_list)) {
-          lat <- sf::st_coordinates(x@sites[[i]]@location)[, 2][1] # nolint
+          lat <- sf::st_coordinates(x@sites[[i]]@geography)[, 2][1] # nolint
           dataset <- datasets_call@datasets[[k]]
           if (eval(calls_list$lat) == TRUE) {
             datasets_lat <- append(datasets_lat, dataset)
@@ -86,7 +86,7 @@ filter.sites <- function(x, ...) {  # nolint
 
         # Check for long
         if ("long" %in% names(calls_list)) {
-          long <- sf::st_coordinates(x@sites[[i]]@location)[,1][1] # nolint
+          long <- sf::st_coordinates(x@sites[[i]]@geography)[,1][1] # nolint
           dataset <- datasets_call@datasets[[k]]
           if (eval(calls_list$long) == TRUE) {
             datasets_long <- append(datasets_long, dataset)
@@ -148,7 +148,7 @@ filter.sites <- function(x, ...) {  # nolint
       new_site <- new("site",
                       siteid = x@sites[[i]]@siteid,
                       sitename = x@sites[[i]]@sitename,
-                      location = x@sites[[i]]@location,
+                      geography = x@sites[[i]]@geography,
                       altitude = x@sites[[i]]@altitude,
                       description = "description",
                       notes = NA_character_,
