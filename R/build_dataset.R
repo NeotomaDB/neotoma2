@@ -44,10 +44,14 @@ build_dataset <- function(x) {
   }
   
   # PI Information
+  pi_list <- list()
+  if(!is.na(x$datasetpi)){
   pi_list <- x$datasetpi %>%
     map(function(y) {
       y$contactname
-    })
+    })}else{
+      pi_list <- list()
+    }
   
   new("dataset",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),

@@ -58,10 +58,10 @@ The function contains data checks for each defined parameter.
 }
 \examples{
 \dontrun{
-To find the downloads object of dataset 24:
+# To find the downloads object of dataset 24:
 downloads24 <- get_downloads(24)
 
-To find all downloads in Brazil
+# To find all downloads in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],

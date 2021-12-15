@@ -49,10 +49,10 @@
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
 #' @examples \dontrun{
-#' To find the downloads object of dataset 24:
+#' # To find the downloads object of dataset 24:
 #' downloads24 <- get_downloads(24)
 #'
-#' To find all downloads in Brazil
+#' # To find all downloads in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
@@ -196,6 +196,7 @@ get_downloads.sites <- function(x, ...) {
       }
     }
   }
+  print(dataset_list)
 
   output <- get_downloads(dataset_list)
 

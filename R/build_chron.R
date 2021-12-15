@@ -37,7 +37,7 @@ build_chron <- function(x) {
   #    contact_list <- c(contact_list, cn)
   #  }
   #}
-  
+  if(!is.na(x$chronology$chronology)){
   # Chroncontrols
   df <- x$chronology$chroncontrols %>%
     map(function(y) {
@@ -64,5 +64,18 @@ build_chron <- function(x) {
       modelagetype = use_na(testNull(x$chronology$chronology$modelagetype, NA), "char"),
       chronologyname = use_na(testNull(x$chronology$chronology$chronologyname,NA), "char"),
       chroncontrols = chron_table) 
-  
+  }else{
+    new("chronology",
+        chronologyid = NA_integer_,
+        notes = NA_character_,
+        contact = list(),
+        agemodel = NA_character_,
+        ageboundolder = NA_integer_,
+        ageboundyounger = NA_integer_,
+        isdefault = NA_integer_,
+        dateprepared = as.Date(character(0)),
+        modelagetype = NA_character_,
+        chronologyname = NA_character_,
+        chroncontrols = data.frame()) 
+  } 
 }
