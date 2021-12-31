@@ -72,9 +72,10 @@ setMethod(f = "show",
 #' @importFrom dplyr bind_cols
 #' @export
 # Todo Convert to as.data.frame
-setGeneric("showDatasets", function(object) {
-  standardGeneric("showDatasets")
-})
+setGeneric("showDatasets", 
+           function(object) {
+            standardGeneric("showDatasets")
+           })
 
 #' @title Convert sites object to a \code{data.frame}
 #' @param object A sites object
@@ -188,10 +189,52 @@ setMethod(f = "c",
 
 #' @title write CSV
 #' @param x sites object 1
+#' @importFrom utils write.csv
 #' @export
 setMethod(f = "write.csv",
           signature = "sites",
           definition = function(x, ...) {
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
+          })
+
+#' @title Obtain coordinates from a sites object.
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+# Todo Convert to as.data.frame
+setGeneric("coordinates", function(obj, ...) {
+  standardGeneric("coordinates")
+})
+
+#' @title Return the latitude and logitude of sites
+#' @param x sites object 1
+#' @export
+setMethod(f = "coordinates",
+          signature = "sites",
+          definition = function(obj, ...) {
+            coords <- as.data.frame(obj)[, c("long", "lat")]
+            return(coords)
+          })
+
+#' @title Plot site coordinates using a basic plot.
+#' @param x sites object 1
+#' @export
+setMethod(f = "plot",
+          signature = "sites",
+          definition = function(x, ...) {
+            coords <- as.data.frame(x)[, c("long", "lat")]
+            plot(coords, ...)
+          })
+
+#' @title Summary of objects within a sites object.
+#' @param x sites object 1
+#' @export
+setMethod(f = "summary",
+          signature = "sites",
+          definition = function(object, ...) {
+            sites <- length(object)
+            collunits <- lapply(mamDl, function(x) length(x@collunits))
           })

@@ -4,7 +4,6 @@
 chronology <- setClass(
   # Set the name for the class
   "chronology",
-  
   # Define the slots
   slots = c(chronologyid = "numeric",
             notes = "character",
@@ -17,7 +16,6 @@ chronology <- setClass(
             modelagetype = "character",
             chronologyname = "character",
             chroncontrols = "ANY"),
-  
   # Set the default values for the slot
   prototype = list(chronologyid = NA_integer_,
                    notes = NA_character_,

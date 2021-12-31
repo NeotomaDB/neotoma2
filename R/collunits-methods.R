@@ -161,4 +161,3 @@ setMethod(f = "write.csv",
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
           })
-
