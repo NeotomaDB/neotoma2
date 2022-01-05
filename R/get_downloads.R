@@ -6,15 +6,6 @@
 #' @importFrom methods new
 #' @description
 #' Information for Fossil Datasets
-#' Look for the whole data details using only a dataset ID
-#' or for multiple metadata.
-#' Displays a site table with the following columns: siteid,
-#' sitename, lat, long, and elev.
-#' The function takes parameters defined by the user and
-#' returns a sites object
-#' with more detailed information regarding datasets and samples.
-#' The user may define all or none of the possible fields.
-#' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
 #' @param ... accepted arguments: sites, datasets
 #' @return The function returns either a single item of class
@@ -76,7 +67,7 @@ parse_download <- function(result) {
     cleanNULL()
   
   my_sites_list <- new('sites', sites = list())
-  for(i in seq_len(length(data))){
+  for (i in seq_len(length(data))) {
     my_site <- build_sites(data[[i]])
     my_sites_list <- c(my_sites_list, my_site)
   }

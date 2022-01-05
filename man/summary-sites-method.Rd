@@ -7,7 +7,9 @@
 \S4method{summary}{sites}(object, ...)
 }
 \arguments{
-\item{x}{sites object 1}
+\item{object}{sites object}
+
+\item{...}{additional properties passed to \code{summary}}
 }
 \description{
 Summary of objects within a sites object.

@@ -8,6 +8,7 @@
 #' Helper function to build a dataset
 #' @param x dataset list
 #' @return list parsed into datasets
+#' @export
 #' @examples \dontrun{
 #' # To build dataset from API call:
 #' build_dataset(x)

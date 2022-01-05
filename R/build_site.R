@@ -3,6 +3,7 @@
 #' @importFrom assertthat assert_that
 #' @importFrom purrr map
 #' @import sf
+#' @export
 #' @examples \dontrun{
 #' response <- jsonlite::fromJSON('https://api.neotomadb.org/v2.0/data/datasets/100,101',
 #'                                flatten=FALSE, simplifyVector=FALSE)
@@ -16,7 +17,7 @@ build_sites <- function(x) {
                           msg = "Parsed object must be a list.")
 
   newSites <- purrr::map(x, function(x) {
-    if(!(is.na(x$geography))){
+    if (!(is.na(x$geography))) {
       geography <- sf::st_read(x$geography, quiet = TRUE)
     } else if (!(is.na(x$site$geography))) {
       geography <- try(sf::st_read(x$site$geography, quiet = TRUE))

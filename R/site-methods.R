@@ -230,11 +230,27 @@ setMethod(f = "plot",
           })
 
 #' @title Summary of objects within a sites object.
-#' @param x sites object 1
+#' @param object sites object
+#' @param ... additional properties passed to \code{summary}
+#' @importFrom dplyr bind_rows mutate select
 #' @export
 setMethod(f = "summary",
           signature = "sites",
           definition = function(object, ...) {
-            sites <- length(object)
-            collunits <- lapply(mamDl, function(x) length(x@collunits))
+            sites <- sapply(object@sites, function(x) x@sitename)
+            siteid <- sapply(object@sites, function(x) x@siteid)
+            collunits <- lapply(object@sites, function(x) {
+              datasets <- sapply(x@collunits@collunits, 
+                                 function(y) length(y@datasets) )
+              chronologies <- sapply(x@collunits@collunits, 
+                                     function(y) length(y@chronologies) )
+              return(data.frame(collunits = length(x@collunits),
+                         datasets = datasets))
+            })
+            
+            collunits %>% 
+              bind_rows() %>% 
+              mutate(sitename = sites, siteid = siteid) %>% 
+              select(siteid, sitename, collunits, datasets)
           })
+          

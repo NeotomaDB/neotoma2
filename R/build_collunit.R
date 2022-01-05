@@ -1,9 +1,10 @@
 #' @title Build a collection unit from the API response
 #' @param x The structured JSON from a Neotoma API v2.0 response that returns a collection unit in any form.
+#' @export
 #' @return An object of class \code{collunit}
 #' @import sf
 build_collunits <- function(x) {
-  if(length(x$datasets)==0){
+  if (length(x$datasets) == 0) {
     # Downloads call
     call_ds <- x$dataset
     datasets <- build_dataset(call_ds)
@@ -12,7 +13,7 @@ build_collunits <- function(x) {
     #
     chronologies <- purrr::map(x$chronologies, build_chron)
     chronologies <- new("chronologies", chronologies = chronologies)
-  }else{
+  } else {
     # Sites call
     call_ds <- x$datasets
     datasets <- purrr::map(x$datasets, build_dataset)

@@ -46,15 +46,6 @@ following detail of information:
 }
 \description{
 Information for Fossil Datasets
-Look for the whole data details using only a dataset ID
-or for multiple metadata.
-Displays a site table with the following columns: siteid,
-sitename, lat, long, and elev.
-The function takes parameters defined by the user and
-returns a sites object
-with more detailed information regarding datasets and samples.
-The user may define all or none of the possible fields.
-The function contains data checks for each defined parameter.
 }
 \examples{
 \dontrun{
