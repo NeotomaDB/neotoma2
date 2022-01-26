@@ -21,7 +21,7 @@ build_dataset <- function(x) {
   length_datum <- length(x$samples)
   analyst_list <- list()
   for (j in seq_len(length_datum)) {
-    depth <- x$samples[[j]]$depth
+    
     sample_id <- x$samples[[j]]$sampleid
     df <- x$samples[[j]]$datum %>%
       map(function(y) {
@@ -29,10 +29,26 @@ build_dataset <- function(x) {
       }) %>%
       bind_rows()
     
-    df_sample <- df %>%
-      select(variablename, units, element, taxongroup, ecologicalgroup, taxonid)
-    taxon_table <- rbind(taxon_table, df_sample) %>%
-      distinct()
+    df_age <- x$samples[[j]]$ages %>%
+      map(function(y) {
+        as.data.frame(y)
+      }) %>%
+      bind_rows()
+    
+    # Other data
+    df$isgn <- x$samples[[j]]$igsn
+    df$depth <- x$samples[[j]]$depth
+    df$sampleid <- x$samples[[j]]$sampleid
+    df$thickness <- x$samples[[j]]$thickness
+    df$samplename <- x$samples[[j]]$samplename
+    df$analysisunitid <- x$samples[[j]]$analysisunitid
+    df$analysisunitname <- x$samples[[j]]$analysisunitname
+    
+    new_df <- cbind(df, df_age)
+    
+    df_sample <- new_df
+    
+    taxon_table <- rbind(taxon_table, df_sample) 
     
     # Analyst Info
     
