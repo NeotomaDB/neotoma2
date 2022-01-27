@@ -16,48 +16,18 @@
 #' 
 build_dataset <- function(x) {
   
-  # Taxon Table
-  taxon_table <- c()
-  length_datum <- length(x$samples)
-  analyst_list <- list()
-  for (j in seq_len(length_datum)) {
-    
+  samples <- purrr::map(x$samples, build_sample)
+  samples <- new("samples", samples = samples)
+  
+  for (j in seq_len(length_samples)) {
+    build_sample(x$sample)
     sample_id <- x$samples[[j]]$sampleid
     df <- x$samples[[j]]$datum %>%
       map(function(y) {
         as.data.frame(y)
       }) %>%
       bind_rows()
-    
-    df_age <- x$samples[[j]]$ages %>%
-      map(function(y) {
-        as.data.frame(y)
-      }) %>%
-      bind_rows()
-    
-    # Other data
-    df$isgn <- x$samples[[j]]$igsn
-    df$depth <- x$samples[[j]]$depth
-    df$sampleid <- x$samples[[j]]$sampleid
-    df$thickness <- x$samples[[j]]$thickness
-    df$samplename <- x$samples[[j]]$samplename
-    df$analysisunitid <- x$samples[[j]]$analysisunitid
-    df$analysisunitname <- x$samples[[j]]$analysisunitname
-    
-    new_df <- cbind(df, df_age)
-    
-    df_sample <- new_df
-    
-    taxon_table <- rbind(taxon_table, df_sample) 
-    
-    # Analyst Info
-    
-    analyst_list_helper <- x$samples[[j]]$sampleanalyst %>%
-      map(function(y) {
-        y$contactname
-      })
-    
-    analyst_list <- c(analyst_list_helper)
+ 
   }
   
   # PI Information
@@ -82,7 +52,6 @@ build_dataset <- function(x) {
       age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
       notes = use_na(testNull(x$datasetnotes, NA), "char"),
       pi_list = pi_list,
-      taxa_table = taxon_table,
-      analyst = analyst_list)
+      samples = samples)
   
 }

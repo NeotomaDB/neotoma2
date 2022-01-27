@@ -16,8 +16,7 @@ dataset <- setClass(
             age_range_young = "numeric",
             notes = "character",
             pi_list = "ANY",
-            taxa_table = "ANY",
-            analyst = "ANY"),
+            samples = "samples"),
   # Set the default values for the slot
   prototype = list(datasetid = NA_integer_,
                    database = NA_character_,
@@ -27,8 +26,7 @@ dataset <- setClass(
                    age_range_young =  NA_integer_,
                    notes = NA_character_,
                    pi_list = list(),
-                   taxa_table = data.frame(),
-                   analyst = list()),
+                   samples = NULL),
 )
 
 #' @title S4 class for datasets information
