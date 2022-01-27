@@ -92,7 +92,7 @@ As explained above, a `site` is the fundamental unit of the Neotoma Database.  I
 
 ```{r setsitefunction}
 my_site <- set_site(sitename="My Lake", 
-                    coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
+                    geography = st_sf(a=3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
                     altitude = 30)
 my_site
