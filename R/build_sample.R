@@ -43,7 +43,7 @@ build_sample <- function(x) {
       sampleid = use_na(testNull(x$sampleid, NA), "int"),
       thickness = use_na(testNull(x$thickness, NA), "int"),
       samplename = use_na(testNull(x$samplename, NA), "char"),
-      sampleanalyst = list(),
+      sampleanalyst = analyst_list_helper,
       analysisunitid = use_na(testNull(x$analysisunitid, NA), "int"),
       analysisunitname = use_na(testNull(x$analysisunitname, NA), "char"))
   

@@ -15,21 +15,10 @@
 #' }
 #' 
 build_dataset <- function(x) {
-  
+
   samples <- purrr::map(x$samples, build_sample)
   samples <- new("samples", samples = samples)
-  
-  for (j in seq_len(length_samples)) {
-    build_sample(x$sample)
-    sample_id <- x$samples[[j]]$sampleid
-    df <- x$samples[[j]]$datum %>%
-      map(function(y) {
-        as.data.frame(y)
-      }) %>%
-      bind_rows()
  
-  }
-  
   # PI Information
   pi_list <- testNull(x$datasetpi, list())
   if(length(pi_list) != 0) {
