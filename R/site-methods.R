@@ -115,6 +115,39 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @title Get site field by numeric index
+#' @param x The site object
+#' @param i The column indicator
+#' @param drop
+setMethod(f = "[",
+          signature = signature(x = "site", i = "numeric"),
+          definition = function(x, i, j, drop = FALSE) {
+            slots <- slotNames(x)[i]
+            as.data.frame(sapply(slots, function(y) slot(x, y)))
+          })
+
+#' @title Get site field by character index
+#' @param x The site object
+#' @param i The column indicator
+#' @param drop
+setMethod(f = "[",
+          signature = signature(x = "site", i = "character"),
+          definition = function(x, i, j, drop = FALSE) {
+            out <- as.data.frame(lapply(i, function(y) slot(x, y)))
+            colnames(out) <- i
+            return(out)
+          })
+
+#' @title Get slot names
+#' @param x
+#' @description Get all names for named elements within a `site` object.
+#' @export
+setMethod(f = "names",
+          signature = signature(x = "site"),
+          definition = function(x) {
+            slotNames(x)
+          })
+
 #' @title  Insert site
 #' @param x sites object
 #' @param i iteration in sites list
@@ -131,7 +164,49 @@ setMethod(f = "[[<-",
           })
 
 
-#' @title  $
+#' @title Assign site field by numeric index
+#' @param x The site object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "[<-",
+          signature = signature(x = "site", i = "character"),
+          definition = function(x, i, j, value, drop = FALSE) {
+            for (idx in 1:length(i)) {
+              slot(x, i[idx]) <- value[idx]
+            }
+            return(x)
+          })
+
+#' @title Assign site field by numeric index
+#' @param x The site object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "[<-",
+          signature = signature(x = "site", i = "numeric"),
+          definition = function(x, i, j, value, drop = FALSE) {
+            slots <- slotNames(x)
+            for (idx in 1:length(i)) {
+              slot(x, slots[i[idx]]) <- value[idx]
+            }
+            return(x)
+          })
+
+#' @title Assign site field by numeric index
+#' @param x The site object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "$<-",
+          signature = signature(x = "site"),
+          definition = function(x, name, value) {
+            slot(x, name) <- value
+            return(x)
+          })
+
+
+#' @title $
 #' @param x site object
 #' @description Obtain slots of a site without using at-mark
 #' @export
