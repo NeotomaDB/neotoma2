@@ -5,6 +5,11 @@
 \title{set Site Information for Fossil Sites}
 \usage{
 set_site(
+<<<<<<< Updated upstream
+=======
+  x = NA,
+  siteid = NA_integer_,
+>>>>>>> Stashed changes
   sitename = NA_character_,
   coordinates = st_as_sf(st_sfc()),
   description = NA_character_,

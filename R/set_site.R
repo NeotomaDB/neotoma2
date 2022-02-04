@@ -16,19 +16,38 @@
 #'                     description = "my lake", altitude = 30)
 #'                     }
 
-set_site <- function(sitename= NA_character_,
-                             coordinates = st_as_sf(st_sfc()),
-                             description = NA_character_,
-                             notes = NA_character_,
-                             collunits = new("collunits"),
-                             altitude = NA_integer_) {
-  x <- new("site")
-  x@sitename <- sitename
-  x@location <- coordinates
-  x@description <- description
-  x@notes <- notes
-  x@collunits <- collunits
-  x@altitude <- altitude
+set_site <- function(x = NA,
+                     siteid = NA_integer_,
+                     sitename= NA_character_,
+                     geography = st_as_sf(st_sfc()),
+                     altitude = NA_integer_,
+                     geopolitical = list(),
+                     area = NA_integer_,
+                     notes = NA_character_,
+                     description = NA_character_,
+                     collunits = new("collunits")) {
+
+  function_call <- match.call()
+  
+  if (suppressWarnings(is.na(x))) {
+    x <- new("site")
+    x@siteid <- siteid
+    x@sitename <- sitename
+    x@geography <- geography
+    x@altitude <- altitude
+    x@geopolitical <- geopolitical
+    x@notes <- notes
+    x@description <- description
+    x@collunits <- collunits  
+  } else {
+    if (class(x) == "site") {
+      for (i in 3:length(function_call)) {
+        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+      }
+    }
+    return(x)
+  }
+  
 
   # TODO : change coordinates to sf_sfc or as is so user can define
 

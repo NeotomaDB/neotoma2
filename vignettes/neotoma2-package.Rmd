@@ -71,19 +71,19 @@ alex
 Neotoma uses a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
 
 ```{r sitewithwildcardname}
-alex <- get_sites(sitename = 'Alexander%')
+alex <- get_sites(sitename = 'Alex%')
 ```
 
-Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we can use S4 accessing techniques to gather the data for either the first or second object.
+Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`.
 
 ### Accessing `sites` metadata
 
-We can also access the different parameters for each site using S4 class marker `@`.
+Although the `sites` are structured using S4 objects (see S4 documentation here), we've added helper functions to make accessing elements easier for users.  
 
-Since the `sites` object is composed by smaller objects of class `site`, we do need to specify which ordered object we want to access. We do so with `[[ ]]` and place the index of the desired object.
+The `alex` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
 
 ```{r extractElement}
-alex@sites[[1]]@siteid
+alex[[1]]$siteid
 ```
 
 ### Creating a Site
@@ -91,20 +91,33 @@ alex@sites[[1]]@siteid
 As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
 ```{r setsitefunction}
-my_site <- set_site(sitename="My Lake", 
-                    coordinates = st_sf(a=3, st_sfc(st_point(1:2))), 
+my_site <- set_site(sitename = "My Lake", 
+                    geography = st_sf(a = 3, st_sfc(st_point(1:2))), 
                     description = "my lake", 
                     altitude = 30)
 my_site
 ```
 
+If we have a set of sites that we are analyzing, we can add the new site to the set of sites, either by appending it to the end, using `c()`, or by replacing a particular element using `[[<-`.
+
+This method allows us to begin modifying site information for existing sites if we have updated knowledge about site properties.
+
+```{r addtosites}
+# Add a new site that's been edited using set_site()
+longer_alex <- c(alex, my_site)
+alex[[3]] <- my_site
+
+# Update a value within an existing `sites` object:
+alex[[2]] <- set_site(alex[[2]], altitude = 3000)
+```
+
 ## Datasets
 
-If you need to get to a deeper level of the sites object, you may want to look at the `get_datasets()` function.
+If you need to get to a deeper level of the sites object, you may want to look at the `get_datasets()` function.  You can use `get_datasets()` using search parameters, or you can use it on an existing `sites` object, such as our prior `alex` dataset.
 
-With get_datasets, we make calls to the API to get each dataset information -DatasetID, location, datasettype and so on.
+`get_datasets()` adds additional metadata to the `site` objects, letting us know which `datasettypes` are associated with a site, and the dataset sample locations at the site.
 
-Getting the datasets by id is the easiest call, you can also pass a vector of IDs or if you already have a `sites` object, you can pass a sites object. Be careful, get_datasets does not take `sitename` or `siteid` as inputs.
+Getting the datasets by id is the easiest call, you can also pass a vector of IDs or if you already have a `sites` object, you can pass a sites object. Be careful, `get_datasets()` does not take `sitename` or `siteid` as inputs, if you wish to use those you can chain `get_sites()` and `get_datasets()`.
 
 ```{r getdatasetsbyid}
 # Getting datasets by ID
@@ -200,11 +213,12 @@ The `filter()` function takes as the first argument, a datasets object, followed
 
 You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.  If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of `&` and `|` operators.
 
-```{r}
-Names_744BH<-c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+```{r, sitesbyname}
+Names_744BH <- c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+
 new_sites <- c()
-for(Number in Names_744BH){
-  sites <- get_sites(sitename=Number)
+for (Number in Names_744BH) {
+  sites <- get_sites(sitename = Number)
   new_sites <- c(new_sites, sites)}
 new_sites
 ```
@@ -299,3 +313,14 @@ new_pub@pages <- '1397-1410'
 ```
 
 #### Validate New Publications
+
+## Examine Neotoma Data
+
+### Down Core Data
+
+Once we've obtained a site we can begin to look at the raw data within the datasets.
+
+```{r downloadData}
+# DOESTN WORK mySites <- get_downloads(brazil_datasets[[1]])
+mySites <- get_downloads(1001)
+```
