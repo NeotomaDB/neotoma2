@@ -46,15 +46,23 @@ following detail of information:
 }
 \description{
 Information for Fossil Datasets
-Look for the whole data details using only a dataset ID
-or for multiple metadata.
-Displays a site table with the following columns: siteid,
-sitename, lat, long, and elev.
-The function takes parameters defined by the user and
-returns a sites object
-with more detailed information regarding datasets and samples.
-The user may define all or none of the possible fields.
-The function contains data checks for each defined parameter.
+}
+\examples{
+\dontrun{
+# To find the downloads object of dataset 24:
+downloads24 <- get_downloads(24)
+
+# To find all downloads in Brazil
+brazil <- '{"type": "Polygon",
+"coordinates": [[
+ [-73.125, -9.102096738726443],
+ [-56.953125,-33.137551192346145],
+ [-36.5625,-7.710991655433217],
+ [-68.203125,13.923403897723347],
+ [-73.125,-9.102096738726443]]]}'
+brazil_datasets <- get_datasets(loc = brazil[1])
+brazil_downloads <- get_downloads(brazil_datasets)
+}
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

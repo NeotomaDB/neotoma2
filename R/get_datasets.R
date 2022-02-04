@@ -47,18 +47,18 @@
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
 #' @examples \dontrun{
-#' To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' # To find all datasets with a min altitude of 12 and a max altitude of 25:
 #' sites_12to25 <- get_datasets(altmin=12, altmax=25)
 #'
-#' To find all datasets in Brazil
-#' brazil <- "{"type": "Polygon",
+#' # To find all datasets in Brazil
+#' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]
-#' ]]}"
+#' ]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' }
 #' @export
@@ -71,6 +71,7 @@ get_datasets <- function(x = NA, ...) {
 }
 
 parse_dataset <- function(result) { # nolint
+  
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
@@ -83,157 +84,64 @@ parse_dataset <- function(result) { # nolint
     }
     return(x)
   }
-
-  result <- result %>%
+  
+  data <- result$data %>%
     fix_null()
-  result_length <- length(result[2]$data)
 
-  sites <- c()
-  for (i in seq_len(result_length)) {
-    # i-th element result[2]$data[[i]]$
-    coll_units <- c()
-    dataset_list <- c()
-
-    # Sites
-    # Sitename
-    if (is.null(result[2]$data[[i]]$site$sitename)) {
-      sitename <- result[2]$data[[i]]$sites$site$sitename
+  newSites <- map(data, function(x) {
+    if(is.null(x$sites)){
+      call <- x$site
+    }else{
+      call <- x$sites$site
+    }
+    if (is.na(call$geography)) {
+      geography <- st_as_sf(st_sfc())
     } else {
-      sitename <- result[2]$data[[i]]$site$sitename
-    }
-
-    # Site ID
-    if (is.null(result[2]$data[[i]]$site$siteid)) {
-      siteid <- result[2]$data[[i]]$sites$site$siteid
-    }else{
-      siteid <- result[2]$data[[i]]$site$siteid
-    }
-
-    # Location
-    location <- result[2]$data[[i]]$site$geography
-    location2 <- result[2]$data[[i]]$sites$site$geography
-
-    if (is.null(location)) {
-      if (is.na(location2)) {
-        location <- sf::st_sf(sf::st_sfc())
-      }else{
-        location <- sf::st_read(location2, quiet = TRUE)
+      geography <- try(sf::st_read(call$geography, quiet = TRUE))
+      
+      if ('try-error' %in% class(geography)) {
+        stop('Invalid geoJSON passed from the API. \nCheck that:\n', call$geography, 
+             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
+             'is invalid, contact a Neotoma administrator.')
       }
+    }
+    
+    if(length(x$sites$datasets) == 0){
+      datasets_ <- map(x$site$datasets, build_dataset)
+      datasets_ <- new("datasets", datasets=datasets_)
     }else{
-      location <- sf::st_read(location, quiet = TRUE)
-    }
-
-    # Altitude
-    if (is.null(result[2]$data[[i]]$site$altitude)) {
-      elev <- result[2]$data[[i]]$sites$site$altitude
-      if (is.logical(elev)) {
-        elev <- NA_integer_
-        }
-    }else{
-      elev <- result[2]$data[[i]]$site$altitude
-      if (is.logical(elev)) {
-        elev <- NA_integer_
-        }
-    }
-
-    # Description
-    if (is.null(result[2]$data[[i]]$site$sitedescription)) {
-      description <- result[2]$data[[i]]$sites$site$sitedescription
-      if (is.logical(description)) {
-        description <- NA_character_
-        }
-    }else{
-      description <- result[2]$data[[i]]$site$sitedescription
-      if (is.logical(description)) {
-        description <- NA_character_
-        }
-    }
-
-    # Notes
-    if (is.null(result[2]$data[[i]]$site$sitenotes)) {
-      notes <- result[2]$data[[i]]$sites$site$sitenotes
-      if (is.logical(notes)) {
-        notes <- NA_character_
-        }
-    }else{
-      notes <- result[2]$data[[i]]$site$sitenotes
-      if (is.logical(notes)) {
-        notes <- NA_character_
-        }
-    }
-
-    # Datasets
-    # i-th element result[2]$data[[i]]$
-    datasets_length <- length(result[2]$data[[i]]$site$datasets)
-
-    for (j in 1:datasets_length) {
-      datasetid <- result[2]$data[[i]]$site$datasets[[j]]$datasetid
-      datasettype <- result[2]$data[[i]]$site$datasets[[j]]$datasettype
-      if (is.null(result[2]$data[[i]]$site$datasets[[j]]$datasetnotes)) {
-        datasetnotes <- NA_character_
-        if (is.logical(datasetnotes)) {
-          datasetnotes <- NA_character_
-          }
-      }else{
-        datasetnotes <- result[2]$data[[i]]$site$datasets[[j]]$datasetnotes
-        if (is.logical(datasetnotes)) {
-          datasetnotes <- NA_character_
-          }
-      }
-
-      new_dataset <- new("dataset",
-                         datasetid = datasetid,
-                         datasetname = sitename,
-                         datasettype = datasettype,
-                         location = location,
-                         notes = datasetnotes)
-    }
-    dataset_list <- append(dataset_list, new_dataset)
-    datasets_list <- new("datasets", datasets = dataset_list)
-
+      datasets_ <- map(x$sites$datasets, build_dataset)
+      datasets_ <- new("datasets", datasets=datasets_)
+    }    
+    collunits <- new('collunits', 
+                     collunits = list())
+    
     # Collunits
-    # Coll Unit ID
-    if (is.null(result[2]$data[[i]]$site$collectionunitid)) {
-      collunitid <- result[2]$data[[i]]$sites$site$collectionunitid
-    }else{
-      collunitid <- result[2]$data[[i]]$site$collectionunitid
-    }
-    colldate <- as.Date(character(0))
-
-    # Coll Unit Handle
-    if (is.null(result[2]$data[[i]]$site$handle)) {
-      handle <- result[2]$data[[i]]$sites$site$handle
-    }else{
-      handle <- result[2]$data[[i]]$site$handle
-    }
-
+    # TODO: Implement build collunit
     new_collunit <- new("collunit",
-                        collunitid = collunitid,
-                        colldate = colldate,
-                        handle = handle,
-                        datasets = datasets_list,
+                        collectionunitid = call$collectionunitid,
+                        colldate = as.Date(character(0)),
+                        handle = call$handle,
+                        datasets = datasets_,
                         chronologies = new("chronologies",
-                                 chronologies = list()))
-
-    coll_units <- append(coll_units, new_collunit)
-    coll_units <- new("collunits", collunits = coll_units)
-
-    new_site <- new("site",
-                    siteid = siteid,
-                    sitename = sitename,
-                    location = location,
-                    altitude = elev,
-                    description = description,
-                    notes = NA_character_,
-                    collunits = coll_units)
-    sites <- append(sites, new_site)
-
-  }
-
-  sites <- new("sites", sites = sites)
-
+                                           chronologies = list()))
+    
+    collunits <- new("collunits", collunits = list(new_collunit))
+    
+    # Site
+    # API error does not allow for bulid site usage yet.
+    set_site(sitename = use_na(call$sitename, "char"),
+             siteid   = use_na(call$siteid, "int"),
+             geography = geography,
+             altitude = use_na(call$altitude, "int"),
+             description = use_na(call$sitedescription, "char"),
+             notes = use_na(call$sitenotes, "char"),
+             collunits = collunits)
+  })
+  
+  sites <- new("sites", sites = newSites)
+  
   return(sites)
-
 }
 
 #' @title Get Dataset Default
@@ -242,15 +150,15 @@ parse_dataset <- function(result) { # nolint
 #' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
-
+  
   cl <- as.list(match.call())
-
+  
   possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
                           "ageyoung", "ageold", "ageof", "limit", "offset",
                           "all_data", "sites_o")
-
+  
   cl[[1]] <- NULL
-
+  
   for (name in names(cl)) {
     if (!(name %in% possible_arguments)) {
       message1 <- " is not an allowed argument. \n
@@ -258,23 +166,23 @@ get_datasets.default <- function(x, ...) { # nolint
       message(paste0(name, message1))
     }
   }
-
+  
   cl <- lapply(cl, eval, envir = parent.frame())
-
+  
   error_check <- check_args(cl) # nolint
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
     cl <- error_check[[1]]
   }
-
+  
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     if (is.numeric(cl$loc)) {
       coords <- cl$loc
       my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2],
                                ymax = coords[3], ymin = coords[4]),
-                               crs = st_crs(4326))
+                             crs = st_crs(4326))
       if (is.na(my_bbox$xmin)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
@@ -287,11 +195,11 @@ get_datasets.default <- function(x, ...) { # nolint
       if (is.na(my_bbox$ymax)) {
         stop("Numeric coordinates need to be an array of 4 units.")
       }
-
+      
       my_bbox <- sf::st_as_sfc(my_bbox)
       new_geojson <- geojsonsf::sfc_geojson(my_bbox)
       new_geojson <- new_geojson[1]
-
+      
       base_url <- paste0("data/datasets?loc=", new_geojson[1])
       for (name in names(cl)) {
         if (!(name == "loc")) {
@@ -310,7 +218,7 @@ get_datasets.default <- function(x, ...) { # nolint
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
-
+  
   if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
     return(NULL)
   }else{
@@ -333,15 +241,15 @@ get_datasets.numeric <- function(x, ...) {
       return(x)
     }
   }
-
+  
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-
+  
   base_url <- paste0("data/datasets/", dataset)
   result <- neotoma2::parseURL(base_url)
   result_length <- length(result[2]$data)
-
+  
   if (result_length > 0) {
     output <- parse_dataset(result)
     return(output)
@@ -367,7 +275,7 @@ get_datasets.sites <- function(x, ...) {
       }
     }
   }
-
+  
   output <- get_datasets(dataset_list)
   return(output)
 }

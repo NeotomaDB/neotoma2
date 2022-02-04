@@ -3,6 +3,7 @@
 #' \code{NULL} elements to \code{NA}.
 #' @param x An element that may or may not have NULL values.
 #' @importFrom purrr map
+#' @export
 #' @noRd
 cleanNULL <- function(x) { # nolint
   if ("list" %in% class(x)) {

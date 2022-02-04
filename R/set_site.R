@@ -2,19 +2,25 @@
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
-#' @param sitename actual site name
-#' @param coordinates sf object
-#' @param description description of site
+#' @param siteid The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).
+#' @param sitename Actual site name as a character string.
+#' @param geography An \code{sf} object representing the site location, either as a polygon or point.
+#' @param altitude altitude/elevation of the site.
+#' @param geopolitical The geopolitical unit in which the site is located.
+#' @param area The area of the site or depositional basin in *ha*.  Can be calculated from the polygon.
+#' @param description A character description of site.
 #' @param notes additional information of the site
-#' @param collunits collection units in the site
-#' @param altitude altitude/elevation of the site
+#' @param collunits Collection units in the site
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create a site called "My Lake", to 
 #' x = st_as_sf(st_sfc(st_point(c(5,5))))
-#' my_site <- set_site(sitename="My Lake", coordinates = x,
-#'                     description = "my lake", altitude = 30)
-#'                     }
+#' my_site <- set_site(sitename = "My Lake",
+#'                     geography = x,
+#'                     description = "my lake", 
+#'                     altitude = 30)
+#' }
 
 set_site <- function(x = NA,
                      siteid = NA_integer_,

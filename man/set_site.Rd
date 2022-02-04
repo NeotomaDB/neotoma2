@@ -5,39 +5,54 @@
 \title{set Site Information for Fossil Sites}
 \usage{
 set_site(
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
   x = NA,
   siteid = NA_integer_,
 >>>>>>> Stashed changes
+=======
+  siteid = NA_integer_,
+>>>>>>> dev
   sitename = NA_character_,
-  coordinates = st_as_sf(st_sfc()),
-  description = NA_character_,
+  geography = st_as_sf(st_sfc()),
+  altitude = NA_integer_,
+  geopolitical = list(),
+  area = NA_integer_,
   notes = NA_character_,
-  collunits = new("collunits"),
-  altitude = NA_integer_
+  description = NA_character_,
+  collunits = new("collunits")
 )
 }
 \arguments{
-\item{sitename}{actual site name}
+\item{siteid}{The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).}
 
-\item{coordinates}{sf object}
+\item{sitename}{Actual site name as a character string.}
 
-\item{description}{description of site}
+\item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
+
+\item{altitude}{altitude/elevation of the site.}
+
+\item{geopolitical}{The geopolitical unit in which the site is located.}
+
+\item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
 
 \item{notes}{additional information of the site}
 
-\item{collunits}{collection units in the site}
+\item{description}{A character description of site.}
 
-\item{altitude}{altitude/elevation of the site}
+\item{collunits}{Collection units in the site}
 }
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
 \dontrun{
+# Create a site called "My Lake", to 
 x = st_as_sf(st_sfc(st_point(c(5,5))))
-my_site <- set_site(sitename="My Lake", coordinates = x,
-                    description = "my lake", altitude = 30)
-                    }
+my_site <- set_site(sitename = "My Lake",
+                    geography = x,
+                    description = "my lake", 
+                    altitude = 30)
+}
 }
