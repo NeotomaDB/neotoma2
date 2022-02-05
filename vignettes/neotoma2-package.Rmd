@@ -31,9 +31,9 @@ The `neotoma2` R package is intended to act as the intermediary to support these
 
 ### Package Requirements
 
-The earlier `neotoma` package tried to use base R as much as possible.  Given the current ubiquity of the `tidyverse`, the `neotoma2` package now draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package.
+The earlier `neotoma` package tried to use base R as much as possible.  The `neotoma2` package now draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package. The choice to integrate `tidyverse` packages was made largely because of the current ubiquity of the `tidyverse` in R education.
 
-There are some namespace overlaps, for example with the `filter()` function.  Depending on the order with which packages are loaded you may get errors using these functions.  If that's the case, one way of bug-checking is to try calling the function explicitly: `neotoma2::filter(. . .)`.  This will ensure it is the `filter()` function from the `neotoma2` package.
+There are some namespace overlaps, for example with the `filter()` function.  Depending on the order with which packages are loaded you may get errors using these functions.  If that's the case, one way of bug-checking is to try calling the function explicitly from the package: `neotoma2::filter(...)`.  This will ensure it is the `filter()` function from the `neotoma2` package.
 
 ## Site Searches
 
@@ -41,11 +41,11 @@ The highest level object in Neotoma is the **site**.  Sites have spatial coordin
 
 Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined with other sites into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods for printing, plotting and exporting information.
 
-![closeup of several Neotoma sites in the carribean.](images/siteshot.png)
+![closeup of several Neotoma sites in the Carribean.](images/siteshot.png)
 
 ### Finding sites
 
-All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` funtion by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
 
 If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
 
@@ -85,6 +85,23 @@ The `alex` object is composed of several smaller objects of class `site`.  We ca
 ```{r extractElement}
 alex[[1]]$siteid
 ```
+
+The elements within a `site` are the same as the defined columns within the Neotoma [`ndb.sites`](https://open.neotomadb.org/dbtables) table, with the exception of the `collunits` slot, which contains the collection units and associated datasets that are found within a site.  You can see all the `site` slots using the `names()` function.  You can select individual elements of a `site`, and you can assign values to these parameters:
+
+```{r showallNamesSite}
+names(alex[[1]])
+
+# Modify a value using $<- assignment:
+alex[[1]]$area
+alex[[1]]$area <- 100
+alex[[1]]$area
+
+# Modify a value using [<- assignment:
+alex[[1]]["area"] <- 30
+# alex[[1]][7] <- 30  <- Fails because the `Notes` field expects a character string.
+```
+
+In this way we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements.  Although not currently implemented, the goal is to support direct upload of updated information by users.
 
 ### Creating a Site
 
@@ -321,6 +338,5 @@ new_pub@pages <- '1397-1410'
 Once we've obtained a site we can begin to look at the raw data within the datasets.
 
 ```{r downloadData}
-# DOESTN WORK mySites <- get_downloads(brazil_datasets[[1]])
-mySites <- get_downloads(1001)
+mySites <- get_downloads(brazil_datasets)
 ```
