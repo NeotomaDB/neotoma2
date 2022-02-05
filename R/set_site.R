@@ -22,7 +22,8 @@
 #'                     altitude = 30)
 #' }
 
-set_site <- function(siteid = NA_integer_,
+set_site <- function(x = NA,
+                     siteid = NA_integer_,
                      sitename= NA_character_,
                      geography = st_as_sf(st_sfc()),
                      altitude = NA_integer_,
@@ -32,15 +33,29 @@ set_site <- function(siteid = NA_integer_,
                      description = NA_character_,
                      collunits = new("collunits")) {
 
-  x <- new("site")
-  x@siteid <- siteid
-  x@sitename <- sitename
-  x@geography <- geography
-  x@altitude <- altitude
-  x@geopolitical <- geopolitical
-  x@notes <- notes
-  x@description <- description
-  x@collunits <- collunits
+  function_call <- match.call()
+  
+  if (suppressWarnings(is.na(x))) {
+    x <- new("site")
+    x@siteid <- siteid
+    x@sitename <- sitename
+    x@geography <- geography
+    x@altitude <- altitude
+    x@geopolitical <- geopolitical
+    x@notes <- notes
+    x@description <- description
+    x@collunits <- collunits  
+  } else {
+    if (class(x) == "site") {
+      for (i in 3:length(function_call)) {
+        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+      }
+    }
+    return(x)
+  }
+  
+
+  # TODO : change coordinates to sf_sfc or as is so user can define
 
   return(x)
 }

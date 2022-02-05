@@ -5,6 +5,7 @@
 \title{set Site Information for Fossil Sites}
 \usage{
 set_site(
+  x = NA,
   siteid = NA_integer_,
   sitename = NA_character_,
   geography = st_as_sf(st_sfc()),

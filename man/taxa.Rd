@@ -2,19 +2,15 @@
 % Please edit documentation in R/taxa.R
 \name{taxa}
 \alias{taxa}
-\title{plotLeaflet}
+\title{taxa}
 \usage{
 taxa(object)
 }
 \arguments{
-\item{object}{Sites object to plot}
-
-\item{save_im}{save output}
-
-\item{path}{location where output should be saved in. save_im must be TRUE}
+\item{object}{Sites object to extract taxa table from}
 }
 \description{
-Plot sites on a leaflet map
+Show the taxa table
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}
