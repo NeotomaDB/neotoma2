@@ -72,6 +72,7 @@ Neotoma uses a Postgres Database to manage data.  Postgres uses the `%` sign as 
 
 ```{r sitewithwildcardname}
 alex <- get_sites(sitename = 'Alex%')
+alex
 ```
 
 Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`.
@@ -159,7 +160,7 @@ run = TRUE
 offset <- 0
 
 while(run) {
-  sites <- get_sites(offset=offset)
+  sites <- get_sites(offset=offset, limit = 500)
   if(length(sites) == 0) {
     run = FALSE
   }
@@ -168,8 +169,19 @@ while(run) {
   } else {
     allSites <- sites
   }
-  offset <- offset + 25
+  offset <- offset + 500
 }
+```
+
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add the `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, you can do that automatically using the `all_data=TRUE` argument.
+
+We can use that `all_data=TRUE` in R in the following way:
+
+```{r all_data, eval=FALSE}
+
+allSites <- get_sites(all_data = TRUE)
+allSites
+ 
 ```
 
 Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.

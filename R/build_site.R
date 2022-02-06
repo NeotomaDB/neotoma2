@@ -15,9 +15,10 @@
 build_sites <- function(x) {
   assertthat::assert_that(is.list(x),
                           msg = "Parsed object must be a list.")
-
   newSites <- purrr::map(x, function(x) {
-    if (!(is.na(x$geography))) {
+    if (is.na(x$geography)) {
+      geography <- st_as_sf(st_sfc())
+      } else if (!(is.na(x$geography))) {
       geography <- sf::st_read(x$geography, quiet = TRUE)
     } else if (!(is.na(x$site$geography))) {
       geography <- try(sf::st_read(x$site$geography, quiet = TRUE))
