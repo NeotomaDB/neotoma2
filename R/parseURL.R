@@ -109,12 +109,8 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
   }else{
     result <- cleanNull(result)
   }
+
+  message(paste0("Your search returned ", length(result$data), " objects."))
   
-  if (length(result$data) < 26) {
-    message(paste0("Your search returned ", length(result$data), " objects."))
-  }else{
-    message(paste0("Printing only 25 objects.
-       Use all_data = TRUE for storing the complete set."))
-  }
   return(result)
 }
