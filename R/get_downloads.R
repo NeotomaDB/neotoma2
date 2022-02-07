@@ -97,8 +97,11 @@ parse_download <- function(result) {
     }
   }
   
+  if(class(new_sites_list) =="site"){
+    new_sites_list <- new("sites", sites = c(new_sites_list))
+  } else {
   new_sites_list <- new("sites", sites = new_sites_list)
-  
+  }
   return(new_sites_list)
 }
 
