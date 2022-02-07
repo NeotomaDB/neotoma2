@@ -87,6 +87,75 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @title Get slot names
+#' @param x
+#' @description Get all names for named elements within a `dataset` object.
+#' @export
+setMethod(f = "names",
+          signature = signature(x = "dataset"),
+          definition = function(x) {
+            slotNames(x)
+          })
+
+#' @title  Insert dataset
+#' @param x datasets object
+#' @param i iteration in datasets list
+#' @param j 
+#' @description Obtain one of the elements within a datasets list
+#' @export
+setMethod(f = "[[<-",
+          signature = signature(x = "datasets"),
+          definition = function(x, i, j, value) {
+            datasetset <- x@datasets
+            datasetset[[i]] <- value
+            out <- new("datasets", datasets = datasetset)
+            return(out)
+          })
+
+
+#' @title Assign dataset field by numeric index
+#' @param x The dataset object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "[<-",
+          signature = signature(x = "dataset", i = "character"),
+          definition = function(x, i, j, value, drop = FALSE) {
+            for (idx in 1:length(i)) {
+              slot(x, i[idx]) <- value[idx]
+            }
+            return(x)
+          })
+
+#' @title Assign dataset field by numeric index
+#' @param x The dataset object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "[<-",
+          signature = signature(x = "dataset", i = "numeric"),
+          definition = function(x, i, j, value, drop = FALSE) {
+            slots <- slotNames(x)
+            for (idx in 1:length(i)) {
+              slot(x, slots[i[idx]]) <- value[idx]
+            }
+            return(x)
+          })
+
+#' @title Assign dataset field by numeric index
+#' @param x The dataset object.
+#' @param i The column indicator.
+#' @param value The value to be used.
+#' @param drop
+setMethod(f = "$<-",
+          signature = signature(x = "dataset"),
+          definition = function(x, name, value) {
+            slot(x, name) <- value
+            return(x)
+          })
+
+
+
 #' @title  $
 #' @param x dataset object
 #' @description Obtain slots of a dataset without using at-mark
@@ -99,7 +168,7 @@ setMethod(f = "$",
 
 #' @title  $ for datasets
 #' @param x datasets object
-#' @description Obtain slots of a site without using at-mark
+#' @description Obtain slots of a dataset without using at-mark
 #' @export
 setMethod(f = "$",
           signature = signature(x = "datasets"),
@@ -111,8 +180,8 @@ setMethod(f = "$",
               unlist()
           })
 
-#' @title  as.data.frame site
-#' @param x site object
+#' @title  as.data.frame dataset
+#' @param x dataset object
 #' @description show as dataframe as prep to save as csv
 #' @export
 setMethod(f = "as.data.frame",

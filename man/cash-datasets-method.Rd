@@ -10,5 +10,5 @@
 \item{x}{datasets object}
 }
 \description{
-Obtain slots of a site without using at-mark
+Obtain slots of a dataset without using at-mark
 }

@@ -155,10 +155,6 @@ It can be computationally intensive to obtain the full set of records for `sites
 
 We can use that in a `while` loop in R in the following way:
 
-```{r all_data, eval=FALSE}
-sites <- get_sites(all_data = TRUE)
-```
-
 ```{r searchOffset, eval=FALSE}
 run = TRUE
 offset <- 0

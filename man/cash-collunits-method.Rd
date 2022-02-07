@@ -10,5 +10,5 @@
 \item{x}{collunits object}
 }
 \description{
-Obtain slots of a site without using at-mark
+Obtain slots of a collunit without using at-mark
 }

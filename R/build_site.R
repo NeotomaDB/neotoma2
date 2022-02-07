@@ -59,5 +59,6 @@ build_sites <- function(x) {
              description = use_na(x$sitedescription, "char"),
              collunits = collunits)
   })
+  
   sites <- new('sites', sites = newSites)
 }

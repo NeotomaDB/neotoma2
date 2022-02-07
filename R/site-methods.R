@@ -257,6 +257,16 @@ setMethod(f = "as.data.frame",
             x@sites %>% map(as.data.frame) %>% bind_rows()
           })
 
+#' @title  as.list sites
+#' @param x sites object
+#' @description show as dataframe as prep to save as csv
+#' @export
+setMethod(f = "as.list",
+          signature = signature("sites"),
+          definition = function(x) {
+            as.list(x@sites)
+          })
+
 #' @title Length Method Sites
 #' @export
 #' @param x sites object
@@ -282,7 +292,7 @@ setMethod(f = "c",
               siteset <- c(x@sites, y)
               out <- new("sites", sites = siteset)
             }
-            return
+            return(out)
           })
 
 #' @title write CSV

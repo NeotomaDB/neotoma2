@@ -66,45 +66,40 @@ parse_download <- function(result) {
   data <- result$data %>%
     cleanNULL()
   
-  my_sites_list <- new('sites', sites = list())
+  my_sites_list <- c()
   for (i in seq_len(length(data))) {
     my_site <- build_sites(data[[i]])
     my_sites_list <- c(my_sites_list, my_site)
   }
   
+  # Remove duplicate sites
+  sites_length <- length(my_sites_list)
+  new_sites_list <- c()
+  for (i in 1:sites_length){
+    for (j in 1:sites_length){
+      if( (i != j) && !(is.na(my_sites_list[[j]]@siteid)) && !(is.na(my_sites_list[[i]]@siteid))) {
+        if(my_sites_list[[i]]@siteid == my_sites_list[[j]]@siteid){
+        # TODO: Check for collunits if they are the same
 
-
-  # newSites <- map(data, function(x) {
-  # 
-  #   if (is.na(x$site$geography)) {
-  #     geography <- st_as_sf(st_sfc())
-  #   } else {
-  #     #geography <- try(sf::geojson_sf(x$site$geography))
-  #     geography <- try(sf::st_read(x$site$geography, quiet = TRUE))
-  #     
-  #     if ('try-error' %in% class(geography)) {
-  #       stop('Invalid geoJSON passed from the API. \nCheck that:\n', x$site$geography, 
-  #            '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
-  #            'is invalid, contact a Neotoma administrator.')
-  #     }
-  #   }
-  #   
-  #   
-  #   
-  #   
-  #     
-  #   set_site(sitename = use_na(x$site$sitename, "char"),
-  #            siteid   = use_na(x$site$siteid, "int"),
-  #            geography = geography,
-  #            altitude = use_na(x$site$altitude, "int"),
-  #            description = use_na(x$site$sitedescription, "char"),
-  #            notes = use_na(x$site$notes, "char"),
-  #            collunits = collunits)
-  # })
-  # 
-  # sites <- new('sites', sites = newSites)
+          # If just siteids are the same, new collunit
+          coll_length <- length(my_sites_list[[i]]@collunits)
+          my_sites_list[[i]]@collunits[[coll_length + 1]] <- my_sites_list[[j]]@collunits[[1]]
+          my_sites_list[[j]] <- set_site()
+        }
+        
+      }
+    }
+  }
   
-  return(my_sites_list)
+  for(i in seq_len(length(my_sites_list))) {
+    if(!is.na(my_sites_list[[i]]@siteid)){
+      new_sites_list <- c(new_sites_list, my_sites_list[[i]])
+    }
+  }
+  
+  new_sites_list <- new("sites", sites = new_sites_list)
+  
+  return(new_sites_list)
 }
 
 #' @title get_downloads
@@ -112,7 +107,7 @@ parse_download <- function(result) {
 #' @param ... arguments in ellipse form
 #' @export
 get_downloads.numeric <- function(x, ...) {
-
+  
   use_na <- function(x, type) {
     if (is.na(x)) {
       return(switch(type,
@@ -122,29 +117,29 @@ get_downloads.numeric <- function(x, ...) {
       return(x)
     }
   }
-
+  
   cl <- as.list(match.call())
-
+  
   possible_arguments <- c("offset", "all_data", "x")
-
+  
   cl[[1]] <- NULL
-
+  
   for (name in names(cl)) {
     if (!(name %in% possible_arguments)) {
       message(paste0(name, " is not an allowed argument.
       Choose from the allowed arguments: sitename, altmax, altmin, loc"))
     }
   }
-
+  
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-
+  
   base_url <- paste0("data/downloads/", dataset)
   result <- parseURL(base_url) # nolint
-
+  
   output <- parse_download(result)
-
+  
   return(output)
 }
 
@@ -153,7 +148,7 @@ get_downloads.numeric <- function(x, ...) {
 #' @param ... arguments in ellipse form
 #' @export
 get_downloads.sites <- function(x, ...) {
-
+  
   use_na <- function(x, type) {
     if (is.na(x)) {
       return(switch(type,
@@ -163,20 +158,20 @@ get_downloads.sites <- function(x, ...) {
       return(x)
     }
   }
-
+  
   cl <- as.list(match.call())
-
+  
   possible_arguments <- c("x", "offset", "all_data", "datasetid")
-
+  
   cl[[1]] <- NULL
-
+  
   for (name in names(cl)) {
     if (!(name %in% possible_arguments)) {
       message(paste0(name, " is not an allowed argument.
       Choose from the allowed arguments: sitename, altmax, altmin, loc"))
     }
-    }
-
+  }
+  
   dataset_list <- c()
   for (i in seq_len(length(x))) {
     collunits_call <- x@sites[[i]]@collunits@collunits
@@ -188,8 +183,8 @@ get_downloads.sites <- function(x, ...) {
     }
   }
   dataset_list <- unique(dataset_list)
-
+  
   output <- get_downloads(dataset_list)
-
+  
   return(output)
 }
