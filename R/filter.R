@@ -139,6 +139,7 @@ filter.sites <- function(x, ...) {  # nolint
         if(length(ch_dataset) == 0){
           ch_dataset <- "do not append"
         }
+        
         if (class(ch_dataset) == "list") {
           datasets_list <- new("datasets", datasets = ch_dataset)
           
