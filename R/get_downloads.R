@@ -78,9 +78,9 @@ parse_download <- function(result, verbose = TRUE) {
     apply(ids, 1, function(x) sum(dl_row == x))
   }
   
-  for (i in 1:length(data)) {
+  for (i in 1:length(dls)) {
     if (length(my_sites_list) == 0) {
-      my_site <- build_sites(data[[i]])
+      my_site <- build_sites(dls[[i]])
       my_sites_list <- c(my_sites_list, my_site)
     } else {
       ids <- getids(my_sites_list, order = FALSE)
