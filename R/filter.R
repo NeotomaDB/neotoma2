@@ -20,6 +20,7 @@ filter.sites <- function(x, ...) {  # nolint
   cl$x <- NULL
   
   calls_list <- c()
+
   for (i in seq_len(length(cl))) {
     txt <- paste0(cl[[i]], collapse = "")
     if (str_detect(txt, "lat")) {
@@ -43,7 +44,7 @@ filter.sites <- function(x, ...) {  # nolint
       calls_list <- append(calls_list, my_list)
     }
   }
-  counter = 0
+
   for (i in names(calls_list)) {
     if (!(i %in% c("lat", "long", "elev", "datasettype", "loc")))
       message(paste0(i, " is not a valid parameter.
@@ -132,12 +133,15 @@ filter.sites <- function(x, ...) {  # nolint
         }
         
         ch_dataset <- Reduce(intersect, datasets_names)
+        
         datasets <- append(datasets, ch_dataset)
         
-        
-        
+        if(length(ch_dataset) == 0){
+          ch_dataset <- "do not append"
+        }
         if (class(ch_dataset) == "list") {
           datasets_list <- new("datasets", datasets = ch_dataset)
+          
         }else{
           datasets_list <- NULL
         }
