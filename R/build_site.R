@@ -31,7 +31,7 @@ build_sites <- function(x) {
       }
     }
     
-    if(is.null(x$collectionunits)){
+    if (is.null(x$collectionunits)) {
       # Dw call
       cu_call <- x$collectionunit
       collunits <- build_collunits(cu_call)
@@ -44,7 +44,7 @@ build_sites <- function(x) {
       collunits <- new("collunits", collunits = collunits)
     }
     
-    if(is.null(x$geopolitical)){
+    if (is.null(x$geopolitical)) {
       geopolitical <- list()
     }else{
       geopolitical <- list(x$geopolitical)

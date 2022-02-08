@@ -55,61 +55,84 @@
 #' brazil_downloads <- get_downloads(brazil_datasets)
 #' }
 #' @export
-get_downloads <- function(x = NA, ...) {
+get_downloads <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
     UseMethod("get_downloads", x)
   }
 }
 
-parse_download <- function(result) {
-  
-  data <- result$data %>%
+parse_download <- function(result, verbose = TRUE) {
+  dls <- result$data %>%
     cleanNULL()
   
+  dl_index <- purrr::map(dls, function(x) { 
+    data.frame(siteid = x$site$siteid,
+               collunitid = x$site$collectionunit$collectionunitid,
+               datasetid = x$site$collectionunit$dataset$datasetid )}) %>% 
+    dplyr::bind_rows()
+  
   my_sites_list <- c()
-  for (i in seq_len(length(data))) {
-    my_site <- build_sites(data[[i]])
-    my_sites_list <- c(my_sites_list, my_site)
+  siteids <- c()
+  
+  check_match <- function(dl_row, ids) {
+    apply(ids, 1, function(x) sum(dl_row == x))
   }
   
-  # Remove duplicate sites
-  sites_length <- length(my_sites_list)
-  new_sites_list <- c()
-  for (i in 1:sites_length){
-    for (j in 1:sites_length){
-      if( (i != j) && !(is.na(my_sites_list[[j]]@siteid)) && !(is.na(my_sites_list[[i]]@siteid))) {
-        if(my_sites_list[[i]]@siteid == my_sites_list[[j]]@siteid){
-        # TODO: Check for collunits if they are the same
-
-          # If just siteids are the same, new collunit
-          coll_length <- length(my_sites_list[[i]]@collunits)
-          my_sites_list[[i]]@collunits[[coll_length + 1]] <- my_sites_list[[j]]@collunits[[1]]
-          my_sites_list[[j]] <- set_site()
-        }
+  for (i in 1:length(dls)) {
+    if (length(my_sites_list) == 0) {
+      my_site <- build_sites(dls[[i]])
+      my_sites_list <- c(my_sites_list, my_site)
+    } else {
+      ids <- getids(my_sites_list, order = FALSE)
+      matches <- check_match(dl_index[i,], ids)
+      
+      if (max(matches) == 0) {
+        # We're adding a site:
+        my_site <- build_sites(dls[[i]])
+        my_sites_list <- c(my_sites_list, my_site)
+      } else if (max(matches) == 1) {
+        # We're adding a collection unit somewhere:
+        st <- ids %>% 
+          mutate(match = matches) %>% 
+          group_by(siteid) %>% 
+          summarise(match = max(match)) %>% 
+          select(match) %>% unlist() %>% 
+          which.max()
         
+        newcu <- build_collunits(dls[[i]]$site$collectionunit)
+        oldcu <- my_sites_list[[st]]@collunits@collunits
+        
+        my_sites_list[[st]]@collunits@collunits <- c(oldcu, newcu)
+      
+      } else if (max(matches) == 2) {
+        # We're adding a dataset to an existing collection unit:
+        
+        st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
+        
+        cuids <- ids %>% 
+          dplyr::filter(siteid == unique(ids$siteid)[st], .preserve = TRUE)
+        
+        cuid <- which(unique(cuids$collunitid) == dl_index$collunitid[i])
+        
+        collunit <- my_sites_list[[st]]@collunits@collunits[[cuid]]
+        newds <- build_dataset(dls[[i]]$site$collectionunit$dataset)
+        collunit@datasets@datasets <- c(collunit@datasets@datasets, 
+                                        newds)
+        my_sites_list[[st]]@collunits@collunits[[cuid]] <- collunit
       }
     }
-  }
-  
-  for(i in seq_len(length(my_sites_list))) {
-    if(!is.na(my_sites_list[[i]]@siteid)){
-      new_sites_list <- c(new_sites_list, my_sites_list[[i]])
+    if (verbose) {
+      cat('.')
     }
   }
-  
-  if(class(new_sites_list) =="site"){
-    new_sites_list <- new("sites", sites = c(new_sites_list))
-  } else {
-  new_sites_list <- new("sites", sites = new_sites_list)
-  }
-  return(new_sites_list)
+  return(my_sites_list)
 }
 
 #' @title get_downloads
 #' @param x Use a single number to extract site information
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.numeric <- function(x, ...) {
+get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   
   use_na <- function(x, type) {
     if (is.na(x)) {
@@ -120,20 +143,7 @@ get_downloads.numeric <- function(x, ...) {
       return(x)
     }
   }
-  
-  cl <- as.list(match.call())
-  
-  possible_arguments <- c("offset", "all_data", "x")
-  
-  cl[[1]] <- NULL
-  
-  for (name in names(cl)) {
-    if (!(name %in% possible_arguments)) {
-      message(paste0(name, " is not an allowed argument.
-      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
-    }
-  }
-  
+
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
@@ -162,32 +172,12 @@ get_downloads.sites <- function(x, ...) {
     }
   }
   
-  cl <- as.list(match.call())
-  
-  possible_arguments <- c("x", "offset", "all_data", "datasetid")
-  
-  cl[[1]] <- NULL
-  
-  for (name in names(cl)) {
-    if (!(name %in% possible_arguments)) {
-      message(paste0(name, " is not an allowed argument.
-      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
-    }
-  }
-  
-  dataset_list <- c()
-  for (i in seq_len(length(x))) {
-    collunits_call <- x@sites[[i]]@collunits@collunits
-    for (j in seq_len(length(collunits_call))) {
-      for (k in seq_len(length(collunits_call[[j]]@datasets@datasets))) {
-        datasetid <- collunits_call[[j]]@datasets@datasets[[k]]@datasetid
-        dataset_list <- c(dataset_list, datasetid)
-      }
-    }
-  }
-  dataset_list <- unique(dataset_list)
-  
-  output <- get_downloads(dataset_list)
+  output <- getids(x) %>%
+    dplyr::select(datasetid) %>% 
+    na.omit() %>%
+    unique() %>% 
+    unlist() %>% 
+    get_downloads(x = ., verbose, ...)
   
   return(output)
 }
