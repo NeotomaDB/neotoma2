@@ -347,18 +347,28 @@ setMethod(f = "summary",
           definition = function(object, ...) {
             sites <- sapply(object@sites, function(x) x@sitename)
             siteid <- sapply(object@sites, function(x) x@siteid)
+            datasettype <- sapply(object@sites, function(x) {
+              datasets_type <- sapply(x@collunits@collunits,
+                                      function(y) {
+                                        datasetsty <- sapply(y@datasets@datasets, function(r) r@datasettype)
+                                      })
+            }
+            )
+            
             collunits <- lapply(object@sites, function(x) {
               datasets <- sapply(x@collunits@collunits, 
                                  function(y) length(y@datasets) )
+              
               chronologies <- sapply(x@collunits@collunits, 
                                      function(y) length(y@chronologies) )
+              
               return(data.frame(collunits = length(x@collunits),
                          datasets = datasets))
             })
             
             collunits %>% 
               bind_rows() %>% 
-              mutate(sitename = sites, siteid = siteid) %>% 
-              select(siteid, sitename, collunits, datasets)
+              mutate(sitename = sites, siteid = siteid, datasets_type = datasettype) %>% 
+              select(siteid, sitename, collunits, datasets, datasets_type)
           })
           
