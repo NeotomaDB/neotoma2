@@ -149,7 +149,7 @@ filter.sites <- function(x, ...) {  # nolint
                           handle = x[[i]]@collunits[[j]]@handle,
                           colldate = x[[i]]@collunits[[j]]@colldate,
                           location = x[[i]]@collunits[[j]]@location,
-                          waterdepth = NA_integer_,
+                          waterdepth = x[[i]]@collunits[[j]]@waterdepth,
                           gpslocation = sf::st_as_sf(sf::st_sfc()),
                           collunittype = NA_character_,
                           collectiondevice = NA_character_,
@@ -159,7 +159,9 @@ filter.sites <- function(x, ...) {  # nolint
                           chronologies = new("chronologies", chronologies = list()))
           
           coll_units <- append(coll_units, collunit)
-          coll_units <- new("collunits", collunits = coll_units)
+          if(class(coll_units) != "collunits") {
+            coll_units <- new("collunits", collunits = coll_units)
+          }
         }
       }
       

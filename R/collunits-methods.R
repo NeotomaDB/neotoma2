@@ -215,9 +215,16 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "collunits"),
           definition = function(x, y) {
-            new("collunits",
-                collunits = unlist(c(x@collunits,
-                                    y@collunits), recursive = FALSE))
+            if (class(y) == "collunits") {
+              out <- new("collunits",
+                         collunits = unlist(c(x@collunits,
+                                          y@collunits),
+                                        recursive = FALSE))
+            } else if (class(y) == "collunit") {
+              collunitset <- c(x@collunits, y)
+              out <- new("collunits", collunits = collunitset)
+            }
+            return(out)
           })
 
 #' @title write CSV
