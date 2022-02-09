@@ -57,6 +57,23 @@ collunits <- setClass("collunits",
                       })
 
 # Show methods go here
+# Start "Show Method" for all Neotoma Objects
+#' @title Show Collection Units Method
+#' @param object collunits object
+#' @export
+setMethod(f = "show",
+          signature = "collunits",
+          definition = function(object) {
+            purrr::map(object, function(x) {
+              data.frame(collunitid = object@collectionunitid,
+                         database = object@database,
+                         datasettype = object@datasettype,
+                         age_range_old =  object@age_range_old,
+                         age_range_young =  object@age_range_young,
+                         notes = object@notes)
+            })
+            print(, row.names = FALSE)
+          })
 
 #' @title  Slicer
 #' @param x collunits object
@@ -176,17 +193,23 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("collunit"),
           definition = function(x) {
-            data.frame(collectionunitid = object@collectionunit,
-                       notes = object@notes,
-                       handle = object@handle,
-                       colldate = object@colldate,
-                       location = object@location,
-                       waterdepth = object@waterdepth,
-                       gpslocation = object@gpslocation,
-                       collunittype = object@collunittype,
-                       collectiondevice = object@collectiondevice,
-                       collectionunitname = object@collectionunitname,
-                       depositionalenvironment = object@depositionalenvironment)
+            
+            testdate <- ifelse(length(x@colldate) == 0, NA, x@colldate)
+            testgeom <- ifelse(nrow(x@gpslocation) == 0, NA, x@gpslocation)
+            
+            data.frame(collectionunitid = x@collectionunitid,
+                       notes = x@notes,
+                       handle = x@handle,
+                       colldate = testdate,
+                       location = x@location,
+                       waterdepth = x@waterdepth,
+                       gpslocation = testgeom,
+                       collunittype = x@collunittype,
+                       collectiondevice = x@collectiondevice,
+                       collectionunitname = x@collectionunitname,
+                       depositionalenvironment = x@depositionalenvironment,
+                       chronologies = length(x@chronologies),
+                       datasets = length(x@datasets))
           })
 
 #' @title  as.data.frame collunits
