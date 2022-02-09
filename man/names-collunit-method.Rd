@@ -6,6 +6,9 @@
 \usage{
 \S4method{names}{collunit}(x)
 }
+\arguments{
+\item{x}{A collection unit object.}
+}
 \description{
 Get all names for named elements within a \code{collunit} object.
 }

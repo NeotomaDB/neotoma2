@@ -6,6 +6,9 @@
 \usage{
 \S4method{names}{site}(x)
 }
+\arguments{
+\item{x}{A site object.}
+}
 \description{
 Get all names for named elements within a \code{site} object.
 }

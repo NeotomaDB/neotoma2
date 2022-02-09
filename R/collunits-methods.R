@@ -11,76 +11,31 @@ setMethod(f = "c",
             y
           })
 
-#' @title S4 class for collunits information
-collunit <- setClass(
-  # Set the name for the class
-  "collunit",
-  slots = c(collectionunitid = "numeric",
-            notes = "character",
-            handle = "character",
-            colldate = "Date",
-            location = "character",
-            waterdepth = "numeric",
-            gpslocation = "sf",
-            collunittype = "character",
-            collectiondevice = "character",
-            collectionunitname = "character",
-            depositionalenvironment = "character",
-            datasets = "datasets",
-            chronologies = "chronologies"),
-  prototype = list(collectionunitid = NA_integer_,
-                   notes = NA_character_,
-                   handle = NA_character_,
-                   colldate = as.Date(character(0)),
-                   location = NA_character_,
-                   waterdepth = NA_integer_,
-                   gpslocation = sf::st_as_sf(sf::st_sfc()),
-                   collunittype = NA_character_,
-                   collectiondevice = NA_character_,
-                   collectionunitname = NA_character_,
-                   depositionalenvironment = NA_character_,
-                   datasets = NULL,
-                   chronologies = NULL))
-
-#' An S4 class for Neotoma Collection Units
-#' @description Holds Collection unit information
-#'  from the Neotoma Paleoecology Database.
-#' @importFrom purrr map
-setClass("collunits",
-        representation(collunits = "list"),
-        validity = function(object) {
-          all(map(object@collunits,
-          function(x) {
-            class(x) == "collunit"
-          }) %>%
-          unlist())
-        })
-
 #' @title  Show the collection unit information
 #' @param x collunits object
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunits"),
           definition = function(object) {
-            result <- purrr::map(object@collunits, function(x) { 
-              as.data.frame(x) 
-              }) %>% 
+            result <- purrr::map(object@collunits, function(x) {
+              as.data.frame(x)
+              }) %>%
               bind_rows()
             print(result)
           })
-          
+
 #' @title  Show the collection unit information
 #' @param x collunit object
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunit"),
           definition = function(object) {
-            result <- as.data.frame(object) 
-            
+            result <- as.data.frame(object)
+
             print(result)
           })
 
-            
+
 #' @title  Slicer
 #' @param x collunits object
 #' @param i iteration in collunits list
@@ -101,7 +56,7 @@ setMethod(f = "[[",
           })
 
 #' @title Get slot names
-#' @param x
+#' @param x A collection unit object.
 #' @description Get all names for named elements within a `collunit` object.
 #' @export
 setMethod(f = "names",
@@ -110,44 +65,9 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @title Extract datasets from a collunits object.
-#' @param object A collunits object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-setMethod(f = "datasets",
-          signature = "collunits",
-          definition = function(object) {
-            result <- purrr::map(object@collunits, function(x)x@datasets)
-            if (length(result) == 1) {
-              out <- result[[1]]
-            } else {
-              out <- result[[1]]
-              for (i in 2:length(result)) {
-                out <- c(out, result[[i]])
-              }
-            }
-            return(out)
-          })
-
-#' @title Extract datasets from a collunit object.
-#' @param object A collunits object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-setMethod(f = "datasets",
-          signature = "collunit",
-          definition = function(object) {
-            result <- object@datasets
-            return(result)
-          })
-
 #' @title  Insert collunit
 #' @param x collunits object
 #' @param i iteration in collunits list
-#' @param j 
 #' @description Obtain one of the elements within a collunits list
 #' @export
 setMethod(f = "[[<-",
@@ -164,7 +84,6 @@ setMethod(f = "[[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "character"),
           definition = function(x, i, j, value, drop = FALSE) {
@@ -178,7 +97,6 @@ setMethod(f = "[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "numeric"),
           definition = function(x, i, j, value, drop = FALSE) {
@@ -193,7 +111,6 @@ setMethod(f = "[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "$<-",
           signature = signature(x = "collunit"),
           definition = function(x, name, value) {

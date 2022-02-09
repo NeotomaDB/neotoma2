@@ -10,8 +10,6 @@
 \item{x}{collunits object}
 
 \item{i}{iteration in collunits list}
-
-\item{j}{}
 }
 \description{
 Obtain one of the elements within a collunits list

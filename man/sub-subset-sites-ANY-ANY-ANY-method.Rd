@@ -10,8 +10,6 @@
 \item{x}{sites object}
 
 \item{i}{iteration in sites list}
-
-\item{j}{}
 }
 \description{
 Obtain one of the elements within a sites list

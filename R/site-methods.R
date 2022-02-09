@@ -1,42 +1,3 @@
-#' An S4 class for site information from the Neotoma Paleoecology Database.
-site <- setClass(
-  # Set the name for the class
-  "site",
-  # Define the slots
-  slots = c(siteid = "numeric",
-            sitename = "character",
-            geography = "sf",
-            altitude = "numeric",
-            geopolitical = "list",
-            area = "numeric",
-            notes = "character",
-            description = "character",
-            collunits = "collunits"),
-  # Set the default values for the slot
-  prototype = list(siteid = NA_integer_,
-                   sitename = NA_character_,
-                   geography = sf::st_sf(sf::st_sfc()),
-                   geopolitical = list(),
-                   altitude = NA_integer_,
-                   area = NA_integer_,
-                   notes = NA_character_,
-                   description = NA_character_,
-                   collunits = NULL) # check what would really be a NA here
-  # Add a validity function that can test data consistency.
-  # This is not called if you have an initialize function defined!
-)
-
-#' An S4 class for multi-site information from
-#'  the Neotoma Paleoecology Database.
-sites <- setClass("sites",
-                  representation(sites = "list"),
-                  validity = function(object) {
-                    all(map(object@sites, function(x) {
-                      class(x) == "site"
-                    }) %>%
-                      unlist())
-                  })
-
 #' @title Show Site objects as a dataframe
 #' @param object site object
 setMethod(f = "show",
@@ -65,15 +26,6 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @title Extract collection units from a sites object
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @export
-setGeneric("collunits", 
-           function(object) {
-             standardGeneric("collunits")
-           })
-
 #' @title Extract datasets from a sites object.
 #' @param object A sites object
 #' @importFrom methods slotNames slot
@@ -101,60 +53,8 @@ setMethod(f = "collunits",
           signature = "site",
           definition = function(object) {
             output <- object@collunits
-            
+
             return(output)
-          })
-
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-# Todo Convert to as.data.frame
-setGeneric("datasets", 
-           function(object) {
-            standardGeneric("datasets")
-           })
-
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-setMethod(f = "datasets",
-          signature = "sites",
-          definition = function(object) {
-            my_datasets <- c()
-            for (i in seq_len(length(object@sites))) {
-              collunits_call <- object@sites[[i]]@collunits@collunits[[1]]
-              my_dataset <- collunits_call@datasets@datasets[[1]]
-              my_datasets <- append(my_datasets, my_dataset)
-              my_datasets2 <- new("datasets", datasets = my_datasets)
-            }
-            return(my_datasets2)
-          })
-
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-setMethod(f = "datasets",
-          signature = "site",
-          definition = function(object) {
-            result <- purrr::map(object@collunits@collunits, function(x)x@datasets)
-            if (length(result) == 1) {
-              out <- result[[1]]
-            } else {
-              out <- result[[1]]
-              for (i in 2:length(result)) {
-                out <- c(out, result[[i]])
-              }
-            }
-            return(out)
           })
 
 #' @title  Slicer
@@ -179,7 +79,6 @@ setMethod(f = "[[",
 #' @title Get site field by numeric index
 #' @param x The site object
 #' @param i The column indicator
-#' @param drop
 setMethod(f = "[",
           signature = signature(x = "site", i = "numeric"),
           definition = function(x, i, j, drop = FALSE) {
@@ -190,7 +89,6 @@ setMethod(f = "[",
 #' @title Get site field by character index
 #' @param x The site object
 #' @param i The column indicator
-#' @param drop
 setMethod(f = "[",
           signature = signature(x = "site", i = "character"),
           definition = function(x, i, j, drop = FALSE) {
@@ -200,7 +98,7 @@ setMethod(f = "[",
           })
 
 #' @title Get slot names
-#' @param x
+#' @param x A site object.
 #' @description Get all names for named elements within a `site` object.
 #' @export
 setMethod(f = "names",
@@ -212,7 +110,6 @@ setMethod(f = "names",
 #' @title  Insert site
 #' @param x sites object
 #' @param i iteration in sites list
-#' @param j 
 #' @description Obtain one of the elements within a sites list
 #' @export
 setMethod(f = "[[<-",
@@ -224,12 +121,10 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-
 #' @title Assign site field by numeric index
 #' @param x The site object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
           definition = function(x, i, j, value, drop = FALSE) {
@@ -243,7 +138,6 @@ setMethod(f = "[<-",
 #' @param x The site object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "numeric"),
           definition = function(x, i, j, value, drop = FALSE) {
@@ -258,7 +152,6 @@ setMethod(f = "[<-",
 #' @param x The site object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @param drop
 setMethod(f = "$<-",
           signature = signature(x = "site"),
           definition = function(x, name, value) {
@@ -366,17 +259,6 @@ setMethod(f = "write.csv",
             write.csv(df1, ...)
           })
 
-#' @title Obtain coordinates from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-# Todo Convert to as.data.frame
-setGeneric("coordinates", function(obj, ...) {
-  standardGeneric("coordinates")
-})
-
 #' @title Return the latitude and logitude of sites
 #' @param x sites object 1
 #' @export
@@ -414,21 +296,20 @@ setMethod(f = "summary",
                                       })
             }
             )
-            
+
             collunits <- lapply(object@sites, function(x) {
-              datasets <- sapply(x@collunits@collunits, 
+              datasets <- sapply(x@collunits@collunits,
                                  function(y) length(y@datasets) )
-              
-              chronologies <- sapply(x@collunits@collunits, 
+
+              chronologies <- sapply(x@collunits@collunits,
                                      function(y) length(y@chronologies) )
-              
+
               return(data.frame(collunits = length(x@collunits),
                          datasets = datasets))
             })
-            
-            collunits %>% 
-              bind_rows() %>% 
-              mutate(sitename = sites, siteid = siteid, datasets_type = datasettype) %>% 
+
+            collunits %>%
+              bind_rows() %>%
+              mutate(sitename = sites, siteid = siteid, datasets_type = datasettype) %>%
               select(siteid, sitename, collunits, datasets, datasets_type)
           })
-          

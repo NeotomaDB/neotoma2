@@ -1,53 +1,44 @@
-#' @title taxa
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
-#' @description Show the samples table
-#' @param object Sites object to extract taxa table from
-#' @export
-setGeneric("taxa", function(object) {
-  standardGeneric("taxa")
-})
-
 #' @export
 setMethod(f = "samples",
           signature = "sites",
-          definition = function(object) {
-            
+          definition = function(x) {
+
             counter = 0
             taxon_table <- c()
-            length_object <- length(object)
+            length_object <- length(x)
             for (i in seq_len(length_object)) {
-              length_collunits <- length(object[[i]]@collunits)
-              siteid <- object[[i]]@siteid
-              sitename <- object[[i]]@sitename
-              #lat<-  mean(st_coordinates(object@geography)[, 2])
-              #long <-   mean(st_coordinates(object@geography)[, 2])
+              length_collunits <- length(x[[i]]@collunits)
+              siteid <- x[[i]]@siteid
+              sitename <- x[[i]]@sitename
+              #lat<-  mean(st_coordinates(x@geography)[, 2])
+              #long <-   mean(st_coordinates(x@geography)[, 2])
               for (j in seq_len(length_collunits)){
-                length_datasets <- length(object[[i]]@collunits[[j]]@datasets)
-                
+                length_datasets <- length(x[[i]]@collunits[[j]]@datasets)
+
                 for (k in seq_len(length_datasets)) {
-                  length_samples <- length(object[[i]]@collunits[[j]]@datasets[[k]]@samples)
-                  datasetid <- object[[i]]@collunits[[j]]@datasets[[k]]@datasetid
-                  
-                  #chron_default <- object[[i]]@collunits[[j]]@chronologies[[k]]@isdefault
-                  #chron_name <- object[[i]]@collunits[[j]]@chronologies[[k]]@chronologyname
-                  #agetype <- object[[i]]@collunits[[j]]@chronologies[[k]]@modelagetype
-                  
+                  length_samples <- length(x[[i]]@collunits[[j]]@datasets[[k]]@samples)
+                  datasetid <- x[[i]]@collunits[[j]]@datasets[[k]]@datasetid
+
+                  #chron_default <- x[[i]]@collunits[[j]]@chronologies[[k]]@isdefault
+                  #chron_name <- x[[i]]@collunits[[j]]@chronologies[[k]]@chronologyname
+                  #agetype <- x[[i]]@collunits[[j]]@chronologies[[k]]@modelagetype
+
                     for (l in seq_len(length_samples)) {
-                      df <- object[[i]]$collunits[[j]]$datasets[[k]]$samples[[l]]$datum 
+                      df <- x[[i]]$collunits[[j]]$datasets[[k]]$samples[[l]]$datum
                       # Verify number of samples
                       counter = counter + 1
-                      
+
                       df_sample <- df %>%
-                        select(units, context, element, taxonid, symmetry, 
+                        select(units, context, element, taxonid, symmetry,
                                taxongroup, elementtype, variablename,ecologicalgroup)
-                      
+
                       # Get ages
-                      ageold <- object[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$ageolder
-                      ageyoung <- object[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$ageyounger
-                      agetype <- object[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$agetype
-                      chronologyname <- object[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$chronologyname
-                      chronologyid <- object[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$chronologyid
-                        
+                      ageold <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$ageolder
+                      ageyoung <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$ageyounger
+                      agetype <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$agetype
+                      chronologyname <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$chronologyname
+                      chronologyid <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages$chronologyid
+
                       df_sample <- df_sample %>%
                         mutate(siteid = siteid,
                                sitename = sitename,
@@ -58,14 +49,14 @@ setMethod(f = "samples",
                                chronologyname = chronologyname,
                                chronologyid = chronologyid
                                )
-                      
+
                       df_sample <- df_sample %>%
-                        select(siteid, sitename, datasetid, units, context, element, 
+                        select(siteid, sitename, datasetid, units, context, element,
                                taxonid, symmetry, taxongroup, elementtype, variablename,
                                ecologicalgroup, ageold, ageyoung, agetype, chronologyname, chronologyid )
                       #   age_old,
                       # age_young, chron_default, chron_name, agetype
-                      
+
                       taxon_table <- rbind(taxon_table, df_sample) %>%
                         distinct()
                     }
