@@ -28,8 +28,8 @@ setMethod(f = "plotLeaflet",
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
-                               lat = mean(st_coordinates(x@location)[, 2]),
-                               long = mean(st_coordinates(x@location)[, 1]),
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
                                elev = x@altitude,
                                description = x@description)
             }) %>%

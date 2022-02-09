@@ -4,7 +4,7 @@
 \alias{getids}
 \title{Get object IDs}
 \usage{
-getids(x)
+getids(x, order = TRUE)
 }
 \arguments{
 \item{x}{A neotoma2 \code{sites} object.}

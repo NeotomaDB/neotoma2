@@ -29,21 +29,21 @@
 #' \item{ \code{description} }{}
 #' \item{ \code{collunits} }{limited information on collunits}
 #' @examples \dontrun{
-#' To find all sites with a min altitude of 12 and a max altitude of 25:
+#' # To find all sites with a min altitude of 12 and a max altitude of 25:
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
 #'
-#' To find all sites that contain the string "Alex%"
+#' # To find all sites that contain the string "Alex%"
 #' alex.sites <- get_sites(sitename="Alex%")
 #'
 #' To find all examples in Brazil
-#' brazil <- "{"type": "Polygon",
+#' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]
-#' ]]}"
+#' ]]}'
 #' brazil_sites <- get_sites(loc = brazil[1])
 #' }
 #' @export
@@ -69,85 +69,16 @@ parse_site <- function(result) {
     return(x)
   }
 
-  result <- result %>%
+  data <- result$data %>%
     fix_null()
-  result_length <- length(result[2]$data)
 
-  sites <- c()
+  # Function to use once API is in order.
+  # API - Site currently does not have any 'site'
+  # keys. Might need modification afterwards
+  newSites <- build_sites(data)
 
-  for (i in seq_len(result_length)) {
-    # Location
-    if (is.na(result[2]$data[[i]]$geography)) {
-      place <- sf::st_sf(sf::st_sfc())
-    }else{
-      place <- sf::st_read(result[2]$data[[i]]$geography, quiet = TRUE)
-    }
-    #
+  return(newSites)
 
-    if (is.na(result[2]$data[[i]]$altitude)) {
-      elev <- NA_integer_
-    }else{
-      elev <- result[2]$data[[i]]$altitude
-    }
-
-    if (is.na(result[2]$data[[i]]$siteid)) {
-      siteid <- NA_integer_
-    }else{
-      siteid <- result[2]$data[[i]]$siteid
-    }
-
-    if (is.na(result[2]$data[[i]]$sitename)) {
-      sitename <- NA_character_
-    }else{
-      sitename <- result[2]$data[[i]]$sitename
-    }
-
-    if (is.na(result[2]$data[[i]]$sitedescription)) {
-      description <- NA_character_
-    }else{
-      description <- as.character(result[2]$data[[i]]$sitedescription)
-    }
-
-    if (!(is.null(result[2]$data[[i]]$sitenotes))) {
-      sitenotes <- as.character(result[2]$data[[i]]$sitenotes)
-    }else{
-      sitenotes <- NA_character_
-    }
-    collunit <- map(result[2]$data[[i]]$collectionunits,
-                    function(x) {
-                      x <- new("collunit",
-                               collunitid = x$collectionunitid,
-                               collunitname = sitename,
-                               colldate = as.Date(character(0)),
-                               substrate = x$collectionunittype,
-                               location = place,
-                               handle = x$handle,
-                               datasets = new("datasets",
-                               datasets = map(x$datasets, function(y) {
-                                 ds <- new("dataset",
-                                 datasetid = y$datasetid,
-                                 datasettype = y$datasettype,
-                                 datasetname = sitename,
-                                 location = place,
-                                 notes = NA_character_)
-                                 })),
-                                chronologies = new("chronologies",
-                                 chronologies = list()))
-                                return(x)
-                                })
-    new_site <- new("site",
-                    siteid = siteid,
-                    sitename = sitename,
-                    location = place,
-                    altitude = elev,
-                    notes = sitenotes,
-                    description = description,
-                    collunits = new("collunits",
-                    collunits = collunit))
-    sites <- append(sites, new_site)
-    output <- new("sites", sites = sites)
-  }
-  return(output)
 }
 
 #' @title Get Site Information for Fossil Sites
@@ -233,7 +164,7 @@ get_sites.default <- function(...) { # nolint
 
   if (is.null(result$data[1][[1]])) {
     return(NULL)
-  }else{
+  } else {
     output <- parse_site(result)
     return(output)
   }
@@ -266,9 +197,12 @@ get_sites.numeric <- function(x, ...) {
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
+
     output <- parse_site(result)
+
     return(output)
-  }else{
+
+  } else {
     return(NULL)
   }
 }
