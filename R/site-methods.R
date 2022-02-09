@@ -112,9 +112,9 @@ setMethod(f = "collunits",
 #' @importFrom dplyr bind_cols
 #' @export
 # Todo Convert to as.data.frame
-setGeneric("showDatasets", 
+setGeneric("datasets", 
            function(object) {
-            standardGeneric("showDatasets")
+            standardGeneric("datasets")
            })
 
 #' @title Extract datasets from a sites object.
@@ -123,7 +123,7 @@ setGeneric("showDatasets",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols
 #' @export
-setMethod(f = "showDatasets",
+setMethod(f = "datasets",
           signature = "sites",
           definition = function(object) {
             my_datasets <- c()
@@ -134,6 +134,27 @@ setMethod(f = "showDatasets",
               my_datasets2 <- new("datasets", datasets = my_datasets)
             }
             return(my_datasets2)
+          })
+
+#' @title Extract datasets from a sites object.
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+setMethod(f = "datasets",
+          signature = "site",
+          definition = function(object) {
+            result <- purrr::map(object@collunits@collunits, function(x)x@datasets)
+            if (length(result) == 1) {
+              result <- result[[1]]
+            } else {
+              out <- result[[1]]
+              for (i in 2:length(result)) {
+                out <- c(out, result[[i]])
+              }
+            }
+            return(result)
           })
 
 #' @title  Slicer
