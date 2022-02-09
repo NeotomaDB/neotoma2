@@ -65,7 +65,47 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @title Convert sites object to a \code{data.frame}
+#' @title Extract collection units from a sites object
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @export
+setGeneric("collunits", 
+           function(object) {
+             standardGeneric("collunits")
+           })
+
+#' @title Extract datasets from a sites object.
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+setMethod(f = "collunits",
+          signature = "sites",
+          definition = function(object) {
+            output <- purrr::map(object@sites, function(x) {
+              x@collunits
+            })
+            final <- output[[1]]
+            for (i in 2:(length(output))) {
+              final <- c(final, output[[i]])
+            }
+            return(final)
+          })
+
+#' @title Extract datasets from a sites object.
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @export
+setMethod(f = "collunits",
+          signature = "site",
+          definition = function(object) {
+            output <- object@collunits
+            
+            return(output)
+          })
+
+#' @title Extract datasets from a sites object.
 #' @param object A sites object
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
@@ -77,7 +117,7 @@ setGeneric("showDatasets",
             standardGeneric("showDatasets")
            })
 
-#' @title Convert sites object to a \code{data.frame}
+#' @title Extract datasets from a sites object.
 #' @param object A sites object
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
@@ -204,7 +244,6 @@ setMethod(f = "$<-",
             slot(x, name) <- value
             return(x)
           })
-
 
 #' @title $
 #' @param x site object

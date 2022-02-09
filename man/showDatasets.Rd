@@ -2,7 +2,7 @@
 % Please edit documentation in R/site-methods.R
 \name{showDatasets}
 \alias{showDatasets}
-\title{Convert sites object to a \code{data.frame}}
+\title{Extract datasets from a sites object.}
 \usage{
 showDatasets(object)
 }
@@ -10,5 +10,5 @@ showDatasets(object)
 \item{object}{A sites object}
 }
 \description{
-Convert sites object to a \code{data.frame}
+Extract datasets from a sites object.
 }

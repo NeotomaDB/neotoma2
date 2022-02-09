@@ -46,35 +46,41 @@ collunit <- setClass(
 #' @description Holds Collection unit information
 #'  from the Neotoma Paleoecology Database.
 #' @importFrom purrr map
-collunits <- setClass("collunits",
-                      representation(collunits = "list"),
-                      validity = function(object) {
-                        all(map(object@collunits,
-                        function(x) {
-                          class(x) == "collunit"
-                        }) %>%
-                        unlist())
-                      })
+setClass("collunits",
+        representation(collunits = "list"),
+        validity = function(object) {
+          all(map(object@collunits,
+          function(x) {
+            class(x) == "collunit"
+          }) %>%
+          unlist())
+        })
 
-# Show methods go here
-# Start "Show Method" for all Neotoma Objects
-#' @title Show Collection Units Method
-#' @param object collunits object
+#' @title  Show the collection unit information
+#' @param x collunits object
 #' @export
 setMethod(f = "show",
-          signature = "collunits",
+          signature = signature(object = "collunits"),
           definition = function(object) {
-            purrr::map(object, function(x) {
-              data.frame(collunitid = object@collectionunitid,
-                         database = object@database,
-                         datasettype = object@datasettype,
-                         age_range_old =  object@age_range_old,
-                         age_range_young =  object@age_range_young,
-                         notes = object@notes)
-            })
-            print(, row.names = FALSE)
+            result <- purrr::map(object@collunits, function(x) { 
+              as.data.frame(x) 
+              }) %>% 
+              bind_rows()
+            print(result)
+          })
+          
+#' @title  Show the collection unit information
+#' @param x collunit object
+#' @export
+setMethod(f = "show",
+          signature = signature(object = "collunit"),
+          definition = function(object) {
+            result <- as.data.frame(object) 
+            
+            print(result)
           })
 
+            
 #' @title  Slicer
 #' @param x collunits object
 #' @param i iteration in collunits list
@@ -193,23 +199,17 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("collunit"),
           definition = function(x) {
-            
-            testdate <- ifelse(length(x@colldate) == 0, NA, x@colldate)
-            testgeom <- ifelse(nrow(x@gpslocation) == 0, NA, x@gpslocation)
-            
-            data.frame(collectionunitid = x@collectionunitid,
-                       notes = x@notes,
-                       handle = x@handle,
-                       colldate = testdate,
-                       location = x@location,
-                       waterdepth = x@waterdepth,
-                       gpslocation = testgeom,
-                       collunittype = x@collunittype,
-                       collectiondevice = x@collectiondevice,
-                       collectionunitname = x@collectionunitname,
-                       depositionalenvironment = x@depositionalenvironment,
-                       chronologies = length(x@chronologies),
-                       datasets = length(x@datasets))
+            data.frame(collectionunitid = object@collectionunit,
+                       notes = object@notes,
+                       handle = object@handle,
+                       colldate = object@colldate,
+                       location = object@location,
+                       waterdepth = object@waterdepth,
+                       gpslocation = object@gpslocation,
+                       collunittype = object@collunittype,
+                       collectiondevice = object@collectiondevice,
+                       collectionunitname = object@collectionunitname,
+                       depositionalenvironment = object@depositionalenvironment)
           })
 
 #' @title  as.data.frame collunits
