@@ -110,6 +110,40 @@ setMethod(f = "names",
             slotNames(x)
           })
 
+#' @title Extract datasets from a collunits object.
+#' @param object A collunits object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+setMethod(f = "datasets",
+          signature = "collunits",
+          definition = function(object) {
+            result <- purrr::map(object@collunits, function(x)x@datasets)
+            if (length(result) == 1) {
+              out <- result[[1]]
+            } else {
+              out <- result[[1]]
+              for (i in 2:length(result)) {
+                out <- c(out, result[[i]])
+              }
+            }
+            return(out)
+          })
+
+#' @title Extract datasets from a collunit object.
+#' @param object A collunits object
+#' @importFrom methods slotNames slot
+#' @importFrom purrr map
+#' @importFrom dplyr bind_cols
+#' @export
+setMethod(f = "datasets",
+          signature = "collunit",
+          definition = function(object) {
+            result <- object@datasets
+            return(result)
+          })
+
 #' @title  Insert collunit
 #' @param x collunits object
 #' @param i iteration in collunits list

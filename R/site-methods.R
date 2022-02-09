@@ -147,14 +147,14 @@ setMethod(f = "datasets",
           definition = function(object) {
             result <- purrr::map(object@collunits@collunits, function(x)x@datasets)
             if (length(result) == 1) {
-              result <- result[[1]]
+              out <- result[[1]]
             } else {
               out <- result[[1]]
               for (i in 2:length(result)) {
                 out <- c(out, result[[i]])
               }
             }
-            return(result)
+            return(out)
           })
 
 #' @title  Slicer
