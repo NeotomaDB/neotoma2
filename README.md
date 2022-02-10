@@ -9,9 +9,9 @@ The `neotoma2` R package represents a set of breaking changes with the original 
 
 This project is an open project, and contributions are welcome from any individual.  All contributors to this project are bound by a [code of conduct](CODE_OF_CONDUCT.md).  Please review and follow this code of conduct as part of your contribution.
 
-  * [Simon Goring](http://goring.org) [![orcid](https://img.shields.io/badge/orcid-0000--0002--2700--4605-brightgreen.svg)](https://orcid.org/0000-0002-2700-4605)  
-  
-  * [Socorro Dominguez Vidana](https://sedv8808.github.io/) [![orcid](https://img.shields.io/badge/orcid-0000--0002--7926--4935-brightgreen.svg)](https://orcid.org/0000-0002-7926-4935)
+* [![orcid](https://img.shields.io/badge/orcid-0000--0002--7926--4935-brightgreen.svg)](https://orcid.org/0000-0002-7926-4935) [Socorro Dominguez Vidana](https://sedv8808.github.io/)
+
+* [![orcid](https://img.shields.io/badge/orcid-0000--0002--2700--4605-brightgreen.svg)](https://orcid.org/0000-0002-2700-4605) [Simon Goring](http://goring.org)
 
 ### Tips for Contributing
 
@@ -23,7 +23,9 @@ All products of the Neotoma Paleoecology Database are licensed under an [MIT Lic
 
 All R functions for the package should be written in the `R` folder.  Any documentation should be added to `.R` files using [`roxygen2`](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) notation.  Because we are using `roxygen2` for documentation in this package, all edits to documentation should take place in the associated functions `.R` file. The files in the `man` folder should not be manually changed.
 
-### Workflow Overview
+Class definitions and new methods should be added to the files `01_classDefinitions.R` and `02_genericDefinitions.R` respectively, to ensure they are properly loaded during the package build process.
+
+### Development Workflow Overview
 
 The `neotoma2` package is built for R.  Build tools include elements from the `usethis`, `devtools` and `testthat` R packages, and build and compilation occurs within (and outside) the RStudio IDE environment.
 
@@ -33,7 +35,11 @@ Package use requires the use of the `devtools::install_github()` function, to pu
 devtools::install_github('NeotomaDB/neotoma2')
 ```
 
-The expectation for this repository is that all commits to the `prod` branch will support a clean package build.
+The expectation for this repository is that all commits to the `prod` branch will support a clean package build.  This is supported through [GitHub Actions](https://github.com/NeotomaDB/neotoma2/actions) in the `.github` folder of the repository.
+
+### Analysis Workflow Overview
+
+There is considerable information in the vignettes for the package, which can be [accessed directly](https://github.com/NeotomaDB/neotoma2/tree/production/vignettes).
 
 ### System Requirements
 
@@ -49,6 +55,6 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
-* Completion of core functionality for data access
+* Completion of core functionality for data access **DONE** Feb 10, 2022
 * Completion of core functionality for data presentation
 * Completion of clear vignettes for major data types or Constituent Databases represented within the Neotoma Database.
