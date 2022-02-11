@@ -20,7 +20,7 @@ filter.sites <- function(x, ...) {  # nolint
   cl$x <- NULL
   
   calls_list <- c()
-
+  
   for (i in seq_len(length(cl))) {
     txt <- paste0(cl[[i]], collapse = "")
     if (str_detect(txt, "lat")) {
@@ -45,10 +45,22 @@ filter.sites <- function(x, ...) {  # nolint
       my_list <- list(datasettype = cl[[i]])
       calls_list <- append(calls_list, my_list)
     }
+    
+    if (str_detect(txt, "ageolder")) {
+      # Appending ageolder call
+      my_list <- list(ageolder = cl[[i]])
+      calls_list <- append(calls_list, my_list)
+    }
+    
+    if (str_detect(txt, "ageyounger")) {
+      # Appending ageyounger call
+      my_list <- list(ageyounger = cl[[i]])
+      calls_list <- append(calls_list, my_list)
+    }
   }
-
+  
   for (i in names(calls_list)) {
-    if (!(i %in% c("lat", "long", "elev", "datasettype", "loc")))
+    if (!(i %in% c("lat", "long", "elev", "datasettype", "loc", "ageolder", "ageyounger")))
       message(paste0(i, " is not a valid parameter.
        It will not be used for filtering"))
   }
@@ -67,6 +79,8 @@ filter.sites <- function(x, ...) {  # nolint
         datasets_long <- c()
         datasets_elev <- c()
         datasets_type <- c()
+        datasets_older <- c()
+        datasets_younger <- c()
         
         # Check for type
         if ("datasettype" %in% names(calls_list)) {
@@ -114,10 +128,65 @@ filter.sites <- function(x, ...) {  # nolint
           }
         }
         
+        # # Check for ages
+        # def_chron <- x[[i]]@collunits[[j]]@defaultchronology
+        # 
+        # # ageboundolder
+        # if ("ageolder" %in% names(calls_list)) {
+        #   ageolder <- x[[i]]@collunits[[j]]@chronologies[[1]]@ageboundolder # nolint
+        #   ageolder <- if (!is.na(ageolder)) {
+        #     datasets_old <- datasets_call@datasets
+        #     if (eval(calls_list$ageolder) == TRUE) {
+        #       datasets_older <- c(datasets_older, datasets_old)
+        #       datasets_older <- Reduce(intersect, datasets_older)
+        #     }else{
+        #       datasets_older <- c(datasets_older, 0)
+        #       datasets_older <- Reduce(intersect, datasets_older)
+        #     }
+        #   }
+        # }
+        
+        # Check for age older
+        if ("ageolder" %in% names(calls_list)) {
+          ageolder <- datasets_call[[k]]@age_range_old
+          ageolder <- if (!is.na(ageolder)) {
+            datasets_old <- datasets_call[[k]]
+            if (eval(calls_list$ageolder) == TRUE) {
+              datasets_older <- append(datasets_older, datasets_old)
+            }else{
+              datasets_older <- append(datasets_older, 0)
+            }
+          }
+        }
+        
+        # Check for age younger
+        if ("ageyounger" %in% names(calls_list)) {
+          ageyounger <- datasets_call[[k]]@age_range_young
+          ageyounger <- if (!is.na(ageyounger)) {
+            datasets_young <- datasets_call[[k]]
+            if (eval(calls_list$ageyounger) == TRUE) {
+              datasets_younger <- append(datasets_younger, datasets_young)
+            }else{
+              datasets_younger <- append(datasets_younger, 0)
+            }
+          }
+        }
+        
+        
         datasets_names <- list(lat = datasets_lat,
                                long = datasets_long,
                                elev = datasets_elev,
-                               datasettype = datasets_type)
+                               datasettype = datasets_type,
+                               ageolder = datasets_older,
+                               ageyounger = datasets_younger)
+        
+        if (!("ageyounger" %in% names(calls_list))) {
+          datasets_names$ageyounger <- NULL
+        }
+        
+        if (!("ageolder" %in% names(calls_list))) {
+          datasets_names$ageolder <- NULL
+        }
         
         if (!("datasettype" %in% names(calls_list))) {
           datasets_names$datasettype <- NULL
