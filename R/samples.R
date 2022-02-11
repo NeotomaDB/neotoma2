@@ -20,10 +20,6 @@ setMethod(f = "samples",
                   length_samples <- length(x[[i]]@collunits[[j]]@datasets[[k]]@samples)
                   datasetid <- x[[i]]@collunits[[j]]@datasets[[k]]@datasetid
                   
-                  #chron_default <- x[[i]]@collunits[[j]]@chronologies[[k]]@isdefault
-                  #chron_name <- x[[i]]@collunits[[j]]@chronologies[[k]]@chronologyname
-                  #agetype <- x[[i]]@collunits[[j]]@chronologies[[k]]@modelagetype
-                  
                   for (l in seq_len(length_samples)) {
                     df <- x[[i]]$collunits[[j]]$datasets[[k]]$samples[[l]]$datum
                     # Verify number of samples
@@ -33,8 +29,8 @@ setMethod(f = "samples",
                       select(units, context, element, taxonid, symmetry,
                              taxongroup, elementtype, variablename,ecologicalgroup)
                     
-                    default_chron <- x[[i]]@collunits[[j]]@defaultchronology
                     # Filter ages dataframe
+                    default_chron <- x[[i]]@collunits[[j]]@defaultchronology
                     df <- x[[i]]@collunits[[j]]@datasets[[k]]@samples[[l]]@ages
                     df <- df %>% dplyr::filter(chronologyid == default_chron)
                     
@@ -52,7 +48,6 @@ setMethod(f = "samples",
                       chronologyname <- NA_character_
                       chronologyid <- NA_integer_
                     }
-                    
                     
                     df_sample <- df_sample %>%
                       mutate(siteid = siteid,
