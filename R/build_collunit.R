@@ -3,6 +3,7 @@
 #' @export
 #' @return An object of class \code{collunit}
 #' @import sf
+
 build_collunits <- function(x) {
   if (length(x$datasets) == 0) {
     # Downloads call
@@ -19,7 +20,7 @@ build_collunits <- function(x) {
     datasets <- new("datasets", datasets = datasets)
     chronologies <- new('chronologies', chronologies = list())
   }
-  
+
   newCollunits <- new('collunit',
                       collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
                       handle = use_na(x$handle, "char"),
@@ -33,5 +34,6 @@ build_collunits <- function(x) {
                       gpslocation = sf::st_as_sf(sf::st_sfc()),
                       notes = use_na(testNull(x$notes,NA), "char"),
                       datasets = datasets,
+                      defaultchronology = use_na(testNull(x$defaultchronology, NA), "int"),
                       chronologies = chronologies)
 }
