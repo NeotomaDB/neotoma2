@@ -4,8 +4,8 @@
 #' @import purrr
 #' @import stringr
 #' @param x A site, dataset or download.
-#' @param ... arguments to filter by: latmin, latmax
-#' longmin, longmax, elevmin, elevmax, datasettype.
+#' @param ... arguments to filter by: lat, long, 
+#' elev, datasettype
 #' @export
 
 filter <- function(x, ...) {
@@ -38,6 +38,8 @@ filter.sites <- function(x, ...) {  # nolint
       my_list <- list(elev = cl[[i]])
       calls_list <- append(calls_list, my_list)
     }
+    
+    
     if (str_detect(txt, "datasettype")) {
       # Appending datasettype call
       my_list <- list(datasettype = cl[[i]])
