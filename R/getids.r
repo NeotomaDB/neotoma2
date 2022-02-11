@@ -6,7 +6,7 @@
 #' @importFrom purrr map
 #' @importFrom dplyr arrange
 #' @export
-getids <- function(x) {
+getids <- function(x, order = TRUE) {
   if (!missing(x)) {
     UseMethod("getids", x)
   }
@@ -15,13 +15,13 @@ getids <- function(x) {
 #' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
 #' @export
-getids.sites <- function(x) {
+getids.sites <- function(x, order = TRUE) {
     siteids <- map(x@sites, function(y) {
         siteid <- y@siteid
         if (length(y@collunits) > 0) {
             collunits <- map(y@collunits@collunits, function(z) {
-                collunitid <- z@collunitid
-                if (length(y@datasets) > 0) {
+                collunitid <- z@collectionunitid
+                if (length(z@datasets) > 0) {
                     datasetids <- map(z@datasets@datasets, function(a) {
                         a@datasetid
                     })
@@ -31,13 +31,18 @@ getids.sites <- function(x) {
 
                 return(data.frame(collunitid = collunitid,
                                 datasetid = unlist(datasetids)))
-            })
+            }) %>% bind_rows()
         } else {
             data.frame(collunitid = NA, datasetid = NA)
         }
         return(data.frame(siteid = siteid, collunits))
     }) %>%
-    bind_rows() %>%
-    arrange(siteid, collunitid, datasetid)
+    bind_rows()
+    
+    if (order) {
+      siteids <- siteids %>%
+        arrange(siteid, collunitid, datasetid)
+    }
+    
     return(siteids)
 }

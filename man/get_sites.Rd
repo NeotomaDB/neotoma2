@@ -38,21 +38,21 @@ The function contains data checks for each defined parameter.
 }
 \examples{
 \dontrun{
-To find all sites with a min altitude of 12 and a max altitude of 25:
+# To find all sites with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_sites(altmin=12, altmax=25)
 
-To find all sites that contain the string "Alex\%"
+# To find all sites that contain the string "Alex\%"
 alex.sites <- get_sites(sitename="Alex\%")
 
 To find all examples in Brazil
-brazil <- "{"type": "Polygon",
+brazil <- '{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],
  [-56.953125,-33.137551192346145],
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]
-]]}"
+]]}'
 brazil_sites <- get_sites(loc = brazil[1])
 }
 }

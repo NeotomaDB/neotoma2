@@ -4,7 +4,7 @@
 \alias{get_downloads.numeric}
 \title{get_downloads}
 \usage{
-\method{get_downloads}{numeric}(x, ...)
+\method{get_downloads}{numeric}(x, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}

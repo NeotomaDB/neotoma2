@@ -1,91 +1,3 @@
-#' @title An S4 class for Neotoma publications
-#' @export
-author <- setClass("author",
-                   representation(author = "contact",
-                                  order = "numeric"),
-                   prototype(author = NULL,
-                             order = NA_integer_))
-
-#' @title An S4 class for a set of Neotoma author objects.
-#' @export
-authors <- setClass("authors",
-                    representation(authors = "list"),
-                    validity = function(object) {
-                      all(map(object@authors, function(x) {
-                        class(x) == "author"}) %>%
-                          unlist())
-                    })
-
-#' @title An S4 class for a single Neotoma publication.
-#' @export
-publication <- setClass("publication",
-                        representation(publicationid = "numeric",
-                                       publicationtypeid = "numeric",
-                                       publicationtype = "character",
-                                       year = "character",
-                                       citation = "character",
-                                       articletitle = "character",
-                                       journal = "character",
-                                       volume = "character",
-                                       issue = "character",
-                                       pages = "character",
-                                       citationnumber = "character",
-                                       doi = "character",
-                                       booktitle = "character",
-                                       numvolumes = "character",
-                                       edition = "character",
-                                       volumetitle = "character",
-                                       seriestitle = "character",
-                                       seriesvolume = "character",
-                                       publisher = "character",
-                                       url = "character",
-                                       city = "character",
-                                       state = "character",
-                                       country = "character",
-                                       originallanguage = "character",
-                                       notes = "character",
-                                       author = "authors"),
-                        prototype(publicationid = NA_integer_,
-                                  publicationtypeid = NA_integer_,
-                                  publicationtype = NA_character_,
-                                  year = NA_character_,
-                                  citation = NA_character_,
-                                  articletitle = NA_character_,
-                                  journal = NA_character_,
-                                  volume = NA_character_,
-                                  issue = NA_character_,
-                                  pages = NA_character_,
-                                  citationnumber = NA_character_,
-                                  doi = NA_character_,
-                                  booktitle = NA_character_,
-                                  numvolumes = NA_character_,
-                                  edition = NA_character_,
-                                  volumetitle = NA_character_,
-                                  seriestitle = NA_character_,
-                                  seriesvolume = NA_character_,
-                                  publisher = NA_character_,
-                                  url = NA_character_,
-                                  city = NA_character_,
-                                  state = NA_character_,
-                                  country = NA_character_,
-                                  originallanguage = NA_character_,
-                                  notes = NA_character_,
-                                  author = NULL))
-
-#' @title
-#'  An S4 class for multi-publication information
-#'  from the Neotoma Paleoecology Database.
-#' @export
-publications <- setClass("publications",
-                         representation(publications  = "list"),
-                         validity = function(object) {
-                           all(map(object@publications,
-                                   function(x) {
-                                     class(x) == "publication"
-                                     }) %>%
-                                 unlist())
-                         })
-
 #' @title Get slot names for a publication object.
 #' @param x A \code{publication} object.
 #' @importFrom methods slotNames
@@ -200,12 +112,6 @@ setMethod(f = "show",
                              doi = object@doi))
           })
 
-#' @title Show matches for objects.
-#' @export
-setGeneric("showMatch", function(x) {
-  standardGeneric("showMatch")
-})
-
 #' @title Show matched publication objects.
 #' @param x A \code{publication} object.
 #' @export
@@ -216,12 +122,6 @@ setMethod(f = "showMatch",
               print(attr(x, "matches"))
             }
           })
-
-#' @title Obtain the DOI for publications.
-#' @export
-setGeneric("doi", function(x) {
-  standardGeneric("doi")
-})
 
 #' @title Get a publication DOI.
 #' @param x A \code{publication} object.
@@ -283,12 +183,6 @@ setMethod(f = "as.data.frame",
             map(function(y) as.data.frame(y)) %>%
               bind_rows()
             return(full)
-})
-
-#' @title Select the best match for an object.
-#' @export
-setGeneric("selectMatch", function(x, n) {
-  standardGeneric("selectMatch")
 })
 
 #' @title Select the best match (between a local record and a Neotoma match)

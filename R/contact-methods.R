@@ -1,37 +1,3 @@
-#' @title An S4 class for Neotoma contacts
-
-contact <- setClass("contact",
-                    representation(contactid = "numeric",
-                                   familyname = "character",
-                                   leadinginitials = "character",
-                                   givennames = "character",
-                                   suffix = "character",
-                                   ORCID = "character",
-                                   title = "character",
-                                   institution = "character",
-                                   email = "character",
-                                   phone = "character",
-                                   contactstatus = "character",
-                                   fax = "character",
-                                   url = "character",
-                                   address = "character",
-                                   notes = "character"),
-                    prototype(contactid = NA_integer_,
-                              familyname = NA_character_,
-                              leadinginitials = NA_character_,
-                              givennames = NA_character_,
-                              suffix = NA_character_,
-                              ORCID = NA_character_,
-                              title = NA_character_,
-                              institution = NA_character_,
-                              email = NA_character_,
-                              phone = NA_character_,
-                              contactstatus = NA_character_,
-                              fax = NA_character_,
-                              url = NA_character_,
-                              address = NA_character_,
-                              notes = NA_character_))
-
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
@@ -49,18 +15,6 @@ setMethod(f = "names",
           definition = function(x) {
             slotNames(x)
           })
-
-#' An S4 class for multi-contact information
-#'  from the Neotoma Paleoecology Database.
-
-contacts <- setClass("contacts",
-                     representation(contacts  = "list"),
-                     validity = function(object) {
-                       all(map(object@contacts, function(x) {
-                         class(x) == "contact"
-                         }) %>%
-                             unlist())
-                     })
 
 setMethod(f = "show",
           signature = "contacts",

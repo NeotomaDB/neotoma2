@@ -20,88 +20,84 @@ library(neotoma2)
 library(raster)
 ```
 
-This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more neotoma2 vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.
+This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more `neotoma2` vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.
 
 ## Obtain Data
-### Obtain all Neotoma Mammal Data
+### Obtain Neotoma Mammal Data
 
 Download occurrence and age data from Neotoma: All vertebrate occurrences for XX region (North America, global) for a particular time window.
 
 By default the API calls have a `limit` of 25 records at a time. Given this the call:
 
 ```{r getRecords, eval=TRUE, message=FALSE}
-faunal <- get_datasets(datasettype='vertebrate fauna')
+faunal <- get_datasets(datasettype = 'vertebrate fauna')
 ```
 
-would return only the first 25 records in Neotoma.  We can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
+would return only the first 25 records in Neotoma.  We can extract the coordinates directly using the `coordinates()` function, we can plot the locations in a very simple `plot()` function, or we can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
 
-```{r plotSmallSites, eval=TRUE}
+```{r plotSiteLatitudes, eval=TRUE}
+faunal_coordinates <- coordinates(faunal)
+plot(faunal_coordinates$lat, 
+     ylab = "Latitude (degrees)", 
+     xlab = "Longitude (degrees)")
+```
+
+The histogram we plot here allows us to examine the latitudinal gradient of the faunal records.  It includes only the 25 records we called for (the default) in the original `get_datasets()` call.  You can see how to call more records in the [Limits & Offsets section](#limits) below
+
+```{r plotSitesInteractive, eval=TRUE}
 plotLeaflet(faunal)
 ```
 
+The leaflet plot is useful because it provides an interactive element to the datasets (the map can be zoomed and clicked). The map is also a `leaflet` object, and so it can be further modified by the end user.  Note: The `leaflet` plot is not accessible to an individual who uses assistive technology to navigate the web.
+
+### Limits & Offsets {#limits}
+
 The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling:
 
-```{r}
-get_datasets(datasettype='vertebrate fauna', limit = 999999)
+```{r getDatasetsHighLimit, eval=FALSE}
+get_datasets(datasettype = 'vertebrate fauna', limit = 999999)
 ```
 
 **Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
 
-One way of dealing with the issue of `offsets` and `limits` is the use of a `while` loop, that runs by increasing the `offset`, until the result returns less that 25 records (the default `limit`).  If we look at the code below we can imagine that if there were 31 total records the first return would have `offset` 0 (`counter` is 1, so `(counter - 1) * 25` is 0), and would return all 25 records.  The second loop would return 6 records, and result in a `break` since `length(mammalSet[[counter]]) < 25`.  Once we break, we put all the results together using the `c()` command.
+One way of dealing with the issue of `offsets` and `limits` is the use of the `all_data` argument. When set to `TRUE`, a `while` loop is run within the function, to pull the data responsibly. This will result in returning all the data for your use-case.
 
-```{r downloadMammals}
+```{r downloadMammals, eval=TRUE}
 # This gives us 25 records (without setting 'limit')
-mammals <- get_datasets(datasettype='vertebrate fauna')
+mammals <- get_datasets(datasettype = 'vertebrate fauna')
 
-# The 'while loop' approach:
-counter <- 1
-mammalSet <- c()
-
-while(TRUE) {
-  mammals <- get_datasets(datasettype='vertebrate fauna',
-                                       offset = (counter - 1) * 25)
-  if (length(mammals@sites) < 25 | counter > 4) {
-    break
-  } else {
-    mammalSet <- c(mammals, mammalSet)
-    counter = counter + 1
-  }
-}
-
+# The 'all_data' approach:
+allMammals <- get_datasets(datasettype = 'vertebrate fauna', 
+                           all_data = TRUE)
 ```
 
-```{r dummyBox, eval=TRUE, results='hide', echo=FALSE}
-mammalSet <- -9999
+Now we have all the vertebrate faunal records from Neotoma, totaling `r length(mammals)` distinct mammal sites.  This accounts for `r length(mammals)` distinct mammal datasets from the Neotoma Paleoecology Database.  These objects are all of class `sites`, but each `sites` object contains `collectionunits` and `datasets`. The `length()` method only returns the number of sites.  If you want to know the total number of sites, collection units, datasets and samples, you can use the `summary()` method:
+
+```{r summaryExample}
+summary(mammals)
 ```
 
-Now we have all our records, totaling `r length(mammalSet)` distinct mammal sites.  This accounts for `r length(mammalSet)` distinct datasets.  Note that these objects are all class `sites`, but that these `sites` contain `collectionunits` and `datasets`.  The `get_datasets()` command does not explicitly download the raw data.
+The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [CLeaning Data](#cleaning)) 
 
-### Obtain Secondary (Environmental) Data
+## Cleaning Data {#cleaning}
 
-Download climate data from appropriate source.
-
-```{r, eval=TRUE}
-worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
-
-raster::plot(worldTmin, 1)
-```
-
-This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
-
-## Cleaning Data
-
-### Clean ages
-
-Lets begin again with downloading all records for mammals within the database that have a Holocene age:
+The basis of any workflow is downloading appropriate data. Lets begin again with downloading all records for mammals within the database that have a Holocene age.  Here we use the `get_datasets()` command, and set `ageold` to be `12000`.  Dates passed to the API are assumed to be in calibrated radiocarbon years before present.
 
 ```{r}
 mamData <- get_datasets(datasettype = "vertebrate fauna", 
-                        ageold = 12000, 
-                        limit = 99999)
-plotLeaflet(mamData)
-mamDl <- get_downloads(mamData)
+                        ageold = 15000,
+                        ageyoung = 12000,
+                        all_data = TRUE)
 
+plotLeaflet(mamData)
+dsid <- getids(mamData)
+
+mamDl <- get_downloads(mamData, all_data = TRUE)
 ```
+
+
+
+### Clean ages
 
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?
@@ -121,6 +117,19 @@ account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
 
   * Create convex hulls (at     multiple time bins?)
 Evaluate which convex hulls intersect with /come within a buffer of point of interest
+
+
+### Obtain Secondary (Environmental) Data
+
+Download climate data from appropriate source.
+
+```{r, eval=TRUE}
+worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
+
+raster::plot(worldTmin, 1)
+```
+
+This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
 
 ### Join Hulls with Environmental Data
   
