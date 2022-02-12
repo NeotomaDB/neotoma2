@@ -21,12 +21,15 @@ build_collunits <- function(x) {
     chronologies <- new('chronologies', chronologies = list())
   }
 
+  if(length(x$handle) == 0) {
+    x$handle <- NA
+  }
   newCollunits <- new('collunit',
                       collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
-                      handle = use_na(x$handle, "char"),
+                      handle = use_na(testNull(x$handle, NA), "char"),
                       collectionunitid = use_na(testNull(x$collectionunitid, NA), "int"),
                       collectiondevice = use_na(testNull(x$collectiondevice, NA), "char"),
-                      collectionunitname = use_na(x$collectionunit, "char"),
+                      collectionunitname = use_na(testNull(x$collectionunitname, NA), "char"),
                       waterdepth = use_na(testNull(x$waterdepth, NA), "int"),
                       colldate = as.Date(character(0)),
                       depositionalenvironment = use_na(testNull(x$depositionalenvironment,NA), "char"),
