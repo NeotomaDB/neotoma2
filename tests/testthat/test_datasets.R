@@ -52,9 +52,16 @@ test_that("get_datasets runs as expected.", {
   
   # Check that datasset types names are only pollen
   
-  brazil_datatype <- summary(brazil_datasets)
-  brazil_datatype <- unique(brazil_datatype$datasets_type)
-  expect_equal(brazil_datatype, "pollen")
+  #brazil_datatype <- summary(brazil_datasets)
+  #brazil_datatype <- unique(brazil_datatype$datasets_type)
+  for (i in seq_len(length(brazil_datasets))) {
+    for (j in seq_len(length(brazil_datasets[[i]]@collunits))) {
+      for (k in seq_len(length(brazil_datasets[[i]]@collunits[[j]]@datasets))) {
+        brazil_datatype <- brazil_datasets[[i]]@collunits[[j]]@datasets[[k]]@datasettype
+        expect_equal(brazil_datatype, "pollen")
+      }
+    }
+  }
   
 })
 
@@ -77,4 +84,29 @@ test_that("get_datasets runs as expected.", {
     expect_lt(i, 250)
     expect_gt(i, 100)
   }
+})
+
+test_that("get_datasets runs as expected.", {
+  ## we don't want this to run on CRAN
+  skip_on_cran()
+  
+  brazil <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+  
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  
+  brazil_datasets <- get_datasets(loc = brazil[1], datasettype = "pollen")
+  
+  # Check that datasset types names are only pollen
+  
+  brazil_unique_sites <- length(unique(getids(brazil_datasets)$siteid))
+  brazil_datasets_length <- length(brazil_datasets)
+  expect_equal(brazil_datasets_length, brazil_unique_sites)
+  
 })
