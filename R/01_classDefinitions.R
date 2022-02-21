@@ -270,7 +270,7 @@ setClass(
             depositionalenvironment = "character",
             datasets = "datasets",
             chronologies = "chronologies",
-            defaultchronology = "numeric"),
+            defaultchronology = "integer"),
   prototype = list(collectionunitid = NA_integer_,
                    notes = NA_character_,
                    handle = NA_character_,

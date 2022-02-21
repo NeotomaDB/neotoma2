@@ -3,6 +3,7 @@
 #' @export
 #' @return An object of class \code{collunit}
 #' @import sf
+
 build_collunits <- function(x) {
   if (length(x$datasets) == 0) {
     # Downloads call
@@ -19,13 +20,16 @@ build_collunits <- function(x) {
     datasets <- new("datasets", datasets = datasets)
     chronologies <- new('chronologies', chronologies = list())
   }
-  
+
+  if(length(x$handle) == 0) {
+    x$handle <- NA
+  }
   newCollunits <- new('collunit',
                       collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
-                      handle = use_na(x$handle, "char"),
+                      handle = use_na(testNull(x$handle, NA), "char"),
                       collectionunitid = use_na(testNull(x$collectionunitid, NA), "int"),
                       collectiondevice = use_na(testNull(x$collectiondevice, NA), "char"),
-                      collectionunitname = use_na(x$collectionunit, "char"),
+                      collectionunitname = use_na(testNull(x$collectionunitname, NA), "char"),
                       waterdepth = use_na(testNull(x$waterdepth, NA), "int"),
                       colldate = as.Date(character(0)),
                       depositionalenvironment = use_na(testNull(x$depositionalenvironment,NA), "char"),
@@ -33,5 +37,6 @@ build_collunits <- function(x) {
                       gpslocation = sf::st_as_sf(sf::st_sfc()),
                       notes = use_na(testNull(x$notes,NA), "char"),
                       datasets = datasets,
+                      defaultchronology = use_na(testNull(x$defaultchronology, NA), "int"),
                       chronologies = chronologies)
 }

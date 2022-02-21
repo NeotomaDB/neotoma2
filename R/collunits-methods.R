@@ -150,17 +150,15 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("collunit"),
           definition = function(x) {
-            data.frame(collectionunitid = object@collectionunit,
-                       notes = object@notes,
-                       handle = object@handle,
-                       colldate = object@colldate,
-                       location = object@location,
-                       waterdepth = object@waterdepth,
-                       gpslocation = object@gpslocation,
-                       collunittype = object@collunittype,
-                       collectiondevice = object@collectiondevice,
-                       collectionunitname = object@collectionunitname,
-                       depositionalenvironment = object@depositionalenvironment)
+            data.frame(collectionunitid = x@collectionunitid,
+                       handle = x@handle,
+                       location = x@location,
+                       waterdepth = x@waterdepth,
+                       collunittype = x@collunittype,
+                       collectiondevice = x@collectiondevice,
+                       defaultchronology = x@defaultchronology,
+                       collectionunitname = x@collectionunitname,
+                       depositionalenvironment = x@depositionalenvironment)
           })
 
 #' @title  as.data.frame collunits
