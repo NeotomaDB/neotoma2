@@ -9,8 +9,8 @@ filter(x, ...)
 \arguments{
 \item{x}{A site, dataset or download.}
 
-\item{...}{arguments to filter by: latmin, latmax
-longmin, longmax, elevmin, elevmax, datasettype.}
+\item{...}{arguments to filter by: lat, long,
+elev, datasettype}
 }
 \description{
 filter
