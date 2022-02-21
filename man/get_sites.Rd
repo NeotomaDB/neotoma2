@@ -21,7 +21,7 @@ siteid, sitename, location, altitude, description,
 limited collection units information.
 \item{ \code{siteid} }{site ID number}
 \item{ \code{sitename} }{site"s name}
-\item{ \code{location} }{sf object that describes site"s location}
+\item{ \code{loc} }{An \code{sf} object that describes site's location}
 \item{ \code{description} }{}
 \item{ \code{collunits} }{limited information on collunits}
 }

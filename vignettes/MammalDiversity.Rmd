@@ -55,7 +55,7 @@ The leaflet plot is useful because it provides an interactive element to the dat
 The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling:
 
 ```{r getDatasetsHighLimit, eval=FALSE}
-get_datasets(datasettype = 'vertebrate fauna', limit = 999999)
+get_datasets(datasettype = 'vertebrate fauna', limit = 50)
 ```
 
 **Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
