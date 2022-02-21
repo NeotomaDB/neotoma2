@@ -47,6 +47,12 @@ setGeneric("samples", function(x) {
   standardGeneric("samples")
 })
 
+#' @title Obtain the chronology from a record or multiple records.
+#' @export
+setGeneric("chronologies", function(x) {
+  standardGeneric("chronologies")
+})
+
 #' @title Obtain the DOI for publications.
 #' @export
 setGeneric("doi", function(x) {

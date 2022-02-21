@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(sf)
+library(geojson)
 library(neotoma2)
 ```
 
@@ -191,7 +192,6 @@ You can get the coordinates to create a GeoJson bounding box from [here](https:/
 Accessing datasets by bounding box:
 
 ```{r bounding box}
-
 brazil <- '{"type": "Polygon", 
             "coordinates": [[
                 [-73.125, -9.102],

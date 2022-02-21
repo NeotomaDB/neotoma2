@@ -305,11 +305,12 @@ setMethod(f = "summary",
                                      function(y) length(y@chronologies) )
 
               return(data.frame(collunits = length(x@collunits),
+                                chronologies = chronologies,
                          datasets = datasets))
             })
 
             collunits %>%
               bind_rows() %>%
               mutate(sitename = sites, siteid = siteid, datasets_type = datasettype) %>%
-              select(siteid, sitename, collunits, datasets, datasets_type)
+              select(siteid, sitename, collunits, chronologies, datasets, datasets_type)
           })
