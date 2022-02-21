@@ -87,7 +87,7 @@ parse_dataset <- function(result) { # nolint
   
   data <- result$data %>%
     fix_null()
-
+  
   newSites <- map(data, function(x) {
     if(is.null(x$sites)){
       call <- x$site
@@ -129,7 +129,7 @@ parse_dataset <- function(result) { # nolint
     collunits <- new("collunits", collunits = list(new_collunit))
     
     # Site
-    # API error does not allow for bulid site usage yet.
+    # API error does not allow for build site usage yet.
     set_site(sitename = use_na(call$sitename, "char"),
              siteid   = use_na(call$siteid, "int"),
              geography = geography,
@@ -141,7 +141,32 @@ parse_dataset <- function(result) { # nolint
   
   sites <- new("sites", sites = newSites)
   
-  return(sites)
+  ## Patch to remove repeated sites
+  new_sites_object <- new("sites")
+  for (i in seq_len(length(sites))) {
+    for(j in seq_len(length(sites))){
+      if(j > i){
+        if(sites[[i]]@siteid == sites[[j]]@siteid){
+          le <- length(sites[[i]]@collunits)+1
+          sites[[i]]@collunits[[le]] <- sites[[j]]@collunits[[1]]
+          new_sites_object <- c(new_sites_object, sites[[i]])
+        }
+      }
+    }
+    if(length(new_sites_object) == 0) {
+      new_sites_object <- c(new_sites_object, sites[[i]])
+    }
+    if(!is.null(new_sites_object)){
+      ids <- getids(new_sites_object)$siteid
+      if (!(sites[[i]]@siteid %in% ids)){
+        new_sites_object <- c(new_sites_object, sites[[i]])
+      }
+    }
+  }
+  
+  return(new_sites_object)
+  
+  #return(sites)
 }
 
 #' @title Get Dataset Default

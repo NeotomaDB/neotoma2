@@ -16,6 +16,9 @@ build_sites <- function(x) {
   assertthat::assert_that(is.list(x),
                           msg = "Parsed object must be a list.")
   newSites <- purrr::map(x, function(x) {
+    if (length(x$geography) == 0 ) {
+      x$geography <- NA
+    }
     if (is.na(x$geography)) {
       geography <- st_as_sf(st_sfc())
       } else if (!(is.na(x$geography))) {
@@ -50,13 +53,13 @@ build_sites <- function(x) {
       geopolitical <- list(x$geopolitical)
     }
     
-    set_site(siteid   = use_na(x$siteid, "int"),
-             sitename = use_na(x$sitename, "char"),
+    set_site(siteid   = use_na(testNull(x$siteid, NA), "int"),
+             sitename = use_na(testNull(x$sitename, NA), "char"),
              geography = geography,
-             altitude = use_na(x$altitude, "int"),
+             altitude = use_na(testNull(x$altitude, NA), "int"),
              geopolitical = geopolitical, 
              notes = use_na(testNull(x$notes, NA), "char"),
-             description = use_na(x$sitedescription, "char"),
+             description = use_na(testNull(x$sitedescription, NA), "char"),
              collunits = collunits)
   })
   

@@ -6,9 +6,9 @@ context("Run Neotoma `test_sites` only when not on CRAN")
 
 
 test_that("filter runs as expected. filters datasettype", {
-
+  
   ## we don't want this to run on CRAN
-
+  
   skip_on_cran()
   
   brazil <- '{"type": "Polygon", 
@@ -25,7 +25,7 @@ test_that("filter runs as expected. filters datasettype", {
   brazil_datasets <- get_datasets(loc = brazil[1])
   
   brazil_pollen <- filter(brazil_datasets, datasettype == "pollen")
-    
+  
   brazil_summary <- summary(brazil_pollen)
   
   brazil_datatype <- unique(brazil_summary$datasets_type)
@@ -164,20 +164,78 @@ test_that("filter runs as expected. filters 2 datasettypes", {
   
   brazil_ <- filter(brazil_datasets, datasettype == "pollen" | datasettype == "charcoal")
   
-  brazil_ids <- getids(brazil_)
-  ids <- brazil_ids$datasetid
-  
-  datasettypes <-  get_datasets(ids)
-  brazil_datatype <- summary(datasettypes)
+  brazil_datatype <- summary(brazil_)
   brazil_datatype <- unique(brazil_datatype$datasets_type)
   
-  for (i in brazil_datatype) {
-    if (i == "pollen") {
-      expect_equal(i, "pollen")
-    } else {
-      expect_equal(i, "charcoal")
+  for (i in seq_len(length(brazil_))) {
+    for (j in seq_len(length(brazil_[[i]]@collunits))) {
+      for (k in seq_len(length(brazil_[[i]]@collunits[[j]]@datasets))) {
+        if (brazil_[[i]]@collunits[[j]]@datasets[[k]]@datasettype == "pollen") {
+          expect_equal(brazil_[[i]]@collunits[[j]]@datasets[[k]]@datasettype, "pollen")
+        } else {
+          expect_equal(brazil_[[i]]@collunits[[j]]@datasets[[k]]@datasettype, "charcoal")
+        }
+      }
     }
   }
+}
+)
 
+
+test_that("filter on datasettype runs as expected. count unique sites", {
+  
+  ## we don't want this to run on CRAN
+  
+  skip_on_cran()
+  
+  brazil <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+  
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  
+  brazil_datasets <- get_datasets(loc = brazil[1])
+  
+  brazil_ <- filter(brazil_datasets, datasettype == "pollen" | datasettype == "charcoal")
+  
+  brazil_ids <- length(unique(getids(brazil_)$siteid))
+  brazil_length <- length(brazil_)
+  
+  expect_equal(brazil_ids, brazil_length)
+  
+}
+)
+
+test_that("filter on lat runs as expected. count unique sites", {
+  
+  ## we don't want this to run on CRAN
+  
+  skip_on_cran()
+  
+  brazil <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+  
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  
+  brazil_datasets <- get_datasets(loc = brazil[1])
+  
+  brasil_space <- brazil_datasets %>% filter(lat > -18 & lat < -16)
+  
+  brazil_ids <- length(unique(getids(brasil_space)$siteid))
+  brazil_length <- length(brasil_space)
+  
+  expect_equal(brazil_ids, brazil_length)
+  
 }
 )
