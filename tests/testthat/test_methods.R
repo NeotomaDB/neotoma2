@@ -19,12 +19,26 @@ test_that("Working with subset methods `datasets()` and `collunits()`.", {
 
   # We can make the geojson a spatial object if we want to use the
   # functionality of the `sf` package.
-  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  brazil_sf <- (brazil)
+  brazil_dl <- brazil_sf %>%
+    get_sites(loc = .) %>%
+    get_downloads()
 
-  brazil_datasets <- get_datasets(loc = brazil[1])
-
-  brazil_dl <- get_downloads(brazil_datasets)
-  brazil_ds <- datasets(brazil_dl)
+  sumDl <- summary(brazil_dl)
+  brazilids <- getids(brazil_dl)
   brazil_cu <- collunits(brazil_dl)
-  expect_identical(nrow(getids(brazil_ds)), length(datasets(brazil_cu)))
+  brazil_ds <- datasets(brazil_dl)
+
+  expect_identical(object = length(brazil_ds),
+                   expected = nrow(brazilids),
+                   label = "The datasets() function isn't returning the right
+                            dataset list")
+
+  expect_identical(object = length(unique(sumDl$siteid)),
+                   expected = length(brazil_dl),
+                   label = "Failed to match the site identifiers & site length.")
+
+  expect_identical(object = sum(sumDl$datasets),
+                   expected = nrow(brazilids),
+                   label = "Datasets returned are not the same length.")
 })

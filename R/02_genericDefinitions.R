@@ -4,7 +4,7 @@
 # Todo Convert to as.data.frame
 setGeneric("datasets",
            function(object) {
-             standardGeneric("datasets")
+             standardGeneric(f = "datasets")
            })
 
 #' @title Obtain coordinates from a sites object.
@@ -15,7 +15,7 @@ setGeneric("datasets",
 #' @export
 # Todo Convert to as.data.frame
 setGeneric("coordinates", function(obj, ...) {
-  standardGeneric("coordinates")
+  standardGeneric(f = "coordinates")
 })
 
 #' @title plotLeaflet
@@ -32,19 +32,19 @@ setGeneric("coordinates", function(obj, ...) {
 #' @param path location where output should be saved in. save_im must be TRUE
 #' @export
 setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
-  standardGeneric("plotLeaflet")
+  standardGeneric(f = "plotLeaflet")
 })
 
 #' @title Show matches for objects.
 #' @export
 setGeneric("showMatch", function(x) {
-  standardGeneric("showMatch")
+  standardGeneric(f = "showMatch")
 })
 
 #' @title Obtain samples from a record or multiple records.
 #' @export
 setGeneric("samples", function(x) {
-  standardGeneric("samples")
+  standardGeneric(f = "samples")
 })
 
 #' @title Obtain the chronology from a record or multiple records.
@@ -56,13 +56,13 @@ setGeneric("chronologies", function(x) {
 #' @title Obtain the DOI for publications.
 #' @export
 setGeneric("doi", function(x) {
-  standardGeneric("doi")
+  standardGeneric(f = "doi")
 })
 
 #' @title Select the best match for an object.
 #' @export
 setGeneric("selectMatch", function(x, n) {
-  standardGeneric("selectMatch")
+  standardGeneric(f = "selectMatch")
 })
 
 #' @title taxa
@@ -71,7 +71,7 @@ setGeneric("selectMatch", function(x, n) {
 #' @param object Sites object to extract taxa table from
 #' @export
 setGeneric("taxa", function(object) {
-  standardGeneric("taxa")
+  standardGeneric(f = "taxa")
 })
 
 #' @title Extract collection units from a sites object
@@ -80,5 +80,5 @@ setGeneric("taxa", function(object) {
 #' @export
 setGeneric("collunits",
            function(object) {
-             standardGeneric("collunits")
+             standardGeneric(f = "collunits")
            })

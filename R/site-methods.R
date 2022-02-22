@@ -26,37 +26,6 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
-#' @export
-setMethod(f = "collunits",
-          signature = "sites",
-          definition = function(object) {
-            output <- purrr::map(object@sites, function(x) {
-              x@collunits
-            })
-            final <- output[[1]]
-            for (i in 2:(length(output))) {
-              final <- c(final, output[[i]])
-            }
-            return(final)
-          })
-
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
-#' @export
-setMethod(f = "collunits",
-          signature = "site",
-          definition = function(object) {
-            output <- object@collunits
-
-            return(output)
-          })
-
 #' @title  Slicer
 #' @param x sites object
 #' @param i iteration in sites list
@@ -287,15 +256,41 @@ setMethod(f = "plot",
 setMethod(f = "summary",
           signature = "sites",
           definition = function(object, ...) {
-            sites <- sapply(object@sites, function(x) x@sitename)
-            siteid <- sapply(object@sites, function(x) x@siteid)
-            datasettype <- sapply(object@sites, function(x) {
-              datasets_type <- sapply(x@collunits@collunits,
-                                      function(y) {
-                                        datasetsty <- sapply(y@datasets@datasets, function(r) r@datasettype)
-                                      })
-            }
-            )
+
+            datasettype <- lapply(object@sites, function(x) {
+
+              collunits <- length(x@collunits@collunits)
+
+              if (length(x) > 0) {
+                collunits <- lapply(x@collunits@collunits,
+                                       function(y) {
+                                         chrons <- length(y@chronologies)
+                                         datasets <- length(y@datasets)
+                                         if (datasets > 0) {
+                                           types <- sapply(y@datasets@datasets,
+                                                           function(r) {
+                                                             r@datasettype
+                                                           }) %>%
+                                             paste0(collapse = ",")
+                                         } else {
+                                           types <- NA
+                                         }
+                                         data.frame(collectionunit = y@handle,
+                                                    chronolgies = chrons,
+                                                    datasets = datasets,
+                                                    types = types)
+                                         }) %>% bind_rows()
+              } else {
+                collunits <- data.frame(collectionunit = NA,
+                                        chronologies = 0,
+                                        datasets = 0,
+                                        types = NA)
+              }
+
+              data.frame(siteid = x$siteid, sitename = x$sitename,
+                         collunits)
+              }
+            ) %>% bind_rows()
 
             collunits <- lapply(object@sites, function(x) {
               datasets <- sapply(x@collunits@collunits,
@@ -304,13 +299,9 @@ setMethod(f = "summary",
               chronologies <- sapply(x@collunits@collunits,
                                      function(y) length(y@chronologies) )
 
-              return(data.frame(collunits = length(x@collunits),
-                                chronologies = chronologies,
-                         datasets = datasets))
-            })
-
-            collunits %>%
-              bind_rows() %>%
-              mutate(sitename = sites, siteid = siteid, datasets_type = datasettype) %>%
-              select(siteid, sitename, collunits, chronologies, datasets, datasets_type)
+              return(data.frame(siteid = x$siteid,
+                                collunits = length(x@collunits),
+                                datasets = datasets))
+            }) %>% bind_rows()
+            return(datasettype)
           })
