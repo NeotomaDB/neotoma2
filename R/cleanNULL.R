@@ -2,18 +2,10 @@
 #' @description Pass an object and convert all
 #' \code{NULL} elements to \code{NA}.
 #' @param x An element that may or may not have NULL values.
-#' @importFrom purrr map
 #' @export
-#' @noRd
 cleanNULL <- function(x) { # nolint
-  if ("list" %in% class(x)) {
-    out <- purrr::map(x, cleanNULL)
-  } else {
-    if (is.null(x)) {
-      out <- NA
-    } else {
-      out <- x
-      }
-  }
+  out <- rapply(x,
+                function(y) { ifelse(is.null(y), NA, y) },
+                how = "replace")
   return(out)
 }

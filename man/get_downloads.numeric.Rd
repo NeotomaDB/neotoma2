@@ -9,6 +9,8 @@
 \arguments{
 \item{x}{Use a single number to extract site information}
 
+\item{verbose}{Should text be printed during the download process?}
+
 \item{...}{arguments in ellipse form}
 }
 \description{

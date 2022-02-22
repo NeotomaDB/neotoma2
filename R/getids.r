@@ -38,11 +38,11 @@ getids.sites <- function(x, order = TRUE) {
         return(data.frame(siteid = siteid, collunits))
     }) %>%
     bind_rows()
-    
+
     if (order) {
       siteids <- siteids %>%
-        arrange(siteid, collunitid, datasetid)
+        arrange(.data$siteid, .data$collunitid, .data$datasetid)
     }
-    
+
     return(siteids)
 }

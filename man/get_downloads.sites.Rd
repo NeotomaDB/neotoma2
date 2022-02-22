@@ -4,10 +4,12 @@
 \alias{get_downloads.sites}
 \title{get_downloads sites}
 \usage{
-\method{get_downloads}{sites}(x, ...)
+\method{get_downloads}{sites}(x, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{sites object}
+
+\item{verbose}{Should text be printed during the download process?}
 
 \item{...}{arguments in ellipse form}
 }

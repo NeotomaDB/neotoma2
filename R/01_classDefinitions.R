@@ -47,7 +47,7 @@ setClass("contacts",
 setClass("author",
                    representation(author = "contact",
                                   order = "numeric"),
-                   prototype(author = NULL,
+                   prototype(author = new("contact"),
                              order = NA_integer_))
 
 #' @title An S4 class for a set of Neotoma author objects.
@@ -114,7 +114,7 @@ setClass("publication",
                                   country = NA_character_,
                                   originallanguage = NA_character_,
                                   notes = NA_character_,
-                                  author = NULL))
+                                  author = new("authors")))
 
 #' @title
 #'  An S4 class for multi-publication information
