@@ -5,7 +5,6 @@
 #' @param type A character string with values either \code{char} or \code{int}.
 #' @importFrom purrr map
 #' @export
-#' @noRd
 use_na <- function(x, type) {
   if (is.na(x)) {
     return(switch(type,
