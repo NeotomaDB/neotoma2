@@ -2,8 +2,7 @@
 library("testthat")
 library("neotoma2")
 
-context("Run Neotoma `test_sites` only when not on CRAN")
-
+context("Run Neotoma `test_filter` only when not on CRAN")
 
 test_that("filter runs as expected. filters datasettype", {
 
@@ -32,9 +31,7 @@ test_that("filter runs as expected. filters datasettype", {
 
   expect_equal(brazil_datatype, "pollen")
 
-}
-)
-
+})
 
 test_that("filter works as expected. filter by lat.", {
 
@@ -55,7 +52,7 @@ test_that("filter works as expected. filter by lat.", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brazil_lat <- filter(brazil_datasets, lat > 0 & lat < 50)
+  brazil_lat <- neotoma2::filter(brazil_datasets, lat > 0 & lat < 50)
 
   ds.0.50 <- as.data.frame(brazil_lat)
   latitudes <- ds.0.50$lat
@@ -65,8 +62,7 @@ test_that("filter works as expected. filter by lat.", {
     expect_gt(i, 0)
   }
 
-}
-)
+})
 
 test_that("filter works as expected. filter by long.", {
 
@@ -87,7 +83,7 @@ test_that("filter works as expected. filter by long.", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brazil_long <- filter(brazil_datasets, long > 0 & long < 50)
+  brazil_long <- neotoma2::filter(brazil_datasets, long > 0 & long < 50)
 
   ds.0.50 <- as.data.frame(brazil_long)
   longitudes <- ds.0.50$long
@@ -119,12 +115,14 @@ test_that("filter works as expected. filter by multiple arguments", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brazil <- filter(brazil_datasets, datasettype == "pollen", long > -60 & long < -50, lat >-10 & lat < 0)
+  brazil <- neotoma2::filter(brazil_datasets,
+                             datasettype == "pollen",
+                             long > -60 & long < -50,
+                             lat > -20 & lat < -10)
 
   df <- as.data.frame(brazil)
   longitudes <- df$long
   latitudes <- df$lat
-
 
   for (i in longitudes) {
     expect_lt(i, -50)
@@ -132,16 +130,15 @@ test_that("filter works as expected. filter by multiple arguments", {
   }
 
   for (i in latitudes) {
-    expect_lt(i, 0)
-    expect_gt(i, -10)
+    expect_lt(i, -10)
+    expect_gt(i, -20)
   }
 
   brazil_summary <- summary(brazil)
-  brazil_datatype <- unique(brazil_summary$datasets_type)
+  brazil_datatype <- unique(brazil_summary$types)
   expect_equal(brazil_datatype, "pollen")
 
-}
-)
+})
 
 test_that("filter runs as expected. filters 2 datasettypes", {
 
@@ -162,7 +159,8 @@ test_that("filter runs as expected. filters 2 datasettypes", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brazil_ <- filter(brazil_datasets, datasettype == "pollen" | datasettype == "charcoal")
+  brazil_ <- neotoma2::filter(brazil_datasets,
+                              datasettype == "pollen" | datasettype == "charcoal")
 
   brazil_datatype <- summary(brazil_)
   brazil_datatype <- unique(brazil_datatype$datasets_type)
@@ -178,8 +176,7 @@ test_that("filter runs as expected. filters 2 datasettypes", {
       }
     }
   }
-}
-)
+})
 
 
 test_that("filter on datasettype runs as expected. count unique sites", {
@@ -201,15 +198,15 @@ test_that("filter on datasettype runs as expected. count unique sites", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brazil_ <- filter(brazil_datasets, datasettype == "pollen" | datasettype == "charcoal")
+  brazil_ <- neotoma2::filter(brazil_datasets,
+                    datasettype == "pollen" | datasettype == "charcoal")
 
   brazil_ids <- length(unique(getids(brazil_)$siteid))
   brazil_length <- length(brazil_)
 
   expect_equal(brazil_ids, brazil_length)
 
-}
-)
+})
 
 test_that("filter on lat runs as expected. count unique sites", {
 
@@ -230,12 +227,11 @@ test_that("filter on lat runs as expected. count unique sites", {
 
   brazil_datasets <- get_datasets(loc = brazil[1])
 
-  brasil_space <- brazil_datasets %>% filter(lat > -18 & lat < -16)
+  brasil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
 
   brazil_ids <- length(unique(getids(brasil_space)$siteid))
   brazil_length <- length(brasil_space)
 
   expect_equal(brazil_ids, brazil_length)
 
-}
-)
+})
