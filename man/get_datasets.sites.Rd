@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object of class \code{sites}.}
 
-\item{...}{accepted arguments: sites_object, contactid, datasettype,}
+\item{...}{additional arguments accepted by \code{get_datasets()}}
 }
 \description{
 Get Dataset from a \code{sites} object.

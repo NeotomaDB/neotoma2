@@ -64,20 +64,20 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
 parse_download <- function(result, verbose = TRUE) {
   dls <- result$data %>%
     cleanNULL()
-  
-  dl_index <- purrr::map(dls, function(x) { 
+
+  dl_index <- purrr::map(dls, function(x) {
     data.frame(siteid = x$site$siteid,
                collunitid = x$site$collectionunit$collectionunitid,
-               datasetid = x$site$collectionunit$dataset$datasetid )}) %>% 
+               datasetid = x$site$collectionunit$dataset$datasetid )}) %>%
     dplyr::bind_rows()
-  
+
   my_sites_list <- c()
   siteids <- c()
-  
+
   check_match <- function(dl_row, ids) {
     apply(ids, 1, function(x) sum(dl_row == x))
   }
-  
+
   for (i in 1:length(dls)) {
     if (length(my_sites_list) == 0) {
       my_site <- build_sites(dls[[i]])
@@ -85,38 +85,38 @@ parse_download <- function(result, verbose = TRUE) {
     } else {
       ids <- getids(my_sites_list, order = FALSE)
       matches <- check_match(dl_index[i,], ids)
-      
+
       if (max(matches) == 0) {
         # We're adding a site:
         my_site <- build_sites(dls[[i]])
         my_sites_list <- c(my_sites_list, my_site)
       } else if (max(matches) == 1) {
         # We're adding a collection unit somewhere:
-        st <- ids %>% 
-          mutate(match = matches) %>% 
-          group_by(siteid) %>% 
-          summarise(match = max(match)) %>% 
-          select(match) %>% unlist() %>% 
+        st <- ids %>%
+          mutate(match = matches) %>%
+          group_by(siteid) %>%
+          summarise(match = max(match)) %>%
+          select(match) %>% unlist() %>%
           which.max()
-        
+
         newcu <- build_collunits(dls[[i]]$site$collectionunit)
         oldcu <- my_sites_list[[st]]@collunits@collunits
-        
+
         my_sites_list[[st]]@collunits@collunits <- c(oldcu, newcu)
-      
+
       } else if (max(matches) == 2) {
         # We're adding a dataset to an existing collection unit:
-        
+
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
-        
-        cuids <- ids %>% 
+
+        cuids <- ids %>%
           dplyr::filter(siteid == unique(ids$siteid)[st], .preserve = TRUE)
-        
+
         cuid <- which(unique(cuids$collunitid) == dl_index$collunitid[i])
-        
+
         collunit <- my_sites_list[[st]]@collunits@collunits[[cuid]]
         newds <- build_dataset(dls[[i]]$site$collectionunit$dataset)
-        collunit@datasets@datasets <- c(collunit@datasets@datasets, 
+        collunit@datasets@datasets <- c(collunit@datasets@datasets,
                                         newds)
         my_sites_list[[st]]@collunits@collunits[[cuid]] <- collunit
       }
@@ -130,10 +130,11 @@ parse_download <- function(result, verbose = TRUE) {
 
 #' @title get_downloads
 #' @param x Use a single number to extract site information
+#' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
 #' @export
 get_downloads.numeric <- function(x, verbose = TRUE, ...) {
-  
+
   use_na <- function(x, type) {
     if (is.na(x)) {
       return(switch(type,
@@ -147,21 +148,22 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  
+
   base_url <- paste0("data/downloads/", dataset)
   result <- parseURL(base_url) # nolint
-  
+
   output <- parse_download(result)
-  
+
   return(output)
 }
 
 #' @title get_downloads sites
 #' @param x sites object
+#' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
 #' @export
-get_downloads.sites <- function(x, ...) {
-  
+get_downloads.sites <- function(x, verbose = TRUE, ...) {
+
   use_na <- function(x, type) {
     if (is.na(x)) {
       return(switch(type,
@@ -171,13 +173,13 @@ get_downloads.sites <- function(x, ...) {
       return(x)
     }
   }
-  
+
   output <- getids(x) %>%
-    dplyr::select(datasetid) %>% 
+    dplyr::select(.data$datasetid) %>%
     na.omit() %>%
-    unique() %>% 
-    unlist() %>% 
-    get_downloads(x = ., verbose, ...)
-  
+    unique() %>%
+    unlist()
+  output <- get_downloads(x = output, verbose, ...)
+
   return(output)
 }

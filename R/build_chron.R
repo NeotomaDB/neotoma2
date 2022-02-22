@@ -13,9 +13,9 @@
 #' # To build dataset from API call:
 #' build_dataset(x)
 #' }
-#' 
+#'
 build_chron <- function(x) {
-  
+
   # TODO pass fix_null to its own script
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
@@ -30,34 +30,32 @@ build_chron <- function(x) {
     return(x)
   }
   # Contact Information
-  #contact <- length(y$chronology$chronology$contact)
   contact_list <- list()
-  #for (k in seq_len(length(contact))) {
-  #  if (!is.na(y$chronology$chronology$contact)) {
-  #    cn <- y$chronology$chronology$contact[[k]]$contactname
-  #    contact_list <- c(contact_list, cn)
-  #  }
-  #}
-  if(length(x$chronology$chronology) > 1){
+
+  if (length(x$chronology$chronology) > 1) {
     check_chron <- x$chronology$chronology[[1]]
   } else{
     check_chron <- x$chronology$chronology
   }
   if (!is.na(check_chron)) {
+
   # Chroncontrols
   df <- x$chronology$chroncontrols %>%
     map(function(y) {
       as.data.frame(y)
     }) %>%
     bind_rows()
-  
+
   chron_table <- data.frame()
   df_sample <- df %>%
-    select(depth, thickness, agelimitolder, chroncontrolid,
-           agelimityounger, chroncontrolage, chroncontroltype)
+    select(.data$depth, .data$thickness,
+           .data$agelimitolder, .data$chroncontrolid,
+           .data$agelimityounger, .data$chroncontrolage,
+           .data$chroncontroltype)
+
   chron_table <- rbind(chron_table, df_sample) %>%
     distinct()
-  
+
   new("chronology",
       chronologyid = use_na(x$chronology$chronologyid, "int"),
       notes = use_na(x$chronology$chronology$notes, "char"),
@@ -69,7 +67,7 @@ build_chron <- function(x) {
       dateprepared = as.Date(x$chronology$chronology$dateprepared),
       modelagetype = use_na(testNull(x$chronology$chronology$modelagetype, NA), "char"),
       chronologyname = use_na(testNull(x$chronology$chronology$chronologyname,NA), "char"),
-      chroncontrols = chron_table) 
+      chroncontrols = chron_table)
   }else{
     new("chronology",
         chronologyid = NA_integer_,
@@ -82,6 +80,6 @@ build_chron <- function(x) {
         dateprepared = as.Date(character(0)),
         modelagetype = NA_character_,
         chronologyname = NA_character_,
-        chroncontrols = data.frame()) 
-  } 
+        chroncontrols = data.frame())
+  }
 }
