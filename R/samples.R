@@ -44,6 +44,7 @@ setMethod(f = "samples",
                       dplyr::filter(.data$chronologyid == default_chron)
 
                     # Ages
+                    age <- df$age
                     ageold <- df$ageolder
                     ageyoung <- df$ageyounger
                     agetype <- df$agetype
@@ -51,6 +52,7 @@ setMethod(f = "samples",
                     chronologyid <- df$chronologyid
 
                     if (nrow(df) == 0) {
+                      age <- NA_integer_
                       ageold <- NA_integer_
                       ageyoung <- NA_integer_
                       agetype <- NA_character_
@@ -59,24 +61,41 @@ setMethod(f = "samples",
                     }
 
                     df_sample <- df_sample %>%
-                      mutate(siteid = siteid,
-                             sitename = sitename,
-                             datasetid = datasetid,
-                             lat = lat,
-                             long = long,
-                             ageold = ageold,
-                             ageyoung = ageyoung,
-                             agetype = agetype,
-                             chronologyname = chronologyname,
-                             chronologyid = chronologyid
+                      mutate(siteid = .data$siteid,
+                             sitename = .data$sitename,
+                             datasetid = .data$datasetid,
+                             lat = .data$lat,
+                             long = .data$long,
+                             age = .data$age,
+                             ageold = .data$ageold,
+                             ageyoung = .data$ageyoung,
+                             agetype = .data$agetype,
+                             chronologyname = .data$chronologyname,
+                             chronologyid = .data$chronologyid
                       )
-                    
+
                     df_sample <- df_sample %>%
-                      select(siteid, sitename, datasetid, units, context, element,
-                             taxonid, symmetry, taxongroup, elementtype, variablename,
-                             ecologicalgroup, agetype, ageold, ageyoung, chronologyname, 
-                             chronologyid, lat, long)
-                    
+                      select(.data$siteid,
+                             .data$sitename,
+                             .data$datasetid,
+                             .data$units,
+                             .data$context,
+                             .data$element,
+                             .data$taxonid,
+                             .data$symmetry,
+                             .data$taxongroup,
+                             .data$elementtype,
+                             .data$variablename,
+                             .data$ecologicalgroup,
+                             .data$agetype,
+                             .data$age,
+                             .data$ageold,
+                             .data$ageyoung,
+                             .data$chronologyname,
+                             .data$chronologyid,
+                             .data$lat,
+                             .data$long)
+
                     taxon_table <- rbind(taxon_table, df_sample) %>%
                       distinct()
                   }
@@ -91,10 +110,10 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-            
+
             counter = 0
             taxon_table <- c()
-            
+
             length_collunits <- length(x@collunits)
             siteid <- x@siteid
             sitename <- x@sitename
@@ -102,65 +121,68 @@ setMethod(f = "samples",
             long <- mean(st_coordinates(x@geography)[, 1])
             for (j in seq_len(length_collunits)){
               length_datasets <- length(x@collunits[[j]]@datasets)
-              
+
               for (k in seq_len(length_datasets)) {
                 length_samples <- length(x@collunits[[j]]@datasets[[k]]@samples)
                 datasetid <- x@collunits[[j]]@datasets[[k]]@datasetid
-                
+
                 for (l in seq_len(length_samples)) {
                   df <- x$collunits[[j]]$datasets[[k]]$samples[[l]]$datum
                   # Verify number of samples
                   counter = counter + 1
-                  
+
                   df_sample <- df %>%
                     select(units, context, element, taxonid, symmetry,
                            taxongroup, elementtype, variablename,ecologicalgroup)
-                  
+
                   # Filter ages dataframe
                   default_chron <- x@collunits[[j]]@defaultchronology
                   df <- x@collunits[[j]]@datasets[[k]]@samples[[l]]@ages
                   df <- df %>% dplyr::filter(chronologyid == default_chron)
-                  
+
                   # Ages
+                  age <- df$age
                   ageold <- df$ageolder
                   ageyoung <- df$ageyounger
                   agetype <- df$agetype
                   chronologyname <- df$chronologyname
                   chronologyid <- df$chronologyid
-                  
+
                   if (nrow(df) == 0) {
+                    age <- NA_integer_
                     ageold <- NA_integer_
                     ageyoung <- NA_integer_
                     agetype <- NA_character_
                     chronologyname <- NA_character_
                     chronologyid <- NA_integer_
                   }
-                  
+
                   df_sample <- df_sample %>%
                     mutate(siteid = siteid,
                            sitename = sitename,
                            datasetid = datasetid,
                            lat = lat,
                            long = long,
+                           age = age,
                            ageold = ageold,
                            ageyoung = ageyoung,
                            agetype = agetype,
                            chronologyname = chronologyname,
                            chronologyid = chronologyid
                     )
-                  
+
                   df_sample <- df_sample %>%
                     select(siteid, sitename, datasetid, units, context, element,
                            taxonid, symmetry, taxongroup, elementtype, variablename,
-                           ecologicalgroup, agetype, ageold, ageyoung, chronologyname, 
+                           ecologicalgroup, agetype, age, ageold, ageyoung, chronologyname,
                            chronologyid, lat, long)
-                  
+
                   taxon_table <- rbind(taxon_table, df_sample) %>%
                     distinct()
                 }
               }
             }
-            
+
             return(taxon_table)
           }
 )
