@@ -132,8 +132,15 @@ setMethod(f = "samples",
                   counter = counter + 1
 
                   df_sample <- df %>%
-                    select(units, context, element, taxonid, symmetry,
-                           taxongroup, elementtype, variablename,ecologicalgroup)
+                    select(.data$units,
+                           .data$context,
+                           .data$element,
+                           .data$taxonid,
+                           .data$symmetry,
+                           .data$taxongroup,
+                           .data$elementtype,
+                           .data$variablename,
+                           .data$ecologicalgroup)
 
                   # Filter ages dataframe
                   default_chron <- x@collunits[[j]]@defaultchronology
@@ -172,10 +179,26 @@ setMethod(f = "samples",
                     )
 
                   df_sample <- df_sample %>%
-                    select(siteid, sitename, datasetid, units, context, element,
-                           taxonid, symmetry, taxongroup, elementtype, variablename,
-                           ecologicalgroup, agetype, age, ageold, ageyoung, chronologyname,
-                           chronologyid, lat, long)
+                    select(.data$siteid,
+                           .data$sitename,
+                           .data$datasetid,
+                           .data$units,
+                           .data$context,
+                           .data$element,
+                           .data$taxonid,
+                           .data$symmetry,
+                           .data$taxongroup,
+                           .data$elementtype,
+                           .data$variablename,
+                           .data$ecologicalgroup,
+                           .data$agetype,
+                           .data$age,
+                           .data$ageold,
+                           .data$ageyoung,
+                           .data$chronologyname,
+                           .data$chronologyid,
+                           .data$lat,
+                           .data$long)
 
                   taxon_table <- rbind(taxon_table, df_sample) %>%
                     distinct()
