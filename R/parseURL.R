@@ -40,6 +40,7 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
 
   response_url <- response$url
 
+
   # When need to check API endpoint, uncomment below
 
   cl <- as.list(match.call())
@@ -61,6 +62,7 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
     result <- cleanNull(result)
 
     result1 <- result$data
+
     responses <- c(responses, result1)
 
     if ("offset" %in% names(query)) {
@@ -83,12 +85,14 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
         response <- httr::GET(paste0(response_url, "&limit=500"),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
+
       }else{
         query$offset <- NULL
         query <- c(query, offset = param_offset)
         response <- httr::GET(paste0(response_url, "?limit=500"),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
+
       }
 
       if (response$status_code == 200) {
