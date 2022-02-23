@@ -20,15 +20,47 @@ setMethod(f = "plotLeaflet",
               addProviderTiles(providers$Stamen.TerrainBackground) %>%
               addTiles() %>%
               addCircleMarkers(lng = df1$long, lat = df1$lat,
-              popup = paste0("<b>", df1$sitename,
-              "</b><br><b>Description:</b> ",
-              df1$description,
-              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
-              df1$siteid,
-              ">Explorer Link</a>"),
-              clusterOptions = markerClusterOptions(),
-              options = markerOptions(riseOnHover = TRUE))
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               clusterOptions = markerClusterOptions(),
+                               options = markerOptions(riseOnHover = TRUE))
+            
+            if (save_im == TRUE) {
+              mapshot(map1, file = path)
+            }
+            map1
+          })
+# End plot methods
 
+
+setMethod(f = "plotLeaflet",
+          signature = "site",
+          definition = function(object, save_im=FALSE, path = "") {
+            
+            df1 <- data.frame(siteid = object@siteid,
+                             sitename = object@sitename,
+                             lat = mean(st_coordinates(object@geography)[, 2]),
+                             long = mean(st_coordinates(object@geography)[, 1]),
+                             elev = object@altitude,
+                             description = object@description)
+            
+            map1 <- leaflet(df1) %>%
+              addProviderTiles(providers$Stamen.TerrainBackground) %>%
+              addTiles() %>%
+              addCircleMarkers(lng = df1$long, lat = df1$lat,
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               clusterOptions = markerClusterOptions(),
+                               options = markerOptions(riseOnHover = TRUE))
+            
             if (save_im == TRUE) {
               mapshot(map1, file = path)
             }
