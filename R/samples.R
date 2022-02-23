@@ -106,7 +106,6 @@ setMethod(f = "samples",
           }
 )
 
-
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
