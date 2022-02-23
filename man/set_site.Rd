@@ -41,11 +41,11 @@ set Site Information for Fossil Sites
 }
 \examples{
 \dontrun{
-# Create a site called "My Lake", to 
+# Create a site called "My Lake", to
 x = st_as_sf(st_sfc(st_point(c(5,5))))
 my_site <- set_site(sitename = "My Lake",
                     geography = x,
-                    description = "my lake", 
+                    description = "my lake",
                     altitude = 30)
 }
 }

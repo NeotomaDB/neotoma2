@@ -6,6 +6,11 @@
 \usage{
 \S4method{[[}{publications,ANY,ANY,ANY}(x, i, j) <- value
 }
+\arguments{
+\item{x}{A publications object.}
+
+\item{i}{A numeric index for the requested publication}
+}
 \description{
 Assign value to an element in a publication list.
 }

@@ -44,7 +44,7 @@ setMethod(f = "show",
 setMethod(f = "[[",
           signature = signature(x = "contacts", i = "numeric"),
           definition = function(x, i) {
-            object@contacts[[i]]
+            x@contacts[[i]]
           })
 
 #' @title Extract or Replace Parts of an Object

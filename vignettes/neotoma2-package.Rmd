@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(sf)
-library(geojson)
+library(geojsonsf)
 library(neotoma2)
 ```
 
@@ -76,7 +76,7 @@ alex <- get_sites(sitename = 'Alex%')
 alex
 ```
 
-Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`.
+<!-- Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
 
 ### Accessing `sites` metadata
 

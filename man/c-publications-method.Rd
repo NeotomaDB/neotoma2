@@ -6,6 +6,11 @@
 \usage{
 \S4method{c}{publications}(x, y)
 }
+\arguments{
+\item{x}{A publications object.}
+
+\item{y}{A publications object}
+}
 \description{
 Combine publication objects.
 }
