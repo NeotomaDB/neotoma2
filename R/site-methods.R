@@ -45,6 +45,15 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @title Get or remove sites by numeric index
+#' @param x The sites object
+#' @param i The numeric index
+setMethod(f = "[",
+          signature = signature(x = "sites", i = "numeric"),
+          definition = function(x, i, j, drop = FALSE) {
+            new("sites", sites = x@sites[i])
+          })
+
 #' @title Get site field by numeric index
 #' @param x The site object
 #' @param i The column indicator
@@ -218,7 +227,8 @@ setMethod(f = "c",
           })
 
 #' @title write CSV
-#' @param x sites object 1
+#' @param x A sites object
+#' @param ... Other options to pass to \code{write.csv()}.
 #' @importFrom utils write.csv
 #' @export
 setMethod(f = "write.csv",

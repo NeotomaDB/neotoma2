@@ -12,3 +12,5 @@ vignettes/diatoms.Rmd
 wc10
 checkout.txt
 lintoutput.txt
+paper.md
+paper.bib

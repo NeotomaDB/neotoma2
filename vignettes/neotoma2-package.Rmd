@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(sf)
-library(geojson)
+library(spData)
+library(geojsonsf)
 library(neotoma2)
 ```
 
@@ -187,11 +188,11 @@ allSites
 
 Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.
 
-You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0)
+You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0), or you can use pre-existing objects within R, for example, country-level data within the `spData` package:
 
 Accessing datasets by bounding box:
 
-```{r bounding box}
+```{r boundingBox}
 brazil <- '{"type": "Polygon", 
             "coordinates": [[
                 [-73.125, -9.102],
@@ -205,7 +206,11 @@ brazil <- '{"type": "Polygon",
 # functionality of the `sf` package.
 brazil_sf <- geojsonsf::geojson_sf(brazil)
 
-brazil_datasets <- get_datasets(loc = brazil[1])
+brazil_datasets <- get_datasets(loc = brazil)
+
+# Or using spData:
+# brazil <- world$geom[world$name_long == "Brazil"]
+#brazil_datasets <- get_datasets(loc = brazil)
 ```
 
 Now we have an object called `brazil_datasets` that contains `r length(brazil_datasets)`.  
@@ -233,7 +238,7 @@ brasil_dates <- brazil_datasets %>%
 brasil_space <- brazil_datasets %>% filter(lat > -18 & lat < -16)
 ```
 
-The `filter()` function takes as the first argument, a datasets object, followed by the critieria we want to use to filter. Current supported criteria includes:
+The `filter()` function takes as the first argument, a datasets object, followed by the criteria we want to use to filter. Current supported criteria includes:
 
 * `lat`
 * `long`
