@@ -85,16 +85,9 @@ test_that("filter works as expected. filter by long.", {
 
   brazil_long <- neotoma2::filter(brazil_datasets, long > 0 & long < 50)
 
-  ds.0.50 <- as.data.frame(brazil_long)
-  longitudes <- ds.0.50$long
+  expect_length(brazil_long, 0)
 
-  for (i in longitudes) {
-    expect_lt(i, 50)
-    expect_gt(i, 0)
-  }
-
-}
-)
+})
 
 test_that("filter works as expected. filter by multiple arguments", {
 
