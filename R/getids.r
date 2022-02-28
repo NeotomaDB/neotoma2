@@ -46,3 +46,29 @@ getids.sites <- function(x, order = TRUE) {
 
     return(siteids)
 }
+
+#' @title Get object IDs from sites
+#' @param x A neotoma2 \code{sites} object.
+#' @export
+getids.site <- function(x, order = TRUE) {
+
+  siteid <- x@siteid
+  if (length(x@collunits) > 0) {
+    collunits <- map(x@collunits@collunits, function(z) {
+      collunitid <- z@collectionunitid
+      if (length(z@datasets) > 0) {
+        datasetids <- map(z@datasets@datasets, function(a) {
+          a@datasetid
+        })
+      } else {
+        datasetids <- NA
+      }
+
+      return(data.frame(collunitid = collunitid,
+                        datasetid = unlist(datasetids)))
+    }) %>% bind_rows()
+  } else {
+    data.frame(collunitid = NA, datasetid = NA)
+  }
+  return(data.frame(siteid = siteid, collunits))
+}

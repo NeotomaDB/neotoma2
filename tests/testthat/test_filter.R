@@ -109,21 +109,21 @@ test_that("filter works as expected. filter by multiple arguments", {
   brazil_datasets <- get_datasets(loc = brazil[1])
 
   brazil <- neotoma2::filter(brazil_datasets,
-                             datasettype == "pollen",
-                             long > -60 & long < -50,
-                             lat > -20 & lat < -10)
+                             datasettype == "pollen" &
+                             long > -60 & long < -40 &
+                             lat > -20 & lat < 0)
 
   df <- as.data.frame(brazil)
   longitudes <- df$long
   latitudes <- df$lat
 
   for (i in longitudes) {
-    expect_lt(i, -50)
+    expect_lt(i, -40)
     expect_gt(i, -60)
   }
 
   for (i in latitudes) {
-    expect_lt(i, -10)
+    expect_lt(i, 0)
     expect_gt(i, -20)
   }
 

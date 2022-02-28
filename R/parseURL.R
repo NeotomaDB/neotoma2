@@ -15,6 +15,7 @@
 #' \code{parseURL}.
 #' @export
 parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
+
   clean <- function(x) {
     ifelse(is.null(x), NA, x)
   }
@@ -25,6 +26,10 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
     } else {
       fn(x)
     }
+  }
+
+  if (!Sys.getenv("APIPOINT") == "") {
+    use <- Sys.getenv("APIPOINT")
   }
 
   baseurl <- switch(use,
@@ -111,6 +116,6 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
   }
 
   message(paste0("Your search returned ", length(result$data), " objects."))
-  
+
   return(result)
 }

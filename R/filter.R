@@ -49,5 +49,4 @@ filter.sites <- function(x, ...) {  # nolint
   })
 
   return(new("sites", sites = pared_ds))
-
 }

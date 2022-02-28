@@ -55,13 +55,14 @@ setMethod(f = "as.data.frame",
                        ageboundolder = x@ageboundolder,
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
-                       dateprepared = x@date,
+                       dateprepared = ifelse(is.null(x@dateprepared), NA, x@dateprepared),
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
 
 #' @title  as.data.frame datasets
 #' @param x chronologies object
+#' @importFrom purrr map
 #' @description show as dataframe as prep to save as csv
 #' @export
 setMethod(f = "as.data.frame",

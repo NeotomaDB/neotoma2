@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(sf)
-library(spData)
 library(geojsonsf)
 library(neotoma2)
 ```
@@ -207,10 +206,6 @@ brazil <- '{"type": "Polygon",
 brazil_sf <- geojsonsf::geojson_sf(brazil)
 
 brazil_datasets <- get_datasets(loc = brazil)
-
-# Or using spData:
-# brazil <- world$geom[world$name_long == "Brazil"]
-#brazil_datasets <- get_datasets(loc = brazil)
 ```
 
 Now we have an object called `brazil_datasets` that contains `r length(brazil_datasets)`.  
