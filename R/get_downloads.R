@@ -94,7 +94,7 @@ parse_download <- function(result, verbose = TRUE) {
         # We're adding a collection unit somewhere:
         st <- ids %>%
           mutate(match = matches) %>%
-          group_by(siteid) %>%
+          group_by(.data$siteid) %>%
           summarise(match = max(match)) %>%
           select(match) %>% unlist() %>%
           which.max()
@@ -110,7 +110,7 @@ parse_download <- function(result, verbose = TRUE) {
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
 
         cuids <- ids %>%
-          dplyr::filter(siteid == unique(ids$siteid)[st], .preserve = TRUE)
+          dplyr::filter(.data$siteid == unique(ids$siteid)[st], .preserve = TRUE)
 
         cuid <- which(unique(cuids$collunitid) == dl_index$collunitid[i])
 
@@ -161,6 +161,7 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @param x sites object
 #' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
+#' @importFrom stats na.omit
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
@@ -176,7 +177,7 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
   output <- getids(x) %>%
     dplyr::select(.data$datasetid) %>%
-    na.omit() %>%
+    stats::na.omit() %>%
     unique() %>%
     unlist()
   output <- get_downloads(x = output, verbose, ...)

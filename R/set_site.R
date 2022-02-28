@@ -2,6 +2,7 @@
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
+#' @importFrom methods slot<-
 #' @param siteid The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).
 #' @param sitename Actual site name as a character string.
 #' @param geography An \code{sf} object representing the site location, either as a polygon or point.
@@ -14,11 +15,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a site called "My Lake", to 
+#' # Create a site called "My Lake", to
 #' x = st_as_sf(st_sfc(st_point(c(5,5))))
 #' my_site <- set_site(sitename = "My Lake",
 #'                     geography = x,
-#'                     description = "my lake", 
+#'                     description = "my lake",
 #'                     altitude = 30)
 #' }
 
@@ -34,7 +35,7 @@ set_site <- function(x = NA,
                      collunits = new("collunits")) {
 
   function_call <- match.call()
-  
+
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
     x@siteid <- siteid
@@ -44,7 +45,7 @@ set_site <- function(x = NA,
     x@geopolitical <- geopolitical
     x@notes <- notes
     x@description <- description
-    x@collunits <- collunits  
+    x@collunits <- collunits
   } else {
     if (class(x) == "site") {
       for (i in 3:length(function_call)) {
@@ -53,7 +54,6 @@ set_site <- function(x = NA,
     }
     return(x)
   }
-  
 
   # TODO : change coordinates to sf_sfc or as is so user can define
 

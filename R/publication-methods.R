@@ -54,6 +54,8 @@ setMethod(f = "$",
 #          })
 
 #' @title Obtain one of the elements within a publication list.
+#' @param x A publications object.
+#' @param i A numeric index for the requested publication
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "publications", i = "numeric"),
@@ -70,6 +72,8 @@ setMethod(f = "[[",
           })
 
 #' @title Assign value to an element in a publication list.
+#' @param x A publications object.
+#' @param i A numeric index for the requested publication
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "publications"),
@@ -84,6 +88,7 @@ setMethod(f = "[[<-",
           })
 
 #' @title Get the number of publications in a publications object.
+#' @param x A publications object.
 #' @export
 setMethod(f = "length",
           signature = signature(x = "publications"),
@@ -92,6 +97,8 @@ setMethod(f = "length",
           })
 
 #' @title Combine publication objects.
+#' @param x A publications object.
+#' @param y A publications object
 #' @export
 setMethod(f = "c",
           signature = signature(x = "publications"),

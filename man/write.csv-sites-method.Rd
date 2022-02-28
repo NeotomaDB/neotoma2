@@ -7,7 +7,9 @@
 \S4method{write.csv}{sites}(x, ...)
 }
 \arguments{
-\item{x}{sites object 1}
+\item{x}{A sites object}
+
+\item{...}{Other options to pass to \code{write.csv()}.}
 }
 \description{
 write CSV

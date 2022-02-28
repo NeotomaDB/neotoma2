@@ -30,7 +30,7 @@ Download occurrence and age data from Neotoma: All vertebrate occurrences for XX
 By default the API calls have a `limit` of 25 records at a time. Given this the call:
 
 ```{r getRecords, eval=TRUE, message=FALSE}
-faunal <- get_datasets(datasettype = 'vertebrate fauna', all_data = TRUE)
+faunal <- get_datasets(datasettype = 'vertebrate fauna')
 ```
 
 would return only the first 25 records in Neotoma.  We can extract the coordinates directly using the `coordinates()` function, we can plot the locations in a very simple `plot()` function, or we can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
@@ -54,15 +54,13 @@ The leaflet plot is useful because it provides an interactive element to the dat
 
 The default for all calls to the Neotoma API is to set a `limit` of 25, but often we want all records.  There are two ways of obtaining all the records.  One is to increase the `limit` parameter, for example, calling:
 
-```{r getDatasetsHighLimit, eval=FALSE}
-get_datasets(datasettype = 'vertebrate fauna', limit = 50)
+```{r getDatasetsHighLimit, eval=TRUE}
+mam50 <- get_datasets(datasettype = 'vertebrate fauna', limit = 50)
 ```
-
-**Please don't do this**.  The issue is that it is computationally expensive for the database itself; it takes much longer for the single query, so an error at any point would result in you retrieving no records at all; and, you don't know how many records you might be getting, so if it's a very large table you might run out of local memory.
 
 One way of dealing with the issue of `offsets` and `limits` is the use of the `all_data` argument. When set to `TRUE`, a `while` loop is run within the function, to pull the data responsibly. This will result in returning all the data for your use-case.
 
-```{r downloadMammals, eval=TRUE}
+```{r downloadMammals, eval=FALSE}
 # This gives us 25 records (without setting 'limit')
 mammals <- get_datasets(datasettype = 'vertebrate fauna')
 
@@ -71,26 +69,43 @@ allMammals <- get_datasets(datasettype = 'vertebrate fauna',
                            all_data = TRUE)
 ```
 
-Now we have all the vertebrate faunal records from Neotoma, totaling `r length(allMammals)` distinct mammal sites.  This accounts for `r length(geids(allMammals))` distinct mammal datasets from the Neotoma Paleoecology Database.  The `allMammals` object is a `sites` object, but each `site` object contains `collectionunits` and `datasets`. The `length()` method only returns the number of sites.  If you want to know the total number of sites, collection units, datasets and samples, you can use the `summary()` method:
+In general it is better to filter records using the search parameters available within the `get_*()` functions than to download all records and filter within R.
+
+For any query set returned by the API we can examine the objects we have returned:
 
 ```{r summaryExample}
 summary(allMammals)
 ```
 
-The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [CLeaning Data](#cleaning)) 
+For our example, we want to search for all early Holocene vertebrate records within Neotoma in eastern North America.  So we can construct our search as follows:
+
+```{r getEasternFossils, eval=FALSE}
+mamSet <- get_datasets(datasettype = "vertebrate fauna",
+                       ageyoung = 6000,
+                       ageold = 11500,
+                       loc = c(-100,20,20,90),
+                       limit = 9000)
+```
+
+The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data..
 
 ## Cleaning Data {#cleaning}
 
 The basis of any workflow is downloading appropriate data. Lets begin again by downloading all records for mammals within the database that have a late-Pleistocene age.  Here we use the `get_datasets()` command, and set `ageold` to be `12000`.  Dates passed to the API are assumed to be in calibrated radiocarbon years before present.
 
+```{r obtainMammalData, eval=TRUE}
+mamSet <- get_datasets(datasettype = "vertebrate fauna",
+                       ageyoung = 6000,
+                       ageold = 11500,
+                       loc = c(-100,20,20,90),
+                       limit = 9000)
+
+plotLeaflet(mamSet)
+```
+
+With the leaflet plot we can dynamically navigate the records, and check to see if sites meet our criteria.
+
 ```{r}
-mamData <- get_datasets(datasettype = "vertebrate fauna", 
-                        ageold = 15000,
-                        ageyoung = 12000,
-                        all_data = TRUE)
-
-plotLeaflet(mamData)
-
 mamDl <- get_downloads(mamData, all_data = TRUE)
 ```
 

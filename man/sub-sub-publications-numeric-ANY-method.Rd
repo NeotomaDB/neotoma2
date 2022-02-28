@@ -6,6 +6,11 @@
 \usage{
 \S4method{[[}{publications,numeric,ANY}(x, i)
 }
+\arguments{
+\item{x}{A publications object.}
+
+\item{i}{A numeric index for the requested publication}
+}
 \description{
 Obtain one of the elements within a publication list.
 }

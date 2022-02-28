@@ -113,6 +113,15 @@ setMethod(f = "$<-",
 
 
 
+#' @title Get or remove datasets by numeric index
+#' @param x The datasets object
+#' @param i The numeric index
+setMethod(f = "[",
+          signature = signature(x = "datasets", i = "numeric"),
+          definition = function(x, i, j, drop = FALSE) {
+            new("datasets", datasets = x@datasets[i])
+          })
+
 #' @title  $
 #' @param x dataset object
 #' @description Obtain slots of a dataset without using at-mark
@@ -144,7 +153,7 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("dataset"),
           definition = function(x) {
-            data.frame(dataset.id = x@datasetid,
+            data.frame(datasetid = x@datasetid,
                        database = x@database,
                        datasettype = x@datasettype,
                        age_range_old =  x@age_range_old,
