@@ -105,11 +105,24 @@ plotLeaflet(mamSet)
 
 With the leaflet plot we can dynamically navigate the records, and check to see if sites meet our criteria.
 
-```{r}
-mamDl <- get_downloads(mamData, all_data = TRUE)
+We can use the `filter()` function to remove data based on one or more criteria.  For example, if we think a particular site is not appropriate to our analysis we can filter by `sitename` before downloading the records:
+
+```{r filterandDl}
+
+mamDl <- mamSet %>% 
+  neotoma2::filter(sitename != 'Medicine Creek Site [39LM222]') %>% 
+  get_downloads(., all_data = TRUE)
 ```
 
 ### Clean ages
+
+Given a set of downloaded datasets we can make additional choices and decisions about the records.  
+
+We may choose to examine the full set of samples:
+
+```{r getSamples}
+mamSamp <- samples(mamDl)
+```
 
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?

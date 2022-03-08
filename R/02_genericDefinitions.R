@@ -50,7 +50,7 @@ setGeneric("samples", function(x) {
 #' @title Obtain the chronology from a record or multiple records.
 #' @export
 setGeneric("chronologies", function(x) {
-  standardGeneric("chronologies")
+  standardGeneric(f = "chronologies")
 })
 
 #' @title Obtain the DOI for publications.
