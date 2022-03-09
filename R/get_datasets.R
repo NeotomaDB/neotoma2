@@ -143,29 +143,10 @@ parse_dataset <- function(result) { # nolint
   sites <- new("sites", sites = newSites)
 
   ## Patch to remove repeated sites
-  new_sites_object <- new("sites")
-  for (i in seq_len(length(sites))) {
-    for (j in seq_len(length(sites))) {
-      if (j > i) {
-        if (sites[[i]]@siteid == sites[[j]]@siteid) {
-          le <- length(sites[[i]]@collunits) + 1
-          sites[[i]]@collunits[[le]] <- sites[[j]]@collunits[[1]]
-          new_sites_object <- c(new_sites_object, sites[[i]])
-        }
-      }
-    }
-    if (length(new_sites_object) == 0) {
-      new_sites_object <- c(new_sites_object, sites[[i]])
-    }
-    if (!is.null(new_sites_object)) {
-      ids <- getids(new_sites_object)$siteid
-      if (!(sites[[i]]@siteid %in% ids)) {
-        new_sites_object <- c(new_sites_object, sites[[i]])
-      }
-    }
-  }
+  ## This is the chunk that's taking the most time.
+  sites <- clean(sites)
 
-  return(new_sites_object)
+  return(sites)
 
 }
 
@@ -226,13 +207,16 @@ get_datasets.default <- function(x, ...) { # nolint
       new_geojson <- new_geojson[1]
 
       base_url <- paste0("data/datasets?loc=", new_geojson[1])
+
       for (name in names(cl)) {
         if (!(name == "loc")) {
           base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
         }
       }
+
       result <- parseURL(base_url) %>%
         cleanNULL()
+
     } else {
       base_url <- paste0("data/datasets")
       result <- parseURL(base_url, ...) %>%
@@ -246,7 +230,7 @@ get_datasets.default <- function(x, ...) { # nolint
 
   if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
     return(NULL)
-  }else{
+  } else {
     output <- parse_dataset(result)
     return(output)
   }
