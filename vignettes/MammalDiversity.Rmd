@@ -87,7 +87,7 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        limit = 9000)
 ```
 
-The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data..
+The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data.
 
 ## Cleaning Data {#cleaning}
 
@@ -103,7 +103,7 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
 plotLeaflet(mamSet)
 ```
 
-With the leaflet plot we can dynamically navigate the records, and check to see if sites meet our criteria.
+With the leaflet plot we can dynamically navigate records, and check to see if sites meet our criteria by checking the records against the Neotoma dataset landing pages, or Neotoma Explorer.
 
 We can use the `filter()` function to remove data based on one or more criteria.  For example, if we think a particular site is not appropriate to our analysis we can filter by `sitename` before downloading the records:
 
@@ -113,6 +113,12 @@ mamDl <- mamSet %>%
   neotoma2::filter(sitename != 'Medicine Creek Site [39LM222]') %>% 
   get_downloads(., all_data = TRUE)
 ```
+
+The full set of filter arguments supported are:
+
+* `siteid`
+* `sitename`
+* 
 
 ### Clean ages
 
