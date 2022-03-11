@@ -35,6 +35,14 @@ setMethod(f = "show",
             print(result)
           })
 
+#' @title Get or remove sites by numeric index
+#' @param x The collunits object
+#' @param i The numeric index
+setMethod(f = "[",
+          signature = signature(x = "collunits", i = "numeric"),
+          definition = function(x, i, j, drop = FALSE) {
+            new("collunits", collunits = x@collunits[i])
+          })
 
 #' @title  Slicer
 #' @param x collunits object
