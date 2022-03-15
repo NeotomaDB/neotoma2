@@ -58,10 +58,10 @@ A collection unit represents the material (e.g., sediment core) that was removed
 
 #### What is the R package doing?
 
-When you work with the `neotoma2` package you are working with data from the neotoma database, but it is mediated through R functions (like `get_sites()` to get site information) that themselves call public URLs, that are basically abstractions of database calls.  So, for example:
+When you work with the `neotoma2` package you are working with data from the neotoma database, but it is mediated through R functions (like `get_sites()` to get site information) that themselves call public URLs, that are basically abstractions of database calls.  So, for example, to get data for site with ID number 12:
 
 ```r
-get_sites(siteid=12)
+get_site(12)
 ```
 actually calls out to the internet for the result at:
 ```
@@ -83,7 +83,7 @@ Following are descriptions of the main functions in `neotoma` and `neotoma2`. Te
 ##### `neotoma` functions
 
 ###### get_site
-Usage: Sites can be searched using the following supported parameters, e.g., get_sites("Sitename"):
+Usage: Sites can be searched using the following supported parameters, e.g., get_site("Sitename"):
 
 | parameter | allowed values |
 | ------ | ------- |
@@ -101,7 +101,7 @@ Values returned: A dataframe that includes: siteid, sitename, long [mean], lat [
 
 To see structure of get_site function output, run the following code:
 ```{R structure_of_get_site_output}
-uwallf_site <-get_site('Upper Wallface%') # finds site data for a site
+uwallf_site <-get_site(sitename = 'Upper Wallface%') # finds site data for a site
 str (uwallf_site) # shows structure of uwallf_site
 ```
 
@@ -143,6 +143,10 @@ uwall
 ##### `neotoma2` functions
 [Similar to `neotoma` functions, but updated (e.g., returning more variables;  descriptions to be added when they are available]
 ###### get_sites
+Needs much more description - arguments and values!!!!
+-----
+To get site info using site ID, just include the siteid, e.g., get_sites(475)
+To get site info using sitename, use get_sites(sitename = "name of Site")
 To see structure of get_sites function output, run the following code:
 ```{R structure_of_get_sites_output}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for a site
@@ -440,10 +444,10 @@ Usually, code would include selection criteria in addition to datasettype. For e
 ```{r getDiatomsByDatasettype} 
 # Get datasets by individual diatom datatype 
 neDiatoms_ss <- get_dataset(datasettype="diatom surface sample")
-# neDiatoms_tb <- get_dataset(datasettype="diatom top-bottom") # This code will not work because "diatom top-bottom" is not on the list of acceptable dataset types that neotoma R accesses.
+# neDiatoms_tb <- get_dataset(datasettype="diatom top-bottom") # This code will not work because "diatom top-bottom" is not on the list of acceptable dataset types that neotoma R accesses.  It can be added to the code when neotoma2R code is changed to allow use of the Top-Bottom data type.
 neDiatoms_dt <- get_dataset(datasettype="diatom")
 # Combine results of search for three individual datatypes into one
-neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt)
+neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_dt)
 neDiatoms_sstb
 #Creates an object, neDiatoms_sstb, to contain the datasets of the different diatom data types in one geographic location box
 neDiatoms_sstb <- c(neDiatoms_ss,neDiatoms_tb,neDiatoms_dt) 
