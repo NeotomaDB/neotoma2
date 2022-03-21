@@ -6,6 +6,9 @@
 \usage{
 showMatch(x)
 }
+\arguments{
+\item{x}{object to show matches for}
+}
 \description{
 Show matches for objects.
 }

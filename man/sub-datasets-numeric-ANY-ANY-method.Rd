@@ -4,7 +4,7 @@
 \alias{[,datasets,numeric,ANY,ANY-method}
 \title{Get or remove datasets by numeric index}
 \usage{
-\S4method{[}{datasets,numeric,ANY,ANY}(x, i, j, drop = FALSE)
+\S4method{[}{datasets,numeric,ANY,ANY}(x, i)
 }
 \arguments{
 \item{x}{The datasets object}

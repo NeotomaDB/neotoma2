@@ -18,6 +18,8 @@ set_site(
 )
 }
 \arguments{
+\item{x}{Object to be set as a site}
+
 \item{siteid}{The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).}
 
 \item{sitename}{Actual site name as a character string.}

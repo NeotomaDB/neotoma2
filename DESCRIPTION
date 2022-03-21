@@ -42,7 +42,6 @@ Imports:
     gtools,
     arulesViz,
     leaflet,
-    geojsonsf,
     mapview,
     assertthat,
     qpdf,

@@ -7,7 +7,11 @@
 \S4method{plot}{sites,ANY}(x, y, ...)
 }
 \arguments{
-\item{x}{sites object 1}
+\item{x}{sites object}
+
+\item{y}{ANY}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 Plot site coordinates using a basic plot.

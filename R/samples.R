@@ -15,7 +15,7 @@ setMethod(f = "samples",
             siteinfo <- as.data.frame(x) %>%
               left_join(allids, by = "siteid") %>%
               left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              rename(sitenotes = notes.x, datasetnotes = notes.y)
+              rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
             
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
@@ -54,7 +54,7 @@ setMethod(f = "samples",
             siteinfo <- as.data.frame(x) %>%
               left_join(allids, by = "siteid") %>%
               left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              rename(sitenotes = notes.x, datasetnotes = notes.y)
+              rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
             
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {

@@ -7,7 +7,7 @@
 \S4method{chronologies}{collunits}(x)
 }
 \arguments{
-\item{object}{A collunit object}
+\item{x}{A collunit object}
 }
 \description{
 Extract chronologies from a sites object.

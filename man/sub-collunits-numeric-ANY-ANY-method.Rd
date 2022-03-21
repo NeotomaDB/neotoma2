@@ -4,7 +4,7 @@
 \alias{[,collunits,numeric,ANY,ANY-method}
 \title{Get or remove sites by numeric index}
 \usage{
-\S4method{[}{collunits,numeric,ANY,ANY}(x, i, j, drop = FALSE)
+\S4method{[}{collunits,numeric,ANY,ANY}(x, i)
 }
 \arguments{
 \item{x}{The collunits object}

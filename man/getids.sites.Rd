@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{A neotoma2 \code{sites} object.}
+
+\item{order}{sort items by siteid, collunitid, datasetid}
 }
 \description{
 Get object IDs from sites

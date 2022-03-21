@@ -34,6 +34,10 @@ set_publications(
 )
 }
 \arguments{
+\item{publicationid}{ID of publication}
+
+\item{publicationtypeid}{ID of kind of publication}
+
 \item{publicationtype}{A text string identifying the publication
 type within the Neotoma database.}
 
@@ -80,6 +84,8 @@ type within the Neotoma database.}
 \item{originallanguage}{Original language of publication.}
 
 \item{notes}{Publication notes.}
+
+\item{author}{name of the author of publication.}
 }
 \description{
 A function to create new publication objects by hand.

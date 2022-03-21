@@ -10,6 +10,8 @@
 \item{x}{contacts A \code{contacts} object associated with a set of names.}
 
 \item{similarity}{The similarity score between matched records (from 0 - 1).}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 Get contact information for Neotoma contributors

@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{chronologies object}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 write CSV

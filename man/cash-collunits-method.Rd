@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{collunits object}
+
+\item{name}{name of the slot}
 }
 \description{
 Obtain slots of a collunit without using at-mark

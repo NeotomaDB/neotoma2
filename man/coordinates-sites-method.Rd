@@ -7,7 +7,9 @@
 \S4method{coordinates}{sites}(obj, ...)
 }
 \arguments{
-\item{x}{sites object 1}
+\item{obj}{A sites object}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 Return the latitude and logitude of sites

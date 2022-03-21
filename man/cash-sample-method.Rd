@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{sample object}
+
+\item{name}{name of the slot}
 }
 \description{
 Obtain slots of a sample without using at-mark

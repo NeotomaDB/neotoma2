@@ -7,7 +7,7 @@
 \S4method{chronologies}{sites}(x)
 }
 \arguments{
-\item{object}{A sites object}
+\item{x}{A sites object}
 }
 \description{
 Extract chronologies from a sites object.

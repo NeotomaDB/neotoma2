@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{sites object}
+
+\item{name}{name of the slot}
 }
 \description{
 Obtain slots of a site without using at-mark

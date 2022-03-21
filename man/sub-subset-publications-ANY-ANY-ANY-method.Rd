@@ -4,12 +4,14 @@
 \alias{[[<-,publications,ANY,ANY,ANY-method}
 \title{Assign value to an element in a publication list.}
 \usage{
-\S4method{[[}{publications,ANY,ANY,ANY}(x, i, j) <- value
+\S4method{[[}{publications,ANY,ANY,ANY}(x, i) <- value
 }
 \arguments{
 \item{x}{A publications object.}
 
 \item{i}{A numeric index for the requested publication}
+
+\item{value}{The value to be used}
 }
 \description{
 Assign value to an element in a publication list.

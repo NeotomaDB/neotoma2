@@ -6,8 +6,13 @@
 \usage{
 clean(x = NA, ...)
 }
+\arguments{
+\item{x}{sites, datasets, collunits that may have duplicates.}
+
+\item{...}{Additional parameters associated with the call.}
+}
 \description{
-clean
+Function that removes duplicate objects such as sites, datasets, or collection units.
 }
 \author{
 Simon Goring \email{goring@wisc.edu}

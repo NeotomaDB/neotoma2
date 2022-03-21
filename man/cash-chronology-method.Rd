@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{chronology object}
+
+\item{name}{name of the slot}
 }
 \description{
 Obtain slots of a chronology without using at-mark

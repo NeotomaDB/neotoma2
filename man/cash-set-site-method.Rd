@@ -9,9 +9,9 @@
 \arguments{
 \item{x}{The site object.}
 
-\item{value}{The value to be used.}
+\item{name}{name of the slot}
 
-\item{i}{The column indicator.}
+\item{value}{The value to be used.}
 }
 \description{
 Assign site field by numeric index

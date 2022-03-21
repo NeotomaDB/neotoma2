@@ -4,7 +4,7 @@
 \alias{[<-,collunit,character,ANY,ANY-method}
 \title{Assign collunit field by numeric index}
 \usage{
-\S4method{[}{collunit,character,ANY,ANY}(x, i, j, drop = FALSE) <- value
+\S4method{[}{collunit,character,ANY,ANY}(x, i) <- value
 }
 \arguments{
 \item{x}{The collunit object.}

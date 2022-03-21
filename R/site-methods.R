@@ -88,11 +88,12 @@ setMethod(f = "names",
 #' @title  Insert site
 #' @param x sites object
 #' @param i iteration in sites list
+#' @param value The value to be used
 #' @description Obtain one of the elements within a sites list
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "sites"),
-          definition = function(x, i, j, value) {
+          definition = function(x, i, value) {
             siteset <- x@sites
             siteset[[i]] <- value
             out <- new("sites", sites = siteset)
@@ -105,7 +106,7 @@ setMethod(f = "[[<-",
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
-          definition = function(x, i, j, value, drop = FALSE) {
+          definition = function(x, i, value) {
             for (idx in 1:length(i)) {
               slot(x, i[idx]) <- value[idx]
             }
@@ -118,7 +119,7 @@ setMethod(f = "[<-",
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "numeric"),
-          definition = function(x, i, j, value, drop = FALSE) {
+          definition = function(x, i, value) {
             slots <- slotNames(x)
             for (idx in 1:length(i)) {
               slot(x, slots[i[idx]]) <- value[idx]
@@ -253,6 +254,7 @@ setMethod(f = "coordinates",
 
 #' @title Plot site coordinates using a basic plot.
 #' @param x sites object
+#' @param y ANY
 #' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "plot",

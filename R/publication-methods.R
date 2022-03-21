@@ -74,10 +74,11 @@ setMethod(f = "[[",
 #' @title Assign value to an element in a publication list.
 #' @param x A publications object.
 #' @param i A numeric index for the requested publication
+#' @param value The value to be used
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "publications"),
-          definition = function(x, i, j, value) {
+          definition = function(x, i, value) {
             if (length(i) == 1) {
               x@publications[[i]] <- new("publication", value)
               out <- x

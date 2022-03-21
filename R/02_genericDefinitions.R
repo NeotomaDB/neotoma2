@@ -44,6 +44,7 @@ setGeneric("showMatch", function(x) {
 })
 
 #' @title Obtain samples from a record or multiple records.
+#' @param x sites object
 #' @export
 setGeneric("samples", function(x) {
   standardGeneric(f = "samples")

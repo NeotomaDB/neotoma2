@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{collunits object}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 write CSV

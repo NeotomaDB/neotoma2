@@ -18,10 +18,10 @@ filter.sites <- function(x, ...) {  # nolint
   ids <- getids(x) %>%
     inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
     inner_join(as.data.frame(x), by = "siteid") %>%
-    rename(datasetnotes = notes.x,
-           sitenotes = notes.y,
-           ageolder = age_range_old,
-           ageyounger = age_range_young)
+    rename(datasetnotes = .data$notes.x,
+           sitenotes = .data$notes.y,
+           ageolder = .data$age_range_old,
+           ageyounger = .data$age_range_young)
 
   cleanids <- ids %>%
     dplyr::filter(...)

@@ -5,7 +5,7 @@
 #' @importFrom methods new
 #' @param x sites, datasets, collunits that may have duplicates.
 #' @param ... Additional parameters associated with the call.
-#' @description
+#' @description Function that removes duplicate objects such as sites, datasets, or collection units.
 
 clean <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -16,12 +16,13 @@ clean <- function(x = NA, ...) {
 }
 
 clean.sites <- function(x) {
+
   siteids <- as.data.frame(x)$siteid
   if (any(duplicated(siteids))) {
     matched <- unique(siteids[duplicated(siteids)])
-    clean_sites <- neotoma2::filter(x, !siteid %in% matched)
+    clean_sites <- neotoma2::filter(x, !.data$siteid %in% matched)
     for (i in matched) {
-      messy_site <- neotoma2::filter(x, siteid == i)
+      messy_site <- neotoma2::filter(x, .data$siteid == i)
       messy_cus <- clean(collunits(messy_site))
       new_site <- messy_site[1]
       new_site@sites[[1]]@collunits <- messy_cus

@@ -8,6 +8,8 @@ getids(x, order = TRUE)
 }
 \arguments{
 \item{x}{A neotoma2 \code{sites} object.}
+
+\item{order}{sort items by siteid, collunitid, datasetid}
 }
 \description{
 This function parses a site object, from \code{site} to

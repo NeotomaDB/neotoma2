@@ -4,12 +4,14 @@
 \alias{[[<-,datasets,ANY,ANY,ANY-method}
 \title{Insert dataset}
 \usage{
-\S4method{[[}{datasets,ANY,ANY,ANY}(x, i, j) <- value
+\S4method{[[}{datasets,ANY,ANY,ANY}(x, i) <- value
 }
 \arguments{
 \item{x}{datasets object}
 
 \item{i}{iteration in datasets list}
+
+\item{value}{The value to be used}
 }
 \description{
 Obtain one of the elements within a datasets list

@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{datasets object}
+
+\item{name}{name of the slot.}
 }
 \description{
 Obtain slots of a dataset without using at-mark

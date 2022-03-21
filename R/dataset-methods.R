@@ -93,7 +93,7 @@ setMethod(f = "[<-",
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "numeric"),
-          definition = function(x, i, j, value, drop = FALSE) {
+          definition = function(x, i, value) {
             slots <- slotNames(x)
             for (idx in 1:length(i)) {
               slot(x, slots[i[idx]]) <- value[idx]
@@ -119,7 +119,7 @@ setMethod(f = "$<-",
 #' @param i The numeric index
 setMethod(f = "[",
           signature = signature(x = "datasets", i = "numeric"),
-          definition = function(x, i, j, drop = FALSE) {
+          definition = function(x, i) {
             new("datasets", datasets = x@datasets[i])
           })
 
@@ -197,6 +197,7 @@ setMethod(f = "c",
 
 #' @title write CSV
 #' @param x datasets object
+#' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "write.csv",
           signature = "datasets",

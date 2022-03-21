@@ -6,6 +6,9 @@
 \usage{
 chronologies(x)
 }
+\arguments{
+\item{x}{sites object that contains chronologies}
+}
 \description{
 Obtain the chronology from a record or multiple records.
 }

@@ -96,6 +96,7 @@ setMethod(f = "c",
 
 #' @title write CSV
 #' @param x chronologies object
+#' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "write.csv",
           signature = "chronologies",

@@ -7,7 +7,9 @@
 coordinates(obj, ...)
 }
 \arguments{
-\item{object}{A sites object}
+\item{obj}{A sites object}
+
+\item{...}{Additional parameters associated with the call.}
 }
 \description{
 Obtain coordinates from a sites object.

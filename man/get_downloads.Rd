@@ -9,6 +9,8 @@ get_downloads(x = NA, verbose = TRUE, ...)
 \arguments{
 \item{x}{Use a single number to extract site information}
 
+\item{verbose}{Status bar of items being downloaded}
+
 \item{...}{accepted arguments: sites, datasets}
 }
 \value{

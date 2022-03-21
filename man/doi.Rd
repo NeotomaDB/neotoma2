@@ -6,6 +6,9 @@
 \usage{
 doi(x)
 }
+\arguments{
+\item{x}{Object with DOIs associated to it.}
+}
 \description{
 Obtain the DOI for publications.
 }

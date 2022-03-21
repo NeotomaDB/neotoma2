@@ -6,6 +6,9 @@
 \usage{
 samples(x)
 }
+\arguments{
+\item{x}{sites object}
+}
 \description{
 Obtain samples from a record or multiple records.
 }

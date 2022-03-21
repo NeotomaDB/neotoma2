@@ -7,7 +7,7 @@
 \S4method{show}{collunits}(object)
 }
 \arguments{
-\item{x}{collunits object}
+\item{object}{collunits object}
 }
 \description{
 Show the collection unit information

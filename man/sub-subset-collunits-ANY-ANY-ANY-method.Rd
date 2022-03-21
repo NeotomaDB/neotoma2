@@ -4,12 +4,14 @@
 \alias{[[<-,collunits,ANY,ANY,ANY-method}
 \title{Insert collunit}
 \usage{
-\S4method{[[}{collunits,ANY,ANY,ANY}(x, i, j) <- value
+\S4method{[[}{collunits,ANY,ANY,ANY}(x, i) <- value
 }
 \arguments{
 \item{x}{collunits object}
 
 \item{i}{iteration in collunits list}
+
+\item{value}{The value to be used}
 }
 \description{
 Obtain one of the elements within a collunits list

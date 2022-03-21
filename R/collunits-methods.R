@@ -212,6 +212,7 @@ setMethod(f = "c",
 
 #' @title write CSV
 #' @param x collunits object
+#' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "write.csv",
           signature = "collunits",

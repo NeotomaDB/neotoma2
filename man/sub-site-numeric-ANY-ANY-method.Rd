@@ -4,7 +4,7 @@
 \alias{[,site,numeric,ANY,ANY-method}
 \title{Get site field by numeric index}
 \usage{
-\S4method{[}{site,numeric,ANY,ANY}(x, i, j, drop = FALSE)
+\S4method{[}{site,numeric,ANY,ANY}(x, i)
 }
 \arguments{
 \item{x}{The site object}

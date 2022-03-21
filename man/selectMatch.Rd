@@ -6,6 +6,11 @@
 \usage{
 selectMatch(x, n)
 }
+\arguments{
+\item{x}{object}
+
+\item{n}{n elements that are a best match}
+}
 \description{
 Select the best match for an object.
 }

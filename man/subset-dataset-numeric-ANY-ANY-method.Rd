@@ -4,7 +4,7 @@
 \alias{[<-,dataset,numeric,ANY,ANY-method}
 \title{Assign dataset field by numeric index}
 \usage{
-\S4method{[}{dataset,numeric,ANY,ANY}(x, i, j, drop = FALSE) <- value
+\S4method{[}{dataset,numeric,ANY,ANY}(x, i) <- value
 }
 \arguments{
 \item{x}{The dataset object.}

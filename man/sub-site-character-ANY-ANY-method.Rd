@@ -4,7 +4,7 @@
 \alias{[,site,character,ANY,ANY-method}
 \title{Get site field by character index}
 \usage{
-\S4method{[}{site,character,ANY,ANY}(x, i, j, drop = FALSE)
+\S4method{[}{site,character,ANY,ANY}(x, i)
 }
 \arguments{
 \item{x}{The site object}

@@ -4,7 +4,7 @@
 \alias{[,sites,numeric,ANY,ANY-method}
 \title{Get or remove sites by numeric index}
 \usage{
-\S4method{[}{sites,numeric,ANY,ANY}(x, i, j, drop = FALSE)
+\S4method{[}{sites,numeric,ANY,ANY}(x, i)
 }
 \arguments{
 \item{x}{The sites object}
