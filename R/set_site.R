@@ -3,6 +3,7 @@
 #' @import sf
 #' @importFrom methods new
 #' @importFrom methods slot<-
+#' @param x Object to be set as a site
 #' @param siteid The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).
 #' @param sitename Actual site name as a character string.
 #' @param geography An \code{sf} object representing the site location, either as a polygon or point.

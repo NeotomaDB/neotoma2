@@ -36,7 +36,12 @@ setMethod(f = "plotLeaflet",
           })
 # End plot methods
 
-
+#' @title plotLeaflet
+#' @description Plot a site on a leaflet map
+#' @param object Site object to plot
+#' @param save_im save output
+#' @param path location where output should be saved in. save_im must be TRUE
+#' @export
 setMethod(f = "plotLeaflet",
           signature = "site",
           definition = function(object, save_im=FALSE, path = "") {

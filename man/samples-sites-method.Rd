@@ -7,8 +7,8 @@
 \S4method{samples}{sites}(x)
 }
 \arguments{
-\item{x}{Sites where samples are}
+\item{x}{sites object}
 }
 \description{
-Retrieve the samples data
+Obtain elements on the samples level
 }

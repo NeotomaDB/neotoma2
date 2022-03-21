@@ -2,15 +2,16 @@
 #' @description Uses the Neotoma API to search and access information
 #' about publications associated with data in the Neotoma Paleoecology Database
 #' @param x integer A contact ID
-#' @param publicationid
+#' @param ...
+#' `publicationid`
 #'    The unique numeric identifier associated with a publication in Neotoma.
-#' @param datasetid
+#' `datasetid`
 #'    A unique identifier for a Neotoma dataset that is associated
 #'    with a publication.
-#' @param familyname The full or partial last name for an individual author.
-#' @param pubtype The publication type, from `get_tables("publicationtypes")`.
-#' @param year The year the publication was released.
-#' @param search A plain text search string used to search the citation.
+#' `familyname` The full or partial last name for an individual author.
+#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
+#' `year` The year the publication was released.
+#' `search` A plain text search string used to search the citation.
 #' @importFrom purrr pluck
 #' @export
 get_publications <- function(x = NA, ...) {
@@ -23,6 +24,16 @@ get_publications <- function(x = NA, ...) {
 #' @title Get publication information from Neotoma
 #' @importFrom methods new
 #' @importFrom purrr pluck
+#' @param ...
+#' `publicationid`
+#'    The unique numeric identifier associated with a publication in Neotoma.
+#' `datasetid`
+#'    A unique identifier for a Neotoma dataset that is associated
+#'    with a publication.
+#' `familyname` The full or partial last name for an individual author.
+#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
+#' `year` The year the publication was released.
+#' `search` A plain text search string used to search the citation.
 #' @export
 get_publications.default <- function(...) {
   . <- ""
@@ -67,6 +78,17 @@ get_publications.default <- function(...) {
 #' @title Get contact information for Neotoma contributors
 #' @importFrom methods new
 #' @importFrom purrr pluck
+#' @param x integer A contact ID
+#' @param ...
+#' `publicationid`
+#'    The unique numeric identifier associated with a publication in Neotoma.
+#' `datasetid`
+#'    A unique identifier for a Neotoma dataset that is associated
+#'    with a publication.
+#' `familyname` The full or partial last name for an individual author.
+#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
+#' `year` The year the publication was released.
+#' `search` A plain text search string used to search the citation.
 #' @export
 get_publications.numeric <- function(x, ...) {
   . <- ""
@@ -102,7 +124,20 @@ get_publications.numeric <- function(x, ...) {
     new("publications", publications = .)
   return(pubs)
 }
+
+#' @title Get publications for Neotoma contributors
 #' @importFrom dplyr coalesce
+#' @param x integer A publication
+#' @param ...
+#' `publicationid`
+#'    The unique numeric identifier associated with a publication in Neotoma.
+#' `datasetid`
+#'    A unique identifier for a Neotoma dataset that is associated
+#'    with a publication.
+#' `familyname` The full or partial last name for an individual author.
+#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
+#' `year` The year the publication was released.
+#' `search` A plain text search string used to search the citation.
 #' @export
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {
@@ -117,6 +152,20 @@ get_publications.publication <- function(x, ...) {
   }
   return(x)
 }
+
+#' @title Get publications for Neotoma contributors
+#' @importFrom dplyr coalesce
+#' @param x integer A publication
+#' @param ...
+#' `publicationid`
+#'    The unique numeric identifier associated with a publication in Neotoma.
+#' `datasetid`
+#'    A unique identifier for a Neotoma dataset that is associated
+#'    with a publication.
+#' `familyname` The full or partial last name for an individual author.
+#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
+#' `year` The year the publication was released.
+#' `search` A plain text search string used to search the citation.
 #' @export
 get_publications.publications <- function(x, ...) {
   for (i in seq_len(length(x))) {

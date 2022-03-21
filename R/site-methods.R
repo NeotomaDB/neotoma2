@@ -50,7 +50,7 @@ setMethod(f = "[[",
 #' @param i The numeric index
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
-          definition = function(x, i, j, drop = FALSE) {
+          definition = function(x, i) {
             new("sites", sites = x@sites[i])
           })
 
@@ -59,7 +59,7 @@ setMethod(f = "[",
 #' @param i The column indicator
 setMethod(f = "[",
           signature = signature(x = "site", i = "numeric"),
-          definition = function(x, i, j, drop = FALSE) {
+          definition = function(x, i) {
             slots <- slotNames(x)[i]
             as.data.frame(sapply(slots, function(y) slot(x, y)))
           })
@@ -69,7 +69,7 @@ setMethod(f = "[",
 #' @param i The column indicator
 setMethod(f = "[",
           signature = signature(x = "site", i = "character"),
-          definition = function(x, i, j, drop = FALSE) {
+          definition = function(x, i) {
             out <- as.data.frame(lapply(i, function(y) slot(x, y)))
             colnames(out) <- i
             return(out)
@@ -128,7 +128,7 @@ setMethod(f = "[<-",
 
 #' @title Assign site field by numeric index
 #' @param x The site object.
-#' @param i The column indicator.
+#' @param name name of the slot
 #' @param value The value to be used.
 setMethod(f = "$<-",
           signature = signature(x = "site"),
@@ -139,6 +139,7 @@ setMethod(f = "$<-",
 
 #' @title $
 #' @param x site object
+#' @param name name of the slot
 #' @description Obtain slots of a site without using at-mark
 #' @export
 setMethod(f = "$",
@@ -149,6 +150,7 @@ setMethod(f = "$",
 
 #' @title  $ for sites
 #' @param x sites object
+#' @param name name of the slot
 #' @description Obtain slots of a site without using at-mark
 #' @export
 setMethod(f = "$",
@@ -239,7 +241,8 @@ setMethod(f = "write.csv",
           })
 
 #' @title Return the latitude and logitude of sites
-#' @param x sites object 1
+#' @param obj A sites object
+#' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "coordinates",
           signature = "sites",
@@ -249,7 +252,8 @@ setMethod(f = "coordinates",
           })
 
 #' @title Plot site coordinates using a basic plot.
-#' @param x sites object 1
+#' @param x sites object
+#' @param ... Additional parameters associated with the call.
 #' @export
 setMethod(f = "plot",
           signature = "sites",

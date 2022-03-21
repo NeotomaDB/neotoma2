@@ -19,6 +19,7 @@ setMethod(f = "[[",
 
 #' @title  $
 #' @param x sample object
+#' @param name name of the slot
 #' @description Obtain slots of a sample without using at-mark
 #' @export
 setMethod(f = "$",
@@ -29,6 +30,7 @@ setMethod(f = "$",
 
 #' @title  $ for samples
 #' @param x samples object
+#' @param name name of the slot
 #' @description Obtain slots of a site without using at-mark
 #' @export
 setMethod(f = "$",

@@ -2,6 +2,9 @@
 #' @description A function to create new publication objects by hand.
 #' @param publicationtype A text string identifying the publication
 #'  type within the Neotoma database.
+#' @param publicationid ID of publication
+#' @param publicationtypeid ID of kind of publication
+#' @param author name of the author of publication.
 #' @param year The year of publication.
 #' @param citation A full text citation for the article.
 #' @param articletitle The title of the article.

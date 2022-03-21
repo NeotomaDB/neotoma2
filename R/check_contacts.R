@@ -13,6 +13,7 @@ check_contacts <- function(x, ...) {
 #' @title Get contact information for Neotoma contributors
 #' @param x contacts A \code{contacts} object associated with a set of names.
 #' @param similarity The similarity score between matched records (from 0 - 1).
+#' @param ... Additional parameters associated with the call.
 #' @export
 check_contacts.contacts <- function(x, similarity = 0.5, ...) {
   checked <- map(x@contacts, function(y) {

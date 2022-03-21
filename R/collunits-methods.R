@@ -12,7 +12,7 @@ setMethod(f = "c",
           })
 
 #' @title  Show the collection unit information
-#' @param x collunits object
+#' @param object collunits object
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunits"),
@@ -25,7 +25,7 @@ setMethod(f = "show",
           })
 
 #' @title  Show the collection unit information
-#' @param x collunit object
+#' @param object collunit object
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunit"),
@@ -40,7 +40,7 @@ setMethod(f = "show",
 #' @param i The numeric index
 setMethod(f = "[",
           signature = signature(x = "collunits", i = "numeric"),
-          definition = function(x, i, j, drop = FALSE) {
+          definition = function(x, i) {
             new("collunits", collunits = x@collunits[i])
           })
 
@@ -76,11 +76,12 @@ setMethod(f = "names",
 #' @title  Insert collunit
 #' @param x collunits object
 #' @param i iteration in collunits list
+#' @param value The value to be used
 #' @description Obtain one of the elements within a collunits list
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "collunits"),
-          definition = function(x, i, j, value) {
+          definition = function(x, i, value) {
             collunitset <- x@collunits
             collunitset[[i]] <- value
             out <- new("collunits", collunits = collunitset)
@@ -94,7 +95,7 @@ setMethod(f = "[[<-",
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "character"),
-          definition = function(x, i, j, value, drop = FALSE) {
+          definition = function(x, i, value) {
             for (idx in 1:length(i)) {
               slot(x, i[idx]) <- value[idx]
             }
@@ -107,7 +108,7 @@ setMethod(f = "[<-",
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "numeric"),
-          definition = function(x, i, j, value, drop = FALSE) {
+          definition = function(x, i, value) {
             slots <- slotNames(x)
             for (idx in 1:length(i)) {
               slot(x, slots[i[idx]]) <- value[idx]
@@ -117,7 +118,7 @@ setMethod(f = "[<-",
 
 #' @title Assign collunit field by numeric index
 #' @param x The collunit object.
-#' @param i The column indicator.
+#' @param name name of the slot.
 #' @param value The value to be used.
 setMethod(f = "$<-",
           signature = signature(x = "collunit"),
@@ -129,6 +130,7 @@ setMethod(f = "$<-",
 
 #' @title  $
 #' @param x collunit object
+#' @param name name of the slot
 #' @description Obtain slots of a collunit without using at-mark
 #' @export
 setMethod(f = "$",
@@ -139,6 +141,7 @@ setMethod(f = "$",
 
 #' @title  $ for collunits
 #' @param x collunits object
+#' @param name name of the slot
 #' @description Obtain slots of a collunit without using at-mark
 #' @export
 setMethod(f = "$",

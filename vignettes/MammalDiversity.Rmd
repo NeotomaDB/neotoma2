@@ -36,7 +36,7 @@ faunal <- get_datasets(datasettype = 'vertebrate fauna')
 would return only the first 25 records in Neotoma.  We can extract the coordinates directly using the `coordinates()` function, we can plot the locations in a very simple `plot()` function, or we can create an interactive spatial plot using the `plotLeaflet()` command to display the records:
 
 ```{r plotSiteLatitudes, eval=TRUE}
-faunal_coordinates <- coordinates(faunal)
+faunal_coordinates <- neotoma2::coordinates(faunal)
 plot(faunal_coordinates$lat, 
      ylab = "Latitude (degrees)", 
      xlab = "Longitude (degrees)")

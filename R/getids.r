@@ -5,6 +5,7 @@
 #' site, collectionunit and dataset IDs for each element within the site.
 #' @importFrom purrr map
 #' @importFrom dplyr arrange
+#' @param order sort items by siteid, collunitid, datasetid
 #' @export
 getids <- function(x, order = TRUE) {
   if (!missing(x)) {
@@ -14,6 +15,7 @@ getids <- function(x, order = TRUE) {
 
 #' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
+#' @param order sort items by siteid, collunitid, datasetid
 #' @export
 getids.sites <- function(x, order = TRUE) {
     siteids <- map(x@sites, function(y) {
@@ -49,6 +51,7 @@ getids.sites <- function(x, order = TRUE) {
 
 #' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
+#' @param order sort items by siteid, collunitid, datasetid
 #' @export
 getids.site <- function(x, order = TRUE) {
 

@@ -87,7 +87,7 @@ setMethod(f = "datasets",
           })
 
 #' @title Extract chronologies from a sites object.
-#' @param object A collunit object
+#' @param x A collunit object
 #' @importFrom methods slotNames slot
 #' @export
 setMethod(f = "chronologies",
@@ -101,7 +101,7 @@ setMethod(f = "chronologies",
           })
 
 #' @title Extract chronologies from a sites object.
-#' @param object A collunit object
+#' @param x A collunit object
 #' @importFrom methods slotNames slot
 #' @export
 setMethod(f = "chronologies",
@@ -116,7 +116,7 @@ setMethod(f = "chronologies",
           })
 
 #' @title Extract chronologies from a sites object.
-#' @param object A site object
+#' @param x A site object
 #' @importFrom methods slotNames slot
 #' @export
 setMethod(f = "chronologies",
@@ -131,7 +131,7 @@ setMethod(f = "chronologies",
           })
 
 #' @title Extract chronologies from a sites object.
-#' @param object A sites object
+#' @param x A sites object
 #' @importFrom methods slotNames slot
 #' @export
 setMethod(f = "chronologies",

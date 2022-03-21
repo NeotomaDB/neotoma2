@@ -7,6 +7,7 @@
 #' @description
 #' Information for Fossil Datasets
 #' @param x Use a single number to extract site information
+#' @param verbose Status bar of items being downloaded
 #' @param ... accepted arguments: sites, datasets
 #' @return The function returns either a single item of class
 #' \code{"try-error"} describing the reason for failure

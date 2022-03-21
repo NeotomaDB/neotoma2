@@ -9,13 +9,11 @@ get_contacts(x = NA, ...)
 \arguments{
 \item{x}{integer A contact ID}
 
-\item{contactname}{A full or partial name for an individual
-contributor to the database.}
-
-\item{familyname}{The full or partial last name for an
-individual contributor to the database.}
-
-\item{status}{The current status of the contributor
+\item{...}{(\code{contactname})  A full or partial name for an individual
+contributor to the database.
+(\code{familyname})  The full or partial last name for an
+individual contributor to the database.
+(\code{status}) The current status of the contributor
 (\code{active} or \code{retired})}
 }
 \description{

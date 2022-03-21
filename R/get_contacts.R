@@ -1,22 +1,33 @@
 #' @title Get contact information for Neotoma contributors
+#' @importFrom methods new
 #' @description Uses the Neotoma API to search and access
 #'  information about individuals who have contributed to
 #'  the data in the Neotoma Paleoecology Database
 #' @param x integer A contact ID
-#' @param contactname A full or partial name for an individual
+#' @param ...
+#' (\code{contactname})  A full or partial name for an individual
 #'  contributor to the database.
-#' @param familyname The full or partial last name for an
+#' (\code{familyname})  The full or partial last name for an
 #'  individual contributor to the database.
-#' @param status The current status of the contributor
+#' (\code{status}) The current status of the contributor
 #'  (\code{active} or \code{retired})
 #' @export
-
 get_contacts <- function(x = NA, ...) {
   UseMethod("get_contacts")
 }
 
 #' @title Get contact information for Neotoma contributors
-#' @importFrom methods new
+#' @description Uses the Neotoma API to search and access
+#'  information about individuals who have contributed to
+#'  the data in the Neotoma Paleoecology Database
+#' @param x integer A contact ID
+#' @param ...
+#' (\code{contactname})  A full or partial name for an individual
+#'  contributor to the database.
+#' (\code{familyname})  The full or partial last name for an
+#'  individual contributor to the database.
+#' (\code{status}) The current status of the contributor
+#'  (\code{active} or \code{retired})
 #' @export
 get_contacts.numeric <- function(x, ...) {
 
@@ -50,6 +61,18 @@ get_contacts.numeric <- function(x, ...) {
   return(contact)
 }
 
+#' @title Get contact information for Neotoma contributors
+#' @description Uses the Neotoma API to search and access
+#'  information about individuals who have contributed to
+#'  the data in the Neotoma Paleoecology Database
+#' @param x integer A contact ID
+#' @param ...
+#' (\code{contactname})  A full or partial name for an individual
+#'  contributor to the database.
+#' (\code{familyname})  The full or partial last name for an
+#'  individual contributor to the database.
+#' (\code{status}) The current status of the contributor
+#'  (\code{active} or \code{retired})
 #' @export
 get_contacts.default <- function(x, ...) {
 

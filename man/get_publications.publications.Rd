@@ -2,23 +2,23 @@
 % Please edit documentation in R/get_publications.R
 \name{get_publications.publications}
 \alias{get_publications.publications}
-\title{Get publication information for Neotoma records}
+\title{Get publications for Neotoma contributors}
 \usage{
 \method{get_publications}{publications}(x, ...)
 }
 \arguments{
-\item{x}{A publication ID
-The unique numeric identifier associated with a publication in Neotoma.}
+\item{x}{integer A publication}
 
-\item{...}{Other options to pass to \code{get_publications()}
-datasetid
+\item{...}{\code{publicationid}
+The unique numeric identifier associated with a publication in Neotoma.
+\code{datasetid}
 A unique identifier for a Neotoma dataset that is associated
 with a publication.
-familyname The full or partial last name for an individual author.
-pubtype The publication type, from \code{get_tables("publicationtypes")}.
-year The year the publication was released.
-search A plain text search string used to search the citation.}
+\code{familyname} The full or partial last name for an individual author.
+\code{pubtype} The publication type, from \code{get_tables("publicationtypes")}.
+\code{year} The year the publication was released.
+\code{search} A plain text search string used to search the citation.}
 }
 \description{
-Get publication information for Neotoma records
+Get publications for Neotoma contributors
 }

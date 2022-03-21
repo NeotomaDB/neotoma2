@@ -71,7 +71,6 @@ get_datasets <- function(x = NA, ...) {
   }
 }
 
-#' @export
 parse_dataset <- function(result) { # nolint
 
   fix_null <- function(x) {

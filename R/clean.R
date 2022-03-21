@@ -3,6 +3,8 @@
 #' @import gtools
 #' @import lubridate
 #' @importFrom methods new
+#' @param x sites, datasets, collunits that may have duplicates.
+#' @param ... Additional parameters associated with the call.
 #' @description
 
 clean <- function(x = NA, ...) {

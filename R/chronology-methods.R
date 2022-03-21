@@ -20,6 +20,7 @@ setMethod(f = "[[",
 
 #' @title  $
 #' @param x chronology object
+#' @param name name of the slot
 #' @description Obtain slots of a chronology without using at-mark
 #' @export
 setMethod(f = "$",
@@ -30,6 +31,7 @@ setMethod(f = "$",
 
 #' @title  $ for chronologies
 #' @param x chronologies object
+#' @param name name of the slot
 #' @description Obtain slots of a chronology without using at-mark
 #' @export
 setMethod(f = "$",

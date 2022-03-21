@@ -9,18 +9,15 @@ get_publications(x = NA, ...)
 \arguments{
 \item{x}{integer A contact ID}
 
-\item{publicationid}{The unique numeric identifier associated with a publication in Neotoma.}
-
-\item{datasetid}{A unique identifier for a Neotoma dataset that is associated
-with a publication.}
-
-\item{familyname}{The full or partial last name for an individual author.}
-
-\item{pubtype}{The publication type, from \code{get_tables("publicationtypes")}.}
-
-\item{year}{The year the publication was released.}
-
-\item{search}{A plain text search string used to search the citation.}
+\item{...}{\code{publicationid}
+The unique numeric identifier associated with a publication in Neotoma.
+\code{datasetid}
+A unique identifier for a Neotoma dataset that is associated
+with a publication.
+\code{familyname} The full or partial last name for an individual author.
+\code{pubtype} The publication type, from \code{get_tables("publicationtypes")}.
+\code{year} The year the publication was released.
+\code{search} A plain text search string used to search the citation.}
 }
 \description{
 Uses the Neotoma API to search and access information
