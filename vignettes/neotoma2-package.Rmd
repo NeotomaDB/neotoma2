@@ -205,7 +205,8 @@ brazil <- '{"type": "Polygon",
 # functionality of the `sf` package.
 brazil_sf <- geojsonsf::geojson_sf(brazil)
 
-brazil_datasets <- get_datasets(loc = brazil)
+brazil_datasets <- get_datasets(loc = brazil_sf)
+brazil_datasets
 ```
 
 Now we have an object called `brazil_datasets` that contains `r length(brazil_datasets)`.  
