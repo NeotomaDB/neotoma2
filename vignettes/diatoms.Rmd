@@ -324,6 +324,7 @@ northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
 
 neus <- sf::st_polygon(list(northeastUS))
+class(neus)
 ``` 
 
 ```{r}

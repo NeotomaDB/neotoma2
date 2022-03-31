@@ -239,28 +239,27 @@ get_datasets.default <- function(x, ...) { # nolint
         result <- parseURL(base_url) %>%
           cleanNULL()
       }
-    } 
-    # else if (class(cl$loc)[3] == "sfg") {
-    #   geo <- sf::st_sfc(cl$loc)
-    #   geo <- geojsonsf::sfc_geojson(geo)
-    #   
-    #   base_url <- paste0("data/datasets?loc=", geo)
-    #   for (name in names(cl)) {
-    #     if (!(name == "loc")) {
-    #       if (!(name == "all_data")) {
-    #         base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-    #       }
-    #     }
-    #   }
-    #   if ("all_data" %in% names(cl)){
-    #     result <- parseURL(base_url, all_data = cl$all_data) %>%
-    #       cleanNULL()
-    #   }else{
-    #     result <- parseURL(base_url) %>%
-    #       cleanNULL()
-    #   }
-    #   
-    # }
+    } else if ("sfg" %in% class(cl$loc)) {
+      geo <- sf::st_sfc(cl$loc)
+      geo <- geojsonsf::sfc_geojson(geo)
+
+      base_url <- paste0("data/datasets?loc=", geo)
+      for (name in names(cl)) {
+        if (!(name == "loc")) {
+          if (!(name == "all_data")) {
+            base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
+          }
+        }
+      }
+      if ("all_data" %in% names(cl)){
+        result <- parseURL(base_url, all_data = cl$all_data) %>%
+          cleanNULL()
+      }else{
+        result <- parseURL(base_url) %>%
+          cleanNULL()
+      }
+
+    }
     else {
       base_url <- paste0("data/datasets")
       result <- parseURL(base_url, ...) %>%
