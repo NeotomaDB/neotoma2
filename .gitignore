@@ -1,12 +1,16 @@
-.gitignore
-R/.gitignore
-.DS_Store
-.Rhistory
-.RData
-.Rproj.user
-inst/doc
-*.Rproj
 
-*.gz
+..Rcheck/
+
+.Rproj.user/
 
 wc10/
+
+neotoma2.Rproj
+
+*.Rproj
+
+.Rhistory
+
+checkout.txt
+
+lintoutput.txt

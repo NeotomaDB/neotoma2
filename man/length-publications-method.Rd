@@ -6,6 +6,9 @@
 \usage{
 \S4method{length}{publications}(x)
 }
+\arguments{
+\item{x}{A publications object.}
+}
 \description{
 Get the number of publications in a publications object.
 }

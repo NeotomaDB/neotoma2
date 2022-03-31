@@ -4,12 +4,12 @@
 \alias{get_datasets.numeric}
 \title{Get Dataset Numeric}
 \usage{
-\method{get_datasets}{numeric}(datasetid, ...)
+\method{get_datasets}{numeric}(x, ...)
 }
 \arguments{
-\item{datasetid}{Use a single number to extract site information}
+\item{x}{Use a single number to extract site information}
 
-\item{...}{arguments in ellipse form}
+\item{...}{Additional parameters to get_datasets}
 }
 \description{
 Get Dataset Numeric

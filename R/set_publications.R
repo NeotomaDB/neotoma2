@@ -1,6 +1,10 @@
 #' @title Create a new publication (or publication set)
 #' @description A function to create new publication objects by hand.
-#' @param publicationtype A text string identifying the publication type within the Neotoma database.
+#' @param publicationtype A text string identifying the publication
+#'  type within the Neotoma database.
+#' @param publicationid ID of publication
+#' @param publicationtypeid ID of kind of publication
+#' @param author name of the author of publication.
 #' @param year The year of publication.
 #' @param citation A full text citation for the article.
 #' @param articletitle The title of the article.
@@ -52,16 +56,16 @@ set_publications <- function(
     originallanguage = NA_character_,
     notes = NA_character_,
     author = NULL) {
-    
-    if(is.null(author)) {
+
+    if (is.null(author)) {
         author <- new("authors")
     }
-    
-    if(is.na(citation)) {
+
+    if (is.na(citation)) {
         citation <- paste0(articletitle, journal)
     }
-    
-    new('publication',
+
+    new("publication",
         publicationid = as.numeric(publicationid),
         publicationtypeid = as.numeric(publicationtypeid),
         publicationtype = as.character(publicationtype),

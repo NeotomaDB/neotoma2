@@ -6,6 +6,9 @@
 \usage{
 \S4method{as.data.frame}{publication}(x)
 }
+\arguments{
+\item{x}{A \code{publication} object.}
+}
 \description{
 Convert a \code{publication} to a \code{data.frame}
 }
