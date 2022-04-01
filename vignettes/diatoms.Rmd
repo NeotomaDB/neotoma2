@@ -279,8 +279,8 @@ uwallf_diatom_dataset <-  uwallf_datasets[[1]]@collunits[[3]]@datasets[[2]] #(da
 Get meta data on a single dataset using datasetID 
 
 ```{r get datasetID}
-# diat_ID <- get_dataset(datasetid) - basic format
-diat_ID <- get_datasets(44764) # Example
+# diat_ID <- get_datasets(datasetid) - basic format
+diat_ID <- get_datasets(32252) # Example
 diat_ID
 ```
 
@@ -310,7 +310,7 @@ Usually, code would include selection criteria in addition to datasettype. For e
 [old text - should be deleted: Example "loc = bounding box" (West,South,East,North) is northern Maine.]
 ```{r getDiatomsByDatasettype} 
 # Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface sample")
+neDiatoms_ss <- get_datasets(datasettype="diatom surface sample", limit=30)
 neDiatoms_ss 
 ```
 
@@ -482,7 +482,7 @@ Don
 # Find datasets using taxon name
 diat_nm<- get_datasets(taxonname = 'Navicula minima')
 # Find datasets using taxon id
-diat_nm1<- get_dataset(datasettype = 'diatom',taxonids = 11249)
+diat_nm1<- get_datasets(datasettype = 'diatom',taxonids = 11249)
 # Find datasets of a specific data type using taxon name
 # [Simon - need code for finding datasets for more than one taxon at a time]
 diat_nm<- get_dataset(datasettype = 'diatom',taxonname = 'Navicula minima')
