@@ -24,12 +24,12 @@ library(purrr)
 library(sf)
 ```
 
-# Start from line 477 March 24th
+# Start from line 477 March 31th
 ## Introduction
 
 This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
 
-Some code in this document was borrowed from the `neotoma2` markdown document prepared by Simon Goring and Socorro Dominguez and the original Neotoma R package ([Goring et al. 2015](http://doi.org/10.5334/oq.ab)).
+Some code in this document was borrowed from the `neotoma` markdown document prepared by Simon Goring and the original Neotoma R package ([Goring et al. 2015](http://doi.org/10.5334/oq.ab)).
 
 One of the main goals of `neotoma2` is to pull records out of the Neotoma database and into a user's R workflow. This will help diatomists and environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
 
@@ -75,12 +75,19 @@ WHERE siteid = 12
 
 It is a lot easier for most users to use the R functions since they create objects in R that work with other commands and statistical analysis they might want to do.
 
-#### Functions in `neotoma` and `neotoma2`
-Following are descriptions of the main functions in `neotoma` and `neotoma2`. Text in quotes was taken from the package descriptions. See the package documentation for more details.
+#### Functions in `neotoma2`
+Following are descriptions of the main functions in `neotoma2`. Text in quotes was taken from the package descriptions. See the package documentation for more details.
 
-`neotoma2` was being developed while this vignette documentation was being prepared, so not all the package functions were available. Currently (November 2021), some functions from `neotoma` and `neotoma2` are used in this document. Over time, original package functions should be replaced with corresponding `neotoma2` functions. In the code chunks below, `neotoma::` refers to functions in the original neotoma R package, for example, **`neotoma::`**`get_site(whatever)`.
+`neotoma2` was being developed while this vignette documentation was being prepared, so not all the package functions were available. Currently (March 2022), some functions from `neotoma` and `neotoma2` are used in this document. Over time, original package functions should be replaced with corresponding `neotoma2` functions. In the code chunks below, `neotoma::` refers to functions in the original neotoma R package, for example, **`neotoma::`**`get_site(whatever)`.
 
 ##### `neotoma2` functions
+
+There are **3** main functions in `neotoma2` to retrieve data: `get_sites()`, `get_datasets()`, and `get_downloads()`
+
+
+## Browsing - Data discovery
+
+This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk in this section is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input of other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
 ###### get_sites
 **Usage:** Sites can be searched using the following supported parameters.
@@ -106,50 +113,7 @@ To see structure of `get_sites()` function output, run the following code:
 uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for a site
 #str(uwallf_site) # shows structure of uwallf_site
 ```
-
-###### get_datasets
-**Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
-
-x is an optional value that represents the numeric dataset ID.
-
-`get_datasets()` returns a **sites** object but with a more complex detail at the dataset level.
-
-The extra values returned for each dataset are: database, age_range_old, age_range_young, notes, location, waterdepth, collunitype, collectiondevice, collectionunitname, collunithandle.
-
-To see structure of a dataset after `get_datasets()`, run the following code:
-```{R structure_of_get_dataset_output}
-uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
-uwallf_diatom_dataset <-  uwallf_datasets[[1]]@collunits[[3]]@datasets[[2]] #(datasetid is 49249)
-#str(uwallf_diatom_dataset ) # shows structure of uwallf_datast
-```
-
-###### get_downloads
-Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
-
-**Usage:**  `get_downloads(x)`
-Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical printing a download status bar.
-
-The values are returned as a `sites` object with a full level of detail; relevant assemblage information and metadata.
-
-The downloaded result is a sites object that contains the constituent taxa, the chronology, site and PIs who contributed the data. 
-
-The following are important components: datasets, chronologies, samples within the dataset.
-
-To see structure of `get_downloads()` function output, run the following code:
-```{R structure_of_get_download_output}
-uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
-uwallf_diatom_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom") # only keep diatom datasets
-uwallf_download <- get_downloads(uwallf_diatom_dataset)
-#str (uwallf_download) # shows structure of uwallf_datast
-```
-
-## Browsing - Data discovery
-
-This section describes ways of searching the Neotoma database to find sites and diatom datasets using various criteria. The primary purpose of each code chunk in this section is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input of other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
-
-### Find sites (using `get_sites()`)
+### Find sites
 
 We can search for information on a single or multiple sites with `neotoma2::get_sites()`. Sometimes it is helpful to find locations of all sites within a region, even if they are not diatom sites, as this indicates the level of paleoecological 'effort' in a region. We can often use a site search to do preliminary work since the `sites` object contains less information than the `datasets` or `downloads` objects. 
 For example, we might want to generate a map of all sites and superimpose specific sites we are interested in.
@@ -189,18 +153,6 @@ my_sites
 ```
 
 Get data on multiple sites using sitenames - National Lakes Assessment Example
-
-```{r NLA}
-library(neotoma2)
-# Join a list of site names together using the combine command, c()
-nlaxl <- c("Gardner Pond","George Wyth Lake","Goose Pond","Gorton Pond","Grassy Pond","Green Belt Lake","Grimes","Grist Millpond","Grittman Lake","Groton Reservoir","Half Moon Lake","Halfway Pond","Hannaberry Lake","Harper Lake","Haskell Lake","Heggs","Henry's Lake","Hert Lake","Highland Lake","Hi-Land Lake","Hinkley's Pond","Horsfall Lake","Hosmer Lake")
-nla_sites <- c() 
-# Run a loop that gets sites for each name in the object containing lake names (nlaxl)
-for(name in nlaxl){
-  sites <- get_sites(sitename = name)
-  nla_sites <- c(nla_sites, sites)}  # The object nla-sites now contains the get_sites results for all lakes
-nla_sites
-```
 
 #### Site ID
 Find sites using siteid.  In the following code chunks, we assume that siteids have been obtained using Neotoma Explorer, from Neotoma Landing Pages or from an external file.
@@ -250,73 +202,53 @@ nlaSites
 ```
 
 #### Geographic location
-**NOTE** We currently don't have a gpid API call to Neotoma2
-Find all sites located in a geopolitical unit as specified by a gpid
-**Still not possible to do**
-```{r get site by gpid}
-# diat_1<-get_site(gpid = x) # basic format
-diat_1<-get_sites(gpid = 6198) # Example using geopolitical ID for Alaska - GeoPoliticalUnits table 
-diat_1
-```
+Find all sites located in a geopolitical unit as specified by a gpid.
 
 View the geopolitical table to search for locations and gpids.
 
 A gpid is a useful way to specify country and state boundaries.
 The code below will open the Geopolitical units table.  Once the table appears, use the search function at top of the page to find the name of a geopolitical unit of interest and its corresponding gpid. 
+
+View the site geopolitical table to find gpids associated with datasetids
+
 ```{R geopoliticalunitsTable}
 loc <- neotoma::get_table(table.name ='geopoliticalunits')
 View(loc)
 # Use the filter at the top of the page to find name of a geopolitical Unit and its corresponding gpid
 ```
 
-View the site geopolitical table to find gpids associated with datasetids
+**Still not possible to do but this is how it should work**
+```{r get site by gpid}
+# diat_1<-get_site(gpid = x) # basic format
+diat_1<-get_sites(gpid = 6198) # Example using geopolitical ID for Alaska - GeoPoliticalUnits table 
+diat_1
+```
+
 
 Run following code to open the sitegeopolitical table and then enter datasetid in filter box to find corresponding gpids
+
+**Not sure what this table is** <- Socorro
 ```{R sitegeopoliticalTable}
 dataset_gpid <- get_table(table.name ='sitegeopolitical')
-view(dataset_gpid)
+View(dataset_gpid)
 # Table columns: GeoPoliticalID,  SiteID, SiteGeoPoliticalID
 ```
 
 Example - get sites from multiple geopolitical units (e.g., states)
+**NOTE: gpid not returning results**
 ```{r retrieveByGeopol}
-library(dplyr)
-library(purrr)
 # Get site data for all sites in three New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY [DFC - delete some states - only 3]
 # The gpids were obtained from the Geopolitical units table 
+
 gpids <- c(8412, 7990, 7934)
-ne_sites <- map(gpids, function(x)
-  neotoma:::get_site(gpid = x)) %>%
-  neotoma::bind()
+
+ne_sites <- c()
+for (id in gpids) {
+  a_site <- get_sites(gpid = id)
+  ne_sites <- c(ne_sites, a_site)
+}
+
 ne_sites
-ne_datasets <- get_dataset(ne_sites)
-ne_datasets
-ne_down_dtsts <- neotoma::get_download(ne_datasets)
-tst <- ne_down_dtsts 
-ne_datasetids <-sapply(ne_down_dtsts, 
-                       function(x) {               c(x$dataset$site.data$site.id, x$dataset$site.data$site.name, x$dataset$dataset.meta$dataset.id, x$dataset$dataset.meta$dataset.name,  x$dataset$dataset.meta$dataset.type, x[[6]][2][4])
-                       })
-tst1 <- ne_datasetids [[6]][5]
-tst1
-ne_down_sites <- neotoma::get_download(ne_sites)
-# The code will run get_site for each gpid, then will bind the results, and then downloaded data
-# [SIMON / Socorro - "Operation timed out" - what is the best way to get data?  Increase limits?  Run in batches?  Also, should add code to limit to diatom dataset types]
-```
-
-
-## Find all sites within a user-specified spatial polygon
-
-We can use the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects).  In the example below, we first create a matrix to represent the corners of a bounding box of the northeastern United States. We then create a spatial polygon ("neus") based on the co-ordinates.  Finally, we to use "neus" as input to the `get_sites()` function.
-
-```{R siteSpatialSearch}
-northeastUS <- rbind(c(-80,40), c(-80,48),
-                     c(-65,48), c(-65,40), c(-80,40))
-neus <- sf::st_polygon(list(northeastUS))
-``` 
-
-```{r}
-neUSsites <- get_datasets(loc = neus)
-neUSsites
 ```
 
 #### Elevation
@@ -325,14 +257,24 @@ Find sites between minimum and maximum elevations (m)
 ```{R sitesbyElev}
 diat_el <- get_sites(altmin=100, altmax=120)
 ```
-Find sites where value for altitude is null
 
-```{r Find sites where elev is null}
-diat_el <- get_sites(limit = 1000) %>%
-  neotoma2::filter(is.na(elev))
-diat_el
+###### get_datasets
+**Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
+
+x is an optional value that represents the numeric dataset ID.
+
+`get_datasets()` returns a **sites** object but with a more complex detail at the dataset level.
+
+The extra values returned for each dataset are: database, age_range_old, age_range_young, notes, location, waterdepth, collunitype, collectiondevice, collectionunitname, collunithandle.
+
+To see structure of a dataset after `get_datasets()`, run the following code:
+```{R structure_of_get_dataset_output}
+uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
+uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
+uwallf_diatom_dataset <-  uwallf_datasets[[1]]@collunits[[3]]@datasets[[2]] #(datasetid is 49249)
+#str(uwallf_diatom_dataset ) # shows structure of uwallf_datast
 ```
-### Find datasets (using get_datasets)
+
 #### Dataset ID
 Get meta data on a single dataset using datasetID 
 
@@ -353,39 +295,14 @@ diat_multid <- get_datasets(multid) # Example
 diat_multid
 ```
 
-Get Sample IDs for Dataset IDs
-```{r GETSampleID for Dataset ID}
-CODE <-c(44764,44765,44766) #datasetids
-C1<- get_datasets(CODE)
-CD <- get_downloads(C1)
-C2 <- samples(CD)$taxonid
-C2
-```
-
-```{r}
-C3 <-datasets(CD)
-as.data.frame(C3)$datasetid
-```
-```{r}
-C4 <-collunits(CD)
-C4
-```
-
-```{R}
-nla744<- read.table('VT744.txt', header=TRUE)
-# This table does not currently exist in the working directory; what is it supposed to contain?  
-```
-
 ```{r GetSampleIDs by Dataset IDs}
-NL1 <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041)
-NL2 <- get_datasets(NL1) %>%
-  neotoma2::filter(datasettype == "diatom surface sample")
-NL3 <- get_downloads(NL2)
-NL4 <- samples(NL3)$taxonid
+NL1 <- c(49651,49032,49033,49034,49035,49036,49037)
+NL2 <- get_datasets(NL1)
+datasets(NL2)
 ```
 
 #### Dataset Type
-Get datasetids by dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
+`neotoma2` can retrieve datasets from the API based on their dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
 Example below gets dataset information for individual dataset types and then combines results into one object.
 
 Usually, code would include selection criteria in addition to datasettype. For example, all datasets of a particular dataset type within a specific geographic region. 
@@ -416,16 +333,17 @@ neDiatoms_com
 
 #####  Geopolitical units (e.g., states)
 
-get_dataset for an individual state - Pennsylvania examples
+get_dataset for an individual state - Pennsylvania examples **NOTE code not ready for gpids**
 ```{R gpidExamplePenn}
-loc <- get_table(table.name='GeoPoliticalUnits') # Find the gpid for Pennsylvania
 # Get_dataset by name
-Geo_PA <- get_dataset(gpid = "Pennsylvania")
+Geo_PA <- get_datasets(gpid = "Pennsylvania")
 # Get by gpid
-GEO_PA1 <- get_dataset(gpid = 8412) # Pennsylvania gpid = 8412
+GEO_PA1 <- get_datasets(gpid = 8412) # Pennsylvania gpid = 8412
 ```
 
-##### Latitude and Longitude boxes
+##### Location based extraction
+
+###### Latitude and Longitude bounding boxes
 
 ```{R diatomsbyBBox}
 # diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
@@ -437,6 +355,25 @@ Example of get_datasets by location with bounding box of lat & longs (West, Sout
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
 plotLeaflet(diat_NE)
 ```
+
+
+###### User-specified spatial polygon
+
+With the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects). We can pass a polygon as a in the `loc` argument of `get_datasets()` in `neotoma2`. 
+
+In the example below, we first create a matrix to represent the corners of a bounding box of the northeastern United States. We then create a spatial polygon ("neus") based on the co-ordinates.  Finally, we to use "neus" as input to the `get_datasets()` function.
+
+```{R siteSpatialSearch}
+northeastUS <- rbind(c(-80,40), c(-80,48),
+                     c(-65,48), c(-65,40), c(-80,40))
+neus <- sf::st_polygon(list(northeastUS))
+``` 
+
+```{r}
+neUSsites <- get_datasets(loc = neus)
+neUSsites
+```
+
 
 #### Elevation (m)
 Find datasets for sites between minimum and maximum elevations
@@ -450,6 +387,85 @@ diat_el2 <- get_datasets(diat_el)
 diat_el2
 ```
 
+###### get_downloads
+Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
+
+**Usage:**  `get_downloads(x)`
+Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical printing a download status bar.
+
+The values are returned as a `sites` object with a full level of detail; relevant assemblage information and metadata.
+
+The downloaded result is a sites object that contains the constituent taxa, the chronology, site and PIs who contributed the data. 
+
+The following are important components: datasets, chronologies, samples within the dataset.
+
+To see structure of `get_downloads()` function output, run the following code:
+```{R structure_of_get_download_output}
+uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
+uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
+uwallf_diatom_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom") # only keep diatom datasets
+uwallf_download <- get_downloads(uwallf_diatom_dataset)
+#str (uwallf_download) # shows structure of uwallf_datast
+```
+
+
+Get Sample IDs for Dataset IDs
+```{r GETSampleID for Dataset ID}
+CODE <-c(44764,44765,44766) #datasetids
+C1<- get_datasets(CODE)
+CD <- get_downloads(C1)
+C2 <- samples(CD)$taxonid
+C2
+```
+
+```{r}
+C3 <-datasets(CD)
+as.data.frame(C3)$datasetid
+```
+```{r}
+C4 <-collunits(CD)
+C4
+```
+
+```{r GetSampleIDs by Dataset IDs and filtering by type}
+NL1 <- c(49651,49032,49033,49034,49035,49036,49037)
+NL2 <- get_datasets(NL1) %>%
+  neotoma2::filter(datasettype == "diatom surface sample")
+NL3 <- get_downloads(NL2)
+NL4 <- samples(NL3)$taxonid
+NL4
+```
+
+## Using neotoma2::filter
+
+There might be cases when we need to filter results out from a `sites` object. We can use the `filter()` function. `filter()` takes any `sites` attribute to filter on.
+
+
+Find sites where value for altitude is null
+
+```{r Find sites where elev is null}
+diat_el <- get_sites(limit = 1000) %>%
+  neotoma2::filter(is.na(elev))
+diat_el
+```
+
+#### Within or intersecting a specified time interval 
+[Simon - Code still needs to be written]
+```{R Diatom Time Interval}
+datasets(NL2)
+NL2
+```
+
+Example for further filtering with `dplyr::filter`
+```{R}
+interval_42 <- as.data.frame(datasets(NL2)) %>%
+  dplyr::filter(age_range_old > -42)
+interval_42
+```
+```{r downloads after dplyr}
+get_downloads(interval_42$datasetid)
+```
+
 #### Investigator name / person name
 [Following code is for how to find a contact id given a contact name; still need code for how to find all datasets associated with a contact]
 ```{R Diatom Investigator}
@@ -458,20 +474,13 @@ Don <- get_contacts(contactname = '%Charles, Donald F.%')
 Don
 ```
 
-# Continue from here
-#### Within or intersecting a specified time interval 
-[Simon - Code still needs to be written]
-```{R Diatom Time Interval}
-```
-Example
-```{R}
-Interval <- filter(X, age_ad >= 1950)
-```
+## START FROM HERE MARCH 31st
 
 #### Taxon name or ID 
+** Note taxon name / id not sure if in API)
 ```{R getTaxa}
 # Find datasets using taxon name
-diat_nm<- get_dataset(taxonname = 'Navicula minima')
+diat_nm<- get_datasets(taxonname = 'Navicula minima')
 # Find datasets using taxon id
 diat_nm1<- get_dataset(datasettype = 'diatom',taxonids = 11249)
 # Find datasets of a specific data type using taxon name
@@ -485,10 +494,11 @@ diat_taxa <- get_table('Taxa')
 #### Submission date
 ```{r SubDate}
 # subdate <- get_datasets(subdate= "04-05-2016")
-subdate <- get_dataset(subdate= "2021-09-23")
+subdate <- get_datasets(subdate= "2021-09-23")
 subdate
 #Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY. 
 # [SIMON The above code does not work.   Code runs, but does not return correct results]
+#** DON The code runs as if you had passed no arguments - it should return 25 items but give the warning that no adequate argument was given.
 ```
 
 #### Dataset DOI
@@ -505,6 +515,8 @@ Code to retreive datasets by collection type - usually would be one part of a la
 ```{R diatombyColltype}
 Col<- get_datasets(CollType= "Core")
 # SIMON/SOCORRO code doesn't work for collection units; needs to involve get_downloads  
+
+## More information would be appreciated (socorro)
 ```
 
 Example of getting dataset by Collection Type id
@@ -523,6 +535,7 @@ get_dataset(CollUnitID='')
 get_datasets(CollUnitHandle='')
 #CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by [?] Collection Unit, and the Handle is used for file names.
 ```
+
 ### Find datasets (multiple functions)
 #### Constituent database
 [SIMON - Code needs to be added]
@@ -555,11 +568,9 @@ get_dataset(search('modern'))
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
-library(neotoma)
-library(neotoma2)
 aggr_set <- read.csv()# If we are going to use the Excel file that contains sampleids for each aggregate dataset, we should read it in here
 aggr1 <- get_datasets() # Do we need to use get_datasets if we already know sampleids?
-aggr2 <- get_download()
+aggr2 <- get_downloads()
 # Code needs to be written
 ```
 
