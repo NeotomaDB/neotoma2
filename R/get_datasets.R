@@ -121,7 +121,8 @@ parse_dataset <- function(result) { # nolint
     # TODO: Implement build collunit
     new_collunit <- new("collunit",
                         collectionunitid = call$collectionunitid,
-                        colldate = as.Date(character(0)),
+                        #colldate = as.Date(character(0)),
+                        colldate = as.Date(testNull(call$colldate, NA)),
                         handle = call$handle,
                         datasets = datasets_,
                         chronologies = new("chronologies",

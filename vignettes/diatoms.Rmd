@@ -419,7 +419,8 @@ C2
 ```
 
 ```{r}
-C3 <-datasets(CD)
+CD
+C3 <- datasets(CD)
 as.data.frame(C3)$datasetid
 ```
 ```{r}
@@ -445,7 +446,7 @@ Find sites where value for altitude is null
 
 ```{r Find sites where elev is null}
 diat_el <- get_sites(limit = 1000) %>%
-  neotoma2::filter(is.na(elev))
+  neotoma2::filter(is.na(altitude))
 diat_el
 ```
 
@@ -456,14 +457,14 @@ datasets(NL2)
 NL2
 ```
 
-Example for further filtering with `dplyr::filter`
-```{R}
-interval_42 <- as.data.frame(datasets(NL2)) %>%
-  dplyr::filter(age_range_old > -42)
+```{R neotoma version}
+interval_42 <- NL2 %>%
+  neotoma2::filter(age_range_old > -42)
 interval_42
 ```
+
 ```{r downloads after dplyr}
-get_downloads(interval_42$datasetid)
+get_downloads(interval_42)
 ```
 
 #### Investigator name / person name
@@ -474,35 +475,48 @@ Don <- get_contacts(contactname = '%Charles, Donald F.%')
 Don
 ```
 
-## START FROM HERE MARCH 31st
-
 #### Taxon name or ID 
 ** Note taxon name / id not sure if in API)
 ```{R getTaxa}
 # Find datasets using taxon name
 diat_nm<- get_datasets(taxonname = 'Navicula minima')
 # Find datasets using taxon id
-diat_nm1<- get_dataset(datasettype = 'diatom',taxonids = 11249)
-# Find datasets of a specific data type using taxon name
-# [Simon - need code for finding datasets for more than one taxon at a time]
-diat_nm<- get_dataset(datasettype = 'diatom',taxonname = 'Navicula minima')
-#To access the diatom taxa table use get_table('Taxa'), Taxon name and Taxon ID can be used to find taxa by dataset types
-diat_taxa <- get_table('Taxa')
-# view (diat_taxa) # run this line to open searchable copy of Taxa table
 ```
 
-#### Submission date
+```{r datasettype and filter taxons}
+# Find datasets of a specific data type
+diat_nm1<- get_datasets(datasettype = 'diatom')
+
+# Get the downloads detail to retrieve the taxons. Apply samples() to the downloads object
+diat_nm1_dw <- get_downloads(diat_nm1)
+diat_samples <- samples(diat_nm1_dw)
+diat_samples
+
+# Use dplyr::filter to obtain the taxa of interest
+diat_samples <- diat_samples %>%
+  dplyr::filter(variablename == 'Navicula minima')
+```
+
+#### Filtering by Submission date
 ```{r SubDate}
-# subdate <- get_datasets(subdate= "04-05-2016")
-subdate <- get_datasets(subdate= "2021-09-23")
-subdate
-#Date of dataset submission, either YYYY-MM-DD or MM-DD-YYYY. 
-# [SIMON The above code does not work.   Code runs, but does not return correct results]
-#** DON The code runs as if you had passed no arguments - it should return 25 items but give the warning that no adequate argument was given.
+# Filtering by submission date, YYYY-MM-DD
+as.data.frame(collunits(diat_nm1_dw)) %>%
+  dplyr::filter(colldate == "2007-06-05")
 ```
+```{r filtered collunits with site and dataset id}
 
+dw_df <- as.data.frame(collunits(diat_nm1_dw)) %>%
+  dplyr::filter(colldate == "2007-06-05")
+
+ids_df <- getids(diat_nm1_dw)
+
+left_join(x=dw_df,y=ids_df, by=c("collectionunitid" = "collunitid"),all.x=TRUE) %>%
+  select(siteid, datasetid, collectionunitid, handle, colldate)
+
+```
 #### Dataset DOI
 
+** Not sure dois is a used parameter.
 ```{r getDiatomsByDOI}
 # neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
@@ -513,27 +527,28 @@ neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for
 Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
 
 ```{R diatombyColltype}
-Col<- get_datasets(CollType= "Core")
-# SIMON/SOCORRO code doesn't work for collection units; needs to involve get_downloads  
+# Note: Couldn't find collectionunits of type core. It would be the same code but replacing
+# filter(collectiondevice to collectiontype)
 
-## More information would be appreciated (socorro)
-```
+df1 <- as.data.frame(collunits(diat_nm1_dw)) %>%
+  filter(collectiondevice == "Modified KB gravity corer")
 
-Example of getting dataset by Collection Type id
-```{R sitesByCollTypeMult}
-get_dataset(CollType='Core','section')
-# [SIMON - above code does not work; needs to involve get_downloads]
-```
+id_df <- getids(diat_nm1_dw)
 
-```{R sitesByCollID}
-# get_dataset(CollUnitID='') # basic format
-get_dataset(CollUnitID='')
-#CollUnitID Unique database record identifier for the collection unit; needs to involve get_downloads.
+left_join(df1, id_df, by = c("collectionunitid" = "collunitid"))$datasetid
 ```
 
 ```{R sitesByCollUnitHandle}
-get_datasets(CollUnitHandle='')
-#CollUnitHandle	Code name of the Collection Unit with which the dataset is associated. This code may be up to 10 characters. Data are frequently distributed by [?] Collection Unit, and the Handle is used for file names.
+df1 <- as.data.frame(collunits(diat_nm1_dw)) %>%
+  filter(handle == "ROCKY15")
+
+id_df <- getids(diat_nm1_dw)
+
+left_join(df1, id_df, by = c("collectionunitid" = "collunitid")) %>%
+  select(siteid, datasetid, collectionunitid, handle, location)
+
+dataset_rocky15 <- get_datasets(18047) #18047 is the datasetid obtained from above
+dataset_rocky15
 ```
 
 ### Find datasets (multiple functions)
@@ -548,23 +563,22 @@ Example of finding constituent databases
 ```{R SitesbyConDBExample}
 ConDB <- 
   
-```
+  ```
 
 #### Sample keyword [secondary]
 Code to retreive datasets by keyword - usually would be one part of a larger code chunk or function
 [Code needs to be written]
 
-```{R SitesbyKW}
-get_dataset(search('x'))
-```
-
 Example of using the search function returning keywords 
-```{R}
-get_dataset(search('modern'))
-# SIMON - Code does not work; I am not sure who wrote it
+```{R KW in notes}
+sediment_txt <- as.data.frame(datasets(diat_nm1_dw)) %>%
+  dplyr::filter(grepl('Sediment sample', notes))
+
+sediment_txt$datasetid
+
 ```
 
-#### Aggregate dataset(s)
+#### Aggregate dataset(s) <- ??
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
@@ -584,15 +598,16 @@ Get all datasetids associated with a particular publication
 ```{R Diatom Publication}
 diat_pub <- get_datasets()
 ```
-Example - [not sure what this code does...]
+Example - [not sure what this code does...] What is the goal?? Socorro
 ```{R Diatom Publication example}
-diat <- get_datasets()
+diat <- get_datasets(datasettype = "diatom")
 diat_pub <- get_publication()
 pub_diat <- sapply(diat_pub, 
-function(x) {
-x$pi.data$ContactID
-})
+                   function(x) {
+                     x$pi.data$ContactID
+                   })
 ```
+
 #### Water chemistry
 ##### Is water chemistry available?
 Determine if any water chemistry data is available for one or more sites or diatom datasets for those sites
@@ -602,20 +617,22 @@ If chem data are available, which parameters? (List variables included)
 ##### From sites within range of water chemistry characteristics
 Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
 
-Why is following code chunk here?
-```{r getWaterChem,}
-neDiatoms <- get_datasets(datasettype="diatom surface sample", loc=BOUNDING_BOX)
-```
-
 Example of how to get water chemistry from the different dataset types [includes snippets of code, none of which work]
 
 ```{r getWaterChemEX}
 diatomss <- get_datasets(datasettype = 'diatom surface sample') %>% 
-get_downloads()
+  get_downloads()
+
 # Following 3 lines of code seem to work, but search through ALL water chemistry datasets
-waterchem <- get_dataset(datasettype = 'water chemistry') %>% 
-get_download() %>% 
-filter(pH < 5)
+waterchem <- get_datasets(datasettype = 'water chemistry') %>% 
+  get_downloads() 
+```
+
+**Note Socorro: not clear what is supposed to happen here; dont find any property called pH so tried with waterdepth.
+```{r}
+as.data.frame(collunits(waterchem)) %>% 
+  dplyr::filter(waterdepth < 5)
+
 # Below - for the future....  get_aggregate function does not yet exist
 diatomss <- get_aggregate(123)
 waterss <- get_aggregate(124)
@@ -625,29 +642,30 @@ waterdl <- get_downloads(waterss) %>% compile_downloads()
 aligned <- align_sites(diatomss, waterss)
 ```
 
+## Need explanations on here (?)
 ```{r fixing}
 diatomss<- get_dataset(datasettype = 'diatom surface sample')
 waterss<- get_dataset(datasettype = 'water chemistry')
 diatom<- get_dataset(datasettype = 'diatom')
 #Sapplyy function is used to return diatomss, read / extract the metadata and select dataset IDs for the first 20 lakes 
 subsetss <- sapply(diatomss, 
-function(x) {
-x$dataset.meta$dataset.id
-})[1:20]
+                   function(x) {
+                     x$dataset.meta$dataset.id
+                   })[1:20]
 #Sapplyy function is used to return diatom, read / extract the metadata and select dataset IDs for the first 20 lakes
-# [Simon - I am not sure what the following code does - please document]
+# [Simon - I am not sure what the following code does - please document] ?
 subset <- sapply(diatom, 
-function(x) {
-x$dataset.meta$dataset.id
-})[1:20]
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                 })[1:20]
 if('filename' %in% list.files()) {
-diat_dl <- readRDS('filename') # It returns the file that is used 
+  diat_dl <- readRDS('filename') # It returns the file that is used 
 } else {
-diat_dl <- get_download(subset)
-diat_dlss <- get_download(subsetss)
-diat_dl <- bind(diat_dl, diat_dlss)
-saveRDS(diat_dl, 'filename') # Saves the download object as a file
-#  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # Saves the download object as a file
+  #  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
 }
 ```
 
@@ -655,31 +673,37 @@ saveRDS(diat_dl, 'filename') # Saves the download object as a file
 
 ##### From sites where one or more specified water chemistry characteristics were measured
 ```{R Diatom Multiple Water Chemistry}
-# [SIMON - SOCORRO - The code below works, but retreives data for different sets of lakes.  Water chemistry for one set of 20 lakes and diatom data for a different set of 20 lakes.  We need code that will get count data and water chemistry data for the same lakes.  May require reading a file that has lists of corresponding diatom and water chemistry sample ids]
-diatomwch<- get_dataset(datasettype = 'water chemistry')
-diatom<- get_dataset(datasettype = 'diatom surface sample')
-subsetwch <- sapply(diatomwch, 
-function(x) {
-x$dataset.meta$dataset.id
-})[1:20]
-subset <- sapply(diatom, 
-function(x) {
-x$dataset.meta$dataset.id
-})[1:20]
+library('WriteXLS')
+diatomwch<- get_datasets(datasettype = 'water chemistry')
+diatom<- get_datasets(datasettype = 'diatom surface sample')
+
+subsetwch <- getids(diatomwch)$datasetid[1:20]
+
+subset <- getids(diatom)$datasetid[1:20]
+
 if('fileWCH' %in% list.files()) {
-diat_dl <- readRDS('fileWCH') # It returns the file that is used 
-} else 
-diat_wch <- get_download(subsetwch)
-diat_dls <- get_download(subset)
-diat_dlb <- bind(diat_wch, diat_dls)
-saveRDS(diat_dlb, 'fileWCH')
+  diat_dl <- readRDS('fileWCH') # It returns the file that is used 
+} else {
+  diat_wch <- get_downloads(subsetwch)
+  diat_dls <- get_downloads(subset)
+  diat_dlb <- c(diat_wch, diat_dls)
+  saveRDS(diat_dlb, 'fileWCH')
+}
 # fileWCH will be created in the working directory
-wideWCH_DTM <- compile_downloads(diat_dlb) 
+#wideWCH_DTM <- compile_downloads(diat_dlb)  # what is this supposed to do?
 ## neotoma function converts multiple downloads into single object 
-minWCH <- wideWCH %>% 
-group_by(dataset) %>% #dataset was returned from the table 
-summarise(min(depth)) #dplyr function to create a dataframe
-wideWCH_DTM %>% filter(is.na(depth))
+minWCH <- as.data.frame(collunits(diat_dlb))
+
+m_ids <- getids(diat_dlb)
+
+minWCH <- left_join(minWCH, m_ids, by = c("collectionunitid" = "collunitid")) %>%
+  group_by(datasetid) %>% #dataset was returned from the table 
+  summarise(min(waterdepth)) %>% #dplyr function to create a dataframe
+  rename(waterdepth = "min(waterdepth)")
+
+wideWCH_DTM <- minWCH %>% 
+  filter(is.na(waterdepth))
+wideWCH_DTM
 # Write data to an Excel file, which will be created in the working directory
 WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 ```
@@ -692,9 +716,9 @@ Needs to be able to accept contact ID of a specific person
 Con_<- get_dataset
 Contact_diat <- get_dataset(datasettype = 'diatom')
 Analyst <- sapply(Contact_diat, 
-function(x) {
-x$pi.data
-})
+                  function(x) {
+                    x$pi.data
+                  })
 ```
 Example
 [Simon - Can this code be modified so it retrieves all dataset IDs associated with an specific example person?]
@@ -702,9 +726,9 @@ Example
 Con_<- get_dataset(32252)
 Contact_diat <- get_dataset(datasettype = 'diatom')
 Con_U <- sapply(Con_, 
-function(x) {
-x$pi.data
-})
+                function(x) {
+                  x$pi.data
+                })
 ```
 
 
@@ -831,26 +855,26 @@ library(purrr)
 V1 <-c(44786,44787,44788) # Datasetids
 # In this example we combine datasets from 3 sites (New England lakes).  To get output for aggregate datasets, a file with all the datasetids for an aggregate dataset could be used as input.
 V1_diatom <- map(V1, function(x)
-neotoma:::get_dataset(x,datasettype="diatom")) %>%
-neotoma::bind()   
+  neotoma:::get_dataset(x,datasettype="diatom")) %>%
+  neotoma::bind()   
 #In the get_dataset line, whatever is in the parenthesis (a parameter such as x or gpid); will be whatever is in the object V1, defined in the line above.
 # [SIMON - Why does datasettype need to be specified above, given that input data are datasetids?  The code seems to run fine with "datasettype="diatom" removed.]
 if('V1' %in% list.files()) {
-V1_dl <- readRDS('V1') 
+  V1_dl <- readRDS('V1') 
 } else {
-V1Datasets <- list()
-#
-for(i in 1:length(V1_diatom)) {
-V1Datasets[[i]] <- get_download(V1_diatom[[i]])
-}
-#For loop will go through each step to first create the file and then download data for each site
-V1_download <- neotoma::bind(V1Datasets)
-saveRDS(V1_download, 'V1')
+  V1Datasets <- list()
+  #
+  for(i in 1:length(V1_diatom)) {
+    V1Datasets[[i]] <- get_download(V1_diatom[[i]])
+  }
+  #For loop will go through each step to first create the file and then download data for each site
+  V1_download <- neotoma::bind(V1Datasets)
+  saveRDS(V1_download, 'V1')
 }
 V1Counts <- compile_downloads(V1_dl)
 V1Row <- V1Counts %>% 
-group_by(dataset) %>% 
-summarise(min(depth))
+  group_by(dataset) %>% 
+  summarise(min(depth))
 WriteXLS(V1Counts,  "VL_dl.xlsx")
 #This last step creates a table in an Excel file which will be saved in the working directory
 ```
@@ -875,23 +899,23 @@ SIMON - Please add comments to document this code chunk
 ```{R ExampleSingleSite }
 Mirror<- get_dataset(39813) # Dataset ID for a diatom surface sample from Mirror Lake; newer dataset/ site ids do not seem to work 
 subsetda <- sapply(Mirror, 
-function(x) {
-x$dataset.meta$dataset.id 
-})
+                   function(x) {
+                     x$dataset.meta$dataset.id 
+                   })
 # The subset is not a function but a way to filter the dataset to get the portions of interest; sapply is a function in the R package  [explanation not clear to me - DFC]
 ## [SIMON - please document the code below - what is its purpose?]
 if('Mirror' %in% list.files()) {
-diat_da <- readRDS('Mirror') 
+  diat_da <- readRDS('Mirror') 
 } else {
-diat_dla <- get_download(subsetda)
-saveRDS(diat_dla, 'Mirror')
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'Mirror')
 }
 #The if and else loops work together to create a file containing downloaded data for the subset
 diatCount <- compile_downloads(diat_dla) 
 ## SIMON - please explain the purpose of the following code.  Seems like maybe this overall code chunk was designed to be able to do more than just get count data for one surface sample.
 minimumRow <- diatCount %>% 
-group_by(dataset) %>% 
-summarise(min(depth)) 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
 #In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
 ```
 
@@ -905,21 +929,21 @@ uwallface.dl <- get_download(uwall)
 ## sapplyy function is used to return diatomss and with the function it is reading the metadata and selecting datasetid to query from first 20 lakes 
 #### JERRIN Review this example with me
 subsetUWall <- sapply(uwall, 
-function(x) {
-x$dataset.meta$dataset.id
-})
+                      function(x) {
+                        x$dataset.meta$dataset.id
+                      })
 if('UWall' %in% list.files()) {
-UWa_dl <- readRDS('UWall') # It returns the file that is used 
+  UWa_dl <- readRDS('UWall') # It returns the file that is used 
 } else {
-UWallf_dl <- get_download(subsetUWall)
-saveRDS(UWallf_dl, 'UWall') # Saves download object as a file in R format
+  UWallf_dl <- get_download(subsetUWall)
+  saveRDS(UWallf_dl, 'UWall') # Saves download object as a file in R format
 }
 wideCounts <- compile_downloads(UWallf_dl) 
 ## compile_downloads function converts multiple downloads into single object
 ## [SIMON - I am not ure what the following code does - please add documentation]
 minRow <- wideCounts %>% 
-group_by(dataset) %>% #dataset was returned from the table 
-summarise(min(depth)) #dplyr function to create a dataframe
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe
 wideCounts %>% filter(!is.na(Eunotia.diodon))
 ## dplyr function used to subset a data frame
 ```
@@ -957,28 +981,28 @@ library(purrr)
 gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
 # gpids for all New England states plus NY and NJ
 ne_diatom <- map(gpids, function(x)
-neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
-neotoma::bind()   
+  neotoma:::get_dataset(gpid = x,datasettype="diatom")) %>%
+  neotoma::bind()   
 ne_diatomSS <- map(gpids, function(x)
-neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
-neotoma::bind() 
+  neotoma:::get_dataset(gpid = x,datasettype="diatom surface sample"))%>% 
+  neotoma::bind() 
 ne_dataset<-bind(ne_diatom,ne_diatomSS)
 # [Simon, there is an error in one of the following lines of code]
 if('DiatomFil' %in% list.files()) {
-Diatom_dl <- readRDS('DiatomFil') 
+  Diatom_dl <- readRDS('DiatomFil') 
 } else {
-allDatasets <- list()
-for(i in length(allDatasets):length(ne_dataset)) {
-allDatasets[[i]] <- get_download(ne_dataset[[i]])
-}
-ne_download <- neotoma::bind(allDatasets)
-saveRDS(ne_download, 'DiatomFil')
+  allDatasets <- list()
+  for(i in length(allDatasets):length(ne_dataset)) {
+    allDatasets[[i]] <- get_download(ne_dataset[[i]])
+  }
+  ne_download <- neotoma::bind(allDatasets)
+  saveRDS(ne_download, 'DiatomFil')
 }
 # Create diatom count files
 wideCounts <- compile_downloads(Diatom_dl) 
 minRow <- wideCounts %>% 
-group_by(dataset) %>% 
-summarise(min(depth)) 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
 ```
 
 ##### Count data for all "diatom" and "diatom surface sample" datasettypes
@@ -992,26 +1016,26 @@ diatom<- get_dataset(datasettype = 'diatom')
 #SIMON - "diatom top-bottom" needs to be added as a choice for datasettype.
 #Sapplyy function is used to return datasetids for diatom and diatom surface sample data types.  The function reads the metadata selects datasetids, and puts them in "suset objects".  The query is limited to the first 20 lakes. 
 subsetss <- sapply(diatomss, 
-function(x) {
-x$dataset.meta$dataset.id 
-})[1:20]
+                   function(x) {
+                     x$dataset.meta$dataset.id 
+                   })[1:20]
 subset <- sapply(diatom, 
-function(x) {
-x$dataset.meta$dataset.id
-})[1:20]
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                 })[1:20]
 if('filename' %in% list.files()) {
-diat_dl <- readRDS('filename') # It returns the file that is used 
+  diat_dl <- readRDS('filename') # It returns the file that is used 
 } else {
-diat_dl <- get_download(subset)
-diat_dlss <- get_download(subsetss)
-diat_dl <- setdiff(diat_dl, diat_dlss)
-saveRDS(diat_dl, 'filename') # It saves this as a download object of the download with file
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- setdiff(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # It saves this as a download object of the download with file
 }
 wideCounts <- compile_downloads(diat_dl) 
 #neotoma function converts multiple downloads into a single object 
 minRow <- wideCounts %>% 
-group_by(dataset) %>% #dataset was returned from the table 
-summarise(min(depth)) #dplyr function to create a dataframe 
+  group_by(dataset) %>% #dataset was returned from the table 
+  summarise(min(depth)) #dplyr function to create a dataframe 
 #Overall count data is retrieved from this portion 
 wideCounts %>% filter(!is.na(Cornus)) # SIMON this line does not work 
 #dplyr function used to subset a data frame
@@ -1025,9 +1049,9 @@ Create file of all diatom taxa in the Neotoma master list - with name, authority
 ```{R, diatom taxa out}
 x
 Taxa_hi <- sapply(x, 
-function(x) {
-x$taxa
-})
+                  function(x) {
+                    x$taxa
+                  })
 compile_taxa
 ```
 Example of returning taxa [Not sure what this code is supposed to do = DFC]
@@ -1075,8 +1099,8 @@ ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRU
 ```{R ChronMetadata}
 # Get chronology metadata from the .meta and .parent lists
 ne_chronmeta <-sapply (ne_chroncontrol, 
-function(x) {               c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name, x$parent$dataset.id, x$parent$dataset.type)
-})
+                       function(x) {               c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name, x$parent$dataset.id, x$parent$dataset.type)
+                       })
 str(ne_chronmeta)
 ```
 
@@ -1176,29 +1200,29 @@ all_wi <- neotoma::get_dataset(test, datasettype = "diatom")
 # [SIMON - What is appropriate code to include more than one datasettype (e.g., diatom AND diatom surface sample?)  Also, since datasetids are specified, is it also necessary to specify datasettype?]
 # Since we're going to use this multiple times, let's make it a function:
 leaflet_map <- function(dataset_in) {
-dataset_summary <- do.call(rbind, lapply(dataset_in, 
-function(x){
-# here we pull out the site information from the `dataset` objects:
-data.frame(name = x$site.data$site.name,
-lat  = x$site.data$lat + runif(1, -0.005, 0.005),
-long = x$site.data$long + runif(1, -0.005, 0.005),
-type = x$dataset.meta$dataset.type)
-}))
-# The leaflet package documentation uses piping.  For the sake of this tutorial, I won't.
-# First, define a color palette for the dataset type symbol plotting.
-pal <- colorFactor("Dark2", domain = levels(dataset_summary$type))
-# Now make the leaflet map, add base raster tiles and then add the markers for the records:
-map <- leaflet(data = dataset_summary)
-map <- leaflet::addTiles(map)
-map <- leaflet::addCircleMarkers(map, ~long, ~lat, 
-popup = ~paste0("Site: ", as.character(name), "<br>",
-"Type: ", 
-as.character(dataset_summary$type)),
-color = ~pal(type),
-stroke = FALSE, fillOpacity = 0.5)
-# You need to explicitly call the `map` object to make it appear!
-map
-# [SIMON, how can we save or copy the map to move it to another location?  Is this possible or do we need to just take a snapshot of the picture?]
+  dataset_summary <- do.call(rbind, lapply(dataset_in, 
+                                           function(x){
+                                             # here we pull out the site information from the `dataset` objects:
+                                             data.frame(name = x$site.data$site.name,
+                                                        lat  = x$site.data$lat + runif(1, -0.005, 0.005),
+                                                        long = x$site.data$long + runif(1, -0.005, 0.005),
+                                                        type = x$dataset.meta$dataset.type)
+                                           }))
+  # The leaflet package documentation uses piping.  For the sake of this tutorial, I won't.
+  # First, define a color palette for the dataset type symbol plotting.
+  pal <- colorFactor("Dark2", domain = levels(dataset_summary$type))
+  # Now make the leaflet map, add base raster tiles and then add the markers for the records:
+  map <- leaflet(data = dataset_summary)
+  map <- leaflet::addTiles(map)
+  map <- leaflet::addCircleMarkers(map, ~long, ~lat, 
+                                   popup = ~paste0("Site: ", as.character(name), "<br>",
+                                                   "Type: ", 
+                                                   as.character(dataset_summary$type)),
+                                   color = ~pal(type),
+                                   stroke = FALSE, fillOpacity = 0.5)
+  # You need to explicitly call the `map` object to make it appear!
+  map
+  # [SIMON, how can we save or copy the map to move it to another location?  Is this possible or do we need to just take a snapshot of the picture?]
 }
 # Since that's all wrapped in a function, we can call it with any `dataset_list`:
 leaflet_map(all_wi)
