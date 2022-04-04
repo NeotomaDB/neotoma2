@@ -24,7 +24,7 @@ library(purrr)
 library(sf)
 ```
 
-# Start from line 477 March 31th
+# Start from line 710 March 31th
 ## Introduction
 
 This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
@@ -707,6 +707,7 @@ wideWCH_DTM
 # Write data to an Excel file, which will be created in the working directory
 WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 ```
+## Socorro from here April 4th
 
 #### Diatom Sample analyst name
 Get all datasets associated with name of a sample analyst
