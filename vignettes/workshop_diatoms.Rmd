@@ -158,6 +158,20 @@ for(sitename in sitenameList){
 }
 my_sites
 ```
+###### Latitude and Longitude bounding boxes
+
+```{R diatomsbyBBox}
+# diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
+```
+
+Example of get_datasets by location with bounding box of lat & longs (West, South, East, North)
+
+```{R diatomsbyBBoxExecuted}
+diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
+plotLeaflet(diat_NE)
+```
+
+
 ###### get_datasets
 **Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
 
@@ -174,6 +188,8 @@ uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wal
 uwallf_datasets
 ```
 
+Don says: add table showing siteid, sitename, datasetid, datasettype, age_range_old, age_range_ young, first publication
+
 #### Dataset ID
 Get meta data on a single dataset using datasetID 
 
@@ -183,96 +199,12 @@ diat_ID <- get_datasets(44764) # Example
 diat_ID
 ```
 
-```{r TODO Create browse function}
-#browse (44764) [Simon - opens Neotoma Explorer, but does not go to the site specified]
-```
-
 Get data on multiple datasets using multiple dataset IDs 
 ```{r multdatsetid }
 multid <- c(44764,44765,44766)
 diat_multid <- get_datasets(multid) # Example
 diat_multid
 ```
-
-```{r GetSampleIDs by Dataset IDs}
-NL1 <- c(49651,49032,49033,49034,49035,49036,49037)
-NL2 <- get_datasets(NL1)
-datasets(NL2)
-```
-
-#### Dataset Type
-`neotoma2` can retrieve datasets from the API based on their dataset type (Diatom, Diatom Surface Sample, Diatom Top-Bottom)
-Example below gets dataset information for individual dataset types and then combines results into one object.
-
-Usually, code would include selection criteria in addition to datasettype. For example, all datasets of a particular dataset type within a specific geographic region. 
-
-[old text - should be deleted: Example "loc = bounding box" (West,South,East,North) is northern Maine.]
-```{r getDiatomsByDatasettype} 
-# Get datasets by individual diatom datatype 
-neDiatoms_ss <- get_datasets(datasettype="diatom surface sample")
-neDiatoms_ss 
-```
-
-
-```{r}
-neDiatoms_tb <- get_datasets(datasettype="diatom top-bottom")
-summary(neDiatoms_tb)
-```
-```{r}
-diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample")
-neDiatoms_com <- c()
-for (type in diatom_list){
-  sites <- get_datasets(datasettype=type)
-  neDiatoms_com <- c(neDiatoms_com, sites)
-}
-neDiatoms_com
-```
-
-#### Geographic region
-
-#####  Geopolitical units (e.g., states)
-
-get_dataset for an individual state - Pennsylvania examples **NOTE code not ready for gpids**
-```{R gpidExamplePenn}
-# Get_dataset by name
-Geo_PA <- get_datasets(gpid = "Pennsylvania")
-# Get by gpid
-GEO_PA1 <- get_datasets(gpid = 8412) # Pennsylvania gpid = 8412
-```
-
-##### Location based extraction
-
-###### Latitude and Longitude bounding boxes
-
-```{R diatomsbyBBox}
-# diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
-```
-
-Example of get_datasets by location with bounding box of lat & longs (West, South, East, North)
-
-```{R diatomsbyBBoxExecuted}
-diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
-plotLeaflet(diat_NE)
-```
-
-
-###### User-specified spatial polygon
-
-With the `sf` package to create polygons for spatial searches (the package also allows you to pass in geoJSON or WKT spatial objects). We can pass a polygon as a in the `loc` argument of `get_datasets()` in `neotoma2`. 
-
-In the example below, we first create a matrix to represent the corners of a bounding box of the northeastern United States. We then create a spatial polygon ("neus") based on the co-ordinates.  Finally, we to use "neus" as input to the `get_datasets()` function.
-
-```{R siteSpatialSearch}
-northeastUS <- rbind(c(-80,40), c(-80,48),
-                     c(-65,48), c(-65,40), c(-80,40))
-neus <- sf::st_polygon(list(northeastUS))
-``` 
-
-```{r}
-neUSsites <- get_datasets(loc = neus)
-neUSsites
-```
-
 
 #### Elevation (m)
 Find datasets for sites between minimum and maximum elevations
@@ -309,48 +241,19 @@ uwallf_download <- get_downloads(uwallf_diatom_dataset)
 
 
 Get Sample IDs for Dataset IDs
-```{r GETSampleID for Dataset ID}
-CODE <-c(44764,44765,44766) #datasetids
-C1<- get_datasets(CODE)
-CD <- get_downloads(C1)
-C2 <- samples(CD)$taxonid
-C2
-```
 
-```{r}
-CD
-C3 <- datasets(CD)
-as.data.frame(C3)$datasetid
-```
-```{r}
-C4 <-collunits(CD)
-C4
-```
-
-```{r GetSampleIDs by Dataset IDs and filtering by type}
-NL1 <- c(49651,49032,49033,49034,49035,49036,49037)
-NL2 <- get_datasets(NL1) %>%
-  neotoma2::filter(datasettype == "diatom surface sample")
-NL3 <- get_downloads(NL2)
-NL4 <- samples(NL3)$taxonid
-NL4
-```
+Insert table listed on table doc (Dataset diatom counts / water chemistry)
 
 ## Using neotoma2::filter
 
 There might be cases when we need to filter results out from a `sites` object. We can use the `filter()` function. `filter()` takes any `sites` attribute to filter on.
 
-
-Find sites where value for altitude is null
-
-```{r Find sites where elev is null}
-diat_el <- get_sites(limit = 1000) %>%
-  neotoma2::filter(is.na(altitude))
-diat_el
-```
+Don says: This should be moved up on the document (where this is first used)
 
 #### Within or intersecting a specified time interval 
 [Simon - Code still needs to be written]
+Don says: Find a working example, or delete this section. Should be using age_old and age_young.
+
 ```{R Diatom Time Interval}
 datasets(NL2)
 NL2
@@ -366,13 +269,6 @@ interval_42
 get_downloads(interval_42)
 ```
 
-#### Investigator name / person name
-[Following code is for how to find a contact id given a contact name; still need code for how to find all datasets associated with a contact]
-```{R Diatom Investigator}
-Don <- get_contacts(contactname = '%Charles, Donald F.%') 
-# In addition to contactname, other possible arguments are: contactid, contactstatus, are familyname
-Don
-```
 
 #### Taxon name or ID 
 ** Note taxon name / id not sure if in API)
@@ -396,62 +292,18 @@ diat_samples <- diat_samples %>%
   dplyr::filter(variablename == 'Navicula minima')
 ```
 
-#### Filtering by Submission date
-```{r SubDate}
-# Filtering by submission date, YYYY-MM-DD
-as.data.frame(collunits(diat_nm1_dw)) %>%
-  dplyr::filter(colldate == "2007-06-05")
-```
-```{r filtered collunits with site and dataset id}
-
-dw_df <- as.data.frame(collunits(diat_nm1_dw)) %>%
-  dplyr::filter(colldate == "2007-06-05")
-
-ids_df <- getids(diat_nm1_dw)
-
-left_join(x=dw_df,y=ids_df, by=c("collectionunitid" = "collunitid"),all.x=TRUE) %>%
-  select(siteid, datasetid, collectionunitid, handle, colldate)
-
-```
 #### Dataset DOI
-
-** Not sure dois is a used parameter.
+Don says: keep in, but make code work.
+** Not sure dois is a used parameter. 
 ```{r getDiatomsByDOI}
 # neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
 # [SIMON - This code chunk does not work.  I assume this is because the Neotoma2 get_datasets function is still being developed. True?  My understanding is that it would retreive the DOI. Don]
 ```
 
-#### Collection unit type, ID or Handle [secondary]
-Code to retreive datasets by collection type - usually would be one part of a larger code chunk or function
-
-```{R diatombyColltype}
-# Note: Couldn't find collectionunits of type core. It would be the same code but replacing
-# filter(collectiondevice to collectiontype)
-
-df1 <- as.data.frame(collunits(diat_nm1_dw)) %>%
-  filter(collectiondevice == "Modified KB gravity corer")
-
-id_df <- getids(diat_nm1_dw)
-
-left_join(df1, id_df, by = c("collectionunitid" = "collunitid"))$datasetid
-```
-
-```{R sitesByCollUnitHandle}
-df1 <- as.data.frame(collunits(diat_nm1_dw)) %>%
-  filter(handle == "ROCKY15")
-
-id_df <- getids(diat_nm1_dw)
-
-left_join(df1, id_df, by = c("collectionunitid" = "collunitid")) %>%
-  select(siteid, datasetid, collectionunitid, handle, location)
-
-dataset_rocky15 <- get_datasets(18047) #18047 is the datasetid obtained from above
-dataset_rocky15
-```
-
 ### Find datasets (multiple functions)
 #### Constituent database
+Don says: keep searching by keyword, but get rid of constituent database example (?)
 [SIMON - Code needs to be added]
 ```{R SitesbyConDB}
 consDB <- get_
@@ -478,6 +330,7 @@ sediment_txt$datasetid
 ```
 
 #### Aggregate dataset(s) <- ??
+Don says: Yes, we want this section.
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
 ```{R Diatom Aggregate Dataset}
@@ -491,23 +344,8 @@ Example
 ```{R Diatom Aggregate Dataset Example}
 ```
 
-#### Publications
-Get all datasetids associated with a particular publication
-
-```{R Diatom Publication}
-diat_pub <- get_datasets()
-```
-Example - [not sure what this code does...] What is the goal?? Socorro
-```{R Diatom Publication example}
-diat <- get_datasets(datasettype = "diatom")
-diat_pub <- get_publication()
-pub_diat <- sapply(diat_pub, 
-                   function(x) {
-                     x$pi.data$ContactID
-                   })
-```
-
 #### Water chemistry
+Don says: We want water chemistry
 ##### Is water chemistry available?
 Determine if any water chemistry data is available for one or more sites or diatom datasets for those sites
 If chem data are available, which parameters? (List variables included)
@@ -608,31 +446,8 @@ WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 ```
 ## Socorro from here April 4th
 
-#### Diatom Sample analyst name
-Get all datasets associated with name of a sample analyst
-[SIMON - Currently seems to just get a list of people who analyzed surface samples; also, may not get diatom analysts - gets investigators associated with all "diatom" datasets instead; will need to involve get_downloads]
-Needs to be able to accept contact ID of a specific person
-```{R Diatom Sample Analyst}
-Con_<- get_dataset
-Contact_diat <- get_dataset(datasettype = 'diatom')
-Analyst <- sapply(Contact_diat, 
-                  function(x) {
-                    x$pi.data
-                  })
-```
-Example
-[Simon - Can this code be modified so it retrieves all dataset IDs associated with an specific example person?]
-```{R Diatom Sample Analyst example}
-Con_<- get_dataset(32252)
-Contact_diat <- get_dataset(datasettype = 'diatom')
-Con_U <- sapply(Con_, 
-                function(x) {
-                  x$pi.data
-                })
-```
-
-
 #### Diatom taxa
+Don says: We probably want this.
 ##### Diatom counts that include one or more specific diatom taxa
 [SIMON - Code does not include possibility of specifying a particular diatom taxon]
 
@@ -666,43 +481,6 @@ Example
 ```{R Diatom Counts EX}
 ```
 
-#### Site characteristics
-##### Site area larger or smaller than specified size
-
-```{R Diatom Site Area}
-```
-
-Example
-
-```{R Diatom Site Area EX}
-```
-
-#### Depository in which diatom slides are located
-
-```{R Depository}
-diat.data <- get_dataset(datasettype='diatom') # access to neotoma explorer but needs to specify 
-browse(diat.data)  #This opens Neotoma Explorer, but does not show any data
-```
-
-Example
-```{R Depository EX}
-library(neotoma)
-```
-#### Chronology (y/n) and characteristics
-Does a dataset have an associated chronology?  If so, what are metadata (e.g., upper and lower age bounds)?
-Not sure of purpose of the following code
-```{R Chron }
-get_chroncontrol(32252) # datasetid for Upper Wallface Pond
-# related to how a bacon model is run through R
-```
-Example
-```{R AnotherChronExample}
-```
-
-Example
-```{R ChronologyExample}
-```
-
 
 ### Format for browsing using multiple criteria - Examples 
 Examples: [could get complicated]  General rules and tips.  [Add as they become known]
@@ -718,6 +496,7 @@ Examples: [could get complicated]  General rules and tips.  [Add as they become 
 ### Other options / Misc:
 
 ### Create output of browse results 
+#Don says: old version of data table doc, leave for now
 Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
 
 Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location in Tilia tabs): 
@@ -736,6 +515,7 @@ Code chunks in this section are designed to create output files for diatom count
 The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
 For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
 
+#Stopped here: April 8, 2022 - 3:51 pm
 ##### View sample and count metadata
 ```{R Upper Wallface View counts}
 ### View sample metadata, list of taxa, and counts in Download dataframes 
@@ -1141,101 +921,3 @@ single or multiple taxa - vs depth or time
 single or multiple taxa from multiple sites - vs depth or time
 ### Plot of abundance of a taxon vs an environmental characteristic 
 (e.g., water chemistry variable)
-
-## Get taxonomic data from DiatomBase
-
-DiatomBase is a subset of WORMS - World Register of Marine Species
-https://www.diatombase.org/index.php
-http://www.marinespecies.org/index.php
-
-`worrms` is an R client for the World Register of Marine Species (<http://www.marinespecies.org/>).  See the taxize book (<https://taxize.dev>) for taxonomically focused work in this and similar packages.   
-
-DiatomBase API's are at: https://www.diatombase.org/aphia.php?p=rest&__route__/.  They are the same as those for WORMS, but functions are restricted to returning records of diatom taxa only.
-
-The following basic R code and text was copied on 29 Oct 2021 by DF Charles from: https://github.com/ropensci/worrms/blob/master/vignettes/worrms.Rmd
-
-Install stable version from CRAN
-```r
-install.packages("worrms")
-```
-Development version from GitHub
-```r
-install.packages("remotes")
-remotes::install_github("ropensci/worrms")
-```
-
-```r
-library("worrms")
-```
-Notes (dfc): 
-The unique identifier for a taxon name in WORMS and DiatomBase is called      "AphiaID"
-The code below uses three functions:
-* wm_records_name - gets primary data on one taxon
-- wm_records_names - gets primary data on two or more taxa
-- wm_sources - gets source information, including reference citation  for the original description
-
-The following website provides a useful way to convert a column  of taxa names to a comma-separated list.  Change the preferences to get a list  with quotes around each name:  https://convert.town/column-to-comma-separated-list
-
-Purpose of code chunks in this section - in the order presented
-1.  Get AphiaID and taxonomic information by one taxon name
-2.  Get AphiaIDs and taxonomic information by multiple taxa names
-3.  Create an object that includes the AphiaID's only from results of 2, above
-4.  Get source data, including original description, by AphiaIDs (contained in object created in number 3, above.
-5.  Combine results of 2 and 4, above, to get information necessary to populate all fields in the Neotoma taxa list.
-
-To get an Excel file with data for entering names in the Neotoma taxa list:
-1. Start with a column of taxa names, convert it to a comma-delimited list
-2. Convert the column of names to a comma delimited file with each name in quotes (e.g., by using convert.town)
-3. Run code chunks (described above) in the following order: 2, 3, 4, 5.
-
-### By single taxon name
-```{r DiatomBase1Taxon}
-library("worrms")
-dtmBase_taxon <- wm_records_name(name = 'Neofragilaria acidobiontica', fuzzy = TRUE, marine_only = FALSE) 
-# Set fuzzy = TRUE (default) to include varieties, etc.
-# Set fuzzy = FALSE to get specified name only - must be exact matches
-# Set marine-only as FALSE; default value is TRUE
-view (dtmBase_taxon)
-```
-### By multiple taxa names
-
-```{r DiatomBaseTaxa}
-library("worrms")
-dtmBase_taxa <- wm_records_names(name = c("Cyclotella chochtawatcheana","Cyclotella meneghiniana","Cyclotella stelligera","Melosira cf. arenti","Aulacoseira sp.","Cyclostephanos sp.","Centric spp.","Chaetoceros sp. ","Pennate Diatoms","Achnanthes brevipes","Achnanthes delicatula","Achnanthes cf. engel ","Achnanthes cf. grana","Achnanthes lanceolata","Achnanthes minutissima","Achnanthes spp.","Amphora coffeiformis","Amphora veneta","Amphora spp.","Caloneis spp.","Cocconeis placentula and varieties","Cocconeis other spp.","Cymbella spp.","Denticula subtilis","Diploneis spp.","Entomoneis spp.","Epithemia spp.","Fragilaria brevistriata","Fragilaria capucina var. vaucheriae","Fragilaria construens and varieties","Fragilaria leptostauron","Fragilaria pinnata","Fragilaria subsalina","Fragilaria zelleri","Fragilaria spp.","Gomphonema","Gyrosigma"), fuzzy = FALSE, marine_only = FALSE)
-# Set fuzzy = TRUE (default) to include varieties, etc.
-# Set fuzzy = FALSE to get specified name only - must be exact match
-# Set marine-only as FALSE; default value is TRUE
-dtmBase_out <- bind_rows(dtmBase_taxa)
-view(dtmBase_out)
-WriteXLS(dtmBase_out, ExcelFileName = "DtmBase_taxa_out.xlsx")
-```
-
-### Get AphiaIDs
-
-```{r DiatomBaseAphiaIDs}
-# Create an object with AphiaIDs using output from the code chunk above
-db_out_Aphiaid <- dtmBase_out$AphiaID
-view (db_out_Aphiaid)
-```
-
-### Create output file for Neotoma
-
-```{r DiatomBaseSources}
-# Create an object combining primary information and reference citations  for taxa with specified AphiaIDs
-# Get source information for the set of AphiaIDs created in the  code chunk above.
-dtmBase_source <- wm_sources_(id = db_out_Aphiaid)
-# Returns sources for several variables, one of which is specified as "original description" in the "use" column
-# Create an object with source for "original description" only
-dtm_Base_origDes <- filter(dtmBase_source, use == "original description")
-# Limit variables / columns to those most relevant
-dtm_Base_origDes1 <- select(dtm_Base_origDes, id ,reference, page, doi)
-# Change "id" column from character to integer type
-dtm_Base_origDes1$id <- as.integer(dtm_Base_origDes1$id)
-# Combine main taxa table (dtmBase_out) and source table (dtm_Base_origDes1)
-dtm_Base_comb <- left_join(dtmBase_out, dtm_Base_origDes1, by = c("AphiaID" = "id"))
-# Create table with variables needed for adding names to Neotoma taxa list
-dtmBase_neo <- select (dtm_Base_comb, "AphiaID", "scientificname", "authority","status", "unacceptreason", "reference", "page", "doi", "citation", "rank", "genus", "family", "valid_AphiaID", "valid_name", "valid_authority")
-view (dtmBase_neo)
-# Create an Excel file
-WriteXLS(dtmBase_neo, ExcelFileName = "DtmBase_addNeotoma.xlsx")
-```
