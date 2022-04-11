@@ -3,6 +3,7 @@
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
+#' @import jsonlite
 #' @importFrom methods new
 #' @description
 #' Information for Fossil Datasets
@@ -183,5 +184,33 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     unlist()
   output <- get_downloads(x = output, verbose, ...)
 
+  return(output)
+}
+
+#' @title get_downloads json
+#' @param x sites object
+#' @param verbose Should text be printed during the download process?
+#' @param ... arguments in ellipse form
+#' @importFrom stats na.omit
+#' @export
+get_downloads.character <- function(x, verbose = TRUE, ...) {
+  print("use json")
+  
+  
+  
+  result <- jsonlite::fromJSON(x, simplifyVector = FALSE)
+  
+  use_na <- function(x, type) {
+    if (is.na(x)) {
+      return(switch(type,
+                    "char" = NA_character_,
+                    "int" = NA_integer_))
+    } else {
+      return(x)
+    }
+  }
+  #print(result$data)
+  output <- parse_download(result)
+  
   return(output)
 }

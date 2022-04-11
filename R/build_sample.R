@@ -15,25 +15,27 @@
 #' }
 #' 
 build_sample <- function(x) {
-    
-    df <- x$datum %>%
-      map(function(y) {
-        as.data.frame(y)
-      }) %>%
-      bind_rows()
-    
-    df_age <- x$ages %>%
-      map(function(y) {
-        as.data.frame(y)
-      }) %>%
-      bind_rows()
-    
-    # Analyst Info
-    
-    analyst_list_helper <- x$sampleanalyst %>%
-      map(function(y) {
-        y$contactname
-      })
+
+  df <- x$datum %>%
+    map(function(y) {
+      y <- map(y, testNull)
+      as.data.frame(y)
+    }) %>%
+    bind_rows()
+ 
+  df_age <- x$ages %>%
+   map(function(y) {
+     y <- map(y, testNull)
+     as.data.frame(y)
+   }) %>%
+   bind_rows()
+  
+  # Analyst Info
+  
+  analyst_list_helper <- x$sampleanalyst %>%
+    map(function(y) {
+      y$contactname
+    })
   
   new("sample",
       ages = df_age,
