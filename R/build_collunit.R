@@ -24,6 +24,8 @@ build_collunits <- function(x) {
   if(length(x$handle) == 0) {
     x$handle <- NA
   }
+  
+  #testNull(x$colldate, character(0))
   newCollunits <- new('collunit',
                       collunittype = use_na(testNull(x$collectionunittype, NA), "char"),
                       handle = use_na(testNull(x$handle, NA), "char"),
@@ -31,7 +33,8 @@ build_collunits <- function(x) {
                       collectiondevice = use_na(testNull(x$collectiondevice, NA), "char"),
                       collectionunitname = use_na(testNull(x$collectionunitname, NA), "char"),
                       waterdepth = use_na(testNull(x$waterdepth, NA), "int"),
-                      colldate = as.Date(character(0)),
+                      #colldate = as.Date(character(0)),
+                      colldate = as.Date(testNull(x$colldate, NA)),
                       depositionalenvironment = use_na(testNull(x$depositionalenvironment,NA), "char"),
                       location = use_na(testNull(x$location, NA), "char"),
                       gpslocation = sf::st_as_sf(sf::st_sfc()),

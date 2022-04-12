@@ -163,6 +163,7 @@ setMethod(f = "as.data.frame",
           definition = function(x) {
             data.frame(collectionunitid = x@collectionunitid,
                        handle = x@handle,
+                       colldate = x@colldate,
                        location = x@location,
                        waterdepth = x@waterdepth,
                        collunittype = x@collunittype,
