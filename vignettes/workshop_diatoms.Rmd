@@ -454,8 +454,8 @@ Don says: We probably want this.
 Get list of taxa found in a single dataset (core)
 
 ```{R datasetByTaxa}
-diat_tax <- get_dataset(32252) # Datasetid for U Wallface P core 1
-diat_dl <- get_download(diat_tax)
+diat_tax <- get_datasets(32252) # Datasetid for U Wallface P core 1
+diat_dl <- get_downloads(diat_tax)
 diat_d2 <- compile_downloads(diat_dl)
 diat_taxa <- taxa(diat_dl)
 diat_taxa
@@ -724,6 +724,7 @@ diat_taxa <- taxa(diat_dl)# The function taxa returns a data frame of taxa for a
 
 
 #### List of diatom taxa
+Don says:  replace this code chunk with code using the "taxa" function in Neotoma 2.
 [Simon - following code does not work - (Error: object 'x' not found)
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
 ```{R, diatom taxa out}
@@ -764,13 +765,14 @@ Needs to be written
 
 #### Water chemistry
 ```{R WCHM Out}
-## get_dataset(sitename='x',datasettype = 'water chemistry') # format
-get_dataset(sitename="%Wallface%",datasettype = 'water chemistry') # example
+## get_datasets(sitename='x',datasettype = 'water chemistry') # format
+get_datasets(sitename="%Wallface%",datasettype = 'water chemistry') # example
 ```
 Example
 ```{R ChemistryExample}
 ```
 #### Chronology
+Don says: replace with code using "chronologies" function in Neotoma2.
 One way to get chronology data is to first run get_download to create a download file and then run get_chroncontrol to extract the chronology data.  The example below gets chronology data from  download files with data for all sites in the northeast US.
 ```{R ExtractChroncontrol}
 # Get chroncontrol data from a download file using get_chroncontrol
