@@ -39,19 +39,11 @@ Do something with the data
 
 
 ## Introduction
-
-This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
-
-Some code in this document was borrowed from the `neotoma` markdown document prepared by Simon Goring and the original Neotoma R package ([Goring et al. 2015](http://doi.org/10.5334/oq.ab)).
+This document was prepared for use at workshops designed to introduce participants to use of the neotoma2 R package, primarily to browse, download, and analyze data in the Neotoma database.  It provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. 
 
 One of the main goals of `neotoma2` is to pull records out of the Neotoma database and into a user's R workflow. This will help diatomists and environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
 
-> If you're thinking without writing, you only think you're thinking. — *Leslie Lamport*
 This document is organized to address users' two main goals: to browse the database to discover datasets that meet specified criteria and to create output files that can be used for further analysis. Other goals are to create plots and maps and analyze data using R code.
-
-### Why `neotoma2` and not just an update of `neotoma`?
-
-The Neotoma servers and all the back-end services recently (as of [Simon - add month / year]) migrated from a SQL Server Database on a lonely Windows N95 computer to a more robust server and set of services. Because of this migration, many of the tools we use to access data are no longer accessible. For this reason, the Neotoma IT Team chose to create a new package. This is because the code used in `neotoma` will not be directly comparable to the code used in `neotoma2` since data objects and expected behaviours will differ.
 
 ### Data Organization in Neotoma
 
@@ -66,7 +58,7 @@ The Neotoma data model is available online at the [Database Schema](https://open
 Neotoma data is structured spatially. Each collection location is assigned a **site**, a spatial location defined by either a point or a polygon. It may be a lake, an archaeological site, a swamp, or another location.
 
 Within a **site**, there may be one or more **collection units**.  
-A collection unit represents the material (e.g., sediment core) removed from a specific location within a `site` (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** can be removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry). Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
+A collection unit represents the material (e.g., sediment core) removed from a specific location within a `site` (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** are defined as material removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry). Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
 
 #### What is the R package doing?
 
@@ -95,6 +87,8 @@ Following are descriptions of the main functions in `neotoma2`. Text in quotes w
 
 There are **3** main functions in `neotoma2` to retrieve data: `get_sites()`, `get_datasets()`, and `get_downloads()`
 
+[[Provide more information on the functions - what they do.  get_sites and get_datasets are nearly the same. Can't use siteid or sitename with get_datasets. Get-downloads gets the data]]
+
 
 ## Browsing - Data discovery
 
@@ -114,19 +108,22 @@ e.g., `get_sites(sitename="Alexander Lake")`
 | `limit` | integer > 0; default 25 |
 | `offset` | integer > 0; default 0 |
 
-Values returned: A sites object that includes: siteid, sitename, long (mean), lat (mean), elev, description, long_acc [width of bounding box], and lat_acc [height of bounding box]
-
 `limit` indicates the maximum number of records that will be returned; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
+
+Values returned: A sites object that includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.
 
 To see structure of `get_sites()` function output, run the following code:
 
 ```{R structure_of_get_site_output}
-uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-#str(uwallf_site) # shows structure of uwallf_site
+uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for Upper Wallface Pond.  Note that % can be used as a wildcard, here and for other Neotoma2 functions)
+str(uwallf_site) # shows structure of uwallf_site
 ```
 ### Find sites
 
-We can search for information on a single or multiple sites with `neotoma2::get_sites()`. Sometimes it is helpful to find locations of all sites within a region, even if they are not diatom sites, as this indicates the level of paleoecological 'effort' in a region. We can often use a site search to do preliminary work since the `sites` object contains less information than the `datasets` or `downloads` objects. 
+The get_sites function can be used to search for information on a single or multiple sites. Sometimes it is helpful to find locations of all sites within a region, even if they are not diatom sites, as this indicates the level of paleoecological 'effort' in a region.
+
+[[[We can often use a site search to do preliminary work since the `sites` object contains less information than the `datasets` or `downloads` objects. - It doesn't really seem to contain less information than a "get_datasets" object. DFC]]]
+
 For example, we might want to generate a map of all sites and superimpose specific sites we are interested in.
 
 #### Site Name
@@ -175,16 +172,17 @@ plotLeaflet(diat_NE)
 ###### get_datasets
 **Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
 
-x is an optional value that represents the numeric dataset ID.
+x is an optional value that represents the numeric dataset ID. [[[Why is it considered "optional"? Need more description of possibilities.  Can use outpu of any of 3 main functions?  Anything that is a sites object? DFC]]]
 
-`get_datasets()` returns a **sites** object but with a more complex detail at the dataset level.
+`get_datasets()` returns a **sites** object but with a more complex detail at the dataset level.  [[[Confirm this description!!]]]
+]]]
 
-The extra values returned for each dataset are: database, age_range_old, age_range_young, notes, location, waterdepth, collunitype, collectiondevice, collectionunitname, collunithandle.
+The extra values returned for each dataset are: database, age_range_old, age_range_young, notes, location, waterdepth, collunitype, collectiondevice, collectionunitname, collunithandle.[[[Review / revise - dfc]]]
 
-To see structure of a dataset after `get_datasets()`, run the following code:
+To see structure of a`get_datasets()` object, run the following code:
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
+uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (returns 4 elements corresponding to the 4 datasets available for U Wallface Pond:  diatom surface sample, diatom, chronology and water chemistry)
 uwallf_datasets
 ```
 
