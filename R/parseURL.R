@@ -14,7 +14,7 @@
 #' @param ... Any query parameters passed from the function calling
 #' \code{parseURL}.
 #' @export
-parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
+parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
     if (is.list(x)) {
@@ -73,8 +73,6 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
     responses <- c()
 
     while (TRUE) {
-      cat(sprintf('offset = %d; length = %d', query$offset, length(responses)), '\n')
-
       response <- httr::GET(paste0(baseurl, x),
                             add_headers("User-Agent" = "neotoma2 R package"),
                             query = query)

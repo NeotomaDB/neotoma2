@@ -89,6 +89,7 @@ parse_dataset <- function(result) { # nolint
   data <- result$data %>%
     fix_null()
 
+  # With a large dataset this seems to take some time, but it's not too bad.
   newSites <- map(data, function(x) {
     if (is.null(x$sites)) {
       call <- x$site

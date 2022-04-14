@@ -23,7 +23,7 @@ clean.sites <- function(x, verbose = TRUE) {
   if (any(duplicated(siteids))) {
     matched <- unique(siteids[duplicated(siteids)])
 
-    clean_sites <- neotoma2::filter(x, !.data$siteid %in% matched)
+    clean_sites <- filter(x, !.data$siteid %in% matched)
     messy_sites <- neotoma2::filter(x, .data$siteid %in% matched)
 
     pb <- progress_bar$new(total = length(matched))

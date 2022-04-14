@@ -63,7 +63,7 @@ One way of dealing with the issue of `offsets` and `limits` is the use of the `a
 
 ```{r downloadMammals, eval=FALSE}
 # This gives us 25 records (without setting 'limit')
-mammals <- get_datasets(datasettype = 'vertebrate fauna')
+mammals <- get_datasets(datasettype = 'vertebrate fauna', limit = 200)
 
 # The 'all_data' approach:
 allMammals <- get_datasets(datasettype = 'vertebrate fauna', 
@@ -85,7 +85,7 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        ageyoung = 6000,
                        ageold = 11500,
                        loc = c(-100,20,20,90),
-                       limit = 9000)
+                       all_data = TRUE)
 ```
 
 The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data.
