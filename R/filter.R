@@ -17,7 +17,7 @@ filter.sites <- function(x, ...) {  # nolint
 
   ids <- getids(x) %>%
     inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-    inner_join(as.data.frame(collectionunits(x)), by = "collunitid") %>%
+    inner_join(as.data.frame(collunits(x)), by = c("collunitid" = "collectionunitid")) %>%
     inner_join(as.data.frame(x), by = "siteid") %>%
     rename(datasetnotes = .data$notes.x,
            sitenotes = .data$notes.y,
