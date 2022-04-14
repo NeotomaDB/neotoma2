@@ -479,7 +479,7 @@ Don
 ** Note taxon name / id not sure if in API)
 ```{R getTaxa}
 # Find datasets using taxon name
-diat_nm<- get_datasets(taxonname = 'Navicula minima')
+diat_nm <- get_datasets(taxonname = 'Navicula minima')
 # Find datasets using taxon id
 ```
 
@@ -498,11 +498,13 @@ diat_samples <- diat_samples %>%
 ```
 
 #### Filtering by Submission date
+
 ```{r SubDate}
 # Filtering by submission date, YYYY-MM-DD
 as.data.frame(collunits(diat_nm1_dw)) %>%
   dplyr::filter(colldate == "2007-06-05")
 ```
+
 ```{r filtered collunits with site and dataset id}
 
 dw_df <- as.data.frame(collunits(diat_nm1_dw)) %>%
@@ -514,12 +516,13 @@ left_join(x=dw_df,y=ids_df, by=c("collectionunitid" = "collunitid"),all.x=TRUE) 
   select(siteid, datasetid, collectionunitid, handle, colldate)
 
 ```
+
 #### Dataset DOI
 
 ** Not sure dois is a used parameter.
 ```{r getDiatomsByDOI}
 # neDiatoms <- get_datasets(dois=c(...)) # basic format
-neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
+neDiatoms <- get_datasets(dois = c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
 # [SIMON - This code chunk does not work.  I assume this is because the Neotoma2 get_datasets function is still being developed. True?  My understanding is that it would retreive the DOI. Don]
 ```
 

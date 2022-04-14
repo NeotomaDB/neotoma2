@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup, eval=TRUE}
 library(neotoma2)
 library(raster)
+library(dismo)
 ```
 
 This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more `neotoma2` vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.

@@ -4,7 +4,7 @@
 \alias{clean}
 \title{clean}
 \usage{
-clean(x = NA, ...)
+clean(x = NA, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{sites, datasets, collunits that may have duplicates.}

@@ -2,12 +2,13 @@
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @import gtools
 #' @import lubridate
+#' @importFrom progress progress_bar
 #' @importFrom methods new
 #' @param x sites, datasets, collunits that may have duplicates.
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites, datasets, or collection units.
 
-clean <- function(x = NA, ...) {
+clean <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
     UseMethod("clean", x)
   } else {
@@ -15,20 +16,31 @@ clean <- function(x = NA, ...) {
   }
 }
 
-clean.sites <- function(x) {
+clean.sites <- function(x, verbose = TRUE) {
 
   siteids <- as.data.frame(x)$siteid
+
   if (any(duplicated(siteids))) {
     matched <- unique(siteids[duplicated(siteids)])
+
     clean_sites <- neotoma2::filter(x, !.data$siteid %in% matched)
+    messy_sites <- neotoma2::filter(x, .data$siteid %in% matched)
+
+    pb <- progress_bar$new(total = length(matched))
+
     for (i in matched) {
-      messy_site <- neotoma2::filter(x, .data$siteid == i)
+      if (verbose == TRUE) {
+        pb$tick()
+      }
+      messy_site <- neotoma2::filter(messy_sites, .data$siteid == i)
       messy_cus <- clean(collunits(messy_site))
       new_site <- messy_site[1]
       new_site@sites[[1]]@collunits <- messy_cus
       clean_sites <- c(clean_sites, new_site[[1]])
     }
+
     return(clean_sites)
+
   } else {
     return(x)
   }
