@@ -13,6 +13,7 @@ build_collunits <- function(x) {
 
     chronologies <- purrr::map(x$chronologies, build_chron)
     chronologies <- new("chronologies", chronologies = chronologies)
+    #chronologies <- new("chronologies", chronologies = list())
   } else {
     # Sites call
     call_ds <- x$datasets

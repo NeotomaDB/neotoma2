@@ -40,8 +40,23 @@ build_chron <- function(x) {
   if (!is.na(check_chron)) {
 
   # Chroncontrols
+    
+    fix_null <- function(x) {
+      for (i in seq_len(length(x))) {
+        if (is.null(x[[i]])) {
+          x[[i]] <- NA
+        } else {
+          if (class(x[[i]]) == "list") {
+            x[[i]] <- fix_null(x[[i]])
+          }
+        }
+      }
+      return(x)
+    }
+    
   df <- x$chronology$chroncontrols %>%
     map(function(y) {
+      y <- fix_null(y)
       as.data.frame(y)
     }) %>%
     bind_rows()
