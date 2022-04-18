@@ -1,12 +1,10 @@
 ---
 title: "JASM - neotoma2 R-package Workshop"
-output:
-  rmarkdown::html_vignette: default
-  html_vignette:
-    toc: yes
-    toc_depth: 4
-vignette: |
-%\VignetteIndexEntry{Working with diatom data in the `neotoma2` R package} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The neotoma2 R Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
