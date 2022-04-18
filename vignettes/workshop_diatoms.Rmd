@@ -1,5 +1,5 @@
 ---
-title: "JASM - neotoma2 R-package Workshop"
+title: "Neotoma2 R-package - JASM Workshop"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{The neotoma2 R Package}
@@ -25,29 +25,30 @@ library(tidyverse)
 
 
 ## Outline
-Browse Data
-  get_sites
-  get_datasets
-Get the Data
-  get_downloads
-Do something with the data
-  maps
-  diagrams
-  tables
+### Browse Data
+#### Find sites
+#### Find datasets
+### Download data
+#### Download full datasets
+### Subset download output
+#### Create output files
+### Visualize data
+#### Tables [?]
+#### Maps
+#### Diagrams
+
 
 
 ## Introduction
-This document was prepared for use at workshops designed to introduce participants to use of the neotoma2 R package, primarily to browse, download, and analyze data in the Neotoma database.  It provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. 
+This document helps introduce workshop participants to use of the neotoma2 R package, primarily to browse, download, and analyze data in the Neotoma database.  It provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with data (primarily diatom-related) from the Neotoma Paleoecology Database. 
 
-One of the main goals of `neotoma2` is to pull records out of the Neotoma database and into a user's R workflow. This will help diatomists and environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
+A main goal of `neotoma2` is to pull records from the Neotoma database and into a user's R workflow. This will help diatomists and other environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
 
 This document is organized to address users' two main goals: to browse the database to discover datasets that meet specified criteria and to create output files that can be used for further analysis. Other goals are to create plots and maps and analyze data using R code.
 
 ### Data Organization in Neotoma
 
-It is worth knowing how the Neotoma database is organized and what we mean when talking about things like `sites`, `datasets`, and `samples`. The database is a Postgres database, and people who are comfortable with SQL can download a snapshot of the database and run much of the analysis on their own.
-
-#### What does the data look like?
+It is worth knowing how the Neotoma database is organized and what we mean when talking about things like `sites`, `datasets`, and `samples`.
 
 The Neotoma data model is available online at the [Database Schema](https://open.neotomadb.org/dbschema) page. As of September 2021, there were 150 different tables in the database. Some of these have particular kinds of data (for example, `agetypes`), and some link tables together. The `neotoma2` package directly supports access to some tables, but not all. For specialized cases, a user may be required to access an entire table directly (using the `get_table()` function).
 
@@ -64,7 +65,6 @@ The `neotoma2` package uses data from the Neotoma database, but it is mediated t
 ```r
 get_sites(12)
 ```
-
 calls out to the internet for the result at:
 ```
 https://api.neotomadb.org/v2.0/data/sites/12
@@ -79,20 +79,22 @@ WHERE siteid = 12
 It is a lot easier for most users to use the R functions since they create objects in R that work with other commands and statistical analysis they might want to do.
 
 #### Functions in `neotoma2`
-Following are descriptions of the main functions in `neotoma2`. Text in quotes was taken from the package descriptions. See the package documentation for more details.
+Following are descriptions of the main functions in `neotoma2`. Text in quotes was taken from the package descriptions. 
 
 ##### `neotoma2` functions
 
-There are **3** main functions in `neotoma2` to retrieve data: `get_sites()`, `get_datasets()`, and `get_downloads()`
-
-[[Provide more information on the functions - what they do.  get_sites and get_datasets are nearly the same. Can't use siteid or sitename with get_datasets. Get-downloads gets the data.  Use get_sites only if the only search info you have is site id or site name.]]
+There are several functions in `neotoma2` to retrieve and subset data.  Functions used in this workshop document include `get_sites()`, `get_datasets()`, and `get_downloads()`, filter(), collunits(), datasets(), samples(), and plotLeaflet().  See the neotoma2 package documentation for more details on these and other functions.[These are described where they first appear in the document below.]
 
 
 ## Browsing - Data discovery
 
 This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk in this section is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input of other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
-###### get_sites
+### Find sites
+Use the get_sites or get_datasets functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using get_sites.
+Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites we are interested in.
+
+#### get_sites function
 **Usage:** Sites can be searched using the following supported parameters.
 e.g., `get_sites(sitename="Alexander Lake")`
 
@@ -108,27 +110,21 @@ e.g., `get_sites(sitename="Alexander Lake")`
 
 `limit` indicates the maximum number of records that will be returned; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
 
-Values returned: A sites object that includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.
+**Values returned:** A "sites object", which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.
 
-To see structure of `get_sites()` function output, run the following code:
+To see the structure (data model) of `get_sites()` output, run the following code:
 
 ```{R structure_of_get_site_output}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for Upper Wallface Pond.  Note that % can be used as a wildcard, here and for other Neotoma2 functions)
 str(uwallf_site) # shows structure of uwallf_site
 ```
-### Find sites
 
-The get_sites function can be used to search for information on a single or multiple sites. Sometimes it is helpful to find locations of all sites within a region, even if they are not diatom sites, as this indicates the level of paleoecological 'effort' in a region.
 
-[[[We can often use a site search to do preliminary work since the `sites` object contains less information than the `datasets` or `downloads` objects. - It doesn't really seem to contain less information than a "get_datasets" object. DFC]]]
-
-For example, we might want to generate a map of all sites and superimpose specific sites we are interested in.
-
-#### Site Name
+##### Search by site name
 
 If we know the names of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
 
-Get data on a single site using sitename
+Get data on a single site using sitename.
 
 ```{r sitesbyName example}
 # diat <- get_sites(sitename = "")  # Basic format
@@ -153,27 +149,26 @@ for(sitename in sitenameList){
 }
 my_sites
 ```
-###### Latitude and Longitude bounding boxes
+##### Search for sites in latitude and longitude bounding boxes
 
 ```{R diatomsbyBBox}
-# diat_LL <- get_datasets(datasettype="diatom", loc=BOUNDING BOX) - basic format
+# diat_LL <- get_sites(datasettype="diatom", loc=BOUNDING BOX) - basic format
 ```
 
-Example of get_datasets by location with bounding box of lat & longs (West, South, East, North)
+Example of get_sites by location with bounding box of lat & longs (West, South, East, North).  Same code works with get_datasets as well as get_sites.  The following code also limits output to dataset type "diatom" and creates a Leaflet map showing locations of sites.
 
 ```{R diatomsbyBBoxExecuted}
-diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
+diat_NE <- get_sites(datasettype="diatom",loc =c(-80,40,-65,48)) 
 plotLeaflet(diat_NE)
 ```
 
-
-###### get_datasets
+##### Find datasets
+###### get_datasets function
 **Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
 
-x is an optional value that represents the numeric dataset ID. [[[Why is it considered "optional"? Need more description of possibilities.  Can use outpu of any of 3 main functions?  Anything that is a sites object? DFC]]]
+x is an optional value that represents an object with numeric dataset ID. [[[Why is it considered "optional"? Need more description of possibilities.  Can use outpu of any of 3 main functions?  Anything that is a sites object? DFC]]]
 
-`get_datasets()` returns a **sites** object but with a more complex detail at the dataset level.  [[[Confirm this description!!]]]
-]]]
+**Values returned**`A "sites object" but with a more complex detail at the dataset level.  [[[Confirm this description!!  How is output different??]]]
 
 The extra values returned for each dataset are: database, age_range_old, age_range_young, notes, location, waterdepth, collunitype, collectiondevice, collectionunitname, collunithandle.[[[Review / revise - dfc]]]
 
@@ -919,3 +914,7 @@ single or multiple taxa - vs depth or time
 single or multiple taxa from multiple sites - vs depth or time
 ### Plot of abundance of a taxon vs an environmental characteristic 
 (e.g., water chemistry variable)
+-----
+[[Provide more information on the functions - what they do.  get_sites and get_datasets are nearly the same. Can't use siteid or sitename with get_datasets. Get-downloads gets the data.  Use get_sites only if the only search info you have is site id or site name.]]
+
+[[[We can often use a site search to do preliminary work since the `sites` object contains less information than the `datasets` or `downloads` objects. - It doesn't really seem to contain less information than a "get_datasets" object. DFC]]]
