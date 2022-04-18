@@ -87,7 +87,7 @@ Following are descriptions of the main functions in `neotoma2`. Text in quotes w
 
 There are **3** main functions in `neotoma2` to retrieve data: `get_sites()`, `get_datasets()`, and `get_downloads()`
 
-[[Provide more information on the functions - what they do.  get_sites and get_datasets are nearly the same. Can't use siteid or sitename with get_datasets. Get-downloads gets the data]]
+[[Provide more information on the functions - what they do.  get_sites and get_datasets are nearly the same. Can't use siteid or sitename with get_datasets. Get-downloads gets the data.  Use get_sites only if the only search info you have is site id or site name.]]
 
 
 ## Browsing - Data discovery
