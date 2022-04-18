@@ -178,6 +178,21 @@ str(uwallf_datasets)
 ```
 
 Don says: add table showing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, first publication
+----------------
+```{R structure_of_get_dataset_output}
+#SITE DATASETS
+SITEID <- rep(uwallf_dl[[1]]@siteid,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
+SITENAME <- rep(uwallf_dl[[1]]@sitename,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
+DATASETID <- as.data.frame(datasets(uwallf_data))$datasetid
+#DATASETNAME <-
+DATASETTYPE <- as.data.frame(datasets(uwallf_data))$datasettype
+AGE_RANGE_OLD <- as.data.frame(datasets(uwallf_data))$age_range_old
+AGE_RANGE_YOUNG <- as.data.frame(datasets(uwallf_data))$age_range_young
+#FIRST PUBLICATION <- (have to figure out) get_publications(DATASETID, 
+
+data.frame(SITEID,SITENAME,DATASETID,AGE_RANGE_OLD,AGE_RANGE_YOUNG)
+```
+-------------------
 
 #### Dataset ID
 Get data on a single dataset using datasetID 
