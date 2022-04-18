@@ -1,0 +1,113 @@
+---
+title: "NE-Dtm-Collab"
+author: "Don Charles"
+date: "11/18/2021"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup}
+library(neotoma2)
+library(neotoma)
+library(dplyr)
+library(purrr)
+library(sf)
+```
+
+```{r setup1, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that
+includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to
+prevent printing of the R code that generated the plot.
+
+The purpose of this document is to document R code procedures for
+examining and creating output files to meet goals of the Northeast Lake
+Sediment Diatom Collaborative. Much basic code was copied from
+diatoms.Rmd
+
+Get site and dataset data from Northeast states using state gpids
+
+```{r retrieveNEdatasets}
+
+# Get site data for all sites in all New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY
+# The gpids were obtained from the Geopolitical units table 
+
+gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
+ne_sites <- map(gpids, function(x)
+  neotoma:::get_site(gpid = x)) %>%
+  neotoma::bind()
+ne_datasets <- get_datasets(ne_sites)
+saveRDS (ne_datasets, file = "ne_datasets")
+ne_datasets
+```
+
+```{r downloadNEdatasetsl}
+ne_down_dtsts <- neotoma::get_download(ne_datasets)
+ne_down_dtsts 
+ne_datasetids <-sapply(ne_down_dtsts, 
+                 function(x) {               c(x$dataset$site.data$site.id, x$dataset$site.data$site.name, x$dataset$dataset.meta$dataset.id, x$dataset$dataset.meta$dataset.name,  x$dataset$dataset.meta$dataset.type, x[[6]][2][4])
+                   })
+ne_datasetids
+saveRDS (ne_datasetids, "ne_datasetids")
+#ne_down_sites <- neotoma::get_download(ne_sites)
+# The code will run get_site for each gpid, then will bind the results, and then downloaded data
+```
+
+Run get_download for all sites in the northeast US to create a download
+file and then run get_chroncontrol to extract the chronology data.
+
+```{R NE_ExtractChroncontrol}
+# Get chroncontrol data from download file
+ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRUE, add = FALSE)
+saveRDS (ne_chroncontrol, "ne_chroncontrol")
+```
+
+```{R ChronMetadata}
+# Get chronology .meta data from chroncontrol file
+ne_chron_meta <- sapply (ne_chroncontrol,
+                         function(x) {x[2]
+                           })
+ne_chron_met <- do.call(rbind,ne_chron_meta)
+#Get .parent data from chroncontrol file
+ne_chron_parent <- sapply (ne_chroncontrol,
+                         function(x) {x[4]
+                           })
+ne_chron_parent <- do.call(rbind,ne_chron_parent)
+# Combine .meta and .parent files
+ne_chron_metandpar <- cbind(ne_chron_parent, ne_chron_met)
+ne_chron_noNAnoCD <- filter(ne_chron_metandpar, name != "Collection date", !is.na(name))
+saveRDS (ne_chron_noNAnoCD, "ne_chron_noNAnoCD")
+WriteXLS::WriteXLS(ne_chron_noNAnoCD, "ne_chron_noNAnoCD.xls")
+```
+
+#ne_chronmeta \<-sapply (ne_chroncontrol, \# function(x) {
+c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name,
+x$parent$dataset.id, x$parent$dataset.type) }) #ne_chronmeta
+#str(ne_chronmeta) #select (ne_chronmeta, x$meta$chron.id )
+as.data.frame (ne_chronmeta) str(ne_chronmeta) attributes (ne_chronmeta)
+#transpose(ne_chronmeta) write(ne_chronmeta) #view (ne_chronmeta) \`\`\`

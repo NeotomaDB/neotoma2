@@ -1,0 +1,105 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl720\margr720\vieww30860\viewh4040\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf0 ## Get taxonomic data from DiatomBase\
+\
+DiatomBase is a subset of WORMS - World Register of Marine Species\
+    https://www.diatombase.org/index.php\
+    http://www.marinespecies.org/index.php\
+    \
+`worrms` is an R client for the World Register of Marine Species (<http://www.marinespecies.org/>).  See the taxize book (<https://taxize.dev>) for taxonomically focused work in this and similar packages.   \
+\
+DiatomBase API's are at: https://www.diatombase.org/aphia.php?p=rest&__route__/.  They are the same as those for WORMS, but functions are restricted to returning records of diatom taxa only.\
+\
+The following basic R code and text was copied on 29 Oct 2021 by DF Charles from: https://github.com/ropensci/worrms/blob/master/vignettes/worrms.Rmd\
+\
+Install stable version from CRAN\
+```r\
+install.packages("worrms")\
+```\
+Development version from GitHub\
+```r\
+install.packages("remotes")\
+remotes::install_github("ropensci/worrms")\
+```\
+\
+```r\
+library("worrms")\
+```\
+Notes (dfc): \
+The unique identifier for a taxon name in WORMS and DiatomBase is called      "AphiaID"\
+The code below uses three functions:\
+  * wm_records_name - gets primary data on one taxon\
+  - wm_records_names - gets primary data on two or more taxa\
+  - wm_sources - gets source information, including reference citation  for the original description\
+    \
+The following website provides a useful way to convert a column  of taxa names to a comma-separated list.  Change the preferences to get a list  with quotes around each name:  https://convert.town/column-to-comma-separated-list\
+  \
+Purpose of code chunks in this section - in the order presented\
+  1.  Get AphiaID and taxonomic information by one taxon name\
+  2.  Get AphiaIDs and taxonomic information by multiple taxa names\
+  3.  Create an object that includes the AphiaID's only from results of 2, above\
+  4.  Get source data, including original description, by AphiaIDs (contained in object created in number 3, above.\
+  5.  Combine results of 2 and 4, above, to get information necessary to populate all fields in the Neotoma taxa list.\
+  \
+To get an Excel file with data for entering names in the Neotoma taxa list:\
+  1. Start with a column of taxa names, convert it to a comma-delimited list\
+  2. Convert the column of names to a comma delimited file with each name in quotes (e.g., by using convert.town)\
+  3. Run code chunks (described above) in the following order: 2, 3, 4, 5.\
+\
+### By single taxon name\
+```\{r DiatomBase1Taxon\}\
+library("worrms")\
+dtmBase_taxon <- wm_records_name(name = 'Neofragilaria acidobiontica', fuzzy = TRUE, marine_only = FALSE) \
+# Set fuzzy = TRUE (default) to include varieties, etc.\
+# Set fuzzy = FALSE to get specified name only - must be exact matches\
+# Set marine-only as FALSE; default value is TRUE\
+view (dtmBase_taxon)\
+```\
+### By multiple taxa names\
+\
+```\{r DiatomBaseTaxa\}\
+library("worrms")\
+dtmBase_taxa <- wm_records_names(name = c("Cyclotella chochtawatcheana","Cyclotella meneghiniana","Cyclotella stelligera","Melosira cf. arenti","Aulacoseira sp.","Cyclostephanos sp.","Centric spp.","Chaetoceros sp. ","Pennate Diatoms","Achnanthes brevipes","Achnanthes delicatula","Achnanthes cf. engel ","Achnanthes cf. grana","Achnanthes lanceolata","Achnanthes minutissima","Achnanthes spp.","Amphora coffeiformis","Amphora veneta","Amphora spp.","Caloneis spp.","Cocconeis placentula and varieties","Cocconeis other spp.","Cymbella spp.","Denticula subtilis","Diploneis spp.","Entomoneis spp.","Epithemia spp.","Fragilaria brevistriata","Fragilaria capucina var. vaucheriae","Fragilaria construens and varieties","Fragilaria leptostauron","Fragilaria pinnata","Fragilaria subsalina","Fragilaria zelleri","Fragilaria spp.","Gomphonema","Gyrosigma"), fuzzy = FALSE, marine_only = FALSE)\
+# Set fuzzy = TRUE (default) to include varieties, etc.\
+# Set fuzzy = FALSE to get specified name only - must be exact match\
+# Set marine-only as FALSE; default value is TRUE\
+dtmBase_out <- bind_rows(dtmBase_taxa)\
+view(dtmBase_out)\
+WriteXLS(dtmBase_out, ExcelFileName = "DtmBase_taxa_out.xlsx")\
+```\
+\
+### Get AphiaIDs\
+\
+```\{r DiatomBaseAphiaIDs\}\
+# Create an object with AphiaIDs using output from the code chunk above\
+db_out_Aphiaid <- dtmBase_out$AphiaID\
+view (db_out_Aphiaid)\
+```\
+\
+### Create output file for Neotoma\
+\
+```\{r DiatomBaseSources\}\
+# Create an object combining primary information and reference citations  for taxa with specified AphiaIDs\
+# Get source information for the set of AphiaIDs created in the  code chunk above.\
+dtmBase_source <- wm_sources_(id = db_out_Aphiaid)\
+# Returns sources for several variables, one of which is specified as "original description" in the "use" column\
+# Create an object with source for "original description" only\
+dtm_Base_origDes <- filter(dtmBase_source, use == "original description")\
+# Limit variables / columns to those most relevant\
+dtm_Base_origDes1 <- select(dtm_Base_origDes, id ,reference, page, doi)\
+# Change "id" column from character to integer type\
+dtm_Base_origDes1$id <- as.integer(dtm_Base_origDes1$id)\
+# Combine main taxa table (dtmBase_out) and source table (dtm_Base_origDes1)\
+dtm_Base_comb <- left_join(dtmBase_out, dtm_Base_origDes1, by = c("AphiaID" = "id"))\
+# Create table with variables needed for adding names to Neotoma taxa list\
+dtmBase_neo <- select (dtm_Base_comb, "AphiaID", "scientificname", "authority","status", "unacceptreason", "reference", "page", "doi", "citation", "rank", "genus", "family", "valid_AphiaID", "valid_name", "valid_authority")\
+view (dtmBase_neo)\
+# Create an Excel file\
+WriteXLS(dtmBase_neo, ExcelFileName = "DtmBase_addNeotoma.xlsx")\
+```\
+}
