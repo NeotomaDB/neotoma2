@@ -93,6 +93,7 @@ Use the get_sites or get_datasets functions to find sites and related informatio
 Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
 
 #### get_sites function
+Find sites using the get_sites function.
 **Usage:** Sites can be searched using the following supported parameters.
 e.g., `get_sites(sitename="Alexander Lake")`
 
@@ -154,12 +155,14 @@ Example of get_sites by location with bounding box of lat & longs.  Same code wo
 
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  Data are returned for the first 25 sites.
-diat_NE <- get_sites(loc =c(-80,40,-65,48)) 
+diat_NE <- get_sites(loc =c(-80,40,-65,48))
+diat_NE
 ```
 
 ##### Find datasets
+Find datasets using the get_datasets function
 ###### get_datasets function
-**Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids,taxonname, ageold, ageyoung, ageof, subdate)
+**Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids, taxonname, ageold, ageyoung, ageof, subdate)
 
 x is an optional value that represents an object with numeric dataset ID(s). It can be a single datasetid, an array with multiple IDs, or an object created using get_sites.
 
@@ -167,8 +170,9 @@ x is an optional value that represents an object with numeric dataset ID(s). It 
 
 To see structure of a`get_datasets()` object, run the following code:
 ```{R structure_of_get_dataset_output}
-uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (returns 4 elements corresponding to the 4 datasets available for U Wallface Pond:  diatom surface sample, diatom, chronology and water chemistry)
+uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
+SOCORRO and SIMON:  Following code does not work.
+uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
 str(uwallf_datasets)
 ```
 
