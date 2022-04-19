@@ -182,8 +182,9 @@ uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface
 str(uwallf_datasets)
 ```
 
-Don says: add table showing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, first publication
 ----------------
+Don says: add table showing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, first publication
+
 The functions used to extract elements from the sites objects may not always have all the variables of interest, or too many variables. Custom tables, or data frames, can be made.
 
 ```{R custom_datasets_dataframe}
@@ -233,6 +234,31 @@ Find datasets for sites between minimum and maximum elevations
 diat_el <- get_datasets(altmin=500,altmax=5500)
 diat_el
 ```
+
+##### `datasets` Function
+The `datasets()` function extracts datasets from a sites objects. 
+
+**Usage:** `datasets(object)`
+The argument for this function takes a "sites" object.
+
+**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+
+```{R datasetsFunctionExample}
+#search for a site by site name
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+#get datasets from get_sites output
+uwallf_datasets <- get_datasets(uwallf_site)
+#filter the datasets output to include only diatoms
+diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+#using the samples function to get the data output
+diat_uwallf_data <- datasets(diat_uwallf_dataset)
+#view the data frame of the data returned from the datasets function
+diat_uwallf_data
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
+```
+
 
 ###### get_downloads
 Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
@@ -369,6 +395,34 @@ aggr2 <- get_downloads()
 Example
 ```{R Diatom Aggregate Dataset Example}
 ```
+
+
+##### `collunits` Function
+The `collunits` function extracts collection units from a sites objects. 
+
+**Usage:** `collunits(object)`
+The argument for this function takes a "sites" object.
+
+**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+
+```{R collunitsFunctionExample}
+#search for a site by site name
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+#get datasets from get_sites output
+uwallf_datasets <- get_datasets(uwallf_site)
+#filter the datasets output to include only diatoms
+diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+#take the diatom datasets and getting the downloads output
+uwallf_dwl <- get_downloads(diat_uwallf_dataset)
+#using the samples function to get the data from the collunits function
+diat_uwallf_collunits <- collunits(uwallf_dwl)
+#view the collection unit data
+diat_uwallf_collunits
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(diat_uwallf_collunits,"C:\\Users\\eco37\\Desktop\\collunits_uwallf.csv", row.names = FALSE)
+```
+
 
 #### Water chemistry
 Don says: We want water chemistry
@@ -754,12 +808,30 @@ Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neo
 ### Add to a table that explicitly matches water chemistry and diatom datasets
 This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 
-### Extract a list of publications for a set of datasets
-Returns publicationid, citation, and DOI for pub if there is one
-```{R get pub out}
-# get_publications(datasetid= x)  # Basic format
+##### `get_publications` Function
+
+The `get_publications` function extracts collection units from a sites objects. 
+
+**Usage:** `get_publications(x = NA, ...)`
+| parameter | allowed values |
+| ------ | ------- |
+| `x` | integer A contact ID |
+| `	publicationid ` | The unique numeric identifier associated with a publication in Neotoma |
+| `datasetid` | A unique identifier for a Neotoma dataset that is associated with a publication |
+| `pubtype ` | The publication type, from `get_tables("publicationtypes")` |
+| `year` | The year the publication was released |
+| `search` | A plain text search string used to search the citation |
+
+**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+
+```{R get_publicationsFunctionExample}
+## Example - U Wallface P datasetid
 uwall_pubs <- get_publications(datasetid=32252) # Example - U Wallface P datasetid
+#to view the output
 uwall_pubs
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(uwall_pubs,"C:\\Users\\eco37\\Desktop\\pubs_uwallf.csv", row.names = FALSE)
 ```
 
 ### Extract a list of DOI’s for a set of datasets
