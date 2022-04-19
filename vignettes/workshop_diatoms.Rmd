@@ -81,16 +81,16 @@ It is a lot easier for most users to use the R functions since they create objec
 
 ##### `neotoma2` functions
 
-There are several functions in `neotoma2` to retrieve and subset data.  Functions used in this workshop document include `get_sites()`, `get_datasets()`, and `get_downloads()`, filter(), collunits(), datasets(), samples(), and plotLeaflet().  See the neotoma2 package documentation for more details on these and other functions.[These are described where they first appear in the document below.]
+There are several functions in `neotoma2` to retrieve and subset data.  Functions used in this workshop document include `get_sites()`, `get_datasets()`, `get_downloads()`, filter(), collunits(), datasets(), samples(), and plotLeaflet().  See the neotoma2 package documentation for more details on these and other functions.[[These are described where they first appear in the document below.]]
 
 
 ## Browsing - Data discovery
 
-This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk in this section is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input of other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
+This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input to other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
 ### Find sites
 Use the get_sites or get_datasets functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using get_sites.
-Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites we are interested in.
+Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
 
 #### get_sites function
 **Usage:** Sites can be searched using the following supported parameters.
@@ -114,18 +114,17 @@ To see the structure (data model) of `get_sites()` output, run the following cod
 
 ##### Search by site ID / view structure of get_sites output
 
-```{R structure_of_get_site_output}
-uwallf_site <- get_sites(sitename = 'Upper Wallface%') # finds site data for Upper Wallface Pond.  Note that % can be used as a wildcard, here and for other Neotoma2 functions)
-str(uwallf_site) # shows structure of uwallf_site
+Search for a site by siteid and view the structure of the output.  
+```{R site-id_structure_of_get_site_output}
+uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which has Neotoma siteid 745.  )
+str(uwallf_site) # shows structure of the uwallf_site object
 ```
-
 
 ##### Search by site name
 
 If we know the names of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
 
 Get data on a single site using sitename.
-
 ```{r sitesbyName example}
 # diat <- get_sites(sitename = "")  # Basic format
 diat <- get_sites(sitename = 'Schrader Pond')  # Example
@@ -149,17 +148,13 @@ for(sitename in sitenameList){
 }
 my_sites
 ```
-##### Search for sites in latitude and longitude bounding boxes
+##### Search for sites in a latitude and longitude bounding box
 
-```{R diatomsbyBBox}
-# diat_LL <- get_sites(datasettype="diatom", loc=BOUNDING BOX) - basic format
-```
+Example of get_sites by location with bounding box of lat & longs.  Same code works with get_datasets as well as get_sites.
 
-Example of get_sites by location with bounding box of lat & longs (West, South, East, North).  Same code works with get_datasets as well as get_sites.  The following code also limits output to dataset type "diatom" and creates a Leaflet map showing locations of sites.
-
-```{R diatomsbyBBoxExecuted}
-diat_NE <- get_sites(datasettype="diatom",loc =c(-80,40,-65,48)) 
-plotLeaflet(diat_NE)
+```{R diatomsbyBoundingBox}
+# Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  Data are returned for the first 25 sites.
+diat_NE <- get_sites(loc =c(-80,40,-65,48)) 
 ```
 
 ##### Find datasets
