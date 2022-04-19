@@ -631,22 +631,38 @@ minimumRow <- diatCount %>%
   group_by(dataset) %>% 
   summarise(min(depth)) 
 #In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
-```
+
 
 #### List of diatom taxa  [[working code still needs to be written - dfc]]
 Don says:  replace this code chunk with code using the "taxa" function in Neotoma 2.
 [Simon - following code does not work - (Error: object 'x' not found)
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
-```{R, diatom taxa out}
-x
-Taxa_hi <- sapply(x, 
-                  function(x) {
-                    x$taxa
-                  })
-compile_taxa
+
+##### `taxa` Function
+The `taxa` function extracts collection units from a sites objects. 
+
+**Usage:** `taxa(object)`
+The argument for this function takes a "sites" object.
+
+**Values returned:** A datasets object displaying a dataframe with the variables units, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), and ecologicalgroup.
+
+```{R taxaFunctionExample}
+#search for a site by site name
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+#get datasets from get_sites output
+uwallf_datasets <- get_datasets(uwallf_site)
+#filter the datasets output to include only diatoms
+diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+#take the diatom datasets and getting the downloads output
+uwallf_dwl <- get_downloads(diat_uwallf_dataset)
+#using the samples function to get the data from the taxa function
+diat_uwallf_taxa <- taxa(uwallf_dwl)
+#view the collection unit data
+diat_uwallf_taxa
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(diat_uwallf_taxa,"C:\\Users\\eco37\\Desktop\\taxa_uwallf.csv", row.names = FALSE)
 ```
-
-
 
 ### Add aggregate datasets to Neotoma
 
