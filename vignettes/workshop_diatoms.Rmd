@@ -171,14 +171,20 @@ x is an optional value that represents an object with numeric dataset ID(s). It 
 To see structure of a`get_datasets()` object, run the following code:
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
-SOCORRO and SIMON:  Following code does not work.
+#SOCORRO and SIMON:  Following code does not work.
 uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
 str(uwallf_datasets)
 ```
 
 Don says: add table showing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, first publication
 ----------------
-```{R structure_of_get_dataset_output}
+The functions used to extract elements from the sites objects may not always have all the variables of interest, or too many variables. Custom tables, or data frames, can be made.
+
+```{R custom_datasets_dataframe}
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+uwallf_data <- get_datasets(uwallf_site)
+uwallf_dl <- get_downloads(uwallf_data)
+
 #SITE DATASETS
 SITEID <- rep(uwallf_dl[[1]]@siteid,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
 SITENAME <- rep(uwallf_dl[[1]]@sitename,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
@@ -187,9 +193,11 @@ DATASETID <- as.data.frame(datasets(uwallf_data))$datasetid
 DATASETTYPE <- as.data.frame(datasets(uwallf_data))$datasettype
 AGE_RANGE_OLD <- as.data.frame(datasets(uwallf_data))$age_range_old
 AGE_RANGE_YOUNG <- as.data.frame(datasets(uwallf_data))$age_range_young
-#FIRST PUBLICATION <- (have to figure out) get_publications(DATASETID, 
+#FIRST PUBLICATION <-
 
-data.frame(SITEID,SITENAME,DATASETID,AGE_RANGE_OLD,AGE_RANGE_YOUNG)
+custom_datasets <- data.frame(SITEID,SITENAME,DATASETID,DATASETTYPE,AGE_RANGE_OLD,AGE_RANGE_YOUNG)
+
+custom_datasets
 ```
 -------------------
 
@@ -479,6 +487,27 @@ diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diato
 # Takes a long time to run
 ```
 
+#### Diatom Counts
+##### Samples Function
+The `samples()` function obtains samples from a record or multiple records as a data frame. The data frame will include the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
+
+```{R samplesFunctionExample}
+#search for a site by site name
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+#get datasets from get_sites output
+uwallf_datasets <- get_datasets(uwallf_site)
+#filter the datasets output to include only diatoms
+diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+#take the diatom datasets and getting the downloads output
+uwallf_dwl <- get_downloads(diat_uwallf_dataset)
+#using the samples function to get the count data as a data frame
+diat_samp_uwallf <- samples(uwallf_dwl)
+#view the data frame of count data
+diat_samp_uwallf
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
+```
 
 ##### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
 
