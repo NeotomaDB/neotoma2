@@ -99,7 +99,7 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        ageyoung = 6000,
                        ageold = 11500,
                        loc = c(-100,20,20,90),
-                       limit = 9000)
+                       all_data)
 
 plotLeaflet(mamSet)
 ```
@@ -109,7 +109,6 @@ With the leaflet plot we can dynamically navigate records, and check to see if s
 We can use the `filter()` function to remove data based on one or more criteria.  For example, if we think a particular site is not appropriate to our analysis we can filter by `sitename` before downloading the records:
 
 ```{r filterandDl}
-
 mamDl <- mamSet %>% 
   neotoma2::filter(sitename != 'Medicine Creek Site [39LM222]') %>% 
   get_downloads(., all_data = TRUE)
@@ -117,15 +116,23 @@ mamDl <- mamSet %>%
 
 The full set of filter arguments supported are:
 
-* `siteid`
-* `sitename`
-* 
+ | -------- | ------------ | ----------- |
+ | "siteid" | "collunitid" | "datasetid" |
+ | "sitename" | "lat" | "long" |
+ | "area"  | "sitenotes" | "description" |
+ | "altitude" | "database" | "datasettype" |
+ | "age_range_old" | "age_range_young" | "datasetnotes" |
+ | "handle" | "colldate" | "location" |
+ | "waterdepth" | "collunittype" | "collectiondevice" |
+ | "defaultchronology" | "collectionunitname" | "depositionalenvironment" |
+
+Once the data is filtered we can either continue to manage the data as sites, datasets or collection units, or we can begin to work directly with the raw sample data using the function `samples()`.  The `samples()` function 
 
 ### Clean ages
 
-Given a set of downloaded datasets we can make additional choices and decisions about the records.  
+Given a set of downloaded datasets we can make additional choices and decisions about the records.  We know that in Neotoma there are a number of records that are measured using radiocarbon years, while others use calendar years.  We also know that datasets have temporal bounds that may extend beyond the ranges of the samples we're interested in (for example, a site has samples across the entire Holocene, but we're only interested in a narrow time window around a certain event).
 
-We may choose to examine the full set of samples:
+So, given the 
 
 ```{r getSamples}
 mamSamp <- samples(mamDl)
