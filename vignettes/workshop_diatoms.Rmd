@@ -89,10 +89,12 @@ There are several functions in `neotoma2` to retrieve and subset data.  Function
 This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input to other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
 ### Find sites
+
 Use the get_sites or get_datasets functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using get_sites.
 Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
 
 #### get_sites function
+
 Find sites using the get_sites function.
 **Usage:** Sites can be searched using the following supported parameters.
 e.g., `get_sites(sitename="Alexander Lake")`
@@ -122,6 +124,7 @@ str(uwallf_site) # shows structure of the uwallf_site object
 ```
 
 ##### Navigating the structure of a sites object (metadata).
+
 The `uwallf_site` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
 
 ```{r extractElement}
@@ -167,8 +170,11 @@ diat_NE
 ```
 
 ##### Find datasets
+
 Find datasets using the get_datasets function
+
 ###### get_datasets function
+
 **Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids, taxonname, ageold, ageyoung, ageof, subdate)
 
 x is an optional value that represents an object with numeric dataset ID(s). It can be a single datasetid, an array with multiple IDs, or an object created using get_sites.
@@ -188,6 +194,7 @@ The functions used to extract elements from the sites objects may not always hav
 
 ```{R custom_datasets_dataframe}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+#Error in data.frame(collectionunitid = x@collectionunitid, handle = x@handle,  : arguments imply differing number of rows: 1, 0
 uwallf_data <- get_datasets(uwallf_site)
 uwallf_dl <- get_downloads(uwallf_data)
 
@@ -208,9 +215,11 @@ custom_datasets
 #to save the output as a CSV file, which could be opened in Microsoft Excel
 write.csv(custom_datasets,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
+
 -------------------
 
 #### Dataset ID
+
 Get data on a single dataset using datasetID 
 
 ```{r get datasetID}
@@ -227,6 +236,7 @@ diat_multid
 ```
 
 #### Elevation (m)
+
 Find datasets for sites between minimum and maximum elevations
 
 ```{R getDatasetssByElevExample}
@@ -260,6 +270,7 @@ write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row
 
 
 ###### get_downloads
+
 Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
 
 **Usage:**  `get_downloads(x)`
@@ -332,10 +343,6 @@ write.csv(diat_uwallf_collunits,"C:\\Users\\eco37\\Desktop\\collunits_uwallf.csv
 
 #### Water chemistry
 Don says: We want water chemistry
-##### Is water chemistry available?
-Determine if any water chemistry data is available for one or more sites or diatom datasets for those sites
-If chem data are available, which parameters? (List variables included)
-[SIMON - Code chunks in this section do not work]
 
 ##### From sites within range of water chemistry characteristics
 Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
@@ -603,6 +610,7 @@ WriteXLS(V1Counts,  "VL_dl.xlsx")
 ```
 
 ##### Count data file for a single site using site name
+
 Following code uses Neotoma2 R - Schrader Pond example
 [SIMON - code does not run - "Error in get_downloads(schrader.data):could not find function "get_downloads"".  I assume this is because the Neotoma2 get_downloads function has not yet been made available]
 ```{r get_singleSitebyName}
@@ -633,14 +641,12 @@ minimumRow <- diatCount %>%
 #In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
 
 
-#### List of diatom taxa  [[working code still needs to be written - dfc]]
-Don says:  replace this code chunk with code using the "taxa" function in Neotoma 2.
-[Simon - following code does not work - (Error: object 'x' not found)
+#### List of diatom taxa 
+
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
 
 ##### `taxa` Function
 The `taxa` function extracts collection units from a sites objects. 
-
 **Usage:** `taxa(object)`
 The argument for this function takes a "sites" object.
 
