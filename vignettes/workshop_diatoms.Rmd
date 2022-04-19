@@ -121,6 +121,13 @@ uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which h
 str(uwallf_site) # shows structure of the uwallf_site object
 ```
 
+##### Navigating the structure of a sites object (metadata).
+The `uwallf_site` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
+
+```{r extractElement}
+uwallf_site[[1]]$siteid
+```
+
 ##### Search by site name
 
 If we know the names of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
@@ -171,7 +178,6 @@ x is an optional value that represents an object with numeric dataset ID(s). It 
 To see structure of a`get_datasets()` object, run the following code:
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
-#SOCORRO and SIMON:  Following code does not work.
 uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
 str(uwallf_datasets)
 ```
@@ -489,7 +495,13 @@ diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diato
 
 #### Diatom Counts
 ##### Samples Function
-The `samples()` function obtains samples from a record or multiple records as a data frame. The data frame will include the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
+The `samples()` function obtains samples from a record or multiple records as a data frame. 
+
+**Usage:** `samples(x)`
+
+The argument for this function takes a "sites" object (x) obtained from `get_downloads`.
+
+**Values returned:** A data frame with the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
 
 ```{R samplesFunctionExample}
 #search for a site by site name
@@ -508,6 +520,36 @@ diat_samp_uwallf
 #to save the output as a CSV file, which could be opened in Microsoft Excel
 write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
+
+```{r diatom_and_waterchemistry_counts example}
+# Join a list of site names together using the combine command, c()
+  sitenameList <- c("Bald Hill", "Blake (sutton)", 
+                    "High (sudbry)", "Holland", 
+                    "Little Hosmer", "Long (grnsbo)", 
+                    "Long (shefld)", "Round (shefld)")
+my_sites <- c()
+for(sitename in sitenameList){
+  a_site <- get_sites(sitename = sitename)
+  my_sites <- c(my_sites, a_site)
+}
+my_sites
+
+
+NE_datasets <- get_datasets(my_sites)
+
+diat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "diatom surface sample")
+wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry")
+
+diat_NE_dl <- get_downloads(diat_NE_dataset)
+wat_NE_dl <- get_downloads(wat_NE_dataset)  
+
+#Join downloads together using the combine command, c()
+diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
+
+#result: count information with only diatom surface samples and water chemistry at the specified sites
+samples(diat_wat_dl)
+```
+
 
 ##### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
 
