@@ -191,7 +191,7 @@ uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 uwallf_data <- get_datasets(uwallf_site)
 uwallf_dl <- get_downloads(uwallf_data)
 
-#SITE DATASETS
+#SITE DATASETS - defining variables to be put into data frame
 SITEID <- rep(uwallf_dl[[1]]@siteid,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
 SITENAME <- rep(uwallf_dl[[1]]@sitename,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
 DATASETID <- as.data.frame(datasets(uwallf_data))$datasetid
@@ -204,6 +204,9 @@ AGE_RANGE_YOUNG <- as.data.frame(datasets(uwallf_data))$age_range_young
 custom_datasets <- data.frame(SITEID,SITENAME,DATASETID,DATASETTYPE,AGE_RANGE_OLD,AGE_RANGE_YOUNG)
 
 custom_datasets
+
+#to save the output as a CSV file, which could be opened in Microsoft Excel
+write.csv(custom_datasets,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
 -------------------
 
@@ -669,31 +672,6 @@ minimumRow <- diatCount %>%
   summarise(min(depth)) 
 #In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
 ```
-
-##### Count data for a single site name or datasetid
-MAYBE revise to neotoma2 to use as the basis for a workshop example.
-
-Upper Wallface Pond examples
-```{R Upper Wallface EX}
-library (neotoma)
-### Find Neotoma Site Id for Upper Wallface Pond 
-uwallface <- get_site (sitename = "Upper Wallface%")
-### Find datasets and IDs associated with U Wallface Pond
-uwallface.dl<- get_dataset(uwallface)  # Review datasets available note ID of the one of interest
-### download data for diatom core dataset (Dataset 32252)
-uwallface.dw <- get_download (32252)
-### Get diatom counts for dataset 32252
-uwallface.ct <- counts (uwallface.dw)
-### Find the number of intervals and number of taxa in a count
-sapply(uwallface.ct, dim)
-### Look at the matrix of diatom counts
-glimpse (uwallface.ct)
-uwallface_comp <- compile_downloads(uwallface.dw) 
-# Compile_downloads is used for combining multiple counts into one table
-uwallface_comp
-WriteXLS(uwallface_comp,"UWallDtmCount.xlsx", col.names=TRUE, row.names=TRUE)
-```
-
 
 #### List of diatom taxa  [[working code still needs to be written - dfc]]
 Don says:  replace this code chunk with code using the "taxa" function in Neotoma 2.
