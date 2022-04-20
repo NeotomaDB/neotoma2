@@ -239,8 +239,8 @@ custom_datasets <- data.frame(SITEID,SITENAME,DATASETID,DATASETTYPE,AGE_RANGE_OL
 
 custom_datasets
 
-#to save the output as a CSV file, which could be opened in Microsoft Excel
-write.csv(custom_datasets,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
+#Save the output as a CSV file, which can be opened in Microsoft Excel
+write.csv(custom_datasets, row.names = FALSE)
 ```
 
 ##### Table of dataset information
@@ -255,7 +255,6 @@ The argument for this function a "sites" object.
 
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
 
-SIMON and SOCORRO - the following code does not work - site object input is a problem.  Maybe it will work with a different sites object?
 
 ```{R datasetsFunctionExample}
 #search for a site by site name
@@ -271,6 +270,8 @@ diat_uwallf_data
 
 #to save the output as a CSV file, which could be opened in Microsoft Excel
 write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
+# Example of how csv file could be saved to a specified directory:
+# write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
 ```
 
 
@@ -341,8 +342,8 @@ diat_uwallf_collunits <- collunits(uwallf_dwl)
 #view the collection unit data
 diat_uwallf_collunits
 
-#to save the output as a CSV file, which could be opened in Microsoft Excel
-write.csv(diat_uwallf_collunits,"C:\\Users\\eco37\\Desktop\\collunits_uwallf.csv", row.names = FALSE)
+#Save the output as a CSV file, which can be opened in Microsoft Excel.  The file will be saved in the working directory.
+write.csv(diat_uwallf_collunits, row.names = FALSE)
 ```
 
 
@@ -363,46 +364,7 @@ waterchem <- get_datasets(datasettype = 'water chemistry') %>%
   get_downloads() 
 ```
 
-**Note Socorro: not clear what is supposed to happen here; dont find any property called pH so tried with waterdepth.
-```{r}
-as.data.frame(collunits(waterchem)) %>% 
-  dplyr::filter(waterdepth < 5)
 
-# Below - for the future....  get_aggregate function does not yet exist
-diatomss <- get_aggregate(123)
-waterss <- get_aggregate(124)
-diatomdl <- get_downloads(diatomss) %>% compile_downloads()
-waterdl <- get_downloads(waterss) %>% compile_downloads()
-# Following proposed function would match corresponding diatom and water chemistry samples
-aligned <- align_sites(diatomss, waterss)
-```
-
-## Need explanations on here (?)
-```{r fixing}
-diatomss<- get_dataset(datasettype = 'diatom surface sample')
-waterss<- get_dataset(datasettype = 'water chemistry')
-diatom<- get_dataset(datasettype = 'diatom')
-#Sapplyy function is used to return diatomss, read / extract the metadata and select dataset IDs for the first 20 lakes 
-subsetss <- sapply(diatomss, 
-                   function(x) {
-                     x$dataset.meta$dataset.id
-                   })[1:20]
-#Sapplyy function is used to return diatom, read / extract the metadata and select dataset IDs for the first 20 lakes
-# [Simon - I am not sure what the following code does - please document] ?
-subset <- sapply(diatom, 
-                 function(x) {
-                   x$dataset.meta$dataset.id
-                 })[1:20]
-if('filename' %in% list.files()) {
-  diat_dl <- readRDS('filename') # It returns the file that is used 
-} else {
-  diat_dl <- get_download(subset)
-  diat_dlss <- get_download(subsetss)
-  diat_dl <- bind(diat_dl, diat_dlss)
-  saveRDS(diat_dl, 'filename') # Saves the download object as a file
-  #  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
-}
-```
 
 
 
@@ -454,7 +416,7 @@ Get list of taxa found in a single dataset (core)
 ```{R datasetByTaxa}
 diat_tax <- get_datasets(32252) # Datasetid for U Wallface P core 1
 diat_dl <- get_downloads(diat_tax)
-diat_d2 <- compile_downloads(diat_dl)
+diat_d2 <- samples(diat_dl)
 diat_taxa <- taxa(diat_dl)
 diat_taxa
 ```
@@ -462,8 +424,8 @@ diat_taxa
 Get list of all taxa associated with single datasettype 
 
 ```{R datasetByTaxaExample}
-diatoms<- get_dataset(datasettype = 'diatom')
-diat_dl <- get_download(diatoms)
+diatoms<- get_datasets(datasettype = 'diatom')
+diat_dl <- get_downloads(diatoms)
 diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
 # Takes a long time to run
 ```
@@ -600,7 +562,7 @@ if('V1' %in% list.files()) {
   V1Datasets <- list()
   #
   for(i in 1:length(V1_diatom)) {
-    V1Datasets[[i]] <- get_download(V1_diatom[[i]])
+    V1Datasets[[i]] <- get_downloads(V1_diatom[[i]])
   }
   #For loop will go through each step to first create the file and then download data for each site
   V1_download <- neotoma::bind(V1Datasets)
@@ -664,7 +626,7 @@ uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 uwallf_datasets <- get_datasets(uwallf_site)
 #filter the datasets output to include only diatoms
 diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
-#take the diatom datasets and getting the downloads output
+#take the diatom datasets and get the downloads output
 uwallf_dwl <- get_downloads(diat_uwallf_dataset)
 #using the samples function to get the data from the taxa function
 diat_uwallf_taxa <- taxa(uwallf_dwl)
@@ -682,7 +644,7 @@ Use the tran function in the Analogue package to transform raw data.  See analog
 
 ``` {R TransformCountsToPct}
 library ("analogue")
-uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download filew with diatom counts for Upper Wallface Pond
+uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
 ```
 
 Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neotoma R Workshop documentation
@@ -910,3 +872,45 @@ Some programs have no standard input format
 #### Others
 ------------
 ----------
+**Note Socorro: not clear what is supposed to happen here; dont find any property called pH so tried with waterdepth.
+```{r}
+as.data.frame(collunits(waterchem)) %>% 
+  dplyr::filter(waterdepth < 5)
+
+# Below - for the future....  get_aggregate function does not yet exist
+diatomss <- get_aggregate(123)
+waterss <- get_aggregate(124)
+diatomdl <- get_downloads(diatomss) %>% compile_downloads()
+waterdl <- get_downloads(waterss) %>% compile_downloads()
+# Following proposed function would match corresponding diatom and water chemistry samples
+aligned <- align_sites(diatomss, waterss)
+```
+
+## Need explanations on here (?)
+```{r fixing}
+diatomss<- get_datasets(datasettype = 'diatom surface sample')
+waterss<- get_datasets(datasettype = 'water chemistry')
+diatom<- get_datasets(datasettype = 'diatom')
+#Sapplyy function is used to return diatomss, read / extract the metadata and select dataset IDs for the first 20 lakes 
+subsetss <- sapply(diatomss, 
+                   function(x) {
+                     x$dataset.meta$dataset.id
+                   })[1:20]
+#Sapplyy function is used to return diatom, read / extract the metadata and select dataset IDs for the first 20 lakes
+# [Simon - I am not sure what the following code does - please document] ?
+subset <- sapply(diatom, 
+                 function(x) {
+                   x$dataset.meta$dataset.id
+                 })[1:20]
+if('filename' %in% list.files()) {
+  diat_dl <- readRDS('filename') # It returns the file that is used 
+} else {
+  diat_dl <- get_download(subset)
+  diat_dlss <- get_download(subsetss)
+  diat_dl <- bind(diat_dl, diat_dlss)
+  saveRDS(diat_dl, 'filename') # Saves the download object as a file
+  #  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
+}
+```
+-------------
+---------------
