@@ -111,16 +111,14 @@ e.g., `get_sites(sitename="Alexander Lake")`
 
 `limit` indicates the maximum number of records that will be returned; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
 
-**Values returned:** A "sites object", which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.
-
-To see the structure (data model) of `get_sites()` output, run the following code chunk.
+**Values returned:** A "sites object", which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.  [revise this paragraph?]
 
 ##### Search by site ID / view structure of get_sites output
 
-Search for a site by siteid and view the structure of the output.  
-```{R site-id_structure_of_get_site_output}
+Search for a site by siteid. 
+```{R dearch by siteid}
 uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which has Neotoma siteid 745.  )
-str(uwallf_site) # shows structure of the uwallf_site object
+uwallf_site
 ```
 
 ##### Navigating the structure of a sites object (metadata).
@@ -133,7 +131,7 @@ uwallf_site[[1]]$siteid
 
 ##### Search by site name
 
-If we know the names of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
+If we know the name of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
 
 Get data on a single site using sitename.
 ```{r sitesbyName example}
@@ -179,9 +177,11 @@ Find datasets using the get_datasets function
 
 x is an optional value that represents an object with numeric dataset ID(s). It can be a single datasetid, an array with multiple IDs, or an object created using get_sites.
 
-**Values returned**`A "sites object" plus a dataframe with location information the same as that produced by the get_sites function.[[but with a more complex detail at the dataset level.  [[[Confirm this description!!  How is output different??]]]
+**Values returned**`A "sites object" plus a dataframe with location information the same as that produced by the get_sites function. The "sites object" provides more detailed information than the "sites object" returned by the get_sites function.
 
 To see structure of a`get_datasets()` object, run the following code:
+SIMON and SOCORRO - the following code does not work on my computer, but does work on Eric's.  Seems get_dataset call is not recognizing the site object as acceptable input.
+
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
 uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
@@ -241,6 +241,7 @@ Find datasets for sites between minimum and maximum elevations
 
 ```{R getDatasetssByElevExample}
 diat_el <- get_datasets(altmin=500,altmax=5500)
+# Returns data for the first 25 sites
 diat_el
 ```
 
@@ -248,9 +249,11 @@ diat_el
 The `datasets()` function extracts datasets from a sites objects. 
 
 **Usage:** `datasets(object)`
-The argument for this function takes a "sites" object.
+The argument for this function a "sites" object.
 
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+
+SIMON and SOCORRO - the following code does not work - site object input is a problem.  Maybe it will work with a different sites object?
 
 ```{R datasetsFunctionExample}
 #search for a site by site name
