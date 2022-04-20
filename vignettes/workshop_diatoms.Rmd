@@ -121,14 +121,6 @@ uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which h
 uwallf_site
 ```
 
-##### Navigating the structure of a sites object (metadata).
-
-The `uwallf_site` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
-
-```{r extractElement}
-uwallf_site[[1]]$siteid
-```
-
 ##### Search by site name
 
 If we know the name of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
@@ -167,7 +159,14 @@ diat_NE <- get_sites(loc =c(-80,40,-65,48))
 diat_NE
 ```
 
-##### Find datasets
+##### Navigate the structure of a sites object to find specific metadata.
+
+Sometimes it is useful to extract specific data from a sites object. For example, the `uwallf_site` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want (e.g., siteid) using the `$` symbol.
+
+```{r extractElement}
+uwallf_site[[1]]$siteid
+```
+### Find datasets
 
 Find datasets using the get_datasets function
 
@@ -179,6 +178,34 @@ x is an optional value that represents an object with numeric dataset ID(s). It 
 
 **Values returned**`A "sites object" plus a dataframe with location information the same as that produced by the get_sites function. The "sites object" provides more detailed information than the "sites object" returned by the get_sites function.
 
+##### Dataset ID
+
+Get data on a single dataset using datasetID 
+
+```{r get datasetID}
+# diat_ID <- get_dataset(datasetid) - basic format
+diat_ID <- get_datasets(44764) # Example
+diat_ID
+```
+
+Get data on multiple datasets using multiple dataset IDs 
+```{r multdatsetid }
+multid <- c(44764,44765,44766)
+diat_multid <- get_datasets(multid) # Example
+diat_multid
+```
+
+#### Elevation (m)
+
+Find datasets for sites between minimum and maximum elevations
+
+```{R getDatasetssByElevExample}
+diat_el <- get_datasets(altmin=500,altmax=5500)
+# Returns data for the first 25 sites
+diat_el
+```
+###### Structure of get_datasets output
+
 To see structure of a`get_datasets()` object, run the following code:
 SIMON and SOCORRO - the following code does not work on my computer, but does work on Eric's.  Seems get_dataset call is not recognizing the site object as acceptable input.
 
@@ -187,7 +214,7 @@ uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a si
 uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
 str(uwallf_datasets)
 ```
--------------
+
 ---------------
 
 The functions used to extract elements from the sites objects may not always have all the variables of interest, or too many variables. Custom tables, or data frames, can be made.  The following example creates a table containing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, and first publication.
@@ -216,36 +243,11 @@ custom_datasets
 write.csv(custom_datasets,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
 
--------------------
+##### Table of dataset information
 
-#### Dataset ID
+Use the `datasets()` function to get a simple table with a subset of basic dataset information.
 
-Get data on a single dataset using datasetID 
-
-```{r get datasetID}
-# diat_ID <- get_dataset(datasetid) - basic format
-diat_ID <- get_datasets(44764) # Example
-diat_ID
-```
-
-Get data on multiple datasets using multiple dataset IDs 
-```{r multdatsetid }
-multid <- c(44764,44765,44766)
-diat_multid <- get_datasets(multid) # Example
-diat_multid
-```
-
-#### Elevation (m)
-
-Find datasets for sites between minimum and maximum elevations
-
-```{R getDatasetssByElevExample}
-diat_el <- get_datasets(altmin=500,altmax=5500)
-# Returns data for the first 25 sites
-diat_el
-```
-
-##### `datasets` Function
+###### `datasets` function
 The `datasets()` function extracts datasets from a sites objects. 
 
 **Usage:** `datasets(object)`
@@ -279,7 +281,7 @@ Using the dataset ID, site object or dataset object, return all records associat
 **Usage:**  `get_downloads(x)`
 Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical printing a download status bar.
 
-The values are returned as a `sites` object with a full level of detail; relevant assemblage information and metadata.
+**Values returned:** a `sites object` with a full level of detail, including relevant assemblage information (e.g., diatom counts) and metadata.
 
 The downloaded result is a sites object that contains the constituent taxa, the chronology, site and PIs who contributed the data. 
 
