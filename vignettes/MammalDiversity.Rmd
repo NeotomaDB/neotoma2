@@ -115,6 +115,8 @@ mamDl <- mamSet %>%
 
 The full set of filter arguments supported are:
 
+
+ |          |              |             | 
  | -------- | ------------ | ----------- |
  | "siteid" | "collunitid" | "datasetid" |
  | "sitename" | "lat" | "long" |
