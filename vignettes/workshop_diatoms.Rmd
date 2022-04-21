@@ -26,22 +26,6 @@ library(sf)
 library(tidyverse)
 ```
 
-
-## Outline
-1. Browse Data
-    + Find sites
-    + Find datasets
-2. Download data
-    + Download full datasets
-    + Subset download output
-        + Helper functions
-3. Create output files
-4. Visualize data
-    + Tables [?]
-    + Maps
-    + Diagrams
-
-
 # Introduction
 
 This document helps introduce workshop participants to use of the neotoma2 R package, primarily to browse, download, and analyze data in the Neotoma database.  It provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with data (primarily diatom-related) from the Neotoma Paleoecology Database. 
@@ -50,7 +34,7 @@ A main goal of `neotoma2` is to pull records from the Neotoma database and into 
 
 This document is organized to address users' two main goals: to browse the database to discover datasets that meet specified criteria and to create output files that can be used for further analysis. Other goals are to create plots and maps and analyze data using R code.
 
-### Data Organization in Neotoma
+### Data organization in Neotoma
 
 It is worth knowing how the Neotoma database is organized and what we mean when talking about things like `sites`, `datasets`, and `samples`.
 
@@ -94,7 +78,7 @@ Helper functions such as `filter()`, `collunits()`, `datasets()`, `samples()`, a
 See the `neotoma2` package documentation for more details on these and other functions.[[These are described where they first appear in the document below.]]
 
 
-# Browsing - Data discovery
+# Browse Data
 
 This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input to other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
 
@@ -231,7 +215,8 @@ uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface
 str(uwallf_datasets)
 ```
 
-### `get_downloads` Function
+# Download Data
+## Downloads function
 
 Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
 
@@ -253,16 +238,17 @@ uwallf_download <- get_downloads(uwallf_diatom_dataset)
 #str (uwallf_download) # shows structure of uwallf_datast
 ```
 
-### Helper Functions
+## Helper functions
 
 The following functions can be used on a `sites` object to return associated values in a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
 
-Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `coordinates`, and many others that are listed within the `neotoma2` package documentation. Below, we will show some basic examples of the output of first three of the functions listed above.
+Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of first three of the functions listed above.
 
 #### `datasets()` function
 The `datasets()` function extracts datasets from a sites objects. 
 
 **Usage:** `datasets(object)`
+
 The argument for this function a "sites" object.
 
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
@@ -288,7 +274,7 @@ write.csv(diat_uwallf_data, row.names = FALSE)
 
 ##### Table of dataset information
 
-Use the `datasets()` function to get a simple table with a subset of basic dataset information. To convert this to a dataframe for manipulation use can use the following code:
+Use the `datasets()` function to get a simple table with a subset of basic dataset information. The following code is an example of how to convert the object to a dataframe for manipulation.
 
 ```{R dataframeDatasetsoutput}
 as.data.frame(datasets(uwallf_data))
@@ -347,7 +333,8 @@ diat_uwallf_collunits <- collunits(uwallf_dwl)
 #view the collection unit data
 diat_uwallf_collunits
 
-#Save the output as a CSV file, which can be opened in Microsoft Excel.  The file will be saved in the working directory.
+#Save the output as a CSV file, which can be opened in Microsoft Excel.
+#The file will be saved in the working directory.
 write.csv(diat_uwallf_collunits, row.names = FALSE)
 ```
 
@@ -647,7 +634,7 @@ The `get_publications` function extracts collection units from a sites objects.
 
 | parameter | allowed values |
 | ------ | ------- |
-| `x` | integer A contact ID |
+| `x` | integer: a contact ID |
 | `	publicationid ` | The unique numeric identifier associated with a publication in Neotoma |
 | `datasetid` | A unique identifier for a Neotoma dataset that is associated with a publication |
 | `pubtype ` | The publication type, from `get_tables("publicationtypes")` |
@@ -656,7 +643,8 @@ The `get_publications` function extracts collection units from a sites objects.
 
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
 
-### Make plots and maps 
+# Visualize Data
+## Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
 
 #### `plotLeaflet()` functions
@@ -668,11 +656,10 @@ diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48))
 plotLeaflet(diat_NE)
 ```
 
-
 #### Map of distribution of sites 
 Map, for example, all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
 
-#**ANY material below here will not be included in the final workshop document**
+# ANY material below here will not be included in the final workshop document
 
 #### Map of distribution of a diatom taxon
 Option 1 - basic map showing occurrence of a taxon
