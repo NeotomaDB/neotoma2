@@ -209,7 +209,6 @@ diat_el
 ###### Structure of get_datasets output
 
 To see structure of a`get_datasets()` object, run the following code:
-SIMON and SOCORRO - the following code does not work on my computer, but does work on Eric's.  Seems get_dataset call is not recognizing the site object as acceptable input.
 
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
@@ -219,11 +218,10 @@ str(uwallf_datasets)
 
 ---------------
 
-The functions used to extract elements from the sites objects may not always have all the variables of interest, or too many variables. Custom tables, or data frames, can be made.  The following example creates a table containing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, and first publication.
+The functions used to extract elements from `sites objects` may not always have all the variables of interest, or too many variables. Custom tables, or data frames, can be made. The following example creates a table containing siteid, sitename, collection unit id, datasetid, datasettype, age_range_old, age_range_ young, and first publication.
 
 ```{R custom_datasets_dataframe}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
-#Error in data.frame(collectionunitid = x@collectionunitid, handle = x@handle,  : arguments imply differing number of rows: 1, 0
 uwallf_data <- get_datasets(uwallf_site)
 uwallf_dl <- get_downloads(uwallf_data)
 
