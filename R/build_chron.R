@@ -15,15 +15,9 @@
 #' }
 #'
 build_chron <- function(x) {
-  # how many chronologies  
   check_chron <- x$chronology
-  
-  #contact_list <- toString(unique(unlist(z@sampleanalyst, use.names = FALSE)))
-  
-  if (!is.na(check_chron$chronologyid)) {
-    
+
     # Chroncontrols
-    
     df <- x$chronology$chroncontrols %>%
       map(function(y) {
         y <- fix_null(y)
@@ -41,7 +35,6 @@ build_chron <- function(x) {
     chron_table <- rbind(chron_table, df_sample) %>%
       distinct()
     
-    
     new("chronology",
         chronologyid = use_na(testNull(check_chron$chronologyid, NA), "int"),
         notes = use_na(testNull(check_chron$chronology$notes, NA), "char"),
@@ -54,18 +47,4 @@ build_chron <- function(x) {
         modelagetype = use_na(testNull(check_chron$chronology$modelagetype, NA), "char"),
         chronologyname = use_na(testNull(check_chron$chronology$chronologyname,NA), "char"),
         chroncontrols = chron_table)
-  }else{
-    new("chronology",
-        chronologyid = NA_integer_,
-        notes = NA_character_,
-        contact = list(),
-        agemodel = NA_character_,
-        ageboundolder = NA_integer_,
-        ageboundyounger = NA_integer_,
-        isdefault = NA_integer_,
-        dateprepared = as.Date(character(0)),
-        modelagetype = NA_character_,
-        chronologyname = NA_character_,
-        chroncontrols = data.frame())
-  }
 }
