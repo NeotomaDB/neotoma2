@@ -31,7 +31,7 @@ library(tidyverse)
 ### Download data
 #### Download full datasets
 #### Subset download output
-#### Create output files
+### Create output files
 ### Visualize data
 #### Tables [?]
 #### Maps
@@ -57,7 +57,9 @@ The Neotoma data model is available online at the [Database Schema](https://open
 Neotoma data is structured spatially. Each collection location is assigned a **site**, a spatial location defined by either a point or a polygon. It may be a lake, an archaeological site, a swamp, or another location.
 
 Within a **site**, there may be one or more **collection units**.  
-A collection unit represents the material (e.g., sediment core) removed from a specific location within a `site` (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** are defined as material removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry). Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
+A collection unit represents the material (e.g., sediment core) removed from a specific location within a `site` (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** are defined as material removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry).   Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
+
+Note: There are three diatom dataset types:  "diatom" (stratigraphic / cores), "diatom surface samples" (surface samples only), and "diatom top-bottom" (top and bottom only).
 
 #### What is the R package doing?
 
