@@ -25,17 +25,17 @@ library(tidyverse)
 
 
 ## Outline
-### Browse Data
-#### Find sites
-#### Find datasets
-### Download data
-#### Download full datasets
-#### Subset download output
-### Create output files
-### Visualize data
-#### Tables [?]
-#### Maps
-#### Diagrams
+1. Browse Data
+  + Find sites
+  + Find datasets
+2. Download data
+  + Download full datasets
+  + Subset download output
+3. Create output files
+4. Visualize data
+  + Tables [?]
+  + Maps
+  + Diagrams
 
 
 
@@ -83,7 +83,7 @@ It is a lot easier for most users to use the R functions since they create objec
 
 ##### `neotoma2` functions
 
-There are several functions in `neotoma2` to retrieve and subset data.  Functions used in this workshop document include `get_sites()`, `get_datasets()`, `get_downloads()`, filter(), collunits(), datasets(), samples(), and plotLeaflet().  See the neotoma2 package documentation for more details on these and other functions.[[These are described where they first appear in the document below.]]
+There are several functions in `neotoma2` to retrieve and subset data.  Functions used in this workshop document include `get_sites()`, `get_datasets()`, `get_downloads()`, `filter()`, `collunits()`, `datasets()`, `samples()`, and `plotLeaflet()`.  See the `neotoma2` package documentation for more details on these and other functions.[[These are described where they first appear in the document below.]]
 
 
 ## Browsing - Data discovery
@@ -92,12 +92,12 @@ This section describes ways of searching the Neotoma database to find `sites` an
 
 ### Find sites
 
-Use the get_sites or get_datasets functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using get_sites.
+Use the `get_sites` or `get_datasets` functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using `get_sites`.
 Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
 
 #### get_sites function
 
-Find sites using the get_sites function.
+Find sites using the `get_sites` function.
 **Usage:** Sites can be searched using the following supported parameters.
 e.g., `get_sites(sitename="Alexander Lake")`
 
@@ -113,7 +113,7 @@ e.g., `get_sites(sitename="Alexander Lake")`
 
 `limit` indicates the maximum number of records that will be returned; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
 
-**Values returned:** A "sites object", which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.  [revise this paragraph?]
+**Values returned:** A `sites` object, which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site.  [revise this paragraph?]
 
 ##### Search by site ID / view structure of get_sites output
 
@@ -153,7 +153,7 @@ my_sites
 ```
 ##### Search for sites in a latitude and longitude bounding box
 
-Example of get_sites by location with bounding box of lat & longs.  Same code works with get_datasets as well as get_sites.
+Example of get_sites by location with bounding box of lat & longs.  Same code works with `get_datasets()` as well as `get_sites()`.
 
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  Data are returned for the first 25 sites.
@@ -172,13 +172,13 @@ uwallf_site[[1]]$siteid
 
 Find datasets using the get_datasets function
 
-###### get_datasets function
+###### `get_datasets` function
 
 **Usage:** get_datasets(x, datasettype, piid, altmin, altmax, loc, gpid, taxonids, taxonname, ageold, ageyoung, ageof, subdate)
 
 x is an optional value that represents an object with numeric dataset ID(s). It can be a single datasetid, an array with multiple IDs, or an object created using get_sites.
 
-**Values returned**`A "sites object" plus a dataframe with location information the same as that produced by the get_sites function. The "sites object" provides more detailed information than the "sites object" returned by the get_sites function.
+**Values returned**A `sites` object plus a dataframe with location information the same as that produced by the get_sites function. The `sites` object provides more detailed information than the `sites` object returned by the `get_sites()` function.
 
 ##### Dataset ID
 
