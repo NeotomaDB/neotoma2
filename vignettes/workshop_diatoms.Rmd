@@ -644,6 +644,7 @@ This is especially important for cases where sites were sampled for water chemis
 The `get_publications` function extracts collection units from a sites objects. 
 
 **Usage:** `get_publications(x = NA, ...)`
+
 | parameter | allowed values |
 | ------ | ------- |
 | `x` | integer A contact ID |
@@ -657,6 +658,16 @@ The `get_publications` function extracts collection units from a sites objects.
 
 ### Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
+
+#### `plotLeaflet()` functions
+
+The `neotoma2` page has a function to map a `sites` object
+
+```{R diatomsbyBBoxExecuted}
+diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
+plotLeaflet(diat_NE)
+```
+
 
 #### Map of distribution of sites 
 Map, for example, all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
