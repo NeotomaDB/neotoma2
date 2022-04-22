@@ -368,8 +368,32 @@ diat_samp_uwallf
 #Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
+
 ##### Water chemistry
-ERIC:  Add code using samples() to get all water chemistry data for one or more datasets.  Could be similar to the the code used to get diatom counts, above.
+
+```{r diatom_and_waterchemistry_counts example}
+# Join a list of site names together using the combine command, c()
+  sitenameList <- c("Bald Hill", "Blake (sutton)", 
+                    "High (sudbry)", "Holland", 
+                    "Little Hosmer", "Long (grnsbo)", 
+                    "Long (shefld)", "Round (shefld)")
+my_sites <- c()
+for(sitename in sitenameList){
+  a_site <- get_sites(sitename = sitename)
+  my_sites <- c(my_sites, a_site)
+}
+my_sites
+
+
+NE_datasets <- get_datasets(my_sites)
+
+wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry")
+
+wat_NE_dl <- get_downloads(wat_NE_dataset)  
+
+#result: count information with only diatom surface samples and water chemistry at the specified sites
+samples(wat_NE_dl)
+```
 
 ##### Diatom counts and water chemistry
 Example of how to get sample data from multiple sites while also filtering for diatom and water chemistry datasets.
@@ -408,6 +432,25 @@ Don says: We probably want this.
 
 
 Get list of all taxa associated with single datasettype. Takes a long time to run. 
+
+```{R MasterListTaxa}
+#code taken from `get_table()` documentation
+someTaxa <- get_table('taxa')
+# Loop with the offset to get all specimens:
+okay <- TRUE
+counter <- 1
+taxa <- list()
+while(okay) {
+  taxa[[counter]] <- get_table('taxa', offset = (counter - 1) * 25)
+  if(nrow(taxa[[counter]]) < 25) {
+    okay <- FALSE
+  } else {
+    counter <- counter + 1
+  }
+}
+taxa <- taxa %>% dplyr::bind_rows()
+```
+
 
 ```{R ListOfTaxaByDatasettype}
 diatoms<- get_datasets(datasettype = 'diatom')
