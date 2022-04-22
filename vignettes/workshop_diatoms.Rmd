@@ -367,9 +367,9 @@ my_sites
 #get datasets from get_sites output
 NE_datasets <- get_datasets(my_sites)
 #filter the datasets output to include only diatoms
-diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+diat_NE_dataset <- neotoma2::filter(my_sites, datasettype == "diatom")
 #take the diatom datasets and getting the downloads output
-diat_NE_dl <- get_downloads(diat_uwallf_dataset)
+diat_NE_dl <- get_downloads(diat_NE_dataset)
 #result: count information with only diatoms at the specified sites
 samples(diat_NE_dl)
 
@@ -381,7 +381,7 @@ samples(diat_NE_dl)
 
 Example of using `samples()` to obtain water chemistry data for multiple lakes.
 
-```{r diatom_and_waterchemistry_counts example}
+```{r waterchemistry_counts example}
 # Use the same sites specified in the chunk above. An object of the site data has already been made.
 my_sites
 
@@ -441,11 +441,6 @@ diat_dl <- get_downloads(diatoms)
 diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
 ```
 
-##### Diatom Counts
-
-###### Diatom counts - include only taxa with abundance greater than x percent (in sample or core)
-
-
 
 ##### Diatom counts
 
@@ -483,9 +478,9 @@ The `get_publications` function extracts collection units from a sites objects.
 Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
 
-#### Map of distribution of sites
+## Map of distribution of sites
 
-##### `plotLeaflet()` function
+## `plotLeaflet()` function
 
 The `neotoma2` package has a function to map a `sites object`. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
 
@@ -503,10 +498,10 @@ Option 2 - basic map showing occurrence of multiple taxa
 Option 3 - same as option 1, but with symbol size proportional to % abundance
 Option 4 - same as option 2, but with symbol size proportional to % abundance
 
-#### Stratigraphic diagrams
+## Stratigraphic diagrams
 NEED INSTRUCTIONS/ CODE for creating input files and creating a variety of stratigraphic diagrams.  Advantages and disadvantages various packages.  Include an example here? TidyPaleo example?
 
-#THE END
+# THE END
 
 ## ANY material below here will not be included in the final workshop document
 
@@ -742,8 +737,8 @@ if('filename' %in% list.files()) {
   #  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
 }
 ```
-------------
------------
+
+
 WATER CHEMISTRY
 
 ##### From sites within range of water chemistry characteristics
@@ -797,8 +792,7 @@ wideWCH_DTM
 # Write data to an Excel file, which will be created in the working directory
 WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 ```
--------
------------
+
 ###### Diatom counts that include one or more specific diatom taxa
 [SIMON - Code does not include possibility of specifying a particular diatom taxon]
 
@@ -811,8 +805,8 @@ diat_d2 <- samples(diat_dl)
 diat_taxa <- taxa(diat_dl)
 diat_taxa
 ```
-------------------
-  -----------
+
+
   ###### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
 
 ###### Format for browsing using multiple criteria - Examples 
@@ -846,8 +840,8 @@ Standard comprehensive output file for use in detailed browsing. Variables shoul
 Code chunks in this section are designed to create output files for diatom counts, metadata, chronology, water chemistry, and other kinds of data.  They provide examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, though they do not do so now, basic output files should include all related data; the number of variables can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
 
 ##### Basic files / matrices
-----------
-------------
+
+
 ##### Count data for one or more datasetids
 Gets count data for one or more datasets and writes data to an Excel file.
 
@@ -933,17 +927,11 @@ uwallface.dw[["32252"]][["counts"]]
 ### View Chronology
 uwallface.dw[["32252"]][["chronologies"]]
 ```
-----
------------
-##### Transform raw diatom counts to percentages and other forms
 
+
+##### Transform raw diatom counts to percentages and other forms
 
 ``` {R TransformCountsToPct}
 library ("analogue")
 uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
 ```
-
-
-```
-----------------
----------------
