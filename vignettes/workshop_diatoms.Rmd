@@ -415,48 +415,9 @@ diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diato
 
 ##### Diatom Counts
 
-###### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
-
-```{R Diatom Counts}
-```
-
-Example
-
-```{R Diatom Counts EX}
-```
+###### Diatom counts - include only taxa with abundance greater than x percent (in sample or core)
 
 
-###### Format for browsing using multiple criteria - Examples 
-Examples: [could get complicated]  General rules and tips.  [Add as they become known]
-
-##### [Following sections to be reorganized]
-
-###### Find all diatom datasets of any datatype
-
-###### Find all diatom datasets of any datatype within a geographic region
-
-###### Find all diatom surface sample datasets within a geographic region
-
-###### Find datasets .... with surface area larger than x ha .......
-
-###### Other options / Misc:
-
-###### Create output of browse results 
-
-###### Don says: old version of data table doc, leave for now
-Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
-
-Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location in Tilia tabs): 
-1.  Site information: Site ID, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id
-2. Collection unit information:  CU ID, Type, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
-3.  Dataset information: Data Type (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
-
-
-#### Create output files for data analysis
-
-Code chunks in this section are designed to create output files for diatom counts, metadata, chronology, water chemistry, and other kinds of data.  They provide examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, though they do not do so now, basic output files should include all related data; the number of variables can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
-
-##### Basic files / matrices
 
 ##### Diatom counts
 
@@ -476,90 +437,18 @@ uwallface.dw[["32252"]][["counts"]]
 uwallface.dw[["32252"]][["chronologies"]]
 ```
 
-##### Count data for one or more datasetids
-Gets count data for one or more datasets and writes data to an Excel file.
-
-```{R ExampleDataset}
-library(purrr)
-V1 <-c(44786,44787,44788) # Datasetids
-# In this example we combine datasets from 3 sites (New England lakes).  To get output for aggregate datasets, a file with all the datasetids for an aggregate dataset could be used as input.
-V1_diatom <- map(V1, function(x)
-  neotoma:::get_dataset(x,datasettype="diatom")) %>%
-  neotoma::bind()   
-#In the get_dataset line, whatever is in the parenthesis (a parameter such as x or gpid); will be whatever is in the object V1, defined in the line above.
-# [SIMON - Why does datasettype need to be specified above, given that input data are datasetids?  The code seems to run fine with "datasettype="diatom" removed.]
-if('V1' %in% list.files()) {
-  V1_dl <- readRDS('V1') 
-} else {
-  V1Datasets <- list()
-  #
-  for(i in 1:length(V1_diatom)) {
-    V1Datasets[[i]] <- get_downloads(V1_diatom[[i]])
-  }
-  #For loop will go through each step to first create the file and then download data for each site
-  V1_download <- neotoma::bind(V1Datasets)
-  saveRDS(V1_download, 'V1')
-}
-V1Counts <- compile_downloads(V1_dl)
-V1Row <- V1Counts %>% 
-  group_by(dataset) %>% 
-  summarise(min(depth))
-WriteXLS(V1Counts,  "VL_dl.xlsx")
-#This last step creates a table in an Excel file which will be saved in the working directory
-```
-
-##### Count data file for a single site using site name
-
-Following code uses Neotoma2 R - Schrader Pond example
-[SIMON - what is neotoma 2 equivalent?]
-```{r get_singleSitebyName}
-schrader <- get_sites(sitename = 'Schrader%') # % can be used to approximate sitenames
-schrader  # Look in output to find datasetid for Schrader (27408)
-schrader.data <- get_datasets(27408)
-schrader.dl <- get_downloads(schrader.data)
-schrader.cnt <- counts(schrader.dl)
-sapply(schrader.cnt, dim) 
-print(schrader.dl)
-```
-
-#### Count data for one dataset ID - subsets
-
-```{r}
-## [SIMON - please document the code below - what is its purpose?]
-if('Mirror' %in% list.files()) {
-  diat_da <- readRDS('Mirror') 
-} else {
-  diat_dla <- get_download(subsetda)
-  saveRDS(diat_dla, 'Mirror')
-}
-#The if and else loops work together to create a file containing downloaded data for the subset
-diatCount <- compile_downloads(diat_dla) 
-## SIMON - please explain the purpose of the following code.  Seems like maybe this overall code chunk was designed to be able to do more than just get count data for one surface sample.
-minimumRow <- diatCount %>% 
-  group_by(dataset) %>% 
-  summarise(min(depth)) 
-#In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
-```
-
 #### List of diatom taxa 
 
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
 
 
-#### Add aggregate datasets to Neotoma
-
-#### Transform raw diatom counts to percentages and other forms
+##### Transform raw diatom counts to percentages and other forms
 Use the tran function in the Analogue package to transform raw data.  See analogue package documentation for a list o possible transformations.
 
 ``` {R TransformCountsToPct}
 library ("analogue")
 uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
 ```
-
-Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neotoma R Workshop documentation
-
-#### Add to a table that explicitly matches water chemistry and diatom datasets
-This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 
 ##### `get_publications` Function
 
@@ -896,3 +785,113 @@ diat_dl <- get_downloads(diat_tax)
 diat_d2 <- samples(diat_dl)
 diat_taxa <- taxa(diat_dl)
 diat_taxa
+```
+------------------
+  -----------
+  ###### Diatom counts include only taxa with abundance greater than x percent (in sample or core)
+
+###### Format for browsing using multiple criteria - Examples 
+Examples: [could get complicated]  General rules and tips.  [Add as they become known]
+
+##### [Following sections to be reorganized]
+
+###### Find all diatom datasets of any datatype
+
+###### Find all diatom datasets of any datatype within a geographic region
+
+###### Find all diatom surface sample datasets within a geographic region
+
+###### Find datasets .... with surface area larger than x ha .......
+
+###### Other options / Misc:
+
+###### Create output of browse results 
+
+###### Don says: old version of data table doc, leave for now
+Minimum “list” of dataset, collection, and / analysis unit ids for further browsing and use as input to other R functions. 
+
+Standard comprehensive output file for use in detailed browsing. Variables should include all of the following (variables are grouped by their location in Tilia tabs): 
+1.  Site information: Site ID, Site name, Latitude, Longitude, Latitude width, Longitude width, Country, State, County, Admin Unit (3rd Geographic Unit), Lake characteristics, publication id
+2. Collection unit information:  CU ID, Type, Collection unit name, Collection unit handle, Location in site, Collection device, Date collected, Water depth of collection
+3.  Dataset information: Data Type (Diatom, Diatom surface sample, or Diatom top-bottom), Primary publication, Investigators [or first author of publication], Sample analyst
+
+
+#### Create output files for data analysis
+
+Code chunks in this section are designed to create output files for diatom counts, metadata, chronology, water chemistry, and other kinds of data.  They provide examples for retrieving data and creating output files in a few basic formats.  Formats include those that can be used as input to data analysis programs - R packages and others.  In general, though they do not do so now, basic output files should include all related data; the number of variables can be reduced later.They will include several descriptive variables and be easily readable. [input to code chunks can include output from browse tasks]
+
+##### Basic files / matrices
+----------
+------------
+##### Count data for one or more datasetids
+Gets count data for one or more datasets and writes data to an Excel file.
+
+```{R ExampleDataset}
+library(purrr)
+V1 <-c(44786,44787,44788) # Datasetids
+# In this example we combine datasets from 3 sites (New England lakes).  To get output for aggregate datasets, a file with all the datasetids for an aggregate dataset could be used as input.
+V1_diatom <- map(V1, function(x)
+  neotoma:::get_dataset(x,datasettype="diatom")) %>%
+  neotoma::bind()   
+#In the get_dataset line, whatever is in the parenthesis (a parameter such as x or gpid); will be whatever is in the object V1, defined in the line above.
+# [SIMON - Why does datasettype need to be specified above, given that input data are datasetids?  The code seems to run fine with "datasettype="diatom" removed.]
+if('V1' %in% list.files()) {
+  V1_dl <- readRDS('V1') 
+} else {
+  V1Datasets <- list()
+  #
+  for(i in 1:length(V1_diatom)) {
+    V1Datasets[[i]] <- get_downloads(V1_diatom[[i]])
+  }
+  #For loop will go through each step to first create the file and then download data for each site
+  V1_download <- neotoma::bind(V1Datasets)
+  saveRDS(V1_download, 'V1')
+}
+V1Counts <- compile_downloads(V1_dl)
+V1Row <- V1Counts %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth))
+WriteXLS(V1Counts,  "VL_dl.xlsx")
+#This last step creates a table in an Excel file which will be saved in the working directory
+```
+
+##### Count data file for a single site using site name
+
+Following code uses Neotoma2 R - Schrader Pond example
+[SIMON - what is neotoma 2 equivalent?]
+```{r get_singleSitebyName}
+schrader <- get_sites(sitename = 'Schrader%') # % can be used to approximate sitenames
+schrader  # Look in output to find datasetid for Schrader (27408)
+schrader.data <- get_datasets(27408)
+schrader.dl <- get_downloads(schrader.data)
+schrader.cnt <- counts(schrader.dl)
+sapply(schrader.cnt, dim) 
+print(schrader.dl)
+```
+
+#### Count data for one dataset ID - subsets
+
+```{r}
+## [SIMON - please document the code below - what is its purpose?]
+if('Mirror' %in% list.files()) {
+  diat_da <- readRDS('Mirror') 
+} else {
+  diat_dla <- get_download(subsetda)
+  saveRDS(diat_dla, 'Mirror')
+}
+#The if and else loops work together to create a file containing downloaded data for the subset
+diatCount <- compile_downloads(diat_dla) 
+## SIMON - please explain the purpose of the following code.  Seems like maybe this overall code chunk was designed to be a
+```ble to do more than just get count data for one surface sample.
+minimumRow <- diatCount %>% 
+  group_by(dataset) %>% 
+  summarise(min(depth)) 
+#In compiling downloads, information is displayed in a table format and is organized using the group_by and summarise functions
+----------------
+  --------------
+Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neotoma R Workshop documentation
+
+#### Add to a table that explicitly matches water chemistry and diatom datasets
+This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
+--------------
+  -----------------
