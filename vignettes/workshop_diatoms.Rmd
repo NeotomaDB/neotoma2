@@ -349,7 +349,7 @@ The `samples()` function obtains sample level data from a record [[`sites object
 
 ##### Diatom counts
 
-Example of using `samples()` to obtain diatom counts
+Example of using `samples()` to obtain diatom counts from a single sediment core.
 
 ```{R samplesFunctionExample}
 # Join a list of site names together using the combine command, c()
@@ -379,6 +379,8 @@ samples(diat_NE_dl)
 
 ##### Water chemistry
 
+Example of using `samples()` to obtain water chemistry data for multiple lakes.
+
 ```{r diatom_and_waterchemistry_counts example}
 # Use the same sites specified in the chunk above. An object of the site data has already been made.
 my_sites
@@ -407,10 +409,12 @@ samples(diat_wat_dl)
 ```
 
 ##### Diatom taxa
-Don says: We probably want this.
 
+Get list of all taxa associated with single datasettype.
 
-Get list of all taxa associated with single datasettype. Takes a long time to run. 
+The following code gets selected diatom taxa name variables from the Neotoma Taxa table.
+
+SIMON and SOCCORO - the following code works, but times-out before all diatom taxa are returned.  Please fix.
 
 ```{R MasterListTaxa}
 #code taken from `get_table()` documentation
@@ -448,31 +452,14 @@ diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diato
 The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
 For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
 
-##### View sample and count metadata
-```{R Upper Wallface View counts}
-### View sample metadata, list of taxa, and counts in Download dataframes 
-### View sample metadata,
-uwallface.dw[["32252"]][["sample.meta"]] 
-### View taxa list
-uwallface.dw[["32252"]][["taxon.list"]]
-### View diatom counts
-uwallface.dw[["32252"]][["counts"]]
-### View Chronology
-uwallface.dw[["32252"]][["chronologies"]]
-```
-
 #### List of diatom taxa 
 
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
 
 
 ##### Transform raw diatom counts to percentages and other forms
-Use the tran function in the Analogue package to transform raw data.  See analogue package documentation for a list o possible transformations.
+NEED CODE to transform raw diatom counts (number of rows counted) in a dataframe to percent relative abundance.  This could be done with using basic R code or by relying on a function in another package - for example the tran() function in the Analogue package.  The tran function can make an varietoy of other transformations as well.
 
-``` {R TransformCountsToPct}
-library ("analogue")
-uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
-```
 
 ##### `get_publications` Function
 
@@ -497,23 +484,27 @@ Make plots and maps
 (e.g., stratigraphic diagrams, maps of taxa distributions)
 
 #### Map of distribution of sites
+
 ##### `plotLeaflet()` function
 
-The `neotoma2` package has a function to map a `sites object`.
-SIMON and SOCORRO - The bounding box argument is not working.  Sites are returned that are located outside the box.
+The `neotoma2` package has a function to map a `sites object`. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
 
-Map, for example, of all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
+SIMON and SOCORRO - The bounding box argument does not work in the example below.  Sites are returned that are located outside the box.
 
 ```{R diatomsbyBBoxExecuted}
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
 plotLeaflet(diat_NE)
 ```
 
-#### Map of distribution of sites
+Wish list for additional types of maps:
 
+Option 1 - basic map showing occurrence of a taxon
+Option 2 - basic map showing occurrence of multiple taxa
+Option 3 - same as option 1, but with symbol size proportional to % abundance
+Option 4 - same as option 2, but with symbol size proportional to % abundance
 
-
-
+#### Stratigraphic diagrams
+NEED INSTRUCTIONS/ CODE for creating input files and creating a variety of stratigraphic diagrams.  Advantages and disadvantages various packages.  Include an example here? TidyPaleo example?
 
 #THE END
 
@@ -929,3 +920,30 @@ Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neo
 This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 --------------
   -----------------
+  
+##### View sample and count metadata
+```{R Upper Wallface View counts}
+### View sample metadata, list of taxa, and counts in Download dataframes 
+### View sample metadata,
+uwallface.dw[["32252"]][["sample.meta"]] 
+### View taxa list
+uwallface.dw[["32252"]][["taxon.list"]]
+### View diatom counts
+uwallface.dw[["32252"]][["counts"]]
+### View Chronology
+uwallface.dw[["32252"]][["chronologies"]]
+```
+----
+-----------
+##### Transform raw diatom counts to percentages and other forms
+
+
+``` {R TransformCountsToPct}
+library ("analogue")
+uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
+```
+
+
+```
+----------------
+---------------
