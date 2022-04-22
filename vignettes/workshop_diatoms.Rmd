@@ -426,19 +426,6 @@ diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diato
 The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
 For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
 
-##### View sample and count metadata
-```{R Upper Wallface View counts}
-### View sample metadata, list of taxa, and counts in Download dataframes 
-### View sample metadata,
-uwallface.dw[["32252"]][["sample.meta"]] 
-### View taxa list
-uwallface.dw[["32252"]][["taxon.list"]]
-### View diatom counts
-uwallface.dw[["32252"]][["counts"]]
-### View Chronology
-uwallface.dw[["32252"]][["chronologies"]]
-```
-
 #### List of diatom taxa 
 
 Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
@@ -906,3 +893,18 @@ Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neo
 This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 --------------
   -----------------
+  
+##### View sample and count metadata
+```{R Upper Wallface View counts}
+### View sample metadata, list of taxa, and counts in Download dataframes 
+### View sample metadata,
+uwallface.dw[["32252"]][["sample.meta"]] 
+### View taxa list
+uwallface.dw[["32252"]][["taxon.list"]]
+### View diatom counts
+uwallface.dw[["32252"]][["counts"]]
+### View Chronology
+uwallface.dw[["32252"]][["chronologies"]]
+```
+----
+-----------
