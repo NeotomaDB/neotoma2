@@ -151,6 +151,8 @@ my_sites
 
 Example of get_sites by location with bounding box of lat & longs.  Same code works with `get_datasets()` as well as `get_sites()`.
 
+SIMON and SOCORRO - Some sites returned are outside the bounding box.  Does loc work?  Do we need to use a different format to specify location?
+
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  
 #Data are returned for the first 25 sites.
@@ -468,21 +470,27 @@ The `get_publications` function extracts collection units from a sites objects.
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
 
 # Visualize Data
-## Make plots and maps 
+
+Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
+#### Map of distribution of sites
+##### `plotLeaflet()` function
 
-#### `plotLeaflet()` functions
-
-The `neotoma2` page has a function to map a `sites` object
+The `neotoma2` package has a function to map a `sites object`.
+SIMON and SOCORRO - The bounding box argument is not working.  Sites are returned that are located outside the box.
 
 ```{R diatomsbyBBoxExecuted}
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
 plotLeaflet(diat_NE)
 ```
 
-#### Map of distribution of sites 
-Map, for example, all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
+#### Map of distribution of sites
 
+Map, for example, of all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
+
+
+
+#THE END
 # ANY material below here will not be included in the final workshop document
 
 #### Map of distribution of a diatom taxon
