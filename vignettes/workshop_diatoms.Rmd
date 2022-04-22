@@ -473,11 +473,14 @@ The `get_publications` function extracts collection units from a sites objects.
 
 Make plots and maps 
 (e.g., stratigraphic diagrams, maps of taxa distributions)
+
 #### Map of distribution of sites
 ##### `plotLeaflet()` function
 
 The `neotoma2` package has a function to map a `sites object`.
 SIMON and SOCORRO - The bounding box argument is not working.  Sites are returned that are located outside the box.
+
+Map, for example, of all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
 
 ```{R diatomsbyBBoxExecuted}
 diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
@@ -486,7 +489,7 @@ plotLeaflet(diat_NE)
 
 #### Map of distribution of sites
 
-Map, for example, of all sites that are part of an aggregate dataset. Following example uses Leaflet package. Very useful for making basic maps quickly and easily.
+
 
 
 
