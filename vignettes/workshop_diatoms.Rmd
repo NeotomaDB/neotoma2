@@ -352,18 +352,26 @@ The `samples()` function obtains sample level data from a record [[`sites object
 Example of using `samples()` to obtain diatom counts
 
 ```{R samplesFunctionExample}
-#search for a site by site name
-uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+# Join a list of site names together using the combine command, c()
+  sitenameList <- c("Bald Hill", "Blake (sutton)", 
+                    "High (sudbry)", "Holland", 
+                    "Little Hosmer", "Long (grnsbo)", 
+                    "Long (shefld)", "Round (shefld)")
+my_sites <- c()
+for(sitename in sitenameList){
+  a_site <- get_sites(sitename = sitename)
+  my_sites <- c(my_sites, a_site)
+}
+my_sites
+
 #get datasets from get_sites output
-uwallf_datasets <- get_datasets(uwallf_site)
+NE_datasets <- get_datasets(my_sites)
 #filter the datasets output to include only diatoms
 diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
 #take the diatom datasets and getting the downloads output
-uwallf_dwl <- get_downloads(diat_uwallf_dataset)
-#using the samples function to get the count data as a data frame
-diat_samp_uwallf <- samples(uwallf_dwl)
-#view the data frame of count data
-diat_samp_uwallf
+diat_NE_dl <- get_downloads(diat_uwallf_dataset)
+#result: count information with only diatoms at the specified sites
+samples(diat_NE_dl)
 
 #Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
@@ -372,18 +380,8 @@ diat_samp_uwallf
 ##### Water chemistry
 
 ```{r diatom_and_waterchemistry_counts example}
-# Join a list of site names together using the combine command, c()
-  sitenameList <- c("Bald Hill", "Blake (sutton)", 
-                    "High (sudbry)", "Holland", 
-                    "Little Hosmer", "Long (grnsbo)", 
-                    "Long (shefld)", "Round (shefld)")
-my_sites <- c()
-for(sitename in sitenameList){
-  a_site <- get_sites(sitename = sitename)
-  my_sites <- c(my_sites, a_site)
-}
+# Use the same sites specified in the chunk above. An object of the site data has already been made.
 my_sites
-
 
 NE_datasets <- get_datasets(my_sites)
 
@@ -391,39 +389,20 @@ wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry"
 
 wat_NE_dl <- get_downloads(wat_NE_dataset)  
 
-#result: count information with only diatom surface samples and water chemistry at the specified sites
+#result: count information with only water chemistry at the specified sites
 samples(wat_NE_dl)
 ```
 
 ##### Diatom counts and water chemistry
-Example of how to get sample data from multiple sites while also filtering for diatom and water chemistry datasets.
+Example of how to get sample data from multiple sites while also filtering for diatom and water chemistry datasets. 
+
+The `sites` objects obtained from the above two chunks of code can be combined to have both diatoms and water chemistry data.
 
 ```{r diatom_and_waterchemistry_counts example}
-# Join a list of site names together using the combine command, c()
-  sitenameList <- c("Bald Hill", "Blake (sutton)", 
-                    "High (sudbry)", "Holland", 
-                    "Little Hosmer", "Long (grnsbo)", 
-                    "Long (shefld)", "Round (shefld)")
-my_sites <- c()
-for(sitename in sitenameList){
-  a_site <- get_sites(sitename = sitename)
-  my_sites <- c(my_sites, a_site)
-}
-my_sites
-
-
-NE_datasets <- get_datasets(my_sites)
-
-diat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "diatom surface sample")
-wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry")
-
-diat_NE_dl <- get_downloads(diat_NE_dataset)
-wat_NE_dl <- get_downloads(wat_NE_dataset)  
-
 #Join downloads together using the combine command, c()
 diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
 
-#result: count information with only diatom surface samples and water chemistry at the specified sites
+#result: count information with both diatoms and water chemistry at the specified sites
 samples(diat_wat_dl)
 ```
 
@@ -537,7 +516,8 @@ plotLeaflet(diat_NE)
 
 
 #THE END
-# ANY material below here will not be included in the final workshop document
+
+## ANY material below here will not be included in the final workshop document
 
 #### Map of distribution of a diatom taxon
 Option 1 - basic map showing occurrence of a taxon
