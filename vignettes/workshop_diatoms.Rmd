@@ -345,6 +345,10 @@ The `samples()` function obtains sample level data from a record [[`sites object
 
 **Values returned:** A data frame with the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
 
+##### Diatom counts
+
+Example of using `samples()` to obtain diatom counts
+
 ```{R samplesFunctionExample}
 #search for a site by site name
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
@@ -359,12 +363,14 @@ diat_samp_uwallf <- samples(uwallf_dwl)
 #view the data frame of count data
 diat_samp_uwallf
 
-#to save the output as a CSV file, which could be opened in Microsoft Excel
-write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
+#Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
+#write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
+##### Water chemistry
+ERIC:  Add code using samples() to get all water chemistry data for one or more datasets.  Could be similar to the the code used to get diatom counts, above.
 
-
-Below is an example of getting sample data from multiple sites while also filtering for diatom and water chemistry datasets.
+##### Diatom counts and water chemistry
+Example of how to get sample data from multiple sites while also filtering for diatom and water chemistry datasets.
 
 ```{r diatom_and_waterchemistry_counts example}
 # Join a list of site names together using the combine command, c()
@@ -395,85 +401,16 @@ diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
 samples(diat_wat_dl)
 ```
 
-
-#### Water chemistry
-Don says: We want water chemistry
-
-##### From sites within range of water chemistry characteristics
-Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
-
-Example of how to get water chemistry from the different dataset types [includes snippets of code, none of which work]
-
-```{r getWaterChemEX}
-diatomss <- get_datasets(datasettype = 'diatom surface sample') %>% 
-  get_downloads()
-
-# Following 3 lines of code seem to work, but search through ALL water chemistry datasets
-waterchem <- get_datasets(datasettype = 'water chemistry') %>% 
-  get_downloads() 
-```
-
-##### From sites where one or more specified water chemistry characteristics were measured
-
-```{R Diatom Multiple Water Chemistry}
-library('WriteXLS')
-diatomwch<- get_datasets(datasettype = 'water chemistry')
-diatom<- get_datasets(datasettype = 'diatom surface sample')
-
-subsetwch <- getids(diatomwch)$datasetid[1:20]
-
-subset <- getids(diatom)$datasetid[1:20]
-
-if('fileWCH' %in% list.files()) {
-  diat_dl <- readRDS('fileWCH') # It returns the file that is used 
-} else {
-  diat_wch <- get_downloads(subsetwch)
-  diat_dls <- get_downloads(subset)
-  diat_dlb <- c(diat_wch, diat_dls)
-  saveRDS(diat_dlb, 'fileWCH')
-}
-# fileWCH will be created in the working directory
-#wideWCH_DTM <- compile_downloads(diat_dlb)  # what is this supposed to do?
-## neotoma function converts multiple downloads into single object 
-minWCH <- as.data.frame(collunits(diat_dlb))
-
-m_ids <- getids(diat_dlb)
-
-minWCH <- left_join(minWCH, m_ids, by = c("collectionunitid" = "collunitid")) %>%
-  group_by(datasetid) %>% #dataset was returned from the table 
-  summarise(min(waterdepth)) %>% #dplyr function to create a dataframe
-  rename(waterdepth = "min(waterdepth)")
-
-wideWCH_DTM <- minWCH %>% 
-  filter(is.na(waterdepth))
-wideWCH_DTM
-# Write data to an Excel file, which will be created in the working directory
-WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
-```
-
 ##### Diatom taxa
 Don says: We probably want this.
 
-###### Diatom counts that include one or more specific diatom taxa
-[SIMON - Code does not include possibility of specifying a particular diatom taxon]
 
-Get list of taxa found in a single dataset (core)
+Get list of all taxa associated with single datasettype. Takes a long time to run. 
 
-```{R datasetByTaxa}
-diat_tax <- get_datasets(32252) # Datasetid for U Wallface P core 1
-diat_dl <- get_downloads(diat_tax)
-diat_d2 <- samples(diat_dl)
-diat_taxa <- taxa(diat_dl)
-diat_taxa
-```
-
-Get list of all taxa associated with single datasettype 
-
-```{R datasetByTaxaExample}
+```{R ListOfTaxaByDatasettype}
 diatoms<- get_datasets(datasettype = 'diatom')
 diat_dl <- get_downloads(diatoms)
 diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
-# Takes a long time to run
 ```
 
 ##### Diatom Counts
@@ -891,3 +828,71 @@ if('filename' %in% list.files()) {
   #  Where is "filename"saved? - What directory? - type getwd() in the console to find out where the file is.
 }
 ```
+------------
+-----------
+WATER CHEMISTRY
+
+##### From sites within range of water chemistry characteristics
+Get datasets associated with water chemistry within a specific range (e.g., pH between 6 and 8)
+
+Example of how to get water chemistry from the different dataset types [includes snippets of code, none of which work]
+
+```{r getWaterChemEX}
+diatomss <- get_datasets(datasettype = 'diatom surface sample') %>% 
+  get_downloads()
+
+# Following 3 lines of code seem to work, but search through ALL water chemistry datasets
+waterchem <- get_datasets(datasettype = 'water chemistry') %>% 
+  get_downloads() 
+```
+
+##### From sites where one or more specified water chemistry characteristics were measured
+
+```{R Diatom Multiple Water Chemistry}
+library('WriteXLS')
+diatomwch<- get_datasets(datasettype = 'water chemistry')
+diatom<- get_datasets(datasettype = 'diatom surface sample')
+
+subsetwch <- getids(diatomwch)$datasetid[1:20]
+
+subset <- getids(diatom)$datasetid[1:20]
+
+if('fileWCH' %in% list.files()) {
+  diat_dl <- readRDS('fileWCH') # It returns the file that is used 
+} else {
+  diat_wch <- get_downloads(subsetwch)
+  diat_dls <- get_downloads(subset)
+  diat_dlb <- c(diat_wch, diat_dls)
+  saveRDS(diat_dlb, 'fileWCH')
+}
+# fileWCH will be created in the working directory
+#wideWCH_DTM <- compile_downloads(diat_dlb)  # what is this supposed to do?
+## neotoma function converts multiple downloads into single object 
+minWCH <- as.data.frame(collunits(diat_dlb))
+
+m_ids <- getids(diat_dlb)
+
+minWCH <- left_join(minWCH, m_ids, by = c("collectionunitid" = "collunitid")) %>%
+  group_by(datasetid) %>% #dataset was returned from the table 
+  summarise(min(waterdepth)) %>% #dplyr function to create a dataframe
+  rename(waterdepth = "min(waterdepth)")
+
+wideWCH_DTM <- minWCH %>% 
+  filter(is.na(waterdepth))
+wideWCH_DTM
+# Write data to an Excel file, which will be created in the working directory
+WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
+```
+-------
+-----------
+###### Diatom counts that include one or more specific diatom taxa
+[SIMON - Code does not include possibility of specifying a particular diatom taxon]
+
+Get list of taxa found in a single dataset (core)
+
+```{R datasetByTaxa}
+diat_tax <- get_datasets(32252) # Datasetid for U Wallface P core 1
+diat_dl <- get_downloads(diat_tax)
+diat_d2 <- samples(diat_dl)
+diat_taxa <- taxa(diat_dl)
+diat_taxa
