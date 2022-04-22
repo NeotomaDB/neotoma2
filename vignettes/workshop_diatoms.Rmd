@@ -218,18 +218,16 @@ str(uwallf_datasets)
 # Download Data
 ## Downloads function
 
-Using the dataset ID, site object or dataset object, return all records associated with the data as a `sites` object with an even more complex detail level.
+Download all records associated with one or more datasets. Use the `get_downloads` function to return a `sites object` with full level of detail.
 
 **Usage:**  `get_downloads(x)`
-Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical printing a download status bar.
+Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical (default is TRUE) - prints (??) a download status bar.
 
 **Values returned:** a `sites object` with a full level of detail, including relevant assemblage information (e.g., diatom counts) and metadata.
 
-The downloaded result is a sites object that contains the constituent taxa, the chronology, site and PIs who contributed the data. 
+The downloaded result is a `sites object` that contains data on: sites, collection units, analysis units, samples, datasets, taxonomic data, chronologies, publications, contacts.
 
-The following are important components: datasets, chronologies, samples within the dataset.
-
-To see structure of `get_downloads()` function output, run the following code:
+To see the structure of `get_downloads()` function output, run the following code:
 ```{R structure_of_get_download_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
 uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
@@ -240,16 +238,16 @@ uwallf_download <- get_downloads(uwallf_diatom_dataset)
 
 ## Helper functions
 
-The following functions can be used on a `sites` object to return associated values in a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
+After obtaining a `get_downloads` result, a typical next step is to create subsets of data for for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
 
-Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of first three of the functions listed above.
+Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of the first three of the functions listed above.
 
 #### `datasets()` function
-The `datasets()` function extracts datasets from a sites objects. 
+The `datasets()` function extracts dataset information from a sites objects. 
 
 **Usage:** `datasets(object)`
 
-The argument for this function a "sites" object.
+The argument for this function a `sites object`.
 
 **Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
 
@@ -259,22 +257,22 @@ The argument for this function a "sites" object.
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 #get datasets from get_sites output
 uwallf_datasets <- get_datasets(uwallf_site)
-#filter the datasets output to include only diatoms
+#filter the datasets output to include only "diatom" datasets
 diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
-#using the samples function to get the data output
+#use the samples function to get the data output
 diat_uwallf_data <- datasets(diat_uwallf_dataset)
-#view the data frame of the data returned from the datasets function
+#view the data frame of the data returned
 diat_uwallf_data
 
 #to save the output in current working directory
 write.csv(diat_uwallf_data, row.names = FALSE)
-# Example of how csv file could be saved to a specified directory:
+# Example of how csv file could be saved to a directory other than the working directory:
 # write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
 ```
 
-##### Table of dataset information
+##### Create dataframe of dataset information
 
-Use the `datasets()` function to get a simple table with a subset of basic dataset information. The following code is an example of how to convert the object to a dataframe for manipulation.
+The `datasets()` function returns an object with basic dataset information. The following code is an example of how to convert that object to a dataframe.
 
 ```{R dataframeDatasetsoutput}
 as.data.frame(datasets(uwallf_data))
@@ -312,7 +310,7 @@ write.csv(custom_datasets, row.names = FALSE)
 
 #### `collunits()` Function
 
-The `collunits` function extracts collection units from a sites objects. 
+The `collunits` function extracts collection units from a `sites object`. 
 
 **Usage:** `collunits(object)`
 The argument for this function takes a "sites" object.
@@ -339,11 +337,11 @@ write.csv(diat_uwallf_collunits, row.names = FALSE)
 ```
 
 #### `samples()` Function
-The `samples()` function obtains samples from a record or multiple records as a data frame. 
+The `samples()` function obtains sample level data from a record [[`sites object`??]] and returns results as a data frame. 
 
 **Usage:** `samples(x)`
 
-The argument for this function takes a "sites" object (x) obtained from `get_downloads`.
+**argument:** (x) is a `sites object` obtained from `get_downloads`.
 
 **Values returned:** A data frame with the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
 
