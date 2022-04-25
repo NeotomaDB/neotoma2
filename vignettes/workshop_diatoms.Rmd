@@ -127,6 +127,7 @@ Get data on a single site using sitename.
 diat <- get_sites(sitename = 'Schrader Pond')  # Example
 diat
 # wildcards (%) can be used if you do not know the exact name
+# The`sitename` input is not case sensitive 
 ## Example: get_sites(sitename = '%Schra%')
 ```
 
@@ -155,9 +156,14 @@ SIMON and SOCORRO - Some sites returned are outside the bounding box.  Does loc 
 
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  
-#Data are returned for the first 25 sites.
-diat_NE <- get_sites(loc =c(-80,40,-65,48))
-diat_NE
+northeastUS <- rbind(c(-80,40), c(-80,48),
+                     c(-65,48), c(-65,40), c(-80,40))
+neus <- sf::st_polygon(list(northeastUS))
+
+#As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
+neUSsites <- get_datasets(loc = neus)
+
+neUSsites
 ```
 
 ##### Navigate the structure of a sites object to find specific metadata.
@@ -165,6 +171,7 @@ diat_NE
 Sometimes it is useful to extract specific data from a sites object. For example, the `uwallf_site` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want (e.g., siteid) using the `$` symbol.
 
 ```{r extractElement}
+#to retrieve the first item in the list, we put a "1" in the brackets. 
 uwallf_site[[1]]$siteid
 ```
 
@@ -213,8 +220,8 @@ To see structure of a `get_datasets()` object, run the following code:
 
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
-str(uwallf_datasets)
+uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
+str(uwallf_data)
 ```
 
 # Download Data
@@ -232,10 +239,14 @@ The downloaded result is a `sites object` that contains data on: sites, collecti
 To see the structure of `get_downloads()` function output, run the following code:
 ```{R structure_of_get_download_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_datasets <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
-uwallf_diatom_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom") # only keep diatom datasets
+uwallf_data <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
+uwallf_diatom_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom") # only keep diatom datasets
 uwallf_download <- get_downloads(uwallf_diatom_dataset)
-#str (uwallf_download) # shows structure of uwallf_datast
+
+#to see a quick summary of collectionunits, chronologies, datasets, and datasetttypes, use the `summary()` function
+summary(uwallf_download)
+
+#str (uwallf_download) shows  complete structure of uwallf_download
 ```
 
 ## Helper functions
@@ -258,9 +269,9 @@ The argument for this function a `sites object`.
 #search for a site by site name
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 #get datasets from get_sites output
-uwallf_datasets <- get_datasets(uwallf_site)
+uwallf_data <- get_datasets(uwallf_site)
 #filter the datasets output to include only "diatom" datasets
-diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
 #use the samples function to get the data output
 diat_uwallf_data <- datasets(diat_uwallf_dataset)
 #view the data frame of the data returned
@@ -323,9 +334,9 @@ The argument for this function takes a "sites" object.
 #search for a site by site name
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 #get datasets from get_sites output
-uwallf_datasets <- get_datasets(uwallf_site)
+uwallf_data <- get_datasets(uwallf_site)
 #filter the datasets output to include only diatoms
-diat_uwallf_dataset <- neotoma2::filter(uwallf_datasets, datasettype == "diatom")
+diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
 #take the diatom datasets and getting the downloads output
 uwallf_dwl <- get_downloads(diat_uwallf_dataset)
 #using the samples function to get the data from the collunits function
@@ -366,12 +377,13 @@ my_sites
 
 #get datasets from get_sites output
 NE_datasets <- get_datasets(my_sites)
-#filter the datasets output to include only diatoms
-diat_NE_dataset <- neotoma2::filter(my_sites, datasettype == "diatom")
 #take the diatom datasets and getting the downloads output
-diat_NE_dl <- get_downloads(diat_NE_dataset)
+diat_NE_dl <- get_downloads(NE_datasets)
+
+#filter the datasets output to include only diatoms
 #result: count information with only diatoms at the specified sites
-samples(diat_NE_dl)
+samples(diat_NE_dl) %>%
+dplyr::filter(datasettype == "diatom surface sample")
 
 #Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
@@ -484,12 +496,18 @@ Make plots and maps
 
 The `neotoma2` package has a function to map a `sites object`. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
 
-SIMON and SOCORRO - The bounding box argument does not work in the example below.  Sites are returned that are located outside the box.
+```{R siteSpatialSearch}
+northeastUS <- rbind(c(-80,40), c(-80,48),
+                     c(-65,48), c(-65,40), c(-80,40))
+neus <- sf::st_polygon(list(northeastUS))
 
-```{R diatomsbyBBoxExecuted}
-diat_NE <- get_datasets(datasettype="diatom",loc =c(-80,40,-65,48)) 
-plotLeaflet(diat_NE)
-```
+#As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
+neUSsites <- get_datasets(loc = neus)
+
+neUSsites
+
+plotLeaflet(neUSsites)
+``` 
 
 Wish list for additional types of maps:
 
