@@ -89,9 +89,17 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
           definition = function(x, y) {
-            new("chronologies",
-                chronologies = unlist(c(x@chronologies,
-                                    y@chronologies), recursive = FALSE))
+            tryCatch(
+              expr = {
+                new("chronologies",
+                    chronologies = unlist(c(x@chronologies,
+                                            y@chronologies), recursive = FALSE))
+              },
+              error = function(e){
+                stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
+                   comes from `get_sites()` or `get_datasets()` which does not have chronology's 
+                   detail")
+              })
           })
 
 #' @title write CSV
