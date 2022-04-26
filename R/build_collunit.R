@@ -10,9 +10,6 @@ build_collunits <- function(x) {
     call_ds <- x$dataset
     datasets <- build_dataset(call_ds)
     datasets <- new("datasets", datasets = list(datasets))
-    
-    print("chronologies")
-    print(length(x$chronologies))
 
     chronologies <- purrr::map(x$chronologies, build_chron)
     chronologies <- new("chronologies", chronologies = chronologies)
@@ -23,7 +20,7 @@ build_collunits <- function(x) {
     datasets <- purrr::map(x$datasets, build_dataset)
     datasets <- new("datasets", datasets = datasets)
     chron <- purrr::map(x$chronologies, build_chron)
-    chronologies <- new('chronologies', chronologies = c(new('chronology')))
+    chronologies <- new('chronologies', chronologies = chron)
   }
 
   if(length(x$handle) == 0) {

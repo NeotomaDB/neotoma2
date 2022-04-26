@@ -89,9 +89,18 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
           definition = function(x, y) {
-            new("chronologies",
+            try(
+            out <- new("chronologies",
                 chronologies = unlist(c(x@chronologies,
-                                    y@chronologies), recursive = FALSE))
+                                    y@chronologies), recursive = FALSE)))
+            if ('try-error' %in% class(out)) {
+              stop("not today")
+              
+            } else {
+              new("chronologies",
+                  chronologies = unlist(c(x@chronologies,
+                                          y@chronologies), recursive = FALSE))
+            } 
           })
 
 #' @title write CSV

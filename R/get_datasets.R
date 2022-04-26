@@ -126,7 +126,7 @@ parse_dataset <- function(result) { # nolint
                         handle = call$handle,
                         datasets = datasets_,
                         chronologies = new("chronologies",
-                                           chronologies = c(new('chronology'))))
+                                           chronologies = list()))
     
     collunits <- new("collunits", collunits = list(new_collunit))
     
