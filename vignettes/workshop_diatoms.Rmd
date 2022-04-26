@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, eval=FALSE}
 library(neotoma2)
 library(dplyr)
 library(purrr)
@@ -172,6 +172,8 @@ Sometimes it is useful to extract specific data from a sites object. For example
 
 ```{r extractElement}
 #to retrieve the first item in the list, we put a "1" in the brackets. 
+uwallf_site <-get_sites(sitename = 'Upper Wallface%')
+
 uwallf_site[[1]]$siteid
 ```
 
@@ -428,7 +430,7 @@ The following code gets selected diatom taxa name variables from the Neotoma Tax
 
 SIMON and SOCCORO - the following code works, but times-out before all diatom taxa are returned.  Please fix.
 
-```{R MasterListTaxa}
+```{R MasterListTaxa, eval=FALSE}
 #code taken from `get_table()` documentation
 someTaxa <- get_table('taxa')
 # Loop with the offset to get all specimens:
@@ -546,31 +548,31 @@ single or multiple taxa from multiple sites - vs depth or time
 [Simon - Code still needs to be written]
 Don says: Find a working example, or delete this section. Should be using age_old and age_young.
 
-```{R Diatom Time Interval}
+```{R Diatom Time Interval, eval=FALSE}
 datasets(NL2)
 NL2
 ```
 
-```{R neotoma version}
+```{R neotoma version, eval=FALSE}
 interval_42 <- NL2 %>%
   neotoma2::filter(age_range_old > -42)
 interval_42
 ```
 
-```{r downloads after dplyr}
+```{r downloads after dplyr, eval=FALSE}
 get_downloads(interval_42)
 ```
 
 
 #### Taxon name or ID 
 ** Note taxon name / id not sure if in API)
-```{R getTaxa}
+```{R getTaxa, eval=FALSE}
 # Find datasets using taxon name
 diat_nm<- get_datasets(taxonname = 'Navicula minima')
 # Find datasets using taxon id
 ```
 
-```{r datasettype and filter taxons}
+```{r datasettype and filter taxons, eval=FALSE}
 # Find datasets of a specific data type
 diat_nm1<- get_datasets(datasettype = 'diatom')
 
@@ -587,7 +589,7 @@ diat_samples <- diat_samples %>%
 #### Dataset DOI
 Don says: keep in, but make code work.
 ** Not sure dois is a used parameter. 
-```{r getDiatomsByDOI}
+```{r getDiatomsByDOI, eval=FALSE}
 # neDiatoms <- get_datasets(dois=c(...)) # basic format
 neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for Livingston P, West P and Wolf L in the Adirondack Mountains, NY.
 # [SIMON - This code chunk does not work.  I assume this is because the Neotoma2 get_datasets function is still being developed. True?  My understanding is that it would retreive the DOI. Don]
@@ -597,20 +599,22 @@ neDiatoms <- get_datasets(dois=c(43516, 43519, 46228)) # Example using DOI's for
 ##### Constituent database
 Don says: keep searching by keyword, but get rid of constituent database example (?)
 [SIMON - Code needs to be added]
-```{R SitesbyConDB}
+```{R SitesbyConDB, eval=FALSE}
 consDB <- get_
 ```
 
 Example of finding constituent databases
 
-```{R SitesbyConDBExample}
+```{R SitesbyConDBExample, eval=FALSE}
 ConDB <- 
 #### Sample keyword [secondary]
 Code to retreive datasets by keyword - usually would be one part of a larger code chunk or function
 [Code needs to be written]
 
+```
+
 Example of using the search function returning keywords 
-```{R KW in notes}
+```{R KW in notes, eval=FALSE}
 sediment_txt <- as.data.frame(datasets(diat_nm1_dw)) %>%
   dplyr::filter(grepl('Sediment sample', notes))
 
@@ -622,7 +626,7 @@ sediment_txt$datasetid
 Don says: Yes, we want this section.
 Get dataset IDs of all members of an aggregate dataset
 Also, get_datasets and get-downloads
-```{R Diatom Aggregate Dataset}
+```{R Diatom Aggregate Dataset, eval=FALSE}
 aggr_set <- read.csv()# If we are going to use the Excel file that contains sampleids for each aggregate dataset, we should read it in here
 aggr1 <- get_datasets() # Do we need to use get_datasets if we already know sampleids?
 aggr2 <- get_downloads()
@@ -630,25 +634,25 @@ aggr2 <- get_downloads()
 ```
 
 Example
-```{R Diatom Aggregate Dataset Example}
+```{R Diatom Aggregate Dataset Example, eval=FALSE}
 ```
 
 #### Extract a list of DOI’s for a set of datasets
-```{R DOIS}
+```{R DOIS, eval=FALSE}
 # Code needs to be written
 ```
 Example
-```{R DOIS EX}
+```{R DOIS EX, eval=FALSE}
 ```
 
 #### Add standard sets of diatom taxa names that could be used to convert multiple synonyms to another set of names
 A complicated task - synonym lists need to be prepared and code written
-```{R standard set}
+```{R standard set, eval=FALSE}
 get_dataset(taxonname = ,search())
 ```
 
 
-```{R get_publicationsFunctionExample}
+```{R get_publicationsFunctionExample, eval=FALSE}
 ## Example - U Wallface P datasetid
 uwall_pubs <- get_publications(datasetid=32252) # Example - U Wallface P datasetid
 #to view the output
@@ -659,7 +663,7 @@ write.csv(uwall_pubs,"C:\\Users\\eco37\\Desktop\\pubs_uwallf.csv", row.names = F
 ```
 
 Get count data for a single core
-```{R Counts single dataset UWall EX}
+```{R Counts single dataset UWall EX, eval=FALSE}
 library (neotoma)
 ### Find Neotoma Site Id for Upper Wallface Pond 
 uwallface <- get_site (sitename = "Upper Wallface%")
@@ -682,12 +686,12 @@ WriteXLS(uwallface.ct,  "count_file.xlsx")
 Needs to be written
 
 #### Water chemistry
-```{R WCHM Out}
+```{R WCHM Out, eval=FALSE}
 ## get_datasets(sitename='x',datasettype = 'water chemistry') # format
 get_datasets(sitename="%Wallface%",datasettype = 'water chemistry') # example
 ```
 Example
-```{R ChemistryExample}
+```{R ChemistryExample, eval=FALSE}
 ```
 
 #### Chronology
@@ -695,11 +699,12 @@ Example
 Don says: replace with code using "chronologies" function in Neotoma2.
 One way to get chronology data is to first run get_download to create a download file and then run get_chroncontrol to extract the chronology data.  The example below gets chronology data from  download files with data for all sites in the northeast US.
 
-```{R ExtractChroncontrol}
+```{R ExtractChroncontrol, eval=FALSE}
 # Get chroncontrol data from a download file using get_chroncontrol
 ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRUE, add = FALSE)
 ```
-```{R ChronMetadata}
+
+```{R ChronMetadata, eval=FALSE}
 # Get chronology metadata from the .meta and .parent lists
 ne_chronmeta <-sapply (ne_chroncontrol, 
                        function(x) {               c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name, x$parent$dataset.id, x$parent$dataset.type)
@@ -715,7 +720,7 @@ Some programs have no standard input format
 #### Others
 
 **Note Socorro: not clear what is supposed to happen here; dont find any property called pH so tried with waterdepth.
-```{r}
+```{r, eval=FALSE}
 as.data.frame(collunits(waterchem)) %>% 
   dplyr::filter(waterdepth < 5)
 
@@ -730,7 +735,7 @@ aligned <- align_sites(diatomss, waterss)
 
 #### Need explanations on here (?)
 
-```{r fixing}
+```{r fixing, eval=FALSE}
 diatomss<- get_datasets(datasettype = 'diatom surface sample')
 waterss<- get_datasets(datasettype = 'water chemistry')
 diatom<- get_datasets(datasettype = 'diatom')
@@ -764,7 +769,7 @@ Get datasets associated with water chemistry within a specific range (e.g., pH b
 
 Example of how to get water chemistry from the different dataset types [includes snippets of code, none of which work]
 
-```{r getWaterChemEX}
+```{r getWaterChemEX, eval=FALSE}
 diatomss <- get_datasets(datasettype = 'diatom surface sample') %>% 
   get_downloads()
 
@@ -775,7 +780,7 @@ waterchem <- get_datasets(datasettype = 'water chemistry') %>%
 
 ##### From sites where one or more specified water chemistry characteristics were measured
 
-```{R Diatom Multiple Water Chemistry}
+```{R Diatom Multiple Water Chemistry, eval=FALSE}
 library('WriteXLS')
 diatomwch<- get_datasets(datasettype = 'water chemistry')
 diatom<- get_datasets(datasettype = 'diatom surface sample')
@@ -816,7 +821,7 @@ WriteXLS(wideWCH_DTM, "wideWCH_DTM.xlsx")
 
 Get list of taxa found in a single dataset (core)
 
-```{R datasetByTaxa}
+```{R datasetByTaxa, eval=FALSE}
 diat_tax <- get_datasets(32252) # Datasetid for U Wallface P core 1
 diat_dl <- get_downloads(diat_tax)
 diat_d2 <- samples(diat_dl)
@@ -863,7 +868,7 @@ Code chunks in this section are designed to create output files for diatom count
 ##### Count data for one or more datasetids
 Gets count data for one or more datasets and writes data to an Excel file.
 
-```{R ExampleDataset}
+```{R ExampleDataset, eval=FALSE}
 library(purrr)
 V1 <-c(44786,44787,44788) # Datasetids
 # In this example we combine datasets from 3 sites (New England lakes).  To get output for aggregate datasets, a file with all the datasetids for an aggregate dataset could be used as input.
@@ -896,7 +901,7 @@ WriteXLS(V1Counts,  "VL_dl.xlsx")
 
 Following code uses Neotoma2 R - Schrader Pond example
 [SIMON - what is neotoma 2 equivalent?]
-```{r get_singleSitebyName}
+```{r get_singleSitebyName, eval=FALSE}
 schrader <- get_sites(sitename = 'Schrader%') # % can be used to approximate sitenames
 schrader  # Look in output to find datasetid for Schrader (27408)
 schrader.data <- get_datasets(27408)
@@ -908,7 +913,7 @@ print(schrader.dl)
 
 #### Count data for one dataset ID - subsets
 
-```{r}
+```{r, eval=FALSE}
 ## [SIMON - please document the code below - what is its purpose?]
 if('Mirror' %in% list.files()) {
   diat_da <- readRDS('Mirror') 
@@ -932,9 +937,10 @@ Note: Basic code for above chunk is from S. Goring, J. Williams and E. Grimm Neo
 This is especially important for cases where sites were sampled for water chemistry as part of more than one study.  As of Oct 2021, corresponding water chemistry and diatom counts are stored in an Excel file.
 --------------
   -----------------
-  
+```  
+
 ##### View sample and count metadata
-```{R Upper Wallface View counts}
+```{R Upper Wallface View counts, eval=FALSE}
 ### View sample metadata, list of taxa, and counts in Download dataframes 
 ### View sample metadata,
 uwallface.dw[["32252"]][["sample.meta"]] 
@@ -949,7 +955,7 @@ uwallface.dw[["32252"]][["chronologies"]]
 
 ##### Transform raw diatom counts to percentages and other forms
 
-``` {R TransformCountsToPct}
+``` {R TransformCountsToPct, eval=FALSE}
 library ("analogue")
 uwallf_dtm_pct <- analogue::tran (x = uwallf_download [[1]]$counts, method = "percent") # Transforms raw counts to percents; uwallf_download is a get_ download file with diatom counts for Upper Wallface Pond
 ```
