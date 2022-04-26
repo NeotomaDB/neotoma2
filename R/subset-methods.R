@@ -148,6 +148,9 @@ setMethod(f = "chronologies",
             output <- map(x@sites, function(y) {
               chronologies(y)
             })
+
             output <- purrr::reduce(output, c)
+         
+            
             return(output)
           })
