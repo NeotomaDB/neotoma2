@@ -5,7 +5,7 @@
 #' @param out A default value to be returned if \code{val} is NULL.
 #' @return The values passed in \code{val} or \code{out} if \code{val} is \code{NULL}.
 #' @export
-testNull <- function(val, out) { # nolint
+testNull <- function(val, out=NA) { # nolint
   if (is.null(val)) {
     return(out)
     } else {

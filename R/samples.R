@@ -24,6 +24,8 @@ setMethod(f = "samples",
                                                           function(z) {
                                                             data.frame(z@ages,
                                                                        z@datum,
+                                                                       sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
+                                                                       sampleid = z@sampleid,
                                                                        depth = z@depth,
                                                                        thickness = z@thickness,
                                                                        samplename = z@samplename)
@@ -59,10 +61,12 @@ setMethod(f = "samples",
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
-                                    allsamp <- purrr::map(y$samples@samples,
+                                    allsamp <- purrr::map(y@samples,
                                                           function(z) {
                                                             data.frame(z@ages,
                                                                        z@datum,
+                                                                       sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
+                                                                       sampleid = z@sampleid,
                                                                        depth = z@depth,
                                                                        thickness = z@thickness,
                                                                        samplename = z@samplename)
@@ -72,6 +76,7 @@ setMethod(f = "samples",
                                   }) %>%
               bind_rows() %>%
               left_join(siteinfo, by = "datasetid")
+            
             return(sampset)
           }
 )
