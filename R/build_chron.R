@@ -35,15 +35,12 @@ build_chron <- function(x) {
     chron_table <- rbind(chron_table, df_sample) %>%
       distinct()
     
-    #print("length notes")
-    #print(length(check_chron$chronology))
-    
     # Chronologies dictionary in API is of length 1 or length 8; if length 1, 
     # the chronology is an NA chronology
     if(length(check_chron$chronology) != 1) {
       new("chronology",
         chronologyid = use_na(testNull(check_chron$chronologyid, NA), "int"),
-        notes = testNull(use_na(testNull(check_chron$chronology$notes, NA), "char"), NA_character_),
+        notes = use_na(testNull(check_chron$chronology$notes, NA), "char"),
         contact = use_na(testNull(check_chron$chronology$contact, NA), "char"),
         agemodel = use_na(testNull(check_chron$chronology$agemodel, NA), "char"),
         ageboundolder = use_na(testNull(check_chron$chronology$agerange$ageboundolder, NA), "int"),
