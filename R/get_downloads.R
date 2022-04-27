@@ -194,22 +194,14 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 #' @importFrom stats na.omit
 #' @export
 get_downloads.character <- function(x, verbose = TRUE, ...) {
-  print("use json")
+
+  result <- jsonlite::fromJSON(x,
+                               flatten = FALSE,
+                               simplifyVector = FALSE)
   
-  
-  
-  result <- jsonlite::fromJSON(x, simplifyVector = FALSE)
-  
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
-  #print(result$data)
+  result <- result %>%
+    cleanNULL()
+
   output <- parse_download(result)
   
   return(output)
