@@ -127,10 +127,47 @@ geopol <- function(x) {
 ```{r combine geopol() & samples()  function}
 #function to add states to samples output dataframe
 # x = geopol() output
-# y = samples() output
+# y = samples() output (or any dataframe with siteid)
 sampdf <- function(x,y) {
 x$states <- row.names(x)
   merge(y, x, by = 'siteid')
 }
 ```
 
+#mapping
+
+```{R siteSpatialSearch}
+northeastUS <- rbind(c(-80,40), c(-80,48),
+                     c(-65,48), c(-65,40), c(-80,40))
+neus <- sf::st_polygon(list(northeastUS))
+
+#As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
+neUSsites <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299)
+
+neUSsites2 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 300)
+
+neUSsites3 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 599)
+
+neUSsites4 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 898)
+
+plotLeaflet(neUSsites)
+``` 
+
+```{R MasterListTaxa, eval=FALSE}
+#code taken from `get_table()` documentation
+#doesn't seem to work
+someTaxa <- get_table('taxa')
+# Loop with the offset to get all specimens:
+okay <- TRUE
+counter <- 1
+taxa <- list()
+while(okay) {
+  taxa[[counter]] <- get_table('taxa', offset = (counter - 1) * 25)
+  if(nrow(taxa[[counter]]) < 25) {
+    okay <- FALSE
+  } else {
+    counter <- counter + 1
+  }
+}
+taxa <- taxa %>% dplyr::bind_rows()
+```
