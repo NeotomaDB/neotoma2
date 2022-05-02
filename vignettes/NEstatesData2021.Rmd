@@ -145,13 +145,13 @@ northeastUS <- rbind(c(-80,40), c(-80,48),
 neus <- sf::st_polygon(list(northeastUS))
 
 #As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
-neUSsites <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299)
+neUSsites <- get_datasets(datasettype = "diatom", loc = neus, limit = 299)
 
-neUSsites2 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 300)
+neUSsites2 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 300)
 
-neUSsites3 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 599)
+neUSsites3 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 599)
 
-neUSsites4 <- get_datasets(datasettype = "diatom surface sample", loc = neus, limit = 299, offset = 898)
+neUSsites4 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 898)
 
 plotLeaflet(neUSsites)
 ``` 
@@ -202,18 +202,56 @@ NLA_2007_Excel <- read_excel("209 NLA 2007 Aggregate Dataset - REVISED 30 April 
 final <- merge(new_NLAstatedf, NLA_2007_Excel, by = 'Neotoma Site ID')
 
 write.csv(final, file = "NLA_states_csv.csv")
-
-view(filter(NLA_states_excel, State %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "New York", "New Jersey", "Pennsylvania", "Rhode Island", "Vermont")))
 ```
 
 ```{r plotting NE_NLA}
-NE_NLA <- dplyr::filter(NLA_states_excel, State %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "New York", "New Jersey", "Pennsylvania", "Rhode Island", "Vermont"))
+library(readxl)
+NLA_states_excel <- read_excel("NLA_states_excel.xlsx", 
+                               col_types = c("numeric", "text", "text", 
+                                             "text", "numeric", "text", "numeric", 
+                                             "text", "text", "text", "text", "text", 
+                                             "text"))
+
+NE_NLA <- dplyr::filter(NLA_states_excel, State %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "New York", "New Jersey", "Rhode Island", "Vermont"))
+
 NE_NLA_ids <- NE_NLA$`Neotoma Site ID`
 
 NE_NLA_ids <- as.numeric(NE_NLA_ids)
 
 NE_NLA_sites <- get_sites(NE_NLA_ids)
 
+#using modified plotLeaflet, found locally in "Custom Functions"
 plotLeaflet(NE_NLA_sites)
+
+```
+
+```{r plotting another dataset ontop of above}
+#data obtained from Diatom Aggregate Dataset
+
+abitibi_ids <- c(27905,27906,27907,27908,27909,27910,27911,27912,27913,27914,27915,27916,27917,27918,27919,27920,27921,27922,27923,27924,27925,27926,27927,27928,27929,27930,27931,27932,27933,27934,27935,27936,27937,27938,27939,27940,27941,27942,27943,27944,27945,27946)
+
+abitibi_sites <- get_sites(abitibi_ids)
+
+#using modified plotLeaflet, found locally in "Custom Functions"
+abitibi_form <- map(abitibi_sites@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
+                               elev = x@altitude,
+                               description = x@description)
+}) %>%
+              bind_rows()
+####result siteids > put into format for plotLeaflet
+#using modified plotLeaflet, found locally in "Custom Functions"
+plotLeaflet(NE_NLA_sites) %>%
+  addCircleMarkers(data = abitibi_form, lng = abitibi_form$long, lat = abitibi_form$lat, radius = 3, color = '#0FF',
+                             popup = paste0("<b>", abitibi_form$sitename,
+                                            "</b><br><b>Description:</b> ",
+                                            abitibi_form$description,
+                                            "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                            abitibi_form$siteid,
+                                            ">Explorer Link</a>"),
+                             options = markerOptions(riseOnHover = TRUE))
 
 ```
