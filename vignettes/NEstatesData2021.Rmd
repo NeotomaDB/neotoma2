@@ -134,6 +134,9 @@ x$states <- row.names(x)
 }
 ```
 
+
+
+
 #mapping
 
 ```{R siteSpatialSearch}
@@ -170,4 +173,47 @@ while(okay) {
   }
 }
 taxa <- taxa %>% dplyr::bind_rows()
+```
+
+```{R getting states from NLA agg dataset, eval=FALSE}
+NLA_states2 <- purrr::map(NLA2007, purrr::possibly(function(x) {
+  site <- get_sites(x)
+  sitename <- site[[1]]$sitename
+  dls <- get_downloads(site)
+  geo <- dls[[1]]@geopolitical[[1]]
+  list(sitename,geo)
+}, otherwise = NA))
+
+NLAstatedf <- t(as.data.frame(do.call(cbind, NLA_states2)))
+colnames(NLAstatedf) <- c("Neotoma Site ID", "geopol")
+NLAstatedf <- as.data.frame(NLAstatedf)
+NLAstatedf <- (unnest(NLAstatedf_df, geopol))
+view(NLAstatedf)
+
+new_NLAstatedf <- NLAstatedf_df %>%
+  mutate(geopolchar=(as.character(NLAstatedf_df$geopol)), siteid = as.numeric(new_NLAstatedf$`Neotoma Site ID`))
+
+new_NLAstatedf <- data.frame(new_NLAstatedf$geopolchar, new_NLAstatedf$siteid)
+colnames(new_NLAstatedf) <- c("geopol", "Neotoma Site ID")
+
+library(readxl)
+NLA_2007_Excel <- read_excel("209 NLA 2007 Aggregate Dataset - REVISED 30 April 2022.xlsx")
+
+final <- merge(new_NLAstatedf, NLA_2007_Excel, by = 'Neotoma Site ID')
+
+write.csv(final, file = "NLA_states_csv.csv")
+
+view(filter(NLA_states_excel, State %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "New York", "New Jersey", "Pennsylvania", "Rhode Island", "Vermont")))
+```
+
+```{r plotting NE_NLA}
+NE_NLA <- dplyr::filter(NLA_states_excel, State %in% c("Connecticut", "Maine", "Massachusetts", "New Hampshire", "New York", "New Jersey", "Pennsylvania", "Rhode Island", "Vermont"))
+NE_NLA_ids <- NE_NLA$`Neotoma Site ID`
+
+NE_NLA_ids <- as.numeric(NE_NLA_ids)
+
+NE_NLA_sites <- get_sites(NE_NLA_ids)
+
+plotLeaflet(NE_NLA_sites)
+
 ```
