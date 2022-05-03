@@ -137,23 +137,27 @@ x$states <- row.names(x)
 
 
 
-#mapping
+#mapping diatom cores for NE
 
 ```{R siteSpatialSearch}
 northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
+
 neus <- sf::st_polygon(list(northeastUS))
 
 #As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
 neUSsites <- get_datasets(datasettype = "diatom", loc = neus, limit = 299)
 
-neUSsites2 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 300)
+#196 objects returned
 
-neUSsites3 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 599)
+#Example if more than can download at once
+#neUSsites2 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 300)
 
-neUSsites4 <- get_datasets(datasettype = "diatom", loc = neus, limit = 299, offset = 898)
+#plotLeaflet(neUSsites)
 
-plotLeaflet(neUSsites)
+neUSsites_dl <- get_downloads(neUSsites)
+
+pc_abun(neUSsites_dl)
 ``` 
 
 ```{R MasterListTaxa, eval=FALSE}
@@ -175,7 +179,16 @@ while(okay) {
 taxa <- taxa %>% dplyr::bind_rows()
 ```
 
+
+
+
+
+
+#AGG DATASET WORK
+###############################################################################
+
 ```{R getting states from NLA agg dataset, eval=FALSE}
+#NLA2007 = siteids from agg dataset
 NLA_states2 <- purrr::map(NLA2007, purrr::possibly(function(x) {
   site <- get_sites(x)
   sitename <- site[[1]]$sitename
@@ -205,6 +218,8 @@ write.csv(final, file = "NLA_states_csv.csv")
 ```
 
 ```{r plotting NE_NLA}
+#Agg #15
+#Handle: NLA-2007
 library(readxl)
 NLA_states_excel <- read_excel("NLA_states_excel.xlsx", 
                                col_types = c("numeric", "text", "text", 
@@ -221,37 +236,114 @@ NE_NLA_ids <- as.numeric(NE_NLA_ids)
 NE_NLA_sites <- get_sites(NE_NLA_ids)
 
 #using modified plotLeaflet, found locally in "Custom Functions"
-plotLeaflet(NE_NLA_sites)
+NE_map <- plotLeaflet(NE_NLA_sites)
+
+```
+```{r plotting another dataset ontop of another function}
+#data obtained from Diatom Aggregate Dataset
+#ids = siteids
+#previous map = leaflet object (results from plotLeaflet)
+#circlecolor = hex color in quotes Ex:
+add_dataset_leaflet <- function(ids, previousmap, circlecolor) {
+  
+  sites_ids <- get_sites(ids)
+  
+  form <- map(sites_ids@sites, function(x) {
+    df <- data.frame(siteid = x@siteid,
+                     sitename = x@sitename,
+                     lat = mean(st_coordinates(x@geography)[, 2]),
+                     long = mean(st_coordinates(x@geography)[, 1]),
+                     elev = x@altitude,
+                     description = x@description)
+  }) %>%
+    bind_rows()
+  
+  leaflet_map <- previousmap %>%
+    addCircleMarkers(data = form, lng = form$long, lat = form$lat, radius = 0.5, color = circlecolor, opacity = 1,
+                     popup = paste0("<b>", form$sitename,
+                                    "</b><br><b>Description:</b> ",
+                                    form$description,
+                                    "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                    form$siteid,
+                                    ">Explorer Link</a>"),
+                     options = markerOptions(riseOnHover = TRUE))
+  return(leaflet_map)
+}
+```
+
+
+```{r plotting another dataset ontop of another 3}
+#data obtained from Diatom Aggregate Dataset
+#Agg #1
+#Handle: EMAP_NE1
+
+EMAP_NE1_ids <- c(26224,26225,26226,26227,26228,26229,26230,26231,26232,26233,26234,24385,23285,26235,26236,26237,26238,26239,26240,26241,26242,26243,26244,26245,26246,26247,26248,26249,26250,26251,26252,26253,26254,26255,26256,26257,26258,26259,26260,26261,24443,26262,26263,26264,26265,26266,23369,26267,13108,26268,23379,26269,23382,24289,26270,26271,26272,26273,13232,26274,26275,26276,26277,26278,26279,26280,26281,26282,26343,26344,26345,26346,25914,26347,26348,25916,25917,26349,26350,26351,26352,26353,26354,26355,26356,26357,26358,26359,26360,26361,26362,26363,26364,26365,26366,26367,26368,26369,26370,26371,26372,26373,26374,26375,26376,26377,26378,26379,26380,26381,26382,26383,26384,26385,26386,26387,26388,26389,26390,26391,26392,26393,22384,26394,26395,26396,26397,26398,26399,25935,26400,26401,26402,26403,26404,26405,26406,26407,26408,26409,26410,26411,26412,26413,26414,26415,26416,26417,26418,13105,26419,26420,26421,26422,26423,26424,26425,26426,26427,26428,26429,24649,26430,26431,26432,26433,26434,26435,26436,26437,26438,26439,26440,26441,13144,26442,26443,26444,26445,26446,26447,26448,26449,26450,26451,26452,26453,26454,26455,26456,26457,26458,26459,26460,26461,26462,26463,26464,26465,26466,26467,26468,26469,26470,26471,26472,24739,26473,26474,26475,26476,26477,26478,26479,24752,26480,26481,26482,26483,26484,26485,26486,26487,26488,24361,26489,26490,26491,26492,26493,26494,26495,26496,26497,26498,26499,26500,26501,26502,13056,26503)
+
+NE_map <- add_dataset_leaflet(EMAP_NE1_ids, previousmap = NE_map, circlecolor = '#ff3333')
+```
+
+```{r plotting another dataset ontop of another 4}
+#data obtained from Diatom Aggregate Dataset
+#Agg #4
+#Handle: ADK-CAL
+
+ADK_CAL_ids <- c(17800,17990,720,14223,18648,18650,18688,710,711,712,23410,713,716,715,717,718,721,722,723,724,725,726,727,728,729,730,736,737,739,740,741,742,743,734,22911,17914,735,714,732,24460,744,746,24431,24432,24466,24433,24439,24442,24445,24458,24459,24463,24495,24435,24477,745,24436,24437,24438,24440,24443,24444,24446,24447,24456,24448,24451,24452,24453,24454,24455,24462,24464,24465,24467,24483,24482,24484,24486,24485,24489,24492,24494,13539,24497,24473,24475,24476,24478,24479,16574,24481)
+
+NE_map <- add_dataset_leaflet(ADK_CAL_ids, previousmap = NLA_EMAP_NE1, circlecolor = '#ffff00')
+
+```
+```{r plotting another dataset ontop of another 5}
+#data obtained from Diatom Aggregate Dataset
+#Agg #9
+#Handle: NENGPIRL
+
+NENGPIRL_ids <- c(25899,25900,25901,25902,25903,13048,25904,24185,25905,25906,25907,25908,25909,25910,25911,25912,18865,25913,25914,25915,25916,25917,25918,25919,25920,25921,25922,25923,25924,25925,25926,25927,25928,18872,25929,25930,25931,1615,25932,25933,25934,25935,25936,25937,25938,25939,25940,25941,25942,25943,25944,25945,25946,25947,25948,25949,25950,25951,25952,25953,25954,25955,25956)
+
+NE_map <- add_dataset_leaflet(NENGPIRL_ids, previousmap = NE_map, circlecolor = '#00cc00')
+```
+
+```{r plotting another dataset ontop of another 6}
+#data obtained from Diatom Aggregate Dataset
+#Agg #24
+#Handle: NJ-PAL10
+
+NJ_PAL10_ids <- c(13158,13160,13163,13165,13167,13170,13172,13174,13176,13178,13181,13182,13183,13190,13191,13192,13193,13194,13195,13196,13197,13198,13199,13200,13201,13202,13203,13204,13205,13206,13207,13208,13209,13210,13211,13212,13213,13214,13215,13216,13217,13218,13219,13220,13222,13223,13224,13225,13226)
+
+NE_map <- add_dataset_leaflet(NJ_PAL10_ids, previousmap = NE_map, circlecolor = '#9900ff')
+```
+```{r leaflet legend}
+#data obtained from Diatom Aggregate Dataset
+
+NE_map <- NE_map %>% addLegend("bottomright", 
+  #colors used in circle markers above
+  colors =c("#03F", "#ff3333", "#ffff00", "#00cc00", "#9900ff"),
+  labels= c("NLA-2007","EMAP_NE1","ADK-CAL","NENGPIRL","NJ-PAL10"),
+  title= "NE Aggregate Datasets w/ WC",
+  opacity = 1)
 
 ```
 
-```{r plotting another dataset ontop of above}
+
+####################################################################
+####################################################################
+####################################################################
+####################################################################
+
+
+```{r plotting another dataset ontop of another example ...}
 #data obtained from Diatom Aggregate Dataset
 
 abitibi_ids <- c(27905,27906,27907,27908,27909,27910,27911,27912,27913,27914,27915,27916,27917,27918,27919,27920,27921,27922,27923,27924,27925,27926,27927,27928,27929,27930,27931,27932,27933,27934,27935,27936,27937,27938,27939,27940,27941,27942,27943,27944,27945,27946)
 
-abitibi_sites <- get_sites(abitibi_ids)
+NE_map <- add_dataset_leaflet(abitibi_ids, previousmap = x, circlecolor = 'x')
+```
 
-#using modified plotLeaflet, found locally in "Custom Functions"
-abitibi_form <- map(abitibi_sites@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
-                               sitename = x@sitename,
-                               lat = mean(st_coordinates(x@geography)[, 2]),
-                               long = mean(st_coordinates(x@geography)[, 1]),
-                               elev = x@altitude,
-                               description = x@description)
-}) %>%
-              bind_rows()
-####result siteids > put into format for plotLeaflet
-#using modified plotLeaflet, found locally in "Custom Functions"
-plotLeaflet(NE_NLA_sites) %>%
-  addCircleMarkers(data = abitibi_form, lng = abitibi_form$long, lat = abitibi_form$lat, radius = 3, color = '#0FF',
-                             popup = paste0("<b>", abitibi_form$sitename,
-                                            "</b><br><b>Description:</b> ",
-                                            abitibi_form$description,
-                                            "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
-                                            abitibi_form$siteid,
-                                            ">Explorer Link</a>"),
-                             options = markerOptions(riseOnHover = TRUE))
+```{r plotting another dataset ontop of another ...}
+#data obtained from Diatom Aggregate Dataset
+#Agg #23
+#Handle: GG-PONDS
+GGreener_ids <- c(13317,13318,13319,13320,13321,13322,13323,13324,13325,13326,13327,13328,13329,13330)
+
+NE_map <- add_dataset_leaflet(GGreener_ids, previousmap = x, circlecolor = 'x')
 
 ```
