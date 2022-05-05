@@ -16,3 +16,10 @@ test_that("Some datasets don't seem to get pulled with chronologies.", {
   singlechron <- testthat::expect_true(any(getchron$chronologyid == 2195))
 
 })
+
+test_that("We can get the samples out of site 13755.", {
+  ## we don't want this to run on CRAN
+
+  skip_on_cran()
+  x <- get_downloads(21007)
+}
