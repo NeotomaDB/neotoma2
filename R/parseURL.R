@@ -44,7 +44,6 @@ parseURL <- function(x, use = "neotoma", all_data=FALSE, ...) { # nolint
                         query = query)
 
   response_url <- response$url
-  
   # When need to check API endpoint, uncomment below
 
   cl <- as.list(match.call())
