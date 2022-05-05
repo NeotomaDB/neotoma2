@@ -38,10 +38,18 @@ build_chron <- function(x) {
     # Chronologies dictionary in API is of length 1 or length 8; if length 1, 
     # the chronology is an NA chronology
     if(length(check_chron$chronology) != 1) {
+      if(length(check_chron$chronology$contact) == 1){
+        contact = use_na(testNull(check_chron$chronology$contact, NA), "char")
+      } else if(length(check_chron$chronology$contact) > 1) {
+        contact = check_chron$chronology$contact
+      } else {
+        contact = use_na(testNull(check_chron$chronology$contact, NA), "char")
+      }
+      
       new("chronology",
         chronologyid = use_na(testNull(check_chron$chronologyid, NA), "int"),
         notes = use_na(testNull(check_chron$chronology$notes, NA), "char"),
-        contact = use_na(testNull(check_chron$chronology$contact, NA), "char"),
+        contact = contact,
         agemodel = use_na(testNull(check_chron$chronology$agemodel, NA), "char"),
         ageboundolder = use_na(testNull(check_chron$chronology$agerange$ageboundolder, NA), "int"),
         ageboundyounger = use_na(testNull(check_chron$chronology$agerange$ageboundyounger, NA), "int"),
