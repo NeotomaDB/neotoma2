@@ -75,7 +75,7 @@ In general it is better to filter records using the search parameters available 
 For any query set returned by the API we can examine the objects we have returned:
 
 ```{r summaryExample}
-summary(allMammals)
+summary(mam50)
 ```
 
 For our example, we want to search for all early Holocene vertebrate records within Neotoma in eastern North America.  So we can construct our search as follows:
