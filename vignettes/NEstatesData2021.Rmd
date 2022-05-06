@@ -14,6 +14,9 @@ library(neotoma)
 library(dplyr)
 library(purrr)
 library(sf)
+library(tidyverse)
+library(leaflet)
+library(leaflegend)
 ```
 
 ```{r setup1, include=FALSE}
@@ -88,13 +91,26 @@ as.data.frame (ne_chronmeta) str(ne_chronmeta) attributes (ne_chronmeta)
 #transpose(ne_chronmeta) write(ne_chronmeta) #view (ne_chronmeta) \`\`\`
 
 
+####################################################################
+####################################################################
+####################################################################
+####################################################################
+
+
 ```{r percent abundance function}
 pc_abun <- function(dl_object) {
+  
   samp <- samples(dl_object)
   taxa <- samp$variablename
   count <- samp$value
+  datasetid <- samp$datasetid
+  siteid <- samp$siteid
   sampleid <- samp$sampleid
-  countDF <- data.frame(sampleid, taxa, count) %>%
+  lat <- samp$lat
+  long <- samp$long
+  
+  
+  countDF <- data.frame(lat, long, siteid, datasetid, sampleid, taxa, count) %>%
     group_by(sampleid) %>%
     mutate(count_pct = count*100 / sum(count))
   return(countDF)
@@ -160,6 +176,630 @@ neUSsites_dl <- get_downloads(neUSsites)
 pc_abun(neUSsites_dl)
 ``` 
 
+
+
+#mapping diatom cores for NE
+```{R Agg Dataset Taxa Presence in Sites}
+#note: this includes states not in the NE. Shouldn't matter, since map is cropped to NE
+diat_15 <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
+
+diat_15_data <- get_datasets(diat_15)
+
+diat_15_dl <- get_downloads(diat_15_data)
+
+view(samples(diat_15_dl))
+#############################
+#this part will depend on what is the result of filtering for stelligera.
+#so code cannot apply to all
+
+testy <- samples(diat_15_dl) %>%
+filter(, grepl("stelligera", variablename, fixed = TRUE))
+
+testy2 <- testy %>%
+dplyr::filter(taxonid == 13088)
+
+final <- testy2$siteid %>%
+  get_sites() %>%
+  plotLeaflet()
+###################
+filtered_dataids <- testy2$datasetid
+
+data_not_found <- setdiff(diat_15, filtered_dataids)
+  
+sites_not_found <- (as.data.frame(get_datasets(data_not_found)))$siteid
+  
+NLA_discostella_stelligera <- add_dataset_leaflet(sites_not_found, previousmap = final, circlecolor = '#999999')
+######################## legend
+NLA_discostella_stelligera <- NLA_discostella_stelligera %>% addLegend("bottomright", 
+  colors =c("#03F", "#999999"),
+  labels= c("Present","Not Present"),
+  title= "D. stelligera distribution in NLA_2007",
+  opacity = 1)
+
+```
+```{R Agg Dataset Taxa Presence in Sites ALL}
+#note: this includes states not in the NE. Shouldn't matter, since map is cropped to NE
+
+#DATASETIDS OF ALL AGG DATASETS
+# Included: diat_1, diat_4, diat_9, diat_15, diat_21, diat_22, diat_23, diat_24
+########### diat_26, diat_32, diat_33, diat_34, diat_35, diat_36, diat_37  
+diat_1 <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041,49042,49043,49044,49045,49046,49661,49662,49663,49664,49665,49666,49667,49668,49669,49670,49671,49672,49673,49674,49675,49676,49677,49678,49679,49680,49681,49682,49683,49684,49685,49688,49689,49690,49691,49692,49693,49694,49695,49696,49697,49698,49699,49700,49701,49702,49703,49704,49705,49706,49707,49708,49709,49710,49711,49712,49713,49714,49715,49716,49717,49718,49719,49720,49721,49722,49723,49724,49725,49726,49727,49728,49729,49730,49731,49732,49733,49734,49735,49736,49737,49738,49739,49740,49741,49742,49743,49744,49745,49746,49747,49748,49749,49750,49751,49752,49753,49754,49755,49756,49757,49758,49759,49760,49761,49762,49763,49764,49765,49766,49767,49768,49769,49770,49771,49772,49773,49774,49775,49776,49777,49778,49779,49780,49781,49782,49783,49784,49785,49786,49787,49788,49789,49790,49791,49792,49793,49794,49795,49796,49797,49798,49799,49800,49801,49802,49803,49804,49805,49806,49807,49808,49809,49810,49811,49812,49813,49814,49815,49816,49817,49818,49819,49820,49821,49822,49823,49824,49825,49826,49827,49828,49829,49830,49831,49832,49833,49834,49835,49836,49837,49838,49839,49840,49841,49842,49843,49844,49845,49846,49847,49848,49849,49850,49851,49852,49853,49854,49855,49856,49857,49858,49859,49860,49861,49862,49863,49864,49865,49866,49867,49868,49869,49870,49871,49872,49873,49874,49875,49876,49877,49878)
+
+diat_1_data <- get_datasets(diat_1)
+
+diat_1_dl <- get_downloads(diat_1_data)
+
+diat_1_pc <- pc_abun(diat_1_dl)
+
+diat_1_taxa <- diat_1_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+#Aulacoseira lirata is present as synonym Melosira lirata in this dataset
+diat_1_taxa_1 <- diat_1_pc %>%
+dplyr::filter(taxa == "Melosira lirata")
+
+#Aulacoseira granulata is present as synonym Melosira granulata in this dataset
+diat_1_taxa_2 <- diat_1_pc %>%
+dplyr::filter(taxa == "Melosira granulata")
+
+diat_1_taxa_3 <- diat_1_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+#############################################################################
+diat_4 <- c(29964,30358,30735,30949,31878,31882,31958,40402,40403,40404,40455,40456,40457,40458,40459,40460,40461,40462,40463,40464,40465,40466,40467,40468,40469,40470,40471,40473,40474,40475,40476,40477,40478,40479,40480,43079,43132,43514,43515,43516,43518,43519,43526,43527,43528,43583,43584,43585,43586,43587,43588,43589,43590,43591,46236,49249,51982,51983,51984,51985,51986,51987,51988,51989,51990,51991,51992,51993,51994,51995,51996,51997,51998,51999,52000,52001,52002,52003,52004,52006,52007,52008,52009,52010,52011,52012,52013,52014,52015,52016,52017,52018)
+
+diat_4_data <- get_datasets(diat_4)
+
+diat_4_dl <- get_downloads(diat_4_data)
+
+diat_4_pc <- pc_abun(diat_4_dl)
+
+diat_4_taxa <- diat_4_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+#Aulacoseira lirata is present as synonym Melosira lirata in this dataset
+diat_4_taxa_1 <- diat_4_pc %>%
+dplyr::filter(taxa == "Melosira lirata")
+
+#Neither genus of this species (Aulicoseira or Melosira) is explicitly defined in this dataset
+diat_4_taxa_2 <- diat_4_pc %>%
+dplyr::filter(taxa == "Melosira granulata")
+
+diat_4_taxa_3 <- diat_4_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_9 <- c(44764,44765,44766,44767,44768,44769,44770,44771,44772,44773,44774,44775,44776,44777,44778,44779,44780,44781,44782,44783,44784,44785,44786,44787,44788,44789,44790,44791,44792,44793,44794,44795,44796,44797,44798,44799,44800,44801,44802,44803,44804,44805,44806,44807,44808,44809,44810,44811,44812,44813,44814,44815,44816,44817,44818,44819,44820,44821,44822,44823,44824,44825)
+
+diat_9_data <- get_datasets(diat_9)
+
+diat_9_dl <- get_downloads(diat_9_data)
+
+diat_9_pc <- pc_abun(diat_9_dl)
+
+diat_9_taxa <- diat_9_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+#Aulacoseira lirata is present as synonym Melosira lirata in this dataset
+diat_9_taxa_1 <- diat_9_pc %>%
+dplyr::filter(taxa == "Melosira lirata")
+
+#Aulacoseira granulata is present as synonym Melosira granulata in this dataset
+diat_9_taxa_2 <- diat_9_pc %>%
+dplyr::filter(taxa == "Melosira granulata")
+
+diat_9_taxa_3 <- diat_9_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+#############################################################################
+diat_15 <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
+
+diat_15_data <- get_datasets(diat_15)
+
+diat_15_dl <- get_downloads(diat_15_data)
+
+diat_15_pc <- pc_abun(diat_15_dl)
+
+diat_15_taxa <- diat_15_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_15_taxa_1 <- diat_15_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_15_taxa_2 <- diat_15_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_15_taxa_3 <- diat_15_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#percent_abun_taxa_map <- plotLeaflet2(diat_15_sites, df_with_count_pct = diat_15_taxa)
+
+#############################################################################
+diat_21 <- c(19321,19394,19400,19327,19329,19331,19333,19335,19337,19339,19402,19340,19404,19342,19344,19409,19346,19406,19411,19412,19415,19417)
+
+diat_21_data <- get_datasets(diat_21)
+
+diat_21_dl <- get_downloads(diat_21_data)
+
+diat_21_pc <- pc_abun(diat_21_dl)
+
+diat_21_taxa <- diat_21_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_21_taxa_1 <- diat_15_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_21_taxa_2 <- diat_15_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_21_taxa_3 <- diat_15_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+
+#############################################################################
+diat_22 <- c(19363,19364,19365,19366,19367,19368,19369,19370,19371,19372,19373,19374,19375,19376,19377,19382,19426,19431,19434,19437,19442,19445,19446,19447,19448,19449,19450,19451,19452,19453,19454,19455,19456,19457,19458,19459,19460,19461,19462,19463,19464,19473,19474,19477,19480,19483,19486,19489,19490,19491,19492,19505,19506,19507,19508,19509,19510,19511,19514,19517,19520,19523)
+
+diat_22_data <- get_datasets(diat_22)
+
+diat_22_dl <- get_downloads(diat_22_data)
+
+diat_22_pc <- pc_abun(diat_22_dl)
+
+diat_22_taxa <- diat_22_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_22_taxa_1 <- diat_22_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_22_taxa_2 <- diat_22_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_22_taxa_3 <- diat_22_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+#############################################################################
+diat_23 <- c(19872,19873,19876,19878,19880,19881,19882,19884,19886,19888,19890,19892,19894,19896)
+
+diat_23_data <- get_datasets(diat_23)
+
+diat_23_dl <- get_downloads(diat_23_data)
+
+diat_23_pc <- pc_abun(diat_23_dl)
+
+diat_23_taxa <- diat_23_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_23_taxa_1 <- diat_23_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_23_taxa_2 <- diat_23_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_23_taxa_3 <- diat_23_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+#############################################################################
+diat_24 <- c(19531,19535,19541,19545,19549,19555,19559,19563,19567,19571,19577,19579,19581,19594,19596,19598,19600,19602,19604,19606,19608,19610,19612,19614,19622,19624,19626,19628,19630,19632,19634,19636,19638,19640,19644,19650,19654,19656,19660,19664,19666,19668,19670,19672,19676,19678,19680,19682,19684)
+
+diat_24_data <- get_datasets(diat_24)
+
+diat_24_dl <- get_downloads(diat_24_data)
+
+diat_24_pc <- pc_abun(diat_24_dl)
+
+diat_24_taxa <- diat_24_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_24_taxa_1 <- diat_24_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_24_taxa_2 <- diat_24_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_24_taxa_3 <- diat_24_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+#############################################################################
+diat_26 <- c(19720,19722,19724,19726,19727,19729,19731,19733,19735,19736,19737,19738,19739,19740,19741,19742,19743,19745,19747,19749,19751,19752,19753,19754,19755,19757,19758,19759,19760,19761,19764,19767,19768,19769,19770,19771,19772,19773,19774,19775,19776,19777)
+
+diat_26_data <- get_datasets(diat_26)
+
+diat_26_dl <- get_downloads(diat_26_data)
+
+diat_26_pc <- pc_abun(diat_26_dl)
+
+diat_26_taxa <- diat_26_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_26_taxa_1 <- diat_26_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_26_taxa_2 <- diat_26_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_26_taxa_3 <- diat_26_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+#############################################################################
+diat_32 <- c(49957,49958,49959,49960,49961,49962,49963,49964,49967,49968,49969,49970,49971)
+
+diat_32_data <- get_datasets(diat_32)
+
+diat_32_dl <- get_downloads(diat_32_data)
+
+diat_32_pc <- pc_abun(diat_32_dl)
+
+diat_32_taxa <- diat_32_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_32_taxa_1 <- diat_32_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_32_taxa_2 <- diat_32_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_32_taxa_3 <- diat_32_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_33 <- c(50077,50078,50079,50080,50081,50082,50083,50084,50085,50086,50087,50088,50089,50090,50091,50092,50093,50094,50095,50097,50098,50099,50100,50101,50102,50103,50104,50105,50106,50107,50108,50109,50110,50111,50112,50113)
+
+diat_33_data <- get_datasets(diat_33)
+
+diat_33_dl <- get_downloads(diat_33_data)
+
+diat_33_pc <- pc_abun(diat_33_dl)
+
+diat_33_taxa <- diat_33_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_33_taxa_1 <- diat_33_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_33_taxa_2 <- diat_33_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_33_taxa_3 <- diat_33_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_34 <- c(50193,50194,50195,50196,50197,50198,50199,50200,50201,50202,50203,50204,50205,50206,50207,50208)
+
+diat_34_data <- get_datasets(diat_34)
+
+diat_34_dl <- get_downloads(diat_34_data)
+
+diat_34_pc <- pc_abun(diat_34_dl)
+
+diat_34_taxa <- diat_34_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_34_taxa_1 <- diat_34_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_34_taxa_2 <- diat_34_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_34_taxa_3 <- diat_34_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_35 <- c(50213,50214,50209,50210,50211,50212)
+
+diat_35_data <- get_datasets(diat_35)
+
+diat_35_dl <- get_downloads(diat_35_data)
+
+diat_35_pc <- pc_abun(diat_35_dl)
+
+diat_35_taxa <- diat_35_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_35_taxa_1 <- diat_35_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_35_taxa_2 <- diat_35_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_35_taxa_3 <- diat_35_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_36 <- c(50156,50157,50158,50159,50160,50161,50162,50163)
+
+diat_36_data <- get_datasets(diat_36)
+
+diat_36_dl <- get_downloads(diat_36_data)
+
+diat_36_pc <- pc_abun(diat_36_dl)
+
+diat_36_taxa <- diat_36_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_36_taxa_1 <- diat_36_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_36_taxa_2 <- diat_36_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_36_taxa_3 <- diat_36_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+
+#############################################################################
+diat_37 <- c(42748,42780,42844,42825,42798,42757,42749,42779,42828,42853,42796,42818,42812,42819,42777,42788,42754,42768,42799,42785,42759,42778,42787,42756,42753,42776,42850,42800,42843,42766,42822,42802,42817,42815,42811,42814,42807,42793,42755,42760,42835,42765,42792,42842,42772,42771,42840,42849,42761,42805,42804,42763,42762,42810,42784,42833,42809,42752,42808,42820,42783,42790,42782,42837,42797,42758,42827,42764,42795,42789,42767,42816,42829,42826,42839,42836,42750,42830,42848,42831,42847,42770,42834,42824,42794,42781,42823,42821,42786,42851,42846,42813,42806,42769,42775,42832,42791,42801,42852,42838,42841,42751,42803,42845)
+
+diat_37_data <- get_datasets(diat_37)
+
+diat_37_dl <- get_downloads(diat_37_data)
+
+diat_37_pc <- pc_abun(diat_37_dl)
+
+diat_37_taxa <- diat_37_pc %>%
+filter(, grepl("crotonensis", taxa, fixed = TRUE))
+
+diat_37_taxa_1 <- diat_37_pc %>%
+dplyr::filter(taxa == "Aulacoseira lirata")
+
+diat_37_taxa_2 <- diat_37_pc %>%
+dplyr::filter(taxa == "Aulacoseira granulata")
+
+diat_37_taxa_3 <- diat_37_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+##############################################################################
+############################################################################################################################################################################################################################################################################################################################
+
+#manipulating data that was defined in the previous code above in this chunk^
+
+#combining all of the count data (defined above) from each agg dataset to one dataframe
+#Fragilaria crotonensis
+alltaxa <- rbind(diat_1_taxa, diat_4_taxa, diat_9_taxa, diat_15_taxa, diat_21_taxa, diat_22_taxa, diat_23_taxa, diat_24_taxa, diat_26_taxa, diat_32_taxa, diat_33_taxa, diat_34_taxa, diat_35_taxa, diat_36_taxa, diat_37_taxa)
+
+alltaxa_test <- aggregate(alltaxa$count_pct ~ alltaxa$siteid + alltaxa$lat + alltaxa$long, data = alltaxa, FUN = mean)
+
+colnames(alltaxa_test_1) <- c("siteid", "lat", "long", "count_pct")
+
+alltaxa_test <- arrange(alltaxa_test_1,siteid)
+
+diat_sites_all <- get_sites(alltaxa_test_1$siteid)
+
+croto_abun_taxa_map_1 <- plotLeaflet2(diat_sites_all_1, df_with_count_pct = alltaxa_test_1, title = "Fragilaria crotonensis % Abundance")
+
+#Aulacoseira lirata
+alltaxa_1 <- rbind(diat_1_taxa_1, diat_4_taxa_1, diat_9_taxa_1, diat_15_taxa_1, diat_21_taxa_1, diat_22_taxa_1, diat_23_taxa_1, diat_24_taxa_1, diat_26_taxa_1, diat_32_taxa_1, diat_33_taxa_1, diat_34_taxa_1, diat_35_taxa_1, diat_36_taxa_1, diat_37_taxa_1)
+
+alltaxa_1_test_1 <- aggregate(alltaxa_1$count_pct ~ alltaxa_1$siteid + alltaxa_1$lat + alltaxa_1$long, data = alltaxa_1, FUN = mean)
+
+colnames(alltaxa_1_test_1) <- c("siteid", "lat", "long", "count_pct")
+
+alltaxa_1_test_1 <- arrange(alltaxa_1_test_1,siteid)
+
+diat_sites_all_1_1 <- get_sites(alltaxa_1_test_1$siteid)
+
+croto_abun_taxa_map_1_1 <- plotLeaflet2(diat_sites_all_1_1, df_with_count_pct = alltaxa_1_test_1, title = "Aulacoseira lirata % Abundance")
+
+#Aulicoseira granulata
+alltaxa_2 <- rbind(diat_1_taxa_2, diat_4_taxa_2, diat_9_taxa_2, diat_15_taxa_2, diat_21_taxa_2, diat_22_taxa_2, diat_23_taxa_2, diat_24_taxa_2, diat_26_taxa_2, diat_32_taxa_2, diat_33_taxa_2, diat_34_taxa_2, diat_35_taxa_2, diat_36_taxa_2, diat_37_taxa_2)
+
+alltaxa_2_test_1 <- aggregate(alltaxa_2$count_pct ~ alltaxa_2$siteid + alltaxa_2$lat + alltaxa_2$long, data = alltaxa_2, FUN = mean)
+
+colnames(alltaxa_2_test_1) <- c("siteid", "lat", "long", "count_pct")
+
+alltaxa_2_test_1 <- arrange(alltaxa_2_test_1,siteid)
+
+diat_sites_all_2_1 <- get_sites(alltaxa_2_test_1$siteid)
+
+croto_abun_taxa_map_2_1 <- plotLeaflet2(diat_sites_all_2_1, df_with_count_pct = alltaxa_2_test_1, title = "Aulacoseira granulata % Abundance")
+
+#Eunotia exigua
+alltaxa_3 <- rbind(diat_1_taxa_3, diat_4_taxa_3, diat_9_taxa_3, diat_15_taxa_3, diat_21_taxa_3, diat_22_taxa_3, diat_23_taxa_3, diat_24_taxa_3, diat_26_taxa_3, diat_32_taxa_3, diat_33_taxa_3, diat_34_taxa_3, diat_35_taxa_3, diat_36_taxa_3, diat_37_taxa_3)
+
+alltaxa_3_test_1 <- aggregate(alltaxa_3$count_pct ~ alltaxa_3$siteid + alltaxa_3$lat + alltaxa_3$long, data = alltaxa_3, FUN = mean)
+
+colnames(alltaxa_3_test_1) <- c("siteid", "lat", "long", "count_pct")
+
+alltaxa_3_test_1 <- arrange(alltaxa_3_test_1,siteid)
+
+
+diat_sites_all_3_1 <- get_sites(alltaxa_3_test_1$siteid)
+
+croto_abun_taxa_map_3_1 <- plotLeaflet2(diat_sites_all_3_1, df_with_count_pct = alltaxa_3_test_1, title = "Eunotia exigua % Abundance")
+
+croto_abun_taxa_map_3 <- plotLeaflet2(diat_sites_all_3, df_with_count_pct = taxa_table_all_3, title = "Eunotia exigua % Abundance")
+
+###########################################################################
+#EVERYTHING BELOW HERE IS LEFTOVER CODE
+
+#THIS CODE ONLY CHOOSES 1ST SAMPLE IN A SITEID, THIS SHOULD BE DIFFERENT LATER
+taxa_table_all <- (alltaxa[!duplicated(alltaxa$siteid),])
+
+
+all_diat_dls <- c(diat_1_dl, diat_4_dl, diat_9_dl, diat_15_dl, diat_21_dl, diat_22_dl, diat_23_dl, diat_24_dl, diat_26_dl, diat_32_dl, diat_33_dl, diat_34_dl, diat_35_dl, diat_36_dl, diat_37_dl)
+
+all_diat_datasetids <- c(diat_1, diat_4, diat_9, diat_15, diat_21, diat_22, diat_23, diat_24, diat_26, diat_32, diat_33, diat_34, diat_35, diat_36, diat_37) 
+
+#trying to make the above into a function
+#not complete, doesn't work
+getall_dl <- function(diat_datasetids) {
+  count_data <- sapply(diat_datasetids, function(x) {
+    data <- get_datasets(x)
+    dl <- get_datasets(data)
+    samp <- samples(dl)
+  })
+}
+  
+#############################
+
+
+testy <- samples(diat_15_dl) %>%
+filter(, grepl("stelligera", variablename, fixed = TRUE))
+
+testy2 <- testy %>%
+dplyr::filter(taxonid == 13088)
+
+final <- testy2$siteid %>%
+  get_sites() %>%
+  plotLeaflet()
+```
+```{R plotting total Ph in WC against taxa % abundance}
+#using: Aggregate Datasets - Diatoms -  EMAP NE SW Neotoma (version 1)
+#sheet: Northeast combined wWC 28Apr22
+#only using sites that have both a WC and DIAT datasetid
+
+wc_diat_1 <- c(45824,45825,45826,45827,45828,45829,45830,45831,45832,45833,45834,45835,45836,45837,45838,45839,45840,45841,45842,45843,45844,45845,45846,45847,45848,45849,45850,45851,45852,45853,45854,45855,45856,45857,45858,45859,45860,45861,45862,45863,45864,45865,45866,45867,45868,45869,45870,45871,45872,45873,45874,45875,45876,45877,45878,45879,45880,45881,45882,45883,45884,45885,45886,45887,45888,45889,45890,45891,45961,45962,45963,45964,45965,45966,45967,45968,45969,45970,45971,45972,45973,45974,45975,45976,45977,45978,45979,45980,45981,45982,45983,45984,45985,45986,45987,45988,45989,45990,45991,45992,45993,45994,45995,45996,45997,45998,45999,46000,46001,46002,46003,46004,46005,46006,46007,46008,46009,46010,46011,46012,46013,46014,46015,46016,46017,46018,46019,46020,46021,46022,46023,46024,46025,46026,46027,46028,46029,46030,46031,46032,46033,46034,46035,46036,46037,46038,46039,46040,46041,46042,46043,46044,46045,46046,46047,46048,46049,46050,46051,46052,46053,46054,46055,46056,46057,46058,46059,46060,46061,46062,46063,46064,46065,46066,46067,46068,46069,46070,46071,46072,46073,46074,46075,46076,46077,46078,46079,46080,46081,46082,46083,46084,46085,46086,46087,46088,46089,46090,46091,46092,46093,46094,46095,46096,46097,46098,46099,46100,46101,46102,46103,46104,46105,46106,46107,46108,46109,46110,46111,46112,46113,46114,46115,46116,46117,46118,46119,46120,46121,46122,46123,46124,46125,46126,46127)
+
+diat_1_new <- c(49022,49023,49024,49025,49026,49027,49028,49029,49030,49031,49032,49033,49034,49035,49036,49037,49038,49039,49040,49041,49042,49043,49044,49045,49046,49661,49662,49663,49664,49665,49666,49667,49668,49669,49670,49671,49672,49673,49674,49675,49676,49677,49678,49679,49680,49681,49682,49683,49684,49685,49688,49689,49690,49691,49692,49693,49694,49695,49696,49697,49698,49699,49700,49701,49702,49703,49704,49705,49706,49707,49708,49709,49710,49711,49712,49713,49714,49715,49716,49717,49718,49719,49720,49721,49722,49723,49724,49725,49726,49727,49728,49729,49730,49731,49732,49733,49734,49735,49736,49737,49738,49739,49740,49741,49742,49745,49746,49747,49748,49749,49750,49751,49752,49753,49754,49755,49756,49757,49758,49760,49761,49762,49763,49764,49765,49766,49767,49768,49769,49772,49773,49774,49775,49776,49777,49778,49779,49780,49781,49782,49783,49784,49785,49786,49787,49788,49789,49790,49791,49792,49793,49794,49795,49796,49797,49798,49799,49800,49801,49802,49803,49804,49805,49806,49807,49808,49809,49810,49811,49812,49813,49814,49815,49816,49817,49818,49819,49820,49821,49822,49823,49824,49825,49826,49827,49828,49829,49830,49831,49832,49833,49834,49835,49836,49837,49838,49839,49840,49841,49842,49843,49844,49845,49846,49847,49848,49849,49850,49851,49852,49853,49854,49855,49856,49857,49859,49860,49861,49862,49863,49864,49865,49866,49867,49868,49869,49870,49871,49872,49873,49874,49875,49876,49877,49878)
+#############################################################################
+wc_diat_9 <- c(44830,44831,44832,44833,44834,44835,44836,44837,44838,44839,44840,44841,44842,44843,44844,44845,44846,44847,44848,44849,44850,44851,44852,44853,44854,44855,44856,44857,44859,44860,44861,44862,44863,44864,44865,44866,44867,44868,44869,44870,44871,44872,44873,44874,44875,44876,44877,44878,44879,44880,44881,44882,44883,44884,44885,44886,44887,44888,44889,44890,44891,44892)
+
+diat_9_new <- c(44830,44831,44832,44833,44834,44835,44836,44837,44838,44839,44840,44841,44842,44843,44844,44845,44846,44847,44848,44849,44850,44851,44852,44853,44854,44855,44856,44857,44859,44860,44861,44862,44863,44864,44865,44866,44867,44868,44869,44870,44871,44872,44873,44874,44875,44876,44877,44878,44879,44880,44881,44882,44883,44884,44885,44886,44887,44888,44889,44890,44891,44892)
+#############################################################################
+wc_diat_21 <- c(19320,19393,19399,19326,19328,19330,19332,19334,19336,19338,19401,19691,19403,19341,19343,19345,19405,19410,19416)
+
+diat_21_new <- c(19321,19394,19400,19327,19329,19331,19333,19335,19337,19339,19402,19340,19404,19342,19344,19346,19406,19411,19417)
+#############################################################################
+wc_diat_23 <- c(19871,19874,19875,19877,19879,19879,19879,19883,19885,19887,19889,19891,19893,19895)
+
+diat_23_new <- c(19872,19873,19876,19878,19880,19881,19882,19884,19886,19888,19890,19892,19894,19896)
+#############################################################################
+wc_diat_24 <- c(19530,19534,19540,19544,19548,19554,19558,19562,19566,19570,19576,19578,19580,19593,19595,19597,19599,19601,19603,19605,19607,19609,19611,19613,19621,19623,19625,19627,19629,19631,19633,19635,19637,19639,19643,19648,19653,19655,19659,19663,19665,19667,19669,19671,19675,19677,19679,19681,19683)
+
+diat_24_new <- c(19531,19535,19541,19545,19549,19555,19559,19563,19567,19571,19577,19579,19581,19594,19596,19598,19600,19602,19604,19606,19608,19610,19612,19614,19622,19624,19626,19628,19630,19632,19634,19636,19638,19640,19644,19650,19654,19656,19660,19664,19666,19668,19670,19672,19676,19678,19680,19682,19684)
+#############################################################################
+wc_diat_32 <- c(51856,51859,51868,51869,51876,51877,51878,51891,51892,51896,51897,51900,51902)
+
+diat_32_new <- c(49957,49958,49959,49960,49961,49962,49963,49964,49967,49968,49969,49970,49971)
+#############################################################################
+wc_diat_34 <- c(51857,51861,51862,51865,51866,51868,51870,51872,51873,51874,51884,51886,51887,51888,51890,51893)
+
+diat_34_new <- c(50193,50194,50195,50196,50197,50198,50199,50200,50201,50202,50203,50204,50205,50206,50207,50208)
+#############################################################################
+wc_diat_35 <- c(51885,51899,51858,51867,51871,51901)
+
+diat_35_new <- c(50213,50214,50209,50210,50211,50212)
+#############################################################################
+wc_diat_36 <- c(51860,51863,51864,51879,51880,51883,51894,51898)
+  
+diat_36_new <- c(50156,50157,50158,50159,50160,50161,50162,50163)  
+#############################################################################
+wc_diat_4 <- c(43076,43089,43099,43125,43130,43139,43176,43074,43075,43077,43081,43085,43092,43093,43094,43095,43100,43104,43105,43109,43110,43114,43116,43118,43120,43121,43133,43137,43143,43168,43173,43175,43179,43124,43153,43090,43126,43134,43180,43158,43080,43082,43142,43083,43096,43101,43106,43129,43131,43138,43185,43086,43157,43190,43087,43088,43091,43097,43102,43103,43107,43108,43127,43111,43115,43117,43119,43122,43123,43136,43140,43141,43144,43166,43165,43167,43170,43169,43174,43182,43184,43187,43188,43152,43155,43156,43159,43160,43162,43164)
+
+diat_4_new <- c(29964,30358,30735,30949,31878,31882,31958,40402,40403,40404,40455,40456,40457,40458,40459,40460,40461,40462,40463,40464,40465,40466,40467,40468,40469,40470,40471,40473,40474,40475,40476,40477,40478,40479,40480,43514,43515,43516,43518,43519,43526,43527,43528,43583,43584,43585,43586,43587,43588,43589,43590,43591,46236,49249,51982,51983,51984,51985,51986,51987,51988,51989,51990,51991,51992,51993,51994,51995,51996,51997,51998,51999,52000,52001,52002,52003,52004,52006,52007,52008,52009,52010,52011,52012,52013,52014,52015,52016,52017,52018)
+#############################################################################
+wc_diat_15 <- c(43406,43241,42916,42918,42921,42922,42932,42943,42959,42960,42962,42985,42987,42988,42991,42995,43010,43016,43019,43020,43023,43315,43026,43315,43026,43027,43408,43379,43493,43351,43253,43055,43472,43256,43236,43410,43310,42930,43029,43033,43035,43038,43047,43049,43053,43060,43061,43064,43065,43068,43197,43215,43230,43239,43244,43258,43264,43265,43268,43269,43270,43271,43276,43282,43308,43317,43337,43343,43346,43362,43363,43364,43367,43382,43383,43391,43399,43400,43411,43415,43418,43427,43430,43440,43450,43454,43460,43462,43466,43476,43481,43486,43487,43499,43501,43503,43506,43553,43554)
+
+diat_15_new <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
+
+
+#TRYING TO PLOT, INITIALLY ONLY USING AGG DATASET #15
+wc_diat_15_data <- get_datasets(wc_diat_15)
+wc_diat_15_dl <- get_downloads(wc_diat_15_data)
+wc_diat_15_ph <- samples(wc_diat_15_dl) %>%
+  dplyr::filter(variablename == "Total Phosphorus (unfiltered)")
+
+wc_diat_15_ph <- data.frame(wc_diat_15_ph$datasetid, wc_diat_15_ph$siteid, wc_diat_15_ph$sitename, wc_diat_15_ph$units, wc_diat_15_ph$value, wc_diat_15_ph$variablename)
+
+colnames(wc_diat_15_ph) <- c("datasetid","siteid", "sitename", "units", "value", "variablename")
+
+wc_diat_15_ph <- arrange(wc_diat_15_ph,siteid)
+
+diat_15_taxa_3 <- diat_15_pc %>%
+  dplyr::filter(taxa == "Eunotia exigua")
+
+diat_15_taxa_3 <- arrange(diat_15_taxa_3,siteid)
+
+test <- subset(wc_diat_15_ph, wc_diat_15_ph$siteid %in% diat_15_taxa_3$siteid)
+
+x_phos <- test$value
+y_abun <- diat_15_taxa_3$count_pct
+
+phos_vs_abun <- plot(x_phos,y_abun,
+   xlab = "Total Phosphorus (µg/L)",
+   ylab = "% Abundance",
+   main = "Total Phosphorus vs. Eunotia exigua % Abundance")
+
+x_phos_no_190 <- x_phos[-16]
+y_abun_no_190 <- y_abun[-16]
+
+eye2 <- plot(x_phos_no_190, y_abun_no_190, xlab = "Total Phosphorus (µg/L)", ylab = "% Abundance", main = "Total Phosphorus vs. Eunotia exigua % Abundance")
+
+
+diat_15_dl <- get_downloads(diat_15_data)
+```
+
+
+```{R function for above^^^}
+
+```
+
+```{R siteSpatialSearch 2}
+diat_24<- c(19531,19535,19541,19545,19549,19555,19559,19563,19567,19571,19577,19579,19581,19594,19596,19598,19600,19602,19604,19606,19608,19610,19612,19614,19622,19624,19626,19628,19630,19632,19634,19636,19638,19640,19644,19650,19654,19656,19660,19664,19666,19668,19670,19672,19676,19678,19680,19682,19684)
+
+diat_24_data <- get_datasets(diat_24)
+
+diat_24_dl <- get_downloads(diat_24_data)
+
+view(samples(diat_24_dl))
+
+
+hey <- samples(diat_24_dl) %>%
+filter(, grepl("stelligera", variablename, fixed = TRUE))
+
+hey2 <- hey %>%
+dplyr::filter(taxonid == 13088)
+view(hey2)
+data.frame(hey$siteid, hey$sitename, hey$value, hey$variablename)
+
+
+
+
+#making the above a function
+taxa_mapping <- function(dl, taxa) {
+samp <- samples(diat_24_dl) %>%
+filter(, grepl("stelligera", variablename, fixed = TRUE))
+
+hey2 <- hey %>%
+dplyr::filter(taxonid == 13088)
+view(hey2)
+
+#seperate
+view(pc_abun(diat_24_dl))
+``` 
+
+```{R abundance leaflet for one site (initial code)}
+#Using custom function: plotLeaflet2
+#only using NLA_2007
+####this chunk (all the way to the below hashes) includes how to make a percent
+####abundance taxa map
+diat_15 <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
+
+diat_15_data <- get_datasets(diat_15)
+
+diat_15_dl <- get_downloads(diat_15_data)
+
+diat_15_pc <- pc_abun(diat_15_dl)
+
+umm <- diat_15_pc %>%
+dplyr::filter(taxa == "Discostella pseudostelligera")
+
+umm_sites <- get_sites(umm$siteid)
+
+percent_abun_taxa_map <- plotLeaflet2(umm_sites, df_with_count_pct = umm)
+
+##################################################################3
+
+
+```
+
+
+
+
+
 ```{R MasterListTaxa, eval=FALSE}
 #code taken from `get_table()` documentation
 #doesn't seem to work
@@ -221,7 +861,7 @@ write.csv(final, file = "NLA_states_csv.csv")
 #Agg #15
 #Handle: NLA-2007
 library(readxl)
-NLA_states_excel <- read_excel("NLA_states_excel.xlsx", 
+NLA_states_excel <- read_excel("C:/Users/eco37/Desktop/NLA_states_excel.xlsx", 
                                col_types = c("numeric", "text", "text", 
                                              "text", "numeric", "text", "numeric", 
                                              "text", "text", "text", "text", "text", 
@@ -237,8 +877,9 @@ NE_NLA_sites <- get_sites(NE_NLA_ids)
 
 #using modified plotLeaflet, found locally in "Custom Functions"
 NE_map <- plotLeaflet(NE_NLA_sites)
-
 ```
+
+
 ```{r plotting another dataset ontop of another function}
 #data obtained from Diatom Aggregate Dataset
 #ids = siteids
@@ -289,7 +930,7 @@ NE_map <- add_dataset_leaflet(EMAP_NE1_ids, previousmap = NE_map, circlecolor = 
 
 ADK_CAL_ids <- c(17800,17990,720,14223,18648,18650,18688,710,711,712,23410,713,716,715,717,718,721,722,723,724,725,726,727,728,729,730,736,737,739,740,741,742,743,734,22911,17914,735,714,732,24460,744,746,24431,24432,24466,24433,24439,24442,24445,24458,24459,24463,24495,24435,24477,745,24436,24437,24438,24440,24443,24444,24446,24447,24456,24448,24451,24452,24453,24454,24455,24462,24464,24465,24467,24483,24482,24484,24486,24485,24489,24492,24494,13539,24497,24473,24475,24476,24478,24479,16574,24481)
 
-NE_map <- add_dataset_leaflet(ADK_CAL_ids, previousmap = NLA_EMAP_NE1, circlecolor = '#ffff00')
+NE_map <- add_dataset_leaflet(ADK_CAL_ids, previousmap = NE_map, circlecolor = '#ffff00')
 
 ```
 ```{r plotting another dataset ontop of another 5}
@@ -304,21 +945,69 @@ NE_map <- add_dataset_leaflet(NENGPIRL_ids, previousmap = NE_map, circlecolor = 
 
 ```{r plotting another dataset ontop of another 6}
 #data obtained from Diatom Aggregate Dataset
-#Agg #24
-#Handle: NJ-PAL10
+#Agg #24, 26 (25 missing from combined ?)
+#Handle: NJ-PAL10, NJ_PAL14
 
 NJ_PAL10_ids <- c(13158,13160,13163,13165,13167,13170,13172,13174,13176,13178,13181,13182,13183,13190,13191,13192,13193,13194,13195,13196,13197,13198,13199,13200,13201,13202,13203,13204,13205,13206,13207,13208,13209,13210,13211,13212,13213,13214,13215,13216,13217,13218,13219,13220,13222,13223,13224,13225,13226)
 
-NE_map <- add_dataset_leaflet(NJ_PAL10_ids, previousmap = NE_map, circlecolor = '#9900ff')
+NJ_PAL14_ids <- c(13241,13232,13242,13178,13243,13244,13202,13203,13209,13245,13246,13215,13247,13219,13223,13224,13225,13248,13249,13250,13251,13252,13253,13254,13255,13256,13257,13258,953,13259,13261,13263,13264,13265,13266,13267,13268,13269,13270,13271,13272,13273)
+
+NJ_ids <- c(NJ_PAL10_ids,NJ_PAL14_ids)
+
+NE_map <- add_dataset_leaflet(NJ_ids, previousmap = NE_map, circlecolor = '#9900ff')
 ```
+
+```{r plotting another dataset ontop of another 7}
+#data obtained from Diatom Aggregate Dataset
+#Agg #23
+#Handle: GG-PONDS
+GGreener_ids <- c(13317,13318,13319,13320,13321,13322,13323,13324,13325,13326,13327,13328,13329,13330)
+
+NE_map <- add_dataset_leaflet(GGreener_ids, previousmap = NE_map, circlecolor = '#ff9900')
+
+```
+
+```{r plotting another dataset ontop of another 8}
+#data obtained from Diatom Aggregate Dataset
+#Agg #32, 33, 34, 35, 36
+#Handle: VT-REF11, VT-NLA12, VT-LA13, VT-1W14, VT-OL18
+VT_ids <- c(8587,24372,24369,24363,24362,24360,24368,24367,24366,24370,24365,24371,24364,25901,13132,27816,27817,27818,24369,24417,27819,27820,13049,27821,27822,27823,13142,27824,27825,27829,26467,27826,27827,24417,27828,27796,27797,27798,27799,24583,27800,26449,27801,26224,27716,27717,27718,27719,27720,27721,27722,26274,24417,27723,27724,27725,13049,27726,24355,27727,27728,27729,27730,27731,24537,27732,24356,27733,13580,27734,27735,23152,27736,27737,24706,27738,27739,27740,27741)
+
+NE_map <- add_dataset_leaflet(VT_ids, previousmap = NE_map, circlecolor = '#000000')
+
+```
+
+
+```{r plotting another dataset ontop of another 9}
+#data obtained from Diatom Aggregate Dataset
+#Agg #21
+#Handle: NJ-NY-PL
+
+NJ_NY_PL_ids <- c(13027,13067,13028,13029,13030,13031,13032,13033,13034,13035,13070,13036,13071,13037,13038,13074,13039,13072,13075,13076,13078,13080)
+
+NE_map <- add_dataset_leaflet(NJ_NY_PL_ids, previousmap = NE_map, circlecolor = '#00ffff')
+
+```
+
+```{r plotting another dataset ontop of another 10}
+#data obtained from Diatom Aggregate Dataset
+#Agg #22
+#Handle: NE-PALEO
+
+NE_PALEO_ids <- c(13045,13046,13047,13048,13049,13050,13051,13052,1688,13053,13054,13055,13056,13057,13058,13061,13084,13087,1697,13090,13093,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13119,13120,13122,13124,13126,13128,13130,13131,13132,13133,13140,13141,13142,13143,13144,13145,13146,13148,13150,13152,13154)
+
+NE_map <- add_dataset_leaflet(NE_PALEO_ids, previousmap = NE_map, circlecolor = '#663300')
+
+```
+
 ```{r leaflet legend}
 #data obtained from Diatom Aggregate Dataset
 
 NE_map <- NE_map %>% addLegend("bottomright", 
   #colors used in circle markers above
-  colors =c("#03F", "#ff3333", "#ffff00", "#00cc00", "#9900ff"),
-  labels= c("NLA-2007","EMAP_NE1","ADK-CAL","NENGPIRL","NJ-PAL10"),
-  title= "NE Aggregate Datasets w/ WC",
+  colors =c("#03F", "#ff3333", "#ffff00", "#00cc00", "#9900ff", '#ff9900', '#000000', '#00ffff', '#663300'),
+  labels= c("NLA-2007","EMAP_NE1","ADK-CALIBR","NENG-PIRLA","NJ-PALEO", "GG-PONDS", "VT-PALEO", "NJ-NY-PALEO", "NE-PALEO"),
+  title= "NE Diatom Surface Samples",
   opacity = 1)
 
 ```
@@ -336,14 +1025,4 @@ NE_map <- NE_map %>% addLegend("bottomright",
 abitibi_ids <- c(27905,27906,27907,27908,27909,27910,27911,27912,27913,27914,27915,27916,27917,27918,27919,27920,27921,27922,27923,27924,27925,27926,27927,27928,27929,27930,27931,27932,27933,27934,27935,27936,27937,27938,27939,27940,27941,27942,27943,27944,27945,27946)
 
 NE_map <- add_dataset_leaflet(abitibi_ids, previousmap = x, circlecolor = 'x')
-```
-
-```{r plotting another dataset ontop of another ...}
-#data obtained from Diatom Aggregate Dataset
-#Agg #23
-#Handle: GG-PONDS
-GGreener_ids <- c(13317,13318,13319,13320,13321,13322,13323,13324,13325,13326,13327,13328,13329,13330)
-
-NE_map <- add_dataset_leaflet(GGreener_ids, previousmap = x, circlecolor = 'x')
-
 ```
