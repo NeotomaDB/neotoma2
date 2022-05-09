@@ -84,7 +84,10 @@ This section describes ways of searching the Neotoma database to find `sites` an
 
 ### Find sites
 
-Use the `get_sites` or `get_datasets` functions to find sites and related information.  Both functions return essentially the same information, but searches using siteid or sitename can only be done using `get_sites`.
+Use the `get_sites()` or `get_datasets()` functions to find sites and related information. Searches using siteid or sitename can be done using `get_sites()`. Searches using dataset information (such as age, location, dataset type, etc.) can be done using `get_downloads()`. 
+
+The information returned by the both functions are similar, but still notably different. The level of detail in `get_datasets()` is different as it includes: agerange, database , datasettype , datasetnotes . These fields are not in `get_sites()`
+
 Both functions can be used to search for information on a single or multiple sites. The functions are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
 
 #### `get_sites` function
@@ -152,15 +155,16 @@ my_sites
 
 Example of get_sites by location with bounding box of lat & longs.  Same code works with `get_datasets()` as well as `get_sites()`.
 
-SIMON and SOCORRO - Some sites returned are outside the bounding box.  Does loc work?  Do we need to use a different format to specify location?
-
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  
 northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
 neus <- sf::st_polygon(list(northeastUS))
 
-#As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
+# The above code also works with: 
+# northeastUS <- c(-80, -65, 48, 40)
+
+#As the default, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
 neUSsites <- get_datasets(loc = neus, limit = 10)
 
 neUSsites
@@ -187,7 +191,7 @@ Find datasets using the `get_datasets` function
 
 x is an optional value that represents an object with numeric dataset ID(s). It can be a single datasetid, an array with multiple IDs, or an object created using get_sites.
 
-**Values returned:** A `sites` object plus a dataframe with location information the same as that produced by the get_sites function. The `sites` object provides more detailed information than the `sites` object returned by the `get_sites()` function.
+**Values returned:** A (more detailed) `sites` object that includes datasettype, dataset notes and dataset age range.
 
 ##### Dataset ID
 
@@ -232,11 +236,11 @@ str(uwallf_data)
 Download all records associated with one or more datasets. Use the `get_downloads` function to return a `sites object` with full level of detail.
 
 **Usage:**  `get_downloads(x)`
-Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical (default is TRUE) - prints (??) a download status bar.
+Arguments: `x` can be a dataset ID or a vector of numeric dataset IDs. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; verbose, logical (default is TRUE) - prints a download status bar.
 
 **Values returned:** a `sites object` with a full level of detail, including relevant assemblage information (e.g., diatom counts) and metadata.
 
-The downloaded result is a `sites object` that contains data on: sites, collection units, analysis units, samples, datasets, taxonomic data, chronologies, publications, contacts.
+The downloaded result is a `sites object` that contains data on: sites, collection units, analysis units, samples, datasets, taxonomic data, chronologies, and contacts.
 
 To see the structure of `get_downloads()` function output, run the following code:
 ```{R structure_of_get_download_output}
@@ -255,7 +259,7 @@ summary(uwallf_download)
 
 After obtaining a `get_downloads` result, a typical next step is to create subsets of data for for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
 
-Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of the first three of the functions listed above.
+Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of the first three of the functions listed above.
 
 #### `datasets()` function
 The `datasets()` function extracts dataset information from a sites objects. 
@@ -424,6 +428,16 @@ diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
 head(samples(diat_wat_dl),5)
 ```
 
+#### `chronologies()` Function
+The `chronologies()` function obtains chronology data from a record(s) and returns results as a list. 
+
+**Usage:** `chronologies(x)`
+
+**argument:** (x) is a `sites object` (that contains chronologies) obtained from `get_downloads`.
+
+**Values returned:** A list with the variables chronologyid, notes, contact, agemodel, ageboundolder, ageboundyounger, isdefault (?), dateprepared, modelagetype, chronologyname, and chroncontrols.
+
+
 ##### Diatom taxa
 
 Get list of all taxa associated with single datasettype.
@@ -505,8 +519,16 @@ northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
 neus <- sf::st_polygon(list(northeastUS))
 
-#As the deafault, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
-neUSsites <- get_datasets(loc = neus, limit = 99)
+#As the default, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
+neUSsites <- get_datasets(loc = neus, limit = 199)
 
-plotLeaflet(neUSsites)
+my_map <- plotLeaflet(neUSsites)
+
+my_map
+``` 
+
+The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items (as defined in the `leaflet` package) can then be added to the map as desired.
+
+```{R siteSpatialSearch}
+my_map %>% addCircleMarkers(lng =-80, lat = 45, color = "red") #adds a red marker
 ``` 
