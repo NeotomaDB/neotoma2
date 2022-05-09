@@ -428,6 +428,16 @@ diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
 head(samples(diat_wat_dl),5)
 ```
 
+#### `chronologies()` Function
+The `chronologies()` function obtains chronology data from a record(s) and returns results as a list. 
+
+**Usage:** `chronologies(x)`
+
+**argument:** (x) is a `sites object` (that contains chronologies) obtained from `get_downloads`.
+
+**Values returned:** A list with the variables chronologyid, notes, contact, agemodel, ageboundolder, ageboundyounger, isdefault (?), dateprepared, modelagetype, chronologyname, and chroncontrols.
+
+
 ##### Diatom taxa
 
 Get list of all taxa associated with single datasettype.
