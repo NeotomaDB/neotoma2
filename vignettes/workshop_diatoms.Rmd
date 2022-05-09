@@ -530,5 +530,6 @@ my_map
 The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items (as defined in the `leaflet` package) can then be added to the map as desired.
 
 ```{R siteSpatialSearch2}
+library(leaflet)
 my_map %>% addCircleMarkers(lng =-80, lat = 45, color = "red") #adds a red marker
 ``` 
