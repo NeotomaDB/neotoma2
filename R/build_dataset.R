@@ -13,22 +13,22 @@
 #' # To build dataset from API call:
 #' build_dataset(x)
 #' }
-#' 
+#'
 build_dataset <- function(x) {
 
   samples <- purrr::map(x$samples, build_sample)
   samples <- new("samples", samples = samples)
- 
+
   # PI Information
   pi_list <- testNull(x$datasetpi, list())
-  if(length(pi_list) != 0) {
+  if (length(pi_list) != 0) {
     pi_list <- pi_list %>%
       map(function(y) {
-        if(is.na(y[1])){
+        if (is.na(y[1])) {
           NA_character_
-        }else{
-        y$contactname
-          }
+        } else {
+          y$contactname
+        }
       })
   }
 
@@ -42,5 +42,5 @@ build_dataset <- function(x) {
       notes = use_na(testNull(x$datasetnotes, NA), "char"),
       pi_list = pi_list,
       samples = samples)
-  
+
 }

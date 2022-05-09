@@ -15,14 +15,49 @@ filter <- function(x, ...) {
 #' @export
 filter.sites <- function(x, ...) {  # nolint
 
-  ids <- getids(x) %>%
-    inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-    inner_join(as.data.frame(x), by = "siteid") %>%
-    rename(datasetnotes = .data$notes.x,
-           sitenotes = .data$notes.y,
-           altitude = .data$elev,
-           age_range_old = .data$age_range_old,
-           age_range_young = .data$age_range_young)
+  # It is time consuming to do all the joining.  So here we
+  # do a thing to try to speed stuff up by only joining the stuff we need:
+  ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
+    as.character()
+
+  sitecols <- c('sitename', 'lat', 'long', 'altitude') %>%
+    map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
+    unlist() %>%
+    any()
+
+  datasetcols <- c("datasetid", "database", "datasettype", "age_range_old",
+                   "age_range_young", "notes") %>%
+    map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
+    unlist() %>%
+    any()
+
+  collunitcols <- c("collectionunitid", "handle", "colldate",
+                    "location", "waterdepth", "collunittype",
+                    "collectiondevice", "defaultchronology", "collectionunitname",
+                    "depositionalenvironment") %>%
+    map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
+    unlist() %>%
+    any()
+
+  ids <- getids(x)
+
+  if (sitecols == TRUE) {
+    ids <- ids %>%
+      inner_join(as.data.frame(x), by = "siteid") %>%
+      rename(altitude = .data$elev,
+             sitenotes = .data$notes)
+  }
+
+  if (datasetcols == TRUE) {
+    ids <- ids %>%
+      inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
+      rename(datasetnotes = .data$notes)
+  }
+
+  if (collunitcols == TRUE) {
+    ids <- ids %>%
+      inner_join(as.data.frame(collunits(x)), by = c("collunitid" = "collectionunitid"))
+  }
 
   cleanids <- ids %>%
     dplyr::filter(...)
