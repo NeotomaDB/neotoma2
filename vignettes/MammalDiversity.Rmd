@@ -172,9 +172,9 @@ We can see that we're returning `r nrow(taxaTable)` taxa currently.  This may be
 
 ```{r mamRemoveTaxa}
 mamClean <- mamClean %>% 
-  dplyr::filter(variablename %in% taxaTable$variablename[taxaTable$n > 9], .preserve = FALSE)
+  dplyr::filter(variablename %in% taxaTable$variablename[taxaTable$n > 5], .preserve = FALSE)
 
-taxaTable <- taxaTable %>% filter(n > 9)
+taxaTable <- taxaTable %>% filter(n > 5)
 ```
 
   *  Determine possible taxonomic level (species, genus)
@@ -194,7 +194,9 @@ We have filtered out the sets we are not interested in using, based on age, taxo
 spatial <- mamClean %>% 
   mutate(agebin = ifelse(ageolder < 5000, "young", "old"))
 
-spatial <- st_as_sf(spatial, coords = c("long", "lat"))
+spatial <- sf::st_as_sf(spatial, 
+                        coords = c("long", "lat"),
+                        crs = "+proj=longlat +datum=WGS84")
 
 hulls <- list()
 
@@ -203,15 +205,10 @@ for (i in 1:nrow(taxaTable)) {
   hulls[[i]]$variablename <- taxaTable$variablename[i]
   hulls[[i]]$hull <- spatial %>% 
     dplyr::filter(variablename == taxaTable$variablename[i]) %>% 
-    st_union() %>% 
-    st_convex_hull()
+    sf::st_union() %>% 
+    sf::st_convex_hull()
 }
 
-  mutate(points = st_point(x = c(long, lat)))
-
-  group_by(variablename, agebin) %>% 
-
-  summarise(points = st_as_sf(data.frame(long = long, lat = lat)), coords = c("long", "lat"))
 ```
 
   * Create convex hulls (at multiple time bins?)
@@ -223,15 +220,19 @@ Evaluate which convex hulls intersect with /come within a buffer of point of int
 Download climate data from appropriate source.
 
 ```{r, eval=TRUE}
-worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
+# worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
 
 raster::plot(worldTmin, 1)
+values <- sf::st_crop(worldTmin, hulls[[1]]$hull)
 ```
 
 This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
 
 ### Join Hulls with Environmental Data
   
+```{r}
+hulls[[1]]
+```
   * Apply the convex hull to look at the environmental space occupied by the taxon
 
 ## Build SDMs

@@ -17,9 +17,22 @@ test_that("Some datasets don't seem to get pulled with chronologies.", {
 
 })
 
-test_that("We can get the samples out of site 13755.", {
+test_that("We can get the samples out of dataset 15692.", {
   ## we don't want this to run on CRAN
-
   skip_on_cran()
-  x <- get_downloads(21007)
-}
+  testthat::expect_is(get_downloads(15692) %>% samples(), "data.frame")
+})
+
+test_that("ggplot2 on the african data works:", {
+  my_datasets <- get_datasets(40945)
+  mySites <- get_downloads(my_datasets)
+  my_counts <- neotoma2::samples(mySites)
+
+  aa <- my_counts %>%
+    filter(taxongroup == "Vascular plants") %>%
+    group_by(age, ecologicalgroup) %>%
+    summarize(count = sum(value)) %>%
+    ggplot() +
+    geom_path(aes(x = age, y = count, color = ecologicalgroup))
+  testthat::expect_is(aa, "gg")
+})
