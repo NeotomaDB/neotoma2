@@ -1,6 +1,7 @@
 # load libraries
 library("testthat")
 library("neotoma2")
+library("tidyverse")
 
 context("Run only when not on CRAN")
 
