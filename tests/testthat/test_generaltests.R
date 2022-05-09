@@ -19,7 +19,6 @@ test_that("Some datasets don't seem to get pulled with chronologies.", {
 
 test_that("We can get the samples out of dataset 15692.", {
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   testthat::expect_is(get_downloads(15692) %>% samples(), "data.frame")
 })

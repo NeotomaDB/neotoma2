@@ -97,6 +97,9 @@ setMethod(f = "samples",
                                     allsamp <- purrr::map(y@samples@samples,
                                                           function(z) {
                                                             whichage <- which(z@ages$chronologyid == defaultchron$chronologyid)
+                                                            if (length(whichage) == 0) {
+                                                              whichage <- 1
+                                                            }
                                                             data.frame(z@ages[whichage,],
                                                                        z@datum,
                                                                        sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
