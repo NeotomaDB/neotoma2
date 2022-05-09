@@ -10,9 +10,9 @@ setMethod(f = "collunits",
             output <- purrr::map(object@sites, function(x) {
               x@collunits
             })
-
+            
             final <- purrr::reduce(output, c)
-
+            
             return(final)
           })
 
@@ -97,7 +97,15 @@ setMethod(f = "chronologies",
               attr(y, "collunitid") <- x$collectionunitid
               return(y)
             })
-            new("chronologies", chronologies = output)
+            try(
+              new("chronologies", chronologies = output)
+            )
+            if ('try-error' %in% class(new("chronologies", chronologies = output))) {
+              stop("not today")
+              
+            } else {
+              new("chronologies", chronologies = output)
+            }
           })
 
 #' @title Extract chronologies from a sites object.
@@ -110,7 +118,7 @@ setMethod(f = "chronologies",
             output <- map(x@collunits, function(y) {
               chronologies(y)
             })
-
+            
             output <- purrr::reduce(output, c)
             return(output)
           })
@@ -126,7 +134,7 @@ setMethod(f = "chronologies",
               chronologies(y)
             })
             output <- purrr::reduce(output, c)
-
+            
             return(output)
           })
 
@@ -140,6 +148,9 @@ setMethod(f = "chronologies",
             output <- map(x@sites, function(y) {
               chronologies(y)
             })
+
             output <- purrr::reduce(output, c)
+         
+            
             return(output)
           })

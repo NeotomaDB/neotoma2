@@ -3,6 +3,7 @@
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
+#' @import jsonlite
 #' @importFrom methods new
 #' @description
 #' Information for Fossil Datasets
@@ -136,15 +137,6 @@ parse_download <- function(result, verbose = TRUE) {
 #' @export
 get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
 
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
@@ -166,15 +158,6 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
 
   output <- getids(x) %>%
     dplyr::select(.data$datasetid) %>%
@@ -183,5 +166,25 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     unlist()
   output <- get_downloads(x = output, verbose, ...)
 
+  return(output)
+}
+
+#' @title get_downloads json
+#' @param x sites object
+#' @param verbose Should text be printed during the download process?
+#' @param ... arguments in ellipse form
+#' @importFrom stats na.omit
+#' @export
+get_downloads.character <- function(x, verbose = TRUE, ...) {
+
+  result <- jsonlite::fromJSON(x,
+                               flatten = FALSE,
+                               simplifyVector = FALSE)
+  
+  result <- result %>%
+    cleanNULL()
+
+  output <- parse_download(result)
+  
   return(output)
 }

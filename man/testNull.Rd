@@ -4,7 +4,7 @@
 \alias{testNull}
 \title{Clear out NULL values and replace with value}
 \usage{
-testNull(val, out)
+testNull(val, out = NA)
 }
 \arguments{
 \item{val}{A value to be passed in}
