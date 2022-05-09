@@ -514,7 +514,7 @@ Make plots and maps
 
 The `neotoma2` package has a function to map a `sites object`. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
 
-```{R siteSpatialSearch}
+```{R siteSpatialSearch1}
 northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
 neus <- sf::st_polygon(list(northeastUS))
@@ -529,6 +529,6 @@ my_map
 
 The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items (as defined in the `leaflet` package) can then be added to the map as desired.
 
-```{R siteSpatialSearch}
+```{R siteSpatialSearch2}
 my_map %>% addCircleMarkers(lng =-80, lat = 45, color = "red") #adds a red marker
 ``` 
