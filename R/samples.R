@@ -21,7 +21,7 @@ setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
 
-            allids <- getids(x)
+            allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
@@ -78,12 +78,15 @@ setMethod(f = "samples",
               maxOrder <- max(defaultchron$order, na.rm = TRUE)
 
               if (allNA == TRUE) {
-                warnsite <- sprintf("The dataset %d has no default chronologies.",
-                                    allids$datasetid[1])
+                 warnsite <- sprintf("The dataset %d has no default chronologies.",
+                                     allids$datasetid[1])
+                #warnsite <- sprintf("The dataset d has no default chronologies.")
                 warning(warnsite)
               } else if (sum(defaultchron$order == maxOrder, na.rm = TRUE) > 1) {
-                warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
-                                    allids$datasetid[1], defaultchron$chronologyid[which.max(defaultchron$order)])
+                #warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
+                #                    allids$datasetid[1], defaultchron$chronologyid[which.max(defaultchron$order)])
+                warnsite <- sprintf("The dataset d has multiple default chronologies. Chronology d has been used.")
+                
                 warning(warnsite)
                 defaultchron <- defaultchron[which.max(defaultchron$order),]
               } else {
