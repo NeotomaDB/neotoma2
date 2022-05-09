@@ -20,6 +20,7 @@ build_sites <- function(x) {
       x$geography <- NA
     }
     if (is.na(x$geography)) {
+      print("here")
       geography <- st_as_sf(st_sfc())
       } else if (!(is.na(x$geography))) {
       geography <- sf::st_read(x$geography, quiet = TRUE)

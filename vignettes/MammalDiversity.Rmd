@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup, eval=TRUE}
 library(neotoma2)
 library(raster)
+library(dismo)
 ```
 
 This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more `neotoma2` vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.
@@ -62,7 +63,7 @@ One way of dealing with the issue of `offsets` and `limits` is the use of the `a
 
 ```{r downloadMammals, eval=FALSE}
 # This gives us 25 records (without setting 'limit')
-mammals <- get_datasets(datasettype = 'vertebrate fauna')
+mammals <- get_datasets(datasettype = 'vertebrate fauna', limit = 200)
 
 # The 'all_data' approach:
 allMammals <- get_datasets(datasettype = 'vertebrate fauna', 
@@ -74,7 +75,7 @@ In general it is better to filter records using the search parameters available 
 For any query set returned by the API we can examine the objects we have returned:
 
 ```{r summaryExample}
-summary(allMammals)
+summary(mam50)
 ```
 
 For our example, we want to search for all early Holocene vertebrate records within Neotoma in eastern North America.  So we can construct our search as follows:
@@ -84,7 +85,7 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        ageyoung = 6000,
                        ageold = 11500,
                        loc = c(-100,20,20,90),
-                       limit = 9000)
+                       all_data = TRUE)
 ```
 
 The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data.
@@ -97,8 +98,7 @@ The basis of any workflow is downloading appropriate data. Lets begin again by d
 mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        ageyoung = 6000,
                        ageold = 11500,
-                       loc = c(-100,20,20,90),
-                       limit = 9000)
+                       all_data = TRUE)
 
 plotLeaflet(mamSet)
 ```
@@ -108,7 +108,6 @@ With the leaflet plot we can dynamically navigate records, and check to see if s
 We can use the `filter()` function to remove data based on one or more criteria.  For example, if we think a particular site is not appropriate to our analysis we can filter by `sitename` before downloading the records:
 
 ```{r filterandDl}
-
 mamDl <- mamSet %>% 
   neotoma2::filter(sitename != 'Medicine Creek Site [39LM222]') %>% 
   get_downloads(., all_data = TRUE)
@@ -116,25 +115,67 @@ mamDl <- mamSet %>%
 
 The full set of filter arguments supported are:
 
-* `siteid`
-* `sitename`
-* 
+
+ |          |              |             |
+ | -------- | ------------ | ----------- |
+ | "siteid" | "collunitid" | "datasetid" |
+ | "sitename" | "lat" | "long" |
+ | "area"  | "sitenotes" | "description" |
+ | "altitude" | "database" | "datasettype" |
+ | "age_range_old" | "age_range_young" | "datasetnotes" |
+ | "handle" | "colldate" | "location" |
+ | "waterdepth" | "collunittype" | "collectiondevice" |
+ | "defaultchronology" | "collectionunitname" | "depositionalenvironment" |
+
+Once the data is filtered we can either continue to manage the data as sites, datasets or collection units, or we can begin to work directly with the raw sample data using the function `samples()`.  The `samples()` function returns information about the site, dataset, chronology and samples.  It tends to be very verbose, to support all of the user communities within the Neotoma data ecosystem:
+
+```{r getsamples}
+mamSamp <- samples(mamDl)
+```
+
+```{r mamSampDT, echo=TRUE}
+DT::datatable(mamSamp[1:30,])
+```
 
 ### Clean ages
 
-Given a set of downloaded datasets we can make additional choices and decisions about the records.  
+Given a set of downloaded datasets we can make additional choices and decisions about the records.  We know that in Neotoma there are a number of records that are measured using radiocarbon years, while others use calendar years.  We also know that datasets have temporal bounds that may extend beyond the ranges of the samples we're interested in (for example, a site has samples across the entire Holocene, but we're only interested in a narrow time window around a certain event).
 
-We may choose to examine the full set of samples:
+So, given the range of dates, lets clean things up so that we only accept dates with uncertainty less than 500yrs:
 
 ```{r getSamples}
-mamSamp <- samples(mamDl)
+mamClean <- mamSamp %>% 
+  dplyr::filter(ageolder - ageyounger < 500)
 ```
+
+You will note that `chronologyid` is one of the fields included in the `samples()` output.  We can use the chronologies to get finer-grained understanding of the temporal certainty for the records. Unfortunately, a large portion of the early mammal data (records submitted as part of Faunmap) within Neotoma is poorly constrained.  We can look at these records
 
   * ensure taxa are really within the target age range
   * Assess what age controls are used for each species/occurrence?
   * Exclude certain dating methods (e.g. $^{14}C$ on apatite, or biostratigraphic data, or… high grade based on the narrowness of the date control or error bars)
 
 ### Clean taxonomy
+
+From this data we then have a set of taxa:
+
+```{r taxontable}
+taxaTable <- mamClean %>% 
+  group_by(variablename) %>% 
+  summarise(n = length(unique(collunitid)))
+```
+
+```{r tabletable}
+DT::datatable(taxaTable)
+```
+
+We can see that we're returning `r nrow(taxaTable)` taxa currently.  This may be more than we want.  In fact we can use the `taxaTable` to take a look at some of the taxa, or we can use the `taxa()` function on the `mamDl` object to get a more complete look at the taxon list present.  `taxaTable` shows us that `r sum(taxaTable$n==1)` taxa appear only once.
+
+```{r mamRemoveTaxa}
+mamClean <- mamClean %>% 
+  dplyr::filter(variablename %in% taxaTable$variablename[taxaTable$n > 5], .preserve = FALSE)
+
+taxaTable <- taxaTable %>% filter(n > 5)
+```
 
   *  Determine possible taxonomic level (species, genus)
 account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
@@ -146,6 +187,30 @@ account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
 
 ## Assemble Cleaned Data
 
+We have filtered out the sets we are not interested in using, based on age, taxon or space.  For each taxon remaining we can use the `sf` package to create spatial polygons at two time periods, prior to 5000 cal yr BP and post 5000 cal yr BP:
+
+```{r}
+
+spatial <- mamClean %>% 
+  mutate(agebin = ifelse(ageolder < 5000, "young", "old"))
+
+spatial <- sf::st_as_sf(spatial, 
+                        coords = c("long", "lat"),
+                        crs = "+proj=longlat +datum=WGS84")
+
+hulls <- list()
+
+for (i in 1:nrow(taxaTable)) {
+  hulls[[i]] <- list()
+  hulls[[i]]$variablename <- taxaTable$variablename[i]
+  hulls[[i]]$hull <- spatial %>% 
+    dplyr::filter(variablename == taxaTable$variablename[i]) %>% 
+    sf::st_union() %>% 
+    sf::st_convex_hull()
+}
+
+```
+
   * Create convex hulls (at multiple time bins?)
 Evaluate which convex hulls intersect with /come within a buffer of point of interest
 
@@ -155,15 +220,19 @@ Evaluate which convex hulls intersect with /come within a buffer of point of int
 Download climate data from appropriate source.
 
 ```{r, eval=TRUE}
-worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
+# worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
 
 raster::plot(worldTmin, 1)
+values <- sf::st_crop(worldTmin, hulls[[1]]$hull)
 ```
 
 This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
 
 ### Join Hulls with Environmental Data
   
+```{r}
+hulls[[1]]
+```
   * Apply the convex hull to look at the environmental space occupied by the taxon
 
 ## Build SDMs
