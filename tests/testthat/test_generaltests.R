@@ -30,7 +30,7 @@ test_that("ggplot2 on the african data works:", {
   my_counts <- neotoma2::samples(mySites)
 
   aa <- my_counts %>%
-    filter(taxongroup == "Vascular plants") %>%
+    dplyr::filter(taxongroup == "Vascular plants") %>%
     group_by(age, ecologicalgroup) %>%
     summarize(count = sum(value)) %>%
     ggplot() +

@@ -1,4 +1,6 @@
-#' @title  samples
+utils::globalVariables(c("modelagetype", "isdefault", "allids", "<<-"))
+
+#' @title samples
 #' @param x sites object
 #' @description Obtain elements on the samples level
 #' @export
@@ -12,7 +14,7 @@ setMethod(f = "samples",
           }
 )
 
-#' @title  samples
+#' @title samples
 #' @param x site object
 #' @description Obtain elements on the samples level
 #' @export
@@ -20,7 +22,7 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-
+            #allids <- NULL
             allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
@@ -36,6 +38,9 @@ setMethod(f = "samples",
           }
 )
 
+#' @title samples
+#' @param x collunits object
+#' @description Obtain elements from collunits
 setMethod(f = "samples",
           signature = "collunits",
           definition = function(x) {
@@ -44,7 +49,9 @@ setMethod(f = "samples",
           }
 )
 
-
+#' @title samples
+#' @param x collunit object
+#' @description Obtain elements from collunit
 setMethod(f = "samples",
           signature = "collunit",
           definition = function(x) {
