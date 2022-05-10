@@ -137,15 +137,6 @@ parse_download <- function(result, verbose = TRUE) {
 #' @export
 get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
 
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
@@ -167,15 +158,6 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
 
   output <- getids(x) %>%
     dplyr::select(.data$datasetid) %>%

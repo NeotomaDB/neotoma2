@@ -6,36 +6,9 @@
 setMethod(f = "samples",
           signature = "sites",
           definition = function(x) {
-            
-            counter = 0
-            taxon_table <- c()
-            length_object <- length(x)
-            
-            allids <- getids(x)
-            siteinfo <- as.data.frame(x) %>%
-              left_join(allids, by = "siteid") %>%
-              left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
-            
-            sampset <- purrr::map(datasets(x)@datasets,
-                                  function(y) {
-                                    dsid <- y$datasetid
-                                    allsamp <- purrr::map(y$samples@samples,
-                                                          function(z) {
-                                                            data.frame(z@ages,
-                                                                       z@datum,
-                                                                       sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
-                                                                       sampleid = z@sampleid,
-                                                                       depth = z@depth,
-                                                                       thickness = z@thickness,
-                                                                       samplename = z@samplename)
-                                                          }) %>%
-                                      bind_rows() %>%
-                                      mutate(datasetid = dsid)
-                                  }) %>%
-              bind_rows() %>%
-              left_join(siteinfo, by = "datasetid")
-            return(sampset)
+            output <- purrr::map(x@sites, function(y) samples(y)) %>%
+              dplyr::bind_rows()
+            return(output)
           }
 )
 
@@ -47,36 +20,103 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-            
-            counter = 0
-            taxon_table <- c()
-            length_object <- length(x)
-            
-            allids <- getids(x)
+
+            allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
-              left_join(allids, by = "siteid") %>%
-              left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
+              dplyr::left_join(allids, by = "siteid") %>%
+              dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
+              dplyr::rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
+
+            sampset <- purrr::map(x@collunits@collunits, function(y) samples(y)) %>%
+                                      dplyr::bind_rows() %>%
+              dplyr::bind_rows() %>%
+              dplyr::left_join(siteinfo, by = "datasetid")
+
+            return(sampset)
+          }
+)
+
+setMethod(f = "samples",
+          signature = "collunits",
+          definition = function(x) {
+            purrr::map(x@collunits, function(x) samples(x)) %>%
+              dplyr::bind_rows()
+          }
+)
+
+
+setMethod(f = "samples",
+          signature = "collunit",
+          definition = function(x) {
+            precedence <- c("Calendar years BP",
+                            "Calibrated radiocarbon years BP",
+                            "Radiocarbon years BP", "Varve years BP")
             
+            
+
+            # Check the chronologies to make sure everything is okay:
+            if (length(chronologies(x)) > 0) {
+              # This pulls the chronology IDs, then applies the Neotoma
+              # age model precedence (see get_table('agetypes')).
+              # It returns a value that is larger when your age reporting is
+              # better.
+              defaultchron <- purrr::map(chronologies(x)@chronologies,
+                                         function(y) {
+                                           data.frame(chronologyid = y@chronologyid,
+                                                      isdefault = y@isdefault,
+                                                      modelagetype = y@modelagetype,
+                                                      chronologyname = y@chronologyname)
+                                         }) %>%
+                dplyr::bind_rows() %>%
+                dplyr::mutate(modelrank = match(modelagetype, rev(precedence)),
+                              order = isdefault * match(modelagetype, rev(precedence)))
+
+              # Validation of default chrons, we want to check whether there
+              # exists either multiple default chronologies for the same time-frame
+              # or, alternately, no default chronology.
+              allNA <- all(is.na(defaultchron$order))
+              maxOrder <- max(defaultchron$order, na.rm = TRUE)
+
+              if (allNA == TRUE) {
+                 warnsite <- sprintf("The dataset %d has no default chronologies.",
+                                     allids$datasetid[1])
+                warning(warnsite)
+              } else if (sum(defaultchron$order == maxOrder, na.rm = TRUE) > 1) {
+                warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
+                                    allids$datasetid[1], defaultchron$chronologyid[which.max(defaultchron$order)])
+                warning(warnsite)
+                defaultchron <- defaultchron[which.max(defaultchron$order),]
+              } else {
+                defaultchron <- defaultchron[which.max(defaultchron$order),]
+              }
+            } else {
+              defaultchron <- data.frame(chronologyid = NULL)
+            }
+
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
-                                    allsamp <- purrr::map(y@samples,
+                                    allsamp <- purrr::map(y@samples@samples,
                                                           function(z) {
-                                                            data.frame(z@ages,
+                                                            whichage <- which(z@ages$chronologyid == defaultchron$chronologyid)
+                                                            if (length(whichage) == 0) {
+                                                              whichage <- 1
+                                                            }
+                                                            data.frame(z@ages[whichage,],
                                                                        z@datum,
                                                                        sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
                                                                        sampleid = z@sampleid,
                                                                        depth = z@depth,
                                                                        thickness = z@thickness,
-                                                                       samplename = z@samplename)
+                                                                       samplename = z@samplename,
+                                                                       row.names = NULL)
                                                           }) %>%
-                                      bind_rows() %>%
-                                      mutate(datasetid = dsid)
+                                      dplyr::bind_rows() %>%
+                                      dplyr::mutate(datasetid = dsid)
                                   }) %>%
-              bind_rows() %>%
-              left_join(siteinfo, by = "datasetid")
-            
+              dplyr::bind_rows()
+
             return(sampset)
           }
 )
+
