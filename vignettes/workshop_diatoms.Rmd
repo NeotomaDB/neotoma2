@@ -437,6 +437,14 @@ The `chronologies()` function obtains chronology data from a record(s) and retur
 
 **Values returned:** A list with the variables chronologyid, notes, contact, agemodel, ageboundolder, ageboundyounger, isdefault (?), dateprepared, modelagetype, chronologyname, and chroncontrols.
 
+```{R chronologies, eval=FALSE}
+uwallf_dl <- get_sites(sitename = 'Upper Wallface%') %>%
+  get_datasets() %>%
+  get_downloads()
+ 
+uwallf_chron <- chronologies(uwallf_dl)
+```
+
 
 ##### Diatom taxa
 
