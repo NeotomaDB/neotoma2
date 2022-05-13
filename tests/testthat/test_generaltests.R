@@ -36,3 +36,7 @@ test_that("ggplot2 on the african data works:", {
     geom_path(aes(x = age, y = count, color = ecologicalgroup))
   testthat::expect_is(aa, "gg")
 })
+
+test_that("A faunmap dataset with some contacts actually works", {
+  mydataset <- get_downloads(7032)
+})

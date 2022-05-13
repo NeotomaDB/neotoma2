@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(neotoma2)
 library(raster)
 library(dismo)
+library(dplyr)
 ```
 
 This is a model workflow to help understand and map faunal assemblage diversity across time and space.  There are more `neotoma2` vignettes, for diatoms and for pollen generally.  This vignette specifically addresses the use of the package to manage and understand how the package can be used to work with vertabrate faunal data.
@@ -78,13 +79,13 @@ For any query set returned by the API we can examine the objects we have returne
 summary(mam50)
 ```
 
-For our example, we want to search for all early Holocene vertebrate records within Neotoma in eastern North America.  So we can construct our search as follows:
+For our example, we want to search for all early Holocene vertebrate records within Neotoma in North America.  So we can construct our search as follows:
 
-```{r getEasternFossils, eval=FALSE}
+```{r getEasternFossils, eval=TRUE}
 mamSet <- get_datasets(datasettype = "vertebrate fauna",
                        ageyoung = 6000,
                        ageold = 11500,
-                       loc = c(-100,20,20,90),
+                       loc = c(-140,20,20,90),
                        all_data = TRUE)
 ```
 
@@ -108,13 +109,12 @@ With the leaflet plot we can dynamically navigate records, and check to see if s
 We can use the `filter()` function to remove data based on one or more criteria.  For example, if we think a particular site is not appropriate to our analysis we can filter by `sitename` before downloading the records:
 
 ```{r filterandDl}
-mamDl <- mamSet %>% 
+mamDl <- allMammals %>% 
   neotoma2::filter(sitename != 'Medicine Creek Site [39LM222]') %>% 
   get_downloads(., all_data = TRUE)
 ```
 
 The full set of filter arguments supported are:
-
 
  |          |              |             |
  | -------- | ------------ | ----------- |
@@ -189,7 +189,7 @@ account for uncertain taxa (cf., aff., type, ?) → taxa harmonization table
 
 We have filtered out the sets we are not interested in using, based on age, taxon or space.  For each taxon remaining we can use the `sf` package to create spatial polygons at two time periods, prior to 5000 cal yr BP and post 5000 cal yr BP:
 
-```{r}
+```{r, makinghulls}
 
 spatial <- mamClean %>% 
   mutate(agebin = ifelse(ageolder < 5000, "young", "old"))
@@ -211,29 +211,26 @@ for (i in 1:nrow(taxaTable)) {
 
 ```
 
-  * Create convex hulls (at multiple time bins?)
-Evaluate which convex hulls intersect with /come within a buffer of point of interest
-
-
 ### Obtain Secondary (Environmental) Data
 
-Download climate data from appropriate source.
+Download climate data from appropriate source. This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.  In this case we are obtaining the minimum temperature for each month of the year, globally.
 
 ```{r, eval=TRUE}
-# worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
-
-raster::plot(worldTmin, 1)
-values <- sf::st_crop(worldTmin, hulls[[1]]$hull)
+worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10) %>% 
+  st_as_stars()
+plot(worldTmin)
 ```
 
-This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.
+Here we convert the raster to a `stars` object, for use with simple features.
 
 ### Join Hulls with Environmental Data
   
-```{r}
-hulls[[1]]
+```{r hiddenrasterplot}
+values <- st_crop(worldTmin, hulls[[1]]$hull)
+plot(values[1])
 ```
-  * Apply the convex hull to look at the environmental space occupied by the taxon
+
+Now we can extract the data for each of the convex hulls within the dataset.
 
 ## Build SDMs
   
