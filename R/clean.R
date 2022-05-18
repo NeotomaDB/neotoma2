@@ -5,6 +5,7 @@
 #' @importFrom progress progress_bar
 #' @importFrom methods new
 #' @param x sites, datasets, collunits that may have duplicates.
+#' @param verbose parameter to prints out progress bar
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites, datasets, or collection units.
 

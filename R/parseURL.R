@@ -42,6 +42,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                           query = query)
 
     response_url <- response$url
+    #print(response_url)
 
     # Break if we can't connect:
     stop_for_status(response,

@@ -216,9 +216,10 @@ for (i in 1:nrow(taxaTable)) {
 Download climate data from appropriate source. This is just an example of downloading one element of [WorldClim](https://www.worldclim.org/) data as a raster in R. This particular raster has `r raster::nlayers(worldTmin)` layers and is a global dataset.  The `raster` package for R has a number of links to external datasets such as WorldClim.  Alternately you can load in your own data.  In this case we are obtaining the minimum temperature for each month of the year, globally.
 
 ```{r, eval=TRUE}
-worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10) %>% 
-  st_as_stars()
-plot(worldTmin)
+worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
+
+raster::plot(worldTmin, 1)
+values <- sf::st_crop(worldTmin, hulls[[1]]$hull)
 ```
 
 Here we convert the raster to a `stars` object, for use with simple features.

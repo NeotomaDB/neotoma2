@@ -1,4 +1,6 @@
-#' @title  samples
+utils::globalVariables(c("modelagetype", "isdefault", "allids", "<<-"))
+
+#' @title samples
 #' @param x sites object
 #' @description Obtain elements on the samples level
 #' @export
@@ -12,7 +14,7 @@ setMethod(f = "samples",
           }
 )
 
-#' @title  samples
+#' @title samples
 #' @param x site object
 #' @description Obtain elements on the samples level
 #' @export
@@ -20,8 +22,8 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-
-            allids <- getids(x)
+            #allids <- NULL
+            allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
@@ -36,6 +38,9 @@ setMethod(f = "samples",
           }
 )
 
+#' @title samples
+#' @param x collunits object
+#' @description Obtain elements from collunits
 setMethod(f = "samples",
           signature = "collunits",
           definition = function(x) {
@@ -44,13 +49,17 @@ setMethod(f = "samples",
           }
 )
 
-
+#' @title samples
+#' @param x collunit object
+#' @description Obtain elements from collunit
 setMethod(f = "samples",
           signature = "collunit",
           definition = function(x) {
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
+            
+            
 
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
@@ -76,8 +85,8 @@ setMethod(f = "samples",
               maxOrder <- max(defaultchron$order, na.rm = TRUE)
 
               if (allNA == TRUE) {
-                warnsite <- sprintf("The dataset %d has no default chronologies.",
-                                    allids$datasetid[1])
+                 warnsite <- sprintf("The dataset %d has no default chronologies.",
+                                     allids$datasetid[1])
                 warning(warnsite)
               } else if (sum(defaultchron$order == maxOrder, na.rm = TRUE) > 1) {
                 warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
