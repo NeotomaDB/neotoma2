@@ -65,4 +65,5 @@ test_that("Duplicated sampleids don't exist (in the APD)", {
 
 test_that("A faunmap dataset with some contacts actually works", {
   mydataset <- get_downloads(7032)
+  testthat::expect_is(mydataset, "sites")
 })

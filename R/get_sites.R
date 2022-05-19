@@ -148,7 +148,6 @@ get_sites.default <- function(...) { # nolint
         cleanNULL()
 
     }else{
-
       base_url <- paste0("data/sites")
       result <- parseURL(base_url, ...) %>%
         cleanNULL()
