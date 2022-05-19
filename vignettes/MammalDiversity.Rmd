@@ -220,7 +220,7 @@ Evaluate which convex hulls intersect with /come within a buffer of point of int
 Download climate data from appropriate source.
 
 ```{r, eval=TRUE}
-# worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
+worldTmin <- raster::getData('worldclim', var = 'tmin', res = 10)
 
 raster::plot(worldTmin, 1)
 values <- sf::st_crop(worldTmin, hulls[[1]]$hull)
