@@ -48,15 +48,15 @@ filter.sites <- function(x, ...) {  # nolint
              sitenotes = .data$notes)
   }
 
+  if (collunitcols == TRUE) {
+    ids <- ids %>%
+      inner_join(as.data.frame(collunits(x)), by = c("collunitid" = "collectionunitid"))
+  }
+
   if (datasetcols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
       rename(datasetnotes = .data$notes)
-  }
-
-  if (collunitcols == TRUE) {
-    ids <- ids %>%
-      inner_join(as.data.frame(collunits(x)), by = c("collunitid" = "collectionunitid"))
   }
 
   cleanids <- ids %>%
@@ -72,15 +72,19 @@ filter.sites <- function(x, ...) {  # nolint
 
   # Sites are cleared.  Now need to clear datasets:
   good_dsid <- unique(cleanids$datasetid)
+  good_cuid <- unique(cleanids$collunitid)
 
   pared_ds <- purrr::map(pared_sites@sites, function(x) {
-    xcu <- purrr::map(collunits(x)@collunits, function(y) {
+    ycu <- collunits(x)
+    ycu <- ycu[which(as.data.frame(ycu)$collectionunitid %in% good_cuid)]
+    xcu <- purrr::map(ycu@collunits, function(y) {
       yds <- datasets(y)
       yds <- yds[which(as.data.frame(yds)$datasetid %in% good_dsid)]
       y@datasets <- yds
       return(y)
     })
     x@collunits@collunits <- xcu
+
     return(x)
   })
 
