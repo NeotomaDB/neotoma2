@@ -72,6 +72,16 @@ setGeneric("selectMatch", function(x, n) {
   standardGeneric(f = "selectMatch")
 })
 
+#' @title chroncontrols
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @description Show the samples table
+#' @param x Sites object to extract chroncontrols table from
+#' @export
+setGeneric("chroncontrols", function(x) {
+  standardGeneric(f = "chroncontrols")
+})
+
+
 #' @title taxa
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @description Show the samples table
