@@ -228,3 +228,37 @@ test_that("filter on lat runs as expected. count unique sites", {
   expect_equal(brazil_ids, brazil_length)
 
 })
+
+test_that("filtering by collunitid removes samples", {
+  
+  ## we don't want this to run on CRAN
+  
+  skip_on_cran()
+  
+  meer <- get_sites(sitename = "meerfeld%") %>% get_downloads()
+  
+  meerDS42510 <- meer %>% neotoma2::filter(collunitid == 29576)
+  
+  
+  expect_true({samples(meerDS42510); TRUE})
+  
+})
+
+test_that("filtering by datasetid keeps all other collection units 
+          where the dataset does not belong", {
+  
+  ## we don't want this to run on CRAN
+  
+  skip_on_cran()
+  
+  meer <- get_sites(sitename = "meerfeld%") %>% get_downloads()
+  
+  meerDS42510 <- meer %>% neotoma2::filter(datasetid == 42510)
+  
+  meerId <-  as.data.frame(collunits(meerDS42510))$collectionunitid
+ 
+  expect_equal(meerId, 29576)
+  
+})
+
+
