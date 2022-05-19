@@ -73,10 +73,15 @@ test_that("All Czech sites work with different spatial bounds:", {
                          18.91 49.61,
                          15.24 50.99,
                          12.4 50.14))',
-             bbox = c(48.64, 50.99, 12.4, 18.91))
+             bbox = c(12.4, 48.64, 18.91, 50.99))
 
-  cz$sf <- geojsonsf::geojson_sf(cz$geoJSON)
+  #cz$sf <- geojsonsf::geojson_sf(cz$geoJSON)[[1]]
   cz_sites <- map(cz, function(x) get_sites(loc = x))
+  testthat::expect_true(all.equal(cz_sites[[1]], cz_sites[[2]]))
 
+  # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
+  # but the bounding box strategy means that the reverse is not true:
+  cz_ids <- getids(cz_sites[[1]])
+  testthat::expect_true(all(cz_ids$siteid %in% getids(cz_sites[[3]])$siteid))
 })
 
