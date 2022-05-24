@@ -67,3 +67,8 @@ test_that("A faunmap dataset with some contacts actually works", {
   mydataset <- get_downloads(7032)
   testthat::expect_is(mydataset, "sites")
 })
+
+test_that("The taxa() call should only return unique results", {
+  mydataset <- get_downloads(c(1435, 24238))
+  testthat::expect_false(any(duplicated(taxa(mydataset))))
+})

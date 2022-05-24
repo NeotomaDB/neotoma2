@@ -99,3 +99,12 @@ setGeneric("collunits",
            function(object) {
              standardGeneric(f = "collunits")
            })
+
+#' @title Set the default chronology within a collectionunit.
+#' @param object A sites object
+#' @importFrom methods slotNames slot
+#' @export
+setGeneric("set_default",
+           function(object) {
+             standardGeneric(f = "set_default")
+           })
