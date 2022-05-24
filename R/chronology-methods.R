@@ -119,7 +119,7 @@ setMethod(f = "write.csv",
 #' @param n The particular chronology to be used as the default.
 #' @importFrom purrr map
 setMethod(f = "set_default",
-          signature = "chronologies",
+          signature = signature(x = "chronologies"),
           definition = function(x, n) {
             assertthat::assert_that(class(x) == "chronologies")
 

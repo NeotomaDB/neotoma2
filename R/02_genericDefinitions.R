@@ -105,6 +105,6 @@ setGeneric("collunits",
 #' @importFrom methods slotNames slot
 #' @export
 setGeneric("set_default",
-           function(object) {
+           function(x, n) {
              standardGeneric(f = "set_default")
            })
