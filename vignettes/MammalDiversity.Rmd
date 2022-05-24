@@ -91,6 +91,12 @@ mamSet <- get_datasets(datasettype = "vertebrate fauna",
 
 The `get_datasets()` command does not explicitly download the raw data.  `get_datasets()` is intended to provide an outline of the data available.  It is then used with the `filter()` functions (described in [Cleaning Data](#cleaning)), and ultimately with `get_downloads()` to return the raw data.
 
+We can then validate the download, making sure we're getting the records we expect, by mapping them:
+
+```{r}
+plotLeaflet(mamSet)
+```
+
 ## Cleaning Data {#cleaning}
 
 The basis of any workflow is downloading appropriate data. Lets begin again by downloading all records for mammals within the database that have a late-Pleistocene age.  Here we use the `get_datasets()` command, and set `ageold` to be `12000`.  Dates passed to the API are assumed to be in calibrated radiocarbon years before present.
@@ -234,6 +240,10 @@ plot(values[1])
 Now we can extract the data for each of the convex hulls within the dataset.
 
 ## Build SDMs
-  
+
+```{r}
+library(dismo)
+
+```
   * Create SDMs for taxon with intersection convex hulls
   * Assess which SDMs intersect with point of interest
