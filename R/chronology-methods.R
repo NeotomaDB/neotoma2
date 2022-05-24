@@ -130,10 +130,11 @@ setMethod(f = "set_default",
             replacingmodel <- chron_set$modelagetype[chron_set$chronologyid == n]
 
             chronout <- purrr::map(1:length(x), function(y) {
-              if (y == n) {
+              if (x@chronologies[[y]]$chronologyid == n) {
                 x@chronologies[[y]]@isdefault <- 1
               }
-              if (y != n & x@chronologies[[y]]$modelagetype == replacingmodel) {
+              if (x@chronologies[[y]]$chronologyid != n &
+                  x@chronologies[[y]]$modelagetype == replacingmodel) {
                 x@chronologies[[y]]@isdefault <- 0
               }
               return(x@chronologies[[y]])

@@ -20,6 +20,10 @@ test_that("We can set and change the default chronology.", {
   ## we don't want this to run on CRAN
 
   skip_on_cran()
-  get_download()
+  site <- get_downloads(24238)
+  chrono <- chronologies(site)
+  newchron <- set_default(chrono, 14590)
 
+  tester <- all(as.data.frame(chrono)$isdefault == as.data.frame(newchron)$isdefault)
+  testthat::expect_false(tester)
 })
