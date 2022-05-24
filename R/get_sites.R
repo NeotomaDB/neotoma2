@@ -109,57 +109,75 @@ get_sites.default <- function(...) { # nolint
   } else {
     cl <- error_check[[1]]
   }
-
+  # Location geojson / coords array
   if ("loc" %in% names(cl)) {
-    if (is.numeric(cl$loc)) {
-      coords <- cl$loc
-      boxx <- c(xmin = coords[1], xmax = coords[2])
-      boxy <- c(ymax = coords[3], ymin = coords[4])
-      box <- c(boxx, boxy)
-      my_bbox <- sf::st_bbox(box, crs = sf::st_crs(4326))
-
-      if (is.na(my_bbox$xmin)) {
-        stop("Numeric coordinates need to be an array of 4 units.")
+    loc <- parse_location(cl$loc)
+    base_url <- paste0("data/sites?loc=", loc)
+    
+    for (name in names(cl)) {
+      if (!(name == "loc")) {
+        base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
       }
-
-      if (is.na(my_bbox$xmax)) {
-        stop("Numeric coordinates need to be an array of 4 units.")
-      }
-
-      if (is.na(my_bbox$ymin)) {
-        stop("Numeric coordinates need to be an array of 4 units.")
-      }
-
-      if (is.na(my_bbox$ymax)) {
-        stop("Numeric coordinates need to be an array of 4 units.")
-      }
-
-      my_bbox <- sf::st_as_sfc(my_bbox)
-      new_geojson <- geojsonsf::sfc_geojson(my_bbox)
-      new_geojson <- new_geojson[1]
-
-      base_url <- paste0("data/sites?loc=", new_geojson[1])
-      for (name in names(cl)) {
-        if (!(name == "loc")) {
-          base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-        }
-      }
-      result <- parseURL(base_url) %>%
-        cleanNULL()
-
-    }else{
-      base_url <- paste0("data/sites")
-      result <- parseURL(base_url, ...) %>%
-        cleanNULL()
     }
-  }else{
-
+    result <- parseURL(base_url) %>%
+      cleanNULL()
+  } else {
     base_url <- paste0("data/sites")
-
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
-
   }
+  # ###
+  # if ("loc" %in% names(cl)) {
+  #   if (is.numeric(cl$loc)) {
+  #     coords <- cl$loc
+  #     boxx <- c(xmin = coords[1], xmax = coords[2])
+  #     boxy <- c(ymax = coords[3], ymin = coords[4])
+  #     box <- c(boxx, boxy)
+  #     my_bbox <- sf::st_bbox(box, crs = sf::st_crs(4326))
+  # 
+  #     if (is.na(my_bbox$xmin)) {
+  #       stop("Numeric coordinates need to be an array of 4 units.")
+  #     }
+  # 
+  #     if (is.na(my_bbox$xmax)) {
+  #       stop("Numeric coordinates need to be an array of 4 units.")
+  #     }
+  # 
+  #     if (is.na(my_bbox$ymin)) {
+  #       stop("Numeric coordinates need to be an array of 4 units.")
+  #     }
+  # 
+  #     if (is.na(my_bbox$ymax)) {
+  #       stop("Numeric coordinates need to be an array of 4 units.")
+  #     }
+  # 
+  #     my_bbox <- sf::st_as_sfc(my_bbox)
+  #     new_geojson <- geojsonsf::sfc_geojson(my_bbox)
+  #     new_geojson <- new_geojson[1]
+  # 
+  #     base_url <- paste0("data/sites?loc=", new_geojson[1])
+  #     for (name in names(cl)) {
+  #       if (!(name == "loc")) {
+  #         base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
+  #       }
+  #     }
+  #     result <- parseURL(base_url) %>%
+  #       cleanNULL()
+  # 
+  #   }else{
+  #     base_url <- paste0("data/sites")
+  #     result <- parseURL(base_url, ...) %>%
+  #       cleanNULL()
+  #   }
+  # }else{
+  # 
+  #   base_url <- paste0("data/sites")
+  # 
+  #   result <- parseURL(base_url, ...) %>%
+  #     cleanNULL()
+###
+    
+#  }
 
   if (is.null(result$data[1][[1]])) {
     return(NULL)

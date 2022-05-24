@@ -12,8 +12,8 @@ parse_location <- function(x) {
   if (is.numeric(x)) {
     # We're getting a numeric vector of coordinates:
     coords <- x
-    my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[2],
-                             ymax = coords[3], ymin = coords[4]),
+    my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[3],
+                             ymax = coords[4], ymin = coords[2]),
                            crs = st_crs(4326))
     
     if (any(sapply(my_bbox, is.na))) {
@@ -40,10 +40,14 @@ parse_location <- function(x) {
     return(loc)
     
   } else if (is.character(x)) {
-    loc <- geojsonsf::geojson_sf(x)
-    loc <- parse_location(loc)
+    loc1 <- try(geojsonsf::geojson_sf(x), silent=TRUE)
+    if("try-error" %in% class(loc1)) {
+      loc <- sf::st_as_sf(wk::new_wk_wkt(x))
+      loc <- parse_location(loc)
+    } else {
+      loc <- parse_location(loc1)
+    }
     return(loc)
-    
   }
-
+  
 }

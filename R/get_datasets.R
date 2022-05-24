@@ -190,79 +190,69 @@ get_datasets.default <- function(x, ...) { # nolint
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
-    print("loc successful")
-    print(loc)
-    
     base_url <- paste0("data/datasets?loc=", loc)
     
     for (name in names(cl)) {
       if (!(name == "loc")) {
-        if (!(name == "all_data")) {
-          base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-        }
+        base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
       }
     }
-  }
-    
-    
-    if ("all_data" %in% names(cl)) {
-      result <- parseURL(base_url, all_data = cl$all_data) %>%
-        cleanNULL()
-    } else {
-      result <- parseURL(base_url) %>%
-        cleanNULL()
-    }
-    
-    
-    if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
-      return(NULL)
-    } else {
-      output <- parse_dataset(result)
-      return(output)
-    }
-  
-}
-  
-  #' @title Get Dataset Numeric
-  #' @param x Use a single number to extract site information
-  #' @param ... Additional parameters to get_datasets
-  #' @export
-  get_datasets.numeric <- function(x, ...) {
-    use_na <- function(x, type) {
-      if (is.na(x)) {
-        return(switch(type,
-                      "char" = NA_character_,
-                      "int" = NA_integer_))
-      } else {
-        return(x)
-      }
-    }
-    
-    if (length(x) > 0) {
-      dataset <- paste0(x, collapse = ",")
-    }
-    
-    base_url <- paste0("data/datasets/", dataset)
-    result <- neotoma2::parseURL(base_url)
-    result_length <- length(result[2]$data)
-    
-    if (result_length > 0) {
-      output <- parse_dataset(result)
-      return(output)
-    }else{
-      return(NULL)
-    }
+    result <- parseURL(base_url) %>%
+      cleanNULL()
+  } else {
+    base_url <- paste0("data/datasets")
+    result <- parseURL(base_url, ...) %>%
+      cleanNULL()
   }
   
-  #' @title Get Dataset from a \code{sites} object.
-  #' @param x An object of class \code{sites}.
-  #' @param ... additional arguments accepted by \code{get_datasets()}
-  #' @export
-  get_datasets.sites <- function(x, ...) {
-    # List of datasets ids
-    dataset_list <- getids(x)$datasetid
-    
-    output <- get_datasets(dataset_list, ...)
+  if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
+    return(NULL)
+  } else {
+    output <- parse_dataset(result)
     return(output)
   }
   
+}
+
+#' @title Get Dataset Numeric
+#' @param x Use a single number to extract site information
+#' @param ... Additional parameters to get_datasets
+#' @export
+get_datasets.numeric <- function(x, ...) {
+  use_na <- function(x, type) {
+    if (is.na(x)) {
+      return(switch(type,
+                    "char" = NA_character_,
+                    "int" = NA_integer_))
+    } else {
+      return(x)
+    }
+  }
+  
+  if (length(x) > 0) {
+    dataset <- paste0(x, collapse = ",")
+  }
+  
+  base_url <- paste0("data/datasets/", dataset)
+  result <- neotoma2::parseURL(base_url)
+  result_length <- length(result[2]$data)
+  
+  if (result_length > 0) {
+    output <- parse_dataset(result)
+    return(output)
+  }else{
+    return(NULL)
+  }
+}
+
+#' @title Get Dataset from a \code{sites} object.
+#' @param x An object of class \code{sites}.
+#' @param ... additional arguments accepted by \code{get_datasets()}
+#' @export
+get_datasets.sites <- function(x, ...) {
+  # List of datasets ids
+  dataset_list <- getids(x)$datasetid
+  
+  output <- get_datasets(dataset_list, ...)
+  return(output)
+}
