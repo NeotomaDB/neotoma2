@@ -97,7 +97,7 @@ setMethod(f = "c",
               },
               error = function(e){
                 stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
-                   comes from `get_sites()` or `get_datasets()` which does not have chronology's 
+                   comes from `get_sites()` or `get_datasets()` which does not have chronology's
                    detail")
               })
           })
@@ -111,4 +111,34 @@ setMethod(f = "write.csv",
           definition = function(x, ...) {
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
+          })
+
+
+#' @title Change the default age model for a record.
+#' @param x A chronologies object.
+#' @param n The particular chronology to be used as the default.
+#' @importFrom purrr map
+setMethod(f = "set_default",
+          signature = signature(x = "chronologies"),
+          definition = function(x, n) {
+            assertthat::assert_that(class(x) == "chronologies")
+
+            chron_set <- as.data.frame(x)
+
+            assertthat::assert_that(n %in% chron_set$chronologyid, msg = "The new default chronology must be a valid chronologyid within the chronologies.")
+
+            replacingmodel <- chron_set$modelagetype[chron_set$chronologyid == n]
+
+            chronout <- purrr::map(1:length(x), function(y) {
+              if (x@chronologies[[y]]$chronologyid == n) {
+                x@chronologies[[y]]@isdefault <- 1
+              }
+              if (x@chronologies[[y]]$chronologyid != n &
+                  x@chronologies[[y]]$modelagetype == replacingmodel) {
+                x@chronologies[[y]]@isdefault <- 0
+              }
+              return(x@chronologies[[y]])
+            })
+
+            return(new("chronologies", chronologies = chronout))
           })
