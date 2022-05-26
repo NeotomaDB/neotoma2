@@ -29,7 +29,7 @@
 #' }
 
 set_chronology <- function(x = NA,
-                           id = uuid::UUIDgenerate(),
+                           chronologyid = NA_integer_,
                            notes = NA_character_,
                            contact = list(),
                            agemodel = NA_character_,
@@ -44,6 +44,13 @@ set_chronology <- function(x = NA,
 
   if (suppressWarnings(is.na(x))) {
     x <- new("chronology")
+
+    if (is.na(chronologyid)) {
+      x@chronologyid <- uuid::UUIDgenerate()
+    } else {
+      x@chronologyid <- chronologyid
+    }
+
     x@contact <- contact
     x@agemodel <- agemodel
     x@ageboundolder <- ceiling(ageboundolder / 10) * 10
@@ -53,7 +60,11 @@ set_chronology <- function(x = NA,
     x@dateprepared <- dateprepared
     x@modelagetype <- modelagetype
     x@chronologyname <- chronologyname
+
+    chroncontrols$chronologyid <- x@chronologyid
+
     x@chroncontrols <- chroncontrols
+
   }
   return(x)
 }

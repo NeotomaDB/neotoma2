@@ -6,6 +6,7 @@
 \usage{
 set_chronology(
   x = NA,
+  chronologyid = NA_integer_,
   notes = NA_character_,
   contact = list(),
   agemodel = NA_character_,
@@ -20,6 +21,7 @@ set_chronology(
 
 set_chronology(
   x = NA,
+  chronologyid = NA_integer_,
   notes = NA_character_,
   contact = list(),
   agemodel = NA_character_,
@@ -35,30 +37,31 @@ set_chronology(
 \arguments{
 \item{x}{Object to be set as a chronology}
 
-\item{notes}{<- notes}
+\item{notes}{Additional notes about the chronology. For more modern models, often the function call to Bacon or Bchron is added here.}
 
-\item{contact}{<- contact}
+\item{contact}{A contacts object, identifying the individual(s) who created the chronology}
 
-\item{agemodel}{<- agemodel}
+\item{agemodel}{A string representing the age model name, for example "Crummy linear interpolation".}
 
-\item{ageboundolder}{<- ageboundolder}
+\item{ageboundolder}{The ageboundolder is assigned the oldest sample age rounded up to the nearest 10}
 
-\item{ageboundyounger}{<- ageboundyounger}
+\item{ageboundyounger}{The ageboundyounger is assigned the oldest sample age rounded up to the nearest 10}
 
-\item{isdefault}{<- isdefault}
+\item{isdefault}{Defines whether the model is the default for the collection unit for a particular model age type.}
 
-\item{dateprepared}{<- dateprepared}
+\item{dateprepared}{The date at which the age model was prepared.}
 
-\item{modelagetype}{<- modelagetype}
+\item{modelagetype}{The age type for the model. For validation, the models should be one of the valid Neotoma \code{agetypes}: \url{https://api.neotomadb.org/v2.0/data/dbtables?table=agetypes}}
 
-\item{chronologyname}{<- chronologyname}
+\item{chronologyname}{A valid name for the chronology.}
 
-\item{chroncontrols}{<- chroncontrols}
+\item{chroncontrols}{A data.frame containing the chronological controls for the age model.}
 }
 \description{
-set Site Information for Fossil Sites
-
-set chronology information for a new record.
+Create a new chronology for a record, or for your own entertainment.
+Within Neotoma all chronologies have unique numeric identifiers. Within R, because of the
+need to use the indentifiers across objects, and because we want to avoid conflicts between
+naming systems, a universally unique identifier (UUID) is created for the object ID.
 }
 \examples{
 \dontrun{
