@@ -1,6 +1,6 @@
 #' @title An S4 class for Neotoma contacts
 setClass("contact",
-                    representation(contactid = "numeric",
+                    representation(contactid = "ANY",
                                    familyname = "character",
                                    leadinginitials = "character",
                                    givennames = "character",
