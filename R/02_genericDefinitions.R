@@ -91,6 +91,17 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
+#' @title Add a new chronology to a collection unit.
+#' @param object A collectionunit object
+#' @param x A chronology object
+#' @param y A \code{data.frame} of sample ages
+#' @importFrom methods slotNames slot
+#' @export
+setGeneric("add_chronology",
+           function(object, x, y) {
+             standardGeneric(f = "add_chronology")
+           })
+
 #' @title Extract collection units from a sites object
 #' @param object A sites object
 #' @importFrom methods slotNames slot

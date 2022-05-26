@@ -27,7 +27,8 @@ setMethod(f = "samples",
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              dplyr::rename(sitenotes = .data$notes.x, datasetnotes = .data$notes.y)
+              dplyr::rename(sitenotes = .data$notes.x,
+                            datasetnotes = .data$notes.y)
 
             sampset <- purrr::map(x@collunits@collunits, function(y) samples(y)) %>%
                                       dplyr::bind_rows() %>%
@@ -58,8 +59,6 @@ setMethod(f = "samples",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-            
-            
 
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
@@ -111,6 +110,7 @@ setMethod(f = "samples",
                                                             }
                                                             data.frame(z@ages[whichage,],
                                                                        z@datum,
+                                                                       analysisunitid = z@analysisunitid,
                                                                        sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
                                                                        sampleid = z@sampleid,
                                                                        depth = z@depth,

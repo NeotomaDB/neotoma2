@@ -137,7 +137,7 @@ setClass(
   # Set the name for the class
   "chronology",
   # Define the slots
-  slots = c(chronologyid = "numeric",
+  slots = c(chronologyid = "ANY",
             notes = "character",
             contact = "ANY",
             agemodel = "character",

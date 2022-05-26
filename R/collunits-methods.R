@@ -24,6 +24,18 @@ setMethod(f = "show",
             print(result)
           })
 
+#' @title  Add a chronology to a collectionunit
+#' @param object collunit object
+#' @export
+setMethod(f = "add_chronology",
+          signature = signature(object = "collunit", x = "chronology", y = "data.frame"),
+          definition = function(object, x, y) {
+            result <- as.data.frame(object)
+
+            print(result)
+          })
+
+
 #' @title  Show the collection unit information
 #' @param object collunit object
 #' @export

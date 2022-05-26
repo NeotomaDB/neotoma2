@@ -29,6 +29,18 @@ setMethod(f = "$",
             slot(x, name)
           })
 
+#' @title  $ Assignment
+#' @param x chronology object
+#' @param name name of the slot
+#' @description Obtain slots of a chronology without using at-mark
+#' @export
+setMethod(f = "$<-",
+          signature = signature(x = "chronology"),
+          definition = function(x, name, value) {
+            slot(x, name) <- value
+            return(x)
+          })
+
 #' @title  $ for chronologies
 #' @param x chronologies object
 #' @param name name of the slot
@@ -89,17 +101,20 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
           definition = function(x, y) {
+            if ("chronology" %in% class(y)) {
+              y <- new("chronologies", chronologies = list(y))
+            }
             tryCatch(
-              expr = {
-                new("chronologies",
-                    chronologies = unlist(c(x@chronologies,
-                                            y@chronologies), recursive = FALSE))
-              },
-              error = function(e){
-                stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
-                   comes from `get_sites()` or `get_datasets()` which does not have chronology's
-                   detail")
-              })
+                expr = {
+                  new("chronologies",
+                      chronologies = unlist(c(x@chronologies,
+                                              y@chronologies), recursive = FALSE))
+                },
+                error = function(e){
+                  stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
+                     comes from `get_sites()` or `get_datasets()` which does not have chronology's
+                     detail")
+                })
           })
 
 #' @title write CSV
