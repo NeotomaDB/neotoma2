@@ -68,7 +68,7 @@ setMethod(f = "samples",
               # better.
               defaultchron <- purrr::map(chronologies(x)@chronologies,
                                          function(y) {
-                                           data.frame(chronologyid = y@chronologyid,
+                                           data.frame(chronologyid = as.character(y@chronologyid),
                                                       isdefault = y@isdefault,
                                                       modelagetype = y@modelagetype,
                                                       chronologyname = y@chronologyname)

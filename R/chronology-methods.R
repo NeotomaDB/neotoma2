@@ -59,17 +59,18 @@ setMethod(f = "$",
 #' @title  as.data.frame chronology
 #' @param x chronology object
 #' @description show as dataframe as prep to save as csv
+#' @importFrom lubridate as_date
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronology"),
           definition = function(x) {
-            data.frame(chronologyid = x@chronologyid,
+            data.frame(chronologyid = as.character(x@chronologyid),
                        notes = x@notes,
                        agemodel = x@agemodel,
                        ageboundolder = x@ageboundolder,
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
-                       dateprepared = ifelse(is.null(x@dateprepared), NA, x@dateprepared),
+                       dateprepared = lubridate::as_date(ifelse(is.null(x@dateprepared), NA, x@dateprepared)),
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
