@@ -1,12 +1,13 @@
 #' @title set chronology information for a new record.
 #' @description Create a new chronology for a record, or for your own entertainment.
 #' Within Neotoma all chronologies have unique numeric identifiers. Within R, because of the
-#' need to use the indentifiers across objects, and because we want to avoid conflicts between
+#' need to use the identifiers across objects, and because we want to avoid conflicts between
 #' naming systems, a universally unique identifier (UUID) is created for the object ID.
 #' @importFrom methods new
 #' @importFrom uuid UUIDgenerate
 #' @importFrom methods slot<-
 #' @param x Object to be set as a chronology
+#' @param chronologyid An optional value. Will be assigned a unique identifier if not provided.
 #' @param contact A contacts object, identifying the individual(s) who created the chronology
 #' @param agemodel A string representing the age model name, for example "Crummy linear interpolation".
 #' @param ageboundolder The ageboundolder is assigned the oldest sample age rounded up to the nearest 10

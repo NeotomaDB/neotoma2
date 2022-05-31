@@ -30,8 +30,9 @@ setMethod(f = "$",
           })
 
 #' @title  $ Assignment
-#' @param x chronology object
-#' @param name name of the slot
+#' @param x A chronology object
+#' @param name The name of the chronology slot.
+#' @param value A value to be assigned to the chronology slot.
 #' @description Obtain slots of a chronology without using at-mark
 #' @export
 setMethod(f = "$<-",

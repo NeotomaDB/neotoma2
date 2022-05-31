@@ -112,7 +112,8 @@ setGeneric("collunits",
            })
 
 #' @title Set the default chronology within a collectionunit.
-#' @param object A sites object
+#' @param x A chronologies object.
+#' @param n The particular chronology to be used as the default.
 #' @importFrom methods slotNames slot
 #' @export
 setGeneric("set_default",

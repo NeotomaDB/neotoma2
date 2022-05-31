@@ -37,6 +37,8 @@ set_chronology(
 \arguments{
 \item{x}{Object to be set as a chronology}
 
+\item{chronologyid}{An optional value. Will be assigned a unique identifier if not provided.}
+
 \item{notes}{Additional notes about the chronology. For more modern models, often the function call to Bacon or Bchron is added here.}
 
 \item{contact}{A contacts object, identifying the individual(s) who created the chronology}
@@ -60,7 +62,7 @@ set_chronology(
 \description{
 Create a new chronology for a record, or for your own entertainment.
 Within Neotoma all chronologies have unique numeric identifiers. Within R, because of the
-need to use the indentifiers across objects, and because we want to avoid conflicts between
+need to use the identifiers across objects, and because we want to avoid conflicts between
 naming systems, a universally unique identifier (UUID) is created for the object ID.
 }
 \examples{

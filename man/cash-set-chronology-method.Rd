@@ -7,9 +7,11 @@
 \S4method{$}{chronology}(x, name) <- value
 }
 \arguments{
-\item{x}{chronology object}
+\item{x}{A chronology object}
 
-\item{name}{name of the slot}
+\item{name}{The name of the chronology slot.}
+
+\item{value}{A value to be assigned to the chronology slot.}
 }
 \description{
 Obtain slots of a chronology without using at-mark

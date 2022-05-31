@@ -7,7 +7,9 @@
 set_default(x, n)
 }
 \arguments{
-\item{object}{A sites object}
+\item{x}{A chronologies object.}
+
+\item{n}{The particular chronology to be used as the default.}
 }
 \description{
 Set the default chronology within a collectionunit.

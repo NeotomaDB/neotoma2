@@ -26,7 +26,8 @@ RoxygenNote: 7.1.2
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    Bchron
 Imports:
     magrittr,
     lifecycle,
@@ -48,6 +49,7 @@ Imports:
     stringr,
     progress,
     covr,
-    wk
+    wk,
+    uuid
 RdMacros: lifecycle
 VignetteBuilder: knitr

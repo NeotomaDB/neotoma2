@@ -1,6 +1,7 @@
 # load libraries
 library("testthat")
 library("neotoma2")
+library("Bchron")
 
 context("Run Neotoma `test_samples` only when not on CRAN")
 
