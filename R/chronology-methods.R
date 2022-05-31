@@ -29,6 +29,19 @@ setMethod(f = "$",
             slot(x, name)
           })
 
+#' @title  $ Assignment
+#' @param x A chronology object
+#' @param name The name of the chronology slot.
+#' @param value A value to be assigned to the chronology slot.
+#' @description Obtain slots of a chronology without using at-mark
+#' @export
+setMethod(f = "$<-",
+          signature = signature(x = "chronology"),
+          definition = function(x, name, value) {
+            slot(x, name) <- value
+            return(x)
+          })
+
 #' @title  $ for chronologies
 #' @param x chronologies object
 #' @param name name of the slot
@@ -47,17 +60,18 @@ setMethod(f = "$",
 #' @title  as.data.frame chronology
 #' @param x chronology object
 #' @description show as dataframe as prep to save as csv
+#' @importFrom lubridate as_date
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronology"),
           definition = function(x) {
-            data.frame(chronologyid = x@chronologyid,
+            data.frame(chronologyid = as.character(x@chronologyid),
                        notes = x@notes,
                        agemodel = x@agemodel,
                        ageboundolder = x@ageboundolder,
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
-                       dateprepared = ifelse(is.null(x@dateprepared), NA, x@dateprepared),
+                       dateprepared = lubridate::as_date(ifelse(is.null(x@dateprepared), NA, x@dateprepared)),
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
@@ -89,17 +103,20 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
           definition = function(x, y) {
+            if ("chronology" %in% class(y)) {
+              y <- new("chronologies", chronologies = list(y))
+            }
             tryCatch(
-              expr = {
-                new("chronologies",
-                    chronologies = unlist(c(x@chronologies,
-                                            y@chronologies), recursive = FALSE))
-              },
-              error = function(e){
-                stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
-                   comes from `get_sites()` or `get_datasets()` which does not have chronology's 
-                   detail")
-              })
+                expr = {
+                  new("chronologies",
+                      chronologies = unlist(c(x@chronologies,
+                                              y@chronologies), recursive = FALSE))
+                },
+                error = function(e){
+                  stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
+                     comes from `get_sites()` or `get_datasets()` which does not have chronology's
+                     detail")
+                })
           })
 
 #' @title write CSV
@@ -111,4 +128,34 @@ setMethod(f = "write.csv",
           definition = function(x, ...) {
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
+          })
+
+
+#' @title Change the default age model for a record.
+#' @param x A chronologies object.
+#' @param n The particular chronology to be used as the default.
+#' @importFrom purrr map
+setMethod(f = "set_default",
+          signature = signature(x = "chronologies"),
+          definition = function(x, n) {
+            assertthat::assert_that(class(x) == "chronologies")
+
+            chron_set <- as.data.frame(x)
+
+            assertthat::assert_that(n %in% chron_set$chronologyid, msg = "The new default chronology must be a valid chronologyid within the chronologies.")
+
+            replacingmodel <- chron_set$modelagetype[chron_set$chronologyid == n]
+
+            chronout <- purrr::map(1:length(x), function(y) {
+              if (x@chronologies[[y]]$chronologyid == n) {
+                x@chronologies[[y]]@isdefault <- 1
+              }
+              if (x@chronologies[[y]]$chronologyid != n &
+                  x@chronologies[[y]]$modelagetype == replacingmodel) {
+                x@chronologies[[y]]@isdefault <- 0
+              }
+              return(x@chronologies[[y]])
+            })
+
+            return(new("chronologies", chronologies = chronout))
           })

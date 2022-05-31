@@ -1,6 +1,6 @@
 #' @title An S4 class for Neotoma contacts
 setClass("contact",
-                    representation(contactid = "numeric",
+                    representation(contactid = "ANY",
                                    familyname = "character",
                                    leadinginitials = "character",
                                    givennames = "character",
@@ -137,7 +137,7 @@ setClass(
   # Set the name for the class
   "chronology",
   # Define the slots
-  slots = c(chronologyid = "numeric",
+  slots = c(chronologyid = "ANY",
             notes = "character",
             contact = "ANY",
             agemodel = "character",

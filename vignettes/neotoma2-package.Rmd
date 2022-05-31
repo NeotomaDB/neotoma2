@@ -231,7 +231,7 @@ brasil_dates <- brazil_datasets %>%
 
 # With boolean operators:
 
-brasil_space <- brazil_datasets %>% filter(lat > -18 & lat < -16)
+brasil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
 ```
 
 The `filter()` function takes as the first argument, a datasets object, followed by the criteria we want to use to filter. Current supported criteria includes:
