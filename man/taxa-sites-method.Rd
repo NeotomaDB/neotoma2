@@ -13,5 +13,5 @@
 A \code{data.frame} reporting the taxa/data objects, units, &cetera within the set of records.
 }
 \description{
-Extract taxonomic data from a set of sites.
+From a sites object,
 }
