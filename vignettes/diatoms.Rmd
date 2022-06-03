@@ -41,7 +41,7 @@ This document is organized to address users' two main goals: to browse the datab
 The Neotoma servers and all the back-end services recently (as of [Simon - add month / year]) migrated from a SQL Server Database on a lonely Windows N95 computer to a more robust server and set of services. Because of this migration, many of the tools we use to access data are no longer accessible. For this reason, the Neotoma IT Team chose to create a new package. This is because the code used in `neotoma` will not be directly comparable to the code used in `neotoma2` since data objects and expected behaviours will differ.
 
 ### Data Organization in Neotoma
-
+[[Re following two sections.  Can they be combined? - Delete the What does the data loook like heading?  Can SQL be used to work with the Postgres database?]]
 It is worth knowing how the Neotoma database is organized and what we mean when talking about things like `sites`, `datasets`, and `samples`. The database is a Postgres database, and people who are comfortable with SQL can download a snapshot of the database and run much of the analysis on their own.
 
 #### What does the data look like?
@@ -155,7 +155,7 @@ my_sites
 Get data on multiple sites using sitenames - National Lakes Assessment Example
 
 #### Site ID
-Find sites using siteid.  In the following code chunks, we assume that siteids have been obtained using Neotoma Explorer, from Neotoma Landing Pages or from an external file.
+Find sites using siteid.  In the following code chunks, we assume that siteids have been obtained from Neotoma Explorer, from Neotoma Landing Pages or from an external file.
 
 Get data on a single site using siteid
 ```{r sitesbySiteID example}
@@ -1025,8 +1025,8 @@ Needs to be written
 
 #### Water chemistry
 ```{R WCHM Out}
-uwallf <- get_site(sitename="%Wallface%")
-get_datasets(uwallf,datasettype = 'water chemistry') # example
+uwallf <- get_sites(sitename="%Wallface%")
+uwallf_wc <- get_datasets(uwallf,datasettype = 'water chemistry') # example
 ```
 
 #### `chronologies()` Function
