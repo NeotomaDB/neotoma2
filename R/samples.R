@@ -71,7 +71,8 @@ setMethod(f = "samples",
                                            data.frame(chronologyid = as.character(y@chronologyid),
                                                       isdefault = y@isdefault,
                                                       modelagetype = y@modelagetype,
-                                                      chronologyname = y@chronologyname)
+                                                      chronologyname = y@chronologyname,
+                                                      dateprepared = y@dateprepared)
                                          }) %>%
                 dplyr::bind_rows() %>%
                 dplyr::mutate(modelrank = match(modelagetype, rev(precedence)),
@@ -82,6 +83,16 @@ setMethod(f = "samples",
               # or, alternately, no default chronology.
               allNA <- all(is.na(defaultchron$order))
               maxOrder <- max(defaultchron$order, na.rm = TRUE)
+              if(sum(defaultchron$order==maxOrder, na.rm = TRUE) > 1) {
+                if(any(is.na(defaultchron$dateprepared))){
+                  
+                  newMaxOrder <- which.max(defaultchron$chronologyid[defaultchron$order == maxOrder])
+                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+                } else {
+                  newMaxOrder <- which.max(defaultchron$dateprepared[defaultchron$order == maxOrder])
+                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+                }
+              }
 
               if (allNA == TRUE) {
                  warnsite <- sprintf("The dataset %d has no default chronologies.",
