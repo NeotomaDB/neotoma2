@@ -29,12 +29,12 @@ setMethod(f = "samples",
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
               dplyr::rename(sitenotes = .data$notes.x,
                             datasetnotes = .data$notes.y)
-
+            
             sampset <- purrr::map(x@collunits@collunits, function(y) samples(y)) %>%
-                                      dplyr::bind_rows() %>%
+              dplyr::bind_rows() %>%
               dplyr::bind_rows() %>%
               dplyr::left_join(siteinfo, by = "datasetid")
-
+            
             return(sampset)
           }
 )
@@ -59,7 +59,7 @@ setMethod(f = "samples",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-
+            
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma
@@ -71,21 +71,32 @@ setMethod(f = "samples",
                                            data.frame(chronologyid = as.character(y@chronologyid),
                                                       isdefault = y@isdefault,
                                                       modelagetype = y@modelagetype,
-                                                      chronologyname = y@chronologyname)
+                                                      chronologyname = y@chronologyname,
+                                                      dateprepared = y@dateprepared)
                                          }) %>%
                 dplyr::bind_rows() %>%
                 dplyr::mutate(modelrank = match(modelagetype, rev(precedence)),
                               order = isdefault * match(modelagetype, rev(precedence)))
-
+              
               # Validation of default chrons, we want to check whether there
               # exists either multiple default chronologies for the same time-frame
               # or, alternately, no default chronology.
               allNA <- all(is.na(defaultchron$order))
               maxOrder <- max(defaultchron$order, na.rm = TRUE)
-
+              if(sum(defaultchron$order==maxOrder, na.rm = TRUE) > 1) {
+                if(any(is.na(defaultchron$dateprepared))){
+                  
+                  newMaxOrder <- which.max(defaultchron$chronologyid[defaultchron$order == maxOrder])
+                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+                } else {
+                  newMaxOrder <- which.max(defaultchron$dateprepared[defaultchron$order == maxOrder])
+                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+                }
+              }
+              
               if (allNA == TRUE) {
-                 warnsite <- sprintf("The dataset %d has no default chronologies.",
-                                     allids$datasetid[1])
+                warnsite <- sprintf("The dataset %d has no default chronologies.",
+                                    allids$datasetid[1])
                 warning(warnsite)
               } else if (sum(defaultchron$order == maxOrder, na.rm = TRUE) > 1) {
                 warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
@@ -98,7 +109,7 @@ setMethod(f = "samples",
             } else {
               defaultchron <- data.frame(chronologyid = NULL)
             }
-
+            
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
@@ -122,8 +133,7 @@ setMethod(f = "samples",
                                       dplyr::mutate(datasetid = dsid)
                                   }) %>%
               dplyr::bind_rows()
-
+            
             return(sampset)
           }
 )
-
