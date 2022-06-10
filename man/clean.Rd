@@ -9,6 +9,8 @@ clean(x = NA, verbose = TRUE, ...)
 \arguments{
 \item{x}{sites, datasets, collunits that may have duplicates.}
 
+\item{verbose}{parameter to prints out progress bar}
+
 \item{...}{Additional parameters associated with the call.}
 }
 \description{

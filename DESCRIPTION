@@ -25,9 +25,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests:
     testthat,
-    covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    Bchron
 Imports:
     magrittr,
     lifecycle,
@@ -39,12 +39,17 @@ Imports:
     jsonlite,
     methods,
     dplyr,
+    tidyverse,
     gtools,
     arulesViz,
     leaflet,
     mapview,
     assertthat,
     qpdf,
-    stringr
+    stringr,
+    progress,
+    covr,
+    wk,
+    uuid
 RdMacros: lifecycle
 VignetteBuilder: knitr

@@ -72,6 +72,16 @@ setGeneric("selectMatch", function(x, n) {
   standardGeneric(f = "selectMatch")
 })
 
+#' @title chroncontrols
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @description Show the samples table
+#' @param x Sites object to extract chroncontrols table from
+#' @export
+setGeneric("chroncontrols", function(x) {
+  standardGeneric(f = "chroncontrols")
+})
+
+
 #' @title taxa
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @description Show the samples table
@@ -81,6 +91,17 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
+#' @title Add a new chronology to a collection unit.
+#' @param object A collectionunit object
+#' @param x A chronology object
+#' @param y A \code{data.frame} of sample ages
+#' @importFrom methods slotNames slot
+#' @export
+setGeneric("add_chronology",
+           function(object, x, y) {
+             standardGeneric(f = "add_chronology")
+           })
+
 #' @title Extract collection units from a sites object
 #' @param object A sites object
 #' @importFrom methods slotNames slot
@@ -88,4 +109,14 @@ setGeneric("taxa", function(object) {
 setGeneric("collunits",
            function(object) {
              standardGeneric(f = "collunits")
+           })
+
+#' @title Set the default chronology within a collectionunit.
+#' @param x A chronologies object.
+#' @param n The particular chronology to be used as the default.
+#' @importFrom methods slotNames slot
+#' @export
+setGeneric("set_default",
+           function(x, n) {
+             standardGeneric(f = "set_default")
            })
