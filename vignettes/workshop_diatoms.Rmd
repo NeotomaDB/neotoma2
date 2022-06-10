@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo=FALSE}
+```{r setup, message=FALSE}
 library(neotoma2)
 library(dplyr)
 library(purrr)
@@ -40,7 +40,7 @@ It is worth knowing how the Neotoma database is organized and what we mean when 
 
 The Neotoma data model is available online at the [Database Schema](https://open.neotomadb.org/dbschema) page. As of September 2021, there were 150 different tables in the database. Some of these have particular kinds of data (for example, `agetypes`), and some link tables together. The `neotoma2` package directly supports access to some tables, but not all. For specialized cases, a user may be required to access an entire table directly (using the `get_table()` function).
 
-#### Neotoma Structure (change header title?)
+#### Neotoma Structure
 
 Neotoma data is structured spatially. Each collection location is assigned a **site**, a spatial location defined by either a point or a polygon. It may be a lake, an archaeological site, a swamp, or another location.
 
@@ -49,7 +49,7 @@ A collection unit represents the material (e.g., sediment core) removed from a s
 
 Note: There are three diatom dataset types:  "diatom" (stratigraphic / cores), "diatom surface samples" (surface samples only), and "diatom top-bottom" (top and bottom only).
 
-#### neotoma2 R-package function (change header title?)
+#### neotoma2 R-package function
 
 The `neotoma2` package uses data from the Neotoma database, but it is mediated through R functions (like `get_sites()` to get site information) that call public URLs, which are abstractions of database calls. So, for example, to get data for the site with ID number 12:
 ```r
@@ -115,7 +115,8 @@ e.g., `get_sites(sitename="Alexander Lake")`
 Search for a site by siteid. 
 
 ```{R dearch by siteid}
-uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which has the Neotoma siteid 745.  )
+uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which has the Neotoma siteid 745.
+
 uwallf_site
 ```
 
@@ -227,7 +228,8 @@ To see structure of a `get_datasets()` object, run the following code:
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
 uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
-str(uwallf_data)
+
+#str(uwallf_data)
 ```
 
 # Download Data
@@ -448,30 +450,17 @@ uwallf_chron <- chronologies(uwallf_dl)
 
 ##### Diatom taxa
 
-Get list of all taxa associated with single datasettype.
-
 The following code gets selected diatom taxa name variables from the Neotoma Taxa table.
 
-SIMON and SOCCORO - the following code works, but times-out before all diatom taxa are returned.  Please fix.
+```{R MasterListTaxa}
+diat_taxa_tab <- get_table('taxa') %>%
+  dplyr::filter(TaxaGroupID == "DIA")
 
-```{R MasterListTaxa, eval=FALSE}
-#code taken from `get_table()` documentation
-someTaxa <- get_table('taxa')
-# Loop with the offset to get all specimens:
-okay <- TRUE
-counter <- 1
-taxa <- list()
-while(okay) {
-  taxa[[counter]] <- get_table('taxa', offset = (counter - 1) * 25)
-  if(nrow(taxa[[counter]]) < 25) {
-    okay <- FALSE
-  } else {
-    counter <- counter + 1
-  }
-}
-taxa <- taxa %>% dplyr::bind_rows()
+head(diat_taxa_tab, 5)
 ```
 
+
+Get list of all taxa associated with single datasettype.
 
 ```{R ListOfTaxaByDatasettype}
 diatoms<- get_datasets(datasettype = 'diatom')
@@ -505,11 +494,12 @@ The `get_publications` function extracts collection units from a sites objects.
 | `x` | integer: a contact ID |
 | `	publicationid ` | The unique numeric identifier associated with a publication in Neotoma |
 | `datasetid` | A unique identifier for a Neotoma dataset that is associated with a publication |
+| `siteid` | A unique identifier for a Neotoma site that is associated with a publication |
 | `pubtype ` | The publication type, from `get_tables("publicationtypes")` |
 | `year` | The year the publication was released |
 | `search` | A plain text search string used to search the citation |
 
-**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+**Values returned:** A "publications" object that displays the variables publicationid, citation, and DOI. The structure of the "publications" object contains metadata with all possible publications info.
 
 # Visualize Data
 
