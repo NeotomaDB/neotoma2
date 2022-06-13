@@ -84,7 +84,7 @@ This section describes ways of searching the Neotoma database to find `sites` an
 
 ### Find sites
 
-Use the `get_sites()` or `get_datasets()` functions to find sites and related information. Searches using siteid or sitename can be done using `get_sites()`. Searches using dataset information (such as age, location, dataset type, etc.) can be done using `get_downloads()`. 
+Use the `get_sites()` or `get_datasets()` functions to find sites and related information. Searches using siteid or sitename can be done using `get_sites()`. Searches using dataset information (such as age, location, dataset type, etc.) can be done using `get_datasets()`. 
 
 The information returned by the both functions are similar, but still notably different. The level of detail in `get_datasets()` is different as it includes: agerange, database , datasettype , datasetnotes . These fields are not in `get_sites()`
 
