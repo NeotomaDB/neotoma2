@@ -453,7 +453,7 @@ The following code gets selected diatom taxa name variables from the Neotoma Tax
 
 ```{R MasterListTaxa}
 diat_taxa_tab <- get_table('taxa') %>%
-  dplyr::filter(TaxaGroupID == "DIA")
+  dplyr::filter(taxagroupid == "DIA")
 
 head(diat_taxa_tab, 5)
 ```
@@ -499,6 +499,23 @@ The `get_publications` function extracts collection units from a `sites` object.
 | `search` | A plain text search string used to search the citation |
 
 **Values returned:** A "publications" object that displays the variables publicationid, citation, and DOI. The structure of the "publications" object contains metadata with all possible publications info.
+
+```{R publications example}
+uwallf_site <- get_sites(sitename = 'Upper Wallface%')
+
+uwallf_data <- get_datasets(uwallf_site)
+
+#filtering for only diatom datasets
+diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
+
+#using `getids()` to retrieve the diatom datasetids
+diat_uwallf_datasetids <- getids(diat_uwallf_dataset)$datasetid 
+
+#`get_publications()` can only take one datasetid at a time. Putting "[1]" after the object takes the first datasetid.
+uwallf_pub <- get_publications(datasetid = diat_uwallf_datasetids[1])
+
+uwallf_pub
+```
 
 # Visualize Data
 
