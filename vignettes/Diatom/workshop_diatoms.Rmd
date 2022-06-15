@@ -367,6 +367,9 @@ The `samples()` function obtains sample level data from a record `sites` object 
 
 ##### Diatom counts
 
+The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
+For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
+
 Example of using `samples()` to obtain diatom counts from a single sediment core.
 
 ```{R samplesFunctionExample}
@@ -392,7 +395,8 @@ diat_NE_dl <- get_downloads(NE_datasets)
 NE_diat_samp <- samples(diat_NE_dl) %>%
 dplyr::filter(datasettype == "diatom surface sample")
 
-head(NE_diat_samp, 5)
+#output is a large table. The head function is used to show only the first three rows to save space
+head(NE_diat_samp, 3)
 
 #Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
@@ -413,7 +417,7 @@ wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry"
 wat_NE_dl <- get_downloads(wat_NE_dataset)  
 
 #result: count information with only water chemistry at the specified sites
-head(samples(wat_NE_dl),5)
+head(samples(wat_NE_dl),3)
 ```
 
 ##### Diatom counts and water chemistry
@@ -452,7 +456,8 @@ uwallf_chron <- chronologies(uwallf_dl)
 The following code gets selected diatom taxa name variables from the Neotoma Taxa table.
 
 ```{R MasterListTaxa}
-diat_taxa_tab <- get_table('taxa') %>%
+#By default, get_table only returns 25 specimen records
+diat_taxa_tab <- get_table('taxa', limit=99999) %>%
   dplyr::filter(taxagroupid == "DIA")
 
 head(diat_taxa_tab, 5)
@@ -461,26 +466,13 @@ head(diat_taxa_tab, 5)
 
 Get list of all taxa associated with single datasettype.
 
-```{R ListOfTaxaByDatasettype}
+```{R ListOfTaxaByDatasettype, warning=FALSE}
 diatoms<- get_datasets(datasettype = 'diatom')
 diat_dl <- get_downloads(diatoms)
 diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
+
+head(diat_taxa,3)
 ```
-
-
-##### Diatom counts
-
-The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
-For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
-
-#### List of diatom taxa 
-
-Create file of all diatom taxa in the Neotoma master list - with name, authority, code, notes, etc.
-
-
-##### Transform raw diatom counts to percentages and other forms
-NEED CODE to transform raw diatom counts (number of rows counted) in a dataframe to percent relative abundance.  This could be done with using basic R code or by relying on a function in another package - for example the tran() function in the Analogue package.  The tran function can make a variety of other transformations as well.
-
 
 ##### `get_publications` Function
 
