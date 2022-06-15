@@ -416,7 +416,7 @@ wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry"
 
 wat_NE_dl <- get_downloads(wat_NE_dataset)  
 
-#result: count information with only water chemistry at the specified sites
+#result: count information with only water chemistry at the specified sites. 
 head(samples(wat_NE_dl),3)
 ```
 
@@ -425,12 +425,12 @@ Example of how to get sample data from multiple sites while also filtering for d
 
 The `sites` objects obtained from the above two chunks of code can be combined to have both diatoms and water chemistry data.
 
-```{r diatom_and_waterchemistry_counts example}
+```{r diatom_and_waterchemistry_counts example, warning=FALSE}
 #Join downloads together using the combine command, c()
 diat_wat_dl <- c(diat_NE_dl, wat_NE_dl)
 
 #result: count information with both diatoms and water chemistry at the specified sites
-head(samples(diat_wat_dl),5)
+diat_wat_counts <- samples(diat_wat_dl)
 ```
 
 #### `chronologies()` Function
