@@ -135,12 +135,12 @@ diat_6
 ```
 Get data on multiple sites by reading a text file of siteids
 
-The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a plain text file called `NLAD.txt` with a list of site IDs for sites sampled as part of the National Lakes Assessment.  The contents of the file look like this [[(the ellipsis would be replaced by other numbers)]]:
+The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a plain text file called `NLAD.txt` with a list of site IDs for sites sampled as part of the National Lakes Assessment.
 
-There may well be many more lines with numbers representing each site identifer in the set of records.  In this case we would load the data like so:
+There may well be many more lines with numbers representing each site identifier in the set of records.  In this case we would load the data like so:
 
 ```{r NLAmultiplesiteID}
-nlad <- read.table('NLAD.txt', header=FALSE)
+nlad <- read.table('vignettes\\Data-DFC\\NLAD.txt', header=FALSE)
 nlaSites <- get_sites(nlad$V1)
 nlaSites
 ```
@@ -217,10 +217,11 @@ diat_1
 ```
 View the sitegeopolitical table to find gpids associated with datasetids.
 
-Run following code to open the sitegeopolitical table and then enter datasetid in filter box to find corresponding gpids
+Run following code to open the sitegeopolitical table and then enter siteid in filter box to find corresponding gpids
 
 ```{R sitegeopoliticalTable}
-dataset_gpid <- get_table(table.name ="sitegeopolitical")
+dataset_gpid <- get_table('sitegeopolitical', limit=99999) %>%
+  dplyr::filter(siteid == 10)
 View(dataset_gpid)
 # Table columns: GeoPoliticalID,  SiteID, SiteGeoPoliticalID
 ```
@@ -228,10 +229,10 @@ View(dataset_gpid)
 Example - get sites from multiple geopolitical units (e.g., states)
 
 ```{r retrieveByGeopol}
-# Get site data for all sites in three New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY [[DFC - delete some states from list above- include only the 3 states used]]
+# Get site data for all sites in three New England states (PA, NJ, NY)
 # The gpids were obtained from the Geopolitical units table 
 
-gpids <- c(8412, 7990, 7934) #gpids for .......
+gpids <- c(8412, 7990, 7934) #gpids for PA, NY, and NJ
 
 ne_sites <- c()
 for (id in gpids) {
@@ -242,7 +243,7 @@ for (id in gpids) {
 ne_sites
 ```
 
-##### Navigate the structure of a `sites` object to find specific metadata.
+### Navigate the structure of a `sites` object to find specific metadata.
 
 Sometimes it is useful to extract specific data from a `sites` object.  We can call any individual site using `[[ ]]`, placing the index (sequence number) of the desired site object between the brackets. For example, the `uwallf_site` object is composed of only one site, so its index value is 1. Then we can also call the particular variable we want (e.g., siteid) using the `$` symbol.
 
