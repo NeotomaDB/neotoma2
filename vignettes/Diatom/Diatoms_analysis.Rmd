@@ -1,6 +1,6 @@
 ---
-title: "NE-Dtm-Collab"
-author: "Don Charles"
+title: "Diatom Data Analysis"
+author: "Don Charles, Eric O'Malley"
 date: "11/18/2021"
 output: html_document
 editor_options: 
@@ -65,7 +65,7 @@ pc_abun <- function(dl_object) {
 The following code extracts the state using a site object
 (change the [[2]] to [[3]] in the `geopol()` function to get county instead of state)
 
-These functions are also within my own functions directory, which may be more up to date.
+**Probably switch to searching by GPID in get_datasets, although this may still be useful**
 
 ```{r geo pol (state) function}
 #x = sites object
@@ -133,7 +133,19 @@ saveRDS(diat_taxa_tab, file = "diat_taxa_table.rds")
 ```
 
 
-##mapping diatom cores for NE
+
+
+
+
+# Mapping diatom cores for NE
+
+The results of the code below is a leaflet map with that plots taxa abundance with location. 
+
+The code chunk below was a working version. It needs to be reorganized / cleaned up. 
+
+There should only be 1 plotting taxa (instead of 4). Makes use of a modified PlotLeaflet function in neotoma2 that I named PlotLeaflet2. This function is not in the document, but it is a separate script I have locally (add?). Extra code needs to be removed. Remove all variable naming (use %>%). 
+
+
 ```{R Agg Dataset Taxa Presence in Sites}
 #note: this includes states not in the NE. Shouldn't matter, since map is cropped to NE
 diat_15 <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
@@ -602,6 +614,11 @@ final <- testy2$siteid %>%
   plotLeaflet()
 ```
 
+
+
+
+# Plotting total Ph in WC against percent abundance
+
 ```{R plotting total Ph in WC against taxa % abundance}
 #using: Aggregate Datasets - Diatoms -  EMAP NE SW Neotoma (version 1)
 #sheet: Northeast combined wWC 28Apr22
@@ -748,9 +765,6 @@ diat_15_dl <- get_downloads(diat_15_data)
 ```
 
 
-```{R function for above^^^}
-
-```
 
 ```{R siteSpatialSearch 2}
 diat_24<- c(19531,19535,19541,19545,19549,19555,19559,19563,19567,19571,19577,19579,19581,19594,19596,19598,19600,19602,19604,19606,19608,19610,19612,19614,19622,19624,19626,19628,19630,19632,19634,19636,19638,19640,19644,19650,19654,19656,19660,19664,19666,19668,19670,19672,19676,19678,19680,19682,19684)
@@ -791,21 +805,6 @@ view(pc_abun(diat_24_dl))
 
 #Visualization using Maps (plotLeaflet)
 
-##Simple Map using bounding box
-
-```{R siteSpatialSearch1}
-northeastUS <- rbind(c(-80,40), c(-80,48),
-                     c(-65,48), c(-65,40), c(-80,40))
-neus <- sf::st_polygon(list(northeastUS))
-
-#As the default, `get_datasets()` only retrieves the first 25 results. Use the argument `limit =" to change this.
-neUSsites <- get_datasets(loc = neus, limit = 199)
-
-my_map <- plotLeaflet(neUSsites)
-
-my_map
-``` 
-
 
 ```{R abundance leaflet for one site (initial code)}
 #Using custom function: plotLeaflet2
@@ -835,25 +834,6 @@ percent_abun_taxa_map <- plotLeaflet2(umm_sites, df_with_count_pct = umm)
 
 
 
-
-```{R MasterListTaxa, eval=FALSE}
-#code taken from `get_table()` documentation
-#doesn't seem to work
-someTaxa <- get_table('taxa')
-# Loop with the offset to get all specimens:
-okay <- TRUE
-counter <- 1
-taxa <- list()
-while(okay) {
-  taxa[[counter]] <- get_table('taxa', offset = (counter - 1) * 25)
-  if(nrow(taxa[[counter]]) < 25) {
-    okay <- FALSE
-  } else {
-    counter <- counter + 1
-  }
-}
-taxa <- taxa %>% dplyr::bind_rows()
-```
 
 
 
@@ -1057,7 +1037,7 @@ NE_map <- NE_map %>% addLegend("bottomright",
 
 
 
-#PLOTTING (GGPLOT, RIOJA)
+#Stratigraphic PLOTTING (GGPLOT, RIOJA)
 
 ```{r ggplot spatial-based data}
 #code obtained from Simon Goring's R_Workshop neotoma2 presentation (May 15, 2022)
@@ -1349,77 +1329,9 @@ grid::grid.draw(species_plot_grob)
 ```
 
 
-#OLD CODE
+#Aggregate Dataset, getting count data for diatom and corresponding water chemistry
+```{r diatom water chemistry agg dataset example}
 
-####################################################################
-####################################################################
-####################################################################
-####################################################################
 
-Get site and dataset data from Northeast states using state gpids
-
-```{r retrieveNEdatasets}
-
-# Get site data for all sites in all New England states (ME, VT, NH, CT, MA, RI) plus NJ and NY
-# The gpids were obtained from the Geopolitical units table 
-
-gpids <- c(8412, 7990, 7934, 7326, 7923, 8981, 6442, 7368)
-ne_sites <- map(gpids, function(x)
-  neotoma:::get_site(gpid = x)) %>%
-  neotoma::bind()
-ne_datasets <- get_datasets(ne_sites)
-saveRDS (ne_datasets, file = "ne_datasets")
-ne_datasets
 ```
 
-```{r downloadNEdatasetsl}
-ne_down_dtsts <- neotoma::get_download(ne_datasets)
-ne_down_dtsts 
-ne_datasetids <-sapply(ne_down_dtsts, 
-                 function(x) {               c(x$dataset$site.data$site.id, x$dataset$site.data$site.name, x$dataset$dataset.meta$dataset.id, x$dataset$dataset.meta$dataset.name,  x$dataset$dataset.meta$dataset.type, x[[6]][2][4])
-                   })
-ne_datasetids
-saveRDS (ne_datasetids, "ne_datasetids")
-#ne_down_sites <- neotoma::get_download(ne_sites)
-# The code will run get_site for each gpid, then will bind the results, and then downloaded data
-```
-
-Run get_download for all sites in the northeast US to create a download
-file and then run get_chroncontrol to extract the chronology data.
-
-```{R NE_ExtractChroncontrol}
-# Get chroncontrol data from download file
-ne_chroncontrol <- get_chroncontrol(ne_down_dtsts, chronology = 1, verbose = TRUE, add = FALSE)
-saveRDS (ne_chroncontrol, "ne_chroncontrol")
-```
-
-```{R ChronMetadata}
-# Get chronology .meta data from chroncontrol file
-ne_chron_meta <- sapply (ne_chroncontrol,
-                         function(x) {x[2]
-                           })
-ne_chron_met <- do.call(rbind,ne_chron_meta)
-#Get .parent data from chroncontrol file
-ne_chron_parent <- sapply (ne_chroncontrol,
-                         function(x) {x[4]
-                           })
-ne_chron_parent <- do.call(rbind,ne_chron_parent)
-# Combine .meta and .parent files
-ne_chron_metandpar <- cbind(ne_chron_parent, ne_chron_met)
-ne_chron_noNAnoCD <- filter(ne_chron_metandpar, name != "Collection date", !is.na(name))
-saveRDS (ne_chron_noNAnoCD, "ne_chron_noNAnoCD")
-WriteXLS::WriteXLS(ne_chron_noNAnoCD, "ne_chron_noNAnoCD.xls")
-```
-
-#ne_chronmeta \<-sapply (ne_chroncontrol, \# function(x) {
-c(x$meta$name, x$meta$chron.id, x$meta$age.type, x$parent$dataset.name,
-x$parent$dataset.id, x$parent$dataset.type) }) #ne_chronmeta
-#str(ne_chronmeta) #select (ne_chronmeta, x$meta$chron.id )
-as.data.frame (ne_chronmeta) str(ne_chronmeta) attributes (ne_chronmeta)
-#transpose(ne_chronmeta) write(ne_chronmeta) #view (ne_chronmeta) \`\`\`
-
-
-####################################################################
-####################################################################
-####################################################################
-####################################################################
