@@ -301,6 +301,14 @@ diat_el
 
 Find datasets for sites with samples representing a specific time interval.  Use the same code used to search by elevation range, above, but substitute "ageyoung" and "ageold" for "altmin" and "altmax".
 
+```{R getDatasetssByElevExample}
+# Ages in calendar years BP
+# Find datasets for sites ranging in age from
+diat_age <- get_datasets(ageyoung=3000,ageold=5000, limit = 10)
+# Returns data for the first 25 sites
+diat_age
+```
+
 #### Search using contactid
 
 Find datasets associated with a contactid.  [[Code below does not give correct response]]
@@ -312,13 +320,28 @@ Platt <- get_contacts(contactname = '%Bradbury%')
 # In addition to contactname, other possible arguments are: contactid, contactstatus, and familyname
 Platt
 #Find datasets associated with Platt (contactid ID 18).
-Platt_ds <- get_datasets(contactid=18)
+# BELOW LINE DOESN'T RETURN ACCURATE RESULTS
+Platt_ds <- get_datasets(contactid = 18)
 datasets(Platt_ds)
 ```
 ####Search using sample analyst
 
 [[Add code for searching for datasets by sample analyst.  But perhaps this can only be done with a get_downloads object???]]
 
+```{R sample analyst}
+# Finds 20 datasets with "diatom" datasettype
+diatom_samples <- get_datasets(datasettype = "diatom") %>%
+  get_downloads %>%
+  samples()
+
+# Search for specific sample analyst in datasets
+don_samples <- diatom_samples %>%
+  dplyr::filter(sampleanalyst == "Charles, Donald F.")
+
+# obtain the datasetids that the sample analyst is associated with
+datasetids_don <- unique(don_samples$datasetid)
+
+```
 ###### Structure of `get_datasets` output
 
 To see structure of a `get_datasets()` object, run the following code:
@@ -399,7 +422,7 @@ as.data.frame(datasets(uwallf_data))
 ```
 
 The functions used to extract elements from `sites` objects (like `datasets()`) may not return all the variables of interest, or too many variables. Custom tables, or data frames, can be made from the information within the `sites` object. The following example creates a table containing the variables obtained from the `datasets()` function, along with additional variables like siteid and sitename.
-?rep?
+
 ```{R custom_datasets_dataframe}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 uwallf_data <- get_datasets(uwallf_site)
@@ -462,11 +485,6 @@ The `samples()` function obtains sample level data from a `sites` object created
 
 **Values returned:** A data frame with the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
 
-##### Diatom counts
-[[Need code chunks for finding datasets that contain one or more specific diatom taxa names, that are part of specific aggregate datasets]]
-The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
-For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
-
 Example of using `samples()` to obtain diatom counts from multiple sediment cores.
 
 ```{R samplesFunctionExample}
@@ -499,6 +517,22 @@ head(NE_diat_samp, 3)
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
 
+##### Diatom counts
+[[Need code chunks for finding datasets that contain **one or more specific diatom taxa names, that are part of specific aggregate datasets**]]
+
+```{R aggregate dataset finding taxa}
+agg_datasetids <- read_excel("path_to_file.xlsx", sheet = "sheetname_with_datasetids")
+
+agg_samples <- get_datasets(agg_datasetids) %>%
+  get_downloads() %>%
+  samples()
+
+agg_samples %>%
+  dplyr::filter(variablename == "taxa_name" | "other_taxa")
+```
+
+The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
+For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
 ##### Water chemistry
 
 Example of using `samples()` to obtain water chemistry data for multiple lakes.
