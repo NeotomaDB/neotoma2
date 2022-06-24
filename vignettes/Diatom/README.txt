@@ -12,7 +12,7 @@ Basic code for using neotoma2 to retrieve data from the Neotoma database.  Creat
 
 Diatoms_analysis  (old name: NEstatesData2021.Rmd)
 
-Basic code for analyzing and presenting data that has been retrieved using neotoma2.  Started with several sections from NEstatesData2021.  The NEstatesData2021.Rmd was created to make a presentation for the JASM meeting based on data from the northeast US, as part of work for the Northeast Lake Sediment Diatom Collaborative.  It will be maintained as a separate document, but not as a vignette.
+Basic code for analyzing and presenting data that has been retrieved using neotoma2 code that is included in Diatoms_neo2.Rmd.  Document started with several sections from NEstatesData2021.Rmd, which was created to make a presentation for the May 2022 JASM meeting in Grand Rapids MI.  Analysis for the presentation was based on data from the northeast US, as part of work for the Northeast Lake Sediment Diatom Collaborative.  NEstatesData2021.Rmd will be maintained as a separate document, but not as a vignette.
 
  
 
