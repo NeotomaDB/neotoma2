@@ -172,6 +172,8 @@ NLA_discostella_stelligera <- NLA_discostella_stelligera %>% addLegend("bottomri
   opacity = 1)
 
 ```
+
+
 ```{R Agg Dataset Taxa Presence in Sites ALL}
 #note: this includes states not in the NE. Shouldn't matter, since map is cropped to NE
 
@@ -1333,6 +1335,306 @@ grid::grid.draw(species_plot_grob)
 #Aggregate Dataset, getting count data for diatom and corresponding water chemistry
 ```{r diatom water chemistry agg dataset example}
 
+
+```
+
+
+
+
+The following code displays a map of taxa distribution. The icon size of the leaflet map (as well as color) scales based on the percent abundance of the taxa.  
+
+```{r plotLeaflet with scaling sizes based on PERCENT ABUNDANCE}
+#object - sites object from `get_sites`, `get_datasets`, `get_downloads`
+
+#df_with_count_pct - a dataframe that has the % abundance in a column named "count_pct." of a specific species
+##The output from custom function `pc_abun()` will give this dataframe
+
+#title - desired title of leaflet map
+
+#save_im - to save the plot
+#path - the path to save the plot if `save_im` is equal to TRUE. Default path is cwd.
+
+plotLeaflet_taxa <- function(object, df_with_count_pct, title = "Taxa % Abundance", save_im=FALSE, path = "") {
+            df1 <- map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
+                               elev = x@altitude,
+                               description = x@description)
+            }) %>%
+              bind_rows()
+            numPal <- colorNumeric('viridis', df_with_count_pct$count_pct)
+            symbols <- makeSizeIcons(values = df_with_count_pct$count_pct,
+                                     shape = 'diamond',
+                                     color = 'black',
+                                     pal = numPal,
+                                     opacity = .5,
+                                     baseSize = 4)
+            map1 <- leaflet(df1) %>%
+              addProviderTiles(providers$Stamen.TerrainBackground) %>%
+              addTiles() %>%
+              addMarkers(icon = symbols, lng = df_with_count_pct$long, lat = df_with_count_pct$lat,
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               options = markerOptions(riseOnHover = TRUE)) %>%
+              addLegendSize(values = df_with_count_pct$count_pct,
+                pal = numPal,
+                title = title,
+                baseSize = 4,
+                shape = 'diamond',
+                orientation = 'horizontal',
+                opacity = .5,
+                fillOpacity = .3,
+                position = 'bottomright',
+                breaks = 5)
+            
+            if (save_im == TRUE) {
+              mapshot(map1, file = path)
+            }
+            map1
+          }
+```
+
+
+```{r plotLeaflet with scaling sizes based on PERCENT ABUNDANCE example}
+
+diat_15 <- c(51593,51440,40058,40060,40063,40064,40075,40119,40135,40136,40138,40242,40244,40245,40248,40252,40268,40275,40278,40279,40283,51502,40286,51502,40286,40287,51595,51566,51681,51538,51452,50275,51660,51455,50417,51597,51497,40072,50248,50253,50255,50258,50267,50269,50273,50283,50285,50288,50289,50293,50379,50397,50411,50420,51443,51457,51463,51464,51467,51468,51469,51470,51475,51481,51495,51504,51524,51530,51533,51549,51550,51551,51554,51569,51570,51578,51586,51587,51598,51602,51605,51614,51617,51627,51638,51642,51648,51650,51654,51664,51669,51674,51675,51687,51689,51691,51694,50282,50284)
+
+diat_15_dl <- get_datasets(diat_15) %>%
+  get_downloads()
+
+diat_15_abun <- pc_abun(diat_15_dl)
+
+diat_15_taxa <- dplyr::filter(diat_15_abun, taxa == "Fragilaria crotonensis")
+
+diat_15_taxa <- arrange(diat_15_taxa, siteid)
+
+object_with_taxa <- get_datasets(diat_15_taxa$datasetid)
+
+hi <- plotLeaflet_taxa(object_with_taxa, diat_15_taxa, title = "F. crotonensis % Abundance")
+#object = diat_15_dl
+#df_with_count_pct = object_with_taxa
+
+```
+
+
+
+
+trying to edit to make color change based on a waterchemistry characteristic
+
+```{r plotLeaflet with scaling sizes based on PERCENT ABUNDANCE and WC}
+#object - sites object from `get_sites`, `get_datasets`, `get_downloads`
+
+#df_with_count_pct - a dataframe that has the % abundance in a column named "count_pct." of a specific species
+##The output from custom function `pc_abun()` will give this dataframe
+
+#title - desired title of leaflet map
+
+#save_im - to save the plot
+#path - the path to save the plot if `save_im` is equal to TRUE. Default path is cwd.
+
+plotLeaflet_taxa_wc <- function(object, df_with_count_pct, title = "Taxa % Abundance", save_im=FALSE, path = "") {
+            df1 <- map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
+                               elev = x@altitude,
+                               description = x@description)
+            }) %>%
+              bind_rows()
+            numPal <- colorNumeric(palette = "plasma", domain =  df_with_count_pct$value)
+            symbols <- makeSizeIcons(values = df_with_count_pct$count_pct,
+                                     shape = 'circle',
+                                     color = 'black',
+                                     pal = numPal,
+                                     opacity = .5,
+                                     baseSize = 4)
+            map1 <- leaflet(df1) %>%
+              addProviderTiles(providers$Stamen.TerrainBackground) %>%
+              addTiles() %>%
+              addMarkers(icon = symbols, lng = df_with_count_pct$long, lat = df_with_count_pct$lat,
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               options = markerOptions(riseOnHover = TRUE)) %>%
+              addLegendSize(values = df_with_count_pct$count_pct,
+                pal = numPal,
+                title = title,
+                baseSize = 4,
+                shape = 'circle',
+                orientation = 'horizontal',
+                opacity = .5,
+                fillOpacity = .3,
+                position = 'bottomright',
+                breaks = 5)
+            
+            if (save_im == TRUE) {
+              mapshot(map1, file = path)
+            }
+            map1
+          }
+```
+
+
+
+```{r}
+wc_diat_15 <- c(43406,43241,42916,42918,42921,42922,42932,42943,42959,42960,42962,42985,42987,42988,42991,42995,43010,43016,43019,43020,43023,43315,43026,43315,43026,43027,43408,43379,43493,43351,43253,43055,43472,43256,43236,43410,43310,42930,43029,43033,43035,43038,43047,43049,43053,43060,43061,43064,43065,43068,43197,43215,43230,43239,43244,43258,43264,43265,43268,43269,43270,43271,43276,43282,43308,43317,43337,43343,43346,43362,43363,43364,43367,43382,43383,43391,43399,43400,43411,43415,43418,43427,43430,43440,43450,43454,43460,43462,43466,43476,43481,43486,43487,43499,43501,43503,43506,43553,43554)
+
+wc_samples <- get_datasets(wc_diat_15) %>%
+  get_downloads() %>%
+  samples() %>%
+  dplyr::filter(variablename == "Total Phosphorus (unfiltered)") %>%
+
+wc_samples_reduced <- select(wc_samples, siteid, variablename, value)
+
+wc_samples_reduced <- rename(wc_samples_reduced, WaterChem = variablename)
+
+merged_abun_wc <- merge(diat_15_taxa, wc_samples_reduced)
+
+object_with_wc <- get_datasets(merged_abun_wc$datasetid)
+
+######TESTING BY REMOVING LARGE PHOS 
+
+merged_abun_wc_2 <- (merged_abun_wc[-c(34), ]) #still doesn't work
+
+
+
+hi_2 <- plotLeaflet_taxa_wc(object = object_with_wc, df_with_count_pct = merged_abun_wc_2, title = "test")
+```
+
+
+7/(5-7)/22
+The code below is for making a shiny app. 
+(filtering for state doesn't work, can't get code to work)
+So far it only successfully filters by elevation. Should work with any continuous variable. I need to figure out how to deal with categorical variables (like states).
+
+
+
+```{r}
+library(shiny)
+library(dplyr)
+
+# to be used on a downloads sites object. Code taken and modified from part of plotLeaflet()
+shiny_form <- function(object, save_im=FALSE, path = "") {
+  df1 <- map(object@sites, function(x) {
+    df <- data.frame(siteid = x@siteid,
+                     sitename = x@sitename,
+                     lat = mean(st_coordinates(x@geography)[, 2]),
+                     long = mean(st_coordinates(x@geography)[, 1]),
+                     elev = x@altitude,
+                     description = x@description,
+                     state = x@geopolitical[[1]][[2]])
+  }) %>%
+    bind_rows()
+}
+
+#GETTING DATA
+
+ids_9<- c(44764,44765,44766,44767,44768,44769,44770,44771,44772,44773,44774,44775,44776,44777,44778,44779,44780,44781,44782,44783,44784,44785,44786,44787,44788,44789,44790,44791,44792,44793,44794,44795,44796,44797,44798,44799,44800,44801,44802,44803,44804,44805,44806,44807,44808,44809,44810,44811,44812,44813,44814,44815,44816,44817,44818,44819,44820,44821,44822,44823,44824,44825)
+
+data_9 <- get_datasets(ids_9) %>%
+  get_downloads()
+
+data_9_final <- shiny_form(data_9)
+
+# MAKING SHINY APP
+## Define UI 
+ui <- fluidPage(
+    titlePanel("Diatom Aggregate Dataset"),
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("elevation",
+                        "Minimum elevation",
+                        min = (min(data_9_final$elev)),
+                        max = (max(data_9_final$elev)),
+                        value = 300),
+            selectInput(
+              "states",
+              "State",
+              choices = unique(data_9_final$state),
+              multiple = TRUE)
+        ),
+
+        ## Show a map of the generated distribution
+        mainPanel(
+           leafletOutput("mymap")
+        )
+    )
+)
+
+## Define server logic required to draw leaflet map
+server <- function(input, output) {
+
+    output$mymap <- renderLeaflet({
+      leaflet(data_9_final %>%
+                dplyr::filter(elev >= input$elevation)) %>%
+        addProviderTiles(providers$Stamen.TerrainBackground) %>%
+        addTiles() %>%
+        addCircleMarkers(lng = ~long, lat = ~lat,
+                         popup = paste0("<b>", data_9_final$sitename,
+                                        "</b><br><b>Description:</b> ",
+                                        data_9_final$description,
+                                        "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                        data_9_final$siteid,
+                                        ">Explorer Link</a>"))
+    })
+}
+
+## Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+```{r TITAN2 workflow}
+install.packages("TITAN2")
+library("TITAN2")
+
+data(glades.taxa) #glades.taxa is already in package
+#str(glades.taxa) # to see the structure of what input data should look like
+# Taxa in your file must occur at least 3 times. Missing values are not allowed.
+
+data(glades.env) #has total phosphorus data
+
+glades.titan <- titan(glades.env, glades.taxa) #takes a long time to run
+
+
+#TABULAR RESULTS
+
+glades.titan$sumz.cp #show sumz point changes
+
+head(glades.titan$sppmax) #show results for individual taxa
+#large table
+
+summary(glades.titan) #to show results with numerous variables
+
+#VISUALIZING
+## see package documentation for detailed explanation of uses for each, as well as arguments.
+
+plot_sumz_density(glades.titan)
+
+plot_sumz(glades.titan)
+
+plot_taxa_ridges(glades.titan)
+
+plot_taxa(glades.titan) 
+
+plot_cps(glades.titan)
+```
+
+Stratigraphic plots using analogue (Palyoplot too? (we can discuss))
+
+Code is WIP
+
+```{r}
 
 ```
 
