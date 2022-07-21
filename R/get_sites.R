@@ -116,7 +116,9 @@ get_sites.default <- function(...) { # nolint
     
     for (name in names(cl)) {
       if (!(name == "loc")) {
+        if (!(name == "all_data")) {
         base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
+        }
       }
     }
     # loc and all_data
@@ -128,14 +130,10 @@ get_sites.default <- function(...) { # nolint
         cleanNULL()
     } 
   }else{
-    # loc and all_data present
-    if ("all_data" %in% names(cl)){
-      result <- parseURL(base_url, all_data = cl$all_data) %>%
-        cleanNULL()
-    }else{
-      result <- parseURL(base_url) %>%
-        cleanNULL()
-    }
+
+    base_url <- paste0("data/sites")
+    result <- parseURL(base_url, ...) %>%
+      cleanNULL()
   }
   
   

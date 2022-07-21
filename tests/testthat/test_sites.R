@@ -57,6 +57,7 @@ test_that("get_sites runs as expected.", {
   expect_setequal(sites.vec, c(1001, 2001, 15, 24))
 
 })
+
 test_that("All Czech sites work with different spatial bounds:", {
   cz_json <- '{"type": "Polygon",
         "coordinates": [[
@@ -83,34 +84,21 @@ test_that("All Czech sites work with different spatial bounds:", {
   testthat::expect_true(all(cz_ids$siteid %in% getids(get_sites(loc=cz_bbox, limit = 50))$siteid))
 })
 
+test_that("All Data + loc work", {
+  europe_json <- '{"type": "Polygon",
+        "coordinates": [
+          [[-23.5546875, 70.8446726342528],
+           [-25.3125, 39.36827914916014],
+           [61.87499999999999, 39.36827914916014],
+           [62.57812500000001, 74.01954331150228],
+           [-23.5546875, 70.8446726342528]]
+        ]}'
+  
+  data <- get_sites(loc = europe_json[1], all_data = TRUE)
+  testthat::expect_equal(length(data), 1614)
+  
+  
+  # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
+  # but the bounding box strategy means that the reverse is not true:
 
-# 
-# 
-# test_that("All Czech sites work with different spatial bounds:", {
-#   cz <- list(geoJSON = '{"type": "Polygon",
-#         "coordinates": [[
-#             [12.40, 50.14],
-#             [14.10, 48.64],
-#             [16.95, 48.66],
-#             [18.91, 49.61],
-#             [15.24, 50.99],
-#             [12.40, 50.14]]]}',
-#              WKT = 'POLYGON ((12.4 50.14,
-#                          14.1 48.64,
-#                          16.95 48.66,
-#                          18.91 49.61,
-#                          15.24 50.99,
-#                          12.4 50.14))',
-#              bbox = c(12.4, 48.64, 18.91, 50.99))
-# 
-#   #cz$sf <- geojsonsf::geojson_sf(cz$geoJSON)[[1]]
-#   cz_sites <- purrr::map(cz, function(x) get_sites(loc = x))
-#   
-#   testthat::expect_true(all.equal(cz_sites[[1]], cz_sites[[2]]))
-# 
-#   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
-#   # but the bounding box strategy means that the reverse is not true:
-#   cz_ids <- getids(cz_sites[[1]])
-#   testthat::expect_true(all(cz_ids$siteid %in% getids(cz_sites[[3]])$siteid))
-# })
-# 
+})
