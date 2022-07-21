@@ -39,7 +39,11 @@ set_site <- function(x = NA,
 
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
-    x@siteid <- siteid
+    if (is.na(siteid)) {
+      x@siteid <- uuid::UUIDgenerate()
+    } else {
+      x@siteid <- siteid
+    }
     x@sitename <- sitename
     x@geography <- geography
     x@altitude <- altitude
