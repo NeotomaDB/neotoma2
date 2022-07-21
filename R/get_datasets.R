@@ -194,11 +194,20 @@ get_datasets.default <- function(x, ...) { # nolint
     
     for (name in names(cl)) {
       if (!(name == "loc")) {
-        base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
+        if (!(name == "all_data")) {
+          base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
+        } 
       }
     }
-    result <- parseURL(base_url) %>%
-      cleanNULL()
+    
+    # loc and all_data present
+    if ("all_data" %in% names(cl)){
+      result <- parseURL(base_url, all_data = cl$all_data) %>%
+        cleanNULL()
+    }else{
+      result <- parseURL(base_url) %>%
+        cleanNULL()
+    }
   } else {
     base_url <- paste0("data/datasets")
     result <- parseURL(base_url, ...) %>%

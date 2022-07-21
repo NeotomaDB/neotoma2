@@ -68,42 +68,42 @@ parse_site <- function(result) {
     }
     return(x)
   }
-
+  
   data <- result$data %>%
     fix_null()
-
+  
   # Function to use once API is in order.
   # API - Site currently does not have any 'site'
   # keys. Might need modification afterwards
   newSites <- build_sites(data)
-
+  
   return(newSites)
-
+  
 }
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc
 #' @export
 get_sites.default <- function(...) { # nolint
-
+  
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin")
   possible_args2 <- c("loc", "limit", "offset", "all_data")
   possible_args <- c(possible_args, possible_args2)
-
+  
   cl[[1]] <- NULL
-
+  
   for (name in names(cl)) {
     if (!(name %in% possible_args)) {
       message(paste0(name, " is not an allowed argument.\
       Choose from the allowed arguments: sitename, altmax, altmin, loc"))
     }
   }
-
+  
   cl <- lapply(cl, eval, envir = parent.frame())
-
+  
   error_check <- check_args(cl) # nolint
-
+  
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
@@ -119,73 +119,33 @@ get_sites.default <- function(...) { # nolint
         base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
       }
     }
-    result <- parseURL(base_url) %>%
-      cleanNULL()
-  } else {
-    base_url <- paste0("data/sites")
-    result <- parseURL(base_url, ...) %>%
-      cleanNULL()
+    # loc and all_data
+    if ("all_data" %in% names(cl)){
+      result <- parseURL(base_url, all_data = cl$all_data) %>%
+        cleanNULL()
+    }else{
+      result <- parseURL(base_url) %>%
+        cleanNULL()
+    } 
+  }else{
+    # loc and all_data present
+    if ("all_data" %in% names(cl)){
+      result <- parseURL(base_url, all_data = cl$all_data) %>%
+        cleanNULL()
+    }else{
+      result <- parseURL(base_url) %>%
+        cleanNULL()
+    }
   }
-  # ###
-  # if ("loc" %in% names(cl)) {
-  #   if (is.numeric(cl$loc)) {
-  #     coords <- cl$loc
-  #     boxx <- c(xmin = coords[1], xmax = coords[2])
-  #     boxy <- c(ymax = coords[3], ymin = coords[4])
-  #     box <- c(boxx, boxy)
-  #     my_bbox <- sf::st_bbox(box, crs = sf::st_crs(4326))
-  # 
-  #     if (is.na(my_bbox$xmin)) {
-  #       stop("Numeric coordinates need to be an array of 4 units.")
-  #     }
-  # 
-  #     if (is.na(my_bbox$xmax)) {
-  #       stop("Numeric coordinates need to be an array of 4 units.")
-  #     }
-  # 
-  #     if (is.na(my_bbox$ymin)) {
-  #       stop("Numeric coordinates need to be an array of 4 units.")
-  #     }
-  # 
-  #     if (is.na(my_bbox$ymax)) {
-  #       stop("Numeric coordinates need to be an array of 4 units.")
-  #     }
-  # 
-  #     my_bbox <- sf::st_as_sfc(my_bbox)
-  #     new_geojson <- geojsonsf::sfc_geojson(my_bbox)
-  #     new_geojson <- new_geojson[1]
-  # 
-  #     base_url <- paste0("data/sites?loc=", new_geojson[1])
-  #     for (name in names(cl)) {
-  #       if (!(name == "loc")) {
-  #         base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-  #       }
-  #     }
-  #     result <- parseURL(base_url) %>%
-  #       cleanNULL()
-  # 
-  #   }else{
-  #     base_url <- paste0("data/sites")
-  #     result <- parseURL(base_url, ...) %>%
-  #       cleanNULL()
-  #   }
-  # }else{
-  # 
-  #   base_url <- paste0("data/sites")
-  # 
-  #   result <- parseURL(base_url, ...) %>%
-  #     cleanNULL()
-###
-    
-#  }
-
+  
+  
   if (is.null(result$data[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_site(result)
     return(output)
   }
-
+  
 }
 
 #' @title Get Site Information for Fossil Sites
@@ -202,23 +162,23 @@ get_sites.numeric <- function(x, ...) {
       return(x)
     }
   }
-
+  
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
   }
-
+  
   base_url <- paste0("data/sites/", siteids)
-
+  
   result <- neotoma2::parseURL(base_url)
-
+  
   result_length <- length(result[2]$data)
-
+  
   if (result_length > 0) {
-
+    
     output <- parse_site(result)
-
+    
     return(output)
-
+    
   } else {
     return(NULL)
   }
