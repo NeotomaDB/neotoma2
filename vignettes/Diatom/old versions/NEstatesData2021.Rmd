@@ -1514,8 +1514,7 @@ hi_2 <- plotLeaflet_taxa_wc(object = object_with_wc, df_with_count_pct = merged_
 
 7/(5-7)/22
 The code below is for making a shiny app. 
-(filtering for state doesn't work, can't get code to work)
-So far it only successfully filters by elevation. Should work with any continuous variable. I need to figure out how to deal with categorical variables (like states).
+So far it only successfully filters by elevation and state.
 
 
 
@@ -1545,6 +1544,14 @@ data_9 <- get_datasets(ids_9) %>%
   get_downloads()
 
 data_9_final <- shiny_form(data_9)
+```
+
+```{r}
+#now using RDS
+#readRDS('C:\\Users\\eco37\\Desktop\\Neotoma_R_Eric\\diatom_neotoma_erico\\vignettes\\Data-DFC\\NEdata_withstates.rds')
+readRDS(file = "vignettes\\Data-DFC\\NEdata_withstates.rds")
+NEdata_edited <- NEdata_withstates[complete.cases(NEdata_withstates$elev),] #some dont have elevations, this removes that
+states <- c("All states", unique(NEdata_edited$state))
 
 # MAKING SHINY APP
 ## Define UI 
@@ -1554,14 +1561,11 @@ ui <- fluidPage(
         sidebarPanel(
             sliderInput("elevation",
                         "Minimum elevation",
-                        min = (min(data_9_final$elev)),
-                        max = (max(data_9_final$elev)),
+                        min = (min(NEdata_edited$elev)),
+                        max = (max(NEdata_edited$elev)),
                         value = 300),
-            selectInput(
-              "states",
-              "State",
-              choices = unique(data_9_final$state),
-              multiple = TRUE)
+            selectInput("statess", "Choose a state:", choices = states, selected =
+                          states[1])
         ),
 
         ## Show a map of the generated distribution
@@ -1574,17 +1578,26 @@ ui <- fluidPage(
 ## Define server logic required to draw leaflet map
 server <- function(input, output) {
 
+    dat <- reactive({
+    if (input$statess!="All states"){ 
+    temp <- NEdata_edited %>%
+    filter(state == (input$statess)) 
+} else { 
+    temp <- NEdata_edited 
+}
+})
+  
     output$mymap <- renderLeaflet({
-      leaflet(data_9_final %>%
-                dplyr::filter(elev >= input$elevation)) %>%
+      leaflet(dat() %>%
+              dplyr::filter(elev >= input$elevation)) %>%
         addProviderTiles(providers$Stamen.TerrainBackground) %>%
         addTiles() %>%
         addCircleMarkers(lng = ~long, lat = ~lat,
-                         popup = paste0("<b>", data_9_final$sitename,
+                         popup = paste0("<b>", NEdata_edited$sitename,
                                         "</b><br><b>Description:</b> ",
-                                        data_9_final$description,
+                                        NEdata_edited$description,
                                         "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
-                                        data_9_final$siteid,
+                                        NEdata_edited$siteid,
                                         ">Explorer Link</a>"))
     })
 }
@@ -1595,7 +1608,7 @@ shinyApp(ui = ui, server = server)
 
 
 ```{r TITAN2 workflow}
-install.packages("TITAN2")
+#install.packages("TITAN2")
 library("TITAN2")
 
 data(glades.taxa) #glades.taxa is already in package

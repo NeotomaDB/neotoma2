@@ -287,6 +287,25 @@ diat_multid
 
 The above code is useful for obtaining data for pre-defined Aggregate Datasets.  Sets of Aggregate Dataset datasetids can be stored as .txt files and used as inputs to get_datasets.
 
+Creates a dataframe with siteid, datasetid, and corresponding site information) using datasetids.
+
+```{r }
+plains <- c(54039,54040,54041,54042,54043,54044,54045,54052,54053,54054,54055,54056,54057,54058,54059,54060,54061,54062,54063,54064,54065,54066,54067,54068,54069,54070,54072,54073,54074,54075,54076,54077,54078,54079,54080,54081,54082,54083,54084,54085,54086,54087,54088,54089,54090,54091,54092,54093,54094,54095,54096,54097,54098,54099,54100)
+
+plains_data <- get_datasets(plains)
+plains_ids <- as.data.frame(getids(plains_data))
+
+plains_data_frame <- as.data.frame(plains_data)
+plains_ids_frame <- as.data.frame(plains_ids)
+
+final <- merge(plains_ids_frame, plains_data_frame) %>%
+  arrange(final, datasetid)
+
+#write.csv(final,"C:\\path\\to\\file_destination\\GreatPlains_agg.csv", row.names = FALSE)
+
+final
+```
+
 #### Search using elevation range
 
 Find datasets for sites between minimum and maximum elevations (m)
