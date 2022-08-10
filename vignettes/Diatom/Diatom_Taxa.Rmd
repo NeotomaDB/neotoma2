@@ -1,10 +1,62 @@
 ---
 title: "Diatom_Taxa"
-author: "Eric O"
+author: "Eric O'Malley, Don Charles"
 date: "6/6/2022"
 output: html_document
 ---
-## Get taxonomic data from DiatomBase
+
+## **Taxa Harmonization**
+
+The following code chunks retrieves Diatom cores from the NE United States. This is to be used in the following chunk to show taxa harmonization
+
+```{r}
+# polygon obtained from http://geojson.io/#map=5/42.049/-75.894
+ne <- '{"type": "Polygon",
+        "coordinates": [[
+            [-80.5517578125,
+              39.70718665682654],
+            [-66.7529296875,
+              39.70718665682654],
+            [-66.7529296875,
+              47.517200697839414],
+            [-80.5517578125,
+              47.517200697839414],
+            [-80.5517578125,
+              39.70718665682654]]]}'
+
+
+ne_datasets <- neotoma2::get_datasets(loc = ne[1], datasettype = "diatom" ,all_data = TRUE)
+
+ne_dl <- get_downloads(ne_datasets, all_data = TRUE)
+
+allSamp <- samples(ne_dl)
+
+```
+
+
+### Taxa Harmonization Step
+
+Code modified from Simon Goring and Socorro Dominguez Vidaña's [EPD Binder: Simple Workflow](https://open.neotomadb.org/EPD_binder/simple_workflow.html#)
+
+
+```{r, taxa harmonization}
+allSamp2 <- allSamp %>%
+  mutate(variablename = replace(variablename, 
+                                stringr::str_detect(variablename, "lirata.*"), 
+                                "Aulacoseira lirata"))
+#`mutate()` the column `variablename` so that any time we detect (str_detect()) a variablename that has lirata" (the .* represents a wildcard for any character [.], zero or more times [*]) we replace() it with the character string "Aulacoseira lirata"
+
+original_taxa_list <- neotoma2::taxa(ne_dl)
+# `taxa()` can be used to get the original list of taxa to compare changes.
+
+changed <- unique(allSamp$variablename)
+original <- original_taxa_list$variablename
+
+setdiff(original, changed)
+#displays what taxa were changed
+```
+
+## **Get taxonomic data from DiatomBase**
 
 DiatomBase is a subset of WORMS - World Register of Marine Species
 https://www.diatombase.org/index.php
