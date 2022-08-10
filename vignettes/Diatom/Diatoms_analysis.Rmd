@@ -105,7 +105,7 @@ As of 6/10/2022: The file is named Aggregate Datasets - Diatoms -  EMAP NE SW Ne
 The file is located: \\files.drexel.edu\ANS\PCER_Data\Phycdata\PROJECTS\NEOTOMA\Aggreg Datasets - Dtm-WChem Corresp
 
 The code chunks were initially made just copying and pasting the datasetids into R. 
-
+**EDIT**
 ```{r agg dataset excel loading, eval=FALSE}
 library(readxl)
 # read_excel(path, sheet = NULL)
@@ -133,7 +133,7 @@ The results of the code below is a leaflet map with that plots taxa abundance wi
 
 The code chunk below was a working version. It needs to be reorganized / cleaned up. 
 
-There should only be 1 plotting taxa (instead of 4). Makes use of a modified PlotLeaflet function in neotoma2 that I named PlotLeaflet2. This function is not in the document, but it is a separate script I have locally (add?). Extra code needs to be removed. Remove all variable naming (use %>%). 
+There should only be 1 plotting taxa (instead of 4) **DONE**. Makes use of a modified PlotLeaflet function in neotoma2 that I named PlotLeaflet2. This function is not in the document, but it is a separate script I have locally (add?). Extra code needs to be removed. Remove all variable naming (use %>%). 
 
 
 ```{R Agg Dataset Taxa Presence in Sites}
@@ -732,28 +732,28 @@ stratigraphic diagram of depth (y) vs. abundance (x) of taxa above a specified a
 # produces stratigraphic diagram of depth (y) vs. abundance (x) of taxa above a specified abundance in ONE site.
 
 ###################################################################DATA PREP
-yeah <- get_datasets(datasettype = "diatom", limit = 1) %>%
+diatom_cores <- get_datasets(datasettype = "diatom", limit = 1) %>%
   get_downloads() %>%
   samples()
 
-yeah2 <- data.frame(yeah$depth, yeah$age, yeah$variablename, yeah$value)
+diatom_df <- data.frame(diatom_cores$depth, diatom_cores$age, diatom_cores$variablename, diatom_cores$value)
 
-colnames(yeah2) <- c("depth", "age", "taxa", "count")
+colnames(diatom_df) <- c("depth", "age", "taxa", "count")
 
-yeah3 <- yeah2 %>%
+diatom_abun <- diatom_df %>%
   group_by(depth) %>%
   mutate(relative_abundance_percent = count / sum(count) * 100)
 
-yeah_common_taxa <- yeah3 %>%
+diatom_common_taxa <- diatom_abun %>%
   group_by(taxa) %>%
   summarise(max_rel_abund = max(relative_abundance_percent)) %>%
   filter(max_rel_abund >= 10) %>%
   arrange(max_rel_abund) %>%
   pull(taxa)
 
-yeah_counts_common <- yeah3 %>%
-  filter(taxa %in% yeah_common_taxa) %>%
-  mutate(taxa = factor(taxa, levels = yeah_common_taxa)) %>%
+diatom_counts_common <- diatom_abun %>%
+  filter(taxa %in% diatom_common_taxa) %>%
+  mutate(taxa = factor(taxa, levels = diatom_common_taxa)) %>%
   arrange(taxa)
 
 
