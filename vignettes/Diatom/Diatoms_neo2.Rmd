@@ -285,6 +285,19 @@ diat_multid <- get_datasets(multid) # Example
 diat_multid
 ```
 
+Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample."
+
+```{r multi datasettype}
+
+diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample")
+data_all_diat <- c()
+for (type in diatom_list){
+  sites <- get_datasets(datasettype=type)
+  dl_all_diat <- c(data_all_diat, sites)
+}
+data_all_diat
+```
+
 The above code is useful for obtaining data for pre-defined Aggregate Datasets.  Sets of Aggregate Dataset datasetids can be stored as .txt files and used as inputs to get_datasets.
 
 Creates a dataframe with siteid, datasetid, and corresponding site information) using datasetids.
