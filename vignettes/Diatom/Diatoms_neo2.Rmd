@@ -361,7 +361,7 @@ datasets(Platt_ds)
 ```
 ####Search using sample analyst
 
-[[Add code for searching for datasets by sample analyst.  But perhaps this can only be done with a get_downloads object???]]
+Search for datasets by sample analyst.
 
 ```{R sample analyst}
 # Finds first 25 datasets (default number) with "diatom" datasettype and downloads all sample data associated with the datasets
@@ -378,19 +378,19 @@ datasetids_don
 ```
 ###### Structure of `get_datasets` output
 
-To see structure of a `get_datasets()` object, run the following code:
+To see the structure of a `get_datasets()` object, run the following code:
 
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
 uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
 
-#str(uwallf_data)
+# str(uwallf_data) # to see output, remove # from beginning of line
 ```
 
 # Download Data
 ## Downloads function
 
-Download all records associated with one or more datasets. Use the `get_downloads` function to return a `sites` object with full level of detail.
+Use the `get_downloads` function to download all records associated with one or more datasets.  The function returns a `sites` object with full level of detail.
 
 **Usage:**  `get_downloads(x)`
 Arguments: `x` can be a datasetid or a vector of numeric datasetids. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; "verbose, logical (default is TRUE)" - prints a download status bar.
@@ -497,9 +497,9 @@ uwallf_site <- get_sites(sitename = 'Upper Wallface%')
 uwallf_data <- get_datasets(uwallf_site)
 #filter the datasets output to include only diatoms
 diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
-#take the diatom datasets and getting the downloads output
+#take the diatom datasets and get the downloads output
 uwallf_dwl <- get_downloads(diat_uwallf_dataset)
-#using the samples function to get the data from the collunits function
+#use the samples function to get data from the collunits function
 diat_uwallf_collunits <- collunits(uwallf_dwl)
 #view the collection unit data
 diat_uwallf_collunits
