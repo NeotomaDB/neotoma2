@@ -47,7 +47,7 @@ Neotoma data is structured spatially. Each collection location is assigned a **s
 Within a **site**, there may be one or more **collection units**.  
 A collection unit represents the material (e.g., sediment core) removed from a specific location within a **site** (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** are defined as material removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry).   Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
 
-Note: There are three diatom dataset types:  "diatom" (stratigraphic / cores), "diatom surface samples" (surface samples only), and "diatom top-bottom" (top and bottom only).
+Note: There are four diatom dataset types:  "diatom" (stratigraphic / cores), "diatom surface sample" (surface samples only), "diatom bottom sample" (bottom samples only) and "diatom top-bottom" (top and bottom samples only).
 
 #### neotoma2 R-package functions
 
@@ -82,9 +82,9 @@ This section describes ways of searching the Neotoma database to find `sites` an
 
 Use the `get_sites()` or `get_datasets()` functions to find sites and related information. Searches using siteid or sitename can be done using `get_sites()`. Searches using dataset information (such as age, location, dataset type, etc.) can be done using `get_datasets()`. 
 
-The information returned by both functions is similar, but still notably different. The level of detail in `get_datasets()` is different as it includes: agerange, database, datasettype, and datasetnotes. These fields are not in `get_sites()` output.  [[TRUE??]]
+The information returned by both functions is similar, but still notably different. The level of detail in `get_datasets()` is different as it includes: agerange, database, datasettype, and datasetnotes. These fields are not in `get_sites()` output.
 
-Both functions can be used to search for information on a single or multiple sites. They are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map of all sites and superimpose specific sites of interest.
+Both functions can be used to search for information on a single or multiple sites. They are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map showing site locations.
 
 #### `get_sites` function
 
@@ -135,7 +135,7 @@ diat_6
 ```
 Get data on multiple sites by reading a text file of siteids
 
-The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a plain text file called `NLAD.txt` with a list of site IDs for sites sampled as part of the National Lakes Assessment.
+The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a plain text file called `NLAD.txt` with a list of site IDs for sites sampled as part of the EPA National Lakes Assessment.
 
 There may well be many more lines with numbers representing each site identifier in the set of records.  In this case we would load the data like so:
 
@@ -180,8 +180,8 @@ my_sites
 
 ##### Search for sites in a latitude and longitude bounding box
 
-Example of finding sites by location within a bounding box of lats & longs.  Same code works with `get_datasets()` as well as `get_sites()`.
-[[Revise wording in following code chunk; clarify use of the two BB options]]
+Example of finding sites by location within a bounding box of latitudes and longitudes.  Same code works with `get_datasets()` as well as `get_sites()`.
+
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  
 northeastUS <- rbind(c(-80,40), c(-80,48),
@@ -201,21 +201,24 @@ neUSsites
 
 Find all sites located in a geopolitical unit as specified by a gpid. There are up to four hierarchical levels of geopolitical unit (first to fourth) to which a site can be assigned.  The combination of names of levels for a site depends on the country or region in which a site is located.  In the USA the four levels are country, state, county and administrative unit (e.g., Jeferson National Forest).
 
-[[A gpid is a useful way to specify country and state boundaries. - delete?]]
-The code below will open the Geopolitical units table.  Once the table appears, use the search function at top of the page to find the name of a geopolitical unit of interest and its corresponding gpid. 
+The code below will open the Geopolitical units table.  Once the table appears, use the search function at the top of the page to find the name of a geopolitical unit of interest and its corresponding gpid. 
 
 ```{R geopoliticalunitsTable}
+# View the sitegeopolitical table to find gpids associated with datasetids
 loc <- neotoma::get_table(table.name ='geopoliticalunits')
 View(loc)
 # Use the filter at the top of the page to find name of a geopolitical unit and its corresponding gpid
 ```
 
+Example - get_sites using geopolitical ID for Alaska (6198), obtained from the GeoPoliticalUnits table.
+
 ```{r get site by gpid}
+# Returns table of sites located in Alaska. 
 # diat_1<-get_site(gpid = x) # basic format
-diat_1<-get_sites(gpid = 6198) # Example using geopolitical ID for Alaska - GeoPoliticalUnits table.  Returns table of sites located in Alaska. 
+diat_1<-get_sites(gpid = 6198) 
 diat_1
 ```
-View the sitegeopolitical table to find gpids associated with datasetids.
+
 
 Run following code to open the sitegeopolitical table and then enter siteid in filter box to find corresponding gpids
 
@@ -230,7 +233,7 @@ Example - get sites from multiple geopolitical units (e.g., states)
 
 ```{r retrieveByGeopol}
 # Get site data for all sites in three New England states (PA, NJ, NY)
-# The gpids were obtained from the Geopolitical units table 
+# The state gpids were obtained from the Geopolitical units table 
 
 gpids <- c(8412, 7990, 7934) #gpids for PA, NY, and NJ
 
@@ -266,7 +269,7 @@ Use this function to discover datasets available for a geographic location, with
 
 x is an optional value that represents an object with numeric datasetids. It can be a single datasetid, an array with multiple IDs, or a `sites` object created using `get_sites`.
 
-**Values returned:** A `sites` object with more detail than a `get_sites` object that includes information on collection unitsa nd datasets (e.g., datasettype, dataset notes and dataset age range).
+**Values returned:** A `sites` object with more detail than a `get_sites` object that includes information on collection units and datasets (e.g., datasettype, dataset notes and dataset age range).
 
 ##### Search using datasetid
 
@@ -289,18 +292,18 @@ Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample."
 
 ```{r multi datasettype}
 
-diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample")
+diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample", "diatom bottom sample")
 data_all_diat <- c()
 for (type in diatom_list){
   sites <- get_datasets(datasettype=type)
   dl_all_diat <- c(data_all_diat, sites)
 }
-data_all_diat
+dl_all_diat
 ```
 
 The above code is useful for obtaining data for pre-defined Aggregate Datasets.  Sets of Aggregate Dataset datasetids can be stored as .txt files and used as inputs to get_datasets.
 
-Creates a dataframe with siteid, datasetid, and corresponding site information) using datasetids.
+Creates a dataframe with siteid, datasetid, and corresponding site information)(?) using datasetids.
 
 ```{r }
 plains <- c(54039,54040,54041,54042,54043,54044,54045,54052,54053,54054,54055,54056,54057,54058,54059,54060,54061,54062,54063,54064,54065,54066,54067,54068,54069,54070,54072,54073,54074,54075,54076,54077,54078,54079,54080,54081,54082,54083,54084,54085,54086,54087,54088,54089,54090,54091,54092,54093,54094,54095,54096,54097,54098,54099,54100)
@@ -312,7 +315,7 @@ plains_data_frame <- as.data.frame(plains_data)
 plains_ids_frame <- as.data.frame(plains_ids)
 
 final <- merge(plains_ids_frame, plains_data_frame) %>%
-  arrange(final, datasetid)
+  arrange(., datasetid)
 
 #write.csv(final,"C:\\path\\to\\file_destination\\GreatPlains_agg.csv", row.names = FALSE)
 
@@ -361,18 +364,17 @@ datasets(Platt_ds)
 [[Add code for searching for datasets by sample analyst.  But perhaps this can only be done with a get_downloads object???]]
 
 ```{R sample analyst}
-# Finds 20 datasets with "diatom" datasettype
+# Finds first 25 datasets (default number) with "diatom" datasettype and downloads all sample data associated with the datasets
 diatom_samples <- get_datasets(datasettype = "diatom") %>%
   get_downloads %>%
   samples()
-
-# Search for specific sample analyst in datasets
+# Filter above sample data for a specific sample analyst
 don_samples <- diatom_samples %>%
   dplyr::filter(sampleanalyst == "Charles, Donald F.")
 
 # obtain the datasetids that the sample analyst is associated with
 datasetids_don <- unique(don_samples$datasetid)
-
+datasetids_don
 ```
 ###### Structure of `get_datasets` output
 
