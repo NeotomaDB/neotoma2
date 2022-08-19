@@ -3,7 +3,7 @@ title: "Working with diatom data in the neotoma2 R-package - June 2022"
 output: 
   rmarkdown::html_vignette:
     toc: true
-    toc_depth: 3
+    toc_depth: 4
 vignette: >
   %\VignetteIndexEntry{The neotoma2 R Package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -140,7 +140,7 @@ The above code returns data for three sites.  We could use a larger set of site 
 There may well be many more lines with numbers representing each site identifier in the set of records.  In this case we would load the data like so:
 
 ```{r NLAmultiplesiteID}
-nlad <- read.table('vignettes\\Data-DFC\\NLAD.txt', header=FALSE)
+nlad <- read.table('..\\Data-DFC\\NLAD.txt', header=FALSE)
 nlaSites <- get_sites(nlad$V1)
 nlaSites
 ```
@@ -205,7 +205,7 @@ The code below will open the Geopolitical units table.  Once the table appears, 
 
 ```{R geopoliticalunitsTable}
 # View the sitegeopolitical table to find gpids associated with datasetids
-loc <- neotoma::get_table(table.name ='geopoliticalunits')
+loc <- neotoma2::get_table('geopoliticalunits', limit=99999)
 View(loc)
 # Use the filter at the top of the page to find name of a geopolitical unit and its corresponding gpid
 ```
@@ -246,7 +246,7 @@ for (id in gpids) {
 ne_sites
 ```
 
-### Navigate the structure of a `sites` object to find specific metadata.
+#### Navigate the structure of a `sites` object to find specific metadata.
 
 Sometimes it is useful to extract specific data from a `sites` object.  We can call any individual site using `[[ ]]`, placing the index (sequence number) of the desired site object between the brackets. For example, the `uwallf_site` object is composed of only one site, so its index value is 1. Then we can also call the particular variable we want (e.g., siteid) using the `$` symbol.
 
@@ -364,7 +364,7 @@ datasets(Platt_ds)
 
 Search for datasets by sample analyst.
 
-```{R sample analyst}
+```{R sample analyst, warning=FALSE}
 # Finds first 25 datasets (default number) with "diatom" datasettype and downloads all sample data associated with the datasets
 diatom_samples <- get_datasets(datasettype = "diatom") %>%
   get_downloads %>%
@@ -562,9 +562,9 @@ head(NE_diat_samp, 3)
 ##### Diatom counts
 [[Need code chunks for finding datasets that contain **one or more specific diatom taxa names, that are part of specific aggregate datasets**]]
 
-Example of obtaining diatom counts for an aggregate dataset by reading an external file with datasetids.
+Example of obtaining diatom counts for an aggregate dataset by reading an external file with datasetids.  To run code, replace "path to file" with a working path.
 
-```{R aggregate dataset finding taxa}
+```{R aggregate dataset finding taxa, eval=FALSE}
 agg_datasetids <- read_excel("path_to_file.xlsx", sheet = "sheetname_with_datasetids")
 
 agg_samples <- get_datasets(agg_datasetids) %>%
@@ -608,7 +608,7 @@ diat_wat_counts <- samples(diat_wat_dl)
 ```
 
 #### `chronologies()` Function
-The `chronologies()` function obtains chronology data from a record(s) and returns results as a list. 
+The `chronologies()` function obtains chronology data from a record(s)[[sites object??]] and returns results as a list. 
 
 **Usage:** `chronologies(x)`
 
