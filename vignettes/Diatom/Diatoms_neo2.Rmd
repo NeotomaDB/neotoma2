@@ -135,12 +135,13 @@ diat_6
 ```
 Get data on multiple sites by reading a text file of siteids
 
-The above code returns data for three sites.  We could use a larger set of site IDs either by loading the IDs from a file, or by entering them directly.  Here we assume that there exists a plain text file called `NLAD.txt` with a list of site IDs for sites sampled as part of the EPA National Lakes Assessment.
+The above code returns data for three sites.  We could use a larger set of site IDs by either entering them directly or by loading the IDs from a file.  In the example below we assume that there exists a plain text file called `NLAD.txt` which contains a list of site IDs for sites sampled as part of the EPA National Lakes Assessment.
 
 There may well be many more lines with numbers representing each site identifier in the set of records.  In this case we would load the data like so:
 
 ```{r NLAmultiplesiteID}
 nlad <- read.table('..\\Data-DFC\\NLAD.txt', header=FALSE)
+# nlad <- read.table('path_to_file\\NLAD.txt', header=FALSE)
 nlaSites <- get_sites(nlad$V1)
 nlaSites
 ```
@@ -156,8 +157,8 @@ Get data on a single site using sitename.
 # diat <- get_sites(sitename = "")  # Basic format
 diat <- get_sites(sitename = 'Schrader Pond')  # Example
 diat
+# The`sitename` input is not case sensitive
 # wildcards (%) can be used if you do not know the exact name
-# The`sitename` input is not case sensitive 
 ## Example: get_sites(sitename = '%Schra%')
 ```
 
@@ -302,9 +303,9 @@ for (type in diatom_list){
 dl_all_diat
 ```
 
-Obtain data for multiple datasetids in pre-defined "Aggregate Datasets" files.  Sets of Aggregate Dataset datasetids can be stored as .txt or .csv files and used as inputs to get_datasets, either by pasting the datasetids into the code chunk or reading in the file.
+Obtain data for multiple datasetids in pre-defined "Aggregate Dataset" files.  Sets of Aggregate Dataset datasetids can be stored as .txt or .csv files and used as inputs to get_datasets, either by pasting the datasetids into the code chunk or reading in the file.
 
-The following code example creates a dataframe with siteid, datasetid, and corresponding site information)for datasets in the Northern Great Plains aggregate dataset.
+The following code example creates a dataframe with siteid, datasetid, and corresponding site information for datasets in the Northern Great Plains aggregate dataset.
 
 ```{r }
 plains <- c(54039,54040,54041,54042,54043,54044,54045,54052,54053,54054,54055,54056,54057,54058,54059,54060,54061,54062,54063,54064,54065,54066,54067,54068,54069,54070,54072,54073,54074,54075,54076,54077,54078,54079,54080,54081,54082,54083,54084,54085,54086,54087,54088,54089,54090,54091,54092,54093,54094,54095,54096,54097,54098,54099,54100)
@@ -318,7 +319,7 @@ plains_ids_frame <- as.data.frame(plains_ids)
 final <- merge(plains_ids_frame, plains_data_frame) %>%
   arrange(., datasetid)
 
-#write.csv(final,"C:\\path\\to\\file_destination\\GreatPlains_agg.csv", row.names = FALSE)
+#write.csv(final,"C:\\path_to_file_destination\\GreatPlains_agg.csv", row.names = FALSE)
 
 final
 ```
@@ -350,14 +351,15 @@ diat_age
 
 Find datasets associated with a contactid.  [[Code below does not currently (August 2022) give correct response. It is being revised.]]
 
+Find datasts associated with Platt Bradbury
+
 ```{R Diatom Investigator}
-#Find datasts associated with Platt Bradbury
 #Find contactid for Platt Bradbury
 Platt <- get_contacts(contactname = '%Bradbury%') 
 # In addition to contactname, other possible arguments are: contactid, contactstatus, and familyname
 Platt
 #Find datasets associated with Platt Bradbury (contactid ID 18).
-# BELOW LINE DOESN'T RETURN ACCURATE RESULTS
+# CODE BELOW LINE DOES NOT RETURN ACCURATE RESULTS
 Platt_ds <- get_datasets(contactid = 18)
 datasets(Platt_ds)
 ```
@@ -494,7 +496,7 @@ The `collunits` function extracts collection unit information from a `sites` obj
 **Usage:** `collunits(object)`
 The argument for this function takes a `sites` object.
 
-**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
+**Values returned:** A datasets object with the variables datasetid, database, datasettype, age_range_old, age_range_young, and notes.
 
 Example of using `collunits()` to obtain information on collection units for a site.
 
@@ -615,7 +617,7 @@ diat_wat_counts <- samples(diat_wat_dl)
 
 #### `chronologies()` function
 
-The `chronologies()` function obtains chronology data from a record(s)[[sites object??]] and returns results as a list. 
+The `chronologies()` function obtains chronology data from a sites object and returns results as a list. 
 
 **Usage:** `chronologies(x)`
 
@@ -682,7 +684,7 @@ The `get_publications` function extracts publication information from a `sites` 
 | `year` | The year the publication was released |
 | `search` | A plain text search string used to search the citation |
 
-**Values returned:** A "publications" object that displays the variables publicationid, citation, and DOI. The structure of the "publications" object contains all possible publication information.
+**Values returned:** A "publications" object and a table that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
 
 ```{R publications example}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
