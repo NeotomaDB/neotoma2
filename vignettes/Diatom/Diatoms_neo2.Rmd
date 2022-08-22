@@ -645,9 +645,11 @@ The `taxa ()` function obtains a list of unique taxa names contained in download
 
 **argument:** (x) is a `sites` object (that contains taxa names) obtained from `get_downloads`.
 
-The following code gets a complete list of diatom taxa name variables from the Neotoma Taxa table.
+**values returned:** A data frame with 11 variables:  units, context, element, taxonid, symmetry, taxon group, element type, variable name, ecological group, sites - number in which the taxon occurs, and samples - number of samples in which the taxon occurs.
 
 [[Need example of getting a list of taxa from a download sites object - use result of an example above?]]
+
+Get a complete list of diatom taxa names from the Neotoma Taxa table.
 
 ```{R MasterListTaxa}
 #By default, get_table only returns 25 specimen records
@@ -684,7 +686,7 @@ The `get_publications` function extracts publication information from a `sites` 
 | `year` | The year the publication was released |
 | `search` | A plain text search string used to search the citation |
 
-**Values returned:** A "publications" object and a table that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
+**Values returned:** A "publications" object and a table [dataframe?] that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
 
 ```{R publications example}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
