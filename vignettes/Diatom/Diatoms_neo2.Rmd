@@ -219,7 +219,8 @@ Example - `get_sites()` using geopolitical ID for Alaska (6198), obtained from t
 # Returns table of sites located in Alaska. 
 # diat_1 <- get_sites(gpid = x) # basic format
 diat_1<-get_sites(gpid = 6198) 
-diat_1
+
+head(diat_1,5)
 ```
 
 
@@ -300,7 +301,7 @@ Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample." [No
 diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample")
 data_all_diat <- c()
 for (type in diatom_list){
-  sites <- get_datasets(datasettype=type)
+  sites <- get_datasets(datasettype=type, limit = 10)
   dl_all_diat <- c(data_all_diat, sites)
 }
 dl_all_diat
@@ -365,7 +366,7 @@ Platt_ds <- get_datasets(contactid = 18)
 head(datasets(Platt_ds),3) #show first 3 rows
 ```
 
-####Search using sample analyst
+#### Search using sample analyst
 
 Search for datasets by sample analyst.
 
