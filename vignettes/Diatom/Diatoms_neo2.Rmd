@@ -30,7 +30,7 @@ library(tidyverse)
 
 ## General
 
-This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
+This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database.  It presumes users have already read and are familiar with the basic Neotoma2 R Markdown document, "neotoma2-package.Rmd. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
 
 A main goal of `neotoma2` is to pull records from the Neotoma database and into a user's R workflow. This will help diatomists and other environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
 
@@ -68,8 +68,9 @@ WHERE siteid = 12
 
 It is a lot easier for most users to use the R functions since they create objects in R that work with other commands and statistical analysis they might want to do.
 
-There are three main functions in `neotoma2` to retrieve and subset data: `get_sites()`, `get_datasets()`, and `get_downloads()`.  Each returns a `sites` object output with increasing level of detail (e.g., `get_sites` least; `get_downloads` most).  A `sites` object can potentially contain a complete set of data for one or more sites, including information on site locations, collection units, chronologies, datasets samples and taxa counts.   
-Neotoma2 also includes helper functions such as `filter()`, `collunits()`, `datasets()`, `samples()`, and `plotLeaflet()`.  They are used to extract elements from the obtained `sites` objects.  
+There are three main functions in `neotoma2` to retrieve and subset data: `get_sites()`, `get_datasets()`, and `get_downloads()`.  Each returns a `sites` object output with increasing level of detail (e.g., `get_sites` least; `get_downloads` most).  A `sites` object can potentially contain a complete set of data for one or more sites, including information on site locations, collection units, chronologies, datasets samples and taxa counts.
+
+Neotoma2 also includes helper functions such as `filter()`,`datasets()`, `collunits()`, `samples()`, and `plotLeaflet()`.  They are used to extract elements from the obtained `sites` objects.  
 
 Functions are described where they first appear in the document below.  See the `neotoma2` package documentation for more details.
 
@@ -290,11 +291,11 @@ diat_multid <- get_datasets(multid) # Example
 diat_multid
 ```
 
-Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample."
+Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample." [Note: cannot currently (as of 22 Aug 2022) get datasets for "diatom bottom sample."]
 
 ```{r multi datasettype}
 
-diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample", "diatom bottom sample")
+diatom_list <- c("diatom", "diatom top-bottom", "diatom surface sample")
 data_all_diat <- c()
 for (type in diatom_list){
   sites <- get_datasets(datasettype=type)
@@ -422,6 +423,10 @@ summary(uwallf_download)
 After obtaining a `get_downloads` result, a typical next step is to create subsets of data for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
 
 Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of the first three of the functions listed above.
+
+#### `filter ()` function
+
+The filter function filters a sites object by latitude, longitude, elevation or dataset type.  It should be expressed in code as "neotoma2::filter ()" so it will not be confused with the dyplr's filter function.  See "neotoma2-package.Rmd" for more detailed description.  See the code chunk below (R datasetsFunctionExample) for an example.
 
 #### `datasets()` function
 
@@ -562,7 +567,7 @@ dplyr::filter(datasettype == "diatom surface sample")
 #output is a large table. The head function is used to show only the first three rows to save space
 head(NE_diat_samp, 3)
 
-#Example code to save the output as a CSV file, [[(which can be opened in Microsoft Excel)]] in a location other than the working directory:
+#Example code to save the output as a CSV file in a location other than the current working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
 
@@ -686,7 +691,7 @@ The `get_publications` function extracts publication information from a `sites` 
 | `year` | The year the publication was released |
 | `search` | A plain text search string used to search the citation |
 
-**Values returned:** A "publications" object and a table [dataframe?] that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
+**Values returned:** A "publications" object and a dataframe that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
 
 ```{R publications example}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
