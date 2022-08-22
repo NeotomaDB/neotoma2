@@ -1,11 +1,11 @@
 ---
-title: "Working with diatom data in the neotoma2 R-package - June 2022"
+title: "Working with diatom data in the neotoma2 R-package - August 2022"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 5
 vignette: >
-  %\VignetteIndexEntry{The neotoma2 R Package}
+  %\VignetteIndexEntry{Working with diatom data in the neotoma2 R-package - August 2022}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -205,18 +205,19 @@ Find all sites located in a geopolitical unit as specified by a gpid. There are 
 
 The code below will open the Geopolitical units table.  Once the table appears, use the search function at the top of the page to find the name of a geopolitical unit of interest and its corresponding gpid. 
 
-```{R geopoliticalunitsTable}
+```{R geopoliticalunitsTable, eval=FALSE}
 # View the sitegeopolitical table to find gpids associated with datasetids
-loc <- neotoma2::get_table('geopoliticalunits', limit=99999)
-View(loc)
+GEOP <- neotoma2::get_table('geopoliticalunits', limit=99999)
+
+View(GEOP) #opens table in separate RStudio tab
 # Use the filter at the top of the page to find name of a geopolitical unit and its corresponding gpid
 ```
 
-Example - get_sites using geopolitical ID for Alaska (6198), obtained from the GeoPoliticalUnits table.
+Example - `get_sites()` using geopolitical ID for Alaska (6198), obtained from the GeoPoliticalUnits table.
 
 ```{r get site by gpid}
 # Returns table of sites located in Alaska. 
-# diat_1<-get_site(gpid = x) # basic format
+# diat_1 <- get_sites(gpid = x) # basic format
 diat_1<-get_sites(gpid = 6198) 
 diat_1
 ```
@@ -227,13 +228,14 @@ Run following code to open the sitegeopolitical table and then enter siteid in f
 ```{R sitegeopoliticalTable}
 dataset_gpid <- get_table('sitegeopolitical', limit=99999) %>%
   dplyr::filter(siteid == 10)
-View(dataset_gpid)
+
+dataset_gpid
 # Table columns: GeoPoliticalID,  SiteID, SiteGeoPoliticalID
 ```
 
 Example - get sites from multiple geopolitical units (e.g., states)
 
-```{r retrieveByGeopol}
+```{r retrieveByGeopol, warning=FALSE}
 # Get site data for all sites in three New England states (PA, NJ, NY)
 # The state gpids were obtained from the Geopolitical units table 
 
@@ -241,7 +243,7 @@ gpids <- c(8412, 7990, 7934) #gpids for PA, NY, and NJ
 
 ne_sites <- c()
 for (id in gpids) {
-  a_site <- get_sites(gpid = id)
+  a_site <- get_sites(gpid = id, limit = 3) #3 sites for each state
   ne_sites <- c(ne_sites, a_site)
 }
 #returns data for first 25 sites
@@ -311,18 +313,16 @@ The following code example creates a dataframe with siteid, datasetid, and corre
 ```{r }
 plains <- c(54039,54040,54041,54042,54043,54044,54045,54052,54053,54054,54055,54056,54057,54058,54059,54060,54061,54062,54063,54064,54065,54066,54067,54068,54069,54070,54072,54073,54074,54075,54076,54077,54078,54079,54080,54081,54082,54083,54084,54085,54086,54087,54088,54089,54090,54091,54092,54093,54094,54095,54096,54097,54098,54099,54100)
 
-plains_data <- get_datasets(plains)
-plains_ids <- as.data.frame(getids(plains_data))
+plains_data <- as.data.frame(get_datasets(plains))
+plains_ids <- as.data.frame(getids(get_datasets(plains)))
 
-plains_data_frame <- as.data.frame(plains_data)
-plains_ids_frame <- as.data.frame(plains_ids)
 
-final <- merge(plains_ids_frame, plains_data_frame) %>%
+plains_dataids <- merge(plains_ids, plains_data) %>%
   arrange(., datasetid)
 
 #write.csv(final,"C:\\path_to_file_destination\\GreatPlains_agg.csv", row.names = FALSE)
 
-final
+head(plains_dataids,5)
 ```
 
 #### Search using elevation range
@@ -362,8 +362,9 @@ Platt
 #Find datasets associated with Platt Bradbury (contactid ID 18).
 # CODE BELOW LINE DOES NOT RETURN ACCURATE RESULTS
 Platt_ds <- get_datasets(contactid = 18)
-datasets(Platt_ds)
+head(datasets(Platt_ds),3) #show first 3 rows
 ```
+
 ####Search using sample analyst
 
 Search for datasets by sample analyst.
@@ -381,6 +382,7 @@ don_samples <- diatom_samples %>%
 datasetids_don <- unique(don_samples$datasetid)
 datasetids_don
 ```
+
 ###### Structure of `get_datasets` output
 
 To see the structure of a `get_datasets()` object, run the following code:
@@ -407,26 +409,31 @@ Arguments: `x` can be a datasetid or a vector of numeric datasetids. It can also
 
 To see the structure of `get_downloads()` function output, run the following code:
 ```{R structure_of_get_download_output}
-uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site
-uwallf_data <- get_datasets(uwallf_site) # finds datasets data for Upper Wallface (there's 4 elements)
-uwallf_diatom_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom") # only keep diatom datasets
-uwallf_download <- get_downloads(uwallf_diatom_dataset)
+uwallf_dl <- get_downloads(uwallf_data)
 
 #to see a quick summary of collectionunits, chronologies, datasets, and datasetttypes, use the `summary()` function
-summary(uwallf_download)
+summary(uwallf_dl)
 
 #str (uwallf_download) # remove "#" from beginning of this line and run code to show complete structure of uwallf_download
 ```
 
 ### Helper functions
 
-After obtaining a `get_downloads` result, a typical next step is to create subsets of data for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
+A typical next step is to create subsets of data for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
 
-Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are listed and described within the `neotoma2` package documentation. Below are some basic examples of the output of the first three of the functions listed above.
+Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are also listed and described within the `neotoma2` package documentation.
 
-#### `filter ()` function
+#### `filter()` function
 
 The filter function filters a sites object by latitude, longitude, elevation or dataset type.  It should be expressed in code as "neotoma2::filter ()" so it will not be confused with the dyplr's filter function.  See "neotoma2-package.Rmd" for more detailed description.  See the code chunk below (R datasetsFunctionExample) for an example.
+
+```{r, filter function}
+diat_uwallf_dl <- uwallf_dl %>%
+  neotoma2::filter(datasettype == "diatom")
+
+#looking at the summary output, we can see only "diatom" types are included
+summary(diat_uwallf_dl)
+```
 
 #### `datasets()` function
 
@@ -439,19 +446,15 @@ The argument for this function is a `sites` object.
 
 
 ```{R datasetsFunctionExample}
-#search for a site by site name
-uwallf_site <- get_sites(sitename = 'Upper Wallface%')
-#get datasets from get_sites output
-uwallf_data <- get_datasets(uwallf_site)
-#filter the datasets output to include only "diatom" datasets
-diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
-#use the datasets function to get the data output
-diat_uwallf_data <- datasets(diat_uwallf_dataset)
+
+uwallf_datasets <- datasets(uwallf_data)
 #view the data frame of the data returned
-diat_uwallf_data
+uwallf_datasets
 
 #to save the output in current working directory
-write.csv(diat_uwallf_data, row.names = FALSE)
+##write.csv(uwallf_datasets, row.names = FALSE)
+
+
 # Example of how a csv file could be saved to a directory other than the working directory:
 # write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
 ```
@@ -460,7 +463,7 @@ write.csv(diat_uwallf_data, row.names = FALSE)
 
 The `datasets()` function returns an object with basic dataset information. The following code is an example of how to convert that object to a dataframe.
 
-```{R dataframeDatasetsoutput}
+```{R dataframeDatasetsoutput, eval=FALSE}
 as.data.frame(datasets(uwallf_data))
 
 #as a dataframe, the variables (columns) can be called
@@ -471,10 +474,6 @@ as.data.frame(datasets(uwallf_data))
 The functions used to extract elements from `sites` objects (like `datasets()`) may not return all the variables of interest, or too many variables. Custom tables, or data frames, can be made from the information within the `sites` object. The following example creates a table containing the variables obtained from the `datasets()` function, along with additional variables like siteid and sitename.
 
 ```{R custom_datasets_dataframe}
-uwallf_site <- get_sites(sitename = 'Upper Wallface%')
-uwallf_data <- get_datasets(uwallf_site)
-uwallf_dl <- get_downloads(uwallf_data)
-
 #SITE DATASETS - define variables to be put into data frame
 #This code (specifically for SITEID and SITENAME) only works for one site)
 SITEID <- rep(uwallf_dl[[1]]@siteid,(length(as.data.frame(datasets(uwallf_data))$datasetid)))
@@ -488,7 +487,7 @@ AGE_RANGE_YOUNG <- as.data.frame(datasets(uwallf_data))$age_range_young
 
 custom_datasets <- data.frame(SITEID,SITENAME,DATASETID,DATASETTYPE,AGE_RANGE_OLD,AGE_RANGE_YOUNG)
 
-custom_datasets
+head(custom_datasets,3)
 
 #Save the output as a CSV file, which can be opened in Microsoft Excel
 write.csv(custom_datasets, row.names = FALSE)
@@ -506,16 +505,8 @@ The argument for this function takes a `sites` object.
 Example of using `collunits()` to obtain information on collection units for a site.
 
 ```{R collunitsFunctionExample}
-#search for a site by site name
-uwallf_site <- get_sites(sitename = 'Upper Wallface%')
-#get datasets from get_sites output
-uwallf_data <- get_datasets(uwallf_site)
-#filter the datasets output to include only diatoms
-diat_uwallf_dataset <- neotoma2::filter(uwallf_data, datasettype == "diatom")
-#take the diatom datasets and get the downloads output
-uwallf_dwl <- get_downloads(diat_uwallf_dataset)
 #use the samples function to get data from the collunits function
-diat_uwallf_collunits <- collunits(uwallf_dwl)
+diat_uwallf_collunits <- collunits(diat_uwallf_dl)
 #view the collection unit data
 diat_uwallf_collunits
 
@@ -564,15 +555,12 @@ diat_NE_dl <- get_downloads(NE_datasets)
 NE_diat_samp <- samples(diat_NE_dl) %>%
 dplyr::filter(datasettype == "diatom surface sample")
 
-#output is a large table. The head function is used to show only the first three rows to save space
-head(NE_diat_samp, 3)
+##NE_diat_samp is a fairly large table. The `names()` function is used to see what variables is in the dataframe
+names(NE_diat_samp)
 
 #Example code to save the output as a CSV file in a location other than the current working directory:
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
-
-
-[[Need code chunks for finding datasets that contain **one or more specific diatom taxa names, that are part of specific aggregate datasets**]]
 
 Example of obtaining diatom counts for an aggregate dataset by reading an external file with datasetids.  To run code, replace "path to file" with a working path.
 
@@ -594,16 +582,15 @@ Example of using `samples()` to obtain water chemistry data for multiple lakes.
 
 ```{r waterchemistry_counts example}
 # Use the same sites specified in the chunk above. An object of the site data has already been made.
-my_sites
+NE_dl <- my_sites %>%
+  get_datasets() %>%
+  get_downloads
 
-NE_datasets <- get_datasets(my_sites)
+wat_NE_dl <- neotoma2::filter(NE_datasets, datasettype == "water chemistry")
 
-wat_NE_dataset <- neotoma2::filter(NE_datasets, datasettype == "water chemistry")
-
-wat_NE_dl <- get_downloads(wat_NE_dataset)  
 
 #result: count information with only water chemistry at the specified sites. 
-head(samples(wat_NE_dl),3)
+head(samples(wat_NE_dl),2) #a small glance at the water chemistry samples
 ```
 
 ##### Diatom counts and water chemistry
@@ -652,8 +639,6 @@ The `taxa ()` function obtains a list of unique taxa names contained in download
 
 **values returned:** A data frame with 11 variables:  units, context, element, taxonid, symmetry, taxon group, element type, variable name, ecological group, sites - number in which the taxon occurs, and samples - number of samples in which the taxon occurs.
 
-[[Need example of getting a list of taxa from a download sites object - use result of an example above?]]
-
 Get a complete list of diatom taxa names from the Neotoma Taxa table.
 
 ```{R MasterListTaxa}
@@ -667,10 +652,8 @@ head(diat_taxa_tab, 5)
 
 Get list of all taxa associated with single datasettype.
 
-```{R ListOfTaxaByDatasettype, warning=FALSE}
-diatoms<- get_datasets(datasettype = 'diatom')
-diat_dl <- get_downloads(diatoms)
-diat_taxa <- taxa(diat_dl) # List of taxa in all datasets of dataset type "diatom"
+```{R ListOfTaxa, warning=FALSE}
+diat_taxa <- taxa(uwallf_dl) # List of taxa in all datasets of dataset type "diatom"
 
 head(diat_taxa,3)
 ```
@@ -720,7 +703,7 @@ Make plots and maps (e.g., stratigraphic diagrams, maps of taxa distributions)
 
 The `neotoma2` package has a function to map a `sites` object. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
 
-```{R siteSpatialSearch1}
+```{R siteSpatialSearch1, out.width = '100%'}
 #find all sites in the northeast US
 northeastUS <- rbind(c(-80,40), c(-80,48),
                      c(-65,48), c(-65,40), c(-80,40))
@@ -736,7 +719,7 @@ my_map
 
 The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items (as defined in the `leaflet` package, e.g., custom markers) can then be added to the map as desired.
 
-```{R siteSpatialSearch2}
+```{R siteSpatialSearch2, out.width = '100%'}
 library(leaflet)
 my_map %>% addCircleMarkers(lng =-80, lat = 45, color = "red") #adds a red marker
 ``` 
