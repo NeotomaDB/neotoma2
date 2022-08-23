@@ -158,7 +158,6 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
-
   output <- getids(x) %>%
     dplyr::select(.data$datasetid) %>%
     stats::na.omit() %>%
