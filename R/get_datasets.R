@@ -128,9 +128,9 @@ parse_dataset <- function(result) { # nolint
                         datasets = datasets_,
                         chronologies = new("chronologies",
                                            chronologies = list()))
-    
+
     collunits <- new("collunits", collunits = list(new_collunit))
-    
+
     # Site
     # API error does not allow for build site usage yet.
     set_site(sitename = use_na(call$sitename, "char"),
@@ -141,15 +141,15 @@ parse_dataset <- function(result) { # nolint
              notes = use_na(call$sitenotes, "char"),
              collunits = collunits)
   })
-  
+
   sites <- new("sites", sites = newSites)
-  
+
   ## Patch to remove repeated sites
   ## This is the chunk that's taking the most time.
   sites <- clean(sites)
-  
+
   return(sites)
-  
+
 }
 
 #' @title Get Dataset Default

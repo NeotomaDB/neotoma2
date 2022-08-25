@@ -1,6 +1,8 @@
+setClassUnion("id", c("character", "integer", "numeric"))
+
 #' @title An S4 class for Neotoma contacts
 setClass("contact",
-                    representation(contactid = "ANY",
+                    representation(contactid = "id",
                                    familyname = "character",
                                    leadinginitials = "character",
                                    givennames = "character",
@@ -63,7 +65,7 @@ setClass("authors",
 #' @title An S4 class for a single Neotoma publication.
 #' @export
 setClass("publication",
-                        representation(publicationid = "numeric",
+                        representation(publicationid = "id",
                                        publicationtypeid = "numeric",
                                        publicationtype = "character",
                                        year = "character",
@@ -137,7 +139,7 @@ setClass(
   # Set the name for the class
   "chronology",
   # Define the slots
-  slots = c(chronologyid = "ANY",
+  slots = c(chronologyid = "id",
             notes = "character",
             contact = "ANY",
             agemodel = "character",
@@ -189,11 +191,11 @@ setClass(
             igsn = "character",
             datum = "ANY",
             depth = "numeric",
-            sampleid = "numeric",
+            sampleid = "id",
             thickness = "numeric",
             samplename = "character",
             sampleanalyst = "ANY",
-            analysisunitid = "numeric",
+            analysisunitid = "id",
             analysisunitname = "character"),
 
   # Set the default values for the slot
@@ -224,10 +226,11 @@ setClass(
   # Set the name for the class
   "dataset",
   # Define the slots
-  slots = c(datasetid = "numeric",
+  slots = c(datasetid = "id",
             database = "character",
             doi = "ANY",
             datasettype = "character",
+            datasetname = "character",
             age_range_old = "numeric",
             age_range_young = "numeric",
             notes = "character",
@@ -238,6 +241,7 @@ setClass(
                    database = NA_character_,
                    doi = list(),
                    datasettype = NA_character_,
+                   datasetname = NA_character_,
                    age_range_old =  NA_integer_,
                    age_range_young =  NA_integer_,
                    notes = NA_character_,
@@ -257,7 +261,7 @@ setClass(
 setClass(
   # Set the name for the class
   "collunit",
-  slots = c(collectionunitid = "numeric",
+  slots = c(collectionunitid = "id",
             notes = "character",
             handle = "character",
             colldate = "Date",
@@ -306,7 +310,7 @@ setClass(
   # Set the name for the class
   "site",
   # Define the slots
-  slots = c(siteid = "numeric",
+  slots = c(siteid = "id",
             sitename = "character",
             geography = "sf",
             altitude = "numeric",
