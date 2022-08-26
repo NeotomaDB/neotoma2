@@ -60,7 +60,6 @@ are to create plots and maps and analyze data using R code.
 Document created using R Markdown
 
 
-
 <font size="1"> Cite as: <br> O'Malley, E.C., S.D.,Vidaña, S., Goring, D.F., Charles. 2022. Working with diatom data in the neotoma2 R-package. <https://github.com/NeotomaDB/neotoma2/tree/production/vignettes> </font>
 
 ## Data organization in Neotoma
