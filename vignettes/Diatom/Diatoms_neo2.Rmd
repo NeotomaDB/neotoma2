@@ -1,13 +1,16 @@
 ---
-title: "Working with diatom data in the neotoma2 R-package - August 2022"
+title: "Working with diatom data in the neotoma2 R-package"
+author: "Eric O'Malley, Socorro Dominguez Vidaña, Simon Goring, Don Charles"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+abstract: "O'Malley, E.C., S.D.,Vidaña S., Goring, D.F., Charles. 2022. Working with diatom data in the neotoma2 R-package. https://github.com/NeotomaDB/neotoma2/tree/production/vignettes"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 5
 vignette: >
   %\VignetteIndexEntry{Working with diatom data in the neotoma2 R-package - August 2022}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -30,115 +33,211 @@ library(tidyverse)
 
 ## General
 
-This document provides general guidance and specific code examples for those wanting to use `neotoma2` to retrieve and work with diatom data from the Neotoma Paleoecology Database.  It presumes users have already read and are familiar with the basic Neotoma2 R Markdown document, "neotoma2-package.Rmd. This vignette, as part of the `neotoma2` package, also provides the package developers (Socorro Dominguez and Simon Goring) a set of structured descriptions for the kinds of work that diatom researchers may wish to perform with Neotoma data and some of the specific tasks they may wish to accomplish. Researchers who would like to add examples or other workflows can reach out to the developers through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues), or the [Neotoma Slack Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
+This document provides general guidance and specific code examples for
+those wanting to use `neotoma2` to retrieve and work with diatom data
+from the Neotoma Paleoecology Database. It presumes users have already
+read and are familiar with the basic Neotoma2 R Markdown document,
+"neotoma2-package.Rmd. This vignette, as part of the `neotoma2` package,
+also provides the package developers (Socorro Dominguez and Simon
+Goring) a set of structured descriptions for the kinds of work that
+diatom researchers may wish to perform with Neotoma data and some of the
+specific tasks they may wish to accomplish. Researchers who would like
+to add examples or other workflows can reach out to the developers
+through [GitHub Issues](https://github.com/NeotomaDB/neotoma2/issues),
+or the [Neotoma Slack
+Workspace](https://join.slack.com/t/neotomadb/shared_invite/zt-cvsv53ep-wjGeCTkq7IhP6eUNA9NxYQ).
 
-A main goal of `neotoma2` is to pull records from the Neotoma database and into a user's R workflow. This will help diatomists and other environmental scientists produce clear working documents that use data from Neotoma and allow them to combine it with their own data or data from other sources.
+A main goal of `neotoma2` is to pull records from the Neotoma database
+and into a user's R workflow. This will help diatomists and other
+environmental scientists produce clear working documents that use data
+from Neotoma and allow them to combine it with their own data or data
+from other sources.
 
-This document is organized to address users' two main goals: to browse the database to discover datasets that meet specified criteria and to create output files that can be used for further analysis. Other goals are to create plots and maps and analyze data using R code.
+This document is organized to address users' two main goals: to browse
+the database to discover datasets that meet specified criteria and to
+create output files that can be used for further analysis. Other goals
+are to create plots and maps and analyze data using R code.
+
+Document created using R Markdown
+
+
+
+<font size="1"> Cite as: <br> O'Malley, E.C., S.D.,Vidaña, S., Goring, D.F., Charles. 2022. Working with diatom data in the neotoma2 R-package. <https://github.com/NeotomaDB/neotoma2/tree/production/vignettes> </font>
 
 ## Data organization in Neotoma
 
-It is worth knowing how the Neotoma database is organized and what we mean when talking about things like `sites`, `datasets`, and `samples`.
+It is worth knowing how the Neotoma database is organized and what we
+mean when talking about things like `sites`, `datasets`, and `samples`.
 
-The Neotoma data model is available online at the [Database Schema](https://open.neotomadb.org/dbschema) page. As of September 2021, there were 150 different tables in the database. Some of these have particular kinds of data (for example, `agetypes`), and some link tables together. The `neotoma2` package directly supports access to some tables, but not all. For specialized cases, a user may be required to access an entire table directly (using the `get_table()` function). Neotoma is a Postgres database, and people who are comfortable with SQL can download a snapshot of the database and run much of the analysis on their own.
+The Neotoma data model is available online at the [Database
+Schema](https://open.neotomadb.org/dbschema) page. As of September 2021,
+there were 150 different tables in the database. Some of these have
+particular kinds of data (for example, `agetypes`), and some link tables
+together. The `neotoma2` package directly supports access to some
+tables, but not all. For specialized cases, a user may be required to
+access an entire table directly (using the `get_table()` function).
+Neotoma is a Postgres database, and people who are comfortable with SQL
+can download a snapshot of the database and run much of the analysis on
+their own.
 
-Neotoma data is structured spatially. Each collection location is assigned a **site**, a spatial location defined by either a point or a polygon. It may be a lake, an archaeological site, a swamp, or another location.
+Neotoma data is structured spatially. Each collection location is
+assigned a **site**, a spatial location defined by either a point or a
+polygon. It may be a lake, an archaeological site, a swamp, or another
+location.
 
-Within a **site**, there may be one or more **collection units**.  
-A collection unit represents the material (e.g., sediment core) removed from a specific location within a **site** (e.g., a lake). So, a researcher may have taken multiple cores within a lake basin, or an archaeologist may have several dig sites within a larger area. Collection unit material is subdivided into **analysis units** (e.g., sediment intervals within a core). **Samples** are defined as material removed from analysis units and analyzed for a particular dataset type (e.g., diatoms, pollen, water chemistry).   Groups of analysis units (samples) from an individual collection unit are then grouped into a **dataset**.
+Within a **site**, there may be one or more **collection units**.\
+A collection unit represents the material (e.g., sediment core) removed
+from a specific location within a **site** (e.g., a lake). So, a
+researcher may have taken multiple cores within a lake basin, or an
+archaeologist may have several dig sites within a larger area.
+Collection unit material is subdivided into **analysis units** (e.g.,
+sediment intervals within a core). **Samples** are defined as material
+removed from analysis units and analyzed for a particular dataset type
+(e.g., diatoms, pollen, water chemistry). Groups of analysis units
+(samples) from an individual collection unit are then grouped into a
+**dataset**.
 
-Note: There are four diatom dataset types:  "diatom" (stratigraphic / cores), "diatom surface sample" (surface samples only), "diatom bottom sample" (bottom samples only) and "diatom top-bottom" (top and bottom samples only).
+Note: There are four diatom dataset types: "diatom" (stratigraphic /
+cores), "diatom surface sample" (surface samples only), "diatom bottom
+sample" (bottom samples only) and "diatom top-bottom" (top and bottom
+samples only).
 
 ## neotoma2 R-package functions
 
-The `neotoma2` package uses data from the Neotoma database, but it is mediated through R functions (like `get_sites()` to get site information) that call public URLs, which are abstractions of database calls. So, for example, to get data for the site with ID number 12:
-```r
+The `neotoma2` package uses data from the Neotoma database, but it is
+mediated through R functions (like `get_sites()` to get site
+information) that call public URLs, which are abstractions of database
+calls. So, for example, to get data for the site with ID number 12:
+
+``` {.r}
 get_sites(12)
 ```
+
 calls out to the internet for the result at:
-```
-https://api.neotomadb.org/v2.0/data/sites/12
-```
+
+    https://api.neotomadb.org/v2.0/data/sites/12
 
 Which itself calls an SQL query:
-```sql
+
+``` {.sql}
 SELECT * FROM ndb.sites
 WHERE siteid = 12
 ```
 
-It is a lot easier for most users to use the R functions since they create objects in R that work with other commands and statistical analysis they might want to do.
+It is a lot easier for most users to use the R functions since they
+create objects in R that work with other commands and statistical
+analysis they might want to do.
 
-There are three main functions in `neotoma2` to retrieve and subset data: `get_sites()`, `get_datasets()`, and `get_downloads()`.  Each returns a `sites` object output with increasing level of detail (e.g., `get_sites` least; `get_downloads` most).  A `sites` object can potentially contain a complete set of data for one or more sites, including information on site locations, collection units, chronologies, datasets samples and taxa counts.
+There are three main functions in `neotoma2` to retrieve and subset
+data: `get_sites()`, `get_datasets()`, and `get_downloads()`. Each
+returns a `sites` object output with increasing level of detail (e.g.,
+`get_sites` least; `get_downloads` most). A `sites` object can
+potentially contain a complete set of data for one or more sites,
+including information on site locations, collection units, chronologies,
+datasets samples and taxa counts.
 
-Neotoma2 also includes helper functions such as `filter()`,`datasets()`, `collunits()`, `samples()`, and `plotLeaflet()`.  They are used to extract elements from the obtained `sites` objects.  
+Neotoma2 also includes helper functions such as `filter()`,`datasets()`,
+`collunits()`, `samples()`, and `plotLeaflet()`. They are used to
+extract elements from the obtained `sites` objects.
 
-Functions are described where they first appear in the document below.  See the `neotoma2` package documentation for more details.
-
+Functions are described where they first appear in the document below.
+See the `neotoma2` package documentation for more details.
 
 # Browse Data
 
-This section describes ways of searching the Neotoma database to find `sites` and diatom `datasets` using various criteria. The primary purpose of each code chunk is to find the `sites` or `datasets` that meet the criteria specified in the code. The returned objects can then be used as input to other code chunks that return more detailed information on the datasets and create output files for data analysis (e.g., diatom counts).
+This section describes ways of searching the Neotoma database to find
+`sites` and diatom `datasets` using various criteria. The primary
+purpose of each code chunk is to find the `sites` or `datasets` that
+meet the criteria specified in the code. The returned objects can then
+be used as input to other code chunks that return more detailed
+information on the datasets and create output files for data analysis
+(e.g., diatom counts).
 
 ## Find sites
 
-Use the `get_sites()` or `get_datasets()` functions to find sites and related information. Searches using siteid or sitename can be done using `get_sites()`. Searches using dataset information (such as age, location, dataset type, etc.) can be done using `get_datasets()`. 
+Use the `get_sites()` or `get_datasets()` functions to find sites and
+related information. Searches using siteid or sitename can be done using
+`get_sites()`. Searches using dataset information (such as age,
+location, dataset type, etc.) can be done using `get_datasets()`.
 
-The information returned by both functions is similar, but still notably different. The level of detail in `get_datasets()` is different as it includes: agerange, database, datasettype, and datasetnotes. These fields are not in `get_sites()` output.
+The information returned by both functions is similar, but still notably
+different. The level of detail in `get_datasets()` is different as it
+includes: agerange, database, datasettype, and datasetnotes. These
+fields are not in `get_sites()` output.
 
-Both functions can be used to search for information on a single or multiple sites. They are helpful for finding locations of all sites within a region, even if they are not diatom sites; this is useful for indicating the level of paleoecological 'effort' in a region.  Also, output can be used to generate a map showing site locations.
+Both functions can be used to search for information on a single or
+multiple sites. They are helpful for finding locations of all sites
+within a region, even if they are not diatom sites; this is useful for
+indicating the level of paleoecological 'effort' in a region. Also,
+output can be used to generate a map showing site locations.
 
 ### `get_sites` function
 
 Find sites using the `get_sites` function.
 
-**Usage:** Sites can be searched using the following supported parameters
-(e.g., `get_sites(sitename="Alexander Lake")`).
+**Usage:** Sites can be searched using the following supported
+parameters (e.g., `get_sites(sitename="Alexander Lake")`).
 
-| parameter | allowed values |
-| ------ | ------- |
-| `siteid` | integers (values > 0) |
+| parameter  | allowed values                          |
+|------------|-----------------------------------------|
+| `siteid`   | integers (values \> 0)                  |
 | `sitename` | valid character string; `%` as wildcard |
-| `altmax` | integers (values >= than `altmin`) |
-| `altmin` | integers |
-| `loc` | spatial coordinates (WKT or geoJSON) |
-| `limit` | integer > 0; default 25 |
-| `offset` | integer > 0; default 0 |
+| `altmax`   | integers (values \>= than `altmin`)     |
+| `altmin`   | integers                                |
+| `loc`      | spatial coordinates (WKT or geoJSON)    |
+| `limit`    | integer \> 0; default 25                |
+| `offset`   | integer \> 0; default 0                 |
 
-`limit` indicates the maximum number of records that will be returned; `offset` indicates the number in a sequence where processing will begin.  Together, these allow large numbers of records to be processed in batches.
+`limit` indicates the maximum number of records that will be returned;
+`offset` indicates the number in a sequence where processing will begin.
+Together, these allow large numbers of records to be processed in
+batches.
 
-**Values returned:** A `sites` object, which includes nested lists with information on: siteid, sitename, latitude and longitude, elevation, geopolitical unit, notes, site description, collection units, and datasets associated with the collection units.  In addition to the data above, the function returns a table (dataframe) with 5 location variables for each site (see example below).
+**Values returned:** A `sites` object, which includes nested lists with
+information on: siteid, sitename, latitude and longitude, elevation,
+geopolitical unit, notes, site description, collection units, and
+datasets associated with the collection units. In addition to the data
+above, the function returns a table (dataframe) with 5 location
+variables for each site (see example below).
 
 #### Search by site ID
 
-Get data for a single site using siteid. 
+Get data for a single site using siteid.
 
 ```{R dearch by siteid}
 uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which has the Neotoma siteid 745.
 
 uwallf_site
 ```
-To see the structure of the output, type "str(uwallf_site)" in the RStudio console.
+
+To see the structure of the output, type "str(uwallf_site)" in the
+RStudio console.
 
 Get data on multiple sites by using siteids.
 
-Example input data:
-| `sitename` |  `siteid` |
-| -- | -- |
-| Jackson Pond | 25918 |
-| Jellison Hill Pond | 25919 |
-| Jimmie Pond | 25920 |
+Example input data: \| `sitename` \| `siteid` \| \| -- \| -- \| \|
+Jackson Pond \| 25918 \| \| Jellison Hill Pond \| 25919 \| \| Jimmie
+Pond \| 25920 \|
 
 Get data on multiple sites by using siteids
+
 ```{r multsitesbySiteIDs example}
 siteids <- c(25918, 25919, 25920)
 diat_6 <- get_sites(siteids)
 diat_6
 ```
+
 Get data on multiple sites by reading a text file of siteids
 
-The above code returns data for three sites.  We could use a larger set of site IDs by either entering them directly or by loading the IDs from a file.  In the example below we assume that there exists a plain text file called `NLAD.txt` which contains a list of site IDs for sites sampled as part of the EPA National Lakes Assessment.
+The above code returns data for three sites. We could use a larger set
+of site IDs by either entering them directly or by loading the IDs from
+a file. In the example below we assume that there exists a plain text
+file called `NLAD.txt` which contains a list of site IDs for sites
+sampled as part of the EPA National Lakes Assessment.
 
-There may well be many more lines with numbers representing each site identifier in the set of records.  In this case we would load the data like so:
+There may well be many more lines with numbers representing each site
+identifier in the set of records. In this case we would load the data
+like so:
 
 ```{r NLAmultiplesiteID}
 nlad <- read.table('..\\Data-DFC\\NLAD.txt', header=FALSE)
@@ -147,10 +246,10 @@ nlaSites <- get_sites(nlad$V1)
 nlaSites
 ```
 
-
 #### Search by site name
 
-If we know the name of one or more of the existing sites we are looking for, we can get site data using the `sitename` parameter.
+If we know the name of one or more of the existing sites we are looking
+for, we can get site data using the `sitename` parameter.
 
 Get data on a single site using sitename.
 
@@ -162,7 +261,6 @@ diat
 # wildcards (%) can be used if you do not know the exact name
 ## Example: get_sites(sitename = '%Schra%')
 ```
-
 
 Get data on multiple sites using sitenames.
 
@@ -182,7 +280,9 @@ my_sites
 
 #### Search for sites in a latitude and longitude bounding box
 
-Example of finding sites by location within a bounding box of latitudes and longitudes.  Same code works with `get_datasets()` as well as `get_sites()`.
+Example of finding sites by location within a bounding box of latitudes
+and longitudes. Same code works with `get_datasets()` as well as
+`get_sites()`.
 
 ```{R diatomsbyBoundingBox}
 # Find sites in the northeast US.  Order of boundaries is: West, South, East, North.  
@@ -201,9 +301,16 @@ neUSsites
 
 #### Search for sites by geopolitical unit
 
-Find all sites located in a geopolitical unit as specified by a gpid. There are up to four hierarchical levels of geopolitical unit (first to fourth) to which a site can be assigned.  The combination of names of levels for a site depends on the country or region in which a site is located.  In the USA the four levels are country, state, county and administrative unit (e.g., Jeferson National Forest).
+Find all sites located in a geopolitical unit as specified by a gpid.
+There are up to four hierarchical levels of geopolitical unit (first to
+fourth) to which a site can be assigned. The combination of names of
+levels for a site depends on the country or region in which a site is
+located. In the USA the four levels are country, state, county and
+administrative unit (e.g., Jeferson National Forest).
 
-The code below will open the Geopolitical units table.  Once the table appears, use the search function at the top of the page to find the name of a geopolitical unit of interest and its corresponding gpid. 
+The code below will open the Geopolitical units table. Once the table
+appears, use the search function at the top of the page to find the name
+of a geopolitical unit of interest and its corresponding gpid.
 
 ```{R geopoliticalunitsTable, eval=FALSE}
 # View the sitegeopolitical table to find gpids associated with datasetids
@@ -213,7 +320,8 @@ View(GEOP) #opens table in separate RStudio tab
 # Use the filter at the top of the page to find name of a geopolitical unit and its corresponding gpid
 ```
 
-Example - `get_sites()` using geopolitical ID for Alaska (6198), obtained from the GeoPoliticalUnits table.
+Example - `get_sites()` using geopolitical ID for Alaska (6198),
+obtained from the GeoPoliticalUnits table.
 
 ```{r get site by gpid}
 # Returns table of sites located in Alaska. 
@@ -223,8 +331,8 @@ diat_1<-get_sites(gpid = 6198)
 head(diat_1,5)
 ```
 
-
-Run following code to open the sitegeopolitical table and then enter siteid in filter box to find corresponding gpids
+Run following code to open the sitegeopolitical table and then enter
+siteid in filter box to find corresponding gpids
 
 ```{R sitegeopoliticalTable}
 dataset_gpid <- get_table('sitegeopolitical', limit=99999) %>%
@@ -253,7 +361,12 @@ ne_sites
 
 #### Navigate the structure of a `sites` object to find specific metadata.
 
-Sometimes it is useful to extract specific data from a `sites` object.  We can call any individual site using `[[ ]]`, placing the index (sequence number) of the desired site object between the brackets. For example, the `uwallf_site` object is composed of only one site, so its index value is 1. Then we can also call the particular variable we want (e.g., siteid) using the `$` symbol.
+Sometimes it is useful to extract specific data from a `sites` object.
+We can call any individual site using `[[ ]]`, placing the index
+(sequence number) of the desired site object between the brackets. For
+example, the `uwallf_site` object is composed of only one site, so its
+index value is 1. Then we can also call the particular variable we want
+(e.g., siteid) using the `$` symbol.
 
 ```{r extractElement}
 #Create a `sites` object using get_sites; this example - Upper Wallface Pond
@@ -268,17 +381,24 @@ Find datasets using the `get_datasets` function
 
 ### `get_datasets` function
 
-Use this function to discover datasets available for a geographic location, within an elevation range, representing a range of ages, and more.  Also use it to retrieve metadata for specific datasets.
+Use this function to discover datasets available for a geographic
+location, within an elevation range, representing a range of ages, and
+more. Also use it to retrieve metadata for specific datasets.
 
-**Usage:** `get_datasets(x, sites_object, contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof)`
+**Usage:**
+`get_datasets(x, sites_object, contactid, datasettype, altmin, altmax, loc, ageyoung, ageold, ageof)`
 
-x is an optional value that represents an object with numeric datasetids. It can be a single datasetid, an array with multiple IDs, or a `sites` object created using `get_sites`.
+x is an optional value that represents an object with numeric
+datasetids. It can be a single datasetid, an array with multiple IDs, or
+a `sites` object created using `get_sites`.
 
-**Values returned:** A `sites` object with more detail than a `get_sites` object that includes information on collection units and datasets (e.g., datasettype, dataset notes and dataset age range).
+**Values returned:** A `sites` object with more detail than a
+`get_sites` object that includes information on collection units and
+datasets (e.g., datasettype, dataset notes and dataset age range).
 
 ##### Search using datasetid
 
-Get data for a single dataset using datasetid 
+Get data for a single dataset using datasetid
 
 ```{r get datasetid}
 # diat_ID <- get_dataset(datasetid) - basic format
@@ -294,7 +414,9 @@ diat_multid <- get_datasets(multid) # Example
 diat_multid
 ```
 
-Get all datasets for "diatom", "diatom top-bottom", "diatom surface sample." [Note: cannot currently (as of 22 Aug 2022) get datasets for "diatom bottom sample."]
+Get all datasets for "diatom", "diatom top-bottom", "diatom surface
+sample." [Note: cannot currently (as of 22 Aug 2022) get datasets for
+"diatom bottom sample."]
 
 ```{r multi datasettype}
 
@@ -307,9 +429,14 @@ for (type in diatom_list){
 dl_all_diat
 ```
 
-Obtain data for multiple datasetids in pre-defined "Aggregate Dataset" files.  Sets of Aggregate Dataset datasetids can be stored as .txt or .csv files and used as inputs to get_datasets, either by pasting the datasetids into the code chunk or reading in the file.
+Obtain data for multiple datasetids in pre-defined "Aggregate Dataset"
+files. Sets of Aggregate Dataset datasetids can be stored as .txt or
+.csv files and used as inputs to get_datasets, either by pasting the
+datasetids into the code chunk or reading in the file.
 
-The following code example creates a dataframe with siteid, datasetid, and corresponding site information for datasets in the Northern Great Plains aggregate dataset.
+The following code example creates a dataframe with siteid, datasetid,
+and corresponding site information for datasets in the Northern Great
+Plains aggregate dataset.
 
 ```{r }
 plains <- c(54039,54040,54041,54042,54043,54044,54045,54052,54053,54054,54055,54056,54057,54058,54059,54060,54061,54062,54063,54064,54065,54066,54067,54068,54069,54070,54072,54073,54074,54075,54076,54077,54078,54079,54080,54081,54082,54083,54084,54085,54086,54087,54088,54089,54090,54091,54092,54093,54094,54095,54096,54097,54098,54099,54100)
@@ -339,7 +466,9 @@ diat_el
 
 #### Search using age range
 
-Find datasets for sites with samples representing a specific time interval.  Use the same code used to search by elevation range, above, but substitute "ageyoung" and "ageold" for "altmin" and "altmax".
+Find datasets for sites with samples representing a specific time
+interval. Use the same code used to search by elevation range, above,
+but substitute "ageyoung" and "ageold" for "altmin" and "altmax".
 
 ```{R getDatasetssByAgeRangeExample}
 # Ages in calendar years BP
@@ -351,7 +480,8 @@ diat_age
 
 #### Search using contactid
 
-Find datasets associated with a contactid.  [[Code below does not currently (August 2022) give correct response. It is being revised.]]
+Find datasets associated with a contactid. [[Code below does not
+currently (August 2022) give correct response. It is being revised.]]
 
 Find datasts associated with Platt Bradbury
 
@@ -386,7 +516,8 @@ datasetids_don
 
 ###### Structure of `get_datasets` output
 
-To see the structure of a `get_datasets()` object, run the following code:
+To see the structure of a `get_datasets()` object, run the following
+code:
 
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
@@ -401,14 +532,23 @@ uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pon
 
 ### `get_downloads` function
 
-Use the `get_downloads` function to download all records associated with one or more datasets.  The function returns a `sites` object with full level of detail.
+Use the `get_downloads` function to download all records associated with
+one or more datasets. The function returns a `sites` object with full
+level of detail.
 
-**Usage:**  `get_downloads(x)`
-Arguments: `x` can be a datasetid or a vector of numeric datasetids. It can also be a `sites` object as returned by `get_datasets()` or `get_sites()`; "verbose, logical (default is TRUE)" - prints a download status bar.
+**Usage:** `get_downloads(x)` Arguments: `x` can be a datasetid or a
+vector of numeric datasetids. It can also be a `sites` object as
+returned by `get_datasets()` or `get_sites()`; "verbose, logical
+(default is TRUE)" - prints a download status bar.
 
-**Values returned:** a `sites` object with a full level of detail, including data on sites, collection units, analysis units, samples, datasets, taxonomic data (e.g., diatom counts), chronologies, and contactid.
+**Values returned:** a `sites` object with a full level of detail,
+including data on sites, collection units, analysis units, samples,
+datasets, taxonomic data (e.g., diatom counts), chronologies, and
+contactid.
 
-To see the structure of `get_downloads()` function output, run the following code:
+To see the structure of `get_downloads()` function output, run the
+following code:
+
 ```{R structure_of_get_download_output}
 uwallf_dl <- get_downloads(uwallf_data)
 
@@ -420,13 +560,23 @@ summary(uwallf_dl)
 
 ### Helper functions
 
-A typical next step is to create subsets of data for intended analyses.  The following helper functions can be used on a `sites` object to return a subset of associated values as a data frame without having to go through the structure of lists returned from `get_sites`, `get_datasets`, or `get_downloads`.
+A typical next step is to create subsets of data for intended analyses.
+The following helper functions can be used on a `sites` object to return
+a subset of associated values as a data frame without having to go
+through the structure of lists returned from `get_sites`,
+`get_datasets`, or `get_downloads`.
 
-Some examples of helper functions are `datasets()`, `collunits()`, `samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are also listed and described within the `neotoma2` package documentation.
+Some examples of helper functions are `datasets()`, `collunits()`,
+`samples()`,`taxa()`, `chronologies()` and `coordinates()`. These are
+also listed and described within the `neotoma2` package documentation.
 
 #### `filter()` function
 
-The filter function filters a sites object by latitude, longitude, elevation or dataset type.  It should be expressed in code as "neotoma2::filter ()" so it will not be confused with the dyplr's filter function.  See "neotoma2-package.Rmd" for more detailed description.  See the code chunk below (R datasetsFunctionExample) for an example.
+The filter function filters a sites object by latitude, longitude,
+elevation or dataset type. It should be expressed in code as
+"neotoma2::filter ()" so it will not be confused with the dyplr's filter
+function. See "neotoma2-package.Rmd" for more detailed description. See
+the code chunk below (R datasetsFunctionExample) for an example.
 
 ```{r, filter function}
 diat_uwallf_dl <- uwallf_dl %>%
@@ -438,13 +588,13 @@ summary(diat_uwallf_dl)
 
 #### `datasets()` function
 
-The `datasets()` function extracts dataset information from a `sites` object. 
-**Usage:** `datasets(object)`
+The `datasets()` function extracts dataset information from a `sites`
+object. **Usage:** `datasets(object)`
 
 The argument for this function is a `sites` object.
 
-**Values returned:** A datasets object with the variables dataset.id, database, datasettype, age_range_old, age_range_young, and notes.
-
+**Values returned:** A datasets object with the variables dataset.id,
+database, datasettype, age_range_old, age_range_young, and notes.
 
 ```{R datasetsFunctionExample}
 
@@ -462,7 +612,9 @@ uwallf_datasets
 
 ##### Create dataframe of dataset information
 
-The `datasets()` function returns an object with basic dataset information. The following code is an example of how to convert that object to a dataframe.
+The `datasets()` function returns an object with basic dataset
+information. The following code is an example of how to convert that
+object to a dataframe.
 
 ```{R dataframeDatasetsoutput, eval=FALSE}
 as.data.frame(datasets(uwallf_data))
@@ -472,7 +624,12 @@ as.data.frame(datasets(uwallf_data))
 (as.data.frame(datasets(uwallf_data)))$datasetid
 ```
 
-The functions used to extract elements from `sites` objects (like `datasets()`) may not return all the variables of interest, or too many variables. Custom tables, or data frames, can be made from the information within the `sites` object. The following example creates a table containing the variables obtained from the `datasets()` function, along with additional variables like siteid and sitename.
+The functions used to extract elements from `sites` objects (like
+`datasets()`) may not return all the variables of interest, or too many
+variables. Custom tables, or data frames, can be made from the
+information within the `sites` object. The following example creates a
+table containing the variables obtained from the `datasets()` function,
+along with additional variables like siteid and sitename.
 
 ```{R custom_datasets_dataframe}
 #SITE DATASETS - define variables to be put into data frame
@@ -496,14 +653,17 @@ write.csv(custom_datasets, row.names = FALSE)
 
 #### `collunits()` function
 
-The `collunits` function extracts collection unit information from a `sites` object. 
+The `collunits` function extracts collection unit information from a
+`sites` object.
 
-**Usage:** `collunits(object)`
-The argument for this function takes a `sites` object.
+**Usage:** `collunits(object)` The argument for this function takes a
+`sites` object.
 
-**Values returned:** A datasets object with the variables datasetid, database, datasettype, age_range_old, age_range_young, and notes.
+**Values returned:** A datasets object with the variables datasetid,
+database, datasettype, age_range_old, age_range_young, and notes.
 
-Example of using `collunits()` to obtain information on collection units for a site.
+Example of using `collunits()` to obtain information on collection units
+for a site.
 
 ```{R collunitsFunctionExample}
 #use the samples function to get data from the collunits function
@@ -518,20 +678,32 @@ write.csv(diat_uwallf_collunits, row.names = FALSE)
 
 #### `samples()` function
 
-The `samples()` function obtains sample level data from a `sites` object created using get_downloads and returns results as a data frame. 
+The `samples()` function obtains sample level data from a `sites` object
+created using get_downloads and returns results as a data frame.
 
 **Usage:** `samples(x)`
 
 **argument:** (x) is a `sites` object obtained from `get_downloads`.
 
-**Values returned:** A data frame with the variables age, agetype, ageolder, ageyounger, chronologyid, chronologyname, units, value, context, element, taxonid, symmetry, taxongroup, elementtype, variablename (taxa), ecologicalgroup, depth, thickness, sample name, datasetid, siteid, sitename, lat, long, area, sitenotes, description, elev, collunitid, database, datasettype, age_range_old, age_range_young, and datasetnotes.
+**Values returned:** A data frame with the variables age, agetype,
+ageolder, ageyounger, chronologyid, chronologyname, units, value,
+context, element, taxonid, symmetry, taxongroup, elementtype,
+variablename (taxa), ecologicalgroup, depth, thickness, sample name,
+datasetid, siteid, sitename, lat, long, area, sitenotes, description,
+elev, collunitid, database, datasettype, age_range_old, age_range_young,
+and datasetnotes.
 
 ##### Diatom counts
 
-The `samples ()` function provides the most efficient way to obtain a data frame with diatom counts.  The following code chunks can be used to view diatom count related data.  There are a few examples, each with something a little different.
-For single sites and multiple sites; aggregate data sets; stratigraphic vs surface sample vs top-bottom; percentages vs raw counts; containing specific taxa, etc.
+The `samples ()` function provides the most efficient way to obtain a
+data frame with diatom counts. The following code chunks can be used to
+view diatom count related data. There are a few examples, each with
+something a little different. For single sites and multiple sites;
+aggregate data sets; stratigraphic vs surface sample vs top-bottom;
+percentages vs raw counts; containing specific taxa, etc.
 
-Example of using `samples()` to obtain diatom counts from multiple sediment cores.
+Example of using `samples()` to obtain diatom counts from multiple
+sediment cores.
 
 ```{R samplesFunctionExample}
 # Join a list of site names together using the combine command, c()
@@ -563,7 +735,9 @@ names(NE_diat_samp)
 #write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
 ```
 
-Example of obtaining diatom counts for an aggregate dataset by reading an external file with datasetids.  To run code, replace "path to file" with a working path.
+Example of obtaining diatom counts for an aggregate dataset by reading
+an external file with datasetids. To run code, replace "path to file"
+with a working path.
 
 ```{R aggregate dataset finding taxa, eval=FALSE}
 agg_datasetids <- read_excel("path_to_file.xlsx", sheet = "sheetname_with_datasetids")
@@ -576,10 +750,10 @@ agg_samples %>%
   dplyr::filter(variablename == "taxa_name" | "other_taxa")
 ```
 
-
 ##### Water chemistry
 
-Example of using `samples()` to obtain water chemistry data for multiple lakes.
+Example of using `samples()` to obtain water chemistry data for multiple
+lakes.
 
 ```{r waterchemistry_counts example}
 # Use the same sites specified in the chunk above. An object of the site data has already been made.
@@ -596,9 +770,11 @@ head(samples(wat_NE_dl),2) #a small glance at the water chemistry samples
 
 ##### Diatom counts and water chemistry
 
-Example of how to get sample data from multiple sites while also filtering for diatom and water chemistry datasets. 
+Example of how to get sample data from multiple sites while also
+filtering for diatom and water chemistry datasets.
 
-The `sites` objects obtained from the above two chunks of code can be combined to include both diatom count and water chemistry data.
+The `sites` objects obtained from the above two chunks of code can be
+combined to include both diatom count and water chemistry data.
 
 ```{r diatom_and_waterchemistry_counts example, warning=FALSE}
 #Join downloads together using the combine command, c()
@@ -610,13 +786,17 @@ diat_wat_counts <- samples(diat_wat_dl)
 
 #### `chronologies()` function
 
-The `chronologies()` function obtains chronology data from a sites object and returns results as a list. 
+The `chronologies()` function obtains chronology data from a sites
+object and returns results as a list.
 
 **Usage:** `chronologies(x)`
 
-**argument:** (x) is a `sites` object (that contains chronologies) obtained from `get_downloads`.
+**argument:** (x) is a `sites` object (that contains chronologies)
+obtained from `get_downloads`.
 
-**Values returned:** A list with the variables chronologyid, notes, contact, agemodel, ageboundolder, ageboundyounger, isdefault (?), dateprepared, modelagetype, chronologyname, and chroncontrols.
+**Values returned:** A list with the variables chronologyid, notes,
+contact, agemodel, ageboundolder, ageboundyounger, isdefault (?),
+dateprepared, modelagetype, chronologyname, and chroncontrols.
 
 Example using `chronologies ()` to get chronology data for a site.
 
@@ -629,16 +809,20 @@ uwallf_chron <- chronologies(uwallf_dl)
 uwallf_chron
 ```
 
-
 #### `taxa` () function
 
-The `taxa ()` function obtains a list of unique taxa names contained in download sites object.
+The `taxa ()` function obtains a list of unique taxa names contained in
+download sites object.
 
 **Usage:** `taxa(x)`
 
-**argument:** (x) is a `sites` object (that contains taxa names) obtained from `get_downloads`.
+**argument:** (x) is a `sites` object (that contains taxa names)
+obtained from `get_downloads`.
 
-**values returned:** A data frame with 11 variables:  units, context, element, taxonid, symmetry, taxon group, element type, variable name, ecological group, sites - number in which the taxon occurs, and samples - number of samples in which the taxon occurs.
+**values returned:** A data frame with 11 variables: units, context,
+element, taxonid, symmetry, taxon group, element type, variable name,
+ecological group, sites - number in which the taxon occurs, and samples
+- number of samples in which the taxon occurs.
 
 Get a complete list of diatom taxa names from the Neotoma Taxa table.
 
@@ -650,7 +834,6 @@ diat_taxa_tab <- get_table('taxa', limit=99999) %>%
 head(diat_taxa_tab, 5)
 ```
 
-
 Get list of all taxa associated with single datasettype.
 
 ```{R ListOfTaxa, warning=FALSE}
@@ -661,21 +844,41 @@ head(diat_taxa,3)
 
 #### `get_publications ()` function
 
-The `get_publications` function extracts publication information from a `sites` object. 
+The `get_publications` function extracts publication information from a
+`sites` object.
 
 **Usage:** `get_publications(x = NA, ...)`
 
-| parameter | allowed values |
-| ------ | ------- |
-| `x` | integer: a contactid |
-| `	publicationid ` | The unique numeric identifier associated with a publication in Neotoma |
-| `datasetid` | A unique identifier for a Neotoma dataset that is associated with a publication |
-| `siteid` | A unique identifier for a Neotoma site that is associated with a publication |
-| `pubtype ` | The publication type, from `get_tables("publicationtypes")` |
-| `year` | The year the publication was released |
-| `search` | A plain text search string used to search the citation |
++--------------------------------+-------------------------------------+
+| parameter                      | allowed values                      |
++================================+=====================================+
+| `x`                            | integer: a contactid                |
++--------------------------------+-------------------------------------+
+| `publicationid`                | The unique numeric identifier       |
+|                                | associated with a publication in    |
+|                                | Neotoma                             |
++--------------------------------+-------------------------------------+
+| `datasetid`                    | A unique identifier for a Neotoma   |
+|                                | dataset that is associated with a   |
+|                                | publication                         |
++--------------------------------+-------------------------------------+
+| `siteid`                       | A unique identifier for a Neotoma   |
+|                                | site that is associated with a      |
+|                                | publication                         |
++--------------------------------+-------------------------------------+
+| `pubtype`                      | The publication type, from          |
+|                                | `get_tables("publicationtypes")`    |
++--------------------------------+-------------------------------------+
+| `year`                         | The year the publication was        |
+|                                | released                            |
++--------------------------------+-------------------------------------+
+| `search`                       | A plain text search string used to  |
+|                                | search the citation                 |
++--------------------------------+-------------------------------------+
 
-**Values returned:** A "publications" object and a dataframe that displays the variables publicationid, citation, and DOI. The "publications" object contains all possible publication information.
+**Values returned:** A "publications" object and a dataframe that
+displays the variables publicationid, citation, and DOI. The
+"publications" object contains all possible publication information.
 
 ```{R publications example}
 uwallf_site <- get_sites(sitename = 'Upper Wallface%')
@@ -696,13 +899,16 @@ uwallf_pub
 
 # Visualize Data
 
-Make plots and maps (e.g., stratigraphic diagrams, maps of taxa distributions)
+Make plots and maps (e.g., stratigraphic diagrams, maps of taxa
+distributions)
 
 ## Map of site locations
 
 ### `plotLeaflet()` function
 
-The `neotoma2` package has a function to map a `sites` object. Use it, for example, to create a map showing all sites that are located within a specific geographic region, are part of an aggregate dataset, etc. 
+The `neotoma2` package has a function to map a `sites` object. Use it,
+for example, to create a map showing all sites that are located within a
+specific geographic region, are part of an aggregate dataset, etc.
 
 ```{R siteSpatialSearch1, out.width = '100%'}
 #find all sites in the northeast US
@@ -716,11 +922,13 @@ neUSsites <- get_datasets(loc = neus, limit = 199)
 my_map <- plotLeaflet(neUSsites)
 
 my_map
-``` 
+```
 
-The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items (as defined in the `leaflet` package, e.g., custom markers) can then be added to the map as desired.
+The map returned by `plotLeaflet()` is a `leaflet` object. Leaflet items
+(as defined in the `leaflet` package, e.g., custom markers) can then be
+added to the map as desired.
 
 ```{R siteSpatialSearch2, out.width = '100%'}
 library(leaflet)
 my_map %>% addCircleMarkers(lng =-80, lat = 45, color = "red") #adds a red marker
-``` 
+```
