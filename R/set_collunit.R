@@ -13,7 +13,7 @@
 #' @param collunittype type of collection unit
 #' @param collectiondevice device used to collect the sample
 #' @param collectionunitname name of the collection unit 
-#' @param depositionalenvironment 
+#' @param depositionalenvironment depositional environment
 #' @param datasets datasets that the collection unit has
 #' @param chronologies chronologies taken from the collection unit
 #' @param defaultchronology best chronology model identifier to be used with this collection unit

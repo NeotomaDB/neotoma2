@@ -35,6 +35,8 @@ set_dataset(
 \item{notes}{notes}
 
 \item{pi_list}{pi list}
+
+\item{samples}{taxa objects}
 }
 \description{
 set Site Information for Fossil Sites

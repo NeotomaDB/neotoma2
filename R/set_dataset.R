@@ -11,7 +11,7 @@
 #' @param age_range_young age range young
 #' @param notes notes
 #' @param pi_list pi list
-#' @param samples
+#' @param samples taxa objects
 #' @export
 #' @examples
 #' \dontrun{

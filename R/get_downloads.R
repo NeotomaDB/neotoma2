@@ -100,7 +100,7 @@ parse_download <- function(result, verbose = TRUE) {
         ## Review this piece of code @Simon
         ## Why is it necessary to groupby and unlist, simple match should work 
         ## (? I think)
-        # st2 <- ids %>%
+        # st <- ids %>%
         #   mutate(match = matches) %>%
         #   group_by(.data$siteid) %>%
         #   summarise(match = max(match)) %>%

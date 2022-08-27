@@ -95,7 +95,7 @@ test_that("All Data + loc work", {
         ]}'
   
   data <- get_sites(loc = europe_json[1], all_data = TRUE)
-  testthat::expect_equal(length(data), 1614)
+  testthat::expect_equal(length(data), 1633)
   
   
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],

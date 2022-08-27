@@ -122,7 +122,7 @@ test_that("all_data + loc work", {
         ]}'
   
   data <- get_datasets(loc = europe_json[1], all_data = TRUE)
-  testthat::expect_equal(length(data), 1614)
+  testthat::expect_equal(length(data), 1633)
   
 
 })

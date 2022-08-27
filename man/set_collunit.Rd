@@ -45,7 +45,7 @@ set_collunit(
 
 \item{collectionunitname}{name of the collection unit}
 
-\item{depositionalenvironment}{}
+\item{depositionalenvironment}{depositional environment}
 
 \item{datasets}{datasets that the collection unit has}
 
