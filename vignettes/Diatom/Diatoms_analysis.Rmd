@@ -1,7 +1,7 @@
 ---
 title: "Diatom Data Analysis"
-author: "Don Charles, Eric O'Malley"
-date: "11/18/2021"
+author: "Eric O'Malley, Don Charles"
+date: "Started 11/18/2021"
 output:
   pdf_document: default
   html_document: default
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
 
 ##Percent Abundance Function
 
-The following code creates a percent abundance calculation of each sample from a sites object obtained from `get_downloads()`. A percent abundance column named `count_pct` is added to a dataframe containing other useful variables obtained from the `samples()` function.
+The following code calculates percent abundance of diatoms from the count data contained in a sites object obtained using `get_downloads()`. A percent abundance column named `count_pct` is added to a dataframe containing other useful variables obtained from the `samples()` function.
 
 ```{r percent abundance function}
 pc_abun <- function(dl_object) {
@@ -63,7 +63,7 @@ pc_abun <- function(dl_object) {
 ## Geo Political Units Function
 (WIP)
 
-The following code extracts the state using a site object
+The following code extracts state name using a site object
 (change the [[2]] to [[3]] in the `geopol()` function to get county instead of state)
 
 **Probably switch to searching by GPID in get_datasets, although this may still be useful**
@@ -93,7 +93,7 @@ geopol <- function(x) {
 ```
 
 ```{r combine geopol() & samples()  function}
-#function to add states to samples output dataframe
+#function to add state names to samples () output dataframe
 # x = geopol() output
 # y = samples() output (or any dataframe with siteid)
 sampdf <- function(x,y) {
@@ -104,7 +104,7 @@ x$states <- row.names(x)
 
 ## Pivot Wider
 
-Count data obtained from `samples()` is in a "long" format. Some common diatom analysis packages require the data be in a "wide" format (such as Rioja). The following code shows how to transform wider.
+Count data obtained from `samples()` is in a "long" format. Some common diatom analysis packages (such as Rioja) require the data be in a "wide" format . The following code shows how to transform wider.
 
 ```{r, pivot wider}
 tidyr::pivot_wider(widetable,
@@ -118,13 +118,13 @@ tidyr::pivot_wider(widetable,
 
 #Aggregate Dataset Work
 
-Aggregate dataset work involves using the excel file containing all of the aggregate dataset information. 
+Aggregate dataset work involves using the Excel workbook that contains all of the aggregate dataset information (e.g., dataset and sample ids of members of each aggregate set). 
 
-As of 6/10/2022: The file is named Aggregate Datasets - Diatoms -  EMAP NE SW Neotoma (version 1)
+As of 6/10/2022: The file is named Aggregate Datasets - Diatoms -  EMAP NE SW Neotoma (version 1) [[replace with current name]]
 
 The file is located: \\files.drexel.edu\ANS\PCER_Data\Phycdata\PROJECTS\NEOTOMA\Aggreg Datasets - Dtm-WChem Corresp
 
-The code chunks were initially made just copying and pasting the datasetids into R. 
+The code chunks were initially made by just copying and pasting the datasetids into R. 
 **EDIT**
 ```{r agg dataset excel loading, eval=FALSE}
 library(readxl)
@@ -139,7 +139,7 @@ aggregate_wo_WC <- read_excel("C:\\Users\\eco37\\Desktop\\R Files\\neotoma_diato
 
 ## RDS Object
 
-Some of the sites objects are large. It may be worth saving as an RDS file to be read in to avoid downtime.
+Some of the sites objects are large. It may be worth saving them as an RDS file to be read in to avoid downtime.
 
 ```{rds saving}
 #saves any object to 
@@ -206,8 +206,8 @@ NE_map <- plotLeaflet(NE_NLA_sites)
 NE_map
 ```
 
-# SCATTERPLOT
-## Total Ph in WC against percent abundance
+# Scatterplot of percent abundance vs water chemistry
+## Total pH against percent abundance - example
 
 ```{R plotting total Ph in WC against taxa % abundance}
 #using: Aggregate Datasets - Diatoms -  EMAP NE SW Neotoma (version 1)
