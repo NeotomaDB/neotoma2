@@ -16,7 +16,7 @@
 #' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
 #' @param ... accepted arguments: sitename, altmax, altmin, loc, taxa, 
-#' contacts, keyword, gipd
+#' contacts, keyword, gpid
 #' @return The function returns either a single item of class \code{"try-error"}
 #' describing the reason for failure (either mis-defined parameters or an error
 #' from the Neotoma API), or a table of sites, with rows corresponding to the
@@ -83,12 +83,12 @@ parse_site <- function(result) {
 }
 
 #' @title Get Site Information for Fossil Sites
-#' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc, gipd
+#' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc, gpid
 #' @export
 get_sites.default <- function(...) { # nolint
   
   cl <- as.list(match.call())
-  possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gipd")
+  possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
   possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts")
   possible_args <- c(possible_args, possible_args2)
   
