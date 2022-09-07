@@ -15,7 +15,8 @@
 #' The user may define all or none of the possible fields.
 #' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
-#' @param ... accepted arguments: sitename, altmax, altmin
+#' @param ... accepted arguments: sitename, altmax, altmin, loc, taxa, 
+#' contacts, keyword 
 #' @return The function returns either a single item of class \code{"try-error"}
 #' describing the reason for failure (either mis-defined parameters or an error
 #' from the Neotoma API), or a table of sites, with rows corresponding to the
@@ -87,8 +88,8 @@ parse_site <- function(result) {
 get_sites.default <- function(...) { # nolint
   
   cl <- as.list(match.call())
-  possible_args <- c("sitename", "altmax", "altmin")
-  possible_args2 <- c("loc", "limit", "offset", "all_data")
+  possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa")
+  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts")
   possible_args <- c(possible_args, possible_args2)
   
   cl[[1]] <- NULL
@@ -96,7 +97,7 @@ get_sites.default <- function(...) { # nolint
   for (name in names(cl)) {
     if (!(name %in% possible_args)) {
       message(paste0(name, " is not an allowed argument.\
-      Choose from the allowed arguments: sitename, altmax, altmin, loc"))
+      Choose from the allowed arguments: sitename, altmax, altmin, loc, keyword, contacts, taxa"))
     }
   }
   
