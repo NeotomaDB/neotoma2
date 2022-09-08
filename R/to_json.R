@@ -17,40 +17,31 @@
 #' @export
 to_json.sites <- function(x = NA, ...) {
   
-  datasets_json <- jsonify::to_json(list(datasetid = x[[1]]@collunits[[1]]@datasets[[1]]@datasetid,
-                                        datasettype = x[[1]]@collunits[[1]]@datasets[[1]]@datasettype
-                                        ), unbox = TRUE
-                                    )
-
-  # Note: add collectionunittype in sites object
-  
   output <- purrr::map(x@sites, function(y){
-                      jsonify::to_json(list(siteid = y@siteid, 
-                                            sitename = y@sitename,
-                                            sitedescription = y@description,
-                                            geography = '{\"type\":\"Point\",\"crs\":"}',
-                                            altitude = y@altitude,
-                                            collectionunits = purrr::map(y@collunits@collunits, function(z){
-                                              jsonify::to_json(list(
-                                                                handle = z@handle,
-                                                                datasets = purrr::map(z@datasets@datasets, function(d){
-                                                                  jsonify::to_json(list(
-                                                                                      datasetid = d@datasetid,
-                                                                                      datasettype = d@datasettype
-                                                                  ), unbox=TRUE)
-                                                                }),
-                                                                collectionunit = z@collectionunitname,
-                                                                collectionunitid = z@collectionunitid
-                                                                ), unbox = TRUE
-                                              )
-                                            })
-                      ), unbox = TRUE
-                      )})
-    
-  
+    jsonify::to_json(list(siteid = y@siteid, 
+                          sitename = y@sitename,
+                          sitedescription = y@description,
+                          geography = '{\"type\":\"Point\",\"crs\":"}',
+                          altitude = y@altitude,
+                          collectionunits = purrr::map(y@collunits@collunits, function(z){
+                            jsonify::to_json(list(
+                              handle = z@handle,
+                              datasets = purrr::map(z@datasets@datasets, function(d){
+                                jsonify::to_json(list(
+                                  datasetid = d@datasetid,
+                                  datasettype = d@datasettype
+                                ), unbox=TRUE)
+                              }),
+                              collectionunit = z@collectionunitname,
+                              collectionunitid = z@collectionunitid
+                            ), unbox = TRUE
+                            )
+                          })
+    ), unbox = TRUE
+    )
+    })
 
   return(output)
-  
   
 }
 
