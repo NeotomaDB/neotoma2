@@ -4,6 +4,7 @@
 #' @import lubridate
 #' @import sf
 #' @import jsonify
+#' @import geojsonsf
 #' @description
 #' Convert a Site object into a json file for API management
 #' @param x sites R object to be converted
@@ -17,11 +18,11 @@
 #' @export
 to_json.sites <- function(x = NA, ...) {
   
-  output <- purrr::map(x@sites, function(y){
+  output <- jsonify::to_json(purrr::map(x@sites, function(y){
     jsonify::to_json(list(siteid = y@siteid, 
                           sitename = y@sitename,
                           sitedescription = y@description,
-                          geography = '{\"type\":\"Point\",\"crs\":"}',
+                          geography = geojsonsf::sf_geojson(y@geography),
                           altitude = y@altitude,
                           collectionunits = purrr::map(y@collunits@collunits, function(z){
                             jsonify::to_json(list(
@@ -39,7 +40,7 @@ to_json.sites <- function(x = NA, ...) {
                           })
     ), unbox = TRUE
     )
-    })
+    }), unbox = TRUE)
 
   return(output)
   
