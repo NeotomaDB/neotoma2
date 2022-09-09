@@ -18,31 +18,80 @@
 #' @export
 to_json.sites <- function(x = NA, ...) {
   
-  output <- jsonify::to_json(purrr::map(x@sites, function(y){
-    jsonify::to_json(list(siteid = y@siteid, 
-                          sitename = y@sitename,
-                          sitedescription = y@description,
-                          geography = geojsonsf::sf_geojson(y@geography),
-                          altitude = y@altitude,
-                          collectionunits = purrr::map(y@collunits@collunits, function(z){
-                            jsonify::to_json(list(
-                              handle = z@handle,
-                              datasets = purrr::map(z@datasets@datasets, function(d){
-                                jsonify::to_json(list(
-                                  datasetid = d@datasetid,
-                                  datasettype = d@datasettype
-                                ), unbox=TRUE)
-                              }),
-                              collectionunit = z@collectionunitname,
-                              collectionunitid = z@collectionunitid
-                            ), unbox = TRUE
-                            )
-                          })
-    ), unbox = TRUE
-    )
-    }), unbox = TRUE)
-
-  return(output)
+  output <- jsonify::to_json(
+    purrr::map(x@sites, function(y){
+      list(
+           area = "missing",
+           notes = "missing",
+           siteid = y@siteid,
+           altitude = y@altitude,
+           sitename = y@sitename,
+           geography = geojsonsf::sf_geojson(y@geography),
+           geopolitical = "missing",
+           collectionunits = purrr::map(y@collunits@collunits, function(z){
+                                  list(
+                                       notes = "missing",
+                                       handle = z@handle,
+                                       colldate = "missing",
+                                       location = "missing",
+                                       waterdepth = "missing",
+                                       gpslocation = "missing",
+                                       collunittype = "missing",
+                                       collectionunit = z@collectionunitname,
+                                       collectiondevice = "missing",
+                                       collectionunitid = z@collectionunitid,
+                                       depositionalenvironment = "missing",
+                                       datasets = purrr::map(z@datasets@datasets, function(d){
+                                                      list(
+                                                           doi = "missing",
+                                                           agerange = "missing",
+                                                           database = d@database,
+                                                           datasetid = d@datasetid,
+                                                           datasetpi = "missing",
+                                                           datasetname = d@datasetname,
+                                                           datasettype = d@datasettype,
+                                                           datasetnotes = d@notes,
+                                                           samples = purrr::map(d@samples@samples, function(s){
+                                                             list(
+                                                               ages = "missing",
+                                                               igsn = "missing",
+                                                               datum = "missing",
+                                                               depth = "missing",
+                                                               sampleid = "missing",
+                                                               thickness = "missing",
+                                                               samplename = "missing",
+                                                               sampleanalyst = "missing",
+                                                               analysisunitid = "missing",
+                                                               analysisunitname = "missing"
+                                                             )})
+                                                           )}),
+                                       chronologies = purrr::map(z@chronologies@chronologies, function(d){
+                                                          list(
+                                                               chronology = "missing",
+                                                               contact = "missing",
+                                                               agemodel = "missing",
+                                                               agerange = "missing",
+                                                               isdefault = "missing",
+                                                               dateprepared = "missing",
+                                                               modelagetype = "missing",
+                                                               chronologyname = "missing",
+                                                               chronologyid = "missing",
+                                                               chroncontrols = "missing",
+                                                               depth = "missing",
+                                                               geochron = "missing",
+                                                               thickness = "missing",
+                                                               agelimitoder = "missing",
+                                                               chroncontrolid = "missing",
+                                                               agelimityounger = "missing",
+                                                               chroncontrolage = "missing",
+                                                               chroncontroltype = "missing",
+                                                               defaultchronology = "missing"
+                                                               )}),
+                                       defaultchronology = "missing"
+                                       )}),
+           sitedescription = y@description
+           )}), unbox = TRUE)
   
+  return(output)
 }
 
