@@ -228,9 +228,9 @@ agg_wWC_15 <- with_wc_agg %>%
 
 ##Total Phosphorus (unfiltered)
 ##wc_diat_15_phos <- get_datasets(agg_wWC_15$wc_datasetid) %>%
-  get_downloads() %>%
-  samples() %>%
-  dplyr::filter(variablename == "Total Phosphorus (unfiltered)")
+  #get_downloads() %>%
+  #samples() %>%
+  #dplyr::filter(variablename == "Total Phosphorus (unfiltered)")
 
 #WC
 wc_diat_15_ph <- get_datasets(agg_wWC_15$wc_datasetid) %>%
@@ -277,8 +277,37 @@ abline(reg, col = "red") #If there is the error "plot.net has not been called ye
 
 
 #LEAFLET
-## Adding Leaflet Markers to existing map **SHOULD BE CHANGED**
-**NOT NEEDED** (can just use addCircleMarkers)
+## Adding Leaflet Markers to existing map 
+
+The following two code chunks are two custom leaflet function
+
+```{r}
+plotLeaflet_unclustered <- function(object, path = "") {
+            df1 <- map(object@sites, function(x) {
+              df <- data.frame(siteid = x@siteid,
+                               sitename = x@sitename,
+                               lat = mean(st_coordinates(x@geography)[, 2]),
+                               long = mean(st_coordinates(x@geography)[, 1]),
+                               elev = x@altitude,
+                               description = x@description)
+            }) %>%
+              bind_rows()
+            map1 <- leaflet(df1) %>%
+              addProviderTiles(providers$Stamen.TerrainBackground) %>%
+              addTiles() %>%
+              addCircleMarkers(lng = df1$long, lat = df1$lat, radius = 0.5, opacity = 1,
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               options = markerOptions(riseOnHover = TRUE))
+return(map1)
+}
+```
+
+
 ```{r plotting another dataset ontop of another function}
 #data obtained from Diatom Aggregate Dataset
 #ids = siteids
@@ -341,7 +370,7 @@ dplyr::filter(variablename == "Discostella stelligera") #filtering again to only
 
 final <- samp_stelligera$siteid %>%
   get_sites() %>%
-  plotLeaflet()
+  plotLeaflet_unclustered()
 ###################
 # getting the sites where the taxa was not found
 
@@ -360,6 +389,8 @@ NLA_discostella_stelligera <- NLA_discostella_stelligera %>% addLegend("bottomri
   labels= c("Present","Not Present"),
   title= "D. stelligera distribution in NLA_2007",
   opacity = 1)
+
+NLA_discostella_stelligera
 
 
 #result: leaflet map displaying which sites had atleast 1 count of the taxa vs. sites with none
@@ -503,17 +534,18 @@ diat_37_taxa <- get_datasets(diat_37) %>%
 
 #combining all of the count data (defined above) from each agg dataset to one dataframe
 
-all_sites <- rbind(diat_1_taxa, diat_4_taxa, diat_9_taxa, diat_15_taxa, diat_21_taxa, diat_22_taxa, diat_23_taxa, diat_24_taxa, diat_26_taxa, diat_32_taxa, diat_33_taxa, diat_34_taxa, diat_35_taxa, diat_36_taxa, diat_37_taxa)
+#all_sites <- rbind(diat_1_taxa, diat_4_taxa, diat_9_taxa, diat_15_taxa, diat_21_taxa, diat_22_taxa, diat_23_taxa, diat_24_taxa, diat_26_taxa, diat_32_taxa, diat_33_taxa, diat_34_taxa, diat_35_taxa, diat_36_taxa, diat_37_taxa)
+
+all_sites <- rbind(diat_1_taxa, diat_4_taxa, diat_9_taxa, diat_15_taxa, diat_21_taxa, diat_22_taxa, diat_23_taxa, diat_24_taxa, diat_26_taxa,, diat_33_taxa, diat_34_taxa, diat_35_taxa, diat_36_taxa)
 
 all_taxa_formatted <- aggregate(all_sites$count_pct ~ all_sites$siteid + all_sites$lat + all_sites$long, data = all_sites, FUN = mean) %>%
   colnames() <- c("siteid", "lat", "long", "count_pct") %>%
   arrange() %>%
   get_sites(.$siteid)
 
-croto_abun_taxa_map_3_1 <- plotLeaflet2(diat_sites_all_3_1, df_with_count_pct = alltaxa_3_test_1, title = "Eunotia exigua % Abundance")
+croto_abun_taxa_map_3_1 <- plotLeaflet_unclustered(diat_sites_all_3_1, df_with_count_pct = alltaxa_3_test_1, title = "Eunotia exigua % Abundance")
 
-croto_abun_taxa_map_3 <- plotLeaflet2(diat_sites_all_3, df_with_count_pct = taxa_table_all_3, title = "Eunotia exigua % Abundance")
-
+croto_abun_taxa_map_3 <- plotLeaflet_unclustered(diat_sites_all_3, df_with_count_pct = taxa_table_all_3, title = "Eunotia exigua % Abundance")
 ```
 
 ## Visualization using Maps (plotLeaflet)
@@ -938,10 +970,4 @@ species_plot_ob
 ```
 
 
-#Diatoms and Water Chemistry
-Aggregate Dataset, getting count data for diatom and corresponding water chemistry
-```{r diatom water chemistry agg dataset example}
-
-
-```
 
