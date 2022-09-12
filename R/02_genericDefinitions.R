@@ -1,3 +1,5 @@
+utils::globalVariables(c("analysisunitid"))
+
 #' @title Extract datasets from a sites object.
 #' @param object A sites object
 #' @export

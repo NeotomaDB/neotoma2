@@ -59,7 +59,7 @@ get_publications.default <- function(...) {
     x[is.null(x)] <- NA_character_
     output <- new("publication",
         publicationtype = as.character(x$pubtype),
-        publicationid = as.numeric(x$publicationid),
+        publicationid = as.integer(x$publicationid),
         articletitle = as.character(x$articletitle),
         year = as.character(x$year),
         journal = as.character(x$journal),
@@ -110,7 +110,7 @@ get_publications.numeric <- function(x, ...) {
                   x[is.null(x)] <- NA_character_
                   new("publication",
                       publicationtype = as.character(x$pubtype),
-                      publicationid = as.numeric(x$publicationid),
+                      publicationid = as.integer(x$publicationid),
                       articletitle = as.character(x$articletitle),
                       year = as.character(x$year),
                       journal = as.character(x$journal),
