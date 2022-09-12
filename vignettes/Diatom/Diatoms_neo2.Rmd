@@ -208,16 +208,7 @@ uwallf_site <- get_sites(745) # finds site data for Upper Wallface Pond, which h
 uwallf_site
 ```
 
-To see the structure of the output, type "str(uwallf_site)" in the
-RStudio console.
-
 Get data on multiple sites by using siteids.
-
-Example input data: \| `sitename` \| `siteid` \| \| -- \| -- \| \|
-Jackson Pond \| 25918 \| \| Jellison Hill Pond \| 25919 \| \| Jimmie
-Pond \| 25920 \|
-
-Get data on multiple sites by using siteids
 
 ```{r multsitesbySiteIDs example}
 siteids <- c(25918, 25919, 25920)
@@ -329,8 +320,10 @@ diat_1<-get_sites(gpid = 6198)
 head(diat_1,5)
 ```
 
-Run following code to open the sitegeopolitical table and then enter
-siteid in filter box to find corresponding gpids
+Run the following code to open the sitegeopolitical table and then enter
+siteid in filter box to find corresponding gpids. 
+
+The sitegeopolitical table and geopoliticalunits table return similar information. sitegeopolitical also returns the siteids that are associated with GeoPolitical units.
 
 ```{R sitegeopoliticalTable}
 dataset_gpid <- get_table('sitegeopolitical', limit=99999) %>%
@@ -446,7 +439,7 @@ plains_ids <- as.data.frame(getids(get_datasets(plains)))
 plains_dataids <- merge(plains_ids, plains_data) %>%
   arrange(., datasetid)
 
-#write.csv(final,"C:\\path_to_file_destination\\GreatPlains_agg.csv", row.names = FALSE)
+#write.csv(final,"C:\\path_to_file_destination\\GreatPlains_agg.csv", file = "filename.csv", row.names = FALSE)
 
 head(plains_dataids,5)
 ```
@@ -519,10 +512,22 @@ code:
 
 ```{R structure_of_get_dataset_output}
 uwallf_site <-get_sites(sitename = 'Upper Wallface%') # finds site data for a site, including datasetid's.
-uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; returns 4 elements corresponding to the 4 datasets available for U Wallface Pond.  Each element is a different datasettype:  diatom surface sample, diatom, chronology and water chemistry.
+uwallf_data <- get_datasets(uwallf_site) # finds datasets for Upper Wallface Pond; This contains all information about the site, collection units, and datasets.
 
 # str(uwallf_data) # to see output, remove # from beginning of this line
 ```
+
+To see the structure of the output, use the `str()` function on the sites object returned from `get_sites()`, `get_datasets()`, and `get_downloads()`. This will show you all of the information that was retrieved from the Neotoma database in nested lists.
+
+Specific elements of the sites object can be called by navigating the nested lists. Below is an example of how to do so.
+
+```{r}
+uwallf_data[[1]]@siteid #The "[[1]]" is specifying the first site in the sites object
+
+uwallf_data[[1]]@collunits[[1]]@datasets@datasets[[1]] #some dataset information
+```
+
+The Helper functions (discussed in the next section) are used to easily get information from the sites object in convenient dataframes for analysis.
 
 # Download Data
 
@@ -601,11 +606,11 @@ uwallf_datasets <- datasets(uwallf_data)
 uwallf_datasets
 
 #to save the output in current working directory
-##write.csv(uwallf_datasets, row.names = FALSE)
+##write.csv(uwallf_datasets, file = "filename.csv", row.names = FALSE)
 
 
 # Example of how a csv file could be saved to a directory other than the working directory:
-# write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", row.names = FALSE)
+# write.csv(diat_uwallf_data,"C:\\Users\\eco37\\Desktop\\datasets_uwallf.csv", file = "filename.csv", row.names = FALSE)
 ```
 
 ##### Create dataframe of dataset information
@@ -646,7 +651,7 @@ custom_datasets <- data.frame(SITEID,SITENAME,DATASETID,DATASETTYPE,AGE_RANGE_OL
 head(custom_datasets,3)
 
 #Save the output as a CSV file, which can be opened in Microsoft Excel
-write.csv(custom_datasets, row.names = FALSE)
+write.csv(custom_datasets, file = "filename.csv", row.names = FALSE)
 ```
 
 #### `collunits()` function
@@ -671,7 +676,7 @@ diat_uwallf_collunits
 
 #Save the output as a CSV file, which can be opened in Microsoft Excel.
 #The file will be saved in the working directory.
-write.csv(diat_uwallf_collunits, row.names = FALSE)
+write.csv(diat_uwallf_collunits, file = "filename.csv", row.names = FALSE)
 ```
 
 #### `samples()` function
@@ -730,7 +735,7 @@ dplyr::filter(datasettype == "diatom surface sample")
 names(NE_diat_samp)
 
 #Example code to save the output as a CSV file in a location other than the current working directory:
-#write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", row.names = FALSE)
+#write.csv(diat_samp_uwallf,"C:\\Users\\eco37\\Desktop\\diat_uwallf.csv", file = "filename.csv", row.names = FALSE)
 ```
 
 Example of obtaining diatom counts for an aggregate dataset by reading
