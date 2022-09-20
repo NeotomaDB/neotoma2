@@ -16,7 +16,10 @@
 #' Convert the object to json
 #' to_json(alex.sites)
 #' @export
-to_json.sites <- function(x = NA, ...) {
+#' 
+setMethod(f = "to_json",
+          signature = "sites",
+          definition = function(x = NA) {
   
   output <- jsonify::to_json(
     purrr::map(x@sites, function(y){
@@ -86,5 +89,5 @@ to_json.sites <- function(x = NA, ...) {
            )}), unbox = TRUE)
   
   return(output)
-}
+})
 

@@ -9,7 +9,8 @@ get_sites(x = NA, ...)
 \arguments{
 \item{x}{Use a single number to extract site information}
 
-\item{...}{accepted arguments: sitename, altmax, altmin}
+\item{...}{accepted arguments: sitename, altmax, altmin, loc, taxa,
+contacts, keyword, gpid}
 }
 \value{
 The function returns either a single item of class \code{"try-error"}
