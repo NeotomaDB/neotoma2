@@ -40,9 +40,11 @@ get_specimens.numeric <- function(x) {
   
   base_url <- paste0("data/specimens/", x)
   result <- neotoma2::parseURL(base_url)
-  print(result)
+  #print(result)
   result_length <- length(result[2]$data)
   
   specimens <- map(result$data, build_specimen)
+  print("specimens")
+  print(specimens)
   specimens <- new("specimens", specimens = specimens)
 }
