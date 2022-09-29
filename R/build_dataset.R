@@ -32,7 +32,7 @@ build_dataset <- function(x) {
       })
   }
   
-  specimens <- get_specimens(x$datasetid)
+  specimens <- new("specimens", specimens = list())
 
   new("dataset",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
@@ -45,6 +45,6 @@ build_dataset <- function(x) {
       notes = use_na(testNull(x$datasetnotes, NA), "char"),
       pi_list = pi_list,
       samples = samples,
-      specimens = NULL)
+      specimens = specimens)
 
 }
