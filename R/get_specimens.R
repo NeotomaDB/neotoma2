@@ -13,11 +13,9 @@
 #' my_specimens <- get_specimens(19832)
 #' }
 #' @export
-get_specimens <- function(x = NA, ...) {
+get_specimens <- function(x = NA) {
   if (!missing(x)) {
     UseMethod("get_specimens", x)
-  } else {
-    UseMethod("get_specimens", NA)
   }
 }
 
@@ -43,6 +41,7 @@ get_specimens.numeric <- function(x) {
   
   base_url <- paste0("data/specimens/", datasetid)
   result <- neotoma2::parseURL(base_url)
+  
   
   # Getting specimens data
   sps <- result$data %>%
@@ -93,4 +92,23 @@ get_specimens.numeric <- function(x) {
   
   return(ds)
   
+}
+
+
+#' @title Get Specimen Sites
+#' @param x Use a single number to extract site information
+#' @param ... Additional parameters to get_specimens
+#' @export
+get_specimens.sites <- function(x) {
+  
+  output <- getids(x) %>%
+    dplyr::select(.data$datasetid) %>%
+    stats::na.omit() %>%
+    unique() %>%
+    unlist()
+  
+  print(output)
+  output <- get_specimens(x = output)
+  
+  return(output)
 }

@@ -4,7 +4,7 @@
 \alias{get_specimens}
 \title{get_specimens}
 \usage{
-get_specimens(x = NA, ...)
+get_specimens(x = NA)
 }
 \arguments{
 \item{x}{Use a single datasetid}
