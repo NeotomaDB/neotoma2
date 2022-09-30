@@ -65,6 +65,7 @@ get_specimens.numeric <- function(x) {
     ids <- getids(ds, order = FALSE)
     matches <- check_match(sp_index[i,], ids)
     
+    # Retrieve IDs for site and collectionunit based on datasetID
     st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
     
     cuids <- ids %>%
@@ -72,7 +73,7 @@ get_specimens.numeric <- function(x) {
     
     cuid <- which(unique(cuids$collunitid) == ids$collunitid[which.max(matches)])
     
-    
+    # Filter based on datasetID
     dsids <- cuids %>%
       dplyr::filter(.data$collunitid == unique(cuids$collunitid)[cuid], .preserve = TRUE)
     
@@ -80,6 +81,7 @@ get_specimens.numeric <- function(x) {
     
     newsp <- build_specimen(sps[[i]])
     
+    # Attach built specimen slot to datasets
     datasets <- ds[[st]]@collunits@collunits[[cuid]]@datasets@datasets[[dsid]]
     
     datasets@specimens@specimens <- c(datasets@specimens@specimens,
