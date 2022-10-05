@@ -89,7 +89,7 @@ get_sites.default <- function(...) { # nolint
   
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
-  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts")
+  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts", "siteid")
   possible_args <- c(possible_args, possible_args2)
   
   cl[[1]] <- NULL
