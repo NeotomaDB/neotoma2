@@ -2,8 +2,7 @@
 library("testthat")
 library("neotoma2")
 
-context("Run Neotoma `test_sites` only when not on CRAN")
-
+context("Run Neotoma `test_datasets` only when not on CRAN")
 
 test_that("get_datasets numeric runs.", {
   ## we don't want this to run on CRAN
@@ -108,21 +107,19 @@ test_that("get_datasets runs as expected.", {
   brazil_unique_sites <- length(unique(getids(brazil_datasets)$siteid))
   brazil_datasets_length <- length(brazil_datasets)
   expect_equal(brazil_datasets_length, brazil_unique_sites)
-  
 })
 
 test_that("all_data + loc work", {
-  europe_json <- '{"type": "Polygon",
-        "coordinates": [
-          [[-23.5546875, 70.8446726342528],
-           [-25.3125, 39.36827914916014],
-           [61.87499999999999, 39.36827914916014],
-           [62.57812500000001, 74.01954331150228],
-           [-23.5546875, 70.8446726342528]]
-        ]}'
-  
+  europe_json <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+
   data <- get_datasets(loc = europe_json[1], all_data = TRUE)
-  testthat::expect_equal(length(data), 1633)
-  
+  testthat::expect_gt(length(data), 25)
 
 })
