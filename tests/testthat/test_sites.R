@@ -74,10 +74,9 @@ test_that("All Czech sites work with different spatial bounds:", {
                          15.24 50.99,
                          12.4 50.14))'
   cz_bbox = c(12.4, 48.64, 18.91, 50.99)
-  
+
   testthat::expect_true(all.equal(get_sites(loc=cz_json), get_sites(loc=cz_WKT)))
- 
-  
+
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
   # but the bounding box strategy means that the reverse is not true:
   cz_ids <- getids(get_sites(loc=cz_json[1]))
@@ -93,12 +92,9 @@ test_that("All Data + loc work", {
            [62.57812500000001, 74.01954331150228],
            [-23.5546875, 70.8446726342528]]
         ]}'
-  
   data <- get_sites(loc = europe_json[1], all_data = TRUE)
-  testthat::expect_equal(length(data), 1633)
-  
-  
+  testthat::expect_gt(length(data), 50)
+
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
   # but the bounding box strategy means that the reverse is not true:
-
 })

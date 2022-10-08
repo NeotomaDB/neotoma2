@@ -2,7 +2,7 @@
 library("testthat")
 library("neotoma2")
 
-context("Run Neotoma examples only when not on CRAN")
+context("Run Neotoma download examples only when not on CRAN")
 
 test_that("get_downloads runs as expected.", {
   ## we don't want this to run on CRAN

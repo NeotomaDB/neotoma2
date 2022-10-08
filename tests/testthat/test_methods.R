@@ -2,7 +2,7 @@
 library("testthat")
 library("neotoma2")
 
-context("Run Neotoma examples only when not on CRAN")
+context("Run Neotoma Methods examples only when not on CRAN")
 
 test_that("Working with subset methods `datasets()` and `collunits()`.", {
   ## we don't want this to run on CRAN
