@@ -3,6 +3,7 @@
 #' @author Simon Goring \email{ }
 #' @import gtools
 #' @import lubridate
+#' @import stringr
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @description An internal helper function used to connect to the Neotoma API
@@ -40,7 +41,18 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
                           query = query)
-
+    
+    if(response$status_code == 414) {
+      print("i'm here")
+      y <- stringr::str_remove_all(x, "data/datasets/")
+      
+      response <- httr::POST(paste0(baseurl, "data/datasets"), 
+                             body = paste0("datasetid=", y),
+                             add_headers("User-Agent" = "neotoma2 R package"),
+                             verbose(), content_type("application/json"))
+      
+    }
+    
     response_url <- response$url
     #print(response_url)
 
@@ -97,8 +109,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     result$data <- responses
 
   }
-
-  message(paste0("Your search returned ", length(result$data), " objects."))
 
   return(result)
 }
