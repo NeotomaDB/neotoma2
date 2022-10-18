@@ -89,7 +89,7 @@ get_sites.default <- function(...) { # nolint
   
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
-  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts")
+  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts", "siteid")
   possible_args <- c(possible_args, possible_args2)
   
   cl[[1]] <- NULL
@@ -152,15 +152,6 @@ get_sites.default <- function(...) { # nolint
 #' @param ... accepted arguments if numeric all_data
 #' @export
 get_sites.numeric <- function(x, ...) {
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    }else{
-      return(x)
-    }
-  }
   
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")

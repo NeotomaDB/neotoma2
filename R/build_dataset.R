@@ -31,16 +31,20 @@ build_dataset <- function(x) {
         }
       })
   }
+  
+  specimens <- new("specimens", specimens = list())
 
   new("dataset",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
       database = use_na(testNull(x$database, NA), "char"),
       doi = list(x$doi),
       datasettype = use_na(testNull(x$datasettype, NA), "char"),
+      datasetname = use_na(testNull(x$datasetname, NA), "char"),
       age_range_old = use_na(testNull(x$agerange[[1]]$ageold, NA), "int"),
       age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
       notes = use_na(testNull(x$datasetnotes, NA), "char"),
       pi_list = pi_list,
-      samples = samples)
+      samples = samples,
+      specimens = specimens)
 
 }
