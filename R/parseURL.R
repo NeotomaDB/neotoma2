@@ -47,7 +47,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       y <- stringr::str_remove_all(x, "data/datasets/")
       
       response <- httr::POST(paste0(baseurl, "data/datasets"), 
-                             body = paste0("datasetid=", y),
+                             body = jsonlite::toJSON(list(datasetid=y)),
                              add_headers("User-Agent" = "neotoma2 R package"),
                              verbose(), content_type("application/json"))
       
