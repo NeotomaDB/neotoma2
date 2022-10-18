@@ -19,40 +19,15 @@ get_specimens <- function(x = NA) {
   }
 }
 
-
-#' @title Get Specimen Numeric
-#' @param x Use a single number to extract site information
-#' @param ... Additional parameters to get_specimens
-#' @export
-get_specimens.numeric <- function(x) {
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    } else {
-      return(x)
-    }
-  }
+# Parse specimen must take the result of API call + sites object
+parse_specimen <- function(result, ds) {
   
-  if (length(x) > 0) {
-    datasetid <- paste0(x, collapse = ",")
-  }
-  
-  base_url <- paste0("data/specimens/", datasetid)
-  result <- neotoma2::parseURL(base_url)
-  
-  
-  # Getting specimens data
   sps <- result$data %>%
     cleanNULL()
   
   sp_index <- purrr::map(sps, function(x) {
     data.frame(datasetid = x$datasetid)}) %>%
     dplyr::bind_rows() 
-  
-  ds <- get_datasets(x)
-  ids <- getids(ds, order = FALSE)
   
   # Move from get_downloads to a different helper function script
   check_match <- function(sp_row, ids) {
@@ -95,6 +70,26 @@ get_specimens.numeric <- function(x) {
     }
   }
   return(ds)
+}
+
+#' @title Get Specimen Numeric
+#' @param x Use a single number to extract site information
+#' @param ... Additional parameters to get_specimens
+#' @export
+get_specimens.numeric <- function(x) {
+  
+  dw <- get_downloads(x)
+  
+  if (length(x) > 0) {
+    datasetid <- paste0(x, collapse = ",")
+  }
+
+  base_url <- paste0("data/specimens/", datasetid)
+  result <- neotoma2::parseURL(base_url)
+  
+  ds <- parse_specimen(result, dw)
+  
+  return(ds)
   
 }
 
@@ -111,7 +106,20 @@ get_specimens.sites <- function(x) {
     unique() %>%
     unlist()
   
-  output <- get_specimens(x = output)
+  if (length(output) > 0) {
+    output <- paste0(output, collapse = ",")
+  }
   
-  return(output)
+  base_url <- paste0("data/specimens/", output)
+  result <- neotoma2::parseURL(base_url)
+
+  df <- samples(x)
+  
+  if(dim(df)[1] == 0){
+    x <- get_downloads(x)
+  }
+  
+  ds <- parse_specimen(result, x)
+  
+  return(ds)
 }
