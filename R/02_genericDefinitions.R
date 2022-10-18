@@ -59,11 +59,18 @@ setGeneric("chronologies", function(x) {
   standardGeneric(f = "chronologies")
 })
 
-#' @title Obtain the DOI for publications.
+#' @title Obtain the DOI for publications or datasets.
 #' @param x Object with DOIs associated to it.
 #' @export
 setGeneric("doi", function(x) {
   standardGeneric(f = "doi")
+})
+
+#' @title Obtain the DOI for publications or datasets.
+#' @param x Object with DOIs associated to it.
+#' @export
+setGeneric("cite_data", function(x) {
+  standardGeneric(f = "cite_data")
 })
 
 #' @title Select the best match for an object.
