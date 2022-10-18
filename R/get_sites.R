@@ -152,15 +152,6 @@ get_sites.default <- function(...) { # nolint
 #' @param ... accepted arguments if numeric all_data
 #' @export
 get_sites.numeric <- function(x, ...) {
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    }else{
-      return(x)
-    }
-  }
   
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
