@@ -4,6 +4,8 @@
 #' @import gtools
 #' @import lubridate
 #' @import stringr
+#' @import dplyr
+#' @import tidyr
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @description An internal helper function used to connect to the Neotoma API
@@ -16,7 +18,7 @@
 #' \code{parseURL}.
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
-
+  
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
     if (is.list(x)) {
       lapply(x, cleanNull, fn)
@@ -24,17 +26,17 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       fn(x)
     }
   }
-
+  
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
-
+  
   baseurl <- switch(use,
                     "dev" = "https://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-
+  
   query <- list(...)
 
   if (all_data == FALSE) {
@@ -43,59 +45,103 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                           query = query)
     
     if(response$status_code == 414) {
-      print("i'm here")
-      y <- stringr::str_remove_all(x, "data/datasets/")
+      # Build json body - pass to function
+      # There are 3 cases
+      # I. Long list of IDs (most common)
+      query <- list(...)
+      args <- x
+      if (grepl("datasets", args)){
+        new_url <- paste0(baseurl, "data/datasets")
+        params <- stringr::str_remove_all(args, "data/datasets")
+        if(substr(params,1,1)=="/"){
+          numbers <- stringr::str_remove_all(params, "/")
+          body <- jsonlite::toJSON(list(datasetid=numbers))
+        }
+      } else if(grepl("sites", args)){
+        new_url <- paste0(baseurl, "data/sites")
+        params <- stringr::str_remove_all(args, "data/sites")
+        if(substr(params,1,1)=="/"){
+          numbers <- stringr::str_remove_all(params, "/")
+          body <- jsonlite::toJSON(list(siteid=numbers))
+        }
+      } else if(grepl("downloads", args)){
+        new_url <- paste0(baseurl, "data/downloads")
+        params <- stringr::str_remove_all(args, "data/downloads")
+        if(substr(params,1,1)=="/"){
+          numbers <- stringr::str_remove_all(params, "/")
+          body = jsonlite::toJSON(list(datasetid=numbers))
+        }
+      }
       
-      response <- httr::POST(paste0(baseurl, "data/datasets"), 
-                             body = jsonlite::toJSON(list(datasetid=y)),
+      # II. Other simple queries - Unlikely unless it comes with a complex location
+      if (params ==""){
+        body <- jsonlite::toJSON(query, flatten = TRUE)
+      }
+      
+      # III. When location is present and the base_URL has too much info
+      if(substr(params,1,1)=="?"){
+        params <- stringr::str_remove_all(params, "\\?")
+        params <- stringr::str_replace_all(params, "=", ":")
+        params <- strsplit(params, "&")
+        df <- dplyr::as_tibble(data.frame(params))
+        df <- df %>% dplyr::rename(col1 = colnames(df[1]))
+        df2 <- df %>% 
+          tidyr::separate(col1, c("name", "value"), sep = ":", remove = FALSE, extra = "merge")
+        df2 <- df2 %>% select("name", "value")
+        df2 <- tidyr::pivot_wider(df2)
+        
+        body <- jsonlite::toJSON(df_ready2,auto_unbox=TRUE)
+      }
+      # Finished body
+      
+      response <- httr::POST(new_url, 
+                             body = body,
                              add_headers("User-Agent" = "neotoma2 R package"),
                              verbose(), content_type("application/json"))
-      
     }
     
     response_url <- response$url
-    #print(response_url)
-
+    
     # Break if we can't connect:
     stop_for_status(response,
                     task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-
+    
     if (response$status_code == 200) {
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
       result <- cleanNull(result)
     }
-
+    
     return(result)
-
+    
   } else {
     # Here the flag all_data has been accepted, so we're going to pull
     # everything in.
-
+    
     if ("limit" %in% names(query)) {
       stop("You cannot use the limit parameter when all_data is TRUE")
     }
-
+    
     query$offset <- 0
     query$limit <- 100
-
+    
     responses <- c()
-
+    
     while (TRUE) {
       response <- httr::GET(paste0(baseurl, x),
                             add_headers("User-Agent" = "neotoma2 R package"),
                             query = query)
-
+      
       stop_for_status(response,
                       task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-
+      
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
@@ -105,10 +151,10 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       responses <- c(responses, cleanNull(result)$data)
       query$offset <- query$offset + query$limit
     }
-
+    
     result$data <- responses
-
+    
   }
-
+  
   return(result)
 }
