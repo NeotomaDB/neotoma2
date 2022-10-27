@@ -1,6 +1,11 @@
 setClassUnion("id", c("character", "integer", "numeric"))
 
 #' @title An S4 class for Neotoma contacts
+#' @summary The object that contains contacts and their constituent components.
+#' @return contact
+#' @examples
+#' new("contact", familyname = "Goring", givennames = "Simon J.")
+#' @export
 setClass("contact",
                     representation(contactid = "id",
                                    familyname = "character",
