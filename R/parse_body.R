@@ -1,23 +1,14 @@
-#' @title parseURL
+#' @title parse_body
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
-#' @author Simon Goring \email{ }
 #' @import gtools
 #' @import lubridate
 #' @import stringr
 #' @import dplyr
 #' @import tidyr
-#' @importFrom httr add_headers content GET stop_for_status
-#' @importFrom jsonlite fromJSON
-#' @description An internal helper function used to connect to the Neotoma API
-#' in a standard manner, and to provide basic validation of any response.
+#' @importFrom jsonlite toJSON
+#' @description An internal helper function to parse de body of POST API requests
 #' @param x The HTTP path for the particular API call.
-#' @param use By default use the neotoma server (\code{neotoma}),
-#' but supports either the development API server or a local server.
-#' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the function calling
-#' \code{parseURL}.
-#' @export
-#' 
 #' 
 parsebody <- function(x, ...) {
   query <- list(...)
@@ -26,21 +17,18 @@ parsebody <- function(x, ...) {
   # I. Long list of IDs (most common)
   args <- x
   if (grepl("datasets", args)){
-    new_url <- paste0(baseurl, "data/datasets")
     params <- stringr::str_remove_all(args, "data/datasets")
     if(substr(params,1,1)=="/"){
       numbers <- stringr::str_remove_all(params, "/")
       body <- jsonlite::toJSON(list(datasetid=numbers))
     }
   } else if(grepl("sites", args)){
-    new_url <- paste0(baseurl, "data/sites")
     params <- stringr::str_remove_all(args, "data/sites")
     if(substr(params,1,1)=="/"){
       numbers <- stringr::str_remove_all(params, "/")
       body <- jsonlite::toJSON(list(siteid=numbers))
     }
   } else if(grepl("downloads", args)){
-    new_url <- paste0(baseurl, "data/downloads")
     params <- stringr::str_remove_all(args, "data/downloads")
     if(substr(params,1,1)=="/"){
       numbers <- stringr::str_remove_all(params, "/")
@@ -55,7 +43,6 @@ parsebody <- function(x, ...) {
   
   # III. When location is present and the base_URL has too much info
   if(substr(params,1,1)=="?"){
-    print("i'm here")
     params <- stringr::str_remove_all(params, "\\?")
     params <- stringr::str_replace_all(params, "=", ":")
     params <- strsplit(params, "&")
@@ -73,3 +60,23 @@ parsebody <- function(x, ...) {
   return(body)
 }
 # Finished body
+
+
+newURL <- function(baseurl, args, ...) {
+  query <- list(...)
+  # Retrieve complete call to create json body
+  # There are 3 cases
+  # I. Long list of IDs (most common)
+  if (grepl("datasets", args)){
+    new_url <- paste0(baseurl, "data/datasets")
+    params <- stringr::str_remove_all(args, "data/datasets")
+  } else if(grepl("sites", args)){
+    new_url <- paste0(baseurl, "data/sites")
+    params <- stringr::str_remove_all(args, "data/sites")
+  } else if(grepl("downloads", args)){
+    new_url <- paste0(baseurl, "data/downloads")
+    params <- stringr::str_remove_all(args, "data/downloads")
+  }
+  return(new_url)
+}
+
