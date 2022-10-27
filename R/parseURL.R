@@ -57,12 +57,10 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       # Function with For loop (temporary)
       datasetids <- jsonlite::fromJSON(body)
       datasetids <- as.numeric(stringr::str_extract_all(datasetids$datasetid, "[0-9.]+")[[1]])
-      
       # Splitting 50 by 100
-      seq_chunk <- split(datasetids, ceiling(seq_along(datasetids)/100))
+      seq_chunk <- split(datasetids, ceiling(seq_along(datasetids)/25))
       
       responses <- c()
-      
       for(sequ in seq_chunk) {
         url_ <- paste0(new_url, '/', paste0(sequ,collapse = ","))
         response <- httr::GET(url_,
@@ -80,7 +78,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         
         responses <- c(responses, cleanNull(result)$data)
       }
-      
+
       result$data <- responses
       return(result)
       

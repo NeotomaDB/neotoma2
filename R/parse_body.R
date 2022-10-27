@@ -20,6 +20,7 @@ parsebody <- function(x, ...) {
     params <- stringr::str_remove_all(args, "data/datasets")
     if(substr(params,1,1)=="/"){
       numbers <- stringr::str_remove_all(params, "/")
+      
       body <- jsonlite::toJSON(list(datasetid=numbers))
     }
   } else if(grepl("sites", args)){
