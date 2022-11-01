@@ -36,8 +36,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-  query <- list(...)
   
+  query <- list(...)
   if (all_data == FALSE) {
     response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
@@ -49,55 +49,27 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       args <- x
       new_url <- newURL(baseurl, args, ...)
       body <- parsebody(args,...)
-      # response <- httr::POST(new_url, 
-      #                        body = body,
-      #                        add_headers("User-Agent" = "neotoma2 R package"),
-      #                        httr::content_type("application/json"))
-      # 
-      # Function with For loop (temporary)
-      datasetids <- jsonlite::fromJSON(body)
-      datasetids <- as.numeric(stringr::str_extract_all(datasetids$datasetid, "[0-9.]+")[[1]])
-      # Splitting 50 by 100
-      seq_chunk <- split(datasetids, ceiling(seq_along(datasetids)/25))
-      
-      responses <- c()
-      for(sequ in seq_chunk) {
-        url_ <- paste0(new_url, '/', paste0(sequ,collapse = ","))
-        response <- httr::GET(url_,
-                              add_headers("User-Agent" = "neotoma2 R package"))
-        
-        stop_for_status(response,
-                        task = "Could not connect to the Neotoma API.
-                    Check that the path is valid, and check the current
-                     status of the Neotoma API services at
-                      http://data.neotomadb.org")
-        
-        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                     flatten = FALSE,
-                                     simplifyVector = FALSE)
-        
-        responses <- c(responses, cleanNull(result)$data)
-      }
+      response <- httr::POST(new_url,
+                             body = body,
+                             add_headers("User-Agent" = "neotoma2 R package"),
+                             httr::content_type("application/json"))
+      warning("To get the complete data, use all_data=TRUE. Returned the first 25 elements.")
+    }
 
-      result$data <- responses
-      return(result)
-      
-    } else {
-      response_url <- response$url
-      
-      # Break if we can't connect:
-      stop_for_status(response,
-                      task = "Could not connect to the Neotoma API.
+    response_url <- response$url
+    
+    # Break if we can't connect:
+    stop_for_status(response,
+                    task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-      
-      if (response$status_code == 200) {
-        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                     flatten = FALSE,
-                                     simplifyVector = FALSE)
-        result <- cleanNull(result)
-      }
+    
+    if (response$status_code == 200) {
+      result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+                                   flatten = FALSE,
+                                   simplifyVector = FALSE)
+      result <- cleanNull(result)
     }
     return(result)
     
@@ -118,25 +90,62 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                             add_headers("User-Agent" = "neotoma2 R package"),
                             query = query)
       
-      stop_for_status(response,
-                      task = "Could not connect to the Neotoma API.
+      if(response$status_code == 414) {
+        # Function with Post (Use this once server issue is resolved)
+        args <- x
+        new_url <- newURL(baseurl, args, ...)
+        body <- parsebody(args,...)
+        body <- jsonlite::fromJSON(body)
+        
+        datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid, "[0-9.]+")[[1]])
+        seq_chunk <- split(datasetids_nos, ceiling(seq_along(datasetids_nos)/100))
+        
+        responses <- c()
+        for(sequ in seq_chunk) {
+          #body <- list()
+          body$datasetid <- paste0(sequ,collapse = ",")
+          body$limit <- 100
+          body <- jsonlite::toJSON(body,auto_unbox=TRUE)
+          response <- httr::POST(new_url,
+                                 body = body,
+                                 add_headers("User-Agent" = "neotoma2 R package"),
+                                 httr::content_type("application/json"))
+          stop_for_status(response,
+                          task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-      
-      result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                   flatten = FALSE,
-                                   simplifyVector = FALSE)
-      if (length(cleanNull(result)$data) == 0) {
-        break
+          
+          result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+                                       flatten = FALSE,
+                                       simplifyVector = FALSE)
+          
+          responses <- c(responses, cleanNull(result)$data)
+        }
+        
+        result$data <- responses
+        return(result)
+        
+      } else {
+        
+        stop_for_status(response,
+                        task = "Could not connect to the Neotoma API.
+                    Check that the path is valid, and check the current
+                     status of the Neotoma API services at
+                      http://data.neotomadb.org")
+        
+        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+                                     flatten = FALSE,
+                                     simplifyVector = FALSE)
+        if (length(cleanNull(result)$data) == 0) {
+          break
+        }
+        responses <- c(responses, cleanNull(result)$data)
+        query$offset <- query$offset + query$limit
+        
+        result$data <- responses
       }
-      responses <- c(responses, cleanNull(result)$data)
-      query$offset <- query$offset + query$limit
+      return(result)
     }
-    
-    result$data <- responses
-    
   }
-  
-  return(result)
 }
