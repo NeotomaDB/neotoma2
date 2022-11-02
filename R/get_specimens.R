@@ -74,7 +74,6 @@ parse_specimen <- function(result, ds) {
 
 #' @title Get Specimen Numeric
 #' @param x Use a single number to extract site information
-#' @param ... Additional parameters to get_specimens
 #' @export
 get_specimens.numeric <- function(x) {
   
@@ -84,7 +83,7 @@ get_specimens.numeric <- function(x) {
     datasetid <- paste0(x, collapse = ",")
   }
 
-  base_url <- paste0("data/specimens/", datasetid)
+  base_url <- paste0("data/datasets/", datasetid, "/specimens")
   result <- neotoma2::parseURL(base_url)
   
   ds <- parse_specimen(result, dw)
@@ -96,7 +95,6 @@ get_specimens.numeric <- function(x) {
 
 #' @title Get Specimen Sites
 #' @param x Use a single number to extract site information
-#' @param ... Additional parameters to get_specimens
 #' @export
 get_specimens.sites <- function(x) {
   
@@ -110,7 +108,7 @@ get_specimens.sites <- function(x) {
     output <- paste0(output, collapse = ",")
   }
   
-  base_url <- paste0("data/specimens/", output)
+  base_url <- paste0("data/datasets/", output,"/specimens/")
   result <- neotoma2::parseURL(base_url)
 
   df <- samples(x)

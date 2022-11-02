@@ -40,6 +40,7 @@ Imports:
     methods,
     dplyr,
     tidyverse,
+    tidyr,
     gtools,
     arulesViz,
     leaflet,
