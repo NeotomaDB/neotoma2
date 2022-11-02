@@ -114,7 +114,7 @@ get_sites.default <- function(...) { # nolint
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/sites?loc=", loc)
-    
+
     for (name in names(cl)) {
       if (!(name == "loc")) {
         if (!(name == "all_data")) {

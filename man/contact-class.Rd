@@ -4,6 +4,12 @@
 \name{contact-class}
 \alias{contact-class}
 \title{An S4 class for Neotoma contacts}
+\value{
+contact
+}
 \description{
-An S4 class for Neotoma contacts
+The object that contains contacts and their constituent components.
+}
+\examples{
+new("contact", familyname = "Goring", givennames = "Simon J.")
 }

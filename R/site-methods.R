@@ -379,11 +379,11 @@ setMethod(f = "cite_data",
           signature = "sites",
           definition = function(x) {
             ids <- getids(x)
-            sitenames <- x  %>% 
-              as.data.frame() %>% 
+            sitenames <- x  %>%
+              as.data.frame() %>%
               dplyr::select(siteid, sitename)
-            datasets <- datasets(x) %>% 
-              as.data.frame() %>% 
+            datasets <- datasets(x) %>%
+              as.data.frame() %>%
               dplyr::select(datasetid, datasettype, database)
 
             dois <- purrr::map(datasets(x)@datasets, function(x) {
@@ -405,7 +405,7 @@ setMethod(f = "cite_data",
             dplyr::group_by(siteid, collunitid, datasetid) %>%
             dplyr::arrange(doi) %>%
             dplyr::filter(dplyr::row_number() == 1) %>%
-            as.data.frame() %>% 
+            as.data.frame() %>%
             dplyr::mutate(citation = sprintf("%s. %s; %s dataset. In %s. Neotoma Paleoecology Database. doi:%s",
                           pi_list, sitename, datasettype, database, doi)) %>%
             dplyr::select(datasetid, citation)
@@ -423,11 +423,11 @@ setMethod(f = "cite_data",
           signature = "site",
           definition = function(x) {
             ids <- getids(x)
-            sitenames <- x  %>% 
-              as.data.frame() %>% 
+            sitenames <- x  %>%
+              as.data.frame() %>%
               dplyr::select(siteid, sitename)
-            datasets <- datasets(x) %>% 
-              as.data.frame() %>% 
+            datasets <- datasets(x) %>%
+              as.data.frame() %>%
               dplyr::select(datasetid, datasettype, database)
 
             dois <- purrr::map(datasets(x)@datasets, function(x) {

@@ -16,3 +16,12 @@
 \description{
 Plot sites on a leaflet map
 }
+\examples{
+\dontrun{
+# Note that by default the limit for queries is 25 records:
+modernSites <- get_sites(keyword = "Modern")
+plotLeaflet(modernSites)
+# Save map to file:
+plotLeaflet(modernSites, save_im = '/tmp/myMap.png')
+}
+}

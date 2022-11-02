@@ -1,12 +1,23 @@
 #' @title plotLeaflet
 #' @description Plot sites on a leaflet map
+#' @importFrom purrr map
+#' @importFrom assertthat assert_that
+#' @importFrom leaflet leaflet addProviderTiles addTiles addCircleMarkers
+#' @importFrom mapview mapshot
 #' @param object Sites object to plot
 #' @param save_im save output
 #' @param path location where output should be saved in. save_im must be TRUE
+#' @examples \dontrun{
+#' # Note that by default the limit for queries is 25 records:
+#' modernSites <- get_sites(keyword = "Modern")
+#' plotLeaflet(modernSites)
+#' # Save map to file:
+#' plotLeaflet(modernSites, save_im = '/tmp/myMap.png')
+#' }
 #' @export
 setMethod(f = "plotLeaflet",
           signature = "sites",
-          definition = function(object, save_im=FALSE, path = "") {
+          definition = function(object, save_im = FALSE, path = "") {
             df1 <- map(object@sites, function(x) {
               df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
@@ -32,7 +43,7 @@ setMethod(f = "plotLeaflet",
             if (save_im == TRUE) {
               mapshot(map1, file = path)
             }
-            map1
+            return(map1)
           })
 # End plot methods
 
@@ -41,18 +52,26 @@ setMethod(f = "plotLeaflet",
 #' @param object Site object to plot
 #' @param save_im save output
 #' @param path location where output should be saved in. save_im must be TRUE
+#' @importFrom purrr map
+#' @importFrom assertthat assert_that
+#' @importFrom leaflet leaflet addProviderTiles addTiles addCircleMarkers
+#' @importFrom mapview mapshot
+#' @examples \dontrun{
+#' modernSites <- get_sites(keyword = "Modern")
+#' plotLeaflet(modernSites[[1]])
+#' }
 #' @export
 setMethod(f = "plotLeaflet",
           signature = "site",
-          definition = function(object, save_im=FALSE, path = "") {
-            
+          definition = function(object, save_im = FALSE, path = "") {
+
             df1 <- data.frame(siteid = object@siteid,
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
                              long = mean(st_coordinates(object@geography)[, 1]),
                              elev = object@altitude,
                              description = object@description)
-            
+
             map1 <- leaflet(df1) %>%
               addProviderTiles(providers$Stamen.TerrainBackground) %>%
               addTiles() %>%
@@ -65,10 +84,10 @@ setMethod(f = "plotLeaflet",
                                               ">Explorer Link</a>"),
                                clusterOptions = markerClusterOptions(),
                                options = markerOptions(riseOnHover = TRUE))
-            
+
             if (save_im == TRUE) {
               mapshot(map1, file = path)
             }
-            map1
+            return(map1)
           })
 # End plot methods
