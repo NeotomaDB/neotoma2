@@ -55,7 +55,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                              httr::content_type("application/json"))
       warning("To get the complete data, use all_data=TRUE. Returned the first 25 elements.")
     }
-
+    
     response_url <- response$url
     
     # Break if we can't connect:
@@ -83,50 +83,52 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     query$offset <- 0
     query$limit <- 100
     
-    responses <- c()
-    
-    while (TRUE) {
-      response <- httr::GET(paste0(baseurl, x),
-                            add_headers("User-Agent" = "neotoma2 R package"),
-                            query = query)
+    response <- httr::GET(paste0(baseurl, x),
+                          add_headers("User-Agent" = "neotoma2 R package"),
+                          query = query)
+    if(response$status_code == 414) {
+      # Function with Post (Use this once server issue is resolved)
+      args <- x
+      new_url <- newURL(baseurl, args, ...)
+      body <- parsebody(args,...)
+      body <- jsonlite::fromJSON(body)
       
-      if(response$status_code == 414) {
-        # Function with Post (Use this once server issue is resolved)
-        args <- x
-        new_url <- newURL(baseurl, args, ...)
-        body <- parsebody(args,...)
-        body <- jsonlite::fromJSON(body)
-        
-        datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid, "[0-9.]+")[[1]])
-        seq_chunk <- split(datasetids_nos, ceiling(seq_along(datasetids_nos)/50))
-        
-        responses <- c()
-        for(sequ in seq_chunk) {
-          body <- list()
-          body$datasetid <- paste0(sequ,collapse = ",")
-          body$limit <- 50
-          body <- jsonlite::toJSON(body,auto_unbox=TRUE)
-          response <- httr::POST(new_url,
-                                 body = body,
-                                 add_headers("User-Agent" = "neotoma2 R package"),
-                                 httr::content_type("application/json"))
-          stop_for_status(response,
-                          task = "Could not connect to the Neotoma API.
+      datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid, "[0-9.]+")[[1]])
+      seq_chunk <- split(datasetids_nos, ceiling(seq_along(datasetids_nos)/50))
+      
+      responses <- c()
+      for(sequ in seq_chunk) {
+        body <- list()
+        body$datasetid <- paste0(sequ,collapse = ",")
+        body$limit <- 50
+        body <- jsonlite::toJSON(body,auto_unbox=TRUE)
+        response <- httr::POST(new_url,
+                               body = body,
+                               add_headers("User-Agent" = "neotoma2 R package"),
+                               httr::content_type("application/json"))
+        stop_for_status(response,
+                        task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-          
-          result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                       flatten = FALSE,
-                                       simplifyVector = FALSE)
-          
-          responses <- c(responses, cleanNull(result)$data)
-        }
         
-        result$data <- responses
-        return(result)
+        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+                                     flatten = FALSE,
+                                     simplifyVector = FALSE)
         
-      } else {
+        responses <- c(responses, cleanNull(result)$data)
+      }
+      
+      result$data <- responses
+      return(result)
+      
+    } else{
+      
+      responses <- c()
+      while (TRUE) {
+        response <- httr::GET(paste0(baseurl, x),
+                              add_headers("User-Agent" = "neotoma2 R package"),
+                              query = query)
         
         stop_for_status(response,
                         task = "Could not connect to the Neotoma API.
@@ -137,14 +139,17 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                      flatten = FALSE,
                                      simplifyVector = FALSE)
+        
         if (length(cleanNull(result)$data) == 0) {
           break
         }
-        responses <- c(responses, cleanNull(result)$data)
-        query$offset <- query$offset + query$limit
         
-        result$data <- responses
-      }
+        responses <- c(responses, cleanNull(result)$data)
+        
+        query$offset <- query$offset + query$limit
+      }  
+      result$data <- responses
+      
       return(result)
     }
   }
