@@ -98,13 +98,13 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         body <- jsonlite::fromJSON(body)
         
         datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid, "[0-9.]+")[[1]])
-        seq_chunk <- split(datasetids_nos, ceiling(seq_along(datasetids_nos)/100))
+        seq_chunk <- split(datasetids_nos, ceiling(seq_along(datasetids_nos)/50))
         
         responses <- c()
         for(sequ in seq_chunk) {
-          #body <- list()
+          body <- list()
           body$datasetid <- paste0(sequ,collapse = ",")
-          body$limit <- 100
+          body$limit <- 50
           body <- jsonlite::toJSON(body,auto_unbox=TRUE)
           response <- httr::POST(new_url,
                                  body = body,
