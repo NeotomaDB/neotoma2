@@ -1,9 +1,9 @@
-#' @title to_json
+#' @title toJSON
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
 #' @import lubridate
 #' @import sf
-#' @import jsonify
+#' @import jsonlite
 #' @import geojsonsf
 #' @description
 #' Convert a Site object into a json file for API management
@@ -14,14 +14,13 @@
 #' alex.sites <- get_sites(sitename="Alex%")
 #'
 #' Convert the object to json
-#' to_json(alex.sites)
+#' toJSON(alex.sites)
 #' @export
-#' 
-setMethod(f = "to_json",
+setMethod(f = "toJSON",
           signature = "sites",
           definition = function(x = NA) {
   
-  output <- jsonify::to_json(
+  output <- jsonlite::toJSON(
     purrr::map(x@sites, function(y){
       list(
            area = y@area,
@@ -86,8 +85,7 @@ setMethod(f = "to_json",
                                        defaultchronology = z@defaultchronology
                                        )}),
            sitedescription = y@description
-           )}), unbox = TRUE)
+           )}), auto_unbox=TRUE)
   
   return(output)
 })
-

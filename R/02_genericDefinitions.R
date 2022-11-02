@@ -93,6 +93,15 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
+#' @title toJSON
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @description Export toJSON
+#' @param x Sites object to extract taxa table from
+#' @export
+setGeneric("toJSON", function(x) {
+  standardGeneric(f = "toJSON")
+})
+
 #' @title Add a new chronology to a collection unit.
 #' @param object A collectionunit object
 #' @param x A chronology object
