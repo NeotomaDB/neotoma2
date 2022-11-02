@@ -31,6 +31,8 @@ build_dataset <- function(x) {
         }
       })
   }
+  
+  specimens <- new("specimens", specimens = list())
 
   new("dataset",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
@@ -42,6 +44,7 @@ build_dataset <- function(x) {
       age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
       notes = use_na(testNull(x$datasetnotes, NA), "char"),
       pi_list = pi_list,
-      samples = samples)
+      samples = samples,
+      specimens = specimens)
 
 }

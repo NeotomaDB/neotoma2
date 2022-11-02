@@ -7,7 +7,7 @@
 \method{get_sites}{default}(...)
 }
 \arguments{
-\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc}
+\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc, gpid}
 }
 \description{
 Get Site Information for Fossil Sites

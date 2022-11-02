@@ -26,7 +26,7 @@
 
 set_site <- function(x = NA,
                      siteid = NA_integer_,
-                     sitename= NA_character_,
+                     sitename = NA_character_,
                      geography = st_as_sf(st_sfc()),
                      altitude = NA_integer_,
                      geopolitical = list(),
@@ -54,10 +54,12 @@ set_site <- function(x = NA,
   } else {
     if (class(x) == "site") {
       for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+        slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
       }
+      return(x)
+    } else {
+      stop("`x` must be a site object if it is supplied.")
     }
-    return(x)
   }
 
   # TODO : change coordinates to sf_sfc or as is so user can define

@@ -94,19 +94,9 @@ parse_download <- function(result, verbose = TRUE) {
         my_site <- build_sites(dls[[i]])
         my_sites_list <- c(my_sites_list, my_site)
         # for some reason, the 19 sites where added fine
-        
+
       } else if (max(matches) == 1) {
         # We're adding a collection unit somewhere:
-        ## Review this piece of code @Simon
-        ## Why is it necessary to groupby and unlist, simple match should work 
-        ## (? I think)
-        # st <- ids %>%
-        #   mutate(match = matches) %>%
-        #   group_by(.data$siteid) %>%
-        #   summarise(match = max(match)) %>%
-        #   select(match) %>% unlist() %>%
-        #   which.max()
-        
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
         
         newcu <- build_collunits(dls[[i]]$site$collectionunit)
@@ -116,8 +106,7 @@ parse_download <- function(result, verbose = TRUE) {
         
       } else if (max(matches) == 2) {
         # We're adding a dataset to an existing collection unit:
-        
-        
+
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
         
         cuids <- ids %>%

@@ -3,7 +3,7 @@ library("testthat")
 library("neotoma2")
 library("Bchron")
 
-context("Run Neotoma `test_samples` only when not on CRAN")
+context("Test the runs for chroncontrols.")
 
 test_that("Running samples on a record with multiple chronologies pulls the default model.", {
 

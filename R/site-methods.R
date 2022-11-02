@@ -321,3 +321,139 @@ setMethod(f = "summary",
             }) %>% bind_rows()
             return(datasettype)
           })
+
+#' @title Obtain dataset DOIs from records.
+#' @param x sites object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows full_join select arrange filter
+#' @export
+setMethod(f = "doi",
+          signature = "sites",
+          definition = function(x) {
+            ids <- getids(x)
+            dois <- purrr::map(datasets(x)@datasets, function(x) {
+              doi <- unlist((x$doi  %>% purrr::map(testNull)))
+              data.frame(datasetid = x$datasetid,
+                         doi = doi)
+            }) %>%
+            dplyr::bind_rows() %>%
+            dplyr::full_join(ids, by = "datasetid") %>% 
+            dplyr::select(siteid, collunitid, datasetid, doi) %>% 
+            dplyr::group_by(siteid, collunitid, datasetid) %>%
+            dplyr::arrange(doi) %>%
+            dplyr::filter(dplyr::row_number()==1) %>%
+            as.data.frame()
+            return(dois)
+          })
+
+#' @title Obtain dataset DOIs from records.
+#' @param x site object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows full_join select arrange filter
+#' @export
+setMethod(f = "doi",
+          signature = "site",
+          definition = function(x) {
+            ids <- getids(x)
+            dois <- purrr::map(datasets(x)@datasets, function(x) {
+              doi <- unlist((x$doi  %>% purrr::map(testNull)))
+              data.frame(datasetid = x$datasetid,
+                         doi = doi)
+            }) %>%
+            dplyr::bind_rows() %>%
+            dplyr::full_join(ids, by = "datasetid") %>% 
+            dplyr::select(siteid, collunitid, datasetid, doi) %>% 
+            dplyr::group_by(siteid, collunitid, datasetid) %>%
+            dplyr::arrange(doi) %>%
+            dplyr::filter(dplyr::row_number()==1) %>%
+            as.data.frame()
+            return(dois)
+          })
+
+#' @title Obtain data citations from records.
+#' @param x sites object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows full_join select arrange filter
+#' @export
+setMethod(f = "cite_data",
+          signature = "sites",
+          definition = function(x) {
+            ids <- getids(x)
+            sitenames <- x  %>%
+              as.data.frame() %>%
+              dplyr::select(siteid, sitename)
+            datasets <- datasets(x) %>%
+              as.data.frame() %>%
+              dplyr::select(datasetid, datasettype, database)
+
+            dois <- purrr::map(datasets(x)@datasets, function(x) {
+              doi <- unlist((x$doi  %>% purrr::map(testNull)))
+              pi_list <- unlist((x$pi_list  %>% purrr::map(testNull)))
+              data.frame(datasetid = x$datasetid,
+                         doi = doi,
+                         pi_list = paste0(sort(pi_list), collapse = "; "))
+            }) %>%
+            dplyr::bind_rows()
+
+            citations <- ids %>%
+            dplyr::full_join(sitenames, by = "siteid") %>%
+            dplyr::full_join(datasets, by = "datasetid") %>%
+            dplyr::full_join(dois, by = "datasetid") %>%
+            dplyr::select(siteid, sitename,
+                          collunitid, datasetid,
+                          datasettype, database, doi, pi_list) %>%
+            dplyr::group_by(siteid, collunitid, datasetid) %>%
+            dplyr::arrange(doi) %>%
+            dplyr::filter(dplyr::row_number() == 1) %>%
+            as.data.frame() %>%
+            dplyr::mutate(citation = sprintf("%s. %s; %s dataset. In %s. Neotoma Paleoecology Database. doi:%s",
+                          pi_list, sitename, datasettype, database, doi)) %>%
+            dplyr::select(datasetid, citation)
+
+            return(citations)
+          })
+
+
+#' @title Obtain data citations from records.
+#' @param x sites object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows full_join select arrange filter
+#' @export
+setMethod(f = "cite_data",
+          signature = "site",
+          definition = function(x) {
+            ids <- getids(x)
+            sitenames <- x  %>%
+              as.data.frame() %>%
+              dplyr::select(siteid, sitename)
+            datasets <- datasets(x) %>%
+              as.data.frame() %>%
+              dplyr::select(datasetid, datasettype, database)
+
+            dois <- purrr::map(datasets(x)@datasets, function(x) {
+              doi <- unlist((x$doi  %>% purrr::map(testNull)))
+              pi_list <- unlist((x$pi_list  %>% purrr::map(testNull)))
+              data.frame(datasetid = x$datasetid,
+                         doi = doi,
+                         pi_list = paste0(sort(pi_list), collapse = "; "))
+            }) %>%
+            dplyr::bind_rows()
+
+            citations <- ids %>%
+            dplyr::full_join(sitenames, by = "siteid") %>%
+            dplyr::full_join(datasets, by = "datasetid") %>%
+            dplyr::full_join(dois, by = "datasetid") %>%
+            dplyr::select(siteid, sitename,
+                          collunitid, datasetid,
+                          datasettype, database, doi, pi_list) %>%
+            dplyr::group_by(siteid, collunitid, datasetid) %>%
+            dplyr::arrange(doi) %>%
+            dplyr::filter(dplyr::row_number() == 1) %>%
+            as.data.frame() %>%
+            dplyr::mutate(citation = sprintf("%s. %s; %s dataset. In %s. Neotoma Paleoecology Database. doi:%s",
+                          pi_list, sitename, datasettype, database, doi)) %>%
+            dplyr::select(datasetid, citation)
+
+            return(citations)
+          })
+

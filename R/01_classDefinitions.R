@@ -1,6 +1,11 @@
 setClassUnion("id", c("character", "integer", "numeric"))
 
 #' @title An S4 class for Neotoma contacts
+#' @description The object that contains contacts and their constituent components.
+#' @return contact
+#' @examples
+#' new("contact", familyname = "Goring", givennames = "Simon J.")
+#' @export
 setClass("contact",
                     representation(contactid = "id",
                                    familyname = "character",
@@ -219,6 +224,88 @@ setClass(
   "samples",
   slots = c(samples = "list"))
 
+#' @title S4 class for repository information
+#' @description The standard object class for repository
+#'  from the Neotoma Paleoecology Database.
+setClass(
+  # Set the name for the class
+  "repository",
+  # Define the slots
+  slots = c(notes = "character",
+            acronym = "character",
+            repository = "character",
+            repositoryid = "id",
+            repositorynotes = "character"
+  ),
+  # Set the default values for the slot
+  prototype = list(notes = NA_character_,
+                   acronym = NA_character_,
+                   repository = NA_character_,
+                   repositoryid = NA_integer_,
+                   repositorynotes = NA_character_
+  ),
+)
+
+#' @title S4 class for repositories information
+#' @description The grouped class for repositories from
+#'  the Neotoma Paleoecology Database.
+setClass(
+  # Set the name for the class
+  "repositories",
+  slots = c(repositories = "list"))
+
+#' @title S4 class for specimen information
+#' @description The standard object class for specimen
+#'  from the Neotoma Paleoecology Database.
+setClass(
+  # Set the name for the class
+  "specimen",
+  # Define the slots
+  slots = c(datasetid = "id",
+            sampleid = "id",
+            specimenid = "numeric",
+            repository = "repository",
+            taxonid = "id",
+            taxonname = "character",
+            elementtype = "character",
+            symmetry = "character",
+            portion = "character",
+            sex = "character",
+            domesticstatus = "character",
+            taphonomictype = "character",
+            nisp = "numeric",
+            preservative = "character",
+            maturity = "character",
+            samplenotes = "character"
+  ),
+  # Set the default values for the slot
+  prototype = list(datasetid = NA_integer_,
+                   sampleid = NA_integer_,
+                   specimenid = NA_integer_,
+                   repository = NULL,
+                   taxonid = NA_integer_,
+                   taxonname = NA_character_,
+                   elementtype = NA_character_,
+                   symmetry = NA_character_,
+                   portion = NA_character_,
+                   sex = NA_character_,
+                   domesticstatus = NA_character_,
+                   taphonomictype = NA_character_,
+                   nisp = NA_integer_,
+                   preservative = NA_character_,
+                   maturity = NA_character_,
+                   samplenotes = NA_character_
+  ),
+)
+
+#' @title S4 class for specimens information
+#' @description The grouped class for specimens from
+#'  the Neotoma Paleoecology Database.
+setClass(
+  # Set the name for the class
+  "specimens",
+  slots = c(specimens = "list"))
+
 #' @title S4 class for dataset information
 #' @description The standard object class for datasets
 #'  from the Neotoma Paleoecology Database.
@@ -235,7 +322,8 @@ setClass(
             age_range_young = "numeric",
             notes = "character",
             pi_list = "ANY",
-            samples = "samples"),
+            samples = "samples",
+            specimens = "specimens"),
   # Set the default values for the slot
   prototype = list(datasetid = NA_integer_,
                    database = NA_character_,
@@ -246,7 +334,8 @@ setClass(
                    age_range_young =  NA_integer_,
                    notes = NA_character_,
                    pi_list = list(),
-                   samples = NULL),
+                   samples = NULL,
+                   specimens = NULL),
 )
 
 #' @title S4 class for datasets information

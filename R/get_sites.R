@@ -114,7 +114,7 @@ get_sites.default <- function(...) { # nolint
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/sites?loc=", loc)
-    
+
     for (name in names(cl)) {
       if (!(name == "loc")) {
         if (!(name == "all_data")) {
@@ -152,15 +152,6 @@ get_sites.default <- function(...) { # nolint
 #' @param ... accepted arguments if numeric all_data
 #' @export
 get_sites.numeric <- function(x, ...) {
-  use_na <- function(x, type) {
-    if (is.na(x)) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int" = NA_integer_))
-    }else{
-      return(x)
-    }
-  }
   
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")

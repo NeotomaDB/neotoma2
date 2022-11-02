@@ -16,3 +16,9 @@
 \description{
 Plot a site on a leaflet map
 }
+\examples{
+\dontrun{
+modernSites <- get_sites(keyword = "Modern")
+plotLeaflet(modernSites[[1]])
+}
+}
