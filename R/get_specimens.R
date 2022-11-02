@@ -83,7 +83,7 @@ get_specimens.numeric <- function(x) {
     datasetid <- paste0(x, collapse = ",")
   }
 
-  base_url <- paste0("data/", datasetid, "/specimens")
+  base_url <- paste0("data/datasets/", datasetid, "/specimens")
   result <- neotoma2::parseURL(base_url)
   
   ds <- parse_specimen(result, dw)
@@ -108,7 +108,7 @@ get_specimens.sites <- function(x) {
     output <- paste0(output, collapse = ",")
   }
   
-  base_url <- paste0("data/specimens/", output)
+  base_url <- paste0("data/datasets/", output,"/specimens/")
   result <- neotoma2::parseURL(base_url)
 
   df <- samples(x)

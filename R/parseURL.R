@@ -36,7 +36,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-  
   query <- list(...)
   if (all_data == FALSE) {
     response <- httr::GET(paste0(baseurl, x),
@@ -57,7 +56,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     }
     
     response_url <- response$url
-    
+
     # Break if we can't connect:
     stop_for_status(response,
                     task = "Could not connect to the Neotoma API.
