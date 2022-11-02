@@ -15,6 +15,13 @@ The function returns a json object
 \description{
 Convert a Site object into a json file for API management
 }
+\examples{
+\dontrun{
+# To find all sites that contain the string "Alex\%"
+alex.sites <- get_sites(sitename="Alex\%")
+Convert the object to json
+toJSON(alex.sites)}
+}
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}
 }
