@@ -24,17 +24,17 @@ build_chron <- function(x) {
         as.data.frame(y)
       }) %>%
       bind_rows()
-    
+
     chron_table <- data.frame()
     df_sample <- df %>%
       select(.data$depth, .data$thickness,
              .data$agelimitolder, .data$chroncontrolid,
              .data$agelimityounger, .data$chroncontrolage,
              .data$chroncontroltype)
-    
+
     chron_table <- rbind(chron_table, df_sample) %>%
       distinct()
-    
+
     # Chronologies dictionary in API is of length 1 or length 8; if length 1, 
     # the chronology is an NA chronology
     if(length(check_chron$chronology) != 1) {
@@ -50,9 +50,12 @@ build_chron <- function(x) {
         chronologyid = use_na(testNull(check_chron$chronologyid, NA), "int"),
         notes = use_na(testNull(check_chron$chronology$notes, NA), "char"),
         contact = contact,
-        agemodel = use_na(testNull(check_chron$chronology$agemodel, NA), "char"),
-        ageboundolder = use_na(testNull(check_chron$chronology$agerange$ageboundolder, NA), "int"),
-        ageboundyounger = use_na(testNull(check_chron$chronology$agerange$ageboundyounger, NA), "int"),
+        agemodel = use_na(testNull(check_chron$chronology$agemodel,
+          NA), "char"),
+        ageboundolder = use_na(testNull(check_chron$chronology$agerange$ageboundolder,
+          NA), "int"),
+        ageboundyounger = use_na(testNull(check_chron$chronology$agerange$ageboundyounger,
+          NA), "int"),
         isdefault = use_na(as.numeric(testNull(check_chron$chronology$isdefault, NA)), "int"),
         dateprepared = as.Date(testNull(check_chron$chronology$dateprepared, NA)),
         modelagetype = use_na(testNull(check_chron$chronology$modelagetype, NA), "char"),

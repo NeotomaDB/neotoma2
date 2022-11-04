@@ -152,7 +152,7 @@ my_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 25)
 my_pollen_datasets
 ```
 
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
 
 We can use that in a `while` loop in R in the following way:
 
@@ -161,11 +161,11 @@ run = TRUE
 offset <- 0
 
 while(run) {
-  sites <- get_sites(offset=offset, limit = 500)
-  if(length(sites) == 0) {
+  sites <- get_sites(offset = offset, limit = 500)
+  if (length(sites) == 0) {
     run = FALSE
   }
-  if(exists('allSites')) {
+  if (exists("allSites")) {
     allSites <- c(allSites, sites)
   } else {
     allSites <- sites
@@ -174,9 +174,9 @@ while(run) {
 }
 ```
 
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add the `limit=99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, you can do that automatically using the `all_data=TRUE` argument.
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add the `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, you can do that automatically using the `all_data = TRUE` argument.
 
-We can use that `all_data=TRUE` in R in the following way:
+We can use that `all_data = TRUE` in R in the following way:
 
 ```{r all_data, eval=FALSE}
 
@@ -222,11 +222,12 @@ plotLeaflet(brazil_datasets)
 Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brasil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
 
 ```{r filterBrasil}
-brasil_dates <- neotoma2::filter(brazil_datasets, datasettype == "geochronologic")
+brasil_dates <- neotoma2::filter(brazil_datasets,
+  datasettype == "geochronologic")
 
 # or:
 
-brasil_dates <- brazil_datasets %>% 
+brasil_dates <- brazil_datasets %>%
   neotoma2::filter(datasettype == "geochronologic")
 
 # With boolean operators:
@@ -244,12 +245,17 @@ The `filter()` function takes as the first argument, a datasets object, followed
 You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.  If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of `&` and `|` operators.
 
 ```{r, sitesbyname}
-Names_744BH <- c("Bald Hill", "Blake (sutton)", "High (sudbry)", "Holland", "Little Hosmer", "Long (grnsbo)", "Long (shefld)", "Round (shefld)")
+Names_744BH <- c("Bald Hill", "Blake (sutton)",
+                 "High (sudbry)", "Holland",
+                 "Little Hosmer", "Long (grnsbo)",
+                 "Long (shefld)", "Round (shefld)")
 
 new_sites <- c()
 for (Number in Names_744BH) {
   sites <- get_sites(sitename = Number)
-  new_sites <- c(new_sites, sites)}
+  new_sites <- c(new_sites, sites)
+  }
+
 new_sites
 ```
 
@@ -269,7 +275,7 @@ We can use a single publication ID or multiple IDs.  In either case the API retu
 
 ```{r pubsbyid}
 one <- get_publications(12)
-two <- get_publications(c(12,14))
+two <- get_publications(c(12, 14))
 ```
 
 From there we can then then subset and extract elements from the list using the standard `[[` format.  For example:
@@ -316,7 +322,7 @@ two[[1]]
 
 The output will look similar to the output for `two` above, however you will see that only a single result will be returned and the class (for a single publication) will be of type `publication` (as opposed to `publications`).  
 
-We can select an array of `publication` objects using the `[[` method, either as a sequence (`1:10`, or as a numeric vector (`c(1,2,3)`)):
+We can select an array of `publication` objects using the `[[` method, either as a sequence (`1:10`, or as a numeric vector (`c(1, 2, 3)`)):
 
 ```{r subsetPubs}
 # Select publications with Neotoma Publication IDs 1 - 10.
@@ -331,15 +337,16 @@ subPub
 Just as we can use the `set_sites()` function to set new site information, we can also create new publication information using `set_publications()`.  With `set_publications()` you can enter as much or as little of the article metadata as you'd like, but it's designed (in part) to use the CrossRef API to return information from a DOI.
 
 ```{r setNewPub}
-new_pub <- set_publications(articletitle = 'Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota',
-                           journal = 'Canadian Journal of Botany',
-                           volume = 46)
+new_pub <- set_publications(
+  articletitle = "Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota",
+  journal = "Canadian Journal of Botany",
+  volume = 46)
 ```
 
 A `publication` has a large number of slots that can be defined.  These may be left blank, they may be set directly after the publication is defined:
 
 ```{r setPubValue}
-new_pub@pages <- '1397-1410'
+new_pub@pages <- "1397-1410"
 ```
 
 #### Validate New Publications
