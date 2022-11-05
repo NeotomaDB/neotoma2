@@ -22,20 +22,19 @@ setMethod(f = "chroncontrols",
 setMethod(f = "chroncontrols",
           signature = "site",
           definition = function(x) {
-            #allids <- NULL
+
             siteid <- as.data.frame(x)$siteid
             chrons <- chronologies(x)
             chronset <- purrr::map(chrons@chronologies, function(y) {
               data.frame(chronologyid = y@chronologyid,
-                         y@chroncontrols) 
+                         y@chroncontrols)
             }) %>%
               dplyr::bind_rows() %>%
               dplyr::mutate(siteid = siteid)
-            
+
             chronset <- chronset %>%
               select(siteid, everything())
 
             return(chronset)
           }
 )
-
