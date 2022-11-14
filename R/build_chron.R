@@ -24,39 +24,43 @@ build_chron <- function(x) {
         as.data.frame(y)
       }) %>%
       bind_rows()
-    
+
     chron_table <- data.frame()
     df_sample <- df %>%
       select(.data$depth, .data$thickness,
              .data$agelimitolder, .data$chroncontrolid,
              .data$agelimityounger, .data$chroncontrolage,
              .data$chroncontroltype)
-    
+
     chron_table <- rbind(chron_table, df_sample) %>%
       distinct()
-    
-    # Chronologies dictionary in API is of length 1 or length 8; if length 1, 
+
+    # Chronologies dictionary in API is of length 1 or length 8; if length 1,
     # the chronology is an NA chronology
-    if(length(check_chron$chronology) != 1) {
-      if(length(check_chron$chronology$contact) == 1){
-        contact = use_na(testNull(check_chron$chronology$contact, NA), "char")
-      } else if(length(check_chron$chronology$contact) > 1) {
-        contact = check_chron$chronology$contact
+    if (length(check_chron$chronology) != 1) {
+      ch <- check_chron$chronology
+      if (length(ch$contact) == 1) {
+        contact <- use_na(testNull(ch$contact, NA), "char")
+      } else if (length(ch$contact) > 1) {
+        contact <- ch$contact
       } else {
-        contact = use_na(testNull(check_chron$chronology$contact, NA), "char")
+        contact <- use_na(testNull(ch$contact, NA), "char")
       }
-      
+
       new("chronology",
         chronologyid = use_na(testNull(check_chron$chronologyid, NA), "int"),
-        notes = use_na(testNull(check_chron$chronology$notes, NA), "char"),
+        notes = use_na(testNull(ch$notes, NA), "char"),
         contact = contact,
-        agemodel = use_na(testNull(check_chron$chronology$agemodel, NA), "char"),
-        ageboundolder = use_na(testNull(check_chron$chronology$agerange$ageboundolder, NA), "int"),
-        ageboundyounger = use_na(testNull(check_chron$chronology$agerange$ageboundyounger, NA), "int"),
-        isdefault = use_na(as.numeric(testNull(check_chron$chronology$isdefault, NA)), "int"),
-        dateprepared = as.Date(testNull(check_chron$chronology$dateprepared, NA)),
-        modelagetype = use_na(testNull(check_chron$chronology$modelagetype, NA), "char"),
-        chronologyname = use_na(testNull(check_chron$chronology$chronologyname,NA), "char"),
+        agemodel = use_na(testNull(ch$agemodel,
+          NA), "char"),
+        ageboundolder = use_na(testNull(ch$agerange$ageboundolder,
+          NA), "int"),
+        ageboundyounger = use_na(testNull(ch$agerange$ageboundyounger,
+          NA), "int"),
+        isdefault = use_na(as.numeric(testNull(ch$isdefault, NA)), "int"),
+        dateprepared = as.Date(testNull(ch$dateprepared, NA)),
+        modelagetype = use_na(testNull(ch$modelagetype, NA), "char"),
+        chronologyname = use_na(testNull(ch$chronologyname, NA), "char"),
         chroncontrols = chron_table)
     } else {
       new("chronology",
@@ -72,5 +76,4 @@ build_chron <- function(x) {
           chronologyname = NA_character_,
           chroncontrols = chron_table)
     }
-    
 }

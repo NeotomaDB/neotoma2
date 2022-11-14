@@ -5,7 +5,9 @@
 #' @export
 cleanNULL <- function(x) { # nolint
   out <- rapply(x,
-                function(y) { ifelse(is.null(y), NA, y) },
+                function(y) {
+                  ifelse(is.null(y), NA, y)
+                },
                 how = "replace")
   return(out)
 }

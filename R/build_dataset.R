@@ -31,7 +31,7 @@ build_dataset <- function(x) {
         }
       })
   }
-  
+
   specimens <- new("specimens", specimens = list())
 
   new("dataset",

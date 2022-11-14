@@ -15,10 +15,10 @@
 #' }
 #'
 build_specimen <- function(x) {
-  
+
   new("specimen",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
-      sampleid = use_na(testNull(x$sampleid, NA), "int"), 
+      sampleid = use_na(testNull(x$sampleid, NA), "int"),
       specimenid = use_na(testNull(x$specimenid, NA), "int"),
       repository = new("repository",
                        notes = NA_character_,
@@ -39,5 +39,5 @@ build_specimen <- function(x) {
       maturity = use_na(testNull(x$maturity, NA), "char"),
       samplenotes = use_na(testNull(x$samplenotes, NA), "char")
   )
-  
+
 }

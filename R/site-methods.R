@@ -338,10 +338,10 @@ setMethod(f = "doi",
             }) %>%
             dplyr::bind_rows() %>%
             dplyr::full_join(ids, by = "datasetid") %>% 
-            dplyr::select(siteid, collunitid, datasetid, doi) %>% 
+            dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%
             dplyr::arrange(doi) %>%
-            dplyr::filter(dplyr::row_number()==1) %>%
+            dplyr::filter(dplyr::row_number() == 1) %>%
             as.data.frame()
             return(dois)
           })

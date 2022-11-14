@@ -10,9 +10,9 @@ setMethod(f = "collunits",
             output <- purrr::map(object@sites, function(x) {
               x@collunits
             })
-            
+
             final <- purrr::reduce(output, c)
-            
+
             return(final)
           })
 
@@ -36,7 +36,8 @@ setMethod(f = "collunits",
 setMethod(f = "datasets",
           signature = "collunits",
           definition = function(object) {
-            result <- purrr::map(object@collunits, function(x)x@datasets)
+            result <- purrr::map(object@collunits,
+              function(x) x@datasets)
             if (length(result) == 1) {
               out <- result[[1]]
             } else {
@@ -77,7 +78,8 @@ setMethod(f = "datasets",
           signature = "site",
           definition = function(object) {
             cunits <- collunits(object)
-            result <- purrr::map(cunits@collunits, function(x)x@datasets)
+            result <- purrr::map(cunits@collunits,
+              function(x) x@datasets)
             if (length(result) == 1) {
               out <- result[[1]]
             } else {
@@ -98,14 +100,12 @@ setMethod(f = "chronologies",
               return(y)
             })
             try(
-              new("chronologies", chronologies = output)
+              returner <- new("chronologies", chronologies = output)
             )
-            if ('try-error' %in% class(new("chronologies", chronologies = output))) {
-              stop("not today")
-              
-            } else {
-              new("chronologies", chronologies = output)
+            if ("try-error" %in% class(returner)) {
+              stop("Cannot create chronology for this colleciton unit.")
             }
+            return(returner)
           })
 
 #' @title Extract chronologies from a sites object.
@@ -118,7 +118,7 @@ setMethod(f = "chronologies",
             output <- map(x@collunits, function(y) {
               chronologies(y)
             })
-            
+
             output <- purrr::reduce(output, c)
             return(output)
           })
@@ -134,7 +134,7 @@ setMethod(f = "chronologies",
               chronologies(y)
             })
             output <- purrr::reduce(output, c)
-            
+
             return(output)
           })
 
@@ -150,7 +150,6 @@ setMethod(f = "chronologies",
             })
 
             output <- purrr::reduce(output, c)
-         
-            
+
             return(output)
           })

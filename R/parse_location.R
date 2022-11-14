@@ -5,20 +5,19 @@
 #' @import geojsonsf
 #' @importFrom methods new
 #' @description
-#' Retrieve location from datasdets WT, geojson, bounding box
+#' Retrieve location from datasets WTK, geojson, bounding box
 #' @param x location object
+#' @export
 
 parse_location <- function(x) {
   if (is.numeric(x)) {
     # We're getting a numeric vector of coordinates:
-    coords <- x
-    my_bbox <- sf::st_bbox(c(xmin = coords[1], xmax = coords[3],
-                             ymax = coords[4], ymin = coords[2]),
-                           crs = st_crs(4326))
+    assertthat::assert_that(length(na.omit(x)) == 4,
+      msg = "Numeric coordinates need to be an array of 4 units, c(xmin, xmax, ymax, ymin)")
 
-    if (any(sapply(my_bbox, is.na))) {
-      stop("Numeric coordinates need to be an array of 4 units, c(xmin, xmax, ymax, ymin)")
-    }
+    my_bbox <- sf::st_bbox(c(xmin = x[1], xmax = x[3],
+                             ymax = x[4], ymin = x[2]),
+                           crs = st_crs(4326))
 
     my_bbox <- sf::st_as_sfc(my_bbox)
 

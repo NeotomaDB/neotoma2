@@ -27,9 +27,9 @@ test_that("We can download records and plot a single site with plot leaflet.", {
   testthat::expect_is(output, "leaflet")
 })
 
-test_that("The curvature of the earth isn't affecting the projection/selection", {
+test_that("Location parsing isn't affecting the representation of spatial polygons passed to the DB:", {
   # This is an issue raised by Adrian.
-  skip_on_cran()
+
   location <- '{"type": "Polygon",
             "coordinates": [[
                 [-169, 24],
@@ -42,9 +42,22 @@ test_that("The curvature of the earth isn't affecting the projection/selection",
   loc <- geojsonsf::sf_geojson(loc1)
 
   testthat::expect_equivalent(loc1, geojsonsf::geojson_sf(loc))
+  testthat::expect_equivalent(loc1,
+    geojsonsf::geojson_sf(parse_location(location)))
+}
 
-  usa <- get_sites(loc = location, limit = 10000)
-  usa_ds <- get_datasets(loc = location, limit = 10000)
+test_that("We are pulling in the sites we expect to capture:", {
+  skip_on_cran()
+  location <- '{"type": "Polygon",
+            "coordinates": [[
+                [-169, 24],
+                [-169, 75],
+                [-52, 75],
+                [-52, 24],
+                [-169, 24]]]}'
+
+  usa <- get_sites(loc = location, limit = 20000)
+  usa_ds <- get_datasets(loc = location, all_data = TRUE)
   fla <- get_sites(gpid = "Florida", limit = 10000)
 
   testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))

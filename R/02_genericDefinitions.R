@@ -34,7 +34,7 @@ setGeneric("coordinates", function(obj, ...) {
 #' @param save_im save output
 #' @param path location where output should be saved in. save_im must be TRUE
 #' @export
-setGeneric("plotLeaflet", function(object, save_im=FALSE, path = "") {
+setGeneric("plotLeaflet", function(object, save_im = FALSE, path = "") {
   standardGeneric(f = "plotLeaflet")
 })
 

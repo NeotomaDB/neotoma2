@@ -37,6 +37,7 @@ setMethod(f = "show",
                                domesticstatus = y@domesticstatus,
                                taphonomictype = y@taphonomictype,
                                samplenotes = y@samplenotes)
+              return(df)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
@@ -94,7 +95,7 @@ setMethod(f = "[[<-",
 setMethod(f = "[<-",
           signature = signature(x = "specimen", i = "character"),
           definition = function(x, i, value) {
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(length(i))) {
               slot(x, i[idx]) <- value[idx]
             }
             return(x)
@@ -108,7 +109,7 @@ setMethod(f = "[<-",
           signature = signature(x = "specimen", i = "numeric"),
           definition = function(x, i, value) {
             slots <- slotNames(x)
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(length(i))) {
               slot(x, slots[i[idx]]) <- value[idx]
             }
             return(x)
@@ -219,6 +220,6 @@ setMethod(f = "c",
 setMethod(f = "write.csv",
           signature = "specimens",
           definition = function(x, ...) {
-            df1 <- as.data.frame(x)
-            write.csv(df1, ...)
+            as.data.frame(x) %>%
+              write.csv(...)
           })
