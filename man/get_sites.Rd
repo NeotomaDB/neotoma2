@@ -39,13 +39,16 @@ The function contains data checks for each defined parameter.
 }
 \examples{
 \dontrun{
-# To find all sites with a min altitude of 12 and a max altitude of 25:
+## Find all sites with a min altitude of 12m and a max altitude of 25m
+## By default returns only 25 sites (default limit is 25):
 sites_12to25 <- get_sites(altmin=12, altmax=25)
+## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
+sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
 
-# To find all sites that contain the string "Alex\%"
-alex.sites <- get_sites(sitename="Alex\%")
+## To find all sites that contain the string "Alex\%"
+alex_sites <- get_sites(sitename="Alex\%")
 
-To find all examples in Brazil
+## To find sites in Brazil (again with default 25 records)
 brazil <- '{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],

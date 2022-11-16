@@ -14,8 +14,9 @@ Build a \code{site} from the Neotoma API response.
 }
 \examples{
 \dontrun{
-response <- jsonlite::fromJSON('https://api.neotomadb.org/v2.0/data/datasets/100,101',
-                               flatten=FALSE, simplifyVector=FALSE)
+response <- jsonlite::fromJSON(
+  "https://api.neotomadb.org/v2.0/data/datasets/100,101",
+  flatten = FALSE, simplifyVector = FALSE)
 response <- cleanNULL(response)
 newSites <- build_sites(response$data)
 newSites

@@ -8,7 +8,8 @@
 contact
 }
 \description{
-The object that contains contacts and their constituent components.
+The object that contains contacts and their
+constituent components.
 }
 \examples{
 new("contact", familyname = "Goring", givennames = "Simon J.")
