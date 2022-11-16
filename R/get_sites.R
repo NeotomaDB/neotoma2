@@ -1,3 +1,32 @@
+#' @title parse_site
+#' @description An internal helper function to parse the API result into a site object.
+#' @param result A JSON object from the API.
+#' @return A neotoma2 site object.
+parse_site <- function(result) {
+  fix_null <- function(x) {
+    for (i in seq_len(length(x))) {
+      if (is.null(x[[i]])) {
+        x[[i]] <- NA
+      } else {
+        if (class(x[[i]]) == "list") {
+          x[[i]] <- fix_null(x[[i]])
+        }
+      }
+    }
+    return(x)
+  }
+
+  data <- result$data %>%
+    fix_null()
+
+  # Function to use once API is in order.
+  # API - Site currently does not have any 'site'
+  # keys. Might need modification afterwards
+  newSites <- build_sites(data)
+
+  return(newSites)
+}
+
 #' @title get_sites
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
@@ -30,13 +59,16 @@
 #' \item{ \code{description} }{}
 #' \item{ \code{collunits} }{limited information on collunits}
 #' @examples \dontrun{
-#' # To find all sites with a min altitude of 12 and a max altitude of 25:
+#' ## Find all sites with a min altitude of 12m and a max altitude of 25m
+#' ## By default returns only 25 sites (default limit is 25):
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
+#' ## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
+#' sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
 #'
-#' # To find all sites that contain the string "Alex%"
-#' alex.sites <- get_sites(sitename="Alex%")
+#' ## To find all sites that contain the string "Alex%"
+#' alex_sites <- get_sites(sitename="Alex%")
 #'
-#' To find all examples in Brazil
+#' ## To find sites in Brazil (again with default 25 records)
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
@@ -54,32 +86,6 @@ get_sites <- function(x = NA, ...) {
   } else {
     UseMethod("get_sites", NA)
   }
-}
-
-parse_site <- function(result) {
-  fix_null <- function(x) {
-    for (i in seq_len(length(x))) {
-      if (is.null(x[[i]])) {
-        x[[i]] <- NA
-      } else {
-        if (class(x[[i]]) == "list") {
-          x[[i]] <- fix_null(x[[i]])
-        }
-      }
-    }
-    return(x)
-  }
-  
-  data <- result$data %>%
-    fix_null()
-  
-  # Function to use once API is in order.
-  # API - Site currently does not have any 'site'
-  # keys. Might need modification afterwards
-  newSites <- build_sites(data)
-  
-  return(newSites)
-  
 }
 
 #' @title Get Site Information for Fossil Sites

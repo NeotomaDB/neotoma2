@@ -1,7 +1,7 @@
 #' @title pingNeotoma
 #' @importFrom httr HEAD
 #' @importFrom stringr str_detect
-#' @importFrom assertthat assertthat
+#' @importFrom assertthat assert_that
 #' @description A quick function to test whether or not the Neotoma Database
 #' API is currently running.
 #' @param server One of \code{localhost:PORT} (where \code{PORT} is a valid
