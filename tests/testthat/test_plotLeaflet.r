@@ -1,9 +1,4 @@
 # load libraries
-library("testthat")
-library("neotoma2")
-
-context("Run Neotoma plotLeaflet tests when not on Cran")
-
 testthat::test_that("We can download records and plot them with plot leaflet.", {
 
   ## we don't want this to run on CRAN

@@ -1,5 +1,3 @@
-context("Test the runs for chroncontrols.")
-
 test_that("Obtaining chron controls for differrent kinds of records works as expected.", {
 
   ## we don't want this to run on CRAN
@@ -48,7 +46,7 @@ test_that("We can add a new chronology to a record:",
   controls$agelimitolder[1] <- 2
   controls$thickness[1] <- 1
 
-  predictDepths <- samples(stara) %>%
+  predict_depths <- samples(stara) %>%
     select(depth, analysisunitid) %>%
     unique() %>%
     arrange(depth)
@@ -62,7 +60,7 @@ test_that("We can add a new chronology to a record:",
                                   allowOutside = TRUE,
                                   ids = controls$chroncontrolid)
 
-  newpredictions <- predict(new_chron, predictDepths$depth)
+  newpredictions <- predict(new_chron, predict_depths$depth)
 
   new_chron_stara <- set_chronology(agemodel = "Bchron model",
                               isdefault = 1,
@@ -73,7 +71,7 @@ test_that("We can add a new chronology to a record:",
                               chronologyname = "Simon's example chronology",
                               chroncontrols = controls)
 
-  new_sample_ages <- data.frame(predictDepths,
+  new_sample_ages <- data.frame(predict_depths,
                               age = colMeans(newpredictions),
                               ageolder = colMeans(newpredictions) +
                                 apply(newpredictions, 2, sd),
