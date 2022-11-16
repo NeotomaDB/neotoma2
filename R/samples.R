@@ -22,19 +22,19 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-            #allids <- NULL
             allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              dplyr::rename(sitenotes = .data$notes.x,
-                            datasetnotes = .data$notes.y)
-            
-            sampset <- purrr::map(x@collunits@collunits, function(y) samples(y)) %>%
-              dplyr::bind_rows() %>%
-              dplyr::bind_rows() %>%
-              dplyr::left_join(siteinfo, by = "datasetid")
-            
+              dplyr::rename(sitenotes = notes.x,
+                            datasetnotes = notes.y)
+
+            sampset <- purrr::map(x@collunits@collunits,
+              function(y) samples(y)) %>%
+                dplyr::bind_rows() %>%
+                dplyr::bind_rows() %>%
+                dplyr::left_join(siteinfo, by = "datasetid")
+
             return(sampset)
           }
 )
@@ -59,7 +59,7 @@ setMethod(f = "samples",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-            
+
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma

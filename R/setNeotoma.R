@@ -1,14 +1,15 @@
 #' @title Set Neotoma API Source
+#' @description
+#' Choose to pull Neotoma data from the main Neotoma server, the development
+#' server or from a local instance of the API.
 #' @importFrom stringr str_detect
-#' @importFrom assertthat assertthat
-#' param server One of \code{local} (when the API is running locally on port 3005),
+#' @importFrom assertthat assert_that
+#' @param server One of \code{local} (when the API is running locally on port 3005),
 #' \code{neotoma} or \code{dev}.
-#' @description Choose to pull Neotoma data from the main Neotoma server,
-#' the development server or from a local instance of the API.
-#' @examples 
+#' @examples
 #' # The user is running the API locally using the node/express API
 #' # cloned from github: https://github.com/NeotomaDB/api_nodetest
-#' setNeotoma("local")
+#' setNeotoma(server = "neotoma")
 #' @export
 
 setNeotoma <- function(server = "neotoma") {
@@ -21,5 +22,5 @@ setNeotoma <- function(server = "neotoma") {
         dev = "dev",
         "local")
 
-    Sys.setenv(server)
+    Sys.setenv("APIPOINT" = server)
 }
