@@ -1,7 +1,3 @@
-# load libraries
-library("testthat")
-library("neotoma2")
-
 context("Run Neotoma `test_filter` only when not on CRAN")
 
 test_that("filter runs as expected. filters datasettype", {

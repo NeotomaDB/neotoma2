@@ -4,7 +4,7 @@ library("neotoma2")
 
 context("Run Neotoma plotLeaflet tests when not on Cran")
 
-test_that("We can download records and plot them with plot leaflet.", {
+testthat::test_that("We can download records and plot them with plot leaflet.", {
 
   ## we don't want this to run on CRAN
 
@@ -16,7 +16,7 @@ test_that("We can download records and plot them with plot leaflet.", {
 
 })
 
-test_that("We can download records and plot a single site with plot leaflet.", {
+testthat::test_that("We can download records and plot a single site with plot leaflet.", {
 
   ## we don't want this to run on CRAN
 
@@ -27,7 +27,7 @@ test_that("We can download records and plot a single site with plot leaflet.", {
   testthat::expect_is(output, "leaflet")
 })
 
-test_that("Location parsing isn't affecting the representation of spatial polygons passed to the DB:", {
+testthat::test_that("Location parsing isn't affecting the representation of spatial polygons passed to the DB:", {
   # This is an issue raised by Adrian.
 
   location <- '{"type": "Polygon",
@@ -44,9 +44,9 @@ test_that("Location parsing isn't affecting the representation of spatial polygo
   testthat::expect_equivalent(loc1, geojsonsf::geojson_sf(loc))
   testthat::expect_equivalent(loc1,
     geojsonsf::geojson_sf(parse_location(location)))
-}
+})
 
-test_that("We are pulling in the sites we expect to capture:", {
+testthat::test_that("We are pulling in the sites we expect to capture:", {
   skip_on_cran()
   location <- '{"type": "Polygon",
             "coordinates": [[

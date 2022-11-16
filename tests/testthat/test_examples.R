@@ -1,7 +1,3 @@
-## load packages
-library("testthat")
-library("neotoma2")
-
 context("Run Neotoma examples only when not on CRAN")
 
 test_that("Examples run without error", {

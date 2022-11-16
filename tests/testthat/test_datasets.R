@@ -1,7 +1,3 @@
-## load packages
-library("testthat")
-library("neotoma2")
-
 context("Run Neotoma `test_datasets` only when not on CRAN")
 
 test_that("get_datasets numeric runs.", {

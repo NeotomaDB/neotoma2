@@ -1,7 +1,3 @@
-# load libraries
-library("testthat")
-library("neotoma2")
-
 context("Run Neotoma `test_clean` only when not on CRAN")
 
 test_that("Doubling a set of records results and cleaning results in a clean set.", {

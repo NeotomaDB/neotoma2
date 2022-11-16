@@ -1,8 +1,3 @@
-# load libraries
-library("testthat")
-library("neotoma2")
-library("tidyverse")
-
 context("Run general tests only when not on CRAN")
 
 test_that("Some datasets don't seem to get pulled with chronologies.", {
