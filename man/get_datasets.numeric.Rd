@@ -14,3 +14,9 @@
 \description{
 Get Dataset Numeric
 }
+\examples{
+dontrun{
+allds <- get_datasets(1:29)
+plotLeaflet(allds)
+}
+}

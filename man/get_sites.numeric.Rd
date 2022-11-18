@@ -9,7 +9,11 @@
 \arguments{
 \item{x}{The numeric site ID from Neotoma}
 
-\item{...}{accepted arguments if numeric all_data}
+\item{...}{accepted arguments if numeric all_data
+#' @examples \dontrun{
+## Find all sites by numeric siteid: 
+sites <- get_sites(seq(1,100))
+}}
 }
 \description{
 Get Site Information for Fossil Sites

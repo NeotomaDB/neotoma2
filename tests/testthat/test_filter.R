@@ -1,5 +1,3 @@
-context("Run Neotoma `test_filter` only when not on CRAN")
-
 test_that("filter runs as expected. filters datasettype", {
 
   ## we don't want this to run on CRAN
@@ -16,13 +14,9 @@ test_that("filter runs as expected. filters datasettype", {
               ]]}'
 
   brazil_sf <- geojsonsf::geojson_sf(brazil)
-
   brazil_datasets <- get_datasets(loc = brazil[1])
-
   brazil_pollen <- neotoma2::filter(brazil_datasets, datasettype == "pollen")
-
   brazil_summary <- summary(brazil_pollen)
-
   brazil_datatype <- unique(brazil_summary$types)
 
   expect_equal(brazil_datatype, "pollen")
@@ -45,11 +39,8 @@ test_that("filter works as expected. filter by lat.", {
               ]]}'
 
   brazil_sf <- geojsonsf::geojson_sf(brazil)
-
   brazil_datasets <- get_datasets(loc = brazil[1])
-
   brazil_lat <- neotoma2::filter(brazil_datasets, lat > 0 & lat < 50)
-
   ds.0.50 <- as.data.frame(brazil_lat)
   latitudes <- ds.0.50$lat
 

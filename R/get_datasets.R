@@ -157,6 +157,20 @@ parse_dataset <- function(result) { # nolint
 #' @param x Use a single number to extract site information
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
+#' @examples \dontrun{
+#' # To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#'
+#' # To find all datasets in Brazil
+#' brazil <- '{"type": "Polygon",
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]]]}'
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
 
@@ -223,6 +237,10 @@ get_datasets.default <- function(x, ...) { # nolint
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
+#' @examples dontrun{
+#' allds <- get_datasets(1:29)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.numeric <- function(x, ...) {
   use_na <- function(x, type) {
@@ -254,6 +272,11 @@ get_datasets.numeric <- function(x, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param x An object of class \code{sites}.
 #' @param ... additional arguments accepted by \code{get_datasets()}
+#' @examples dontrun{
+#' random_sites <- get_sites(1:100)
+#' allds <- get_datasets(random_sites)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids

@@ -44,7 +44,7 @@ parse_site <- function(result) {
 #' The user may define all or none of the possible fields.
 #' The function contains data checks for each defined parameter.
 #' @param x Use a single number to extract site information
-#' @param ... accepted arguments: sitename, altmax, altmin, loc, taxa, 
+#' @param ... accepted arguments: sitename, altmax, altmin, loc, taxa,
 #' contacts, keyword, gpid
 #' @return The function returns either a single item of class \code{"try-error"}
 #' describing the reason for failure (either mis-defined parameters or an error
@@ -90,27 +90,49 @@ get_sites <- function(x = NA, ...) {
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc, gpid
+#' @examples \dontrun{
+#' ## Find all sites with a min altitude of 12m and a max altitude of 25m
+#' ## By default returns only 25 sites (default limit is 25):
+#' sites_12to25 <- get_sites(altmin=12, altmax=25)
+#' ## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
+#' sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
+#'
+#' ## To find all sites that contain the string "Alex%"
+#' alex_sites <- get_sites(sitename="Alex%")
+#'
+#' ## To find sites in Brazil (again with default 25 records)
+#' brazil <- '{"type": "Polygon",
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]
+#' ]]}'
+#' brazil_sites <- get_sites(loc = brazil[1])
+#' }
 #' @export
 get_sites.default <- function(...) { # nolint
-  
+
   cl <- as.list(match.call())
   possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
-  possible_args2 <- c("loc", "limit", "offset", "all_data", "contacts", "siteid", "datasettype")
+  possible_args2 <- c("loc", "limit", "offset",
+    "all_data", "contacts", "siteid", "datasettype")
   possible_args <- c(possible_args, possible_args2)
-  
+
   cl[[1]] <- NULL
-  
+
   for (name in names(cl)) {
     if (!(name %in% possible_args)) {
       message(paste0(name, " is not an allowed argument.\
       Choose from the allowed arguments: sitename, altmax, altmin, loc, keyword, contacts, taxa"))
     }
   }
-  
+
   cl <- lapply(cl, eval, envir = parent.frame())
-  
+
   error_check <- check_args(cl) # nolint
-  
+
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
@@ -135,46 +157,49 @@ get_sites.default <- function(...) { # nolint
     }else{
       result <- parseURL(base_url) %>%
         cleanNULL()
-    } 
-  }else{
+    }
+  } else {
 
     base_url <- paste0("data/sites")
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
-  
-  
+
   if (is.null(result$data[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_site(result)
     return(output)
   }
-  
+
 }
 
 #' @title Get Site Information for Fossil Sites
 #' @param x The numeric site ID from Neotoma
 #' @param ... accepted arguments if numeric all_data
+#' #' @examples \dontrun{
+#' ## Find all sites by numeric siteid: 
+#' sites <- get_sites(seq(1,100))
+#' }
 #' @export
 get_sites.numeric <- function(x, ...) {
-  
+
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
   }
-  
+
   base_url <- paste0("data/sites/", siteids)
-  
+
   result <- neotoma2::parseURL(base_url)
-  
+
   result_length <- length(result[2]$data)
-  
+
   if (result_length > 0) {
-    
+
     output <- parse_site(result)
-    
+
     return(output)
-    
+
   } else {
     return(NULL)
   }
