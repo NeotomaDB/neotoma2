@@ -27,10 +27,10 @@ build_chron <- function(x) {
 
     chron_table <- data.frame()
     df_sample <- df %>%
-      select(.data$depth, .data$thickness,
-             .data$agelimitolder, .data$chroncontrolid,
-             .data$agelimityounger, .data$chroncontrolage,
-             .data$chroncontroltype)
+      select(depth, thickness,
+             agelimitolder, chroncontrolid,
+             agelimityounger, chroncontrolage,
+             chroncontroltype)
 
     chron_table <- rbind(chron_table, df_sample) %>%
       distinct()

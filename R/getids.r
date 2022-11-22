@@ -16,8 +16,10 @@ getids <- function(x, order = TRUE) {
 #' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
 #' @param order sort items by siteid, collunitid, datasetid
+#' @importFrom purrr map
+#' @importFrom dplyr arrange bind_rows
 #' @export
-getids.sites <- function(x, order = TRUE) {
+getids.sites <- function (x, order = TRUE) {
     siteids <- map(x@sites, function(y) {
         siteid <- y@siteid
         if (length(y@collunits) > 0) {
@@ -43,7 +45,7 @@ getids.sites <- function(x, order = TRUE) {
 
     if (order) {
       siteids <- siteids %>%
-        arrange(.data$siteid, .data$collunitid, .data$datasetid)
+        arrange(siteid, collunitid, datasetid)
     }
 
     return(siteids)
@@ -52,15 +54,17 @@ getids.sites <- function(x, order = TRUE) {
 #' @title Get object IDs from sites
 #' @param x A neotoma2 \code{sites} object.
 #' @param order sort items by siteid, collunitid, datasetid
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows
 #' @export
-getids.site <- function(x, order = TRUE) {
+getids.site <- function (x, order = TRUE) {
 
   siteid <- x@siteid
   if (length(x@collunits) > 0) {
-    collunits <- map(x@collunits@collunits, function(z) {
+    collunits <- purrr::map(x@collunits@collunits, function(z) {
       collunitid <- z@collectionunitid
       if (length(z@datasets) > 0) {
-        datasetids <- map(z@datasets@datasets, function(a) {
+        datasetids <- purrr::map(z@datasets@datasets, function(a) {
           a@datasetid
         })
       } else {
@@ -69,7 +73,7 @@ getids.site <- function(x, order = TRUE) {
 
       return(data.frame(collunitid = collunitid,
                         datasetid = unlist(datasetids)))
-    }) %>% bind_rows()
+    }) %>% dplyr::bind_rows()
   } else {
     data.frame(collunitid = NA, datasetid = NA)
   }

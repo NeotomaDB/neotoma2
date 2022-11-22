@@ -27,7 +27,8 @@ limited collection units information.
 \item{ \code{collunits} }{limited information on collunits}
 }
 \description{
-Information for Fossil Sites
+The get_sites() function is a wrapper for the Neotoma \code{sites} API
+endpoint.
 Look for a site details using only a site ID or for multiple sites
 using possible sitenames, max latitudes or min latitudes.
 Displays a table with the following columns: siteid, sitename, lat, long,
@@ -55,8 +56,7 @@ brazil <- '{"type": "Polygon",
  [-56.953125,-33.137551192346145],
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
- [-73.125,-9.102096738726443]
-]]}'
+ [-73.125,-9.102096738726443]]]}'
 brazil_sites <- get_sites(loc = brazil[1])
 }
 }

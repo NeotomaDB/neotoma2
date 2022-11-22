@@ -34,7 +34,8 @@ parse_site <- function(result) {
 #' @import sf
 #' @importFrom methods new
 #' @description
-#' Information for Fossil Sites
+#' The get_sites() function is a wrapper for the Neotoma \code{sites} API
+#' endpoint.
 #' Look for a site details using only a site ID or for multiple sites
 #' using possible sitenames, max latitudes or min latitudes.
 #' Displays a table with the following columns: siteid, sitename, lat, long,
@@ -58,7 +59,8 @@ parse_site <- function(result) {
 #' \item{ \code{loc} }{An \code{sf} object that describes site's location}
 #' \item{ \code{description} }{}
 #' \item{ \code{collunits} }{limited information on collunits}
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' ## Find all sites with a min altitude of 12m and a max altitude of 25m
 #' ## By default returns only 25 sites (default limit is 25):
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
@@ -75,8 +77,7 @@ parse_site <- function(result) {
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
-#'  [-73.125,-9.102096738726443]
-#' ]]}'
+#'  [-73.125,-9.102096738726443]]]}'
 #' brazil_sites <- get_sites(loc = brazil[1])
 #' }
 #' @export
@@ -90,7 +91,8 @@ get_sites <- function(x = NA, ...) {
 
 #' @title Get Site Information for Fossil Sites
 #' @param ... accepted arguments: siteid, sitename, altmax, altmin, loc, gpid
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' ## Find all sites with a min altitude of 12m and a max altitude of 25m
 #' ## By default returns only 25 sites (default limit is 25):
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
@@ -107,27 +109,28 @@ get_sites <- function(x = NA, ...) {
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
-#'  [-73.125,-9.102096738726443]
-#' ]]}'
+#'  [-73.125,-9.102096738726443]]]}'
 #' brazil_sites <- get_sites(loc = brazil[1])
 #' }
 #' @export
 get_sites.default <- function(...) { # nolint
 
   cl <- as.list(match.call())
-  possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
-  possible_args2 <- c("loc", "limit", "offset",
-    "all_data", "contacts", "siteid", "datasettype")
-  possible_args <- c(possible_args, possible_args2)
+  # possible_args <- c("sitename", "altmax", "altmin", "keyword", "taxa", "gpid")
+  # possible_args2 <- c("loc", "limit", "offset",
+  #   "all_data", "contacts", "siteid", "datasettype")
+  # possible_args <- c(possible_args, possible_args2)
 
   cl[[1]] <- NULL
 
-  for (name in names(cl)) {
-    if (!(name %in% possible_args)) {
-      message(paste0(name, " is not an allowed argument.\
-      Choose from the allowed arguments: sitename, altmax, altmin, loc, keyword, contacts, taxa"))
-    }
-  }
+  # Commenting out named parameter warning.
+  #  for (name in names(cl)) {
+  #   if (!(name %in% possible_args)) {
+  #     message(paste0(name, " is not an allowed argument.\
+  #     Choose from the allowed arguments: sitename, altmax, altmin,
+  #     loc, keyword, contacts, taxa"))
+  #   }
+  # }
 
   cl <- lapply(cl, eval, envir = parent.frame())
 
@@ -177,8 +180,9 @@ get_sites.default <- function(...) { # nolint
 #' @title Get Site Information for Fossil Sites
 #' @param x The numeric site ID from Neotoma
 #' @param ... accepted arguments if numeric all_data
-#' #' @examples \dontrun{
-#' ## Find all sites by numeric siteid: 
+#' @examples 
+#' \dontrun{
+#' ## Find all sites by numeric siteid:
 #' sites <- get_sites(seq(1,100))
 #' }
 #' @export

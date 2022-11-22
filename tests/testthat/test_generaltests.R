@@ -28,8 +28,8 @@ test_that("ggplot2 on the african data works:", {
     dplyr::filter(taxongroup == "Vascular plants") %>%
     group_by(age, ecologicalgroup) %>%
     summarize(count = sum(value)) %>%
-    ggplot() +
-    geom_path(aes(x = age, y = count, color = ecologicalgroup))
+    ggplot2::ggplot() +
+    ggplot2::geom_path(ggplot2::aes(x = age, y = count, color = ecologicalgroup))
   testthat::expect_is(aa, "gg")
 })
 
@@ -66,4 +66,43 @@ test_that("A faunmap dataset with some contacts actually works", {
 test_that("The taxa() call should only return unique results", {
   mydataset <- get_downloads(c(1435, 24238))
   testthat::expect_false(any(duplicated(taxa(mydataset))))
+})
+
+testthat::test_that("Location parsing isn't affecting the representation of spatial polygons passed to the DB:", {
+  # This is an issue raised by Adrian.
+
+  location <- '{"type": "Polygon",
+            "coordinates": [[
+                [-169, 24],
+                [-169, 75],
+                [-52, 75],
+                [-52, 24],
+                [-169, 24]]]}'
+
+  loc1 <- geojsonsf::geojson_sf(location) # sf object
+  loc <- geojsonsf::sf_geojson(loc1)
+
+  testthat::expect_equivalent(loc1, geojsonsf::geojson_sf(loc))
+  testthat::expect_equivalent(loc1,
+    geojsonsf::geojson_sf(parse_location(location)))
+})
+
+testthat::test_that("We are pulling in the sites we expect to capture:", {
+  # This test takes a really long time. . .
+  skip_on_cran()
+  location <- '{"type": "Polygon",
+            "coordinates": [[
+                [-169, 24],
+                [-169, 75],
+                [-52, 75],
+                [-52, 24],
+                [-169, 24]]]}'
+
+  usa <- get_sites(loc = location, limit = 20000)
+  #usa_ds <- get_datasets(loc = location, all_data = TRUE)
+  fla <- get_sites(gpid = "Florida", limit = 10000)
+
+  testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+  #testthat::expect_true(all(getids(fla)$siteid %in% getids(usa_ds)$siteid))
+
 })
