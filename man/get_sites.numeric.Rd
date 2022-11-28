@@ -14,3 +14,9 @@
 \description{
 Get Site Information for Fossil Sites
 }
+\examples{
+\dontrun{
+## Find all sites by numeric siteid:
+sites <- get_sites(seq(1,100))
+}
+}

@@ -2,19 +2,26 @@
 % Please edit documentation in R/testNull.R
 \name{testNull}
 \alias{testNull}
-\title{Clear out NULL values and replace with value}
+\title{Clear NULL values and replace with value predefined value.}
 \usage{
 testNull(val, out = NA)
 }
 \arguments{
-\item{val}{A value to be passed in}
+\item{val}{The value to be checked.}
 
 \item{out}{A default value to be returned if \code{val} is NULL.}
 }
 \value{
-The values passed in \code{val} or \code{out} if \code{val} is \code{NULL}.
+The values passed in \code{val} or \code{out} if
+\code{val} is \code{NULL}.
 }
 \description{
 Similar to concatenate, checks to see if a value is NULL
-and replace it with a known value.
+and replace it with a known value provided in \code{out}.
+}
+\examples{
+# Passing a null value into the function returns 12:
+a <- testNull(val = NULL, out = 12)
+# Passing a non-NULL value returns that value:
+b <- testNull(val = 11, out = 12)
 }

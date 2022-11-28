@@ -58,8 +58,7 @@
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
-#'  [-73.125,-9.102096738726443]
-#' ]]}'
+#'  [-73.125,-9.102096738726443]]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' }
 #' @export
@@ -72,7 +71,7 @@ get_datasets <- function(x = NA, ...) {
 }
 
 parse_dataset <- function(result) { # nolint
-  
+
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
@@ -85,10 +84,10 @@ parse_dataset <- function(result) { # nolint
     }
     return(x)
   }
-  
+
   data <- result$data %>%
     fix_null()
-  
+
   # With a large dataset this seems to take some time, but it's not too bad.
   newSites <- map(data, function(x) {
     if (is.null(x$sites)) {
@@ -100,14 +99,16 @@ parse_dataset <- function(result) { # nolint
       geography <- st_as_sf(st_sfc())
     } else {
       geography <- try(sf::st_read(call$geography, quiet = TRUE))
-      
-      if ('try-error' %in% class(geography)) {
-        stop('Invalid geoJSON passed from the API. \nCheck that:\n', call$geography,
-             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
-             'is invalid, contact a Neotoma administrator.')
+
+      if ("try-error" %in% class(geography)) {
+        stop("Invalid geoJSON passed from the API. \nCheck that:\n",
+          call$geography,
+          "\n is valid geoJSON using a service like ",
+          "http://geojson.io/. If the geojson ",
+          "is invalid, contact a Neotoma administrator.")
       }
     }
-    
+
     if (length(x$sites$datasets) == 0) {
       datasets_ <- map(x$site$datasets, build_dataset)
       datasets_ <- new("datasets", datasets = datasets_)
@@ -115,9 +116,9 @@ parse_dataset <- function(result) { # nolint
       datasets_ <- map(x$sites$datasets, build_dataset)
       datasets_ <- new("datasets", datasets = datasets_)
     }
-    collunits <- new('collunits',
+    collunits <- new("collunits",
                      collunits = list())
-    
+
     # Collunits
     # TODO: Implement build collunit
     new_collunit <- new("collunit",
@@ -156,17 +157,31 @@ parse_dataset <- function(result) { # nolint
 #' @param x Use a single number to extract site information
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
+#' @examples \dontrun{
+#' # To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#'
+#' # To find all datasets in Brazil
+#' brazil <- '{"type": "Polygon",
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]]]}'
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
-  
+
   cl <- as.list(match.call())
-  
+
   possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
                           "ageyoung", "ageold", "ageof", "limit", "offset",
                           "all_data", "sites_o")
-  
+
   cl[[1]] <- NULL
-  
+
   for (name in names(cl)) {
     if (!(name %in% possible_arguments)) {
       message1 <- " is not an allowed argument. \n
@@ -174,37 +189,33 @@ get_datasets.default <- function(x, ...) { # nolint
       message(paste0(name, message1))
     }
   }
-  
   cl <- lapply(cl, eval, envir = parent.frame())
-  
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
-  
   error_check <- check_args(cl) # nolint
-  
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
     cl <- error_check[[1]]
   }
-  
+
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/datasets?loc=", loc)
-    
+
     for (name in names(cl)) {
       if (!(name == "loc")) {
         if (!(name == "all_data")) {
           base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-        } 
+        }
       }
     }
-    
+
     # loc and all_data present
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
         cleanNULL()
-    }else{
+    } else {
       result <- parseURL(base_url) %>%
         cleanNULL()
     }
@@ -213,19 +224,23 @@ get_datasets.default <- function(x, ...) { # nolint
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
-  
+
   if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_dataset(result)
     return(output)
   }
-  
+
 }
 
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
+#' @examples dontrun{
+#' allds <- get_datasets(1:29)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.numeric <- function(x, ...) {
   use_na <- function(x, type) {
@@ -237,19 +252,19 @@ get_datasets.numeric <- function(x, ...) {
       return(x)
     }
   }
-  
+
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  
+
   base_url <- paste0("data/datasets/", dataset)
   result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
-  
+
   if (result_length > 0) {
     output <- parse_dataset(result)
     return(output)
-  }else{
+  } else {
     return(NULL)
   }
 }
@@ -257,11 +272,16 @@ get_datasets.numeric <- function(x, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param x An object of class \code{sites}.
 #' @param ... additional arguments accepted by \code{get_datasets()}
+#' @examples dontrun{
+#' random_sites <- get_sites(1:100)
+#' allds <- get_datasets(random_sites)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids
   dataset_list <- getids(x)$datasetid
-  
+
   output <- get_datasets(dataset_list, ...)
   return(output)
 }

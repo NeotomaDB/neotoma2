@@ -21,6 +21,7 @@ setMethod(f = "show",
                                lat = mean(st_coordinates(x@geography)[, 2]),
                                long = mean(st_coordinates(x@geography)[, 1]),
                                altitude = x@altitude)
+              return(df)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
@@ -107,7 +108,7 @@ setMethod(f = "[[<-",
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
           definition = function(x, i, value) {
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(length(i))) {
               slot(x, i[idx]) <- value[idx]
             }
             return(x)
@@ -121,7 +122,7 @@ setMethod(f = "[<-",
           signature = signature(x = "site", i = "numeric"),
           definition = function(x, i, value) {
             slots <- slotNames(x)
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(length(i))) {
               slot(x, slots[i[idx]]) <- value[idx]
             }
             return(x)
@@ -306,26 +307,35 @@ setMethod(f = "summary",
               data.frame(siteid = x$siteid, sitename = x$sitename,
                          collunits)
               }
-            ) %>% bind_rows()
+            ) %>%
+            bind_rows()
 
             collunits <- lapply(object@sites, function(x) {
               datasets <- sapply(x@collunits@collunits,
-                                 function(y) length(y@datasets) )
+                                 function(y) length(y@datasets))
 
               chronologies <- sapply(x@collunits@collunits,
-                                     function(y) length(y@chronologies) )
+                                     function(y) length(y@chronologies))
 
               return(data.frame(siteid = x$siteid,
                                 collunits = length(x@collunits),
                                 datasets = datasets))
-            }) %>% bind_rows()
+            }) %>%
+            bind_rows()
             return(datasettype)
           })
 
 #' @title Obtain dataset DOIs from records.
-#' @param x sites object
+#' @description Given complete dataset objects in Neotoma (must have used
+#' \code{get_datasets()} or \code{get_downloads()}), return the dataset
+#' doi for the record.
+#' @param x a neotoma2 \code{site} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
+#' @examples
+#' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+#' mb_ds <- get_datasets(mb)
+#' doi(mb_ds)
 #' @export
 setMethod(f = "doi",
           signature = "sites",
@@ -347,9 +357,16 @@ setMethod(f = "doi",
           })
 
 #' @title Obtain dataset DOIs from records.
-#' @param x site object
+#' @description Given complete dataset objects in Neotoma (must have used
+#' \code{get_datasets()} or \code{get_downloads()}), return the dataset
+#' doi for the record.
+#' @param x a neotoma2 \code{site} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
+#' @examples
+#' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+#' mb_ds <- get_datasets(mb)
+#' doi(mb_ds)
 #' @export
 setMethod(f = "doi",
           signature = "site",
@@ -370,14 +387,23 @@ setMethod(f = "doi",
             return(dois)
           })
 
-#' @title Obtain data citations from records.
+#' @title Obtain data citations from multiple records.
+#' @description Given complete dataset objects in Neotoma (must have used
+#' \code{get_datasets()} or \code{get_downloads()}), return a formatted
+#' citation for the record, including the dataset DOI.
 #' @param x sites object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
+#' @examples
+#' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+#' mb_ds <- get_datasets(mb)
+#' cite_data(mb_ds)
 #' @export
 setMethod(f = "cite_data",
           signature = "sites",
           definition = function(x) {
+            strn <- paste0("%s. %s; %s dataset. ",
+                           "In %s. Neotoma Paleoecology Database. doi:%s")
             ids <- getids(x)
             sitenames <- x  %>%
               as.data.frame() %>%
@@ -406,7 +432,7 @@ setMethod(f = "cite_data",
             dplyr::arrange(doi) %>%
             dplyr::filter(dplyr::row_number() == 1) %>%
             as.data.frame() %>%
-            dplyr::mutate(citation = sprintf("%s. %s; %s dataset. In %s. Neotoma Paleoecology Database. doi:%s",
+            dplyr::mutate(citation = sprintf(strn,
                           pi_list, sitename, datasettype, database, doi)) %>%
             dplyr::select(datasetid, citation)
 
@@ -414,14 +440,23 @@ setMethod(f = "cite_data",
           })
 
 
-#' @title Obtain data citations from records.
+#' @title Obtain data citations from a single record.
+#' @description Given complete dataset objects in Neotoma (must have used
+#' \code{get_datasets()} or \code{get_downloads()}), return a formatted
+#' citation for the record, including the dataset DOI.
 #' @param x sites object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
+#' @examples
+#' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+#' mb_ds <- get_datasets(mb)
+#' cite_data(mb_ds)
 #' @export
 setMethod(f = "cite_data",
           signature = "site",
           definition = function(x) {
+            strn <- paste0("%s. %s; %s dataset. ",
+                           "In %s. Neotoma Paleoecology Database. doi:%s")
             ids <- getids(x)
             sitenames <- x  %>%
               as.data.frame() %>%
@@ -450,10 +485,9 @@ setMethod(f = "cite_data",
             dplyr::arrange(doi) %>%
             dplyr::filter(dplyr::row_number() == 1) %>%
             as.data.frame() %>%
-            dplyr::mutate(citation = sprintf("%s. %s; %s dataset. In %s. Neotoma Paleoecology Database. doi:%s",
-                          pi_list, sitename, datasettype, database, doi)) %>%
+            dplyr::mutate(citation = sprintf(strn, 
+              pi_list, sitename, datasettype, database, doi)) %>%
             dplyr::select(datasetid, citation)
 
             return(citations)
           })
-

@@ -10,7 +10,8 @@
 \item{object}{A \code{collunits} object.}
 }
 \value{
-A \code{data.frame} reporting the taxa/data objects, units, &cetera within the set of records.
+A \code{data.frame} reporting the taxa/data objects, units,
+elements and other features within a set of records.
 }
 \description{
 Extract taxonomic data from a set of sites.

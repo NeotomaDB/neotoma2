@@ -13,7 +13,7 @@
 The function returns a json object
 }
 \description{
-Convert a Site object into a json file for API management
+Convert a neotoma2 \code{sites} object into a JSON file for API management.
 }
 \examples{
 \dontrun{

@@ -1,11 +1,38 @@
-#' @title filter
+#' @title Apply a filter for Neotoma sites objects.
+#' @description The \code{filter} function takes a \code{sites} object
+#' and allows a user to filter on a number of properties. Since a sites obhect
+#' is a nested object (it contains collection units, datasets, samples, etc.)
+#' the degree to which filtering occurs depends on the amount of data contained
+#' within the sites object. Filtering parameters include:
+#' \itemize{
+#'  \item{"siteid"}{A numeric site identifer from the Neotoma Database}
+#'  \item{"sitename"}{The character string sitename.}
+#'  \item{"lat"}{A numeric latitude value.}
+#'  \item{"long"}{A numeric longitude value.}
+#'  \item{"altitude"}{The elevation of the site. Note that some sites do not include elevation information. For these an NA value appears, and they would be removed when using an elevation filter.}
+#'  \item{"datasetid"}{A numeric datasetid from Neotoma.}
+#'  \item{"database"}{A character string naming the constituent database from which the dataset is drawn.}
+#'  \item{"datasettype"}{A character string representing one of the many daataset types within Neotoma.}
+#'  \item{"age_range_old"}{A dataset-level parameter indicating the oldest date covered by the dataset chronology.}
+#'  \item{"age_range_young"}{A dataset-level parameter indicating the youngest date covered by the dataset chronology.}
+#'  \item{"notes"}{Free-form dataset notes provided by the dataset PI(s), analysts or data stewards.}
+#'  \item{"collectionunitid"}{A numeric collection unit identifier from Neotoma.}
+#'  \item{"handle"}{A character string identifying the collection unit. These are often shorter form names (originally a default 8 character length).}
+#'  \item{"collectionunitname"}{A character string identifying the collection unit name.}
+#'  \item{"colldate"}{The date on which the collection unit was sampled. Many of these are empty.}
+#'  \item{"location"}{A free-form character string indicating the location of the collection unit within the site.}
+#'  \item{"waterdepth"}{A numeric depth at which the core was obtained.}
+#'  \item{"collunittype"}{A character string for the collection unit type.}
+#'  \item{"collectiondevice"}{A fixed vocabulary term for the collection device.}
+#'  \item{"depositionalenvironment"}{A fixed vocaublary name for the depositional environment.}
+#' }
+#'
 #' @import sf
 #' @import dplyr
 #' @importFrom purrr map
 #' @import stringr
 #' @param x A site, dataset or download.
-#' @param ... arguments to filter by: lat, long,
-#' elev, datasettype
+#' @param ... arguments to filter by.
 #' @export
 
 filter <- function(x, ...) {
@@ -33,8 +60,8 @@ filter.sites <- function(x, ...) {  # nolint
 
   collunitcols <- c("collectionunitid", "handle", "colldate",
                     "location", "waterdepth", "collunittype",
-                    "collectiondevice", "defaultchronology", "collectionunitname",
-                    "depositionalenvironment") %>%
+                    "collectiondevice", "defaultchronology",
+                    "collectionunitname", "depositionalenvironment") %>%
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()
@@ -44,19 +71,20 @@ filter.sites <- function(x, ...) {  # nolint
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
-      rename(altitude = .data$elev,
-             sitenotes = .data$notes)
+      rename(altitude = elev,
+             sitenotes = notes)
   }
 
   if (collunitcols == TRUE) {
     ids <- ids %>%
-      inner_join(as.data.frame(collunits(x)), by = c("collunitid" = "collectionunitid"))
+      inner_join(as.data.frame(collunits(x)), 
+        by = c("collunitid" = "collectionunitid"))
   }
 
   if (datasetcols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-      rename(datasetnotes = .data$notes)
+      rename(datasetnotes = notes)
   }
 
   cleanids <- ids %>%

@@ -2,7 +2,7 @@
 % Please edit documentation in R/site-methods.R
 \name{cite_data,site-method}
 \alias{cite_data,site-method}
-\title{Obtain data citations from records.}
+\title{Obtain data citations from a single record.}
 \usage{
 \S4method{cite_data}{site}(x)
 }
@@ -10,5 +10,12 @@
 \item{x}{sites object}
 }
 \description{
-Obtain data citations from records.
+Given complete dataset objects in Neotoma (must have used
+\code{get_datasets()} or \code{get_downloads()}), return a formatted
+citation for the record, including the dataset DOI.
+}
+\examples{
+mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+mb_ds <- get_datasets(mb)
+cite_data(mb_ds)
 }

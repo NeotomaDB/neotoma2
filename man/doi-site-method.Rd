@@ -7,8 +7,15 @@
 \S4method{doi}{site}(x)
 }
 \arguments{
-\item{x}{site object}
+\item{x}{a neotoma2 \code{site} object}
 }
 \description{
-Obtain dataset DOIs from records.
+Given complete dataset objects in Neotoma (must have used
+\code{get_datasets()} or \code{get_downloads()}), return the dataset
+doi for the record.
+}
+\examples{
+mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
+mb_ds <- get_datasets(mb)
+doi(mb_ds)
 }

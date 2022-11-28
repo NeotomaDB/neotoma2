@@ -7,7 +7,8 @@
 build_collunits(x)
 }
 \arguments{
-\item{x}{The structured JSON from a Neotoma API v2.0 response that returns a collection unit in any form.}
+\item{x}{The structured JSON from a Neotoma API v2.0 response that
+returns a collection unit in any form.}
 }
 \value{
 An object of class \code{collunit}
