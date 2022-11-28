@@ -14,8 +14,8 @@
 #' @param use By default use the neotoma server (\code {neotoma}),
 #' but supports either the development API server or a local server.
 #' @param all_data If TRUE return all possible API calls
-#' @param ... Any query parameters passed from the function calling
-#' \code {parseURL}.
+#' @param ... Any query parameters passed from the function 
+#' calling \code {parseURL}
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
