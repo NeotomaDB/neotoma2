@@ -4,10 +4,12 @@
 \alias{get_specimens}
 \title{get_specimens}
 \usage{
-get_specimens(x = NA)
+get_specimens(x = NA, ...)
 }
 \arguments{
-\item{x}{Use a single datasetid}
+\item{x}{Use a single specimenid}
+
+\item{...}{passing datasetids}
 }
 \value{
 The function returns a specimens list
