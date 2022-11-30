@@ -347,7 +347,7 @@ setMethod(f = "doi",
                          doi = doi)
             }) %>%
             dplyr::bind_rows() %>%
-            dplyr::full_join(ids, by = "datasetid") %>% 
+            dplyr::full_join(ids, by = "datasetid") %>%
             dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%
             dplyr::arrange(doi) %>%
@@ -378,8 +378,8 @@ setMethod(f = "doi",
                          doi = doi)
             }) %>%
             dplyr::bind_rows() %>%
-            dplyr::full_join(ids, by = "datasetid") %>% 
-            dplyr::select(siteid, collunitid, datasetid, doi) %>% 
+            dplyr::full_join(ids, by = "datasetid") %>%
+            dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%
             dplyr::arrange(doi) %>%
             dplyr::filter(dplyr::row_number()==1) %>%
@@ -485,7 +485,7 @@ setMethod(f = "cite_data",
             dplyr::arrange(doi) %>%
             dplyr::filter(dplyr::row_number() == 1) %>%
             as.data.frame() %>%
-            dplyr::mutate(citation = sprintf(strn, 
+            dplyr::mutate(citation = sprintf(strn,
               pi_list, sitename, datasettype, database, doi)) %>%
             dplyr::select(datasetid, citation)
 

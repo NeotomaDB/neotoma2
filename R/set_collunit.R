@@ -12,15 +12,16 @@
 #' @param gpslocation location with GPS
 #' @param collunittype type of collection unit
 #' @param collectiondevice device used to collect the sample
-#' @param collectionunitname name of the collection unit 
+#' @param collectionunitname name of the collection unit
 #' @param depositionalenvironment depositional environment
 #' @param datasets datasets that the collection unit has
 #' @param chronologies chronologies taken from the collection unit
-#' @param defaultchronology best chronology model identifier to be used with this collection unit
+#' @param defaultchronology best chronology model identifier to 
+#' be used with this collection unit
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a dataset 
+#' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",
 #'                     datsettype = "pollen",
 #'                     notes = "my lake"0)
@@ -41,9 +42,9 @@ set_collunit <- function(x = NA,
                          datasets = NA,
                          chronologies = NA,
                          defaultchronology = NA_integer_) {
-  
+
   function_call <- match.call()
-  
+
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
     if (is.na(collectionunitid)) {
@@ -64,7 +65,7 @@ set_collunit <- function(x = NA,
     x@datasets <- datasets
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
-    
+
   } else {
     if (class(x) == "collunit") {
       for (i in 3:length(function_call)) {
@@ -73,6 +74,6 @@ set_collunit <- function(x = NA,
     }
     return(x)
   }
-  
+
   return(x)
 }

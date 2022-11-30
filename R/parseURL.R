@@ -1,6 +1,6 @@
 #' @title parseURL
 #' @author Socorro Dominguez \email {sedv8808@@gmail.com}
-#' @author Simon Goring \email { }
+#' @author Simon Goring \email {goring@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import stringr
