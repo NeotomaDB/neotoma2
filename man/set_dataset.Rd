@@ -43,7 +43,7 @@ set Site Information for Fossil Sites
 }
 \examples{
 \dontrun{
-# Create a dataset 
+# Create a dataset
 my_dataset <- set_dataset(database = "EPD",
                     datsettype = "pollen",
                     notes = "my lake"0)

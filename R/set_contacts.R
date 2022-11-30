@@ -1,18 +1,23 @@
-#' @title set chronology information for a new record.
-#' @description Create a new chronology for a record, or for your own entertainment.
-#' Within Neotoma all chronologies have unique numeric identifiers. Within R, because of the
-#' need to use the indentifiers across objects, and because we want to avoid conflicts between
-#' naming systems, a universally unique identifier (UUID) is created for the object ID.
+#' @title Set contact information for a new record.
+#' @description Create a new contact for a record.
+#' Within Neotoma all chronologies have unique numeric identifiers. 
+#' Within R, because of the need to use the indentifiers across objects,
+#' and because we want to avoid conflicts between naming systems, a 
+#' universally unique identifier (UUID) is created for the object ID.
 #' @importFrom methods new
 #' @importFrom uuid UUIDgenerate
 #' @importFrom methods slot<-
 #' @param contactid An arbitrary Contact identification number.
 #' @param familyname Family or surname name of a person.
-#' @param leadinginitials Leading initials for given or forenames without spaces (e.g. «G.G.»).
-#' @param givennames Given or forenames of a person (e.g. «George Gaylord»). Initials with spaces are used if full given names are not known (e.g. «G. G»).
-#' @param suffix Suffix of a person’s name (e.g. «Jr.», «III»).
+#' @param leadinginitials Leading initials for given or forenames
+#' without spaces (e.g. \code{G.G.}).
+#' @param givennames Given or forenames of a person (e.g. 
+#' \code{George Gaylord}). Initials with spaces are used if full
+#' given names are not known (e.g. \code{G. G}).
+#' @param suffix Suffix of a person’s name (e.g. \code{Jr.}, \code{III}).
 #' @param ORCID A unique ORCID (see \url{https://orcid.org}).
-#' @param title A person’s title (e.g. «Dr.», «Prof.», «Prof. Dr»).
+#' @param title A person’s title (e.g. \code{Dr.}, \code{Prof.},
+#' \code{Prof. Dr}).
 #' @param institution The institution where an individual works.
 #' @param email An individuals email address
 #' @param phone Their phone number
@@ -28,7 +33,7 @@ set_contact <- function(contactid = NA_integer_,
                         leadinginitials = NA_character_,
                         givennames = NA_character_,
                         suffix = NA_character_,
-                        ORCID = NA_character_,
+                        ORCID = NA_character_,  # nolint
                         title = NA_character_,
                         institution = NA_character_,
                         email = NA_character_,

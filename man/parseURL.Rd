@@ -14,8 +14,8 @@ but supports either the development API server or a local server.}
 
 \item{all_data}{If TRUE return all possible API calls}
 
-\item{...}{Any query parameters passed from the function
-calling \code {parseURL}}
+\item{...}{Any query parameters passed from the function calling
+\code {parseURL}.}
 }
 \description{
 An internal helper function used to connect to the Neotoma API
