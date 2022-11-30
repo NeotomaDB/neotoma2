@@ -9,20 +9,19 @@ parseURL(x, use = "neotoma", all_data = FALSE, ...)
 \arguments{
 \item{x}{The HTTP path for the particular API call.}
 
-\item{use}{By default use the neotoma server (\code {neotoma}),
-but supports either the development API server or a local server.}
+\item{use}{Uses the neotoma server by default, but supports either the development API server or a local server.}
 
 \item{all_data}{If TRUE return all possible API calls}
 
-\item{...}{Any query parameters passed from the function calling
-\code {parseURL}.}
+\item{...}{Any query parameters passed from the calling function.
+calling \code{parseURL}}
 }
 \description{
 An internal helper function used to connect to the Neotoma API
 in a standard manner, and to provide basic validation of any response.
 }
 \author{
-Socorro Dominguez \email {sedv8808@gmail.com}
+Socorro Dominguez \email{sedv8808@gmail.com}
 
-Simon Goring \email { }
+Simon Goring \email{goring@wisc.edu}
 }
