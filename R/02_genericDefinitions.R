@@ -145,3 +145,13 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+
+#' @title samples
+#' @param x sites object
+#' @description Obtain wide samples table
+#' @export
+#' @import dplyr
+setGeneric("toWide",
+           function(x) {
+             standardGeneric(f = "toWide")
+           })

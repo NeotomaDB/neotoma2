@@ -95,7 +95,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         ceiling(seq_along(datasetids_nos) / 50))
 
       responses <- c()
-      if (sequ %in% seq_chunk) {
+      for (sequ in seq_chunk) {
         body <- list()
         body$datasetid <- paste0(sequ, collapse = ",")
         body$limit <- 50
