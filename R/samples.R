@@ -67,49 +67,53 @@ setMethod(f = "samples",
               # It returns a value that is larger when your age reporting is
               # better.
               defaultchron <- purrr::map(chronologies(x)@chronologies,
-                                         function(y) {
-                                           data.frame(chronologyid = as.character(y@chronologyid),
-                                                      isdefault = y@isdefault,
-                                                      modelagetype = y@modelagetype,
-                                                      chronologyname = y@chronologyname,
-                                                      dateprepared = y@dateprepared)
-                                         }) %>%
+                function(y) {
+                  data.frame(chronologyid = as.character(y@chronologyid),
+                            isdefault = y@isdefault,
+                            modelagetype = y@modelagetype,
+                            chronologyname = y@chronologyname,
+                            dateprepared = y@dateprepared)
+                }) %>%
                 dplyr::bind_rows() %>%
                 dplyr::mutate(modelrank = match(modelagetype, rev(precedence)),
-                              order = isdefault * match(modelagetype, rev(precedence)))
-              
+                              order = isdefault * match(modelagetype,
+                                rev(precedence)))
+
               # Validation of default chrons, we want to check whether there
-              # exists either multiple default chronologies for the same time-frame
-              # or, alternately, no default chronology.
-              allNA <- all(is.na(defaultchron$order))
-              maxOrder <- max(defaultchron$order, na.rm = TRUE)
-              if(sum(defaultchron$order==maxOrder, na.rm = TRUE) > 1) {
-                if(any(is.na(defaultchron$dateprepared))){
-                  
-                  newMaxOrder <- which.max(defaultchron$chronologyid[defaultchron$order == maxOrder])
-                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+              # exists either multiple default chronologies for the same
+              # time-frame or, alternately, no default chronology.
+              all_na <- all(is.na(defaultchron$order))
+              max_order <- max(defaultchron$order, na.rm = TRUE)
+              if (sum(defaultchron$order == max_order, na.rm = TRUE) > 1) {
+                if (any(is.na(defaultchron$dateprepared))) {
+                  newmax_order <- which.max(defaultchron$chronologyid[defaultchron$order == max_order])
+                  defaultchron$order[defaultchron$order == max_order][newmax_order] <- max_order + 1
                 } else {
-                  newMaxOrder <- which.max(defaultchron$dateprepared[defaultchron$order == maxOrder])
-                  defaultchron$order[defaultchron$order == maxOrder][newMaxOrder] <- maxOrder + 1
+                  newmax_order <- which.max(defaultchron$dateprepared[defaultchron$order == max_order])
+                  defaultchron$order[defaultchron$order == max_order][newmax_order] <- max_order + 1
                 }
               }
 
-              if (allNA == TRUE) {
-                warnsite <- sprintf("The dataset %d has no default chronologies.",
-                                    allids$datasetid[1])
+              if (all_na == TRUE) {
+                warnsite <- sprintf(
+                  "The dataset %d has no default chronologies.",
+                  allids$datasetid[1])
                 warning(warnsite)
-              } else if (sum(defaultchron$order == maxOrder, na.rm = TRUE) > 1) {
-                warnsite <- sprintf("The dataset %d has multiple default chronologies. Chronology %d has been used.",
-                                    allids$datasetid[1], defaultchron$chronologyid[which.max(defaultchron$order)])
+              } else if (sum(defaultchron$order == max_order, na.rm = TRUE) > 1) {
+                warnsite <- sprintf(
+                  "The dataset %d has multiple default chronologies.
+                   Chronology %d has been used.",
+                   allids$datasetid[1],
+                   defaultchron$chronologyid[which.max(defaultchron$order)])
                 warning(warnsite)
-                defaultchron <- defaultchron[which.max(defaultchron$order),]
+                defaultchron <- defaultchron[which.max(defaultchron$order), ]
               } else {
-                defaultchron <- defaultchron[which.max(defaultchron$order),]
+                defaultchron <- defaultchron[which.max(defaultchron$order), ]
               }
             } else {
               defaultchron <- data.frame(chronologyid = NULL)
             }
-            
+
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
@@ -133,7 +137,7 @@ setMethod(f = "samples",
                                       dplyr::mutate(datasetid = dsid)
                                   }) %>%
               dplyr::bind_rows()
-            
+
             return(sampset)
           }
 )

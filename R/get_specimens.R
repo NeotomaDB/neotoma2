@@ -6,16 +6,19 @@
 #' @importFrom methods new
 #' @description
 #' Information for Specimens
-#' @param x Use a single datasetid
+#' @param x Use a single specimenid
+#' @param ... passing datasetids 
 #' @return The function returns a specimens list
 #' @examples \dontrun{
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
 #' my_specimens <- get_specimens(19832)
 #' }
 #' @export
-get_specimens <- function(x = NA) {
+get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
     UseMethod("get_specimens", x)
+  }else {
+    UseMethod("get_specimens", NA)
   }
 }
 
@@ -75,28 +78,61 @@ parse_specimen <- function(result, ds) {
 #' @title Get Specimen Numeric
 #' @param x Use a single number to extract site information
 #' @export
-get_specimens.numeric <- function(x) {
-
-  dw <- get_downloads(x)
+get_specimens.numeric <- function(x, ...) {
 
   if (length(x) > 0) {
-    datasetid <- paste0(x, collapse = ",")
+    specimenid <- paste0(x, collapse = ",")
   }
 
-  base_url <- paste0("data/datasets/", datasetid, "/specimens")
+  base_url <- paste0("data/specimens/", specimenid)
   result <- neotoma2::parseURL(base_url)
-
+  
+  sps <- result$data %>%
+    cleanNULL()
+  
+  sp_index <- purrr::map(sps, function(x) {
+    data.frame(datasetid = x$datasetid)}) %>%
+    dplyr::bind_rows()
+  
+  dw <- get_downloads(sp_index$datasetid)
+  
   ds <- parse_specimen(result, dw)
 
   return(ds)
 
 }
 
+#' @title Get Specimen datasetid
+#' @param ... Use a single number to extract site information
+#' @export
+get_specimens.default <- function(...) {
+ 
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
+  cl <- lapply(cl, eval, envir = parent.frame())
+  dsid = cl$datasetid
+
+  if (length(dsid) > 0) {
+    dsid <- paste0(dsid, collapse = ",")
+  }
+  
+  base_url <- paste0("data/datasets/", dsid, "/specimens")
+  result <- neotoma2::parseURL(base_url)
+  
+  dw <- get_downloads(cl$datasetid)
+  
+  ds <- parse_specimen(result, dw)
+  
+  return(ds)
+}
+
 
 #' @title Get Specimen Sites
 #' @param x Use a single number to extract site information
+#' @param ... Other possible parameters such as datasetid
 #' @export
-get_specimens.sites <- function(x) {
+get_specimens.sites <- function(x,...) {
 
   output <- getids(x) %>%
     dplyr::select(datasetid) %>%

@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_contacts.R
 \name{set_contact}
 \alias{set_contact}
-\title{set chronology information for a new record.}
+\title{Set contact information for a new record.}
 \usage{
 set_contact(
   contactid = NA_integer_,
@@ -27,15 +27,19 @@ set_contact(
 
 \item{familyname}{Family or surname name of a person.}
 
-\item{leadinginitials}{Leading initials for given or forenames without spaces (e.g. «G.G.»).}
+\item{leadinginitials}{Leading initials for given or forenames
+without spaces (e.g. \code{G.G.}).}
 
-\item{givennames}{Given or forenames of a person (e.g. «George Gaylord»). Initials with spaces are used if full given names are not known (e.g. «G. G»).}
+\item{givennames}{Given or forenames of a person (e.g.
+\code{George Gaylord}). Initials with spaces are used if full
+given names are not known (e.g. \code{G. G}).}
 
-\item{suffix}{Suffix of a person’s name (e.g. «Jr.», «III»).}
+\item{suffix}{Suffix of a person’s name (e.g. \code{Jr.}, \code{III}).}
 
 \item{ORCID}{A unique ORCID (see \url{https://orcid.org}).}
 
-\item{title}{A person’s title (e.g. «Dr.», «Prof.», «Prof. Dr»).}
+\item{title}{A person’s title (e.g. \code{Dr.}, \code{Prof.},
+\code{Prof. Dr}).}
 
 \item{institution}{The institution where an individual works.}
 
@@ -54,8 +58,9 @@ set_contact(
 \item{notes}{Notes about the individual}
 }
 \description{
-Create a new chronology for a record, or for your own entertainment.
-Within Neotoma all chronologies have unique numeric identifiers. Within R, because of the
-need to use the indentifiers across objects, and because we want to avoid conflicts between
-naming systems, a universally unique identifier (UUID) is created for the object ID.
+Create a new contact for a record.
+Within Neotoma all chronologies have unique numeric identifiers.
+Within R, because of the need to use the indentifiers across objects,
+and because we want to avoid conflicts between naming systems, a
+universally unique identifier (UUID) is created for the object ID.
 }

@@ -4,7 +4,7 @@
 \alias{get_specimens.numeric}
 \title{Get Specimen Numeric}
 \usage{
-\method{get_specimens}{numeric}(x)
+\method{get_specimens}{numeric}(x, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
