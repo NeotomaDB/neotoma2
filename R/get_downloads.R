@@ -161,7 +161,7 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     stats::na.omit() %>%
     unique() %>%
     unlist()
-  output <- get_downloads(x = output, verbose, ...)
+  output <- get_downloads(x = output, verbose, all_data = TRUE, ...)
 
   return(output)
 }

@@ -4,10 +4,12 @@
 \alias{get_specimens.sites}
 \title{Get Specimen Sites}
 \usage{
-\method{get_specimens}{sites}(x)
+\method{get_specimens}{sites}(x, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
+
+\item{...}{Other possible parameters such as datasetid}
 }
 \description{
 Get Specimen Sites

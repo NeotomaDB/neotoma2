@@ -1,6 +1,6 @@
 #' @title parseURL
-#' @author Socorro Dominguez \email {sedv8808@@gmail.com}
-#' @author Simon Goring \email { }
+#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Simon Goring \email{goring@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import stringr
@@ -11,11 +11,10 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP path for the particular API call.
-#' @param use By default use the neotoma server (\code {neotoma}),
-#' but supports either the development API server or a local server.
+#' @param use Uses the neotoma server by default, but supports either the development API server or a local server.
 #' @param all_data If TRUE return all possible API calls
-#' @param ... Any query parameters passed from the function calling
-#' \code {parseURL}.
+#' @param ... Any query parameters passed from the calling function.
+#' calling \code{parseURL}
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
@@ -96,7 +95,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         ceiling(seq_along(datasetids_nos) / 50))
 
       responses <- c()
-      if (sequ %in% seq_chunk) {
+      for (sequ in seq_chunk) {
         body <- list()
         body$datasetid <- paste0(sequ, collapse = ",")
         body$limit <- 50

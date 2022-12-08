@@ -52,6 +52,13 @@ setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
 })
 
+#' @title Obtain specimens from a record or multiple records.
+#' @param x sites object
+#' @export
+setGeneric("specimens", function(x) {
+  standardGeneric(f = "specimens")
+})
+
 #' @title Obtain the chronology from a record or multiple records.
 #' @export
 #' @param x sites object that contains chronologies
@@ -137,4 +144,14 @@ setGeneric("collunits",
 setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
+           })
+
+#' @title samples
+#' @param x sites object
+#' @description Obtain wide samples table
+#' @export
+#' @import dplyr
+setGeneric("toWide",
+           function(x) {
+             standardGeneric(f = "toWide")
            })
