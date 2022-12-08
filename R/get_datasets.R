@@ -282,6 +282,7 @@ get_datasets.sites <- function(x, ...) {
   # List of datasets ids
   dataset_list <- getids(x)$datasetid
 
-  output <- get_datasets(dataset_list, ...)
+  output <- get_datasets(dataset_list, all_data=TRUE)
+  
   return(output)
 }
