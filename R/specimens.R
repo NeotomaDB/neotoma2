@@ -2,7 +2,7 @@
 #' @author Socorro Dominguez \email{s.dominguez@@ht-data.com}
 #' @import dplyr
 #' @description
-#' Information tabke for Specimens
+#' Information table for Specimens
 #' @param x Use a sites element that has specimens added.
 #' @return The function returns a specimens summary table.
 #' @examples \dontrun{
@@ -15,8 +15,10 @@
 setMethod(f = "specimens",
 signature = "sites",
 definition = function(x) {
+
   output <- purrr::map(x@sites, function(y) specimens(y)) %>%
     dplyr::bind_rows()
+  
   return(output)
 }
 )
@@ -29,6 +31,7 @@ definition = function(x) {
 setMethod(f = "specimens",
           signature = "site",
           definition = function(x) {
+            
             allids <<- getids(x)
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
@@ -54,9 +57,11 @@ setMethod(f = "specimens",
 setMethod(f = "specimens",
           signature = "collunits",
           definition = function(x) {
-            purrr::map(x@collunits, function(x) specimens(x)) %>%
+           output <- purrr::map(x@collunits, function(x) specimens(x)) %>%
               dplyr::bind_rows()
-          }
+           return(output)
+           }
+          
 )
 
 
@@ -69,26 +74,38 @@ setMethod(f = "specimens",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-            
-        
-            
+            sampleset <- samples(x) %>%
+              dplyr::select('datasetid', 'sampleid', 'taxonid', 'age',
+              'agetype', 'ageolder', 'ageyounger', 'chronologyid',
+              'chronologyname', 'units', 'value', 'context', 'element',
+              'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
+              'sampleanalyst', 'depth', 'thickness', 'samplename')
+          
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
                                     allspec <- purrr::map(y@specimens@specimens,
                                                           function(z) {
-                                                         
-                                                            data.frame(sampleid = z@sampleid,
-                                                                       taxonid = z@taxonid,
-                                                                       elementtype = z@elementtype,
-                                                                       symmetry = z@symmetry,
-                                                                       row.names = NULL)
+                                                            data.frame(
+                                                              sampleid = z@sampleid,
+                                                              taxonid = z@taxonid,
+                                                              specimendid = z@specimenid,
+                                                              taxonname = z@taxonname,
+                                                              portion = z@portion,
+                                                              sex = z@sex,
+                                                              domesticstatus = z@domesticstatus,
+                                                              taphonomictype = z@taphonomictype,
+                                                              elementtype = z@elementtype,
+                                                              symmetry = z@symmetry,
+                                                              row.names = NULL)
                                                           }) %>%
                                       dplyr::bind_rows() %>%
                                       dplyr::mutate(datasetid = dsid)
                                   }) %>%
               dplyr::bind_rows()
+
+            new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
             
-            return(sampset)
+            return(new_sampset)
           }
 )
