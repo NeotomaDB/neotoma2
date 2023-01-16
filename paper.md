@@ -25,11 +25,11 @@ bibliography: paper.bib
 
 # Summary
 
-The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [@williams2018neotoma] within the R environment. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years.
+The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [@williams2018neotoma] within the R environment. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years. The R package allows researchers to both download, and create new records using `get_` (e.g., `get_sites()`) and `set_` functions (e.g., `set_sites()`) respectively. This 
 
 # Statement of need
 
-The `neotoma` R package [@goring2015neotoma] leveraged the Neotoma Paleoeocology Database v1.0 API.  Changes to the underlying database requires new data objects within the R package, to more closely align to the Neotoma data model [@grimm2018].
+The `neotoma` R package [@goring2015neotoma] leveraged the Neotoma Paleoeocology Database v1.0 API.  Changes to the underlying database requires new data objects within the R package, to more closely align to the Neotoma data model [@grimm2018]. The broad user community for Neotoma 
 
 # Citations
 

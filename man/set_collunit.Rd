@@ -9,7 +9,7 @@ set_collunit(
   collectionunitid = NA_integer_,
   notes = NA_character_,
   handle = NA_character_,
-  colldate = NA,
+  colldate = as.Date(character(1)),
   location = NA_character_,
   waterdepth = NA_integer_,
   gpslocation = st_as_sf(st_sfc()),
@@ -17,8 +17,8 @@ set_collunit(
   collectiondevice = NA_character_,
   collectionunitname = NA_character_,
   depositionalenvironment = NA_character_,
-  datasets = NA,
-  chronologies = NA,
+  datasets = new("datasets"),
+  chronologies = new("chronologies"),
   defaultchronology = NA_integer_
 )
 }
