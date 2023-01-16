@@ -30,7 +30,6 @@ Suggests:
     Bchron
 Imports:
     magrittr,
-    lifecycle,
     sf,
     geojsonsf,
     purrr,
@@ -39,7 +38,6 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    tidyverse,
     tidyr,
     gtools,
     leaflet,
@@ -49,5 +47,4 @@ Imports:
     progress,
     wk,
     uuid
-RdMacros: lifecycle
 VignetteBuilder: knitr
