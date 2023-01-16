@@ -3,7 +3,10 @@
 \docType{class}
 \name{author-class}
 \alias{author-class}
-\title{An S4 class for Neotoma publications}
+\title{An S4 class for the authors of a Neotoma publication.}
 \description{
-An S4 class for Neotoma publications
+This class combines the S4 class \code{contact} with a numeric
+author order. This allows us to reuse \code{contact} objects, and to assign
+the authorship order within a publication. The full set of authors for
+a publication are represented by the \code{authors} object.
 }

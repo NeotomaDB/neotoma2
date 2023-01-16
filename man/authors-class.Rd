@@ -5,5 +5,6 @@
 \alias{authors-class}
 \title{An S4 class for a set of Neotoma author objects.}
 \description{
-An S4 class for a set of Neotoma author objects.
+The S4 \code{authors} are a set of individual \code{author} objects that
+are then associated with a single S4 \code{publication} class.
 }

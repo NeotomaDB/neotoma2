@@ -22,7 +22,7 @@ Description: Access and manipulate data from the Neotoma Paleoecology Database.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Suggests:
     testthat,
     knitr,
@@ -42,14 +42,11 @@ Imports:
     tidyverse,
     tidyr,
     gtools,
-    arulesViz,
     leaflet,
     mapview,
     assertthat,
-    qpdf,
     stringr,
     progress,
-    covr,
     wk,
     uuid
 RdMacros: lifecycle

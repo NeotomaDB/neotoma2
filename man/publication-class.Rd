@@ -5,5 +5,6 @@
 \alias{publication-class}
 \title{An S4 class for a single Neotoma publication.}
 \description{
-An S4 class for a single Neotoma publication.
+A publication is liked to an individual Neotoma dataset object
+They are grouped using an S4 \code{publications} class.
 }
