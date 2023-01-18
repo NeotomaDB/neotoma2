@@ -1,3 +1,7 @@
+utils::globalVariables(c("depth", "thickness", "agelimitolder",
+  "chroncontrolid", "agelimityounger", "chroncontrolage",
+  "chroncontroltype"))
+
 #' @title get_downloads
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
