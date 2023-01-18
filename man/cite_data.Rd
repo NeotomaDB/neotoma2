@@ -10,5 +10,6 @@ cite_data(x)
 \item{x}{Object with DOIs associated to it.}
 }
 \description{
-The fuction, applied to a data object with a valid dataset, will return a properly formatted data citation for the record.
+The fuction, applied to a data object with a valid dataset,
+will return a properly formatted data citation for the record.
 }

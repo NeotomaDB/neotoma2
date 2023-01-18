@@ -15,7 +15,7 @@ first_author <- new("author", author = simon, order = 1)
 second_author <- new("author", author = socorro, order = 2)
 author_list <- new("authors", authors = list(simon, socorro))
 pub <- new("publication",
-           articletitle = "Top or bottom: Optimum spreading surfaces for toast.",
+           articletitle = "Top or bottom: Best toast spreading surfaces.",
            journal = "Peanut Butter Science",
            year = "2022",
            volume = "2",

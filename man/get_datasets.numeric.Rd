@@ -15,7 +15,7 @@
 Get Dataset Numeric
 }
 \examples{
-dontrun{
+\dontrun{
 allds <- get_datasets(1:29)
 plotLeaflet(allds)
 }
