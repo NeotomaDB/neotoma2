@@ -18,6 +18,8 @@ Maintainers@R:
            role = c("aut", "cre"),
            email = "goring@wisc.edu",
            comment = structure("0000-0002-2700-4605", .Names = "ORCID"))
+URL: https://github.com/NeotomaDB/neotoma2
+BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulate data from the Neotoma Paleoecology Database.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -44,7 +46,6 @@ Imports:
     assertthat,
     stringr,
     progress,
-    covr,
     wk,
     uuid,
     tidyr
