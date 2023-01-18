@@ -1,5 +1,11 @@
-#' @title Show Site objects as a dataframe
+#' @title Show a site object as a dataframe
+#' @description Convert a Neotoma package site object into a data.frame()
+#' returning the siteid, sitename, latitude, longitude and altitude of the site.
 #' @param object site object
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' as.data.frame(some_site[[1]])
+#' @export
 setMethod(f = "show",
           signature = "site",
           definition = function(object) {
@@ -10,8 +16,13 @@ setMethod(f = "show",
                              altitude = object@altitude), row.names = FALSE)
           })
 
-#' @title Show Sites objects as a dataframe
+#' @title Show sites objects as a dataframe
+#' @description Return a set of site objects as a single data.frame().
 #' @param object sites object
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' as.data.frame(some_site)
+#' @export
 setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
@@ -31,6 +42,9 @@ setMethod(f = "show",
 #' @param x sites object
 #' @param i iteration in sites list
 #' @description Obtain one of the elements within a sites list
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' some_site[[2]]
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
@@ -49,6 +63,10 @@ setMethod(f = "[[",
 #' @title Get or remove sites by numeric index
 #' @param x The sites object
 #' @param i The numeric index
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' some_site[2]
+#' @export
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
           definition = function(x, i) {
@@ -218,12 +236,12 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "sites"),
           definition = function(x, y) {
-            if (class(y) == "sites") {
+            if (is(y, "sites")) {
               out <- new("sites",
                          sites = unlist(c(x@sites,
                                           y@sites),
                                         recursive = FALSE))
-            } else if (class(y) == "site") {
+            } else if (is(y, "site")) {
               siteset <- c(x@sites, y)
               out <- new("sites", sites = siteset)
             }
