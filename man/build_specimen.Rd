@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_specimen.R
 \name{build_specimen}
 \alias{build_specimen}
-\title{get_downloads}
+\title{Build specimen objects.}
 \usage{
 build_specimen(x)
 }
@@ -10,14 +10,14 @@ build_specimen(x)
 \item{x}{specimen list}
 }
 \value{
-list parsed into specimen
+A list (from JSON) parsed into specimen
 }
 \description{
-Helper function to build a specimen
+A helper function to build a specimen object from a list returned
+within the get_speciments() call.
 }
 \examples{
 \dontrun{
-# To build dataset from API call:
 build_specimen(x)
 }
 

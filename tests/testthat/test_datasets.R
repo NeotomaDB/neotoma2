@@ -13,7 +13,8 @@ test_that("get_datasets numeric runs.", {
 
 })
 
-test_that("get_datasets runs as a vector with length defined by vector or limit.", {
+test_that("get_datasets runs as a vector with length
+  defined by vector or limit.", {
   ## we don't want this to run on CRAN
   skip_on_cran()
 

@@ -13,7 +13,7 @@
 The function returns a specimens summary table.
 }
 \description{
-Information tabke for Specimens
+Information table for Specimens
 }
 \examples{
 \dontrun{

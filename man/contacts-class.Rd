@@ -3,9 +3,15 @@
 \docType{class}
 \name{contacts-class}
 \alias{contacts-class}
-\title{An S4 class for multi-contact information
-from the Neotoma Paleoecology Database.}
+\title{An S4 class for multi-contact information from the Neotoma
+Paleoecology Database.}
 \description{
-An S4 class for multi-contact information
-from the Neotoma Paleoecology Database.
+An unordered list of individual S4 \code{contact} objects.
+}
+\examples{
+# Create two contact objects and associate them within a contacts object.
+simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
+socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
+packagers <- new("contacts", contacts = list(simon, socorro))
+packagers
 }

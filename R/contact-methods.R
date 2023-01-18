@@ -108,16 +108,17 @@ setMethod(f = "as.data.frame",
 #' @title c Method - Combine contacts objects
 #' @param x contacts object 1
 #' @param y contacts object 2
+#' @importFrom methods is
 #' @export
 setMethod(f = "c",
           signature = signature(x = "contacts"),
           definition = function(x, y) {
-            if (class(y) == "contacts") {
+            if (is(y, "contacts")) {
               out <- new("contacts",
                          contacts = unlist(c(x@contacts,
                                               y@contacts),
                                             recursive = FALSE))
-            } else if (class(y) == "contact") {
+            } else if (is(y, "contact")) {
               contactset <- c(x@contacts, y)
               out <- new("contacts", contacts = contactset)
             }
@@ -127,14 +128,15 @@ setMethod(f = "c",
 #' @title c Method - Combine contacts objects
 #' @param x contacts object 1
 #' @param y contacts object 2
+#' @importFrom methods is
 #' @export
 setMethod(f = "c",
           signature = signature(x = "contact"),
           definition = function(x, y) {
-            if (class(y) == "contact") {
+            if (is(y, "contact")) {
               out <- new("contacts",
                          contacts = list(x, y))
-            } else if (class(y) == "contacts") {
+            } else if (is(y, "contacts")) {
               contactset <- c(x@contacts, y)
               out <- new("contacts", contacts = contactset)
             }

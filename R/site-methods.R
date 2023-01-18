@@ -296,7 +296,8 @@ setMethod(f = "summary",
                                                     chronolgies = chrons,
                                                     datasets = datasets,
                                                     types = types)
-                                         }) %>% bind_rows()
+                                         }) %>%
+                                         bind_rows()
               } else {
                 collunits <- data.frame(collectionunit = NA,
                                         chronologies = 0,

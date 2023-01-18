@@ -2,9 +2,20 @@ utils::globalVariables(c("modelagetype", "isdefault", "allids", "<<-"))
 
 #' @title samples
 #' @param x sites object
-#' @description Obtain elements on the samples level
+#' @description Obtain all samples within a sites object
+#' @examples
+#' marion <- get_sites(sitename = "Marion Lake") %>%
+#'   get_datasets() %>%
+#'   filter(datasettype == "pollen") %>%
+#'   get_downloads()
+#' pollen <- samples(marion)
+#' plot(value ~ I(-1 * age), 
+#'      data = pollen[pollen$variablename == "Cupressaceae",],
+#' xlab = "Years before present",
+#' ylab = "Cupressaceae pollen count")
 #' @export
-#' @import dplyr
+#' @importFrom dplyr bind_rows
+#' @importFrom purrr map
 setMethod(f = "samples",
           signature = "sites",
           definition = function(x) {
@@ -17,6 +28,16 @@ setMethod(f = "samples",
 #' @title samples
 #' @param x site object
 #' @description Obtain elements on the samples level
+#' @examples
+#' marion <- get_sites(sitename = "Marion Lake") %>%
+#'   get_datasets() %>%
+#'   filter(datasettype == "pollen") %>%
+#'   get_downloads()
+#' pollen <- samples(marion)
+#' plot(value ~ I(-1 * age), 
+#'      data = pollen[pollen$variablename == "Cupressaceae",],
+#' xlab = "Years before present",
+#' ylab = "Cupressaceae pollen count")
 #' @export
 #' @import dplyr
 setMethod(f = "samples",
@@ -38,8 +59,20 @@ setMethod(f = "samples",
           }
 )
 
-#' @title samples
+#' @title Get samples from a collectionunit or set of collection units:
 #' @param x collunits object
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows
+#' @examples
+#' marion <- get_sites(sitename = "Marion Lake") %>%
+#'   get_datasets() %>%
+#'   filter(datasettype == "pollen") %>%
+#'   get_downloads()
+#' pollen <- samples(collunits(marion))
+#' plot(value ~ I(-1 * age),
+#'      data = pollen[pollen$variablename == "Cupressaceae",],
+#' xlab = "Years before present",
+#' ylab = "Cupressaceae pollen count")
 #' @description Obtain elements from collunits
 setMethod(f = "samples",
           signature = "collunits",
@@ -52,6 +85,19 @@ setMethod(f = "samples",
 #' @title samples
 #' @param x collunit object
 #' @description Obtain elements from collunit
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows mutate
+#' @examples
+#' marion <- get_sites(sitename = "Marion Lake") %>%
+#'   get_datasets() %>%
+#'   filter(datasettype == "pollen") %>%
+#'   get_downloads()
+#' pollen <- samples(collunits(marion)[[1]])
+#' plot(value ~ I(-1 * age),
+#'      data = pollen[pollen$variablename == "Cupressaceae",],
+#' xlab = "Years before present",
+#' ylab = "Cupressaceae pollen count")
+#' @export
 setMethod(f = "samples",
           signature = "collunit",
           definition = function(x) {
@@ -98,7 +144,8 @@ setMethod(f = "samples",
                   "The dataset %d has no default chronologies.",
                   allids$datasetid[1])
                 warning(warnsite)
-              } else if (sum(defaultchron$order == max_order, na.rm = TRUE) > 1) {
+              } else if (sum(defaultchron$order == max_order, 
+                             na.rm = TRUE) > 1) {
                 warnsite <- sprintf(
                   "The dataset %d has multiple default chronologies.
                    Chronology %d has been used.",

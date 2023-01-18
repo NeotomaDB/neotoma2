@@ -15,7 +15,7 @@
 Get Dataset from a \code{sites} object.
 }
 \examples{
-dontrun{
+\dontrun{
 random_sites <- get_sites(1:100)
 allds <- get_datasets(random_sites)
 plotLeaflet(allds)

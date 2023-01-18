@@ -54,7 +54,7 @@ setMethod(f = "plotLeaflet",
 #' @param path location where output should be saved in. save_im must be TRUE
 #' @importFrom purrr map
 #' @importFrom assertthat assert_that
-#' @importFrom leaflet leaflet addProviderTiles addTiles addCircleMarkers
+#' @import leaflet
 #' @importFrom mapview mapshot
 #' @examples \dontrun{
 #' modernSites <- get_sites(keyword = "Modern")
@@ -64,7 +64,7 @@ setMethod(f = "plotLeaflet",
 setMethod(f = "plotLeaflet",
           signature = "site",
           definition = function(object, save_im = FALSE, path = "") {
-
+            explorerURL <- "http://apps.neotomadb.org/explorer/"
             df1 <- data.frame(siteid = object@siteid,
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
@@ -79,7 +79,8 @@ setMethod(f = "plotLeaflet",
                                popup = paste0("<b>", df1$sitename,
                                               "</b><br><b>Description:</b> ",
                                               df1$description,
-                                              "<br><a href=http://apps.neotomadb.org/explorer/?siteids=",
+                                              "<br><a href=", 
+                                              explorerURL, "?siteids=",
                                               df1$siteid,
                                               ">Explorer Link</a>"),
                                clusterOptions = markerClusterOptions(),

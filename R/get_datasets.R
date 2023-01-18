@@ -182,13 +182,6 @@ get_datasets.default <- function(x, ...) { # nolint
 
   cl[[1]] <- NULL
 
-  for (name in names(cl)) {
-    # if (!(name %in% possible_arguments)) {
-    #   message1 <- " is not an allowed argument. \n
-    #   Allowed arguments: sitename, altmax, altmin, loc"
-    #   message(paste0(name, message1))
-    # }
-  }
   cl <- lapply(cl, eval, envir = parent.frame())
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
   error_check <- check_args(cl) # nolint
@@ -225,7 +218,7 @@ get_datasets.default <- function(x, ...) { # nolint
       cleanNULL()
   }
 
-  if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
+  if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_dataset(result)
@@ -237,7 +230,7 @@ get_datasets.default <- function(x, ...) { # nolint
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
-#' @examples dontrun{
+#' @examples \dontrun{
 #' allds <- get_datasets(1:29)
 #' plotLeaflet(allds)
 #' }
@@ -272,7 +265,7 @@ get_datasets.numeric <- function(x, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param x An object of class \code{sites}.
 #' @param ... additional arguments accepted by \code{get_datasets()}
-#' @examples dontrun{
+#' @examples \dontrun{
 #' random_sites <- get_sites(1:100)
 #' allds <- get_datasets(random_sites)
 #' plotLeaflet(allds)
@@ -283,7 +276,7 @@ get_datasets.sites <- function(x, ...) {
   dataset_list <- getids(x)$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
 
-  output <- get_datasets(dataset_list, all_data=TRUE)
-  
+  output <- get_datasets(dataset_list, all_data = TRUE)
+
   return(output)
 }

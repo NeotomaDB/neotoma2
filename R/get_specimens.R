@@ -7,7 +7,7 @@
 #' @description
 #' Information for Specimens
 #' @param x Use a single specimenid
-#' @param ... passing datasetids 
+#' @param ... Additional terms passed to get_specimens.
 #' @return The function returns a specimens list
 #' @examples \dontrun{
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
@@ -77,6 +77,7 @@ parse_specimen <- function(result, ds) {
 
 #' @title Get Specimen Numeric
 #' @param x Use a single number to extract site information
+#' @param ... Additional terms passed to get_specimens.
 #' @export
 get_specimens.numeric <- function(x, ...) {
 
@@ -86,16 +87,16 @@ get_specimens.numeric <- function(x, ...) {
 
   base_url <- paste0("data/specimens/", specimenid)
   result <- neotoma2::parseURL(base_url)
-  
+
   sps <- result$data %>%
     cleanNULL()
-  
+
   sp_index <- purrr::map(sps, function(x) {
     data.frame(datasetid = x$datasetid)}) %>%
     dplyr::bind_rows()
-  
+
   dw <- get_downloads(sp_index$datasetid)
-  
+
   ds <- parse_specimen(result, dw)
 
   return(ds)
@@ -111,7 +112,7 @@ get_specimens.default <- function(...) {
   cl[[1]] <- NULL
   
   cl <- lapply(cl, eval, envir = parent.frame())
-  dsid = cl$datasetid
+  dsid <- cl$datasetid
 
   if (length(dsid) > 0) {
     dsid <- paste0(dsid, collapse = ",")
