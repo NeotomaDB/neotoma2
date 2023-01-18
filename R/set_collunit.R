@@ -67,7 +67,7 @@ set_collunit <- function(x = NA,
     x@defaultchronology <- defaultchronology
 
   } else {
-    if (class(x) == "collunit") {
+    if (is(x, "collunit")) {
       for (i in 3:length(function_call)) {
         slot(x, names(function_call)[[i]]) <- function_call[[i]]
       }

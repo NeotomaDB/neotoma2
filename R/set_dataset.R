@@ -51,7 +51,7 @@ set_dataset <- function(x = NA,
     x@samples <- samples
 
   } else {
-    if (class(x) == "dataset") {
+    if (is(x, "dataset")) {
       for (i in 3:length(function_call)) {
         slot(x, names(function_call)[[i]]) <- function_call[[i]]
       }

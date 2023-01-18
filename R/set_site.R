@@ -52,7 +52,7 @@ set_site <- function(x = NA,
     x@description <- description
     x@collunits <- collunits
   } else {
-    if (class(x) == "site") {
+    if (is(x, "site")) {
       for (i in 3:length(function_call)) {
         slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
       }

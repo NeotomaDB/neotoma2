@@ -8,7 +8,7 @@ parse_site <- function(result) {
       if (is.null(x[[i]])) {
         x[[i]] <- NA
       } else {
-        if (class(x[[i]]) == "list") {
+        if (is(x[[i]], "list")) {
           x[[i]] <- fix_null(x[[i]])
         }
       }
