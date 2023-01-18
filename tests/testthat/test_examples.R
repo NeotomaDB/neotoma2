@@ -9,7 +9,9 @@ test_that("Examples run without error", {
            "filter",
            "taxa",
            "testNULL",
-           "samples")
+           "samples",
+           "get_publications",
+           "clean")
 
   refnames <- paste0("example-ref-", egs, ".rds")
 
