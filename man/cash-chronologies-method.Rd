@@ -12,5 +12,5 @@
 \item{name}{name of the slot}
 }
 \description{
-Obtain slots of a chronology without using at-mark
+Obtain slots of a chronologies object without using at-mark
 }

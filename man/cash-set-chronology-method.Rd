@@ -14,5 +14,5 @@
 \item{value}{A value to be assigned to the chronology slot.}
 }
 \description{
-Obtain slots of a chronology without using at-mark
+Assign values to slots of a chronology without using at-mark
 }

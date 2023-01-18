@@ -11,7 +11,8 @@
 
 \item{x}{A chronology object generated using \code{set_chronology()}}
 
-\item{y}{A data.frame of sample ages, with required columns "analysisunitid", "age", "agetype", "ageolder", and "ageyounger".}
+\item{y}{A data.frame of sample ages, with required columns:
+"analysisunitid", "age", "agetype", "ageolder", and "ageyounger".}
 }
 \description{
 Add a new chronology into an existing collectionunit.

@@ -14,7 +14,8 @@ clean(x = NA, verbose = TRUE, ...)
 \item{...}{Additional parameters associated with the call.}
 }
 \description{
-Function that removes duplicate objects such as sites, datasets, or collection units.
+Function that removes duplicate objects such as sites, datasets,
+or collection units.
 }
 \author{
 Simon Goring \email{goring@wisc.edu}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_publications.R
 \name{get_publications.numeric}
 \alias{get_publications.numeric}
-\title{Get contact information for Neotoma contributors}
+\title{Get publications using their unique identifier.}
 \usage{
 \method{get_publications}{numeric}(x, ...)
 }
@@ -20,5 +20,9 @@ with a publication.
 \code{search} A plain text search string used to search the citation.}
 }
 \description{
-Get contact information for Neotoma contributors
+Get publications using their unique identifier.
+}
+\examples{
+# We want the paper identified in Neotoma as 666:
+get_publications(666)
 }

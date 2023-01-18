@@ -9,6 +9,9 @@ get_manual()
 \description{
 Open up the Neotoma manual homepage.
 }
+\examples{
+get_manual()
+}
 \author{
 Simon Goring \email{goring@wisc.edu}
 }
