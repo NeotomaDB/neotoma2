@@ -17,8 +17,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, eval=TRUE}
 library(neotoma2)
-library(raster)
-library(dismo)
 library(dplyr)
 ```
 
@@ -242,7 +240,7 @@ Now we can extract the data for each of the convex hulls within the dataset.
 ## Build SDMs
 
 ```{r}
-library(dismo)
+a <- 1 + 2
 
 ```
   * Create SDMs for taxon with intersection convex hulls
