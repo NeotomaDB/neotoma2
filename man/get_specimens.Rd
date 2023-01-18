@@ -9,7 +9,7 @@ get_specimens(x = NA, ...)
 \arguments{
 \item{x}{Use a single specimenid}
 
-\item{...}{passing datasetids}
+\item{...}{Additional terms passed to get_specimens.}
 }
 \value{
 The function returns a specimens list

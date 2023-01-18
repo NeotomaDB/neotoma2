@@ -38,13 +38,14 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    tidyr,
     gtools,
     leaflet,
     mapview,
     assertthat,
     stringr,
     progress,
+    covr,
     wk,
-    uuid
+    uuid,
+    tidyr
 VignetteBuilder: knitr

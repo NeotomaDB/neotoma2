@@ -7,6 +7,7 @@
 #' @importFrom geojsonsf sf_geojson
 #' @importFrom purrr map
 #' @importFrom assertthat assert_that
+#' @importFrom methods is
 #' @description
 #' Convert a neotoma2 \code{sites} object into a JSON file for API management.
 #' @param x sites R object to be converted
@@ -20,11 +21,11 @@
 setMethod(f = "toJSON",
           signature = "sites",
           definition = function(x = NA) {
-            
+
             sample_list <- function(s) {
               assertthat::assert_that(is(s, "sample"),
-                                      msg = "Samples object is empty or not samples")
-              
+                msg = "Samples object is empty or not samples")
+
               output <- list(ages = s@ages,
                              igsn = s@igsn,
                              datum = s@datum,
@@ -37,11 +38,11 @@ setMethod(f = "toJSON",
                              analysisunitname = s@analysisunitname)
               return(output)
             }
-            
+
             specimens_list <- function(sp) {
               assertthat::assert_that(is(sp, "specimen"),
-                                      msg = "Specimens object is empty or not specimens")
-              
+                msg = "Specimens object is empty or not specimens")
+
               output <- list(datasetid = sp$datasetid,
                              sampleid = sp$sampleid,
                              specimenid = sp$specimenid,
@@ -62,14 +63,14 @@ setMethod(f = "toJSON",
                              preservative = sp$preservative,
                              maturity = sp$maturity,
                              samplenotes = sp$samplenotes)
-              
+
               return(output)
             }
-            
+
             dataset_list <- function(d) {
               assertthat::assert_that(is(d, "dataset"),
-                                      msg = "Dataset object is empty or not a dataset")
-              
+                msg = "Dataset object is empty or not a dataset")
+
               output <- list(doi = d@doi,
                              agerange = list(agerangeold = d@age_range_old,
                                              agerangeyoung = d@age_range_young),
@@ -83,11 +84,11 @@ setMethod(f = "toJSON",
                              samples = purrr::map(d@samples@samples, sample_list))
               return(output)
             }
-            
+
             chronology_list <- function(ch) {
               assertthat::assert_that(is(ch, "chronology"),
-                                      msg = "Chronology passed is not a chronology object.")
-              
+                msg = "Chronology passed is not a chronology object.")
+
               output <- list(contact = ch@contact,
                              agemodel = ch@agemodel,
                              agerange = list(ageboundolder = ch@ageboundolder,
@@ -98,14 +99,14 @@ setMethod(f = "toJSON",
                              chronologyname = ch@chronologyname,
                              chronologyid = ch@chronologyid,
                              chroncontrols = ch@chroncontrols)
-              
+
               return(output)
             }
-            
+
             collection_list <- function(z) {
               assertthat::assert_that(is(z, "collunit"),
-                                      msg = "Collectionunit passed is not a valid collectionunit object.")
-              
+                msg = "Collectionunit passed is not a valid collectionunit object.")
+
               output <- list(notes = z@notes,
                              handle = z@handle,
                              colldate = z@colldate,
@@ -122,7 +123,7 @@ setMethod(f = "toJSON",
                              defaultchronology = z@defaultchronology)
               return(output)
             }
-            
+
             output <- jsonlite::toJSON(
               purrr::map(x@sites,
                          function(y) {
@@ -137,6 +138,6 @@ setMethod(f = "toJSON",
                                                              collection_list),
                                 sitedescription = y@description)
                          }), auto_unbox = TRUE)
-            
+
             return(output)
           })

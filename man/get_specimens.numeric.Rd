@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
+
+\item{...}{Additional terms passed to get_specimens.}
 }
 \description{
 Get Specimen Numeric
