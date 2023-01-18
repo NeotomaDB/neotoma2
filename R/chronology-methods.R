@@ -29,11 +29,11 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-#' @title  $ Assignment
+#' @title $ Assignment
 #' @param x A chronology object
 #' @param name The name of the chronology slot.
 #' @param value A value to be assigned to the chronology slot.
-#' @description Obtain slots of a chronology without using at-mark
+#' @description Assign values to slots of a chronology without using at-mark
 #' @export
 setMethod(f = "$<-",
           signature = signature(x = "chronology"),
@@ -45,7 +45,7 @@ setMethod(f = "$<-",
 #' @title  $ for chronologies
 #' @param x chronologies object
 #' @param name name of the slot
-#' @description Obtain slots of a chronology without using at-mark
+#' @description Obtain slots of a chronologies object without using at-mark
 #' @export
 setMethod(f = "$",
           signature = signature(x = "chronologies"),
@@ -71,7 +71,9 @@ setMethod(f = "as.data.frame",
                        ageboundolder = x@ageboundolder,
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
-                       dateprepared = lubridate::as_date(ifelse(is.null(x@dateprepared), NA, x@dateprepared)),
+                       dateprepared =
+                        lubridate::as_date(ifelse(is.null(x@dateprepared),
+                          NA, x@dateprepared)),
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
@@ -110,12 +112,14 @@ setMethod(f = "c",
                 expr = {
                   new("chronologies",
                       chronologies = unlist(c(x@chronologies,
-                                              y@chronologies), recursive = FALSE))
+                                              y@chronologies),
+                                            recursive = FALSE))
                 },
-                error = function(e){
-                  stop("Use `get_downloads()` to fill chronologies details. Current `sites` object
-                     comes from `get_sites()` or `get_datasets()` which does not have chronology's
-                     detail")
+                error = function(e) {
+                  stop("Use `get_downloads()` to fill chronologies details.
+                        Current `sites` object comes from `get_sites()` or
+                        `get_datasets()` which does not have chronology
+                        detail")
                 })
           })
 
@@ -142,11 +146,14 @@ setMethod(f = "set_default",
 
             chron_set <- as.data.frame(x)
 
-            assertthat::assert_that(n %in% chron_set$chronologyid, msg = "The new default chronology must be a valid chronologyid within the chronologies.")
+            assertthat::assert_that(n %in% chron_set$chronologyid, 
+              msg = "The new default chronology must be a valid chronologyid
+                     within the chronologies.")
 
-            replacingmodel <- chron_set$modelagetype[chron_set$chronologyid == n]
+            which_replace <- chron_set$chronologyid == n
+            replacingmodel <- chron_set$modelagetype[which_replace]
 
-            chronout <- purrr::map(1:length(x), function(y) {
+            chronout <- purrr::map(seq_len(x), function(y) {
               if (x@chronologies[[y]]$chronologyid == n) {
                 x@chronologies[[y]]@isdefault <- 1
               }

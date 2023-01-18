@@ -9,28 +9,42 @@
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
 #'  \item{"long"}{A numeric longitude value.}
-#'  \item{"altitude"}{The elevation of the site. Note that some sites do not include elevation information. For these an NA value appears, and they would be removed when using an elevation filter.}
+#'  \item{"altitude"}{The elevation of the site. Note that some sites do not
+#'   include elevation information. For these an NA value appears, and they
+#'   would be removed when using an elevation filter.}
 #'  \item{"datasetid"}{A numeric datasetid from Neotoma.}
-#'  \item{"database"}{A character string naming the constituent database from which the dataset is drawn.}
-#'  \item{"datasettype"}{A character string representing one of the many daataset types within Neotoma.}
-#'  \item{"age_range_old"}{A dataset-level parameter indicating the oldest date covered by the dataset chronology.}
-#'  \item{"age_range_young"}{A dataset-level parameter indicating the youngest date covered by the dataset chronology.}
-#'  \item{"notes"}{Free-form dataset notes provided by the dataset PI(s), analysts or data stewards.}
-#'  \item{"collectionunitid"}{A numeric collection unit identifier from Neotoma.}
-#'  \item{"handle"}{A character string identifying the collection unit. These are often shorter form names (originally a default 8 character length).}
-#'  \item{"collectionunitname"}{A character string identifying the collection unit name.}
-#'  \item{"colldate"}{The date on which the collection unit was sampled. Many of these are empty.}
-#'  \item{"location"}{A free-form character string indicating the location of the collection unit within the site.}
+#'  \item{"database"}{A character string naming the constituent database
+#'   from which the dataset is drawn.}
+#'  \item{"datasettype"}{A character string representing one of the many
+#'   daataset types within Neotoma.}
+#'  \item{"age_range_old"}{A dataset-level parameter indicating the oldest
+#'   date covered by the dataset chronology.}
+#'  \item{"age_range_young"}{A dataset-level parameter indicating the youngest
+#'   date covered by the dataset chronology.}
+#'  \item{"notes"}{Free-form dataset notes provided by the dataset PI(s),
+#'   analysts or data stewards.}
+#'  \item{"collectionunitid"}{A numeric collection unit identifier from
+#'   Neotoma.}
+#'  \item{"handle"}{A character string identifying the collection unit. These
+#'   are often shorter form names (originally a default 8 character length).}
+#'  \item{"collectionunitname"}{A character string identifying the collection
+#'   unit name.}
+#'  \item{"colldate"}{The date on which the collection unit was sampled. Many
+#'   of these are empty.}
+#'  \item{"location"}{A free-form character string indicating the location of
+#'   the collection unit within the site.}
 #'  \item{"waterdepth"}{A numeric depth at which the core was obtained.}
 #'  \item{"collunittype"}{A character string for the collection unit type.}
-#'  \item{"collectiondevice"}{A fixed vocabulary term for the collection device.}
-#'  \item{"depositionalenvironment"}{A fixed vocaublary name for the depositional environment.}
+#'  \item{"collectiondevice"}{A fixed vocabulary term for the collection
+#'   device.}
+#'  \item{"depositionalenvironment"}{A fixed vocaublary name for the
+#'   depositional environment.}
 #' }
 #'
 #' @import sf
 #' @import dplyr
 #' @importFrom purrr map
-#' @import stringr
+#' @importFrom stringr str_detect
 #' @param x A site, dataset or download.
 #' @param ... arguments to filter by.
 #' @export
@@ -47,7 +61,7 @@ filter.sites <- function(x, ...) {  # nolint
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
 
-  sitecols <- c('sitename', 'lat', 'long', 'altitude') %>%
+  sitecols <- c("sitename", "lat", "long", "altitude") %>%
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()

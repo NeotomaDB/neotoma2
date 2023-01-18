@@ -182,13 +182,6 @@ get_datasets.default <- function(x, ...) { # nolint
 
   cl[[1]] <- NULL
 
-  for (name in names(cl)) {
-    # if (!(name %in% possible_arguments)) {
-    #   message1 <- " is not an allowed argument. \n
-    #   Allowed arguments: sitename, altmax, altmin, loc"
-    #   message(paste0(name, message1))
-    # }
-  }
   cl <- lapply(cl, eval, envir = parent.frame())
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
   error_check <- check_args(cl) # nolint
@@ -225,7 +218,7 @@ get_datasets.default <- function(x, ...) { # nolint
       cleanNULL()
   }
 
-  if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
+  if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_dataset(result)
@@ -282,7 +275,7 @@ get_datasets.sites <- function(x, ...) {
   # List of datasets ids
   dataset_list <- getids(x)$datasetid
 
-  output <- get_datasets(dataset_list, all_data=TRUE)
-  
+  output <- get_datasets(dataset_list, all_data = TRUE)
+
   return(output)
 }

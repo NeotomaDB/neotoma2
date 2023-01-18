@@ -112,7 +112,7 @@ get_specimens.default <- function(...) {
   cl[[1]] <- NULL
   
   cl <- lapply(cl, eval, envir = parent.frame())
-  dsid = cl$datasetid
+  dsid <- cl$datasetid
 
   if (length(dsid) > 0) {
     dsid <- paste0(dsid, collapse = ",")

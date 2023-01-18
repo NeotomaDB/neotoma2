@@ -9,7 +9,7 @@
 #' @description An internal helper function to parse de body of POST API requests
 #' @param x The HTTP path for the particular API call.
 #' @param ... Any query parameters passed from the function calling
-#' 
+#'
 parsebody <- function(x, ...) {
   query <- list(...)
   # Retrieve complete call to create json body
@@ -20,7 +20,6 @@ parsebody <- function(x, ...) {
     params <- stringr::str_remove_all(args, "data/datasets")
     if(substr(params,1,1)=="/"){
       numbers <- stringr::str_remove_all(params, "/")
-      
       body <- jsonlite::toJSON(list(datasetid=numbers))
     }
   } else if(grepl("sites", args)){
@@ -31,17 +30,15 @@ parsebody <- function(x, ...) {
     }
   } else if(grepl("downloads", args)){
     params <- stringr::str_remove_all(args, "data/downloads")
-    if(substr(params,1,1)=="/"){
+    if (substr(params, 1, 1) == "/") {
       numbers <- stringr::str_remove_all(params, "/")
-      body = jsonlite::toJSON(list(datasetid=numbers))
+      body <- jsonlite::toJSON(list(datasetid = numbers))
     }
   }
-  
   # II. Other simple queries - Unlikely unless it comes with a complex location
   if (params ==""){
     body <- jsonlite::toJSON(query, flatten = TRUE)
   }
-  
   # III. When location is present and the base_URL has too much info
   if(substr(params,1,1)=="?"){
     params <- stringr::str_remove_all(params, "\\?")
@@ -50,34 +47,30 @@ parsebody <- function(x, ...) {
     df <- data.frame(params)
     df <- dplyr::as_tibble(df)
     df <- df %>% dplyr::rename(col1 = colnames(df[1]))
-    df2 <- df %>% 
-      tidyr::separate(col1, c("name", "value"), sep = ":", remove = FALSE, extra = "merge")
+    df2 <- df %>%
+      tidyr::separate(col1, c("name", "value"), sep = ":", 
+        Sremove = FALSE, extra = "merge")
     df2 <- df2 %>% select("name", "value")
     df2 <- tidyr::pivot_wider(df2)
-    
-    body <- jsonlite::toJSON(df_ready2,auto_unbox=TRUE)
+    body <- jsonlite::toJSON(df_ready2, auto_unbox = TRUE)
   }
-  
   return(body)
 }
 # Finished body
-
-
 newURL <- function(baseurl, args, ...) {
   query <- list(...)
   # Retrieve complete call to create json body
   # There are 3 cases
   # I. Long list of IDs (most common)
-  if (grepl("datasets", args)){
+  if (grepl("datasets", args)) {
     new_url <- paste0(baseurl, "data/datasets")
     params <- stringr::str_remove_all(args, "data/datasets")
-  } else if(grepl("sites", args)){
+  } else if (grepl("sites", args)){
     new_url <- paste0(baseurl, "data/sites")
     params <- stringr::str_remove_all(args, "data/sites")
-  } else if(grepl("downloads", args)){
+  } else if (grepl("downloads", args)) {
     new_url <- paste0(baseurl, "data/downloads")
     params <- stringr::str_remove_all(args, "data/downloads")
   }
   return(new_url)
 }
-
