@@ -47,6 +47,6 @@ test_that("get_downloads yields same get_datasets ids II", {
 
   # The get_downloads limit happens, so we have fewer rows in df1
   expect_lte(nrow(df1), nrow(df2))
-  expect_true(all(df1$datasetid %in% df2$datasetid))
+  expect_true(all(unique(df1$datasetid) %in% unique(df2$datasetid)))
 
 })
