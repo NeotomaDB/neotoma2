@@ -146,14 +146,14 @@ setMethod(f = "set_default",
 
             chron_set <- as.data.frame(x)
 
-            assertthat::assert_that(n %in% chron_set$chronologyid, 
+            assertthat::assert_that(n %in% chron_set$chronologyid,
               msg = "The new default chronology must be a valid chronologyid
                      within the chronologies.")
 
             which_replace <- chron_set$chronologyid == n
             replacingmodel <- chron_set$modelagetype[which_replace]
 
-            chronout <- purrr::map(seq_len(x), function(y) {
+            chronout <- purrr::map(seq_len(length(x)), function(y) {
               if (x@chronologies[[y]]$chronologyid == n) {
                 x@chronologies[[y]]@isdefault <- 1
               }
