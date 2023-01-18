@@ -5,7 +5,11 @@ test_that("Examples run without error", {
   ## List of example topics we want to check
   egs <- c("get_sites",
            "get_datasets",
-           "get_downloads")
+           "get_downloads",
+           "filter",
+           "taxa",
+           "testNULL",
+           "samples")
 
   refnames <- paste0("example-ref-", egs, ".rds")
 
