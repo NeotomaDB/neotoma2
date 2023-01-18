@@ -13,5 +13,5 @@ simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 first_author <- new("author", author = simon, order = 1)
 second_author <- new("author", author = socorro, order = 2)
-author_list <- new("authors", authors = list(simon, socorro))
+author_list <- new("authors", authors = list(first_author, second_author))
 }

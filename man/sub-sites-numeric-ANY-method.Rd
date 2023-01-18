@@ -14,3 +14,7 @@
 \description{
 Get or remove sites by numeric index
 }
+\examples{
+some_site <- get_sites(sitename = "Site\%")
+some_site[2]
+}

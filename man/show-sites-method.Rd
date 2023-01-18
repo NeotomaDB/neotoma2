@@ -2,7 +2,7 @@
 % Please edit documentation in R/site-methods.R
 \name{show,sites-method}
 \alias{show,sites-method}
-\title{Show Sites objects as a dataframe}
+\title{Show sites objects as a dataframe}
 \usage{
 \S4method{show}{sites}(object)
 }
@@ -10,5 +10,9 @@
 \item{object}{sites object}
 }
 \description{
-Show Sites objects as a dataframe
+Return a set of site objects as a single data.frame().
+}
+\examples{
+some_site <- get_sites(sitename = "Site\%")
+as.data.frame(some_site)
 }
