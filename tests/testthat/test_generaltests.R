@@ -98,7 +98,7 @@ testthat::test_that("We are pulling in the sites we expect to capture:", {
                 [-52, 24],
                 [-169, 24]]]}'
 
-  usa <- get_sites(loc = location, limit = 20000)
+  usa <- get_sites(loc = location, limit = 16340)
   #usa_ds <- get_datasets(loc = location, all_data = TRUE)
   fla <- get_sites(gpid = "Florida", limit = 10000)
 

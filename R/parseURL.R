@@ -62,6 +62,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                       http://data.neotomadb.org")
 
     if (response$status_code == 200) {
+      #print(response$url)
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
