@@ -3,7 +3,7 @@
 setMethod(f = "show",
           signature = "site",
           definition = function(object) {
-            print(data.frame(siteid = object@siteid,
+            print(data.frame(siteid = as.character(object@siteid),
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
                              long = mean(st_coordinates(object@geography)[, 1]),
@@ -16,7 +16,7 @@ setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
             map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
+              df <- data.frame(siteid = as.character(x@siteid),
                                sitename = x@sitename,
                                lat = mean(st_coordinates(x@geography)[, 2]),
                                long = mean(st_coordinates(x@geography)[, 1]),
@@ -172,7 +172,7 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("site"),
           definition = function(x) {
-            data.frame(siteid = x@siteid,
+            data.frame(siteid = as.character(x@siteid),
                        sitename = x@sitename,
                        lat = mean(st_coordinates(x@geography)[, 2]),
                        long = mean(st_coordinates(x@geography)[, 1]),
@@ -304,7 +304,7 @@ setMethod(f = "summary",
                                         types = NA)
               }
 
-              data.frame(siteid = x$siteid, sitename = x$sitename,
+              data.frame(siteid = as.character(x$siteid), sitename = x$sitename,
                          collunits)
               }
             ) %>%
@@ -317,7 +317,7 @@ setMethod(f = "summary",
               chronologies <- sapply(x@collunits@collunits,
                                      function(y) length(y@chronologies))
 
-              return(data.frame(siteid = x$siteid,
+              return(data.frame(siteid = as.character(x$siteid),
                                 collunits = length(x@collunits),
                                 datasets = datasets))
             }) %>%

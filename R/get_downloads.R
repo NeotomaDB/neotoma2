@@ -160,8 +160,9 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     dplyr::select(datasetid) %>%
     stats::na.omit() %>%
     unique() %>%
-    unlist()
-  output <- get_downloads(x = output, verbose, ...)
+    unlist() %>%
+    as.numeric()
+  output <- get_downloads(x = output, verbose, all_data = TRUE, ...)
 
   return(output)
 }

@@ -28,7 +28,6 @@ setMethod(f = "samples",
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
               dplyr::rename(sitenotes = notes.x,
                             datasetnotes = notes.y)
-
             sampset <- purrr::map(x@collunits@collunits,
               function(y) samples(y)) %>%
                 dplyr::bind_rows() %>%
@@ -134,7 +133,7 @@ setMethod(f = "samples",
                                                                        row.names = NULL)
                                                           }) %>%
                                       dplyr::bind_rows() %>%
-                                      dplyr::mutate(datasetid = dsid)
+                                      dplyr::mutate(datasetid = as.character(dsid))
                                   }) %>%
               dplyr::bind_rows()
 

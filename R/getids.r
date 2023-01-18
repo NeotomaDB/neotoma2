@@ -35,18 +35,26 @@ getids.sites <- function (x, order = TRUE) {
 
                 return(data.frame(collunitid = collunitid,
                                 datasetid = unlist(datasetids)))
-            }) %>% bind_rows()
+            }) %>% dplyr::bind_rows()
         } else {
             data.frame(collunitid = NA, datasetid = NA)
         }
         return(data.frame(siteid = siteid, collunits))
-    }) %>%
-    bind_rows()
+    }) #%>%
+      
+    siteids <- do.call("rbind.data.frame", args = siteids)
+    rownames(siteids) = seq(length=nrow(siteids))
 
     if (order) {
       siteids <- siteids %>%
         arrange(siteid, collunitid, datasetid)
     }
+    
+    # Guaranteeing that future joins all work out
+    siteids <- siteids %>% 
+      mutate(siteid = as.character(siteid),
+             collunitid = as.character(collunitid),
+             datasetid = as.character(datasetid))
 
     return(siteids)
 }
@@ -71,11 +79,11 @@ getids.site <- function (x, order = TRUE) {
         datasetids <- NA
       }
 
-      return(data.frame(collunitid = collunitid,
-                        datasetid = unlist(datasetids)))
+      return(data.frame(collunitid = as.character(collunitid),
+                        datasetid = as.character(unlist(datasetids))))
     }) %>% dplyr::bind_rows()
   } else {
     data.frame(collunitid = NA, datasetid = NA)
   }
-  return(data.frame(siteid = siteid, collunits))
+  return(data.frame(siteid = as.character(siteid), collunits))
 }

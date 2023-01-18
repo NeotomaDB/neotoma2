@@ -102,7 +102,6 @@ testthat::test_that("We are pulling in the sites we expect to capture:", {
   #usa_ds <- get_datasets(loc = location, all_data = TRUE)
   fla <- get_sites(gpid = "Florida", limit = 10000)
 
-  testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
-  #testthat::expect_true(all(getids(fla)$siteid %in% getids(usa_ds)$siteid))
+  testthat::expect_true(all(unique(getids(fla)$siteid) %in% unique(getids(usa)$siteid)))
 
 })

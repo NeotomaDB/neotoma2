@@ -4,7 +4,7 @@
 setMethod(f = "show",
           signature = "dataset",
           definition = function(object) {
-            print(data.frame(datasetid = object@datasetid,
+            print(data.frame(datasetid = as.character(object@datasetid),
                              database = object@database,
                              datasettype = object@datasettype,
                              age_range_old =  object@age_range_old,
@@ -18,7 +18,7 @@ setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
             map(object@datasets, function(y) {
-              df <- data.frame(datasetid = y@datasetid,
+              df <- data.frame(datasetid = as.character(y@datasetid),
                                database = y@database,
                                datasettype = y@datasettype,
                                age_range_old =  y@age_range_old,
@@ -156,7 +156,7 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("dataset"),
           definition = function(x) {
-            data.frame(datasetid = x@datasetid,
+            data.frame(datasetid = as.character(x@datasetid),
                        database = x@database,
                        datasettype = x@datasettype,
                        age_range_old =  x@age_range_old,
