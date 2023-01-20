@@ -1,3 +1,4 @@
+utils::globalVariables(c("col1", "df_ready2"))
 #' @title parse_body
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools

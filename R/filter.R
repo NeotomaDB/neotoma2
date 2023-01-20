@@ -1,3 +1,4 @@
+utils::globalVariables(c("elev", "notes"))
 #' @title Apply a filter for Neotoma sites objects.
 #' @description The \code{filter} function takes a \code{sites} object
 #' and allows a user to filter on a number of properties. Since a sites obhect
@@ -103,7 +104,7 @@ filter <- function(x, ...) {
 #' @param ... arguments to filter by.
 #' @examples
 #' # Download 100 sites, but only keep the sites that are close to sea level.
-#' some_sites <- get_sites(sitename = "Lake%", limit = 100):
+#' some_sites <- get_sites(sitename = "Lake%", limit = 100)
 #' site_subset <- some_sites %>% filter(altitude < 100)
 #' # Download 100 sites, get all associated datasets, but keep only
 #' # sites/datasets that are of datasettype "pollen":

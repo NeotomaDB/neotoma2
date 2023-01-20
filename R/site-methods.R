@@ -1,3 +1,9 @@
+utils::globalVariables(c("siteid", "collunitid", "sitename", "datasetid",
+  "datasettype", "database", "pi_list", ".", "citation",
+  "notes.x", "notes.y", "allids", "element", "taxonid", "symmetry",
+  "taxongroup", "elementtype", "variablename", "ecologicalgroup", "element",
+  "age", "value", "counter", "prop"))
+
 #' @title Show a site object as a dataframe
 #' @description Convert a Neotoma package site object into a data.frame()
 #' returning the siteid, sitename, latitude, longitude and altitude of the site.
@@ -366,6 +372,7 @@ setMethod(f = "doi",
                          doi = doi)
             }) %>%
             dplyr::bind_rows() %>%
+            dplyr::mutate(datasetid = as.character(datasetid)) %>%
             dplyr::full_join(ids, by = "datasetid") %>%
             dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%
@@ -401,7 +408,7 @@ setMethod(f = "doi",
             dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%
             dplyr::arrange(doi) %>%
-            dplyr::filter(dplyr::row_number()==1) %>%
+            dplyr::filter(dplyr::row_number() == 1) %>%
             as.data.frame()
             return(dois)
           })
@@ -438,22 +445,23 @@ setMethod(f = "cite_data",
                          doi = doi,
                          pi_list = paste0(sort(pi_list), collapse = "; "))
             }) %>%
-            dplyr::bind_rows()
+            do.call(rbind, .) %>%
+            mutate(datasetid = as.character(datasetid)) # Cast to manage joins.
 
             citations <- ids %>%
-            dplyr::full_join(sitenames, by = "siteid") %>%
-            dplyr::full_join(datasets, by = "datasetid") %>%
-            dplyr::full_join(dois, by = "datasetid") %>%
-            dplyr::select(siteid, sitename,
-                          collunitid, datasetid,
-                          datasettype, database, doi, pi_list) %>%
-            dplyr::group_by(siteid, collunitid, datasetid) %>%
-            dplyr::arrange(doi) %>%
-            dplyr::filter(dplyr::row_number() == 1) %>%
-            as.data.frame() %>%
-            dplyr::mutate(citation = sprintf(strn,
-                          pi_list, sitename, datasettype, database, doi)) %>%
-            dplyr::select(datasetid, citation)
+              dplyr::full_join(sitenames, by = "siteid") %>%
+              dplyr::full_join(datasets, by = "datasetid") %>%
+              dplyr::full_join(dois, by = "datasetid") %>%
+              dplyr::select(siteid, sitename,
+                            collunitid, datasetid,
+                            datasettype, database, doi, pi_list) %>%
+              dplyr::group_by(siteid, collunitid, datasetid) %>%
+              dplyr::arrange(doi) %>%
+              dplyr::filter(dplyr::row_number() == 1) %>%
+              as.data.frame() %>%
+              dplyr::mutate(citation = sprintf(strn,
+                            pi_list, sitename, datasettype, database, doi)) %>%
+              dplyr::select(datasetid, citation)
 
             return(citations)
           })

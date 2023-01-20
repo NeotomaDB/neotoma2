@@ -1,3 +1,5 @@
+utils::globalVariables(c(".", "element", "taxonid", "symmetry", "taxongroup",
+  "elementtype", "variablename", "ecologicalgroup", "element", "taxonid"))
 # Start "c" methods
 #' @title c Method - Combine objects, including NULL
 setClassUnion("missingOrNULL", c("missing", "NULL"))

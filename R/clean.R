@@ -11,6 +11,31 @@ utils::globalVariables(c("siteid"))
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
+#' @examples
+#' clean_sites <- get_sites(sitename = "L%", limit = 20)
+#' more_sites <- get_sites(sitename = "La%", limit = 20)
+#' long_set <- c(clean_sites, more_sites)
+#' length(long_set)
+#' # By removing duplicates we get a smaller object.
+#' length(clean(long_set))
+#' # We can do the same thing with collection units:
+#' clean_cols <- get_sites(sitename = "L%", limit = 20) %>%
+#'   collunits()
+#' more_cols <- get_sites(sitename = "La%", limit = 20) %>%
+#'   collunits()
+#' long_set <- c(clean_cols, more_cols)
+#' length(long_set)
+#' # By removing duplicates we get a smaller object.
+#' length(clean(long_set))
+#' # And datasets:
+#' clean_ds <- get_sites(sitename = "L%", limit = 20) %>%
+#'   get_downloads() %>% datasets()
+#' more_ds <- get_sites(sitename = "La%", limit = 20) %>%
+#'   get_downloads() %>% datasets()
+#' long_set <- c(clean_ds, more_ds)
+#' length(long_set)
+#' # By removing duplicates we get a smaller object.
+#' length(clean(long_set))
 #' @export
 clean <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
@@ -39,7 +64,7 @@ clean <- function(x = NA, verbose = TRUE, ...) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' @export
-clean.sites <- function(x, verbose = TRUE) {
+clean.sites <- function(x, verbose = TRUE, ...) {
 
   siteids <- as.data.frame(x)$siteid
 
@@ -90,7 +115,7 @@ clean.sites <- function(x, verbose = TRUE) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' @export
-clean.collunits <- function(x) {
+clean.collunits <- function(x, verbose = TRUE, ...) {
   cuids <- as.data.frame(x)$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
   if (length(matched) == 0) {
@@ -129,7 +154,7 @@ clean.collunits <- function(x) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' @export
-clean.datasets <- function(x) {
+clean.datasets <- function(x, verbose = TRUE, ...) {
   dsids <- as.data.frame(x)$datasetid
   return(x[which(!duplicated(dsids))])
 }
