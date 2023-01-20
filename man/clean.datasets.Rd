@@ -4,7 +4,7 @@
 \alias{clean.datasets}
 \title{clean sites objects to remove duplicates.}
 \usage{
-\method{clean}{datasets}(x)
+\method{clean}{datasets}(x, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{sites, datasets, collunits that may have duplicates.}
