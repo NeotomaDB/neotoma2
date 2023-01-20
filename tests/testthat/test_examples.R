@@ -13,8 +13,6 @@ test_that("Examples run without error", {
            "get_publications",
            "clean")
 
-  refnames <- paste0("example-ref-", egs, ".rds")
-
   for (i in seq_along(egs)) {
     egout <- try(example(topic = egs[i], package = "neotoma2", ask = FALSE,
                          character.only = TRUE, run.dontrun = TRUE,
