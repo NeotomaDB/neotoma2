@@ -81,7 +81,8 @@ setMethod(f = "specimens",
               'chronologyname', 'units', 'value', 'context', 'element',
               'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
               'sampleanalyst', 'depth', 'thickness', 'samplename')
-          
+            print("sampleset")
+            print(head(sampleset, n = 3))
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
@@ -104,6 +105,8 @@ setMethod(f = "specimens",
                                       dplyr::mutate(datasetid = dsid)
                                   }) %>%
               dplyr::bind_rows()
+            print("sampset")
+            print(head(sampset, n=3))
 
             new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
             
