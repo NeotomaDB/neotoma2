@@ -32,7 +32,8 @@ setMethod(f = "specimens",
           signature = "site",
           definition = function(x) {
             
-            allids <<- getids(x)
+            #allids <<- getids(x)
+            assign("allids", getids(x))
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
