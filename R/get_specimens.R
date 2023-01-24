@@ -159,7 +159,7 @@ get_specimens.sites <- function(x,...) {
   base_url <- paste0("data/datasets/", output,"/specimens/")
   result <- neotoma2::parseURL(base_url)
 
-  df <- samples(x)
+  df <- suppressWarnings(samples(x))
 
   if(dim(df)[1] == 0){
     x <- get_downloads(x)
