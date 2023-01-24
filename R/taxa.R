@@ -19,6 +19,9 @@ setMethod(f = "taxa",
           signature = "sites",
           definition = function(object) {
             samples <- samples(object)
+            if(nrow(samples) == 0){
+              stop("No assigned samples. Did you run get_downloads() on your sites object?")
+            }
             tx_table <- samples %>%
               group_by(units,
                 context,

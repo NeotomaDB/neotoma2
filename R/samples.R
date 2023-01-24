@@ -21,6 +21,10 @@ setMethod(f = "samples",
           definition = function(x) {
             output <- purrr::map(x@sites, function(y) samples(y)) %>%
               dplyr::bind_rows()
+            if(nrow(output) == 0){
+              warnsite <- sprintf("No assigned samples Did you run get_downloads()?")
+              warning(warnsite)
+            }
             return(output)
           }
 )
@@ -106,6 +110,7 @@ setMethod(f = "samples",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
 
+            allids <- get("allids", parent.frame())
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma
