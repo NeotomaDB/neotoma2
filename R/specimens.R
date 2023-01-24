@@ -78,7 +78,12 @@ setMethod(f = "specimens",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-            sampleset <- samples(x) %>%
+            sampleset <- samples(x)
+            
+            if(nrow(sampleset) == 0){
+              stop("Not enough data. Have you run get_specimens()?")
+            }
+            sampleset %>%
               dplyr::select('datasetid', 'sampleid', 'taxonid', 'age',
                             'agetype', 'ageolder', 'ageyounger', 'chronologyid',
                             'chronologyname', 'units', 'value', 'context', 'element',
