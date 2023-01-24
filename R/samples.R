@@ -106,6 +106,7 @@ setMethod(f = "samples",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
 
+            allids <- get("allids", parent.frame())
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma
