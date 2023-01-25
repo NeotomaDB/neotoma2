@@ -7,7 +7,6 @@
 #' @description
 #' Information for Specimens
 #' @param x Use a single specimenid
-#' @param datasetid datasetid number(s)
 #' @param ... Additional terms passed to get_specimens, most common datasetid
 #' @return The function returns a specimens list
 #' @examples \dontrun{

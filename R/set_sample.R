@@ -13,7 +13,7 @@
 #' @param samplename sample's name
 #' @param sampleanalyst Analyst's contact name
 #' @param analysisunitid Which analysis unit it is
-#' @param analysisunitnamesiteid Analysis Unit's name
+#' @param analysisunitname Analysis Unit's name
 #' @export
 #' @examples
 #' \dontrun{

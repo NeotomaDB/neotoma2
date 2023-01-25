@@ -10,8 +10,6 @@ get_specimens(x = NA, ...)
 \item{x}{Use a single specimenid}
 
 \item{...}{Additional terms passed to get_specimens, most common datasetid}
-
-\item{datasetid}{datasetid number(s)}
 }
 \value{
 The function returns a specimens list

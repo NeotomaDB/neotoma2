@@ -39,7 +39,7 @@ set_sample(
 
 \item{analysisunitid}{Which analysis unit it is}
 
-\item{analysisunitnamesiteid}{Analysis Unit's name}
+\item{analysisunitname}{Analysis Unit's name}
 }
 \description{
 set Sample Information
