@@ -18,34 +18,15 @@ utils::globalVariables(c("context"))
 setMethod(f = "taxa",
           signature = "sites",
           definition = function(object) {
-            samples <- samples(object)
-            if(nrow(samples) == 0){
-              stop("No assigned samples. Did you run get_downloads() on your sites object?")
+            output <- purrr::map(object@sites, function(y) taxa(y)) %>%
+              dplyr::bind_rows()
+            if(nrow(output) == 0){
+              warnsite <- sprintf("No assigned samples. Did you run get_downloads()?")
+              warning(warnsite)
             }
-            tx_table <- samples %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
-              summarise(samples = n(), .groups = "keep") %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
-              summarise(sites = n(), samples = sum(samples), .groups = "keep")
-            return(tx_table)
-          })
+            return(output)
+          }
+)
 
 #' @title Extract taxonomic data from a single site.
 #' @param object A \code{site} object.
@@ -58,31 +39,11 @@ setMethod(f = "taxa",
 setMethod(f = "taxa",
           signature = "site",
           definition = function(object) {
-            samples <- samples(object)
-            tx_table <- samples %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
-              summarise(samples = n(), .groups = "keep") %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
-              summarise(sites = n(), samples = sum(samples), .groups = "keep")
-            return(tx_table)
-          })
+            assign("allids", getids(object))
+            purrr::map(object@collunits@collunits, function(x) taxa(x)) %>%
+              dplyr::bind_rows()
+          }
+)
 
 #' @title Extract taxonomic data from a set of sites.
 #' @param object A \code{collunits} object.
@@ -91,31 +52,12 @@ setMethod(f = "taxa",
 setMethod(f = "taxa",
           signature = "collunits",
           definition = function(object) {
-            samples <- samples(object)
-            tx_table <- samples %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
-              summarise(samples = n(), .groups = "keep") %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
-              summarise(sites = n(), samples = sum(samples), .groups = "keep")
-            return(tx_table)
-          })
+            allids <- get("allids", parent.frame())
+            siteid <- allids$siteid
+            purrr::map(object@collunits, function(x) taxa(x)) %>%
+              dplyr::bind_rows()
+          }
+)
 
 #' @title Extract taxonomic data from a set of sites.
 #' @param object A \code{collunit} object.
@@ -124,7 +66,11 @@ setMethod(f = "taxa",
 setMethod(f = "taxa",
           signature = "collunit",
           definition = function(object) {
+            allids <- get("allids", parent.frame())
+            siteid <- allids$siteid[[1]]
             samples <- samples(object)
+            samples <- samples %>%
+              mutate(siteid = siteid)
             tx_table <- samples %>%
               group_by(units,
                 context,
@@ -134,7 +80,7 @@ setMethod(f = "taxa",
                 taxongroup,
                 elementtype,
                 variablename,
-                ecologicalgroup,
+                ecologicalgroup, 
                 siteid) %>%
               summarise(samples = n(), .groups = "keep") %>%
               group_by(units,

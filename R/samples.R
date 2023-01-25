@@ -49,7 +49,6 @@ setMethod(f = "samples",
           definition = function(x) {
             ##allids <- getids(x)
             assign("allids", getids(x))
-            allids <- get("allids", parent.frame())
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
