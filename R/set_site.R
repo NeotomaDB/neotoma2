@@ -35,7 +35,7 @@ set_site <- function(x = NA,
                      description = NA_character_,
                      collunits = new("collunits")) {
 
-  #function_call <- match.call()
+  function_call <- match.call()
 
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
@@ -53,15 +53,8 @@ set_site <- function(x = NA,
     x@collunits <- collunits
   } else {
     if (is(x, "site")) {
-     # site_slots <- names(x)
-      cl <- as.list(match.call())
-      #sprint(cl)
-      cl <- lapply(cl, eval, envir = parent.frame())
-      print(cl)
-      #print(site_slots)
-      print(names(cl))
-      for (name in names(cl)) {
-        slot(x, name) <- cl[name]
+      for (i in 3:length(function_call)) {
+        slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
       }
       return(x)
     } else {

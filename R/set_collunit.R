@@ -42,7 +42,9 @@ set_collunit <- function(x = NA,
                          datasets = new("datasets"),
                          chronologies = new("chronologies"),
                          defaultchronology = NA_integer_) {
-  
+
+  function_call <- match.call()
+
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
     if (is.na(collectionunitid)) {
@@ -63,18 +65,15 @@ set_collunit <- function(x = NA,
     x@datasets <- datasets
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
-    
+
   } else {
     if (is(x, "collunit")) {
-      collunit_slots <- names(x)
-      for (i in collunit_slots) {
-        slot(x, i) <- eval(x$i)
+      for (i in 3:length(function_call)) {
+        slot(x, names(function_call)[[i]]) <- function_call[[i]]
       }
-      return(x)
-    } else {
-      stop("`x` must be a collunit object if it is supplied.")
     }
+    return(x)
   }
-  
+
   return(x)
 }
