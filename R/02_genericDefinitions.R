@@ -137,12 +137,3 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
-
-#' @title samples
-#' @param x sites object
-#' @description Obtain wide samples table
-#' @export
-setGeneric("toWide",
-           function(x) {
-             standardGeneric(f = "toWide")
-           })

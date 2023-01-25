@@ -6,14 +6,14 @@
 \usage{
 set_sample(
   x = NA,
-  ages = df_age,
+  ages = list(),
   igsn = NA_character_,
-  datum = df,
+  datum = data.frame(),
   depth = NA_integer_,
   sampleid = NA_integer_,
   thickness = NA_integer_,
   samplename = NA_character_,
-  sampleanalyst = analyst_list_helper,
+  sampleanalyst = list(),
   analysisunitid = NA_integer_,
   analysisunitname = NA_character_
 )
