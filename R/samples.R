@@ -9,7 +9,7 @@ utils::globalVariables(c("modelagetype", "isdefault"))
 #'   filter(datasettype == "pollen") %>%
 #'   get_downloads()
 #' pollen <- samples(marion)
-#' plot(value ~ I(-1 * age), 
+#' plot(value ~ I(-1 * age),
 #'      data = pollen[pollen$variablename == "Cupressaceae",],
 #' xlab = "Years before present",
 #' ylab = "Cupressaceae pollen count")
@@ -43,18 +43,15 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-            ##allids <- getids(x)
-            assign("allids", getids(x))
+            allids <- getids(x)
             siteinfo <- as.data.frame(x) %>%
-              dplyr::left_join(allids, by = "siteid") %>%
-              dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-              dplyr::rename(sitenotes = notes.x,
-                            datasetnotes = notes.y)
+              dplyr::left_join(allids, by = "siteid")
             sampset <- purrr::map(x@collunits@collunits,
               function(y) samples(y)) %>%
                 dplyr::bind_rows() %>%
                 dplyr::bind_rows() %>%
-                dplyr::left_join(siteinfo, by = "datasetid")
+                dplyr::left_join(siteinfo, by = "datasetid") %>%
+                dplyr::rename(sitenotes = notes)
 
             return(sampset)
           }
@@ -106,7 +103,7 @@ setMethod(f = "samples",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
 
-            allids <- get("allids", parent.frame())
+            ids <- getids(x)
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma
@@ -133,8 +130,9 @@ setMethod(f = "samples",
               max_order <- max(defaultchron$order, na.rm = TRUE)
               if (sum(defaultchron$order == max_order, na.rm = TRUE) > 1) {
                 if (any(is.na(defaultchron$dateprepared))) {
-                  newmax_order <- which.max(defaultchron$chronologyid[defaultchron$order == max_order])
-                  defaultchron$order[defaultchron$order == max_order][newmax_order] <- max_order + 1
+                  high_chron <- defaultchron$order == max_order
+                  newmax_order <- which.max(defaultchron$chronologyid[high_chron])
+                  defaultchron$order[high_chron][newmax_order] <- max_order + 1
                 } else {
                   newmax_order <- which.max(defaultchron$dateprepared[defaultchron$order == max_order])
                   defaultchron$order[defaultchron$order == max_order][newmax_order] <- max_order + 1
@@ -144,14 +142,14 @@ setMethod(f = "samples",
               if (all_na == TRUE) {
                 warnsite <- sprintf(
                   "The dataset %s has no default chronologies.",
-                  allids$datasetid[1])
+                  ids$datasetid[1])
                 warning(warnsite)
-              } else if (sum(defaultchron$order == max_order, 
+              } else if (sum(defaultchron$order == max_order,
                              na.rm = TRUE) > 1) {
                 warnsite <- sprintf(
                   "The dataset %s has multiple default chronologies.
                    Chronology %s has been used.",
-                   allids$datasetid[1],
+                   ids$datasetid[1],
                    defaultchron$chronologyid[which.max(defaultchron$order)])
                 warning(warnsite)
                 defaultchron <- defaultchron[which.max(defaultchron$order), ]
@@ -183,8 +181,11 @@ setMethod(f = "samples",
                                                           }) %>%
                                       dplyr::bind_rows() %>%
                                       dplyr::mutate(datasetid = as.character(dsid))
+                                    return(allsamp)
                                   }) %>%
-              dplyr::bind_rows()
+              dplyr::bind_rows() %>%
+              dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
+              dplyr::rename(datasetnotes = notes)
 
             return(sampset)
           }
