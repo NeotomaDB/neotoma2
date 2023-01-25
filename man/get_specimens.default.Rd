@@ -7,7 +7,7 @@
 \method{get_specimens}{default}(...)
 }
 \arguments{
-\item{...}{Use a single number to extract site information}
+\item{...}{Pass argument datasetid and the corresponding datasetid}
 }
 \description{
 Get Specimen datasetid

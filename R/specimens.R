@@ -123,7 +123,6 @@ setMethod(f = "specimens",
             if(nrow(sampset) != 0){
               new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
             } else {
-              
               new_sampset <- data.frame()
             }
             return(new_sampset)

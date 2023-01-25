@@ -1,0 +1,69 @@
+#' @title set Sample Information
+#' @import lubridate
+#' @import sf
+#' @importFrom methods new
+#' @importFrom methods slot<-
+#' @param x Object to be set as a sample
+#' @param ages ages
+#' @param igsn IGSN character
+#' @param datum dataframe of datum
+#' @param depth integer representing depth
+#' @param sampleid ID for sample
+#' @param thickness thickness of core
+#' @param samplename sample's name
+#' @param sampleanalyst Analyst's contact name
+#' @param analysisunitid Which analysis unit it is
+#' @param analysisunitnamesiteid Analysis Unit's name
+#' @export
+#' @examples
+#' \dontrun{
+#' # Create a site called "My Lake", to
+#' x = st_as_sf(st_sfc(st_point(c(5,5))))
+#' my_site <- set_site(sitename = "My Lake",
+#'                     geography = x,
+#'                     description = "my lake",
+#'                     altitude = 30)
+#' }
+set_sample <- function(x=NA,
+                       ages = list(),
+                       igsn = NA_character_,
+                       datum = data.frame(),
+                       depth = NA_integer_,
+                       sampleid = NA_integer_,
+                       thickness = NA_integer_,
+                       samplename = NA_character_,
+                       sampleanalyst = list(),
+                       analysisunitid = NA_integer_,
+                       analysisunitname = NA_character_){
+  
+  if (suppressWarnings(is.na(x))) {
+    x <- new("sample")
+    if (is.na(sampleid)) {
+      x@sampleid <- uuid::UUIDgenerate()
+    } else {
+      x@sampleid <- sampleid
+    }
+    
+    x@ages <- ages
+    x@igsn <- igsn
+    x@datum <- datum
+    x@depth <- depth
+    x@thickness <- thickness
+    x@samplename <- samplename
+    x@sampleanalyst <- sampleanalyst
+    x@analysisunitid <- analysisunitid
+    x@analysisunitname <- analysisunitname
+  } else {
+    if (is(x, "sample")) {
+      sample_slots <- names(x)
+      for (i in sample_slots) {
+        slot(x, i) <- eval(x@i)
+      }
+      return(x)
+    } else {
+      stop("`x` must be a sample object if it is supplied.")
+    }
+  }
+  
+}
+  
