@@ -49,6 +49,7 @@ setMethod(f = "samples",
           definition = function(x) {
             ##allids <- getids(x)
             assign("allids", getids(x))
+            allids <- get("allids", parent.frame())
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
@@ -82,6 +83,7 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "collunits",
           definition = function(x) {
+            allids <- get("allids", parent.frame())
             purrr::map(x@collunits, function(x) samples(x)) %>%
               dplyr::bind_rows()
           }

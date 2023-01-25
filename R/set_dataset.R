@@ -52,12 +52,17 @@ set_dataset <- function(x = NA,
 
   } else {
     if (is(x, "dataset")) {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
+    } else {
+      stop("`x` must be a dataset object if it is supplied.")
     }
-    return(x)
   }
-
   return(x)
 }

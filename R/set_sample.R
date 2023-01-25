@@ -36,6 +36,8 @@ set_sample <- function(x=NA,
                        analysisunitid = NA_integer_,
                        analysisunitname = NA_character_){
   
+  function_call <- match.call()
+  
   if (suppressWarnings(is.na(x))) {
     x <- new("sample")
     if (is.na(sampleid)) {
@@ -43,7 +45,6 @@ set_sample <- function(x=NA,
     } else {
       x@sampleid <- sampleid
     }
-    
     x@ages <- ages
     x@igsn <- igsn
     x@datum <- datum
@@ -55,15 +56,17 @@ set_sample <- function(x=NA,
     x@analysisunitname <- analysisunitname
   } else {
     if (is(x, "sample")) {
-      sample_slots <- names(x)
-      for (i in sample_slots) {
-        slot(x, i) <- eval(x@i)
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
-      return(x)
     } else {
       stop("`x` must be a sample object if it is supplied.")
     }
   }
-  
+  return(x)
 }
-  

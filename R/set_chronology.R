@@ -54,15 +54,15 @@ set_chronology <- function(x = NA,
                            chronologyname = NA_character_,
                            chroncontrols = data.frame()) {
 
+  function_call <- match.call()
+  
   if (suppressWarnings(is.na(x))) {
     x <- new("chronology")
-
     if (is.na(chronologyid)) {
       x@chronologyid <- uuid::UUIDgenerate()
     } else {
       x@chronologyid <- chronologyid
     }
-
     x@contact <- contact
     x@agemodel <- agemodel
     x@ageboundolder <- ceiling(ageboundolder / 10) * 10
@@ -77,6 +77,19 @@ set_chronology <- function(x = NA,
 
     x@chroncontrols <- chroncontrols
 
+  } else {
+    if (is(x, "chronology")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
+      }
+    } else {
+      stop("`x` must be a chronology object if it is supplied.")
+    }
   }
   return(x)
 }

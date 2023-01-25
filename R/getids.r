@@ -66,7 +66,6 @@ getids.sites <- function (x, order = TRUE) {
 #' @importFrom dplyr bind_rows
 #' @export
 getids.site <- function (x, order = TRUE) {
-
   siteid <- x@siteid
   if (length(x@collunits) > 0) {
     collunits <- purrr::map(x@collunits@collunits, function(z) {
