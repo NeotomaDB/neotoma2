@@ -18,7 +18,7 @@ marion <- get_sites(sitename = "Marion Lake") \%>\%
   filter(datasettype == "pollen") \%>\%
   get_downloads()
 pollen <- samples(marion)
-plot(value ~ I(-1 * age), 
+plot(value ~ I(-1 * age),
      data = pollen[pollen$variablename == "Cupressaceae",],
 xlab = "Years before present",
 ylab = "Cupressaceae pollen count")
