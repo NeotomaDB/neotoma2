@@ -7,12 +7,15 @@
 #' @description
 #' Information for Specimens
 #' @param x Use a single specimenid
-#' @param ... Additional terms passed to get_specimens.
+#' @param datasetid datasetid number(s)
+#' @param ... Additional terms passed to get_specimens, most common datasetid
 #' @return The function returns a specimens list
 #' @examples \dontrun{
-#' # To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' # To find specimen with ID 19832:
 #' my_specimens <- get_specimens(19832)
 #' }
+#' # To find specimens in datasetid 41610
+#' my_specimens2 <- get_specimens(datasetid = 41610)
 #' @export
 get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -88,9 +91,15 @@ get_specimens.numeric <- function(x, ...) {
   base_url <- paste0("data/specimens/", specimenid)
   result <- neotoma2::parseURL(base_url)
 
+
+  if(length(result$data) ==0){
+    stop("Specimen ID not found. If you meant dataset ID, use parameter datasetid")
+  }
   sps <- result$data %>%
     cleanNULL()
 
+  #if sps is empty list, exit and return error No Specimen ID available.
+  
   sp_index <- purrr::map(sps, function(x) {
     data.frame(datasetid = x$datasetid)}) %>%
     dplyr::bind_rows()
@@ -104,7 +113,7 @@ get_specimens.numeric <- function(x, ...) {
 }
 
 #' @title Get Specimen datasetid
-#' @param ... Use a single number to extract site information
+#' @param ... Pass argument datasetid and the corresponding datasetid
 #' @export
 get_specimens.default <- function(...) {
  
@@ -112,14 +121,16 @@ get_specimens.default <- function(...) {
   cl[[1]] <- NULL
   
   cl <- lapply(cl, eval, envir = parent.frame())
-  dsid <- cl$datasetid
+  dsid <- as.numeric(cl$datasetid)
 
   if (length(dsid) > 0) {
     dsid <- paste0(dsid, collapse = ",")
   }
   
-  base_url <- paste0("data/datasets/", dsid, "/specimens")
+  
+  base_url <- paste0("data/datasets/", as.character(dsid), "/specimens")
   result <- neotoma2::parseURL(base_url)
+  #print(result)
   
   dw <- get_downloads(cl$datasetid)
   

@@ -1,4 +1,4 @@
-utils::globalVariables(c("modelagetype", "isdefault", "allids", "<<-"))
+utils::globalVariables(c("modelagetype", "isdefault"))
 
 #' @title samples
 #' @param x sites object
@@ -43,7 +43,8 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "site",
           definition = function(x) {
-            allids <<- getids(x)
+            ##allids <- getids(x)
+            assign("allids", getids(x))
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
@@ -105,6 +106,7 @@ setMethod(f = "samples",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
 
+            allids <- get("allids", parent.frame())
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
               # This pulls the chronology IDs, then applies the Neotoma
@@ -141,14 +143,14 @@ setMethod(f = "samples",
 
               if (all_na == TRUE) {
                 warnsite <- sprintf(
-                  "The dataset %d has no default chronologies.",
+                  "The dataset %s has no default chronologies.",
                   allids$datasetid[1])
                 warning(warnsite)
               } else if (sum(defaultchron$order == max_order, 
                              na.rm = TRUE) > 1) {
                 warnsite <- sprintf(
-                  "The dataset %d has multiple default chronologies.
-                   Chronology %d has been used.",
+                  "The dataset %s has multiple default chronologies.
+                   Chronology %s has been used.",
                    allids$datasetid[1],
                    defaultchron$chronologyid[which.max(defaultchron$order)])
                 warning(warnsite)
