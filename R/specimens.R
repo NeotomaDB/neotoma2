@@ -61,8 +61,8 @@ setMethod(f = "specimens",
 setMethod(f = "specimens",
           signature = "collunits",
           definition = function(x) {
-            allids <- get("allids", parent.frame())
-            output <- purrr::map(x@collunits, function(x) specimens(x)) %>%
+           allids <- get("allids", parent.frame())
+           output <- purrr::map(x@collunits, function(x) specimens(x)) %>%
               dplyr::bind_rows()
             return(output)
           }
@@ -85,10 +85,10 @@ setMethod(f = "specimens",
             }
             sampleset %>%
               dplyr::select('datasetid', 'sampleid', 'taxonid', 'age',
-                            'agetype', 'ageolder', 'ageyounger', 'chronologyid',
-                            'chronologyname', 'units', 'value', 'context', 'element',
-                            'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
-                            'sampleanalyst', 'depth', 'thickness', 'samplename')
+              'agetype', 'ageolder', 'ageyounger', 'chronologyid',
+              'chronologyname', 'units', 'value', 'context', 'element',
+              'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
+              'sampleanalyst', 'depth', 'thickness', 'samplename')
             
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {

@@ -143,7 +143,7 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   base_url <- paste0("data/downloads/", dataset)
   result <- parseURL(base_url, ...) # nolint
 
-  output <- parse_download(result)
+  output <- parse_download(result, verbose = verbose)
 
   return(output)
 }
@@ -182,7 +182,7 @@ get_downloads.character <- function(x, verbose = TRUE, ...) {
   result <- result %>%
     cleanNULL()
 
-  output <- parse_download(result)
+  output <- parse_download(result, verbose = verbose)
 
   return(output)
 }

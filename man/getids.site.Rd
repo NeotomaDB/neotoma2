@@ -2,15 +2,15 @@
 % Please edit documentation in R/getids.r
 \name{getids.site}
 \alias{getids.site}
-\title{Get object IDs from sites}
+\title{Get object IDs from a site object.}
 \usage{
 \method{getids}{site}(x, order = TRUE)
 }
 \arguments{
-\item{x}{A neotoma2 \code{sites} object.}
+\item{x}{A neotoma2 \code{site} object.}
 
 \item{order}{sort items by siteid, collunitid, datasetid}
 }
 \description{
-Get object IDs from sites
+Get object IDs from a site object.
 }
