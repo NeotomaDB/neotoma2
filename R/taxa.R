@@ -19,7 +19,18 @@ setMethod(f = "taxa",
           signature = "sites",
           definition = function(object) {
             output <- purrr::map(object@sites, function(y) taxa(y)) %>%
-              dplyr::bind_rows()
+              dplyr::bind_rows() %>%
+                group_by(units,
+                context,
+                element,
+                taxonid,
+                symmetry,
+                taxongroup,
+                elementtype,
+                variablename,
+                ecologicalgroup) %>%
+              summarise(samples = sum(samples),
+                        sites = sum(sites), .groups = "keep")
             if(nrow(output) == 0){
               warnsite <- sprintf("No assigned samples. Did you run get_downloads()?")
               warning(warnsite)
