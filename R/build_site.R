@@ -63,7 +63,8 @@ build_sites <- function(x) {
              notes = use_na(testNull(x$notes, NA), "char"),
              description = use_na(testNull(x$sitedescription, NA), "char"),
              collunits = collunits)
-  })
+    }
+  )
 
   sites <- new("sites", sites = new_sites)
   return(sites)

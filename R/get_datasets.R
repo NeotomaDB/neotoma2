@@ -273,7 +273,11 @@ get_datasets.numeric <- function(x, ...) {
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids
-  dataset_list <- getids(x)$datasetid
+  ids <- getids(x)
+  ids <- ids %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+                               !is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
 
   output <- get_datasets(dataset_list, all_data = TRUE)
