@@ -11,7 +11,8 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP path for the particular API call.
-#' @param use Uses the neotoma server by default, but supports either the development API server or a local server.
+#' @param use Uses the neotoma server by default, but supports either the development
+#' API server or a local server.
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
 #' calling \code{parseURL}
@@ -51,7 +52,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                              body = body,
                              add_headers("User-Agent" = "neotoma2 R package"),
                              httr::content_type("application/json"))
-      warning("To get the complete data, use all_data = TRUE. Returned the first 25 elements.")
+      warning("To get the complete data, use all_data = TRUE. 
+        Returned the first 25 elements.")
     }
 
     # Break if we can't connect:
@@ -87,13 +89,13 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       # Function with Post (Use this once server issue is resolved)
       args <- x
       new_url <- newURL(baseurl, args, ...)
-      body <- parsebody(args,...)
+      body <- parsebody(args, ...)
       body <- jsonlite::fromJSON(body)
 
       datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid,
         "[0-9.]+")[[1]])
-      seq_chunk <- split(datasetids_nos, 
-        ceiling(seq_along(datasetids_nos) / 50))
+      seq_chunk <- split(datasetids_nos,
+        ceiling(seq_along(datasetids_nos) / query$limit))
 
       responses <- c()
       for (sequ in seq_chunk) {

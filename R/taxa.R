@@ -1,4 +1,4 @@
-utils::globalVariables(c("context"))
+utils::globalVariables(c("context", "sites"))
 
 #' @import dplyr
 #' @export

@@ -2,35 +2,13 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites.default}
 \alias{get_sites.default}
-\title{Get Site Information for Fossil Sites}
+\title{get_sites}
 \usage{
 \method{get_sites}{default}(...)
 }
-\arguments{
-\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc, gpid}
-}
 \description{
-Get Site Information for Fossil Sites
+get_sites
 }
-\examples{
-\dontrun{
-## Find all sites with a min altitude of 12m and a max altitude of 25m
-## By default returns only 25 sites (default limit is 25):
-sites_12to25 <- get_sites(altmin=12, altmax=25)
-## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
-sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
-
-## To find all sites that contain the string "Alex\%"
-alex_sites <- get_sites(sitename="Alex\%")
-
-## To find sites in Brazil (again with default 25 records)
-brazil <- '{"type": "Polygon",
-"coordinates": [[
- [-73.125, -9.102096738726443],
- [-56.953125,-33.137551192346145],
- [-36.5625,-7.710991655433217],
- [-68.203125,13.923403897723347],
- [-73.125,-9.102096738726443]]]}'
-brazil_sites <- get_sites(loc = brazil[1])
-}
+\author{
+Socorro Dominguez \email{sedv8808@gmail.com}
 }
