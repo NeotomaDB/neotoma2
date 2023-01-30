@@ -11,8 +11,8 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP path for the particular API call.
-#' @param use Uses the neotoma server by default, but supports either the development
-#' API server or a local server.
+#' @param use Uses the neotoma server by default, but supports either the
+#' development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
 #' calling \code{parseURL}
@@ -27,6 +27,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     }
   }
 
+  # Assign the API host location:
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
@@ -36,6 +37,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
+
   query <- list(...)
   if (all_data == FALSE) {
     response <- httr::GET(paste0(baseurl, x),
@@ -43,7 +45,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                           query = query)
 
     if (response$status_code == 414) {
-      # Function with Post (Use this once server issue is resolved)
+      # The 414 error is a URL that is too long. This is a lazy way to manage
+      # the choice between a POST and GET call.
+      # Function with POST (Use this once server issue is resolved)
       query <- list(...)
       args <- x
       new_url <- newURL(baseurl, args, ...)
@@ -64,7 +68,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                       http://data.neotomadb.org")
 
     if (response$status_code == 200) {
-      #print(response$url)
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
