@@ -1,5 +1,6 @@
-#' @title Build a \code{site} from the Neotoma API response.
-#' @param x A list returned from the Neotoma API's \code{data} slot.
+#' @md
+#' @title Build a `site` from the Neotoma API response.
+#' @param x A list returned from the Neotoma API's `data` slot.
 #' @importFrom assertthat assert_that
 #' @importFrom purrr map
 #' @import sf

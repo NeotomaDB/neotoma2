@@ -1,3 +1,4 @@
+#' @md
 #' @title parseURL
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @author Simon Goring \email{goring@wisc.edu}
@@ -10,12 +11,11 @@
 #' @importFrom jsonlite fromJSON
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
-#' @param x The HTTP path for the particular API call.
-#' @param use Uses the neotoma server by default, but supports either the
+#' @param x The HTTP/S path for the particular API call.
+#' @param use Uses the neotoma server by default ("neotoma"), but supports either the
 #' development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
-#' calling \code{parseURL}
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
@@ -157,4 +157,28 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       return(result)
     }
   }
+}
+
+#' @title Format API call to Neotoma from call arguments
+#' @description
+#' Take a set of arguments from the neotoma2 package and produce
+#' the appropriate URL to the Neotoma v2.0 API.
+#' This is an internal function used by `parseURL()`.
+#' @returns A properly formatted URL.
+newURL <- function(baseurl, args, ...) {
+  query <- list(...)
+  # Retrieve complete call to create json body
+  # There are 3 cases
+  # I. Long list of IDs (most common)
+  if (grepl("datasets", args)) {
+    new_url <- paste0(baseurl, "data/datasets")
+    params <- stringr::str_remove_all(args, "data/datasets")
+  } else if (grepl("sites", args)) {
+    new_url <- paste0(baseurl, "data/sites")
+    params <- stringr::str_remove_all(args, "data/sites")
+  } else if (grepl("downloads", args)) {
+    new_url <- paste0(baseurl, "data/downloads")
+    params <- stringr::str_remove_all(args, "data/downloads")
+  }
+  return(new_url)
 }

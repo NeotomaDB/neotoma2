@@ -5,8 +5,9 @@
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' A helper function to build a specimen object from a list returned 
-#' within the get_speciments() call.
+#' A helper function to build a specimen object from a list returned by
+#' the Neotoma API call. The function is not exported, but called from
+#' the get_speciments() call.
 #' @param x specimen list
 #' @return A list (from JSON) parsed into specimen
 #' @export

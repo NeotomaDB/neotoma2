@@ -37,22 +37,18 @@ parse_site <- function(result) {
 #' @description
 #' The get_sites() function is a wrapper for the Neotoma `sites` API
 #' endpoint.
-#' Look for a site details using only a site ID or for multiple sites
-#' using possible sitenames, max latitudes or min latitudes.
-#' Displays a table with the following columns: siteid, sitename, lat, long,
-#' and elev.
 #' The function takes parameters defined by the user and returns a list
-#' of contact information supplied by the Neotoma Paleoecological Database.
+#' of site information supplied by the Neotoma Paleoecological Database.
 #' The user may define all or none of the possible fields.
-#' The function contains data checks for each defined parameter.
-#' @param x Use a single number to extract site information
-#' @param ... accepted arguments, see description for more details.
+#' @param x Use a single integer or vector of integers representing 
+#' unique Neotoma site identifiers (siteids) to extract site information.
+#' @param ... accepted arguments, see details for more information.
 #' @details
 #' A `site` object in Neotoma is a physical location at which one or more
 #' collection units are located. Each collection unit may have one or more
 #' datasets within it, defined by the dataset type. The `get_sites()`
 #' function searches for each site within Neotoma that matches the query
-#' parameters, and returns them as a `sites`` object, a list of `site`
+#' parameters, and returns them as a `sites` object, a list of `site`
 #' objects. The `get_sites()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `sites`.
 #' The call itself uses a SQL query which accepts any one of the following

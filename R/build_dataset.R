@@ -1,13 +1,13 @@
-#' @title get_downloads
+#' @title Build a dataset object from a JSON list representation.
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' Helper function to build a dataset
-#' @param x dataset list
-#' @return list parsed into datasets
+#' Helper function to build a dataset from the API JSON response.
+#' @param x a JSON dataset object passed from the Neotoma API.
+#' @return A `dataset` object.
 #' @export
 #' @examples \dontrun{
 #' # To build dataset from API call:

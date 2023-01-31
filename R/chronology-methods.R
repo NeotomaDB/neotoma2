@@ -1,8 +1,9 @@
-# Show methods
-#' @title  Slicer
+#' @md
+#' @title Extract
 #' @param x chronologies object
 #' @param i iteration in chronologies list
-#' @description Obtain one of the elements within a chronologies list
+#' @description Obtain one of the elements within a `chronologies` list
+#' either by element order or by element name.
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "chronologies", i = "numeric"),
@@ -18,10 +19,10 @@ setMethod(f = "[[",
             return(out)
           })
 
-#' @title  $
+#' @title  Extract
 #' @param x chronology object
 #' @param name name of the slot
-#' @description Obtain slots of a chronology without using at-mark
+#' @description Extract chronology metadata by slot name.
 #' @export
 setMethod(f = "$",
           signature = signature(x = "chronology"),
@@ -29,11 +30,11 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-#' @title $ Assignment
+#' @title Replace part of an object
 #' @param x A chronology object
 #' @param name The name of the chronology slot.
 #' @param value A value to be assigned to the chronology slot.
-#' @description Assign values to slots of a chronology without using at-mark
+#' @description Assign values to slots within a chronology object.
 #' @export
 setMethod(f = "$<-",
           signature = signature(x = "chronology"),
@@ -42,10 +43,11 @@ setMethod(f = "$<-",
             return(x)
           })
 
-#' @title  $ for chronologies
+#' @title Extract
 #' @param x chronologies object
 #' @param name name of the slot
-#' @description Obtain slots of a chronologies object without using at-mark
+#' @description Obtain chronology slots across all chronology elements within
+#' a chronologies object.
 #' @export
 setMethod(f = "$",
           signature = signature(x = "chronologies"),
@@ -57,9 +59,9 @@ setMethod(f = "$",
               unlist()
           })
 
-#' @title  as.data.frame chronology
+#' @title Create a data.frame from a chronology object.
 #' @param x chronology object
-#' @description show as dataframe as prep to save as csv
+#' @description Convert all slots within a chronology to a data.frame.
 #' @importFrom lubridate as_date
 #' @export
 setMethod(f = "as.data.frame",
@@ -78,10 +80,11 @@ setMethod(f = "as.data.frame",
                        chronologyname = x@chronologyname)
           })
 
-#' @title  as.data.frame datasets
+#' @title  as.data.frame chronologies
 #' @param x chronologies object
 #' @importFrom purrr map
-#' @description show as dataframe as prep to save as csv
+#' @description Convert all slots within each chronology within a
+#' chronologies object to a data.frame.
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronologies"),
