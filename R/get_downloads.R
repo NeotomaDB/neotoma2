@@ -156,7 +156,11 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
 
-  output <- getids(x) %>%
+  output <- getids(x) %>% 
+    dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+                  !is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  output <- output %>%
     dplyr::select(datasetid) %>%
     stats::na.omit() %>%
     unique() %>%
