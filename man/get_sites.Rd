@@ -7,9 +7,10 @@
 get_sites(x = NA, ...)
 }
 \arguments{
-\item{x}{Use a single number to extract site information}
+\item{x}{Use a single integer or vector of integers representing
+unique Neotoma site identifiers (siteids) to extract site information.}
 
-\item{...}{accepted arguments, see description for more details.}
+\item{...}{accepted arguments, see details for more information.}
 }
 \value{
 The function returns either a single item of class \code{"try-error"}
@@ -28,21 +29,18 @@ limited collection units information.
 \description{
 The get_sites() function is a wrapper for the Neotoma \code{sites} API
 endpoint.
-Look for a site details using only a site ID or for multiple sites
-using possible sitenames, max latitudes or min latitudes.
-Displays a table with the following columns: siteid, sitename, lat, long,
-and elev.
 The function takes parameters defined by the user and returns a list
-of contact information supplied by the Neotoma Paleoecological Database.
+of site information supplied by the Neotoma Paleoecological Database.
 The user may define all or none of the possible fields.
-The function contains data checks for each defined parameter.
 }
 \details{
 A \code{site} object in Neotoma is a physical location at which one or more
 collection units are located. Each collection unit may have one or more
 datasets within it, defined by the dataset type. The \code{get_sites()}
 function searches for each site within Neotoma that matches the query
-parameters, and returns them as a \verb{sites`` object, a list of }site\verb{objects. The}get_sites()\verb{command wraps the Neotoma API ([api.neotomadb.org](https://api.neotomadb.org)) call for}sites`.
+parameters, and returns them as a \code{sites} object, a list of \code{site}
+objects. The \code{get_sites()} command wraps the Neotoma API
+(\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{sites}.
 The call itself uses a SQL query which accepts any one of the following
 parameters:
 \itemize{
