@@ -251,7 +251,7 @@ get_datasets.numeric <- function(x, ...) {
   }
 
   base_url <- paste0("data/datasets/", dataset)
-  result <- neotoma2::parseURL(base_url, ..., all_data = TRUE)
+  result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
