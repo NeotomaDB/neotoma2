@@ -11,16 +11,19 @@
 #' my_tbl <- specimens(my_specimens)
 #' }
 #' @export
-#' 
 setMethod(f = "specimens",
-signature = "sites",
-definition = function(x) {
-
-  output <- purrr::map(x@sites, function(y) specimens(y)) %>%
-    dplyr::bind_rows()
-  
-  return(output)
-}
+          signature = "sites",
+          definition = function(x) {
+            
+            output <- purrr::map(x@sites, function(y) specimens(y)) %>%
+              dplyr::bind_rows()
+            if(nrow(output) == 0){
+            warnsite <- sprintf("No assigned specimens. Did you run get_specimens()")
+            warning(warnsite)
+            }
+            
+            return(output)
+          }
 )
 
 #' @title s
@@ -61,11 +64,9 @@ setMethod(f = "specimens",
            allids <- get("allids", parent.frame())
            output <- purrr::map(x@collunits, function(x) specimens(x)) %>%
               dplyr::bind_rows()
-           return(output)
-           }
-          
+            return(output)
+          }
 )
-
 
 #' @title specimens
 #' @param x collunit object
@@ -77,7 +78,12 @@ setMethod(f = "specimens",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-            sampleset <- samples(x) %>%
+            sampleset <- samples(x)
+            
+            if(nrow(sampleset) == 0){
+              stop("Not enough data. Have you run get_specimens()?")
+            }
+            sampleset %>%
               dplyr::select('datasetid', 'sampleid', 'taxonid', 'age',
               'agetype', 'ageolder', 'ageyounger', 'chronologyid',
               'chronologyname', 'units', 'value', 'context', 'element',
@@ -86,29 +92,39 @@ setMethod(f = "specimens",
             
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
-                                    dsid <- y$datasetid
-                                    allspec <- purrr::map(y@specimens@specimens,
-                                                          function(z) {
-                                                            data.frame(
-                                                              sampleid = z@sampleid,
-                                                              taxonid = z@taxonid,
-                                                              specimendid = z@specimenid,
-                                                              taxonname = z@taxonname,
-                                                              portion = z@portion,
-                                                              sex = z@sex,
-                                                              domesticstatus = z@domesticstatus,
-                                                              taphonomictype = z@taphonomictype,
-                                                              elementtype = z@elementtype,
-                                                              symmetry = z@symmetry,
-                                                              row.names = NULL)
-                                                          }) %>%
-                                      dplyr::bind_rows() %>%
-                                      dplyr::mutate(datasetid = dsid)
+                                    if(length(y@specimens@specimens) != 0){
+                                      dsid <- as.character(y$datasetid)
+                                      allspec <- purrr::map(y@specimens@specimens,
+                                                            function(z) {
+                                                              data.frame(
+                                                                sampleid = z@sampleid,
+                                                                taxonid = z@taxonid,
+                                                                specimendid = z@specimenid,
+                                                                taxonname = z@taxonname,
+                                                                portion = z@portion,
+                                                                sex = z@sex,
+                                                                domesticstatus = z@domesticstatus,
+                                                                taphonomictype = z@taphonomictype,
+                                                                elementtype = z@elementtype,
+                                                                symmetry = z@symmetry,
+                                                                row.names = NULL)
+                                                            }) %>%
+                                        dplyr::bind_rows() %>%
+                                        dplyr::mutate(datasetid = dsid)
+                                    } else {
+                                      allspec <- data.frame()
+                                      warnsite <- sprintf("The dataset %s has no assigned specimens.", as.character(y$datasetid))
+                                      warning(warnsite)
+                                      return(allspec)
+                                    }
                                   }) %>%
               dplyr::bind_rows()
-
-            new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
             
+            if(nrow(sampset) != 0){
+              new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
+            } else {
+              new_sampset <- data.frame()
+            }
             return(new_sampset)
           }
 )

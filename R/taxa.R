@@ -1,4 +1,4 @@
-utils::globalVariables(c("context"))
+utils::globalVariables(c("context", "sites"))
 
 #' @import dplyr
 #' @export
@@ -18,20 +18,9 @@ utils::globalVariables(c("context"))
 setMethod(f = "taxa",
           signature = "sites",
           definition = function(object) {
-            samples <- samples(object)
-            tx_table <- samples %>%
-              group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
-              summarise(samples = n(), .groups = "keep") %>%
-              group_by(units,
+            output <- purrr::map(object@sites, function(y) taxa(y)) %>%
+              dplyr::bind_rows() %>%
+                group_by(units,
                 context,
                 element,
                 taxonid,
@@ -40,9 +29,15 @@ setMethod(f = "taxa",
                 elementtype,
                 variablename,
                 ecologicalgroup) %>%
-              summarise(sites = n(), samples = sum(samples), .groups = "keep")
-            return(tx_table)
-          })
+              summarise(samples = sum(samples),
+                        sites = sum(sites), .groups = "keep")
+            if(nrow(output) == 0){
+              warnsite <- sprintf("No assigned samples. Did you run get_downloads()?")
+              warning(warnsite)
+            }
+            return(output)
+          }
+)
 
 #' @title Extract taxonomic data from a single site.
 #' @param object A \code{site} object.
@@ -58,25 +53,25 @@ setMethod(f = "taxa",
             samples <- samples(object)
             tx_table <- samples %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup,
+                       siteid) %>%
               summarise(samples = n(), .groups = "keep") %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup) %>%
               summarise(sites = n(), samples = sum(samples), .groups = "keep")
             return(tx_table)
           })
@@ -91,25 +86,25 @@ setMethod(f = "taxa",
             samples <- samples(object)
             tx_table <- samples %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup,
+                       siteid) %>%
               summarise(samples = n(), .groups = "keep") %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup) %>%
               summarise(sites = n(), samples = sum(samples), .groups = "keep")
             return(tx_table)
           })
@@ -124,25 +119,25 @@ setMethod(f = "taxa",
             samples <- samples(object)
             tx_table <- samples %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup,
-                siteid) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup,
+                       siteid) %>%
               summarise(samples = n(), .groups = "keep") %>%
               group_by(units,
-                context,
-                element,
-                taxonid,
-                symmetry,
-                taxongroup,
-                elementtype,
-                variablename,
-                ecologicalgroup) %>%
+                       context,
+                       element,
+                       taxonid,
+                       symmetry,
+                       taxongroup,
+                       elementtype,
+                       variablename,
+                       ecologicalgroup) %>%
               summarise(sites = n(), samples = sum(samples), .groups = "keep")
             return(tx_table)
           })
