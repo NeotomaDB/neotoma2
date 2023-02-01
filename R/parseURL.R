@@ -1,3 +1,4 @@
+#' @md
 #' @title parseURL
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @author Simon Goring \email{goring@wisc.edu}
@@ -10,11 +11,11 @@
 #' @importFrom jsonlite fromJSON
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
-#' @param x The HTTP path for the particular API call.
-#' @param use Uses the neotoma server by default, but supports either the development API server or a local server.
+#' @param x The HTTP/S path for the particular API call.
+#' @param use Uses the neotoma server by default ("neotoma"), but supports either the
+#' development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
-#' calling \code{parseURL}
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
@@ -26,6 +27,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     }
   }
 
+  # Assign the API host location:
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
@@ -35,6 +37,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
+
   query <- list(...)
   if (all_data == FALSE) {
     response <- httr::GET(paste0(baseurl, x),
@@ -42,7 +45,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                           query = query)
 
     if (response$status_code == 414) {
-      # Function with Post (Use this once server issue is resolved)
+      # The 414 error is a URL that is too long. This is a lazy way to manage
+      # the choice between a POST and GET call.
+      # Function with POST (Use this once server issue is resolved)
       query <- list(...)
       args <- x
       new_url <- newURL(baseurl, args, ...)
@@ -51,7 +56,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                              body = body,
                              add_headers("User-Agent" = "neotoma2 R package"),
                              httr::content_type("application/json"))
-      warning("To get the complete data, use all_data = TRUE. Returned the first 25 elements.")
+      warning("To get the complete data, use all_data = TRUE. 
+        Returned the first 25 elements.")
     }
 
     # Break if we can't connect:
@@ -62,7 +68,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                       http://data.neotomadb.org")
 
     if (response$status_code == 200) {
-      #print(response$url)
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
@@ -87,13 +92,13 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       # Function with Post (Use this once server issue is resolved)
       args <- x
       new_url <- newURL(baseurl, args, ...)
-      body <- parsebody(args,...)
+      body <- parsebody(args, ...)
       body <- jsonlite::fromJSON(body)
 
       datasetids_nos <- as.numeric(stringr::str_extract_all(body$datasetid,
         "[0-9.]+")[[1]])
-      seq_chunk <- split(datasetids_nos, 
-        ceiling(seq_along(datasetids_nos) / 50))
+      seq_chunk <- split(datasetids_nos,
+        ceiling(seq_along(datasetids_nos) / query$limit))
 
       responses <- c()
       for (sequ in seq_chunk) {
@@ -152,4 +157,31 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       return(result)
     }
   }
+}
+
+#' @title Format API call to Neotoma from call arguments
+#' @param baseurl The base URL for the Neotoma API
+#' @param args The set of query arguments to be passed to the API
+#' @param ... Any additional arguments to be passed to the function.
+#' @description
+#' Take a set of arguments from the neotoma2 package and produce
+#' the appropriate URL to the Neotoma v2.0 API.
+#' This is an internal function used by `parseURL()`.
+#' @returns A properly formatted URL.
+newURL <- function(baseurl, args, ...) {
+  query <- list(...)
+  # Retrieve complete call to create json body
+  # There are 3 cases
+  # I. Long list of IDs (most common)
+  if (grepl("datasets", args)) {
+    new_url <- paste0(baseurl, "data/datasets")
+    params <- stringr::str_remove_all(args, "data/datasets")
+  } else if (grepl("sites", args)) {
+    new_url <- paste0(baseurl, "data/sites")
+    params <- stringr::str_remove_all(args, "data/sites")
+  } else if (grepl("downloads", args)) {
+    new_url <- paste0(baseurl, "data/downloads")
+    params <- stringr::str_remove_all(args, "data/downloads")
+  }
+  return(new_url)
 }

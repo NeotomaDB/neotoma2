@@ -1,11 +1,12 @@
-#' @title build_sample
+#' @title Build a samples `data.frame` from Neotoma API JSON
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' Helper function to build a sample
+#' Helper function to build a sample from the API input (list formatted)
+#' coming from the Neotoma API.
 #' @param x sample list
 #' @return list parsed into samples
 #' @export

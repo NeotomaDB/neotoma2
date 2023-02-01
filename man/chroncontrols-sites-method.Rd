@@ -2,7 +2,7 @@
 % Please edit documentation in R/chroncontrols.R
 \name{chroncontrols,sites-method}
 \alias{chroncontrols,sites-method}
-\title{chroncontrols}
+\title{Recover information about the chron controls for a collectionunit.}
 \usage{
 \S4method{chroncontrols}{sites}(x)
 }
@@ -10,5 +10,6 @@
 \item{x}{sites object}
 }
 \description{
-Obtain chroncontrols
+For all sites that includes collection units with chronologies
+return the chronological controls that are used in building the chronology.
 }

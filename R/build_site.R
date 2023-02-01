@@ -1,5 +1,6 @@
-#' @title Build a \code{site} from the Neotoma API response.
-#' @param x A list returned from the Neotoma API's \code{data} slot.
+#' @md
+#' @title Build a `site` from the Neotoma API response.
+#' @param x A list returned from the Neotoma API's `data` slot.
 #' @importFrom assertthat assert_that
 #' @importFrom purrr map
 #' @import sf
@@ -63,7 +64,8 @@ build_sites <- function(x) {
              notes = use_na(testNull(x$notes, NA), "char"),
              description = use_na(testNull(x$sitedescription, NA), "char"),
              collunits = collunits)
-  })
+    }
+  )
 
   sites <- new("sites", sites = new_sites)
   return(sites)

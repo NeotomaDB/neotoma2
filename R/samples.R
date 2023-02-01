@@ -79,7 +79,7 @@ setMethod(f = "samples",
 setMethod(f = "samples",
           signature = "collunits",
           definition = function(x) {
-            allids <- get("allids", parent.frame())
+            # allids <- get("allids", parent.frame())
             purrr::map(x@collunits, function(x) samples(x)) %>%
               dplyr::bind_rows()
           }

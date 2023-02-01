@@ -2,7 +2,7 @@
 % Please edit documentation in R/chronology-methods.R
 \name{[[,chronologies,numeric,ANY-method}
 \alias{[[,chronologies,numeric,ANY-method}
-\title{Slicer}
+\title{Extract}
 \usage{
 \S4method{[[}{chronologies,numeric,ANY}(x, i)
 }
@@ -12,5 +12,6 @@
 \item{i}{iteration in chronologies list}
 }
 \description{
-Obtain one of the elements within a chronologies list
+Obtain one of the elements within a \code{chronologies} list
+either by element order or by element name.
 }
