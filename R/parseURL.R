@@ -160,6 +160,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 }
 
 #' @title Format API call to Neotoma from call arguments
+#' @param baseurl The base URL for the Neotoma API
+#' @param args The set of query arguments to be passed to the API
+#' @param ... Any additional arguments to be passed to the function.
 #' @description
 #' Take a set of arguments from the neotoma2 package and produce
 #' the appropriate URL to the Neotoma v2.0 API.

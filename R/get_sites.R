@@ -34,6 +34,8 @@ parse_site <- function(result) {
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
+#' @param x A numeric vector of unique Neotoma site identifers.
+#' @param ... One of a set of possible query parameters discussed in details.
 #' @description
 #' The get_sites() function is a wrapper for the Neotoma `sites` API
 #' endpoint.
@@ -136,6 +138,7 @@ get_sites <- function(x = NA, ...) {
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
+#' @param ... One of a set of possible query parameters discussed in details.
 #' @export
 get_sites.default <- function(...) { # nolint
 

@@ -6,6 +6,13 @@
 \usage{
 newURL(baseurl, args, ...)
 }
+\arguments{
+\item{baseurl}{The base URL for the Neotoma API}
+
+\item{args}{The set of query arguments to be passed to the API}
+
+\item{...}{Any additional arguments to be passed to the function.}
+}
 \value{
 A properly formatted URL.
 }

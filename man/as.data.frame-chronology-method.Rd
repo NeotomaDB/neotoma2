@@ -2,7 +2,7 @@
 % Please edit documentation in R/chronology-methods.R
 \name{as.data.frame,chronology-method}
 \alias{as.data.frame,chronology-method}
-\title{as.data.frame chronology}
+\title{Create a data.frame from a chronology object.}
 \usage{
 \S4method{as.data.frame}{chronology}(x)
 }
@@ -10,5 +10,5 @@
 \item{x}{chronology object}
 }
 \description{
-show as dataframe as prep to save as csv
+Convert all slots within a chronology to a data.frame.
 }

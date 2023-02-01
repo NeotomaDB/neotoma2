@@ -2,25 +2,24 @@
 % Please edit documentation in R/build_chron.R
 \name{build_chron}
 \alias{build_chron}
-\title{get_downloads}
+\title{build_chron}
 \usage{
 build_chron(x)
 }
 \arguments{
-\item{x}{dataset list}
+\item{x}{A chronology element from the API JSON output.}
 }
 \value{
-list parsed into datasets
+A single \code{chronology} object.
 }
 \description{
-Helper function to bulld a dataset
+A helper function to build a new chronology object from the
+Neotoma API response.
 }
-\examples{
-\dontrun{
-# To build dataset from API call:
-build_dataset(x)
-}
-
+\details{
+This function is an internal function called from
+\code{build_collunit()} to help support the translation between the JSON
+representation of data in the API and the R implementation.
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

@@ -6,6 +6,9 @@
 \usage{
 \method{get_sites}{default}(...)
 }
+\arguments{
+\item{...}{One of a set of possible query parameters discussed in details.}
+}
 \description{
 get_sites
 }
