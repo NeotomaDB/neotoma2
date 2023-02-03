@@ -61,7 +61,7 @@ build_sites <- function(x) {
       dsid <- unique(df$datasetid)
       warnsite <- paste0(sprintf("Dataset(s) %s may have been recently removed from the database.",
                               paste0(dsid,collapse = ", ")),
-                      "Affected sites/datasets will be removed when you do `get_datasets` or `get_downloads`",
+                      " Affected sites/datasets will be removed when you do `get_datasets` or `get_downloads`",
                       sep = "\n")
       warning(warnsite)
     }
