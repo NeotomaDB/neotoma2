@@ -288,10 +288,19 @@ get_datasets.numeric <- function(x, ...) {
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids
-  ids <- getids(x)
-  ids <- ids %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+  ids1 <- getids(x)
+  ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
                                !is.na(suppressWarnings(as.numeric(datasetid))))
 
+  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
+                                      is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  if(nrow(ids2)!=0){
+    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed. 
+                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
+    warning(warnsite)
+  }
+  
   dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
 
