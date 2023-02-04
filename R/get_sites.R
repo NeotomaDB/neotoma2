@@ -217,7 +217,7 @@ get_sites.numeric <- function(x, ...) {
 
   base_url <- paste0("data/sites/", siteids)
 
-  result <- neotoma2::parseURL(base_url)
+  result <- neotoma2::parseURL(base_url, ...)
 
   result_length <- length(result[2]$data)
 
