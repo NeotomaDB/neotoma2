@@ -58,7 +58,7 @@ parse_site <- function(result) {
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
 #' vector of site IDs.
 #'  * `sitename`  The site name, or approximate match using the % wildcard.
-#'  * `database`  The constituent database for the record. See 
+#'  * `database`  The constituent database for the record. See
 #' `get_table("constituentdatabases")`
 #'  * `altmin`  The minimum altitude range for site elevation (in meters).
 #'  *  `altmax`  The maximum altitude range for site elevation (in meters).
@@ -180,7 +180,7 @@ get_sites.default <- function(...) { # nolint
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
         cleanNULL()
-    }else{
+    } else {
       result <- parseURL(base_url) %>%
         cleanNULL()
     }
@@ -221,6 +221,49 @@ get_sites.numeric <- function(x, ...) {
 
   result_length <- length(result[2]$data)
 
+  if (result_length > 0) {
+
+    output <- parse_site(result)
+
+    return(output)
+
+  } else {
+    return(NULL)
+  }
+}
+
+#' @title Get Site Information for Fossil Sites from a Set of Sites
+#' @param x The numeric site ID from Neotoma
+#' @param ... accepted arguments if numeric all_data
+#' @examples
+#' \dontrun{
+#' ## Find all sites using a set of prior sites:
+#' char_sites <- get_sites(taxa = "charcoal")
+#' sites <- get_sites(char_sites)
+#' # Note that each of these have a length of 25 (sites)
+#' # because we didn't use a `limit`, however, we can see
+#' # that `sites` has a full compliment of datasets:
+#' length(datasets(sites)) > length(datasets(char_sites))
+#' pollen_coloc <- sites %>% filter(datasettype == 'pollen')
+#' char_coloc <- char_sites %>% filter(siteid %in% getids(pollen_coloc)$siteid)
+#' pol_char <- c(pollen_coloc, char_coloc)
+#' }
+#' @export
+get_sites.sites <- function(x, ...) {
+
+  if (length(x) > 0) {
+    siteids <- getids(x)$siteid %>%
+      unique() %>%
+      as.numeric() %>%
+      na.omit() %>%
+      paste0(., collapse = ",")
+  }
+
+  base_url <- "data/sites"
+
+  result <- neotoma2::parseURL(base_url, siteid = siteids, ...)
+
+  result_length <- length(result[2]$data)
   if (result_length > 0) {
 
     output <- parse_site(result)
