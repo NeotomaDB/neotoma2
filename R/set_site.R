@@ -34,9 +34,9 @@ set_site <- function(x = NA,
                      notes = NA_character_,
                      description = NA_character_,
                      collunits = new("collunits")) {
-
+  
   function_call <- match.call()
-
+  
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
     if (is.na(siteid)) {
@@ -52,17 +52,18 @@ set_site <- function(x = NA,
     x@description <- description
     x@collunits <- collunits
   } else {
-    if (class(x) == "site") {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+    if (is(x, "site")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
-      return(x)
     } else {
       stop("`x` must be a site object if it is supplied.")
     }
   }
-
-  # TODO : change coordinates to sf_sfc or as is so user can define
-
   return(x)
 }

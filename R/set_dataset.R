@@ -15,7 +15,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a dataset 
+#' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",
 #'                     datsettype = "pollen",
 #'                     notes = "my lake"0)
@@ -31,9 +31,9 @@ set_dataset <- function(x = NA,
                         notes = NA_character_,
                         pi_list = NA,
                         samples = new("samples")) {
-  
+
   function_call <- match.call()
-  
+
   if (suppressWarnings(is.na(x))) {
     x <- new("dataset")
     if (is.na(datasetid)) {
@@ -49,15 +49,20 @@ set_dataset <- function(x = NA,
     x@notes <- notes
     x@pi_list <- pi_list
     x@samples <- samples
-    
+
   } else {
-    if (class(x) == "dataset") {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+    if (is(x, "dataset")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
+    } else {
+      stop("`x` must be a dataset object if it is supplied.")
     }
-    return(x)
   }
-  
   return(x)
 }

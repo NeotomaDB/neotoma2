@@ -1,9 +1,3 @@
-## load packages
-library("testthat")
-library("neotoma2")
-
-context("Run Neotoma Methods examples only when not on CRAN")
-
 test_that("Working with subset methods `datasets()` and `collunits()`.", {
   ## we don't want this to run on CRAN
   skip_on_cran()
@@ -36,7 +30,8 @@ test_that("Working with subset methods `datasets()` and `collunits()`.", {
 
   expect_identical(object = length(unique(sumDl$siteid)),
                    expected = length(brazil_dl),
-                   label = "Failed to match the site identifiers & site length.")
+                   label = "Failed to match the site identifiers & 
+                     site length.")
 
   expect_identical(object = sum(sumDl$datasets),
                    expected = nrow(brazilids),

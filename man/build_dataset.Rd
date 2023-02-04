@@ -2,18 +2,18 @@
 % Please edit documentation in R/build_dataset.R
 \name{build_dataset}
 \alias{build_dataset}
-\title{get_downloads}
+\title{Build a dataset object from a JSON list representation.}
 \usage{
 build_dataset(x)
 }
 \arguments{
-\item{x}{dataset list}
+\item{x}{a JSON dataset object passed from the Neotoma API.}
 }
 \value{
-list parsed into datasets
+A \code{dataset} object.
 }
 \description{
-Helper function to build a dataset
+Helper function to build a dataset from the API JSON response.
 }
 \examples{
 \dontrun{

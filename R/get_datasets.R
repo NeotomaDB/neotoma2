@@ -5,48 +5,57 @@
 #' @import geojsonsf
 #' @importFrom methods new
 #' @description
-#' Information for Fossil Datasets
-#' Look for a dataset details using only a dataset ID or for multiple metadata.
-#' Displays a table with the following columns:
-#' siteid, sitename, lat, long, and elev.
-#' The function takes parameters defined by the user and returns a sites object
-#' with more detailed information regarding datasets.
+#' The `get_datasets()` function is a wrapper for the Neotoma `datasets` API
+#' endpoint.
+#' The function takes parameters defined by the user and returns dataset
+#' information supplied by the Neotoma Paleoecological Database.
 #' The user may define all or none of the possible fields.
-#' The function contains data checks for each defined parameter.
-#' @param x Use a single number to extract site information
-#' @param ... accepted arguments: sites_object, contactid, datasettype,
-#' altmin, altmax, loc, ageyoung, ageold, ageof
-#' @return The function returns either a single item of class
-#' \code{"try-error"} describing the reason for failure
-#' (either mis-defined parameters or an error from the Neotoma API),
-#' or a table of sites, with rows corresponding to the number of individual
-#' sites and datasets returned by the Neotoma API.
-#' Each "site" object contains 6 parameters that can be accessed as well:
-#' \item{ \code{siteid} }{site ID number}
-#' \item{ \code{sitename} }{site"s name}
-#' \item{ \code{location} }{sf object that describes site"s location}
-#' \item{ \code{description} }{}
-#' \item{ \code{collunits} }{limited information on collunits}
-#' Each "collection unit" embedded in the "sites" object contains 6 parameters
-#' that can be accessed as well:
-#' \item{ \code{collunitid}}{collection unit ID number}
-#' \item{ \code{handle} }{collection unit"s handle}
-#' \item{ \code{collunitname} }{collection unit"s name}
-#' \item{ \code{colldate} }{date in collection unit}
-#' \item{ \code{substrate} }{substrate}
-#' \item{ \code{location} }{sf object that describes site"s location}
-#' \item{ \code{datasets} }{detailed information regarding dataset}
-#' Each "dataset" nested in the "collection unit" contains the following detail
-#' of information:
-#' \item{ \code{datasetid} }{dataset ID number}
-#' \item{ \code{datasetname} }{site"s name}
-#' \item{ \code{datasettype} }{type of data found}
-#' \item{ \code{location} }{sf object that describes site"s location}
-#' \item{ \code{notes} }{notes on the dataset}
-#' \item{ \code{taxa table} }{taxa table}
-#' \item{ \code{pi list} }{P.I. info}
-#' \item{ \code{analyst} }{analyst info}
-#' \item{ \code{metadata} }{dataset metadata}
+#' @param x A single datasetid, or a vector of unique dataset ids.
+#' @param ... accepted arguments, see details for more information.
+#' @details
+#' A `dataset` is an element nested within `neotoma2` site objects. The
+#' `get_datasets()` call returns a list of individual `site` objects with
+#' `collunits` (collection units) that contain valid, matching `dataset`
+#' elements.
+#' So, `get_sites()` returns only site metadata. `get_datasets()` returns
+#' site metadata, plus metadata about the individual datasets present at that
+#' site.
+#' The `get_datasets()` function searches for each site within Neotoma
+#' that matches the query parameters, and returns them as a `sites` object,
+#' a list of `site` objects, plus returns all the additional metadata for
+#' the datasets at that site.
+#' The `get_datasets()` command wraps the Neotoma API
+#' ([api.neotomadb.org](https://api.neotomadb.org)) call for `datasets`.
+#' The call itself uses a SQL query which accepts any one of the following
+#' parameters:
+#'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
+#' vector of site IDs.
+#'  * `sitename`  The site name, or approximate match using the % wildcard.
+#'  * `database`  The constituent database for the record. See 
+#' `get_table("constituentdatabases")`
+#'  * `altmin`  The minimum altitude range for site elevation (in meters).
+#'  *  `altmax`  The maximum altitude range for site elevation (in meters).
+#'  *  `datasetid`  The unique dataset ID (integer) in Neotoma. Can be passed
+#' as a vector of dataset IDs.
+#'  * `doi`  The dataset DOI for a dataset contained within a site. Can be
+#' passed as a vector of DOIs.
+#'  * `gpid`  The geopolitical name or identifer containing a site. Can be
+#' passed as a vector of names.
+#'  * `keywords`  Keywords for samples within a set of sites. For example
+#' "modern" indicates a sample within the record uses the keyword "modern".
+#'  * `contacts`  Contact names or IDs associated with a site.
+#'  * `ageyoung`  A minimum spanning age for the record, in years before
+#' radiocarbon present (1950).
+#'  * `ageold`  A maximum spanning age for the record, in years before
+#' radiocarbon present (1950).
+#'  * `ageof`  An age which must be contained within the range of sample ages
+#' for a site.
+#'  * `taxa`  The names of taxa which must be present within samples in a
+#' record.
+#' @return The function returns either a single item of class `"try-error"`
+#' describing the reason for failure (either mis-defined parameters or an error
+#' from the Neotoma API), or list of site objects, each containing one or more
+#' `collunit` objects, with fully populated `datasets` elements.
 #' @examples \dontrun{
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
 #' sites_12to25 <- get_datasets(altmin=12, altmax=25)
@@ -58,9 +67,14 @@
 #'  [-56.953125,-33.137551192346145],
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
-#'  [-73.125,-9.102096738726443]
-#' ]]}'
+#'  [-73.125,-9.102096738726443]]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1])
+#' # To obtain the dataset metadata:
+#' datasets(brazil_datasets)
+#' # There is insufficient metadata at this point to obtain information
+#' # about taxa present at the site. We must use get_downloads() to
+#' # obtain the full set of sample information:
+#' # This fails: taxa(brazil_datasets)
 #' }
 #' @export
 get_datasets <- function(x = NA, ...) {
@@ -72,23 +86,23 @@ get_datasets <- function(x = NA, ...) {
 }
 
 parse_dataset <- function(result) { # nolint
-  
+
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
         x[[i]] <- NA
       } else {
-        if (class(x[[i]]) == "list") {
+        if (is(x[[i]], "list")) {
           x[[i]] <- fix_null(x[[i]])
         }
       }
     }
     return(x)
   }
-  
+
   data <- result$data %>%
     fix_null()
-  
+
   # With a large dataset this seems to take some time, but it's not too bad.
   newSites <- map(data, function(x) {
     if (is.null(x$sites)) {
@@ -100,14 +114,16 @@ parse_dataset <- function(result) { # nolint
       geography <- st_as_sf(st_sfc())
     } else {
       geography <- try(sf::st_read(call$geography, quiet = TRUE))
-      
-      if ('try-error' %in% class(geography)) {
-        stop('Invalid geoJSON passed from the API. \nCheck that:\n', call$geography,
-             '\n is valid geoJSON using a service like http://geojson.io/. If the geojson ',
-             'is invalid, contact a Neotoma administrator.')
+
+      if ("try-error" %in% class(geography)) {
+        stop("Invalid geoJSON passed from the API. \nCheck that:\n",
+          call$geography,
+          "\n is valid geoJSON using a service like ",
+          "http://geojson.io/. If the geojson ",
+          "is invalid, contact a Neotoma administrator.")
       }
     }
-    
+
     if (length(x$sites$datasets) == 0) {
       datasets_ <- map(x$site$datasets, build_dataset)
       datasets_ <- new("datasets", datasets = datasets_)
@@ -115,9 +131,9 @@ parse_dataset <- function(result) { # nolint
       datasets_ <- map(x$sites$datasets, build_dataset)
       datasets_ <- new("datasets", datasets = datasets_)
     }
-    collunits <- new('collunits',
+    collunits <- new("collunits",
                      collunits = list())
-    
+
     # Collunits
     # TODO: Implement build collunit
     new_collunit <- new("collunit",
@@ -156,55 +172,58 @@ parse_dataset <- function(result) { # nolint
 #' @param x Use a single number to extract site information
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
+#' @examples \dontrun{
+#' # To find all datasets with a min altitude of 12 and a max altitude of 25:
+#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#'
+#' # To find all datasets in Brazil
+#' brazil <- '{"type": "Polygon",
+#' "coordinates": [[
+#'  [-73.125, -9.102096738726443],
+#'  [-56.953125,-33.137551192346145],
+#'  [-36.5625,-7.710991655433217],
+#'  [-68.203125,13.923403897723347],
+#'  [-73.125,-9.102096738726443]]]}'
+#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
-  
+
   cl <- as.list(match.call())
-  
+
   possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
                           "ageyoung", "ageold", "ageof", "limit", "offset",
                           "all_data", "sites_o")
-  
+
   cl[[1]] <- NULL
-  
-  for (name in names(cl)) {
-    if (!(name %in% possible_arguments)) {
-      message1 <- " is not an allowed argument. \n
-      Allowed arguments: sitename, altmax, altmin, loc"
-      message(paste0(name, message1))
-    }
-  }
-  
+
   cl <- lapply(cl, eval, envir = parent.frame())
-  
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
-  
   error_check <- check_args(cl) # nolint
-  
   if (error_check[[2]]$flag == 1) {
     stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
   } else {
     cl <- error_check[[1]]
   }
-  
+
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/datasets?loc=", loc)
-    
+
     for (name in names(cl)) {
       if (!(name == "loc")) {
         if (!(name == "all_data")) {
           base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-        } 
+        }
       }
     }
-    
+
     # loc and all_data present
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
         cleanNULL()
-    }else{
+    } else {
       result <- parseURL(base_url) %>%
         cleanNULL()
     }
@@ -213,19 +232,23 @@ get_datasets.default <- function(x, ...) { # nolint
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
-  
-  if (is.null(result$data[1][[1]]) | is.null(result[1][[1]])) {
+
+  if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_dataset(result)
     return(output)
   }
-  
+
 }
 
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
+#' @examples \dontrun{
+#' allds <- get_datasets(1:29)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.numeric <- function(x, ...) {
   use_na <- function(x, type) {
@@ -237,19 +260,19 @@ get_datasets.numeric <- function(x, ...) {
       return(x)
     }
   }
-  
+
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  
+
   base_url <- paste0("data/datasets/", dataset)
   result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
-  
+
   if (result_length > 0) {
     output <- parse_dataset(result)
     return(output)
-  }else{
+  } else {
     return(NULL)
   }
 }
@@ -257,11 +280,31 @@ get_datasets.numeric <- function(x, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param x An object of class \code{sites}.
 #' @param ... additional arguments accepted by \code{get_datasets()}
+#' @examples \dontrun{
+#' random_sites <- get_sites(1:100)
+#' allds <- get_datasets(random_sites)
+#' plotLeaflet(allds)
+#' }
 #' @export
 get_datasets.sites <- function(x, ...) {
   # List of datasets ids
-  dataset_list <- getids(x)$datasetid
+  ids1 <- getids(x)
+  ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+                               !is.na(suppressWarnings(as.numeric(datasetid))))
+
+  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
+                                      is.na(suppressWarnings(as.numeric(datasetid))))
   
-  output <- get_datasets(dataset_list, ...)
+  if(nrow(ids2)!=0){
+    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed. 
+                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
+    warning(warnsite)
+  }
+  
+  dataset_list <- ids$datasetid
+  dataset_list <- as.numeric(unlist(dataset_list))
+
+  output <- get_datasets(dataset_list, all_data = TRUE)
+
   return(output)
 }

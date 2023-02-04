@@ -7,6 +7,6 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 #' @param y sites/datasets object
 setMethod(f = "c",
           signature = "missingOrNULL",
-          definition = function(x ="missingORNULL", y) {
+          definition = function(x = "missingORNULL", y) {
             y
           })

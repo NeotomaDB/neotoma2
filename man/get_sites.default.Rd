@@ -2,13 +2,16 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites.default}
 \alias{get_sites.default}
-\title{Get Site Information for Fossil Sites}
+\title{get_sites}
 \usage{
 \method{get_sites}{default}(...)
 }
 \arguments{
-\item{...}{accepted arguments: siteid, sitename, altmax, altmin, loc, gpid}
+\item{...}{One of a set of possible query parameters discussed in details.}
 }
 \description{
-Get Site Information for Fossil Sites
+get_sites
+}
+\author{
+Socorro Dominguez \email{sedv8808@gmail.com}
 }

@@ -10,8 +10,17 @@
 \item{object}{A \code{sites} object.}
 }
 \value{
-A \code{data.frame} reporting the taxa/data objects, units, &cetera within the set of records.
+A \code{data.frame} reporting the taxa/data objects, units,
+elements and other features within a set of records.
 }
 \description{
 From a sites object,
+}
+\examples{
+somesites <- get_sites(datasettype = "diatom", limit = 3) \%>\%
+  get_downloads()
+diatomtaxa <- taxa(somesites)
+common_taxa <- diatomtaxa \%>\%
+  dplyr::filter(sites == 3)
+
 }

@@ -1,31 +1,37 @@
-#' @title get_downloads
+#' @title Build specimen objects.
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' Helper function to build a specimen
+#' A helper function to build a specimen object from a list returned by
+#' the Neotoma API call. The function is not exported, but called from
+#' the get_speciments() call.
 #' @param x specimen list
-#' @return list parsed into specimen
+#' @return A list (from JSON) parsed into specimen
 #' @export
 #' @examples \dontrun{
-#' # To build dataset from API call:
 #' build_specimen(x)
 #' }
 #'
 build_specimen <- function(x) {
+
+  repo <- x$repository
 
   new("specimen",
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
       sampleid = use_na(testNull(x$sampleid, NA), "int"),
       specimenid = use_na(testNull(x$specimenid, NA), "int"),
       repository = new("repository",
-                       notes = NA_character_,
-                       acronym = NA_character_,
-                       repository = NA_character_,
-                       repositoryid = NA_integer_,
-                       repositorynotes = NA_character_),
+                       notes = use_na(testNull(repo$notes, NA), "char"),
+                       acronym = use_na(testNull(repo$acronym, NA), "char"),
+                       repository = use_na(testNull(repo$repository, NA),
+                         "char"),
+                       repositoryid =  use_na(testNull(repo$repositoryid, NA),
+                         "int"),
+                       repositorynotes = use_na(testNull(repo$repositorynotes,
+                         NA), "char")),
       taxonid = use_na(testNull(x$taxonid, NA), "int"),
       taxonname = use_na(testNull(x$taxonname, NA), "char"),
       elementtype = use_na(testNull(x$elementtype, NA), "char"),

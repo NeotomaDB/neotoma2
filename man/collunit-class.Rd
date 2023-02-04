@@ -3,7 +3,9 @@
 \docType{class}
 \name{collunit-class}
 \alias{collunit-class}
-\title{S4 class for collunits information}
+\title{S4 class for collection units information.}
 \description{
-S4 class for collunits information
+A collection unit represents a collection event from within
+a site. For example, a lake sediment core, or a single dig site within an
+archaeological site.
 }

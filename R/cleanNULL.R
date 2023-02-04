@@ -6,6 +6,7 @@
 cleanNULL <- function(x) { # nolint
   out <- rapply(x,
                 function(y) {
+                  #print(y)
                   ifelse(is.null(y), NA, y)
                 },
                 how = "replace")

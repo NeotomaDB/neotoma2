@@ -1,8 +1,3 @@
-# load libraries
-library("testthat")
-library("neotoma2")
-library("tidyverse")
-
 context("Run general tests only when not on CRAN")
 
 test_that("Some datasets don't seem to get pulled with chronologies.", {
@@ -26,15 +21,17 @@ test_that("We can get the samples out of dataset 15692.", {
 
 test_that("ggplot2 on the african data works:", {
   my_datasets <- get_datasets(40945)
-  mySites <- get_downloads(my_datasets)
-  my_counts <- neotoma2::samples(mySites)
+  my_sites <- get_downloads(my_datasets)
+  my_counts <- neotoma2::samples(my_sites)
 
   aa <- my_counts %>%
     dplyr::filter(taxongroup == "Vascular plants") %>%
     group_by(age, ecologicalgroup) %>%
     summarize(count = sum(value)) %>%
-    ggplot() +
-    geom_path(aes(x = age, y = count, color = ecologicalgroup))
+    ggplot2::ggplot() +
+    ggplot2::geom_path(ggplot2::aes(x = age,
+      y = count,
+      color = ecologicalgroup))
   testthat::expect_is(aa, "gg")
 })
 
@@ -43,7 +40,7 @@ test_that("Duplicated sampleids don't exist (in the APD)", {
   datasetids <- c(41625, 46798, 48891, 47771, 41620, 46689, 52833,
                   48756, 52742, 46700, 47608, 46841, 49238)
 
-  for (i in 1:length(datasetids)) {
+  for (i in seq_along(datasetids)) {
     L <- neotoma2::get_datasets(41625) %>%
       neotoma2::get_downloads()
     my_counts <- neotoma2::samples(L)
@@ -71,4 +68,49 @@ test_that("A faunmap dataset with some contacts actually works", {
 test_that("The taxa() call should only return unique results", {
   mydataset <- get_downloads(c(1435, 24238))
   testthat::expect_false(any(duplicated(taxa(mydataset))))
+})
+
+testthat::test_that("Location parsing isn't affecting representation
+  of spatial polygons passed to the DB:", {
+  # This is an issue raised by Adrian.
+
+  location <- '{"type": "Polygon",
+            "coordinates": [[
+                [-169, 24],
+                [-169, 75],
+                [-52, 75],
+                [-52, 24],
+                [-169, 24]]]}'
+
+  loc1 <- geojsonsf::geojson_sf(location) # sf object
+  loc <- geojsonsf::sf_geojson(loc1)
+
+  testthat::expect_equivalent(loc1, geojsonsf::geojson_sf(loc))
+  testthat::expect_equivalent(loc1,
+    geojsonsf::geojson_sf(parse_location(location)))
+})
+
+testthat::test_that("We are pulling in the sites we expect to capture:", {
+  # This test takes a really long time. . .
+  skip_on_cran()
+  location <- '{"type": "Polygon",
+            "coordinates": [[
+                [-169, 24],
+                [-169, 75],
+                [-52, 75],
+                [-52, 24],
+                [-169, 24]]]}'
+
+  usa <- get_sites(loc = location, limit = 20000)
+  fla <- get_sites(gpid = "Florida", limit = 10000)
+
+  testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+})
+
+testthat::test_that("Loading the manual works:", {
+  if (interactive()) {
+    testthat::expect_equal(get_manual(), NULL)
+  } else {
+    testthat::expect_error(get_manual())
+  }
 })

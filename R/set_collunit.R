@@ -12,15 +12,16 @@
 #' @param gpslocation location with GPS
 #' @param collunittype type of collection unit
 #' @param collectiondevice device used to collect the sample
-#' @param collectionunitname name of the collection unit 
+#' @param collectionunitname name of the collection unit
 #' @param depositionalenvironment depositional environment
 #' @param datasets datasets that the collection unit has
 #' @param chronologies chronologies taken from the collection unit
-#' @param defaultchronology best chronology model identifier to be used with this collection unit
+#' @param defaultchronology best chronology model identifier to 
+#' be used with this collection unit
 #' @export
 #' @examples
 #' \dontrun{
-#' # Create a dataset 
+#' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",
 #'                     datsettype = "pollen",
 #'                     notes = "my lake"0)
@@ -30,7 +31,7 @@ set_collunit <- function(x = NA,
                          collectionunitid = NA_integer_,
                          notes = NA_character_,
                          handle = NA_character_,
-                         colldate = NA,
+                         colldate = as.Date(character(1)),
                          location = NA_character_,
                          waterdepth = NA_integer_,
                          gpslocation = st_as_sf(st_sfc()),
@@ -38,12 +39,12 @@ set_collunit <- function(x = NA,
                          collectiondevice = NA_character_,
                          collectionunitname = NA_character_,
                          depositionalenvironment = NA_character_,
-                         datasets = NA,
-                         chronologies = NA,
+                         datasets = new("datasets"),
+                         chronologies = new("chronologies"),
                          defaultchronology = NA_integer_) {
-  
+
   function_call <- match.call()
-  
+
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
     if (is.na(collectionunitid)) {
@@ -64,15 +65,20 @@ set_collunit <- function(x = NA,
     x@datasets <- datasets
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
-    
+
   } else {
-    if (class(x) == "collunit") {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+    if (is(x, "collunit")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
+    } else {
+      stop("`x` must be a collunit object if it is supplied.")
     }
-    return(x)
   }
-  
   return(x)
 }

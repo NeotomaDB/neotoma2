@@ -3,9 +3,11 @@
 \docType{class}
 \name{publications-class}
 \alias{publications-class}
-\title{An S4 class for multi-publication information
-from the Neotoma Paleoecology Database.}
+\title{An S4 class for multi-publication information from the Neotoma
+Paleoecology Database. This S4 class allows a single dataset to have one
+or more publication classes associated with it.}
 \description{
-An S4 class for multi-publication information
-from the Neotoma Paleoecology Database.
+An S4 class for multi-publication information from the Neotoma
+Paleoecology Database. This S4 class allows a single dataset to have one
+or more publication classes associated with it.
 }

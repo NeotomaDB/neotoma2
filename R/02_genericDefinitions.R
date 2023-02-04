@@ -1,9 +1,11 @@
 utils::globalVariables(c("analysisunitid"))
 
 #' @title Extract datasets from a sites object.
+#' @description If the sites object contains datasets, then the datasets
+#' will be returned. If the sites object does not contain datasets then
+#' the user can apply `get_datasets()` to the object.
 #' @param object A sites object
 #' @export
-# Todo Convert to as.data.frame
 setGeneric("datasets",
            function(object) {
              standardGeneric(f = "datasets")
@@ -12,23 +14,13 @@ setGeneric("datasets",
 #' @title Obtain coordinates from a sites object.
 #' @param obj A sites object
 #' @param ... Additional parameters associated with the call.
-#' @importFrom methods slotNames slot
-#' @importFrom purrr map
-#' @importFrom dplyr bind_cols
 #' @export
-# Todo Convert to as.data.frame
 setGeneric("coordinates", function(obj, ...) {
   standardGeneric(f = "coordinates")
 })
 
 #' @title plotLeaflet
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
-#' @import sf
-#' @importFrom purrr map
-#' @importFrom dplyr bind_rows
-#' @import arulesViz
-#' @import leaflet
-#' @import mapview
 #' @description Plot sites on a leaflet map
 #' @param object Sites object to plot
 #' @param save_im save output
@@ -52,6 +44,13 @@ setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
 })
 
+#' @title Obtain specimens from a record or multiple records.
+#' @param x sites object
+#' @export
+setGeneric("specimens", function(x) {
+  standardGeneric(f = "specimens")
+})
+
 #' @title Obtain the chronology from a record or multiple records.
 #' @export
 #' @param x sites object that contains chronologies
@@ -66,7 +65,9 @@ setGeneric("doi", function(x) {
   standardGeneric(f = "doi")
 })
 
-#' @title Obtain the DOI for publications or datasets.
+#' @title Generate a data citation from a neotoma2 object.
+#' @description The fuction, applied to a data object with a valid dataset, 
+#' will return a properly formatted data citation for the record.
 #' @param x Object with DOIs associated to it.
 #' @export
 setGeneric("cite_data", function(x) {
@@ -113,7 +114,6 @@ setGeneric("toJSON", function(x) {
 #' @param object A collectionunit object
 #' @param x A chronology object
 #' @param y A \code{data.frame} of sample ages
-#' @importFrom methods slotNames slot
 #' @export
 setGeneric("add_chronology",
            function(object, x, y) {
@@ -132,7 +132,6 @@ setGeneric("collunits",
 #' @title Set the default chronology within a collectionunit.
 #' @param x A chronologies object.
 #' @param n The particular chronology to be used as the default.
-#' @importFrom methods slotNames slot
 #' @export
 setGeneric("set_default",
            function(x, n) {

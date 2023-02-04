@@ -2,7 +2,7 @@
 % Please edit documentation in R/samples.R
 \name{samples,collunits-method}
 \alias{samples,collunits-method}
-\title{samples}
+\title{Get samples from a collectionunit or set of collection units:}
 \usage{
 \S4method{samples}{collunits}(x)
 }
@@ -11,4 +11,15 @@
 }
 \description{
 Obtain elements from collunits
+}
+\examples{
+marion <- get_sites(sitename = "Marion Lake") \%>\%
+  get_datasets() \%>\%
+  filter(datasettype == "pollen") \%>\%
+  get_downloads()
+pollen <- samples(collunits(marion))
+plot(value ~ I(-1 * age),
+     data = pollen[pollen$variablename == "Cupressaceae",],
+xlab = "Years before present",
+ylab = "Cupressaceae pollen count")
 }

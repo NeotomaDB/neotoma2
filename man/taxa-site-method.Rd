@@ -10,8 +10,14 @@
 \item{object}{A \code{site} object.}
 }
 \value{
-A \code{data.frame} reporting the taxa/data objects, units, &cetera within the set of records.
+A \code{data.frame} reporting the taxa/data objects, units,
+elements and other features within a set of records.
 }
 \description{
 Extract taxonomic data from a single site.
+}
+\examples{
+somesites <- get_sites(datasettype = "pollen", limit = 3) \%>\%
+  get_downloads()
+diatomtaxa <- taxa(somesites[[1]])
 }

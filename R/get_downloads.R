@@ -71,7 +71,7 @@ parse_download <- function(result, verbose = TRUE) {
     data.frame(siteid = x$site$siteid,
                collunitid = x$site$collectionunit$collectionunitid,
                datasetid = x$site$collectionunit$dataset$datasetid )}) %>%
-    dplyr::bind_rows() 
+    dplyr::bind_rows()
   
   my_sites_list <- c()
   siteids <- c()
@@ -94,7 +94,7 @@ parse_download <- function(result, verbose = TRUE) {
         my_site <- build_sites(dls[[i]])
         my_sites_list <- c(my_sites_list, my_site)
         # for some reason, the 19 sites where added fine
-
+        
       } else if (max(matches) == 1) {
         # We're adding a collection unit somewhere:
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
@@ -106,11 +106,11 @@ parse_download <- function(result, verbose = TRUE) {
         
       } else if (max(matches) == 2) {
         # We're adding a dataset to an existing collection unit:
-
+        
         st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
         
         cuids <- ids %>%
-          dplyr::filter(.data$siteid == unique(ids$siteid)[st], .preserve = TRUE)
+          dplyr::filter(siteid == unique(ids$siteid)[st], .preserve = TRUE)
         
         cuid <- which(unique(cuids$collunitid) == dl_index$collunitid[i])
         
@@ -122,7 +122,7 @@ parse_download <- function(result, verbose = TRUE) {
       }
     }
     if (verbose) {
-      cat('.')
+      cat(".")
     }
   }
   return(my_sites_list)
@@ -143,7 +143,7 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   base_url <- paste0("data/downloads/", dataset)
   result <- parseURL(base_url, ...) # nolint
   
-  output <- parse_download(result)
+  output <- parse_download(result, verbose = verbose)
   
   return(output)
 }
@@ -156,12 +156,26 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   
-  output <- getids(x) %>%
-    dplyr::select(.data$datasetid) %>%
+  output <- getids(x) %>% 
+    dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+                  !is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
+                                        is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  if(nrow(ids2)!=0){
+    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed.
+                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
+    warning(warnsite)
+  }
+  
+  output <- output %>%
+    dplyr::select(datasetid) %>%
     stats::na.omit() %>%
     unique() %>%
-    unlist()
-  output <- get_downloads(x = output, verbose, ...)
+    unlist() %>%
+    as.numeric()
+  output <- get_downloads(x = output, verbose, all_data = TRUE, ...)
   
   return(output)
 }
@@ -173,15 +187,15 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 #' @importFrom stats na.omit
 #' @export
 get_downloads.character <- function(x, verbose = TRUE, ...) {
-
+  
   result <- jsonlite::fromJSON(x,
                                flatten = FALSE,
                                simplifyVector = FALSE)
   
   result <- result %>%
     cleanNULL()
-
-  output <- parse_download(result)
+  
+  output <- parse_download(result, verbose = verbose)
   
   return(output)
 }

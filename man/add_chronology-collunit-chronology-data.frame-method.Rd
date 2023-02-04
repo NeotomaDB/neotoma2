@@ -11,8 +11,19 @@
 
 \item{x}{A chronology object generated using \code{set_chronology()}}
 
-\item{y}{A data.frame of sample ages, with required columns "analysisunitid", "age", "agetype", "ageolder", and "ageyounger".}
+\item{y}{A data.frame of sample ages, with required columns:
+"analysisunitid", "age", "agetype", "ageolder", and "ageyounger".}
 }
 \description{
-Add a new chronology into an existing collectionunit.
+Given a collunit, add a new chronology object to the unit
+with both the chronology metadata and the age information (as \code{y})
+}
+\details{
+When undertaking analysis we may wish to add a new chronology to
+existing records within Neotoma. To do this we must first build the
+chronology, but also link it to existing analysis units within the
+collection unit.
+For examples from this function, see the
+\href{https://open.neotomadb.org/EPD_binder/complex_workflow.html}{Complex Workflows}
+documentation online.
 }
