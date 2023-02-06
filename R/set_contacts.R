@@ -28,7 +28,8 @@
 #' @param notes Notes about the individual
 #' @export
 
-set_contact <- function(contactid = NA_integer_,
+set_contact <- function(x = NA,
+                        contactid = NA_integer_,
                         familyname = NA_character_,
                         leadinginitials = NA_character_,
                         givennames = NA_character_,
