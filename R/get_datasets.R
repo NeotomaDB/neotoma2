@@ -86,7 +86,7 @@ get_datasets <- function(x = NA, ...) {
 }
 
 parse_dataset <- function(result) { # nolint
-
+  
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
       if (is.null(x[[i]])) {
@@ -99,10 +99,10 @@ parse_dataset <- function(result) { # nolint
     }
     return(x)
   }
-
+  
   data <- result$data %>%
     fix_null()
-
+  
   # With a large dataset this seems to take some time, but it's not too bad.
   newSites <- map(data, function(x) {
     if (is.null(x$sites)) {
@@ -114,16 +114,16 @@ parse_dataset <- function(result) { # nolint
       geography <- st_as_sf(st_sfc())
     } else {
       geography <- try(sf::st_read(call$geography, quiet = TRUE))
-
+      
       if ("try-error" %in% class(geography)) {
         stop("Invalid geoJSON passed from the API. \nCheck that:\n",
-          call$geography,
-          "\n is valid geoJSON using a service like ",
-          "http://geojson.io/. If the geojson ",
-          "is invalid, contact a Neotoma administrator.")
+             call$geography,
+             "\n is valid geoJSON using a service like ",
+             "http://geojson.io/. If the geojson ",
+             "is invalid, contact a Neotoma administrator.")
       }
     }
-
+    
     if (length(x$sites$datasets) == 0) {
       datasets_ <- map(x$site$datasets, build_dataset)
       datasets_ <- new("datasets", datasets = datasets_)
@@ -133,7 +133,7 @@ parse_dataset <- function(result) { # nolint
     }
     collunits <- new("collunits",
                      collunits = list())
-
+    
     # Collunits
     # TODO: Implement build collunit
     new_collunit <- new("collunit",
@@ -144,9 +144,9 @@ parse_dataset <- function(result) { # nolint
                         datasets = datasets_,
                         chronologies = new("chronologies",
                                            chronologies = list()))
-
+    
     collunits <- new("collunits", collunits = list(new_collunit))
-
+    
     # Site
     # API error does not allow for build site usage yet.
     set_site(sitename = use_na(call$sitename, "char"),
@@ -157,15 +157,15 @@ parse_dataset <- function(result) { # nolint
              notes = use_na(call$sitenotes, "char"),
              collunits = collunits)
   })
-
+  
   sites <- new("sites", sites = newSites)
-
+  
   ## Patch to remove repeated sites
   ## This is the chunk that's taking the most time.
   sites <- clean(sites)
-
+  
   return(sites)
-
+  
 }
 
 #' @title Get Dataset Default
@@ -188,15 +188,15 @@ parse_dataset <- function(result) { # nolint
 #' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
-
+  
   cl <- as.list(match.call())
-
+  
   possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
                           "ageyoung", "ageold", "ageof", "limit", "offset",
                           "all_data", "sites_o")
-
+  
   cl[[1]] <- NULL
-
+  
   cl <- lapply(cl, eval, envir = parent.frame())
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
   error_check <- check_args(cl) # nolint
@@ -205,12 +205,12 @@ get_datasets.default <- function(x, ...) { # nolint
   } else {
     cl <- error_check[[1]]
   }
-
+  
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/datasets?loc=", loc)
-
+    
     for (name in names(cl)) {
       if (!(name == "loc")) {
         if (!(name == "all_data")) {
@@ -218,7 +218,7 @@ get_datasets.default <- function(x, ...) { # nolint
         }
       }
     }
-
+    
     # loc and all_data present
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
@@ -232,14 +232,14 @@ get_datasets.default <- function(x, ...) { # nolint
     result <- parseURL(base_url, ...) %>%
       cleanNULL()
   }
-
+  
   if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
     return(NULL)
   } else {
     output <- parse_dataset(result)
     return(output)
   }
-
+  
 }
 
 #' @title Get Dataset Numeric
@@ -260,15 +260,15 @@ get_datasets.numeric <- function(x, ...) {
       return(x)
     }
   }
-
+  
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-
+  
   base_url <- paste0("data/datasets/", dataset)
   result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
-
+  
   if (result_length > 0) {
     output <- parse_dataset(result)
     return(output)
@@ -290,10 +290,10 @@ get_datasets.sites <- function(x, ...) {
   # List of datasets ids
   ids1 <- getids(x)
   ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
-                               !is.na(suppressWarnings(as.numeric(datasetid))))
-
+                                !is.na(suppressWarnings(as.numeric(datasetid))))
+  
   ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
-                                      is.na(suppressWarnings(as.numeric(datasetid))))
+                                        is.na(suppressWarnings(as.numeric(datasetid))))
   
   if(nrow(ids2)!=0){
     warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed. 
@@ -303,8 +303,19 @@ get_datasets.sites <- function(x, ...) {
   
   dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
-
-  output <- get_datasets(dataset_list, all_data = TRUE)
-
+  
+  ## Fixing all data
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+ 
+  if('all_data' %in% names(cl)){
+    all_data = cl$all_data
+  }else{
+    all_data = TRUE
+  }
+  ## Fixing all data line
+  
+  output <- get_datasets(dataset_list, all_data = all_data)
+  
   return(output)
 }
