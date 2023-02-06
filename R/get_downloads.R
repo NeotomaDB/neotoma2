@@ -60,6 +60,8 @@
 get_downloads <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
     UseMethod("get_downloads", x)
+  }else {
+    UseMethod("get_downloads", NA)
   }
 }
 
@@ -140,6 +142,8 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
     dataset <- paste0(x, collapse = ",")
   }
   
+  
+  
   base_url <- paste0("data/downloads/", dataset)
   result <- parseURL(base_url, ...) # nolint
   
@@ -175,7 +179,19 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     unique() %>%
     unlist() %>%
     as.numeric()
-  output <- get_downloads(x = output, verbose, all_data = TRUE, ...)
+  
+  ## Fixing all data
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
+  if('all_data' %in% names(cl)){
+    all_data = cl$all_data
+  }else{
+    all_data = TRUE
+  }
+  ## Fixing all data line
+  
+  output <- get_downloads(x = output, verbose, all_data = all_data)
   
   return(output)
 }
