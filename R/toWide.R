@@ -1,8 +1,8 @@
 #' @title toWide
 #' @param x dataframe object with samples
 #' @param variablenames Optional vector to filter by specific variable names.
-#' @param ecologicalgroup Vector stating the ecological groups to be filtered by, e.g "DIAT", "TRSH"
-#' @param elementtype Label of element type to filter by, e.g. "pollen", "valve"
+#' @param ecologicalgroups Vector stating the ecological groups to be filtered by, e.g "DIAT", "TRSH"
+#' @param elementtypes Label of element type to filter by, e.g. "pollen", "valve"
 #' @param unit Label stating which units to filter by, e.g. "NISP"
 #' @param groupby Group by 'age' or 'depth'
 #' @param operation label or vector of operations to be chosen from: 'prop', 'sum', 
@@ -31,7 +31,8 @@
 #' fc_dl1 <- fc_dl[[1]]
 #' 
 #' fc_smp <- samples(fc_dl1)
-#' toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'), elementtypes=', bone/tooth', unit='present/absent')
+#' toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'), 
+#' elementtypes='bone/tooth', unit='present/absent')
 #' 
 #'}
 toWide <- function(x, variablenames=c(), ecologicalgroups=c(), elementtypes=c(), 

@@ -19,16 +19,16 @@ toWide(
 
 \item{variablenames}{Optional vector to filter by specific variable names.}
 
+\item{ecologicalgroups}{Vector stating the ecological groups to be filtered by, e.g "DIAT", "TRSH"}
+
+\item{elementtypes}{Label of element type to filter by, e.g. "pollen", "valve"}
+
 \item{unit}{Label stating which units to filter by, e.g. "NISP"}
 
 \item{groupby}{Group by 'age' or 'depth'}
 
 \item{operation}{label or vector of operations to be chosen from: 'prop', 'sum',
 'count', 'presence'.}
-
-\item{ecologicalgroup}{Vector stating the ecological groups to be filtered by, e.g "DIAT", "TRSH"}
-
-\item{elementtype}{Label of element type to filter by, e.g. "pollen", "valve"}
 }
 \description{
 Obtain a wide table with information regarding of samples grouped by
@@ -54,7 +54,8 @@ fc_dl <- neotoma2::get_downloads(fc_ds)
 fc_dl1 <- fc_dl[[1]]
 
 fc_smp <- samples(fc_dl1)
-toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'), elementtypes=', bone/tooth', unit='present/absent')
+toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'), 
+elementtypes='bone/tooth', unit='present/absent')
 
 }
 }
