@@ -5,6 +5,7 @@
 \title{Set contact information for a new record.}
 \usage{
 set_contact(
+  x = NA,
   contactid = NA_integer_,
   familyname = NA_character_,
   leadinginitials = NA_character_,
@@ -23,6 +24,8 @@ set_contact(
 )
 }
 \arguments{
+\item{x}{Object to be set as a contact}
+
 \item{contactid}{An arbitrary Contact identification number.}
 
 \item{familyname}{Family or surname name of a person.}

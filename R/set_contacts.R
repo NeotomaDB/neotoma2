@@ -7,6 +7,7 @@
 #' @importFrom methods new
 #' @importFrom uuid UUIDgenerate
 #' @importFrom methods slot<-
+#' @param x Object to be set as a contact
 #' @param contactid An arbitrary Contact identification number.
 #' @param familyname Family or surname name of a person.
 #' @param leadinginitials Leading initials for given or forenames

@@ -13,59 +13,54 @@
 #' @import dplyr
 #' @examples
 #' \dontrun{
-#' sa <- list(geoJSON = '{"type": "Polygon",
-#'        "coordinates": [[
-#'             [-79.66, -5.97],
-#'             [-70.06, -19.07],
-#'             [-74.38, -55.59],
-#'             [-34.67, -6.52],
-#'             [-76.41, 8.37],
-#'             [-79.66, -5.97]
-#'             ]]}')
+#' fourcorners <- '{"type": "Polygon",
+#' "coordinates": [[
+#' [-109.36060497194846, 37.69552879956651],
+#' [-107.813845732192, 37.69552879956651],
+#' [-107.813845732192, 36.80303716260222],
+#' [-109.36060497194846, 36.80303716260222], 
+#' [-109.36060497194846, 37.69552879956651]
+#' ]]}'
+#'
+#' Download all vertebrate localities within a bounding box.
+#' fc_sites <- neotoma2::get_sites(loc = fourcorners[1])
+#' fc_ds <- neotoma2::get_datasets(fc_sites, all_data=TRUE) %>% 
+#' neotoma2::filter(datasettype=="vertebrate fauna")
 #' 
-#' sa$sf <- geojsonsf::geojson_sf(sa$geoJSON)
+#' fc_dl <- neotoma2::get_downloads(fc_ds)
+#' fc_dl1 <- fc_dl[[1]]
 #' 
-#' sa_sites <- neotoma2::get_sites(loc = sa$sf, all_data=TRUE)
-#' sa_datasets <- neotoma2::get_datasets(sa_sites)
-#' sa_diatom <- sa_datasets %>% 
-#'  neotoma2::filter(datasettype == "diatom" & !is.na(age_range_young))
-#' sa_dl <- sa_diatom %>% get_downloads()
-#' plottingSite <- sa_dl[[1]]
-#' 
-#' # Obtain variablenames via taxa()
-#' sa_taxa <- taxa(plottingSite) %>%
-#'  filter(ecologicalgroup %in% c("DIAT")) %>%
-#'  filter(elementtype == "valve") 
-#' var_names <- sa_taxa$variablename
+#' fc_smp <- samples(fc_dl1)
+#' toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'), elementtypes=', bone/tooth', unit='present/absent')
 #' 
 #'}
-toWide <- function(x, variablenames=c(), ecologicalgroups=NA, elementtypes=NA, 
-                   unit=NA, groupby='age', operation='prop') {
+toWide <- function(x, variablenames=c(), ecologicalgroups=c(), elementtypes=c(), 
+                   unit=c(), groupby='age', operation='prop') {
   
   if(is.null(variablenames)){
     df <- x
-    warning("All available names in the provided samples data frame will be included.")
+    warning("All available variable names in the provided samples data frame will be included.")
   } else {
     df <- x %>%
       dplyr::filter(variablename %in% variablenames)
   }
   
-  if(is.na(ecologicalgroups)){
+  if(is.null(ecologicalgroups)){
     stop("Please provide which ecological groups you want to filter by.")
   }
   
-  if(is.na(elementtypes)){
+  if(is.null(elementtypes)){
     stop("Please provide which element types you want to filter by.")
   }
   
-  if(is.na(unit)){
+  if(is.null(unit)){
     stop("Please provide which units you want to filter by.")
   }
   
   df <- df %>% 
     dplyr::filter(ecologicalgroup %in% ecologicalgroups) %>%
-    dplyr::filter(elementtype == elementtypes) %>%
-    dplyr::filter(units == unit)
+    dplyr::filter(elementtype %in% elementtypes) %>%
+    dplyr::filter(units %in% unit)
   
   # Get proportion values
   onesite <- df %>%
