@@ -72,7 +72,12 @@ toWide <- function(x, variablenames=c(), ecologicalgroups=c(), elementtypes=c(),
                   n = value) %>% 
     dplyr::arrange(desc(groupby))
   
-  View(onesite)
+  if(unit=="present/absent"){
+    if(operation != "presence"){
+      warning("Unit is `present/absent`, operation 'presence' will be applied.")
+    }
+    operation="presence"
+  }
   widetable <- onesite %>%
     dplyr::mutate(prop = as.numeric(prop),
                   sum = as.numeric(value),
@@ -81,13 +86,14 @@ toWide <- function(x, variablenames=c(), ecologicalgroups=c(), elementtypes=c(),
                     counter == 0 ~ 0)) %>%
     dplyr::select(all_of(groupby), variablename, all_of(operation))
   
- 
+  
+  
   counts <- tidyr::pivot_wider(widetable,
                                id_cols = groupby,
                                names_from = variablename,
                                values_from = operation,
                                values_fill = 0,
-                               values_fn=mean)
+                               values_fn=sum)
   
   return(counts)
 }
