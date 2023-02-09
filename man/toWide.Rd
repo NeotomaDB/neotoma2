@@ -28,7 +28,7 @@ toWide(
 \item{groupby}{Group by 'age' or 'depth'}
 
 \item{operation}{label or vector of operations to be chosen from: 'prop', 'sum',
-'count', 'presence'.}
+'counter', 'presence'.}
 }
 \description{
 Obtain a wide table with information regarding of samples grouped by

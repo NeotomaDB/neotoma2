@@ -6,7 +6,7 @@
 #' @param unit Label stating which units to filter by, e.g. "NISP"
 #' @param groupby Group by 'age' or 'depth'
 #' @param operation label or vector of operations to be chosen from: 'prop', 'sum', 
-#' 'count', 'presence'.
+#' 'counter', 'presence'.
 #' @description Obtain a wide table with information regarding of samples grouped by 
 #' variablename and depth/age.
 #' @export
