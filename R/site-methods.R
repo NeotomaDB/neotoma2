@@ -247,9 +247,11 @@ setMethod(f = "c",
                          sites = unlist(c(x@sites,
                                           y@sites),
                                         recursive = FALSE))
+              out <- clean(out)
             } else if (is(y, "site")) {
               siteset <- c(x@sites, y)
               out <- new("sites", sites = siteset)
+              out <- clean(out)
             }
             return(out)
           })
