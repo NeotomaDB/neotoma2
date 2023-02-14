@@ -199,7 +199,6 @@ get_sites.default <- function(...) { # nolint
     output <- parse_site(result)
     return(output)
   }
-
 }
 
 #' @title Get Site Information for Fossil Sites
