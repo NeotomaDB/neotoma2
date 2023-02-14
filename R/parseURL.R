@@ -119,7 +119,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
           body2$datasetid <- paste0(sequ, collapse = ",")
         }
         body2$limit <- 50
-        print(body2)
         body2 <- jsonlite::toJSON(body2, auto_unbox = TRUE)
         response <- httr::POST(new_url,
                                body = body2,
