@@ -110,8 +110,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 
       for (sequ in seq_chunk) {
         body2 <- list()
-        body2 <- names(body)
         body2 <- body
+        names(body2) <- names(body)
+        
         if('siteid' %in% names(body)){
           body2$siteid <- paste0(sequ, collapse = ",")
         }
