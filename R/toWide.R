@@ -85,9 +85,7 @@ toWide <- function(x, variablenames=c(), ecologicalgroups=c(), elementtypes=c(),
                     counter > 0 ~ 1,
                     counter == 0 ~ 0)) %>%
     dplyr::select(all_of(groupby), variablename, all_of(operation))
-  
-  
-  
+
   counts <- tidyr::pivot_wider(widetable,
                                id_cols = groupby,
                                names_from = variablename,

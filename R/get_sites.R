@@ -251,6 +251,7 @@ get_sites.sites <- function(x, ...) {
   if (length(x) > 0) {
     ids <- getids(x)
     siteids <- ids$siteid
+    #datasetids <- ids$datasetid
     siteids <- siteids %>%
       unique() %>%
       as.numeric() %>%
