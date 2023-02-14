@@ -187,7 +187,9 @@ get_sites.default <- function(...) { # nolint
   } else {
 
     base_url <- paste0("data/sites")
-    result <- parseURL(base_url, ...) %>%
+    result <- parseURL(base_url, ...) 
+    
+    result <- result %>%
       cleanNULL()
   }
 
@@ -216,17 +218,12 @@ get_sites.numeric <- function(x, ...) {
   }
 
   base_url <- paste0("data/sites/", siteids)
-
   result <- neotoma2::parseURL(base_url, ...)
-
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
-
     output <- parse_site(result)
-
     return(output)
-
   } else {
     return(NULL)
   }
@@ -250,27 +247,30 @@ get_sites.numeric <- function(x, ...) {
 #' }
 #' @export
 get_sites.sites <- function(x, ...) {
-
+  
   if (length(x) > 0) {
-    siteids <- getids(x)$siteid %>%
+    ids <- getids(x)
+    siteids <- ids$siteid
+    siteids <- siteids %>%
       unique() %>%
       as.numeric() %>%
       na.omit() %>%
       paste0(., collapse = ",")
   }
-
+ 
   base_url <- "data/sites"
-
-  result <- neotoma2::parseURL(base_url, siteid = siteids, ...)
-
-  result_length <- length(result[2]$data)
-  if (result_length > 0) {
-
-    output <- parse_site(result)
-
-    return(output)
-
+  
+  ## Fixing all data
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
+  if('all_data' %in% names(cl)){
+    all_data = cl$all_data
   } else {
-    return(NULL)
+    all_data = TRUE
   }
+  
+  output <- get_sites(siteid=siteids, all_data=all_data, ...)
+  
+  return(output)
 }
