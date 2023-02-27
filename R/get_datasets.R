@@ -209,7 +209,7 @@ get_datasets.default <- function(x, ...) { # nolint
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
-    base_url <- paste0("data/datasets?loc=", loc)
+    base_url <- paste0("data/datasets?loc=", URLencode(loc, reserved = TRUE))
     if(length(base_url)>1){
       stop("Multiple polygons cannot be handled, pass one polygon at a time.")
     }
