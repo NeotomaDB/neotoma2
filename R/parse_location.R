@@ -27,8 +27,9 @@ parse_location <- function(x) {
     return(loc[1])
     
   } else if (class(x)[1] == "sf") {
-    if ("sfc" %in% class(x$geometry)){
-      loc <- geojsonsf::sfc_geojson(sf::st_geometry(x))
+    geom <- sf::st_geometry(x)
+    if ("sfc" %in% class(geom)){
+        loc <- geojsonsf::sfc_geojson(geom)
     } else {
       loc <- geojsonsf::sf_geojson(x)
     }

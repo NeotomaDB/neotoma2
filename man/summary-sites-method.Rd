@@ -12,5 +12,8 @@
 \item{...}{additional properties passed to \code{summary}}
 }
 \description{
-Summary of objects within a sites object.
+This function summarizes a sites object, from \code{site} level
+and returns a \code{data.frame} that contains the site ID, sitename,
+collectionunit ID, count of chronologies, count of datasets
+and types of datasets within the site.
 }

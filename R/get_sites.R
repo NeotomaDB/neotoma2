@@ -168,6 +168,9 @@ get_sites.default <- function(...) { # nolint
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
     base_url <- paste0("data/sites?loc=", URLencode(loc, reserved = TRUE))
+    if(length(base_url)>1){
+      stop("Multiple polygons cannot be handled, pass one polygon at a time.")
+    }
 
     for (name in names(cl)) {
       if (!(name == "loc")) {
@@ -180,9 +183,12 @@ get_sites.default <- function(...) { # nolint
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
         cleanNULL()
+      
+      # add warning to revise loc argument
     } else {
       result <- parseURL(base_url) %>%
         cleanNULL()
+      # add warning to revise loc argument
     }
   } else {
 
