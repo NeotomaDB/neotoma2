@@ -138,7 +138,7 @@ get_sites <- function(x = NA, ...) {
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
-#' @importFrom utils encodeURL
+#' @importFrom utils URLencode
 #' @param ... One of a set of possible query parameters discussed in details.
 #' @export
 get_sites.default <- function(...) { # nolint
