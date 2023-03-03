@@ -138,10 +138,13 @@ get_sites <- function(x = NA, ...) {
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
+#' @importFrom utils URLencode
 #' @param ... One of a set of possible query parameters discussed in details.
 #' @export
 get_sites.default <- function(...) { # nolint
-
+  oo <- options(scipen = 9999999)
+  on.exit(options(oo))
+  
   cl <- as.list(match.call())
 
   cl[[1]] <- NULL
@@ -167,7 +170,10 @@ get_sites.default <- function(...) { # nolint
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
-    base_url <- paste0("data/sites?loc=", loc)
+    base_url <- paste0("data/sites?loc=", URLencode(loc, reserved = TRUE))
+    if(length(base_url)>1){
+      stop("Multiple polygons cannot be handled, pass one polygon at a time.")
+    }
 
     for (name in names(cl)) {
       if (!(name == "loc")) {
@@ -180,14 +186,19 @@ get_sites.default <- function(...) { # nolint
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
         cleanNULL()
+      
+      # add warning to revise loc argument
     } else {
       result <- parseURL(base_url) %>%
         cleanNULL()
+      # add warning to revise loc argument
     }
   } else {
 
     base_url <- paste0("data/sites")
-    result <- parseURL(base_url, ...) %>%
+    result <- parseURL(base_url, ...) 
+    
+    result <- result %>%
       cleanNULL()
   }
 
@@ -197,7 +208,6 @@ get_sites.default <- function(...) { # nolint
     output <- parse_site(result)
     return(output)
   }
-
 }
 
 #' @title Get Site Information for Fossil Sites
@@ -216,17 +226,12 @@ get_sites.numeric <- function(x, ...) {
   }
 
   base_url <- paste0("data/sites/", siteids)
-
-  result <- neotoma2::parseURL(base_url)
-
+  result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
 
   if (result_length > 0) {
-
     output <- parse_site(result)
-
     return(output)
-
   } else {
     return(NULL)
   }
@@ -245,27 +250,31 @@ get_sites.numeric <- function(x, ...) {
 #' }
 #' @export
 get_sites.sites <- function(x, ...) {
-
+  
   if (length(x) > 0) {
-    siteids <- getids(x)$siteid %>%
+    ids <- getids(x)
+    siteids <- ids$siteid
+    #datasetids <- ids$datasetid
+    siteids <- siteids %>%
       unique() %>%
       as.numeric() %>%
       na.omit() %>%
       paste0(., collapse = ",")
   }
-
+ 
   base_url <- "data/sites"
-
-  result <- neotoma2::parseURL(base_url, siteid = siteids, ...)
-
-  result_length <- length(result[2]$data)
-  if (result_length > 0) {
-
-    output <- parse_site(result)
-
-    return(output)
-
+  
+  ## Fixing all data
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
+  if('all_data' %in% names(cl)){
+    all_data = cl$all_data
   } else {
-    return(NULL)
+    all_data = TRUE
   }
+  
+  output <- get_sites(siteid=siteids, all_data=all_data, ...)
+  
+  return(output)
 }

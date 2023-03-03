@@ -247,9 +247,11 @@ setMethod(f = "c",
                          sites = unlist(c(x@sites,
                                           y@sites),
                                         recursive = FALSE))
+              out <- clean(out)
             } else if (is(y, "site")) {
               siteset <- c(x@sites, y)
               out <- new("sites", sites = siteset)
+              out <- clean(out)
             }
             return(out)
           })
@@ -292,6 +294,10 @@ setMethod(f = "plot",
 #' @title Summary of objects within a sites object.
 #' @param object sites object
 #' @param ... additional properties passed to \code{summary}
+#' @description This function summarizes a sites object, from \code{site} level 
+#' and returns a \code{data.frame} that contains the site ID, sitename,
+#' collectionunit ID, count of chronologies, count of datasets
+#' and types of datasets within the site.
 #' @importFrom dplyr bind_rows mutate select
 #' @export
 setMethod(f = "summary",

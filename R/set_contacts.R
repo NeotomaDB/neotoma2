@@ -7,6 +7,7 @@
 #' @importFrom methods new
 #' @importFrom uuid UUIDgenerate
 #' @importFrom methods slot<-
+#' @param x Object to be set as a contact
 #' @param contactid An arbitrary Contact identification number.
 #' @param familyname Family or surname name of a person.
 #' @param leadinginitials Leading initials for given or forenames
@@ -28,7 +29,8 @@
 #' @param notes Notes about the individual
 #' @export
 
-set_contact <- function(contactid = NA_integer_,
+set_contact <- function(x = NA,
+                        contactid = NA_integer_,
                         familyname = NA_character_,
                         leadinginitials = NA_character_,
                         givennames = NA_character_,
