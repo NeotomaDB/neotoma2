@@ -18,6 +18,7 @@ Get Site Information for Fossil Sites from a Set of Sites
 \dontrun{
 ## Find all sites using a set of prior sites:
 char_sites <- get_sites(taxa = "charcoal")
+<<<<<<< Updated upstream
 sites <- get_sites(char_sites)
 # Note that each of these have a length of 25 (sites)
 # because we didn't use a `limit`, however, we can see
@@ -26,5 +27,10 @@ length(datasets(sites)) > length(datasets(char_sites))
 pollen_coloc <- sites \%>\% filter(datasettype == 'pollen')
 char_coloc <- char_sites \%>\% filter(siteid \%in\% getids(pollen_coloc)$siteid)
 pol_char <- c(pollen_coloc, char_coloc)
+=======
+pollen_coloc <- get_sites(char_sites, datasettype = "pollen")
+char_coloc <- char_sites \%>\% filter(siteid \%in\% getids(pollen_coloc)$siteid)
+pol_char <- c(pollen_coloc, char_coloc) \%>\% clean()
+>>>>>>> Stashed changes
 }
 }

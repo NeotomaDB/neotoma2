@@ -401,37 +401,37 @@ new_pub@pages <- "1397-1410"
 ## Workshops and Code Examples
 
 * 2022 International AL/IPA Meeting; Bariloche, Argentina
-  * [English Language Simple Workflow]()
+  * [English Language Simple Workflow](https://open.neotomadb.org/IAL_IPA-November2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * Spanish Language Simple Workflow
+  * [Spanish Language Simple Workflow](https://open.neotomadb.org/IAL_IPA-November2022/simple_workflow_ES.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * [English Language Complex Workflow]()
+  * [English Language Complex Workflow](https://open.neotomadb.org/IAL_IPA-November2022/complex_workflow.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * [Spanish Language Complex Workflow]()
+  * [Spanish Language Complex Workflow](https://open.neotomadb.org/IAL_IPA-November2022/complex_workflow_ES.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: South America
     * Dataset Types: Diatoms
 * 2022 European Pollen Database Meeting; Prague, Czech Republic
-  * [English Language Simple Workflow](https://open.neotomadb.org/EPD_binder/simple_workflow.html)
+  * [English Language Simple Workflow](https://open.neotomadb.org/EPD-May2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting, taxonomic harmonization
     * Spatial Domain: Europe/Czech Republic
     * Dataset Types: Pollen
-  * [English Language Complex Workflow](https://open.neotomadb.org/EPD_binder/simple_workflow.html)
+  * [English Language Complex Workflow](https://open.neotomadb.org/EPD-May2022/complex_workflow.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: Europe/Czech Republic
     * Dataset Types: Pollen
 * 2022 American Quaternary Association Meeting
-  * English Language Simple Workflow
+  * [English Language Simple Workflow](https://open.neotomadb.org/AMQUA-June2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: North America
     * Dataset Types: Pollen
-  * English Language Complex Workflow
+  * [English Language Complex Workflow](https://open.neotomadb.org/AMQUA-June2022/complex_workflow.html)
     * Topics: Chronologies
     * Spatial Domain: North America
     * Dataset Types: Pollen
