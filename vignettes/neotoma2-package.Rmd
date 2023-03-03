@@ -14,36 +14,52 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include=FALSE}
 library(sf)
 library(geojsonsf)
 library(dplyr)
 library(neotoma2)
 ```
 
-![closeup of several Neotoma sites in the Carribean.](images/siteshot.png)
+![closeup of several Neotoma sites in the Carribean.](images/siteshot.png){width=100%}
+
+## Neotoma Resources
+
+The [Neotoma Paleoecology Database](https://neotomadb.org) is a domain-specific data resource containing millions of fossil records from around the globe, covering the last 5.4 million years. The `neotoma2` R package simplifies some of the data structures and concepts to facilitate statistical analysis and visualization. Users may wish to gain a deeper understanding of the resource itself, or build more complex data objects and relationships. For those users a partial list is provided here, including a table of code examples focusing on different geographic regions, languages and dataset types.
+
+### Resources
+
+* [Neotoma Homepage](https://neotomadb.org)
+  * The Neotoma homepage, with links to contacts, news and other tools and resources.
+* [Neotoma Database Manual](https://open.neotomadb.org/manual)
+  * Documentation for the database itself, with examples of SQL queries and descriptions of Neotoma tables.
+* [Neotoma (JSON) API](https://api.neotomadb.org/)
+  * A tool to obtain data in JSON format directly through calls to Neotoma.
+* [Neotoma GitHub Organization](https://github.com/NeotomaDB)
+  * Open code repositories to see how folks are using Neotoma and what kinds of projects we're working on.
+* Workshops and Code Examples ([see section below](#workshops-and-code-examples))
 
 ## Neotoma Data Structure
 
-Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more **collection units** -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
+![Three panels showing context for Neotoma’s geographic representation of sites. In panel a a site is defined by the boundaries of a lake. The site also has a bounding box, and the core location is defined by a collection unit within the site that is defined with precise coordinates. In panel b a site is defined as a single point, for example, from a textual reference indicating the site is at the intersection of two roads. Here the site and collection unit share the unique point location. In panel c we show how that site location may be obfuscated using a bounding box as the site delimiter. In this case the collection unit would not be defined (but is represented as the triangle for illustration). Figure obtained from the Neotoma Database Manual.](images/siteboundarydiagram.svg){width=100%}
 
-![From the [Neotoma Manual](https://open.neotomadb.org/manual), a simple illustration of how the database is structured with respect to sites, collection units and datasets.](images/manual_siteStructure.png)
+Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more [**collection units**](https://open.neotomadb.org/manual/dataset-collection-related-tables-1.html#CollectionUnits) -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various [**analysis units**] from which **samples** are obtained.
 
-Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
+![From the [Neotoma Manual](https://open.neotomadb.org/manual), a simple illustration of how the database is structured with respect to sites, collection units and datasets.](images/manual_siteStructure.png){width=100%}
+
+Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** (e.g., pollen, diatom, vertebrate fauna) and **constituent database**.
 
 Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries.  From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
 
 The `neotoma2` R package is intended to act as the intermediary to support these research activities using the Neotoma Paleoecology Database. Because R is not a relational database, we needed to modify the data structures of the objects. To do this the package uses a set of S4 objects to represent different elements within the database.
 
-![A diagram showing the different major classes within the `neotoma2` R package, and the way the elements are related to one another. Individual boxes represent the major classes (sites, site, collectionunits, etc.). Each box then has a list of the specific metadata contained within the class, and the variable type (e.g., *siteid: integer*). Below these are the functions that can be applied to the object (e.g., *`[[<-`*). ](images/neotomaUML_as.svg)
+![A diagram showing the different major classes within the `neotoma2` R package, and the way the elements are related to one another. Individual boxes represent the major classes (sites, site, collectionunits, etc.). Each box then has a list of the specific metadata contained within the class, and the variable type (e.g., *siteid: integer*). Below these are the functions that can be applied to the object (e.g., *`[[<-`*). ](images/neotomaUML_as.svg){width=100%}
 
 It is important to note, here and elsewhere: **Almost everything you will interact with is a `sites` object**. A `sites` object is the general currency of this package. `sites` may have more or less metadata associated with them, but they are the primary object, and, as you can see in the diagram above, they have the most functions associated with them.
 
 ### Package Requirements
 
 The earlier `neotoma` package tried to use base R as much as possible.  The `neotoma2` package now draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package. The choice to integrate `tidyverse` packages was made largely because of the current ubiquity of the `tidyverse` in R education.
-
-There are some namespace overlaps, for example with the `filter()` function.  Depending on the order with which packages are loaded you may get errors using these functions.  If that's the case, one way of bug-checking is to try calling the function explicitly from the package: `neotoma2::filter(...)`.  This will ensure it is the `filter()` function from the `neotoma2` package.
 
 ## Site Searches
 
@@ -69,7 +85,7 @@ multiple_sites
 
 Once you search for a site, the `neotoma2` R package makes a call to the Neotoma Database, and returns a structured `sites` object that contains metadata about the sites, and some additional metadata about collection units and datasets at those sites.  This limited metadata helps speed up further searches, but is not complete, for the purposes of analysis.
 
-![The result of a hypothetical `get_sites()` call, is a `sites` object containing two individual `site` objects. Each `site` object contains a `collunits` object with some limited metadata. The top `site` appears to have two collection units, while the lower site has only a single collection unit. Each of the top two collection units appear to contain two datasets, while the bottom site has only the one collection unit with only one dataset.](images/understanding_S4_structure_get_sites.svg)
+![The result of a hypothetical `get_sites()` call, is a `sites` object containing two individual `site` objects. Each `site` object contains a `collunits` object with some limited metadata. The top `site` appears to have two collection units, while the lower site has only a single collection unit. Each of the top two collection units appear to contain two datasets, while the bottom site has only the one collection unit with only one dataset.](images/understanding_S4_structure_get_sites.svg){width=100%}
 
 #### Searching for sites by name
 
@@ -147,7 +163,7 @@ If you need to get to a deeper level of the sites object, you may want to look a
 
 `get_datasets()` adds additional metadata to the `site` objects, letting us know which `datasettypes` are associated with a site, and the dataset sample locations at the site.
 
-![Using `get_datasets()` provides more complete metadata about a record, including the addition of chronological information, and more complete metadata about the datasets, compared to the `get_sites()` call, shown above.  The objects here are the same as above, but now have chronology metadata, and contact metadata for the records. Note that there is still no sample or taxonomic information about these records.  This comes from the `get_downloads()` function.](images/understanding_S4_structure_get_datasets.svg)
+![Using `get_datasets()` provides more complete metadata about a record, including the addition of chronological information, and more complete metadata about the datasets, compared to the `get_sites()` call, shown above.  The objects here are the same as above, but now have chronology metadata, and contact metadata for the records. Note that there is still no sample or taxonomic information about these records.  This comes from the `get_downloads()` function.](images/understanding_S4_structure_get_datasets.svg){width=100%}
 
 Getting the datasets by id is the easiest call, you can also pass a vector of IDs or, if you already have a `sites` object, you can pass a sites object.
 
@@ -261,7 +277,7 @@ You also need to make sure that you accompany any of these terms with the follow
 
 Once we have the set of records we wish to examine, we then want to recover the actual sample data. This will provide us with information about the kinds of elements found at the site, within the dataset, their sample ages, and their counts or measurements. To do this we use the `get_downloads()` call.  Note, as before, we are returning a `sites` objects, but this time with the most complete metadata.
 
-![Using `get_downloads()` returns a `sites` object, but one that contains dataset objects with filled `samples` slots. The `samples` slot is often very large relative to the other metadata associated with `sites`, and so it is commonly held back until a direct request is provided. Helper functions at the `sites` level can pull out `sample` data once `get_downloads()` has been called.](images/understanding_S4_structure.svg)
+![Using `get_downloads()` returns a `sites` object, but one that contains dataset objects with filled `samples` slots. The `samples` slot is often very large relative to the other metadata associated with `sites`, and so it is commonly held back until a direct request is provided. Helper functions at the `sites` level can pull out `sample` data once `get_downloads()` has been called.](images/understanding_S4_structure.svg){width=100%}
 
 Assuming we continue with our example from Brazil, we want to extract records from the country, filter to only pollen records with samples covering the last 10,000 years, and then look at the relative frequency of taxa across sites.  We might do something like this:
 
@@ -381,3 +397,46 @@ A `publication` has a large number of slots that can be defined.  These may be l
 ```{r setPubValue}
 new_pub@pages <- "1397-1410"
 ```
+
+## Workshops and Code Examples
+
+* 2022 International AL/IPA Meeting; Bariloche, Argentina
+  * [English Language Simple Workflow]()
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * Spanish Language Simple Workflow
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * [English Language Complex Workflow]()
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * [Spanish Language Complex Workflow]()
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+* 2022 European Pollen Database Meeting; Prague, Czech Republic
+  * [English Language Simple Workflow](https://open.neotomadb.org/EPD_binder/simple_workflow.html)
+    * Topics: Simple search, climate gradients, stratigraphic plotting, taxonomic harmonization
+    * Spatial Domain: Europe/Czech Republic
+    * Dataset Types: Pollen
+  * [English Language Complex Workflow](https://open.neotomadb.org/EPD_binder/simple_workflow.html)
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: Europe/Czech Republic
+    * Dataset Types: Pollen
+* 2022 American Quaternary Association Meeting
+  * English Language Simple Workflow
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: North America
+    * Dataset Types: Pollen
+  * English Language Complex Workflow
+    * Topics: Chronologies
+    * Spatial Domain: North America
+    * Dataset Types: Pollen
+* Neotoma-charcoal Workshop, Göttingen, Germany. Authors: Petr Kuneš & Thomas Giesecke
+  * [English Language Workflow](https://rpubs.com/petrkunes/neotoma-charcoal)
+    * Topics: Simple Search, PCA, DCA, Charcoal/Pollen Correlation
+    * Spatial Domain: Global/Czech Republic
+    * Dataset Types: Pollen, Charcoal
