@@ -56,7 +56,8 @@ check_args <- function(cl) { # nolint
         if (length(cl$loc) != 4) {
           error$flag <- 1
           error$message[[length(error$message) + 1]] <- paste0("loc
-           must be a geojson string or a 4 coordinate array")
+           must be an sf object, a geojson string or a 4 coordinate 
+           array c(xmin, xmax, ymax, ymin)")
         }
       }
       }

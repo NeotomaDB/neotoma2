@@ -43,7 +43,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
                           query = query)
-    
     if (response$status_code == 414) {
       # The 414 error is a URL that is too long. This is a lazy way to manage
       # the choice between a POST and GET call.
@@ -148,7 +147,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         response <- httr::GET(paste0(baseurl, x),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
-        
         stop_for_status(response,
                         task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current

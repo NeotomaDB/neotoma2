@@ -142,7 +142,9 @@ get_sites <- function(x = NA, ...) {
 #' @param ... One of a set of possible query parameters discussed in details.
 #' @export
 get_sites.default <- function(...) { # nolint
-
+  oo <- options(scipen = 9999999)
+  on.exit(options(oo))
+  
   cl <- as.list(match.call())
 
   cl[[1]] <- NULL

@@ -189,12 +189,9 @@ parse_dataset <- function(result) { # nolint
 #' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
-  
+  oo <- options(scipen = 9999999)
+  on.exit(options(oo))
   cl <- as.list(match.call())
-  
-  possible_arguments <- c("contactid", "datasettype", "altmin", "altmax", "loc",
-                          "ageyoung", "ageold", "ageof", "limit", "offset",
-                          "all_data", "sites_o")
   
   cl[[1]] <- NULL
   
@@ -222,7 +219,7 @@ get_datasets.default <- function(x, ...) { # nolint
         }
       }
     }
-    
+
     # loc and all_data present
     if ("all_data" %in% names(cl)){
       result <- parseURL(base_url, all_data = cl$all_data) %>%
@@ -239,11 +236,11 @@ get_datasets.default <- function(x, ...) { # nolint
   
   if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
     return(NULL)
+    
   } else {
     output <- parse_dataset(result)
     return(output)
   }
-  
 }
 
 #' @title Get Dataset Numeric
@@ -311,7 +308,7 @@ get_datasets.sites <- function(x, ...) {
   ## Fixing all data
   cl <- as.list(match.call())
   cl[[1]] <- NULL
- 
+  
   if('all_data' %in% names(cl)){
     all_data = cl$all_data
   }else{
