@@ -3,6 +3,7 @@
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
+#' @import digest
 #' @importFrom methods new
 #' @description
 #' Helper function to build a dataset from the API JSON response.
@@ -34,17 +35,21 @@ build_dataset <- function(x) {
 
   specimens <- new("specimens", specimens = list())
 
-  new("dataset",
-      datasetid = use_na(testNull(x$datasetid, NA), "int"),
-      database = use_na(testNull(x$database, NA), "char"),
-      doi = list(x$doi),
-      datasettype = use_na(testNull(x$datasettype, NA), "char"),
-      datasetname = use_na(testNull(x$datasetname, NA), "char"),
-      age_range_old = use_na(testNull(x$agerange[[1]]$ageold, NA), "int"),
-      age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
-      notes = use_na(testNull(x$datasetnotes, NA), "char"),
-      pi_list = pi_list,
-      samples = samples,
-      specimens = specimens)
-
+  new_dataset <- set_dataset(x = NA,
+    datasetid = use_na(testNull(x$datasetid, NA), "int"),
+    database = use_na(testNull(x$database, NA), "char"),
+    doi = list(x$doi),
+    datasettype = use_na(testNull(x$datasettype, NA), "char"),
+    datasetname = use_na(testNull(x$datasetname, NA), "char"),
+    age_range_old = use_na(testNull(x$agerange[[1]]$ageold, NA), "int"),
+    age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
+    notes = use_na(testNull(x$datasetnotes, NA), "char"),
+    pi_list = pi_list,
+    samples = samples,
+    specimens = specimens)
+  
+  attributes(new_dataset)$hash <- digest(new_dataset)
+  
+  new_dataset
+    
 }

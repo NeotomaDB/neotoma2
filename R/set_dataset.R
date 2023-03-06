@@ -26,11 +26,13 @@ set_dataset <- function(x = NA,
                         database = NA_character_,
                         doi = NA,
                         datasettype = NA_character_,
+                        datasetname = NA_character_,
                         age_range_old = NA_integer_,
                         age_range_young = NA_integer_,
                         notes = NA_character_,
                         pi_list = NA,
-                        samples = new("samples")) {
+                        samples = new("samples"),
+                        specimens = new("specimens")) {
 
   function_call <- match.call()
 
@@ -44,11 +46,13 @@ set_dataset <- function(x = NA,
     x@database <- database
     x@doi <- doi
     x@datasettype <- datasettype
+    x@datasetname <- datasetname
     x@age_range_old <- age_range_old
     x@age_range_young <- age_range_young
     x@notes <- notes
     x@pi_list <- pi_list
     x@samples <- samples
+    x@specimens <- specimens
 
   } else {
     if (is(x, "dataset")) {

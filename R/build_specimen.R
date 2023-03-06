@@ -19,7 +19,7 @@ build_specimen <- function(x) {
 
   repo <- x$repository
 
-  new("specimen",
+  new_spec <- set_specimen(
       datasetid = use_na(testNull(x$datasetid, NA), "int"),
       sampleid = use_na(testNull(x$sampleid, NA), "int"),
       specimenid = use_na(testNull(x$specimenid, NA), "int"),
@@ -45,5 +45,9 @@ build_specimen <- function(x) {
       maturity = use_na(testNull(x$maturity, NA), "char"),
       samplenotes = use_na(testNull(x$samplenotes, NA), "char")
   )
+  
+  attributes(new_spec)$hash <- digest(new_spec)
+  
+  new_spec
 
 }

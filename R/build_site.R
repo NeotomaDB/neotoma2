@@ -4,6 +4,8 @@
 #' @importFrom assertthat assert_that
 #' @importFrom purrr map
 #' @import sf
+#' @import digest
+#' @import rlang
 #' @export
 #' @examples \dontrun{
 #' response <- jsonlite::fromJSON(
@@ -65,7 +67,7 @@ build_sites <- function(x) {
                       sep = "\n")
       warning(warnsite)
     }
-    set_site(siteid   = use_na(testNull(x$siteid, NA), "int"),
+    new_site <- set_site(siteid   = use_na(testNull(x$siteid, NA), "int"),
              sitename = use_na(testNull(x$sitename, NA), "char"),
              geography = geography,
              altitude = use_na(testNull(x$altitude, NA), "int"),
@@ -73,6 +75,13 @@ build_sites <- function(x) {
              notes = use_na(testNull(x$notes, NA), "char"),
              description = use_na(testNull(x$sitedescription, NA), "char"),
              collunits = collunits)
+    
+    # Update the collunits only for hashing
+    new_site2 <- set_site(new_site, collunits = new("collunits"))
+    
+    attributes(new_site)$hash <- digest(new_site2)
+   
+    new_site
   }
   )
   
