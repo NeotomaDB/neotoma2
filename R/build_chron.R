@@ -85,7 +85,15 @@ build_chron <- function(x) {
       chronologyname = NA_character_,
       chroncontrols = chron_table
     )
-    attributes(new_chron)$hash <- digest(new_chron)
+    attributes(new_chron)$hash <- digest(as.data.frame(new_chron) %>%
+                                           select(chronologyid,
+                                                  agemodel,
+                                                  ageboundolder,
+                                                  ageboundyounger,
+                                                  isdefault,
+                                                  dateprepared,
+                                                  modelagetype,
+                                                  chronologyname))
     new_chron
   }
 }

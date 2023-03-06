@@ -46,7 +46,7 @@ build_collunits <- function(x) {
     chronologies = chronologies,
     defaultchronology = use_na(testNull(x$defaultchronology, NA), "int"))
   
-  attributes(new_collunit)$hash <- digest(new_collunit)
+  attributes(new_collunit)$hash <- digest(as.data.frame(new_collunit))
   
   return(new_collunit)
 }

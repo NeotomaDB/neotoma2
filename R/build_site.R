@@ -76,10 +76,12 @@ build_sites <- function(x) {
              description = use_na(testNull(x$sitedescription, NA), "char"),
              collunits = collunits)
     
-    # Update the collunits only for hashing
-    new_site2 <- set_site(new_site, collunits = new("collunits"))
-    
-    attributes(new_site)$hash <- digest(new_site2)
+    attributes(new_site)$hash <- digest(as.data.frame(new_site) %>% 
+                                          select(siteid,
+                                                 sitename,
+                                                 lat,
+                                                 long,
+                                                 elev))
    
     new_site
   }

@@ -46,7 +46,19 @@ build_specimen <- function(x) {
       samplenotes = use_na(testNull(x$samplenotes, NA), "char")
   )
   
-  attributes(new_spec)$hash <- digest(new_spec)
+  attributes(new_spec)$hash <- digest(as.data.frame(new_spec) %>%
+                                        select(
+                                          datasetid,
+                                          sampleid,
+                                          specimenid,
+                                          taxonid,
+                                          taxonname,
+                                          elementtype,
+                                          symmetry,
+                                          portion,
+                                          sex,
+                                          domesticstatus,
+                                          taphonomictype))
   
   new_spec
 
