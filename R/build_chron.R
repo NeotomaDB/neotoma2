@@ -7,7 +7,6 @@ utils::globalVariables(c("depth", "thickness", "agelimitolder",
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
-#' @import digest
 #' @importFrom methods new
 #' @description
 #' A helper function to build a new chronology object from the
@@ -68,8 +67,8 @@ build_chron <- function(x) {
                    chronologyname = use_na(testNull(ch$chronologyname, NA), "char"),
                    chroncontrols = chron_table)
     
-    attributes(new_chron)$hash <- digest(new_chron)
-    new_chron
+    attributes(new_chron)$hash <- hash(new_chron)
+    return(new_chron)
     
   } else {
     new_chron <- set_chronology(
@@ -85,15 +84,7 @@ build_chron <- function(x) {
       chronologyname = NA_character_,
       chroncontrols = chron_table
     )
-    attributes(new_chron)$hash <- digest(as.data.frame(new_chron) %>%
-                                           select(chronologyid,
-                                                  agemodel,
-                                                  ageboundolder,
-                                                  ageboundyounger,
-                                                  isdefault,
-                                                  dateprepared,
-                                                  modelagetype,
-                                                  chronologyname))
-    new_chron
+    attributes(new_chron)$hash <- hash(new_chron)
+    return(new_chron)
   }
 }

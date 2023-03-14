@@ -137,3 +137,11 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+
+#' @title Hash an object
+#' @param object A site object.
+#' @export
+setGeneric("hash",
+           function(x) {
+             standardGeneric(f = "hash")
+           })

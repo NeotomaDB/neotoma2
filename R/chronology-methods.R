@@ -74,8 +74,8 @@ setMethod(f = "as.data.frame",
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
                        dateprepared =
-                        lubridate::as_date(ifelse(is.null(x@dateprepared),
-                          NA, x@dateprepared)),
+                         lubridate::as_date(ifelse(is.null(x@dateprepared),
+                                                   NA, x@dateprepared)),
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
@@ -112,18 +112,18 @@ setMethod(f = "c",
               y <- new("chronologies", chronologies = list(y))
             }
             tryCatch(
-                expr = {
-                  new("chronologies",
-                      chronologies = unlist(c(x@chronologies,
-                                              y@chronologies),
-                                            recursive = FALSE))
-                },
-                error = function(e) {
-                  stop("Use `get_downloads()` to fill chronologies details.
+              expr = {
+                new("chronologies",
+                    chronologies = unlist(c(x@chronologies,
+                                            y@chronologies),
+                                          recursive = FALSE))
+              },
+              error = function(e) {
+                stop("Use `get_downloads()` to fill chronologies details.
                         Current `sites` object comes from `get_sites()` or
                         `get_datasets()` which does not have chronology
                         detail")
-                })
+              })
           })
 
 #' @title write CSV
@@ -146,16 +146,16 @@ setMethod(f = "set_default",
           signature = signature(x = "chronologies"),
           definition = function(x, n) {
             assertthat::assert_that(class(x) == "chronologies")
-
+            
             chron_set <- as.data.frame(x)
-
+            
             assertthat::assert_that(n %in% chron_set$chronologyid,
-              msg = "The new default chronology must be a valid chronologyid
+                                    msg = "The new default chronology must be a valid chronologyid
                      within the chronologies.")
-
+            
             which_replace <- chron_set$chronologyid == n
             replacingmodel <- chron_set$modelagetype[which_replace]
-
+            
             chronout <- purrr::map(seq_len(length(x)), function(y) {
               if (x@chronologies[[y]]$chronologyid == n) {
                 x@chronologies[[y]]@isdefault <- 1
@@ -166,6 +166,34 @@ setMethod(f = "set_default",
               }
               return(x@chronologies[[y]])
             })
-
+            
             return(new("chronologies", chronologies = chronout))
           })
+
+#' @title Hash a chronology object
+#' @description Hash a Neotoma chronology object
+#' @param object chronology object
+#' @importFrom cli hash_obj_sha256
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' hash(some_site[[1]]$collunit[[1]]$chronology[[1]])
+#' @export
+setMethod(f = "hash",
+          signature = "chronology",
+          definition = function(x) {
+            df <- data.frame(chronologyid = as.character(x@chronologyid),
+                             notes = x@notes,
+                             agemodel = x@agemodel,
+                             ageboundolder = x@ageboundolder,
+                             ageboundyounger = x@ageboundyounger,
+                             isdefault = x@isdefault,
+                             dateprepared =
+                               lubridate::as_date(ifelse(is.null(x@dateprepared),
+                                                         NA, x@dateprepared)),
+                             modelagetype = x@modelagetype,
+                             chronologyname = x@chronologyname)
+            
+            output <- hash_obj_sha256(df)
+            return(output)
+          }
+)

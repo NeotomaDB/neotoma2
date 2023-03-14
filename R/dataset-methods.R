@@ -205,3 +205,29 @@ setMethod(f = "write.csv",
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
           })
+
+#' @title Hash a dataset object
+#' @description Hash a Neotoma dataset object to add as an attribute
+#' @param object dataset object
+#' @importFrom cli hash_obj_sha256
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' hash(some_site[[1]]$collunits[[1]]$datasets[[1]])
+#' @export
+setMethod(f = "hash",
+          signature = "collunit",
+          definition = function(x) {
+            df <- data.frame(collectionunitid = as.character(x@collectionunitid,
+                                                              handle = x@handle,
+                                                              colldate = x@colldate,
+                                                              location = x@location,
+                                                              waterdepth = x@waterdepth, 
+                                                              collunittype = x@collunittype,
+                                                              collectiondevice = x@collectiondevice,
+                                                              defaultchronology = x@defaultchronology,
+                                                              collectionunitname = x@collectionunitname,
+                                                              depositionalenvironment = x@depositionalenvironment))
+            output <- hash_obj_sha256(df)
+            return(output)
+          }
+)

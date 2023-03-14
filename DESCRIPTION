@@ -50,5 +50,6 @@ Imports:
     progress,
     wk,
     uuid,
-    tidyr
+    tidyr,
+    cli
 VignetteBuilder: knitr

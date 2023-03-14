@@ -524,3 +524,28 @@ setMethod(f = "cite_data",
 
             return(citations)
           })
+
+#' @title Hash a site object
+#' @description Hash a Neotoma site object to add as an attribute
+#' returning the hashed siteid, sitename, latitude, longitude and altitude.
+#' @param object site object
+#' @importFrom cli hash_obj_sha256
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' hash(some_site[[1]])
+#' @export
+setMethod(f = "hash",
+          signature = "site",
+          definition = function(x) {
+            df <- data.frame(siteid = as.character(x@siteid),
+                             sitename = x@sitename,
+                             lat = mean(st_coordinates(x@geography)[, 2]),
+                             long = mean(st_coordinates(x@geography)[, 1]),
+                             area = x@area,
+                             description = x@description,
+                             elev = x@altitude)
+            
+            output <- hash_obj_sha256(df)
+            return(output)
+              }
+          )

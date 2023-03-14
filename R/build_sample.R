@@ -50,7 +50,7 @@ build_sample <- function(x) {
     analysisunitid = use_na(testNull(x$analysisunitid, NA), "int"),
     analysisunitname = use_na(testNull(x$analysisunitname, NA), "char"))
   
-  attributes(new_sample)$hash <- digest(new_sample)
+ # attributes(new_sample)$hash <- digest(new_sample)
   
   return(new_sample)
   

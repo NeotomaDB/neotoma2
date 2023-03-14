@@ -4,8 +4,6 @@
 #' @importFrom assertthat assert_that
 #' @importFrom purrr map
 #' @import sf
-#' @import digest
-#' @import rlang
 #' @export
 #' @examples \dontrun{
 #' response <- jsonlite::fromJSON(
@@ -62,30 +60,24 @@ build_sites <- function(x) {
       df <- as.data.frame(datasets(collunits))
       dsid <- unique(df$datasetid)
       warnsite <- paste0(sprintf("Dataset(s) %s may have been recently removed from the database.",
-                              paste0(dsid,collapse = ", ")),
-                      " Affected sites/datasets will be removed when you do `get_datasets` or `get_downloads`",
-                      sep = "\n")
+                                 paste0(dsid,collapse = ", ")),
+                         " Affected sites/datasets will be removed when you do `get_datasets` or `get_downloads`",
+                         sep = "\n")
       warning(warnsite)
     }
     new_site <- set_site(siteid   = use_na(testNull(x$siteid, NA), "int"),
-             sitename = use_na(testNull(x$sitename, NA), "char"),
-             geography = geography,
-             altitude = use_na(testNull(x$altitude, NA), "int"),
-             geopolitical = geopolitical,
-             notes = use_na(testNull(x$notes, NA), "char"),
-             description = use_na(testNull(x$sitedescription, NA), "char"),
-             collunits = collunits)
+                         sitename = use_na(testNull(x$sitename, NA), "char"),
+                         geography = geography,
+                         altitude = use_na(testNull(x$altitude, NA), "int"),
+                         geopolitical = geopolitical,
+                         notes = use_na(testNull(x$notes, NA), "char"),
+                         description = use_na(testNull(x$sitedescription, NA), "char"),
+                         collunits = collunits)
     
-    attributes(new_site)$hash <- digest(as.data.frame(new_site) %>% 
-                                          select(siteid,
-                                                 sitename,
-                                                 lat,
-                                                 long,
-                                                 elev))
-   
+    attributes(new_site)$hash <- hash(new_site)
+    
     new_site
-  }
-  )
+  })
   
   sites <- new("sites", sites = new_sites)
   return(sites)

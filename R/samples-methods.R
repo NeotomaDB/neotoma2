@@ -52,3 +52,53 @@ setMethod(f = "length",
           definition = function(x) {
             length(x@samples)
           })
+
+#' @title  as.data.frame sample
+#' @param x sample object
+#' @description show as dataframe
+#' @export
+setMethod(f = "as.data.frame",
+          signature = signature("sample"),
+          definition = function(x) {
+            data.frame(igsn = x@igsn,
+                       depth = x@depth,
+                       sampleid = as.character(x@sampleid),
+                       thickness = x@thickness,
+                       samplename = x@samplename,
+                       analysisunitid = as.character(x@analysisunitid),
+                       analysisunitname = x@analysisunitname)
+          })
+
+#' @title  Show the sample information
+#' @param object sample object
+#' @export
+setMethod(f = "show",
+          signature = signature(object = "sample"),
+          definition = function(object) {
+            result <- as.data.frame(object)
+            print(result)
+          })
+
+#' @title Hash a sample object
+#' @description Hash a Neotoma sample object
+#' @param object sample object
+#' @importFrom cli hash_obj_sha256
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' hash(some_site[[1]]$collunit[[1]]$dataset[[1]]$samples[[1]])
+#' @export
+setMethod(f = "hash",
+          signature = "sample",
+          definition = function(x) {
+            df <- data.frame(igsn = x@igsn,
+                             depth = x@depth,
+                             sampleid = as.character(x@sampleid),
+                             thickness = x@thickness,
+                             samplename = x@samplename,
+                             analysisunitid = as.character(x@analysisunitid),
+                             analysisunitname = x@analysisunitname)
+            
+            output <- hash_obj_sha256(df)
+            return(output)
+          }
+)

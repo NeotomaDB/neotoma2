@@ -10,11 +10,13 @@ set_dataset(
   database = NA_character_,
   doi = NA,
   datasettype = NA_character_,
+  datasetname = NA_character_,
   age_range_old = NA_integer_,
   age_range_young = NA_integer_,
   notes = NA_character_,
   pi_list = NA,
-  samples = new("samples")
+  samples = new("samples"),
+  specimens = new("specimens")
 )
 }
 \arguments{

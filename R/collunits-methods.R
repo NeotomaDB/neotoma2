@@ -307,3 +307,31 @@ setMethod(f = "write.csv",
             df1 <- as.data.frame(x)
             write.csv(df1, ...)
           })
+
+#' @title Hash a collunit object
+#' @description Hash a Neotoma collection unit object to add as an attribute
+#' returning the hashed siteid, sitename, latitude, longitude and altitude.
+#' @param object collunit object
+#' @importFrom cli hash_obj_sha256
+#' @examples
+#' some_site <- get_sites(sitename = "Site%")
+#' hash(some_site[[1]]$collunit[[1]])
+#' @export
+setMethod(f = "hash",
+          signature = "collunit",
+          definition = function(x) {
+            df <- data.frame(collectionunitid = as.character(x@collectionunitid),
+                             handle = x@handle,
+                             colldate = x@colldate,
+                             location = x@location,
+                             waterdepth = x@waterdepth, 
+                             collunittype = x@collunittype,
+                             collectiondevice = x@collectiondevice,
+                             defaultchronology = x@defaultchronology,
+                             collectionunitname = x@collectionunitname,
+                             depositionalenvironment = x@depositionalenvironment)
+            
+            output <- hash_obj_sha256(df)
+            return(output)
+          }
+)

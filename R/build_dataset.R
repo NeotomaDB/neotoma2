@@ -3,7 +3,6 @@
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
-#' @import digest
 #' @importFrom methods new
 #' @description
 #' Helper function to build a dataset from the API JSON response.
@@ -48,14 +47,7 @@ build_dataset <- function(x) {
                              samples = samples,
                              specimens = specimens)
   
-  attributes(new_dataset)$hash <- digest(as.data.frame(new_dataset) %>% 
-                                           select(
-                                             datasetid,
-                                             database,
-                                             datasettype,
-                                             age_range_old,
-                                             age_range_young
-                                           ))
+  attributes(new_dataset)$hash <- hash(new_dataset)
   
   new_dataset
   

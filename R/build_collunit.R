@@ -3,7 +3,6 @@
 #'   returns a collection unit in any form.
 #' @export
 #' @return An object of class \code{collunit}
-#' @import digest
 #' @import sf
 
 build_collunits <- function(x) {
@@ -46,7 +45,8 @@ build_collunits <- function(x) {
     chronologies = chronologies,
     defaultchronology = use_na(testNull(x$defaultchronology, NA), "int"))
   
-  attributes(new_collunit)$hash <- digest(as.data.frame(new_collunit))
+  
+  attributes(new_collunit)$hash <- hash(new_collunit)
   
   return(new_collunit)
 }
