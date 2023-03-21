@@ -215,18 +215,14 @@ setMethod(f = "write.csv",
 #' hash(some_site[[1]]$collunits[[1]]$datasets[[1]])
 #' @export
 setMethod(f = "hash",
-          signature = "collunit",
+          signature = "dataset",
           definition = function(x) {
-            df <- data.frame(collectionunitid = as.character(x@collectionunitid,
-                                                              handle = x@handle,
-                                                              colldate = x@colldate,
-                                                              location = x@location,
-                                                              waterdepth = x@waterdepth, 
-                                                              collunittype = x@collunittype,
-                                                              collectiondevice = x@collectiondevice,
-                                                              defaultchronology = x@defaultchronology,
-                                                              collectionunitname = x@collectionunitname,
-                                                              depositionalenvironment = x@depositionalenvironment))
+            df <- data.frame(datasetid = as.character(x@datasetid),
+                             database = x@database,
+                             datasettype = x@datasettype,
+                             age_range_old =  x@age_range_old,
+                             age_range_young =  x@age_range_young)
+            
             output <- hash_obj_sha256(df)
             return(output)
           }
