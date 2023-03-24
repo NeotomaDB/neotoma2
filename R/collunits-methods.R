@@ -1,6 +1,6 @@
 #' @md
 utils::globalVariables(c(".", "element", "taxonid", "symmetry", "taxongroup",
-  "elementtype", "variablename", "ecologicalgroup", "element", "taxonid"))
+                         "elementtype", "variablename", "ecologicalgroup", "element", "taxonid"))
 # Start "c" methods
 #' @title c Method - Combine objects, including NULL
 setClassUnion("missingOrNULL", c("missing", "NULL"))
@@ -30,24 +30,24 @@ setMethod(f = "add_chronology",
             existinganalysisIds <- purrr::map(object@datasets@datasets,
                                               function(x) {
                                                 map(x@samples@samples,
-                                                  function(y) {
-                                                    y$analysisunitid
-                                                   }) %>%
-                                                    unlist()
-                                                  })
-
+                                                    function(y) {
+                                                      y$analysisunitid
+                                                    }) %>%
+                                                  unlist()
+                                              })
+            
             if (x$chronologyid %in% existingIds) {
               stop("There is already a chronology with the same ID as your 
                     new chronology.  Please change the new chronologyid.")
             }
-
+            
             assertthat::assert_that(all(c("analysisunitid", "age", 
                                           "agetype", "ageolder",
                                           "ageyounger") %in% colnames(y)),
                                     msg = "The data.frame for sample ages must
                                            contain the columns analysisunitid,
                                            age, agetype, ageolder and ageyounger.")
-
+            
             if (!any(unlist(existinganalysisIds) %in% y$analysisunitid)) {
               stop("There is no overlap between the existing analysis units and
                     the anaysis units in your new sample ages data.frame.")
@@ -56,31 +56,33 @@ setMethod(f = "add_chronology",
                        the new sample ages data.frame. Analysis units without
                        ages will have NA values assigned.")
             }
-
+            
             object@datasets@datasets <- map(object@datasets@datasets,
-              function(z) {
-                z@samples@samples <- map(z@samples@samples, function(a) {
-                  auid <- a@analysisunitid
-                  if (auid %in% y$analysisunitid) {
-                    sampleagerow <- y %>% dplyr::filter(analysisunitid == auid)
-                    a@ages <- data.frame(age = sampleagerow$age,
-                                        agetype = sampleagerow$agetype,
-                                        ageolder = sampleagerow$ageolder,
-                                        ageyounger = sampleagerow$ageyounger,
-                                        chronologyid = x$chronologyid,
-                                        chronologyname = x$chronologyname) %>%
-                      rbind(., a@ages)
-                  }
-                  return(a)
-                })
-                return(z)
-              })
-
+                                            function(z) {
+                                              z@samples@samples <- map(z@samples@samples, function(a) {
+                                                auid <- a@analysisunitid
+                                                if (auid %in% y$analysisunitid) {
+                                                  sampleagerow <- y %>% dplyr::filter(analysisunitid == auid)
+                                                  
+                                                    a@ages <- data.frame(age = sampleagerow$age,
+                                                                         agetype = sampleagerow$agetype,
+                                                                         ageolder = sampleagerow$ageolder,
+                                                                         ageyounger = sampleagerow$ageyounger,
+                                                                         chronologyid = x$chronologyid,
+                                                                         chronologyname = x$chronologyname) %>%
+                                                      rbind(., a@ages)
+                                                  
+                                                }
+                                                return(a)
+                                              })
+                                              return(z)
+                                            })
+            
             object@chronologies <- c(object@chronologies, x)
-
+            
             if (x@isdefault == 1) {
               object@chronologies <- set_default(object@chronologies,
-                x$chronologyid)
+                                                 x$chronologyid)
             }
             return(object)
           })
@@ -103,7 +105,7 @@ setMethod(f = "show",
           definition = function(object) {
             result <- purrr::map(object@collunits, function(x) {
               as.data.frame(x)
-              }) %>%
+            }) %>%
               bind_rows()
             print(result)
           })
@@ -116,7 +118,7 @@ setMethod(f = "show",
           signature = signature(object = "collunit"),
           definition = function(object) {
             result <- as.data.frame(object)
-
+            
             print(result)
           })
 
@@ -288,8 +290,8 @@ setMethod(f = "c",
             if (is(y, "collunits")) {
               out <- new("collunits",
                          collunits = unlist(c(x@collunits,
-                                          y@collunits),
-                                        recursive = FALSE))
+                                              y@collunits),
+                                            recursive = FALSE))
             } else if (is(y, "collunit")) {
               collunitset <- c(x@collunits, y)
               out <- new("collunits", collunits = collunitset)

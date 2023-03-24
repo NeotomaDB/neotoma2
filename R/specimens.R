@@ -97,9 +97,9 @@ setMethod(f = "specimens",
                                       allspec <- purrr::map(y@specimens@specimens,
                                                             function(z) {
                                                               data.frame(
-                                                                sampleid = z@sampleid,
-                                                                taxonid = z@taxonid,
-                                                                specimendid = z@specimenid,
+                                                                sampleid = as.character(z@sampleid),
+                                                                taxonid = as.character(z@taxonid),
+                                                                specimendid = as.character(z@specimenid),
                                                                 taxonname = z@taxonname,
                                                                 portion = z@portion,
                                                                 sex = z@sex,
@@ -110,7 +110,7 @@ setMethod(f = "specimens",
                                                                 row.names = NULL)
                                                             }) %>%
                                         dplyr::bind_rows() %>%
-                                        dplyr::mutate(datasetid = dsid)
+                                        dplyr::mutate(datasetid = as.character(dsid))
                                     } else {
                                       allspec <- data.frame()
                                       warnsite <- sprintf("The dataset %s has no assigned specimens.", as.character(y$datasetid))
