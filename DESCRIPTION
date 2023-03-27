@@ -31,7 +31,8 @@ Suggests:
     knitr,
     rmarkdown,
     Bchron,
-    ggplot2
+    ggplot2,
+    covr
 Imports:
     magrittr,
     sf,

@@ -37,7 +37,7 @@ The [Neotoma Paleoecology Database](https://neotomadb.org) is a domain-specific 
   * A tool to obtain data in JSON format directly through calls to Neotoma.
 * [Neotoma GitHub Organization](https://github.com/NeotomaDB)
   * Open code repositories to see how folks are using Neotoma and what kinds of projects we're working on.
-* Workshops and Code Examples ([see section below](#workshops-and-code-examples))
+* Workshops and Code Examples ([see the section below](#workshops-and-code-examples))
 
 ## Neotoma Data Structure
 
@@ -67,11 +67,11 @@ The highest level object in Neotoma is the **site**.  Sites have spatial coordin
 
 Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined with other sites into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods for printing, plotting and exporting information.
 
-### Finding sites
+### Finding Sites
 
-All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
+All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), location (`loc`) or age bounds.
 
-If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
+If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`. We can get these siteids using the [Neotoma Explorer web application](https://apps.neotomadb.org/explorer), or if we have some familiarity with the site records already.
 
 ```{r getSiteBySiteID}
 # Search for site by a single numeric ID:
@@ -87,7 +87,7 @@ Once you search for a site, the `neotoma2` R package makes a call to the Neotoma
 
 ![The result of a hypothetical `get_sites()` call, is a `sites` object containing two individual `site` objects. Each `site` object contains a `collunits` object with some limited metadata. The top `site` appears to have two collection units, while the lower site has only a single collection unit. Each of the top two collection units appear to contain two datasets, while the bottom site has only the one collection unit with only one dataset.](images/understanding_S4_structure_get_sites.svg){width=100%}
 
-#### Searching for sites by name
+#### Searching for Sites by Name
 
 Often we do not know the particular `siteid`.  If we're looking for a site and we know its name or a part of its name, we can search using the function with the `sitename` argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.  This does not support multiple text strings (i.e., you can't use `c()`).
 
@@ -104,6 +104,25 @@ alex
 ```
 
 <!-- Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
+
+#### Searching for Sites by Age
+
+There are several ways of searching for sites using age parameters. These are represented below:
+
+![Site searches using age parameters including `ageof`, `ageyoung`, `ageold`, `maxage` and `minage`.](images/understandingAgeRanges.svg){width=100%}
+
+We offer several methods of searching because different users have different requirements. A user might be only interested in one specific point in time in the past, for example the 8.2ka event. In this instance they would search `get_sites(ageof = 8200)`. They may want sites with records that completely span a time period, for example the Atlantic chronozone of the Holocene: `get_sites(ageyounger = 5000, ageolder = 8000)`. These sites would have samples both within and outside the defined age range, so that the user could track change into and out of the time period. A user may also be interested in any record within a time bin, regardless of whether the site spans that time zone or not. They would query `get_sites(minage = 5000, maxage = 8000)`.
+
+We can see how these age bounds differ:
+
+```{r agebounds}
+# Note, we are using the `all_data = TRUE` flag here to avoid the default limit of 25 records, discussed below.
+get_sites(ageof = 8200, all_data = TRUE) %>% length()
+get_sites(ageyounger = 5000, ageolder = 8000, all_data = TRUE) %>% length()
+get_sites(minage = 5000, maxage = 8000, all_data = TRUE) %>% length()
+```
+
+It is possible to pass all parameters (`ageof`, `minage`, `maxage`, `ageyounger`, . . . ), but it is likely that these will conflict and result in an empty set of records. To avoid this, be aware of the relationships among these search parameters, and how they might affect your search window.
 
 ### Accessing `sites` metadata
 

@@ -26,18 +26,18 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       fn(x)
     }
   }
-  
+
   # Assign the API host location:
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
-  
+
   baseurl <- switch(use,
                     "dev" = "https://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-  
+
   query <- list(...)
   if (all_data == FALSE) {
     response <- httr::GET(paste0(baseurl, x),

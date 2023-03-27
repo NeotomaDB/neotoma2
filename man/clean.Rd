@@ -15,7 +15,15 @@ clean(x = NA, verbose = TRUE, ...)
 }
 \description{
 Function that removes duplicate objects such as sites,
-datasets, or collection units.
+datasets, or collection units. When we pull in a large number of objects,
+or overlapping searches, we can run into a problem where we have multiple
+instances of the same site, but with different datasets. This function
+attempts to gather all objects together:
+\itemize{
+\item Before: {site: 1, dataset: 1}, {site: 1, dataset: 2}
+\item After: {site: 1, dataset: \link{1, 2}}
+So the site is gathered, and the datasets are now part of an array of datasets.
+}
 }
 \examples{
 clean_sites <- get_sites(sitename = "L\%", limit = 20)
