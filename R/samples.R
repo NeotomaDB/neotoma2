@@ -51,12 +51,12 @@ setMethod(f = "samples",
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid")
             sampset <- purrr::map(x@collunits@collunits,
-              function(y) samples(y)) %>%
-                dplyr::bind_rows() %>%
-                dplyr::bind_rows() %>%
-                dplyr::left_join(siteinfo, by = "datasetid") %>%
-                dplyr::rename(sitenotes = notes)
-
+                                  function(y) samples(y)) %>%
+              dplyr::bind_rows() %>%
+              dplyr::bind_rows() %>%
+              dplyr::left_join(siteinfo, by = "datasetid") %>%
+              dplyr::rename(sitenotes = notes)
+            
             return(sampset)
           }
 )
@@ -107,7 +107,7 @@ setMethod(f = "samples",
             precedence <- c("Calendar years BP",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
-
+            
             ids <- getids(x)
             # Check the chronologies to make sure everything is okay:
             if (length(chronologies(x)) > 0) {
@@ -116,18 +116,18 @@ setMethod(f = "samples",
               # It returns a value that is larger when your age reporting is
               # better.
               defaultchron <- purrr::map(chronologies(x)@chronologies,
-                function(y) {
-                  data.frame(chronologyid = as.character(y@chronologyid),
-                            isdefault = y@isdefault,
-                            modelagetype = y@modelagetype,
-                            chronologyname = y@chronologyname,
-                            dateprepared = y@dateprepared)
-                }) %>%
+                                         function(y) {
+                                           data.frame(chronologyid = as.character(y@chronologyid),
+                                                      isdefault = y@isdefault,
+                                                      modelagetype = y@modelagetype,
+                                                      chronologyname = y@chronologyname,
+                                                      dateprepared = y@dateprepared)
+                                         }) %>%
                 dplyr::bind_rows() %>%
                 dplyr::mutate(modelrank = match(modelagetype, rev(precedence)),
                               order = isdefault * match(modelagetype,
-                                rev(precedence)))
-
+                                                        rev(precedence)))
+              
               # Validation of default chrons, we want to check whether there
               # exists either multiple default chronologies for the same
               # time-frame or, alternately, no default chronology.
@@ -143,7 +143,7 @@ setMethod(f = "samples",
                   defaultchron$order[defaultchron$order == max_order][newmax_order] <- max_order + 1
                 }
               }
-
+              
               if (all_na == TRUE) {
                 warnsite <- sprintf(
                   "The dataset %s has no default chronologies.",
@@ -154,8 +154,8 @@ setMethod(f = "samples",
                 warnsite <- sprintf(
                   "The dataset %s has multiple default chronologies.
                    Chronology %s has been used.",
-                   ids$datasetid[1],
-                   defaultchron$chronologyid[which.max(defaultchron$order)])
+                  ids$datasetid[1],
+                  defaultchron$chronologyid[which.max(defaultchron$order)])
                 warning(warnsite)
                 defaultchron <- defaultchron[which.max(defaultchron$order), ]
               } else {
@@ -164,7 +164,7 @@ setMethod(f = "samples",
             } else {
               defaultchron <- data.frame(chronologyid = NULL)
             }
-
+            
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     dsid <- y$datasetid
@@ -174,15 +174,22 @@ setMethod(f = "samples",
                                                             if (length(whichage) == 0) {
                                                               whichage <- 1
                                                             }
-                                                            data.frame(z@ages[whichage,],
-                                                                       z@datum,
-                                                                       analysisunitid = z@analysisunitid,
-                                                                       sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
-                                                                       sampleid = z@sampleid,
-                                                                       depth = z@depth,
-                                                                       thickness = z@thickness,
-                                                                       samplename = z@samplename,
-                                                                       row.names = NULL)
+                                                            
+                                                            if(dim(z@datum)[1] >0){
+                                                              df <- data.frame(z@ages[whichage,],
+                                                                         z@datum,
+                                                                         analysisunitid = z@analysisunitid,
+                                                                         sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
+                                                                         sampleid = as.character(z@sampleid),
+                                                                         depth = z@depth,
+                                                                         thickness = z@thickness,
+                                                                         samplename = z@samplename,
+                                                                         row.names = NULL)
+                                                            } else {
+                                                              df <- data.frame()
+                                                            }
+                                                            return(df)
+                                                            
                                                           }) %>%
                                       dplyr::bind_rows() %>%
                                       dplyr::mutate(datasetid = as.character(dsid))
@@ -191,7 +198,7 @@ setMethod(f = "samples",
               dplyr::bind_rows() %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
               dplyr::rename(datasetnotes = notes)
-
+            
             return(sampset)
           }
 )
