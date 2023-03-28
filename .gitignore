@@ -10,3 +10,5 @@ lintoutput.txt
 R/.DS_Store
 /doc/
 /Meta/
+
+*.gz
