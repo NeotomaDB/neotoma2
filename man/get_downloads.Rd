@@ -50,7 +50,6 @@ following detail of information:
 Information for Fossil Datasets
 }
 \examples{
-\dontrun{
 # To find the downloads object of dataset 24:
 downloads24 <- get_downloads(24)
 
@@ -64,7 +63,6 @@ brazil <- '{"type": "Polygon",
  [-73.125,-9.102096738726443]]]}'
 brazil_datasets <- get_datasets(loc = brazil[1])
 brazil_downloads <- get_downloads(brazil_datasets)
-}
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}
