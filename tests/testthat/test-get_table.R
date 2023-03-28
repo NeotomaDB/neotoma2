@@ -13,6 +13,6 @@ test_that("We can apply the limits for get_table()", {
 
 test_that("Limit and offsets work for the get_table() call", {
   # Make sure that offsetting by one returns a different result.
-  expect_false(hash(get_table("agetypes", limit = 1)) ==
-    hash(get_table("agetypes", limit = 1, offset = 1)))
+  expect_false(rlang::hash(get_table("agetypes", limit = 1)) ==
+    rlang::hash(get_table("agetypes", limit = 1, offset = 1)))
 })

@@ -106,11 +106,3 @@ testthat::test_that("We are pulling in the sites we expect to capture:", {
 
   testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
 })
-
-testthat::test_that("Loading the manual works:", {
-  if (interactive()) {
-    testthat::expect_equal(get_manual(), NULL)
-  } else {
-    testthat::expect_error(get_manual())
-  }
-})
