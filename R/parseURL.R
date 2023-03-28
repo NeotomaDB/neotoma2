@@ -65,7 +65,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-    
+
     if (response$status_code == 200) {
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
@@ -73,17 +73,17 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       result <- cleanNull(result)
     }
     return(result)
-    
+
   } else {
     # Here the flag all_data has been accepted, so we're going to pull
     # everything in.
     if ("limit" %in% names(query)) {
       stop("You cannot use the limit parameter when all_data is TRUE")
     }
-    
+
     query$offset <- 0
     query$limit <- 100
-    
+
     response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
                           query = query)
@@ -93,8 +93,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       new_url <- newURL(baseurl, args, ...)
       body <- parsebody(args, ...)
       body <- jsonlite::fromJSON(body)
-      
-      
+
+
       if('siteid' %in% names(body)){
         ids_nos <- as.numeric(stringr::str_extract_all(body$siteid,
                                                        "[0-9.]+")[[1]])}
@@ -104,14 +104,14 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       }
       seq_chunk <- split(ids_nos,
                          ceiling(seq_along(ids_nos) / query$limit))
-      
+
       responses <- c()
 
       for (sequ in seq_chunk) {
         body2 <- list()
         body2 <- body
         names(body2) <- names(body)
-        
+
         if('siteid' %in% names(body)){
           body2$siteid <- paste0(sequ, collapse = ",")
         }

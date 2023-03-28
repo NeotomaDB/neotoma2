@@ -45,11 +45,11 @@ The [Neotoma Paleoecology Database](https://neotomadb.org) is a domain-specific 
 
 Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more [**collection units**](https://open.neotomadb.org/manual/dataset-collection-related-tables-1.html#CollectionUnits) -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various [**analysis units**] from which **samples** are obtained.
 
-![From the [Neotoma Manual](https://open.neotomadb.org/manual), a simple illustration of how the database is structured with respect to sites, collection units and datasets.](images/manual_siteStructure.png){width=100%}
-
 Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** (e.g., pollen, diatom, vertebrate fauna) and **constituent database**.
 
-Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries.  From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
+![**Figure**. *The structure of sites, collection units and datasets within Neotoma. A site contains one or more collection units. Chronologies are associated with collection units. Data of a common type (pollen, diatoms, vertebrate fauna) are assigned to a dataset.*](images/site_collunit_dataset.svg){width=50%}
+
+Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries. From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
 
 The `neotoma2` R package is intended to act as the intermediary to support these research activities using the Neotoma Paleoecology Database. Because R is not a relational database, we needed to modify the data structures of the objects. To do this the package uses a set of S4 objects to represent different elements within the database.
 
@@ -115,8 +115,10 @@ We offer several methods of searching because different users have different req
 
 We can see how these age bounds differ:
 
-```{r agebounds}
+```{r agebounds, eval=FALSE}
 # Note, we are using the `all_data = TRUE` flag here to avoid the default limit of 25 records, discussed below.
+# Because these queries are searching through every record they are slow and and are not
+# run in knitting this vignette.
 get_sites(ageof = 8200, all_data = TRUE) %>% length()
 get_sites(ageyounger = 5000, ageolder = 8000, all_data = TRUE) %>% length()
 get_sites(minage = 5000, maxage = 8000, all_data = TRUE) %>% length()
@@ -131,10 +133,11 @@ Although the `sites` are structured using S4 objects (see [Hadley Wickham's S4 d
 The `alex` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
 
 ```{r extractElement}
+alex <- get_sites(sitename = "Alexander Lake")
 alex[[1]]$siteid
 ```
 
-The elements within a `site` are the same as the defined columns within the Neotoma [`ndb.sites`](https://open.neotomadb.org/dbtables) table, with the exception of the `collunits` slot, which contains the collection units and associated datasets that are found within a site.  You can see all the `site` slots using the `names()` function.  You can select individual elements of a `site`, and you can assign values to these parameters:
+The elements within a `site` are the same as the defined columns within the Neotoma [`ndb.sites`](https://open.neotomadb.org/dbschema/tables/sites.html) table, with the exception of the `collunits` slot, which contains the collection units and associated datasets that are found within a site.  You can see all the `site` slots using the `names()` function.  You can select individual elements of a `site`, and you can assign values to these parameters:
 
 ```{r showallNamesSite}
 names(alex[[1]])
@@ -146,14 +149,14 @@ alex[[1]]$area
 
 # Modify a value using [<- assignment:
 alex[[1]]["area"] <- 30
-# alex[[1]][7] <- 30  <- Fails because the `Notes` field expects a character string.
+# alex[[1]][7] <- 30  This fails because the `Notes` field expects a character string.
 ```
 
-In this way we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements.  Although not currently implemented, the goal is to support direct upload of updated information by users.
+Using assignment, we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements. Although not currently implemented, the goal is to support direct upload of updated information by users.
 
 ### Creating a Site
 
-As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
+As explained above, a `site` is the fundamental unit of the Neotoma Database. If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
 ```{r setsitefunction}
 my_site <- set_site(sitename = "My Lake", 
@@ -170,10 +173,21 @@ This method allows us to begin modifying site information for existing sites if 
 ```{r addtosites}
 # Add a new site that's been edited using set_site()
 longer_alex <- c(alex, my_site)
-alex[[3]] <- my_site
+# Or replace an element within the existing list of sites
+# with the newly created site.
+longer_alex[[2]] <- my_site
 
+# Or append to the `sites` list with assignment:
+longer_alex[[3]] <- my_site
+```
+
+We can also use `set_sites()` as a tool to update the metadata associated with an existing site object:
+
+```r
 # Update a value within an existing `sites` object:
-alex[[2]] <- set_site(alex[[2]], altitude = 3000)
+longer_alex[[3]] <- set_site(longer_alex[[3]],
+  altitude = 3000)
+longer_alex
 ```
 
 ## Datasets
@@ -200,40 +214,20 @@ my_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 25)
 my_pollen_datasets
 ```
 
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
-
-We can use that in a `while` loop in R in the following way:
-
-```{r searchOffset, eval=FALSE}
-run <- TRUE
-offset <- 0
-
-while(run) {
-  sites <- get_sites(offset = offset, limit = 500)
-  if (length(sites) == 0) {
-    run = FALSE
-  }
-  if (exists("allSites")) {
-    allSites <- c(allSites, sites)
-  } else {
-    allSites <- sites
-  }
-  offset <- offset + 500
-}
-```
-
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add the `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, you can do that automatically using the `all_data = TRUE` argument.
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results we can use the `all_data = TRUE` flag in our calls.  **However**, this is hard on the Neotoma servers. We tend to prefer that users use `all_data = TRUE` once their analytic workflow is mostly complete.
 
 We can use that `all_data = TRUE` in R in the following way:
 
 ```{r all_data, eval=FALSE}
+allSites_dt <- get_sites(datasettype = "diatom")
+allSites_dt_all <- get_sites(datasettype = "diatom", all_data = TRUE)
 
-allSites <- get_sites(all_data = TRUE)
-allSites
- 
+# Because we used the `all_data = TRUE` flag, there will be more sites
+# in allSites_dt_all, because it represents all sites containing diatom datasets.
+length(allSites_dt_all) > length(allSites_dt)
 ```
 
-Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.
+### Spatial Searches
 
 You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0), or you can use pre-existing objects within R, for example, country-level data within the `spData` package:
 
