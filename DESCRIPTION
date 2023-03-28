@@ -32,7 +32,8 @@ Suggests:
     rmarkdown,
     Bchron,
     ggplot2,
-    covr
+    covr,
+    rlang
 Imports:
     magrittr,
     sf,
