@@ -8,9 +8,10 @@
 #'  get_manual()
 #' }
 #' @importFrom utils browseURL
+#' @importFrom rlang is_interactive
 #' @export
 get_manual <- function() {
-  if (interactive()) {
+  if (rlang::is_interactive()) {
     browseURL(url = "https://open.neotomadb.org/manual")
   } else {
     stop("Browser window will not open if interactive() mode is FALSE.")

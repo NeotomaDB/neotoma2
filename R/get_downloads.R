@@ -41,7 +41,7 @@
 #' \item{ \code{pi list} }{P.I. info}
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
-#' @examples \dontrun{
+#' @examples
 #' # To find the downloads object of dataset 24:
 #' downloads24 <- get_downloads(24)
 #'
@@ -55,7 +55,6 @@
 #'  [-73.125,-9.102096738726443]]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' brazil_downloads <- get_downloads(brazil_datasets)
-#' }
 #' @export
 get_downloads <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {

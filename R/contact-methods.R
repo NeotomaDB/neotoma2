@@ -3,13 +3,13 @@
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
-            print(data.frame(contactid = object@contactid,
-                             familyname = object@familyname,
-                             givennames = object@givennames,
+            print(data.frame(contactid = testNull(object@contactid),
+                             familyname = testNull(object@familyname),
+                             givennames = testNull(object@givennames),
                              ORCID = NA,
                              institution = NA,
                              contactstatus = NA,
-                             notes = object@notes))
+                             notes = testNull(object@notes)))
           })
 
 #' @title Get names of contacts slots
@@ -26,13 +26,13 @@ setMethod(f = "show",
           signature = "contacts",
           definition = function(object) {
             map(object@contacts, function(x) {
-              data.frame(contactid = x@contactid,
-                         familyname = x@familyname,
-                         givennames = x@givennames,
+              data.frame(contactid = testNull(x@contactid),
+                         familyname = testNull(x@familyname),
+                         givennames = testNull(x@givennames),
                          ORCID = NA,
                          institution = NA,
                          contactstatus = NA,
-                         notes = x@notes)
+                         notes = testNull(x@notes))
             }) %>%
               bind_rows() %>%
               print()
