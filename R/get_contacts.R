@@ -58,7 +58,9 @@ get_contacts.numeric <- function(x, ...) {
                       url = as.character(x$url),
                       address = as.character(x$address),
                       notes = NA_character_) })
-  return(contact)
+
+  contacts <- new("contacts", contacts = contact)
+  return(contacts)
 }
 
 #' @title Get contact information for Neotoma contributors
