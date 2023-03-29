@@ -10,10 +10,10 @@
 \item{x}{sites R object to be converted}
 }
 \value{
-The function returns a json object
+The function returns a character string in JSON format
 }
 \description{
-Convert a neotoma2 \code{sites} object into a JSON file for API management.
+Convert a neotoma2 \code{sites} object into a standardized JSON file for API management.
 }
 \examples{
 \dontrun{

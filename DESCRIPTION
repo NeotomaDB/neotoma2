@@ -32,9 +32,9 @@ Suggests:
     rmarkdown,
     Bchron,
     ggplot2,
-    covr,
-    rlang
+    covr
 Imports:
+    rlang,
     magrittr,
     sf,
     geojsonsf,
