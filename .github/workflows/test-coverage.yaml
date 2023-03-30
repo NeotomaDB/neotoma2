@@ -23,7 +23,10 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr
+          extra-packages: |
+            any::rcmdcheck
+            any::xml2
+            any::covr
           needs: coverage
 
       - name: Test coverage
