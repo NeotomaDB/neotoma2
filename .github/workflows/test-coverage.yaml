@@ -24,7 +24,8 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            xml2
+            any::rcmdcheck
+            any::xml2
             any::covr
           needs: coverage
 
