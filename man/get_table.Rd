@@ -7,7 +7,7 @@
 get_table(x, limit = 25, offset = 0)
 }
 \arguments{
-\item{x}{Table name (consult \url{https://open.neotomadb.com/dbschema}
+\item{x}{Table name (consult \url{https://open.neotomadb.org/dbschema/}
 for a complete list of table names.}
 
 \item{limit}{Default 25 records}

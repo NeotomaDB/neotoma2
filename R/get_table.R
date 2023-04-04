@@ -1,7 +1,7 @@
 #' @title Get table record from Neotoma
 #' @description Call Neotoma and return a table
 #'  (with limits & offsets for large tables)
-#' @param x Table name (consult \url{https://open.neotomadb.com/dbschema}
+#' @param x Table name (consult \url{https://open.neotomadb.org/dbschema/}
 #'  for a complete list of table names.
 #' @param limit Default 25 records
 #' @param offset Default 0.
