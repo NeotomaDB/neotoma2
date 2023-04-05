@@ -12,7 +12,7 @@
 #' @export
 get_manual <- function() {
   if (rlang::is_interactive()) {
-    browseURL(url = "https://open.neotomadb.org/manual")
+    browseURL(url = "https://open.neotomadb.org/manual/")
   } else {
     stop("Browser window will not open if interactive() mode is FALSE.")
   }

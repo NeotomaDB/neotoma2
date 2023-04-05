@@ -1,6 +1,6 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2023-01-18
+Date: 2023-04-05
 Version: 1.0.0
 Authors@R:
     c(person(given = "Dominguez Vidana",
@@ -13,17 +13,6 @@ Authors@R:
              role = c("aut", "cre"),
              email = "goring@wisc.edu",
              comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
-Maintainers@R:
-    c(person(given = "Simon",
-             family = "Goring",
-             role = c("aut", "cre"),
-             email = "goring@wisc.edu",
-             comment = structure("0000-0002-2700-4605", .Names = "ORCID")),
-      person(given = "Dominguez Vidana",
-             family = "Socorro",
-           role = c("aut"),
-           email = "s.dominguez@ht-data.com",
-           comment = structure("0000-0002-7926-4935", .Names = "ORCID")))
 URL: https://github.com/NeotomaDB/neotoma2
 BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulate data from the Neotoma Paleoecology Database.

@@ -31,7 +31,7 @@ The [Neotoma Paleoecology Database](https://neotomadb.org) is a domain-specific 
 
 * [Neotoma Homepage](https://neotomadb.org)
   * The Neotoma homepage, with links to contacts, news and other tools and resources.
-* [Neotoma Database Manual](https://open.neotomadb.org/manual)
+* [Neotoma Database Manual](https://open.neotomadb.org/manual/)
   * Documentation for the database itself, with examples of SQL queries and descriptions of Neotoma tables.
 * [Neotoma (JSON) API](https://api.neotomadb.org/)
   * A tool to obtain data in JSON format directly through calls to Neotoma.
@@ -71,7 +71,7 @@ Sites can be searched using the `get_sites()` function, or, can be created using
 
 All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), location (`loc`) or age bounds.
 
-If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`. We can get these siteids using the [Neotoma Explorer web application](https://apps.neotomadb.org/explorer), or if we have some familiarity with the site records already.
+If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`. We can get these siteids using the [Neotoma Explorer web application](https://apps.neotomadb.org/explorer/), or if we have some familiarity with the site records already.
 
 ```{r getSiteBySiteID}
 # Search for site by a single numeric ID:
@@ -325,7 +325,7 @@ In this code chunk we define the bounding polygon for our sites, filter by time 
 
 ## Publications
 
-Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
+Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](https://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
 
 ### `get_publications()` from Neotoma
 
@@ -414,37 +414,37 @@ new_pub@pages <- "1397-1410"
 ## Workshops and Code Examples
 
 * 2022 International AL/IPA Meeting; Bariloche, Argentina
-  * [English Language Simple Workflow](https://open.neotomadb.org/IAL_IPA-November2022/simple_workflow.html)
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * [Spanish Language Simple Workflow](https://open.neotomadb.org/IAL_IPA-November2022/simple_workflow_ES.html)
+  * [Spanish Language Simple Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow_ES.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * [English Language Complex Workflow](https://open.neotomadb.org/IAL_IPA-November2022/complex_workflow.html)
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: South America
     * Dataset Types: Diatoms
-  * [Spanish Language Complex Workflow](https://open.neotomadb.org/IAL_IPA-November2022/complex_workflow_ES.html)
+  * [Spanish Language Complex Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow_ES.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: South America
     * Dataset Types: Diatoms
 * 2022 European Pollen Database Meeting; Prague, Czech Republic
-  * [English Language Simple Workflow](https://open.neotomadb.org/EPD-May2022/simple_workflow.html)
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/EPD-May2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting, taxonomic harmonization
     * Spatial Domain: Europe/Czech Republic
     * Dataset Types: Pollen
-  * [English Language Complex Workflow](https://open.neotomadb.org/EPD-May2022/complex_workflow.html)
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/EPD-May2022/complex_workflow.html)
     * Topics: Chronology building, Bchron
     * Spatial Domain: Europe/Czech Republic
     * Dataset Types: Pollen
 * 2022 American Quaternary Association Meeting
-  * [English Language Simple Workflow](https://open.neotomadb.org/AMQUA-June2022/simple_workflow.html)
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/AMQUA-June2022/simple_workflow.html)
     * Topics: Simple search, climate gradients, stratigraphic plotting
     * Spatial Domain: North America
     * Dataset Types: Pollen
-  * [English Language Complex Workflow](https://open.neotomadb.org/AMQUA-June2022/complex_workflow.html)
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/AMQUA-June2022/complex_workflow.html)
     * Topics: Chronologies
     * Spatial Domain: North America
     * Dataset Types: Pollen
