@@ -268,7 +268,7 @@ setMethod(f = "write.csv",
             write.csv(df1, ...)
           })
 
-#' @title Return the latitude and logitude of sites
+#' @title Return the latitude and longitude of sites
 #' @param obj A sites object
 #' @param ... Additional parameters associated with the call.
 #' @export
@@ -359,8 +359,8 @@ setMethod(f = "summary",
 #' @title Obtain dataset DOIs from records.
 #' @description Given complete dataset objects in Neotoma (must have used
 #' \code{get_datasets()} or \code{get_downloads()}), return the dataset
-#' doi for the record.
-#' @param x a neotoma2 \code{site} object
+#' DOI for the record.
+#' @param x a Neotoma2 \code{site} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @examples
@@ -391,8 +391,8 @@ setMethod(f = "doi",
 #' @title Obtain dataset DOIs from records.
 #' @description Given complete dataset objects in Neotoma (must have used
 #' \code{get_datasets()} or \code{get_downloads()}), return the dataset
-#' doi for the record.
-#' @param x a neotoma2 \code{site} object
+#' DOI for the record.
+#' @param x a Neotoma2 \code{site} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @examples

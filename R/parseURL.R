@@ -12,7 +12,7 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP/S path for the particular API call.
-#' @param use Uses the neotoma server by default ("neotoma"), but supports either the
+#' @param use Uses the Neotoma server by default ("neotoma"), but supports either the
 #' development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
@@ -177,7 +177,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
 #' @param args The set of query arguments to be passed to the API
 #' @param ... Any additional arguments to be passed to the function.
 #' @description
-#' Take a set of arguments from the neotoma2 package and produce
+#' Take a set of arguments from the Neotoma2 package and produce
 #' the appropriate URL to the Neotoma v2.0 API.
 #' This is an internal function used by `parseURL()`.
 #' @returns A properly formatted URL.

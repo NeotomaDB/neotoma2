@@ -1,12 +1,12 @@
 utils::globalVariables(c("elev", "notes"))
 #' @title Apply a filter for Neotoma sites objects.
 #' @description The \code{filter} function takes a \code{sites} object
-#' and allows a user to filter on a number of properties. Since a sites obhect
+#' and allows a user to filter on a number of properties. Since a sites object
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
 #' \itemize{
-#'  \item{"siteid"}{A numeric site identifer from the Neotoma Database}
+#'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
 #'  \item{"long"}{A numeric longitude value.}
@@ -17,7 +17,7 @@ utils::globalVariables(c("elev", "notes"))
 #'  \item{"database"}{A character string naming the constituent database
 #'   from which the dataset is drawn.}
 #'  \item{"datasettype"}{A character string representing one of the many
-#'   daataset types within Neotoma.}
+#'   dataset types within Neotoma.}
 #'  \item{"age_range_old"}{A dataset-level parameter indicating the oldest
 #'   date covered by the dataset chronology.}
 #'  \item{"age_range_young"}{A dataset-level parameter indicating the youngest
@@ -38,7 +38,7 @@ utils::globalVariables(c("elev", "notes"))
 #'  \item{"collunittype"}{A character string for the collection unit type.}
 #'  \item{"collectiondevice"}{A fixed vocabulary term for the collection
 #'   device.}
-#'  \item{"depositionalenvironment"}{A fixed vocaublary name for the
+#'  \item{"depositionalenvironment"}{A fixed vocabulary name for the
 #'   depositional environment.}
 #' }
 #'
@@ -56,12 +56,12 @@ filter <- function(x, ...) {
 
 #' @title Apply a filter for Neotoma sites objects.
 #' @description The \code{filter} function takes a \code{sites} object
-#' and allows a user to filter on a number of properties. Since a sites obhect
+#' and allows a user to filter on a number of properties. Since a sites object
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
 #' \itemize{
-#'  \item{"siteid"}{A numeric site identifer from the Neotoma Database}
+#'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
 #'  \item{"long"}{A numeric longitude value.}
@@ -72,7 +72,7 @@ filter <- function(x, ...) {
 #'  \item{"database"}{A character string naming the constituent database
 #'   from which the dataset is drawn.}
 #'  \item{"datasettype"}{A character string representing one of the many
-#'   daataset types within Neotoma.}
+#'   dataset types within Neotoma.}
 #'  \item{"age_range_old"}{A dataset-level parameter indicating the oldest
 #'   date covered by the dataset chronology.}
 #'  \item{"age_range_young"}{A dataset-level parameter indicating the youngest
@@ -93,7 +93,7 @@ filter <- function(x, ...) {
 #'  \item{"collunittype"}{A character string for the collection unit type.}
 #'  \item{"collectiondevice"}{A fixed vocabulary term for the collection
 #'   device.}
-#'  \item{"depositionalenvironment"}{A fixed vocaublary name for the
+#'  \item{"depositionalenvironment"}{A fixed vocabulary name for the
 #'   depositional environment.}
 #' }
 #' @import sf

@@ -53,7 +53,7 @@
 #'  * `taxa`  The names of taxa which must be present within samples in a
 #' record.
 #' @return The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either mis-defined parameters or an error
+#' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or list of site objects, each containing one or more
 #' `collunit` objects, with fully populated `datasets` elements.
 #' @examples \dontrun{

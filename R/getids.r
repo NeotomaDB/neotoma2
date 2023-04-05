@@ -1,5 +1,5 @@
 #' @title Get object IDs
-#' @param x A neotoma2 \code{sites} object.
+#' @param x A Neotoma2 \code{sites} object.
 #' @description This function parses a site object, from \code{site} to
 #' \code{dataset} level and returns a \code{data.frame} that contains the
 #' site, collectionunit and dataset IDs for each element within the site.
@@ -14,7 +14,7 @@ getids <- function(x, order = TRUE) {
 }
 
 #' @title Get object IDs from sites
-#' @param x A neotoma2 \code{sites} object.
+#' @param x A Neotoma2 \code{sites} object.
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr arrange bind_rows
@@ -60,7 +60,7 @@ getids.sites <- function (x, order = TRUE) {
 }
 
 #' @title Get object IDs from a site object.
-#' @param x A neotoma2 \code{site} object.
+#' @param x A Neotoma2 \code{site} object.
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
@@ -90,7 +90,7 @@ getids.site <- function (x, order = TRUE) {
 #' @title Get object IDs from collectionunits.
 #' @description From a set of collecitonunitobjects, return the
 #' collectionunit and dataset ids.
-#' @param x A neotoma2 \code{collunits} object.
+#' @param x A Neotoma2 \code{collunits} object.
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
@@ -127,7 +127,7 @@ getids.collunits <- function(x, order = TRUE) {
 #' @title Get object IDs from a single collectionunit.
 #' @description From a collecitonunit object, return the
 #' collectionunit and dataset ids.
-#' @param x A neotoma2 \code{collunit} object.
+#' @param x A Neotoma2 \code{collunit} object.
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows

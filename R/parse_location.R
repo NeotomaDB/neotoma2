@@ -5,7 +5,7 @@
 #' @import geojsonsf
 #' @importFrom methods new
 #' @description
-#' Retrieve location from datasets WTK, geojson, bounding box
+#' Retrieve location from datasets WTK, GeoJson, bounding box
 #' @param x location object
 #' @export
 

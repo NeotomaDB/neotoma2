@@ -10,7 +10,7 @@
 #' @importFrom methods is
 #' @title Convert sites object to JSON
 #' @description
-#' Convert a neotoma2 \code{sites} object into a standardized JSON file for API management.
+#' Convert a Neotoma2 \code{sites} object into a standardized JSON file for API management.
 #' @param x sites R object to be converted
 #' @return The function returns a character string in JSON format
 #' @examples \dontrun{

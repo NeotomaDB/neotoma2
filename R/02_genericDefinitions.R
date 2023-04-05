@@ -65,8 +65,8 @@ setGeneric("doi", function(x) {
   standardGeneric(f = "doi")
 })
 
-#' @title Generate a data citation from a neotoma2 object.
-#' @description The fuction, applied to a data object with a valid dataset, 
+#' @title Generate a data citation from a Neotoma2 object.
+#' @description The function, applied to a data object with a valid dataset, 
 #' will return a properly formatted data citation for the record.
 #' @param x Object with DOIs associated to it.
 #' @export

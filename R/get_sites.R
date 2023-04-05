@@ -2,7 +2,7 @@
 #' @title parse_site
 #' @description An internal helper function to parse the API result into a site object.
 #' @param result A JSON object from the API.
-#' @return A neotoma2 site object.
+#' @return A Neotoma2 site object.
 parse_site <- function(result) {
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
@@ -34,7 +34,7 @@ parse_site <- function(result) {
 #' @import lubridate
 #' @import sf
 #' @importFrom methods new
-#' @param x A numeric vector of unique Neotoma site identifers.
+#' @param x A numeric vector of unique Neotoma site identifiers.
 #' @param ... One of a set of possible query parameters discussed in details.
 #' @description
 #' The get_sites() function is a wrapper for the Neotoma `sites` API
@@ -66,7 +66,7 @@ parse_site <- function(result) {
 #' as a vector of dataset IDs.
 #'  * `doi`  The dataset DOI for a dataset contained within a site. Can be
 #' passed as a vector of DOIs.
-#'  * `gpid`  The geopolitical name or identifer containing a site. Can be
+#'  * `gpid`  The geopolitical name or identifier containing a site. Can be
 #' passed as a vector of names.
 #'  * `keywords`  Keywords for samples within a set of sites. For example
 #' "modern" indicates a sample within the record uses the keyword "modern".
@@ -83,7 +83,7 @@ parse_site <- function(result) {
 #' or more sites, along with limited metadata describing the collection units
 #' and datasets located at that site.
 #' @return The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either mis-defined parameters or an error
+#' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or a table of sites, with rows corresponding to the
 #' number of individual sites returned by the Neotoma API.
 #' Each "site" object contains 6 parameters that can be accessed as well:

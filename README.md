@@ -12,9 +12,9 @@ The `neotoma2` R package represents a set of breaking changes with the original 
 
 This project is an open project, and contributions are welcome from any individual.  All contributors to this project are bound by a [code of conduct](https://github.com/NeotomaDB/neotoma2/blob/production/CODE_OF_CONDUCT.md).  Please review and follow this code of conduct as part of your contribution.
 
-* [![orcid](https://img.shields.io/badge/orcid-0000--0002--7926--4935-brightgreen.svg)](https://orcid.org/0000-0002-7926-4935) [Socorro Dominguez Vidana](https://ht-data.com/)
+* [![ORCID](https://img.shields.io/badge/orcid-0000--0002--7926--4935-brightgreen.svg)](https://orcid.org/0000-0002-7926-4935) [Socorro Dominguez Vidana](https://ht-data.com/)
 
-* [![orcid](https://img.shields.io/badge/orcid-0000--0002--2700--4605-brightgreen.svg)](https://orcid.org/0000-0002-2700-4605) [Simon Goring](http://www.goring.org)
+* [![ORCID](https://img.shields.io/badge/orcid-0000--0002--2700--4605-brightgreen.svg)](https://orcid.org/0000-0002-2700-4605) [Simon Goring](http://www.goring.org)
 
 ### Tips for Contributing
 
@@ -46,7 +46,7 @@ There is considerable information in the vignettes for the package, which can be
 
 ### System Requirements
 
-This project is built with R > v4.0.  The packages needed for proper package use are detailled in the `DESCRIPTION` file for this repository.
+This project is built with R > v4.0.  The packages needed for proper package use are detailed in the `DESCRIPTION` file for this repository.
 
 ### Data Requirements
 

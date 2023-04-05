@@ -10,7 +10,7 @@
 #'  \item{flag}{Returns a 0 if everything's fine, a 1 if there's a problem.}
 #'  \item{message}{A list of error messages.}
 #' @references
-#' Neotoma Project Website: http://www.neotomadb.org
+#' Neotoma Project Website: https://www.neotomadb.org/
 
 check_args <- function(cl) { # nolint
 
