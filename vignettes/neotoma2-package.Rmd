@@ -21,7 +21,7 @@ library(dplyr)
 library(neotoma2)
 ```
 
-![closeup of several Neotoma sites in the Caribean.](images/siteshot.png){width=100%}
+![closeup of several Neotoma sites in the Caribbean.](images/siteshot.png){width=100%}
 
 ## Neotoma Resources
 
@@ -255,26 +255,26 @@ Now we have an object called `brazil_datasets` that contains `r length(brazil_da
 
 You can plot these findings!
 
-```{r leafletBrasil}
+```{r leafletBrazil}
 plotLeaflet(brazil_datasets)
 ```
 
 ## Filtering Records
 
-Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brasil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
+Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brazil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
 
-```{r filterBrasil}
-brasil_dates <- neotoma2::filter(brazil_datasets,
+```{r filterBrazil}
+brazil_dates <- neotoma2::filter(brazil_datasets,
   datasettype == "geochronologic")
 
 # or:
 
-brasil_dates <- brazil_datasets %>%
+brazil_dates <- brazil_datasets %>%
   neotoma2::filter(datasettype == "geochronologic")
 
 # With boolean operators:
 
-brasil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
+brazil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
 ```
 
 The `filter()` function takes as the first argument, a datasets object, followed by the criteria we want to use to filter. Current supported criteria includes:

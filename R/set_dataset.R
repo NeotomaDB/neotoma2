@@ -5,7 +5,7 @@
 #' @param x object to be set as dataset,
 #' @param datasetid dataset identifier
 #' @param database dataset where the dataset came from
-#' @param doi doi
+#' @param doi DOI
 #' @param datasettype type the dataset belongs to
 #' @param age_range_old age range old
 #' @param age_range_young age range young

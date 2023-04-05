@@ -39,7 +39,7 @@
 #' as a vector of dataset IDs.
 #'  * `doi`  The dataset DOI for a dataset contained within a site. Can be
 #' passed as a vector of DOIs.
-#'  * `gpid`  The geopolitical name or identifer containing a site. Can be
+#'  * `gpid`  The geopolitical name or identifier containing a site. Can be
 #' passed as a vector of names.
 #'  * `keywords`  Keywords for samples within a set of sites. For example
 #' "modern" indicates a sample within the record uses the keyword "modern".

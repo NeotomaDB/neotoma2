@@ -52,7 +52,7 @@ vector of site IDs.
 as a vector of dataset IDs.
 \item \code{doi}  The dataset DOI for a dataset contained within a site. Can be
 passed as a vector of DOIs.
-\item \code{gpid}  The geopolitical name or identifer containing a site. Can be
+\item \code{gpid}  The geopolitical name or identifier containing a site. Can be
 passed as a vector of names.
 \item \code{keywords}  Keywords for samples within a set of sites. For example
 "modern" indicates a sample within the record uses the keyword "modern".

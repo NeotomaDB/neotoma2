@@ -24,7 +24,7 @@ set_dataset(
 
 \item{database}{dataset where the dataset came from}
 
-\item{doi}{doi}
+\item{doi}{DOI}
 
 \item{datasettype}{type the dataset belongs to}
 
