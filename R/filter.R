@@ -102,7 +102,7 @@ filter <- function(x, ...) {
 #' @importFrom stringr str_detect
 #' @param x A sites object.
 #' @param ... arguments to filter by.
-#' @examples
+#' @examples \dontrun{
 #' # Download 100 sites, but only keep the sites that are close to sea level.
 #' some_sites <- get_sites(sitename = "Lake%", limit = 100)
 #' site_subset <- some_sites %>% filter(altitude < 100)
@@ -111,6 +111,7 @@ filter <- function(x, ...) {
 #' sites <- get_sites(limit = 100) %>%
 #'   get_datasets(all_data = TRUE)
 #' pollen_subset <- sites %>% filter(datasettype == "pollen")
+#' }
 #' @export
 filter.sites <- function(x, ...) {  # nolint
 

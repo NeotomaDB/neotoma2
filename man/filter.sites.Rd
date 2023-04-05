@@ -55,6 +55,7 @@ depositional environment.}
 }
 }
 \examples{
+\dontrun{
 # Download 100 sites, but only keep the sites that are close to sea level.
 some_sites <- get_sites(sitename = "Lake\%", limit = 100)
 site_subset <- some_sites \%>\% filter(altitude < 100)
@@ -63,4 +64,5 @@ site_subset <- some_sites \%>\% filter(altitude < 100)
 sites <- get_sites(limit = 100) \%>\%
   get_datasets(all_data = TRUE)
 pollen_subset <- sites \%>\% filter(datasettype == "pollen")
+}
 }

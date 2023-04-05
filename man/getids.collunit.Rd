@@ -16,9 +16,11 @@ From a collecitonunit object, return the
 collectionunit and dataset ids.
 }
 \examples{
+\dontrun{
 marion <- get_sites(sitename = "Marion Lake") \%>\%
   get_datasets() \%>\%
   filter(datasettype == "pollen") \%>\%
   get_downloads()
 collunitids <- getids(collunits(marion)[[1]])
+}
 }

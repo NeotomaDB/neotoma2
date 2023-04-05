@@ -26,6 +26,7 @@ So the site is gathered, and the datasets are now part of an array of datasets.
 }
 }
 \examples{
+\dontrun{
 clean_sites <- get_sites(sitename = "L\%", limit = 20)
 more_sites <- get_sites(sitename = "La\%", limit = 20)
 long_set <- c(clean_sites, more_sites)
@@ -50,6 +51,7 @@ long_set <- c(clean_ds, more_ds)
 length(long_set)
 # By removing duplicates we get a smaller object.
 length(clean(long_set))
+}
 }
 \author{
 Simon Goring \email{goring@wisc.edu}

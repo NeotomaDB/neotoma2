@@ -18,6 +18,7 @@ Function that removes duplicate objects such as sites,
 datasets, or collection units.
 }
 \examples{
+\dontrun{
 clean_ds <- get_sites(sitename = "L\%", limit = 20) \%>\%
   get_downloads() \%>\% datasets()
 more_ds <- get_sites(sitename = "La\%", limit = 20) \%>\%
@@ -26,6 +27,7 @@ long_set <- c(clean_ds, more_ds)
 length(long_set)
 # By removing duplicates we get a smaller object.
 length(clean(long_set))
+}
 }
 \author{
 Simon Goring \email{goring@wisc.edu}

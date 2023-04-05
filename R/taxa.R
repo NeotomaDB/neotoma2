@@ -2,18 +2,18 @@ utils::globalVariables(c("context", "sites"))
 
 #' @import dplyr
 #' @export
-
 #' @title Extract taxonomic data from a set of sites.
 #' @description From a sites object,
 #' @param object A \code{sites} object.
 #' @return A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
-#' @examples
+#' @examples \dontrun{
 #' somesites <- get_sites(datasettype = "diatom", limit = 3) %>%
 #'   get_downloads()
 #' diatomtaxa <- taxa(somesites)
 #' common_taxa <- diatomtaxa %>%
 #'   dplyr::filter(sites == 3)
+#'   }
 #'
 setMethod(f = "taxa",
           signature = "sites",
@@ -43,10 +43,11 @@ setMethod(f = "taxa",
 #' @param object A \code{site} object.
 #' @return A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
-#' @examples
+#' @examples \dontrun{
 #' somesites <- get_sites(datasettype = "pollen", limit = 3) %>%
 #'   get_downloads()
 #' diatomtaxa <- taxa(somesites[[1]])
+#' }
 setMethod(f = "taxa",
           signature = "site",
           definition = function(object) {

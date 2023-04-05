@@ -94,12 +94,13 @@ getids.site <- function (x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
 #'   get_downloads()
 #' collunitids <- getids(collunits(marion))
+#' }
 #' @export
 getids.collunits <- function(x, order = TRUE) {
 
@@ -131,12 +132,13 @@ getids.collunits <- function(x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
 #'   get_downloads()
 #' collunitids <- getids(collunits(marion)[[1]])
+#' }
 #' @export
 getids.collunit <- function(x, order = TRUE) {
 
