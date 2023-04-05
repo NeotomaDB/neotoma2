@@ -16,7 +16,7 @@ get_downloads(x = NA, verbose = TRUE, ...)
 \value{
 The function returns either a single item of class
 \code{"try-error"} describing the reason for failure
-(either mis-defined parameters or an error from the Neotoma API),
+(either misdefined parameters or an error from the Neotoma API),
 or a table of sites, with rows corresponding to the number of
 individual sites and datasets returned by the Neotoma API.
 Each "site" object contains 6 parameters that can be accessed as well:

@@ -10,7 +10,7 @@ parse_location(x)
 \item{x}{location object}
 }
 \description{
-Retrieve location from datasets WTK, geojson, bounding box
+Retrieve location from datasets WTK, GeoJson, bounding box
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

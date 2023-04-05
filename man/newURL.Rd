@@ -17,7 +17,7 @@ newURL(baseurl, args, ...)
 A properly formatted URL.
 }
 \description{
-Take a set of arguments from the neotoma2 package and produce
+Take a set of arguments from the Neotoma2 package and produce
 the appropriate URL to the Neotoma v2.0 API.
 This is an internal function used by \code{parseURL()}.
 }

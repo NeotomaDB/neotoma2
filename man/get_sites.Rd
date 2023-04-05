@@ -14,7 +14,7 @@ unique Neotoma site identifiers (siteids) to extract site information.}
 }
 \value{
 The function returns either a single item of class \code{"try-error"}
-describing the reason for failure (either mis-defined parameters or an error
+describing the reason for failure (either misdefined parameters or an error
 from the Neotoma API), or a table of sites, with rows corresponding to the
 number of individual sites returned by the Neotoma API.
 Each "site" object contains 6 parameters that can be accessed as well:
@@ -55,7 +55,7 @@ vector of site IDs.
 as a vector of dataset IDs.
 \item \code{doi}  The dataset DOI for a dataset contained within a site. Can be
 passed as a vector of DOIs.
-\item \code{gpid}  The geopolitical name or identifer containing a site. Can be
+\item \code{gpid}  The geopolitical name or identifier containing a site. Can be
 passed as a vector of names.
 \item \code{keywords}  Keywords for samples within a set of sites. For example
 "modern" indicates a sample within the record uses the keyword "modern".

@@ -7,7 +7,7 @@
 \method{getids}{site}(x, order = TRUE)
 }
 \arguments{
-\item{x}{A neotoma2 \code{site} object.}
+\item{x}{A Neotoma2 \code{site} object.}
 
 \item{order}{sort items by siteid, collunitid, datasetid}
 }

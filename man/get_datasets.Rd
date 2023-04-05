@@ -13,7 +13,7 @@ get_datasets(x = NA, ...)
 }
 \value{
 The function returns either a single item of class \code{"try-error"}
-describing the reason for failure (either mis-defined parameters or an error
+describing the reason for failure (either misdefined parameters or an error
 from the Neotoma API), or list of site objects, each containing one or more
 \code{collunit} objects, with fully populated \code{datasets} elements.
 }

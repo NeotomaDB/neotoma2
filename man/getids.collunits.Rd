@@ -7,7 +7,7 @@
 \method{getids}{collunits}(x, order = TRUE)
 }
 \arguments{
-\item{x}{A neotoma2 \code{collunits} object.}
+\item{x}{A Neotoma2 \code{collunits} object.}
 
 \item{order}{sort items by siteid, collunitid, datasetid}
 }

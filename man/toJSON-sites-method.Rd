@@ -13,7 +13,7 @@
 The function returns a character string in JSON format
 }
 \description{
-Convert a neotoma2 \code{sites} object into a standardized JSON file for API management.
+Convert a Neotoma2 \code{sites} object into a standardized JSON file for API management.
 }
 \examples{
 \dontrun{
