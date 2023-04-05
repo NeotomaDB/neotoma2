@@ -65,7 +65,7 @@ setMethod(f = "samples",
 #' @param x collunits object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
@@ -75,6 +75,7 @@ setMethod(f = "samples",
 #'      data = pollen[pollen$variablename == "Cupressaceae",],
 #' xlab = "Years before present",
 #' ylab = "Cupressaceae pollen count")
+#' }
 #' @description Obtain elements from collunits
 setMethod(f = "samples",
           signature = "collunits",
