@@ -8,7 +8,7 @@ tags:
   - Holocene
   - Pleistocene
 authors:
-  - name: Socorro V. Dominguez
+  - name: Socorro Dominguez Vidana
     orcid: 0000-0002-7926-4935
     affiliation: 1
   - name: Simon J Goring
@@ -25,7 +25,7 @@ bibliography: paper.bib
 
 # Summary
 
-The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [https://neotomadb.org; @williams2018neotoma] within the R environment. Neotoma is a community curated paleoecological data resource, containing over 8 million unique observations, with global coverage, from 37 constituent databases. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years. The R package allows researchers to both download, and create new records using `get_` (e.g., `get_sites()`) and `set_` functions (e.g., `set_sites()`) respectively. This provides researchers with the opportunity to develop dynamic workflows that include data generated locally, not yet uploaded to Neotoma.
+The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [https://www.neotomadb.org; @williams2018neotoma] within the R environment. Neotoma is a community curated paleoecological data resource, containing over 8 million unique observations, with global coverage, from 37 constituent databases. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years. The R package allows researchers to both download, and create new records using `get_` (e.g., `get_sites()`) and `set_` functions (e.g., `set_sites()`) respectively. This provides researchers with the opportunity to develop dynamic workflows that include data generated locally, not yet uploaded to Neotoma.
 
 The `neotoma2` R package has been under dynamic development for over a year, but has been used for teaching and training [@EPDref2022]. This release of the `neotoma2` R package is intended to act as a clean release of the package, with all of the core features provided.
 

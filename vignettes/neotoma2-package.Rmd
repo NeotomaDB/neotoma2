@@ -25,11 +25,11 @@ library(neotoma2)
 
 ## Neotoma Resources
 
-The [Neotoma Paleoecology Database](https://neotomadb.org) is a domain-specific data resource containing millions of fossil records from around the globe, covering the last 5.4 million years. The `neotoma2` R package simplifies some of the data structures and concepts to facilitate statistical analysis and visualization. Users may wish to gain a deeper understanding of the resource itself, or build more complex data objects and relationships. For those users a partial list is provided here, including a table of code examples focusing on different geographic regions, languages and dataset types.
+The [Neotoma Paleoecology Database](https://www.neotomadb.org) is a domain-specific data resource containing millions of fossil records from around the globe, covering the last 5.4 million years. The `neotoma2` R package simplifies some of the data structures and concepts to facilitate statistical analysis and visualization. Users may wish to gain a deeper understanding of the resource itself, or build more complex data objects and relationships. For those users a partial list is provided here, including a table of code examples focusing on different geographic regions, languages and dataset types.
 
 ### Resources
 
-* [Neotoma Homepage](https://neotomadb.org)
+* [Neotoma Homepage](https://www.neotomadb.org)
   * The Neotoma homepage, with links to contacts, news and other tools and resources.
 * [Neotoma Database Manual](https://open.neotomadb.org/manual/)
   * Documentation for the database itself, with examples of SQL queries and descriptions of Neotoma tables.
