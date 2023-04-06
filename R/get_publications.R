@@ -153,7 +153,7 @@ get_publications.numeric <- function(x, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @examples
+#' @examples \dontrun{
 #' # Take a publication object and purposely degrade the metadata:
 #' bad_pub <- get_publications(666)
 #' # Note this only changes the reported year, not the citation string.
@@ -163,6 +163,7 @@ get_publications.numeric <- function(x, ...) {
 #' attr(updated_pubs, "matches")
 #' # we see the proper citation in the record:
 #' updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#' }
 #' @export
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {

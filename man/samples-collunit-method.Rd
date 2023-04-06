@@ -13,6 +13,7 @@
 Obtain elements from collunit
 }
 \examples{
+\dontrun{
 marion <- get_sites(sitename = "Marion Lake") \%>\%
   get_datasets() \%>\%
   filter(datasettype == "pollen") \%>\%
@@ -22,4 +23,5 @@ plot(value ~ I(-1 * age),
      data = pollen[pollen$variablename == "Cupressaceae",],
 xlab = "Years before present",
 ylab = "Cupressaceae pollen count")
+}
 }

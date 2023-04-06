@@ -3,7 +3,7 @@ utils::globalVariables(c("modelagetype", "isdefault"))
 #' @title samples
 #' @param x sites object
 #' @description Obtain all samples within a sites object
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
@@ -13,6 +13,7 @@ utils::globalVariables(c("modelagetype", "isdefault"))
 #'      data = pollen[pollen$variablename == "Cupressaceae",],
 #' xlab = "Years before present",
 #' ylab = "Cupressaceae pollen count")
+#' }
 #' @export
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map
@@ -32,7 +33,7 @@ setMethod(f = "samples",
 #' @title samples
 #' @param x site object
 #' @description Obtain elements on the samples level
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
@@ -42,6 +43,7 @@ setMethod(f = "samples",
 #'      data = pollen[pollen$variablename == "Cupressaceae",],
 #' xlab = "Years before present",
 #' ylab = "Cupressaceae pollen count")
+#' }
 #' @export
 #' @import dplyr
 setMethod(f = "samples",
@@ -91,7 +93,7 @@ setMethod(f = "samples",
 #' @description Obtain elements from collunit
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows mutate
-#' @examples
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
@@ -101,6 +103,7 @@ setMethod(f = "samples",
 #'      data = pollen[pollen$variablename == "Cupressaceae",],
 #' xlab = "Years before present",
 #' ylab = "Cupressaceae pollen count")
+#' }
 #' @export
 setMethod(f = "samples",
           signature = "collunit",
