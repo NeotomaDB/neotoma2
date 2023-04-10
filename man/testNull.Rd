@@ -20,8 +20,10 @@ Similar to concatenate, checks to see if a value is NULL
 and replace it with a known value provided in \code{out}.
 }
 \examples{
+\dontrun{
 # Passing a null value into the function returns 12:
 a <- testNull(val = NULL, out = 12)
 # Passing a non-NULL value returns that value:
 b <- testNull(val = 11, out = 12)
+}
 }

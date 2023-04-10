@@ -23,6 +23,7 @@ with a publication.
 Update metadata for a set of publication objects.
 }
 \examples{
+\dontrun{
 # Take a publication object and purposely degrade the metadata:
 bad_pub <- get_publications(c(666, 667, 668))
 # Note this only changes the reported year, not the citation string.
@@ -35,4 +36,5 @@ attr(updated_pubs[[1]], "matches")
 attr(updated_pubs[[2]], "matches")
 # we see the proper citation in the record:
 updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
+}
 }

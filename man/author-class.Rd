@@ -11,6 +11,8 @@ the authorship order within a publication. The full set of authors for
 a publication are represented by the \code{authors} object.
 }
 \examples{
+\dontrun{
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 firstauthor <- new("author", author = simon, order = 1)
+}
 }

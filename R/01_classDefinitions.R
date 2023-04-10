@@ -4,8 +4,8 @@ setClassUnion("id", c("character", "integer", "numeric"))
 #' @description The object that contains the contact information for an
 #' individual, along with associated metadata.
 #' @export
-#' @examples
-#' new("contact", familyname = "Goring", givennames = "Simon J.")
+#' @examples \dontrun{
+#' new("contact", familyname = "Goring", givennames = "Simon J.")}
 setClass("contact",
                     representation(contactid = "id",
                                    familyname = "character",
@@ -41,12 +41,13 @@ setClass("contact",
 #' @title An S4 class for multi-contact information from the Neotoma
 #' Paleoecology Database.
 #' @description An unordered list of individual S4 `contact` objects.
-#' @examples
+#' @examples \dontrun{
 #' # Create two contact objects and associate them within a contacts object.
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 #' packagers <- new("contacts", contacts = list(simon, socorro))
 #' packagers
+#' }
 #' @import dplyr
 #' @importFrom purrr map
 #' @export
@@ -64,9 +65,10 @@ setClass("contacts",
 #' author order. This allows us to reuse `contact` objects, and to assign
 #' the authorship order within a publication. The full set of authors for
 #' a publication are represented by the `authors` object.
-#' @examples
+#' @examples \dontrun{
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' firstauthor <- new("author", author = simon, order = 1)
+#' }
 #' @export
 setClass("author",
                    representation(author = "contact",
@@ -77,12 +79,13 @@ setClass("author",
 #' @title An S4 class for a set of Neotoma author objects.
 #' @description The S4 `authors` are a set of individual `author` objects that
 #' are then associated with a single S4 `publication` class.
-#' @examples
+#' @examples \dontrun{
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 #' first_author <- new("author", author = simon, order = 1)
 #' second_author <- new("author", author = socorro, order = 2)
 #' author_list <- new("authors", authors = list(first_author, second_author))
+#' }
 #' @export
 setClass("authors",
                     representation(authors = "list"),
@@ -95,7 +98,7 @@ setClass("authors",
 #' @title An S4 class for a single Neotoma publication.
 #' @description A publication is liked to an individual Neotoma dataset object
 #' They are grouped using an S4 `publications` class.
-#' @examples
+#' @examples \dontrun{
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 #' first_author <- new("author", author = simon, order = 1)
@@ -107,6 +110,7 @@ setClass("authors",
 #'            year = "2022",
 #'            volume = "2",
 #'            author = author_list)
+#'            }
 #' @export
 setClass("publication", representation(publicationid = "id",
                                        publicationtypeid = "numeric",

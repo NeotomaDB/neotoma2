@@ -59,6 +59,7 @@ test_that("get_sites runs as expected.", {
 })
 
 test_that("All Czech sites work with different spatial bounds:", {
+  skip_on_cran()
   cz_json <- '{"type": "Polygon",
         "coordinates": [[
             [12.40, 50.14],
@@ -86,6 +87,7 @@ test_that("All Czech sites work with different spatial bounds:", {
 })
 
 test_that("All Data + loc work", {
+  skip_on_cran()
   europe_json <- '{"type": "Polygon",
         "coordinates": [
           [[-23.5546875, 70.8446726342528],

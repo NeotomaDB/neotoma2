@@ -8,9 +8,10 @@ utils::globalVariables(c("siteid", "collunitid", "sitename", "datasetid",
 #' @description Convert a Neotoma package site object into a data.frame()
 #' returning the siteid, sitename, latitude, longitude and altitude of the site.
 #' @param object site object
-#' @examples
+#' @examples \dontrun{
 #' some_site <- get_sites(sitename = "Site%")
 #' as.data.frame(some_site[[1]])
+#' }
 #' @export
 setMethod(f = "show",
           signature = "site",
@@ -25,9 +26,10 @@ setMethod(f = "show",
 #' @title Show sites objects as a dataframe
 #' @description Return a set of site objects as a single data.frame().
 #' @param object sites object
-#' @examples
+#' @examples \dontrun{
 #' some_site <- get_sites(sitename = "Site%")
 #' as.data.frame(some_site)
+#' }
 #' @export
 setMethod(f = "show",
           signature = "sites",
@@ -48,9 +50,10 @@ setMethod(f = "show",
 #' @param x sites object
 #' @param i iteration in sites list
 #' @description Obtain one of the elements within a sites list
-#' @examples
+#' @examples \dontrun{
 #' some_site <- get_sites(sitename = "Site%")
 #' some_site[[2]]
+#' }
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
@@ -69,9 +72,10 @@ setMethod(f = "[[",
 #' @title Get or remove sites by numeric index
 #' @param x The sites object
 #' @param i The numeric index
-#' @examples
+#' @examples \dontrun{
 #' some_site <- get_sites(sitename = "Site%")
 #' some_site[2]
+#' }
 #' @export
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
@@ -364,9 +368,11 @@ setMethod(f = "summary",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @examples
+#' \dontrun{
 #' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 #' mb_ds <- get_datasets(mb)
 #' doi(mb_ds)
+#' }
 #' @export
 setMethod(f = "doi",
           signature = "sites",
@@ -396,9 +402,11 @@ setMethod(f = "doi",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @examples
+#' \dontrun{
 #' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 #' mb_ds <- get_datasets(mb)
 #' doi(mb_ds)
+#' }
 #' @export
 setMethod(f = "doi",
           signature = "site",
@@ -426,10 +434,11 @@ setMethod(f = "doi",
 #' @param x sites object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
-#' @examples
+#' @examples \dontrun{
 #' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 #' mb_ds <- get_datasets(mb)
 #' cite_data(mb_ds)
+#' }
 #' @export
 setMethod(f = "cite_data",
           signature = "sites",
@@ -480,7 +489,7 @@ setMethod(f = "cite_data",
 #' @param x sites object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
-#' @examples
+#' @examples 
 #' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 #' mb_ds <- get_datasets(mb)
 #' cite_data(mb_ds)

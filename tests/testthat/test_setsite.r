@@ -5,7 +5,7 @@ library("neotoma2")
 context("Creating objects from scratch works as expected.")
 
 test_that("Creating sites for the neotoma2 package.", {
-  
+  skip_on_cran()
   testthat::expect_error(set_site(x = 12, altitude = 33))
   
   # Update an existing site:

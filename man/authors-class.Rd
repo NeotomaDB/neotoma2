@@ -9,9 +9,11 @@ The S4 \code{authors} are a set of individual \code{author} objects that
 are then associated with a single S4 \code{publication} class.
 }
 \examples{
+\dontrun{
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 first_author <- new("author", author = simon, order = 1)
 second_author <- new("author", author = socorro, order = 2)
 author_list <- new("authors", authors = list(first_author, second_author))
+}
 }

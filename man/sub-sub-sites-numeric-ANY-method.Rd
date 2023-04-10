@@ -15,6 +15,8 @@
 Obtain one of the elements within a sites list
 }
 \examples{
+\dontrun{
 some_site <- get_sites(sitename = "Site\%")
 some_site[[2]]
+}
 }

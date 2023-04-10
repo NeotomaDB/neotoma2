@@ -1,7 +1,6 @@
 test_that("filter runs as expected. filters datasettype", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -25,7 +24,6 @@ test_that("filter runs as expected. filters datasettype", {
 test_that("filter works as expected. filter by lat.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -49,7 +47,6 @@ test_that("filter works as expected. filter by lat.", {
 test_that("filter works as expected. filter by long.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -74,7 +71,6 @@ test_that("filter works as expected. filter by long.", {
 test_that("filter works as expected. filter by multiple arguments", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -112,7 +108,6 @@ test_that("filter works as expected. filter by multiple arguments", {
 test_that("filter runs as expected. filters 2 datasettypes", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -140,7 +135,6 @@ test_that("filter runs as expected. filters 2 datasettypes", {
 test_that("filter on datasettype runs as expected. count unique sites", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -169,7 +163,6 @@ test_that("filter on datasettype runs as expected. count unique sites", {
 test_that("filter on lat runs as expected. count unique sites", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -212,7 +205,6 @@ test_that("filtering by datasetid keeps all other collection units
           where the dataset does not belong", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   meer <- get_sites(sitename = "meerfeld%") %>%
     get_downloads()
@@ -228,7 +220,7 @@ test_that("filtering by datasetid keeps all other collection units
 
 
  test_that("filter works regardless of before/after get_downloads", {
-
+  skip_on_cran()
   core_sites <- c(13949, 11904, 13319, 728, 13248, 2625, 2806,
     13280, 519, 11745, 273, 13956,
     11880, 13321, 9801, 13698, 11816,

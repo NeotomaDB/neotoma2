@@ -15,7 +15,9 @@ Given complete dataset objects in Neotoma (must have used
 DOI for the record.
 }
 \examples{
+\dontrun{
 mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 mb_ds <- get_datasets(mb)
 doi(mb_ds)
+}
 }

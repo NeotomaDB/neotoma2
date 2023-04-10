@@ -13,6 +13,8 @@
 Return a set of site objects as a single data.frame().
 }
 \examples{
+\dontrun{
 some_site <- get_sites(sitename = "Site\%")
 as.data.frame(some_site)
+}
 }

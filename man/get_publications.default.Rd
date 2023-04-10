@@ -21,8 +21,10 @@ with a publication.
 Get publication information from Neotoma
 }
 \examples{
+\dontrun{
 # How old are the papers in Neotoma that include the term "mammut"?
 mammoth_papers <- get_publications(search="mammut") \%>\%
   as.data.frame()
 hist(as.numeric(mammoth_papers$year))
+}
 }

@@ -8,7 +8,6 @@ test_that("Running samples on a record with multiple chronologies
   pulls the default model.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   singlechron <- testthat::expect_true({samples(get_downloads(4716)); TRUE})
   multichron <- testthat::expect_true({samples(get_downloads(21007)); TRUE})

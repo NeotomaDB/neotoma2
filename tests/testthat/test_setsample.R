@@ -5,7 +5,7 @@ library("neotoma2")
 context("Creating samples from scratch works as expected.")
 
 test_that("Creating samples for the neotoma2 package.", {
-  
+  skip_on_cran()
   testthat::expect_error(set_sample(x = 12, depth = 33))
   
   # Update an existing site:

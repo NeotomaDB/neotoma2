@@ -9,6 +9,7 @@ A publication is liked to an individual Neotoma dataset object
 They are grouped using an S4 \code{publications} class.
 }
 \examples{
+\dontrun{
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 first_author <- new("author", author = simon, order = 1)
@@ -20,4 +21,5 @@ pub <- new("publication",
            year = "2022",
            volume = "2",
            author = author_list)
+           }
 }

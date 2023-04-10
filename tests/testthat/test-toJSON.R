@@ -1,4 +1,5 @@
 test_that("Conversion to JSON works as expected:", {
+  skip_on_cran()
   sites <- get_sites(sample(6000, 5))
   sites_dl <- get_downloads(sites)
   aa <- toJSON(sites)

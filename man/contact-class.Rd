@@ -9,5 +9,6 @@ The object that contains the contact information for an
 individual, along with associated metadata.
 }
 \examples{
-new("contact", familyname = "Goring", givennames = "Simon J.")
+\dontrun{
+new("contact", familyname = "Goring", givennames = "Simon J.")}
 }

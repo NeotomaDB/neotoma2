@@ -106,6 +106,7 @@ test_that("get_datasets runs as expected.", {
 })
 
 test_that("all_data + loc work", {
+  skip_on_cran()
   europe_json <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
