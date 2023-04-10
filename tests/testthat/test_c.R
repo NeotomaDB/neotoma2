@@ -1,5 +1,5 @@
 # load libraries
-Sys.setenv(NOT_CRAN='skip')
+#Sys.setenv(NOT_CRAN='skip')
 library("testthat")
 library("neotoma2")
 
