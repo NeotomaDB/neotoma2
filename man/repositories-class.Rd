@@ -4,6 +4,9 @@
 \name{repositories-class}
 \alias{repositories-class}
 \title{S4 class for repositories information}
+\value{
+object of class \code{repositories}
+}
 \description{
 The grouped class for repositories from
 the Neotoma Paleoecology Database.

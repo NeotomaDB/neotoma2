@@ -3,7 +3,11 @@
 \docType{class}
 \name{site-class}
 \alias{site-class}
-\title{An S4 class for site information from the Neotoma Paleoecology Database.}
+\title{An S4 class for site information}
+\value{
+object of class \code{site}
+}
 \description{
-An S4 class for site information from the Neotoma Paleoecology Database.
+The standard object class for sites
+from the Neotoma Paleoecology Database.
 }

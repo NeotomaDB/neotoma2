@@ -12,6 +12,8 @@ plotLeaflet(object, save_im = FALSE, path = "")
 \item{save_im}{save output}
 
 \item{path}{location where output should be saved in. save_im must be TRUE}
+
+\item{leaflet}{map with site markers}
 }
 \description{
 Plot sites on a leaflet map

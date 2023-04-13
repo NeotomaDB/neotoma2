@@ -4,6 +4,9 @@
 \name{specimen-class}
 \alias{specimen-class}
 \title{S4 class for specimen information}
+\value{
+object of class \code{specimen}
+}
 \description{
 The standard object class for specimen
 from the Neotoma Paleoecology Database.

@@ -46,6 +46,9 @@ vector of site IDs.
 \item \code{sitename}  The site name, or approximate match using the \% wildcard.
 \item \code{database}  The constituent database for the record. See
 \code{get_table("constituentdatabases")}
+\item \code{datasettype} Neotoma contains data for a number of dataset types.
+This returns a subset of data types. For a complete list of available
+dataset types, run \code{neotoma2::get_table('datasettypes')}
 \item \code{altmin}  The minimum altitude range for site elevation (in meters).
 \item \code{altmax}  The maximum altitude range for site elevation (in meters).
 \item \code{datasetid}  The unique dataset ID (integer) in Neotoma. Can be passed
@@ -65,6 +68,8 @@ radiocarbon present (1950).
 for a site.
 \item \code{taxa}  The names of taxa which must be present within samples in a
 record.
+\item \code{all_data} The API only downloads the first 25 records of the query.
+For the complete records, use \code{all_data=TRUE}
 }
 }
 \examples{

@@ -489,10 +489,11 @@ setMethod(f = "cite_data",
 #' @param x sites object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
-#' @examples 
+#' @examples \dontrun{
 #' mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
 #' mb_ds <- get_datasets(mb)
 #' cite_data(mb_ds)
+#' }
 #' @export
 setMethod(f = "cite_data",
           signature = "site",

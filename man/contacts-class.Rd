@@ -5,11 +5,14 @@
 \alias{contacts-class}
 \title{An S4 class for multi-contact information from the Neotoma
 Paleoecology Database.}
+\value{
+object of class \code{contacts}
+}
 \description{
 An unordered list of individual S4 \code{contact} objects.
 }
 \examples{
-\dontrun{
+{
 # Create two contact objects and associate them within a contacts object.
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")

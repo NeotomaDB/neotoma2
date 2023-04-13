@@ -19,12 +19,9 @@
 #' @param defaultchronology best chronology model identifier to 
 #' be used with this collection unit
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a dataset
-#' my_dataset <- set_dataset(database = "EPD",
-#'                     datsettype = "pollen",
-#'                     notes = "my lake"0)
+#' @examples {
+#' # Create a collunit
+#' my_collunit <- set_collunit(notes = "my lake")
 #' }
 
 set_collunit <- function(x = NA,

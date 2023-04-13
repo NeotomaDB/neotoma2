@@ -11,6 +11,9 @@ selectMatch(x, n)
 
 \item{n}{n elements that are a best match}
 }
+\value{
+attr Select the match between a local record and a Neotoma match
+}
 \description{
 Select the best match for an object.
 }

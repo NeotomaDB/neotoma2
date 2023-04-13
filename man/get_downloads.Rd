@@ -49,6 +49,18 @@ following detail of information:
 \description{
 Information for Fossil Datasets
 }
+\details{
+The \code{get_downloads()} command wraps the Neotoma API
+(\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{downloads}.
+The call itself uses a SQL query which accepts any one of the following
+parameters:
+\itemize{
+\item \code{datasetid} The unique dataset ID (integer) in Neotoma. Can be passed
+as a vector of dataset IDs.
+\item \code{all_data} The API only downloads the first 25 records of the query.
+For the complete records, use \code{all_data=TRUE}
+}
+}
 \examples{
 \dontrun{
 # To find the downloads object of dataset 24:

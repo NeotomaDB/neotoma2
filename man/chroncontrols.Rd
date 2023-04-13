@@ -9,9 +9,9 @@ chroncontrols(x)
 \arguments{
 \item{x}{Sites object to extract chroncontrols table from}
 }
+\value{
+data.frame with chroncontrols information
+}
 \description{
 Show the samples table
-}
-\author{
-Socorro Dominguez \email{sedv8808@gmail.com}
 }

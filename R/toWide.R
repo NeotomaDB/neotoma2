@@ -12,7 +12,7 @@
 #' @export
 #' @import dplyr
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' fourcorners <- '{"type": "Polygon",
 #' "coordinates": [[
 #' [-109.36060497194846, 37.69552879956651],
@@ -22,9 +22,9 @@
 #' [-109.36060497194846, 37.69552879956651]
 #' ]]}'
 #'
-#' Download all vertebrate localities within a bounding box.
+#' # Download all vertebrate localities within a bounding box.
 #' fc_sites <- neotoma2::get_sites(loc = fourcorners[1])
-#' fc_ds <- neotoma2::get_datasets(fc_sites, all_data=TRUE) %>% 
+#' fc_ds <- neotoma2::get_datasets(fc_sites) %>% 
 #' neotoma2::filter(datasettype=="vertebrate fauna")
 #' 
 #' fc_dl <- neotoma2::get_downloads(fc_ds)

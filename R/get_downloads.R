@@ -10,6 +10,15 @@
 #' @param x Use a single number to extract site information
 #' @param verbose Status bar of items being downloaded
 #' @param ... accepted arguments: sites, datasets
+#' @details
+#' The `get_downloads()` command wraps the Neotoma API
+#' ([api.neotomadb.org](https://api.neotomadb.org)) call for `downloads`.
+#' The call itself uses a SQL query which accepts any one of the following
+#' parameters:
+#'  * `datasetid` The unique dataset ID (integer) in Neotoma. Can be passed
+#' as a vector of dataset IDs.
+#'  * `all_data` The API only downloads the first 25 records of the query. 
+#'  For the complete records, use `all_data=TRUE`
 #' @return The function returns either a single item of class
 #' \code{"try-error"} describing the reason for failure
 #' (either misdefined parameters or an error from the Neotoma API),

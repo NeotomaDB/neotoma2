@@ -4,12 +4,15 @@
 \name{publication-class}
 \alias{publication-class}
 \title{An S4 class for a single Neotoma publication.}
+\value{
+object of class \code{publication}
+}
 \description{
 A publication is liked to an individual Neotoma dataset object
 They are grouped using an S4 \code{publications} class.
 }
 \examples{
-\dontrun{
+{
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 first_author <- new("author", author = simon, order = 1)

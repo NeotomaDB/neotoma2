@@ -7,4 +7,5 @@
 \description{
 Holds Collection unit information
 from the Neotoma Paleoecology Database.
+@return object of class \code{collunits}
 }

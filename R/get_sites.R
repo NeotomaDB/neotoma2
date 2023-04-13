@@ -64,6 +64,9 @@ parse_site <- function(result) {
 #'  *  `altmax`  The maximum altitude range for site elevation (in meters).
 #'  *  `datasetid`  The unique dataset ID (integer) in Neotoma. Can be passed
 #' as a vector of dataset IDs.
+#'  * `datasettype` Neotoma contains data for a number of datasettypes. 
+#'  This returns a subset of data types. For a complete list of available 
+#'  datasettypes, run `neotoma2::get_table('datasettypes')`
 #'  * `doi`  The dataset DOI for a dataset contained within a site. Can be
 #' passed as a vector of DOIs.
 #'  * `gpid`  The geopolitical name or identifier containing a site. Can be
@@ -79,6 +82,8 @@ parse_site <- function(result) {
 #' for a site.
 #'  * `taxa`  The names of taxa which must be present within samples in a
 #' record.
+#'  * `all_data` The API only downloads the first 25 records of the query. 
+#'  For the complete records, use `all_data=TRUE`
 #' This call will then return a data object that contains site metadata for one
 #' or more sites, along with limited metadata describing the collection units
 #' and datasets located at that site.

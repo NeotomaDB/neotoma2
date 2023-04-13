@@ -9,6 +9,9 @@ showMatch(x)
 \arguments{
 \item{x}{object to show matches for}
 }
+\value{
+data.frame that marks if a \code{site} exists in another \code{sites} object
+}
 \description{
 Show matches for objects.
 }

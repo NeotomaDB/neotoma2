@@ -4,6 +4,9 @@
 \name{repository-class}
 \alias{repository-class}
 \title{S4 class for repository information}
+\value{
+object of class \code{repository}
+}
 \description{
 The standard object class for repository
 from the Neotoma Paleoecology Database.

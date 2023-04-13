@@ -9,6 +9,9 @@ samples(x)
 \arguments{
 \item{x}{sites object}
 }
+\value{
+data.frame with record information at sample level
+}
 \description{
 Obtain samples from a record or multiple records.
 }

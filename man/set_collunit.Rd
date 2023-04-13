@@ -58,10 +58,8 @@ be used with this collection unit}
 set Site Information for Fossil Sites
 }
 \examples{
-\dontrun{
-# Create a dataset
-my_dataset <- set_dataset(database = "EPD",
-                    datsettype = "pollen",
-                    notes = "my lake"0)
+{
+# Create a collunit
+my_collunit <- set_collunit(notes = "my lake")
 }
 }

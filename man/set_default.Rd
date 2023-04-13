@@ -11,6 +11,9 @@ set_default(x, n)
 
 \item{n}{The particular chronology to be used as the default.}
 }
+\value{
+sites object with new default chronology
+}
 \description{
 Set the default chronology within a collectionunit.
 }

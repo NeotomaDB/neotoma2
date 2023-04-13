@@ -4,6 +4,9 @@
 \name{author-class}
 \alias{author-class}
 \title{An S4 class for the authors of a Neotoma publication.}
+\value{
+object of class \code{author}
+}
 \description{
 This class combines the S4 class \code{contact} with a numeric
 author order. This allows us to reuse \code{contact} objects, and to assign
@@ -11,7 +14,7 @@ the authorship order within a publication. The full set of authors for
 a publication are represented by the \code{authors} object.
 }
 \examples{
-\dontrun{
+{
 simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 firstauthor <- new("author", author = simon, order = 1)
 }

@@ -9,6 +9,9 @@ specimens(x)
 \arguments{
 \item{x}{sites object}
 }
+\value{
+data.frame with record information regarding specimens
+}
 \description{
 Obtain specimens from a record or multiple records.
 }

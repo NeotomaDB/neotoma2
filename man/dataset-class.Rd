@@ -4,6 +4,9 @@
 \name{dataset-class}
 \alias{dataset-class}
 \title{S4 class for dataset information}
+\value{
+object of class \code{dataset}
+}
 \description{
 The standard object class for datasets
 from the Neotoma Paleoecology Database.

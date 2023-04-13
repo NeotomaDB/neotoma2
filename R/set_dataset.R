@@ -13,12 +13,11 @@
 #' @param pi_list pi list
 #' @param samples taxa objects
 #' @export
-#' @examples
-#' \dontrun{
+#' @examples {
 #' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",
-#'                     datsettype = "pollen",
-#'                     notes = "my lake"0)
+#'                     datasettype = "pollen",
+#'                     notes = "my lake")
 #' }
 
 set_dataset <- function(x = NA,

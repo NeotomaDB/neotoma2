@@ -4,6 +4,9 @@
 \name{samples-class}
 \alias{samples-class}
 \title{S4 class for the set of samples}
+\value{
+object of class \code{samples}
+}
 \description{
 The grouped class for samples from
 the Neotoma Paleoecology Database.

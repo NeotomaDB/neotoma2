@@ -42,10 +42,10 @@ set_dataset(
 set Site Information for Fossil Sites
 }
 \examples{
-\dontrun{
+{
 # Create a dataset
 my_dataset <- set_dataset(database = "EPD",
-                    datsettype = "pollen",
-                    notes = "my lake"0)
+                    datasettype = "pollen",
+                    notes = "my lake")
 }
 }

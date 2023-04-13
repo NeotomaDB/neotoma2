@@ -4,8 +4,9 @@ setClassUnion("id", c("character", "integer", "numeric"))
 #' @description The object that contains the contact information for an
 #' individual, along with associated metadata.
 #' @export
-#' @examples \dontrun{
-#' new("contact", familyname = "Goring", givennames = "Simon J.")}
+#' @examples
+#' new("contact", familyname = "Goring", givennames = "Simon J.")
+#' @return object of class `contact`
 setClass("contact",
                     representation(contactid = "id",
                                    familyname = "character",
@@ -41,7 +42,7 @@ setClass("contact",
 #' @title An S4 class for multi-contact information from the Neotoma
 #' Paleoecology Database.
 #' @description An unordered list of individual S4 `contact` objects.
-#' @examples \dontrun{
+#' @examples {
 #' # Create two contact objects and associate them within a contacts object.
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
@@ -50,6 +51,7 @@ setClass("contact",
 #' }
 #' @import dplyr
 #' @importFrom purrr map
+#' @return object of class `contacts`
 #' @export
 setClass("contacts",
                      representation(contacts  = "list"),
@@ -65,10 +67,11 @@ setClass("contacts",
 #' author order. This allows us to reuse `contact` objects, and to assign
 #' the authorship order within a publication. The full set of authors for
 #' a publication are represented by the `authors` object.
-#' @examples \dontrun{
+#' @examples {
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' firstauthor <- new("author", author = simon, order = 1)
 #' }
+#' @return object of class `author`
 #' @export
 setClass("author",
                    representation(author = "contact",
@@ -79,13 +82,14 @@ setClass("author",
 #' @title An S4 class for a set of Neotoma author objects.
 #' @description The S4 `authors` are a set of individual `author` objects that
 #' are then associated with a single S4 `publication` class.
-#' @examples \dontrun{
+#' @examples {
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 #' first_author <- new("author", author = simon, order = 1)
 #' second_author <- new("author", author = socorro, order = 2)
 #' author_list <- new("authors", authors = list(first_author, second_author))
 #' }
+#' @return object of class `authors`
 #' @export
 setClass("authors",
                     representation(authors = "list"),
@@ -98,7 +102,7 @@ setClass("authors",
 #' @title An S4 class for a single Neotoma publication.
 #' @description A publication is liked to an individual Neotoma dataset object
 #' They are grouped using an S4 `publications` class.
-#' @examples \dontrun{
+#' @examples {
 #' simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
 #' socorro <- new("contact", familyname = "Dominguez", givennames = "Socorro")
 #' first_author <- new("author", author = simon, order = 1)
@@ -111,6 +115,7 @@ setClass("authors",
 #'            volume = "2",
 #'            author = author_list)
 #'            }
+#' @return object of class `publication`
 #' @export
 setClass("publication", representation(publicationid = "id",
                                        publicationtypeid = "numeric",
@@ -168,6 +173,7 @@ setClass("publication", representation(publicationid = "id",
 #' @title An S4 class for multi-publication information from the Neotoma 
 #' Paleoecology Database. This S4 class allows a single dataset to have one
 #' or more publication classes associated with it.
+#' @return object of class `publications`
 #' @export
 setClass("publications",
                          representation(publications  = "list"),
@@ -184,6 +190,7 @@ setClass("publications",
 #' Neotoma Paleoecology Database. A single collection unit may
 #' have one or more chronology. These individual chronology
 #' classes are then grouped into an S4 `chronologies` class.
+#' @return object of class `chronology`
 #' @export
 setClass(
   # Set the name for the class
@@ -217,6 +224,7 @@ setClass(
 #' @title S4 class for chronologies information
 #' @description The grouped class for chronologies
 #'  from the Neotoma Paleoecology Database.
+#' @return object of class `chronologies` 
 #' @export
 setClass(
   "chronologies",
@@ -231,6 +239,7 @@ setClass(
 #' @title S4 class for dataset information
 #' @description The standard object class for samples
 #'  from the Neotoma Paleoecology Database.
+#' @return object of class `sample`
 #' @export
 setClass(
   # Set the name for the class
@@ -263,6 +272,7 @@ setClass(
 #' @title S4 class for the set of samples
 #' @description The grouped class for samples from
 #'  the Neotoma Paleoecology Database.
+#' @return object of class `samples`
 #' @export
 setClass(
   # Set the name for the class
@@ -272,6 +282,7 @@ setClass(
 #' @title S4 class for repository information
 #' @description The standard object class for repository
 #'  from the Neotoma Paleoecology Database.
+#' @return object of class `repository`
 #' @export
 setClass(
   # Set the name for the class
@@ -295,6 +306,7 @@ setClass(
 #' @title S4 class for repositories information
 #' @description The grouped class for repositories from
 #'  the Neotoma Paleoecology Database.
+#' @return object of class `repositories`
 #' @export
 setClass(
   # Set the name for the class
@@ -304,6 +316,7 @@ setClass(
 #' @title S4 class for specimen information
 #' @description The standard object class for specimen
 #'  from the Neotoma Paleoecology Database.
+#' @return object of class `specimen`
 #' @export
 setClass(
   # Set the name for the class
@@ -349,6 +362,7 @@ setClass(
 #' @title S4 class for specimens information
 #' @description The grouped class for specimens from
 #'  the Neotoma Paleoecology Database.
+#' @return object of class `specimens`
 #' @export
 setClass(
   # Set the name for the class
@@ -359,6 +373,7 @@ setClass(
 #' @description The standard object class for datasets
 #'  from the Neotoma Paleoecology Database.
 #' @export
+#' @return object of class `dataset`
 setClass(
   # Set the name for the class
   "dataset",
@@ -391,6 +406,7 @@ setClass(
 #' @title S4 class for datasets information
 #' @description The grouped class for datasets from
 #'  the Neotoma Paleoecology Database.
+#' @return object of class `datasets`
 #' @export
 setClass(
   # Set the name for the class
@@ -401,6 +417,7 @@ setClass(
 #' @description A collection unit represents a collection event from within 
 #' a site. For example, a lake sediment core, or a single dig site within an
 #' archaeological site.
+#' @return object of class `collunit`
 #' @export
 setClass(
   # Set the name for the class
@@ -434,9 +451,11 @@ setClass(
                    chronologies = NULL,
                    defaultchronology = NA_integer_))
 
-#' An S4 class for Neotoma Collection Units
+
+#' @title An S4 class for Neotoma Collection Units
 #' @description Holds Collection unit information
 #'  from the Neotoma Paleoecology Database.
+#'  @return object of class `collunits`
 #' @export
 setClass("collunits",
          representation(collunits = "list"),
@@ -448,8 +467,11 @@ setClass("collunits",
                  unlist())
          })
 
-#' An S4 class for site information from the Neotoma Paleoecology Database.
+#' @title An S4 class for site information
+#' @description The standard object class for sites
+#'  from the Neotoma Paleoecology Database.
 #' @import sf
+#' @return object of class `site`
 #' @export
 setClass(
   # Set the name for the class
@@ -478,8 +500,10 @@ setClass(
   # This is not called if you have an initialize function defined!
 )
 
-#' An S4 class for multi-site information from
-#'  the Neotoma Paleoecology Database.
+#' @title An S4 class for multi-site information 
+#' @description The standard object class for multi-sites
+#'  from the Neotoma Paleoecology Database.from
+#'  @return object of class `sites`
 setClass("sites",
                   representation(sites = "list"),
                   validity = function(object) {

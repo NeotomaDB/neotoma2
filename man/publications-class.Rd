@@ -6,6 +6,9 @@
 \title{An S4 class for multi-publication information from the Neotoma
 Paleoecology Database. This S4 class allows a single dataset to have one
 or more publication classes associated with it.}
+\value{
+object of class \code{publications}
+}
 \description{
 An S4 class for multi-publication information from the Neotoma
 Paleoecology Database. This S4 class allows a single dataset to have one

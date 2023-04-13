@@ -9,6 +9,9 @@ toJSON(x)
 \arguments{
 \item{x}{Sites object to extract taxa table from}
 }
+\value{
+JSON translation of \code{sites} object to JSON
+}
 \description{
 Export toJSON
 }

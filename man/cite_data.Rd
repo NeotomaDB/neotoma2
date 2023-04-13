@@ -9,6 +9,9 @@ cite_data(x)
 \arguments{
 \item{x}{Object with DOIs associated to it.}
 }
+\value{
+data.frame with citation data
+}
 \description{
 The function, applied to a data object with a valid dataset,
 will return a properly formatted data citation for the record.

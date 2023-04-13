@@ -4,11 +4,13 @@
 \name{contact-class}
 \alias{contact-class}
 \title{An S4 class for Neotoma contacts}
+\value{
+object of class \code{contact}
+}
 \description{
 The object that contains the contact information for an
 individual, along with associated metadata.
 }
 \examples{
-\dontrun{
-new("contact", familyname = "Goring", givennames = "Simon J.")}
+new("contact", familyname = "Goring", givennames = "Simon J.")
 }

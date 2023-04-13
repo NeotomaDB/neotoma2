@@ -33,6 +33,9 @@
 #'  * `sitename`  The site name, or approximate match using the % wildcard.
 #'  * `database`  The constituent database for the record. See 
 #' `get_table("constituentdatabases")`
+#'  * `datasettype` Neotoma contains data for a number of dataset types. 
+#'  This returns a subset of data types. For a complete list of available 
+#'  dataset types, run `neotoma2::get_table('datasettypes')`
 #'  * `altmin`  The minimum altitude range for site elevation (in meters).
 #'  *  `altmax`  The maximum altitude range for site elevation (in meters).
 #'  *  `datasetid`  The unique dataset ID (integer) in Neotoma. Can be passed
@@ -52,6 +55,8 @@
 #' for a site.
 #'  * `taxa`  The names of taxa which must be present within samples in a
 #' record.
+#'  * `all_data` The API only downloads the first 25 records of the query. 
+#'  For the complete records, use `all_data=TRUE`
 #' @return The function returns either a single item of class `"try-error"`
 #' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or list of site objects, each containing one or more
