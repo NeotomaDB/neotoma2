@@ -15,7 +15,7 @@
 \code{data.frame} containing \code{siteid}, \code{datasetid}, and \code{collunitid}
 }
 \description{
-From a set of collecitonunitobjects, return the
+From a set of \code{collectionunit} objects, return the
 collectionunit and dataset ids.
 }
 \examples{

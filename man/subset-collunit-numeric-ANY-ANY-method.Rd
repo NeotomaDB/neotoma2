@@ -14,7 +14,7 @@
 \item{value}{The value to be used.}
 }
 \value{
-slided value
+sliced value
 }
 \description{
 Assign collunit field by numeric index

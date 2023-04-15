@@ -15,5 +15,5 @@ A simple \code{specimen} object
 \description{
 A helper function to build a specimen object from a list returned by
 the Neotoma API call. The function is not exported, but called from
-the get_speciments() call.
+the get_specimens() call.
 }

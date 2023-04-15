@@ -9,8 +9,10 @@
 \arguments{
 \item{x}{Use a single number to extract site information}
 
-\item{...}{contactid, datasettype,
-altmin, altmax, loc, ageyoung, ageold, ageof}
+\item{...}{}
+}
+\value{
+\code{sites} object with full metadata up to the \code{dataset} level
 }
 \description{
 Get Dataset Default
@@ -19,7 +21,6 @@ Get Dataset Default
 {
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_datasets(altmin=12, altmax=25, limit=2)
-
 # To find all datasets in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[

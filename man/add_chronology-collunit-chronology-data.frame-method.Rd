@@ -12,7 +12,7 @@
 \item{x}{A chronology object generated using \code{set_chronology()}}
 
 \item{y}{A data.frame of sample ages, with required columns:
-"analysisunitid", "age", "agetype", "ageolder", and "ageyounger".}
+\code{"analysisunitid"}, \code{"age"}, \code{"agetype"}, \code{"ageolder"}, and \code{"ageyounger"}.}
 }
 \value{
 \code{chronologies} with new added chronology

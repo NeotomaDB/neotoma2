@@ -7,7 +7,7 @@
 build_sites(x)
 }
 \arguments{
-\item{x}{A list returned from the Neotoma API's \code{data} slot.}
+\item{x}{A list returned from the Neotoma API \code{data} section.}
 }
 \value{
 A simple \code{site} object
