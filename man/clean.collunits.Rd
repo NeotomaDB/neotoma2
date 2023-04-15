@@ -21,7 +21,7 @@ Function that removes duplicate objects such as sites,
 datasets, or collection units.
 }
 \examples{
-{
+\donttest{
 clean_cols <- get_sites(sitename = "L\%", limit = 1) \%>\%
   collunits()
 more_cols <- get_sites(sitename = "La\%", limit = 1) \%>\%

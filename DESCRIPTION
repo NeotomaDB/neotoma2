@@ -1,6 +1,6 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2023-04-05
+Date: 2023-04-14
 Version: 1.0.0
 Authors@R:
     c(person(given = "Dominguez Vidana",

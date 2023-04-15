@@ -16,7 +16,7 @@ set_chronology(
   dateprepared = as.Date(character(0)),
   modelagetype = NA_character_,
   chronologyname = NA_character_,
-  chroncontrols = data.frame()
+  chroncontrols = data.frame(0)
 )
 }
 \arguments{

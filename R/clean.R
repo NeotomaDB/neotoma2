@@ -116,7 +116,7 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
 #' @returns cleaned `collunits`
-#' @examples {
+#' @examples \donttest{
 #' clean_cols <- get_sites(sitename = "L%", limit = 1) %>%
 #'   collunits()
 #' more_cols <- get_sites(sitename = "La%", limit = 1) %>%
@@ -157,7 +157,7 @@ clean.collunits <- function(x, verbose = TRUE, ...) {
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
 #' @returns cleaned `datasets` after concatenation (no duplicates)
-#' @examples {
+#' @examples \donttest{
 #' clean_ds <- get_sites(sitename = "L%", limit = 1) %>%
 #'   get_downloads() %>% datasets()
 #' more_ds <- get_sites(sitename = "La%", limit = 1) %>%

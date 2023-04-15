@@ -22,21 +22,8 @@ Call Neotoma and return a table
 (with limits & offsets for large tables)
 }
 \examples{
-\donttest{
+{
 # Returns only the first 25 specimen records.
 someSpec <- get_table('specimens')
-# Loop with the offset to get all specimens:
-okay <- TRUE
-counter <- 1
-specimens <- list()
-while(okay) {
-  specimens[[counter]] <- get_table('specimens', offset = (counter - 1) * 25)
-  if(nrow(specimens[[counter]]) < 25) {
-    okay <- FALSE
-  } else {
-    counter <- counter + 1
-  }
-}
-specimens <- specimens \%>\% dplyr::bind_rows()
 }
 }

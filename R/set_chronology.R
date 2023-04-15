@@ -43,7 +43,7 @@ set_chronology <- function(x = NA,
                            dateprepared = as.Date(character(0)),
                            modelagetype = NA_character_,
                            chronologyname = NA_character_,
-                           chroncontrols = data.frame()) {
+                           chroncontrols = data.frame(0)) {
 
   function_call <- match.call()
   
