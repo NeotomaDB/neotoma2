@@ -91,7 +91,7 @@ getids.site <- function (x, order = TRUE) {
 }
 
 #' @title Get object IDs from collectionunits.
-#' @description From a set of collecitonunitobjects, return the
+#' @description From a set of `collectionunit` objects, return the
 #' collectionunit and dataset ids.
 #' @param x A Neotoma2 \code{collunits} object.
 #' @param order sort items by siteid, collunitid, datasetid
@@ -127,7 +127,7 @@ getids.collunits <- function(x, order = TRUE) {
 }
 
 #' @title Get object IDs from a single collectionunit.
-#' @description From a collecitonunit object, return the
+#' @description From a `collectionunit` object, return the
 #' collectionunit and dataset ids.
 #' @param x A Neotoma2 \code{collunit} object.
 #' @param order sort items by siteid, collunitid, datasetid

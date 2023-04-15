@@ -9,7 +9,7 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 #' @param object A collection unit object
 #' @param x A chronology object generated using \code{set_chronology()}
 #' @param y A data.frame of sample ages, with required columns:
-#'   "analysisunitid", "age", "agetype", "ageolder", and "ageyounger".
+#'   `"analysisunitid"`, `"age"`, `"agetype"`, `"ageolder"`, and `"ageyounger"`.
 #' @returns `chronologies` with new added chronology
 #' @description Given a collunit, add a new chronology object to the unit
 #' with both the chronology metadata and the age information (as `y`)
@@ -201,7 +201,7 @@ setMethod(f = "[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
-#' @returns slided value
+#' @returns sliced value
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "numeric"),
           definition = function(x, i, value) {

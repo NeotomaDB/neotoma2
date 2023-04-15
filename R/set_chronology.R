@@ -15,9 +15,9 @@
 #' who created the chronology
 #' @param agemodel A string representing the age model name, for
 #' example "Crummy linear interpolation".
-#' @param ageboundolder The ageboundolder is assigned the oldest sample
+#' @param ageboundolder The `ageboundolder` is assigned the oldest sample
 #' age rounded up to the nearest 10
-#' @param ageboundyounger The ageboundyounger is assigned the oldest
+#' @param ageboundyounger The `ageboundyounger` is assigned the oldest
 #' sample age rounded up to the nearest 10
 #' @param isdefault Defines whether the model is the default for
 #' the collection unit for a particular model age type.
