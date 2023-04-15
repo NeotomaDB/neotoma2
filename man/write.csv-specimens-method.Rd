@@ -11,6 +11,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+NULL - side effect of saving CSV file
+}
 \description{
 write CSV
 }

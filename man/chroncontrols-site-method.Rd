@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{site object}
 }
+\value{
+data.frame with chronological controls
+}
 \description{
 For a site that includes collection units with chronologies
 return the chronological controls that are used in building the chronology.

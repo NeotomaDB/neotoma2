@@ -11,6 +11,9 @@
 
 \item{n}{The particular chronology to be used as the default.}
 }
+\value{
+\code{chronologies} object with a new defaulted \code{chronology}
+}
 \description{
 Change the default age model for a record.
 }

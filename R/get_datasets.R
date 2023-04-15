@@ -57,14 +57,13 @@
 #' record.
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
-#' @return The function returns either a single item of class `"try-error"`
+#' @returns The function returns either a single item of class `"try-error"`
 #' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or list of site objects, each containing one or more
 #' `collunit` objects, with fully populated `datasets` elements.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
 #' sites_12to25 <- get_datasets(altmin=12, altmax=25)
-#'
 #' # To find all datasets in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -73,7 +72,7 @@
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
-#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
 #' # To obtain the dataset metadata:
 #' datasets(brazil_datasets)
 #' # There is insufficient metadata at this point to obtain information
@@ -178,9 +177,9 @@ parse_dataset <- function(result) { # nolint
 #' @param ... contactid, datasettype,
 #' altmin, altmax, loc, ageyoung, ageold, ageof
 #' @importFrom utils URLencode
-#' @examples \dontrun{
+#' @examples {
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
-#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#' sites_12to25 <- get_datasets(altmin=12, altmax=25, limit=2)
 #'
 #' # To find all datasets in Brazil
 #' brazil <- '{"type": "Polygon",
@@ -190,7 +189,7 @@ parse_dataset <- function(result) { # nolint
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
-#' brazil_datasets <- get_datasets(loc = brazil[1])
+#' brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
 #' }
 #' @export
 get_datasets.default <- function(x, ...) { # nolint
@@ -251,9 +250,9 @@ get_datasets.default <- function(x, ...) { # nolint
 #' @title Get Dataset Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
+#' @returns `sites` object with full metadata up to the `dataset` level
 #' @examples \dontrun{
-#' allds <- get_datasets(1:29)
-#' plotLeaflet(allds)
+#' allds <- get_datasets(1:3)
 #' }
 #' @export
 get_datasets.numeric <- function(x, ...) {
@@ -286,10 +285,10 @@ get_datasets.numeric <- function(x, ...) {
 #' @title Get Dataset from a \code{sites} object.
 #' @param x An object of class \code{sites}.
 #' @param ... additional arguments accepted by \code{get_datasets()}
-#' @examples \dontrun{
-#' random_sites <- get_sites(1:100)
-#' allds <- get_datasets(random_sites)
-#' plotLeaflet(allds)
+#' @returns `sites` object with full metadata up to the `dataset` level
+#' @examples \donttest{
+#' random_sites <- get_sites(1)
+#' allds <- get_datasets(random_sites, limit=3)
 #' }
 #' @export
 get_datasets.sites <- function(x, ...) {

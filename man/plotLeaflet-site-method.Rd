@@ -4,20 +4,19 @@
 \alias{plotLeaflet,site-method}
 \title{plotLeaflet}
 \usage{
-\S4method{plotLeaflet}{site}(object, save_im = FALSE, path = "")
+\S4method{plotLeaflet}{site}(object)
 }
 \arguments{
 \item{object}{Site object to plot}
-
-\item{save_im}{save output}
-
-\item{path}{location where output should be saved in. save_im must be TRUE}
+}
+\value{
+\code{leaflet} map
 }
 \description{
 Plot a site on a leaflet map
 }
 \examples{
-\dontrun{
+\donttest{
 modernSites <- get_sites(keyword = "Modern")
 plotLeaflet(modernSites[[1]])
 }

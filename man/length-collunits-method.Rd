@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{collunits object}
 }
+\value{
+length of a \code{collunits} object
+}
 \description{
 Length Method collunits
 }

@@ -11,6 +11,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+null, called for side effects
+}
 \description{
 write CSV
 }

@@ -62,7 +62,7 @@ For the complete records, use \code{all_data=TRUE}
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # To find the downloads object of dataset 24:
 downloads24 <- get_downloads(24)
 

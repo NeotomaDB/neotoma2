@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{chronologies object}
 }
+\value{
+data.frame
+}
 \description{
 Convert all slots within each chronology within a
 chronologies object to a data.frame.

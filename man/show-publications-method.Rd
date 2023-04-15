@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{A \code{publications} object}
 }
+\value{
+NULL - side effect function of printing a data.frame
+}
 \description{
 Show the contents of a publication object.
 }

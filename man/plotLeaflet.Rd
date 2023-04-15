@@ -4,14 +4,10 @@
 \alias{plotLeaflet}
 \title{plotLeaflet}
 \usage{
-plotLeaflet(object, save_im = FALSE, path = "")
+plotLeaflet(object)
 }
 \arguments{
 \item{object}{Sites object to plot}
-
-\item{save_im}{save output}
-
-\item{path}{location where output should be saved in. save_im must be TRUE}
 
 \item{leaflet}{map with site markers}
 }

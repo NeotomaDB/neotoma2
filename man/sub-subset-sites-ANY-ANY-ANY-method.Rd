@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used}
 }
+\value{
+\code{sites} object with reassigned values
+}
 \description{
 Obtain one of the elements within a sites list
 }

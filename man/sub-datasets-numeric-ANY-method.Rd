@@ -11,6 +11,9 @@
 
 \item{i}{The numeric index}
 }
+\value{
+Get or remove \code{datasets} by numeric index
+}
 \description{
 Get or remove datasets by numeric index
 }

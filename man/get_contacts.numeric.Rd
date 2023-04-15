@@ -16,6 +16,9 @@ individual contributor to the database.
 (\code{status}) The current status of the contributor
 (\code{active} or \code{retired})}
 }
+\value{
+\code{contacts} object
+}
 \description{
 Uses the Neotoma API to search and access
 information about individuals who have contributed to

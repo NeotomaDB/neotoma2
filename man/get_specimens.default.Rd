@@ -9,6 +9,15 @@
 \arguments{
 \item{...}{Pass argument datasetid and the corresponding datasetid}
 }
+\value{
+The function returns a specimens list
+}
 \description{
 Get Specimen datasetid
+}
+\examples{
+{
+# To find specimens in datasetid 41610
+my_specimens <- get_specimens(datasetid = 41610)
+}
 }

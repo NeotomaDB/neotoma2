@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+null prints element of a slot
+}
 \description{
 Obtain slots of a collunit without using at-mark
 }

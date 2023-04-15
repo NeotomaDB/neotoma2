@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A contact object.}
 }
+\value{
+names of slots
+}
 \description{
 Get names of contacts slots
 }

@@ -7,5 +7,5 @@
 \description{
 The standard object class for multi-sites
 from the Neotoma Paleoecology Database.from
-@return object of class \code{sites}
+@returns object of class \code{sites}
 }

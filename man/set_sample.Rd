@@ -41,16 +41,15 @@ set_sample(
 
 \item{analysisunitname}{Analysis Unit's name}
 }
+\value{
+\code{sample} object
+}
 \description{
 set Sample Information
 }
 \examples{
-\dontrun{
-# Create a site called "My Lake", to
-x = st_as_sf(st_sfc(st_point(c(5,5))))
-my_site <- set_site(sitename = "My Lake",
-                    geography = x,
-                    description = "my lake",
-                    altitude = 30)
+{
+# Set an empty sample
+my_sample <- set_sample()
 }
 }

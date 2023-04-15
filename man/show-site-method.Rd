@@ -9,13 +9,10 @@
 \arguments{
 \item{object}{site object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
 Convert a Neotoma package site object into a data.frame()
 returning the siteid, sitename, latitude, longitude and altitude of the site.
-}
-\examples{
-\dontrun{
-some_site <- get_sites(sitename = "Site\%")
-as.data.frame(some_site[[1]])
-}
 }

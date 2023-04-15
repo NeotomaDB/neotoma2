@@ -2,7 +2,7 @@
 #' @title parse_site
 #' @description An internal helper function to parse the API result into a site object.
 #' @param result A JSON object from the API.
-#' @return A Neotoma2 site object.
+#' @returns A Neotoma2 site object.
 parse_site <- function(result) {
   fix_null <- function(x) {
     for (i in seq_len(length(x))) {
@@ -87,7 +87,7 @@ parse_site <- function(result) {
 #' This call will then return a data object that contains site metadata for one
 #' or more sites, along with limited metadata describing the collection units
 #' and datasets located at that site.
-#' @return The function returns either a single item of class `"try-error"`
+#' @returns The function returns either a single item of class `"try-error"`
 #' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or a table of sites, with rows corresponding to the
 #' number of individual sites returned by the Neotoma API.
@@ -98,7 +98,7 @@ parse_site <- function(result) {
 #'  *  `description` {}
 #'  *  `collunits` {limited information on collunits}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## Find all sites with a min altitude of 12m and a max altitude of 25m
 #' ## By default returns only 25 sites (default limit is 25):
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
@@ -145,6 +145,16 @@ get_sites <- function(x = NA, ...) {
 #' @importFrom methods new
 #' @importFrom utils URLencode
 #' @param ... One of a set of possible query parameters discussed in details.
+#' @returns The function returns either a single item of class `"try-error"`
+#' describing the reason for failure (either misdefined parameters or an error
+#' from the Neotoma API), or a table of sites, with rows corresponding to the
+#' number of individual sites returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
+#' siteid, sitename, location, altitude, description,
+#' limited collection units information.
+#'  *  `loc` {An `sf` object that describes site's location.}
+#'  *  `description` {}
+#'  *  `collunits` {limited information on collunits}
 #' @export
 get_sites.default <- function(...) { # nolint
   oo <- options(scipen = 9999999)
@@ -218,10 +228,19 @@ get_sites.default <- function(...) { # nolint
 #' @title Get Site Information for Fossil Sites
 #' @param x The numeric site ID from Neotoma
 #' @param ... accepted arguments if numeric all_data
-#' @examples
-#' \dontrun{
+#' @returns The function returns either a single item of class `"try-error"`
+#' describing the reason for failure (either misdefined parameters or an error
+#' from the Neotoma API), or a table of sites, with rows corresponding to the
+#' number of individual sites returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
+#' siteid, sitename, location, altitude, description,
+#' limited collection units information.
+#'  *  `loc` {An `sf` object that describes site's location.}
+#'  *  `description` {}
+#'  *  `collunits` {limited information on collunits}
+#' @examples {
 #' ## Find all sites by numeric siteid:
-#' sites <- get_sites(seq(1,100))
+#' sites <- get_sites(seq(1,3))
 #' }
 #' @export
 get_sites.numeric <- function(x, ...) {
@@ -246,13 +265,23 @@ get_sites.numeric <- function(x, ...) {
 #' @param x The numeric site ID from Neotoma
 #' @param ... accepted arguments if numeric all_data
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## Find all sites using a set of prior sites:
 #' char_sites <- get_sites(taxa = "charcoal")
 #' pollen_coloc <- get_sites(char_sites, datasettype = "pollen")
 #' char_coloc <- char_sites %>% filter(siteid %in% getids(pollen_coloc)$siteid)
 #' pol_char <- c(pollen_coloc, char_coloc) %>% clean()
 #' }
+#' @returns The function returns either a single item of class `"try-error"`
+#' describing the reason for failure (either misdefined parameters or an error
+#' from the Neotoma API), or a table of sites, with rows corresponding to the
+#' number of individual sites returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
+#' siteid, sitename, location, altitude, description,
+#' limited collection units information.
+#'  *  `loc` {An `sf` object that describes site's location.}
+#'  *  `description` {}
+#'  *  `collunits` {limited information on collunits}
 #' @export
 get_sites.sites <- function(x, ...) {
   

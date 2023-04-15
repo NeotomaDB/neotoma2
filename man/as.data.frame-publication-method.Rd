@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A \code{publication} object.}
 }
+\value{
+\code{data.frame} with publications' metadata.
+}
 \description{
 Convert a \code{publication} to a \code{data.frame}
 }

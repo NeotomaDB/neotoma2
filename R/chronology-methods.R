@@ -4,6 +4,7 @@
 #' @param i iteration in chronologies list
 #' @description Obtain one of the elements within a `chronologies` list
 #' either by element order or by element name.
+#' @returns selected `chronology` object
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "chronologies", i = "numeric"),
@@ -23,6 +24,7 @@ setMethod(f = "[[",
 #' @param x chronology object
 #' @param name name of the slot
 #' @description Extract chronology metadata by slot name.
+#' @returns value of the `slot` name
 #' @export
 setMethod(f = "$",
           signature = signature(x = "chronology"),
@@ -35,6 +37,7 @@ setMethod(f = "$",
 #' @param name The name of the chronology slot.
 #' @param value A value to be assigned to the chronology slot.
 #' @description Assign values to slots within a chronology object.
+#' @returns reassigned `chronology` object
 #' @export
 setMethod(f = "$<-",
           signature = signature(x = "chronology"),
@@ -48,6 +51,7 @@ setMethod(f = "$<-",
 #' @param name name of the slot
 #' @description Obtain chronology slots across all chronology elements within
 #' a chronologies object.
+#' @returns A multiple `chronologies`
 #' @export
 setMethod(f = "$",
           signature = signature(x = "chronologies"),
@@ -63,6 +67,7 @@ setMethod(f = "$",
 #' @param x chronology object
 #' @description Convert all slots within a chronology to a data.frame.
 #' @importFrom lubridate as_date
+#' @returns data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronology"),
@@ -85,6 +90,7 @@ setMethod(f = "as.data.frame",
 #' @importFrom purrr map
 #' @description Convert all slots within each chronology within a
 #' chronologies object to a data.frame.
+#' @returns data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronologies"),
@@ -94,6 +100,7 @@ setMethod(f = "as.data.frame",
 
 #' @title Length Method chronologies
 #' @export
+#' @returns integer describing length
 #' @param x chronologies object
 setMethod(f = "length",
           signature = signature(x = "chronologies"),
@@ -104,6 +111,7 @@ setMethod(f = "length",
 #' @title c Method - Combine chronologies objects
 #' @param x chronologies object 1
 #' @param y chronologies object 2
+#' @returns concatenated `chronologies`
 #' @export
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
@@ -129,6 +137,7 @@ setMethod(f = "c",
 #' @title write CSV
 #' @param x chronologies object
 #' @param ... Additional parameters associated with the call.
+#' @returns null, called for side effects
 #' @export
 setMethod(f = "write.csv",
           signature = "chronologies",
@@ -141,6 +150,7 @@ setMethod(f = "write.csv",
 #' @title Change the default age model for a record.
 #' @param x A chronologies object.
 #' @param n The particular chronology to be used as the default.
+#' @returns `chronologies` object with a new defaulted `chronology`
 #' @importFrom purrr map
 setMethod(f = "set_default",
           signature = signature(x = "chronologies"),

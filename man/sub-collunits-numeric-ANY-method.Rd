@@ -11,6 +11,9 @@
 
 \item{i}{The numeric index}
 }
+\value{
+null used for side effects. Printing a data.frame
+}
 \description{
 Get or remove sites by numeric index
 }

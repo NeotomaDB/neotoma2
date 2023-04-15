@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+\code{dataset} slot with new assigned numeric value
+}
 \description{
 Assign dataset field by numeric index
 }

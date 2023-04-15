@@ -13,6 +13,9 @@ clean(x = NA, verbose = TRUE, ...)
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+clean \code{neotoma} objects without duplicates after concatenation
+}
 \description{
 Function that removes duplicate objects such as sites,
 datasets, or collection units. When we pull in a large number of objects,
@@ -26,7 +29,7 @@ So the site is gathered, and the datasets are now part of an array of datasets.
 }
 }
 \examples{
-\dontrun{
+\donttest{
 clean_sites <- get_sites(sitename = "L\%", limit = 20)
 more_sites <- get_sites(sitename = "La\%", limit = 20)
 long_set <- c(clean_sites, more_sites)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_specimen.R
 \name{build_specimen}
 \alias{build_specimen}
-\title{Build specimen objects.}
+\title{Build a specimen objects.}
 \usage{
 build_specimen(x)
 }
@@ -10,19 +10,10 @@ build_specimen(x)
 \item{x}{specimen list}
 }
 \value{
-A list (from JSON) parsed into specimen
+A simple \code{specimen} object
 }
 \description{
 A helper function to build a specimen object from a list returned by
 the Neotoma API call. The function is not exported, but called from
 the get_speciments() call.
-}
-\examples{
-\dontrun{
-build_specimen(x)
-}
-
-}
-\author{
-Socorro Dominguez \email{sedv8808@gmail.com}
 }

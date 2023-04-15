@@ -11,6 +11,9 @@
 
 \item{y}{collunits object 2}
 }
+\value{
+concatenated collection units without duplicates
+}
 \description{
 c Method - Combine collunits objects
 }

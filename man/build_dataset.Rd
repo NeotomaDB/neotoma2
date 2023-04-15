@@ -10,18 +10,11 @@ build_dataset(x)
 \item{x}{a JSON dataset object passed from the Neotoma API.}
 }
 \value{
-A \code{dataset} object.
+A simple \code{dataset} object.
 }
 \description{
 Helper function to build a dataset from the API JSON response.
 }
-\examples{
-\dontrun{
-# To build dataset from API call:
-build_dataset(x)
-}
-
-}
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez
 }

@@ -9,12 +9,9 @@
 \arguments{
 \item{object}{sites object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
 Return a set of site objects as a single data.frame().
-}
-\examples{
-\dontrun{
-some_site <- get_sites(sitename = "Site\%")
-as.data.frame(some_site)
-}
 }

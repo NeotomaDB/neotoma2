@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{chronologies object}
 }
+\value{
+integer describing length
+}
 \description{
 Length Method chronologies
 }

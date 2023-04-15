@@ -2,9 +2,8 @@
 #' @param x The structured JSON from a Neotoma API v2.0 response that
 #'   returns a collection unit in any form.
 #' @export
-#' @return An object of class \code{collunit}
+#' @returns An simple `collunit` object
 #' @import sf
-
 build_collunits <- function(x) {
   if (length(x$datasets) == 0) {
     # Downloads call

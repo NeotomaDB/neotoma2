@@ -54,6 +54,9 @@ set_collunit(
 \item{defaultchronology}{best chronology model identifier to
 be used with this collection unit}
 }
+\value{
+\code{collunit} object
+}
 \description{
 set Site Information for Fossil Sites
 }

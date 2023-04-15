@@ -1,12 +1,12 @@
 #' @title check_args
 #' @description Internal function to check passed arguments.
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez
 #' @param cl called arguments.
 #'    Arguments are going to be called by match_call inside:
 #'    \code{\link{get_sites}}
 #'    \code{\link{get_datasets}}
 #'    \code{\link{get_downloads}}
-#' @return A list with two components:
+#' @returns A list with two components:
 #'  \item{flag}{Returns a 0 if everything's fine, a 1 if there's a problem.}
 #'  \item{message}{A list of error messages.}
 #' @references

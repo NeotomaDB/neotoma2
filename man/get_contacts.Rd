@@ -14,7 +14,8 @@ contributor to the database.
 (\code{familyname})  The full or partial last name for an
 individual contributor to the database.
 (\code{status}) The current status of the contributor
-(\code{active} or \code{retired})}
+(\code{active} or \code{retired})
+@returns \code{contacts} object}
 }
 \description{
 Uses the Neotoma API to search and access

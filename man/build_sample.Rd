@@ -10,18 +10,11 @@ build_sample(x)
 \item{x}{sample list}
 }
 \value{
-list parsed into samples
+A simple \code{sample} object
 }
 \description{
 Helper function to build a sample from the API input (list formatted)
 coming from the Neotoma API.
-}
-\examples{
-\dontrun{
-# To build sample from API call:
-build_sample(x)
-}
-
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

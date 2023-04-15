@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used}
 }
+\value{
+\code{specimens} object with reassigned values
+}
 \description{
 Obtain one of the elements within a specimens list
 }

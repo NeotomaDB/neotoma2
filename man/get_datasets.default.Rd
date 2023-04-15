@@ -16,9 +16,9 @@ altmin, altmax, loc, ageyoung, ageold, ageof}
 Get Dataset Default
 }
 \examples{
-\dontrun{
+{
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
-sites_12to25 <- get_datasets(altmin=12, altmax=25)
+sites_12to25 <- get_datasets(altmin=12, altmax=25, limit=2)
 
 # To find all datasets in Brazil
 brazil <- '{"type": "Polygon",
@@ -28,6 +28,6 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-brazil_datasets <- get_datasets(loc = brazil[1])
+brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
 }
 }

@@ -18,12 +18,12 @@ The function returns a specimens list
 Information for Specimens
 }
 \examples{
-\dontrun{
-# To find specimen with ID 19832:
-my_specimens <- get_specimens(19832)
-}
+\donttest {
+# To find specimen with ID 7:
+my_specimens <- get_specimens(7)
 # To find specimens in datasetid 41610
 my_specimens2 <- get_specimens(datasetid = 41610)
+}
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

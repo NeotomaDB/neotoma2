@@ -11,6 +11,9 @@
 
 \item{n}{The match number (in the case an NA is returned).}
 }
+\value{
+the best match to the selected publication.
+}
 \description{
 Select the best match (between a local record and a Neotoma match)
 }

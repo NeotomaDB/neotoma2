@@ -11,6 +11,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+\code{data.frame} object with site coordinates.
+}
 \description{
 Return the latitude and longitude of sites
 }

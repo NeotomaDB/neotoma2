@@ -19,7 +19,7 @@ A quick function to test whether or not the Neotoma Database
 API is currently running.
 }
 \examples{
-\dontrun{
+{
 test_connection <- pingNeotoma("neotoma")
 }
 }

@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+A multiple \code{chronologies}
+}
 \description{
 Obtain chronology slots across all chronology elements within
 a chronologies object.

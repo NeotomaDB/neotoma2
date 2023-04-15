@@ -1,6 +1,6 @@
 utils::globalVariables(c("col1", "df_ready2"))
 #' @title parse_body
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez
 #' @import gtools
 #' @import lubridate
 #' @import stringr
@@ -10,7 +10,7 @@ utils::globalVariables(c("col1", "df_ready2"))
 #' @description An internal helper function to parse the body of POST API requests
 #' @param x The HTTP path for the particular API call.
 #' @param ... Any query parameters passed from the function calling
-#'
+#' @returns `JSON` object to parse as a body in a HTTP request
 parsebody <- function(x, ...) {
   query <- list(...)
   # Retrieve complete call to create json body

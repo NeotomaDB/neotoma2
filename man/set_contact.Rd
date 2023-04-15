@@ -60,6 +60,9 @@ given names are not known (e.g. \code{G. G}).}
 
 \item{notes}{Notes about the individual}
 }
+\value{
+\code{contact} object
+}
 \description{
 Create a new contact for a record.
 Within Neotoma all chronologies have unique numeric identifiers.

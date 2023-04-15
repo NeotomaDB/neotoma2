@@ -14,12 +14,15 @@ for a complete list of table names.}
 
 \item{offset}{Default 0.}
 }
+\value{
+selected \code{table} values from the Database
+}
 \description{
 Call Neotoma and return a table
 (with limits & offsets for large tables)
 }
 \examples{
-\dontrun{
+\donttest{
 # Returns only the first 25 specimen records.
 someSpec <- get_table('specimens')
 # Loop with the offset to get all specimens:

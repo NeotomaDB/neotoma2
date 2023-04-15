@@ -13,6 +13,9 @@
 
 \item{value}{A value to be assigned to the chronology slot.}
 }
+\value{
+reassigned \code{chronology} object
+}
 \description{
 Assign values to slots within a chronology object.
 }

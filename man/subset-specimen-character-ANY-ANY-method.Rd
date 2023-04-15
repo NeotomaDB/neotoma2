@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+\code{specimen} object with reassigned character values
+}
 \description{
 Assign specimen field by numeric index
 }

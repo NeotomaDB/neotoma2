@@ -15,14 +15,10 @@
 #' @param analysisunitid Which analysis unit it is
 #' @param analysisunitname Analysis Unit's name
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a site called "My Lake", to
-#' x = st_as_sf(st_sfc(st_point(c(5,5))))
-#' my_site <- set_site(sitename = "My Lake",
-#'                     geography = x,
-#'                     description = "my lake",
-#'                     altitude = 30)
+#' @returns `sample` object
+#' @examples {
+#' # Set an empty sample
+#' my_sample <- set_sample()
 #' }
 set_sample <- function(x=NA,
                        ages = list(),

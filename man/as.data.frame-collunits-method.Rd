@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{collunits object}
 }
+\value{
+data.frame of multiple collection units metadata.
+}
 \description{
 show as dataframe as prep to save as csv
 }

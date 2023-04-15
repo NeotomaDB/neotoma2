@@ -19,7 +19,7 @@
 #' as a vector of dataset IDs.
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
-#' @return The function returns either a single item of class
+#' @returns The function returns either a single item of class
 #' \code{"try-error"} describing the reason for failure
 #' (either misdefined parameters or an error from the Neotoma API),
 #' or a table of sites, with rows corresponding to the number of
@@ -50,7 +50,7 @@
 #' \item{ \code{pi list} }{P.I. info}
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # To find the downloads object of dataset 24:
 #' downloads24 <- get_downloads(24)
 #'
@@ -143,6 +143,11 @@ parse_download <- function(result, verbose = TRUE) {
 #' @param x Use a single number to extract site information
 #' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
+#' @returns The function returns either a single item of class
+#' \code{"try-error"} describing the reason for failure
+#' (either misdefined parameters or an error from the Neotoma API),
+#' or a table of sites, with rows corresponding to the number of
+#' individual sites and datasets returned by the Neotoma API.
 #' @export
 get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   
@@ -166,6 +171,11 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
 #' @importFrom stats na.omit
+#' @returns The function returns either a single item of class
+#' \code{"try-error"} describing the reason for failure
+#' (either misdefined parameters or an error from the Neotoma API),
+#' or a table of sites, with rows corresponding to the number of
+#' individual sites and datasets returned by the Neotoma API.
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   
@@ -209,6 +219,11 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 #' @param x sites object
 #' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
+#' @returns The function returns either a single item of class
+#' \code{"try-error"} describing the reason for failure
+#' (either misdefined parameters or an error from the Neotoma API),
+#' or a table of sites, with rows corresponding to the number of
+#' individual sites and datasets returned by the Neotoma API.
 #' @importFrom stats na.omit
 #' @export
 get_downloads.character <- function(x, verbose = TRUE, ...) {

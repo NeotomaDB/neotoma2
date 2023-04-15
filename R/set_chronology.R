@@ -30,17 +30,8 @@
 #' @param chronologyname A valid name for the chronology.
 #' @param chroncontrols A data.frame containing the chronological controls
 #' for the age model.
+#' @returns `chronology` object
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a site called "My Lake", to
-#' x = st_as_sf(st_sfc(st_point(c(5,5))))
-#' my_site <- set_site(sitename = "My Lake",
-#'                     geography = x,
-#'                     description = "my lake",
-#'                     altitude = 30)
-#' }
-
 set_chronology <- function(x = NA,
                            chronologyid = NA_integer_,
                            notes = NA_character_,
@@ -58,7 +49,7 @@ set_chronology <- function(x = NA,
   
   if (suppressWarnings(is.na(x))) {
     x <- new("chronology")
-    if (is.na(chronologyid)) {
+    if (is.na(x@chronologyid)) {
       x@chronologyid <- uuid::UUIDgenerate()
     } else {
       x@chronologyid <- chronologyid

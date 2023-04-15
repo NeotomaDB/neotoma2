@@ -10,12 +10,15 @@ set_server(server = "neotoma")
 \item{server}{One of \code{local} (when the API is running locally on
 port 3005), \code{neotoma} or \code{dev}.}
 }
+\value{
+NULL modifies how to talk to the API (local, dev, server)
+}
 \description{
 Choose to pull Neotoma data from the main Neotoma server, the development
 server or from a local instance of the API.
 }
 \examples{
-\dontrun{
+\donttest{
 # The user is running the API locally using the node/express API
 # cloned from github: https://github.com/NeotomaDB/api_nodetest
 set_server(server = "local")

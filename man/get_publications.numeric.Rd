@@ -23,7 +23,7 @@ with a publication.
 Get publications using their unique identifier.
 }
 \examples{
-\dontrun{
+{
 # We want the paper identified in Neotoma as 666:
 get_publications(666)
 }

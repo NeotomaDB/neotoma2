@@ -38,6 +38,9 @@ set_dataset(
 
 \item{samples}{taxa objects}
 }
+\value{
+\code{dataset} object
+}
 \description{
 set Site Information for Fossil Sites
 }

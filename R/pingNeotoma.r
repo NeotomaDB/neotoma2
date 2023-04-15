@@ -8,12 +8,11 @@
 #' numeric port), \code{neotoma} or \code{dev}.
 #' @returns A valid HTTP status code or returns an error if a connection
 #' is refused.
-#' @examples \dontrun{
+#' @examples {
 #' test_connection <- pingNeotoma("neotoma")
 #' }
 #' @export
 pingNeotoma <- function(server = "neotoma") {
-
     valid_local <- stringr::str_detect(server,
         "(http?:////){0,1}localhost:\\d{1,5}$")
     assertthat::assert_that(valid_local | (server %in% c("neotoma", "dev")),
@@ -23,6 +22,5 @@ pingNeotoma <- function(server = "neotoma") {
         dev = "https://api-dev.neotomadb.org",
         server)
     status <- httr::HEAD(server)
-
     return(status)
 }

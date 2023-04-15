@@ -12,10 +12,10 @@
 #' @description
 #' Convert a Neotoma2 \code{sites} object into a standardized JSON file for API management.
 #' @param x sites R object to be converted
-#' @return The function returns a character string in JSON format
+#' @returns The function returns a character string in JSON format
 #' @examples {
-#' # To find all sites that contain the string "Alex%"
-#' alex.sites <- get_sites(sitename="Alex%")
+#' # To find all sites that contain the string "Alexander%"
+#' alex.sites <- get_sites(sitename="Alexander%")
 #' # Convert the object to json
 #' toJSON(alex.sites)
 #' }

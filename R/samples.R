@@ -3,20 +3,14 @@ utils::globalVariables(c("modelagetype", "isdefault"))
 #' @title samples
 #' @param x sites object
 #' @description Obtain all samples within a sites object
-#' @examples \dontrun{
-#' marion <- get_sites(sitename = "Marion Lake") %>%
-#'   get_datasets() %>%
-#'   filter(datasettype == "pollen") %>%
-#'   get_downloads()
-#' pollen <- samples(marion)
-#' plot(value ~ I(-1 * age),
-#'      data = pollen[pollen$variablename == "Cupressaceae",],
-#' xlab = "Years before present",
-#' ylab = "Cupressaceae pollen count")
+#' @examples {
+#' dw <- get_downloads(1)
+#' pollen <- samples(dw)
 #' }
 #' @export
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map
+#' @returns `data.frame` with sample records
 setMethod(f = "samples",
           signature = "sites",
           definition = function(x) {
@@ -33,18 +27,15 @@ setMethod(f = "samples",
 #' @title samples
 #' @param x site object
 #' @description Obtain elements on the samples level
-#' @examples \dontrun{
+#' @examples \donttest{
 #' marion <- get_sites(sitename = "Marion Lake") %>%
 #'   get_datasets() %>%
 #'   filter(datasettype == "pollen") %>%
 #'   get_downloads()
 #' pollen <- samples(marion)
-#' plot(value ~ I(-1 * age), 
-#'      data = pollen[pollen$variablename == "Cupressaceae",],
-#' xlab = "Years before present",
-#' ylab = "Cupressaceae pollen count")
 #' }
 #' @export
+#' @returns `data.frame` with sample records
 #' @import dplyr
 setMethod(f = "samples",
           signature = "site",
@@ -58,7 +49,6 @@ setMethod(f = "samples",
               dplyr::bind_rows() %>%
               dplyr::left_join(siteinfo, by = "datasetid") %>%
               dplyr::rename(sitenotes = notes)
-            
             return(sampset)
           }
 )
@@ -67,22 +57,11 @@ setMethod(f = "samples",
 #' @param x collunits object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples \dontrun{
-#' marion <- get_sites(sitename = "Marion Lake") %>%
-#'   get_datasets() %>%
-#'   filter(datasettype == "pollen") %>%
-#'   get_downloads()
-#' pollen <- samples(collunits(marion))
-#' plot(value ~ I(-1 * age),
-#'      data = pollen[pollen$variablename == "Cupressaceae",],
-#' xlab = "Years before present",
-#' ylab = "Cupressaceae pollen count")
-#' }
+#' @returns `data.frame` with sample records
 #' @description Obtain elements from collunits
 setMethod(f = "samples",
           signature = "collunits",
           definition = function(x) {
-            # allids <- get("allids", parent.frame())
             purrr::map(x@collunits, function(x) samples(x)) %>%
               dplyr::bind_rows()
           }
@@ -93,17 +72,7 @@ setMethod(f = "samples",
 #' @description Obtain elements from collunit
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows mutate
-#' @examples \dontrun{
-#' marion <- get_sites(sitename = "Marion Lake") %>%
-#'   get_datasets() %>%
-#'   filter(datasettype == "pollen") %>%
-#'   get_downloads()
-#' pollen <- samples(collunits(marion)[[1]])
-#' plot(value ~ I(-1 * age),
-#'      data = pollen[pollen$variablename == "Cupressaceae",],
-#' xlab = "Years before present",
-#' ylab = "Cupressaceae pollen count")
-#' }
+#' @returns `data.frame` with sample records
 #' @export
 setMethod(f = "samples",
           signature = "collunit",
@@ -202,7 +171,6 @@ setMethod(f = "samples",
               dplyr::bind_rows() %>%
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
               dplyr::rename(datasetnotes = notes)
-            
             return(sampset)
           }
 )

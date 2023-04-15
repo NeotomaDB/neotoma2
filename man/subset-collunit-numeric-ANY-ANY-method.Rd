@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+slided value
+}
 \description{
 Assign collunit field by numeric index
 }

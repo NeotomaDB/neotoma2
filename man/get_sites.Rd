@@ -79,7 +79,7 @@ and datasets located at that site.
 }
 }
 \examples{
-\dontrun{
+\donttest{
 ## Find all sites with a min altitude of 12m and a max altitude of 25m
 ## By default returns only 25 sites (default limit is 25):
 sites_12to25 <- get_sites(altmin=12, altmax=25)

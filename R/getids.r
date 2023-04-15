@@ -6,6 +6,7 @@
 #' @importFrom purrr map
 #' @importFrom dplyr arrange
 #' @param order sort items by siteid, collunitid, datasetid
+#' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
 #' @export
 getids <- function(x, order = TRUE) {
   if (!missing(x)) {
@@ -18,6 +19,7 @@ getids <- function(x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr arrange bind_rows
+#' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
 #' @export
 getids.sites <- function (x, order = TRUE) {
     siteids <- map(x@sites, function(y) {
@@ -64,6 +66,7 @@ getids.sites <- function (x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
+#' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
 #' @export
 getids.site <- function (x, order = TRUE) {
   siteid <- x@siteid
@@ -94,13 +97,11 @@ getids.site <- function (x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples \dontrun{
-#' marion <- get_sites(sitename = "Marion Lake") %>%
-#'   get_datasets() %>%
-#'   filter(datasettype == "pollen") %>%
-#'   get_downloads()
+#' @examples {
+#' marion <- get_sites(sitename = "Marion Lake")
 #' collunitids <- getids(collunits(marion))
 #' }
+#' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
 #' @export
 getids.collunits <- function(x, order = TRUE) {
 
@@ -132,11 +133,9 @@ getids.collunits <- function(x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples \dontrun{
-#' marion <- get_sites(sitename = "Marion Lake") %>%
-#'   get_datasets() %>%
-#'   filter(datasettype == "pollen") %>%
-#'   get_downloads()
+#' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
+#' @examples {
+#' marion <- get_sites(sitename = "Marion Lake") 
 #' collunitids <- getids(collunits(marion)[[1]])
 #' }
 #' @export

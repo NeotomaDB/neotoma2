@@ -10,6 +10,7 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 #' @param x A chronology object generated using \code{set_chronology()}
 #' @param y A data.frame of sample ages, with required columns:
 #'   "analysisunitid", "age", "agetype", "ageolder", and "ageyounger".
+#' @returns `chronologies` with new added chronology
 #' @description Given a collunit, add a new chronology object to the unit
 #' with both the chronology metadata and the age information (as `y`)
 #' @details When undertaking analysis we may wish to add a new chronology to
@@ -20,7 +21,6 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 #' [Complex Workflows](https://open.neotomadb.org/EPD_binder/complex_workflow.html)
 #' documentation online.
 #' @export
-
 setMethod(f = "add_chronology",
           signature = signature(object = "collunit",
                                 x = "chronology",
@@ -90,6 +90,7 @@ setMethod(f = "add_chronology",
 #' @title c Method for NULL values
 #' @param x NULL object
 #' @param y sites/collunits object
+#' @returns concatenated `collunits` object
 #' @export
 setMethod(f = "c",
           signature = "missingOrNULL",
@@ -99,6 +100,7 @@ setMethod(f = "c",
 
 #' @title  Show the collection unit information
 #' @param object collunits object
+#' @return null used for side effects. Printing a data.frame
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunits"),
@@ -113,6 +115,7 @@ setMethod(f = "show",
 
 #' @title  Show the collection unit information
 #' @param object collunit object
+#' @return null used for side effects. Printing a data.frame
 #' @export
 setMethod(f = "show",
           signature = signature(object = "collunit"),
@@ -125,6 +128,7 @@ setMethod(f = "show",
 #' @title Get or remove sites by numeric index
 #' @param x The collunits object
 #' @param i The numeric index
+#' @return null used for side effects. Printing a data.frame
 setMethod(f = "[",
           signature = signature(x = "collunits", i = "numeric"),
           definition = function(x, i) {
@@ -135,6 +139,7 @@ setMethod(f = "[",
 #' @param x collunits object
 #' @param i iteration in collunits list
 #' @description Obtain one of the elements within a collunits list
+#' @returns sliced `collunits` object
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "collunits", i = "numeric"),
@@ -153,6 +158,7 @@ setMethod(f = "[[",
 #' @title Get slot names
 #' @param x A collection unit object.
 #' @description Get all names for named elements within a `collunit` object.
+#' @returns NULL. Shows the names of the slots
 #' @export
 setMethod(f = "names",
           signature = signature(x = "collunit"),
@@ -165,6 +171,7 @@ setMethod(f = "names",
 #' @param i iteration in collunits list
 #' @param value The value to be used
 #' @description Obtain one of the elements within a collunits list
+#' @returns Modified `collunits`
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "collunits"),
@@ -180,6 +187,7 @@ setMethod(f = "[[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
+#' @returns sliced element
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "character"),
           definition = function(x, i, value) {
@@ -193,6 +201,7 @@ setMethod(f = "[<-",
 #' @param x The collunit object.
 #' @param i The column indicator.
 #' @param value The value to be used.
+#' @returns slided value
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "numeric"),
           definition = function(x, i, value) {
@@ -207,6 +216,7 @@ setMethod(f = "[<-",
 #' @param x The collunit object.
 #' @param name name of the slot.
 #' @param value The value to be used.
+#' @returns assign a new value to a slot
 setMethod(f = "$<-",
           signature = signature(x = "collunit"),
           definition = function(x, name, value) {
@@ -219,6 +229,7 @@ setMethod(f = "$<-",
 #' @param x collunit object
 #' @param name name of the slot
 #' @description Obtain slots of a collunit without using at-mark
+#' @returns null prints element of a slot
 #' @export
 setMethod(f = "$",
           signature = signature(x = "collunit"),
@@ -230,6 +241,7 @@ setMethod(f = "$",
 #' @param x collunits object
 #' @param name name of the slot
 #' @description Obtain slots of a collunit without using at-mark
+#' @returns null prints element of a slot
 #' @export
 setMethod(f = "$",
           signature = signature(x = "collunits"),
@@ -243,7 +255,8 @@ setMethod(f = "$",
 
 #' @title  as.data.frame site
 #' @param x site object
-#' @description show as dataframe as prep to save as csv
+#' @description show as dataframe 
+#' @returns data.frame object with a collection units metadata
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("collunit"),
@@ -263,6 +276,7 @@ setMethod(f = "as.data.frame",
 #' @title  as.data.frame collunits
 #' @param x collunits object
 #' @description show as dataframe as prep to save as csv
+#' @returns data.frame of multiple collection units metadata.
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("collunits"),
@@ -273,6 +287,7 @@ setMethod(f = "as.data.frame",
 #' @title Length Method collunits
 #' @export
 #' @param x collunits object
+#' @returns length of a `collunits` object
 setMethod(f = "length",
           signature = signature(x = "collunits"),
           definition = function(x) {
@@ -283,6 +298,7 @@ setMethod(f = "length",
 #' @param x collunits object 1
 #' @param y collunits object 2
 #' @importFrom methods is
+#' @returns concatenated collection units without duplicates
 #' @export
 setMethod(f = "c",
           signature = signature(x = "collunits"),
@@ -302,6 +318,7 @@ setMethod(f = "c",
 #' @title write CSV
 #' @param x collunits object
 #' @param ... Additional parameters associated with the call.
+#' @returns null side effect for saving a CSV file.
 #' @export
 setMethod(f = "write.csv",
           signature = "collunits",

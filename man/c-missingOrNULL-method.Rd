@@ -13,6 +13,11 @@
 
 \item{y}{sites/datasets object}
 }
+\value{
+concatenated \code{collunits} object
+
+\code{list} of concatenated items when the first object is NULL
+}
 \description{
 c Method for NULL values
 

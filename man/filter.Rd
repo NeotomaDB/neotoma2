@@ -11,6 +11,9 @@ filter(x, ...)
 
 \item{...}{arguments to filter by.}
 }
+\value{
+filtered \code{sites} object
+}
 \description{
 The \code{filter} function takes a \code{sites} object
 and allows a user to filter on a number of properties. Since a sites object

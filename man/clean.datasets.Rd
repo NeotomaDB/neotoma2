@@ -13,15 +13,18 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+cleaned \code{datasets} after concatenation (no duplicates)
+}
 \description{
 Function that removes duplicate objects such as sites,
 datasets, or collection units.
 }
 \examples{
-\dontrun{
-clean_ds <- get_sites(sitename = "L\%", limit = 20) \%>\%
+{
+clean_ds <- get_sites(sitename = "L\%", limit = 1) \%>\%
   get_downloads() \%>\% datasets()
-more_ds <- get_sites(sitename = "La\%", limit = 20) \%>\%
+more_ds <- get_sites(sitename = "La\%", limit = 1) \%>\%
   get_downloads() \%>\% datasets()
 long_set <- c(clean_ds, more_ds)
 length(long_set)

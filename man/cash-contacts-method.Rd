@@ -11,6 +11,9 @@
 
 \item{name}{The name of a contacts slot.}
 }
+\value{
+object value from the slot
+}
 \description{
 Extract or Replace Parts of an Object
 }

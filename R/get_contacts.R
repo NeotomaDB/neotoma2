@@ -11,6 +11,7 @@
 #'  individual contributor to the database.
 #' (\code{status}) The current status of the contributor
 #'  (\code{active} or \code{retired})
+#'  @returns `contacts` object
 #' @export
 get_contacts <- function(x = NA, ...) {
   UseMethod("get_contacts")
@@ -28,6 +29,7 @@ get_contacts <- function(x = NA, ...) {
 #'  individual contributor to the database.
 #' (\code{status}) The current status of the contributor
 #'  (\code{active} or \code{retired})
+#' @returns `contacts` object
 #' @export
 get_contacts.numeric <- function(x, ...) {
 
@@ -75,6 +77,7 @@ get_contacts.numeric <- function(x, ...) {
 #'  individual contributor to the database.
 #' (\code{status}) The current status of the contributor
 #'  (\code{active} or \code{retired})
+#' @returns `contacts` object
 #' @export
 get_contacts.default <- function(x, ...) {
 

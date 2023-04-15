@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A \code{publication} object.}
 }
+\value{
+\code{string} with \code{publication} slots' names
+}
 \description{
 Get slot names for a publication object.
 }

@@ -11,13 +11,15 @@
 
 \item{...}{additional arguments accepted by \code{get_datasets()}}
 }
+\value{
+\code{sites} object with full metadata up to the \code{dataset} level
+}
 \description{
 Get Dataset from a \code{sites} object.
 }
 \examples{
-\dontrun{
-random_sites <- get_sites(1:100)
-allds <- get_datasets(random_sites)
-plotLeaflet(allds)
+\donttest{
+random_sites <- get_sites(1)
+allds <- get_datasets(random_sites, limit=3)
 }
 }

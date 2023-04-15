@@ -10,6 +10,7 @@
 #' }
 #' @importFrom utils browseURL
 #' @importFrom rlang is_interactive
+#' @returns NULL side effect for opening browser with the manual
 #' @export
 get_manual <- function() {
   if (rlang::is_interactive()) {

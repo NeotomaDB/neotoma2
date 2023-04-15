@@ -27,6 +27,7 @@
 #' @param url Their homepage
 #' @param address A physical address
 #' @param notes Notes about the individual
+#' @returns `contact` object
 #' @export
 
 set_contact <- function(x = NA,

@@ -22,5 +22,5 @@ This function is an internal function called from
 representation of data in the API and the R implementation.
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez
 }

@@ -13,14 +13,17 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+\code{sites} object
+}
 \description{
 Function that removes duplicate objects such as sites,
 datasets, or collection units.
 }
 \examples{
-\dontrun{
-clean_sites <- get_sites(sitename = "L\%", limit = 20)
-more_sites <- get_sites(sitename = "La\%", limit = 20)
+{
+clean_sites <- get_sites(sitename = "L\%", limit = 1)
+more_sites <- get_sites(sitename = "La\%", limit = 1)
 long_set <- c(clean_sites, more_sites)
 length(long_set)
 # By removing duplicates we get a smaller object.

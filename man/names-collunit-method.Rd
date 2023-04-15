@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A collection unit object.}
 }
+\value{
+NULL. Shows the names of the slots
+}
 \description{
 Get all names for named elements within a \code{collunit} object.
 }

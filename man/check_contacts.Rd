@@ -11,6 +11,9 @@ check_contacts(x, ...)
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+contacts object
+}
 \description{
 Uses the Neotoma API to search and access information about individuals
 who have contributed to the data in the Neotoma Paleoecology Database

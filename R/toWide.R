@@ -11,6 +11,7 @@
 #' variablename and depth/age.
 #' @export
 #' @import dplyr
+#' @returns wide `data.frame` obtained from long `samples` `data.frame`
 #' @examples
 #' \donttest{
 #' fourcorners <- '{"type": "Polygon",

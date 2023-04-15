@@ -24,7 +24,7 @@ This works for records without publicationids. We assume that
 data with publicationids is correct.
 }
 \examples{
-\dontrun{
+\donttest{
 # Take a publication object and purposely degrade the metadata:
 bad_pub <- get_publications(666)
 # Note this only changes the reported year, not the citation string.

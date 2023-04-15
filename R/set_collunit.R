@@ -19,11 +19,11 @@
 #' @param defaultchronology best chronology model identifier to 
 #' be used with this collection unit
 #' @export
+#' @returns `collunit` object
 #' @examples {
 #' # Create a collunit
 #' my_collunit <- set_collunit(notes = "my lake")
 #' }
-
 set_collunit <- function(x = NA,
                          collectionunitid = NA_integer_,
                          notes = NA_character_,

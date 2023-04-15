@@ -8,13 +8,13 @@
 #' Information for Specimens
 #' @param x Use a single specimenid
 #' @param ... Additional terms passed to get_specimens, most common datasetid
-#' @return The function returns a specimens list
-#' @examples \dontrun{
-#' # To find specimen with ID 19832:
-#' my_specimens <- get_specimens(19832)
-#' }
+#' @returns The function returns a specimens list
+#' @examples \donttest {
+#' # To find specimen with ID 7:
+#' my_specimens <- get_specimens(7)
 #' # To find specimens in datasetid 41610
 #' my_specimens2 <- get_specimens(datasetid = 41610)
+#' }
 #' @export
 get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -80,6 +80,11 @@ parse_specimen <- function(result, ds) {
 #' @title Get Specimen Numeric
 #' @param x Use a single number to extract site information
 #' @param ... Additional terms passed to get_specimens.
+#' @returns The function returns a specimens list
+#' @examples {
+#' # To find specimen with ID 7:
+#' my_specimens <- get_specimens(7)
+#' }
 #' @export
 get_specimens.numeric <- function(x, ...) {
 
@@ -113,6 +118,11 @@ get_specimens.numeric <- function(x, ...) {
 
 #' @title Get Specimen datasetid
 #' @param ... Pass argument datasetid and the corresponding datasetid
+#' @returns The function returns a specimens list
+#' @examples {
+#' # To find specimens in datasetid 41610
+#' my_specimens <- get_specimens(datasetid = 41610)
+#' }
 #' @export
 get_specimens.default <- function(...) {
  
@@ -129,10 +139,8 @@ get_specimens.default <- function(...) {
   
   base_url <- paste0("data/datasets/", as.character(dsid), "/specimens")
   result <- neotoma2::parseURL(base_url)
-  #print(result)
   
   dw <- get_downloads(cl$datasetid)
-  
   ds <- parse_specimen(result, dw)
   
   return(ds)
@@ -142,6 +150,13 @@ get_specimens.default <- function(...) {
 #' @title Get Specimen Sites
 #' @param x Use a single number to extract site information
 #' @param ... Other possible parameters such as datasetid
+#' @returns The function returns a specimens list
+#' @examples \donttest {
+#' # To find specimen with ID 7:
+#' my_site <- get_sites(13296)
+#' # To find specimens in `my_site`
+#' my_specimens <- get_specimens(my_site)
+#' }
 #' @export
 get_specimens.sites <- function(x,...) {
 

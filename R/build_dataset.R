@@ -1,5 +1,5 @@
 #' @title Build a dataset object from a JSON list representation.
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
@@ -7,13 +7,9 @@
 #' @description
 #' Helper function to build a dataset from the API JSON response.
 #' @param x a JSON dataset object passed from the Neotoma API.
-#' @return A `dataset` object.
+#' @returns A simple `dataset` object.
 #' @export
-#' @examples \dontrun{
-#' # To build dataset from API call:
-#' build_dataset(x)
-#' }
-#'
+
 build_dataset <- function(x) {
 
   samples <- purrr::map(x$samples, build_sample)

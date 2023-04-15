@@ -11,6 +11,9 @@
 
 \item{i}{iteration in chronologies list}
 }
+\value{
+selected \code{chronology} object
+}
 \description{
 Obtain one of the elements within a \code{chronologies} list
 either by element order or by element name.

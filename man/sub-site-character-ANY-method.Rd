@@ -11,6 +11,9 @@
 
 \item{i}{The column indicator}
 }
+\value{
+sliced \code{site} object
+}
 \description{
 Get site field by character index
 }

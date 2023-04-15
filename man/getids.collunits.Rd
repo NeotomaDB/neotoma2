@@ -11,16 +11,16 @@
 
 \item{order}{sort items by siteid, collunitid, datasetid}
 }
+\value{
+\code{data.frame} containing \code{siteid}, \code{datasetid}, and \code{collunitid}
+}
 \description{
 From a set of collecitonunitobjects, return the
 collectionunit and dataset ids.
 }
 \examples{
-\dontrun{
-marion <- get_sites(sitename = "Marion Lake") \%>\%
-  get_datasets() \%>\%
-  filter(datasettype == "pollen") \%>\%
-  get_downloads()
+{
+marion <- get_sites(sitename = "Marion Lake")
 collunitids <- getids(collunits(marion))
 }
 }

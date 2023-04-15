@@ -5,14 +5,7 @@
 #' @importFrom purrr map
 #' @import sf
 #' @export
-#' @examples \dontrun{
-#' response <- jsonlite::fromJSON(
-#'   "https://api.neotomadb.org/v2.0/data/datasets/100,101",
-#'   flatten = FALSE, simplifyVector = FALSE)
-#' response <- cleanNULL(response)
-#' newSites <- build_sites(response$data)
-#' newSites
-#' }
+#' @returns A simple `site` object
 
 build_sites <- function(x) {
   assertthat::assert_that(is.list(x),

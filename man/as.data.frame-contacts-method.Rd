@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A contacts object.}
 }
+\value{
+\code{data.frame} object with multiple \code{contacts} metadata
+}
 \description{
 Transform a contacts object to a data.frame()
 }

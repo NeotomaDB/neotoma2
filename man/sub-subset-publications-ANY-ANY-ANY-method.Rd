@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used}
 }
+\value{
+\code{publications} with new assigned value.
+}
 \description{
 Assign value to an element in a publication list.
 }

@@ -11,6 +11,9 @@
 
 \item{...}{additional properties passed to \code{summary}}
 }
+\value{
+\code{data.frame} object with site summary information
+}
 \description{
 This function summarizes a sites object, from \code{site} level
 and returns a \code{data.frame} that contains the site ID, sitename,

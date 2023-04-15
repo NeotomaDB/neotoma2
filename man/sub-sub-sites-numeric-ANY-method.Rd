@@ -11,12 +11,15 @@
 
 \item{i}{iteration in sites list}
 }
+\value{
+sliced \code{site} object
+}
 \description{
 Obtain one of the elements within a sites list
 }
 \examples{
-\dontrun{
-some_site <- get_sites(sitename = "Site\%")
+{
+some_site <- get_sites(sitename = "Site\%", limit=3)
 some_site[[2]]
 }
 }

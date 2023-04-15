@@ -5,7 +5,8 @@
 #'  for a complete list of table names.
 #' @param limit Default 25 records
 #' @param offset Default 0.
-#' @examples \dontrun{
+#' @returns selected `table` values from the Database 
+#' @examples \donttest{
 #' # Returns only the first 25 specimen records.
 #' someSpec <- get_table('specimens')
 #' # Loop with the offset to get all specimens:

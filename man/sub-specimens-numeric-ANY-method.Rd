@@ -11,6 +11,9 @@
 
 \item{i}{The numeric index}
 }
+\value{
+sliced \code{specimens} object
+}
 \description{
 Get or remove specimens by numeric index
 }

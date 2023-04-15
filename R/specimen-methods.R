@@ -1,6 +1,7 @@
 # Start "Show Method" for all Neotoma Objects
 #' @title Show Specimen Method
 #' @param object specimen object
+#' @returns NULL - side effect for printing a `data.frame` object
 setMethod(f = "show",
           signature = "specimen",
           definition = function(object) {
@@ -21,6 +22,7 @@ setMethod(f = "show",
 
 #' @title Show Specimens object as a dataframe
 #' @param object specimens object
+#' @returns NULL - side effect for printing a `data.frame` object
 setMethod(f = "show",
           signature = "specimens",
           definition = function(object) {
@@ -47,6 +49,7 @@ setMethod(f = "show",
 #' @param x specimens object
 #' @param i iteration in specimens list
 #' @description Obtain one of the elements within a specimens list
+#' @returns sliced `specimens` object
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "specimens", i = "numeric"),
@@ -65,6 +68,7 @@ setMethod(f = "[[",
 #' @title Get slot names
 #' @param x A specimen object.
 #' @description Get all names for named elements within a `specimen` object.
+#' @returns names of the slots of a `site` object
 #' @export
 setMethod(f = "names",
           signature = signature(x = "specimen"),
@@ -76,6 +80,7 @@ setMethod(f = "names",
 #' @param x specimens object
 #' @param i iteration in specimens list
 #' @param value The value to be used
+#' @returns `specimens` object with reassigned values
 #' @description Obtain one of the elements within a specimens list
 #' @export
 setMethod(f = "[[<-",
@@ -92,6 +97,7 @@ setMethod(f = "[[<-",
 #' @param x The specimen object.
 #' @param i The column indicator.
 #' @param value The value to be used.
+#' @returns `specimen` object with reassigned character values
 setMethod(f = "[<-",
           signature = signature(x = "specimen", i = "character"),
           definition = function(x, i, value) {
@@ -104,6 +110,7 @@ setMethod(f = "[<-",
 #' @title Assign specimen field by numeric index
 #' @param x The specimen object.
 #' @param i The column indicator.
+#' @returns `sites` object with reassigned numeric values
 #' @param value The value to be used.
 setMethod(f = "[<-",
           signature = signature(x = "specimen", i = "numeric"),
@@ -119,6 +126,7 @@ setMethod(f = "[<-",
 #' @param x The specimen object.
 #' @param name name of the slot.
 #' @param value The value to be used.
+#' @returns `specimen` object with reassigned values
 setMethod(f = "$<-",
           signature = signature(x = "specimen"),
           definition = function(x, name, value) {
@@ -129,6 +137,7 @@ setMethod(f = "$<-",
 #' @title Get or remove specimens by numeric index
 #' @param x The specimens object
 #' @param i The numeric index
+#' @returns sliced `specimens` object
 setMethod(f = "[",
           signature = signature(x = "specimens", i = "numeric"),
           definition = function(x, i) {
@@ -139,6 +148,7 @@ setMethod(f = "[",
 #' @param x specimen object
 #' @param name name of the slot
 #' @description Obtain slots of a specimen without using at-mark
+#' @returns value at chosen slot in the `specimen` object
 #' @export
 setMethod(f = "$",
           signature = signature(x = "specimen"),
@@ -150,6 +160,7 @@ setMethod(f = "$",
 #' @param x specimens object
 #' @param name name of the slot.
 #' @description Obtain slots of a specimen without using at-mark
+#' @returns value at chosen slot in the `site` object
 #' @export
 setMethod(f = "$",
           signature = signature(x = "specimens"),
@@ -163,7 +174,8 @@ setMethod(f = "$",
 
 #' @title  as.data.frame specimen
 #' @param x specimen object
-#' @description show as dataframe as prep to save as csv
+#' @description show as data.frame
+#' @returns `data.frame` with `specimen metadata`
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("specimen"),
@@ -184,7 +196,8 @@ setMethod(f = "as.data.frame",
 
 #' @title  as.data.frame specimens
 #' @param x specimens object
-#' @description show as dataframe as prep to save as csv
+#' @description show as data.frame
+#' @returns `data.frame` with `specimens metadata`
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("specimens"),
@@ -195,6 +208,7 @@ setMethod(f = "as.data.frame",
 #' @title Length Method specimens
 #' @export
 #' @param x specimens object
+#' @returns `int` with length of `specimens` object
 setMethod(f = "length",
           signature = signature(x = "specimens"),
           definition = function(x) {
@@ -204,6 +218,7 @@ setMethod(f = "length",
 #' @title c Method - Combine specimens objects
 #' @param x specimens object 1
 #' @param y specimens object 2
+#' @returns concatenated `specimens` object
 #' @export
 setMethod(f = "c",
           signature = signature(x = "specimens"),
@@ -216,6 +231,7 @@ setMethod(f = "c",
 #' @title write CSV
 #' @param x specimens object
 #' @param ... Additional parameters associated with the call.
+#' @returns NULL - side effect of saving CSV file
 #' @export
 setMethod(f = "write.csv",
           signature = "specimens",

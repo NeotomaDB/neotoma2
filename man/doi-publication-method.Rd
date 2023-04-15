@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A \code{publication} object.}
 }
+\value{
+\code{DOI} from a publication
+}
 \description{
 Get a publication DOI.
 }

@@ -13,6 +13,7 @@
 #' @param pi_list pi list
 #' @param samples taxa objects
 #' @export
+#' @returns `dataset` object
 #' @examples {
 #' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",

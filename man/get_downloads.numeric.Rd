@@ -13,6 +13,13 @@
 
 \item{...}{arguments in ellipse form}
 }
+\value{
+The function returns either a single item of class
+\code{"try-error"} describing the reason for failure
+(either misdefined parameters or an error from the Neotoma API),
+or a table of sites, with rows corresponding to the number of
+individual sites and datasets returned by the Neotoma API.
+}
 \description{
 get_downloads
 }

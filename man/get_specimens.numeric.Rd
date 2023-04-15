@@ -11,6 +11,15 @@
 
 \item{...}{Additional terms passed to get_specimens.}
 }
+\value{
+The function returns a specimens list
+}
 \description{
 Get Specimen Numeric
+}
+\examples{
+{
+# To find specimen with ID 7:
+my_specimens <- get_specimens(7)
+}
 }

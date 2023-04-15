@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+assign a new value to a slot
+}
 \description{
 Assign collunit field by numeric index
 }

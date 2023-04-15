@@ -11,6 +11,9 @@
 
 \item{...}{arguments to filter by.}
 }
+\value{
+filtered \code{sites} object
+}
 \description{
 The \code{filter} function takes a \code{sites} object
 and allows a user to filter on a number of properties. Since a sites object
@@ -55,13 +58,13 @@ depositional environment.}
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # Download 100 sites, but only keep the sites that are close to sea level.
-some_sites <- get_sites(sitename = "Lake\%", limit = 100)
+some_sites <- get_sites(sitename = "Lake\%", limit = 3)
 site_subset <- some_sites \%>\% filter(altitude < 100)
 # Download 100 sites, get all associated datasets, but keep only
 # sites/datasets that are of datasettype "pollen":
-sites <- get_sites(limit = 100) \%>\%
+sites <- get_sites(limit = 1) \%>\%
   get_datasets(all_data = TRUE)
 pollen_subset <- sites \%>\% filter(datasettype == "pollen")
 }

@@ -19,11 +19,14 @@ with a publication.
 \code{year} The year the publication was released.
 \code{search} A plain text search string used to search the citation.}
 }
+\value{
+\code{publications} object
+}
 \description{
 Update metadata for a set of publication objects.
 }
 \examples{
-\dontrun{
+\donttest{
 # Take a publication object and purposely degrade the metadata:
 bad_pub <- get_publications(c(666, 667, 668))
 # Note this only changes the reported year, not the citation string.

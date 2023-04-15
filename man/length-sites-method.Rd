@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{sites object}
 }
+\value{
+\code{int} with the length of sites object
+}
 \description{
 Length Method Sites
 }

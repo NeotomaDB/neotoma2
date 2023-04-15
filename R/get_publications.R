@@ -13,7 +13,8 @@
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
 #' @importFrom purrr pluck
-#' @examples \dontrun{
+#' @returns `publication` object
+#' @examples \donttest{
 #' # How old are the papers in Neotoma that include the term "mammut"?
 #' mammoth_papers <- get_publications(search="mammut") %>%
 #'   as.data.frame()
@@ -40,12 +41,13 @@ get_publications <- function(x = NA, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # How old are the papers in Neotoma that include the term "mammut"?
 #' mammoth_papers <- get_publications(search="mammut") %>%
 #'   as.data.frame()
 #' hist(as.numeric(mammoth_papers$year))
 #' }
+#' @returns `publications` object
 #' @export
 get_publications.default <- function(...) {
   . <- ""
@@ -101,7 +103,7 @@ get_publications.default <- function(...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @examples \dontrun{
+#' @examples {
 #' # We want the paper identified in Neotoma as 666:
 #' get_publications(666)
 #' }
@@ -156,7 +158,7 @@ get_publications.numeric <- function(x, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Take a publication object and purposely degrade the metadata:
 #' bad_pub <- get_publications(666)
 #' # Note this only changes the reported year, not the citation string.
@@ -195,7 +197,7 @@ get_publications.publication <- function(x, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Take a publication object and purposely degrade the metadata:
 #' bad_pub <- get_publications(c(666, 667, 668))
 #' # Note this only changes the reported year, not the citation string.
@@ -209,6 +211,7 @@ get_publications.publication <- function(x, ...) {
 #' # we see the proper citation in the record:
 #' updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
 #' }
+#' @returns `publications` object
 #' @export
 get_publications.publications <- function(x, ...) {
   for (i in seq_len(length(x))) {

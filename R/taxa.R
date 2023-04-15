@@ -5,9 +5,9 @@ utils::globalVariables(c("context", "sites"))
 #' @title Extract taxonomic data from a set of sites.
 #' @description From a sites object,
 #' @param object A \code{sites} object.
-#' @return A \code{data.frame} reporting the taxa/data objects, units,
+#' @returns A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' somesites <- get_sites(datasettype = "diatom", limit = 3) %>%
 #'   get_downloads()
 #' diatomtaxa <- taxa(somesites)
@@ -41,9 +41,9 @@ setMethod(f = "taxa",
 
 #' @title Extract taxonomic data from a single site.
 #' @param object A \code{site} object.
-#' @return A \code{data.frame} reporting the taxa/data objects, units,
+#' @returns A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' somesites <- get_sites(datasettype = "pollen", limit = 3) %>%
 #'   get_downloads()
 #' diatomtaxa <- taxa(somesites[[1]])
@@ -79,7 +79,7 @@ setMethod(f = "taxa",
 
 #' @title Extract taxonomic data from a set of sites.
 #' @param object A \code{collunits} object.
-#' @return A \code{data.frame} reporting the taxa/data objects, units,
+#' @returns A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
 setMethod(f = "taxa",
           signature = "collunits",
@@ -112,7 +112,7 @@ setMethod(f = "taxa",
 
 #' @title Extract taxonomic data from a set of sites.
 #' @param object A \code{collunit} object.
-#' @return A \code{data.frame} reporting the taxa/data objects, units,
+#' @returns A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
 setMethod(f = "taxa",
           signature = "collunit",

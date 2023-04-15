@@ -6,13 +6,14 @@
 #' @importFrom assertthat assert_that
 #' @param server One of \code{local} (when the API is running locally on
 #' port 3005), \code{neotoma} or \code{dev}.
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # The user is running the API locally using the node/express API
 #' # cloned from github: https://github.com/NeotomaDB/api_nodetest
 #' set_server(server = "local")
 #' # The user switches back to the remote api server.
 #' set_server(server = "neotoma")
 #' }
+#' @returns NULL modifies how to talk to the API (local, dev, server)
 #' @export
 
 set_server <- function(server = "neotoma") {

@@ -9,6 +9,9 @@ cleanNULL(x)
 \arguments{
 \item{x}{An element that may or may not have NULL values.}
 }
+\value{
+parsed \code{list} where NULL values are changed to NA
+}
 \description{
 Pass an object and convert all
 \code{NULL} elements to \code{NA}.

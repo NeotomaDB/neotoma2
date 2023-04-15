@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{datasets object}
 }
+\value{
+\code{int} that showcases the length of a \code{datasets} object
+}
 \description{
 Length Method datasets
 }

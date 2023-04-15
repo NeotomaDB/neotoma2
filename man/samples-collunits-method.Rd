@@ -9,19 +9,9 @@
 \arguments{
 \item{x}{collunits object}
 }
+\value{
+\code{data.frame} with sample records
+}
 \description{
 Obtain elements from collunits
-}
-\examples{
-\dontrun{
-marion <- get_sites(sitename = "Marion Lake") \%>\%
-  get_datasets() \%>\%
-  filter(datasettype == "pollen") \%>\%
-  get_downloads()
-pollen <- samples(collunits(marion))
-plot(value ~ I(-1 * age),
-     data = pollen[pollen$variablename == "Cupressaceae",],
-xlab = "Years before present",
-ylab = "Cupressaceae pollen count")
-}
 }

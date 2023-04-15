@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A dataset object.}
 }
+\value{
+\code{list} with all names of \code{dataset} slots
+}
 \description{
 Get all names for named elements within a \code{dataset} object.
 }

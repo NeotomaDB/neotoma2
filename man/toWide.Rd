@@ -30,6 +30,9 @@ toWide(
 \item{operation}{label or vector of operations to be chosen from: 'prop', 'sum',
 'presence'.}
 }
+\value{
+wide \code{data.frame} obtained from long \code{samples} \code{data.frame}
+}
 \description{
 Obtain a wide table with information regarding of samples grouped by
 variablename and depth/age.

@@ -11,6 +11,9 @@
 
 \item{y}{datasets object 2}
 }
+\value{
+concatenated \code{datasets} object
+}
 \description{
 c Method - Combine datasets objects
 }

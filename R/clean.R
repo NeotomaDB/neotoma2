@@ -17,7 +17,8 @@ utils::globalVariables(c("siteid"))
 #'   * Before: \{site: 1, dataset: 1\}, \{site: 1, dataset: 2\}
 #'   * After: \{site: 1, dataset: \[1, 2\]\}
 #' So the site is gathered, and the datasets are now part of an array of datasets.
-#' @examples \dontrun{
+#' @returns clean `neotoma` objects without duplicates after concatenation
+#' @examples \donttest{
 #' clean_sites <- get_sites(sitename = "L%", limit = 20)
 #' more_sites <- get_sites(sitename = "La%", limit = 20)
 #' long_set <- c(clean_sites, more_sites)
@@ -63,9 +64,10 @@ clean <- function(x = NA, verbose = TRUE, ...) {
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
-#' @examples \dontrun{
-#' clean_sites <- get_sites(sitename = "L%", limit = 20)
-#' more_sites <- get_sites(sitename = "La%", limit = 20)
+#' @returns `sites` object
+#' @examples {
+#' clean_sites <- get_sites(sitename = "L%", limit = 1)
+#' more_sites <- get_sites(sitename = "La%", limit = 1)
 #' long_set <- c(clean_sites, more_sites)
 #' length(long_set)
 #' # By removing duplicates we get a smaller object.
@@ -113,10 +115,11 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
-#' @examples \dontrun{
-#' clean_cols <- get_sites(sitename = "L%", limit = 20) %>%
+#' @returns cleaned `collunits`
+#' @examples {
+#' clean_cols <- get_sites(sitename = "L%", limit = 1) %>%
 #'   collunits()
-#' more_cols <- get_sites(sitename = "La%", limit = 20) %>%
+#' more_cols <- get_sites(sitename = "La%", limit = 1) %>%
 #'   collunits()
 #' long_set <- c(clean_cols, more_cols)
 #' length(long_set)
@@ -153,10 +156,11 @@ clean.collunits <- function(x, verbose = TRUE, ...) {
 #' @param ... Additional parameters associated with the call.
 #' @description Function that removes duplicate objects such as sites,
 #' datasets, or collection units.
-#' @examples \dontrun{
-#' clean_ds <- get_sites(sitename = "L%", limit = 20) %>%
+#' @returns cleaned `datasets` after concatenation (no duplicates)
+#' @examples {
+#' clean_ds <- get_sites(sitename = "L%", limit = 1) %>%
 #'   get_downloads() %>% datasets()
-#' more_ds <- get_sites(sitename = "La%", limit = 20) %>%
+#' more_ds <- get_sites(sitename = "La%", limit = 1) %>%
 #'   get_downloads() %>% datasets()
 #' long_set <- c(clean_ds, more_ds)
 #' length(long_set)

@@ -3,12 +3,11 @@
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf
+#' @returns `sf` object to parse as location.
 #' @importFrom methods new
 #' @description
 #' Retrieve location from datasets WTK, GeoJson, bounding box
 #' @param x location object
-#' @export
-
 parse_location <- function(x) {
   if (is.numeric(x)) {
     # We're getting a numeric vector of coordinates:

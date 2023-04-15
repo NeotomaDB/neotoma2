@@ -6,6 +6,9 @@
 \usage{
 get_manual()
 }
+\value{
+NULL side effect for opening browser with the manual
+}
 \description{
 Open up the Neotoma manual homepage.
 }

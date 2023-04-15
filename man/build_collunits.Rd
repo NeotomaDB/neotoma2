@@ -11,7 +11,7 @@ build_collunits(x)
 returns a collection unit in any form.}
 }
 \value{
-An object of class \code{collunit}
+An simple \code{collunit} object
 }
 \description{
 Build a collection unit from the API response

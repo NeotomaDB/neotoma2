@@ -4,24 +4,21 @@
 \alias{plotLeaflet,sites-method}
 \title{plotLeaflet}
 \usage{
-\S4method{plotLeaflet}{sites}(object, save_im = FALSE, path = "")
+\S4method{plotLeaflet}{sites}(object)
 }
 \arguments{
 \item{object}{Sites object to plot}
-
-\item{save_im}{save output}
-
-\item{path}{location where output should be saved in. save_im must be TRUE}
+}
+\value{
+\code{leaflet} map
 }
 \description{
 Plot sites on a leaflet map
 }
 \examples{
-\dontrun{
+\donttest{
 # Note that by default the limit for queries is 25 records:
 modernSites <- get_sites(keyword = "Modern")
 plotLeaflet(modernSites)
-# Save map to file:
-plotLeaflet(modernSites, save_im = '/tmp/myMap.png')
 }
 }

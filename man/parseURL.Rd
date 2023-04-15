@@ -16,6 +16,9 @@ development API server ("dev") or a local server ("local").}
 
 \item{...}{Any query parameters passed from the calling function.}
 }
+\value{
+\code{list} with cleaned and parsed data from HTTP request
+}
 \description{
 An internal helper function used to connect to the Neotoma API
 in a standard manner, and to provide basic validation of any response.

@@ -11,6 +11,9 @@
 
 \item{order}{sort items by siteid, collunitid, datasetid}
 }
+\value{
+\code{data.frame} containing \code{siteid}, \code{datasetid}, and \code{collunitid}
+}
 \description{
 Get object IDs from sites
 }

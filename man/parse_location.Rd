@@ -9,6 +9,9 @@ parse_location(x)
 \arguments{
 \item{x}{location object}
 }
+\value{
+\code{sf} object to parse as location.
+}
 \description{
 Retrieve location from datasets WTK, GeoJson, bounding box
 }

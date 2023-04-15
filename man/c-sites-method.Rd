@@ -11,6 +11,9 @@
 
 \item{y}{sites object 2}
 }
+\value{
+concatenated and cleaned \code{sites} object
+}
 \description{
 c Method - Combine sites objects
 }

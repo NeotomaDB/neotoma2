@@ -13,15 +13,18 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+cleaned \code{collunits}
+}
 \description{
 Function that removes duplicate objects such as sites,
 datasets, or collection units.
 }
 \examples{
-\dontrun{
-clean_cols <- get_sites(sitename = "L\%", limit = 20) \%>\%
+{
+clean_cols <- get_sites(sitename = "L\%", limit = 1) \%>\%
   collunits()
-more_cols <- get_sites(sitename = "La\%", limit = 20) \%>\%
+more_cols <- get_sites(sitename = "La\%", limit = 1) \%>\%
   collunits()
 long_set <- c(clean_cols, more_cols)
 length(long_set)

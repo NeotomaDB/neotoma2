@@ -1,5 +1,4 @@
-#' @title Build specimen objects.
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @title Build a specimen objects.
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
@@ -9,12 +8,9 @@
 #' the Neotoma API call. The function is not exported, but called from
 #' the get_speciments() call.
 #' @param x specimen list
-#' @return A list (from JSON) parsed into specimen
+#' @returns A simple `specimen` object
 #' @export
-#' @examples \dontrun{
-#' build_specimen(x)
-#' }
-#'
+
 build_specimen <- function(x) {
 
   repo <- x$repository

@@ -19,12 +19,15 @@ with a publication.
 \code{year} The year the publication was released.
 \code{search} A plain text search string used to search the citation.}
 }
+\value{
+\code{publication} object
+}
 \description{
 Uses the Neotoma API to search and access information
 about publications associated with data in the Neotoma Paleoecology Database
 }
 \examples{
-\dontrun{
+\donttest{
 # How old are the papers in Neotoma that include the term "mammut"?
 mammoth_papers <- get_publications(search="mammut") \%>\%
   as.data.frame()

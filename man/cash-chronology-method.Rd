@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+value of the \code{slot} name
+}
 \description{
 Extract chronology metadata by slot name.
 }

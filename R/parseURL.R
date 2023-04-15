@@ -16,7 +16,7 @@
 #' development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
-#' @export
+#' @returns `list` with cleaned and parsed data from HTTP request
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
   
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
@@ -136,12 +136,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         
         responses <- c(responses, cleanNull(result)$data)
       }
-      
       result$data <- responses
       return(result)
-      
     } else {
-      
       responses <- c()
       while (TRUE) {
         response <- httr::GET(paste0(baseurl, x),
@@ -160,13 +157,10 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         if (length(cleanNull(result)$data) == 0) {
           break
         }
-        
         responses <- c(responses, cleanNull(result)$data)
-        
         query$offset <- query$offset + query$limit
       }
       result$data <- responses
-      
       return(result)
     }
   }

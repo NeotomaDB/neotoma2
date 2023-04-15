@@ -11,6 +11,9 @@
 
 \item{i}{A numeric index for the requested publication}
 }
+\value{
+selected \code{publications} object from index
+}
 \description{
 Obtain one of the elements within a publication list.
 }

@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{A contacts object.}
 }
+\value{
+null - side effect for printing contacts object
+}
 \description{
 Show a contacts object.
 }

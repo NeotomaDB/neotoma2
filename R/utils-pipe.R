@@ -8,4 +8,5 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
+#' @returns NULL; allows using tidyverse pipe operator.
 NULL

@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{collunit object}
 }
+\value{
+null used for side effects. Printing a data.frame
+}
 \description{
 Show the collection unit information
 }
