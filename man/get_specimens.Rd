@@ -18,7 +18,7 @@ The function returns a specimens list
 Information for Specimens
 }
 \examples{
-\donttest {
+\donttest{
 # To find specimen with ID 7:
 my_specimens <- get_specimens(7)
 # To find specimens in datasetid 41610

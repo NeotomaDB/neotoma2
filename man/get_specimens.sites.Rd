@@ -18,7 +18,7 @@ The function returns a specimens list
 Get Specimen Sites
 }
 \examples{
-\donttest {
+\donttest{
 # To find specimen with ID 7:
 my_site <- get_sites(13296)
 # To find specimens in `my_site`

@@ -17,6 +17,7 @@
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
 #' @returns `list` with cleaned and parsed data from HTTP request
+#' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
   
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint

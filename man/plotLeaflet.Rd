@@ -8,8 +8,9 @@ plotLeaflet(object)
 }
 \arguments{
 \item{object}{Sites object to plot}
-
-\item{leaflet}{map with site markers}
+}
+\value{
+leaflet map with site markers
 }
 \description{
 Plot sites on a leaflet map

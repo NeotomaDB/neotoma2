@@ -25,7 +25,7 @@ setGeneric("coordinates", function(obj, ...) {
 #' @author Socorro Dominguez \email{sedv8808@@gmail.com}
 #' @description Plot sites on a leaflet map
 #' @param object Sites object to plot
-#' @param leaflet map with site markers
+#' @returns leaflet map with site markers
 #' @export
 setGeneric("plotLeaflet", function(object) {
   standardGeneric(f = "plotLeaflet")

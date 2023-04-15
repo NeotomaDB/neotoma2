@@ -8,13 +8,14 @@
 #' Information for Specimens
 #' @param x Use a single specimenid
 #' @param ... Additional terms passed to get_specimens, most common datasetid
-#' @returns The function returns a specimens list
-#' @examples \donttest {
+#' @examples
+#' \donttest{
 #' # To find specimen with ID 7:
 #' my_specimens <- get_specimens(7)
 #' # To find specimens in datasetid 41610
 #' my_specimens2 <- get_specimens(datasetid = 41610)
 #' }
+#' @returns The function returns a specimens list
 #' @export
 get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -82,7 +83,7 @@ parse_specimen <- function(result, ds) {
 #' @param ... Additional terms passed to get_specimens.
 #' @returns The function returns a specimens list
 #' @examples {
-#' # To find specimen with ID 7:
+#' ## To find specimen with ID 7
 #' my_specimens <- get_specimens(7)
 #' }
 #' @export
@@ -151,7 +152,7 @@ get_specimens.default <- function(...) {
 #' @param x Use a single number to extract site information
 #' @param ... Other possible parameters such as datasetid
 #' @returns The function returns a specimens list
-#' @examples \donttest {
+#' @examples \donttest{
 #' # To find specimen with ID 7:
 #' my_site <- get_sites(13296)
 #' # To find specimens in `my_site`
