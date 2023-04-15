@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Use a single number to extract site information}
 
-\item{...}{}
+\item{...}{accepted arguments, see details for more information.}
 }
 \value{
 \code{sites} object with full metadata up to the \code{dataset} level

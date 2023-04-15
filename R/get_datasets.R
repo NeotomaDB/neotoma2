@@ -174,7 +174,7 @@ parse_dataset <- function(result) { # nolint
 
 #' @title Get Dataset Default
 #' @param x Use a single number to extract site information
-#' @param ... 
+#' @param ... accepted arguments, see details for more information.
 #' @importFrom utils URLencode
 #' @returns `sites` object with full metadata up to the `dataset` level
 #' @examples {
