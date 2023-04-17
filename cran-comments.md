@@ -85,6 +85,15 @@ This is 3rd submission. As for the remarks I received from 2nd submission:
 
 ### 1
 
+    Please provide a link to the used webservices (Neotoma Database) to the 
+    description field of your DESCRIPTION file in the form <http:...> or <https:...>
+    with angle brackets for auto-linking and no space after 'http:' and
+    'https:'.
+    
+Fixed.
+
+### 2
+
     Please add \value to .Rd files regarding exported methods and explain 
     the functions results in the documentation. Please write about the 
     structure of the output (class) and also what the output means. (If a
@@ -115,7 +124,7 @@ We do not see any arguments being added into that function. In `magrittr`, there
 
 As for the `get_manual.Rd` function, there are no parameters that the user needs to pass, it is a static function. I cannot find information on how to document this kind of "parameters".
 
-### 2
+### 3
 
     \dontrun{} should only be used if the example really cannot be executed
     (e.g. because of missing additional software, missing API keys, ...) by
