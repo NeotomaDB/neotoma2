@@ -2,13 +2,16 @@
 % Please edit documentation in R/subset-methods.R
 \name{chronologies,collunits-method}
 \alias{chronologies,collunits-method}
-\title{Extract chronologies from a sites object.}
+\title{Extract \code{chronologies} from a \code{collunits} object.}
 \usage{
 \S4method{chronologies}{collunits}(x)
 }
 \arguments{
-\item{x}{A collunit object}
+\item{x}{A \code{collunits} object}
+}
+\value{
+\code{chronologies} from a \code{collunits} object
 }
 \description{
-Extract chronologies from a sites object.
+Extract \code{chronologies} from a \code{collunits} object.
 }

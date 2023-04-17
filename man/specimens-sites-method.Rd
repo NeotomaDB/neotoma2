@@ -7,18 +7,18 @@
 \S4method{specimens}{sites}(x)
 }
 \arguments{
-\item{x}{Use a sites element that has specimens added.}
+\item{x}{Use a \code{sites} object that has specimens added.}
 }
 \value{
-The function returns a specimens summary table.
+\code{data.frame} with specimens summary table
 }
 \description{
 Information table for Specimens
 }
 \examples{
-\dontrun{
+\donttest{
 # To return a specimens table do:
-my_specimens <- get_specimens(19832)
+my_specimens <- get_specimens(7)
 my_tbl <- specimens(my_specimens)
 }
 }

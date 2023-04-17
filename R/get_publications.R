@@ -13,7 +13,7 @@
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
 #' @importFrom purrr pluck
-#' @returns `publication` object
+#' @returns `publications` object
 #' @examples \donttest{
 #' # How old are the papers in Neotoma that include the term "mammut"?
 #' mammoth_papers <- get_publications(search="mammut") %>%
@@ -107,6 +107,7 @@ get_publications.default <- function(...) {
 #' # We want the paper identified in Neotoma as 666:
 #' get_publications(666)
 #' }
+#' @returns `publications` object
 #' @export
 get_publications.numeric <- function(x, ...) {
   . <- ""
@@ -169,6 +170,7 @@ get_publications.numeric <- function(x, ...) {
 #' # we see the proper citation in the record:
 #' updated_pubs <- attr(updated_pubs, "matches")[[3]]
 #' }
+#' @returns updated `publication` object
 #' @export
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {

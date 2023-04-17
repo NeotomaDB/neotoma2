@@ -2,13 +2,16 @@
 % Please edit documentation in R/subset-methods.R
 \name{chronologies,site-method}
 \alias{chronologies,site-method}
-\title{Extract chronologies from a sites object.}
+\title{Extract \code{chronologies} from a \code{site} object.}
 \usage{
 \S4method{chronologies}{site}(x)
 }
 \arguments{
-\item{x}{A site object}
+\item{x}{A \code{site} object}
+}
+\value{
+\code{chronologies} from a \code{site} object
 }
 \description{
-Extract chronologies from a sites object.
+Extract \code{chronologies} from a \code{site} object.
 }

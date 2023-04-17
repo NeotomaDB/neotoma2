@@ -90,7 +90,7 @@ setMethod(f = "as.data.frame",
 #' @importFrom purrr map
 #' @description Convert all slots within each chronology within a
 #' chronologies object to a data.frame.
-#' @returns data.frame
+#' @returns data.frame with chronologies metadata
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronologies"),

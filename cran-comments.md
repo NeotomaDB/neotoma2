@@ -76,3 +76,58 @@ Unwrapped some examples and replaced the `\dontrun{}` with a `\donttest{}` label
     Please omit any default path in writing functions. In your examples/vignettes/tests you can write to tempdir().
     
 We do not write elements in the user's homespace.
+
+-----
+
+## Responses to remarks I received from 2nd submission
+
+This is 3rd submission. As for the remarks I received from 2nd submission: 
+
+### 1
+
+    Please add \value to .Rd files regarding exported methods and explain 
+    the functions results in the documentation. Please write about the 
+    structure of the output (class) and also what the output means. (If a
+    function does not return a value, please document that too, e.g.
+    \value{No return value, called for side effects} or similar)
+    Missing Rd-tags:
+      chronologies-collunit-method.Rd: \value
+      chronologies-collunits-method.Rd: \value
+      chronologies-site-method.Rd: \value
+      chronologies-sites-method.Rd: \value
+      collunits-site-method.Rd: \value
+      collunits-sites-method.Rd: \value
+      datasets-collunit-method.Rd: \value
+      datasets-collunits-method.Rd: \value
+      datasets-site-method.Rd: \value
+      datasets-sites-method.Rd: \value
+      get_contacts.Rd: \value
+      get_manual.Rd: \arguments
+      get_publications.numeric.Rd: \value
+      get_publications.publication.Rd: \value
+      pipe.Rd: \arguments
+      specimens-collunit-method.Rd: \value
+      specimens-collunits-method.Rd: \value
+      specimens-site-method.Rd: \value
+
+All of the \value tags have been added. For the `pipe.Rd` function, we use the code from the [purrr library](https://github.com/tidyverse/purrr/blob/3b5add2db99a35ec1392ad23dc021b7ccadbbbbb/R/reexport-pipe.R)
+We do not see any arguments being added into that function. In `magrittr`, there are two placeholders but they are used in the body of the `pipe` function - that is not our case.
+
+As for the `get_manual.Rd` function, there are no parameters that the user needs to pass, it is a static function. I cannot find information on how to document this kind of "parameters".
+
+### 2
+
+    \dontrun{} should only be used if the example really cannot be executed
+    (e.g. because of missing additional software, missing API keys, ...) by
+    the user. That's why wrapping examples in \dontrun{} adds the comment
+    ("# Not run:") as a warning for the user. Does not seem necessary.
+    Please replace \dontrun with \donttest.
+    
+    get_datasets.numeric.Rd: Please put functions which download data in
+    \donttest{}. ☑ Done
+    get_manual.Rd: if(interactive()) is sufficient. You don't need to wrap
+    it in \dontrun{} as well. ☑ Done
+    specimens-sites-method.Rd: I believe the same as for 
+    get_datasets.numeric.Rd. ☑ Done
+    
+Done as suggested

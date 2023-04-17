@@ -2,12 +2,15 @@
 % Please edit documentation in R/specimens.R
 \name{specimens,site-method}
 \alias{specimens,site-method}
-\title{s}
+\title{specimens}
 \usage{
 \S4method{specimens}{site}(x)
 }
 \arguments{
 \item{x}{site object}
+}
+\value{
+\code{data.frame} with specimens summary table
 }
 \description{
 Obtain elements on the specimens level

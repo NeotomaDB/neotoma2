@@ -250,7 +250,7 @@ get_datasets.default <- function(x, ...) { # nolint
 #' @param x Use a single number to extract site information
 #' @param ... Additional parameters to get_datasets
 #' @returns `sites` object with full metadata up to the `dataset` level
-#' @examples \dontrun{
+#' @examples \donttest{
 #' allds <- get_datasets(1:3)
 #' }
 #' @export

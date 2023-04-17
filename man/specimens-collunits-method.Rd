@@ -7,8 +7,11 @@
 \S4method{specimens}{collunits}(x)
 }
 \arguments{
-\item{x}{collunits object}
+\item{x}{\code{collunits} object}
+}
+\value{
+\code{data.frame} with specimens summary table
 }
 \description{
-Obtain elements from collunits
+Obtain specimen elements from \code{collunits}
 }

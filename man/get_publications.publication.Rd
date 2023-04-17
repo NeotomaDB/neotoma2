@@ -19,6 +19,9 @@ with a publication.
 \code{year} The year the publication was released.
 \code{search} A plain text search string used to search the citation.}
 }
+\value{
+updated \code{publication} object
+}
 \description{
 This works for records without publicationids. We assume that
 data with publicationids is correct.

@@ -3,32 +3,30 @@
 #' @import dplyr
 #' @description
 #' Information table for Specimens
-#' @param x Use a sites element that has specimens added.
-#' @return The function returns a specimens summary table.
-#' @examples \dontrun{
+#' @param x Use a `sites` object that has specimens added.
+#' @returns `data.frame` with specimens summary table
+#' @examples \donttest{
 #' # To return a specimens table do:
-#' my_specimens <- get_specimens(19832)
+#' my_specimens <- get_specimens(7)
 #' my_tbl <- specimens(my_specimens)
 #' }
 #' @export
 setMethod(f = "specimens",
           signature = "sites",
           definition = function(x) {
-            
             output <- purrr::map(x@sites, function(y) specimens(y)) %>%
               dplyr::bind_rows()
             if(nrow(output) == 0){
             warnsite <- sprintf("No assigned specimens. Did you run get_specimens()")
             warning(warnsite)
             }
-            
             return(output)
-          }
-)
+          })
 
-#' @title s
+#' @title specimens
 #' @param x site object
 #' @description Obtain elements on the specimens level
+#' @returns `data.frame` with specimens summary table
 #' @export
 #' @import dplyr
 setMethod(f = "specimens",
@@ -42,22 +40,19 @@ setMethod(f = "specimens",
               dplyr::left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
               dplyr::rename(sitenotes = notes.x,
                             datasetnotes = notes.y)
-            
             sampset <- purrr::map(x@collunits@collunits,
                                   function(y) specimens(y)) %>%
               dplyr::bind_rows() %>%
               dplyr::bind_rows() %>%
               dplyr::left_join(siteinfo, by = "datasetid")
-            
             return(sampset)
-          }
-)
+          })
 
 ### Collunits
-
 #' @title specimens
-#' @param x collunits object
-#' @description Obtain elements from collunits
+#' @param x `collunits` object
+#' @description Obtain specimen elements from `collunits`
+#' @returns `data.frame` with specimens summary table
 setMethod(f = "specimens",
           signature = "collunits",
           definition = function(x) {
@@ -69,8 +64,9 @@ setMethod(f = "specimens",
 )
 
 #' @title specimens
-#' @param x collunit object
-#' @description Obtain elements from collunit
+#' @param x `collunit` object
+#' @description Obtain specimen elements from a `collunit`
+#' @returns `data.frame` with specimens summary table
 setMethod(f = "specimens",
           signature = "collunit",
           definition = function(x) {
@@ -89,6 +85,10 @@ setMethod(f = "specimens",
               'chronologyname', 'units', 'value', 'context', 'element',
               'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
               'sampleanalyst', 'depth', 'thickness', 'samplename')
+            
+            
+            sampleset <- sampleset %>% 
+              dplyr::mutate(taxonid=as.character(sampleset$taxonid))
             
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
@@ -119,12 +119,10 @@ setMethod(f = "specimens",
                                     }
                                   }) %>%
               dplyr::bind_rows()
-            
             if(nrow(sampset) != 0){
               new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
             } else {
               new_sampset <- data.frame()
             }
             return(new_sampset)
-          }
-)
+          })

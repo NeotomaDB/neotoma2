@@ -18,7 +18,7 @@
 Get Dataset Numeric
 }
 \examples{
-\dontrun{
+\donttest{
 allds <- get_datasets(1:3)
 }
 }

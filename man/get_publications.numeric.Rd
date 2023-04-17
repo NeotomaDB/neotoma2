@@ -19,6 +19,9 @@ with a publication.
 \code{year} The year the publication was released.
 \code{search} A plain text search string used to search the citation.}
 }
+\value{
+\code{publications} object
+}
 \description{
 Get publications using their unique identifier.
 }

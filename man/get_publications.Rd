@@ -20,7 +20,7 @@ with a publication.
 \code{search} A plain text search string used to search the citation.}
 }
 \value{
-\code{publication} object
+\code{publications} object
 }
 \description{
 Uses the Neotoma API to search and access information

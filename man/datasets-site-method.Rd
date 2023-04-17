@@ -2,13 +2,16 @@
 % Please edit documentation in R/subset-methods.R
 \name{datasets,site-method}
 \alias{datasets,site-method}
-\title{Extract datasets from a sites object.}
+\title{Extract \code{datasets} from a \code{site} object.}
 \usage{
 \S4method{datasets}{site}(object)
 }
 \arguments{
-\item{object}{A sites object}
+\item{object}{A \code{site} object}
+}
+\value{
+\code{datasets} from a \code{site} object
 }
 \description{
-Extract datasets from a sites object.
+Extract \code{datasets} from a \code{site} object.
 }
