@@ -16,7 +16,7 @@ Authors@R:
 URL: https://github.com/NeotomaDB/neotoma2
 BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulation of data using the Neotoma Paleoecology Database.
-<https://api.neotomadb.org/api-docs/>.
+        <https://api.neotomadb.org/api-docs/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

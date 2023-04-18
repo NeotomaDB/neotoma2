@@ -140,3 +140,32 @@ As for the `get_manual.Rd` function, there are no parameters that the user needs
     get_datasets.numeric.Rd. ☑ Done
     
 Done as suggested
+
+-----
+
+## Responses to remarks I received from 3rd submission
+
+### 1
+
+    Check: DESCRIPTION meta-information, Result: NOTE
+    Malformed Description field: should contain one or more complete sentences.
+
+So, I originally sent:
+```
+Description: Access and manipulate data from the Neotoma Paleoecology Database. <https://api.neotomadb.org/api-docs/>
+```
+because I was requested to add <https://..> referencing the "Neotoma Paleoecology Database". 
+With the Description above, I do not get any local errors when running the R CMD but for CRAN, I got the error that I was asked to correct.
+
+After e-mailing the R-package-devel mailing list and providing them with my github link, I was advised to indent with 8 spaces on the second line and finish the line with a `.`
+
+The Description field in the Description file now looks like:
+
+```
+Description: Access and manipulate data from the Neotoma Paleoecology Database. 
+        <https://api.neotomadb.org/api-docs/>
+```
+
+There are no spaces after https:// and 8 indents have been added as requested.
+
+I hope this is correct now, otherwise, please give me some more references/examples so that I can do it properly.
