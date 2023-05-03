@@ -4,6 +4,9 @@
 \name{datasets-class}
 \alias{datasets-class}
 \title{S4 class for datasets information}
+\value{
+object of class \code{datasets}
+}
 \description{
 The grouped class for datasets from
 the Neotoma Paleoecology Database.

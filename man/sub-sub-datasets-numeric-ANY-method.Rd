@@ -11,6 +11,9 @@
 
 \item{i}{iteration in datasets list}
 }
+\value{
+sliced \code{dataset} object
+}
 \description{
 Obtain one of the elements within a datasets list
 }

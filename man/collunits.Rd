@@ -9,6 +9,9 @@ collunits(object)
 \arguments{
 \item{object}{A sites object}
 }
+\value{
+collunits detail from a sites object
+}
 \description{
 Extract collection units from a sites object
 }

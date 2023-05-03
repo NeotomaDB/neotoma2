@@ -11,6 +11,9 @@
 
 \item{...}{Other options to pass to \code{write.csv()}.}
 }
+\value{
+NULL side effect from saving a csv file
+}
 \description{
 write CSV
 }

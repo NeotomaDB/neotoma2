@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{site object}
 }
+\value{
+data.frame object with a collection units metadata
+}
 \description{
-show as dataframe as prep to save as csv
+show as dataframe
 }

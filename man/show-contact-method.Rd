@@ -9,7 +9,12 @@
 \S4method{show}{contact}(object)
 }
 \arguments{
-\item{object}{A contact object.}
+\item{object}{a \code{contact} object}
+}
+\value{
+null - side effect for printing contact object
+
+Null - prints a data.frame
 }
 \description{
 Show contact object

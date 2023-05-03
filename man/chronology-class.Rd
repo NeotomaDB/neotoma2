@@ -4,7 +4,12 @@
 \name{chronology-class}
 \alias{chronology-class}
 \title{S4 class for chronologies information}
+\value{
+object of class \code{chronology}
+}
 \description{
-The grouped class for chronologies
-from the Neotoma Paleoecology Database.
+The class for chronologies from the
+Neotoma Paleoecology Database. A single collection unit may
+have one or more chronology. These individual chronology
+classes are then grouped into an S4 \code{chronologies} class.
 }

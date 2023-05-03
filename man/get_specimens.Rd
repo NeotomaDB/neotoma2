@@ -4,10 +4,12 @@
 \alias{get_specimens}
 \title{get_specimens}
 \usage{
-get_specimens(x = NA)
+get_specimens(x = NA, ...)
 }
 \arguments{
-\item{x}{Use a single datasetid}
+\item{x}{Use a single specimenid}
+
+\item{...}{Additional terms passed to get_specimens, most common datasetid}
 }
 \value{
 The function returns a specimens list
@@ -16,9 +18,11 @@ The function returns a specimens list
 Information for Specimens
 }
 \examples{
-\dontrun{
-# To find all datasets with a min altitude of 12 and a max altitude of 25:
-my_specimens <- get_specimens(19832)
+\donttest{
+# To find specimen with ID 7:
+my_specimens <- get_specimens(7)
+# To find specimens in datasetid 41610
+my_specimens2 <- get_specimens(datasetid = 41610)
 }
 }
 \author{

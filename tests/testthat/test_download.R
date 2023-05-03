@@ -19,7 +19,7 @@ test_that("get_downloads runs as expected.", {
   brazil_datasets <- get_datasets(loc = brazil, all_data = TRUE)
 
   expect_equivalent(brazil_datasets, brazil_datasets_sf)
-  brazil_dl <- get_downloads(brazil_datasets, all_data = TRUE)
+  brazil_dl <- get_downloads(brazil_datasets)
   expect_identical(nrow(getids(brazil_datasets)), nrow(getids(brazil_dl)))
 
   expect_equal(getids(brazil_datasets), 
@@ -47,6 +47,6 @@ test_that("get_downloads yields same get_datasets ids II", {
 
   # The get_downloads limit happens, so we have fewer rows in df1
   expect_lte(nrow(df1), nrow(df2))
-  expect_true(all(df1$datasetid %in% df2$datasetid))
+  expect_true(all(unique(df1$datasetid) %in% unique(df2$datasetid)))
 
 })

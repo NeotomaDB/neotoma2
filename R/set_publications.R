@@ -27,6 +27,7 @@
 #' @param country Country of publication.
 #' @param originallanguage Original language of publication.
 #' @param notes Publication notes.
+#' @returns `publication` object
 #' @export
 
 set_publications <- function(

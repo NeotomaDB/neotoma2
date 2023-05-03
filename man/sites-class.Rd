@@ -3,9 +3,9 @@
 \docType{class}
 \name{sites-class}
 \alias{sites-class}
-\title{An S4 class for multi-site information from
-the Neotoma Paleoecology Database.}
+\title{An S4 class for multi-site information}
 \description{
-An S4 class for multi-site information from
-the Neotoma Paleoecology Database.
+The standard object class for multi-sites
+from the Neotoma Paleoecology Database.from
+@returns object of class \code{sites}
 }

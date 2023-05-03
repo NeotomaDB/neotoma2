@@ -5,11 +5,11 @@
 \alias{contact-class}
 \title{An S4 class for Neotoma contacts}
 \value{
-contact
+object of class \code{contact}
 }
 \description{
-The object that contains contacts and their
-constituent components.
+The object that contains the contact information for an
+individual, along with associated metadata.
 }
 \examples{
 new("contact", familyname = "Goring", givennames = "Simon J.")

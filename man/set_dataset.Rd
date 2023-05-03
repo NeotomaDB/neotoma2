@@ -24,7 +24,7 @@ set_dataset(
 
 \item{database}{dataset where the dataset came from}
 
-\item{doi}{doi}
+\item{doi}{DOI}
 
 \item{datasettype}{type the dataset belongs to}
 
@@ -38,14 +38,17 @@ set_dataset(
 
 \item{samples}{taxa objects}
 }
+\value{
+\code{dataset} object
+}
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
-\dontrun{
+{
 # Create a dataset
 my_dataset <- set_dataset(database = "EPD",
-                    datsettype = "pollen",
-                    notes = "my lake"0)
+                    datasettype = "pollen",
+                    notes = "my lake")
 }
 }

@@ -13,6 +13,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+contacts object
+}
 \description{
 Get contact information for Neotoma contributors
 }

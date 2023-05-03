@@ -1,26 +1,14 @@
 #' @title Get table record from Neotoma
 #' @description Call Neotoma and return a table
 #'  (with limits & offsets for large tables)
-#' @param x Table name (consult \url{https://open.neotomadb/dbschema}
+#' @param x Table name (consult \url{https://open.neotomadb.org/dbschema/}
 #'  for a complete list of table names.
 #' @param limit Default 25 records
 #' @param offset Default 0.
-#' @examples \dontrun{
+#' @returns selected `table` values from the Database 
+#' @examples {
 #' # Returns only the first 25 specimen records.
 #' someSpec <- get_table('specimens')
-#' # Loop with the offset to get all specimens:
-#' okay <- TRUE
-#' counter <- 1
-#' specimens <- list()
-#' while(okay) {
-#'   specimens[[counter]] <- get_table('specimens', offset = (counter - 1) * 25)
-#'   if(nrow(specimens[[counter]]) < 25) {
-#'     okay <- FALSE
-#'   } else {
-#'     counter <- counter + 1
-#'   }
-#' }
-#' specimens <- specimens %>% dplyr::bind_rows()
 #' }
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map

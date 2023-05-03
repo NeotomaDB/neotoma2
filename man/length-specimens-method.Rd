@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{specimens object}
 }
+\value{
+\code{int} with length of \code{specimens} object
+}
 \description{
 Length Method specimens
 }

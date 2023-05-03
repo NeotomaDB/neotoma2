@@ -11,6 +11,9 @@
 
 \item{name}{The slot to obtain (e.g., \code{articletitle})}
 }
+\value{
+\code{value} in the selected slot
+}
 \description{
 Extract an element from a \code{publication}
 }

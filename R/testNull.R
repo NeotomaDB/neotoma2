@@ -3,13 +3,14 @@
 #' and replace it with a known value provided in \code{out}.
 #' @param val The value to be checked.
 #' @param out A default value to be returned if \code{val} is NULL.
-#' @return The values passed in \code{val} or \code{out} if
+#' @returns The values passed in \code{val} or \code{out} if
 #'   \code{val} is \code{NULL}.
-#' @examples
+#' @examples {
 #' # Passing a null value into the function returns 12:
 #' a <- testNull(val = NULL, out = 12)
 #' # Passing a non-NULL value returns that value:
 #' b <- testNull(val = 11, out = 12)
+#' }
 #' @export
 testNull <- function(val, out=NA) { # nolint
   if (is.null(val)) {

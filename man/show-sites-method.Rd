@@ -2,13 +2,16 @@
 % Please edit documentation in R/site-methods.R
 \name{show,sites-method}
 \alias{show,sites-method}
-\title{Show Sites objects as a dataframe}
+\title{Show sites objects as a dataframe}
 \usage{
 \S4method{show}{sites}(object)
 }
 \arguments{
 \item{object}{sites object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
-Show Sites objects as a dataframe
+Return a set of site objects as a single data.frame().
 }

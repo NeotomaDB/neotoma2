@@ -11,6 +11,9 @@
 
 \item{i}{iteration in collunits list}
 }
+\value{
+sliced \code{collunits} object
+}
 \description{
 Obtain one of the elements within a collunits list
 }

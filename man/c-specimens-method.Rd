@@ -11,6 +11,9 @@
 
 \item{y}{specimens object 2}
 }
+\value{
+concatenated \code{specimens} object
+}
 \description{
 c Method - Combine specimens objects
 }

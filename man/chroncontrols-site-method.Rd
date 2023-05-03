@@ -2,13 +2,17 @@
 % Please edit documentation in R/chroncontrols.R
 \name{chroncontrols,site-method}
 \alias{chroncontrols,site-method}
-\title{chroncontrols}
+\title{Recover information about the chron controls for a collectionunit.}
 \usage{
 \S4method{chroncontrols}{site}(x)
 }
 \arguments{
 \item{x}{site object}
 }
+\value{
+data.frame with chronological controls
+}
 \description{
-Obtain elements on the samples level
+For a site that includes collection units with chronologies
+return the chronological controls that are used in building the chronology.
 }

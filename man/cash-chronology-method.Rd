@@ -2,7 +2,7 @@
 % Please edit documentation in R/chronology-methods.R
 \name{$,chronology-method}
 \alias{$,chronology-method}
-\title{$}
+\title{Extract}
 \usage{
 \S4method{$}{chronology}(x, name)
 }
@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+value of the \code{slot} name
+}
 \description{
-Obtain slots of a chronology without using at-mark
+Extract chronology metadata by slot name.
 }

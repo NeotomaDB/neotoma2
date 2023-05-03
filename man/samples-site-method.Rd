@@ -9,6 +9,18 @@
 \arguments{
 \item{x}{site object}
 }
+\value{
+\code{data.frame} with sample records
+}
 \description{
 Obtain elements on the samples level
+}
+\examples{
+\donttest{
+marion <- get_sites(sitename = "Marion Lake") \%>\%
+  get_datasets() \%>\%
+  filter(datasettype == "pollen") \%>\%
+  get_downloads()
+pollen <- samples(marion)
+}
 }

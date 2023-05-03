@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{specimens object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
 Show Specimens object as a dataframe
 }

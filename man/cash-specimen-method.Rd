@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+value at chosen slot in the \code{specimen} object
+}
 \description{
 Obtain slots of a specimen without using at-mark
 }

@@ -2,13 +2,16 @@
 % Please edit documentation in R/subset-methods.R
 \name{collunits,sites-method}
 \alias{collunits,sites-method}
-\title{Extract datasets from a sites object.}
+\title{Extract \code{collunits} from a \code{sites} object.}
 \usage{
 \S4method{collunits}{sites}(object)
 }
 \arguments{
-\item{object}{A sites object}
+\item{object}{A \code{sites} object}
+}
+\value{
+\code{collunits} from a \code{sites} object
 }
 \description{
-Extract datasets from a sites object.
+Extract \code{collunits} from a \code{sites} object.
 }

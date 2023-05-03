@@ -19,19 +19,16 @@
 #' @param defaultchronology best chronology model identifier to 
 #' be used with this collection unit
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a dataset
-#' my_dataset <- set_dataset(database = "EPD",
-#'                     datsettype = "pollen",
-#'                     notes = "my lake"0)
+#' @returns `collunit` object
+#' @examples {
+#' # Create a collunit
+#' my_collunit <- set_collunit(notes = "my lake")
 #' }
-
 set_collunit <- function(x = NA,
                          collectionunitid = NA_integer_,
                          notes = NA_character_,
                          handle = NA_character_,
-                         colldate = NA,
+                         colldate = as.Date(character(1)),
                          location = NA_character_,
                          waterdepth = NA_integer_,
                          gpslocation = st_as_sf(st_sfc()),
@@ -39,8 +36,8 @@ set_collunit <- function(x = NA,
                          collectiondevice = NA_character_,
                          collectionunitname = NA_character_,
                          depositionalenvironment = NA_character_,
-                         datasets = NA,
-                         chronologies = NA,
+                         datasets = new("datasets"),
+                         chronologies = new("chronologies"),
                          defaultchronology = NA_integer_) {
 
   function_call <- match.call()
@@ -67,13 +64,18 @@ set_collunit <- function(x = NA,
     x@defaultchronology <- defaultchronology
 
   } else {
-    if (class(x) == "collunit") {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+    if (is(x, "collunit")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
+    } else {
+      stop("`x` must be a collunit object if it is supplied.")
     }
-    return(x)
   }
-
   return(x)
 }

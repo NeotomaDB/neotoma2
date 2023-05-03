@@ -4,6 +4,9 @@
 \name{sample-class}
 \alias{sample-class}
 \title{S4 class for dataset information}
+\value{
+object of class \code{sample}
+}
 \description{
 The standard object class for samples
 from the Neotoma Paleoecology Database.

@@ -2,12 +2,15 @@
 % Please edit documentation in R/samples.R
 \name{samples,collunits-method}
 \alias{samples,collunits-method}
-\title{samples}
+\title{Get samples from a collectionunit or set of collection units:}
 \usage{
 \S4method{samples}{collunits}(x)
 }
 \arguments{
 \item{x}{collunits object}
+}
+\value{
+\code{data.frame} with sample records
 }
 \description{
 Obtain elements from collunits

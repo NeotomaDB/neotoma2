@@ -11,6 +11,9 @@
 
 \item{y}{A publications object}
 }
+\value{
+concatenated \code{publications} object
+}
 \description{
 Combine publication objects.
 }

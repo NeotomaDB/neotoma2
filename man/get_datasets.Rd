@@ -7,59 +7,75 @@
 get_datasets(x = NA, ...)
 }
 \arguments{
-\item{x}{Use a single number to extract site information}
+\item{x}{A single datasetid, or a vector of unique dataset ids.}
 
-\item{...}{accepted arguments: sites_object, contactid, datasettype,
-altmin, altmax, loc, ageyoung, ageold, ageof}
+\item{...}{accepted arguments, see details for more information.}
 }
 \value{
-The function returns either a single item of class
-\code{"try-error"} describing the reason for failure
-(either mis-defined parameters or an error from the Neotoma API),
-or a table of sites, with rows corresponding to the number of individual
-sites and datasets returned by the Neotoma API.
-Each "site" object contains 6 parameters that can be accessed as well:
-\item{ \code{siteid} }{site ID number}
-\item{ \code{sitename} }{site"s name}
-\item{ \code{location} }{sf object that describes site"s location}
-\item{ \code{description} }{}
-\item{ \code{collunits} }{limited information on collunits}
-Each "collection unit" embedded in the "sites" object contains 6 parameters
-that can be accessed as well:
-\item{ \code{collunitid}}{collection unit ID number}
-\item{ \code{handle} }{collection unit"s handle}
-\item{ \code{collunitname} }{collection unit"s name}
-\item{ \code{colldate} }{date in collection unit}
-\item{ \code{substrate} }{substrate}
-\item{ \code{location} }{sf object that describes site"s location}
-\item{ \code{datasets} }{detailed information regarding dataset}
-Each "dataset" nested in the "collection unit" contains the following detail
-of information:
-\item{ \code{datasetid} }{dataset ID number}
-\item{ \code{datasetname} }{site"s name}
-\item{ \code{datasettype} }{type of data found}
-\item{ \code{location} }{sf object that describes site"s location}
-\item{ \code{notes} }{notes on the dataset}
-\item{ \code{taxa table} }{taxa table}
-\item{ \code{pi list} }{P.I. info}
-\item{ \code{analyst} }{analyst info}
-\item{ \code{metadata} }{dataset metadata}
+The function returns either a single item of class \code{"try-error"}
+describing the reason for failure (either misdefined parameters or an error
+from the Neotoma API), or list of site objects, each containing one or more
+\code{collunit} objects, with fully populated \code{datasets} elements.
 }
 \description{
-Information for Fossil Datasets
-Look for a dataset details using only a dataset ID or for multiple metadata.
-Displays a table with the following columns:
-siteid, sitename, lat, long, and elev.
-The function takes parameters defined by the user and returns a sites object
-with more detailed information regarding datasets.
+The \code{get_datasets()} function is a wrapper for the Neotoma \code{datasets} API
+endpoint.
+The function takes parameters defined by the user and returns dataset
+information supplied by the Neotoma Paleoecological Database.
 The user may define all or none of the possible fields.
-The function contains data checks for each defined parameter.
+}
+\details{
+A \code{dataset} is an element nested within \code{neotoma2} site objects. The
+\code{get_datasets()} call returns a list of individual \code{site} objects with
+\code{collunits} (collection units) that contain valid, matching \code{dataset}
+elements.
+So, \code{get_sites()} returns only site metadata. \code{get_datasets()} returns
+site metadata, plus metadata about the individual datasets present at that
+site.
+The \code{get_datasets()} function searches for each site within Neotoma
+that matches the query parameters, and returns them as a \code{sites} object,
+a list of \code{site} objects, plus returns all the additional metadata for
+the datasets at that site.
+The \code{get_datasets()} command wraps the Neotoma API
+(\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{datasets}.
+The call itself uses a SQL query which accepts any one of the following
+parameters:
+\itemize{
+\item \code{siteid}  The unique site ID (integer) in Neotoma. Can be passed as a
+vector of site IDs.
+\item \code{sitename}  The site name, or approximate match using the \% wildcard.
+\item \code{database}  The constituent database for the record. See
+\code{get_table("constituentdatabases")}
+\item \code{datasettype} Neotoma contains data for a number of dataset types.
+This returns a subset of data types. For a complete list of available
+dataset types, run \code{neotoma2::get_table('datasettypes')}
+\item \code{altmin}  The minimum altitude range for site elevation (in meters).
+\item \code{altmax}  The maximum altitude range for site elevation (in meters).
+\item \code{datasetid}  The unique dataset ID (integer) in Neotoma. Can be passed
+as a vector of dataset IDs.
+\item \code{doi}  The dataset DOI for a dataset contained within a site. Can be
+passed as a vector of DOIs.
+\item \code{gpid}  The geopolitical name or identifier containing a site. Can be
+passed as a vector of names.
+\item \code{keywords}  Keywords for samples within a set of sites. For example
+"modern" indicates a sample within the record uses the keyword "modern".
+\item \code{contacts}  Contact names or IDs associated with a site.
+\item \code{ageyoung}  A minimum spanning age for the record, in years before
+radiocarbon present (1950).
+\item \code{ageold}  A maximum spanning age for the record, in years before
+radiocarbon present (1950).
+\item \code{ageof}  An age which must be contained within the range of sample ages
+for a site.
+\item \code{taxa}  The names of taxa which must be present within samples in a
+record.
+\item \code{all_data} The API only downloads the first 25 records of the query.
+For the complete records, use \code{all_data=TRUE}
+}
 }
 \examples{
-\dontrun{
+\donttest{
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_datasets(altmin=12, altmax=25)
-
 # To find all datasets in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
@@ -68,7 +84,13 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-brazil_datasets <- get_datasets(loc = brazil[1])
+brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
+# To obtain the dataset metadata:
+datasets(brazil_datasets)
+# There is insufficient metadata at this point to obtain information
+# about taxa present at the site. We must use get_downloads() to
+# obtain the full set of sample information:
+# This fails: taxa(brazil_datasets)
 }
 }
 \author{

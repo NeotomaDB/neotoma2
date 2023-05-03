@@ -13,6 +13,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+\code{plot} object with site coordinates.
+}
 \description{
 Plot site coordinates using a basic plot.
 }

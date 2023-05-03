@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+\code{value} at selected slot
+}
 \description{
 Obtain slots of a site without using at-mark
 }

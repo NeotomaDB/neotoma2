@@ -9,9 +9,9 @@ taxa(object)
 \arguments{
 \item{object}{Sites object to extract taxa table from}
 }
+\value{
+data.frame with taxa records
+}
 \description{
 Show the samples table
-}
-\author{
-Socorro Dominguez \email{sedv8808@gmail.com}
 }

@@ -9,7 +9,7 @@ set_collunit(
   collectionunitid = NA_integer_,
   notes = NA_character_,
   handle = NA_character_,
-  colldate = NA,
+  colldate = as.Date(character(1)),
   location = NA_character_,
   waterdepth = NA_integer_,
   gpslocation = st_as_sf(st_sfc()),
@@ -17,8 +17,8 @@ set_collunit(
   collectiondevice = NA_character_,
   collectionunitname = NA_character_,
   depositionalenvironment = NA_character_,
-  datasets = NA,
-  chronologies = NA,
+  datasets = new("datasets"),
+  chronologies = new("chronologies"),
   defaultchronology = NA_integer_
 )
 }
@@ -54,14 +54,15 @@ set_collunit(
 \item{defaultchronology}{best chronology model identifier to
 be used with this collection unit}
 }
+\value{
+\code{collunit} object
+}
 \description{
 set Site Information for Fossil Sites
 }
 \examples{
-\dontrun{
-# Create a dataset
-my_dataset <- set_dataset(database = "EPD",
-                    datsettype = "pollen",
-                    notes = "my lake"0)
+{
+# Create a collunit
+my_collunit <- set_collunit(notes = "my lake")
 }
 }

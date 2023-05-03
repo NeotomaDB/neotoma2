@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used}
 }
+\value{
+Modified \code{collunits}
+}
 \description{
 Obtain one of the elements within a collunits list
 }

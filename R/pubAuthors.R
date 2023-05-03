@@ -2,6 +2,7 @@
 #' @param x A list coming from the `author` element of
 #'  the Neotoma publicaiton API
 #' @importFrom purrr map
+#' @returns `author` object
 #' @noRd
 pubAuthors <- function(x) { # nolint
 

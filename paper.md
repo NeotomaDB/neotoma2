@@ -8,7 +8,7 @@ tags:
   - Holocene
   - Pleistocene
 authors:
-  - name: Socorro V. Dominguez
+  - name: Socorro Dominguez Vidana
     orcid: 0000-0002-7926-4935
     affiliation: 1
   - name: Simon J Goring
@@ -25,35 +25,16 @@ bibliography: paper.bib
 
 # Summary
 
-The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [@williams2018neotoma] within the R environment. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years.
+The `neotoma2` R package is a tool to access and manipulate data from the Neotoma Paleoecology Database [https://www.neotomadb.org; @williams2018neotoma] within the R environment. Neotoma is a community curated paleoecological data resource, containing over 8 million unique observations, with global coverage, from 37 constituent databases. The package uses the Neotoma API v2.0 [@goringapi] as a tool to import records from the Neotoma database, allowing researchers to examine taxonomic, spatial and temporal patterns across space and time over the last 5.4 million years. The R package allows researchers to both download, and create new records using `get_` (e.g., `get_sites()`) and `set_` functions (e.g., `set_sites()`) respectively. This provides researchers with the opportunity to develop dynamic workflows that include data generated locally, not yet uploaded to Neotoma.
 
-# Statement of need
+The `neotoma2` R package has been under dynamic development for over a year, but has been used for teaching and training [@EPDref2022]. This release of the `neotoma2` R package is intended to act as a clean release of the package, with all of the core features provided.
 
-The `neotoma` R package [@goring2015neotoma] leveraged the Neotoma Paleoeocology Database v1.0 API.  Changes to the underlying database requires new data objects within the R package, to more closely align to the Neotoma data model [@grimm2018].
+# Statement of Need
 
-# Citations
-
-Citations to entries in paper.bib should be in [rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-    - `@author:2001`  ->  "Author et al. (2001)"
-    - `[@author:2001]` -> "(Author et al., 2001)"
-    - `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
-# Figures
-
-Figures can be included like this:
-
-![Caption for example figure.\label{fig:example}](figure.png) and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-
-![Caption for example figure.](figure.png){ width=20% }
+The `neotoma` R package [@goring2015neotoma] leveraged the Neotoma Paleoeocology Database v1.0 API.  Changes to the underlying database requires new data objects within the R package, to more closely align to the Neotoma data model [@grimm2018]. The broad user community for Neotoma [@Williams2018a;@Goring2018a] requires a toolset that can access and manage data for each of the more than 40 dataset types within Neotoma. This package conforms to a `tidyverse` [@wickham2019tidyverse] approach for data management, with data objects that more closely resemble the underlying data model within Neotoma (https://open.neotomadb.org/db_schema).
 
 # Acknowledgements
 
-We acknowledge contributions from the Neotoma Paleoecology Community.
+We acknowledge contributions from the Neotoma Paleoecology Community, the participants of our workshops for the European Pollen Database, American Quaternary Association and the International Association of Limnologists/International Paleolimnology Association, and members of the EarthCube community. This work was funded through a grant to SJG from the National Science Foundation (NSF-1948926).
 
 # References

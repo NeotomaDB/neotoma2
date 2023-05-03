@@ -9,13 +9,17 @@
 \arguments{
 \item{x}{sites object}
 }
+\value{
+\code{data.frame} object with citation information.
+}
 \description{
 Given complete dataset objects in Neotoma (must have used
 \code{get_datasets()} or \code{get_downloads()}), return a formatted
 citation for the record, including the dataset DOI.
 }
 \examples{
-mb <- get_sites(gpid = "Manitoba", datasettype = "pollen")
-mb_ds <- get_datasets(mb)
-cite_data(mb_ds)
+{
+ds <- get_datasets(1)
+cite_data(ds)
+}
 }

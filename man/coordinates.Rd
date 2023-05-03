@@ -11,6 +11,9 @@ coordinates(obj, ...)
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+dataframe with coordinate values
+}
 \description{
 Obtain coordinates from a sites object.
 }

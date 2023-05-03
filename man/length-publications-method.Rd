@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A publications object.}
 }
+\value{
+\code{int} of the length of the \code{publications} object
+}
 \description{
 Get the number of publications in a publications object.
 }

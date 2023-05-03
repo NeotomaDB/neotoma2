@@ -11,6 +11,9 @@
 
 \item{i}{iteration in samples list}
 }
+\value{
+\code{samples} sliced object
+}
 \description{
 Obtain one of the elements within a samples list
 }

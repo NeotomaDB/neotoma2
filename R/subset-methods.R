@@ -1,8 +1,7 @@
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
+#' @title Extract `collunits` from a `sites` object.
+#' @param object A `sites` object
 #' @importFrom purrr map reduce
-#' @importFrom dplyr bind_cols
+#' @returns `collunits` from a `sites` object
 #' @export
 setMethod(f = "collunits",
           signature = "sites",
@@ -10,15 +9,13 @@ setMethod(f = "collunits",
             output <- purrr::map(object@sites, function(x) {
               x@collunits
             })
-
             final <- purrr::reduce(output, c)
-
             return(final)
           })
 
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
+#' @title Extract `collunits` from a `site` object.
+#' @param object A `site` object
+#' @returns `collunits` from a `site` object
 #' @export
 setMethod(f = "collunits",
           signature = "site",
@@ -28,10 +25,10 @@ setMethod(f = "collunits",
             return(output)
           })
 
-
-#' @title Extract datasets from a collunits object.
-#' @param object A collunits object
+#' @title Extract `datasets` from a `collunits` object.
+#' @param object A `collunits` object
 #' @importFrom purrr map reduce
+#' @returns `datasets` from a `collunits` object
 #' @export
 setMethod(f = "datasets",
           signature = "collunits",
@@ -46,11 +43,10 @@ setMethod(f = "datasets",
             return(out)
           })
 
-#' @title Extract datasets from a collunit object.
-#' @param object A collunits object
-#' @importFrom methods slotNames slot
+#' @title Extract `datasets` from a `collunit` object.
+#' @param object A `collunit` object
 #' @importFrom purrr map
-#' @importFrom dplyr bind_cols
+#' @returns `datasets` from a `collunit` object
 #' @export
 setMethod(f = "datasets",
           signature = "collunit",
@@ -59,9 +55,10 @@ setMethod(f = "datasets",
             return(result)
           })
 
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
+#' @title Extract `datasets` from a `sites` object.
+#' @param object A `sites` object
 #' @importFrom purrr map
+#' @returns `datasets` from a `sites` object
 #' @export
 setMethod(f = "datasets",
           signature = "sites",
@@ -69,10 +66,10 @@ setMethod(f = "datasets",
             datasets(collunits(object))
           })
 
-#' @title Extract datasets from a sites object.
-#' @param object A sites object
-#' @importFrom methods slotNames slot
+#' @title Extract `datasets` from a `site` object.
+#' @param object A `site` object
 #' @importFrom purrr map
+#' @returns `datasets` from a `site` object
 #' @export
 setMethod(f = "datasets",
           signature = "site",
@@ -88,9 +85,9 @@ setMethod(f = "datasets",
             return(out)
           })
 
-#' @title Extract chronologies from a sites object.
-#' @param x A collunit object
-#' @importFrom methods slotNames slot
+#' @title Extract `chronologies` from a `collunit` object.
+#' @param x A `collunit` object
+#' @returns `chronologies` from a `collunit` object
 #' @export
 setMethod(f = "chronologies",
           signature = "collunit",
@@ -108,9 +105,9 @@ setMethod(f = "chronologies",
             return(returner)
           })
 
-#' @title Extract chronologies from a sites object.
-#' @param x A collunit object
-#' @importFrom methods slotNames slot
+#' @title Extract `chronologies` from a `collunits` object.
+#' @param x A `collunits` object
+#' @returns `chronologies` from a `collunits` object
 #' @export
 setMethod(f = "chronologies",
           signature = "collunits",
@@ -118,14 +115,13 @@ setMethod(f = "chronologies",
             output <- map(x@collunits, function(y) {
               chronologies(y)
             })
-
             output <- purrr::reduce(output, c)
             return(output)
           })
 
-#' @title Extract chronologies from a sites object.
-#' @param x A site object
-#' @importFrom methods slotNames slot
+#' @title Extract `chronologies` from a `site` object.
+#' @param x A `site` object
+#' @returns `chronologies` from a `site` object
 #' @export
 setMethod(f = "chronologies",
           signature = "site",
@@ -134,13 +130,12 @@ setMethod(f = "chronologies",
               chronologies(y)
             })
             output <- purrr::reduce(output, c)
-
             return(output)
           })
 
-#' @title Extract chronologies from a sites object.
-#' @param x A sites object
-#' @importFrom methods slotNames slot
+#' @title Extract `chronologies` from a `sites` object.
+#' @param x A `sites` object
+#' @returns `chronologies` from a `sites` object
 #' @export
 setMethod(f = "chronologies",
           signature = "sites",
@@ -148,8 +143,6 @@ setMethod(f = "chronologies",
             output <- map(x@sites, function(y) {
               chronologies(y)
             })
-
             output <- purrr::reduce(output, c)
-
             return(output)
           })

@@ -10,17 +10,18 @@
 \item{x}{sites R object to be converted}
 }
 \value{
-The function returns a json object
+The function returns a character string in JSON format
 }
 \description{
-Convert a neotoma2 \code{sites} object into a JSON file for API management.
+Convert a Neotoma2 \code{sites} object into a standardized JSON file for API management.
 }
 \examples{
-\dontrun{
-# To find all sites that contain the string "Alex\%"
-alex.sites <- get_sites(sitename="Alex\%")
-Convert the object to json
-toJSON(alex.sites)}
+{
+# To find all sites that contain the string "Alexander\%"
+alex.sites <- get_sites(sitename="Alexander\%")
+# Convert the object to json
+toJSON(alex.sites)
+}
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

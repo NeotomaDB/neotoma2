@@ -4,6 +4,9 @@
 \name{chronologies-class}
 \alias{chronologies-class}
 \title{S4 class for chronologies information}
+\value{
+object of class \code{chronologies}
+}
 \description{
 The grouped class for chronologies
 from the Neotoma Paleoecology Database.

@@ -9,6 +9,11 @@ datasets(object)
 \arguments{
 \item{object}{A sites object}
 }
+\value{
+datasets object specific to the metadata contained in datasets
+}
 \description{
-Extract datasets from a sites object.
+If the sites object contains datasets, then the datasets
+will be returned. If the sites object does not contain datasets then
+the user can apply \code{get_datasets()} to the object.
 }

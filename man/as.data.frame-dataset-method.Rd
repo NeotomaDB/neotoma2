@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{dataset object}
 }
+\value{
+\code{data.frame} with \code{dataset} metadata
+}
 \description{
 show as dataframe as prep to save as csv
 }

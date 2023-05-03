@@ -9,6 +9,9 @@ doi(x)
 \arguments{
 \item{x}{Object with DOIs associated to it.}
 }
+\value{
+doi object with DOI information
+}
 \description{
 Obtain the DOI for publications or datasets.
 }

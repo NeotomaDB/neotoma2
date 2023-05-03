@@ -14,27 +14,52 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include=FALSE}
 library(sf)
 library(geojsonsf)
+library(dplyr)
 library(neotoma2)
 ```
 
+![closeup of several Neotoma sites in the Caribbean.](images/siteshot.png){width=100%}
+
+## Neotoma Resources
+
+The [Neotoma Paleoecology Database](https://www.neotomadb.org) is a domain-specific data resource containing millions of fossil records from around the globe, covering the last 5.4 million years. The `neotoma2` R package simplifies some of the data structures and concepts to facilitate statistical analysis and visualization. Users may wish to gain a deeper understanding of the resource itself, or build more complex data objects and relationships. For those users a partial list is provided here, including a table of code examples focusing on different geographic regions, languages and dataset types.
+
+### Resources
+
+* [Neotoma Homepage](https://www.neotomadb.org)
+  * The Neotoma homepage, with links to contacts, news and other tools and resources.
+* [Neotoma Database Manual](https://open.neotomadb.org/manual/)
+  * Documentation for the database itself, with examples of SQL queries and descriptions of Neotoma tables.
+* [Neotoma (JSON) API](https://api.neotomadb.org/)
+  * A tool to obtain data in JSON format directly through calls to Neotoma.
+* [Neotoma GitHub Organization](https://github.com/NeotomaDB)
+  * Open code repositories to see how folks are using Neotoma and what kinds of projects we're working on.
+* Workshops and Code Examples ([see the section below](#workshops-and-code-examples))
+
 ## Neotoma Data Structure
 
-Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more **collection units** -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various **analysis units** from which **samples** are obtained.
+![Three panels showing context for Neotoma’s geographic representation of sites. In panel a a site is defined by the boundaries of a lake. The site also has a bounding box, and the core location is defined by a collection unit within the site that is defined with precise coordinates. In panel b a site is defined as a single point, for example, from a textual reference indicating the site is at the intersection of two roads. Here the site and collection unit share the unique point location. In panel c we show how that site location may be obfuscated using a bounding box as the site delimiter. In this case the collection unit would not be defined (but is represented as the triangle for illustration). Figure obtained from the Neotoma Database Manual.](images/siteboundarydiagram.svg){width=100%}
 
-Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** and **constituent database**.
+Data in Neotoma is associated with sites, specific locations with lat/long coordinates. Within a site, there may be one or more [**collection units**](https://open.neotomadb.org/manual/dataset-collection-related-tables-1.html#CollectionUnits) -- locations at which samples are physically collected within the site. For example, an archaeological **site** may have one or more **collection units**, pits within a broader dig site; a pollen sampling **site** on a lake may have multiple **collection units** -- core sites within the lake basin. Collection units may have higher resolution GPS locations, but are considered to be part of the broader site. Within a **collection unit** data is collected at various [**analysis units**] from which **samples** are obtained.
 
-Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries.  From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
+Because Neotoma is made up of a number of constituent databases (e.g., the Indo-Pacific Pollen Database, NANODe, FAUNMAP), a set of **sample**s associated with a **collection unit** are assigned to a single **dataset** associated with a particular **dataset type** (e.g., pollen, diatom, vertebrate fauna) and **constituent database**.
 
-The `neotoma2` R package is intended to act as the intermediary to support these research activities using the Neotoma Paleoecology Database.
+![**Figure**. *The structure of sites, collection units and datasets within Neotoma. A site contains one or more collection units. Chronologies are associated with collection units. Data of a common type (pollen, diatoms, vertebrate fauna) are assigned to a dataset.*](images/site_collunit_dataset.svg){width=50%}
+
+Researchers often begin by searching for sites within a particular study area, whether that is defined by geographic or political boundaries. From there they interrogate the available datasets for their particular dataset type of interest.  When they find records of interest, they will then often call for the data and associated chronologies.
+
+The `neotoma2` R package is intended to act as the intermediary to support these research activities using the Neotoma Paleoecology Database. Because R is not a relational database, we needed to modify the data structures of the objects. To do this the package uses a set of S4 objects to represent different elements within the database.
+
+![A diagram showing the different major classes within the `neotoma2` R package, and the way the elements are related to one another. Individual boxes represent the major classes (sites, site, collectionunits, etc.). Each box then has a list of the specific metadata contained within the class, and the variable type (e.g., *siteid: integer*). Below these are the functions that can be applied to the object (e.g., *`[[<-`*). ](images/neotomaUML_as.svg){width=100%}
+
+It is important to note, here and elsewhere: **Almost everything you will interact with is a `sites` object**. A `sites` object is the general currency of this package. `sites` may have more or less metadata associated with them, but they are the primary object, and, as you can see in the diagram above, they have the most functions associated with them.
 
 ### Package Requirements
 
 The earlier `neotoma` package tried to use base R as much as possible.  The `neotoma2` package now draws primarily on `dplyr` and `purrr` packages from the `tidyverse`, and on the `sf` spatial data package. The choice to integrate `tidyverse` packages was made largely because of the current ubiquity of the `tidyverse` in R education.
-
-There are some namespace overlaps, for example with the `filter()` function.  Depending on the order with which packages are loaded you may get errors using these functions.  If that's the case, one way of bug-checking is to try calling the function explicitly from the package: `neotoma2::filter(...)`.  This will ensure it is the `filter()` function from the `neotoma2` package.
 
 ## Site Searches
 
@@ -42,13 +67,11 @@ The highest level object in Neotoma is the **site**.  Sites have spatial coordin
 
 Sites can be searched using the `get_sites()` function, or, can be created using the `set_site()` function. A single `site` object is a special object in R, that can be combined with other sites into a `sites` object.  A `sites` object is effectively a `list()` of `site` objects with special methods for printing, plotting and exporting information.
 
-![closeup of several Neotoma sites in the Carribean.](images/siteshot.png)
+### Finding Sites
 
-### Finding sites
+All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), location (`loc`) or age bounds.
 
-All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` package you can search for a site using the `get_sites()` function by its unique site id (`siteid`), by name (`sitename`), by altitude (`altmin`, `altmax`), by geopolitical name (`gpid`), or by location (`loc`).
-
-If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`:
+If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`. We can get these siteids using the [Neotoma Explorer web application](https://apps.neotomadb.org/explorer/), or if we have some familiarity with the site records already.
 
 ```{r getSiteBySiteID}
 # Search for site by a single numeric ID:
@@ -60,7 +83,11 @@ multiple_sites <- get_sites(c(24, 47))
 multiple_sites
 ```
 
-#### Searching for sites by name
+Once you search for a site, the `neotoma2` R package makes a call to the Neotoma Database, and returns a structured `sites` object that contains metadata about the sites, and some additional metadata about collection units and datasets at those sites.  This limited metadata helps speed up further searches, but is not complete, for the purposes of analysis.
+
+![The result of a hypothetical `get_sites()` call, is a `sites` object containing two individual `site` objects. Each `site` object contains a `collunits` object with some limited metadata. The top `site` appears to have two collection units, while the lower site has only a single collection unit. Each of the top two collection units appear to contain two datasets, while the bottom site has only the one collection unit with only one dataset.](images/understanding_S4_structure_get_sites.svg){width=100%}
+
+#### Searching for Sites by Name
 
 Often we do not know the particular `siteid`.  If we're looking for a site and we know its name or a part of its name, we can search using the function with the `sitename` argument, `get_site(sitename = 'XXX')`, where `'XXX'` is the site name.  This does not support multiple text strings (i.e., you can't use `c()`).
 
@@ -78,17 +105,39 @@ alex
 
 <!-- Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
 
+#### Searching for Sites by Age
+
+There are several ways of searching for sites using age parameters. These are represented below:
+
+![Site searches using age parameters including `ageof`, `ageyoung`, `ageold`, `maxage` and `minage`.](images/understandingAgeRanges.svg){width=100%}
+
+We offer several methods of searching because different users have different requirements. A user might be only interested in one specific point in time in the past, for example the 8.2ka event. In this instance they would search `get_sites(ageof = 8200)`. They may want sites with records that completely span a time period, for example the Atlantic chronozone of the Holocene: `get_sites(ageyounger = 5000, ageolder = 8000)`. These sites would have samples both within and outside the defined age range, so that the user could track change into and out of the time period. A user may also be interested in any record within a time bin, regardless of whether the site spans that time zone or not. They would query `get_sites(minage = 5000, maxage = 8000)`.
+
+We can see how these age bounds differ:
+
+```{r agebounds, eval=FALSE}
+# Note, we are using the `all_data = TRUE` flag here to avoid the default limit of 25 records, discussed below.
+# Because these queries are searching through every record they are slow and and are not
+# run in knitting this vignette.
+get_sites(ageof = 8200, all_data = TRUE) %>% length()
+get_sites(ageyounger = 5000, ageolder = 8000, all_data = TRUE) %>% length()
+get_sites(minage = 5000, maxage = 8000, all_data = TRUE) %>% length()
+```
+
+It is possible to pass all parameters (`ageof`, `minage`, `maxage`, `ageyounger`, . . . ), but it is likely that these will conflict and result in an empty set of records. To avoid this, be aware of the relationships among these search parameters, and how they might affect your search window.
+
 ### Accessing `sites` metadata
 
-Although the `sites` are structured using S4 objects (see S4 documentation here), we've added helper functions to make accessing elements easier for users.  
+Although the `sites` are structured using S4 objects (see [Hadley Wickham's S4 documentation](http://adv-r.had.co.nz/S4.html)), we've added helper functions to make accessing elements easier for users.  
 
 The `alex` object is composed of several smaller objects of class `site`.  We can call any individual site using `[[ ]]`, placing the index of the desired object between the brackets.  Then we can also call the particular variable we want using the `$` symbol.
 
 ```{r extractElement}
+alex <- get_sites(sitename = "Alexander Lake")
 alex[[1]]$siteid
 ```
 
-The elements within a `site` are the same as the defined columns within the Neotoma [`ndb.sites`](https://open.neotomadb.org/dbtables) table, with the exception of the `collunits` slot, which contains the collection units and associated datasets that are found within a site.  You can see all the `site` slots using the `names()` function.  You can select individual elements of a `site`, and you can assign values to these parameters:
+The elements within a `site` are the same as the defined columns within the Neotoma [`ndb.sites`](https://open.neotomadb.org/dbschema/tables/sites.html) table, with the exception of the `collunits` slot, which contains the collection units and associated datasets that are found within a site.  You can see all the `site` slots using the `names()` function.  You can select individual elements of a `site`, and you can assign values to these parameters:
 
 ```{r showallNamesSite}
 names(alex[[1]])
@@ -100,14 +149,14 @@ alex[[1]]$area
 
 # Modify a value using [<- assignment:
 alex[[1]]["area"] <- 30
-# alex[[1]][7] <- 30  <- Fails because the `Notes` field expects a character string.
+# alex[[1]][7] <- 30  This fails because the `Notes` field expects a character string.
 ```
 
-In this way we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements.  Although not currently implemented, the goal is to support direct upload of updated information by users.
+Using assignment, we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements. Although not currently implemented, the goal is to support direct upload of updated information by users.
 
 ### Creating a Site
 
-As explained above, a `site` is the fundamental unit of the Neotoma Database.  If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
+As explained above, a `site` is the fundamental unit of the Neotoma Database. If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
 ```{r setsitefunction}
 my_site <- set_site(sitename = "My Lake", 
@@ -124,10 +173,21 @@ This method allows us to begin modifying site information for existing sites if 
 ```{r addtosites}
 # Add a new site that's been edited using set_site()
 longer_alex <- c(alex, my_site)
-alex[[3]] <- my_site
+# Or replace an element within the existing list of sites
+# with the newly created site.
+longer_alex[[2]] <- my_site
 
+# Or append to the `sites` list with assignment:
+longer_alex[[3]] <- my_site
+```
+
+We can also use `set_sites()` as a tool to update the metadata associated with an existing site object:
+
+```r
 # Update a value within an existing `sites` object:
-alex[[2]] <- set_site(alex[[2]], altitude = 3000)
+longer_alex[[3]] <- set_site(longer_alex[[3]],
+  altitude = 3000)
+longer_alex
 ```
 
 ## Datasets
@@ -136,7 +196,9 @@ If you need to get to a deeper level of the sites object, you may want to look a
 
 `get_datasets()` adds additional metadata to the `site` objects, letting us know which `datasettypes` are associated with a site, and the dataset sample locations at the site.
 
-Getting the datasets by id is the easiest call, you can also pass a vector of IDs or if you already have a `sites` object, you can pass a sites object. Be careful, `get_datasets()` does not take `sitename` or `siteid` as inputs, if you wish to use those you can chain `get_sites()` and `get_datasets()`.
+![Using `get_datasets()` provides more complete metadata about a record, including the addition of chronological information, and more complete metadata about the datasets, compared to the `get_sites()` call, shown above.  The objects here are the same as above, but now have chronology metadata, and contact metadata for the records. Note that there is still no sample or taxonomic information about these records.  This comes from the `get_downloads()` function.](images/understanding_S4_structure_get_datasets.svg){width=100%}
+
+Getting the datasets by id is the easiest call, you can also pass a vector of IDs or, if you already have a `sites` object, you can pass a sites object.
 
 ```{r getdatasetsbyid}
 # Getting datasets by ID
@@ -152,40 +214,20 @@ my_pollen_datasets <- get_datasets(datasettype = "pollen", limit = 25)
 my_pollen_datasets
 ```
 
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, using `limit` and `offset`, for example, in a `while` loop.  In a result set of 100 records, the `limit`, when `offset` is 0 (the default), ensures that only the first 25 records are returned.  Keeping the `limit` at 25, and increasing the `offset` to 25 would give us the next 25 records.
-
-We can use that in a `while` loop in R in the following way:
-
-```{r searchOffset, eval=FALSE}
-run = TRUE
-offset <- 0
-
-while(run) {
-  sites <- get_sites(offset = offset, limit = 500)
-  if (length(sites) == 0) {
-    run = FALSE
-  }
-  if (exists("allSites")) {
-    allSites <- c(allSites, sites)
-  } else {
-    allSites <- sites
-  }
-  offset <- offset + 500
-}
-```
-
-It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results it is possible to add the `limit = 99999999` or some similarly high number.  **However**, this is hard on the Neotoma servers.  Best practice is to loop through results, you can do that automatically using the `all_data = TRUE` argument.
+It can be computationally intensive to obtain the full set of records for `sites` or `datasets`. By default the `limit` for all queries is `25`.  The default `offset` is `0`.  To capture all results we can use the `all_data = TRUE` flag in our calls.  **However**, this is hard on the Neotoma servers. We tend to prefer that users use `all_data = TRUE` once their analytic workflow is mostly complete.
 
 We can use that `all_data = TRUE` in R in the following way:
 
 ```{r all_data, eval=FALSE}
+allSites_dt <- get_sites(datasettype = "diatom")
+allSites_dt_all <- get_sites(datasettype = "diatom", all_data = TRUE)
 
-allSites <- get_sites(all_data = TRUE)
-allSites
- 
+# Because we used the `all_data = TRUE` flag, there will be more sites
+# in allSites_dt_all, because it represents all sites containing diatom datasets.
+length(allSites_dt_all) > length(allSites_dt)
 ```
 
-Following this  can see that the total sites returned is equal to the total number of sites in Neotoma.
+### Spatial Searches
 
 You can get the coordinates to create a GeoJson bounding box from [here](https://geojson.io/#map=2/20.0/0.0), or you can use pre-existing objects within R, for example, country-level data within the `spData` package:
 
@@ -213,26 +255,26 @@ Now we have an object called `brazil_datasets` that contains `r length(brazil_da
 
 You can plot these findings!
 
-```{r leafletBrasil}
+```{r leafletBrazil}
 plotLeaflet(brazil_datasets)
 ```
 
 ## Filtering Records
 
-Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brasil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
+Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brazil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
 
-```{r filterBrasil}
-brasil_dates <- neotoma2::filter(brazil_datasets,
+```{r filterBrazil}
+brazil_dates <- neotoma2::filter(brazil_datasets,
   datasettype == "geochronologic")
 
 # or:
 
-brasil_dates <- brazil_datasets %>%
+brazil_dates <- brazil_datasets %>%
   neotoma2::filter(datasettype == "geochronologic")
 
 # With boolean operators:
 
-brasil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
+brazil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
 ```
 
 The `filter()` function takes as the first argument, a datasets object, followed by the criteria we want to use to filter. Current supported criteria includes:
@@ -242,30 +284,50 @@ The `filter()` function takes as the first argument, a datasets object, followed
 * `elev`
 * `datasettype`
 
-You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. Datasettype has to be of type string, while the other terms must be numeric.  If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen datatypes, then you will also make use of `&` and `|` operators.
+You also need to make sure that you accompany any of these terms with the following boolean operators: `<`, `>` or `==`, `!=`. `datasettype` has to be of type string, while the other terms must be numeric.  If you need to filter by the same argument, let's say, you need to filter "geochronologic" and "pollen data types, then you will also make use of `&` and `|` operators.
 
-```{r, sitesbyname}
-Names_744BH <- c("Bald Hill", "Blake (sutton)",
-                 "High (sudbry)", "Holland",
-                 "Little Hosmer", "Long (grnsbo)",
-                 "Long (shefld)", "Round (shefld)")
+## Sample and Taxonomic data
 
-new_sites <- c()
-for (Number in Names_744BH) {
-  sites <- get_sites(sitename = Number)
-  new_sites <- c(new_sites, sites)
-  }
+Once we have the set of records we wish to examine, we then want to recover the actual sample data. This will provide us with information about the kinds of elements found at the site, within the dataset, their sample ages, and their counts or measurements. To do this we use the `get_downloads()` call.  Note, as before, we are returning a `sites` objects, but this time with the most complete metadata.
 
-new_sites
+![Using `get_downloads()` returns a `sites` object, but one that contains dataset objects with filled `samples` slots. The `samples` slot is often very large relative to the other metadata associated with `sites`, and so it is commonly held back until a direct request is provided. Helper functions at the `sites` level can pull out `sample` data once `get_downloads()` has been called.](images/understanding_S4_structure.svg){width=100%}
+
+Assuming we continue with our example from Brazil, we want to extract records from the country, filter to only pollen records with samples covering the last 10,000 years, and then look at the relative frequency of taxa across sites.  We might do something like this:
+
+```{r filterAndShowTaxa}
+brazil <- '{"type": "Polygon", 
+            "coordinates": [[
+                [-73.125, -9.102],
+                [-56.953, -33.138],
+                [-36.563, -7.711],
+                [-68.203, 13.923],
+                [-73.125, -9.102]
+              ]]}'
+
+# We can make the geojson a spatial object if we want to use the
+# functionality of the `sf` package.
+brazil_sf <- geojsonsf::geojson_sf(brazil)
+
+brazil_records <- get_datasets(loc = brazil_sf) %>%
+  neotoma2::filter(datasettype == "pollen" & age_range_young <= 1000 & age_range_old >= 10000) %>%
+  get_downloads(verbose = FALSE)
+
+count_by_site <- samples(brazil_records) %>%
+  dplyr::filter(elementtype == "pollen" & units == "NISP") %>%
+  group_by(siteid, variablename) %>%
+  summarise(n = n()) %>%
+  group_by(variablename) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
 ```
+
+In this code chunk we define the bounding polygon for our sites, filter by time and dataset type, and then return the full records for those sites. We get a `sites` object with dataset and sample information (because we used `get_downloads()`). We execute the `samples()` function to extract all the samples from the `sites` objects, and then filter the resulting `data.frame` to pull only pollen (a pollen dataset may contain spores and other elements that are not, strictly speaking, pollen) that are counted using the number of identified specimens (or NISP). We then `group_by()` the unique site identifiers (`siteid`) and the taxa (`variablename`) to get a count of the number of times each taxon appears in each site. We then want to `summarize()` to a higher level, just trying to understand how many sites each taxon appears in. After that we `arrange()` so that the records show the most common taxa first in the resulting variable `count_by_site`.
 
 ## Publications
 
-Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](http://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
+Many Neotoma records have publications associated with them.  The `publication` object (and the `publications` collection) provide the opportunity to do this.  The [`publication`](https://open.neotomadb.org/dbschema/tables/publications.html) table in Neotoma contains an extensive number of fields.  The methods for `publications` in the `neotoma2` package provide us with tools to retrieve publication data from Neotoma, to set and manipulate publication data locally, and to retrieve publication data from external sources (e.g., using a DOI).
 
 ### `get_publications()` from Neotoma
-
-Publications in Neotoma can be discovered using a number of parameters including   
 
 The most simple case is a search for a publication based on one or more publication IDs.  Most people do not know the unique publication ID of individual articles, but this provides a simple method to highlight the way Neotoma retrieves and presents publication information.
 
@@ -349,14 +411,45 @@ A `publication` has a large number of slots that can be defined.  These may be l
 new_pub@pages <- "1397-1410"
 ```
 
-#### Validate New Publications
+## Workshops and Code Examples
 
-## Examine Neotoma Data
-
-### Down Core Data
-
-Once we've obtained a site we can begin to look at the raw data within the datasets.
-
-```{r downloadData}
-mySites <- get_downloads(brazil_datasets)
-```
+* 2022 International AL/IPA Meeting; Bariloche, Argentina
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow.html)
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * [Spanish Language Simple Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow_ES.html)
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow.html)
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+  * [Spanish Language Complex Workflow](https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow_ES.html)
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: South America
+    * Dataset Types: Diatoms
+* 2022 European Pollen Database Meeting; Prague, Czech Republic
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/EPD-May2022/simple_workflow.html)
+    * Topics: Simple search, climate gradients, stratigraphic plotting, taxonomic harmonization
+    * Spatial Domain: Europe/Czech Republic
+    * Dataset Types: Pollen
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/EPD-May2022/complex_workflow.html)
+    * Topics: Chronology building, Bchron
+    * Spatial Domain: Europe/Czech Republic
+    * Dataset Types: Pollen
+* 2022 American Quaternary Association Meeting
+  * [English Language Simple Workflow](https://open.neotomadb.org/Workshops/AMQUA-June2022/simple_workflow.html)
+    * Topics: Simple search, climate gradients, stratigraphic plotting
+    * Spatial Domain: North America
+    * Dataset Types: Pollen
+  * [English Language Complex Workflow](https://open.neotomadb.org/Workshops/AMQUA-June2022/complex_workflow.html)
+    * Topics: Chronologies
+    * Spatial Domain: North America
+    * Dataset Types: Pollen
+* Neotoma-charcoal Workshop, Göttingen, Germany. Authors: Petr Kuneš & Thomas Giesecke
+  * [English Language Workflow](https://rpubs.com/petrkunes/neotoma-charcoal)
+    * Topics: Simple Search, PCA, DCA, Charcoal/Pollen Correlation
+    * Spatial Domain: Global/Czech Republic
+    * Dataset Types: Pollen, Charcoal

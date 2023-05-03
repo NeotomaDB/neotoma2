@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used}
 }
+\value{
+One \code{dataset} slot's value
+}
 \description{
 Obtain one of the elements within a datasets list
 }

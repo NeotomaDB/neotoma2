@@ -13,6 +13,9 @@ add_chronology(object, x, y)
 
 \item{y}{A \code{data.frame} of sample ages}
 }
+\value{
+chronology object defined by user,
+}
 \description{
 Add a new chronology to a collection unit.
 }

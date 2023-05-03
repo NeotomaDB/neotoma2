@@ -2,6 +2,7 @@
 #' @param x samples object
 #' @param i iteration in samples list
 #' @description Obtain one of the elements within a samples list
+#' @returns `samples` sliced object
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "samples", i = "numeric"),
@@ -21,6 +22,7 @@ setMethod(f = "[[",
 #' @param x sample object
 #' @param name name of the slot
 #' @description Obtain slots of a sample without using at-mark
+#' @returns `value` at selected slot
 #' @export
 setMethod(f = "$",
           signature = signature(x = "sample"),
@@ -32,6 +34,7 @@ setMethod(f = "$",
 #' @param x samples object
 #' @param name name of the slot
 #' @description Obtain slots of a site without using at-mark
+#' @returns `value` at selected slot
 #' @export
 setMethod(f = "$",
           signature = signature(x = "samples"),
@@ -47,6 +50,7 @@ setMethod(f = "$",
 #' @title Length Method samples
 #' @export
 #' @param x samples object
+#' @returns `int` representing the length of `samples object`
 setMethod(f = "length",
           signature = signature(x = "samples"),
           definition = function(x) {

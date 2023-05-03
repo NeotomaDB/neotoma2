@@ -4,6 +4,7 @@
 #'   who have contributed to the data in the Neotoma Paleoecology Database
 #' @param x contacts A \code{contacts} object associated with a set of names.
 #' @param ... Additional parameters associated with the call.
+#' @return contacts object
 #' @export
 
 check_contacts <- function(x, ...) {
@@ -14,6 +15,7 @@ check_contacts <- function(x, ...) {
 #' @param x contacts A \code{contacts} object associated with a set of names.
 #' @param similarity The similarity score between matched records (from 0 - 1).
 #' @param ... Additional parameters associated with the call.
+#' @returns contacts object
 #' @export
 check_contacts.contacts <- function(x, similarity = 0.5, ...) {
   checked <- map(x@contacts, function(y) {

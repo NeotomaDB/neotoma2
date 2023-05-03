@@ -22,8 +22,8 @@ A list with two components:
 Internal function to check passed arguments.
 }
 \references{
-Neotoma Project Website: http://www.neotomadb.org
+Neotoma Project Website: https://www.neotomadb.org/
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez
 }

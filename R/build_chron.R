@@ -1,19 +1,22 @@
-#' @title get_downloads
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+utils::globalVariables(c("depth", "thickness", "agelimitolder",
+  "chroncontrolid", "agelimityounger", "chroncontrolage",
+  "chroncontroltype"))
+
+#' @title build_chron
+#' @author Socorro Dominguez
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
 #' @importFrom methods new
 #' @description
-#' Helper function to bulld a dataset
-#' @param x dataset list
-#' @return list parsed into datasets
+#' A helper function to build a new chronology object from the
+#' Neotoma API response.
+#' @param x A chronology element from the API JSON output.
+#' @returns A single `chronology` object.
+#' @details This function is an internal function called from
+#' `build_collunit()` to help support the translation between the JSON
+#' representation of data in the API and the R implementation.
 #' @export
-#' @examples \dontrun{
-#' # To build dataset from API call:
-#' build_dataset(x)
-#' }
-#'
 build_chron <- function(x) {
   check_chron <- x$chronology
 

@@ -1,7 +1,6 @@
 test_that("filter runs as expected. filters datasettype", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -25,7 +24,6 @@ test_that("filter runs as expected. filters datasettype", {
 test_that("filter works as expected. filter by lat.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -49,7 +47,6 @@ test_that("filter works as expected. filter by lat.", {
 test_that("filter works as expected. filter by long.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -74,7 +71,6 @@ test_that("filter works as expected. filter by long.", {
 test_that("filter works as expected. filter by multiple arguments", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -112,7 +108,6 @@ test_that("filter works as expected. filter by multiple arguments", {
 test_that("filter runs as expected. filters 2 datasettypes", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -140,7 +135,6 @@ test_that("filter runs as expected. filters 2 datasettypes", {
 test_that("filter on datasettype runs as expected. count unique sites", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -169,7 +163,6 @@ test_that("filter on datasettype runs as expected. count unique sites", {
 test_that("filter on lat runs as expected. count unique sites", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -212,7 +205,6 @@ test_that("filtering by datasetid keeps all other collection units
           where the dataset does not belong", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   meer <- get_sites(sitename = "meerfeld%") %>%
     get_downloads()
@@ -227,37 +219,12 @@ test_that("filtering by datasetid keeps all other collection units
 })
 
 
-# test_that("filter works regardless of before/after get_downloads", {
-
-#   core_sites <- c(13949, 11904, 13319, 728, 13248, 2625, 2806,
-#     13280, 519, 11745, 273, 13956,
-#     11880, 13321, 9801, 13698, 11816,
-#     13909, 13921)
-
-#   core_wc_dl_f <- get_sites(core_sites) %>%
-#     get_datasets() %>%
-#     get_downloads() %>%
-#     neotoma2::filter(datasettype == "water chemistry")
-
-#   core_wc_f_dl <- get_sites(core_sites) %>%
-#     get_datasets() %>%
-#     neotoma2::filter(datasettype == "water chemistry") %>%
-#     get_downloads()
-
-#   core_dl_f_ids <- getids(core_wc_dl_f)
-#   core_f_dl_ids <- getids(core_wc_f_dl)
-
-#   expect_setequal(core_dl_f_ids$siteid, core_f_dl_ids$siteid)
-#   expect_setequal(core_dl_f_ids$collunitid, core_f_dl_ids$collunitid)
-#   expect_setequal(core_dl_f_ids$datasetid, core_f_dl_ids$datasetid)
-
-# })
-
-test_that("filter contains the right datasets/collunits I", {
-
-  core_sites <- c(13949, 11904, 13319, 728, 13248, 2625,
-                  2806, 13280, 519, 11745, 273,
-                  13956, 11880, 13321, 9801, 13698, 11816, 13909, 13921)
+ test_that("filter works regardless of before/after get_downloads", {
+  skip_on_cran()
+  core_sites <- c(13949, 11904, 13319, 728, 13248, 2625, 2806,
+    13280, 519, 11745, 273, 13956,
+    11880, 13321, 9801, 13698, 11816,
+    13909, 13921)
 
   core_wc_dl_f <- get_sites(core_sites) %>%
     get_datasets() %>%
@@ -269,42 +236,11 @@ test_that("filter contains the right datasets/collunits I", {
     neotoma2::filter(datasettype == "water chemistry") %>%
     get_downloads()
 
-  site728a <- getids(core_wc_f_dl) %>% dplyr::filter(siteid == 728)
-  expect_equal(site728a$collunitid, 30115)
-  expect_equal(site728a$datasetid, 43118)
+  core_dl_f_ids <- getids(core_wc_dl_f)
+  core_f_dl_ids <- getids(core_wc_f_dl)
 
+  expect_setequal(core_dl_f_ids$siteid, core_f_dl_ids$siteid)
+  expect_setequal(core_dl_f_ids$collunitid, core_f_dl_ids$collunitid)
+  expect_setequal(core_dl_f_ids$datasetid, core_f_dl_ids$datasetid)
 
-  site11745b <- getids(core_wc_dl_f) %>% dplyr::filter(siteid == 11745)
-  expect_equal(site11745b$collunitid, 33232)
-  expect_equal(site11745b$datasetid, 46561)
-
-})
-
-test_that("filter contains the right datasets/collunits II", {
-
-  core_sites <- c(13949, 11904, 13319, 728,
-                  13248, 2625, 2806, 13280,
-                  519, 11745, 273, 13956,
-                  11880, 13321, 9801, 13698,
-                  11816, 13909, 13921)
-
-  core_wc_dl_f <- get_sites(core_sites) %>%
-    get_datasets() %>%
-    get_downloads() %>%
-    neotoma2::filter(datasettype == "water chemistry")
-
-  core_wc_f_dl <- get_sites(core_sites) %>%
-    get_datasets() %>%
-    neotoma2::filter(datasettype == "water chemistry") %>%
-    get_downloads()
-
-  site11745a <- getids(core_wc_f_dl) %>% dplyr::filter(siteid == 11745)
-  expect_setequal(site11745a$collunitid, c(13204, 33232))
-
-  expect_setequal(site11745a$datasetid, c(17706, 46561))
-
-  site11745b <- getids(core_wc_dl_f) %>% dplyr::filter(siteid == 11745)
-  expect_equal(site11745b$collunitid, 33232)
-  expect_equal(site11745b$datasetid, 46561)
-
-})
+ })

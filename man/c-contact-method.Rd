@@ -11,6 +11,9 @@
 
 \item{y}{contacts object 2}
 }
+\value{
+\code{contacts} concatenated object
+}
 \description{
 c Method - Combine contacts objects
 }

@@ -11,6 +11,9 @@
 
 \item{y}{contacts object 2}
 }
+\value{
+concatenated and clean objects
+}
 \description{
 c Method - Combine contacts objects
 }

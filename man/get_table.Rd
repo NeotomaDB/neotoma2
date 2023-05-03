@@ -7,33 +7,23 @@
 get_table(x, limit = 25, offset = 0)
 }
 \arguments{
-\item{x}{Table name (consult \url{https://open.neotomadb/dbschema}
+\item{x}{Table name (consult \url{https://open.neotomadb.org/dbschema/}
 for a complete list of table names.}
 
 \item{limit}{Default 25 records}
 
 \item{offset}{Default 0.}
 }
+\value{
+selected \code{table} values from the Database
+}
 \description{
 Call Neotoma and return a table
 (with limits & offsets for large tables)
 }
 \examples{
-\dontrun{
+{
 # Returns only the first 25 specimen records.
 someSpec <- get_table('specimens')
-# Loop with the offset to get all specimens:
-okay <- TRUE
-counter <- 1
-specimens <- list()
-while(okay) {
-  specimens[[counter]] <- get_table('specimens', offset = (counter - 1) * 25)
-  if(nrow(specimens[[counter]]) < 25) {
-    okay <- FALSE
-  } else {
-    counter <- counter + 1
-  }
-}
-specimens <- specimens \%>\% dplyr::bind_rows()
 }
 }

@@ -16,7 +16,7 @@ set_chronology(
   dateprepared = as.Date(character(0)),
   modelagetype = NA_character_,
   chronologyname = NA_character_,
-  chroncontrols = data.frame()
+  chroncontrols = data.frame(0)
 )
 }
 \arguments{
@@ -34,10 +34,10 @@ who created the chronology}
 \item{agemodel}{A string representing the age model name, for
 example "Crummy linear interpolation".}
 
-\item{ageboundolder}{The ageboundolder is assigned the oldest sample
+\item{ageboundolder}{The \code{ageboundolder} is assigned the oldest sample
 age rounded up to the nearest 10}
 
-\item{ageboundyounger}{The ageboundyounger is assigned the oldest
+\item{ageboundyounger}{The \code{ageboundyounger} is assigned the oldest
 sample age rounded up to the nearest 10}
 
 \item{isdefault}{Defines whether the model is the default for
@@ -54,6 +54,9 @@ should be one of the valid Neotoma \code{agetypes}:
 \item{chroncontrols}{A data.frame containing the chronological controls
 for the age model.}
 }
+\value{
+\code{chronology} object
+}
 \description{
 Create a new chronology for a record.
 Within Neotoma all chronologies have unique numeric
@@ -61,14 +64,4 @@ identifiers. Within R, because of the need to use the
 identifiers across objects, and because we want to avoid
 conflicts between naming systems, a universally unique
 identifier (UUID) is created for the object ID.
-}
-\examples{
-\dontrun{
-# Create a site called "My Lake", to
-x = st_as_sf(st_sfc(st_point(c(5,5))))
-my_site <- set_site(sitename = "My Lake",
-                    geography = x,
-                    description = "my lake",
-                    altitude = 30)
-}
 }

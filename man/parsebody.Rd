@@ -11,9 +11,12 @@ parsebody(x, ...)
 
 \item{...}{Any query parameters passed from the function calling}
 }
+\value{
+\code{JSON} object to parse as a body in a HTTP request
+}
 \description{
-An internal helper function to parse de body of POST API requests
+An internal helper function to parse the body of POST API requests
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez
 }

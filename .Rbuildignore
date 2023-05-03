@@ -7,12 +7,13 @@ CODE_OF_CONDUCT.md
 .github
 .git
 ^.*.tar.gz
-vignettes/MammalDiversity.Rmd
-vignettes/diatoms.Rmd
-wc10
 checkout.txt
 lintoutput.txt
 paper.md
 paper.bib
 ^\.github$
+^doc$
+^Meta$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
 codemeta.json

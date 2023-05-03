@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+\code{site} object with reassigned values
+}
 \description{
 Assign site field by numeric index
 }

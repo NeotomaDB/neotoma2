@@ -16,7 +16,7 @@ get_downloads(x = NA, verbose = TRUE, ...)
 \value{
 The function returns either a single item of class
 \code{"try-error"} describing the reason for failure
-(either mis-defined parameters or an error from the Neotoma API),
+(either misdefined parameters or an error from the Neotoma API),
 or a table of sites, with rows corresponding to the number of
 individual sites and datasets returned by the Neotoma API.
 Each "site" object contains 6 parameters that can be accessed as well:
@@ -49,8 +49,20 @@ following detail of information:
 \description{
 Information for Fossil Datasets
 }
+\details{
+The \code{get_downloads()} command wraps the Neotoma API
+(\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{downloads}.
+The call itself uses a SQL query which accepts any one of the following
+parameters:
+\itemize{
+\item \code{datasetid} The unique dataset ID (integer) in Neotoma. Can be passed
+as a vector of dataset IDs.
+\item \code{all_data} The API only downloads the first 25 records of the query.
+For the complete records, use \code{all_data=TRUE}
+}
+}
 \examples{
-\dontrun{
+\donttest{
 # To find the downloads object of dataset 24:
 downloads24 <- get_downloads(24)
 

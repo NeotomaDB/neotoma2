@@ -11,6 +11,9 @@ use_na(x, type)
 
 \item{type}{A character string with values either \code{char} or \code{int}.}
 }
+\value{
+object converted to \code{NA_character} or \code{NA_integer}
+}
 \description{
 Pass an object and convert all
 \code{NA} elements to particular \code{NA} types.

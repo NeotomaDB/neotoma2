@@ -2,13 +2,17 @@
 % Please edit documentation in R/site-methods.R
 \name{show,site-method}
 \alias{show,site-method}
-\title{Show Site objects as a dataframe}
+\title{Show a site object as a dataframe}
 \usage{
 \S4method{show}{site}(object)
 }
 \arguments{
 \item{object}{site object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
-Show Site objects as a dataframe
+Convert a Neotoma package site object into a data.frame()
+returning the siteid, sitename, latitude, longitude and altitude of the site.
 }

@@ -5,7 +5,7 @@
 #' @param x object to be set as dataset,
 #' @param datasetid dataset identifier
 #' @param database dataset where the dataset came from
-#' @param doi doi
+#' @param doi DOI
 #' @param datasettype type the dataset belongs to
 #' @param age_range_old age range old
 #' @param age_range_young age range young
@@ -13,12 +13,12 @@
 #' @param pi_list pi list
 #' @param samples taxa objects
 #' @export
-#' @examples
-#' \dontrun{
+#' @returns `dataset` object
+#' @examples {
 #' # Create a dataset
 #' my_dataset <- set_dataset(database = "EPD",
-#'                     datsettype = "pollen",
-#'                     notes = "my lake"0)
+#'                     datasettype = "pollen",
+#'                     notes = "my lake")
 #' }
 
 set_dataset <- function(x = NA,
@@ -51,13 +51,18 @@ set_dataset <- function(x = NA,
     x@samples <- samples
 
   } else {
-    if (class(x) == "dataset") {
-      for (i in 3:length(function_call)) {
-        slot(x, names(function_call)[[i]]) <- function_call[[i]]
+    if (is(x, "dataset")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
       }
+    } else {
+      stop("`x` must be a dataset object if it is supplied.")
     }
-    return(x)
   }
-
   return(x)
 }

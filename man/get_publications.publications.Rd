@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_publications.R
 \name{get_publications.publications}
 \alias{get_publications.publications}
-\title{Get publications for Neotoma contributors}
+\title{Update metadata for a set of publication objects.}
 \usage{
 \method{get_publications}{publications}(x, ...)
 }
@@ -19,6 +19,25 @@ with a publication.
 \code{year} The year the publication was released.
 \code{search} A plain text search string used to search the citation.}
 }
+\value{
+\code{publications} object
+}
 \description{
-Get publications for Neotoma contributors
+Update metadata for a set of publication objects.
+}
+\examples{
+\donttest{
+# Take a publication object and purposely degrade the metadata:
+bad_pub <- get_publications(c(666, 667, 668))
+# Note this only changes the reported year, not the citation string.
+bad_pub[[1]]@year <- "1923"
+bad_pub[[1]]@publicationid <- as.character(NA)
+updated_pubs <- get_publications(bad_pub)
+# Only the first publication object has any matches. It's the only one
+# that is missing its publicaitonid.
+attr(updated_pubs[[1]], "matches")
+attr(updated_pubs[[2]], "matches")
+# we see the proper citation in the record:
+updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
+}
 }

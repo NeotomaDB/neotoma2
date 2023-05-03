@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+Assign new \code{dataset} by numeric index
+}
 \description{
 Assign dataset field by numeric index
 }

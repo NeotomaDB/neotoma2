@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{specimen object}
 }
+\value{
+NULL - side effect for printing a \code{data.frame} object
+}
 \description{
 Show Specimen Method
 }

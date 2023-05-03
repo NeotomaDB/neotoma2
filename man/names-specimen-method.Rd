@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A specimen object.}
 }
+\value{
+names of the slots of a \code{site} object
+}
 \description{
 Get all names for named elements within a \code{specimen} object.
 }

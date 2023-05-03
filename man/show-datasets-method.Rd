@@ -9,6 +9,9 @@
 \arguments{
 \item{object}{datasets object}
 }
+\value{
+null - side effect, prints a \code{data.frame} with \code{datasets} metadata
+}
 \description{
 Show Datasets object as a dataframe
 }

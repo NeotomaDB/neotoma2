@@ -9,6 +9,15 @@
 \arguments{
 \item{x}{sites object}
 }
+\value{
+\code{data.frame} with sample records
+}
 \description{
-Obtain elements on the samples level
+Obtain all samples within a sites object
+}
+\examples{
+{
+dw <- get_downloads(1)
+pollen <- samples(dw)
+}
 }

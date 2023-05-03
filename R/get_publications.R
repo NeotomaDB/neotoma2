@@ -13,6 +13,13 @@
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
 #' @importFrom purrr pluck
+#' @returns `publications` object
+#' @examples \donttest{
+#' # How old are the papers in Neotoma that include the term "mammut"?
+#' mammoth_papers <- get_publications(search="mammut") %>%
+#'   as.data.frame()
+#' hist(as.numeric(mammoth_papers$year))
+#' }
 #' @export
 get_publications <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -34,6 +41,13 @@ get_publications <- function(x = NA, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
+#' @examples \donttest{
+#' # How old are the papers in Neotoma that include the term "mammut"?
+#' mammoth_papers <- get_publications(search="mammut") %>%
+#'   as.data.frame()
+#' hist(as.numeric(mammoth_papers$year))
+#' }
+#' @returns `publications` object
 #' @export
 get_publications.default <- function(...) {
   . <- ""
@@ -75,7 +89,7 @@ get_publications.default <- function(...) {
     new("publications", publications = .)
   return(pubs)
 }
-#' @title Get contact information for Neotoma contributors
+#' @title Get publications using their unique identifier.
 #' @importFrom methods new
 #' @importFrom purrr pluck
 #' @param x integer A contact ID
@@ -89,6 +103,11 @@ get_publications.default <- function(...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
+#' @examples {
+#' # We want the paper identified in Neotoma as 666:
+#' get_publications(666)
+#' }
+#' @returns `publications` object
 #' @export
 get_publications.numeric <- function(x, ...) {
   . <- ""
@@ -125,7 +144,9 @@ get_publications.numeric <- function(x, ...) {
   return(pubs)
 }
 
-#' @title Get publications for Neotoma contributors
+#' @title Update information for a publications object.
+#' @description This works for records without publicationids. We assume that
+#' data with publicationids is correct.
 #' @importFrom dplyr coalesce
 #' @param x integer A publication
 #' @param ...
@@ -138,6 +159,18 @@ get_publications.numeric <- function(x, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
+#' @examples \donttest{
+#' # Take a publication object and purposely degrade the metadata:
+#' bad_pub <- get_publications(666)
+#' # Note this only changes the reported year, not the citation string.
+#' bad_pub[[1]]@year <- "1923"
+#' bad_pub[[1]]@publicationid <- as.character(NA)
+#' updated_pubs <- get_publications(bad_pub[[1]])
+#' attr(updated_pubs, "matches")
+#' # we see the proper citation in the record:
+#' updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#' }
+#' @returns updated `publication` object
 #' @export
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {
@@ -153,7 +186,7 @@ get_publications.publication <- function(x, ...) {
   return(x)
 }
 
-#' @title Get publications for Neotoma contributors
+#' @title Update metadata for a set of publication objects.
 #' @importFrom dplyr coalesce
 #' @param x integer A publication
 #' @param ...
@@ -166,6 +199,21 @@ get_publications.publication <- function(x, ...) {
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
+#' @examples \donttest{
+#' # Take a publication object and purposely degrade the metadata:
+#' bad_pub <- get_publications(c(666, 667, 668))
+#' # Note this only changes the reported year, not the citation string.
+#' bad_pub[[1]]@year <- "1923"
+#' bad_pub[[1]]@publicationid <- as.character(NA)
+#' updated_pubs <- get_publications(bad_pub)
+#' # Only the first publication object has any matches. It's the only one
+#' # that is missing its publicaitonid.
+#' attr(updated_pubs[[1]], "matches")
+#' attr(updated_pubs[[2]], "matches")
+#' # we see the proper citation in the record:
+#' updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
+#' }
+#' @returns `publications` object
 #' @export
 get_publications.publications <- function(x, ...) {
   for (i in seq_len(length(x))) {

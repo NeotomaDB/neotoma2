@@ -87,6 +87,9 @@ type within the Neotoma database.}
 
 \item{author}{name of the author of publication.}
 }
+\value{
+\code{publication} object
+}
 \description{
 A function to create new publication objects by hand.
 }

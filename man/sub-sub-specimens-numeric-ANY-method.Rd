@@ -11,6 +11,9 @@
 
 \item{i}{iteration in specimens list}
 }
+\value{
+sliced \code{specimens} object
+}
 \description{
 Obtain one of the elements within a specimens list
 }

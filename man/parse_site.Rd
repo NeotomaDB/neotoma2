@@ -10,7 +10,7 @@ parse_site(result)
 \item{result}{A JSON object from the API.}
 }
 \value{
-A neotoma2 site object.
+A Neotoma2 site object.
 }
 \description{
 An internal helper function to parse the API result into a site object.

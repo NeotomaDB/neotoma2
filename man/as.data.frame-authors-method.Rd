@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{An author}
 }
+\value{
+\code{data.frame} with publications metadata
+}
 \description{
 Convert a publication author to a \code{data.frame}
 }

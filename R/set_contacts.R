@@ -7,6 +7,7 @@
 #' @importFrom methods new
 #' @importFrom uuid UUIDgenerate
 #' @importFrom methods slot<-
+#' @param x Object to be set as a contact
 #' @param contactid An arbitrary Contact identification number.
 #' @param familyname Family or surname name of a person.
 #' @param leadinginitials Leading initials for given or forenames
@@ -26,9 +27,11 @@
 #' @param url Their homepage
 #' @param address A physical address
 #' @param notes Notes about the individual
+#' @returns `contact` object
 #' @export
 
-set_contact <- function(contactid = NA_integer_,
+set_contact <- function(x = NA,
+                        contactid = NA_integer_,
                         familyname = NA_character_,
                         leadinginitials = NA_character_,
                         givennames = NA_character_,
@@ -43,26 +46,44 @@ set_contact <- function(contactid = NA_integer_,
                         url = NA_character_,
                         address = NA_character_,
                         notes = NA_character_) {
+  
+  function_call <- match.call()
+  
+  if (suppressWarnings(is.na(x))) {
+    x <- new("contact")
+    if (is.na(contactid)) {
+      x@contactid <- uuid::UUIDgenerate()
+    } else {
+      x@contactid <- contactid
+    }
+    x@familyname <- familyname
+    x@givennames <- givennames
+    x@leadinginitials <- leadinginitials
+    x@suffix <- suffix
+    x@ORCID <- ORCID
+    x@title <- title
+    x@institution <- institution
+    x@email <- email
+    x@phone <- phone
+    x@contactstatus <- contactstatus
+    x@fax <- fax
+    x@url <- url
+    x@address <- address
+    x@notes <- notes
 
-  if (is.na(contactid)) {
-    contactid <- uuid::UUIDgenerate()
+  } else {
+    if (is(x, "contact")) {
+      if(length(function_call)>2){
+        for (i in 3:length(function_call)) {
+          slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
+        }
+        return(x)
+      } else {
+        return(x)
+      }
+    } else {
+      stop("`x` must be a contact object if it is supplied.")
+    }
   }
-
-  new("contact",
-      contactid = contactid,
-      familyname = testNull(familyname, NA_character_),
-      givennames = testNull(givennames, NA_character_),
-      leadinginitials = testNull(leadinginitials, NA_character_),
-      suffix = testNull(suffix, NA_character_),
-      ORCID = testNull(ORCID, NA_character_),
-      title = testNull(title, NA_character_),
-      institution = testNull(institution, NA_character_),
-      email = testNull(email, NA_character_),
-      phone = testNull(phone, NA_character_),
-      contactstatus = testNull(contactstatus, NA_character_),
-      fax = testNull(fax, NA_character_),
-      url = testNull(url, NA_character_),
-      address = testNull(address, NA_character_),
-      notes = testNull(notes, NA_character_))
+  return(x)
 }
-

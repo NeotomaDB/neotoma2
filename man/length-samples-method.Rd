@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{samples object}
 }
+\value{
+\code{int} representing the length of \verb{samples object}
+}
 \description{
 Length Method samples
 }

@@ -17,7 +17,9 @@ elements and other features within a set of records.
 Extract taxonomic data from a single site.
 }
 \examples{
+\donttest{
 somesites <- get_sites(datasettype = "pollen", limit = 3) \%>\%
   get_downloads()
 diatomtaxa <- taxa(somesites[[1]])
+}
 }

@@ -11,6 +11,9 @@
 
 \item{name}{name of the slot}
 }
+\value{
+Obtain a \code{dataset}'s \code{slot} value using $
+}
 \description{
 Obtain slots of a dataset without using at-mark
 }

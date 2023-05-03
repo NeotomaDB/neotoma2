@@ -9,11 +9,12 @@ test_that("get_datasets numeric runs.", {
     dplyr::select(datasetid) %>%
     unique()
 
-  testthat::expect_equivalent(datasets_ids, 1001)
+  testthat::expect_equivalent(datasets_ids, "1001")
 
 })
 
-test_that("get_datasets runs as a vector with length defined by vector or limit.", {
+test_that("get_datasets runs as a vector with length
+  defined by vector or limit.", {
   ## we don't want this to run on CRAN
   skip_on_cran()
 
@@ -105,6 +106,7 @@ test_that("get_datasets runs as expected.", {
 })
 
 test_that("all_data + loc work", {
+  skip_on_cran()
   europe_json <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],

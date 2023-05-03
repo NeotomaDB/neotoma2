@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{specimens object}
 }
+\value{
+\code{data.frame} with \verb{specimens metadata}
+}
 \description{
-show as dataframe as prep to save as csv
+show as data.frame
 }

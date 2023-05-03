@@ -2,7 +2,7 @@
 % Please edit documentation in R/chronology-methods.R
 \name{$,chronologies-method}
 \alias{$,chronologies-method}
-\title{$ for chronologies}
+\title{Extract}
 \usage{
 \S4method{$}{chronologies}(x, name)
 }
@@ -11,6 +11,10 @@
 
 \item{name}{name of the slot}
 }
+\value{
+A multiple \code{chronologies}
+}
 \description{
-Obtain slots of a chronology without using at-mark
+Obtain chronology slots across all chronology elements within
+a chronologies object.
 }

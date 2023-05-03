@@ -7,9 +7,12 @@
 getids(x, order = TRUE)
 }
 \arguments{
-\item{x}{A neotoma2 \code{sites} object.}
+\item{x}{A Neotoma2 \code{sites} object.}
 
 \item{order}{sort items by siteid, collunitid, datasetid}
+}
+\value{
+\code{data.frame} containing \code{siteid}, \code{datasetid}, and \code{collunitid}
 }
 \description{
 This function parses a site object, from \code{site} to

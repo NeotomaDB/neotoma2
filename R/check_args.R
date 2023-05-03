@@ -1,16 +1,16 @@
 #' @title check_args
 #' @description Internal function to check passed arguments.
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez
 #' @param cl called arguments.
 #'    Arguments are going to be called by match_call inside:
 #'    \code{\link{get_sites}}
 #'    \code{\link{get_datasets}}
 #'    \code{\link{get_downloads}}
-#' @return A list with two components:
+#' @returns A list with two components:
 #'  \item{flag}{Returns a 0 if everything's fine, a 1 if there's a problem.}
 #'  \item{message}{A list of error messages.}
 #' @references
-#' Neotoma Project Website: http://www.neotomadb.org
+#' Neotoma Project Website: https://www.neotomadb.org/
 
 check_args <- function(cl) { # nolint
 
@@ -56,7 +56,8 @@ check_args <- function(cl) { # nolint
         if (length(cl$loc) != 4) {
           error$flag <- 1
           error$message[[length(error$message) + 1]] <- paste0("loc
-           must be a geojson string or a 4 coordinate array")
+           must be an sf object, a geojson string or a 4 coordinate 
+           array c(xmin, xmax, ymax, ymin)")
         }
       }
       }

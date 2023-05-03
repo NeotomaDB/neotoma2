@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{collunit object}
 }
+\value{
+\code{data.frame} with sample records
+}
 \description{
 Obtain elements from collunit
 }

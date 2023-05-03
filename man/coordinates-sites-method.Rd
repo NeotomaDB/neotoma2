@@ -2,7 +2,7 @@
 % Please edit documentation in R/site-methods.R
 \name{coordinates,sites-method}
 \alias{coordinates,sites-method}
-\title{Return the latitude and logitude of sites}
+\title{Return the latitude and longitude of sites}
 \usage{
 \S4method{coordinates}{sites}(obj, ...)
 }
@@ -11,6 +11,9 @@
 
 \item{...}{Additional parameters associated with the call.}
 }
+\value{
+\code{data.frame} object with site coordinates.
+}
 \description{
-Return the latitude and logitude of sites
+Return the latitude and longitude of sites
 }

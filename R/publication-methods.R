@@ -1,6 +1,7 @@
 #' @title Get slot names for a publication object.
 #' @param x A \code{publication} object.
 #' @importFrom methods slotNames
+#' @returns `string` with `publication` slots' names
 #' @export
 setMethod(f = "names",
           signature = signature(x = "publication"),
@@ -11,6 +12,7 @@ setMethod(f = "names",
 #' @title Get slot names for a publication object.
 #' @param x A \code{publications} object.
 #' @importFrom methods slotNames
+#' @returns `string` with `publications` slots' names
 #' @export
 setMethod(f = "names",
           signature = signature(x = "publications"),
@@ -22,6 +24,7 @@ setMethod(f = "names",
 #' @param object A \code{publications} object
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
+#' @returns NULL - side effect function of printing a data.frame
 #' @export
 setMethod(f = "show",
           signature = signature(object = "publications"),
@@ -39,6 +42,7 @@ setMethod(f = "show",
 #' @param x A \code{publication} object.
 #' @param name The slot to obtain (e.g., \code{articletitle})
 #' @importFrom methods slot
+#' @returns `value` in the selected slot
 #' @export
 setMethod(f = "$",
           signature = signature(x = "publication"),
@@ -46,16 +50,10 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-# Currently errors out.
-# setMethod(f = "$<-",
-#          signature = signature(x = "publication"),
-#          definition = function(x, name, y) {
-#            slot(x, name) <- y
-#          })
-
 #' @title Obtain one of the elements within a publication list.
 #' @param x A publications object.
 #' @param i A numeric index for the requested publication
+#' @returns selected `publications` object from index
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "publications", i = "numeric"),
@@ -75,6 +73,7 @@ setMethod(f = "[[",
 #' @param x A publications object.
 #' @param i A numeric index for the requested publication
 #' @param value The value to be used
+#' @returns `publications` with new assigned value.
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "publications"),
@@ -90,6 +89,7 @@ setMethod(f = "[[<-",
 
 #' @title Get the number of publications in a publications object.
 #' @param x A publications object.
+#' @returns `int` of the length of the `publications` object
 #' @export
 setMethod(f = "length",
           signature = signature(x = "publications"),
@@ -100,6 +100,7 @@ setMethod(f = "length",
 #' @title Combine publication objects.
 #' @param x A publications object.
 #' @param y A publications object
+#' @returns concatenated `publications` object
 #' @export
 setMethod(f = "c",
           signature = signature(x = "publications"),
@@ -111,6 +112,7 @@ setMethod(f = "c",
 
 #' @title Print publications to screen.
 #' @param object A \code{publication} object.
+#' @returns NULL - side effect function of printing a data.frame
 #' @export
 setMethod(f = "show",
           signature = signature(object = "publication"),
@@ -122,6 +124,7 @@ setMethod(f = "show",
 
 #' @title Show matched publication objects.
 #' @param x A \code{publication} object.
+#' @returns NULL printed matches with other publications
 #' @export
 setMethod(f = "showMatch",
           signature = signature(x = "publication"),
@@ -134,6 +137,7 @@ setMethod(f = "showMatch",
 #' @title Get a publication DOI.
 #' @param x A \code{publication} object.
 #' @importFrom methods slotNames
+#' @returns `DOI` from a publication
 #' @export
 setMethod(f = "doi",
           signature = signature(x = "publication"),
@@ -146,6 +150,7 @@ setMethod(f = "doi",
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols
+#' @returns `data.frame` with publications metadata
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "authors"),
@@ -163,6 +168,7 @@ setMethod(f = "as.data.frame",
 #' @importFrom methods slotNames slot
 #' @importFrom purrr map
 #' @param x A \code{publication} object.
+#' @returns `data.frame` with publications' metadata.
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "publication"),
@@ -183,6 +189,7 @@ setMethod(f = "as.data.frame",
 
 #' @title Convert publications to a \code{data.frame}
 #' @param x A \code{publications} object.
+#' @returns `data.frame` with publications' metadata.
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "publications"),
@@ -196,6 +203,7 @@ setMethod(f = "as.data.frame",
 #' @title Select the best match (between a local record and a Neotoma match)
 #' @param x A \code{publication} object
 #' @param n The match number.
+#' @returns the best match to the selected publication.
 #' @export
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
@@ -212,6 +220,7 @@ setMethod(f = "selectMatch",
 #' @title Select the best match (between a local record and a Neotoma match)
 #' @param x A \code{publication} object
 #' @param n The match number (in the case an NA is returned).
+#' @returns the best match to the selected publication.
 #' @export
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),

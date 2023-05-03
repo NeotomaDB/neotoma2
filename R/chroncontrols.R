@@ -1,8 +1,10 @@
-utils::globalVariables(c("modelagetype", "isdefault", "allids", "<<-"))
+utils::globalVariables(c("modelagetype", "isdefault", "allids"))
 
-#' @title chroncontrols
+#' @title Recover information about the chron controls for a collectionunit.
+#' @description For all sites that includes collection units with chronologies
+#' return the chronological controls that are used in building the chronology.
 #' @param x sites object
-#' @description Obtain chroncontrols
+#' @returns data.frame with chronological controls
 #' @export
 #' @import dplyr
 setMethod(f = "chroncontrols",
@@ -14,10 +16,12 @@ setMethod(f = "chroncontrols",
           }
 )
 
-#' @title chroncontrols
+#' @title Recover information about the chron controls for a collectionunit.
+#' @description For a site that includes collection units with chronologies
+#' return the chronological controls that are used in building the chronology.
 #' @param x site object
-#' @description Obtain elements on the samples level
 #' @export
+#' @returns data.frame with chronological controls
 #' @import dplyr
 setMethod(f = "chroncontrols",
           signature = "site",

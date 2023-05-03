@@ -13,6 +13,9 @@
 
 \item{value}{The value to be used.}
 }
+\value{
+\code{sites} object with reassigned numeric values
+}
 \description{
 Assign specimen field by numeric index
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_sample.R
 \name{build_sample}
 \alias{build_sample}
-\title{build_sample}
+\title{Build a samples \code{data.frame} from Neotoma API JSON}
 \usage{
 build_sample(x)
 }
@@ -10,17 +10,11 @@ build_sample(x)
 \item{x}{sample list}
 }
 \value{
-list parsed into samples
+A simple \code{sample} object
 }
 \description{
-Helper function to build a sample
-}
-\examples{
-\dontrun{
-# To build sample from API call:
-build_sample(x)
-}
-
+Helper function to build a sample from the API input (list formatted)
+coming from the Neotoma API.
 }
 \author{
 Socorro Dominguez \email{sedv8808@gmail.com}

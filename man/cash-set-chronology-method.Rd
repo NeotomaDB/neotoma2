@@ -2,7 +2,7 @@
 % Please edit documentation in R/chronology-methods.R
 \name{$<-,chronology-method}
 \alias{$<-,chronology-method}
-\title{$ Assignment}
+\title{Replace part of an object}
 \usage{
 \S4method{$}{chronology}(x, name) <- value
 }
@@ -13,6 +13,9 @@
 
 \item{value}{A value to be assigned to the chronology slot.}
 }
+\value{
+reassigned \code{chronology} object
+}
 \description{
-Obtain slots of a chronology without using at-mark
+Assign values to slots within a chronology object.
 }

@@ -7,18 +7,11 @@
 build_sites(x)
 }
 \arguments{
-\item{x}{A list returned from the Neotoma API's \code{data} slot.}
+\item{x}{A list returned from the Neotoma API \code{data} section.}
+}
+\value{
+A simple \code{site} object
 }
 \description{
 Build a \code{site} from the Neotoma API response.
-}
-\examples{
-\dontrun{
-response <- jsonlite::fromJSON(
-  "https://api.neotomadb.org/v2.0/data/datasets/100,101",
-  flatten = FALSE, simplifyVector = FALSE)
-response <- cleanNULL(response)
-newSites <- build_sites(response$data)
-newSites
-}
 }

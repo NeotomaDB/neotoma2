@@ -11,6 +11,9 @@
 
 \item{i}{The numeric index of a contact slot.}
 }
+\value{
+sliced contacts
+}
 \description{
 Extract or Replace Parts of an Object
 }

@@ -30,7 +30,8 @@ test_that("Working with subset methods `datasets()` and `collunits()`.", {
 
   expect_identical(object = length(unique(sumDl$siteid)),
                    expected = length(brazil_dl),
-                   label = "Failed to match the site identifiers & site length.")
+                   label = "Failed to match the site identifiers & 
+                     site length.")
 
   expect_identical(object = sum(sumDl$datasets),
                    expected = nrow(brazilids),

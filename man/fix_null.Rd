@@ -9,6 +9,9 @@ fix_null(x)
 \arguments{
 \item{x}{item that has null objects.}
 }
+\value{
+\code{list} with \code{NA}s instead of \code{null} objects
+}
 \description{
 API responses from the Neotoma API return many fields
 as NULL values. This function turns the NULL values into logical NAs.

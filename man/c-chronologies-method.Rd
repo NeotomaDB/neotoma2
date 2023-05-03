@@ -11,6 +11,9 @@
 
 \item{y}{chronologies object 2}
 }
+\value{
+concatenated \code{chronologies}
+}
 \description{
 c Method - Combine chronologies objects
 }
