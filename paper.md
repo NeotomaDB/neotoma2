@@ -1,5 +1,5 @@
 ---
-  title: 'neotoma2: An R package to access data from the Neotoma Paleoecology Database'
+title: 'neotoma2: An R package to access data from the Neotoma Paleoecology Database'
 tags:
   - R
   - paleoecology
