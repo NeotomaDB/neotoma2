@@ -27,23 +27,36 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       fn(x)
     }
   }
-
+  
   # Assign the API host location:
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
-
+  
   baseurl <- switch(use,
                     "dev" = "https://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
-
+  
   query <- list(...)
   if (all_data == FALSE) {
-    response <- httr::GET(paste0(baseurl, x),
-                          add_headers("User-Agent" = "neotoma2 R package"),
-                          query = query)
+    try(
+      response <- httr::GET(paste0(baseurl, x),
+                            add_headers("User-Agent" = "neotoma2 R package"),
+                            query = query)
+    )
+    
+    if (inherits(response, "try-error")) {
+      # Handle the SSL error
+      error_message <- conditionMessage(response)
+      
+      if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+        # Handle SSL certificate-related errors
+        stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
+      }
+    }
+    
     if (response$status_code == 414) {
       # The 414 error is a URL that is too long. This is a lazy way to manage
       # the choice between a POST and GET call.
@@ -52,10 +65,27 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       args <- x
       new_url <- newURL(baseurl, args, ...)
       body <- parsebody(args, ...)
-      response <- httr::POST(new_url,
+      try(
+        response <- httr::POST(new_url,
                              body = body,
                              add_headers("User-Agent" = "neotoma2 R package"),
                              httr::content_type("application/json"))
+      )
+      if (inherits(response, "try-error")) {
+        # Handle the SSL error
+        error_message <- conditionMessage(response)
+        
+        if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+          # Handle SSL certificate-related errors
+          stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
+        }
+      }
+      # Break if we can't connect:
+      stop_for_status(response,
+                      task = "Could not connect to the Neotoma API.
+                    Check that the path is valid, and check the current
+                     status of the Neotoma API services at
+                      http://data.neotomadb.org")
       warning("To get the complete data, use all_data = TRUE. 
         Returned the first 25 elements.")
     }
@@ -66,7 +96,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-
+    
     if (response$status_code == 200) {
       result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
@@ -74,28 +104,44 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       result <- cleanNull(result)
     }
     return(result)
-
+    
   } else {
     # Here the flag all_data has been accepted, so we're going to pull
     # everything in.
     if ("limit" %in% names(query)) {
       stop("You cannot use the limit parameter when all_data is TRUE")
     }
-
+    
     query$offset <- 0
     query$limit <- 100
-
-    response <- httr::GET(paste0(baseurl, x),
+    try(
+      response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
                           query = query)
+    )
+    if (inherits(response, "try-error")) {
+      # Handle the SSL error
+      error_message <- conditionMessage(response)
+      
+      if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+        # Handle SSL certificate-related errors
+        stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
+      }
+    }
+    stop_for_status(response,
+                    task = "Could not connect to the Neotoma API.
+                    Check that the path is valid, and check the current
+                     status of the Neotoma API services at
+                      http://data.neotomadb.org")
+    
     if (response$status_code == 414) {
       # Function with Post (Use this once server issue is resolved)
       args <- x
       new_url <- newURL(baseurl, args, ...)
       body <- parsebody(args, ...)
       body <- jsonlite::fromJSON(body)
-
-
+      
+      
       if('siteid' %in% names(body)){
         ids_nos <- as.numeric(stringr::str_extract_all(body$siteid,
                                                        "[0-9.]+")[[1]])}
@@ -105,14 +151,14 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       }
       seq_chunk <- split(ids_nos,
                          ceiling(seq_along(ids_nos) / query$limit))
-
+      
       responses <- c()
-
+      
       for (sequ in seq_chunk) {
         body2 <- list()
         body2 <- body
         names(body2) <- names(body)
-
+        
         if('siteid' %in% names(body)){
           body2$siteid <- paste0(sequ, collapse = ",")
         }
@@ -121,10 +167,21 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         }
         body2$limit <- 50
         body2 <- jsonlite::toJSON(body2, auto_unbox = TRUE)
-        response <- httr::POST(new_url,
+        try(
+          response <- httr::POST(new_url,
                                body = body2,
                                add_headers("User-Agent" = "neotoma2 R package"),
                                httr::content_type("application/json"))
+        )
+        if (inherits(response, "try-error")) {
+          # Handle the SSL error
+          error_message <- conditionMessage(response)
+          
+          if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+            # Handle SSL certificate-related errors
+            stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
+          }
+        }
         stop_for_status(response,
                         task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current
@@ -142,9 +199,20 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     } else {
       responses <- c()
       while (TRUE) {
+        try(
         response <- httr::GET(paste0(baseurl, x),
                               add_headers("User-Agent" = "neotoma2 R package"),
                               query = query)
+        )
+        if (inherits(response, "try-error")) {
+          # Handle the SSL error
+          error_message <- conditionMessage(response)
+          
+          if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+            # Handle SSL certificate-related errors
+            stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
+          }
+        }
         stop_for_status(response,
                         task = "Could not connect to the Neotoma API.
                     Check that the path is valid, and check the current

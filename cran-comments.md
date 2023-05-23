@@ -169,3 +169,9 @@ Description: Access and manipulate data from the Neotoma Paleoecology Database.
 There are no spaces after https:// and 8 indents have been added as requested.
 
 I hope this is correct now, otherwise, please give me some more references/examples so that I can do it properly.
+
+---
+
+## Updates regarding SSL Certificate
+
+The SSL certificate was updated and added stop_for_status() functions to handle possible errors in R in case the SSL certificate is not updated on time.
