@@ -175,3 +175,9 @@ I hope this is correct now, otherwise, please give me some more references/examp
 ## Updates regarding SSL Certificate
 
 The SSL certificate was updated and added stop_for_status() functions to handle possible errors in R in case the SSL certificate is not updated on time.
+
+---
+
+## Updates regarding trimmed results
+
+One part of the code was limiting results. We have aimed to fix this.

@@ -108,12 +108,20 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
   } else {
     # Here the flag all_data has been accepted, so we're going to pull
     # everything in.
-    if ("limit" %in% names(query)) {
-      stop("You cannot use the limit parameter when all_data is TRUE")
+    if ("limit" %in% names(query) & "all_data" %in% names(query)) {
+      stop("You cannot use the limit and all_data parameter at the same time")
     }
     
-    query$offset <- 0
-    query$limit <- 50
+    if (!("offset" %in% names(query))){
+      query$offset <- 0
+    }
+    
+    # If there is a limit to a long list, 
+    if (!("limit" %in% names(query))){
+      query$limit <- 50
+    }
+    ql <- query$limit
+    
     try(
       response <- httr::GET(paste0(baseurl, x),
                           add_headers("User-Agent" = "neotoma2 R package"),
@@ -161,7 +169,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
           #print(length(body2$datasetid))
           body2$datasetid <- paste0(sequ, collapse = ",")
         }
-        body2$limit <- 50
+        body2$limit <- ql # Refer to the previous variable rather than hardcoding
         #print(body2)
         
         body2 <- jsonlite::toJSON(body2, auto_unbox = TRUE)
