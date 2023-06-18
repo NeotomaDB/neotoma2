@@ -304,11 +304,22 @@ get_sites.sites <- function(x, ...) {
   
   if('all_data' %in% names(cl)){
     all_data = cl$all_data
-  } else {
-    all_data = TRUE
+  }else{
+    cl[['all_data']] = TRUE
   }
   
-  output <- get_sites(siteid=siteids, all_data=all_data, ...)
+  if('limit' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  
+  if('offset' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  ## Fixing all data line
+  
+  cl[['x']] <- siteids
+
+  output <- do.call(get_sites, cl)
   
   return(output)
 }

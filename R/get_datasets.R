@@ -268,7 +268,7 @@ get_datasets.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  
+
   base_url <- paste0("data/datasets/", dataset)
   result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
@@ -315,11 +315,21 @@ get_datasets.sites <- function(x, ...) {
   if('all_data' %in% names(cl)){
     all_data = cl$all_data
   }else{
-    all_data = TRUE
+    cl[['all_data']] = TRUE
+  }
+  
+  if('limit' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  
+  if('offset' %in% names(cl)){
+    cl[['all_data']] = FALSE
   }
   ## Fixing all data line
   
-  output <- get_datasets(dataset_list, all_data = all_data)
+  cl[['x']] <- dataset_list
+  
+  output <- do.call(get_datasets, cl)
   
   return(output)
 }

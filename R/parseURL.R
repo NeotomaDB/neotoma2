@@ -40,13 +40,14 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     use)
   
   query <- list(...)
+
   if (all_data == FALSE) {
     try(
       response <- httr::GET(paste0(baseurl, x),
                             add_headers("User-Agent" = "neotoma2 R package"),
                             query = query)
     )
-    
+
     if (inherits(response, "try-error")) {
       # Handle the SSL error
       error_message <- conditionMessage(response)
@@ -65,6 +66,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       args <- x
       new_url <- newURL(baseurl, args, ...)
       body <- parsebody(args, ...)
+      #print(body)
       try(
         response <- httr::POST(new_url,
                              body = body,
@@ -86,8 +88,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-      warning("To get the complete data, use all_data = TRUE. 
-        Returned the first 25 elements.")
+      warning("To get the complete data, use all_data = TRUE.")
     }
     
     # Break if we can't connect:
@@ -108,18 +109,12 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
   } else {
     # Here the flag all_data has been accepted, so we're going to pull
     # everything in.
-    if ("limit" %in% names(query) & "all_data" %in% names(query)) {
-      stop("You cannot use the limit and all_data parameter at the same time")
+    if ("limit" %in% names(query)) {
+      stop("You cannot use the limit parameter when all_data is TRUE")
     }
     
-    if (!("offset" %in% names(query))){
-      query$offset <- 0
-    }
-    
-    # If there is a limit to a long list, 
-    if (!("limit" %in% names(query))){
-      query$limit <- 50
-    }
+    query$offset <- 0
+    query$limit <- 50
     ql <- query$limit
     
     try(

@@ -21,19 +21,19 @@ parsebody <- function(x, ...) {
     params <- stringr::str_remove_all(args, "data/datasets")
     if(substr(params, 1, 1) == "/") {
       numbers <- stringr::str_remove_all(params, "/")
-      body <- jsonlite::toJSON(list(datasetid = numbers))
+      body <- jsonlite::toJSON(list(datasetid = numbers, ...))
     }
   } else if(grepl("sites", args)){
     params <- stringr::str_remove_all(args, "data/sites")
     if(substr(params, 1, 1) == "/") {
       numbers <- stringr::str_remove_all(params, "/")
-      body <- jsonlite::toJSON(list(siteid = numbers))
+      body <- jsonlite::toJSON(list(siteid = numbers, ...))
     }
   } else if(grepl("downloads", args)){
     params <- stringr::str_remove_all(args, "data/downloads")
     if (substr(params, 1, 1) == "/") {
       numbers <- stringr::str_remove_all(params, "/")
-      body <- jsonlite::toJSON(list(datasetid = numbers))
+      body <- jsonlite::toJSON(list(datasetid = numbers, ...))
     }
   }
   # II. Other simple queries - Unlikely unless it comes with a complex location
@@ -53,7 +53,7 @@ parsebody <- function(x, ...) {
         Sremove = FALSE, extra = "merge")
     df2 <- df2 %>% select("name", "value")
     df2 <- tidyr::pivot_wider(df2)
-    body <- jsonlite::toJSON(df_ready2, auto_unbox = TRUE)
+    body <- jsonlite::toJSON(df2, auto_unbox = TRUE)
   }
   return(body)
 }
