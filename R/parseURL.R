@@ -62,11 +62,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       # The 414 error is a URL that is too long. This is a lazy way to manage
       # the choice between a POST and GET call.
       # Function with POST (Use this once server issue is resolved)
-      query <- list(...)
-      args <- x
-      new_url <- newURL(baseurl, args, ...)
-      body <- parsebody(args, ...)
-      #print(body)
+      new_url <- newURL(baseurl, x, ...)
+      body <- parsebody(x, all_data=FALSE, ...)
       try(
         response <- httr::POST(new_url,
                              body = body,
@@ -136,10 +133,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       # Function with Post (Use this once server issue is resolved)
       args <- x
       new_url <- newURL(baseurl, args, ...)
-      body <- parsebody(args, ...)
+      body <- parsebody(args, all_data, ...)
       body <- jsonlite::fromJSON(body)
-      
-      
       if('siteid' %in% names(body)){
         ids_nos <- as.numeric(stringr::str_extract_all(body$siteid,
                                                        "[0-9.]+")[[1]])}
@@ -161,12 +156,9 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
           body2$siteid <- paste0(sequ, collapse = ",")
         }
         if('datasetid' %in% names(body)){
-          #print(length(body2$datasetid))
           body2$datasetid <- paste0(sequ, collapse = ",")
         }
         body2$limit <- ql # Refer to the previous variable rather than hardcoding
-        #print(body2)
-        
         body2 <- jsonlite::toJSON(body2, auto_unbox = TRUE)
         try(
           response <- httr::POST(new_url,

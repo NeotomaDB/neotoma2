@@ -155,7 +155,7 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
     dataset <- paste0(x, collapse = ",")
   }
 
-  base_url <- paste0("data/downloads/", dataset)
+  base_url <- paste0("data/downloads?datasetid=", dataset)
   result <- parseURL(base_url, ...) # nolint
   
   output <- parse_download(result, verbose = verbose)
@@ -194,7 +194,8 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     stats::na.omit() %>%
     unique() %>%
     unlist() %>%
-    as.numeric()
+    as.numeric() %>%
+    suppressWarnings()
   
   ## Fixing all data
   cl <- as.list(match.call())
