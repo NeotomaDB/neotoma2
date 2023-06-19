@@ -4,10 +4,13 @@
 \alias{parsebody}
 \title{parse_body}
 \usage{
-parsebody(x, ...)
+parsebody(x, all_data, ...)
 }
 \arguments{
 \item{x}{The HTTP path for the particular API call.}
+
+\item{all_data}{recovers all_data parameter to decide how to handle downloads
+lists that would result in a 414 error.}
 
 \item{...}{Any query parameters passed from the function calling}
 }

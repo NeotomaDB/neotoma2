@@ -9,6 +9,8 @@ utils::globalVariables(c("col1", "df_ready2"))
 #' @importFrom jsonlite toJSON
 #' @description An internal helper function to parse the body of POST API requests
 #' @param x The HTTP path for the particular API call.
+#' @param all_data recovers all_data parameter to decide how to handle downloads 
+#' lists that would result in a 414 error.
 #' @param ... Any query parameters passed from the function calling
 #' @returns `JSON` object to parse as a body in a HTTP request
 parsebody <- function(x, all_data, ...) {
