@@ -13,7 +13,7 @@ authors:
     affiliation: 1
   - name: Simon J Goring
     orcid: 0000-0002-2700-4605
-    affiliation: [2, 3]
+    affiliation: "2, 3"
 affiliations:
   - name: HT Data
     index: 1
