@@ -1,0 +1,23 @@
+citHeader("To cite neotoma2 in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Working with the Neotoma Paleoecology Database",
+  author   = c(person(given = "Dominguez Vidana",
+             family = "Socorro",
+             role = c("aut"),
+             email = "s.dominguez@ht-data.com",
+             comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
+      person(given = "Simon",
+             family = "Goring",
+             role = c("aut", "cre"),
+             email = "goring@wisc.edu",
+             comment = structure("0000-0002-2700-4605", .Names = "ORCID"))),
+  doi      = "10.5281/zenodo.8114874",
+  journal  = "GitHub",
+  year = "2023",
+  textVersion = paste("Dominguez S, Goring S. 2023. Working with the Neotoma Paleoecology Database. GitHub. url: https://github.com/NeotomaDB/neotoma2"
+
+  )
+)
+
