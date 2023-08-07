@@ -1,0 +1,30 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0002-2700-4605",
+      "@type": "Person",
+      "email": "goring@wisc.edu",
+      "name": "Simon James Goring",
+      "affiliation": "University of Wisconsin - Madison"
+    },
+    {
+      "@id": "http://orcid.com/0000-0002-7926-4935",
+      "@type": "Person",
+      "email": "s.dominguez@ht-data.com",
+      "name": "Socorro Dominguez",
+      "affiliation": "HT Data"
+    }
+  ],
+  "identifier": "http://doi.org/10.5281/zenodo.7892993",
+  "codeRepository": "https://github.com/NeotomaDB/neotoma2",
+  "datePublished": "2023-05-03",
+  "dateModified": "2023-05-03",
+  "dateCreated": "2023-05-03",
+  "description": "The neotoma2 R package is a tool to access and manipulate data from the Neotoma Paleoecology Database (https://www.neotomadb.org) within the R environment.",
+  "keywords": "paleoecology, chronology, stratigraphy, API, Neotoma, fossils, palynology, paleolimnology, archaeology, radiocarbon, 210Pb",
+  "license": "MIT",
+  "title": "neotoma2: An R package to access data from the Neotoma Paleoecology Database",
+  "version": "v1.0.0"
+}
