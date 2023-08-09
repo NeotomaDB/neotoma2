@@ -8,7 +8,9 @@
 
 # `neotoma2` R Package
 
-The `neotoma2` R package represents a set of breaking changes with the original `neotoma` R package.  The `neotoma2` package is built on the new [Neotoma API](https://api.neotomadb.org/api-docs) and is intended as a starting point for a fully interactive experience with the [Neotoma Paleoecology Database](https://www.neotomadb.org), to support both data access and data input through R.
+The `neotoma2` R package represents a set of breaking changes with the original `neotoma` R package. The `neotoma` package was deprecated following end-of-life for the Neotoma Windows Server in 2020 and the migration of the Neotoma backend infrastructure to a PostgreSQL database and JavaScript API.
+
+The `neotoma2` package is built on the new [Neotoma API](https://api.neotomadb.org/api-docs) and is intended as a starting point for a fully interactive experience with the [Neotoma Paleoecology Database](https://www.neotomadb.org), to support both data access and data input through R.
 
 ## Contributors
 
