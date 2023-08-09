@@ -37,7 +37,7 @@ The `neotoma2` package is built for R.  Build tools include elements from the `u
 Package use requires the use of the `devtools::install_github()` function, to pull this working repository into a user's environment:
 
 ```r
-devtools::install_github('NeotomaDB/neotoma2')
+devtools::install_github('NeotomaDB/neotoma2', build_vignettes = TRUE)
 ```
 
 The expectation for this repository is that all commits to the `prod` branch will support a clean package build.  This is supported through [GitHub Actions](https://github.com/NeotomaDB/neotoma2/actions) in the `.github` folder of the repository.
