@@ -12,14 +12,14 @@
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x The HTTP/S path for the particular API call.
-#' @param use Uses the Neotoma server by default ("neotoma"), but supports either the
-#' development API server ("dev") or a local server ("local").
+#' @param use Uses the Neotoma server by default ("neotoma"), but supports
+#' either the development API server ("dev") or a local server ("local").
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
 #' @returns `list` with cleaned and parsed data from HTTP request
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
-  
+
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
     if (is.list(x)) {
       lapply(x, cleanNull, fn)
@@ -59,7 +59,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       warning("To get the complete data, use all_data = TRUE. 
         Returned the first 25 elements.")
     }
-    
+
     # Break if we can't connect:
     stop_for_status(response,
                     task = "Could not connect to the Neotoma API.
@@ -96,10 +96,11 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       body <- jsonlite::fromJSON(body)
 
 
-      if('siteid' %in% names(body)){
+      if ("siteid" %in% names(body)) {
         ids_nos <- as.numeric(stringr::str_extract_all(body$siteid,
-                                                       "[0-9.]+")[[1]])}
-      if('datasetid' %in% names(body)){
+                                                       "[0-9.]+")[[1]])
+      }
+      if("datasetid" %in% names(body)) {
         ids_nos <- as.numeric(stringr::str_extract_all(body$datasetid,
                                                        "[0-9.]+")[[1]])
       }
@@ -113,10 +114,10 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         body2 <- body
         names(body2) <- names(body)
 
-        if('siteid' %in% names(body)){
+        if ("siteid" %in% names(body)) {
           body2$siteid <- paste0(sequ, collapse = ",")
         }
-        if('datasetid' %in% names(body)){
+        if ("datasetid" %in% names(body)) {
           body2$datasetid <- paste0(sequ, collapse = ",")
         }
         body2$limit <- 50
@@ -130,11 +131,11 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-        
+
         result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                      flatten = FALSE,
                                      simplifyVector = FALSE)
-        
+
         responses <- c(responses, cleanNull(result)$data)
       }
       result$data <- responses
@@ -150,11 +151,11 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     Check that the path is valid, and check the current
                      status of the Neotoma API services at
                       http://data.neotomadb.org")
-        
+
         result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                      flatten = FALSE,
                                      simplifyVector = FALSE)
-        
+
         if (length(cleanNull(result)$data) == 0) {
           break
         }

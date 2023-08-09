@@ -17,7 +17,8 @@ setMethod(f = "specimens",
             output <- purrr::map(x@sites, function(y) specimens(y)) %>%
               dplyr::bind_rows()
             if(nrow(output) == 0){
-            warnsite <- sprintf("No assigned specimens. Did you run get_specimens()")
+            warnsite <-
+              sprintf("No assigned specimens. Did you run get_specimens()")
             warning(warnsite)
             }
             return(output)
@@ -32,8 +33,6 @@ setMethod(f = "specimens",
 setMethod(f = "specimens",
           signature = "site",
           definition = function(x) {
-            
-            #allids <<- getids(x)
             assign("allids", getids(x))
             siteinfo <- as.data.frame(x) %>%
               dplyr::left_join(allids, by = "siteid") %>%
@@ -75,21 +74,22 @@ setMethod(f = "specimens",
                             "Calibrated radiocarbon years BP",
                             "Radiocarbon years BP", "Varve years BP")
             sampleset <- samples(x)
-            
-            if(nrow(sampleset) == 0){
+
+            if (nrow(sampleset) == 0) {
               stop("Not enough data. Have you run get_specimens()?")
             }
             sampleset %>%
               dplyr::select('datasetid', 'sampleid', 'taxonid', 'age',
               'agetype', 'ageolder', 'ageyounger', 'chronologyid',
               'chronologyname', 'units', 'value', 'context', 'element',
-              'taxongroup', 'variablename', 'ecologicalgroup', 'analysisunitid', 
-              'sampleanalyst', 'depth', 'thickness', 'samplename')
-            
-            
+              'taxongroup', 'variablename', 'ecologicalgroup',
+              'analysisunitid', 'sampleanalyst', 'depth', 'thickness',
+              'samplename')
+
+
             sampleset <- sampleset %>% 
               dplyr::mutate(taxonid=as.character(sampleset$taxonid))
-            
+
             sampset <- purrr::map(datasets(x)@datasets,
                                   function(y) {
                                     if(length(y@specimens@specimens) != 0){
@@ -119,8 +119,9 @@ setMethod(f = "specimens",
                                     }
                                   }) %>%
               dplyr::bind_rows()
-            if(nrow(sampset) != 0){
-              new_sampset <- left_join(sampset, sampleset, by = c('datasetid', 'sampleid', 'taxonid'))
+            if (nrow(sampset) != 0) {
+              new_sampset <- left_join(sampset, sampleset,
+                by = c('datasetid', 'sampleid', 'taxonid'))
             } else {
               new_sampset <- data.frame()
             }

@@ -9,8 +9,8 @@ parseURL(x, use = "neotoma", all_data = FALSE, ...)
 \arguments{
 \item{x}{The HTTP/S path for the particular API call.}
 
-\item{use}{Uses the Neotoma server by default ("neotoma"), but supports either the
-development API server ("dev") or a local server ("local").}
+\item{use}{Uses the Neotoma server by default ("neotoma"), but supports
+either the development API server ("dev") or a local server ("local").}
 
 \item{all_data}{If TRUE return all possible API calls}
 
