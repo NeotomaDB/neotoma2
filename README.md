@@ -22,6 +22,8 @@ This project is an open project, and contributions are welcome from any individu
 
 Issues and bug reports are always welcome.  Code clean-up, and feature additions can be done either through pull requests to [project forks](https://github.com/NeotomaDB/neotoma2/network/members) or [project branches](https://github.com/NeotomaDB/neotoma2/branches).
 
+Please direct development questions to Simon Goring by email: [goring@wisc.edu](mailto:goring@wisc.edu).
+
 All products of the Neotoma Paleoecology Database are licensed under an [MIT License](LICENSE) unless otherwise noted.
 
 ## How to use this repository
