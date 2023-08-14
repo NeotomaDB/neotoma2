@@ -1,6 +1,7 @@
 ---
 title: "The neotoma2 R Package"
 output: rmarkdown::html_vignette
+VignetteBuilder: pkgdown
 vignette: >
   %\VignetteIndexEntry{The neotoma2 R Package}
   %\VignetteEngine{knitr::rmarkdown}
