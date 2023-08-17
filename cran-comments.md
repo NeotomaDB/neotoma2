@@ -169,3 +169,9 @@ Description: Access and manipulate data from the Neotoma Paleoecology Database.
 There are no spaces after https:// and 8 indents have been added as requested.
 
 I hope this is correct now, otherwise, please give me some more references/examples so that I can do it properly.
+
+-----
+
+## Remarks for Upgrade 1.0.3
+
+Added JOSS Article PDF and vignette under inst/doc
