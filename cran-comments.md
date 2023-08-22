@@ -174,4 +174,4 @@ I hope this is correct now, otherwise, please give me some more references/examp
 
 ## Remarks for Upgrade 1.0.3
 
-Added JOSS Article PDF and vignette under inst/doc
+Added JOSS Article PDF and fixed small errors in the API calls.
