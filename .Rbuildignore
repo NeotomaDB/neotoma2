@@ -17,3 +17,4 @@ paper.*
 ^CRAN-SUBMISSION$
 codemeta.json
 
+^codemeta\.json$
