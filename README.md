@@ -50,6 +50,14 @@ The expectation for this repository is that all commits to the `prod` branch wil
 
 There is considerable information in the vignettes for the package, which can be [accessed directly](https://github.com/NeotomaDB/neotoma2/tree/production/vignettes).
 
+### Report of Sites Statistics
+
+In order to see the total available sites that can be queried by this package, use the function:
+
+```
+neotoma2::get_stats(start=0, end=1)
+```
+
 ### System Requirements
 
 This project is built with R > v4.0.  The packages needed for proper package use are detailed in the `DESCRIPTION` file for this repository.
@@ -65,5 +73,5 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 This project is to be evaluated using the following metrics:
 
 * Completion of core functionality for data access **DONE** Feb 10, 2022
-* Completion of core functionality for data presentation
+* Completion of core functionality for data presentation **DONE**
 * Completion of clear vignettes for major data types or Constituent Databases represented within the Neotoma Database.
