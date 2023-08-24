@@ -1,5 +1,3 @@
-citHeader("To cite neotoma2 in publications use:")
-
 bibentry(
   bibtype    = "Manual",
   title    = "Working with the Neotoma Paleoecology Database",
