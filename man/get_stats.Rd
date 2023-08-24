@@ -15,8 +15,18 @@ get_stats(start, end)
 \code{data.frame} with summary statistics
 }
 \description{
-Returns the count of sites, datasets, publications and other
+Returns a count of sites, datasets, publications and other
 objects added to Neotoma during the requested time period.
+}
+\details{
+This function returns summaries about the data holdings
+within Neotoma using the existing Neotoma API's \code{summary} endpoint. This can
+provide information about recent uploads (the number of new sites uploaded within the
+last month, for example), or can be used to provide information about the overall number
+of sites/datasets (using an arbitrarily high value for \code{end}).
+}
+\examples{
+last_month <- get_stats(start = 0, end = 1)
 }
 \author{
 Socorro Dominguez \email{s.dominguez@ht-data.com}
