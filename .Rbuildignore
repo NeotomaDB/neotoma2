@@ -9,11 +9,11 @@ CODE_OF_CONDUCT.md
 ^.*.tar.gz
 checkout.txt
 lintoutput.txt
-paper.md
-paper.bib
+paper.*
 ^\.github$
 ^doc$
 ^Meta$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 codemeta.json
+

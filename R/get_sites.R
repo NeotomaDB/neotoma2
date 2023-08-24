@@ -244,11 +244,9 @@ get_sites.default <- function(...) { # nolint
 #' }
 #' @export
 get_sites.numeric <- function(x, ...) {
-
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
   }
-
   base_url <- paste0("data/sites/", siteids)
   result <- neotoma2::parseURL(base_url, ...)
   result_length <- length(result[2]$data)
@@ -293,6 +291,7 @@ get_sites.sites <- function(x, ...) {
       unique() %>%
       as.numeric() %>%
       na.omit() %>%
+      suppressWarnings() %>%
       paste0(., collapse = ",")
   }
  
@@ -304,11 +303,23 @@ get_sites.sites <- function(x, ...) {
   
   if('all_data' %in% names(cl)){
     all_data = cl$all_data
-  } else {
-    all_data = TRUE
+  }else{
+    cl[['all_data']] = TRUE
   }
   
-  output <- get_sites(siteid=siteids, all_data=all_data, ...)
+  if('limit' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  
+  if('offset' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  ## Fixing all data line
+  
+  cl[['siteid']] <- siteids
+  cl[['x']] <- NULL
+
+  output <- do.call(get_sites, cl)
   
   return(output)
 }

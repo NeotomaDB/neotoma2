@@ -8,7 +8,11 @@
 #' @export
 
 check_contacts <- function(x, ...) {
-  UseMethod("check_contacts")
+  if (class(x) %in% c("contacts")) {
+    UseMethod("check_contacts")
+  } else {
+    stop("check_contacts() must operate on a `contacts` or `contact` object.")
+  }
 }
 
 #' @title Get contact information for Neotoma contributors
@@ -19,7 +23,7 @@ check_contacts <- function(x, ...) {
 #' @export
 check_contacts.contacts <- function(x, similarity = 0.5, ...) {
   checked <- map(x@contacts, function(y) {
-    if (is.na(y@contactid)) {
+    if (is.na(y@contactid) | !is(y@contactid, "numeric")) {
       output <- get_contacts(name = paste0(y@givennames, " ",
                                            y@familyname),
                              similarity = similarity, ...)

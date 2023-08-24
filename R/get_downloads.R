@@ -151,14 +151,11 @@ parse_download <- function(result, verbose = TRUE) {
 #' @export
 get_downloads.numeric <- function(x, verbose = TRUE, ...) {
   
-  
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  
-  
-  
-  base_url <- paste0("data/downloads/", dataset)
+
+  base_url <- paste0("data/downloads?datasetid=", dataset)
   result <- parseURL(base_url, ...) # nolint
   
   output <- parse_download(result, verbose = verbose)
@@ -197,7 +194,8 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     stats::na.omit() %>%
     unique() %>%
     unlist() %>%
-    as.numeric()
+    as.numeric() %>%
+    suppressWarnings()
   
   ## Fixing all data
   cl <- as.list(match.call())
@@ -206,12 +204,23 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
   if('all_data' %in% names(cl)){
     all_data = cl$all_data
   }else{
-    all_data = TRUE
+    cl[['all_data']] = TRUE
+  }
+  
+  if('limit' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  
+  if('offset' %in% names(cl)){
+    cl[['all_data']] = FALSE
   }
   ## Fixing all data line
   
-  output <- get_downloads(x = output, verbose, all_data = all_data)
+  cl[['x']] <- output
+  cl[['verbose']] <- verbose
   
+  output <- do.call(get_downloads, cl)
+
   return(output)
 }
 
@@ -231,7 +240,6 @@ get_downloads.character <- function(x, verbose = TRUE, ...) {
   result <- jsonlite::fromJSON(x,
                                flatten = FALSE,
                                simplifyVector = FALSE)
-  
   result <- result %>%
     cleanNULL()
   

@@ -337,7 +337,7 @@ setMethod(f = "summary",
                                            types <- NA
                                          }
                                          data.frame(collectionunit = y@handle,
-                                                    chronolgies = chrons,
+                                                    chronologies = chrons,
                                                     datasets = datasets,
                                                     types = types)
                                          }) %>%

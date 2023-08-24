@@ -104,9 +104,23 @@ testthat::test_that("We are pulling in the sites we expect to capture:", {
                 [-52, 75],
                 [-52, 24],
                 [-169, 24]]]}'
-  
+
   usa <- get_sites(loc = location, limit = 20000)
   fla <- get_sites(gpid = "Florida", limit = 10000)
-  
+
   testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+})
+
+testthat::test_that("Testing the publications calls.", {
+  empty <- get_publications()
+  pollen <- get_publications(search = "pollen")
+  counts <- get_publications(c(1, 2, 3, 4))
+  frompubs <- get_publications(counts)
+
+  testthat::expect_is(empty, "publications")
+  testthat::expect_is(pollen, "publications")
+  testthat::expect_is(counts, "publications")
+  testthat::expect_false(empty[[1]]@citation == pollen[[1]]@citation)
+  testthat::expect_length(counts, 4)
+  testthat::expect_identical(counts, frompubs)
 })

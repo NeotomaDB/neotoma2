@@ -8,7 +8,9 @@
 
 # `neotoma2` R Package
 
-The `neotoma2` R package represents a set of breaking changes with the original `neotoma` R package.  The `neotoma2` package is built on the new [Neotoma API](https://api.neotomadb.org/api-docs) and is intended as a starting point for a fully interactive experience with the [Neotoma Paleoecology Database](https://www.neotomadb.org), to support both data access and data input through R.
+The `neotoma2` R package represents a set of breaking changes with the original `neotoma` R package. The `neotoma` package was deprecated following end-of-life for the Neotoma Windows Server in 2020 and the migration of the Neotoma backend infrastructure to a PostgreSQL database and JavaScript API.
+
+The `neotoma2` package is built on the new [Neotoma API](https://api.neotomadb.org/api-docs) and is intended as a starting point for a fully interactive experience with the [Neotoma Paleoecology Database](https://www.neotomadb.org), to support both data access and data input through R.
 
 ## Contributors
 
@@ -21,6 +23,8 @@ This project is an open project, and contributions are welcome from any individu
 ### Tips for Contributing
 
 Issues and bug reports are always welcome.  Code clean-up, and feature additions can be done either through pull requests to [project forks](https://github.com/NeotomaDB/neotoma2/network/members) or [project branches](https://github.com/NeotomaDB/neotoma2/branches).
+
+Please direct development questions to Simon Goring by email: [goring@wisc.edu](mailto:goring@wisc.edu).
 
 All products of the Neotoma Paleoecology Database are licensed under an [MIT License](LICENSE) unless otherwise noted.
 
@@ -37,7 +41,7 @@ The `neotoma2` package is built for R.  Build tools include elements from the `u
 Package use requires the use of the `devtools::install_github()` function, to pull this working repository into a user's environment:
 
 ```r
-devtools::install_github('NeotomaDB/neotoma2')
+devtools::install_github('NeotomaDB/neotoma2', build_vignettes = TRUE)
 ```
 
 The expectation for this repository is that all commits to the `prod` branch will support a clean package build.  This is supported through [GitHub Actions](https://github.com/NeotomaDB/neotoma2/actions) in the `.github` folder of the repository.
@@ -45,6 +49,14 @@ The expectation for this repository is that all commits to the `prod` branch wil
 ### Analysis Workflow Overview
 
 There is considerable information in the vignettes for the package, which can be [accessed directly](https://github.com/NeotomaDB/neotoma2/tree/production/vignettes).
+
+### Report of Sites Statistics
+
+In order to see the total available sites that can be queried by this package, use the function:
+
+```
+neotoma2::get_stats(start=0, end=1)
+```
 
 ### System Requirements
 
@@ -61,5 +73,5 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 This project is to be evaluated using the following metrics:
 
 * Completion of core functionality for data access **DONE** Feb 10, 2022
-* Completion of core functionality for data presentation
+* Completion of core functionality for data presentation **DONE**
 * Completion of clear vignettes for major data types or Constituent Databases represented within the Neotoma Database.

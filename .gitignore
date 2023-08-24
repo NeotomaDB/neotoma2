@@ -4,6 +4,7 @@ wc10/
 neotoma2.Rproj
 *.Rproj
 .Rhistory
+.Rbuildignore
 checkout.txt
 lintoutput.txt
 .DS_Store
@@ -12,3 +13,5 @@ R/.DS_Store
 /Meta/
 
 *.gz
+
+*/inst/doc/neotoma2-package.html
