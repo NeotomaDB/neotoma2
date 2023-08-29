@@ -30,6 +30,8 @@
 #' @param chronologyname A valid name for the chronology.
 #' @param chroncontrols A data.frame containing the chronological controls
 #' for the age model.
+#' @description Function to create new chronology objects for personal analysis. 
+#' The new object will not be uploaded to the database.
 #' @returns `chronology` object
 #' @export
 set_chronology <- function(x = NA,
