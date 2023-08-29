@@ -18,6 +18,8 @@
 #' @param chronologies chronologies taken from the collection unit
 #' @param defaultchronology best chronology model identifier to 
 #' be used with this collection unit
+#' @description Function to create new collection unit objects for personal analysis. 
+#' The new object will not be uploaded to the database.
 #' @export
 #' @returns `collunit` object
 #' @examples {

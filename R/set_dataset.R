@@ -13,6 +13,8 @@
 #' @param pi_list pi list
 #' @param samples taxa objects
 #' @export
+#' @description Function to create new `dataset` objects for personal analysis. 
+#' The new object will not be uploaded to the database.
 #' @returns `dataset` object
 #' @examples {
 #' # Create a dataset

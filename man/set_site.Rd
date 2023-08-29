@@ -34,7 +34,7 @@ set_site(
 
 \item{notes}{additional information of the site}
 
-\item{description}{A character description of site.}
+\item{description}{Function to create new site objects for personal analysis. The new object will not be uploaded to the database.}
 
 \item{collunits}{Collection units in the site}
 }
