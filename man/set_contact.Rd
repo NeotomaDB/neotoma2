@@ -68,5 +68,6 @@ Create a new contact for a record.
 Within Neotoma all chronologies have unique numeric identifiers.
 Within R, because of the need to use the indentifiers across objects,
 and because we want to avoid conflicts between naming systems, a
-universally unique identifier (UUID) is created for the object ID.
+universally unique identifier (UUID) is created for the object ID.This is not
+to be updated to the database.
 }

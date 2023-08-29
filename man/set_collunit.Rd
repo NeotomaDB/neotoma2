@@ -58,7 +58,8 @@ be used with this collection unit}
 \code{collunit} object
 }
 \description{
-set Site Information for Fossil Sites
+Function to create new collection unit objects for personal analysis.
+The new object will not be uploaded to the database.
 }
 \examples{
 {

@@ -1,4 +1,5 @@
 ..Rcheck/
+neotoma2.Rcheck/
 .Rproj.user/
 wc10/
 neotoma2.Rproj
@@ -13,5 +14,4 @@ R/.DS_Store
 /Meta/
 
 *.gz
-
-*/inst/doc/neotoma2-package.html
+inst/

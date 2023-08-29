@@ -44,7 +44,8 @@ utils::globalVariables(c("siteid"))
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 clean <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
     UseMethod("clean", x)
@@ -73,7 +74,8 @@ clean <- function(x = NA, verbose = TRUE, ...) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 clean.sites <- function(x, verbose = TRUE, ...) {
 
   siteids <- as.data.frame(x)$siteid
@@ -126,7 +128,8 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 clean.collunits <- function(x, verbose = TRUE, ...) {
   cuids <- as.data.frame(x)$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
@@ -167,7 +170,8 @@ clean.collunits <- function(x, verbose = TRUE, ...) {
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 clean.datasets <- function(x, verbose = TRUE, ...) {
   dsids <- as.data.frame(x)$datasetid
   return(x[which(!duplicated(dsids))])

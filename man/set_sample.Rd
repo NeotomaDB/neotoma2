@@ -45,7 +45,8 @@ set_sample(
 \code{sample} object
 }
 \description{
-set Sample Information
+Function to create new samples objects for analysis.
+The new object will not be uploaded to the database.
 }
 \examples{
 {

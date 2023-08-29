@@ -11,7 +11,8 @@
 #' # Passing a non-NULL value returns that value:
 #' b <- testNull(val = 11, out = 12)
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 testNull <- function(val, out=NA) { # nolint
   if (is.null(val)) {
     return(out)

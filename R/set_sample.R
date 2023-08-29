@@ -14,6 +14,8 @@
 #' @param sampleanalyst Analyst's contact name
 #' @param analysisunitid Which analysis unit it is
 #' @param analysisunitname Analysis Unit's name
+#' @description Function to create new samples objects for analysis. 
+#' The new object will not be uploaded to the database.
 #' @export
 #' @returns `sample` object
 #' @examples {

@@ -34,6 +34,6 @@ Get Site Information for Fossil Sites from a Set of Sites
 char_sites <- get_sites(taxa = "charcoal")
 pollen_coloc <- get_sites(char_sites, datasettype = "pollen")
 char_coloc <- char_sites \%>\% filter(siteid \%in\% getids(pollen_coloc)$siteid)
-pol_char <- c(pollen_coloc, char_coloc) \%>\% clean()
+pol_char <- c(pollen_coloc, char_coloc)
 }
 }

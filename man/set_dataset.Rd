@@ -42,7 +42,8 @@ set_dataset(
 \code{dataset} object
 }
 \description{
-set Site Information for Fossil Sites
+Function to create new \code{dataset} objects for personal analysis.
+The new object will not be uploaded to the database.
 }
 \examples{
 {

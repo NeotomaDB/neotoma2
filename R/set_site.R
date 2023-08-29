@@ -10,7 +10,7 @@
 #' @param altitude altitude/elevation of the site.
 #' @param geopolitical The geopolitical unit in which the site is located.
 #' @param area The area of the site or depositional basin in *ha*.  Can be calculated from the polygon.
-#' @param description A character description of site.
+#' @param description Function to create new site objects for personal analysis. The new object will not be uploaded to the database.
 #' @param notes additional information of the site
 #' @param collunits Collection units in the site
 #' @returns `site` object

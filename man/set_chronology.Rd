@@ -64,4 +64,7 @@ identifiers. Within R, because of the need to use the
 identifiers across objects, and because we want to avoid
 conflicts between naming systems, a universally unique
 identifier (UUID) is created for the object ID.
+
+Function to create new chronology objects for personal analysis.
+The new object will not be uploaded to the database.
 }

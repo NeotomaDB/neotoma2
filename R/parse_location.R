@@ -7,6 +7,8 @@
 #' @importFrom methods new
 #' @description
 #' Retrieve location from datasets WTK, GeoJson, bounding box
+#' @keywords internal
+#' @noRd
 #' @param x location object
 parse_location <- function(x) {
   if (is.numeric(x)) {
