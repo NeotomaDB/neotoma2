@@ -23,3 +23,4 @@ An internal helper function to parse the body of POST API requests
 \author{
 Socorro Dominguez
 }
+\keyword{internal}
