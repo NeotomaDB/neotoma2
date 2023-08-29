@@ -268,7 +268,7 @@ get_sites.numeric <- function(x, ...) {
 #' char_sites <- get_sites(taxa = "charcoal")
 #' pollen_coloc <- get_sites(char_sites, datasettype = "pollen")
 #' char_coloc <- char_sites %>% filter(siteid %in% getids(pollen_coloc)$siteid)
-#' pol_char <- c(pollen_coloc, char_coloc) %>% clean()
+#' pol_char <- c(pollen_coloc, char_coloc)
 #' }
 #' @returns The function returns either a single item of class `"try-error"`
 #' describing the reason for failure (either misdefined parameters or an error
