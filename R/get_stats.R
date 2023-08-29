@@ -14,8 +14,9 @@
 #' @param start The starting month (from present == 0) for which to generate the summary.
 #' @param end The ending month (from present == 0) for which to generate the summary.
 #' @returns `data.frame` with summary statistics
-#' @examples
+#' @examples \donttest{
 #' last_month <- get_stats(start = 0, end = 1)
+#' }
 #' @export
 get_stats <- function(start, end) {
 
