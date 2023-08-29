@@ -13,6 +13,7 @@ utils::globalVariables(c("col1", "df_ready2"))
 #' lists that would result in a 414 error.
 #' @param ... Any query parameters passed from the function calling
 #' @returns `JSON` object to parse as a body in a HTTP request
+#' @keywords internal
 parsebody <- function(x, all_data, ...) {
   #query <- list(...)
   # Retrieve complete call to create json body
