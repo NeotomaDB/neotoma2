@@ -26,7 +26,9 @@ last month, for example), or can be used to provide information about the overal
 of sites/datasets (using an arbitrarily high value for \code{end}).
 }
 \examples{
+\donttest{
 last_month <- get_stats(start = 0, end = 1)
+}
 }
 \author{
 Socorro Dominguez \email{s.dominguez@ht-data.com}
