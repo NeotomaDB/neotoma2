@@ -21,7 +21,7 @@ affiliations:
     index: 2
   - name: Center for Climatic Research, University of Wisconsin -- Madison
     index: 3
-date: 22 February 2022
+date: 6 November 2023
 bibliography: paper.bib
 ---
 
