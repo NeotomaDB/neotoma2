@@ -42,7 +42,6 @@ Imports:
     dplyr,
     gtools,
     leaflet,
-    mapview,
     assertthat,
     stringr,
     progress,

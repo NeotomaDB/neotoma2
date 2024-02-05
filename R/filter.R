@@ -142,6 +142,10 @@ filter.sites <- function(x, ...) {  # nolint
     any()
 
   ids <- getids(x)
+  ids <- ids %>% mutate(
+    collunitid = as.numeric(collunitid),
+    datasetid = as.numeric(datasetid)
+  )
 
   if (sitecols == TRUE) {
     ids <- ids %>%
@@ -152,14 +156,16 @@ filter.sites <- function(x, ...) {  # nolint
 
   if (collunitcols == TRUE) {
     ids <- ids %>%
-      inner_join(as.data.frame(collunits(x)), 
+      inner_join(
+        as.data.frame(collunits(x)), 
         by = c("collunitid" = "collectionunitid"))
   }
 
   if (datasetcols == TRUE) {
     ids <- ids %>%
-      inner_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-      rename(datasetnotes = notes)
+      inner_join(
+        mutate(as.data.frame(datasets(x)), datasetid = as.numeric(datasetid)),
+        by = "datasetid")
   }
 
   cleanids <- ids %>%

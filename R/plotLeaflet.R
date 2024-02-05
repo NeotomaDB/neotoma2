@@ -2,8 +2,7 @@
 #' @description Plot sites on a leaflet map
 #' @importFrom purrr map
 #' @importFrom assertthat assert_that
-#' @importFrom leaflet leaflet addProviderTiles addTiles addCircleMarkers
-#' @importFrom mapview mapshot
+#' @importFrom leaflet leaflet addTiles addCircleMarkers
 #' @param object Sites object to plot
 #' @examples \donttest{
 #' # Note that by default the limit for queries is 25 records:
@@ -25,7 +24,6 @@ setMethod(f = "plotLeaflet",
             }) %>%
               bind_rows()
             map1 <- leaflet(df1) %>%
-              addProviderTiles(providers$Stamen.TerrainBackground) %>%
               addTiles() %>%
               addCircleMarkers(lng = df1$long, lat = df1$lat,
                                popup = paste0("<b>", df1$sitename,
@@ -46,7 +44,6 @@ setMethod(f = "plotLeaflet",
 #' @importFrom purrr map
 #' @importFrom assertthat assert_that
 #' @import leaflet
-#' @importFrom mapview mapshot
 #' @examples \donttest{
 #' modernSites <- get_sites(keyword = "Modern")
 #' plotLeaflet(modernSites[[1]])
@@ -63,9 +60,7 @@ setMethod(f = "plotLeaflet",
                              long = mean(st_coordinates(object@geography)[, 1]),
                              elev = object@altitude,
                              description = object@description)
-
             map1 <- leaflet(df1) %>%
-              addProviderTiles(providers$Stamen.TerrainBackground) %>%
               addTiles() %>%
               addCircleMarkers(lng = df1$long, lat = df1$lat,
                                popup = paste0("<b>", df1$sitename,
