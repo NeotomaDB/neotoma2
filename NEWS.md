@@ -5,4 +5,14 @@
 
 # neotoma2 1.0.3
 
-Added JOSS Article PDF and vignette under inst/doc
+## Remarks for Upgrade 1.0.3
+
+Fixed errors in the API calls.
+
+Fixed filter function for collection units and datasets.
+
+Updated plotLeaflet to not add provider tiles.
+
+Removed mapview to avoid `sp` conflicts.
+
+Updated README to reflect milestones with JOSS.
