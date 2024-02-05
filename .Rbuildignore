@@ -26,3 +26,5 @@ paper.*
 codemeta.json
 
 ^codemeta\.json$
+
+CITATION.cff

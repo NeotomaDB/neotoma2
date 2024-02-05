@@ -128,6 +128,7 @@ setMethod(f = "show",
 #' @title Get or remove sites by numeric index
 #' @param x The collunits object
 #' @param i The numeric index
+#' @description Retrieve sites by numeric index
 #' @return null used for side effects. Printing a data.frame
 setMethod(f = "[",
           signature = signature(x = "collunits", i = "numeric"),
