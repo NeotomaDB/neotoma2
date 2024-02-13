@@ -453,15 +453,19 @@ setMethod(f = "cite_data",
           definition = function(x) {
             strn <- paste0("%s. %s; %s dataset. ",
                            "In %s. Neotoma Paleoecology Database. doi:%s")
-            ids <- getids(x)
+            ids <- getids(x) %>% mutate(
+              collunitid = as.numeric(collunitid),
+              datasetid = as.numeric(datasetid))
+            
             sitenames <- x  %>%
               as.data.frame() %>%
               dplyr::select(siteid, sitename)
             datasets <- datasets(x) %>%
               as.data.frame() %>%
-              dplyr::select(datasetid, datasettype, database)
+              dplyr::select(datasetid, datasettype, database)%>%
+              mutate(datasetid = as.numeric(datasetid))
 
-            dois <- purrr::map(datasets(x)@datasets, function(x) {
+            dois <- purrr::map(datasets(get_datasets(x))@datasets, function(x) {
               doi <- unlist((x$doi  %>% purrr::map(testNull)))
               pi_list <- unlist((x$pi_list  %>% purrr::map(testNull)))
               data.frame(datasetid = x$datasetid,
@@ -469,7 +473,7 @@ setMethod(f = "cite_data",
                          pi_list = paste0(sort(pi_list), collapse = "; "))
             }) %>%
             do.call(rbind, .) %>%
-            mutate(datasetid = as.character(datasetid)) # Cast to manage joins.
+              mutate(datasetid = as.numeric(datasetid))
 
             citations <- ids %>%
               dplyr::full_join(sitenames, by = "siteid") %>%
@@ -484,7 +488,8 @@ setMethod(f = "cite_data",
               as.data.frame() %>%
               dplyr::mutate(citation = sprintf(strn,
                             pi_list, sitename, datasettype, database, doi)) %>%
-              dplyr::select(datasetid, citation)
+              dplyr::select(datasetid, citation) %>%
+              mutate(datasetid = as.numeric(datasetid))
 
             return(citations)
           })
@@ -508,22 +513,27 @@ setMethod(f = "cite_data",
           definition = function(x) {
             strn <- paste0("%s. %s; %s dataset. ",
                            "In %s. Neotoma Paleoecology Database. doi:%s")
-            ids <- getids(x)
+            ids <- getids(x) %>% mutate(
+              collunitid = as.numeric(collunitid),
+              datasetid = as.numeric(datasetid))
+            
             sitenames <- x  %>%
               as.data.frame() %>%
-              dplyr::select(siteid, sitename)
+              dplyr::select(siteid, sitename) 
             datasets <- datasets(x) %>%
               as.data.frame() %>%
-              dplyr::select(datasetid, datasettype, database)
+              dplyr::select(datasetid, datasettype, database) %>%
+              mutate(datasetid = as.numeric(datasetid))
 
-            dois <- purrr::map(datasets(x)@datasets, function(x) {
+            dois <- purrr::map(datasets(get_datasets(x))@datasets, function(x) {
               doi <- unlist((x$doi  %>% purrr::map(testNull)))
               pi_list <- unlist((x$pi_list  %>% purrr::map(testNull)))
               data.frame(datasetid = x$datasetid,
                          doi = doi,
                          pi_list = paste0(sort(pi_list), collapse = "; "))
             }) %>%
-            dplyr::bind_rows()
+            dplyr::bind_rows() %>%
+              mutate(datasetid = as.numeric(datasetid))
 
             citations <- ids %>%
             dplyr::full_join(sitenames, by = "siteid") %>%
