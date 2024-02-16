@@ -9,7 +9,7 @@
 
 Fixed errors in the API calls.
 
-Fixed filter function for collection units and datasets.
+Fixed filter function for collection units and datasets. Changed \itemize for \describe
 
 Updated plotLeaflet to not add provider tiles.
 
