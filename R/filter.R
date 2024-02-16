@@ -5,7 +5,7 @@ utils::globalVariables(c("elev", "notes"))
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
-#' \itemize{
+#' \describe{
 #'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
@@ -40,8 +40,7 @@ utils::globalVariables(c("elev", "notes"))
 #'   device.}
 #'  \item{"depositionalenvironment"}{A fixed vocabulary name for the
 #'   depositional environment.}
-#' }
-#'
+#'}
 #' @import sf
 #' @import dplyr
 #' @importFrom purrr map
@@ -61,7 +60,7 @@ filter <- function(x, ...) {
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
-#' \itemize{
+#' \describe{
 #'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
@@ -96,7 +95,7 @@ filter <- function(x, ...) {
 #'   device.}
 #'  \item{"depositionalenvironment"}{A fixed vocabulary name for the
 #'   depositional environment.}
-#' }
+#'   }
 #' @import sf
 #' @import dplyr
 #' @importFrom purrr map
@@ -116,23 +115,23 @@ filter <- function(x, ...) {
 #' }
 #' @export
 filter.sites <- function(x, ...) {  # nolint
-
+  
   # It is time consuming to do all the joining.  So here we
   # do a thing to try to speed stuff up by only joining the stuff we need:
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
-
+  
   sitecols <- c("sitename", "lat", "long", "altitude") %>%
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()
-
+  
   datasetcols <- c("datasetid", "database", "datasettype", "age_range_old",
                    "age_range_young", "notes") %>%
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()
-
+  
   collunitcols <- c("collectionunitid", "handle", "colldate",
                     "location", "waterdepth", "collunittype",
                     "collectiondevice", "defaultchronology",
@@ -140,49 +139,49 @@ filter.sites <- function(x, ...) {  # nolint
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()
-
+  
   ids <- getids(x)
   ids <- ids %>% mutate(
     collunitid = as.numeric(collunitid),
     datasetid = as.numeric(datasetid)
   )
-
+  
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
       rename(altitude = elev,
              sitenotes = notes)
   }
-
+  
   if (collunitcols == TRUE) {
     ids <- ids %>%
       inner_join(
         as.data.frame(collunits(x)), 
         by = c("collunitid" = "collectionunitid"))
   }
-
+  
   if (datasetcols == TRUE) {
     ids <- ids %>%
       inner_join(
         mutate(as.data.frame(datasets(x)), datasetid = as.numeric(datasetid)),
         by = "datasetid")
   }
-
+  
   cleanids <- ids %>%
     dplyr::filter(...)
-
+  
   if (nrow(cleanids) == 0) {
     return(new("sites"))
   }
-
+  
   siteids <- as.data.frame(x)$siteid
-
+  
   pared_sites <- x[which(siteids %in% cleanids$siteid)]
-
+  
   # Sites are cleared.  Now need to clear datasets:
   good_dsid <- unique(cleanids$datasetid)
   good_cuid <- unique(cleanids$collunitid)
-
+  
   pared_ds <- purrr::map(pared_sites@sites, function(x) {
     ycu <- collunits(x)
     ycu <- ycu[which(as.data.frame(ycu)$collectionunitid %in% good_cuid)]
@@ -193,9 +192,9 @@ filter.sites <- function(x, ...) {  # nolint
       return(y)
     })
     x@collunits@collunits <- xcu
-
+    
     return(x)
   })
-
+  
   return(new("sites", sites = pared_ds))
 }
