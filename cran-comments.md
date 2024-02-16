@@ -176,7 +176,7 @@ I hope this is correct now, otherwise, please give me some more references/examp
 
 Fixed errors in the API calls.
 
-Fixed filter function for collection units and datasets.
+Fixed filter function for collection units and datasets. Fixed filter function documentation.
 
 Updated plotLeaflet to not add provider tiles.
 
