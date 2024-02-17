@@ -96,9 +96,9 @@ parse_site <- function(result) {
 #' Each "site" object contains 6 parameters that can be accessed as well:
 #' siteid, sitename, location, altitude, description,
 #' limited collection units information.
-#'  *  `loc` {An `sf` object that describes site's location.}
-#'  *  `description` {}
-#'  *  `collunits` {limited information on collunits}
+#'  *  `loc` An `sf` object that describes site's location.
+#'  *  `description`
+#'  *  `collunits` limited information on collunits
 #' @examples
 #' \donttest{
 #' ## Find all sites with a min altitude of 12m and a max altitude of 25m
