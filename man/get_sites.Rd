@@ -43,6 +43,7 @@ objects. The \code{get_sites()} command wraps the Neotoma API
 (\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{sites}.
 The call itself uses a SQL query which accepts any one of the following
 parameters:
+\describe{
 \itemize{
 \item \code{siteid}  The unique site ID (integer) in Neotoma. Can be passed as a
 vector of site IDs.
@@ -69,13 +70,14 @@ radiocarbon present (1950).
 radiocarbon present (1950).
 \item \code{ageof}  An age which must be contained within the range of sample ages
 for a site.
-\item \code{taxa}  The names of taxa which must be present within samples in a
+\item \code{taxa} The names of taxa which must be present within samples in a
 record.
 \item \code{all_data} The API only downloads the first 25 records of the query.
 For the complete records, use \code{all_data=TRUE}
 This call will then return a data object that contains site metadata for one
 or more sites, along with limited metadata describing the collection units
 and datasets located at that site.
+}
 }
 }
 \examples{

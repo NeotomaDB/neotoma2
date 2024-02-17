@@ -55,6 +55,7 @@ parse_site <- function(result) {
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `sites`.
 #' The call itself uses a SQL query which accepts any one of the following
 #' parameters:
+#' \describe{
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
 #' vector of site IDs.
 #'  * `sitename`  The site name, or approximate match using the % wildcard.
@@ -80,13 +81,14 @@ parse_site <- function(result) {
 #' radiocarbon present (1950).
 #'  * `ageof`  An age which must be contained within the range of sample ages
 #' for a site.
-#'  * `taxa`  The names of taxa which must be present within samples in a
+#'  * `taxa` The names of taxa which must be present within samples in a
 #' record.
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
 #' This call will then return a data object that contains site metadata for one
 #' or more sites, along with limited metadata describing the collection units
 #' and datasets located at that site.
+#' }
 #' @returns The function returns either a single item of class `"try-error"`
 #' describing the reason for failure (either misdefined parameters or an error
 #' from the Neotoma API), or a table of sites, with rows corresponding to the
@@ -152,9 +154,11 @@ get_sites <- function(x = NA, ...) {
 #' Each "site" object contains 6 parameters that can be accessed as well:
 #' siteid, sitename, location, altitude, description,
 #' limited collection units information.
-#'  *  `loc` {An `sf` object that describes site's location.}
-#'  *  `description` {}
-#'  *  `collunits` {limited information on collunits}
+#' \describe{
+#'  *  `loc` An `sf` object that describes site's location.
+#'  *  `description` 
+#'  *  `collunits` limited information on collunits
+#'  }
 #' @export
 get_sites.default <- function(...) { # nolint
   oo <- options(scipen = 9999999)
@@ -163,15 +167,6 @@ get_sites.default <- function(...) { # nolint
   cl <- as.list(match.call())
 
   cl[[1]] <- NULL
-
-  # Commenting out named parameter warning.
-  #  for (name in names(cl)) {
-  #   if (!(name %in% possible_args)) {
-  #     message(paste0(name, " is not an allowed argument.\
-  #     Choose from the allowed arguments: sitename, altmax, altmin,
-  #     loc, keyword, contacts, taxa"))
-  #   }
-  # }
 
   cl <- lapply(cl, eval, envir = parent.frame())
 
@@ -235,9 +230,11 @@ get_sites.default <- function(...) { # nolint
 #' Each "site" object contains 6 parameters that can be accessed as well:
 #' siteid, sitename, location, altitude, description,
 #' limited collection units information.
-#'  *  `loc` {An `sf` object that describes site's location.}
-#'  *  `description` {}
-#'  *  `collunits` {limited information on collunits}
+#' \describe{
+#'  *  `loc` An `sf` object that describes site's location.
+#'  *  `description` 
+#'  *  `collunits` limited information on collunits
+#'  }
 #' @examples {
 #' ## Find all sites by numeric siteid:
 #' sites <- get_sites(seq(1,3))
@@ -277,9 +274,11 @@ get_sites.numeric <- function(x, ...) {
 #' Each "site" object contains 6 parameters that can be accessed as well:
 #' siteid, sitename, location, altitude, description,
 #' limited collection units information.
-#'  *  `loc` {An `sf` object that describes site's location.}
-#'  *  `description` {}
-#'  *  `collunits` {limited information on collunits}
+#' \decribe{
+#'  *  `loc` An `sf` object that describes site's location.
+#'  *  `description`
+#'  *  `collunits` limited information on collunits
+#'  }
 #' @export
 get_sites.sites <- function(x, ...) {
   
