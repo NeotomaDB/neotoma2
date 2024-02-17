@@ -274,7 +274,7 @@ get_sites.numeric <- function(x, ...) {
 #' Each "site" object contains 6 parameters that can be accessed as well:
 #' siteid, sitename, location, altitude, description,
 #' limited collection units information.
-#' \decribe{
+#' \describe{
 #'  *  `loc` An `sf` object that describes site's location.
 #'  *  `description`
 #'  *  `collunits` limited information on collunits
