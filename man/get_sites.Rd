@@ -43,41 +43,39 @@ objects. The \code{get_sites()} command wraps the Neotoma API
 (\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{sites}.
 The call itself uses a SQL query which accepts any one of the following
 parameters:
-\describe{
 \itemize{
-\item \code{siteid}  The unique site ID (integer) in Neotoma. Can be passed as a
-vector of site IDs.
-\item \code{sitename}  The site name, or approximate match using the \% wildcard.
-\item \code{database}  The constituent database for the record. See
-\code{get_table("constituentdatabases")}
-\item \code{altmin}  The minimum altitude range for site elevation (in meters).
-\item \code{altmax}  The maximum altitude range for site elevation (in meters).
-\item \code{datasetid}  The unique dataset ID (integer) in Neotoma. Can be passed
-as a vector of dataset IDs.
-\item \code{datasettype} Neotoma contains data for a number of datasettypes.
+\item{\code{siteid}}{The unique site ID (integer) in Neotoma. Can be passed as a
+vector of site IDs.}
+\item{sitename}{The site name, or approximate match using the \% wildcard.}
+\item{database}{The constituent database for the record. See
+\code{get_table("constituentdatabases")}}
+\item{altmin}{The minimum altitude range for site elevation (in meters).}
+\item{altmax}{The maximum altitude range for site elevation (in meters).}
+\item{datasetid}{The unique dataset ID (integer) in Neotoma. Can be passed
+as a vector of dataset IDs.}
+\item{datasettype}{Neotoma contains data for a number of datasettypes.
 This returns a subset of data types. For a complete list of available
-datasettypes, run \code{neotoma2::get_table('datasettypes')}
-\item \code{doi}  The dataset DOI for a dataset contained within a site. Can be
-passed as a vector of DOIs.
-\item \code{gpid}  The geopolitical name or identifier containing a site. Can be
-passed as a vector of names.
-\item \code{keywords}  Keywords for samples within a set of sites. For example
-"modern" indicates a sample within the record uses the keyword "modern".
-\item \code{contacts}  Contact names or IDs associated with a site.
-\item \code{ageyoung}  A minimum spanning age for the record, in years before
-radiocarbon present (1950).
-\item \code{ageold}  A maximum spanning age for the record, in years before
-radiocarbon present (1950).
-\item \code{ageof}  An age which must be contained within the range of sample ages
-for a site.
-\item \code{taxa} The names of taxa which must be present within samples in a
-record.
-\item \code{all_data} The API only downloads the first 25 records of the query.
-For the complete records, use \code{all_data=TRUE}
+datasettypes, run \code{neotoma2::get_table('datasettypes')}}
+\item{doi}{The dataset DOI for a dataset contained within a site. Can be
+passed as a vector of DOIs.}
+\item{gpid}{The geopolitical name or identifier containing a site. Can be
+passed as a vector of names.}
+\item{keywords}{Keywords for samples within a set of sites. For example
+"modern" indicates a sample within the record uses the keyword "modern".}
+\item{contacts}{Contact names or IDs associated with a site.}
+\item{ageyoung}{A minimum spanning age for the record, in years before
+radiocarbon present (1950).}
+\item{ageold}{A maximum spanning age for the record, in years before
+radiocarbon present (1950).}
+\item{ageof}{An age which must be contained within the range of sample ages
+for a site.}
+\item{taxa}{The names of taxa which must be present within samples in a
+record.}
+\item{all_data}{The API only downloads the first 25 records of the query.
+For the complete records, use \code{all_data=TRUE}}
 This call will then return a data object that contains site metadata for one
 or more sites, along with limited metadata describing the collection units
 and datasets located at that site.
-}
 }
 }
 \examples{

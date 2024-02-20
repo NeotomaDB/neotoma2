@@ -5,7 +5,7 @@ utils::globalVariables(c("elev", "notes"))
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
-#' \describe{
+#' \itemize{
 #'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
@@ -49,7 +49,6 @@ utils::globalVariables(c("elev", "notes"))
 #' @param ... arguments to filter by.
 #' @returns filtered `sites` object 
 #' @export
-
 filter <- function(x, ...) {
   UseMethod("filter", x)
 }
@@ -60,7 +59,7 @@ filter <- function(x, ...) {
 #' is a nested object (it contains collection units, datasets, samples, etc.)
 #' the degree to which filtering occurs depends on the amount of data contained
 #' within the sites object. Filtering parameters include:
-#' \describe{
+#' \itemize{
 #'  \item{"siteid"}{A numeric site identifier from the Neotoma Database}
 #'  \item{"sitename"}{The character string sitename.}
 #'  \item{"lat"}{A numeric latitude value.}
