@@ -29,7 +29,7 @@ parse_site <- function(result) {
 }
 
 #' @title get_sites
-#' @author Socorro Dominguez \email{{s.dominguez@ht-data.com}}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @import gtools
 #' @import lubridate
 #' @import sf
@@ -140,7 +140,7 @@ get_sites <- function(x = NA, ...) {
 }
 
 #' @title get_sites
-#' @author Socorro Dominguez \email{{s.dominguez@ht-data.com}}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @import gtools
 #' @import lubridate
 #' @import sf

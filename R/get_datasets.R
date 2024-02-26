@@ -1,5 +1,5 @@
 #' @title get_datasets
-#' @author Socorro Dominguez \email{{s.dominguez@ht-data.com}}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf
