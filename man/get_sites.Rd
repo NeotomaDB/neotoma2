@@ -111,5 +111,5 @@ plot(x = seq(0, 10000, by = 1000), y = lilysites, type = 'b')
 }
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{{s.dominguez@ht-data.com}}
 }

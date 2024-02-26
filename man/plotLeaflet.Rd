@@ -16,5 +16,5 @@ leaflet map with site markers
 Plot sites on a leaflet map
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{s.dominguez@ht-data.com}
 }

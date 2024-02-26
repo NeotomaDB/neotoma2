@@ -5,12 +5,12 @@ Version: 1.0.3
 Authors@R:
     c(person(given = "Dominguez Vidana",
              family = "Socorro",
-             role = c("aut"),
+             role = c("aut", "cre"),
              email = "s.dominguez@ht-data.com",
              comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
       person(given = "Simon",
              family = "Goring",
-             role = c("aut", "cre"),
+             role = c("aut"),
              email = "goring@wisc.edu",
              comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
 URL: https://github.com/NeotomaDB/neotoma2
