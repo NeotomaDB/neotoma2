@@ -183,3 +183,8 @@ Updated plotLeaflet to not add provider tiles.
 Removed mapview to avoid `sp` conflicts.
 
 Updated README to reflect milestones with JOSS.
+
+New maintainer:
+  Dominguez Vidana Socorro <s.dominguez@ht-data.com>
+Old maintainer(s):
+  Simon Goring <goring@wisc.edu>
