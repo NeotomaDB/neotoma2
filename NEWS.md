@@ -16,3 +16,5 @@ Updated plotLeaflet to not add provider tiles.
 Removed mapview to avoid `sp` conflicts.
 
 Updated README to reflect milestones with JOSS.
+
+Updated maintainer.
