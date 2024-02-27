@@ -17,9 +17,9 @@ number of individual sites returned by the Neotoma API.
 Each "site" object contains 6 parameters that can be accessed as well:
 siteid, sitename, location, altitude, description,
 limited collection units information.
-\describe{
-\item{loc}{ An \code{sf} object that describes site's location.}
-\item{collunits}{ limited information on collunits}
+\itemize{
+\item \code{loc} An \code{sf} object that describes site's location.
+\item \code{collunits} limited information on collunits
 }
 }
 \description{

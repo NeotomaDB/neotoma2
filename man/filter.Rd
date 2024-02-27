@@ -21,39 +21,39 @@ is a nested object (it contains collection units, datasets, samples, etc.)
 the degree to which filtering occurs depends on the amount of data contained
 within the sites object. Filtering parameters include:
 \itemize{
-\item{"siteid"}{A numeric site identifier from the Neotoma Database}
-\item{"sitename"}{The character string sitename.}
-\item{"lat"}{A numeric latitude value.}
-\item{"long"}{A numeric longitude value.}
-\item{"altitude"}{The elevation of the site. Note that some sites do not
+\item \code{siteid} A numeric site identifier from the Neotoma Database.
+\item \code{sitename} The character string sitename.
+\item \code{lat} A numeric latitude value.
+\item \code{long} A numeric longitude value.
+\item \code{altitude} The elevation of the site. Note that some sites do not
 include elevation information. For these an NA value appears, and they
-would be removed when using an elevation filter.}
-\item{"datasetid"}{A numeric datasetid from Neotoma.}
-\item{"database"}{A character string naming the constituent database
-from which the dataset is drawn.}
-\item{"datasettype"}{A character string representing one of the many
-dataset types within Neotoma.}
-\item{"age_range_old"}{A dataset-level parameter indicating the oldest
-date covered by the dataset chronology.}
-\item{"age_range_young"}{A dataset-level parameter indicating the youngest
-date covered by the dataset chronology.}
-\item{"notes"}{Free-form dataset notes provided by the dataset PI(s),
-analysts or data stewards.}
-\item{"collectionunitid"}{A numeric collection unit identifier from
-Neotoma.}
-\item{"handle"}{A character string identifying the collection unit. These
-are often shorter form names (originally a default 8 character length).}
-\item{"collectionunitname"}{A character string identifying the collection
-unit name.}
-\item{"colldate"}{The date on which the collection unit was sampled. Many
-of these are empty.}
-\item{"location"}{A free-form character string indicating the location of
-the collection unit within the site.}
-\item{"waterdepth"}{A numeric depth at which the core was obtained.}
-\item{"collunittype"}{A character string for the collection unit type.}
-\item{"collectiondevice"}{A fixed vocabulary term for the collection
-device.}
-\item{"depositionalenvironment"}{A fixed vocabulary name for the
-depositional environment.}
+would be removed when using an elevation filter.
+\item \code{datasetid} A numeric datasetid from Neotoma.
+\item \code{database} A character string naming the constituent database
+from which the dataset is drawn.
+\item \code{datasettype} A character string representing one of the many
+dataset types within Neotoma.
+\item \code{age_range_old} A dataset-level parameter indicating the oldest
+date covered by the dataset chronology.
+\item \code{age_range_young} A dataset-level parameter indicating the youngest
+date covered by the dataset chronology.
+\item \code{notes} Free-form dataset notes provided by the dataset PI(s),
+analysts or data stewards.
+\item \code{collectionunitid} A numeric collection unit identifier from
+Neotoma.
+\item \code{handle} A character string identifying the collection unit. These
+are often shorter form names (originally a default 8 character length).
+\item \code{collectionunitname} A character string identifying the collection
+unit name.
+\item \code{colldate} The date on which the collection unit was sampled. Many
+of these are empty.
+\item \code{location} A free-form character string indicating the location of
+the collection unit within the site.
+\item \code{waterdepth} A numeric depth at which the core was obtained.
+\item \code{collunittype} A character string for the collection unit type.
+\item \code{collectiondevice} A fixed vocabulary term for the collection
+device.
+\item \code{depositionalenvironment} A fixed vocabulary name for the
+depositional environment.
 }
 }
