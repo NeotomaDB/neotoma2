@@ -48,4 +48,5 @@ Imports:
     wk,
     uuid,
     tidyr
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
