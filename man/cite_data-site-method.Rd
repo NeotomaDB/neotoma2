@@ -18,7 +18,7 @@ Given complete dataset objects in Neotoma (must have used
 citation for the record, including the dataset DOI.
 }
 \examples{
-{
+\donttest{
 ds <- get_datasets(1)
 cite_data(ds)
 }

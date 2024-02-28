@@ -503,7 +503,8 @@ setMethod(f = "cite_data",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @returns `data.frame` object with citation information.
-#' @examples {
+#' @examples 
+#' \donttest{
 #' ds <- get_datasets(1)
 #' cite_data(ds)
 #' }
