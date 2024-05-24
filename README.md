@@ -3,7 +3,7 @@
 [![NSF-1948926](https://img.shields.io/badge/NSF-1948926-blue.svg)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1948926)
 [![Codecov test coverage](https://codecov.io/gh/NeotomaDB/neotoma2/branch/production/graph/badge.svg)](https://app.codecov.io/gh/NeotomaDB/neotoma2?branch=production)
 [![DOI](https://zenodo.org/badge/265675258.svg)](https://zenodo.org/badge/latestdoi/265675258) 
-[![status](https://joss.theoj.org/papers/80636d1e6d32175f13edb7e7ed14089a/status.svg)](https://joss.theoj.org/papers/80636d1e6d32175f13edb7e7ed14089a)
+[![status](https://joss.theoj.org/papers/80636d1e6d32175f13edb7e7ed14089a/status.svg)](https://joss.theoj.org/papers/10.21105/joss.05561)
 <!-- badges: end -->
 
 # `neotoma2` R Package
@@ -74,6 +74,11 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
+* Updated production Branch with CRAN changes, May 24, 2024; only code affected.
+* Maintenance Github 1.0.3 release, February 28, 2024
+* Published JOSS paper, **DONE** 28 November, 2023
+* Submitted paper to JOSS **DONE** 03 May, 2023
+* Completion CRAN 1.0.0 release **DONE** April 23, 2023
 * Completion of core functionality for data access **DONE** Feb 10, 2022
 * Completion of core functionality for data presentation **DONE**
 * Completion of clear vignettes for major data types or Constituent Databases represented within the Neotoma Database.
