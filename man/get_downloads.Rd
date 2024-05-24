@@ -79,5 +79,5 @@ brazil_downloads <- get_downloads(brazil_datasets)
 }
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{s.dominguez@ht-data.com}
 }

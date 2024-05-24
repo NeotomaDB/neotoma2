@@ -17,5 +17,5 @@ Helper function to build a sample from the API input (list formatted)
 coming from the Neotoma API.
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{s.dominguez@ht-data.com}
 }

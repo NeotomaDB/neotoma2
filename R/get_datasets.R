@@ -1,5 +1,5 @@
 #' @title get_datasets
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf
@@ -291,6 +291,59 @@ get_datasets.numeric <- function(x, ...) {
 #' }
 #' @export
 get_datasets.sites <- function(x, ...) {
+  # List of datasets ids
+  ids1 <- getids(x)
+  ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
+                                !is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
+                                        is.na(suppressWarnings(as.numeric(datasetid))))
+  
+  if(nrow(ids2)!=0){
+    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed. 
+                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
+    warning(warnsite)
+  }
+  
+  dataset_list <- ids$datasetid
+  dataset_list <- as.numeric(unlist(dataset_list))
+  
+  ## Fixing all data
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
+  if('all_data' %in% names(cl)){
+    all_data = cl$all_data
+  }else{
+    cl[['all_data']] = TRUE
+  }
+  
+  if('limit' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  
+  if('offset' %in% names(cl)){
+    cl[['all_data']] = FALSE
+  }
+  ## Fixing all data line
+  
+  cl[['x']] <- dataset_list
+  
+  output <- do.call(get_datasets, cl)
+  
+  return(output)
+}
+
+#' @title Get Dataset from a \code{site} object.
+#' @param x An object of class \code{site}.
+#' @param ... additional arguments accepted by \code{get_datasets()}
+#' @returns `sites` object with full metadata up to the `dataset` level
+#' @examples \donttest{
+#' random_sites <- get_sites(1)
+#' allds <- get_datasets(random_sites, limit=3)
+#' }
+#' @export
+get_datasets.site <- function(x, ...) {
   # List of datasets ids
   ids1 <- getids(x)
   ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),

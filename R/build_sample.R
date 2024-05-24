@@ -1,5 +1,5 @@
 #' @title Build a samples `data.frame` from Neotoma API JSON
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr

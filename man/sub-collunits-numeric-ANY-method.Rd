@@ -15,5 +15,5 @@
 null used for side effects. Printing a data.frame
 }
 \description{
-Get or remove sites by numeric index
+Retrieve sites by numeric index
 }

@@ -20,7 +20,7 @@
 #' @export
 get_stats <- function(start, end) {
 
-  base_url <- paste0("/data/summary/rawbymonth?start=", start, "&end=", end)
+  base_url <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
   result <- neotoma2::parseURL(base_url)
 
   result <- result$data$data

@@ -22,7 +22,7 @@ setGeneric("coordinates", function(obj, ...) {
 })
 
 #' @title plotLeaflet
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
 #' @description Plot sites on a leaflet map
 #' @param object Sites object to plot
 #' @returns leaflet map with site markers

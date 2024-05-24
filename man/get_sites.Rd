@@ -21,9 +21,9 @@ Each "site" object contains 6 parameters that can be accessed as well:
 siteid, sitename, location, altitude, description,
 limited collection units information.
 \itemize{
-\item \code{loc} {An \code{sf} object that describes site's location.}
-\item \code{description} {}
-\item \code{collunits} {limited information on collunits}
+\item \code{loc} An \code{sf} object that describes site's location.
+\item \code{description}
+\item \code{collunits} limited information on collunits
 }
 }
 \description{
@@ -47,13 +47,12 @@ parameters:
 \item \code{siteid}  The unique site ID (integer) in Neotoma. Can be passed as a
 vector of site IDs.
 \item \code{sitename}  The site name, or approximate match using the \% wildcard.
-\item \code{database}  The constituent database for the record. See
-\code{get_table("constituentdatabases")}
+\item \code{database}  The constituent database for the record. See \code{get_table("constituentdatabases")}
 \item \code{altmin}  The minimum altitude range for site elevation (in meters).
 \item \code{altmax}  The maximum altitude range for site elevation (in meters).
 \item \code{datasetid}  The unique dataset ID (integer) in Neotoma. Can be passed
 as a vector of dataset IDs.
-\item \code{datasettype} Neotoma contains data for a number of datasettypes.
+\item \code{datasettype}  Neotoma contains data for a number of datasettypes.
 This returns a subset of data types. For a complete list of available
 datasettypes, run \code{neotoma2::get_table('datasettypes')}
 \item \code{doi}  The dataset DOI for a dataset contained within a site. Can be
@@ -71,7 +70,7 @@ radiocarbon present (1950).
 for a site.
 \item \code{taxa}  The names of taxa which must be present within samples in a
 record.
-\item \code{all_data} The API only downloads the first 25 records of the query.
+\item \code{all_data}  The API only downloads the first 25 records of the query.
 For the complete records, use \code{all_data=TRUE}
 This call will then return a data object that contains site metadata for one
 or more sites, along with limited metadata describing the collection units
@@ -87,7 +86,6 @@ sites_12to25 <- get_sites(altmin=12, altmax=25)
 sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
 ## To find all sites that contain the string "Alex\%"
 alex_sites <- get_sites(sitename="Alex\%")
-
 ## To find sites in Brazil (again with default 25 records)
 brazil <- '{"type": "Polygon",
 "coordinates": [[
@@ -111,5 +109,5 @@ plot(x = seq(0, 10000, by = 1000), y = lilysites, type = 'b')
 }
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{s.dominguez@ht-data.com}
 }

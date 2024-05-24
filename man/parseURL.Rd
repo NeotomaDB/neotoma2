@@ -24,7 +24,7 @@ An internal helper function used to connect to the Neotoma API
 in a standard manner, and to provide basic validation of any response.
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez \email{s.dominguez@ht-data.com}
 
 Simon Goring \email{goring@wisc.edu}
 }
