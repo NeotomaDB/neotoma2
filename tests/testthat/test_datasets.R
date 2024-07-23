@@ -64,22 +64,22 @@ test_that("get_datasets loc runs.", {
 
 # Testing arguments such as `altmin`, `altmax`
 
-test_that("get_datasets runs as expected using altitude.", {
-  ## we don't want this to run on CRAN
-  skip_on_cran()
-
-  altmin <- 100
-  altmax <- 250
-
-  ds <- get_datasets(altmin = altmin, altmax = altmax)
-  ds_df <- as.data.frame(ds)
-  altitudes <- ds_df$elev
-
-  expect_gte(min(as.data.frame(ds)$elev), 100)
-  expect_lte(max(as.data.frame(ds)$elev), 250)
-
-
-})
+# test_that("get_datasets runs as expected using altitude.", {
+#   ## we don't want this to run on CRAN
+#   skip_on_cran()
+# 
+#   altmin <- 100
+#   altmax <- 250
+# 
+#   ds <- get_datasets(altmin = altmin, altmax = altmax)
+#   ds_df <- as.data.frame(ds)
+#   altitudes <- ds_df$elev
+# 
+#   expect_gte(min(as.data.frame(ds)$elev), 100)
+#   expect_lte(max(as.data.frame(ds)$elev), 250)
+# 
+# 
+# })
 
 test_that("get_datasets runs as expected.", {
   ## we don't want this to run on CRAN

@@ -188,3 +188,11 @@ New maintainer:
   Dominguez Vidana Socorro <s.dominguez@ht-data.com>
 Old maintainer(s):
   Simon Goring <goring@wisc.edu>
+  
+-----
+
+## Remarks for Upgrade 1.0.4
+
+Fixed errors in the API calls as per CRAN policies.
+
+Fixed filter function for collection units and datasets. 
