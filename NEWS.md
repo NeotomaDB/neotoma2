@@ -18,3 +18,11 @@ Removed mapview to avoid `sp` conflicts.
 Updated README to reflect milestones with JOSS.
 
 Updated maintainer.
+
+# neotoma2 1.0.4
+
+## Remarks for Upgrade 1.0.4
+
+Fixed errors in the API calls.
+
+Updated README.

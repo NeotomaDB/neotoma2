@@ -74,7 +74,8 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
-* Maintenance Github 1.0.3 release, February 28, 2024
+* Maintenance Github 1.0.4 release, **DONE** July 23, 2024
+* Maintenance Github 1.0.3 release, **DONE** February 28, 2024
 * Published JOSS paper, **DONE** 28 November, 2023
 * Submitted paper to JOSS **DONE** 03 May, 2023
 * Completion CRAN 1.0.0 release **DONE** April 23, 2023
