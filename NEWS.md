@@ -26,3 +26,10 @@ Updated maintainer.
 Fixed errors in the API calls.
 
 Updated README.
+
+# neotoma2 1.0.5
+
+## Remarks for Upgrade 1.0.5
+
+Fixed errors in the API calls. Added `tryCatch` statements in vignette
+Changed some minor API calls to `eval=False`

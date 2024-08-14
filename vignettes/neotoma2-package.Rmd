@@ -391,7 +391,7 @@ We can also use search elements to search for publications.  The `get_publicatio
 * `limit`
 * `offset`
 
-```{r fulltestPubSearch, eval=FALSE}
+```{r fulltestPubSearch}
 michPubs <- get_publications(search = "Michigan", limit = 2)
 ```
 
@@ -399,7 +399,7 @@ This results in a set of `r length(michPubs)` publications from Neotoma, equal t
 
 Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
 
-```{r nonsenseSearch, eval=FALSE}
+```{r nonsenseSearch}
 noise <- get_publications(search = "Canada Banada Nanada", limit = 5)
 ```
 
