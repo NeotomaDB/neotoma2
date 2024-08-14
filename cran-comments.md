@@ -201,4 +201,4 @@ Fixed filter function for collection units and datasets.
 
 ## Remarks for Upgrade 1.0.5
 
-Fixed errors in the API calls in vignette adding tryCatch statemetns so that the vignette can be rebuilt regardless of API status.
+Fixed errors in the API calls in vignette adding `tryCatch` statements so that the vignette can be rebuilt regardless of API status.
