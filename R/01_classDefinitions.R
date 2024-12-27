@@ -385,6 +385,7 @@ setClass(
             datasetname = "character",
             age_range_old = "numeric",
             age_range_young = "numeric",
+            age_units = "character",
             notes = "character",
             pi_list = "ANY",
             samples = "samples",
@@ -397,6 +398,7 @@ setClass(
                    datasetname = NA_character_,
                    age_range_old =  NA_integer_,
                    age_range_young =  NA_integer_,
+                   age_units = NA_character_,
                    notes = NA_character_,
                    pi_list = list(),
                    samples = NULL,
@@ -512,3 +514,43 @@ setClass("sites",
                     }) %>%
                       unlist())
                   })
+
+#' @title S4 class for specimen information
+#' @description Taxon class for single taxon information
+#'  from the Neotoma Paleoecology Database.
+#' @returns object of class `taxon`
+#' @export
+setClass("taxon",
+         slots = c(taxonid = "numeric",
+                   taxoncode = "character",
+                   taxonname = "character",
+                   author = "character",
+                   ecolgroup = "character",
+                   highertaxonid = "numeric",
+                   status = "character",
+                   taxagroupid = "character",
+                   publicationid = "numeric",
+                   publication = "character"),
+         prototype = list(taxonid = NA_integer_,
+                   taxoncode = NA_character_,
+                   taxonname = NA_character_,
+                   author = NA_character_,
+                   ecolgroup = NA_character_,
+                   highertaxonid = NA_integer_,
+                   status = NA_character_,
+                   taxagroupid = NA_character_,
+                   publicationid = NA_integer_,
+                   publication = NA_character_))
+
+#' @title S4 class for taxa information
+#' @description Taxa class for taxa information
+#'  from the Neotoma Paleoecology Database.
+#' @returns object of class `taxon`
+#' @export
+setClass("taxa", representation(taxa = "list"),
+         validity = function(object) {
+           all(map(object, function(x) {
+             class(x) == "taxon"
+           }) %>%
+             unlist())
+         })
