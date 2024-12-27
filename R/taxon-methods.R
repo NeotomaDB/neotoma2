@@ -178,16 +178,16 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("taxon"),
           definition = function(x) {
-            data.frame(taxonid = as.character(object@taxonid),
-                       taxoncode = object@taxoncode,
-                       taxonname = object@taxonname,
-                       author =  object@author,
-                       ecolgroup =  object@ecolgroup,
-                       highertaxonid = object@highertaxonid,
-                       status = object@status,
-                       taxagroupid = object@taxagroupid,
-                       publicationid = object@publicationid,
-                       publication = object@publication)
+            data.frame(taxonid = as.character(x@taxonid),
+                       taxoncode = x@taxoncode,
+                       taxonname = x@taxonname,
+                       author =  x@author,
+                       ecolgroup =  x@ecolgroup,
+                       highertaxonid = x@highertaxonid,
+                       status = x@status,
+                       taxagroupid = x@taxagroupid,
+                       publicationid = x@publicationid,
+                       publication = x@publication)
           })
 
 #' @title  as.data.frame taxa
@@ -196,10 +196,27 @@ setMethod(f = "as.data.frame",
 #' @returns `data.frame` with `taxa` metadata
 #' @export
 setMethod(f = "as.data.frame",
-          signature = signature("taxa"),
+          signature = "taxa",
           definition = function(x) {
-            x@taxa %>% map(as.data.frame) %>% bind_rows()
-          })
+            df <- map(x@taxa, function(y) {
+              data.frame(
+                taxonid = as.character(y@taxonid),
+                taxoncode = y@taxoncode,
+                taxonname = y@taxonname,
+                author = y@author,
+                ecolgroup = y@ecolgroup,
+                highertaxonid = y@highertaxonid,
+                status = y@status,
+                taxagroupid = y@taxagroupid,
+                publicationid = y@publicationid,
+                publication = y@publication
+              )
+            }) %>%
+              bind_rows()
+            
+            return(df)
+          }
+)
 
 #' @title Length Method taxa
 #' @export
