@@ -15,7 +15,7 @@ setMethod(f = "plotLeaflet",
           signature = "sites",
           definition = function(object) {
             df1 <- map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
+              df <- data.frame(siteid = as.integer(x@siteid),
                                sitename = x@sitename,
                                lat = mean(st_coordinates(x@geography)[, 2]),
                                long = mean(st_coordinates(x@geography)[, 1]),
@@ -54,7 +54,7 @@ setMethod(f = "plotLeaflet",
           signature = "site",
           definition = function(object) {
             explorerURL <- "http://apps.neotomadb.org/explorer/"
-            df1 <- data.frame(siteid = object@siteid,
+            df1 <- data.frame(siteid = as.integer(object@siteid),
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
                              long = mean(st_coordinates(object@geography)[, 1]),
