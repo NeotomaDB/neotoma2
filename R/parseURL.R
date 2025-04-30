@@ -19,8 +19,6 @@
 #' @returns `list` with cleaned and parsed data from HTTP request
 #' @export
 parseURL <- function(x, use = "neotoma", all_data = FALSE, fetch_fn = NULL, ...) {
-  
-  # Helper to clean NULLs from JSON structures
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) {
     if (is.list(x)) {
       lapply(x, cleanNull, fn)
@@ -29,7 +27,6 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, fetch_fn = NULL, ...)
     }
   }
   
-  # Determine API base URL
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
@@ -42,55 +39,30 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, fetch_fn = NULL, ...)
   )
   
   query <- list(...)
-  url <- paste0(baseurl, x)
+  query_str <- paste0(
+    "?",
+    paste0(URLencode(names(query)), "=", URLencode(as.character(query)), collapse = "&")
+  )
+  url <- paste0(baseurl, x, if (length(query) > 0) query_str else "")
   
-  # Assign fetch function if in webR
+  # Use JS fetch if available and no function supplied
   if (is.null(fetch_fn) && isTRUE(getOption("webr"))) {
     fetch_fn <- fetchJS
   }
   
-  # If a fetch_fn is provided (likely webR environment), use it
+  # Use JS fetch for POST requests (or optionally any in webR)
   if (!is.null(fetch_fn)) {
     body <- if (length(query) > 0) jsonlite::toJSON(query, auto_unbox = TRUE) else NULL
-    result_json <- fetch_fn(url, body)
+    result_json <- fetch_fn(url, body = body)
     result <- jsonlite::fromJSON(result_json, flatten = FALSE, simplifyVector = FALSE)
     return(cleanNull(result))
   }
   
-  # Otherwise, fall back to standard httr-based flow
-  try(
-    response <- httr::GET(url,
-                          httr::add_headers("User-Agent" = "neotoma2 R package"),
-                          query = query
-    )
-  )
-  
-  if (inherits(response, "try-error")) {
-    error_message <- conditionMessage(response)
-    if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-      stop("SSL certificate error: ", error_message)
-    }
-  }
-  
-  # Handle 414 by switching to POST
-  if (response$status_code == 414) {
-    new_url <- newURL(baseurl, x, ...)
-    body <- parsebody(x, all_data = FALSE, ...)
-    try(
-      response <- httr::POST(new_url,
-                             body = body,
-                             httr::add_headers("User-Agent" = "neotoma2 R package"),
-                             httr::content_type("application/json")
-      )
-    )
-    stop_for_status(response, task = "Could not connect to the Neotoma API.")
-  } else {
-    stop_for_status(response, task = "Could not connect to the Neotoma API.")
-  }
-  
-  result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                               flatten = FALSE,
-                               simplifyVector = FALSE)
+  # Use readLines() to do a simple GET request
+  con <- url(url, open = "rb")
+  on.exit(close(con))
+  txt <- paste0(readLines(con, warn = FALSE), collapse = "\n")
+  result <- jsonlite::fromJSON(txt, flatten = FALSE, simplifyVector = FALSE)
   return(cleanNull(result))
 }
 
