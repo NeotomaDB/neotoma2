@@ -18,9 +18,10 @@
 #' @param ... Any query parameters passed from the calling function.
 #' @returns `list` with cleaned and parsed data from HTTP request
 #' @export
-parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
+parseURL <- function(x, use = "neotoma", all_data = FALSE, fetch_fn = NULL, ...) {
   
-  cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) { # nolint
+  # Helper to clean NULLs from JSON structures
+  cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) {
     if (is.list(x)) {
       lapply(x, cleanNull, fn)
     } else {
@@ -28,7 +29,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
     }
   }
   
-  # Assign the API host location:
+  # Determine API base URL
   if (!Sys.getenv("APIPOINT") == "") {
     use <- Sys.getenv("APIPOINT")
   }
@@ -37,196 +38,60 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                     "dev" = "http://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
-                    use)
+                    use
+  )
   
   query <- list(...)
-
-  if (all_data == FALSE) {
-    try(
-      response <- httr::GET(paste0(baseurl, x),
-                            add_headers("User-Agent" = "neotoma2 R package"),
-                            query = query)
+  url <- paste0(baseurl, x)
+  
+  # Assign fetch function if in webR
+  if (is.null(fetch_fn) && isTRUE(getOption("webr"))) {
+    fetch_fn <- fetchJS
+  }
+  
+  # If a fetch_fn is provided (likely webR environment), use it
+  if (!is.null(fetch_fn)) {
+    body <- if (length(query) > 0) jsonlite::toJSON(query, auto_unbox = TRUE) else NULL
+    result_json <- fetch_fn(url, body)
+    result <- jsonlite::fromJSON(result_json, flatten = FALSE, simplifyVector = FALSE)
+    return(cleanNull(result))
+  }
+  
+  # Otherwise, fall back to standard httr-based flow
+  try(
+    response <- httr::GET(url,
+                          httr::add_headers("User-Agent" = "neotoma2 R package"),
+                          query = query
     )
-
-    if (inherits(response, "try-error")) {
-      # Handle the SSL error
-      error_message <- conditionMessage(response)
-      
-      if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-        # Handle SSL certificate-related errors
-        stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
-      }
-    }
-    
-    if (response$status_code == 414) {
-      # The 414 error is a URL that is too long. This is a lazy way to manage
-      # the choice between a POST and GET call.
-      # Function with POST (Use this once server issue is resolved)
-      new_url <- newURL(baseurl, x, ...)
-      body <- parsebody(x, all_data=FALSE, ...)
-      try(
-        response <- httr::POST(new_url,
-                             body = body,
-                             add_headers("User-Agent" = "neotoma2 R package"),
-                             httr::content_type("application/json"))
-      )
-      if (inherits(response, "try-error")) {
-        # Handle the SSL error
-        error_message <- conditionMessage(response)
-        
-        if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-          # Handle SSL certificate-related errors
-          stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
-        }
-      }
-      # Break if we can't connect:
-      stop_for_status(response,
-                      task = "Could not connect to the Neotoma API.
-                    Check that the path is valid, and check the current
-                     status of the Neotoma API services at
-                      http://data.neotomadb.org")
-      warning("To get the complete data, use all_data = TRUE.")
-    }
-    
-    # Break if we can't connect:
-    stop_for_status(response,
-                    task = "Could not connect to the Neotoma API.
-                    Check that the path is valid, and check the current
-                     status of the Neotoma API services at
-                      http://data.neotomadb.org")
-    
-    if (response$status_code == 200) {
-      result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                   flatten = FALSE,
-                                   simplifyVector = FALSE)
-      result <- cleanNull(result)
-    }
-    return(result)
-    
-  } else {
-    # Here the flag all_data has been accepted, so we're going to pull
-    # everything in.
-    if ("limit" %in% names(query)) {
-      stop("You cannot use the limit parameter when all_data is TRUE")
-    }
-    
-    query$offset <- 0
-    query$limit <- 50
-    ql <- query$limit
-    
-    try(
-      response <- httr::GET(paste0(baseurl, x),
-                          add_headers("User-Agent" = "neotoma2 R package"),
-                          query = query)
-    )
-    
-    if (inherits(response, "try-error")) {
-      # Handle the SSL error
-      error_message <- conditionMessage(response)
-      
-      if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-        # Handle SSL certificate-related errors
-        stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
-      }
-    }
-
-    if (response$status_code == 414 | nchar(response$url) > 2000) {
-      # Function with Post (Use this once server issue is resolved)
-      args <- x
-      new_url <- newURL(baseurl, args, ...)
-      body <- parsebody(args, all_data, ...)
-      body <- jsonlite::fromJSON(body)
-      if('siteid' %in% names(body)){
-        ids_nos <- as.numeric(stringr::str_extract_all(body$siteid,
-                                                       "[0-9.]+")[[1]])}
-      if('datasetid' %in% names(body)){
-        ids_nos <- as.numeric(stringr::str_extract_all(body$datasetid,
-                                                       "[0-9.]+")[[1]])
-      }
-      seq_chunk <- split(ids_nos,
-                         ceiling(seq_along(ids_nos) / query$limit))
-      
-      responses <- c()
-      
-      for (sequ in seq_chunk) {
-        body2 <- list()
-        body2 <- body
-        names(body2) <- names(body)
-        
-        if('siteid' %in% names(body)){
-          body2$siteid <- paste0(sequ, collapse = ",")
-        }
-        if('datasetid' %in% names(body)){
-          body2$datasetid <- paste0(sequ, collapse = ",")
-        }
-        body2$limit <- ql # Refer to the previous variable rather than hardcoding
-        body2 <- jsonlite::toJSON(body2, auto_unbox = TRUE)
-        try(
-          response <- httr::POST(new_url,
-                               body = body2,
-                               add_headers("User-Agent" = "neotoma2 R package"),
-                               httr::content_type("application/json"))
-        )
-        if (inherits(response, "try-error")) {
-          # Handle the SSL error
-          error_message <- conditionMessage(response)
-          
-          if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-            # Handle SSL certificate-related errors
-            stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
-          }
-        }
-        stop_for_status(response,
-                        task = "Could not connect to the Neotoma API.
-                    Check that the path is valid, and check the current
-                     status of the Neotoma API services at
-                      http://data.neotomadb.org")
-        
-        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                     flatten = FALSE,
-                                     simplifyVector = FALSE)
-        
-        responses <- c(responses, cleanNull(result)$data)
-      }
-      result$data <- responses
-      return(result)
-    } else {
-      responses <- c()
-      while (TRUE) {
-        try(
-        response <- httr::GET(paste0(baseurl, x),
-                              add_headers("User-Agent" = "neotoma2 R package"),
-                              query = query)
-        )
-        if (inherits(response, "try-error")) {
-          # Handle the SSL error
-          error_message <- conditionMessage(response)
-          
-          if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
-            # Handle SSL certificate-related errors
-            stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
-          }
-        }
-        stop_for_status(response,
-                        task = "Could not connect to the Neotoma API.
-                    Check that the path is valid, and check the current
-                     status of the Neotoma API services at
-                      http://data.neotomadb.org")
-        
-        result <- jsonlite::fromJSON(httr::content(response, as = "text"),
-                                     flatten = FALSE,
-                                     simplifyVector = FALSE)
-        
-        if (length(cleanNull(result)$data) == 0) {
-          break
-        }
-        responses <- c(responses, cleanNull(result)$data)
-        query$offset <- query$offset + query$limit
-      }
-      result$data <- responses
-      return(result)
+  )
+  
+  if (inherits(response, "try-error")) {
+    error_message <- conditionMessage(response)
+    if (grepl("SSL certificate", error_message, ignore.case = TRUE)) {
+      stop("SSL certificate error: ", error_message)
     }
   }
+  
+  # Handle 414 by switching to POST
+  if (response$status_code == 414) {
+    new_url <- newURL(baseurl, x, ...)
+    body <- parsebody(x, all_data = FALSE, ...)
+    try(
+      response <- httr::POST(new_url,
+                             body = body,
+                             httr::add_headers("User-Agent" = "neotoma2 R package"),
+                             httr::content_type("application/json")
+      )
+    )
+    stop_for_status(response, task = "Could not connect to the Neotoma API.")
+  } else {
+    stop_for_status(response, task = "Could not connect to the Neotoma API.")
+  }
+  
+  result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+                               flatten = FALSE,
+                               simplifyVector = FALSE)
+  return(cleanNull(result))
 }
 
 #' @title Format API call to Neotoma from call arguments
@@ -254,4 +119,32 @@ newURL <- function(baseurl, args, ...) {
     params <- stringr::str_remove_all(args, "data/downloads")
   }
   return(new_url)
+}
+
+
+fetchJS <- function(url, body = NULL, method = NULL) {
+  js_code <- if (!is.null(body)) {
+    sprintf(
+      "await fetch('%s', {
+        method: '%s',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(%s)
+      }).then(res => res.text())",
+      url,
+      ifelse(is.null(method), "POST", toupper(method)),
+      body
+    )
+  } else {
+    sprintf(
+      "await fetch('%s', {
+        method: '%s',
+        headers: { 'Content-Type': 'application/json' }
+      }).then(res => res.text())",
+      url,
+      ifelse(is.null(method), "GET", toupper(method))
+    )
+  }
+  
+  result <- webR::runjs(js_code)
+  return(result)
 }
