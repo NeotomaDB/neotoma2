@@ -34,7 +34,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
   }
   
   baseurl <- switch(use,
-                    "dev" = "https://api-dev.neotomadb.org/v2.0/",
+                    "dev" = "http://api-dev.neotomadb.org/v2.0/",
                     "neotoma" = "https://api.neotomadb.org/v2.0/",
                     "local" = "http://localhost:3005/v2.0/",
                     use)
