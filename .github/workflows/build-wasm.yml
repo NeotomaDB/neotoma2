@@ -1,0 +1,36 @@
+name: Build WASM and Deploy
+
+on:
+  push:
+    branches: [webr]
+
+jobs:
+  build-wasm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout package source
+        uses: actions/checkout@v3
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Set up WebAssembly toolchain
+        uses: r-wasm/actions/setup-wasm@v1
+
+      - name: Build WASM binary
+        run: |
+          mkdir -p wasm
+          Rscript -e 'webr::wasmify(".", output_dir = "wasm")'
+
+      - name: Push to target gh-pages branch
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git clone --branch gh-pages https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/YOUR-USERNAME/trial.git out
+          rm -rf out/wasm
+          cp -r wasm out/wasm
+          cd out
+          git add wasm
+          git commit -m "Update WASM build from neotoma2"
+          git push origin gh-pages
