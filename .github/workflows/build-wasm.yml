@@ -34,19 +34,14 @@ jobs:
           install.packages("webr", repos = c("https://repo.r-wasm.org", "https://cloud.r-project.org"))
         shell: Rscript {0}
   
-      - name: Build WASM binary
+       - name: Build WebR-compatible binary
         run: |
-          mkdir -p wasm
-          Rscript build_wasm.R
+          dir.create("wasm", showWarnings = FALSE)
+          webr::wasmify(".", output_dir = "wasm")
+        shell: Rscript {0}
 
-      - name: Push to target gh-pages branch
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git clone --branch gh-pages https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/YOUR-USERNAME/trial.git out
-          rm -rf out/wasm
-          cp -r wasm out/wasm
-          cd out
-          git add wasm
-          git commit -m "Update WASM build from neotoma2"
-          git push origin gh-pages
+      - name: Upload WASM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-package
+          path: wasm/
