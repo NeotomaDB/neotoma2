@@ -23,9 +23,10 @@ jobs:
           cd emsdk
           ./emsdk install latest
           ./emsdk activate latest
-          # Export variables for next steps
-          ./emsdk_env.sh > emsdk_env.sh.out
-          grep 'export ' emsdk_env.sh.out | sed 's/export //g' >> $GITHUB_ENV
+      
+          # Export EMSDK environment vars for later steps
+          ./emsdk_env.sh > emsdk_env_tmp.sh
+          grep "^export " emsdk_env_tmp.sh | sed 's/^export //' >> $GITHUB_ENV
 
       - name: Build WASM binary
         run: |
