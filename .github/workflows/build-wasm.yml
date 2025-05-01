@@ -23,8 +23,9 @@ jobs:
           cd emsdk
           ./emsdk install latest
           ./emsdk activate latest
-          source ./emsdk_env.sh
-          echo "source $PWD/emsdk/emsdk_env.sh" >> $GITHUB_ENV
+          # Export variables for next steps
+          ./emsdk_env.sh > emsdk_env.sh.out
+          grep 'export ' emsdk_env.sh.out | sed 's/export //g' >> $GITHUB_ENV
 
       - name: Build WASM binary
         run: |
