@@ -28,7 +28,12 @@ jobs:
           chmod +x emsdk_env.sh
           ./emsdk_env.sh > ../emsdk_env_tmp.sh
           grep "^export " ../emsdk_env_tmp.sh | sed 's/^export //' >> $GITHUB_ENV
-
+          
+      - name: Install webr package
+        run: |
+          install.packages("webr", repos = "https://repo.r-wasm.org")
+        shell: Rscript {0}
+  
       - name: Build WASM binary
         run: |
           mkdir -p wasm
