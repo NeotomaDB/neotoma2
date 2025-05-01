@@ -31,7 +31,9 @@ jobs:
           
       - name: Install webr package
         run: |
-          install.packages("webr", repos = c("https://repo.r-wasm.org", "https://cloud.r-project.org"))
+          dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
+          install.packages("webr", lib = Sys.getenv("R_LIBS_USER"),
+                           repos = c("https://repo.r-wasm.org", "https://cloud.r-project.org"))
         shell: Rscript {0}
   
       - name: Build WebR-compatible binary
