@@ -31,13 +31,13 @@ jobs:
           
       - name: Install webr package
         run: |
-          install.packages("webr", repos = "https://repo.r-wasm.org")
+          install.packages("webr", repos = c("https://repo.r-wasm.org", "https://cloud.r-project.org"))
         shell: Rscript {0}
   
       - name: Build WASM binary
         run: |
           mkdir -p wasm
-          Rscript -e 'webr::wasmify(".", output_dir = "wasm")'
+          Rscript build_wasm.R
 
       - name: Push to target gh-pages branch
         run: |
