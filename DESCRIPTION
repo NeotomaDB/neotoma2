@@ -36,7 +36,6 @@ Imports:
     geojsonsf,
     purrr,
     lubridate,
-    httr,
     jsonlite,
     methods,
     dplyr,
