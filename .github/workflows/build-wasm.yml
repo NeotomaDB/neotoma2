@@ -34,7 +34,7 @@ jobs:
           install.packages("webr", repos = c("https://repo.r-wasm.org", "https://cloud.r-project.org"))
         shell: Rscript {0}
   
-       - name: Build WebR-compatible binary
+      - name: Build WebR-compatible binary
         run: |
           dir.create("wasm", showWarnings = FALSE)
           webr::wasmify(".", output_dir = "wasm")
