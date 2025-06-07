@@ -203,6 +203,9 @@ Fixed filter function for collection units and datasets.
 
 Fixed errors in the API calls in vignette adding `tryCatch` statements so that the vignette can be rebuilt regardless of API status.
 
+-----
+
 ## Remarks for Upgrade 1.0.6
 
-Included age type units in datasets Neotoma object and its different meethods.
+Included age type units in datasets Neotoma object and its different methods.
+Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
