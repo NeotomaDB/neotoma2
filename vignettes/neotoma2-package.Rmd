@@ -12,6 +12,31 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# Check if the API is available
+# otherwise, set up eval=False
+api_available <- FALSE
+try({
+  res = httr::GET("https://api.neotomadb.org/v2.0/data/datasets/24")
+  if(res$status_code==200){
+    api_available <- TRUE
+  }
+}, silent = TRUE)
+
+knitr::knit_hooks$set(eval = function(before, options, envir) {
+  if(!api_available) 
+    return(FALSE)
+  options$eval  # fallback to original
+})
+
+# Set global chunk options
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{r setup_md, include=FALSE}
+safe_eval <- function(expr, fallback = "N/A") {
+  tryCatch(eval(expr, envir = .GlobalEnv), error = function(e) fallback)
+}
 ```
 
 ```{r setup, include=FALSE}
@@ -103,7 +128,7 @@ alex <- get_sites(sitename = 'Alex%')
 alex
 ```
 
-<!-- Since this new `sites` object has `r length(alex@sites)` elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
+<!-- Since this new `sites` object has `r tryCatch(length(alex@sites), error = function(e) "N/A")`. elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
 
 #### Searching for Sites by Age
 
@@ -256,7 +281,7 @@ brazil_datasets <- tryCatch({
 })
 ```
 
-Now we have an object called `brazil_datasets` that contains `r length(brazil_datasets)`.  
+Now we have an object called `brazil_datasets` that contains `r tryCatch(length(brazil_datasets), error = function(e) "N/A")`. 
 
 You can plot these findings!
 
@@ -395,7 +420,7 @@ We can also use search elements to search for publications.  The `get_publicatio
 michPubs <- get_publications(search = "Michigan", limit = 2)
 ```
 
-This results in a set of `r length(michPubs)` publications from Neotoma, equal to the `limit`.  If the number of matching publications is less than the limit then the `length()` will be smaller.
+This results in a set of `r tryCatch(length(michPubs), error = function(e) "N/A")` publications from Neotoma, equal to the `limit`.  If the number of matching publications is less than the limit then the `length()` will be smaller.
 
 Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
 
@@ -403,7 +428,7 @@ Text matching in Neotoma is approximate, meaning it is a measure of the overall 
 noise <- get_publications(search = "Canada Banada Nanada", limit = 5)
 ```
 
-This returns a result set of length `r length(noise)`.
+This returns a result set of length `r tryCatch(length(noise), error = function(e) "N/A")`.
 
 This returns the (Neotoma) ID, the citation and the publication DOI (if that is stored in Neotoma).  We can get the first publication using the standard `[[` nomenclature:
 
