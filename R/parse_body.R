@@ -41,7 +41,8 @@ parsebody <- function(x, all_data, ...) {
   }
   # II. Other simple queries - Unlikely unless it comes with a complex location
   if (params == "") {
-    body <- jsonlite::toJSON(list(...), flatten = TRUE)
+    m <- list(...)
+    body <- jsonlite::toJSON(m)
   }
   # III. When location is present and the base_URL has too much info
   if (startsWith(params, "?")) {
@@ -54,7 +55,10 @@ parsebody <- function(x, all_data, ...) {
       value <- kv[[2]]
       if (name == "loc") {
         # Preserve original percent-encoded string
-        param_data[[name]] <- value
+        decoded_loc <- jsonlite::fromJSON(utils::URLdecode(value))
+        param_data[[name]] <- decoded_loc
+        #param_data[[name]] <- utils::URLdecode(value)
+        #param_data[[name]] <- value
       } else {
         # Convert numeric where possible
         num_val <- suppressWarnings(as.numeric(value))
@@ -63,8 +67,8 @@ parsebody <- function(x, all_data, ...) {
     }
     
     # Merge with ... arguments
-    full_params <- c(param_data, query)
-    body <- jsonlite::toJSON(list(full_params), auto_unbox = TRUE)
+    full_params <- modifyList(param_data, query)
+    body <- jsonlite::toJSON(full_params, auto_unbox = TRUE)
   }
   
   return(body)
