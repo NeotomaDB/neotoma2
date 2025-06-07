@@ -209,3 +209,5 @@ Fixed errors in the API calls in vignette adding `tryCatch` statements so that t
 
 Included age type units in datasets Neotoma object and its different methods.
 Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
+
+Made sure `loc` argument is handled as a geojson
