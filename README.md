@@ -1,5 +1,5 @@
 <!-- badges: start -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-orange.svg)](https://doi.org/10.21105/joss.05561)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![NSF-1948926](https://img.shields.io/badge/NSF-1948926-blue.svg)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1948926)
 [![Codecov test coverage](https://codecov.io/gh/NeotomaDB/neotoma2/branch/production/graph/badge.svg)](https://app.codecov.io/gh/NeotomaDB/neotoma2?branch=production)
 [![DOI](https://zenodo.org/badge/265675258.svg)](https://zenodo.org/badge/latestdoi/265675258) 
