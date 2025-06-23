@@ -10,6 +10,7 @@ setMethod(f = "show",
                              datasettype = object@datasettype,
                              age_range_old =  object@age_range_old,
                              age_range_young =  object@age_range_young,
+                             age_units = object@age_units,
                              notes = object@notes), row.names = FALSE)
           })
 
@@ -25,6 +26,7 @@ setMethod(f = "show",
                                datasettype = y@datasettype,
                                age_range_old =  y@age_range_old,
                                age_range_young =  y@age_range_young,
+                               age_units = y@age_units,
                                notes = y@notes)
             }) %>%
               bind_rows() %>%
@@ -173,6 +175,7 @@ setMethod(f = "as.data.frame",
                        datasettype = x@datasettype,
                        age_range_old =  x@age_range_old,
                        age_range_young =  x@age_range_young,
+                       age_units = x@age_units,
                        notes = x@notes)
           })
 

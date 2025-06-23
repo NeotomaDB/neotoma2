@@ -162,7 +162,6 @@ get_sites.default <- function(...) { # nolint
   cl[[1]] <- NULL
 
   cl <- lapply(cl, eval, envir = parent.frame())
-
   error_check <- check_args(cl) # nolint
 
   if (error_check[[2]]$flag == 1) {
@@ -173,7 +172,8 @@ get_sites.default <- function(...) { # nolint
   # Location geojson / coords array
   if ("loc" %in% names(cl)) {
     loc <- parse_location(cl$loc)
-    base_url <- paste0("data/sites?loc=", URLencode(loc, reserved = TRUE))
+    encoded_loc <- URLencode(loc, reserved = TRUE)
+    base_url <- paste0("data/sites?loc=", encoded_loc)
     if(length(base_url)>1){
       stop("Multiple polygons cannot be handled, pass one polygon at a time.")
     }

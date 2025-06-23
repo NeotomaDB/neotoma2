@@ -1,7 +1,12 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
+<<<<<<< HEAD
 Date: 2024-07-23
 Version: 1.0.4
+=======
+Date: 2025-06-23
+Version: 1.0.6
+>>>>>>> dev
 Authors@R:
     c(person(given = "Dominguez Vidana",
              family = "Socorro",
@@ -20,14 +25,14 @@ Description: Access and manipulation of data using the Neotoma Paleoecology Data
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests:
     testthat,
     knitr,
     pkgdown,
     rmarkdown,
-    Bchron,
     ggplot2,
+    Bchron,
     covr
 Imports:
     rlang,
@@ -47,6 +52,7 @@ Imports:
     progress,
     wk,
     uuid,
+    utils,
     tidyr
 VignetteBuilder: 
     knitr

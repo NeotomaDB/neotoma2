@@ -1,8 +1,0 @@
-^doc$
-inst/docs
-inst/doc
-
-^inst/doc/.*
-^inst/doc/neotoma2-package_files/$
-inst/doc/neotoma2-package_files/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js
-inst/doc/neotoma2-package_files/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js

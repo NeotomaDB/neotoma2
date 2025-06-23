@@ -15,7 +15,7 @@ utils::globalVariables(c("col1", "df_ready2"))
 #' @returns `JSON` object to parse as a body in a HTTP request
 #' @keywords internal
 parsebody <- function(x, all_data, ...) {
-  #query <- list(...)
+  query <- list(...)
   # Retrieve complete call to create json body
   # There are 3 cases
   # I. Long list of IDs (most common)
@@ -41,22 +41,35 @@ parsebody <- function(x, all_data, ...) {
   }
   # II. Other simple queries - Unlikely unless it comes with a complex location
   if (params == "") {
-    body <- jsonlite::toJSON(list(...), flatten = TRUE)
+    m <- list(...)
+    body <- jsonlite::toJSON(m)
   }
   # III. When location is present and the base_URL has too much info
-  if(substr(params, 1, 1) == "?") {
-    params <- stringr::str_remove_all(params, "\\?")
-    params <- stringr::str_replace_all(params, "=", ":")
-    params <- strsplit(params, "&")
-    df <- data.frame(params)
-    df <- dplyr::as_tibble(df)
-    df <- df %>% dplyr::rename(col1 = colnames(df[1]))
-    df2 <- df %>%
-      tidyr::separate(col1, c("name", "value"), sep = ":",
-                      Sremove = FALSE, extra = "merge")
-    df2 <- df2 %>% select("name", "value")
-    df2 <- tidyr::pivot_wider(df2)
-    body <- jsonlite::toJSON(df2, auto_unbox = TRUE)
+  if (startsWith(params, "?")) {
+    param_list <- strsplit(substring(params, 2), "&")[[1]]
+    kv_pairs <- strsplit(param_list, "=")
+    # Keep "loc" as a raw string; parse others
+    param_data <- list()
+    for (kv in kv_pairs) {
+      name <- kv[[1]]
+      value <- kv[[2]]
+      if (name == "loc") {
+        # Preserve original percent-encoded string
+        decoded_loc <- jsonlite::fromJSON(utils::URLdecode(value))
+        param_data[[name]] <- decoded_loc
+        #param_data[[name]] <- utils::URLdecode(value)
+        #param_data[[name]] <- value
+      } else {
+        # Convert numeric where possible
+        num_val <- suppressWarnings(as.numeric(value))
+        param_data[[name]] <- if (!is.na(num_val)) num_val else value
+      }
+    }
+    
+    # Merge with ... arguments
+    full_params <- utils::modifyList(param_data, query)
+    body <- jsonlite::toJSON(full_params, auto_unbox = TRUE)
   }
+  
   return(body)
 }

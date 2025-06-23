@@ -4,7 +4,7 @@ testthat::test_that("We can download records and plot them
 
   ## we don't want this to run on CRAN
   skip_on_cran()
-  fiftyds <- get_datasets(limit = 50)
+  fiftyds <- get_sites(limit = 50)
 
   output <- plotLeaflet(fiftyds)
   testthat::expect_is(output, "leaflet")
@@ -16,7 +16,7 @@ testthat::test_that("We can download records and plot a single site
 
   ## we don't want this to run on CRAN
   skip_on_cran()
-  fiftyds <- get_datasets(limit = 50)
+  fiftyds <- get_sites(limit = 50)
 
   output <- plotLeaflet(fiftyds[[1]])
   testthat::expect_is(output, "leaflet")
