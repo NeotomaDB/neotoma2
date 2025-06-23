@@ -19,7 +19,7 @@ From a set of \code{collectionunit} objects, return the
 collectionunit and dataset ids.
 }
 \examples{
-{
+\donttest{
 marion <- get_sites(sitename = "Marion Lake")
 collunitids <- getids(collunits(marion))
 }
