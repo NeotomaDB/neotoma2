@@ -67,7 +67,7 @@ parsebody <- function(x, all_data, ...) {
     }
     
     # Merge with ... arguments
-    full_params <- modifyList(param_data, query)
+    full_params <- utils::modifyList(param_data, query)
     body <- jsonlite::toJSON(full_params, auto_unbox = TRUE)
   }
   

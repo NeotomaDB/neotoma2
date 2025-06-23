@@ -2,6 +2,7 @@
 #' @title get_taxon
 #' @description a sites object with the requested taxa.
 #' @param x string taxa name or names
+#' @param ... accepted arguments, see details for more information.
 #' @returns A Neotoma2 sites object with datasets with the requested taxa.
 #' 
 #' @export

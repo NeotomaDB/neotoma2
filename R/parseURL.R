@@ -68,7 +68,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         response <- httr::POST(new_url,
                                body = body,
                                add_headers("User-Agent" = "neotoma2 R package"),
-                               httr::content_type("application/json"))
+                               httr::content_type("application/json")
+      )
       )
       if (inherits(response, "try-error")) {
         # Handle the SSL error
@@ -110,7 +111,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
       stop("You cannot use the limit parameter when all_data is TRUE")
     }
     query$offset <- 0
-    query$limit <- 50
+    query$limit <- 2000
     ql <- query$limit
     
     try(
@@ -128,15 +129,13 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
         stop("SSL certificate error:", error_message, "\n Please contact the Neotoma Team")
       }
     }
-    if (response$status_code == 414 | nchar(response$url) > 2000) {
+    if (response$status_code == 414 & nchar(response$url) > 2000) {
       if (any(!(c('siteid', 'datasetid') %in% names(body)))) {
         # The 414 error is a URL that is too long. This is a lazy way to manage
         # the choice between a POST and GET call.
         # Function with POST (Use this once server issue is resolved)
         args <- x
         new_url <- newURL(baseurl, args, ...)
-        query$offset <- 0
-        query$limit <- 2000
         ql <- query$limit
         body <- parsebody(args, all_data=FALSE, limit=2000, ...) #lazy fix. think of other ways to handle long urls
         #body <- jsonlite::toJSON(body, auto_unbox = TRUE) #, pretty = TRUE
@@ -145,7 +144,8 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
                                  body = body,
                                  encode = 'json',
                                  add_headers("User-Agent" = "neotoma2 R package"),
-                                 httr::content_type("application/json"))
+                                 httr::content_type("application/json"),
+                                 httr::verbose())
         )
         stop_for_status(response,
                         task = "Could not connect to the Neotoma API.
@@ -173,7 +173,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) { # nolint
           ids_nos <- as.numeric(stringr::str_extract_all(body$datasetid,
                                                          "[0-9.]+")[[1]])
         }
-        
+        query$limit <-50
         seq_chunk <- split(ids_nos,
                            ceiling(seq_along(ids_nos) / query$limit))
         

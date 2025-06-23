@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 # otherwise, set up eval=False
 api_available <- FALSE
 try({
-  res = httr::GET("https://api.neotomadb.org/v2.0/data/datasets/24")
+  res = pingNeotoma()
   if(res$status_code==200){
     api_available <- TRUE
   }
@@ -30,7 +30,7 @@ knitr::knit_hooks$set(eval = function(before, options, envir) {
 })
 
 # Set global chunk options
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(eval = TRUE)
 ```
 
 ```{r setup_md, include=FALSE}
@@ -128,7 +128,7 @@ alex <- get_sites(sitename = 'Alex%')
 alex
 ```
 
-<!-- Since this new `sites` object has `r tryCatch(length(alex@sites), error = function(e) "N/A")`. elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`. -->
+Since this new `sites` object has `r tryCatch(length(alex@sites), error = function(e) "N/A")`. elements that belong to `site`, we may want to access only one of the objects, or sets of metadata from our variable `alex`.
 
 #### Searching for Sites by Age
 

@@ -1,6 +1,6 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2025-06-07
+Date: 2025-06-23
 Version: 1.0.6
 Authors@R:
     c(person(given = "Dominguez Vidana",
@@ -26,8 +26,8 @@ Suggests:
     knitr,
     pkgdown,
     rmarkdown,
-    Bchron,
     ggplot2,
+    Bchron,
     covr
 Imports:
     rlang,
@@ -47,6 +47,7 @@ Imports:
     progress,
     wk,
     uuid,
+    utils,
     tidyr
 VignetteBuilder: 
     knitr

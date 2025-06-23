@@ -8,6 +8,8 @@ get_taxa(x = NA, ...)
 }
 \arguments{
 \item{x}{string taxa name or names}
+
+\item{...}{accepted arguments, see details for more information.}
 }
 \value{
 A Neotoma2 sites object with datasets with the requested taxa.
