@@ -45,7 +45,7 @@ setMethod(f = "show",
 #' @param i iteration in sites list
 #' @description Obtain one of the elements within a sites list
 #' @returns sliced `site` object
-#' @examples {
+#' @examples \donttest{
 #' some_site <- get_sites(sitename = "Site%", limit=3)
 #' some_site[[2]]
 #' }

@@ -18,7 +18,7 @@
 Get Dataset Default
 }
 \examples{
-{
+\donttest{
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_datasets(altmin=12, altmax=25, limit=2)
 # To find all datasets in Brazil

@@ -18,7 +18,7 @@ sliced \code{site} object
 Obtain one of the elements within a sites list
 }
 \examples{
-{
+\donttest{
 some_site <- get_sites(sitename = "Site\%", limit=3)
 some_site[[2]]
 }

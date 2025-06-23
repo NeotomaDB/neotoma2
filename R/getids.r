@@ -134,7 +134,7 @@ getids.collunits <- function(x, order = TRUE) {
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
 #' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
-#' @examples {
+#' @examples \donttest{
 #' marion <- get_sites(sitename = "Marion Lake") 
 #' collunitids <- getids(collunits(marion)[[1]])
 #' }
