@@ -43,6 +43,7 @@ Package use requires the use of the `devtools::install_github()` function, to pu
 ```r
 devtools::install_github('NeotomaDB/neotoma2', build_vignettes = TRUE)
 ```
+
 The expectation for this repository is that all commits to the `prod` branch will support a clean package build.  This is supported through [GitHub Actions](https://github.com/NeotomaDB/neotoma2/actions) in the `.github` folder of the repository.
 
 ### Analysis Workflow Overview
