@@ -7,19 +7,13 @@
   "codeRepository": "https://github.com/NeotomaDB/neotoma2",
   "issueTracker": "https://github.com/NeotomaDB/neotoma2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
-  "provider": {
-    "@id": "https://cran.r-project.org",
-    "@type": "Organization",
-    "name": "Comprehensive R Archive Network (CRAN)",
-    "url": "https://cran.r-project.org"
-  },
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "author": [
     {
       "@type": "Person",
@@ -39,10 +33,10 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Simon",
-      "familyName": "Goring",
-      "email": "goring@wisc.edu",
-      "@id": "https://orcid.org/0000-0002-2700-4605"
+      "givenName": "Dominguez Vidana",
+      "familyName": "Socorro",
+      "email": "s.dominguez@ht-data.com",
+      "@id": "https://orcid.org/0000-0002-7926-4935"
     }
   ],
   "softwareSuggestions": [
@@ -96,18 +90,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "Bchron",
-      "name": "Bchron",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=Bchron"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "provider": {
@@ -117,6 +99,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "Bchron",
+      "name": "Bchron",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Bchron"
     },
     {
       "@type": "SoftwareApplication",
@@ -271,18 +265,6 @@
     },
     "13": {
       "@type": "SoftwareApplication",
-      "identifier": "mapview",
-      "name": "mapview",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=mapview"
-    },
-    "14": {
-      "@type": "SoftwareApplication",
       "identifier": "assertthat",
       "name": "assertthat",
       "provider": {
@@ -293,7 +275,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=assertthat"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
@@ -305,7 +287,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
-    "16": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "progress",
       "name": "progress",
@@ -317,7 +299,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=progress"
     },
-    "17": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "wk",
       "name": "wk",
@@ -329,7 +311,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=wk"
     },
-    "18": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "uuid",
       "name": "uuid",
@@ -340,6 +322,11 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=uuid"
+    },
+    "18": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
     },
     "19": {
       "@type": "SoftwareApplication",
@@ -355,10 +342,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1939.46KB",
+  "fileSize": "8245.922KB",
   "citation": [
     {
-      "@type": "ScholarlyArticle",
+      "@type": "SoftwareSourceCode",
       "datePublished": "2023",
       "author": [
         {
@@ -378,6 +365,7 @@
       ],
       "name": "Working with the Neotoma Paleoecology Database",
       "identifier": "10.5281/zenodo.8114874",
+      "url": "https://open.neotomadb.org/neotoma2/inst/doc/neotoma2-package.html",
       "@id": "https://doi.org/10.5281/zenodo.8114874",
       "sameAs": "https://doi.org/10.5281/zenodo.8114874",
       "isPartOf": {
