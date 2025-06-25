@@ -97,7 +97,7 @@ getids.site <- function (x, order = TRUE) {
 #' @param order sort items by siteid, collunitid, datasetid
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
-#' @examples {
+#' @examples \donttest{
 #' marion <- get_sites(sitename = "Marion Lake")
 #' collunitids <- getids(collunits(marion))
 #' }
