@@ -15,5 +15,6 @@ R/.DS_Store
 
 *.gz
 inst/
+inst/doc/neotoma2-package.html
 
 CRAN-SUBMISSION
