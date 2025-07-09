@@ -1,5 +1,5 @@
 #' @title get_specimens
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf

@@ -22,7 +22,7 @@ setGeneric("coordinates", function(obj, ...) {
 })
 
 #' @title plotLeaflet
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description Plot sites on a leaflet map
 #' @param object Sites object to plot
 #' @returns leaflet map with site markers
@@ -110,7 +110,7 @@ setGeneric("taxa", function(object) {
 })
 
 #' @title toJSON
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
+#' @author Socorro Dominguez 
 #' @description Export toJSON
 #' @param x Sites object to extract taxa table from
 #' @returns JSON translation of `sites` object to JSON

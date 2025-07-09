@@ -1,5 +1,5 @@
 #' @title parse_location
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf

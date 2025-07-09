@@ -1,6 +1,6 @@
 #' @md
 #' @title get_stats
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @import dplyr
 #' @import tidyr
