@@ -33,7 +33,7 @@ set_site <- function(x = NA,
                      area = NA_integer_,
                      notes = NA_character_,
                      description = NA_character_,
-                     collunits = new("collunits")) {
+                     collunits = NULL) {
   
   function_call <- match.call()
   

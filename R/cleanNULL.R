@@ -5,10 +5,9 @@
 #' @returns parsed `list` where NULL values are changed to NA
 #' @keywords internal
 #' @noRd
-cleanNULL <- function(x) { # nolint
+cleanNULL <- function(x) {
   out <- rapply(x,
                 function(y) {
-                  #print(y)
                   ifelse(is.null(y), NA, y)
                 },
                 how = "replace")

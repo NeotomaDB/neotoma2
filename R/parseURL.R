@@ -14,8 +14,8 @@
 #' @param all_data If TRUE return all possible API calls
 #' @param ... Any query parameters passed from the calling function.
 #' @returns `list` with cleaned and parsed data from HTTP request
-#' @export
-
+#' @keywords internal
+#' @noRd
 parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
   cleanNull <- function(x, fn = function(x) if (is.null(x)) NA else x) {
     if (is.list(x)) {
@@ -40,7 +40,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
       full_url <- httr::modify_url(baseurl,
                                    path = file.path("v2.0", x),
                                    query = query)
-      if (nchar(full_url) > 2000) {
+      if (nchar(full_url) < 2000) {
         httr::GET(paste0(baseurl, x),
                   httr::add_headers("User-Agent" = "neotoma2 R package"),
                   query = query)
@@ -139,18 +139,21 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
   } else {
     query$offset <- 0
     query$limit <- 2000
+    responses <- c()
     while (TRUE) {
-      responses <- c()
       response <- get_response(baseurl, x, query)
-      result <- jsonlite::fromJSON(httr::content(response, as = "text"),
+      r <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                    flatten = FALSE,
                                    simplifyVector = FALSE)
-      if (is.null(result$data) || length(result$data) == 0) {
+      r <- cleanNull(r)
+      if (is.null(r$data) || length(r$data) == 0) {
         break
       }
-      responses <- c(responses, cleanNull(result)$data)
+      responses <- c(responses, r$data)
       query$offset <- query$offset + query$limit
     }
+    result <- list()
     result$data <- responses
   }
+  return(result)
 }

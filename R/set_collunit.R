@@ -38,8 +38,8 @@ set_collunit <- function(x = NA,
                          collectiondevice = NA_character_,
                          collectionunitname = NA_character_,
                          depositionalenvironment = NA_character_,
-                         datasets = new("datasets"),
-                         chronologies = new("chronologies"),
+                         datasets = NULL,
+                         chronologies = NULL,
                          defaultchronology = NA_integer_) {
 
   function_call <- match.call()
