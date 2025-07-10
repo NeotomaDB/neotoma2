@@ -5,7 +5,6 @@
 #' @import stringr
 #' @keywords internal
 #' @noRd
-
 get_params <- function(obj) {
   url <- "https://api.neotomadb.org/api-docs/swagger-ui-init.js"
   r <- tryCatch({
@@ -24,5 +23,7 @@ get_params <- function(obj) {
             conditionMessage(e))
     NULL
   })
+  r <- append(r, list("all_data", "limit", "offset"))
+  r <- lapply(r, tolower)
   return(r)
 }

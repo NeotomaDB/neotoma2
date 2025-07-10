@@ -14,7 +14,6 @@ build_dataset <- function(...) {
     args <- list(...)
     assertthat::assert_that(is.list(args),
                             msg = "Parsed object must be a list.")
-  
   # PI Information
   pi_list <- testNull(args$datasetpi, list())
   if (length(pi_list) != 0) {
@@ -27,8 +26,6 @@ build_dataset <- function(...) {
         }
       })
   }
-
-  print(args)
   ds <- set_dataset(
       datasetid = use_na(testNull(args$datasetid, NA), "int"),
       database = use_na(testNull(args$database, NA), "char"),
@@ -42,5 +39,4 @@ build_dataset <- function(...) {
       pi_list = pi_list,
       samples = NULL,
       specimens = NULL)
-
 }

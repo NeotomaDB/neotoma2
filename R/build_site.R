@@ -7,7 +7,6 @@
 #' @returns A simple `site` object
 #' @keywords internal
 #' @noRd
-
 build_site <- function(...) {
   args <- list(...)
   assertthat::assert_that(is.list(args),

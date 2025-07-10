@@ -26,5 +26,5 @@ limited collection units information.
 get_sites
 }
 \author{
-Socorro Dominguez \email{s.dominguez@ht-data.com}
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

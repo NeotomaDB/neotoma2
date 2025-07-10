@@ -10,7 +10,8 @@ use_na <- function(x, type) {
   if (is.null(x) || is.na(x)) {
     return(switch(type,
                   "char" = NA_character_,
-                  "int" = NA_integer_))
+                  "int" = NA_integer_,
+                  "sf" = st_as_sf(st_sfc())))
   } else {
     return(x)
   }

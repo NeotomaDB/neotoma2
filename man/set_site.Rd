@@ -14,7 +14,7 @@ set_site(
   area = NA_integer_,
   notes = NA_character_,
   description = NA_character_,
-  collunits = new("collunits")
+  collunits = NULL
 )
 }
 \arguments{

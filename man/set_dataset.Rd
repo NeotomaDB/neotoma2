@@ -7,14 +7,17 @@
 set_dataset(
   x = NA,
   datasetid = NA_integer_,
+  datasetname = NA_character_,
   database = NA_character_,
   doi = NA,
   datasettype = NA_character_,
   age_range_old = NA_integer_,
   age_range_young = NA_integer_,
+  age_units = NA_character_,
   notes = NA_character_,
   pi_list = NA,
-  samples = new("samples")
+  samples = NULL,
+  specimens = NULL
 )
 }
 \arguments{

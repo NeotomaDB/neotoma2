@@ -1,38 +1,7 @@
-#' @md
-#' @title parse_site
-#' @description An internal helper function to parse the API result into a site object.
-#' @param result A JSON object from the API.
-#' @returns A Neotoma2 site object.
-parse_site <- function(result) {
-  fix_null <- function(x) {
-    for (i in seq_len(length(x))) {
-      if (is.null(x[[i]])) {
-        x[[i]] <- NA
-      } else {
-        if (is(x[[i]], "list")) {
-          x[[i]] <- fix_null(x[[i]])
-        }
-      }
-    }
-    return(x)
-  }
-
-  data <- result$data %>%
-    fix_null()
-
-  # Function to use once API is in order.
-  # API - Site currently does not have any 'site'
-  # keys. Might need modification afterwards
-  newSites <- build_sites(data)
-
-  return(newSites)
-}
-
 #' @title get_sites
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
-#' @import sf
 #' @importFrom methods new
 #' @param x A numeric vector of unique Neotoma site identifiers.
 #' @param ... One of a set of possible query parameters discussed in details.
@@ -98,14 +67,11 @@ parse_site <- function(result) {
 #'  * `collunits` limited information on collunits
 #' @examples
 #' \donttest{
-#' ## Find all sites with a min altitude of 12m and a max altitude of 25m
-#' ## By default returns only 25 sites (default limit is 25):
+#' ## Find sites with a min altitude of 12m and a max altitude of 25m
 #' sites_12to25 <- get_sites(altmin=12, altmax=25)
 #' ## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
 #' sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
-#' ## To find all sites that contain the string "Alex%"
-#' alex_sites <- get_sites(sitename="Alex%")
-#' ## To find sites in Brazil (again with default 25 records)
+#' ## To find sites in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
 #'  [-73.125, -9.102096738726443],
@@ -124,7 +90,6 @@ parse_site <- function(result) {
 #'                     all_data = TRUE)
 #'   lilysites <- c(lilysites, length(lily))
 #' }
-#' plot(x = seq(0, 10000, by = 1000), y = lilysites, type = 'b')
 #' }
 #' @export
 get_sites <- function(x = NA, ...) {
@@ -132,6 +97,38 @@ get_sites <- function(x = NA, ...) {
     UseMethod("get_sites", x)
   } else {
     UseMethod("get_sites", NA)
+  }
+}
+
+
+#' @title Get Site Information for Fossil Sites
+#' @param x The numeric site ID from Neotoma
+#' @param ... accepted arguments if numeric all_data
+#' @returns The function returns either a single item of class `"try-error"`
+#' describing the reason for failure (either misdefined parameters or an error
+#' from the Neotoma API), or a table of sites, with rows corresponding to the
+#' number of individual sites returned by the Neotoma API.
+#' Each "site" object contains 6 parameters that can be accessed as well:
+#' siteid, sitename, location, altitude, description,
+#' limited collection units information.
+#'  * `loc` An `sf` object that describes site's location.
+#'  * `collunits` limited information on collunits
+#' @examples {
+#' ## Find all sites by numeric siteid:
+#' sites <- get_sites(seq(1,3))
+#' }
+#' @export
+get_sites.numeric <- function(x, ...) {
+  if (length(x) > 0) {
+    siteids <- paste0(x, collapse = ",")
+  }
+  base_url <- paste0("data/sites/", siteids)
+  result <- parseURL(base_url, ...)
+  if (length(result[2]$data) > 0) {
+    output <- parse_site(result)
+    return(output)
+  } else {
+    return(NULL)
   }
 }
 
@@ -156,54 +153,12 @@ get_sites <- function(x = NA, ...) {
 get_sites.default <- function(...) { # nolint
   oo <- options(scipen = 9999999)
   on.exit(options(oo))
-  
-  cl <- as.list(match.call())
-
-  cl[[1]] <- NULL
-
-  cl <- lapply(cl, eval, envir = parent.frame())
-  error_check <- check_args(cl) # nolint
-
-  if (error_check[[2]]$flag == 1) {
-    stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
-  } else {
-    cl <- error_check[[1]]
-  }
-  # Location geojson / coords array
-  if ("loc" %in% names(cl)) {
-    loc <- parse_location(cl$loc)
-    encoded_loc <- URLencode(loc, reserved = TRUE)
-    base_url <- paste0("data/sites?loc=", encoded_loc)
-    if(length(base_url)>1){
-      stop("Multiple polygons cannot be handled, pass one polygon at a time.")
-    }
-
-    for (name in names(cl)) {
-      if (!(name == "loc")) {
-        if (!(name == "all_data")) {
-        base_url <- paste0(base_url, "&", name, "=", paste0(cl[name]))
-        }
-      }
-    }
-    # loc and all_data
-    if ("all_data" %in% names(cl)){
-      result <- parseURL(base_url, all_data = cl$all_data) %>%
-        cleanNULL()
-      
-      # add warning to revise loc argument
-    } else {
-      result <- parseURL(base_url) %>%
-        cleanNULL()
-      # add warning to revise loc argument
-    }
-  } else {
 
     base_url <- paste0("data/sites")
     result <- parseURL(base_url, ...) 
     
     result <- result %>%
       cleanNULL()
-  }
 
   if (is.null(result$data[1][[1]])) {
     return(NULL)
@@ -211,101 +166,4 @@ get_sites.default <- function(...) { # nolint
     output <- parse_site(result)
     return(output)
   }
-}
-
-#' @title Get Site Information for Fossil Sites
-#' @param x The numeric site ID from Neotoma
-#' @param ... accepted arguments if numeric all_data
-#' @returns The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either misdefined parameters or an error
-#' from the Neotoma API), or a table of sites, with rows corresponding to the
-#' number of individual sites returned by the Neotoma API.
-#' Each "site" object contains 6 parameters that can be accessed as well:
-#' siteid, sitename, location, altitude, description,
-#' limited collection units information.
-#'  * `loc` An `sf` object that describes site's location.
-#'  * `collunits` limited information on collunits
-#' @examples {
-#' ## Find all sites by numeric siteid:
-#' sites <- get_sites(seq(1,3))
-#' }
-#' @export
-get_sites.numeric <- function(x, ...) {
-  if (length(x) > 0) {
-    siteids <- paste0(x, collapse = ",")
-  }
-  base_url <- paste0("data/sites/", siteids)
-  result <- neotoma2::parseURL(base_url, ...)
-  result_length <- length(result[2]$data)
-
-  if (result_length > 0) {
-    output <- parse_site(result)
-    return(output)
-  } else {
-    return(NULL)
-  }
-}
-
-#' @title Get Site Information for Fossil Sites from a Set of Sites
-#' @param x The numeric site ID from Neotoma
-#' @param ... accepted arguments if numeric all_data
-#' @examples
-#' \donttest{
-#' ## Find all sites using a set of prior sites:
-#' char_sites <- get_sites(taxa = "charcoal")
-#' pollen_coloc <- get_sites(char_sites, datasettype = "pollen")
-#' char_coloc <- char_sites %>% filter(siteid %in% getids(pollen_coloc)$siteid)
-#' pol_char <- c(pollen_coloc, char_coloc)
-#' }
-#' @returns The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either misdefined parameters or an error
-#' from the Neotoma API), or a table of sites, with rows corresponding to the
-#' number of individual sites returned by the Neotoma API.
-#' Each "site" object contains 6 parameters that can be accessed as well:
-#' siteid, sitename, location, altitude, description,
-#' limited collection units information.
-#'  * `loc` An `sf` object that describes site's location.
-#'  * `collunits` limited information on collunits
-#' @export
-get_sites.sites <- function(x, ...) {
-  
-  if (length(x) > 0) {
-    ids <- getids(x)
-    siteids <- ids$siteid
-    #datasetids <- ids$datasetid
-    siteids <- siteids %>%
-      unique() %>%
-      as.numeric() %>%
-      na.omit() %>%
-      suppressWarnings() %>%
-      paste0(., collapse = ",")
-  }
- 
-  base_url <- "data/sites"
-  
-  ## Fixing all data
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
-  
-  if('all_data' %in% names(cl)){
-    all_data = cl$all_data
-  }else{
-    cl[['all_data']] = TRUE
-  }
-  
-  if('limit' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  
-  if('offset' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  ## Fixing all data line
-  
-  cl[['siteid']] <- siteids
-  cl[['x']] <- NULL
-
-  output <- do.call(get_sites, cl)
-  
-  return(output)
 }

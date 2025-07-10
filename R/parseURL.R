@@ -39,11 +39,24 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
     response <- tryCatch({
       full_url <- httr::modify_url(baseurl,
                                    path = file.path("v2.0", x),
-                                   query = query)
-      if (nchar(full_url) < 2000) {
+                                   query = query[setdiff(names(query), "loc")])
+      if (nchar(full_url) < 2000 && !('loc' %in% names(query))) {
         httr::GET(paste0(baseurl, x),
                   httr::add_headers("User-Agent" = "neotoma2 R package"),
                   query = query)
+      } else if ("loc" %in% names(query)) {
+        query$loc <- parseLocation(query$loc)
+        body <- jsonlite::toJSON(query, auto_unbox = TRUE, null = "null")
+        parts <- strsplit(x, "/")[[1]]
+        path_str <- paste(parts[1:2], collapse = "/")
+        baseurl <- paste0(baseurl, path_str)
+        response <- httr::POST(paste0(baseurl),
+                               body = body,
+                               encode = "raw",
+                               httr::add_headers("User-Agent" =
+                                                   "neotoma2 R package",
+                                                 "Content-Type" =
+                                                   "application/json"))
       } else {
         parts <- strsplit(x, "/")[[1]]
         path_str <- paste(parts[1:2], collapse = "/")
