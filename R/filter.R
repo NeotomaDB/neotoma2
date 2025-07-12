@@ -169,10 +169,9 @@ filter.sites <- function(x, ...) {  # nolint
     return(new("sites"))
   }
   
-  siteids <- as.data.frame(x)$siteid
-  
+  siteids <- unique(as.data.frame(x)$siteid)
   pared_sites <- x[which(siteids %in% cleanids$siteid)]
-  
+
   # Sites are cleared.  Now need to clear datasets:
   good_dsid <- unique(cleanids$datasetid)
   good_cuid <- unique(cleanids$collunitid)

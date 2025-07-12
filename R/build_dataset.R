@@ -37,6 +37,6 @@ build_dataset <- function(...) {
       age_units = use_na(testNull(args$agerange[[1]]$units, NA), "char"),
       notes = use_na(testNull(args$datasetnotes, NA), "char"),
       pi_list = pi_list,
-      samples = NULL,
-      specimens = NULL)
+      samples = testNull(args$samples, NULL),
+      specimens = testNull(args$specimens, NULL))
 }

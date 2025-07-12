@@ -11,7 +11,8 @@ use_na <- function(x, type) {
     return(switch(type,
                   "char" = NA_character_,
                   "int" = NA_integer_,
-                  "sf" = st_as_sf(st_sfc())))
+                  "sf" = st_as_sf(st_sfc()),
+                  "list" = list()))
   } else {
     return(x)
   }

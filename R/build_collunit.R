@@ -10,9 +10,9 @@ build_collunits <- function(...) {
   assertthat::assert_that(is.list(args),
                           msg = "Parsed object must be a list.")
   cu <- set_collunit(
+    collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
     collunittype = use_na(testNull(args$collectionunittype, NA), "char"),
     handle = use_na(testNull(args$handle, NA), "char"),
-    collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
     collectiondevice = use_na(testNull(args$collectiondevice, NA), "char"),
     collectionunitname = use_na(testNull(args$collectionunitname, NA), "char"),
     waterdepth = use_na(testNull(args$waterdepth, NA), "int"),

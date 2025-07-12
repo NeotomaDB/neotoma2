@@ -9,8 +9,8 @@
 #' coming from the Neotoma API.
 #' @param x sample list
 #' @returns A simple `sample` object
-#' @export
-
+#' @keywords internal
+#' @noRd
 build_sample <- function(x) {
 
   df <- x$datum %>%
