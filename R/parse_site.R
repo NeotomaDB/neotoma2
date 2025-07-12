@@ -19,9 +19,15 @@
 parse_site <- function(result, parse_download = FALSE) {
   data <- result$data
   data <- group_response(data)
+  
   new_sites <- purrr::map(data, function(x) {
     # Map collection units
-    cu <- purrr::map(x$site$collectionunits, function(y){
+    if (is.null(x$site$collectionunits)) {
+      call <- x$collectionunits
+    } else {
+      call <- x$site$collectionunits
+    }
+    cus <- purrr::map(call, function(y){
       # Map datasets
       ds <- purrr::map(y$datasets, function(z) {
         samp <- purrr::map(z$samples, build_sample)
@@ -41,11 +47,11 @@ parse_site <- function(result, parse_download = FALSE) {
                      specimens = NULL)
         do.call(build_dataset, ds_l)
       })
+      
       ds <- new("datasets", datasets = ds)
       # Chronologies
       chronologies <- purrr::map(y$chronologies, function(z) {
         if (!is.na(z$chronology$chronologyid)){
-          print(z$chronology$chroncontrols)
           ch_l <- list(chronologyid = use_na(z$chronology$chronologyid, "int"),
                        notes = use_na(z$chronology$chronolgy$notes, "char"),
                        contact = use_na(z$chronology$chronolgy$contact, "char"),
@@ -76,15 +82,15 @@ parse_site <- function(result, parse_download = FALSE) {
         location = use_na(y$location, "char"),
         waterdepth = use_na(y$waterdepth, "int"),
         gpslocation = testNull(y$gpslocation, NA),
-        collunittype = use_na(y$collunittype, "char"),
+        collunittype = use_na(testNull(testNull(y$unittype, y$collunittype),
+                                                y$collectionunittype), "char"),
         collectiondevice = use_na(y$collectiondevice, "char"),
-        collectionunitname = use_na(y$collectionunitname, "char"),
+        collectionunitname = use_na(y$collectionunit, "char"),
         depositionalenvironment = use_na(y$depositionalenvironment, "char"),
         defaultchronology = use_na(y$defaultchronology, "int"))
       do.call(build_collunits, cu_l)
     })
-    cu <- new("collunits", collunits = cu)
-    
+    cu <- new("collunits", collunits = cus)
     st <- if (!is.null(x$site)) x$site else x
     st_l <- list(sitename = st$sitename,
                  siteid = st$siteid,
@@ -98,7 +104,6 @@ parse_site <- function(result, parse_download = FALSE) {
   new_sites <- new("sites", sites = new_sites)
   return(new_sites)
 }
-
 normalize_agerange <- function(agerange) {
   if (is.null(agerange) || length(agerange) == 0) {
     list(list(ageold = NA, ageyoung = NA, units = NA))

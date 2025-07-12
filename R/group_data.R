@@ -49,7 +49,7 @@ group_download <- function(data) {
   })
 }
 
-group_dataset_data <- function(data) {
+group_dataset <- function(data) {
   site_groups <- split(data, sapply(data, function(x) x$site$siteid))
   sites <- purrr::map(site_groups, function(site_group) {
     site_info <- site_group[[1]]$site
@@ -64,12 +64,7 @@ group_dataset_data <- function(data) {
       # datasets in cu
       all_datasets <- purrr::map(cu_group, function(x) x$site$datasets) %>%
         purrr::flatten()
-      datasets <- purrr::map(all_datasets, function(ds) {
-        ds$agerange <- if (length(ds$agerange) == 0) {
-          list(list(ageold = NA, ageyoung = NA, units = NA))
-        } else ds$agerange
-      })
-      cu_info$datasets <- datasets
+      cu_info$datasets <- all_datasets
       cu_info
     })
     # Remove unnecessary fields

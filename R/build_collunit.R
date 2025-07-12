@@ -11,7 +11,7 @@ build_collunits <- function(...) {
                           msg = "Parsed object must be a list.")
   cu <- set_collunit(
     collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
-    collunittype = use_na(testNull(args$collectionunittype, NA), "char"),
+    collunittype = use_na(testNull(args$collunittype, NA), "char"),
     handle = use_na(testNull(args$handle, NA), "char"),
     collectiondevice = use_na(testNull(args$collectiondevice, NA), "char"),
     collectionunitname = use_na(testNull(args$collectionunitname, NA), "char"),
