@@ -16,7 +16,7 @@ The function returns a character string in JSON format
 Convert a Neotoma2 \code{sites} object into a standardized JSON file for API management.
 }
 \examples{
-{
+\dontrun{
 # To find all sites that contain the string "Alexander\%"
 alex.sites <- get_sites(sitename="Alexander\%")
 # Convert the object to json
@@ -24,5 +24,5 @@ toJSON(alex.sites)
 }
 }
 \author{
-Socorro Dominguez \email{s.dominguez@ht-data.com}
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

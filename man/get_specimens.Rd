@@ -26,5 +26,5 @@ my_specimens2 <- get_specimens(datasetid = 41610)
 }
 }
 \author{
-Socorro Dominguez \email{s.dominguez@ht-data.com}
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

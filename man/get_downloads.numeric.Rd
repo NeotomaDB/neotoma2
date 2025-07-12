@@ -4,14 +4,14 @@
 \alias{get_downloads.numeric}
 \title{get_downloads}
 \usage{
-\method{get_downloads}{numeric}(x, verbose = TRUE, ...)
+\method{get_downloads}{numeric}(x, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
 
-\item{verbose}{Should text be printed during the download process?}
-
 \item{...}{arguments in ellipse form}
+
+\item{verbose}{Should text be printed during the download process?}
 }
 \value{
 The function returns either a single item of class

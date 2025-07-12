@@ -16,5 +16,5 @@ JSON translation of \code{sites} object to JSON
 Export toJSON
 }
 \author{
-Socorro Dominguez \email{sedv8808@gmail.com}
+Socorro Dominguez
 }

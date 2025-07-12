@@ -79,14 +79,11 @@ and datasets located at that site.
 }
 \examples{
 \donttest{
-## Find all sites with a min altitude of 12m and a max altitude of 25m
-## By default returns only 25 sites (default limit is 25):
+## Find sites with a min altitude of 12m and a max altitude of 25m
 sites_12to25 <- get_sites(altmin=12, altmax=25)
 ## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
 sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
-## To find all sites that contain the string "Alex\%"
-alex_sites <- get_sites(sitename="Alex\%")
-## To find sites in Brazil (again with default 25 records)
+## To find sites in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],
@@ -105,9 +102,8 @@ for (i in seq(0, 10000, by = 1000)) {
                     all_data = TRUE)
   lilysites <- c(lilysites, length(lily))
 }
-plot(x = seq(0, 10000, by = 1000), y = lilysites, type = 'b')
 }
 }
 \author{
-Socorro Dominguez \email{s.dominguez@ht-data.com}
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }
