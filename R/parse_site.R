@@ -18,8 +18,7 @@
 #' @noRd
 parse_site <- function(result, parse_download = FALSE) {
   data <- result$data
-  data <- group_data(data)
-  
+  data <- group_response(data)
   new_sites <- purrr::map(data, function(x) {
     # Map collection units
     cu <- purrr::map(x$site$collectionunits, function(y){
@@ -29,45 +28,71 @@ parse_site <- function(result, parse_download = FALSE) {
         samp <- new("samples", samples = samp)
         z$agerange <- normalize_agerange(z$agerange)
         ds_l <- list(datasetid = z$datasetid,
-             database = use_na(z$database, "char"),
-             doi = z$doi,
-             datasettype = use_na(z$datasettype, "char"),
-             datasetname = use_na(z$datasetname, "char"),
-             age_range_old = use_na(z$agerange[[1]]$ageold, "int"),
-             age_range_young = use_na(z$agerange[[1]]$ageyoung, "int"),
-             age_units = use_na(z$agerange[[1]]$units, "int"),
-             notes = use_na(z$datasetnotes, "char"),
-             pi_list = z$pi_list,
-             samples = samp,
-             specimens = NULL)
+                     database = use_na(z$database, "char"),
+                     doi = z$doi,
+                     datasettype = use_na(z$datasettype, "char"),
+                     datasetname = use_na(z$datasetname, "char"),
+                     age_range_old = use_na(z$agerange[[1]]$ageold, "int"),
+                     age_range_young = use_na(z$agerange[[1]]$ageyoung, "int"),
+                     age_units = use_na(z$agerange[[1]]$units, "int"),
+                     notes = use_na(z$datasetnotes, "char"),
+                     pi_list = z$pi_list,
+                     samples = samp,
+                     specimens = NULL)
         do.call(build_dataset, ds_l)
       })
-      # TODO Build Chronologies
       ds <- new("datasets", datasets = ds)
+      # Chronologies
+      chronologies <- purrr::map(y$chronologies, function(z) {
+        if (!is.na(z$chronology$chronologyid)){
+          print(z$chronology$chroncontrols)
+          ch_l <- list(chronologyid = use_na(z$chronology$chronologyid, "int"),
+                       notes = use_na(z$chronology$chronolgy$notes, "char"),
+                       contact = use_na(z$chronology$chronolgy$contact, "char"),
+                       agemodel = use_na(z$chronology$chronolgy$agemodel, "char"),
+                       ageboundolder = use_na(z$chronology$chronolgy$ageboundolder, "int"),
+                       ageboundyounger = use_na(z$chronology$chronolgy$ageboundyounger, "int"),
+                       isdefault = use_na(z$chronology$chronology$isdefault, "bool"),
+                       dateprepared = use_na(as.Date(z$chronology$chronology$dateprepared), "date"),
+                       modelagetype = use_na(z$chronology$chronology$modelagetype, "char"),
+                       chronologyname = use_na(z$chronology$chronology$chronologyname, "char"),
+                       chroncontrols = z$chronology$chroncontrols)
+          do.call(build_chron, ch_l)
+        } else {
+          NULL
+        }
+      })
+      if (is.null(chronologies) || all(sapply(chronologies, is.null))) {
+        chron <- new("chronologies", chronologies = list())
+      } else {
+        chron <- new("chronologies", chronologies = chronologies)
+      }
       cu_l <- list(
-           collectionunitid = y$collectionunitid,
-           colldate = as.Date(testNull(y$colldate, NA)),
-           handle = use_na(y$handle, "char"),
-           datasets = ds,
-           chronologies = NULL,
-           location = use_na(y$location, "char"),
-           waterdepth = use_na(y$waterdepth, "int"),
-           gpslocation = testNull(y$gpslocation, NA),
-           collunittype = use_na(y$collunittype, "char"),
-           collectiondevice = use_na(y$collectiondevice, "char"),
-           collectionunitname = use_na(y$collectionunitname, "char"),
-           depositionalenvironment = use_na(y$depositionalenvironment, "char"),
-           defaultchronology = use_na(y$defaultchronology, "int"))
+        collectionunitid = y$collectionunitid,
+        colldate = as.Date(testNull(y$colldate, NA)),
+        handle = use_na(y$handle, "char"),
+        datasets = ds,
+        chronologies = chron,
+        location = use_na(y$location, "char"),
+        waterdepth = use_na(y$waterdepth, "int"),
+        gpslocation = testNull(y$gpslocation, NA),
+        collunittype = use_na(y$collunittype, "char"),
+        collectiondevice = use_na(y$collectiondevice, "char"),
+        collectionunitname = use_na(y$collectionunitname, "char"),
+        depositionalenvironment = use_na(y$depositionalenvironment, "char"),
+        defaultchronology = use_na(y$defaultchronology, "int"))
       do.call(build_collunits, cu_l)
     })
     cu <- new("collunits", collunits = cu)
-    st_l <- list(sitename = x$site$sitename,
-                     siteid = x$site$siteid,
-                     geography = x$site$geography,
-                     altitude = x$site$altitude,
-                     description = x$site$sitedescription,
-                     notes = x$site$sitenotes,
-                     collunits = cu)
+    
+    st <- if (!is.null(x$site)) x$site else x
+    st_l <- list(sitename = st$sitename,
+                 siteid = st$siteid,
+                 geography = st$geography,
+                 altitude = st$altitude,
+                 description = st$sitedescription,
+                 notes = st$sitenotes,
+                 collunits = cu)
     do.call(build_site, st_l)
   })
   new_sites <- new("sites", sites = new_sites)
