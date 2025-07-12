@@ -16,11 +16,14 @@
 #' @returns `list` with cleaned and parsed data from HTTP request
 #' @keywords internal
 #' @noRd
-parse_site <- function(result, parse_download = FALSE) {
+parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
   data <- result$data
   data <- group_response(data)
   
   new_sites <- purrr::map(data, function(x) {
+    if (verbose) {
+      cat(".")
+    }
     # Map collection units
     if (is.null(x$site$collectionunits)) {
       call <- x$collectionunits

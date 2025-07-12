@@ -84,12 +84,12 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
 #' or a table of sites, with rows corresponding to the number of
 #' individual sites and datasets returned by the Neotoma API.
 #' @export
-get_downloads.numeric <- function(x, verbose = TRUE, ...) {
+get_downloads.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
   base_url <- paste0("data/downloads?datasetid=", dataset)
-  result <- parseURL(base_url, ...)
+  result <- parseURL(base_url,  ...)
   if (length(result[2]$data) > 0) {
     output <- parse_site(result, parse_download = TRUE)
     return(output)
@@ -111,50 +111,14 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   
-  output <- getids(x) %>% 
-    dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
-                  !is.na(suppressWarnings(as.numeric(datasetid))))
-  
-  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
-                                        is.na(suppressWarnings(as.numeric(datasetid))))
-  
-  if(nrow(ids2)!=0){
-    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed.
-                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
-    warning(warnsite)
-  }
-  
-  output <- output %>%
+  ids <- getids(x)
+ 
+  ids <- ids %>%
     dplyr::select(datasetid) %>%
-    stats::na.omit() %>%
     unique() %>%
     unlist() %>%
-    as.numeric() %>%
-    suppressWarnings()
-  
-  ## Fixing all data
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
-  
-  if('all_data' %in% names(cl)){
-    all_data = cl$all_data
-  }else{
-    cl[['all_data']] = TRUE
-  }
-  
-  if('limit' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  
-  if('offset' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  ## Fixing all data line
-  
-  cl[['x']] <- output
-  cl[['verbose']] <- verbose
-  
-  output <- do.call(get_downloads, cl)
+    as.numeric()
+  output <- get_downloads(x = ids, verbose, ...)
 
   return(output)
 }

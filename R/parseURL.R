@@ -58,15 +58,17 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
                                                  "Content-Type" =
                                                    "application/json"))
       } else {
+        # Numeric Long calls
         parts <- strsplit(x, "/")[[1]]
         path_str <- paste(parts[1:2], collapse = "/")
-        baseurl <- paste0(baseurl, path_str)
+        parts2 <- sub("\\?.*$", "", path_str)
+        baseurl <- paste0(baseurl, parts2)
         if (length(parts) >= 2) {
           resource <- parts[length(parts) - 1]
           value <- parts[length(parts)] # Value limited to Site/DS IDs
-          if (grepl("site", resource)) {
+          if (grepl("site", parts2)) {
             resource <- "siteid"
-          } else if (grepl(c("dataset", "download"), resource)) {
+          } else if (any(grepl("dataset|download", parts2))) {
             resource <- "datasetid"
           }
         }
@@ -85,8 +87,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
                                    httr::add_headers("User-Agent" =
                                                        "neotoma2 R package",
                                                      "Content-Type" =
-                                                       "application/json"),
-                                   httr::verbose())
+                                                       "application/json"))
             if (httr::http_error(response)) {
               warning("Skipping failed request with status ",
                       response$status_code)
@@ -94,12 +95,12 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
             }
             r <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                     flatten = FALSE, simplifyVector = FALSE)
+            
             if (!is.null(r$data)) {
               results <- c(results, r$data)
             }
           }
-          response$data <- results
-          response
+          response <- list(data = results)
         } else {
           # Convert query to JSON
           if (!resource %in% names(query)) {
@@ -110,8 +111,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
                      body = body,
                      encode = "raw",
                      httr::add_headers("User-Agent" = "neotoma2 R package",
-                                       "Content-Type" = "application/json"),
-                     httr::verbose())
+                                       "Content-Type" = "application/json"))
         }
       }
     }, error = function(e) {
@@ -125,7 +125,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
       return(NULL)
     })
 
-    if (is.null(response) || isTRUE(httr::http_error(response))) {
+    if (is.null(response) || isTRUE(inherits(response, "response") && httr::http_error(response))) {
       if (is.null(response)) {
         stop("Error: Check your R Code.")
       }
@@ -145,10 +145,13 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
 
   if (all_data == FALSE) {
     response <- get_response(baseurl, x, query)
+    if (inherits(response, "response")) {
     result <- jsonlite::fromJSON(httr::content(response, as = "text"),
                                  flatten = FALSE,
                                  simplifyVector = FALSE)
-    result <- cleanNull(result)
+    } else {
+    result <- cleanNull(response)
+    }
   } else {
     query$offset <- 0
     query$limit <- 2000

@@ -36,7 +36,6 @@ build_chron <- function(...) {
   })
   
   chron_table <- df[!duplicated(df), ]
-  print(chron_table)
   # Contacts
   if (length(args$contact) == 1) {
     contact <- use_na(testNull(args$contact, NA), "list")
