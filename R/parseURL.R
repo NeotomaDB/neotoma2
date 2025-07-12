@@ -100,7 +100,10 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
               results <- c(results, r$data)
             }
           }
-          response <- list(data = results)
+          response <- list(status = 200,
+                           data = results,
+                           message = "Success")
+          return(response)
         } else {
           # Convert query to JSON
           if (!resource %in% names(query)) {
@@ -150,7 +153,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
                                  flatten = FALSE,
                                  simplifyVector = FALSE)
     } else {
-    result <- cleanNull(response)
+      result <- response
     }
   } else {
     query$offset <- 0

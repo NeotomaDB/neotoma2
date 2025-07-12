@@ -54,7 +54,7 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
       ds <- new("datasets", datasets = ds)
       # Chronologies
       chronologies <- purrr::map(y$chronologies, function(z) {
-        if (!is.na(z$chronology$chronologyid)){
+        if (!is.null(z$chronology$chronologyid)){
           ch_l <- list(chronologyid = use_na(z$chronology$chronologyid, "int"),
                        notes = use_na(z$chronology$chronolgy$notes, "char"),
                        contact = use_na(z$chronology$chronolgy$contact, "char"),
