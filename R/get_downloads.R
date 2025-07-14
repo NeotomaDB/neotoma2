@@ -111,12 +111,15 @@ get_downloads.numeric <- function(x, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)
+  
   ids <- ids %>%
     dplyr::select(datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
-  output <- get_downloads(x = ids, verbose, ...)
+  
+  output <- get_downloads(x = ids, all_data = TRUE, ...)
+
   return(output)
 }
 

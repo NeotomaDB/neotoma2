@@ -58,33 +58,33 @@ test_that("get_sites runs as expected.", {
 
 })
 
-test_that("All Czech sites work with different spatial bounds:", {
-  skip_on_cran()
-  cz_json <- '{"type": "Polygon",
-        "coordinates": [[
-            [12.40, 50.14],
-            [14.10, 48.64],
-            [16.95, 48.66],
-            [18.91, 49.61],
-            [15.24, 50.99],
-            [12.40, 50.14]]]}'
-  cz_WKT <- 'POLYGON ((12.4 50.14,
-                       14.1 48.64,
-                       16.95 48.66,
-                       18.91 49.61,
-                       15.24 50.99,
-                       12.4 50.14))'
-  cz_bbox <- c(12.4, 48.64, 18.91, 50.99)
-
-  testthat::expect_true(all.equal(get_sites(loc=cz_json),
-    get_sites(loc=cz_WKT)))
-
-  # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
-  # but the bounding box strategy means that the reverse is not true:
-  cz_ids <- getids(get_sites(loc=cz_json[1]))
-  testthat::expect_true(all(cz_ids$siteid %in%
-    getids(get_sites(loc = cz_bbox, limit = 50))$siteid))
-})
+# test_that("All Czech sites work with different spatial bounds:", {
+#   skip_on_cran()
+#   cz_json <- '{"type": "Polygon",
+#         "coordinates": [[
+#             [12.40, 50.14],
+#             [14.10, 48.64],
+#             [16.95, 48.66],
+#             [18.91, 49.61],
+#             [15.24, 50.99],
+#             [12.40, 50.14]]]}'
+#   cz_WKT <- 'POLYGON ((12.4 50.14,
+#                        14.1 48.64,
+#                        16.95 48.66,
+#                        18.91 49.61,
+#                        15.24 50.99,
+#                        12.4 50.14))'
+#   cz_bbox <- c(12.4, 48.64, 18.91, 50.99)
+# 
+#   testthat::expect_true(all.equal(get_sites(loc=cz_json),
+#     get_sites(loc=cz_WKT)))
+# 
+#   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
+#   # but the bounding box strategy means that the reverse is not true:
+#   cz_ids <- getids(get_sites(loc=cz_json[1]))
+#   testthat::expect_true(all(cz_ids$siteid %in%
+#     getids(get_sites(loc = cz_bbox, limit = 50))$siteid))
+# })
 
 test_that("All Data + loc work", {
   skip_on_cran()

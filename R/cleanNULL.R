@@ -6,10 +6,15 @@
 #' @keywords internal
 #' @noRd
 cleanNULL <- function(x) {
-  out <- rapply(x,
-                function(y) {
-                  ifelse(is.null(y), NA, y)
-                },
-                how = "replace")
-  return(out)
+  if (is.list(x)) {
+    lapply(x, function(el) {
+      if (is.null(el)) {
+        NA
+      } else {
+        cleanNULL(el)
+      }
+    })
+  } else {
+    x
+  }
 }

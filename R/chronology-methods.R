@@ -168,11 +168,11 @@ setMethod(f = "set_default",
 
             chronout <- purrr::map(seq_len(length(x)), function(y) {
               if (x@chronologies[[y]]$chronologyid == n) {
-                x@chronologies[[y]]@isdefault <- 1
+                x@chronologies[[y]]@isdefault <- TRUE
               }
               if (x@chronologies[[y]]$chronologyid != n &
                   x@chronologies[[y]]$modelagetype == replacingmodel) {
-                x@chronologies[[y]]@isdefault <- 0
+                x@chronologies[[y]]@isdefault <- FALSE
               }
               return(x@chronologies[[y]])
             })

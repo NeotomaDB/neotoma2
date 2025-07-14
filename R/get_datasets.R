@@ -157,13 +157,8 @@ get_datasets.sites <- function(x, ...) {
     unlist() %>%
     as.numeric()
 
-  output <- get_datasets(x = ids, ...)
+  output <- get_datasets(x = ids, all_data=TRUE, ...)
   
-  return(output)
-  
-  dataset_list <- ids$datasetid
-  dataset_list <- as.numeric(unlist(dataset_list))
-  output <- get_datasets(x = dataset_list, all_data = TRUE)
   return(output)
 }
 
