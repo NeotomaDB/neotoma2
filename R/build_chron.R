@@ -22,19 +22,16 @@ build_chron <- function(...) {
   args <- list(...)
   assertthat::assert_that(is.list(args),
                           msg = "Parsed object must be a list.")
-
-  df <- purrr::map_dfr(args$chroncontrols, function(x) {
-    tibble::tibble(
-      depth = use_na(x$depth, "int"),
-      thickness = use_na(x$thickness, "int"),
-      agelimityounger = use_na(x$agelimityounger, "int"),
-      agelimitolder = use_na(x$agelimitolder, "int"),
-      chroncontrolid = use_na(x$chroncontrolid, "int"),
-      chroncontrolage = use_na(x$chroncontrolage, "int"),
-      chroncontroltype = use_na(x$chroncontroltype, "char")
-    )
-  })
-  
+  df <- purrr::map(args$chroncontrols, function(x) {
+    as.data.frame(list(depth = use_na(x$depth, "int"),
+                       thickness = use_na(x$thickness, "int"),
+                       agelimityounger = use_na(x$agelimityounger, "int"),
+                       agelimitolder = use_na(x$agelimitolder, "int"),
+                       chroncontrolid = use_na(x$chroncontrolid, "int"),
+                       chroncontrolage = use_na(x$chroncontrolage, "int"),
+                       chroncontroltype = use_na(x$chroncontroltype, "char")
+    ))}) %>%
+    bind_rows()
   chron_table <- df[!duplicated(df), ]
   # Contacts
   if (length(args$contact) == 1) {
@@ -55,6 +52,6 @@ build_chron <- function(...) {
                                dateprepared = use_na(args$dateprepared, "date"),
                                modelagetype = use_na(args$modelagetype, "char"),
                                chronologyname = use_na(args$chronologyname, "char"),
-                               chroncontrols = use_na(chron_table, "data.frame"))
+                               chroncontrols = chron_table)
   return(chronology)
 }

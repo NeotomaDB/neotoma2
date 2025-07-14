@@ -132,14 +132,11 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 #' @importFrom stats na.omit
 #' @export
 get_downloads.character <- function(x, verbose = TRUE, ...) {
-  
   result <- jsonlite::fromJSON(x,
                                flatten = FALSE,
                                simplifyVector = FALSE)
   result <- result %>%
     cleanNULL()
-  
   output <- parse_download(result, verbose = verbose)
-  
   return(output)
 }
