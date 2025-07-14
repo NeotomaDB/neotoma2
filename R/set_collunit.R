@@ -38,8 +38,8 @@ set_collunit <- function(x = NA,
                          collectiondevice = NA_character_,
                          collectionunitname = NA_character_,
                          depositionalenvironment = NA_character_,
-                         datasets = new("datasets"),
-                         chronologies = new("chronologies"),
+                         datasets = NULL,
+                         chronologies = NULL,
                          defaultchronology = NA_integer_) {
 
   function_call <- match.call()
@@ -47,7 +47,8 @@ set_collunit <- function(x = NA,
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
     if (is.na(collectionunitid)) {
-      x@collectionunitid <- uuid::UUIDgenerate()
+      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      x@collectionunitid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@collectionunitid <- collectionunitid
     }

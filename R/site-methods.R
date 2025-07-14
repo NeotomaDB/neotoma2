@@ -13,7 +13,7 @@ utils::globalVariables(c("siteid", "collunitid", "sitename", "datasetid",
 setMethod(f = "show",
           signature = "site",
           definition = function(object) {
-            print(data.frame(siteid = as.character(object@siteid),
+            print(data.frame(siteid = object@siteid,
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
                              long = mean(st_coordinates(object@geography)[, 1]),
@@ -29,7 +29,7 @@ setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
             map(object@sites, function(x) {
-              df <- data.frame(siteid = as.character(x@siteid),
+              df <- data.frame(siteid = x@siteid,
                                sitename = x@sitename,
                                lat = mean(st_coordinates(x@geography)[, 2]),
                                long = mean(st_coordinates(x@geography)[, 1]),
@@ -202,7 +202,7 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("site"),
           definition = function(x) {
-            data.frame(siteid = as.character(x@siteid),
+            data.frame(siteid = x@siteid,
                        sitename = x@sitename,
                        lat = mean(st_coordinates(x@geography)[, 2]),
                        long = mean(st_coordinates(x@geography)[, 1]),
@@ -349,7 +349,7 @@ setMethod(f = "summary",
                                         types = NA)
               }
 
-              data.frame(siteid = as.character(x$siteid), sitename = x$sitename,
+              data.frame(siteid = x$siteid, sitename = x$sitename,
                          collunits)
               }
             ) %>%
@@ -362,7 +362,7 @@ setMethod(f = "summary",
               chronologies <- sapply(x@collunits@collunits,
                                      function(y) length(y@chronologies))
 
-              return(data.frame(siteid = as.character(x$siteid),
+              return(data.frame(siteid = x$siteid,
                                 collunits = length(x@collunits),
                                 datasets = datasets))
             }) %>%
@@ -393,7 +393,7 @@ setMethod(f = "doi",
                          doi = doi)
             }) %>%
             dplyr::bind_rows() %>%
-            dplyr::mutate(datasetid = as.character(datasetid)) %>%
+            dplyr::mutate(datasetid = datasetid) %>%
             dplyr::full_join(ids, by = "datasetid") %>%
             dplyr::select(siteid, collunitid, datasetid, doi) %>%
             dplyr::group_by(siteid, collunitid, datasetid) %>%

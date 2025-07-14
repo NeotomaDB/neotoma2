@@ -1,5 +1,5 @@
 #' @title get_specimens
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import geojsonsf
@@ -8,15 +8,9 @@
 #' Information for Specimens
 #' @param x Use a single specimenid
 #' @param ... Additional terms passed to get_specimens, most common datasetid
-#' @examples
-#' \donttest{
-#' # To find specimen with ID 7:
-#' my_specimens <- get_specimens(7)
-#' # To find specimens in datasetid 41610
-#' my_specimens2 <- get_specimens(datasetid = 41610)
-#' }
 #' @returns The function returns a specimens list
-#' @export
+#' @keywords internal
+#' @noRd
 get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
     UseMethod("get_specimens", x)
@@ -82,11 +76,9 @@ parse_specimen <- function(result, ds) {
 #' @param x Use a single number to extract site information
 #' @param ... Additional terms passed to get_specimens.
 #' @returns The function returns a specimens list
-#' @examples {
-#' ## To find specimen with ID 7
-#' my_specimens <- get_specimens(7)
-#' }
-#' @export
+#' @keywords internal
+#' @noRd
+# remove meanwhile
 get_specimens.numeric <- function(x, ...) {
 
   if (length(x) > 0) {
@@ -94,7 +86,7 @@ get_specimens.numeric <- function(x, ...) {
   }
 
   base_url <- paste0("data/specimens/", specimenid)
-  result <- neotoma2::parseURL(base_url)
+  result <- parseURL(base_url)
 
 
   if(length(result$data) ==0){
@@ -120,11 +112,9 @@ get_specimens.numeric <- function(x, ...) {
 #' @title Get Specimen datasetid
 #' @param ... Pass argument datasetid and the corresponding datasetid
 #' @returns The function returns a specimens list
-#' @examples {
-#' # To find specimens in datasetid 41610
-#' my_specimens <- get_specimens(datasetid = 41610)
-#' }
-#' @export
+#' @keywords internal
+#' @noRd
+# remove meanwhile
 get_specimens.default <- function(...) {
  
   cl <- as.list(match.call())
@@ -139,7 +129,7 @@ get_specimens.default <- function(...) {
   
   
   base_url <- paste0("data/datasets/", as.character(dsid), "/specimens")
-  result <- neotoma2::parseURL(base_url)
+  result <- parseURL(base_url)
   
   dw <- get_downloads(cl$datasetid)
   ds <- parse_specimen(result, dw)
@@ -152,13 +142,9 @@ get_specimens.default <- function(...) {
 #' @param x Use a single number to extract site information
 #' @param ... Other possible parameters such as datasetid
 #' @returns The function returns a specimens list
-#' @examples \donttest{
-#' # To find specimen with ID 7:
-#' my_site <- get_sites(13296)
-#' # To find specimens in `my_site`
-#' my_specimens <- get_specimens(my_site)
-#' }
-#' @export
+#' @keywords internal
+#' @noRd
+# remove meanwhile
 get_specimens.sites <- function(x,...) {
 
   output <- getids(x) %>%
@@ -172,7 +158,7 @@ get_specimens.sites <- function(x,...) {
   }
 
   base_url <- paste0("data/datasets/", output,"/specimens/")
-  result <- neotoma2::parseURL(base_url)
+  result <- parseURL(base_url)
 
   df <- suppressWarnings(samples(x))
 

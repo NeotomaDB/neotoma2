@@ -90,7 +90,7 @@ setMethod(f = "samples",
               # better.
               defaultchron <- purrr::map(chronologies(x)@chronologies,
                                          function(y) {
-                                           data.frame(chronologyid = as.character(y@chronologyid),
+                                           data.frame(chronologyid = y@chronologyid,
                                                       isdefault = y@isdefault,
                                                       modelagetype = y@modelagetype,
                                                       chronologyname = y@chronologyname,
@@ -153,7 +153,7 @@ setMethod(f = "samples",
                                                                          z@datum,
                                                                          analysisunitid = z@analysisunitid,
                                                                          sampleanalyst = toString(unique(unlist(z@sampleanalyst, use.names = FALSE))),
-                                                                         sampleid = as.character(z@sampleid),
+                                                                         sampleid = z@sampleid,
                                                                          depth = z@depth,
                                                                          thickness = z@thickness,
                                                                          samplename = z@samplename,
@@ -165,7 +165,7 @@ setMethod(f = "samples",
                                                             
                                                           }) %>%
                                       dplyr::bind_rows() %>%
-                                      dplyr::mutate(datasetid = as.character(dsid))
+                                      dplyr::mutate(datasetid = dsid)
                                     return(allsamp)
                                   }) %>%
               dplyr::bind_rows() %>%

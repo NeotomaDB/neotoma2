@@ -1,5 +1,5 @@
 #' @title Build a samples `data.frame` from Neotoma API JSON
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
@@ -9,8 +9,8 @@
 #' coming from the Neotoma API.
 #' @param x sample list
 #' @returns A simple `sample` object
-#' @export
-
+#' @keywords internal
+#' @noRd
 build_sample <- function(x) {
 
   df <- x$datum %>%

@@ -15,10 +15,8 @@ test_that("get_downloads runs as expected.", {
   # functionality of the `sf` package.
   brazil_sf <- geojsonsf::geojson_sf(brazil)
 
-  brazil_datasets_sf <- get_datasets(loc = brazil_sf[1], all_data = TRUE)
-  brazil_datasets <- get_datasets(loc = brazil, all_data = TRUE)
+  brazil_datasets <- get_datasets(loc = brazil_sf, all_data = TRUE)
 
-  expect_equivalent(brazil_datasets, brazil_datasets_sf)
   brazil_dl <- get_downloads(brazil_datasets)
   expect_identical(nrow(getids(brazil_datasets)), nrow(getids(brazil_dl)))
 

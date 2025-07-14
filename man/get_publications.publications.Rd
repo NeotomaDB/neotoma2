@@ -31,7 +31,7 @@ Update metadata for a set of publication objects.
 bad_pub <- get_publications(c(666, 667, 668))
 # Note this only changes the reported year, not the citation string.
 bad_pub[[1]]@year <- "1923"
-bad_pub[[1]]@publicationid <- as.character(NA)
+bad_pub[[1]]@publicationid <- NA_integer_
 updated_pubs <- get_publications(bad_pub)
 # Only the first publication object has any matches. It's the only one
 # that is missing its publicaitonid.

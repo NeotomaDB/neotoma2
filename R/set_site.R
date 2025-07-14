@@ -33,14 +33,15 @@ set_site <- function(x = NA,
                      area = NA_integer_,
                      notes = NA_character_,
                      description = NA_character_,
-                     collunits = new("collunits")) {
+                     collunits = NULL) {
   
   function_call <- match.call()
   
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
     if (is.na(siteid)) {
-      x@siteid <- uuid::UUIDgenerate()
+      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      x@siteid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@siteid <- siteid
     }

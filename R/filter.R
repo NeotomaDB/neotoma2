@@ -105,7 +105,7 @@ filter <- function(x, ...) {
 #' # Download 100 sites, get all associated datasets, but keep only
 #' # sites/datasets that are of datasettype "pollen":
 #' sites <- get_sites(limit = 1) %>%
-#'   get_datasets(all_data = TRUE)
+#'   get_datasets()
 #' pollen_subset <- sites %>% filter(datasettype == "pollen")
 #' }
 #' @export
@@ -136,11 +136,6 @@ filter.sites <- function(x, ...) {  # nolint
     any()
   
   ids <- getids(x)
-  ids <- ids %>% mutate(
-    collunitid = as.numeric(collunitid),
-    datasetid = as.numeric(datasetid)
-  )
-  
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
@@ -169,10 +164,9 @@ filter.sites <- function(x, ...) {  # nolint
     return(new("sites"))
   }
   
-  siteids <- as.data.frame(x)$siteid
-  
+  siteids <- unique(as.data.frame(x)$siteid)
   pared_sites <- x[which(siteids %in% cleanids$siteid)]
-  
+
   # Sites are cleared.  Now need to clear datasets:
   good_dsid <- unique(cleanids$datasetid)
   good_cuid <- unique(cleanids$collunitid)

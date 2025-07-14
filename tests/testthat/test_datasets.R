@@ -9,7 +9,7 @@ test_that("get_datasets numeric runs.", {
     dplyr::select(datasetid) %>%
     unique()
 
-  testthat::expect_equivalent(datasets_ids, "1001")
+  testthat::expect_equivalent(datasets_ids, 1001)
 
 })
 

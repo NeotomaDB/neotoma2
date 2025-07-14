@@ -22,7 +22,7 @@ setGeneric("coordinates", function(obj, ...) {
 })
 
 #' @title plotLeaflet
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description Plot sites on a leaflet map
 #' @param object Sites object to plot
 #' @returns leaflet map with site markers
@@ -47,13 +47,13 @@ setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
 })
 
-#' @title Obtain specimens from a record or multiple records.
-#' @param x sites object
-#' @returns data.frame with record information regarding specimens
-#' @export
-setGeneric("specimens", function(x) {
-  standardGeneric(f = "specimens")
-})
+# #' @title Obtain specimens from a record or multiple records.
+# #' @param x sites object
+# #' @returns data.frame with record information regarding specimens
+# #' @export
+# setGeneric("specimens", function(x) {
+#   standardGeneric(f = "specimens")
+# })
 
 #' @title Obtain the chronology from a record or multiple records.
 #' @param x sites object that contains chronologies
@@ -109,15 +109,17 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
-#' @title toJSON
-#' @author Socorro Dominguez \email{sedv8808@@gmail.com}
-#' @description Export toJSON
-#' @param x Sites object to extract taxa table from
-#' @returns JSON translation of `sites` object to JSON
-#' @export
-setGeneric("toJSON", function(x) {
-  standardGeneric(f = "toJSON")
-})
+# @title toJSON
+# @author Socorro Dominguez 
+# @description Export toJSON
+# @param x Sites object to extract taxa table from
+# @returns JSON translation of `sites` object to JSON
+# @keywords internal
+# @noRd
+# # comment out for now
+# setGeneric("toJSON", function(x) {
+#   standardGeneric(f = "toJSON")
+# })
 
 #' @title Add a new chronology to a collection unit.
 #' @param object A collectionunit object

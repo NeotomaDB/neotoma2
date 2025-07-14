@@ -202,7 +202,7 @@ setClass(
             agemodel = "character",
             ageboundolder = "numeric",
             ageboundyounger = "numeric",
-            isdefault = "numeric",
+            isdefault = "logical",
             dateprepared = "Date",
             modelagetype = "character",
             chronologyname = "character",
@@ -214,7 +214,7 @@ setClass(
                    agemodel = NA_character_,
                    ageboundolder = NA_integer_,
                    ageboundyounger = NA_integer_,
-                   isdefault = NA_integer_,
+                   isdefault = FALSE,
                    dateprepared = as.Date(character(1)),
                    modelagetype = NA_character_,
                    chronologyname = NA_character_,
@@ -369,14 +369,15 @@ setClass(
   "specimens",
   slots = c(specimens = "list"))
 
+
+setClassUnion("samplesOrNULL", c("samples", "NULL"))
+setClassUnion("specimensOrNULL", c("specimens", "NULL"))
 #' @title S4 class for dataset information
 #' @description The standard object class for datasets
 #'  from the Neotoma Paleoecology Database.
 #' @export
 #' @returns object of class `dataset`
-setClass(
-  # Set the name for the class
-  "dataset",
+setClass("dataset",
   # Define the slots
   slots = c(datasetid = "id",
             database = "character",
@@ -388,8 +389,8 @@ setClass(
             age_units = "character",
             notes = "character",
             pi_list = "ANY",
-            samples = "samples",
-            specimens = "specimens"),
+            samples = "samplesOrNULL",
+            specimens = "specimensOrNULL"),
   # Set the default values for the slot
   prototype = list(datasetid = NA_integer_,
                    database = NA_character_,
@@ -410,20 +411,18 @@ setClass(
 #'  the Neotoma Paleoecology Database.
 #' @returns object of class `datasets`
 #' @export
-setClass(
-  # Set the name for the class
-  "datasets",
+setClass("datasets",
   slots = c(datasets = "list"))
 
+setClassUnion("datasetsOrNULL", c("datasets", "NULL"))
+setClassUnion("chronologiesOrNULL", c("chronologies", "NULL"))
 #' @title S4 class for collection units information.
 #' @description A collection unit represents a collection event from within 
 #' a site. For example, a lake sediment core, or a single dig site within an
 #' archaeological site.
 #' @returns object of class `collunit`
 #' @export
-setClass(
-  # Set the name for the class
-  "collunit",
+setClass("collunit",
   slots = c(collectionunitid = "id",
             notes = "character",
             handle = "character",
@@ -435,8 +434,8 @@ setClass(
             collectiondevice = "character",
             collectionunitname = "character",
             depositionalenvironment = "character",
-            datasets = "datasets",
-            chronologies = "chronologies",
+            datasets = "datasetsOrNULL",
+            chronologies = "chronologiesOrNULL",
             defaultchronology = "integer"),
   prototype = list(collectionunitid = NA_integer_,
                    notes = NA_character_,
@@ -469,16 +468,14 @@ setClass("collunits",
                  unlist())
          })
 
+setClassUnion("collunitsOrNULL", c("collunits", "NULL"))
 #' @title An S4 class for site information
 #' @description The standard object class for sites
 #'  from the Neotoma Paleoecology Database.
 #' @import sf
 #' @returns object of class `site`
 #' @export
-setClass(
-  # Set the name for the class
-  "site",
-  # Define the slots
+setClass("site",
   slots = c(siteid = "id",
             sitename = "character",
             geography = "sf",
@@ -487,8 +484,7 @@ setClass(
             area = "numeric",
             notes = "character",
             description = "character",
-            collunits = "collunits"),
-  # Set the default values for the slot
+            collunits = "collunitsOrNULL"),
   prototype = list(siteid = NA_integer_,
                    sitename = NA_character_,
                    geography = sf::st_sf(sf::st_sfc()),
@@ -497,9 +493,7 @@ setClass(
                    area = NA_integer_,
                    notes = NA_character_,
                    description = NA_character_,
-                   collunits = NULL) # check what would really be a NA here
-  # Add a validity function that can test data consistency.
-  # This is not called if you have an initialize function defined!
+                   collunits = NULL)
 )
 
 #' @title An S4 class for multi-site information 

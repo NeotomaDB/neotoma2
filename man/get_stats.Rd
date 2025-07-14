@@ -31,7 +31,7 @@ last_month <- get_stats(start = 0, end = 1)
 }
 }
 \author{
-Socorro Dominguez \email{s.dominguez@ht-data.com}
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 
 Simon Goring \email{goring@wisc.edu}
 }

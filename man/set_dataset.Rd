@@ -7,20 +7,25 @@
 set_dataset(
   x = NA,
   datasetid = NA_integer_,
+  datasetname = NA_character_,
   database = NA_character_,
   doi = NA,
   datasettype = NA_character_,
   age_range_old = NA_integer_,
   age_range_young = NA_integer_,
+  age_units = NA_character_,
   notes = NA_character_,
   pi_list = NA,
-  samples = new("samples")
+  samples = NULL,
+  specimens = NULL
 )
 }
 \arguments{
 \item{x}{object to be set as dataset,}
 
 \item{datasetid}{dataset identifier}
+
+\item{datasetname}{name of the dataset}
 
 \item{database}{dataset where the dataset came from}
 
@@ -32,11 +37,15 @@ set_dataset(
 
 \item{age_range_young}{age range young}
 
+\item{age_units}{age units}
+
 \item{notes}{notes}
 
 \item{pi_list}{pi list}
 
 \item{samples}{taxa objects}
+
+\item{specimens}{specimens slot}
 }
 \value{
 \code{dataset} object

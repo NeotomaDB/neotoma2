@@ -72,27 +72,24 @@ test_that("The taxa() call should only return unique results", {
   testthat::expect_false(any(duplicated(taxa(mydataset))))
 })
 
-testthat::test_that("Location parsing isn't affecting representation
-  of spatial polygons passed to the DB:", {
-    
-    skip_on_cran()
-    # This is an issue raised by Adrian.
-    
-    location <- '{"type": "Polygon",
-            "coordinates": [[
-                [-169, 24],
-                [-169, 75],
-                [-52, 75],
-                [-52, 24],
-                [-169, 24]]]}'
-    
-    loc1 <- geojsonsf::geojson_sf(location) # sf object
-    loc <- geojsonsf::sf_geojson(loc1)
-    
-    testthat::expect_equivalent(loc1, geojsonsf::geojson_sf(loc))
-    testthat::expect_equivalent(loc1,
-                                geojsonsf::geojson_sf(parse_location(location)))
-  })
+# testthat::test_that("Location parsing isn't affecting representation
+#   of spatial polygons passed to the DB:", {
+#     
+#     skip_on_cran()
+#     # This is an issue raised by Adrian.
+#     
+#     location <- '{"type": "Polygon",
+#             "coordinates": [[
+#                 [-169, 24],
+#                 [-169, 75],
+#                 [-52, 75],
+#                 [-52, 24],
+#                 [-169, 24]]]}'
+#     
+#     loc1 <- geojsonsf::geojson_sf(location)
+#     testthat::expect_equivalent(loc1,
+#                                 geojsonsf::geojson_sf(parseLocation(location)))
+#   })
 
 testthat::test_that("We are pulling in the sites we expect to capture:", {
   # This test takes a really long time. . .

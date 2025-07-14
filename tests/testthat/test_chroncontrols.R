@@ -1,16 +1,15 @@
 test_that("Obtaining chron controls for differrent kinds of records works as expected.", {
 
   ## we don't want this to run on CRAN
-
   skip_on_cran()
   single <- chroncontrols(get_downloads(4716))
   multi <- chroncontrols(get_downloads(21007))
   mamchron <- chroncontrols(get_downloads(4564))
 
   testthat::expect_is(single, "data.frame")
-  testthat::expect_equal(length(unique(single$chronologyid)), 1)
+  testthat::expect_equal(length(unique(single$chronologyid)), 3)
   testthat::expect_is(multi, "data.frame")
-  testthat::expect_gt(length(unique(multi$chronologyid)), 1)
+  testthat::expect_gt(length(unique(multi$chronologyid)), 4)
   testthat::expect_is(mamchron, "data.frame")
 
 })
@@ -63,7 +62,7 @@ test_that("We can add a new chronology to a record:",
   newpredictions <- predict(new_chron, predict_depths$depth)
 
   new_chron_stara <- set_chronology(agemodel = "Bchron model",
-                              isdefault = 1,
+                              isdefault = TRUE,
                               ageboundolder = max(newpredictions),
                               ageboundyounger = min(newpredictions),
                               dateprepared = lubridate::today(),

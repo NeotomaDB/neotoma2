@@ -1,7 +1,7 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2025-06-23
-Version: 1.0.6
+Date: 2025-07-14
+Version: 1.0.7
 Authors@R:
     c(person(given = "Dominguez Vidana",
              family = "Socorro",
@@ -33,6 +33,7 @@ Imports:
     rlang,
     magrittr,
     sf,
+    digest,
     geojsonsf,
     purrr,
     lubridate,
@@ -45,7 +46,6 @@ Imports:
     assertthat,
     stringr,
     progress,
-    wk,
     uuid,
     utils,
     tidyr

@@ -42,7 +42,7 @@ getids.sites <- function (x, order = TRUE) {
             data.frame(collunitid = NA, datasetid = NA)
         }
         return(data.frame(siteid = siteid, collunits))
-    }) #%>%
+    })
 
     siteids <- do.call("rbind.data.frame", args = siteids)
     rownames(siteids) <- seq(length = nrow(siteids))
@@ -54,9 +54,11 @@ getids.sites <- function (x, order = TRUE) {
 
     # Guaranteeing that future joins all work out
     siteids <- siteids %>% 
-      mutate(siteid = as.character(siteid),
-             collunitid = as.character(collunitid),
-             datasetid = as.character(datasetid))
+      mutate(siteid = siteid,
+             collunitid = collunitid,
+             datasetid = datasetid)
+    
+    siteids <- siteids[!is.na(siteids$datasetid), ]
 
     return(siteids)
 }
@@ -81,13 +83,13 @@ getids.site <- function (x, order = TRUE) {
         datasetids <- NA
       }
 
-      return(data.frame(collunitid = as.character(collunitid),
-                        datasetid = as.character(unlist(datasetids))))
+      return(data.frame(collunitid = (collunitid),
+                        datasetid = (unlist(datasetids))))
     }) %>% dplyr::bind_rows()
   } else {
     data.frame(collunitid = NA, datasetid = NA)
   }
-  return(data.frame(siteid = as.character(siteid), collunits))
+  return(data.frame(siteid = (siteid), collunits))
 }
 
 #' @title Get object IDs from collectionunits.
@@ -117,13 +119,13 @@ getids.collunits <- function(x, order = TRUE) {
         datasetids <- NA
       }
 
-      return(data.frame(collunitid = as.character(collunitid),
-                        datasetid = as.character(unlist(datasetids))))
+      return(data.frame(collunitid = (collunitid),
+                        datasetid = (unlist(datasetids))))
     }) %>% dplyr::bind_rows()
   } else {
     data.frame(collunitid = NA, datasetid = NA)
   }
-  return(data.frame(siteid = as.character(siteid), collunits))
+  return(data.frame(siteid = (siteid), collunits))
 }
 
 #' @title Get object IDs from a single collectionunit.
@@ -152,7 +154,11 @@ getids.collunit <- function(x, order = TRUE) {
     datasetids <- NA
   }
 
-  return(data.frame(siteid = as.character(siteid),
-                    collunitid = as.character(collunitid),
-                    datasetid = as.character(datasetids)))
+  df <- data.frame(siteid = siteid,
+                    collunitid = collunitid,
+                    datasetid = datasetids)
+  
+  df <- df[!is.na(df$datasetid), ]
+  
+  return(df)
 }

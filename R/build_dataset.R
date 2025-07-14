@@ -6,17 +6,16 @@
 #' @importFrom methods new
 #' @description
 #' Helper function to build a dataset from the API JSON response.
-#' @param x a JSON dataset object passed from the Neotoma API.
+#' @param args a JSON dataset object passed from the Neotoma API.
 #' @returns A simple `dataset` object.
-#' @export
-
-build_dataset <- function(x) {
-
-  samples <- purrr::map(x$samples, build_sample)
-  samples <- new("samples", samples = samples)
-
+#' @keywords internal
+#' @noRd
+build_dataset <- function(...) {
+    args <- list(...)
+    assertthat::assert_that(is.list(args),
+                            msg = "Parsed object must be a list.")
   # PI Information
-  pi_list <- testNull(x$datasetpi, list())
+  pi_list <- testNull(args$datasetpi, list())
   if (length(pi_list) != 0) {
     pi_list <- pi_list %>%
       map(function(y) {
@@ -27,21 +26,17 @@ build_dataset <- function(x) {
         }
       })
   }
-
-  specimens <- new("specimens", specimens = list())
-
-  new("dataset",
-      datasetid = use_na(testNull(x$datasetid, NA), "int"),
-      database = use_na(testNull(x$database, NA), "char"),
-      doi = list(x$doi),
-      datasettype = use_na(testNull(x$datasettype, NA), "char"),
-      datasetname = use_na(testNull(x$datasetname, NA), "char"),
-      age_range_old = use_na(testNull(x$agerange[[1]]$ageold, NA), "int"),
-      age_range_young = use_na(testNull(x$agerange[[1]]$ageyoung, NA), "int"),
-      age_units = use_na(testNull(x$agerange[[1]]$units, NA), "char"),
-      notes = use_na(testNull(x$datasetnotes, NA), "char"),
+  ds <- set_dataset(
+      datasetid = use_na(testNull(args$datasetid, NA), "int"),
+      database = use_na(testNull(args$database, NA), "char"),
+      doi = list(args$doi),
+      datasettype = use_na(testNull(args$datasettype, NA), "char"),
+      datasetname = use_na(testNull(args$datasetname, NA), "char"),
+      age_range_old = use_na(testNull(args$age_range_old, NA), "int"),
+      age_range_young = use_na(testNull(args$age_range_young, NA), "int"),
+      age_units = use_na(testNull(args$units, NA), "char"),
+      notes = use_na(testNull(args$datasetnotes, NA), "char"),
       pi_list = pi_list,
-      samples = samples,
-      specimens = specimens)
-
+      samples = testNull(args$samples, NULL),
+      specimens = testNull(args$specimens, NULL))
 }

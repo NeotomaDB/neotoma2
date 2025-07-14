@@ -68,14 +68,7 @@ get_taxon.default <- function(x, ...) {
   cl <- lapply(cl, eval, envir = parent.frame())
   
   all_data <- ifelse(is.null(cl$all_data), FALSE, TRUE)
-  error_check <- check_args(cl) # nolint
-  
-  if (error_check[[2]]$flag == 1) {
-    stop(paste0(unlist(error_check[[2]]$message), collapse = "\n  "))
-  } else {
-    cl <- error_check[[1]]
-  }
-  
+
   base_url <- paste0("data/taxa")
   result <- parseURL(base_url, ...) %>%
     cleanNULL()
@@ -113,7 +106,7 @@ get_taxon.numeric <- function(x, ...) {
   }
   
   base_url <- paste0("data/taxa/", taxa_id)
-  result <- neotoma2::parseURL(base_url, ...)
+  result <- parseURL(base_url, ...)
   result_length <- length(result[2]$data)
   
   if (result_length > 0) {

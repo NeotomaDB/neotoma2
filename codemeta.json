@@ -7,13 +7,19 @@
   "codeRepository": "https://github.com/NeotomaDB/neotoma2",
   "issueTracker": "https://github.com/NeotomaDB/neotoma2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
   "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -164,6 +170,18 @@
     },
     "4": {
       "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
       "identifier": "geojsonsf",
       "name": "geojsonsf",
       "provider": {
@@ -174,7 +192,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=geojsonsf"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -186,7 +204,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
@@ -198,7 +216,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
@@ -210,7 +228,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=httr"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -222,12 +240,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
@@ -239,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "gtools",
       "name": "gtools",
@@ -251,7 +269,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=gtools"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
@@ -263,7 +281,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=leaflet"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "assertthat",
       "name": "assertthat",
@@ -275,7 +293,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=assertthat"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
@@ -287,7 +305,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "progress",
       "name": "progress",
@@ -298,18 +316,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=progress"
-    },
-    "16": {
-      "@type": "SoftwareApplication",
-      "identifier": "wk",
-      "name": "wk",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=wk"
     },
     "17": {
       "@type": "SoftwareApplication",
@@ -342,7 +348,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "8245.833KB",
+  "fileSize": "8071.224KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

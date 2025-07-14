@@ -1,5 +1,5 @@
 #' @title get_downloads
-#' @author Socorro Dominguez \email{s.dominguez@ht-data.com}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @import gtools
 #' @import lubridate
 #' @import dplyr
@@ -74,74 +74,8 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
   }
 }
 
-parse_download <- function(result, verbose = TRUE) {
-  dls <- result$data %>%
-    cleanNULL()
-  
-  dl_index <- purrr::map(dls, function(x) {
-    data.frame(siteid = x$site$siteid,
-               collunitid = x$site$collectionunit$collectionunitid,
-               datasetid = x$site$collectionunit$dataset$datasetid )}) %>%
-    dplyr::bind_rows()
-  
-  my_sites_list <- c()
-  siteids <- c()
-  
-  check_match <- function(dl_row, ids) {
-    apply(ids, 1, function(x) sum(dl_row == x))
-  }
-  
-  for (i in 1:length(dls)) {
-    if (length(my_sites_list) == 0) {
-      my_site <- build_sites(dls[[i]])
-      my_sites_list <- c(my_sites_list, my_site)
-      
-    } else {
-      ids <- getids(my_sites_list, order = FALSE)
-      matches <- check_match(dl_index[i,], ids)
-      
-      if (max(matches) == 0) {
-        # We're adding a site:
-        my_site <- build_sites(dls[[i]])
-        my_sites_list <- c(my_sites_list, my_site)
-        # for some reason, the 19 sites where added fine
-        
-      } else if (max(matches) == 1) {
-        # We're adding a collection unit somewhere:
-        st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
-        
-        newcu <- build_collunits(dls[[i]]$site$collectionunit)
-        oldcu <- my_sites_list[[st]]@collunits@collunits
-        
-        my_sites_list[[st]]@collunits@collunits <- c(oldcu, newcu)
-        
-      } else if (max(matches) == 2) {
-        # We're adding a dataset to an existing collection unit:
-        
-        st <- match(ids$siteid[which.max(matches)], unique(ids$siteid))
-        
-        cuids <- ids %>%
-          dplyr::filter(siteid == unique(ids$siteid)[st], .preserve = TRUE)
-        
-        cuid <- which(unique(cuids$collunitid) == dl_index$collunitid[i])
-        
-        collunit <- my_sites_list[[st]]@collunits@collunits[[cuid]]
-        newds <- build_dataset(dls[[i]]$site$collectionunit$dataset)
-        collunit@datasets@datasets <- c(collunit@datasets@datasets,
-                                        newds)
-        my_sites_list[[st]]@collunits@collunits[[cuid]] <- collunit
-      }
-    }
-    if (verbose) {
-      cat(".")
-    }
-  }
-  return(my_sites_list)
-}
-
 #' @title get_downloads
 #' @param x Use a single number to extract site information
-#' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
 #' @returns The function returns either a single item of class
 #' \code{"try-error"} describing the reason for failure
@@ -149,18 +83,18 @@ parse_download <- function(result, verbose = TRUE) {
 #' or a table of sites, with rows corresponding to the number of
 #' individual sites and datasets returned by the Neotoma API.
 #' @export
-get_downloads.numeric <- function(x, verbose = TRUE, ...) {
-  
+get_downloads.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-
   base_url <- paste0("data/downloads?datasetid=", dataset)
-  result <- parseURL(base_url, ...) # nolint
-  
-  output <- parse_download(result, verbose = verbose)
-  
-  return(output)
+  result <- parseURL(base_url,  ...)
+  if (length(result[2]$data) > 0) {
+    output <- parse_site(result, parse_download = TRUE)
+    return(output)
+  } else {
+    return(NULL)
+  }
 }
 
 #' @title get_downloads sites
@@ -175,75 +109,26 @@ get_downloads.numeric <- function(x, verbose = TRUE, ...) {
 #' individual sites and datasets returned by the Neotoma API.
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
+  ids <- getids(x)
   
-  output <- getids(x) %>% 
-    dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
-                  !is.na(suppressWarnings(as.numeric(datasetid))))
-  
-  ids2 <- getids(x) %>% dplyr::filter(is.na(suppressWarnings(as.numeric(siteid))) |
-                                        is.na(suppressWarnings(as.numeric(datasetid))))
-  
-  if(nrow(ids2)!=0){
-    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the Neotoma DB yet or it has been removed.
-                        It will be removed from your search.",  paste0(ids2$siteid,collapse = ", "), paste0(ids2$datasetid,collapse = ", "))
-    warning(warnsite)
-  }
-  
-  output <- output %>%
+  ids <- ids %>%
     dplyr::select(datasetid) %>%
-    stats::na.omit() %>%
     unique() %>%
     unlist() %>%
-    as.numeric() %>%
-    suppressWarnings()
+    as.numeric()
   
-  ## Fixing all data
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
-  
-  if('all_data' %in% names(cl)){
-    all_data = cl$all_data
-  }else{
-    cl[['all_data']] = TRUE
-  }
-  
-  if('limit' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  
-  if('offset' %in% names(cl)){
-    cl[['all_data']] = FALSE
-  }
-  ## Fixing all data line
-  
-  cl[['x']] <- output
-  cl[['verbose']] <- verbose
-  
-  output <- do.call(get_downloads, cl)
+  output <- get_downloads(x = ids, all_data = TRUE, ...)
 
   return(output)
 }
 
-#' @title get_downloads JSON
-#' @param x sites object
-#' @param verbose Should text be printed during the download process?
-#' @param ... arguments in ellipse form
-#' @returns The function returns either a single item of class
-#' \code{"try-error"} describing the reason for failure
-#' (either misdefined parameters or an error from the Neotoma API),
-#' or a table of sites, with rows corresponding to the number of
-#' individual sites and datasets returned by the Neotoma API.
-#' @importFrom stats na.omit
-#' @export
-get_downloads.character <- function(x, verbose = TRUE, ...) {
-  
-  result <- jsonlite::fromJSON(x,
-                               flatten = FALSE,
-                               simplifyVector = FALSE)
-  result <- result %>%
-    cleanNULL()
-  
-  output <- parse_download(result, verbose = verbose)
-  
-  return(output)
-}
+
+#' get_downloads.character <- function(x, verbose = TRUE, ...) {
+#'   result <- jsonlite::fromJSON(x,
+#'                                flatten = FALSE,
+#'                                simplifyVector = FALSE)
+#'   result <- result %>%
+#'     cleanNULL()
+#'   output <- parse_download(result, verbose = verbose)
+#'   return(output)
+#' }

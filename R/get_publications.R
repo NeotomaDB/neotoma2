@@ -51,44 +51,46 @@ get_publications <- function(x = NA, ...) {
 #' @export
 get_publications.default <- function(...) {
   . <- ""
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  params <- get_params("publications")
+
   baseURL <- paste0("data/publications") # nolint
-  result <- parseURL(baseURL, ...) %>%
+  result <- parseURL(baseURL, ...) 
+  result <- result$data %>%
     cleanNULL() %>%
-    pluck("data") %>%
     pluck("result")
-  testNull <- function(val, out) { # nolint
-    if (is.null(val)) {
-      return(out)
-    } else {
-      return(val)
-      }
-  }
+
   pubs <- map(result, function(x) {
     if ("match" %in% names(x)) {
       match <- x$match
     } else {
       match <- NULL
     }
+    
     x <- x$publication
     x[is.null(x)] <- NA_character_
     output <- new("publication",
-        publicationtype = as.character(x$pubtype),
-        publicationid = as.integer(x$publicationid),
-        articletitle = as.character(x$articletitle),
-        year = as.character(x$year),
-        journal = as.character(x$journal),
-        volume = as.character(x$volume),
-        issue = as.character(x$issue),
-        pages = as.character(x$pages),
-        citation = as.character(x$citation),
-        doi = as.character(x$doi),
+        publicationtype = use_na(testNull(x$pubtype), "char"),
+        publicationid = use_na(testNull(x$publicationid), "int"),
+        articletitle = use_na(testNull(x$articletitle), "char"),
+        year = use_na(testNull(x$year), "char"),
+        journal = use_na(testNull(x$journal), "char"),
+        volume = use_na(testNull(x$volume), "char"),
+        issue = use_na(testNull(x$issue), "char"),
+        pages = use_na(testNull(x$pages), "char"),
+        citation = use_na(testNull(x$citation), "char"),
+        doi = use_na(testNull(x$doi), "char"),
         author = pubAuthors(x))
     attr(output, "match") <- match
     return(output)
-  }) %>%
+    }) %>%
     new("publications", publications = .)
   return(pubs)
-}
+  }
+
+  
 #' @title Get publications using their unique identifier.
 #' @importFrom methods new
 #' @importFrom purrr pluck
@@ -128,16 +130,16 @@ get_publications.numeric <- function(x, ...) {
                   x <- x$publication
                   x[is.null(x)] <- NA_character_
                   new("publication",
-                      publicationtype = as.character(x$pubtype),
-                      publicationid = as.integer(x$publicationid),
-                      articletitle = as.character(x$articletitle),
-                      year = as.character(x$year),
-                      journal = as.character(x$journal),
-                      volume = as.character(x$volume),
-                      issue = as.character(x$issue),
-                      pages = as.character(x$pages),
-                      citation = as.character(x$citation),
-                      doi = as.character(x$doi),
+                      publicationtype = use_na(testNull(x$pubtype), "char"),
+                      publicationid = use_na(testNull(x$publicationid), "int"),
+                      articletitle = use_na(testNull(x$articletitle), "char"),
+                      year = use_na(testNull(x$year), "char"),
+                      journal = use_na(testNull(x$journal), "char"),
+                      volume = use_na(testNull(x$volume), "char"),
+                      issue = use_na(testNull(x$issue), "char"),
+                      pages = use_na(testNull(x$pages), "char"),
+                      citation = use_na(testNull(x$citation), "char"),
+                      doi = use_na(testNull(x$doi), "char"),
                       author = pubAuthors(x))
                 }) %>%
     new("publications", publications = .)
@@ -164,7 +166,7 @@ get_publications.numeric <- function(x, ...) {
 #' bad_pub <- get_publications(666)
 #' # Note this only changes the reported year, not the citation string.
 #' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- as.character(NA)
+#' bad_pub[[1]]@publicationid <- NA_integer_
 #' updated_pubs <- get_publications(bad_pub[[1]])
 #' attr(updated_pubs, "matches")
 #' # we see the proper citation in the record:
@@ -204,7 +206,7 @@ get_publications.publication <- function(x, ...) {
 #' bad_pub <- get_publications(c(666, 667, 668))
 #' # Note this only changes the reported year, not the citation string.
 #' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- as.character(NA)
+#' bad_pub[[1]]@publicationid <- NA_integer_
 #' updated_pubs <- get_publications(bad_pub)
 #' # Only the first publication object has any matches. It's the only one
 #' # that is missing its publicaitonid.

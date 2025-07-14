@@ -14,11 +14,12 @@
 #' @importFrom purrr map
 #' @export
 get_table <- function(x, limit =25, offset=0) {
-  result <- parseURL(paste0("dbtables/table?table=",
-  x, "&limit=", limit, "&offset=", offset))
-  output <- result$data$data %>%
+  result <- parseURL("dbtables/table", table = x, limit = limit, offset = offset)
+  
+  result <- result$data$data 
+  output <- result %>%
+    cleanNULL() %>%
     purrr::map(data.frame) %>%
     dplyr::bind_rows()
-
   return(output)
 }
