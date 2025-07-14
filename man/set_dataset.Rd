@@ -25,6 +25,8 @@ set_dataset(
 
 \item{datasetid}{dataset identifier}
 
+\item{datasetname}{name of the dataset}
+
 \item{database}{dataset where the dataset came from}
 
 \item{doi}{DOI}
@@ -35,11 +37,15 @@ set_dataset(
 
 \item{age_range_young}{age range young}
 
+\item{age_units}{age units}
+
 \item{notes}{notes}
 
 \item{pi_list}{pi list}
 
 \item{samples}{taxa objects}
+
+\item{specimens}{specimens slot}
 }
 \value{
 \code{dataset} object

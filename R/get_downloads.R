@@ -76,7 +76,6 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
 
 #' @title get_downloads
 #' @param x Use a single number to extract site information
-#' @param verbose Should text be printed during the download process?
 #' @param ... arguments in ellipse form
 #' @returns The function returns either a single item of class
 #' \code{"try-error"} describing the reason for failure
@@ -123,23 +122,13 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
   return(output)
 }
 
-#' @title get_downloads JSON
-#' @param x sites object
-#' @param verbose Should text be printed during the download process?
-#' @param ... arguments in ellipse form
-#' @returns The function returns either a single item of class
-#' \code{"try-error"} describing the reason for failure
-#' (either misdefined parameters or an error from the Neotoma API),
-#' or a table of sites, with rows corresponding to the number of
-#' individual sites and datasets returned by the Neotoma API.
-#' @importFrom stats na.omit
-#' @export
-get_downloads.character <- function(x, verbose = TRUE, ...) {
-  result <- jsonlite::fromJSON(x,
-                               flatten = FALSE,
-                               simplifyVector = FALSE)
-  result <- result %>%
-    cleanNULL()
-  output <- parse_download(result, verbose = verbose)
-  return(output)
-}
+
+#' get_downloads.character <- function(x, verbose = TRUE, ...) {
+#'   result <- jsonlite::fromJSON(x,
+#'                                flatten = FALSE,
+#'                                simplifyVector = FALSE)
+#'   result <- result %>%
+#'     cleanNULL()
+#'   output <- parse_download(result, verbose = verbose)
+#'   return(output)
+#' }

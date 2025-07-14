@@ -105,7 +105,7 @@ filter <- function(x, ...) {
 #' # Download 100 sites, get all associated datasets, but keep only
 #' # sites/datasets that are of datasettype "pollen":
 #' sites <- get_sites(limit = 1) %>%
-#'   get_datasets(all_data = TRUE)
+#'   get_datasets()
 #' pollen_subset <- sites %>% filter(datasettype == "pollen")
 #' }
 #' @export

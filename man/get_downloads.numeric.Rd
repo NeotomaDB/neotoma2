@@ -10,8 +10,6 @@
 \item{x}{Use a single number to extract site information}
 
 \item{...}{arguments in ellipse form}
-
-\item{verbose}{Should text be printed during the download process?}
 }
 \value{
 The function returns either a single item of class

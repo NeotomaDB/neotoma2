@@ -166,7 +166,7 @@ get_publications.numeric <- function(x, ...) {
 #' bad_pub <- get_publications(666)
 #' # Note this only changes the reported year, not the citation string.
 #' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- use_na(testNull(NA)
+#' bad_pub[[1]]@publicationid <- NA_integer_
 #' updated_pubs <- get_publications(bad_pub[[1]])
 #' attr(updated_pubs, "matches")
 #' # we see the proper citation in the record:
@@ -206,7 +206,7 @@ get_publications.publication <- function(x, ...) {
 #' bad_pub <- get_publications(c(666, 667, 668))
 #' # Note this only changes the reported year, not the citation string.
 #' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- use_na(testNull(NA)
+#' bad_pub[[1]]@publicationid <- NA_integer_
 #' updated_pubs <- get_publications(bad_pub)
 #' # Only the first publication object has any matches. It's the only one
 #' # that is missing its publicaitonid.

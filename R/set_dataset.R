@@ -7,8 +7,11 @@
 #' @param database dataset where the dataset came from
 #' @param doi DOI
 #' @param datasettype type the dataset belongs to
+#' @param datasetname name of the dataset
 #' @param age_range_old age range old
 #' @param age_range_young age range young
+#' @param age_units age units
+#' @param specimens specimens slot
 #' @param notes notes
 #' @param pi_list pi list
 #' @param samples taxa objects

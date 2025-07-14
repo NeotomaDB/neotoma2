@@ -19,7 +19,9 @@
 #' # Convert the object to json
 #' toJSON(alex.sites)
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
+# remove meanwhile
 setMethod(f = "toJSON",
           signature = "sites",
           definition = function(x = NA) {
