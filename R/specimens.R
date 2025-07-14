@@ -5,12 +5,8 @@
 #' Information table for Specimens
 #' @param x Use a `sites` object that has specimens added.
 #' @returns `data.frame` with specimens summary table
-#' @examples \donttest{
-#' # To return a specimens table do:
-#' my_specimens <- get_specimens(7)
-#' my_tbl <- specimens(my_specimens)
-#' }
-#' @export
+#' @keywords internal
+#' @noRd
 setMethod(f = "specimens",
           signature = "sites",
           definition = function(x) {
@@ -28,8 +24,9 @@ setMethod(f = "specimens",
 #' @param x site object
 #' @description Obtain elements on the specimens level
 #' @returns `data.frame` with specimens summary table
-#' @export
 #' @import dplyr
+#' @keywords internal
+#' @noRd
 setMethod(f = "specimens",
           signature = "site",
           definition = function(x) {
@@ -52,6 +49,8 @@ setMethod(f = "specimens",
 #' @param x `collunits` object
 #' @description Obtain specimen elements from `collunits`
 #' @returns `data.frame` with specimens summary table
+#' @keywords internal
+#' @noRd
 setMethod(f = "specimens",
           signature = "collunits",
           definition = function(x) {
@@ -66,6 +65,8 @@ setMethod(f = "specimens",
 #' @param x `collunit` object
 #' @description Obtain specimen elements from a `collunit`
 #' @returns `data.frame` with specimens summary table
+#' @keywords internal
+#' @noRd
 setMethod(f = "specimens",
           signature = "collunit",
           definition = function(x) {

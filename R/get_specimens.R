@@ -11,12 +11,6 @@
 #' @returns The function returns a specimens list
 #' @keywords internal
 #' @noRd
-# remove meanwhile
-# To find specimen with ID 7:
-#my_specimens <- get_specimens(7)
-# To find specimens in datasetid 41610
-# my_specimens2 <- get_specimens(datasetid = 41610)
-# }
 get_specimens <- function(x = NA, ...) {
   if (!missing(x)) {
     UseMethod("get_specimens", x)
