@@ -53,7 +53,7 @@ set_chronology <- function(x = NA,
     if (is.na(x@chronologyid)) {
       if (is.na(chronologyid)) {
         hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
-        x@chronologyid <- as.integer(strtoi(substr(hash, 1, 8), base = 16))
+        x@chronologyid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
       } else {
         x@chronologyid <- chronologyid
       }

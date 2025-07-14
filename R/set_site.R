@@ -40,7 +40,8 @@ set_site <- function(x = NA,
   if (suppressWarnings(is.na(x))) {
     x <- new("site")
     if (is.na(siteid)) {
-      x@siteid <- uuid::UUIDgenerate()
+      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      x@siteid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@siteid <- siteid
     }

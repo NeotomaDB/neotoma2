@@ -48,7 +48,7 @@ set_collunit <- function(x = NA,
     x <- new("collunit")
     if (is.na(collectionunitid)) {
       hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
-      x@collectionunitid <- as.integer(strtoi(substr(hash, 1, 8), base = 16))
+      x@collectionunitid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@collectionunitid <- collectionunitid
     }

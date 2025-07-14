@@ -39,7 +39,8 @@ set_sample <- function(x=NA,
   if (suppressWarnings(is.na(x))) {
     x <- new("sample")
     if (is.na(sampleid)) {
-      x@sampleid <- uuid::UUIDgenerate()
+      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      x@sampleid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@sampleid <- sampleid
     }

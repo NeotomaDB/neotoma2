@@ -43,7 +43,7 @@ set_dataset <- function(x = NA,
     x <- new("dataset")
     if (is.na(datasetid)) {
       hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
-      x@datasetid <- as.integer(strtoi(substr(hash, 1, 8), base = 16))
+      x@datasetid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@datasetid <- datasetid
     }

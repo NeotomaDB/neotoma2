@@ -53,7 +53,8 @@ set_contact <- function(x = NA,
   if (suppressWarnings(is.na(x))) {
     x <- new("contact")
     if (is.na(contactid)) {
-      x@contactid <- uuid::UUIDgenerate()
+      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      x@contactid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@contactid <- contactid
     }
