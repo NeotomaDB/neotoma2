@@ -47,13 +47,13 @@ setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
 })
 
-#' @title Obtain specimens from a record or multiple records.
-#' @param x sites object
-#' @returns data.frame with record information regarding specimens
-#' @export
-setGeneric("specimens", function(x) {
-  standardGeneric(f = "specimens")
-})
+# #' @title Obtain specimens from a record or multiple records.
+# #' @param x sites object
+# #' @returns data.frame with record information regarding specimens
+# #' @export
+# setGeneric("specimens", function(x) {
+#   standardGeneric(f = "specimens")
+# })
 
 #' @title Obtain the chronology from a record or multiple records.
 #' @param x sites object that contains chronologies
