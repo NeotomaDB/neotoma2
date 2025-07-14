@@ -214,9 +214,8 @@ Made sure `loc` argument is handled as a geojson
 
 -----
 
-## Remarks for Upgrade 1.0.6
+## Remarks for Upgrade 1.0.7
 
-Included age type units in datasets Neotoma object and its different methods.
-Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
-
-Made sure `loc` argument is handled as a geojson
+Changed way of parsing data - arranged the list prior building the sites and internals.
+Fixed API calls to include more POST requests.
+Removed some minor functions for now, will include in next version.
