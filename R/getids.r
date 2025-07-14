@@ -42,7 +42,7 @@ getids.sites <- function (x, order = TRUE) {
             data.frame(collunitid = NA, datasetid = NA)
         }
         return(data.frame(siteid = siteid, collunits))
-    }) #%>%
+    })
 
     siteids <- do.call("rbind.data.frame", args = siteids)
     rownames(siteids) <- seq(length = nrow(siteids))

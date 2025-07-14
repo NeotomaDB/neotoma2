@@ -150,7 +150,15 @@ get_sites.numeric <- function(x, ...) {
 #'  * `loc` An `sf` object that describes site's location.
 #'  * `collunits` limited information on collunits
 #' @export
-get_sites.default <- function(...) { # nolint
+get_sites.default <- function(...) {
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  params <- get_params("sites")
+  if (!all(names(cl) %in% params)) {
+    warning("Some parameters seem invalid. The current accepted parameters are: ",
+            paste(unlist(params), collapse = ", "))
+  }
   oo <- options(scipen = 9999999)
   on.exit(options(oo))
 

@@ -110,16 +110,13 @@ get_downloads.numeric <- function(x, ...) {
 #' individual sites and datasets returned by the Neotoma API.
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
-  
   ids <- getids(x)
- 
   ids <- ids %>%
     dplyr::select(datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
   output <- get_downloads(x = ids, verbose, ...)
-
   return(output)
 }
 

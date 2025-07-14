@@ -41,9 +41,9 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
                      doi = z$doi,
                      datasettype = use_na(z$datasettype, "char"),
                      datasetname = use_na(z$datasetname, "char"),
-                     age_range_old = use_na(z$agerange[[1]]$ageold, "int"),
-                     age_range_young = use_na(z$agerange[[1]]$ageyoung, "int"),
-                     age_units = use_na(z$agerange[[1]]$units, "int"),
+                     age_range_old = use_na(z$agerange$ageold, "int"),
+                     age_range_young = use_na(z$agerange$ageyoung, "int"),
+                     age_units = use_na(z$agerange$units, "int"),
                      notes = use_na(z$datasetnotes, "char"),
                      pi_list = z$pi_list,
                      samples = samp,
@@ -109,8 +109,8 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
 }
 normalize_agerange <- function(agerange) {
   if (is.null(agerange) || length(agerange) == 0) {
-    list(list(ageold = NA, ageyoung = NA, units = NA))
+    list(ageold = NA, ageyoung = NA, units = NA)
   } else {
-    agerange
+    list(ageold = agerange[[1]]$ageold, ageyoung = agerange[[1]]$ageyoung, units = agerange[[1]]$units)
   }
 }

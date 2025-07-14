@@ -136,11 +136,6 @@ filter.sites <- function(x, ...) {  # nolint
     any()
   
   ids <- getids(x)
-  ids <- ids %>% mutate(
-    collunitid = as.numeric(collunitid),
-    datasetid = as.numeric(datasetid)
-  )
-  
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
