@@ -548,3 +548,61 @@ setClass("taxa", representation(taxa = "list"),
            }) %>%
              unlist())
          })
+
+
+#' @title Speleothems
+#' @description Speleothems class for SISAL data
+#' @returns object of class `speleothem`
+#' @export
+setClass("speleothem",
+         slots = c(entityid = "numeric",
+                   entityname = "character",
+                   siteid = "numeric",
+                   collectionunitid = "numeric",
+                   datasetid = "numeric",
+                   dripheight = "numeric",
+                   monitoring = "logical",
+                   relativeage = "character",
+                   speleothemtype = "character",
+                   dripheightunits = "character",
+                   entitycovertype = "character",
+                   entrancedistance = "numeric",
+                   landusecovertype = "character",
+                   speleothemdriptype = "character",
+                   landusecoverpercent = "numeric",
+                   vegetationcovertype = "character",
+                   entitycoverthickness = "numeric",
+                   entrancedistanceunits = "character",
+                   vegetationcoverpercent = "numeric"),
+         prototype = list(entityid = NA_integer_,
+                          entityname = NA_character_,
+                          siteid = NA_integer_,
+                          collectionunitid = NA_integer_,
+                          datasetid = NA_integer_,
+                          dripheight = NA_integer_,
+                          monitoring = FALSE,
+                          relativeage = NA_character_,
+                          speleothemtype = NA_character_,
+                          dripheightunits = NA_character_,
+                          entitycovertype = NA_character_,
+                          entrancedistance = NA_integer_,
+                          landusecovertype = NA_character_,
+                          speleothemdriptype = NA_character_,
+                          landusecoverpercent = NA_integer_,
+                          vegetationcovertype = NA_character_,
+                          entitycoverthickness = NA_integer_,
+                          entrancedistanceunits = NA_character_,
+                          vegetationcoverpercent = NA_integer_))
+
+#' @title Speleothem
+#' @description Speleothem class for SISAL data
+#'  from the Neotoma Paleoecology Database.
+#' @returns object of class `speleothem`
+#' @export
+setClass("speleothems", representation(speleothems = "list"),
+         validity = function(object) {
+           all(map(object, function(x) {
+             class(x) == "speleothem"
+           }) %>%
+             unlist())
+         })
