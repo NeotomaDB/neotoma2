@@ -5,7 +5,8 @@
 setMethod(f = "show",
           signature = "speleothem",
           definition = function(object) {
-            print(data.frame(entityname = object@entityname,
+            print(data.frame(entityid = object@entityid,
+                             entityname = object@entityname,
                              siteid = object@siteid,
                              collectionunitid = object@collectionunitid,
                              datasetid = object@datasetid,
@@ -31,8 +32,9 @@ setMethod(f = "show",
 setMethod(f = "show",
           signature = "speleothems",
           definition = function(object) {
-            map(object@datasets, function(y) {
-              df <- data.frame(entityname = y@entityname,
+            map(object, function(y) {
+              df <- data.frame(entityid = y@entityid,
+                               entityname = y@entityname,
                                siteid = y@siteid,
                                collectionunitid = y@collectionunitid,
                                datasetid = y@datasetid,
@@ -192,7 +194,8 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("speleothem"),
           definition = function(x) {
-            data.frame(entityname = x@entityname,
+            data.frame(entityid = x@entityid,
+                       entityname = x@entityname,
                        siteid = x@siteid,
                        collectionunitid = x@collectionunitid,
                        datasetid = x@datasetid,

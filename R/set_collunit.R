@@ -18,6 +18,7 @@
 #' @param chronologies chronologies taken from the collection unit
 #' @param defaultchronology best chronology model identifier to 
 #' be used with this collection unit
+#' @param speleothems speleothems associated with the collection unit
 #' @description Function to create new collection unit objects for personal analysis. 
 #' The new object will not be uploaded to the database.
 #' @export
@@ -40,7 +41,8 @@ set_collunit <- function(x = NA,
                          depositionalenvironment = NA_character_,
                          datasets = NULL,
                          chronologies = NULL,
-                         defaultchronology = NA_integer_) {
+                         defaultchronology = NA_integer_,
+                         speleothems = NULL) {
 
   function_call <- match.call()
 
@@ -65,6 +67,7 @@ set_collunit <- function(x = NA,
     x@datasets <- datasets
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
+    x@speleothems <- speleothems
 
   } else {
     if (is(x, "collunit")) {

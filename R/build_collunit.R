@@ -23,7 +23,8 @@ build_collunits <- function(...) {
     notes = use_na(testNull(args$notes, NA), "char"),
     datasets = testNull(args$datasets, NULL),
     defaultchronology = use_na(testNull(args$defaultchronology, NA), "int"),
-    chronologies = testNull(args$chronologies, NULL)
+    chronologies = testNull(args$chronologies, NULL),
+    speleothems = testNull(args$speleothems, NULL)
   )
   return(cu)
 }

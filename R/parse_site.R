@@ -76,6 +76,36 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
       } else {
         chron <- new("chronologies", chronologies = chronologies)
       }
+      
+      # Speleothems
+      speleothems <- purrr::map(y$speleothems, function(z) {
+        sp_l <- list(entityid = use_na(testNull(z$entityid, NA), "int"),
+                     entityname = use_na(testNull(z$entityname, NA), "char"),
+                     siteid = use_na(testNull(z$siteid, NA), "int"),
+                     collectionunitid = use_na(testNull(z$collectionunitid, NA), "int"),
+                     datasetid = use_na(testNull(z$datasetid, NA), "int"),
+                     dripheight = use_na(testNull(z$dripheight, NA), "int"),
+                     dripheightunits = use_na(testNull(z$dripheightunits, NA), "char"),
+                     monitoring = use_na(testNull(z$monitoring, NA), "logic"),
+                     relativeage = use_na(testNull(z$relativeage, NA), "char"),
+                     speleothemtype = use_na(testNull(z$speleothemtype, NA), "char"),
+                     entitycovertype = use_na(testNull(z$entitycovertype, NA), "char"),
+                     entrancedistance = use_na(testNull(z$entrancedistance, NA), "int"),
+                     landusecovertype = use_na(testNull(z$landusecovertype, NA), "char"),
+                     speleothemdriptype = use_na(testNull(z$speleothemdriptype, NA), "char"),
+                     landusecoverpercent = use_na(testNull(z$landusecoverpercent, NA), "int"),
+                     vegetationcovertype = use_na(testNull(z$vegetationcovertype, NA), "char"),
+                     entitycoverthickness = use_na(testNull(z$entitycoverthickness, NA), "int"),
+                     entrancedistanceunits = use_na(testNull(z$entrancedistanceunits, NA), "char"),
+                     vegetationcoverpercent = use_na(testNull(z$vegetationcoverpercent, NA), "int"))
+        do.call(build_speleothem, sp_l)
+      })
+      
+      if (is.null(speleothems) || all(sapply(speleothems, is.null))) {
+        speleo <- new("speleothems", speleothems = list())
+      } else {
+        speleo <- new("speleothems", speleothems = speleothems)
+      }
       cu_l <- list(
         collectionunitid = y$collectionunitid,
         colldate = as.Date(testNull(y$colldate, NA)),
@@ -90,7 +120,8 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
         collectiondevice = use_na(y$collectiondevice, "char"),
         collectionunitname = use_na(y$collectionunit, "char"),
         depositionalenvironment = use_na(y$depositionalenvironment, "char"),
-        defaultchronology = use_na(y$defaultchronology, "int"))
+        defaultchronology = use_na(y$defaultchronology, "int"),
+        speleothems = speleo)
       do.call(build_collunits, cu_l)
     })
     cu <- new("collunits", collunits = cus)

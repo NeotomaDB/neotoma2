@@ -19,7 +19,8 @@ set_collunit(
   depositionalenvironment = NA_character_,
   datasets = NULL,
   chronologies = NULL,
-  defaultchronology = NA_integer_
+  defaultchronology = NA_integer_,
+  speleothems = NULL
 )
 }
 \arguments{
@@ -53,6 +54,8 @@ set_collunit(
 
 \item{defaultchronology}{best chronology model identifier to
 be used with this collection unit}
+
+\item{speleothems}{speleothems associated with the collection unit}
 }
 \value{
 \code{collunit} object
