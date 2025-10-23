@@ -11,7 +11,6 @@ build_speleothem <- function(...) {
   args <- list(...)
   assertthat::assert_that(is.list(args),
                           msg = "Parsed object must be a list.")
-  
  speleothem <- set_speleothem(entityid = use_na(testNull(args$entityid, NA), "int"),
                         entityname = use_na(testNull(args$entityname, NA), "char"),
                         siteid = use_na(testNull(args$siteid, NA), "int"),

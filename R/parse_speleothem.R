@@ -1,7 +1,6 @@
 #' @md
 #' @title parseURL
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @author Simon Goring \email{goring@wisc.edu}
 #' @importFrom httr add_headers content GET stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @import stringr
@@ -11,7 +10,6 @@
 #' @noRd
 parse_speleothem <- function(result) {
   data <- result$data
-  
   speleothems <- purrr::map(data, function(x) {
    sp <-  list(entityid = x$speleothem$entityid,
          entityname = x$speleothem$entityname,

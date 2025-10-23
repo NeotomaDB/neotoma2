@@ -15,7 +15,6 @@
 #' @param collunits Collection units in the site
 #' @returns `site` object
 #' @export
-
 set_speleothem <- function(x = NA,
                            entityid = NA_integer_,
                            entityname = NA_character_,
@@ -36,7 +35,6 @@ set_speleothem <- function(x = NA,
                            entitycoverthickness = NA_integer_,
                            entrancedistanceunits = NA_character_,
                            vegetationcoverpercent = NA_integer_){
-                          
   function_call <- match.call()
   
   if (suppressWarnings(is.na(x))) {
@@ -47,8 +45,6 @@ set_speleothem <- function(x = NA,
     } else {
       x@entityid <- entityid
     }
-    cat('drip height:')
-    print(dripheight)
     x$entityname <- entityname
     x$siteid <- siteid
     x$collectionunitid <- collectionunitid
@@ -67,7 +63,6 @@ set_speleothem <- function(x = NA,
     x$entitycoverthickness <- entitycoverthickness
     x$entrancedistanceunits <- entrancedistanceunits
     x@vegetationcoverpercent <- vegetationcoverpercent
-    
   } else {
     if (is(x, "speleothem")) {
       if(length(function_call)>2){
