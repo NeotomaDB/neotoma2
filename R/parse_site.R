@@ -84,7 +84,6 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
                      entityname = use_na(testNull(z$entityname, NA), "char"),
                      siteid = use_na(testNull(z$siteid, NA), "int"),
                      collectionunitid = use_na(testNull(z$collectionunitid, NA), "int"),
-                     datasetid = use_na(testNull(z$datasetid, NA), "int"),
                      dripheight = use_na(testNull(z$dripheight, NA), "int"),
                      dripheightunits = use_na(testNull(z$dripheightunits, NA), "char"),
                      monitoring = use_na(testNull(z$monitoring, NA), "logic"),

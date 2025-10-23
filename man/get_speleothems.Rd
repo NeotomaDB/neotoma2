@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_speleothems.R
 \name{get_speleothems}
 \alias{get_speleothems}
-\title{get_sites}
+\title{get_speleothems}
 \usage{
 get_speleothems(x = NA, ...)
 }
@@ -10,7 +10,7 @@ get_speleothems(x = NA, ...)
 \item{x}{A sites object.}
 }
 \description{
-get_sites
+get_speleothems
 }
 \author{
 Socorro Dominguez \email{dominguezvid@wisc.edu}

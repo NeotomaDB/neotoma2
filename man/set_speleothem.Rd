@@ -10,7 +10,6 @@ set_speleothem(
   entityname = NA_character_,
   siteid = NA_integer_,
   collectionunitid = NA_integer_,
-  datasetid = NA_integer_,
   dripheight = NA_integer_,
   monitoring = FALSE,
   relativeage = NA_character_,

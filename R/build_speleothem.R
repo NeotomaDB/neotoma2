@@ -15,7 +15,6 @@ build_speleothem <- function(...) {
                         entityname = use_na(testNull(args$entityname, NA), "char"),
                         siteid = use_na(testNull(args$siteid, NA), "int"),
                         collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
-                        datasetid = use_na(testNull(args$datasetid, NA), "int"),
                         dripheight = use_na(testNull(args$dripheight, NA), "int"),
                         dripheightunits = use_na(testNull(args$dripheightunits, NA), "char"),
                         monitoring = use_na(testNull(args$monitoring, NA), "logic"),

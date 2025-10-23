@@ -1,12 +1,12 @@
 
 
-speleo_helper <- function(sites, dsids, ...) {
-  if (length(dsids) > 0) {
-    dsids <- paste0(dsids, collapse = ",")
-  }
+speleo_helper <- function(sites) {
+  ids <- getids(sites)
+  cuids <- ids$collunitid
+  
   #sites <- get_downloads(dsids)
-  base_url <- paste0("data/speleothems/", dsids)
-  result <- parseURL(base_url, ...)
+  base_url <- paste0("data/speleothems/", cuids)
+  result <- parseURL(base_url)
   
   if (length(result[2]$data) > 0) {
     speleo <- parse_speleothem(result)
@@ -16,7 +16,7 @@ speleo_helper <- function(sites, dsids, ...) {
   
   pared_ds <- purrr::map(sites@sites, function(x) {
     ycu <- purrr::map(x@collunits, function(z) {
-      yds <- speleo[which(as.data.frame(z)$collectionunitid %in% z$collectionunitid)]
+      yds <- speleo[which(as.data.frame(speleo)$collectionunitid %in% z$collectionunitid)]
       z@speleothems <- yds
       return(z)
     })
@@ -53,8 +53,8 @@ get_speleothems.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dsids <- paste0(x, collapse = ",")
   }
-  sites <- get_downloads(x)
-  pared_ds <- speleo_helper(sites, dsids)
+  st <- get_datasets(x)
+  pared_ds <- speleo_helper(st)
   return(new("sites", sites = pared_ds))
 }
 

@@ -20,7 +20,6 @@ set_speleothem <- function(x = NA,
                            entityname = NA_character_,
                            siteid = NA_integer_,
                            collectionunitid = NA_integer_,
-                           datasetid = NA_integer_,
                            dripheight = NA_integer_,
                            monitoring = FALSE,
                            relativeage = NA_character_,
@@ -48,7 +47,6 @@ set_speleothem <- function(x = NA,
     x$entityname <- entityname
     x$siteid <- siteid
     x$collectionunitid <- collectionunitid
-    x$datasetid <- datasetid
     x$dripheight <- dripheight
     x$monitoring <- monitoring
     x$relativeage <- relativeage
