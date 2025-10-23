@@ -39,6 +39,7 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
         ds_l <- list(datasetid = z$datasetid,
                      database = use_na(z$database, "char"),
                      doi = z$doi,
+                     recdatecreated = use_na(as.Date(z$recdatecreated), "date"),
                      datasettype = use_na(z$datasettype, "char"),
                      datasetname = use_na(z$datasetname, "char"),
                      age_range_old = use_na(z$agerange$ageold, "int"),

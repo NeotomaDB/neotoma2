@@ -122,7 +122,7 @@ filter.sites <- function(x, ...) {  # nolint
     any()
   
   datasetcols <- c("datasetid", "database", "datasettype", "age_range_old",
-                   "age_range_young", "notes") %>%
+                   "age_range_young", "notes", "recdatecreated") %>% # Add submissioN_date and DOI
     map(function(x) any(stringr::str_detect(ellipsis, x))) %>%
     unlist() %>%
     any()

@@ -30,6 +30,7 @@ build_dataset <- function(...) {
       datasetid = use_na(testNull(args$datasetid, NA), "int"),
       database = use_na(testNull(args$database, NA), "char"),
       doi = list(args$doi),
+      recdatecreated = use_na(testNull(args$recdatecreated, NA), "date"),
       datasettype = use_na(testNull(args$datasettype, NA), "char"),
       datasetname = use_na(testNull(args$datasetname, NA), "char"),
       age_range_old = use_na(testNull(args$age_range_old, NA), "int"),

@@ -31,6 +31,7 @@ set_dataset <- function(x = NA,
                         datasetname = NA_character_,
                         database = NA_character_,
                         doi = NA,
+                        recdatecreated = as.Date(character(1)),
                         datasettype = NA_character_,
                         age_range_old = NA_integer_,
                         age_range_young = NA_integer_,
@@ -53,6 +54,7 @@ set_dataset <- function(x = NA,
     x@datasetname <- datasetname
     x@database <- database
     x@doi <- doi
+    x@recdatecreated <- recdatecreated
     x@datasettype <- datasettype
     x@age_range_old <- age_range_old
     x@age_range_young <- age_range_young
