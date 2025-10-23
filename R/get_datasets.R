@@ -122,7 +122,7 @@ get_datasets.default <- function(x, ...) {
   oo <- options(scipen = 9999999)
   on.exit(options(oo))
   cl <- as.list(match.call())
-  if ('doidata' %in% params) { #add 'doi' to cl
+  if ('doidata' %in% params) {
     params <- append(params, 'doi')
   }
   cl[[1]] <- NULL
