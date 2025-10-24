@@ -1,4 +1,6 @@
 on: [push]
+branches:
+      - production
 jobs:
   paper:
     runs-on: ubuntu-latest
