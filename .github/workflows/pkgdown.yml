@@ -25,6 +25,11 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-pandoc@v2
+      
+      - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
       - name: Install dependencies
         run: |
