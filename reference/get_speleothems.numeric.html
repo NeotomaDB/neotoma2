@@ -92,9 +92,11 @@ from the Neotoma API), or a sies object with speleothem data.</p>
 <span class="r-in"><span><span class="co">## Find speleothems by numeric datasetid:</span></span></span>
 <span class="r-in"><span><span class="va">speleo</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_speleothems.html">get_speleothems</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in value[[3L]](cond):</span> API request failed: length(url) == 1 is not TRUE</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Check that the API path is valid or visit:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>            http://data.neotomadb.org</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Internal Server Error (HTTP 500). Failed to Could not connect to the Neotoma API.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
 </code></pre></div>
     </div>
   </div>
