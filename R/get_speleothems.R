@@ -3,9 +3,13 @@
 speleo_helper <- function(sites) {
   ids <- getids(sites)
   cuids <- ids$collunitid
+  if (length(cuids) > 0) {
+    cuids <- paste0(cuids, collapse = ",")
+  }
   
   #sites <- get_downloads(dsids)
   base_url <- paste0("data/speleothems/", cuids)
+
   result <- parseURL(base_url)
   
   if (length(result[2]$data) > 0) {
@@ -71,7 +75,6 @@ get_speleothems.numeric <- function(x, ...) {
 #' }
 #' @export
 get_speleothems.sites <- function(x, ...) {
-  dsids <- getids(sites)$datasetids
-  pared_ds <- speleo_helper(x, dsids)
-  return(pared_ds)
+  pared_ds <- speleo_helper(x)
+  return(new("sites", sites = pared_ds))
 }

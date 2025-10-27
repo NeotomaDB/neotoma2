@@ -47,6 +47,22 @@ setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
 })
 
+#' @title Obtain speleothems from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothems", function(x) {
+  standardGeneric(f = "speleothems")
+})
+
+#' @title Obtain speleothems and samples from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothemdetails", function(x) {
+  standardGeneric(f = "speleothemdetails")
+})
+
 # #' @title Obtain specimens from a record or multiple records.
 # #' @param x sites object
 # #' @returns data.frame with record information regarding specimens
