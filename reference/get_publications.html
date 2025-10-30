@@ -99,13 +99,132 @@ with a publication.
 <span class="r-in"><span><span class="co"># How old are the papers in Neotoma that include the term "mammut"?</span></span></span>
 <span class="r-in"><span><span class="va">mammoth_papers</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span>search<span class="op">=</span><span class="st">"mammut"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (cond) .Internal(C_tryCatchHelper(addr, 1L, cond)))(structure(list(message = "Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.\n                                    Check that the path is valid, and \n                                    check the current status of the\n                                    Neotoma API services at \n                                    http://data.neotomadb.org.",     call = get_response(baseurl, x, query)), class = c("http_504", "http_500", "http_error", "error", "condition"))):</span> error in evaluating the argument 'x' in selecting a method for function 'as.data.frame': Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid           citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          4500 Maillard, R. 1986. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid                                        citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          8139 Larivière, S. 2001. Mammalian Species 647:1-11. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid                 citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         19372 Martius, K. 1830. Flora. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid                                                 citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         10768 Belanger, N. 1988. The Whitestone Mammoth. Biome 8(3):3. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid                     citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          4509 Manguin, E. 1954. Reference. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17602</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Del Río, A. 1918. El Mammut o Elephas primegenius. Boletín de la Dirección de Estudios Biológicos 3(2):366-369.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         10735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                   citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Lucas, S.G., and G.S. Morgan. 1997. The American mastodont (Mammut americanum) in New Mexico. The Southwestern Naturalist 42(3):312-317.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          2879</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                      citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Miller, W. E. 1987. Mammut americanum, Utah's first record of the American mastodon. Journal of Paleontology 61(1):168-183.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          2384</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                              citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Hansen, G. H. 1928. Hairy mammoth skeleton in Utah. Science 68:621. &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         11520</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                  citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Carlson, A.K., and R.L. Carlson. 1998. Dating the Likely mammoth. The Midden 30(4):4-5.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          3211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Saunders, J. J. 1970. The distribution and taxonomy of Mammuthus in Arizona. Master's thesis, University of Arizona, Tucson.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17622</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                           citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Freund, G., and E.W. Guenther. 1987. Mammute und ihre kümmerfotmen von Eurasien bis Mexiko. Quartär 37-38:13-51.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                       citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 De Terra, H., editor. 1957. Man and mammoth in Mexico. Hutchinson of London.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                              citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ramos-Meza, E., and D.W. Delgado. 1962. Mammutes: hallazgo de un cementerio en Jalisco. Folia Universitaria 3:1-63.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                           citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Martínez del Rio, P. 1952. El mamut de Santa Isabel Iztapan. Cuadernos Americanos 64(4):149-170.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          1632</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                             citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Madden, C. T. 1983. More earliest isotopically dated Mammuthus from North America. Quaternary Research 19:275-277.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 10.1016/0033-5894(83)90012-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                      citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Gut, H.J. 1959. A Pleistocene Vampire Bat from Florida. Journal of Mammalogy 40(4):534-538.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          2479</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                            citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Hoffmeister, D.F. 1989. Mammals of Illinois. University of Illinois Press, Urbana, Illinois, USA.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         19696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Madden, C.T. 1986. Stegomastodon Associated with Mammuthus in Arizona during the Quaternary. Quaternary Research 26:266-271.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          7648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                          citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Woodman, N., and J.W. Branstrator. 2008. The Overmyer mastodon (Mammut americanum) from Fulton County, Indiana. The American Midland Naturalist 159(1):125-146.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 10.1674/0003-0031(2008)159[125:tommaf]2.0.co;2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                               citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Aveleyra, L.A.A. 1959. Los cazadores del mamut, primeros habitantes de México. Esplendor del México Antiguo 1:53-72.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          1667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                      citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Agenbroad, L. D., and J. I. Mead. 1989. Quaternary geochronology and distribution of Mammuthus on the Colorado Plateau. Geology 17:861-864.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 10.1130/0091-7613(1989)017&lt;0861:qgadom&gt;2.3.co;2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid                                          citation  doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         21260 Bacon, L.C. Notes: Email: Linda.C.Bacon@maine.gov &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          7240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                               citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Pasenko, M.R., and B.W. Schubert. 2004. Mammuthus jeffersonii (Proboscidea, Mammalia) from Northern Illinois. PaleoBios 24(3):19-24.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         17734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                            citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ray, C.E. 1956. Pre-Columbian horses fromYucatan. Journal of Mammalogy 38(2):278.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">mammoth_papers</span><span class="op">$</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'mammoth_papers' not found</span>
+<span class="r-plt img"><img src="get_publications-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
