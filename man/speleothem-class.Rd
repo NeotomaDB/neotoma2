@@ -3,10 +3,11 @@
 \docType{class}
 \name{speleothem-class}
 \alias{speleothem-class}
-\title{Speleothems}
+\title{S4 class for speleothem information}
 \value{
 object of class \code{speleothem}
 }
 \description{
-Speleothems class for SISAL data
+The standard object class for speleothem
+from the Neotoma Paleoecology Database.
 }

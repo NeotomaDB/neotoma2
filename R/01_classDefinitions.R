@@ -1,5 +1,4 @@
 setClassUnion("id", c("character", "integer", "numeric"))
-
 #' @title An S4 class for Neotoma contacts
 #' @description The object that contains the contact information for an
 #' individual, along with associated metadata.
@@ -8,36 +7,36 @@ setClassUnion("id", c("character", "integer", "numeric"))
 #' new("contact", familyname = "Goring", givennames = "Simon J.")
 #' @returns object of class `contact`
 setClass("contact",
-                    representation(contactid = "id",
-                                   familyname = "character",
-                                   leadinginitials = "character",
-                                   givennames = "character",
-                                   suffix = "character",
-                                   ORCID = "character",
-                                   title = "character",
-                                   institution = "character",
-                                   email = "character",
-                                   phone = "character",
-                                   contactstatus = "character",
-                                   fax = "character",
-                                   url = "character",
-                                   address = "character",
-                                   notes = "character"),
-                    prototype(contactid = NA_integer_,
-                              familyname = NA_character_,
-                              leadinginitials = NA_character_,
-                              givennames = NA_character_,
-                              suffix = NA_character_,
-                              ORCID = NA_character_,
-                              title = NA_character_,
-                              institution = NA_character_,
-                              email = NA_character_,
-                              phone = NA_character_,
-                              contactstatus = NA_character_,
-                              fax = NA_character_,
-                              url = NA_character_,
-                              address = NA_character_,
-                              notes = NA_character_))
+         representation(contactid = "id",
+                        familyname = "character",
+                        leadinginitials = "character",
+                        givennames = "character",
+                        suffix = "character",
+                        ORCID = "character",
+                        title = "character",
+                        institution = "character",
+                        email = "character",
+                        phone = "character",
+                        contactstatus = "character",
+                        fax = "character",
+                        url = "character",
+                        address = "character",
+                        notes = "character"),
+         prototype(contactid = NA_integer_,
+                   familyname = NA_character_,
+                   leadinginitials = NA_character_,
+                   givennames = NA_character_,
+                   suffix = NA_character_,
+                   ORCID = NA_character_,
+                   title = NA_character_,
+                   institution = NA_character_,
+                   email = NA_character_,
+                   phone = NA_character_,
+                   contactstatus = NA_character_,
+                   fax = NA_character_,
+                   url = NA_character_,
+                   address = NA_character_,
+                   notes = NA_character_))
 
 #' @title An S4 class for multi-contact information from the Neotoma
 #' Paleoecology Database.
@@ -54,13 +53,13 @@ setClass("contact",
 #' @returns object of class `contacts`
 #' @export
 setClass("contacts",
-                     representation(contacts  = "list"),
-                     validity = function(object) {
-                       all(map(object@contacts, function(x) {
-                         class(x) == "contact"
-                       }) %>%
-                         unlist())
-                     })
+         representation(contacts  = "list"),
+         validity = function(object) {
+           all(map(object@contacts, function(x) {
+             class(x) == "contact"
+           }) %>%
+             unlist())
+         })
 
 #' @title An S4 class for the authors of a Neotoma publication.
 #' @description This class combines the S4 class `contact` with a numeric
@@ -74,10 +73,10 @@ setClass("contacts",
 #' @returns object of class `author`
 #' @export
 setClass("author",
-                   representation(author = "contact",
-                                  order = "numeric"),
-                   prototype(author = new("contact"),
-                             order = NA_integer_))
+         representation(author = "contact",
+                        order = "numeric"),
+         prototype(author = new("contact"),
+                   order = NA_integer_))
 
 #' @title An S4 class for a set of Neotoma author objects.
 #' @description The S4 `authors` are a set of individual `author` objects that
@@ -92,12 +91,12 @@ setClass("author",
 #' @returns object of class `authors`
 #' @export
 setClass("authors",
-                    representation(authors = "list"),
-                    validity = function(object) {
-                      all(map(object@authors, function(x) {
-                        class(x) == "author"}) %>%
-                          unlist())
-                    })
+         representation(authors = "list"),
+         validity = function(object) {
+           all(map(object@authors, function(x) {
+             class(x) == "author"}) %>%
+               unlist())
+         })
 
 #' @title An S4 class for a single Neotoma publication.
 #' @description A publication is liked to an individual Neotoma dataset object
@@ -117,58 +116,59 @@ setClass("authors",
 #'            }
 #' @returns object of class `publication`
 #' @export
-setClass("publication", representation(publicationid = "id",
-                                       publicationtypeid = "numeric",
-                                       publicationtype = "character",
-                                       year = "character",
-                                       citation = "character",
-                                       articletitle = "character",
-                                       journal = "character",
-                                       volume = "character",
-                                       issue = "character",
-                                       pages = "character",
-                                       citationnumber = "character",
-                                       doi = "character",
-                                       booktitle = "character",
-                                       numvolumes = "character",
-                                       edition = "character",
-                                       volumetitle = "character",
-                                       seriestitle = "character",
-                                       seriesvolume = "character",
-                                       publisher = "character",
-                                       url = "character",
-                                       city = "character",
-                                       state = "character",
-                                       country = "character",
-                                       originallanguage = "character",
-                                       notes = "character",
-                                       author = "authors"),
-                        prototype(publicationid = NA_integer_,
-                                  publicationtypeid = NA_integer_,
-                                  publicationtype = NA_character_,
-                                  year = NA_character_,
-                                  citation = NA_character_,
-                                  articletitle = NA_character_,
-                                  journal = NA_character_,
-                                  volume = NA_character_,
-                                  issue = NA_character_,
-                                  pages = NA_character_,
-                                  citationnumber = NA_character_,
-                                  doi = NA_character_,
-                                  booktitle = NA_character_,
-                                  numvolumes = NA_character_,
-                                  edition = NA_character_,
-                                  volumetitle = NA_character_,
-                                  seriestitle = NA_character_,
-                                  seriesvolume = NA_character_,
-                                  publisher = NA_character_,
-                                  url = NA_character_,
-                                  city = NA_character_,
-                                  state = NA_character_,
-                                  country = NA_character_,
-                                  originallanguage = NA_character_,
-                                  notes = NA_character_,
-                                  author = new("authors")))
+setClass("publication", 
+         representation(publicationid = "id",
+                        publicationtypeid = "numeric",
+                        publicationtype = "character",
+                        year = "character",
+                        citation = "character",
+                        articletitle = "character",
+                        journal = "character",
+                        volume = "character",
+                        issue = "character",
+                        pages = "character",
+                        citationnumber = "character",
+                        doi = "character",
+                        booktitle = "character",
+                        numvolumes = "character",
+                        edition = "character",
+                        volumetitle = "character",
+                        seriestitle = "character",
+                        seriesvolume = "character",
+                        publisher = "character",
+                        url = "character",
+                        city = "character",
+                        state = "character",
+                        country = "character",
+                        originallanguage = "character",
+                        notes = "character",
+                        author = "authors"),
+         prototype(publicationid = NA_integer_,
+                   publicationtypeid = NA_integer_,
+                   publicationtype = NA_character_,
+                   year = NA_character_,
+                   citation = NA_character_,
+                   articletitle = NA_character_,
+                   journal = NA_character_,
+                   volume = NA_character_,
+                   issue = NA_character_,
+                   pages = NA_character_,
+                   citationnumber = NA_character_,
+                   doi = NA_character_,
+                   booktitle = NA_character_,
+                   numvolumes = NA_character_,
+                   edition = NA_character_,
+                   volumetitle = NA_character_,
+                   seriestitle = NA_character_,
+                   seriesvolume = NA_character_,
+                   publisher = NA_character_,
+                   url = NA_character_,
+                   city = NA_character_,
+                   state = NA_character_,
+                   country = NA_character_,
+                   originallanguage = NA_character_,
+                   notes = NA_character_,
+                   author = new("authors")))
 
 #' @title An S4 class for multi-publication information from the Neotoma 
 #' Paleoecology Database. This S4 class allows a single dataset to have one
@@ -176,14 +176,14 @@ setClass("publication", representation(publicationid = "id",
 #' @returns object of class `publications`
 #' @export
 setClass("publications",
-                         representation(publications  = "list"),
-                         validity = function(object) {
-                           all(map(object@publications,
-                                   function(x) {
-                                     class(x) == "publication"
-                                   }) %>%
-                                 unlist())
-                         })
+         representation(publications  = "list"),
+         validity = function(object) {
+           all(map(object@publications,
+                   function(x) {
+                     class(x) == "publication"
+                   }) %>%
+                 unlist())
+         })
 
 #' @title S4 class for chronologies information
 #' @description The class for chronologies from the
@@ -192,23 +192,19 @@ setClass("publications",
 #' classes are then grouped into an S4 `chronologies` class.
 #' @returns object of class `chronology`
 #' @export
-setClass(
-  # Set the name for the class
-  "chronology",
-  # Define the slots
-  slots = c(chronologyid = "id",
-            notes = "character",
-            contact = "ANY",
-            agemodel = "character",
-            ageboundolder = "numeric",
-            ageboundyounger = "numeric",
-            isdefault = "logical",
-            dateprepared = "Date",
-            modelagetype = "character",
-            chronologyname = "character",
-            chroncontrols = "ANY"),
-  # Set the default values for the slot
-  prototype = list(chronologyid = NA_integer_,
+setClass("chronology",
+         representation(chronologyid = "id",
+                        notes = "character",
+                        contact = "ANY",
+                        agemodel = "character",
+                        ageboundolder = "numeric",
+                        ageboundyounger = "numeric",
+                        isdefault = "logical",
+                        dateprepared = "Date",
+                        modelagetype = "character",
+                        chronologyname = "character",
+                        chroncontrols = "ANY"),
+         prototype(chronologyid = NA_integer_,
                    notes = NA_character_,
                    contact = list(),
                    agemodel = NA_character_,
@@ -218,46 +214,38 @@ setClass(
                    dateprepared = as.Date(character(1)),
                    modelagetype = NA_character_,
                    chronologyname = NA_character_,
-                   chroncontrols = data.frame()),
-)
+                   chroncontrols = data.frame()))
 
 #' @title S4 class for chronologies information
 #' @description The grouped class for chronologies
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `chronologies` 
 #' @export
-setClass(
-  "chronologies",
-  slots = c(chronologies = "list"),
-  # Validity functions
-  validity = function(object) {
-    all(object@chronologies %>%
-          lapply(class) %>%
-          unlist(recursive = FALSE) ==  "chronology")
-  })
+setClass("chronologies",
+         representation(chronologies = "list"),
+         validity = function(object) {
+           all(object@chronologies %>%
+                 lapply(class) %>%
+                 unlist(recursive = FALSE) ==  "chronology")
+         })
 
 #' @title S4 class for dataset information
 #' @description The standard object class for samples
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `sample`
 #' @export
-setClass(
-  # Set the name for the class
-  "sample",
-  # Define the slots
-  slots = c(ages = "ANY",
-            igsn = "character",
-            datum = "ANY",
-            depth = "numeric",
-            sampleid = "id",
-            thickness = "numeric",
-            samplename = "character",
-            sampleanalyst = "ANY",
-            analysisunitid = "id",
-            analysisunitname = "character"),
-
-  # Set the default values for the slot
-  prototype = list(ages = list(),
+setClass("sample",
+         representation(ages = "ANY",
+                        igsn = "character",
+                        datum = "ANY",
+                        depth = "numeric",
+                        sampleid = "id",
+                        thickness = "numeric",
+                        samplename = "character",
+                        sampleanalyst = "ANY",
+                        analysisunitid = "id",
+                        analysisunitname = "character"),
+         prototype(ages = list(),
                    igsn = NA_character_,
                    datum = data.frame(),
                    depth = NA_integer_,
@@ -266,81 +254,64 @@ setClass(
                    samplename = NA_character_,
                    sampleanalyst = list(),
                    analysisunitid = NA_integer_,
-                   analysisunitname = NA_character_),
-)
+                   analysisunitname = NA_character_))
 
 #' @title S4 class for the set of samples
 #' @description The grouped class for samples from
 #'  the Neotoma Paleoecology Database.
 #' @returns object of class `samples`
 #' @export
-setClass(
-  # Set the name for the class
-  "samples",
-  slots = c(samples = "list"))
+setClass("samples",
+         representation(samples = "list"))
 
 #' @title S4 class for repository information
 #' @description The standard object class for repository
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `repository`
 #' @export
-setClass(
-  # Set the name for the class
-  "repository",
-  # Define the slots
-  slots = c(notes = "character",
-            acronym = "character",
-            repository = "character",
-            repositoryid = "id",
-            repositorynotes = "character"
-  ),
-  # Set the default values for the slot
-  prototype = list(notes = NA_character_,
+setClass("repository",
+         representation(notes = "character",
+                        acronym = "character",
+                        repository = "character",
+                        repositoryid = "id",
+                        repositorynotes = "character"),
+         prototype(notes = NA_character_,
                    acronym = NA_character_,
                    repository = NA_character_,
                    repositoryid = NA_integer_,
-                   repositorynotes = NA_character_
-  ),
-)
+                   repositorynotes = NA_character_))
 
 #' @title S4 class for repositories information
 #' @description The grouped class for repositories from
 #'  the Neotoma Paleoecology Database.
 #' @returns object of class `repositories`
 #' @export
-setClass(
-  # Set the name for the class
-  "repositories",
-  slots = c(repositories = "list"))
+setClass("repositories",
+         representation(repositories = "list"))
 
 #' @title S4 class for specimen information
 #' @description The standard object class for specimen
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `specimen`
 #' @export
-setClass(
-  # Set the name for the class
-  "specimen",
-  # Define the slots
-  slots = c(datasetid = "id",
-            sampleid = "id",
-            specimenid = "numeric",
-            repository = "repository",
-            taxonid = "id",
-            taxonname = "character",
-            elementtype = "character",
-            symmetry = "character",
-            portion = "character",
-            sex = "character",
-            domesticstatus = "character",
-            taphonomictype = "character",
-            nisp = "numeric",
-            preservative = "character",
-            maturity = "character",
-            samplenotes = "character"
-  ),
-  # Set the default values for the slot
-  prototype = list(datasetid = NA_integer_,
+setClass("specimen",
+         representation(datasetid = "id",
+                        sampleid = "id",
+                        specimenid = "numeric",
+                        repository = "repository",
+                        taxonid = "id",
+                        taxonname = "character",
+                        elementtype = "character",
+                        symmetry = "character",
+                        portion = "character",
+                        sex = "character",
+                        domesticstatus = "character",
+                        taphonomictype = "character",
+                        nisp = "numeric",
+                        preservative = "character",
+                        maturity = "character",
+                        samplenotes = "character"),
+         prototype(datasetid = NA_integer_,
                    sampleid = NA_integer_,
                    specimenid = NA_integer_,
                    repository = NULL,
@@ -355,19 +326,15 @@ setClass(
                    nisp = NA_integer_,
                    preservative = NA_character_,
                    maturity = NA_character_,
-                   samplenotes = NA_character_
-  ),
-)
+                   samplenotes = NA_character_))
 
 #' @title S4 class for specimens information
 #' @description The grouped class for specimens from
 #'  the Neotoma Paleoecology Database.
 #' @returns object of class `specimens`
 #' @export
-setClass(
-  # Set the name for the class
-  "specimens",
-  slots = c(specimens = "list"))
+setClass("specimens",
+         representation(specimens = "list"))
 
 
 setClassUnion("samplesOrNULL", c("samples", "NULL"))
@@ -378,22 +345,20 @@ setClassUnion("specimensOrNULL", c("specimens", "NULL"))
 #' @export
 #' @returns object of class `dataset`
 setClass("dataset",
-  # Define the slots
-  slots = c(datasetid = "id",
-            database = "character",
-            doi = "ANY",
-            recdatecreated = "Date",
-            datasettype = "character",
-            datasetname = "character",
-            age_range_old = "numeric",
-            age_range_young = "numeric",
-            age_units = "character",
-            notes = "character",
-            pi_list = "ANY",
-            samples = "samplesOrNULL",
-            specimens = "specimensOrNULL"),
-  # Set the default values for the slot
-  prototype = list(datasetid = NA_integer_,
+         representation(datasetid = "id",
+                        database = "character",
+                        doi = "ANY",
+                        recdatecreated = "Date",
+                        datasettype = "character",
+                        datasetname = "character",
+                        age_range_old = "numeric",
+                        age_range_young = "numeric",
+                        age_units = "character",
+                        notes = "character",
+                        pi_list = "ANY",
+                        samples = "samplesOrNULL",
+                        specimens = "specimensOrNULL"),
+         prototype(datasetid = NA_integer_,
                    database = NA_character_,
                    doi = list(),
                    recdatecreated = as.Date(character(1)),
@@ -405,7 +370,7 @@ setClass("dataset",
                    notes = NA_character_,
                    pi_list = list(),
                    samples = NULL,
-                   specimens = NULL),
+                   specimens = NULL)
 )
 
 #' @title S4 class for datasets information
@@ -414,53 +379,56 @@ setClass("dataset",
 #' @returns object of class `datasets`
 #' @export
 setClass("datasets",
-  slots = c(datasets = "list"))
+         representation(datasets = "list"))
 
-#' @title Speleothems
-#' @description Speleothems class for SISAL data
+#' @title S4 class for speleothem information
+#' @description The standard object class for speleothem
+#'  from the Neotoma Paleoecology Database.
 #' @returns object of class `speleothem`
 #' @export
 setClass("speleothem",
-         slots = c(entityid = "numeric",
-                   entityname = "character",
-                   siteid = "numeric",
-                   collectionunitid = "numeric",
-                   dripheight = "numeric",
-                   monitoring = "logical",
-                   relativeage = "character",
-                   speleothemtype = "character",
-                   dripheightunits = "character",
-                   entitycovertype = "character",
-                   entrancedistance = "numeric",
-                   landusecovertype = "character",
-                   speleothemdriptype = "character",
-                   landusecoverpercent = "numeric",
-                   vegetationcovertype = "character",
-                   entitycoverthickness = "numeric",
-                   entrancedistanceunits = "character",
-                   vegetationcoverpercent = "numeric"),
-         prototype = list(entityid = NA_integer_,
-                          entityname = NA_character_,
-                          siteid = NA_integer_,
-                          collectionunitid = NA_integer_,
-                          dripheight = NA_integer_,
-                          monitoring = FALSE,
-                          relativeage = NA_character_,
-                          speleothemtype = NA_character_,
-                          dripheightunits = NA_character_,
-                          entitycovertype = NA_character_,
-                          entrancedistance = NA_integer_,
-                          landusecovertype = NA_character_,
-                          speleothemdriptype = NA_character_,
-                          landusecoverpercent = NA_integer_,
-                          vegetationcovertype = NA_character_,
-                          entitycoverthickness = NA_integer_,
-                          entrancedistanceunits = NA_character_,
-                          vegetationcoverpercent = NA_integer_))
+         representation(entityid = "numeric",
+                        entityname = "character",
+                        siteid = "numeric",
+                        collectionunitid = "numeric",
+                        dripheight = "numeric",
+                        monitoring = "logical",
+                        geology = "character",
+                        relativeage = "character",
+                        speleothemtype = "character",
+                        dripheightunits = "character",
+                        entitycovertype = "character",
+                        entrancedistance = "numeric",
+                        landusecovertype = "character",
+                        speleothemdriptype = "character",
+                        landusecoverpercent = "numeric",
+                        vegetationcovertype = "character",
+                        entitycoverthickness = "numeric",
+                        entrancedistanceunits = "character",
+                        vegetationcoverpercent = "numeric"),
+         prototype(entityid = NA_integer_,
+                   entityname = NA_character_,
+                   siteid = NA_integer_,
+                   collectionunitid = NA_integer_,
+                   dripheight = NA_integer_,
+                   monitoring = FALSE,
+                   geology = NA_character_,
+                   relativeage = NA_character_,
+                   speleothemtype = NA_character_,
+                   dripheightunits = NA_character_,
+                   entitycovertype = NA_character_,
+                   entrancedistance = NA_integer_,
+                   landusecovertype = NA_character_,
+                   speleothemdriptype = NA_character_,
+                   landusecoverpercent = NA_integer_,
+                   vegetationcovertype = NA_character_,
+                   entitycoverthickness = NA_integer_,
+                   entrancedistanceunits = NA_character_,
+                   vegetationcoverpercent = NA_integer_))
 
-#' @title Speleothem
-#' @description Speleothem class for SISAL data
-#'  from the Neotoma Paleoecology Database.
+#' @title S4 class for Speleothem information
+#' @description The grouped class for speleothems from
+#'  the Neotoma Paleoecology Database.
 #' @returns object of class `speleothem`
 #' @export
 setClass("speleothems", representation(speleothems = "list"),
@@ -481,22 +449,22 @@ setClassUnion("chronologiesOrNULL", c("chronologies", "NULL"))
 #' @returns object of class `collunit`
 #' @export
 setClass("collunit",
-  slots = c(collectionunitid = "id",
-            notes = "character",
-            handle = "character",
-            colldate = "Date",
-            location = "character",
-            waterdepth = "numeric",
-            gpslocation = "sf",
-            collunittype = "character",
-            collectiondevice = "character",
-            collectionunitname = "character",
-            depositionalenvironment = "character",
-            datasets = "datasetsOrNULL",
-            chronologies = "chronologiesOrNULL",
-            defaultchronology = "integer",
-            speleothems = "speleothemsOrNULL"),
-  prototype = list(collectionunitid = NA_integer_,
+         representation(collectionunitid = "id",
+                        notes = "character",
+                        handle = "character",
+                        colldate = "Date",
+                        location = "character",
+                        waterdepth = "numeric",
+                        gpslocation = "sf",
+                        collunittype = "character",
+                        collectiondevice = "character",
+                        collectionunitname = "character",
+                        depositionalenvironment = "character",
+                        datasets = "datasetsOrNULL",
+                        chronologies = "chronologiesOrNULL",
+                        defaultchronology = "integer",
+                        speleothems = "speleothemsOrNULL"),
+         prototype(collectionunitid = NA_integer_,
                    notes = NA_character_,
                    handle = NA_character_,
                    colldate = as.Date(character(1)),
@@ -535,16 +503,16 @@ setClassUnion("collunitsOrNULL", c("collunits", "NULL"))
 #' @returns object of class `site`
 #' @export
 setClass("site",
-  slots = c(siteid = "id",
-            sitename = "character",
-            geography = "sf",
-            altitude = "numeric",
-            geopolitical = "list",
-            area = "numeric",
-            notes = "character",
-            description = "character",
-            collunits = "collunitsOrNULL"),
-  prototype = list(siteid = NA_integer_,
+         representation(siteid = "id",
+                        sitename = "character",
+                        geography = "sf",
+                        altitude = "numeric",
+                        geopolitical = "list",
+                        area = "numeric",
+                        notes = "character",
+                        description = "character",
+                        collunits = "collunitsOrNULL"),
+         prototype(siteid = NA_integer_,
                    sitename = NA_character_,
                    geography = sf::st_sf(sf::st_sfc()),
                    geopolitical = list(),
@@ -552,21 +520,20 @@ setClass("site",
                    area = NA_integer_,
                    notes = NA_character_,
                    description = NA_character_,
-                   collunits = NULL)
-)
+                   collunits = NULL))
 
 #' @title An S4 class for multi-site information 
 #' @description The standard object class for multi-sites
 #'  from the Neotoma Paleoecology Database.from
 #'  @returns object of class `sites`
 setClass("sites",
-                  representation(sites = "list"),
-                  validity = function(object) {
-                    all(map(object@sites, function(x) {
-                      class(x) == "site"
-                    }) %>%
-                      unlist())
-                  })
+         representation(sites = "list"),
+         validity = function(object) {
+           all(map(object@sites, function(x) {
+             class(x) == "site"
+           }) %>%
+             unlist())
+         })
 
 #' @title S4 class for specimen information
 #' @description Taxon class for single taxon information
@@ -574,17 +541,17 @@ setClass("sites",
 #' @returns object of class `taxon`
 #' @export
 setClass("taxon",
-         slots = c(taxonid = "numeric",
-                   taxoncode = "character",
-                   taxonname = "character",
-                   author = "character",
-                   ecolgroup = "character",
-                   highertaxonid = "numeric",
-                   status = "character",
-                   taxagroupid = "character",
-                   publicationid = "numeric",
-                   publication = "character"),
-         prototype = list(taxonid = NA_integer_,
+         representation(taxonid = "numeric",
+                        taxoncode = "character",
+                        taxonname = "character",
+                        author = "character",
+                        ecolgroup = "character",
+                        highertaxonid = "numeric",
+                        status = "character",
+                        taxagroupid = "character",
+                        publicationid = "numeric",
+                        publication = "character"),
+         prototype(taxonid = NA_integer_,
                    taxoncode = NA_character_,
                    taxonname = NA_character_,
                    author = NA_character_,

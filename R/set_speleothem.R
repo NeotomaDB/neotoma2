@@ -22,6 +22,7 @@ set_speleothem <- function(x = NA,
                            collectionunitid = NA_integer_,
                            dripheight = NA_integer_,
                            monitoring = FALSE,
+                           geology = NA_character_,
                            relativeage = NA_character_,
                            speleothemtype = NA_character_,
                            dripheightunits = NA_character_,
@@ -49,6 +50,7 @@ set_speleothem <- function(x = NA,
     x$collectionunitid <- collectionunitid
     x$dripheight <- dripheight
     x$monitoring <- monitoring
+    x$geology <- geology
     x$relativeage <- relativeage
     x$speleothemtype <- speleothemtype
     x$dripheightunits <- dripheightunits

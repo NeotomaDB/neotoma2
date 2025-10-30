@@ -18,6 +18,7 @@ build_speleothem <- function(...) {
                         dripheight = use_na(testNull(args$dripheight, NA), "int"),
                         dripheightunits = use_na(testNull(args$dripheightunits, NA), "char"),
                         monitoring = use_na(testNull(args$monitoring, NA), "logic"),
+                        geology = use_na(testNull(args$geology, NA), "char"),
                         relativeage = use_na(testNull(args$relativeage, NA), "char"),
                         speleothemtype = use_na(testNull(args$speleothemtype, NA), "char"),
                         entitycovertype = use_na(testNull(args$entitycovertype, NA), "char"),

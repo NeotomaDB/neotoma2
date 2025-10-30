@@ -12,6 +12,7 @@ set_speleothem(
   collectionunitid = NA_integer_,
   dripheight = NA_integer_,
   monitoring = FALSE,
+  geology = NA_character_,
   relativeage = NA_character_,
   speleothemtype = NA_character_,
   dripheightunits = NA_character_,

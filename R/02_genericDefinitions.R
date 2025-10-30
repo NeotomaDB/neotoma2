@@ -1,5 +1,3 @@
-utils::globalVariables(c("analysisunitid"))
-
 #' @title Extract datasets from a sites object.
 #' @description If the sites object contains datasets, then the datasets
 #' will be returned. If the sites object does not contain datasets then
@@ -124,18 +122,6 @@ setGeneric("chroncontrols", function(x) {
 setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
-
-# @title toJSON
-# @author Socorro Dominguez 
-# @description Export toJSON
-# @param x Sites object to extract taxa table from
-# @returns JSON translation of `sites` object to JSON
-# @keywords internal
-# @noRd
-# # comment out for now
-# setGeneric("toJSON", function(x) {
-#   standardGeneric(f = "toJSON")
-# })
 
 #' @title Add a new chronology to a collection unit.
 #' @param object A collectionunit object
