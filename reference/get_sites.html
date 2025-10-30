@@ -151,22 +151,10 @@ and datasets located at that site.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co">## Find sites with a min altitude of 12m and a max altitude of 25m</span></span></span>
 <span class="r-in"><span><span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">12</span>, altmax<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some parameters seem invalid. The current accepted parameters are: NA, all_data, limit, offset</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
 <span class="r-in"><span><span class="co">## Return all sites, using a minimum altitude of 2500m (returns &gt;500 sites):</span></span></span>
 <span class="r-in"><span><span class="va">sites_2500</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">2500</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some parameters seem invalid. The current accepted parameters are: NA, all_data, limit, offset</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
 <span class="r-in"><span><span class="co">## To find sites in Brazil</span></span></span>
 <span class="r-in"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span></span>
 <span class="r-in"><span><span class="st">"coordinates": [[</span></span></span>
@@ -176,13 +164,7 @@ and datasets located at that site.</p></li>
 <span class="r-in"><span><span class="st"> [-68.203125,13.923403897723347],</span></span></span>
 <span class="r-in"><span><span class="st"> [-73.125,-9.102096738726443]]]}'</span></span></span>
 <span class="r-in"><span><span class="va">brazil_sites</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>loc <span class="op">=</span> <span class="va">brazil</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some parameters seem invalid. The current accepted parameters are: NA, all_data, limit, offset</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Finding all sites with Liliaceae pollen in 1000 year bins:</span></span></span>
 <span class="r-in"><span><span class="va">lilysites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -193,13 +175,17 @@ and datasets located at that site.</p></li>
 <span class="r-in"><span>                    all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">lilysites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">lilysites</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">lily</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some parameters seem invalid. The current accepted parameters are: NA, all_data, limit, offset</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Gateway Timeout (HTTP 504). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
