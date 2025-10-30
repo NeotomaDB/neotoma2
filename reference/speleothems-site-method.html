@@ -90,13 +90,13 @@
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>invalid 'scipen' 9999999, used 9999</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some parameters seem invalid. The current accepted parameters are: sitename, database, datasettype, altmin, altmax, loc, siteid, datasetid, doidata, gpid, keyword, contactid, taxa, ageyoung, ageold, ageof, all_data, limit, offset, doi</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_response(baseurl, x, query):</span> Internal Server Error (HTTP 500). Failed to Could not connect to the Neotoma API.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Check that the path is valid, and </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     check the current status of the</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     Neotoma API services at </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>                                     http://data.neotomadb.org.</span>
 <span class="r-in"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="speleothems.html">speleothems</a></span><span class="op">(</span><span class="va">kesang</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'speleothems': object 'kesang' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(x@sites, function(y) speleothems(y)):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> With name: 7.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `purrr::map()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `x@speleothems@speleothems`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> no applicable method for `@` applied to an object of class "NULL"</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

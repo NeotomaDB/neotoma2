@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   neotoma2-package: neotoma2-package.html
-last_built: 2025-10-27T21:40Z
+last_built: 2025-10-30T18:48Z
 urls:
   reference: https://open.neotomadb.org/neotoma2/reference
   article: https://open.neotomadb.org/neotoma2/articles
