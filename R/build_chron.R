@@ -1,6 +1,6 @@
-utils::globalVariables(c("depth", "thickness", "agelimitolder",
-                         "chroncontrolid", "agelimityounger", "chroncontrolage",
-                         "chroncontroltype"))
+# utils::globalVariables(c("depth", "thickness", "agelimitolder",
+#                          "chroncontrolid", "agelimityounger", "chroncontrolage",
+#                          "chroncontroltype"))
 
 #' @title build_chron
 #' @author Socorro Dominguez

@@ -153,14 +153,21 @@ get_datasets.default <- function(x, ...) {
 #' @export
 get_datasets.sites <- function(x, ...) {
   ids <- getids(x)
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
   
   ids <- ids %>%
     dplyr::select(datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
-
-  output <- get_datasets(x = ids, all_data=TRUE, ...)
+  
+  if ('all_data' %in% cl) {
+    all_data <- cl$all_data
+  } else {
+    all_data <- TRUE
+  }
+  output <- get_datasets(x = ids, all_data=all_data, ...)
   
   return(output)
 }
@@ -176,6 +183,9 @@ get_datasets.sites <- function(x, ...) {
 #' @export
 get_datasets.site <- function(x, ...) {
   # List of datasets ids
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  
   ids1 <- getids(x)
   ids <- ids1 %>% dplyr::filter(!is.na(suppressWarnings(as.numeric(siteid))),
                                 !is.na(suppressWarnings(as.numeric(datasetid))))
@@ -192,7 +202,12 @@ get_datasets.site <- function(x, ...) {
   dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
   
-  output <- get_datasets(dataset_list, all_data=TRUE)
+  if ('all_data' %in% cl) {
+    all_data <- cl$all_data
+  } else {
+    all_data <- TRUE
+  }
+  output <- get_datasets(dataset_list, all_data=all_data)
   
   return(output)
 }

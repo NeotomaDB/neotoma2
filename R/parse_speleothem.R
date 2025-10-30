@@ -24,12 +24,13 @@ parse_speleothem <- function(result) {
          dripheightunits = use_na(testNull(x$speleothem$dripheightunits, NA), "char"),
          entitycovertype = use_na(testNull(x$speleothem$entitycovertype, NA), "char"),
          entrancedistance = use_na(testNull(x$speleothem$entrancedistance, NA), "int"),
+         entrancedistanceunits = "m",
          landusecovertype = use_na(testNull(x$speleothem$landusecovertype, NA), "char"),
          speleothemdriptype = use_na(testNull(x$speleothem$speleothemdriptype, NA), "char"),
          landusecoverpercent = use_na(testNull(x$speleothem$landusecoverpercent, NA), "int"),
          vegetationcovertype = use_na(testNull(x$speleothem$vegetationcovertype, NA), "char"),
          entitycoverthickness = use_na(testNull(x$speleothem$entitycoverthickness, NA), "int"),
-         entrancedistanceunits = use_na(testNull(x$speleothem$entrancedistanceunits, NA), "char"),
+         #entrancedistanceunits = use_na(testNull(x$speleothem$entrancedistanceunits, NA), "char"),
          vegetationcoverpercent = use_na(testNull(x$speleothem$vegetationcoverpercent, NA), "int"))
     do.call(build_speleothem, sp)
   })

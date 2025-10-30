@@ -125,6 +125,7 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
       do.call(build_collunits, cu_l)
     })
     cu <- new("collunits", collunits = cus)
+    cu <- clean(cu)
     st <- if (!is.null(x$site)) x$site else x
     st_l <- list(sitename = st$sitename,
                  siteid = st$siteid,
@@ -136,6 +137,7 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
     do.call(build_site, st_l)
   })
   new_sites <- new("sites", sites = new_sites)
+  new_sites <- clean(new_sites)
   return(new_sites)
 }
 normalize_agerange <- function(agerange) {

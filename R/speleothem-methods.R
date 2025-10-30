@@ -9,21 +9,22 @@ setMethod(f = "show",
                              entityname = object@entityname,
                              siteid = object@siteid,
                              collectionunitid = object@collectionunitid,
+                             speleothemdriptype = object@speleothemdriptype,
                              dripheight = object@dripheight,
+                             dripheightunits = object@dripheightunits,
                              monitoring = object@monitoring,
                              geology = object@geology,
                              relativeage = object@relativeage,
                              speleothemtype = object@speleothemtype,
-                             dripheightunits = object@dripheightunits,
-                             entitycovertype = object@entitycovertype,
                              entrancedistance = object@entrancedistance,
+                             entrancedistanceunits = object@entrancedistanceunits,
                              landusecovertype = object@landusecovertype,
-                             speleothemdriptype = object@speleothemdriptype,
                              landusecoverpercent = object@landusecoverpercent,
                              vegetationcovertype = object@vegetationcovertype,
-                             entitycoverthickness = object@entitycoverthickness,
-                             entrancedistanceunits = object@entrancedistanceunits,
-                             vegetationcoverpercent = object@vegetationcoverpercent), row.names = FALSE)
+                             vegetationcoverpercent = object@vegetationcoverpercent,
+                             entitycovertype = object@entitycovertype,
+                             entitycoverthickness = object@entitycoverthickness
+                             ), row.names = FALSE)
           })
 
 #' @title Show Datasets object as a dataframe
@@ -37,21 +38,21 @@ setMethod(f = "show",
                                entityname = y@entityname,
                                siteid = y@siteid,
                                collectionunitid = y@collectionunitid,
+                               speleothemdriptype = y@speleothemdriptype,
                                dripheight = y@dripheight,
+                               dripheightunits = y@dripheightunits,
                                monitoring = y@monitoring,
                                geology = y@geology,
                                relativeage = y@relativeage,
                                speleothemtype = y@speleothemtype,
-                               dripheightunits = y@dripheightunits,
-                               entitycovertype = y@entitycovertype,
                                entrancedistance = y@entrancedistance,
+                               entrancedistanceunits = y@entrancedistanceunits,
                                landusecovertype = y@landusecovertype,
-                               speleothemdriptype = y@speleothemdriptype,
                                landusecoverpercent = y@landusecoverpercent,
                                vegetationcovertype = y@vegetationcovertype,
-                               entitycoverthickness = y@entitycoverthickness,
-                               entrancedistanceunits = y@entrancedistanceunits,
-                               vegetationcoverpercent = y@vegetationcoverpercent)
+                               vegetationcoverpercent = y@vegetationcoverpercent,
+                               entitycovertype = y@entitycovertype,
+                               entitycoverthickness = y@entitycoverthickness)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
@@ -198,21 +199,21 @@ setMethod(f = "as.data.frame",
                        entityname = x@entityname,
                        siteid = x@siteid,
                        collectionunitid = x@collectionunitid,
+                       speleothemdriptype = x@speleothemdriptype,
                        dripheight = x@dripheight,
+                       dripheightunits = x@dripheightunits,
                        monitoring = x@monitoring,
                        geology = x@geology,
                        relativeage = x@relativeage,
                        speleothemtype = x@speleothemtype,
-                       dripheightunits = x@dripheightunits,
-                       entitycovertype = x@entitycovertype,
                        entrancedistance = x@entrancedistance,
+                       entrancedistanceunits = x@entrancedistanceunits,
                        landusecovertype = x@landusecovertype,
-                       speleothemdriptype = x@speleothemdriptype,
                        landusecoverpercent = x@landusecoverpercent,
                        vegetationcovertype = x@vegetationcovertype,
+                       vegetationcoverpercent = x@vegetationcoverpercent,
                        entitycoverthickness = x@entitycoverthickness,
-                       entrancedistanceunits = x@entrancedistanceunits,
-                       vegetationcoverpercent = x@vegetationcoverpercent)
+                       entitycovertype = x@entitycovertype)
           })
 
 #' @title  as.data.frame speleothems

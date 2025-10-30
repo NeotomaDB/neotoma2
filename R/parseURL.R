@@ -87,8 +87,7 @@ parseURL <- function(x, use = "neotoma", all_data = FALSE, ...) {
                                    httr::add_headers("User-Agent" =
                                                        "neotoma2 R package",
                                                      "Content-Type" =
-                                                       "application/json"),
-                                   httr::verbose())
+                                                       "application/json"))
             if (httr::http_error(response)) {
               warning("Skipping failed request with status ",
                       response$status_code)

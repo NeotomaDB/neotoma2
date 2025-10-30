@@ -110,6 +110,8 @@ get_downloads.numeric <- function(x, ...) {
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
   
   ids <- ids %>%
     dplyr::select(datasetid) %>%
@@ -117,7 +119,12 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
     unlist() %>%
     as.numeric()
   
-  output <- get_downloads(x = ids, all_data = TRUE, ...)
+  if ('all_data' %in% cl) {
+    all_data <- cl$all_data
+  } else {
+    all_data <- TRUE
+  }
+  output <- get_downloads(x = ids, all_data = all_data, ...)
 
   return(output)
 }
