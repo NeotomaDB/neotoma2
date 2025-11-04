@@ -159,7 +159,7 @@ get_sites.default <- function(...) {
     warning("Some parameters seem invalid. The current accepted parameters are: ",
             paste(unlist(params), collapse = ", "))
   }
-  oo <- options(scipen = 9999999)
+  oo <- options(scipen = 9999)
   on.exit(options(oo))
 
     base_url <- paste0("data/sites")

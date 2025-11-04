@@ -15,6 +15,7 @@ setMethod(f = "speleothemdetails",
             output <- purrr::map(x@sites, function(y) speleothemdetails(y)) %>%
               dplyr::bind_rows() %>%
               dplyr::distinct()
+            
             if(nrow(output) == 0){
               warnsite <- sprintf("No assigned speleothems. Is it a speleothem dataset? \n
                                   Did you run get_speleothems()?")
@@ -42,7 +43,7 @@ setMethod(f = "speleothemdetails",
           definition = function(x) {
             sampset <- purrr::map(x@collunits@collunits,
                                   function(y) speleothemdetails(y) %>%
-              dplyr::mutate(siteid = x$siteid)) %>%
+                                    dplyr::mutate(siteid = x$siteid)) %>%
               dplyr::bind_rows()
             return(sampset)
           }
@@ -74,13 +75,20 @@ setMethod(f = "speleothemdetails",
           signature = "collunit",
           definition = function(x) {
             speleothemset <- speleothems(x)
-            x <- get_downloads(speleothemset$datasetid)
-            sp_samples <- samples(x) %>% distinct()
-            # join speleothemset and sp_samples on datasetid
-            df <- speleothemset %>%
-              dplyr::left_join(sp_samples,
-                               by = "datasetid") %>%
-              dplyr::distinct()
-            df <- df[ , sort(names(df))]
-            return(df)
+            if (nrow(speleothemset) == 0 ){
+              warnsite <- sprintf("No assigned speleothems. Is it a speleothem dataset? \n
+                                  Did you run get_speleothems()?")
+              warning(warnsite)
+              return(data.frame())
+            } else {
+              x <- get_downloads(speleothemset$datasetid)
+              sp_samples <- samples(x) %>% distinct()
+              # join speleothemset and sp_samples on datasetid
+              df <- speleothemset %>%
+                dplyr::left_join(sp_samples,
+                                 by = "datasetid") %>%
+                dplyr::distinct()
+              df <- df[ , sort(names(df))]
+              return(df)
+            }
           })

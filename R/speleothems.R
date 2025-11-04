@@ -88,7 +88,12 @@ setMethod(f = "speleothems",
             dsids <- as.data.frame(datasets(x)) %>%
               dplyr::filter(datasettype == "speleothem") %>%
               dplyr::mutate(collectionunitid = x@collectionunitid)
-
+            
+            if (length(x@speleothems@speleothems) == 0) {
+              warnsite <- sprintf("No assigned speleothems. Is it a speleothems dataset? Did you run `get_speleothems()`?")
+              warning(warnsite)
+              return(data.frame())
+            } else {
             speleothemset <- purrr::map(x@speleothems@speleothems,
                                         function(y) {
                                           y <- as.data.frame(y)
@@ -122,4 +127,5 @@ setMethod(f = "speleothems",
             speleothemset  <- speleothemset %>%
               distinct()
             return(speleothemset)
+            }
           })

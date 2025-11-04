@@ -119,7 +119,7 @@ get_datasets.numeric <- function(x, ...) {
 #' @export
 get_datasets.default <- function(x, ...) {
   params <- get_params("datasets")
-  oo <- options(scipen = 9999999)
+  oo <- options(scipen = 9999)
   on.exit(options(oo))
   cl <- as.list(match.call())
   if ('doidata' %in% params) {
