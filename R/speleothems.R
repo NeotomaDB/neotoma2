@@ -1,6 +1,7 @@
 #' @title speleothems
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom dplyr bind_rows distinct select filter left_join rename
+#' @importFrom dplyr bind_rows distinct select filter
+#' @importFrom dplyr arrange left_join rename
 #' @importFrom purrr map
 #' @param x sites object
 #' @returns `data.frame` with sample records
@@ -17,7 +18,16 @@ setMethod(f = "speleothems",
     output <- map(x@sites,
                   function(y) speleothems(y)) %>%
       bind_rows() %>%
-      distinct()
+      select(siteid, sitename, collectionunitid, datasetid,
+             entityid, entityname, speleothemtype, geology,
+             relativeage, monitoring,
+             speleothemdriptype, dripheight, dripheightunits,
+             covertype, entitycoverthickness,
+             entrancedistance, entrancedistanceunits, 
+             landusecovertype, landusecoverpercent,
+             vegetationcovertype, vegetationcoverpercent) %>%
+      distinct() %>%
+      arrange(entityid, siteid, collectionunitid)
     if (nrow(output) == 0) {
       msg <- "No assigned speleothems. Is it a speleothem dataset? \n
                           Did you run get_speleothems()?"
@@ -71,7 +81,8 @@ setMethod(f = "speleothems",
   definition = function(x) {
     dsids <- as.data.frame(datasets(x)) %>%
       filter(datasettype == "speleothem") %>%
-      mutate(collectionunitid = x@collectionunitid)
+      mutate(collectionunitid = x@collectionunitid) %>%
+      select(collectionunitid, datasetid)
     if (length(x@speleothems@speleothems) == 0) {
       warning(sprintf("No assigned speleothems. Is it a speleothems dataset?
               Did you run `get_speleothems()`?"))
@@ -82,7 +93,7 @@ setMethod(f = "speleothems",
                              y <- as.data.frame(y)
                              if (!is.null(y) && nrow(y) > 0) {
                                df <-
-                                 data.frame(collunitid = y$collectionunitid,
+                                 data.frame(collectionunitid = y$collectionunitid,
                                             entityid = y$entityid,
                                             entityname = y$entityname,
                                             speleothemtype = y$speleothemtype,
@@ -109,11 +120,7 @@ setMethod(f = "speleothems",
                                             y$vegetationcovertype,
                                             vegetationcoverpercent =
                                             y$vegetationcoverpercent) %>%
-                                 left_join(dsids %>%
-                                             select(collunitid =
-                                                      dsids$collectionunitid,
-                                                    datasetid = datasetid),
-                                           by = "collunitid")
+                                 left_join(dsids, by = "collectionunitid")
                              } else {
                                df <- data.frame()
                              }

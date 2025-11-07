@@ -1,6 +1,7 @@
 #' @title speleothemdetails
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom dplyr bind_rows distinct mutate rename left_join
+#' @importFrom dplyr bind_rows distinct mutate rename 
+#' @importFrom dplyr left_join select arrange
 #' @importFrom purrr map
 #' @param x site object
 #' @returns `data.frame` with speleothem records
@@ -20,7 +21,23 @@ setMethod(f = "speleothemdetails",
     output <- map(x@sites,
                   function(y) speleothemdetails(y)) %>%
       bind_rows() %>%
-      distinct()
+      distinct() %>%
+      select(siteid, sitename, collectionunitid, datasetid,
+             entityid, entityname, depth, thickness,
+             chronologyid, chronologyname, 
+             agetype, ageolder, age, ageyounger, age_units,
+             sampleid, samplename,
+             taxongroup, ecologicalgroup,
+             taxonid, variablename, value, units,
+             # speleothem details
+             speleothemtype, geology,
+             relativeage, monitoring,
+             speleothemdriptype, dripheight, dripheightunits,
+             covertype, entitycoverthickness,
+             entrancedistance, entrancedistanceunits, 
+             landusecovertype, landusecoverpercent,
+             vegetationcovertype, vegetationcoverpercent) %>%
+      arrange(entityid, taxonid, depth, age)
     if (nrow(output) == 0) {
       warnsite <- sprintf("No assigned speleothems. Is it a speleothem 
                            dataset? \nDid you run get_speleothems()?")
@@ -36,8 +53,8 @@ setMethod(f = "speleothemdetails",
   signature = "site",
   definition = function(x) {
     sampset <- map(x@collunits@collunits,
-                   function(y) speleothemdetails(y)) %>%
-      mutate(siteid = x$siteid) %>%
+                   function(y) speleothemdetails(y) %>%
+                     mutate(siteid = x$siteid)) %>%
       bind_rows()
     return(sampset)
   }
@@ -74,7 +91,6 @@ setMethod(f = "speleothemdetails",
                 left_join(sp_samples,
                           by = "datasetid") %>%
                 distinct()
-              df <- df[, sort(names(df))]
               return(df)
             }
           })

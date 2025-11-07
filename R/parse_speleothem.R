@@ -9,7 +9,8 @@
 #' @keywords internal
 #' @noRd
 parse_speleothem <- function(data) {
-  speleothems <- map(data$speleothem, function(x) {
+  speleothems <- map(data, function(x) {
+    x <- x$speleothem
     sp <-
       list(entityid = x$entityid,
            entityname = x$entityname,

@@ -10,7 +10,7 @@ get_speleothems(x = NA, ...)
 
 \method{get_speleothems}{numeric}(x, ...)
 
-\method{get_speleothems}{sites}(...)
+\method{get_speleothems}{sites}(x, ...)
 }
 \arguments{
 \item{x}{A dataset ID or vector of dataset IDs}

@@ -72,7 +72,12 @@ parse_site <- function(result, verbose = FALSE) {
         chron <- new("chronologies", chronologies = chronologies)
       }
       # Speleothems
-      speleothems <- parse_speleothem(y)
+      speleothems <- tryCatch(
+        parse_speleothem(y$speleothems),
+        error = function(e) {
+          NULL # Speleothems does not exist in the regular API calls
+        }
+      )
       # Build collection unit
       cu_l <-
         list(collectionunitid = y$collectionunitid,

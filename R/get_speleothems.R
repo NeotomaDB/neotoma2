@@ -12,15 +12,15 @@ speleo_helper <- function(sites) {
   }
   baseURL <- paste0("data/speleothems/", cuids)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(baseURL),
     error = function(e) {
       message("API call failed: ", e$message)
       NULL
     }
   )
-  if (length(result[2]$data) > 0) {
+  if (length(result$data) > 0) {
+    speleo <- parse_speleothem(result$data)
     speleo <- speleo %>% cleanNULL()
-    speleo <- parse_speleothem(result)
   } else {
     speleo <- NULL
   }
@@ -85,11 +85,10 @@ get_speleothems.numeric <- function(x, ...) {
 
 #' @rdname get_speleothems
 #' @export
-get_speleothems.sites <- function(...) {
-  pared_ds <- speleo_helper()
+get_speleothems.sites <- function(x, ...) {
+  pared_ds <- speleo_helper(x)
   if (is.null(pared_ds)) {
-    args <- list(...)
-    args
+    st
   } else {
     new("sites", sites = pared_ds)
   }
