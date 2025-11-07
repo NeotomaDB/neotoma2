@@ -1,9 +1,6 @@
-utils::globalVariables(c("siteid"))
 #' @title clean Neotoma objects to remove duplicates and empty objects.
 #' @name clean
 #' @author Simon Goring \email{goring@wisc.edu}
-#' @import gtools
-#' @import lubridate
 #' @importFrom progress progress_bar
 #' @importFrom methods new
 #' @param x sites, datasets, collunits that may have duplicates.
@@ -17,7 +14,8 @@ utils::globalVariables(c("siteid"))
 #' attempts to gather all objects together:
 #'   * Before: \{site: 1, dataset: 1\}, \{site: 1, dataset: 2\}
 #'   * After: \{site: 1, dataset: \[1, 2\]\}
-#' So the site is gathered, and the datasets are now part of an array of datasets.
+#' So the site is gathered, and the datasets are now part of an
+#' array of datasets.
 #' @examples \donttest{
 #' clean_sites <- get_sites(sitename = "L%", limit = 20)
 #' more_sites <- get_sites(sitename = "La%", limit = 20)

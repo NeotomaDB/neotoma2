@@ -1,5 +1,3 @@
-utils::globalVariables(c("modelagetype", "isdefault"))
-
 #' @title samples
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @author Simon Goring \email{goring@wisc.edu}
@@ -40,7 +38,7 @@ setMethod(f = "samples",
       bind_rows() %>%
       bind_rows() %>%
       left_join(siteinfo, by = "datasetid") %>%
-      rename(sitenotes = notes)
+      rename(sitenotes = .data$notes)
     return(sampset)
   }
 )
@@ -150,7 +148,7 @@ setMethod(f = "samples",
                    }) %>%
       bind_rows() %>%
       left_join(as.data.frame(datasets(x)), by = "datasetid") %>%
-      rename(datasetnotes = notes)
+      rename(datasetnotes = .data$notes)
     return(sampset)
   }
 )

@@ -34,7 +34,8 @@ attempts to gather all objects together:
 \itemize{
 \item Before: \{site: 1, dataset: 1\}, \{site: 1, dataset: 2\}
 \item After: \{site: 1, dataset: [1, 2]\}
-So the site is gathered, and the datasets are now part of an array of datasets.
+So the site is gathered, and the datasets are now part of an
+array of datasets.
 }
 }
 \examples{

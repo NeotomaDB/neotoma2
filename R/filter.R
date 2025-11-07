@@ -1,4 +1,3 @@
-#utils::globalVariables(c("elev", "notes"))
 #' @title Apply a `filter` for Neotoma sites objects.
 #' @name filter
 #' @author Simon Goring \email{goring@wisc.edu}

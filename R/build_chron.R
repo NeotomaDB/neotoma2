@@ -1,7 +1,3 @@
-# utils::globalVariables(c("depth", "thickness", "agelimitolder",
-#                          "chroncontrolid", "agelimityounger", "chroncontrolage",
-#                          "chroncontroltype"))
-
 #' @title build_chron
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom assertthat assert_that

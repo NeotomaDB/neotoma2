@@ -1,3 +1,17 @@
 # _pkgdown.yml
 url: https://open.neotomadb.org/neotoma2/
 destination: docs
+articles:
+  - title: "JOSS Paper"
+    contents:
+      - text: "Read the JOSS paper."
+        href: "https://joss.theoj.org/papers/10.21105/joss.05561"
+  - title: "Simple Workflow"
+    contents:
+      - text: "A simple workflow to get started with neotoma2."
+        href: "https://open.neotomadb.org/Current_Workshop/simple_workflow.html"
+  - title: "Not So Simple Workflow"
+    contents:
+      - text: "A more complex workflow using neotoma2."
+        href: "https://open.neotomadb.org/Current_Workshop/complex_workflow.html"
+        

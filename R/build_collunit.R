@@ -1,6 +1,5 @@
 #' @title Build a collection unit from the API response
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @import sf
 #' @importFrom assertthat assert_that
 #' @param args The structured JSON from a Neotoma API v2.0 response that
 #'   returns a collection unit in any form.

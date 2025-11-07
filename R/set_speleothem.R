@@ -1,6 +1,5 @@
 #' @title Set Speleothem
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @import lubridate
 #' @importFrom methods new slot<-
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest

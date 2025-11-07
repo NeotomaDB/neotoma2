@@ -1,6 +1,6 @@
 on: [push]
 branches:
-      - production
+      - joss
 jobs:
   paper:
     runs-on: ubuntu-latest
@@ -12,13 +12,11 @@ jobs:
         uses: openjournals/openjournals-draft-action@master
         with:
           journal: joss
-          # This should be the path to the paper within your repo.
           paper-path: paper.md
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: paper
-          # This is the output path where Pandoc will write the compiled
-          # PDF. Note, this should be the same directory as the input
-          # paper.md
-          path: paper.pdf
+      - name: Commit updated paper
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add paper.pdf
+          git commit -m "Update JOSS paper PDF" || echo "No changes to commit"
+          git push origin joss

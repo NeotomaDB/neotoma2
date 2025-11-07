@@ -2,7 +2,7 @@ name: pkgdown
 
 on:
   push:
-    branches: [main, CRAN1.0.8]
+    branches: [main, dev]
   pull_request:
   release:
     types: [published]
