@@ -1,4 +1,5 @@
 #' @title get_taxa
+#' @name get_taxa
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description a `sites` object with sites that contain the requested `taxa.`
 #' @param x A `taxon` ID to extract site information

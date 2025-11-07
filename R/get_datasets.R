@@ -1,4 +1,5 @@
 #' @title get_datasets
+#' @name get_datasets
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new
 #' @importFrom dplyr select filter

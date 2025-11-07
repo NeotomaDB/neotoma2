@@ -43,6 +43,7 @@ speleo_helper <- function(sites) {
 }
 
 #' @title get_speleothems
+#' @name get_speleothems
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new
 #' @param x A dataset ID or vector of dataset IDs

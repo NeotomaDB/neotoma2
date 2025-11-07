@@ -1,4 +1,5 @@
 #' @title Get object IDs
+#' @name getids
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @description This function parses a site object, from \code{site} to
 #' \code{dataset} level and returns a \code{data.frame} that contains the

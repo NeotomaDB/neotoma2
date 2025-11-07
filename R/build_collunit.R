@@ -20,7 +20,7 @@ build_collunits <- function(...) {
     colldate = use_na(args$colldate, "date"),
     depositionalenvironment = use_na(args$depositionalenvironment, "char"),
     location = use_na(args$location, "char"),
-    gpslocation = use_na(args$location, "sf"),
+    gpslocation = use_na(args$gpslocation, "sf"),
     notes = use_na(args$notes, "char"),
     datasets = testNull(args$datasets, NULL),
     defaultchronology = use_na(args$defaultchronology, "int"),

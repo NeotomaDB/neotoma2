@@ -1,4 +1,5 @@
 #' @title get_sites
+#' @name get_sites
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @param x Use a single integer or vector of integers representing 
 #' unique Neotoma site identifiers (siteids) to extract site information.

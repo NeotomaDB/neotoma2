@@ -10,28 +10,35 @@
 #' @noRd
 use_na <- function(x, type) {
   tryCatch({
-    if (is.null(x) || is.na(x)) {
+    if (type == "sf") {
+      if (is.null(x) || nrow(x) == 0) {
+        return(sf::st_as_sf(sf::st_sfc()))
+      } else {
+        return(x)
+      }
+    }
+    if (is.null(x) || (is.atomic(x) && all(is.na(x)))) {
       return(switch(type,
                     "char" = NA_character_,
-                    "int" = NA_integer_,
-                    "sf" = sf::st_as_sf(sf::st_sfc()),
+                    "int"  = NA_integer_,
                     "list" = list(),
                     "date" = as.Date(NA_character_),
                     "bool" = NA,
-                    "df" = data.frame(),
+                    "df"   = data.frame(),
                     NA))
-    } else {
-      return(x)
     }
+    
+    x
   }, error = function(e) {
-    # For atomic vectors
-    return(switch(type,
-                  "char" = NA_character_,
-                  "int" = NA_integer_,
-                  "sf" = sf::st_as_sf(sf::st_sfc()),
-                  "list" = list(),
-                  "date" = as.Date(NA_character_),
-                  "bool" = NA,
-                  NA))
+    # Fallback
+    switch(type,
+           "char" = NA_character_,
+           "int"  = NA_integer_,
+           "sf"   = sf::st_as_sf(sf::st_sfc()),
+           "list" = list(),
+           "date" = as.Date(NA_character_),
+           "bool" = NA,
+           "df"   = data.frame(),
+           NA)
   })
 }

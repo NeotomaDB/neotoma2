@@ -1,5 +1,6 @@
 utils::globalVariables(c("siteid"))
 #' @title clean Neotoma objects to remove duplicates and empty objects.
+#' @name clean
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @import gtools
 #' @import lubridate

@@ -42,3 +42,6 @@ the Neotoma ecolgrouptypes table)
 (1, True) or extant (0, False).
 }
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

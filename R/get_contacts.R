@@ -1,4 +1,5 @@
 #' @title Get `contact` information for Neotoma contributors
+#' @name get_contacts
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new

@@ -1,4 +1,5 @@
 #' @title get_downloads
+#' @name get_downloads
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom dplyr select
 #' @importFrom methods new
@@ -86,7 +87,7 @@ get_downloads.numeric <- function(x, ...) {
     }
   )
   if (!is.null(result[2]$data) || (length(result[2]$data) > 0)) {
-    output <- parse_site(result, parse_download = TRUE)
+    output <- parse_site(result)
     return(output)
   } else {
     return(NULL)

@@ -24,6 +24,8 @@ parse_taxon <- function(data) {
 }
 
 #' @title get_taxon
+#' @name get_taxon
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description a `taxon` object with detailed information
 #' @param x taxon ID
 #' @param ... accepted arguments, see **details** for more information.

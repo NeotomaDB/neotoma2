@@ -1,4 +1,5 @@
 #' @title Get publication information for Neotoma records
+#' @name get_publications
 #' @description Uses the Neotoma API to search and access information
 #' about publications associated with data in the Neotoma Paleoecology Database
 #' @importFrom methods new
