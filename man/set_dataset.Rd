@@ -63,3 +63,6 @@ my_dataset <- set_dataset(database = "EPD",
                     notes = "my lake")
 }
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

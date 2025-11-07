@@ -61,7 +61,8 @@ be used with this collection unit}
 \code{collunit} object
 }
 \description{
-Function to create new collection unit objects for personal analysis.
+Function to create new collection unit objects for
+personal analysis.
 The new object will not be uploaded to the database.
 }
 \examples{
@@ -69,4 +70,9 @@ The new object will not be uploaded to the database.
 # Create a collunit
 my_collunit <- set_collunit(notes = "my lake")
 }
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+
+Simon Goring \email{goring@wisc.edu}
 }

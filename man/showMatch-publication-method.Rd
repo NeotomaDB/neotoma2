@@ -9,9 +9,6 @@
 \arguments{
 \item{x}{A \code{publication} object.}
 }
-\value{
-NULL printed matches with other publications
-}
 \description{
 Show matched publication objects.
 }

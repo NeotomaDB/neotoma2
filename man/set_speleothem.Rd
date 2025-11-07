@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_speleothem.R
 \name{set_speleothem}
 \alias{set_speleothem}
-\title{set Site Information for Fossil Sites}
+\title{Set Speleothem}
 \usage{
 set_speleothem(
   x = NA,
@@ -30,27 +30,50 @@ set_speleothem(
 \arguments{
 \item{x}{Object to be set as a speleothem}
 
-\item{siteid}{The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).}
+\item{entityid}{The speleothem entity ID.}
 
-\item{sitename}{Actual site name as a character string.}
+\item{entityname}{Name of the speleothem entity.}
 
-\item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
+\item{siteid}{The unique site ID for a site.}
 
-\item{altitude}{altitude/elevation of the site.}
+\item{collectionunitid}{The unique collection unit ID for a collection unit.}
 
-\item{geopolitical}{The geopolitical unit in which the site is located.}
+\item{dripheight}{drip height}
 
-\item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
+\item{monitoring}{Is the speleothem being monitored? TRUE/FALSE}
 
-\item{description}{Function to create new site objects for personal analysis. The new object will not be uploaded to the database.}
+\item{geology}{rock type of the speleothem}
 
-\item{notes}{additional information of the site}
+\item{relativeage}{relative age of the speleothem}
 
-\item{collunits}{Collection units in the site}
+\item{speleothemtype}{type of speleothem}
+
+\item{dripheightunits}{Units for drip height}
+
+\item{entitycovertype}{type of cover around the speleothem}
+
+\item{entrancedistance}{distance from cave entrance}
+
+\item{landusecovertype}{type of land use cover around the speleothem}
+
+\item{speleothemdriptype}{type of speleothem drip}
+
+\item{landusecoverpercent}{land use cover percent}
+
+\item{vegetationcovertype}{type of vegetation cover around the speleothem}
+
+\item{entitycoverthickness}{thickness of the entity cover}
+
+\item{entrancedistanceunits}{Units for distance from cave entrance}
+
+\item{vegetationcoverpercent}{vegetation cover percent}
 }
 \value{
-\code{site} object
+\code{speleothem} object
 }
 \description{
-set Site Information for Fossil Sites
+Set Speleothem
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

@@ -21,3 +21,6 @@ ds <- get_datasets(37302)
 sp <- speleothems(ds)
 }
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

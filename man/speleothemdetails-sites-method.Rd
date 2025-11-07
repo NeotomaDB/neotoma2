@@ -7,17 +7,23 @@
 \S4method{speleothemdetails}{sites}(x)
 }
 \arguments{
-\item{x}{sites object}
+\item{x}{site object}
 }
 \value{
-\code{data.frame} with sample records
+\code{data.frame} with speleothem records
 }
 \description{
-Obtain all speleothems within a sites object
+Obtain elements on the speleothems level
 }
 \examples{
-{
-ds <- get_datasets(37302)
-sp <- speleothems(ds)
+\donttest{
+kesang <- get_sites(sitename = "Kesang cave") \%>\%
+  get_datasets() \%>\%
+  filter(datasettype == "pollen") \%>\%
+  get_speleothems()
+sp <- speleothemdetails(kesang)
 }
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }
