@@ -2,9 +2,15 @@
 % Please edit documentation in R/get_contacts.R
 \name{get_contacts}
 \alias{get_contacts}
-\title{Get contact information for Neotoma contributors}
+\alias{get_contacts.numeric}
+\alias{get_contacts.default}
+\title{Get \code{contact} information for Neotoma contributors}
 \usage{
 get_contacts(x = NA, ...)
+
+\method{get_contacts}{numeric}(x, ...)
+
+\method{get_contacts}{default}(x, ...)
 }
 \arguments{
 \item{x}{integer A contact ID}
@@ -23,4 +29,9 @@ individual contributor to the database.
 Uses the Neotoma API to search and access
 information about individuals who have contributed to
 the data in the Neotoma Paleoecology Database
+}
+\author{
+Simon Goring \email{goring@wisc.edu}
+
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

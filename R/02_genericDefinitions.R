@@ -1,5 +1,3 @@
-utils::globalVariables(c("analysisunitid"))
-
 #' @title Extract datasets from a sites object.
 #' @description If the sites object contains datasets, then the datasets
 #' will be returned. If the sites object does not contain datasets then
@@ -45,15 +43,23 @@ setGeneric("showMatch", function(x) {
 #' @export
 setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
+  })
+
+#' @title Obtain speleothems from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothems", function(x) {
+  standardGeneric(f = "speleothems")
 })
 
-# #' @title Obtain specimens from a record or multiple records.
-# #' @param x sites object
-# #' @returns data.frame with record information regarding specimens
-# #' @export
-# setGeneric("specimens", function(x) {
-#   standardGeneric(f = "specimens")
-# })
+#' @title Obtain speleothems and samples from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothemdetails", function(x) {
+  standardGeneric(f = "speleothemdetails")
+})
 
 #' @title Obtain the chronology from a record or multiple records.
 #' @param x sites object that contains chronologies
@@ -99,7 +105,6 @@ setGeneric("chroncontrols", function(x) {
   standardGeneric(f = "chroncontrols")
 })
 
-
 #' @title taxa
 #' @description Show the samples table
 #' @param object Sites object to extract taxa table from
@@ -108,18 +113,6 @@ setGeneric("chroncontrols", function(x) {
 setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
-
-# @title toJSON
-# @author Socorro Dominguez 
-# @description Export toJSON
-# @param x Sites object to extract taxa table from
-# @returns JSON translation of `sites` object to JSON
-# @keywords internal
-# @noRd
-# # comment out for now
-# setGeneric("toJSON", function(x) {
-#   standardGeneric(f = "toJSON")
-# })
 
 #' @title Add a new chronology to a collection unit.
 #' @param object A collectionunit object
@@ -151,3 +144,11 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+#TODO
+# #' @title Obtain specimens from a record or multiple records.
+# #' @param x sites object
+# #' @returns data.frame with record information regarding specimens
+# #' @export
+# setGeneric("specimens", function(x) {
+#   standardGeneric(f = "specimens")
+#   })

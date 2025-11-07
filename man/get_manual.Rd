@@ -20,7 +20,6 @@ if (interactive()) {
  get_manual()
 }
 }
-
 }
 \author{
 Simon Goring \email{goring@wisc.edu}

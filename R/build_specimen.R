@@ -1,7 +1,5 @@
 #' @title Build a specimen objects.
-#' @import gtools
-#' @import lubridate
-#' @import dplyr
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new
 #' @description
 #' A helper function to build a specimen object from a list returned by
@@ -9,37 +7,32 @@
 #' the get_specimens() call.
 #' @param x specimen list
 #' @returns A simple `specimen` object
-#' @export
-
+#' @noRd
 build_specimen <- function(x) {
-
-  repo <- x$repository
-
-  new("specimen",
-      datasetid = use_na(testNull(x$datasetid, NA), "int"),
-      sampleid = use_na(testNull(x$sampleid, NA), "int"),
-      specimenid = use_na(testNull(x$specimenid, NA), "int"),
-      repository = new("repository",
-                       notes = use_na(testNull(repo$notes, NA), "char"),
-                       acronym = use_na(testNull(repo$acronym, NA), "char"),
-                       repository = use_na(testNull(repo$repository, NA),
-                         "char"),
-                       repositoryid =  use_na(testNull(repo$repositoryid, NA),
-                         "int"),
-                       repositorynotes = use_na(testNull(repo$repositorynotes,
-                         NA), "char")),
-      taxonid = use_na(testNull(x$taxonid, NA), "int"),
-      taxonname = use_na(testNull(x$taxonname, NA), "char"),
-      elementtype = use_na(testNull(x$elementtype, NA), "char"),
-      symmetry = use_na(testNull(x$symmetry, NA), "char"),
-      portion = use_na(testNull(x$portion, NA), "char"),
-      sex = use_na(testNull(x$sex, NA), "char"),
-      domesticstatus = use_na(testNull(x$domesticstatus, NA), "char"),
-      taphonomictype = use_na(testNull(x$taphonomictype, NA), "char"),
-      nisp = use_na(testNull(x$nisp, NA), "int"),
-      preservative =use_na(testNull(x$preservative, NA), "char"),
-      maturity = use_na(testNull(x$maturity, NA), "char"),
-      samplenotes = use_na(testNull(x$samplenotes, NA), "char")
-  )
-
+  x <- cleanNULL(x)
+  repo <- x$repository %>% cleanNULL()
+  sp <- new("specimen",
+            datasetid = use_na(x$datasetid, "int"),
+            sampleid = use_na(x$sampleid, "int"),
+            specimenid = use_na(x$specimenid, "int"),
+            repository = new("repository",
+                             notes = use_na(repo$notes, "char"),
+                             acronym = use_na(repo$acronym, "char"),
+                             repository = use_na(repo$repository, "char"),
+                             repositoryid =  use_na(repo$repositoryid, "int"),
+                             repositorynotes = use_na(repo$repositorynotes,
+                                                      "char")),
+            taxonid = use_na(x$taxonid, "int"),
+            taxonname = use_na(x$taxonname, "char"),
+            elementtype = use_na(x$elementtype, "char"),
+            symmetry = use_na(x$symmetry, "char"),
+            portion = use_na(x$portion, "char"),
+            sex = use_na(x$sex, "char"),
+            domesticstatus = use_na(x$domesticstatus, "char"),
+            taphonomictype = use_na(x$taphonomictype, "char"),
+            nisp = use_na(x$nisp, "int"),
+            preservative = use_na(x$preservative, "char"),
+            maturity = use_na(x$maturity, "char"),
+            samplenotes = use_na(x$samplenotes, "char"))
+  return(sp)
 }

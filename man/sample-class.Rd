@@ -3,11 +3,11 @@
 \docType{class}
 \name{sample-class}
 \alias{sample-class}
-\title{S4 class for dataset information}
+\title{S4 class for \code{samples} information}
 \value{
 object of class \code{sample}
 }
 \description{
-The standard object class for samples
-from the Neotoma Paleoecology Database.
+The standard object class for \code{samples}
+in the Neotoma Paleoecology Database.
 }

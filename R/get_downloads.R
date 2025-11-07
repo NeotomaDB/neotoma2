@@ -1,12 +1,10 @@
 #' @title get_downloads
+#' @name get_downloads
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @import gtools
-#' @import lubridate
-#' @import dplyr
-#' @import jsonlite
+#' @importFrom dplyr select
 #' @importFrom methods new
 #' @description
-#' Information for Fossil Datasets
+#' Download `sites` objects up to datum and chronology detail level.
 #' @param x Use a single number to extract site information
 #' @param verbose Status bar of items being downloaded
 #' @param ... accepted arguments: sites, datasets
@@ -53,7 +51,6 @@
 #' @examples \donttest{
 #' # To find the downloads object of dataset 24:
 #' downloads24 <- get_downloads(24)
-#'
 #' # To find all downloads in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -65,6 +62,7 @@
 #' brazil_datasets <- get_datasets(loc = brazil[1])
 #' brazil_downloads <- get_downloads(brazil_datasets)
 #' }
+#' @md
 #' @export
 get_downloads <- function(x = NA, verbose = TRUE, ...) {
   if (!missing(x)) {
@@ -74,61 +72,44 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
   }
 }
 
-#' @title get_downloads
-#' @param x Use a single number to extract site information
-#' @param ... arguments in ellipse form
-#' @returns The function returns either a single item of class
-#' \code{"try-error"} describing the reason for failure
-#' (either misdefined parameters or an error from the Neotoma API),
-#' or a table of sites, with rows corresponding to the number of
-#' individual sites and datasets returned by the Neotoma API.
+#' @rdname get_downloads
 #' @export
 get_downloads.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  base_url <- paste0("data/downloads?datasetid=", dataset)
-  result <- parseURL(base_url,  ...)
-  if (length(result[2]$data) > 0) {
-    output <- parse_site(result, parse_download = TRUE)
+  baseURL <- paste0("data/downloads?datasetid=", dataset)
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
+  if (!is.null(result[2]$data) || (length(result[2]$data) > 0)) {
+    output <- parse_site(result)
     return(output)
   } else {
     return(NULL)
   }
 }
 
-#' @title get_downloads sites
-#' @param x sites object
-#' @param verbose Should text be printed during the download process?
-#' @param ... arguments in ellipse form
-#' @importFrom stats na.omit
-#' @returns The function returns either a single item of class
-#' \code{"try-error"} describing the reason for failure
-#' (either misdefined parameters or an error from the Neotoma API),
-#' or a table of sites, with rows corresponding to the number of
-#' individual sites and datasets returned by the Neotoma API.
+#' @rdname get_downloads
 #' @export
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)
-  
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
   ids <- ids %>%
-    dplyr::select(datasetid) %>%
+    select(datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
-  
-  output <- get_downloads(x = ids, all_data = TRUE, ...)
-
+  if ("all_data" %in% cl) {
+    all_data <- cl$all_data
+  } else {
+    all_data <- TRUE
+  }
+  output <- get_downloads(x = ids, all_data = all_data, ...)
   return(output)
 }
-
-
-#' get_downloads.character <- function(x, verbose = TRUE, ...) {
-#'   result <- jsonlite::fromJSON(x,
-#'                                flatten = FALSE,
-#'                                simplifyVector = FALSE)
-#'   result <- result %>%
-#'     cleanNULL()
-#'   output <- parse_download(result, verbose = verbose)
-#'   return(output)
-#' }

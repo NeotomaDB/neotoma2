@@ -2,9 +2,15 @@
 % Please edit documentation in R/filter.R
 \name{filter}
 \alias{filter}
-\title{Apply a filter for Neotoma sites objects.}
+\alias{filter.sites}
+\alias{filter.data.frame}
+\title{Apply a \code{filter} for Neotoma sites objects.}
 \usage{
 filter(x, ...)
+
+\method{filter}{sites}(x, ...)
+
+\method{filter}{data.frame}(.data, ..., .by = NULL, .preserve = FALSE)
 }
 \arguments{
 \item{x}{A site, dataset or download.}
@@ -56,4 +62,21 @@ device.
 \item \code{depositionalenvironment} A fixed vocabulary name for the
 depositional environment.
 }
+}
+\examples{
+\donttest{
+# Download 10 sites, but only keep the sites that are close to sea level.
+some_sites <- get_sites(sitename = "Lake\%", limit = 3)
+site_subset <- some_sites \%>\% filter(altitude < 100)
+# Download 10 sites, get all associated datasets, but keep only
+# sites/datasets that are of datasettype "pollen":
+sites <- get_sites(limit = 10) \%>\%
+  get_datasets()
+pollen_subset <- sites \%>\% filter(datasettype == "pollen")
+}
+}
+\author{
+Simon Goring \email{goring@wisc.edu}
+
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

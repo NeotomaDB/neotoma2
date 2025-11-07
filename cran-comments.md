@@ -11,93 +11,144 @@
 
 -----
 
-## Responses to remarks I received from 1st submission
+## Upgrade 1.0.8
 
-This is 2nd submission. As for the remarks I received from 1st submission: 
+Updated neotoma2R package documentation, simplifying the volume of .Rd documents.
+I also included _.mkdocs_ to generate documentation with `pkgdown` package.
+The documentation HTML files are now hosted at:
+[https://open.neotomadb.org/neotoma2/](https://open.neotomadb.org/neotoma2/)
 
-### 1
+Implemented github actions to build and deploy the documentation to the above URL whenever
+there is a push to the `main` branch.
 
-    Thanks, if there are references describing the methods in your package, 
-    please add these in the Description field of your DESCRIPTION file in 
-    the form
-    authors (year) <doi:...>
-    authors (year) <arXiv:...>
-    authors (year, ISBN:...)
-    with no space after 'doi:', 'arXiv:' and angle brackets for auto-linking.
+Created new `speleothem` S4 class and specific methods for speleothem data,
+of particular interest:
 
-There are NO references describing the methods in this package. 
+* `get_speleothems()`
+* `speleothems()`
+* `speleothemdetails()`
 
-### 2
+Upgraded `filter()` so that it is no longer needed to specify `dplyr::` or `neotoma2::` when using the function. `filter()` also works on `recdatecreated` and `DOI` fields.
 
-    Additionally, we see:
-      Warning: Unexecutable code in man/set_collunit.Rd:
-      notes = "my lake":
-      Warning: Unexecutable code in man/set_dataset.Rd:
-      notes = "my lake":
-      Warning: Unexecutable code in man/toJSON-sites-method.Rd:
-      Convert the: 
-      Warning: Unexecutable code in man/toWide.Rd:
-      Download all:
+Added new tests to improve code coverage.
 
-I have fixed the code so that it can be executed.
+Worked on improving `get_taxa()` and `get_taxon()` functions. The first one works as `get_datasets(taxa=...)` while the latter one retrieves taxon details for a single taxon id or a vector of taxon ids.
 
+When API is down for whichever reason, instead of stopping, any `get_()` function will return `NULL` with a warning message. This will prevent violating **CRAN** policies when building vignettes or running examples if the API is not available.
 
-### 3
-
-    Please add \value to .Rd files regarding exported methods and explain the functions results in the  documentation. Please write about the structure of the output (class) and also what the output means. (If a function does not return a value, please document that too, e.g. \value{No return value, called for side effects} or similar)
-```
-Missing Rd-tags in up to 204 .Rd files, e.g.:
-     add_chronology-collunit-chronology-data.frame-method.Rd: \value
-     add_chronology.Rd: \value
-     as.data.frame-authors-method.Rd: \value
-     as.data.frame-chronologies-method.Rd: \value
-     as.data.frame-chronology-method.Rd: \value
-     as.data.frame-collunit-method.Rd: \value
-     ...
-```
-Added `@returns` to function with descriptions. This adds the `value` tag to .Rd files
-
-### 4
-
-    \dontrun{} should only be used if the example really cannot be executed (e.g. because of missing additional software, missing API keys, ...) by the user. That's why wrapping examples in \dontrun{} adds the comment ("# Not run:") as a warning for the user.
-    Does not seem necessary.
-    Please unwrap the examples if they are executable in < 5 sec, or create additionally small toy examples to allow automatic testing.
-    (You could also replace \dontrun{} with \donttest, if it takes longer than 5 sec to be executed, but it would be preferable to have automatic checks for functions. Otherwise, you can also write some tests.)
-
-    Please replace \dontrun{} by \donttest{} or unwap the examples if they 
-    can be executed in less than 5 sec per Rd-file.
-    
-Unwrapped some examples and replaced the `\dontrun{}` with a `\donttest{}` label. Most examples make calls to the Neotoma API and CANNOT use smaller toy datasets. Because of this, some examples take longer than 5 seconds and have to keep the `\donttest{}` label.
-
-
-### 5
-
-    Please ensure that your functions do not write by default or in your examples/vignettes/tests in the user's home filespace (including the package directory and getwd()). This is not allowed by CRAN policies.
-    Please omit any default path in writing functions. In your examples/vignettes/tests you can write to tempdir().
-    
-We do not write elements in the user's homespace.
+Maintainer's email updated.
 
 -----
 
-## Responses to remarks I received from 2nd submission
+## Upgrade 1.0.7
 
-This is 3rd submission. As for the remarks I received from 2nd submission: 
+Included age type units in datasets Neotoma object and its different methods.
+Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
 
-### 1
+Made sure `loc` argument is handled as a geojson
 
+-----
+
+## Upgrade 1.0.6
+
+Included age type units in datasets Neotoma object and its different methods.
+Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
+
+Made sure `loc` argument is handled as a geojson
+
+-----
+
+## Upgrade 1.0.5
+
+Fixed errors in the API calls in vignette adding `tryCatch()` statements so that the vignette can be rebuilt regardless of API status.
+
+-----
+
+## Upgrade 1.0.4
+
+Fixed errors in the API calls as per **CRAN** policies.
+
+Fixed `filter` function for *collection units* and *datasets*.
+
+-----
+
+## Upgrade 1.0.3
+
+Fixed errors in the API calls.
+
+Fixed filter function for collection units and datasets. Fixed filter function documentation.
+
+Updated plotLeaflet to not add provider tiles.
+
+Removed mapview to avoid `sp` conflicts.
+
+Updated **README** to reflect milestones with **JOSS**.
+
+```{markdown}
+New maintainer:
+  Dominguez Vidana Socorro <s.dominguez@ht-data.com>
+Old maintainer(s):
+  Simon Goring <goring@wisc.edu>
+```
+
+-----
+
+## Upgrade 1.0.2
+
+### 1.0.2 - 1
+
+```{markdown}
+Check: DESCRIPTION meta-information, Result: NOTE
+Malformed Description field: should contain one or more complete sentences.
+```
+
+I originally sent:
+
+```{markdown}
+Description: Access and manipulate data from the Neotoma Paleoecology Database. <https://api.neotomadb.org/api-docs/>
+```
+
+I was requested to add <https://..> referencing the "Neotoma Paleoecology Database".
+With the Description above, I do not get any local errors when running the R CMD but for CRAN, I got the error that I was asked to correct.
+
+After e-mailing the R-package-devel mailing list and providing them with my github link, I was advised to indent with 8 spaces on the second line and finish the line with a `.`
+
+The Description field in the Description file now looks like:
+
+```{markdown}
+Description: Access and manipulate data from the Neotoma Paleoecology Database. 
+        <https://api.neotomadb.org/api-docs/>
+```
+
+There are no spaces after https:// and 8 indents have been added as requested.
+
+I hope this is correct now, otherwise, please give me some more references/examples so that I can do it properly.
+
+-----
+
+## Release 1.0.1
+
+This is 3rd submission. As for the remarks I received from 2nd submission:
+
+### 1.0.1 - 1
+
+```{markdown}
     Please provide a link to the used webservices (Neotoma Database) to the 
     description field of your DESCRIPTION file in the form <http:...> or <https:...>
     with angle brackets for auto-linking and no space after 'http:' and
     'https:'.
-    
+```
+
 Fixed.
 
-### 2
+### 1.0.1 - 2
 
-    Please add \value to .Rd files regarding exported methods and explain 
-    the functions results in the documentation. Please write about the 
-    structure of the output (class) and also what the output means. (If a
-    function does not return a value, please document that too, e.g.
+Please add \value to .Rd files regarding exported methods and explain 
+the functions results in the documentation. Please write about the 
+structure of the output (class) and also what the output means. (If a
+function does not return a value, please document that too, e.g.
+
+```{markdown}
     \value{No return value, called for side effects} or similar)
     Missing Rd-tags:
       chronologies-collunit-method.Rd: \value
@@ -118,14 +169,16 @@ Fixed.
       specimens-collunit-method.Rd: \value
       specimens-collunits-method.Rd: \value
       specimens-site-method.Rd: \value
+```
 
 All of the \value tags have been added. For the `pipe.Rd` function, we use the code from the [purrr library](https://github.com/tidyverse/purrr/blob/3b5add2db99a35ec1392ad23dc021b7ccadbbbbb/R/reexport-pipe.R)
 We do not see any arguments being added into that function. In `magrittr`, there are two placeholders but they are used in the body of the `pipe` function - that is not our case.
 
 As for the `get_manual.Rd` function, there are no parameters that the user needs to pass, it is a static function. I cannot find information on how to document this kind of "parameters".
 
-### 3
+### 1.0.1 - 3
 
+```{markdown}
     \dontrun{} should only be used if the example really cannot be executed
     (e.g. because of missing additional software, missing API keys, ...) by
     the user. That's why wrapping examples in \dontrun{} adds the comment
@@ -138,84 +191,81 @@ As for the `get_manual.Rd` function, there are no parameters that the user needs
     it in \dontrun{} as well. ☑ Done
     specimens-sites-method.Rd: I believe the same as for 
     get_datasets.numeric.Rd. ☑ Done
-    
+```
+
 Done as suggested
 
 -----
 
-## Responses to remarks I received from 3rd submission
+## First submission to CRAN comments
 
 ### 1
 
-    Check: DESCRIPTION meta-information, Result: NOTE
-    Malformed Description field: should contain one or more complete sentences.
-
-So, I originally sent:
-```
-Description: Access and manipulate data from the Neotoma Paleoecology Database. <https://api.neotomadb.org/api-docs/>
-```
-because I was requested to add <https://..> referencing the "Neotoma Paleoecology Database". 
-With the Description above, I do not get any local errors when running the R CMD but for CRAN, I got the error that I was asked to correct.
-
-After e-mailing the R-package-devel mailing list and providing them with my github link, I was advised to indent with 8 spaces on the second line and finish the line with a `.`
-
-The Description field in the Description file now looks like:
-
-```
-Description: Access and manipulate data from the Neotoma Paleoecology Database. 
-        <https://api.neotomadb.org/api-docs/>
+```{markdown}
+    Thanks, if there are references describing the methods in your package, 
+    please add these in the Description field of your DESCRIPTION file in 
+    the form
+    authors (year) <doi:...>
+    authors (year) <arXiv:...>
+    authors (year, ISBN:...)
+    with no space after 'doi:', 'arXiv:' and angle brackets for auto-linking.
 ```
 
-There are no spaces after https:// and 8 indents have been added as requested.
+There are NO references describing the methods in this package.
 
-I hope this is correct now, otherwise, please give me some more references/examples so that I can do it properly.
+### 2
 
------
+```{markdown}
+    Additionally, we see:
+      Warning: Unexecutable code in man/set_collunit.Rd:
+      notes = "my lake":
+      Warning: Unexecutable code in man/set_dataset.Rd:
+      notes = "my lake":
+      Warning: Unexecutable code in man/toJSON-sites-method.Rd:
+      Convert the: 
+      Warning: Unexecutable code in man/toWide.Rd:
+      Download all:
+    Please fix the code so that it can be executed. 
+```
 
-## Remarks for Upgrade 1.0.3
+I have fixed the code so that it can be executed.
 
-Fixed errors in the API calls.
+### 3
 
-Fixed filter function for collection units and datasets. Fixed filter function documentation.
+```{markdown}
+Please add \value to .Rd files regarding exported methods and explain the functions results in the  documentation. Please write about the structure of the output (class) and also what the output means. (If a function does not return a value, please document that too, e.g. \value{No return value, called for side effects} or similar)
 
-Updated plotLeaflet to not add provider tiles.
+Missing Rd-tags in up to 204 .Rd files, e.g.:
+     add_chronology-collunit-chronology-data.frame-method.Rd: \value
+     add_chronology.Rd: \value
+     as.data.frame-authors-method.Rd: \value
+     as.data.frame-chronologies-method.Rd: \value
+     as.data.frame-chronology-method.Rd: \value
+     as.data.frame-collunit-method.Rd: \value
+     ...
+```
 
-Removed mapview to avoid `sp` conflicts.
+Added `@returns` to function with descriptions. This adds the `value` tag to .Rd files
 
-Updated README to reflect milestones with JOSS.
+### 4
 
-New maintainer:
-  Dominguez Vidana Socorro <s.dominguez@ht-data.com>
-Old maintainer(s):
-  Simon Goring <goring@wisc.edu>
-  
------
+```{markdown}
+\dontrun{} should only be used if the example really cannot be executed (e.g. because of missing additional software, missing API keys, ...) by the user. That's why wrapping examples in \dontrun{} adds the comment ("# Not run:") as a warning for the user.
+Does not seem necessary.
+Please unwrap the examples if they are executable in < 5 sec, or create additionally small toy examples to allow automatic testing.
+(You could also replace \dontrun{} with \donttest, if it takes longer than 5 sec to be executed, but it would be preferable to have automatic checks for functions. Otherwise, you can also write some tests.)
 
-## Remarks for Upgrade 1.0.4
+Please replace \dontrun{} by \donttest{} or unwap the examples if they 
+can be executed in less than 5 sec per Rd-file.
+```
 
-Fixed errors in the API calls as per CRAN policies.
+Unwrapped some examples and replaced the `\dontrun{}` with a `\donttest{}` label. Most examples make calls to the Neotoma API and CANNOT use smaller toy datasets. Because of this, some examples take longer than 5 seconds and have to keep the `\donttest{}` label.
 
-Fixed filter function for collection units and datasets. 
+### 5
 
------
+```{markdown}
+Please ensure that your functions do not write by default or in your examples/vignettes/tests in the user's home filespace (including the package directory and getwd()). This is not allowed by CRAN policies.
+Please omit any default path in writing functions. In your examples/vignettes/tests you can write to tempdir().
+```
 
-## Remarks for Upgrade 1.0.5
-
-Fixed errors in the API calls in vignette adding `tryCatch` statements so that the vignette can be rebuilt regardless of API status.
-
------
-
-## Remarks for Upgrade 1.0.6
-
-Included age type units in datasets Neotoma object and its different methods.
-Fixed RMarkdown so that when API is not available, it changes all eval chunks to FALSE so that it does not fail.
-
-Made sure `loc` argument is handled as a geojson
-
------
-
-## Remarks for Upgrade 1.0.7
-
-Changed way of parsing data - arranged the list prior building the sites and internals.
-Fixed API calls to include more POST requests.
-Removed some minor functions for now, will include in next version.
+We do not write elements in the user's homespace.

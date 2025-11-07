@@ -1,5 +1,6 @@
 #' @title Create a new publication (or publication set)
-#' @description A function to create new publication objects by hand.
+#' @author Simon Goring \email{goring@wisc.edu}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @param publicationtype A text string identifying the publication
 #'  type within the Neotoma database.
 #' @param publicationid ID of publication
@@ -28,8 +29,9 @@
 #' @param originallanguage Original language of publication.
 #' @param notes Publication notes.
 #' @returns `publication` object
+#' @description A function to create new publication objects by hand.
+#' @md
 #' @export
-
 set_publications <- function(
     publicationid = NA_integer_,
     publicationtypeid = NA_integer_,
@@ -57,40 +59,37 @@ set_publications <- function(
     originallanguage = NA_character_,
     notes = NA_character_,
     author = NULL) {
-
-    if (is.null(author)) {
-        author <- new("authors")
-    }
-
-    if (is.na(citation)) {
-        citation <- paste0(articletitle, journal)
-    }
-
-    new("publication",
-        publicationid = as.numeric(publicationid),
-        publicationtypeid = as.numeric(publicationtypeid),
-        publicationtype = as.character(publicationtype),
-        year = as.character(year),
-        citation = as.character(citation),
-        articletitle = as.character(articletitle),
-        journal = as.character(journal),
-        volume = as.character(volume),
-        issue = as.character(issue),
-        pages = as.character(pages),
-        citationnumber = as.character(citationnumber),
-        doi = as.character(doi),
-        booktitle = as.character(booktitle),
-        numvolumes = as.character(numvolumes),
-        edition = as.character(edition),
-        volumetitle = as.character(volumetitle),
-        seriestitle = as.character(seriestitle),
-        seriesvolume = as.character(seriesvolume),
-        publisher = as.character(publisher),
-        url = as.character(url),
-        city = as.character(city),
-        state = as.character(state),
-        country = as.character(country),
-        originallanguage = as.character(originallanguage),
-        notes = as.character(notes),
-        author = author)
+  if (is.null(author)) {
+    author <- new("authors")
+  }
+  if (is.na(citation)) {
+    citation <- paste0(articletitle, journal)
+  }
+  new("publication",
+      publicationid = as.numeric(publicationid),
+      publicationtypeid = as.numeric(publicationtypeid),
+      publicationtype = as.character(publicationtype),
+      year = as.character(year),
+      citation = as.character(citation),
+      articletitle = as.character(articletitle),
+      journal = as.character(journal),
+      volume = as.character(volume),
+      issue = as.character(issue),
+      pages = as.character(pages),
+      citationnumber = as.character(citationnumber),
+      doi = as.character(doi),
+      booktitle = as.character(booktitle),
+      numvolumes = as.character(numvolumes),
+      edition = as.character(edition),
+      volumetitle = as.character(volumetitle),
+      seriestitle = as.character(seriestitle),
+      seriesvolume = as.character(seriesvolume),
+      publisher = as.character(publisher),
+      url = as.character(url),
+      city = as.character(city),
+      state = as.character(state),
+      country = as.character(country),
+      originallanguage = as.character(originallanguage),
+      notes = as.character(notes),
+      author = author)
 }

@@ -1,7 +1,5 @@
-# Start "Show Method" for all Neotoma Objects
-#' @title Show Dataset Method
-#' @param object dataset object
-#' @returns null - side effect, prints a `data.frame` with `dataset` metadata
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "dataset",
           definition = function(object) {
@@ -11,12 +9,12 @@ setMethod(f = "show",
                              age_range_old =  object@age_range_old,
                              age_range_young =  object@age_range_young,
                              age_units = object@age_units,
+                             recdatecreated = object@recdatecreated,
                              notes = object@notes), row.names = FALSE)
           })
 
-#' @title Show Datasets object as a dataframe
-#' @param object datasets object
-#' @returns null - side effect, prints a `data.frame` with `datasets` metadata
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
@@ -27,17 +25,14 @@ setMethod(f = "show",
                                age_range_old =  y@age_range_old,
                                age_range_young =  y@age_range_young,
                                age_units = y@age_units,
+                               recdatecreated = y@recdatecreated,
                                notes = y@notes)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
           })
 
-#' @title  Slicer
-#' @param x datasets object
-#' @param i iteration in datasets list
-#' @description Obtain one of the elements within a datasets list
-#' @returns sliced `dataset` object
+#' @rdname sub-sub
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "datasets", i = "numeric"),
@@ -45,7 +40,7 @@ setMethod(f = "[[",
             if (length(i) == 1) {
               out <- new("dataset", x@datasets[[i]])
             } else {
-              out <- purrr::map(i, function(z) {
+              out <- map(i, function(z) {
                 new("dataset", x@datasets[[z]])
               })
               out <- new("datasets", datasets = out)
@@ -53,10 +48,7 @@ setMethod(f = "[[",
             return(out)
           })
 
-#' @title Get slot names
-#' @param x A dataset object.
-#' @description Get all names for named elements within a `dataset` object.
-#' @returns `list` with all names of `dataset` slots
+#' @rdname names
 #' @export
 setMethod(f = "names",
           signature = signature(x = "dataset"),
@@ -64,12 +56,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @title  Insert dataset
-#' @param x datasets object
-#' @param i iteration in datasets list
-#' @param value The value to be used
-#' @description Obtain one of the elements within a datasets list
-#' @returns One `dataset` slot's value 
+#' @rdname sub-subset
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "datasets"),
@@ -80,12 +67,8 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-
-#' @title Assign dataset field by numeric index
-#' @param x The dataset object.
-#' @param i The column indicator.
-#' @param value The value to be used.
-#' @returns `dataset` slot with new assigned character value
+#' @rdname subset
+#' @export
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "character"),
           definition = function(x, i, value) {
@@ -95,11 +78,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @title Assign dataset field by numeric index
-#' @param x The dataset object.
-#' @param i The column indicator.
-#' @param value The value to be used.
-#' @returns `dataset` slot with new assigned numeric value
+#' @rdname subset
+#' @export
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "numeric"),
           definition = function(x, i, value) {
@@ -110,11 +90,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @title Assign dataset field by numeric index
-#' @param x The dataset object.
-#' @param name name of the slot.
-#' @param value The value to be used.
-#' @returns Assign new `dataset` by numeric index
+#' @rdname cash-set
+#' @export
 setMethod(f = "$<-",
           signature = signature(x = "dataset"),
           definition = function(x, name, value) {
@@ -122,23 +99,15 @@ setMethod(f = "$<-",
             return(x)
           })
 
-
-
-#' @title Get or remove datasets by numeric index
-#' @param x The datasets object
-#' @param i The numeric index
-#' @returns Get or remove `datasets` by numeric index
+#' @rdname sub
+#' @export
 setMethod(f = "[",
           signature = signature(x = "datasets", i = "numeric"),
           definition = function(x, i) {
             new("datasets", datasets = x@datasets[i])
           })
 
-#' @title  $
-#' @param x dataset object
-#' @param name name of the slot
-#' @description Obtain slots of a dataset without using at-mark
-#' @returns Obtain a `dataset`'s `slot` value using $
+#' @rdname cash
 #' @export
 setMethod(f = "$",
           signature = signature(x = "dataset"),
@@ -146,11 +115,7 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-#' @title  $ for datasets
-#' @param x datasets object
-#' @param name name of the slot.
-#' @description Obtain slots of a dataset without using at-mark
-#' @returns Obtain a `datasets`' `slot` value using $  
+#' @rdname cash
 #' @export
 setMethod(f = "$",
           signature = signature(x = "datasets"),
@@ -162,10 +127,7 @@ setMethod(f = "$",
               unlist()
           })
 
-#' @title  as.data.frame dataset
-#' @param x dataset object
-#' @description show as dataframe as prep to save as csv
-#' @returns `data.frame` with `dataset` metadata
+#' @rdname as.data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("dataset"),
@@ -176,13 +138,11 @@ setMethod(f = "as.data.frame",
                        age_range_old =  x@age_range_old,
                        age_range_young =  x@age_range_young,
                        age_units = x@age_units,
+                       recdatecreated = x@recdatecreated,
                        notes = x@notes)
           })
 
-#' @title  as.data.frame datasets
-#' @param x datasets object
-#' @description show as dataframe as prep to save as csv
-#' @returns `data.frame` with `datasets` metadata
+#' @rdname as.data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("datasets"),
@@ -190,20 +150,15 @@ setMethod(f = "as.data.frame",
             x@datasets %>% map(as.data.frame) %>% bind_rows()
           })
 
-#' @title Length Method datasets
+#' @rdname length
 #' @export
-#' @returns `int` that showcases the length of a `datasets` object
-#' @param x datasets object
 setMethod(f = "length",
           signature = signature(x = "datasets"),
           definition = function(x) {
             length(x@datasets)
           })
 
-#' @title c Method - Combine datasets objects
-#' @param x datasets object 1
-#' @param y datasets object 2
-#' @returns concatenated `datasets` object
+#' @rdname c
 #' @export
 setMethod(f = "c",
           signature = signature(x = "datasets"),
@@ -211,16 +166,4 @@ setMethod(f = "c",
             new("datasets",
                 datasets = unlist(c(x@datasets,
                                     y@datasets), recursive = FALSE))
-          })
-
-#' @title write CSV
-#' @param x datasets object
-#' @param ... Additional parameters associated with the call.
-#' @returns null -side effect for printing a CSV file
-#' @export
-setMethod(f = "write.csv",
-          signature = "datasets",
-          definition = function(x, ...) {
-            df1 <- as.data.frame(x)
-            write.csv(df1, ...)
           })

@@ -2,9 +2,15 @@
 % Please edit documentation in R/get_sites.R
 \name{get_sites}
 \alias{get_sites}
+\alias{get_sites.numeric}
+\alias{get_sites.default}
 \title{get_sites}
 \usage{
 get_sites(x = NA, ...)
+
+\method{get_sites}{numeric}(x, ...)
+
+\method{get_sites}{default}(...)
 }
 \arguments{
 \item{x}{Use a single integer or vector of integers representing
@@ -27,7 +33,7 @@ limited collection units information.
 }
 }
 \description{
-The get_sites() function is a wrapper for the Neotoma \code{sites} API
+The \code{get_sites} function is a wrapper for the Neotoma \code{sites} API
 endpoint.
 The function takes parameters defined by the user and returns a list
 of site information supplied by the Neotoma Paleoecological Database.
@@ -47,7 +53,8 @@ parameters:
 \item \code{siteid}  The unique site ID (integer) in Neotoma. Can be passed as a
 vector of site IDs.
 \item \code{sitename}  The site name, or approximate match using the \% wildcard.
-\item \code{database}  The constituent database for the record. See \code{get_table("constituentdatabases")}
+\item \code{database}  The constituent database for the record.
+See \code{get_table("constituentdatabases")}
 \item \code{altmin}  The minimum altitude range for site elevation (in meters).
 \item \code{altmax}  The maximum altitude range for site elevation (in meters).
 \item \code{datasetid}  The unique dataset ID (integer) in Neotoma. Can be passed
@@ -92,7 +99,6 @@ brazil <- '{"type": "Polygon",
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
 brazil_sites <- get_sites(loc = brazil[1])
-
 # Finding all sites with Liliaceae pollen in 1000 year bins:
 lilysites <- c()
 for (i in seq(0, 10000, by = 1000)) {
@@ -101,8 +107,7 @@ for (i in seq(0, 10000, by = 1000)) {
                     ageold = i + 500,
                     all_data = TRUE)
   lilysites <- c(lilysites, length(lily))
-}
-}
+}}
 }
 \author{
 Socorro Dominguez \email{dominguezvid@wisc.edu}

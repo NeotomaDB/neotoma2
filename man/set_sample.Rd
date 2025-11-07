@@ -54,3 +54,6 @@ The new object will not be uploaded to the database.
 my_sample <- set_sample()
 }
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

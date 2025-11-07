@@ -65,7 +65,7 @@ test_that("We can add a new chronology to a record:",
                               isdefault = TRUE,
                               ageboundolder = max(newpredictions),
                               ageboundyounger = min(newpredictions),
-                              dateprepared = lubridate::today(),
+                              dateprepared = Sys.Date(),
                               modelagetype = "Calibrated radiocarbon years BP",
                               chronologyname = "Simon's example chronology",
                               chroncontrols = controls)

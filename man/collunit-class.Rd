@@ -3,12 +3,12 @@
 \docType{class}
 \name{collunit-class}
 \alias{collunit-class}
-\title{S4 class for collection units information.}
+\title{S4 class for \verb{collection units} information.}
 \value{
-object of class \code{collunit}
+object of class \code{collunits}
 }
 \description{
-A collection unit represents a collection event from within
-a site. For example, a lake sediment core, or a single dig site within an
+A \verb{collection unit} represents a collection event from within
+a \code{site}. For example, a lake sediment core, or a single dig site within an
 archaeological site.
 }

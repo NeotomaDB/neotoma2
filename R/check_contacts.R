@@ -1,4 +1,5 @@
 #' @title Check contact information for a record against Neotoma contributors
+#' @author Simon Goring \email{goring@wisc.edu}
 #' @description
 #'   Uses the Neotoma API to search and access information about individuals
 #'   who have contributed to the data in the Neotoma Paleoecology Database
@@ -6,7 +7,6 @@
 #' @param ... Additional parameters associated with the call.
 #' @return contacts object
 #' @export
-
 check_contacts <- function(x, ...) {
   if (class(x) %in% c("contacts")) {
     UseMethod("check_contacts")

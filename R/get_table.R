@@ -13,13 +13,22 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map
 #' @export
-get_table <- function(x, limit =25, offset=0) {
-  result <- parseURL("dbtables/table", table = x, limit = limit, offset = offset)
-  
-  result <- result$data$data 
-  output <- result %>%
-    cleanNULL() %>%
-    purrr::map(data.frame) %>%
-    dplyr::bind_rows()
-  return(output)
+get_table <- function(x, limit = 25, offset = 0) {
+  result <- tryCatch(
+    parseURL("dbtables/table", table = x, limit = limit, offset = offset),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
+  if (is.null(result$data)) {
+    return(NULL)
+  } else {
+    result <- result$data$data 
+    output <- result %>%
+      cleanNULL() %>%
+      map(data.frame) %>%
+      bind_rows()
+    return(output)
+  }
 }

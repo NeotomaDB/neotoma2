@@ -1,29 +1,30 @@
 #' @title Build a collection unit from the API response
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom assertthat assert_that
 #' @param args The structured JSON from a Neotoma API v2.0 response that
 #'   returns a collection unit in any form.
 #' @returns An simple `collunit` object
-#' @import sf
-#' @keywords internal
 #' @noRd
 build_collunits <- function(...) {
   args <- list(...)
-  assertthat::assert_that(is.list(args),
-                          msg = "Parsed object must be a list.")
+  assert_that(is.list(args), msg = "Parsed object must be a list.")
+  args <- cleanNULL(args)
   cu <- set_collunit(
-    collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
-    collunittype = use_na(testNull(args$collunittype, NA), "char"),
-    handle = use_na(testNull(args$handle, NA), "char"),
-    collectiondevice = use_na(testNull(args$collectiondevice, NA), "char"),
-    collectionunitname = use_na(testNull(args$collectionunitname, NA), "char"),
-    waterdepth = use_na(testNull(args$waterdepth, NA), "int"),
-    colldate = as.Date(testNull(args$colldate, NA)),
-    depositionalenvironment = use_na(testNull(args$depositionalenvironment, NA), "char"),
-    location = use_na(testNull(args$location, NA), "char"),
-    gpslocation = sf::st_as_sf(sf::st_sfc()),
-    notes = use_na(testNull(args$notes, NA), "char"),
+    collectionunitid = use_na(args$collectionunitid, "int"),
+    collunittype = use_na(args$collunittype, "char"),
+    handle = use_na(args$handle, "char"),
+    collectiondevice = use_na(args$collectiondevice, "char"),
+    collectionunitname = use_na(args$collectionunitname, "char"),
+    waterdepth = use_na(args$waterdepth, "int"),
+    colldate = use_na(args$colldate, "date"),
+    depositionalenvironment = use_na(args$depositionalenvironment, "char"),
+    location = use_na(args$location, "char"),
+    gpslocation = use_na(args$gpslocation, "sf"),
+    notes = use_na(args$notes, "char"),
     datasets = testNull(args$datasets, NULL),
-    defaultchronology = use_na(testNull(args$defaultchronology, NA), "int"),
-    chronologies = testNull(args$chronologies, NULL)
+    defaultchronology = use_na(args$defaultchronology, "int"),
+    chronologies = testNull(args$chronologies, NULL),
+    speleothems = testNull(args$speleothems, NULL)
   )
   return(cu)
 }

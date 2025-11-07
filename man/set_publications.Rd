@@ -93,3 +93,8 @@ type within the Neotoma database.}
 \description{
 A function to create new publication objects by hand.
 }
+\author{
+Simon Goring \email{goring@wisc.edu}
+
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

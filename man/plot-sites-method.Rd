@@ -9,8 +9,6 @@
 \arguments{
 \item{x}{sites object}
 
-\item{y}{ANY}
-
 \item{...}{Additional parameters associated with the call.}
 }
 \value{
