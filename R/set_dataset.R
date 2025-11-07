@@ -1,7 +1,8 @@
 #' @title set Site Information for Fossil Sites
-#' @import lubridate
-#' @importFrom methods new
-#' @importFrom methods slot<-
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom methods new slot<-
+#' @importFrom uuid UUIDgenerate
+#' @importFrom digest digest
 #' @param x object to be set as dataset,
 #' @param datasetid dataset identifier
 #' @param database dataset where the dataset came from
@@ -25,7 +26,6 @@
 #'                     datasettype = "pollen",
 #'                     notes = "my lake")
 #' }
-
 set_dataset <- function(x = NA,
                         datasetid = NA_integer_,
                         datasetname = NA_character_,
@@ -40,13 +40,11 @@ set_dataset <- function(x = NA,
                         pi_list = NA,
                         samples = NULL,
                         specimens = NULL) {
-
   function_call <- match.call()
-
   if (suppressWarnings(is.na(x))) {
     x <- new("dataset")
     if (is.na(datasetid)) {
-      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      hash <- digest(UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
       x@datasetid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@datasetid <- datasetid
@@ -62,7 +60,6 @@ set_dataset <- function(x = NA,
     x@notes <- notes
     x@pi_list <- pi_list
     x@samples <- samples
-
   } else {
     if (is(x, "dataset")) {
       if(length(function_call)>2){

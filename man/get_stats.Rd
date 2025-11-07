@@ -7,9 +7,11 @@
 get_stats(start, end)
 }
 \arguments{
-\item{start}{The starting month (from present == 0) for which to generate the summary.}
+\item{start}{The starting month (from present == 0) for
+which to generate the summary.}
 
-\item{end}{The ending month (from present == 0) for which to generate the summary.}
+\item{end}{The ending month (from present == 0) for which
+to generate the summary.}
 }
 \value{
 \code{data.frame} with summary statistics
@@ -21,9 +23,10 @@ objects added to Neotoma during the requested time period.
 \details{
 This function returns summaries about the data holdings
 within Neotoma using the existing Neotoma API's \code{summary} endpoint. This can
-provide information about recent uploads (the number of new sites uploaded within the
-last month, for example), or can be used to provide information about the overall number
-of sites/datasets (using an arbitrarily high value for \code{end}).
+provide information about recent uploads (the number of new sites
+uploaded within the last month, for example), or can be used to provide
+information about the overall number of sites/datasets (using an arbitrarily
+high value for \code{end}).
 }
 \examples{
 \donttest{

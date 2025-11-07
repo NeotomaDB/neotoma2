@@ -1,39 +1,31 @@
-#' @md
-#' @title parseURL
+#' @title parse_site
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @author Simon Goring \email{goring@wisc.edu}
-#' @importFrom httr add_headers content GET stop_for_status
-#' @importFrom jsonlite fromJSON
-#' @import stringr
-#' @description An internal helper function used to connect to the Neotoma API
-#' in a standard manner, and to provide basic validation of any response.
-#' @param x The HTTP/S path for the particular API call.
-#' @param use Uses the Neotoma server by default ("neotoma"),
-#' but supports either the development API server ("dev"),
-#' or a local server ("local").
-#' @param all_data If TRUE return all possible API calls
-#' @param ... Any query parameters passed from the calling function.
+#' @importFrom purrr map
+#' @importFrom methods new
+#' @description An internal helper function used to parse site information into
+#' `neotoma2R` objects.
+#' @param result The API response.
+#' @param verbose If TRUE print progress to console in bar form.
 #' @returns `list` with cleaned and parsed data from HTTP request
-#' @keywords internal
 #' @noRd
-parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
+parse_site <- function(result, verbose = FALSE) {
   data <- result$data
   data <- group_response(data)
-  
-  new_sites <- purrr::map(data, function(x) {
+  new_sites <- map(data, function(x) {
     if (verbose) {
       cat(".")
     }
-    # Map collection units
+    # Collection units
     if (is.null(x$site$collectionunits)) {
       call <- x$collectionunits
     } else {
       call <- x$site$collectionunits
     }
-    cus <- purrr::map(call, function(y){
-      # Map datasets
-      ds <- purrr::map(y$datasets, function(z) {
-        samp <- purrr::map(z$samples, build_sample)
+    cus <- map(call, function(y){
+      # Datasets
+      ds <- map(y$datasets, function(z) {
+        samp <- map(z$samples, build_sample)
         samp <- new("samples", samples = samp)
         z$agerange <- normalize_agerange(z$agerange)
         ds_l <- list(datasetid = z$datasetid,
@@ -51,22 +43,24 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
                      specimens = NULL)
         do.call(build_dataset, ds_l)
       })
-      
       ds <- new("datasets", datasets = ds)
       # Chronologies
-      chronologies <- purrr::map(y$chronologies, function(z) {
-        if (!is.null(z$chronology$chronologyid)){
-          ch_l <- list(chronologyid = use_na(z$chronology$chronologyid, "int"),
-                       notes = use_na(z$chronology$chronolgy$notes, "char"),
-                       contact = use_na(z$chronology$chronolgy$contact, "char"),
-                       agemodel = use_na(z$chronology$chronolgy$agemodel, "char"),
-                       ageboundolder = use_na(z$chronology$chronolgy$ageboundolder, "int"),
-                       ageboundyounger = use_na(z$chronology$chronolgy$ageboundyounger, "int"),
-                       isdefault = use_na(z$chronology$chronology$isdefault, "bool"),
-                       dateprepared = use_na(as.Date(z$chronology$chronology$dateprepared), "date"),
-                       modelagetype = use_na(z$chronology$chronology$modelagetype, "char"),
-                       chronologyname = use_na(z$chronology$chronology$chronologyname, "char"),
-                       chroncontrols = z$chronology$chroncontrols)
+      chronologies <- map(y$chronologies, function(z) {
+        if (!is.null(z$chronology$chronologyid)) {
+          ch <- z$chronology
+          ch_l <-
+            list(chronologyid = use_na(ch$chronologyid, "int"),
+                 notes = use_na(ch$chronolgy$notes, "char"),
+                 contact = use_na(ch$chronolgy$contact, "char"),
+                 agemodel = use_na(ch$chronolgy$agemodel, "char"),
+                 ageboundolder = use_na(ch$chronolgy$ageboundolder, "int"),
+                 ageboundyounger = use_na(ch$chronolgy$ageboundyounger, "int"),
+                 isdefault = use_na(ch$chronology$isdefault, "bool"),
+                 dateprepared = use_na(as.Date(ch$chronology$dateprepared),
+                                       "date"),
+                 modelagetype = use_na(ch$chronology$modelagetype, "char"),
+                 chronologyname = use_na(ch$chronology$chronologyname, "char"),
+                 chroncontrols = ch$chroncontrols)
           do.call(build_chron, ch_l)
         } else {
           NULL
@@ -77,55 +71,30 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
       } else {
         chron <- new("chronologies", chronologies = chronologies)
       }
-      
       # Speleothems
-      speleothems <- purrr::map(y$speleothems, function(z) {
-        sp_l <- list(entityid = use_na(testNull(z$entityid, NA), "int"),
-                     entityname = use_na(testNull(z$entityname, NA), "char"),
-                     siteid = use_na(testNull(z$siteid, NA), "int"),
-                     collectionunitid = use_na(testNull(z$collectionunitid, NA), "int"),
-                     dripheight = use_na(testNull(z$dripheight, NA), "int"),
-                     dripheightunits = use_na(testNull(z$dripheightunits, NA), "char"),
-                     monitoring = use_na(testNull(z$monitoring, NA), "logic"),
-                     relativeage = use_na(testNull(z$relativeage, NA), "char"),
-                     speleothemtype = use_na(testNull(z$speleothemtype, NA), "char"),
-                     entitycovertype = use_na(testNull(z$entitycovertype, NA), "char"),
-                     entrancedistance = use_na(testNull(z$entrancedistance, NA), "int"),
-                     landusecovertype = use_na(testNull(z$landusecovertype, NA), "char"),
-                     speleothemdriptype = use_na(testNull(z$speleothemdriptype, NA), "char"),
-                     landusecoverpercent = use_na(testNull(z$landusecoverpercent, NA), "int"),
-                     vegetationcovertype = use_na(testNull(z$vegetationcovertype, NA), "char"),
-                     entitycoverthickness = use_na(testNull(z$entitycoverthickness, NA), "int"),
-                     entrancedistanceunits = use_na(testNull(z$entrancedistanceunits, NA), "char"),
-                     vegetationcoverpercent = use_na(testNull(z$vegetationcoverpercent, NA), "int"))
-        do.call(build_speleothem, sp_l)
-      })
-      
-      if (is.null(speleothems) || all(sapply(speleothems, is.null))) {
-        speleo <- new("speleothems", speleothems = list())
-      } else {
-        speleo <- new("speleothems", speleothems = speleothems)
-      }
-      cu_l <- list(
-        collectionunitid = y$collectionunitid,
-        colldate = as.Date(testNull(y$colldate, NA)),
-        handle = use_na(y$handle, "char"),
-        datasets = ds,
-        chronologies = chron,
-        location = use_na(y$location, "char"),
-        waterdepth = use_na(y$waterdepth, "int"),
-        gpslocation = testNull(y$gpslocation, NA),
-        collunittype = use_na(testNull(testNull(y$unittype, y$collunittype),
-                                                y$collectionunittype), "char"),
-        collectiondevice = use_na(y$collectiondevice, "char"),
-        collectionunitname = use_na(y$collectionunit, "char"),
-        depositionalenvironment = use_na(y$depositionalenvironment, "char"),
-        defaultchronology = use_na(y$defaultchronology, "int"),
-        speleothems = speleo)
+      speleothems <- parse_speleothem(y)
+      # Build collection unit
+      cu_l <-
+        list(collectionunitid = y$collectionunitid,
+             colldate = as.Date(testNull(y$colldate, NA)),
+             handle = use_na(y$handle, "char"),
+             datasets = ds,
+             chronologies = chron,
+             location = use_na(y$location, "char"),
+             waterdepth = use_na(y$waterdepth, "int"),
+             gpslocation = testNull(y$gpslocation, NA),
+             collunittype = use_na(testNull(testNull(y$unittype,
+                                                     y$collunittype),
+                                            y$collectionunittype), "char"),
+             collectiondevice = use_na(y$collectiondevice, "char"),
+             collectionunitname = use_na(y$collectionunit, "char"),
+             depositionalenvironment = use_na(y$depositionalenvironment,
+                                              "char"),
+             defaultchronology = use_na(y$defaultchronology, "int"),
+             speleothems = speleothems)
       do.call(build_collunits, cu_l)
     })
-    cu <- new("collunits", collunits = cus)
-    cu <- clean(cu)
+    cu <- new("collunits", collunits = cus) %>% clean()
     st <- if (!is.null(x$site)) x$site else x
     st_l <- list(sitename = st$sitename,
                  siteid = st$siteid,
@@ -140,10 +109,19 @@ parse_site <- function(result, verbose = FALSE, parse_download = FALSE) {
   new_sites <- clean(new_sites)
   return(new_sites)
 }
+
+#' @title normalize_agerange
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @description An internal helper function used to parse age range information
+#' @param agerange age range information from API response
+#' @returns list with normalized age range information
+#' @noRd
 normalize_agerange <- function(agerange) {
   if (is.null(agerange) || length(agerange) == 0) {
     list(ageold = NA, ageyoung = NA, units = NA)
   } else {
-    list(ageold = agerange[[1]]$ageold, ageyoung = agerange[[1]]$ageyoung, units = agerange[[1]]$units)
+    list(ageold = agerange[[1]]$ageold,
+         ageyoung = agerange[[1]]$ageyoung,
+         units = agerange[[1]]$units)
   }
 }

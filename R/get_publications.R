@@ -1,6 +1,9 @@
 #' @title Get publication information for Neotoma records
 #' @description Uses the Neotoma API to search and access information
 #' about publications associated with data in the Neotoma Paleoecology Database
+#' @importFrom methods new
+#' @importFrom purrr pluck
+#' @importFrom dplyr coalesce
 #' @param x integer A contact ID
 #' @param ...
 #' `publicationid`
@@ -12,7 +15,6 @@
 #' `pubtype` The publication type, from `get_tables("publicationtypes")`.
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
-#' @importFrom purrr pluck
 #' @returns `publications` object
 #' @examples \donttest{
 #' # How old are the papers in Neotoma that include the term "mammut"?
@@ -20,6 +22,7 @@
 #'   as.data.frame()
 #' hist(as.numeric(mammoth_papers$year))
 #' }
+#' @md
 #' @export
 get_publications <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -28,26 +31,8 @@ get_publications <- function(x = NA, ...) {
     UseMethod("get_publications", NA)
   }
 }
-#' @title Get publication information from Neotoma
-#' @importFrom methods new
-#' @importFrom purrr pluck
-#' @param ...
-#' `publicationid`
-#'    The unique numeric identifier associated with a publication in Neotoma.
-#' `datasetid`
-#'    A unique identifier for a Neotoma dataset that is associated
-#'    with a publication.
-#' `familyname` The full or partial last name for an individual author.
-#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
-#' `year` The year the publication was released.
-#' `search` A plain text search string used to search the citation.
-#' @examples \donttest{
-#' # How old are the papers in Neotoma that include the term "mammut"?
-#' mammoth_papers <- get_publications(search="mammut") %>%
-#'   as.data.frame()
-#' hist(as.numeric(mammoth_papers$year))
-#' }
-#' @returns `publications` object
+
+#' @rdname get_publications
 #' @export
 get_publications.default <- function(...) {
   . <- ""
@@ -55,65 +40,54 @@ get_publications.default <- function(...) {
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
   params <- get_params("publications")
-
-  baseURL <- paste0("data/publications") # nolint
-  result <- parseURL(baseURL, ...) 
-  result <- result$data %>%
-    cleanNULL() %>%
-    pluck("result")
-
-  pubs <- map(result, function(x) {
-    if ("match" %in% names(x)) {
-      match <- x$match
-    } else {
-      match <- NULL
+  baseURL <- paste0("data/publications")
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
     }
-    
-    x <- x$publication
-    x[is.null(x)] <- NA_character_
-    output <- new("publication",
-        publicationtype = use_na(testNull(x$pubtype), "char"),
-        publicationid = use_na(testNull(x$publicationid), "int"),
-        articletitle = use_na(testNull(x$articletitle), "char"),
-        year = use_na(testNull(x$year), "char"),
-        journal = use_na(testNull(x$journal), "char"),
-        volume = use_na(testNull(x$volume), "char"),
-        issue = use_na(testNull(x$issue), "char"),
-        pages = use_na(testNull(x$pages), "char"),
-        citation = use_na(testNull(x$citation), "char"),
-        doi = use_na(testNull(x$doi), "char"),
-        author = pubAuthors(x))
-    attr(output, "match") <- match
-    return(output)
+  )
+  if (is.null(result$data)) {
+    return(NULL)
+  } else {
+    result <- result$data %>% cleanNULL() %>% pluck("result")
+    pubs <- map(result, function(x) {
+      if ("match" %in% names(x)) {
+        match <- x$match
+      } else {
+        match <- NULL
+      }
+      x <- x$publication
+      x[is.null(x)] <- NA_character_
+      output <- new("publication",
+                    publicationtype = use_na(testNull(x$pubtype), "char"),
+                    publicationid = use_na(testNull(x$publicationid), "int"),
+                    articletitle = use_na(testNull(x$articletitle), "char"),
+                    year = use_na(testNull(x$year), "char"),
+                    journal = use_na(testNull(x$journal), "char"),
+                    volume = use_na(testNull(x$volume), "char"),
+                    issue = use_na(testNull(x$issue), "char"),
+                    pages = use_na(testNull(x$pages), "char"),
+                    citation = use_na(testNull(x$citation), "char"),
+                    doi = use_na(testNull(x$doi), "char"),
+                    author = pubAuthors(x))
+      attr(output, "match") <- match
+      return(output)
     }) %>%
-    new("publications", publications = .)
-  return(pubs)
+      new("publications", publications = .)
+    return(pubs)
   }
+}
 
-  
-#' @title Get publications using their unique identifier.
-#' @importFrom methods new
-#' @importFrom purrr pluck
-#' @param x integer A contact ID
-#' @param ...
-#' `publicationid`
-#'    The unique numeric identifier associated with a publication in Neotoma.
-#' `datasetid`
-#'    A unique identifier for a Neotoma dataset that is associated
-#'    with a publication.
-#' `familyname` The full or partial last name for an individual author.
-#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
-#' `year` The year the publication was released.
-#' `search` A plain text search string used to search the citation.
+#' @rdname get_publications
 #' @examples {
 #' # We want the paper identified in Neotoma as 666:
 #' get_publications(666)
 #' }
-#' @returns `publications` object
 #' @export
 get_publications.numeric <- function(x, ...) {
   . <- ""
-
   if (length(x) > 0) {
     pubids <- paste0(x, collapse = ",")
   }
@@ -125,42 +99,40 @@ get_publications.numeric <- function(x, ...) {
     }
   }
   baseURL <- paste0("data/publications/", pubids) # nolint
-  result <- parseURL(baseURL) %>% cleanNULL() # nolint
-  pubs <- map(result$data, function(x) {
-                  x <- x$publication
-                  x[is.null(x)] <- NA_character_
-                  new("publication",
-                      publicationtype = use_na(testNull(x$pubtype), "char"),
-                      publicationid = use_na(testNull(x$publicationid), "int"),
-                      articletitle = use_na(testNull(x$articletitle), "char"),
-                      year = use_na(testNull(x$year), "char"),
-                      journal = use_na(testNull(x$journal), "char"),
-                      volume = use_na(testNull(x$volume), "char"),
-                      issue = use_na(testNull(x$issue), "char"),
-                      pages = use_na(testNull(x$pages), "char"),
-                      citation = use_na(testNull(x$citation), "char"),
-                      doi = use_na(testNull(x$doi), "char"),
-                      author = pubAuthors(x))
-                }) %>%
-    new("publications", publications = .)
-  return(pubs)
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
+
+  if (is.null(result$data)) {
+    return(NULL)
+  } else {
+    result <- result %>% cleanNULL() # nolint
+    pubs <- map(result$data, function(x) {
+      x <- x$publication
+      x[is.null(x)] <- NA_character_
+      new("publication",
+          publicationtype = use_na(testNull(x$pubtype), "char"),
+          publicationid = use_na(testNull(x$publicationid), "int"),
+          articletitle = use_na(testNull(x$articletitle), "char"),
+          year = use_na(testNull(x$year), "char"),
+          journal = use_na(testNull(x$journal), "char"),
+          volume = use_na(testNull(x$volume), "char"),
+          issue = use_na(testNull(x$issue), "char"),
+          pages = use_na(testNull(x$pages), "char"),
+          citation = use_na(testNull(x$citation), "char"),
+          doi = use_na(testNull(x$doi), "char"),
+          author = pubAuthors(x))
+    }) %>%
+      new("publications", publications = .)
+    return(pubs)
+  }
 }
 
-#' @title Update information for a publications object.
-#' @description This works for records without publicationids. We assume that
-#' data with publicationids is correct.
-#' @importFrom dplyr coalesce
-#' @param x integer A publication
-#' @param ...
-#' `publicationid`
-#'    The unique numeric identifier associated with a publication in Neotoma.
-#' `datasetid`
-#'    A unique identifier for a Neotoma dataset that is associated
-#'    with a publication.
-#' `familyname` The full or partial last name for an individual author.
-#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
-#' `year` The year the publication was released.
-#' `search` A plain text search string used to search the citation.
+#' @rdname get_publications
 #' @examples \donttest{
 #' # Take a publication object and purposely degrade the metadata:
 #' bad_pub <- get_publications(666)
@@ -172,7 +144,6 @@ get_publications.numeric <- function(x, ...) {
 #' # we see the proper citation in the record:
 #' updated_pubs <- attr(updated_pubs, "matches")[[3]]
 #' }
-#' @returns updated `publication` object
 #' @export
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {
@@ -180,7 +151,7 @@ get_publications.publication <- function(x, ...) {
       test <- get_publications(search = x@citation, limit = 3)
       attr(x, "matches") <- test
     } else {
-      searchString <- dplyr::coalesce(x@citation, x@articletitle, x@booktitle) # nolint
+      searchString <- coalesce(x@citation, x@articletitle, x@booktitle) # nolint
       test <- get_publications(search = searchString, limit = 3)
       attr(x, "matches") <- test
     }
@@ -188,19 +159,7 @@ get_publications.publication <- function(x, ...) {
   return(x)
 }
 
-#' @title Update metadata for a set of publication objects.
-#' @importFrom dplyr coalesce
-#' @param x integer A publication
-#' @param ...
-#' `publicationid`
-#'    The unique numeric identifier associated with a publication in Neotoma.
-#' `datasetid`
-#'    A unique identifier for a Neotoma dataset that is associated
-#'    with a publication.
-#' `familyname` The full or partial last name for an individual author.
-#' `pubtype` The publication type, from `get_tables("publicationtypes")`.
-#' `year` The year the publication was released.
-#' `search` A plain text search string used to search the citation.
+#' @rdname get_publications
 #' @examples \donttest{
 #' # Take a publication object and purposely degrade the metadata:
 #' bad_pub <- get_publications(c(666, 667, 668))
@@ -215,7 +174,6 @@ get_publications.publication <- function(x, ...) {
 #' # we see the proper citation in the record:
 #' updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
 #' }
-#' @returns `publications` object
 #' @export
 get_publications.publications <- function(x, ...) {
   for (i in seq_len(length(x))) {

@@ -2,15 +2,43 @@
 % Please edit documentation in R/get_speleothems.R
 \name{get_speleothems}
 \alias{get_speleothems}
+\alias{get_speleothems.numeric}
+\alias{get_speleothems.sites}
 \title{get_speleothems}
 \usage{
 get_speleothems(x = NA, ...)
+
+\method{get_speleothems}{numeric}(x, ...)
+
+\method{get_speleothems}{sites}(...)
 }
 \arguments{
-\item{x}{A sites object.}
+\item{x}{A dataset ID or vector of dataset IDs}
+
+\item{...}{accepted arguments}
+}
+\value{
+\code{sites} object with speleothem data
 }
 \description{
 get_speleothems
+}
+\details{
+The \code{get_speleothems()} command wraps the Neotoma API
+(\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{speleothems}.
+The call itself uses a SQL query which accepts any one of the following
+parameters:
+\itemize{
+\item \code{x}  The unique dataset ID (integer) in Neotoma. Can be passed as a
+vector of dataset IDs.
+\item \code{sites}  A \code{sites} R object.
+}
+}
+\examples{
+{
+## Find speleothems by numeric datasetid:
+speleo <- get_speleothems(c(2,5))
+}
 }
 \author{
 Socorro Dominguez \email{dominguezvid@wisc.edu}

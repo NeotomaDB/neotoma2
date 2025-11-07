@@ -1,40 +1,42 @@
-#' @md
-#' @title parseURL
+#' @title parse_speleothem
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom httr add_headers content GET stop_for_status
-#' @importFrom jsonlite fromJSON
-#' @import stringr
-#' @description An internal helper function used to connect to the Neotoma API
-#' in a standard manner, and to provide basic validation of any response.
+#' @importFrom purrr map
+#' @importFrom methods new
+#' @description An internal helper function used to parse the Neotoma API
+#' content of speleothems into `neotoma2R` objects.
+#' @param data The API response.
+#' @returns `list` with cleaned and parsed data from HTTP request
 #' @keywords internal
 #' @noRd
-parse_speleothem <- function(result) {
-  data <- result$data
-  speleothems <- purrr::map(data, function(x) {
-   sp <-  list(entityid = x$speleothem$entityid,
-         entityname = x$speleothem$entityname,
-         siteid = x$speleothem$siteid,
-         collectionunitid = x$speleothem$collectionunitid,
-         datasetid = x$speleothem$datasetid,
-         dripheight = use_na(testNull(x$speleothem$dripheight, NA), "int"),
-         monitoring = use_na(x$speleothem$monitoring, "bool"),
-         geology = use_na(testNull(x$speleothem$geology, NA), "char"),
-         relativeage = use_na(testNull(x$speleothem$rockage, NA), "char"),
-         speleothemtype = use_na(testNull(x$speleothem$speleothemtype, NA), "char"),
-         dripheightunits = use_na(testNull(x$speleothem$dripheightunits, NA), "char"),
-         entitycovertype = use_na(testNull(x$speleothem$entitycovertype, NA), "char"),
-         entrancedistance = use_na(testNull(x$speleothem$entrancedistance, NA), "int"),
-         entrancedistanceunits = "m",
-         landusecovertype = use_na(testNull(x$speleothem$landusecovertype, NA), "char"),
-         speleothemdriptype = use_na(testNull(x$speleothem$speleothemdriptype, NA), "char"),
-         landusecoverpercent = use_na(testNull(x$speleothem$landusecoverpercent, NA), "int"),
-         vegetationcovertype = use_na(testNull(x$speleothem$vegetationcovertype, NA), "char"),
-         entitycoverthickness = use_na(testNull(x$speleothem$entitycoverthickness, NA), "int"),
-         #entrancedistanceunits = use_na(testNull(x$speleothem$entrancedistanceunits, NA), "char"),
-         vegetationcoverpercent = use_na(testNull(x$speleothem$vegetationcoverpercent, NA), "int"))
+parse_speleothem <- function(data) {
+  speleothems <- map(data$speleothem, function(x) {
+    sp <-
+      list(entityid = x$entityid,
+           entityname = x$entityname,
+           siteid = x$siteid,
+           collectionunitid = x$collectionunitid,
+           datasetid = x$datasetid,
+           dripheight = use_na(x$dripheight, "int"),
+           monitoring = use_na(x$monitoring, "bool"),
+           geology = use_na(x$geology, "char"),
+           relativeage = use_na(x$rockage, "char"),
+           speleothemtype = use_na(x$speleothemtype, "char"),
+           dripheightunits = use_na(x$dripheightunits, "char"),
+           entitycovertype = use_na(x$entitycovertype, "char"),
+           entrancedistance = use_na(x$entrancedistance, "int"),
+           entrancedistanceunits = use_na(x$entrancedistance, "char"),
+           landusecovertype = use_na(x$landusecovertype, "char"),
+           speleothemdriptype = use_na(x$speleothemdriptype, "char"),
+           landusecoverpercent = use_na(x$landusecoverpercent, "int"),
+           vegetationcovertype = use_na(x$vegetationcovertype, "char"),
+           entitycoverthickness = use_na(x$entitycoverthickness, "int"),
+           vegetationcoverpercent = use_na(x$vegetationcoverpercent, "int"))
     do.call(build_speleothem, sp)
   })
-  
-  sp <- new("speleothems", speleothems = speleothems)
-  return(sp)
+  if (is.null(speleothems) || all(sapply(speleothems, is.null))) {
+    speleo <- new("speleothems", speleothems = list())
+  } else {
+    speleo <- new("speleothems", speleothems = speleothems)
+  }
+  return(speleo)
 }

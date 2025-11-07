@@ -1,6 +1,5 @@
-#' @title Show contact object
-#' @param object A contact object.
-#' @returns null - side effect for printing contact object
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
@@ -13,18 +12,16 @@ setMethod(f = "show",
                              notes = testNull(object@notes)))
           })
 
-#' @title Get names of contacts slots
-#' @param x A contact object.
-#' @returns names of slots
+#' @rdname names
+#' @export
 setMethod(f = "names",
           signature = signature(x = "contact"),
           definition = function(x) {
             slotNames(x)
           })
 
-#' @title Show a contacts object.
-#' @param object A contacts object.
-#' @returns null - side effect for printing contacts object
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "contacts",
           definition = function(object) {
@@ -41,30 +38,24 @@ setMethod(f = "show",
               print()
           })
 
-#' @title Extract or Replace Parts of an Object
-#' @param x A contact object.
-#' @param i The numeric index of a contact slot.
-#' @returns sliced contacts
+#' @rdname sub-sub
+#' @export
 setMethod(f = "[[",
           signature = signature(x = "contacts", i = "numeric"),
           definition = function(x, i) {
             x@contacts[[i]]
           })
 
-#' @title Extract or Replace Parts of an Object
-#' @param x A contact object.
-#' @param name The name of a contact slot.
-#' @returns value in the selected slot
+#' @rdname cash
+#' @export
 setMethod(f = "$",
           signature = signature(x = "contact"),
           definition = function(x, name) {
             slot(x, name)
           })
 
-#' @title Extract or Replace Parts of an Object
-#' @param x A contacts object.
-#' @param name The name of a contacts slot.
-#' @returns object value from the slot
+#' @rdname cash
+#' @export
 setMethod(f = "$",
           signature = signature(x = "contacts"),
           definition = function(x, name) {
@@ -75,9 +66,8 @@ setMethod(f = "$",
               unlist()
           })
 
-#' @title Show a contact object
-#' @param object a `contact` object
-#' @returns Null - prints a data.frame
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
@@ -91,9 +81,8 @@ setMethod(f = "show",
               print()
           })
 
-#' @title Transform a contacts object to a data.frame()
-#' @param x A contact object.
-#' @returns `data.frame` object with contact metadata
+#' @rdname as.data.frame
+#' @export
 setMethod(f = "as.data.frame",
           signature = signature("contact"),
           definition = function(x) {
@@ -106,20 +95,16 @@ setMethod(f = "as.data.frame",
                        notes = x@notes)
           })
 
-#' @title Transform a contacts object to a data.frame()
-#' @param x A contacts object.
-#' @returns `data.frame` object with multiple `contacts` metadata
+#' @rdname as.data.frame
+#' @export
 setMethod(f = "as.data.frame",
           signature = signature("contacts"),
           definition = function(x) {
-            x@contacts %>% map(as.data.frame) %>% bind_rows()
+            x@contacts %>% map(as.data.frame) %>% 
+              bind_rows()
           })
 
-#' @title c Method - Combine contacts objects
-#' @param x contacts object 1
-#' @param y contacts object 2
-#' @importFrom methods is
-#' @returns concatenated and clean objects
+#' @rdname c
 #' @export
 setMethod(f = "c",
           signature = signature(x = "contacts"),
@@ -127,8 +112,8 @@ setMethod(f = "c",
             if (is(y, "contacts")) {
               out <- new("contacts",
                          contacts = unlist(c(x@contacts,
-                                              y@contacts),
-                                            recursive = FALSE))
+                                             y@contacts),
+                                           recursive = FALSE))
             } else if (is(y, "contact")) {
               contactset <- c(x@contacts, y)
               out <- new("contacts", contacts = contactset)
@@ -136,11 +121,7 @@ setMethod(f = "c",
             return(out)
           })
 
-#' @title c Method - Combine contacts objects
-#' @param x contacts object 1
-#' @param y contacts object 2
-#' @returns `contacts` concatenated object
-#' @importFrom methods is
+#' @rdname c
 #' @export
 setMethod(f = "c",
           signature = signature(x = "contact"),

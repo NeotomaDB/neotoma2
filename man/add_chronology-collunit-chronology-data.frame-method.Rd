@@ -30,3 +30,6 @@ For examples from this function, see the
 \href{https://open.neotomadb.org/EPD_binder/complex_workflow.html}{Complex Workflows}
 documentation online.
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

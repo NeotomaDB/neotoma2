@@ -2,9 +2,15 @@
 % Please edit documentation in R/get_downloads.R
 \name{get_downloads}
 \alias{get_downloads}
+\alias{get_downloads.numeric}
+\alias{get_downloads.sites}
 \title{get_downloads}
 \usage{
 get_downloads(x = NA, verbose = TRUE, ...)
+
+\method{get_downloads}{numeric}(x, ...)
+
+\method{get_downloads}{sites}(x, verbose = TRUE, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
@@ -47,7 +53,7 @@ following detail of information:
 \item{ \code{metadata} }{dataset metadata}
 }
 \description{
-Information for Fossil Datasets
+Download \code{sites} objects up to datum and chronology detail level.
 }
 \details{
 The \code{get_downloads()} command wraps the Neotoma API
@@ -65,7 +71,6 @@ For the complete records, use \code{all_data=TRUE}
 \donttest{
 # To find the downloads object of dataset 24:
 downloads24 <- get_downloads(24)
-
 # To find all downloads in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[

@@ -1,34 +1,36 @@
-#' @md
 #' @title Build a `speleothem` from the Neotoma API response.
-#' @param args A list returned from the Neotoma API `data` section.
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom assertthat assert_that
-#' @importFrom purrr map
-#' @import sf
+#' @param args A list returned from the Neotoma API `data` section.
 #' @returns A simple `speleothem` object
-#' @keywords internal
 #' @noRd
 build_speleothem <- function(...) {
   args <- list(...)
-  assertthat::assert_that(is.list(args),
-                          msg = "Parsed object must be a list.")
- speleothem <- set_speleothem(entityid = use_na(testNull(args$entityid, NA), "int"),
-                        entityname = use_na(testNull(args$entityname, NA), "char"),
-                        siteid = use_na(testNull(args$siteid, NA), "int"),
-                        collectionunitid = use_na(testNull(args$collectionunitid, NA), "int"),
-                        dripheight = use_na(testNull(args$dripheight, NA), "int"),
-                        dripheightunits = use_na(testNull(args$dripheightunits, NA), "char"),
-                        monitoring = use_na(testNull(args$monitoring, NA), "logic"),
-                        geology = use_na(testNull(args$geology, NA), "char"),
-                        relativeage = use_na(testNull(args$relativeage, NA), "char"),
-                        speleothemtype = use_na(testNull(args$speleothemtype, NA), "char"),
-                        entitycovertype = use_na(testNull(args$entitycovertype, NA), "char"),
-                        entrancedistance = use_na(testNull(args$entrancedistance, NA), "int"),
-                        landusecovertype = use_na(testNull(args$landusecovertype, NA), "char"),
-                        speleothemdriptype = use_na(testNull(args$speleothemdriptype, NA), "char"),
-                        landusecoverpercent = use_na(testNull(args$landusecoverpercent, NA), "int"),
-                        vegetationcovertype = use_na(testNull(args$vegetationcovertype, NA), "char"),
-                        entitycoverthickness = use_na(testNull(args$entitycoverthickness, NA), "int"),
-                        entrancedistanceunits = use_na(testNull(args$entrancedistanceunits, NA), "char"),
-                        vegetationcoverpercent = use_na(testNull(args$vegetationcoverpercent, NA), "int"))
+  args <- cleanNULL(args)
+  assert_that(is.list(args), msg = "Parsed object must be a list.")
+  speleothem <- set_speleothem(
+                  entityid = use_na(args$entityid, "int"),
+                  entityname = use_na(args$entityname, "char"),
+                  siteid = use_na(args$siteid, "int"),
+                  collectionunitid = use_na(args$collectionunitid, "int"),
+                  dripheight = use_na(args$dripheight, "int"),
+                  dripheightunits = use_na(args$dripheightunits, "char"),
+                  monitoring = use_na(args$monitoring, "logic"),
+                  geology = use_na(args$geology, "char"),
+                  relativeage = use_na(args$relativeage, "char"),
+                  speleothemtype = use_na(args$speleothemtype, "char"),
+                  entitycovertype = use_na(args$entitycovertype, "char"),
+                  entrancedistance = use_na(args$entrancedistance, "int"),
+                  landusecovertype = use_na(args$landusecovertype, "char"),
+                  speleothemdriptype = use_na(args$speleothemdriptype, "char"),
+                  landusecoverpercent = use_na(args$landusecoverpercent, "int"),
+                  vegetationcovertype = use_na(args$vegetationcovertype,
+                                               "char"),
+                  entitycoverthickness = use_na(args$entitycoverthickness,
+                                                "int"),
+                  entrancedistanceunits = use_na(args$entrancedistanceunits,
+                                                 "char"),
+                  vegetationcoverpercent = use_na(args$vegetationcoverpercent,
+                                                  "int"))
   return(speleothem)
 }

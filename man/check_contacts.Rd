@@ -18,3 +18,6 @@ contacts object
 Uses the Neotoma API to search and access information about individuals
 who have contributed to the data in the Neotoma Paleoecology Database
 }
+\author{
+Simon Goring \email{goring@wisc.edu}
+}

@@ -5,9 +5,9 @@
 #' and because we want to avoid conflicts between naming systems, a 
 #' universally unique identifier (UUID) is created for the object ID.This is not
 #' to be updated to the database.
-#' @importFrom methods new
+#' @importFrom methods new slot<-
 #' @importFrom uuid UUIDgenerate
-#' @importFrom methods slot<-
+#' @importFrom digest digest
 #' @param x Object to be set as a contact
 #' @param contactid An arbitrary Contact identification number.
 #' @param familyname Family or surname name of a person.
@@ -29,8 +29,8 @@
 #' @param address A physical address
 #' @param notes Notes about the individual
 #' @returns `contact` object
+#' @md
 #' @export
-
 set_contact <- function(x = NA,
                         contactid = NA_integer_,
                         familyname = NA_character_,
@@ -53,7 +53,7 @@ set_contact <- function(x = NA,
   if (suppressWarnings(is.na(x))) {
     x <- new("contact")
     if (is.na(contactid)) {
-      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      hash <- digest(UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
       x@contactid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@contactid <- contactid
@@ -72,10 +72,9 @@ set_contact <- function(x = NA,
     x@url <- url
     x@address <- address
     x@notes <- notes
-
   } else {
     if (is(x, "contact")) {
-      if(length(function_call)>2){
+      if (length(function_call) > 2) {
         for (i in 3:length(function_call)) {
           slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
         }

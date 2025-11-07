@@ -1,38 +1,62 @@
-
-
+#' @title Helper function for `get_speleothems`
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom purrr map
+#' @param sites A `sites` object
+#' @return Processed speleothem data in the `sites` object
+#' @noRd
 speleo_helper <- function(sites) {
   ids <- getids(sites)
   cuids <- ids$collunitid
   if (length(cuids) > 0) {
     cuids <- paste0(cuids, collapse = ",")
   }
-  
-  #sites <- get_downloads(dsids)
-  base_url <- paste0("data/speleothems/", cuids)
-
-  result <- parseURL(base_url)
-  
+  baseURL <- paste0("data/speleothems/", cuids)
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
   if (length(result[2]$data) > 0) {
+    speleo <- speleo %>% cleanNULL()
     speleo <- parse_speleothem(result)
   } else {
     speleo <- NULL
   }
-  
-  pared_ds <- purrr::map(sites@sites, function(x) {
-    ycu <- purrr::map(x@collunits, function(z) {
-      yds <- speleo[which(as.data.frame(speleo)$collectionunitid %in% z$collectionunitid)]
-      z@speleothems <- yds
-      return(z)
+  if (!is.null(speleo)) {
+    pared_ds <- map(sites@sites, function(x) {
+      ycu <- map(x@collunits, function(z) {
+        yds <- speleo[
+          which(as.data.frame(speleo)$collectionunitid %in% z$collectionunitid)
+        ]
+        z@speleothems <- yds
+        z
+      })
+      x@collunits@collunits <- ycu
+      x
     })
-    x@collunits@collunits <- ycu
-    return(x)
-  })
+  } else {
+    pared_ds <- NULL
+  }
+  pared_ds
 }
 
 #' @title get_speleothems
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new
-#' @param x A sites object.
+#' @param x A dataset ID or vector of dataset IDs
+#' @param ... accepted arguments
+#' @returns `sites` object with speleothem data
+#' @details
+#' The `get_speleothems()` command wraps the Neotoma API
+#' ([api.neotomadb.org](https://api.neotomadb.org)) call for `speleothems`.
+#' The call itself uses a SQL query which accepts any one of the following
+#' parameters:
+#'  * `x`  The unique dataset ID (integer) in Neotoma. Can be passed as a
+#' vector of dataset IDs.
+#'  * `sites`  A `sites` R object.
+#' @md
 #' @export
 get_speleothems <- function(x = NA, ...) {
   if (!missing(x)) {
@@ -42,39 +66,30 @@ get_speleothems <- function(x = NA, ...) {
   }
 }
 
-#' @title Get Speleothem Data from a Sites object
-#' @param x The numeric dataset ID from Neotoma
-#' @param ... accepted arguments if numeric all_data
-#' @returns The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either misdefined parameters or an error
-#' from the Neotoma API), or a sies object with speleothem data.
+#' @rdname get_speleothems
 #' @examples {
 #' ## Find speleothems by numeric datasetid:
 #' speleo <- get_speleothems(c(2,5))
 #' }
 #' @export
 get_speleothems.numeric <- function(x, ...) {
-  if (length(x) > 0) {
-    dsids <- paste0(x, collapse = ",")
-  }
   st <- get_datasets(x)
   pared_ds <- speleo_helper(st)
-  return(new("sites", sites = pared_ds))
+  if (is.null(pared_ds)) {
+    st
+  } else {
+    new("sites", sites = pared_ds)
+  }
 }
 
-
-#' @title Get Speleothem Data from a Sites object
-#' @param x The numeric dataset ID from Neotoma
-#' @param ... accepted arguments if numeric all_data
-#' @returns The function returns either a single item of class `"try-error"`
-#' describing the reason for failure (either misdefined parameters or an error
-#' from the Neotoma API), or a sies object with speleothem data.
-#' @examples {
-#' ## Find speleothems by numeric datasetid:
-#' speleo <- get_speleothems(c(2,5))
-#' }
+#' @rdname get_speleothems
 #' @export
-get_speleothems.sites <- function(x, ...) {
-  pared_ds <- speleo_helper(x)
-  return(new("sites", sites = pared_ds))
+get_speleothems.sites <- function(...) {
+  pared_ds <- speleo_helper()
+  if (is.null(pared_ds)) {
+    args <- list(...)
+    args
+  } else {
+    new("sites", sites = pared_ds)
+  }
 }

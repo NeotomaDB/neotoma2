@@ -14,15 +14,15 @@ A \code{data.frame} reporting the taxa/data objects, units,
 elements and other features within a set of records.
 }
 \description{
-From a sites object,
+Extract taxonomic data from a set of sites.
 }
 \examples{
 \donttest{
-somesites <- get_sites(datasettype = "diatom", limit = 3) \%>\%
+somesites <- get_sites(datasettype = "diatom") \%>\%
   get_downloads()
 diatomtaxa <- taxa(somesites)
-common_taxa <- diatomtaxa \%>\%
-  dplyr::filter(sites == 3)
   }
-
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

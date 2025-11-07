@@ -1,8 +1,5 @@
 #' @title Set Neotoma API Source or Server
-#' @description
-#' Choose to pull Neotoma data from the main Neotoma server, the development
-#' server or from a local instance of the API.
-#' @importFrom stringr str_detect
+#' @author Simon Goring \email{goring@wisc.edu}
 #' @importFrom assertthat assert_that
 #' @param server One of \code{local} (when the API is running locally on
 #' port 3005), \code{neotoma} or \code{dev}.
@@ -14,18 +11,18 @@
 #' set_server(server = "neotoma")
 #' }
 #' @returns NULL modifies how to talk to the API (local, dev, server)
+#' @description
+#' Choose to pull Neotoma data from the main Neotoma server, the development
+#' server or from a local instance of the API.
 #' @export
-
 set_server <- function(server = "neotoma") {
+  assert_that(server %in% c("neotoma", "dev", "local"),
+              msg = "The parameter `server` must be `local`, 
+                    `neotoma` or `dev`.")
+  server <- switch(server,
+                   neotoma = "neotoma",
+                   dev = "dev",
+                   local = "local")
 
-    assertthat::assert_that(server %in%
-        c("neotoma", "dev", "local"),
-        msg = "The parameter `server` must be `local`, `neotoma` or `dev`.")
-
-    server <- switch(server,
-        neotoma = "neotoma",
-        dev = "dev",
-        "local")
-
-    Sys.setenv("APIPOINT" = server)
+  Sys.setenv("APIPOINT" = server)
 }

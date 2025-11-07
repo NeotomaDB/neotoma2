@@ -43,7 +43,7 @@ setGeneric("showMatch", function(x) {
 #' @export
 setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
-})
+  })
 
 #' @title Obtain speleothems from a record or multiple records.
 #' @param x sites object
@@ -60,14 +60,6 @@ setGeneric("speleothems", function(x) {
 setGeneric("speleothemdetails", function(x) {
   standardGeneric(f = "speleothemdetails")
 })
-
-# #' @title Obtain specimens from a record or multiple records.
-# #' @param x sites object
-# #' @returns data.frame with record information regarding specimens
-# #' @export
-# setGeneric("specimens", function(x) {
-#   standardGeneric(f = "specimens")
-# })
 
 #' @title Obtain the chronology from a record or multiple records.
 #' @param x sites object that contains chronologies
@@ -113,7 +105,6 @@ setGeneric("chroncontrols", function(x) {
   standardGeneric(f = "chroncontrols")
 })
 
-
 #' @title taxa
 #' @description Show the samples table
 #' @param object Sites object to extract taxa table from
@@ -153,3 +144,11 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+#TODO
+# #' @title Obtain specimens from a record or multiple records.
+# #' @param x sites object
+# #' @returns data.frame with record information regarding specimens
+# #' @export
+# setGeneric("specimens", function(x) {
+#   standardGeneric(f = "specimens")
+#   })

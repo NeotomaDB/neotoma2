@@ -2,14 +2,26 @@
 % Please edit documentation in R/getids.r
 \name{getids}
 \alias{getids}
+\alias{getids.sites}
+\alias{getids.site}
+\alias{getids.collunits}
+\alias{getids.collunit}
 \title{Get object IDs}
 \usage{
 getids(x, order = TRUE)
+
+\method{getids}{sites}(x, order = TRUE)
+
+\method{getids}{site}(x, order = TRUE)
+
+\method{getids}{collunits}(x, order = TRUE)
+
+\method{getids}{collunit}(x, order = TRUE)
 }
 \arguments{
-\item{x}{A Neotoma2 \code{sites} object.}
+\item{x}{A Neotoma2 \code{sites} or \code{collunits} object.}
 
-\item{order}{sort items by siteid, collunitid, datasetid}
+\item{order}{sort items by \code{siteid}, \code{collunitid}, \code{datasetid}}
 }
 \value{
 \code{data.frame} containing \code{siteid}, \code{datasetid}, and \code{collunitid}
@@ -18,4 +30,13 @@ getids(x, order = TRUE)
 This function parses a site object, from \code{site} to
 \code{dataset} level and returns a \code{data.frame} that contains the
 site, collectionunit and dataset IDs for each element within the site.
+}
+\examples{
+\donttest{
+marion <- get_sites(sitename = "Marion Lake")
+collunitids <- getids(collunits(marion))
+}
+}
+\author{
+Simon Goring \email{goring@wisc.edu}
 }

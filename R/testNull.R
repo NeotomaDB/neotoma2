@@ -13,10 +13,10 @@
 #' }
 #' @keywords internal
 #' @noRd
-testNull <- function(val, out=NA) {
+testNull <- function(val, out = NA) {
   if (is.null(val)) {
     return(out)
-    } else {
-      return(val)
-    }
+  } else {
+    return(val)
+  }
 }

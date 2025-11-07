@@ -16,3 +16,6 @@ data.frame with chronological controls
 For all sites that includes collection units with chronologies
 return the chronological controls that are used in building the chronology.
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+}

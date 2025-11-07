@@ -1,68 +1,61 @@
-# Start "Show Method" for all Neotoma Objects
-#' @title Show Speleothem Method
-#' @param object speleothem object
-#' @returns null - side effect, prints a `data.frame` with `speleo` metadata
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "speleothem",
           definition = function(object) {
             print(data.frame(entityid = object@entityid,
-                             entityname = object@entityname,
-                             siteid = object@siteid,
-                             collectionunitid = object@collectionunitid,
-                             speleothemdriptype = object@speleothemdriptype,
-                             dripheight = object@dripheight,
-                             dripheightunits = object@dripheightunits,
-                             monitoring = object@monitoring,
-                             geology = object@geology,
-                             relativeage = object@relativeage,
-                             speleothemtype = object@speleothemtype,
-                             entrancedistance = object@entrancedistance,
-                             entrancedistanceunits = object@entrancedistanceunits,
-                             landusecovertype = object@landusecovertype,
-                             landusecoverpercent = object@landusecoverpercent,
-                             vegetationcovertype = object@vegetationcovertype,
-                             vegetationcoverpercent = object@vegetationcoverpercent,
-                             entitycovertype = object@entitycovertype,
-                             entitycoverthickness = object@entitycoverthickness
-                             ), row.names = FALSE)
+                    entityname = object@entityname,
+                    siteid = object@siteid,
+                    collectionunitid = object@collectionunitid,
+                    speleothemdriptype = object@speleothemdriptype,
+                    dripheight = object@dripheight,
+                    dripheightunits = object@dripheightunits,
+                    monitoring = object@monitoring,
+                    geology = object@geology,
+                    relativeage = object@relativeage,
+                    speleothemtype = object@speleothemtype,
+                    entrancedistance = object@entrancedistance,
+                    entrancedistanceunits = object@entrancedistanceunits,
+                    landusecovertype = object@landusecovertype,
+                    landusecoverpercent = object@landusecoverpercent,
+                    vegetationcovertype = object@vegetationcovertype,
+                    vegetationcoverpercent = object@vegetationcoverpercent,
+                    entitycovertype = object@entitycovertype,
+                    entitycoverthickness = object@entitycoverthickness
+                  ), row.names = FALSE)
           })
 
-#' @title Show Datasets object as a dataframe
-#' @param object datasets object
-#' @returns null - side effect, prints a `data.frame` with `datasets` metadata
+#' @rdname show
+#' @export
 setMethod(f = "show",
           signature = "speleothems",
           definition = function(object) {
             map(object, function(y) {
-              df <- data.frame(entityid = y@entityid,
-                               entityname = y@entityname,
-                               siteid = y@siteid,
-                               collectionunitid = y@collectionunitid,
-                               speleothemdriptype = y@speleothemdriptype,
-                               dripheight = y@dripheight,
-                               dripheightunits = y@dripheightunits,
-                               monitoring = y@monitoring,
-                               geology = y@geology,
-                               relativeage = y@relativeage,
-                               speleothemtype = y@speleothemtype,
-                               entrancedistance = y@entrancedistance,
-                               entrancedistanceunits = y@entrancedistanceunits,
-                               landusecovertype = y@landusecovertype,
-                               landusecoverpercent = y@landusecoverpercent,
-                               vegetationcovertype = y@vegetationcovertype,
-                               vegetationcoverpercent = y@vegetationcoverpercent,
-                               entitycovertype = y@entitycovertype,
-                               entitycoverthickness = y@entitycoverthickness)
+              data.frame(entityid = y@entityid,
+                         entityname = y@entityname,
+                         siteid = y@siteid,
+                         collectionunitid = y@collectionunitid,
+                         speleothemdriptype = y@speleothemdriptype,
+                         dripheight = y@dripheight,
+                         dripheightunits = y@dripheightunits,
+                         monitoring = y@monitoring,
+                         geology = y@geology,
+                         relativeage = y@relativeage,
+                         speleothemtype = y@speleothemtype,
+                         entrancedistance = y@entrancedistance,
+                         entrancedistanceunits = y@entrancedistanceunits,
+                         landusecovertype = y@landusecovertype,
+                         landusecoverpercent = y@landusecoverpercent,
+                         vegetationcovertype = y@vegetationcovertype,
+                         vegetationcoverpercent = y@vegetationcoverpercent,
+                         entitycovertype = y@entitycovertype,
+                         entitycoverthickness = y@entitycoverthickness)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
           })
 
-#' @title  Slicer
-#' @param x speleothems object
-#' @param i iteration in speleothems list
-#' @description Obtain one of the elements within a datasets list
-#' @returns sliced `dataset` object
+#' @rdname sub-sub
 #' @export
 setMethod(f = "[[",
           signature = signature(x = "speleothems", i = "numeric"),
@@ -70,7 +63,7 @@ setMethod(f = "[[",
             if (length(i) == 1) {
               out <- new("speleothem", x@speleothems[[i]])
             } else {
-              out <- purrr::map(i, function(z) {
+              out <- map(i, function(z) {
                 new("dataset", x@speleothems[[z]])
               })
               out <- new("speleothems", speleothems = out)
@@ -78,10 +71,7 @@ setMethod(f = "[[",
             return(out)
           })
 
-#' @title Get slot names
-#' @param x A dataset object.
-#' @description Get all names for named elements within a `dataset` object.
-#' @returns `list` with all names of `dataset` slots
+#' @rdname names
 #' @export
 setMethod(f = "names",
           signature = signature(x = "speleothem"),
@@ -89,12 +79,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @title  Insert dataset
-#' @param x speleothems object
-#' @param i iteration in speleothems list
-#' @param value The value to be used
-#' @description Obtain one of the elements within a speleothems list
-#' @returns One `speleothem` slot's value 
+#' @rdname sub-subset
 #' @export
 setMethod(f = "[[<-",
           signature = signature(x = "speleothems"),
@@ -105,41 +90,31 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-
-#' @title Assign speleothem field by numeric index
-#' @param x The speleothem object.
-#' @param i The column indicator.
-#' @param value The value to be used.
-#' @returns `speleothem` slot with new assigned character value
+#' @rdname subset
+#' @export
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "character"),
           definition = function(x, i, value) {
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(i)) {
               slot(x, i[idx]) <- value[idx]
             }
             return(x)
           })
 
-#' @title Assign speleothem field by numeric index
-#' @param x The speleothem object.
-#' @param i The column indicator.
-#' @param value The value to be used.
-#' @returns `speleothem` slot with new assigned numeric value
+#' @rdname subset
+#' @export
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "numeric"),
           definition = function(x, i, value) {
             slots <- slotNames(x)
-            for (idx in 1:length(i)) {
+            for (idx in seq_along(i)) {
               slot(x, slots[i[idx]]) <- value[idx]
             }
             return(x)
           })
 
-#' @title Assign speleothem field by numeric index
-#' @param x The speleothem object.
-#' @param name name of the slot.
-#' @param value The value to be used.
-#' @returns Assign new `speleothem` by numeric index
+#' @rdname cash-set
+#' @export
 setMethod(f = "$<-",
           signature = signature(x = "speleothem"),
           definition = function(x, name, value) {
@@ -147,23 +122,15 @@ setMethod(f = "$<-",
             return(x)
           })
 
-
-
-#' @title Get or remove speleothems by numeric index
-#' @param x The speleothems object
-#' @param i The numeric index
-#' @returns Get or remove `speleothems` by numeric index
+#' @rdname sub
+#' @export
 setMethod(f = "[",
           signature = signature(x = "speleothems", i = "numeric"),
           definition = function(x, i) {
             new("speleothems", speleothems = x@speleothems[i])
           })
 
-#' @title  $
-#' @param x speleothem object
-#' @param name name of the slot
-#' @description Obtain slots of a speleothem without using at-mark
-#' @returns Obtain a `speleothem`'s `slot` value using $
+#' @rdname cash
 #' @export
 setMethod(f = "$",
           signature = signature(x = "speleothem"),
@@ -171,11 +138,7 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-#' @title  $ for speleothems
-#' @param x speleothems object
-#' @param name name of the slot.
-#' @description Obtain slots of a speleothem without using at-mark
-#' @returns Obtain a `speleothems`' `slot` value using $  
+#' @rdname cash
 #' @export
 setMethod(f = "$",
           signature = signature(x = "speleothems"),
@@ -187,10 +150,7 @@ setMethod(f = "$",
               unlist()
           })
 
-#' @title  as.data.frame speleothem
-#' @param x speleothem object
-#' @description show as dataframe as prep to save as csv
-#' @returns `data.frame` with `speleothem` metadata
+#' @rdname as.data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("speleothem"),
@@ -216,10 +176,7 @@ setMethod(f = "as.data.frame",
                        entitycovertype = x@entitycovertype)
           })
 
-#' @title  as.data.frame speleothems
-#' @param x speleothems object
-#' @description show as dataframe as prep to save as csv
-#' @returns `data.frame` with `speleothems` metadata
+#' @rdname as.data.frame
 #' @export
 setMethod(f = "as.data.frame",
           signature = signature("speleothems"),
@@ -227,25 +184,21 @@ setMethod(f = "as.data.frame",
             x@speleothems %>% map(as.data.frame) %>% bind_rows()
           })
 
-#' @title Length Method speleothems
+#' @rdname length
 #' @export
-#' @returns `int` that showcases the length of a `speleothems` object
-#' @param x speleothems object
 setMethod(f = "length",
           signature = signature(x = "speleothems"),
           definition = function(x) {
             length(x@speleothems)
           })
 
-#' @title c Method - Combine speleothems objects
-#' @param x speleothems object 1
-#' @param y speleothems object 2
-#' @returns concatenated `speleothems` object
+#' @rdname c
 #' @export
 setMethod(f = "c",
           signature = signature(x = "speleothems"),
           definition = function(x, y) {
             new("speleothems",
                 speleothems = unlist(c(x@speleothems,
-                                    y@speleothems), recursive = FALSE))
+                                       y@speleothems),
+                                     recursive = FALSE))
           })
