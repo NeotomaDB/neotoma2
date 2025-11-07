@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">neotoma2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
       </span>
     </div>
 
@@ -63,7 +63,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_speleothems</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_speleothems</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'numeric'</span></span>
+<span><span class="fu">get_speleothems</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'sites'</span></span>
+<span><span class="fu">get_speleothems</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,14 +77,40 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A sites object.</p></dd>
+<dd><p>A dataset ID or vector of dataset IDs</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>accepted arguments</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p><code>sites</code> object with speleothem data</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The <code>get_speleothems()</code> command wraps the Neotoma API
+(<a href="https://api.neotomadb.org" class="external-link">api.neotomadb.org</a>) call for <code>speleothems</code>.
+The call itself uses a SQL query which accepts any one of the following
+parameters:</p><ul><li><p><code>x</code>  The unique dataset ID (integer) in Neotoma. Can be passed as a
+vector of dataset IDs.</p></li>
+<li><p><code>sites</code>  A <code>sites</code> R object.</p></li>
+</ul></div>
     <div id="author">
     <h2>Author</h2>
     <p>Socorro Dominguez <a href="mailto:dominguezvid@wisc.edu">dominguezvid@wisc.edu</a></p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Find speleothems by numeric datasetid:</span></span></span>
+<span class="r-in"><span><span class="va">speleo</span> <span class="op">&lt;-</span> <span class="fu">get_speleothems</span><span class="op">(</span><span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> API call failed: '...' used in an incorrect context</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -91,7 +123,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

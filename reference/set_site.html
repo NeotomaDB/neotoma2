@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">neotoma2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
       </span>
     </div>
 
@@ -86,15 +86,17 @@
 
 
 <dt id="arg-siteid">siteid<a class="anchor" aria-label="anchor" href="#arg-siteid"></a></dt>
-<dd><p>The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).</p></dd>
+<dd><p>The unique <code>site id</code> for a site.
+If this site is new to Neotoma then leave the ID as NA.</p></dd>
 
 
 <dt id="arg-sitename">sitename<a class="anchor" aria-label="anchor" href="#arg-sitename"></a></dt>
-<dd><p>Actual site name as a character string.</p></dd>
+<dd><p>Name of a site.</p></dd>
 
 
 <dt id="arg-geography">geography<a class="anchor" aria-label="anchor" href="#arg-geography"></a></dt>
-<dd><p>An <code>sf</code> object representing the site location, either as a polygon or point.</p></dd>
+<dd><p>A <code>sf</code> object representing the site location,
+either as a polygon or point.</p></dd>
 
 
 <dt id="arg-altitude">altitude<a class="anchor" aria-label="anchor" href="#arg-altitude"></a></dt>
@@ -106,7 +108,8 @@
 
 
 <dt id="arg-area">area<a class="anchor" aria-label="anchor" href="#arg-area"></a></dt>
-<dd><p>The area of the site or depositional basin in <em>ha</em>.  Can be calculated from the polygon.</p></dd>
+<dd><p>The area of the site or depositional basin in <em>ha</em>.
+Can be calculated from the polygon.</p></dd>
 
 
 <dt id="arg-notes">notes<a class="anchor" aria-label="anchor" href="#arg-notes"></a></dt>
@@ -114,7 +117,8 @@
 
 
 <dt id="arg-description">description<a class="anchor" aria-label="anchor" href="#arg-description"></a></dt>
-<dd><p>Function to create new site objects for personal analysis. The new object will not be uploaded to the database.</p></dd>
+<dd><p>Function to create new site objects.
+The new object will not be uploaded to the database.</p></dd>
 
 
 <dt id="arg-collunits">collunits<a class="anchor" aria-label="anchor" href="#arg-collunits"></a></dt>
@@ -125,17 +129,22 @@
     <h2>Value</h2>
     <p><code>site</code> object</p>
     </div>
+    <div id="author">
+    <h2>Author</h2>
+    <p>Socorro Dominguez <a href="mailto:dominguezvid@wisc.edu">dominguezvid@wisc.edu</a></p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Create a site called "My Lake", to</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="fu">st_sfc</span><span class="op">(</span><span class="fu">st_point</span><span class="op">(</span><span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_site</span> <span class="op">&lt;-</span> <span class="fu">set_site</span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"My Lake"</span>,</span></span>
 <span class="r-in"><span>                    geography <span class="op">=</span> <span class="va">x</span>,</span></span>
 <span class="r-in"><span>                    description <span class="op">=</span> <span class="st">"my lake"</span>,</span></span>
 <span class="r-in"><span>                    altitude <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in st_as_sf(st_sfc(st_point(c(5, 5)))):</span> could not find function "st_as_sf"</span>
 </code></pre></div>
     </div>
   </div>
@@ -150,7 +159,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
