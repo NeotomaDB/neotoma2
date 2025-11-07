@@ -1,5 +1,6 @@
 #' @title Display a `sites` object or nested slots.
 #' @name show
+#' @importFrom sf st_coordinates
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
 #' @param object `sites`, `datasets`, `collunits`, `contacts` object
@@ -202,6 +203,7 @@ setMethod(f = "$",
 
 #' @title as.data.frame
 #' @name as.data.frame
+#' @importFrom sf st_coordinates
 #' @param x `neotoma2` object
 #' @returns `data.frame` object
 #' @description Returns `neotoma2` object's data as a `data.frame`.
