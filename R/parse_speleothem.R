@@ -11,6 +11,9 @@
 parse_speleothem <- function(data) {
   speleothems <- map(data, function(x) {
     x <- x$speleothem
+    if (x$entrancedistanceunits == 37) {
+      x$entrancedistanceunits <- "m"
+    }
     sp <-
       list(entityid = x$entityid,
            entityname = x$entityname,
@@ -25,7 +28,7 @@ parse_speleothem <- function(data) {
            dripheightunits = use_na(x$dripheightunits, "char"),
            entitycovertype = use_na(x$entitycovertype, "char"),
            entrancedistance = use_na(x$entrancedistance, "int"),
-           entrancedistanceunits = use_na(x$entrancedistance, "char"),
+           entrancedistanceunits = use_na(x$entrancedistanceunits, "char"),
            landusecovertype = use_na(x$landusecovertype, "char"),
            speleothemdriptype = use_na(x$speleothemdriptype, "char"),
            landusecoverpercent = use_na(x$landusecoverpercent, "int"),
