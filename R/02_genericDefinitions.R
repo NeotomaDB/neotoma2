@@ -114,12 +114,28 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
-#' @title Add a new chronology to a collection unit.
-#' @param object A collectionunit object
-#' @param x A chronology object
-#' @param y A \code{data.frame} of sample ages
-#' @returns chronology object defined by user,
-#' @export
+#' @title Add a new chronology into an existing collectionunit.
+#' @name add_chronology
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom purrr map
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr filter
+#' @param object A collection unit object
+#' @param x A chronology object generated using \code{set_chronology()}
+#' @param y A data.frame of sample ages, with required columns:
+#'   `"analysisunitid"`, `"age"`, `"agetype"`, `"ageolder"`, and `"ageyounger"`.
+#' @returns `chronologies` with new added chronology
+#' @description Given a collunit, add a new chronology object to the unit
+#' with both the chronology metadata and the age information (as `y`)
+#' @details When undertaking analysis we may wish to add a new chronology to
+#' existing records within Neotoma. To do this we must first build the
+#' chronology, but also link it to existing analysis units within the
+#' collection unit.
+#' For examples from this function, see the
+#' https://open.neotomadb.org/EPD_binder/complex_workflow.html
+#' documentation online.
+#' @md
+#' @exportMethod add_chronology
 setGeneric("add_chronology",
            function(object, x, y) {
              standardGeneric(f = "add_chronology")

@@ -88,11 +88,11 @@
 #' }}
 #' @md
 #' @export
-get_sites <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_sites", x)
+get_sites <- function(x, ...) {
+  if (missing(x)) {
+    UseMethod("get_sites", "default")
   } else {
-    UseMethod("get_sites", NA)
+    UseMethod("get_sites", x)
   }
 }
 

@@ -2,20 +2,27 @@
 % Please edit documentation in R/filter.R
 \name{filter}
 \alias{filter}
+\alias{filter.NULL}
 \alias{filter.sites}
 \alias{filter.data.frame}
 \title{Apply a \code{filter} for Neotoma sites objects.}
 \usage{
-filter(x, ...)
+filter(.data, ...)
 
-\method{filter}{sites}(x, ...)
+\method{filter}{`NULL`}(.data, ..., .by = NULL, .preserve = FALSE)
+
+\method{filter}{sites}(.data, ..., .by = NULL, .preserve = FALSE)
 
 \method{filter}{data.frame}(.data, ..., .by = NULL, .preserve = FALSE)
 }
 \arguments{
-\item{x}{A site, dataset or download.}
+\item{.data}{A site, dataset, download, or data frame}
 
-\item{...}{arguments to filter by.}
+\item{...}{Additional arguments passed to \code{filter()}}
+
+\item{.by}{Grouping variables (for dplyr data.frames)}
+
+\item{.preserve}{Whether to preserve grouping (for dplyr data.frames)}
 }
 \value{
 filtered \code{sites} object
@@ -80,3 +87,4 @@ Simon Goring \email{goring@wisc.edu}
 
 Socorro Dominguez \email{dominguezvid@wisc.edu}
 }
+\keyword{internal}

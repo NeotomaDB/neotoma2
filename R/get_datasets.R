@@ -61,6 +61,8 @@
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
 #' @examples \donttest{
+#' random_sites <- get_sites(1)
+#' allds <- get_datasets(random_sites, limit=3)
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
 #' sites_12to25 <- get_datasets(altmin=12, altmax=25)
 #' # To find all datasets in Brazil
@@ -72,24 +74,13 @@
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
 #' brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
-#' # To obtain the dataset metadata:
-#' datasets(brazil_datasets)
-#' # There is insufficient metadata at this point to obtain information
-#' # about taxa present at the site. We must use get_downloads() to
-#' # obtain the full set of sample information:
-#' # This fails: taxa(brazil_datasets)
 #' }
 #' @md
 #' @export
 get_datasets <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_datasets", x)
-  } else {
-    UseMethod("get_datasets", NA)
-  }
+  UseMethod("get_datasets")
 }
 
-#' @title Get Dataset Numeric
 #' @rdname get_datasets
 #' @export
 get_datasets.numeric <- function(x, ...) {
@@ -112,7 +103,6 @@ get_datasets.numeric <- function(x, ...) {
   }
 }
 
-#' @title Get Dataset Default
 #' @rdname get_datasets
 #' @export
 get_datasets.default <- function(x, ...) {
@@ -146,21 +136,14 @@ get_datasets.default <- function(x, ...) {
   }
 }
 
-# for sites objects
-#' @title Get Dataset from a \code{sites} object.
 #' @rdname get_datasets
-#' @examples \donttest{
-#' random_sites <- get_sites(1)
-#' allds <- get_datasets(random_sites, limit=3)
-#' }
-#' @md
 #' @export
 get_datasets.sites <- function(x, ...) {
   ids <- getids(x)
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   ids <- ids %>%
-    select(datasetid) %>%
+    select(.data$datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
@@ -181,17 +164,17 @@ get_datasets.site <- function(x, ...) {
   cl[[1]] <- NULL
   ids1 <- getids(x)
   ids <- ids1 %>%
-    filter(!is.na(suppressWarnings(as.numeric(siteid))),
-           !is.na(suppressWarnings(as.numeric(datasetid))))
+    filter(!is.na(suppressWarnings(as.numeric(.data$siteid))),
+           !is.na(suppressWarnings(as.numeric(.data$datasetid))))
   ids2 <- getids(x) %>% 
-    filter(is.na(suppressWarnings(as.numeric(siteid))) |
-             is.na(suppressWarnings(as.numeric(datasetid))))
+    filter(is.na(suppressWarnings(as.numeric(.data$siteid))) |
+             is.na(suppressWarnings(as.numeric(.data$datasetid))))
   if (nrow(ids2) != 0) {
     warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the
                          Neotoma DB yet or it has been removed. 
                         It will be removed from your search.",
-                        paste0(ids2$siteid,collapse = ", "),
-                        paste0(ids2$datasetid,collapse = ", "))
+                        paste0(ids2$siteid, collapse = ", "),
+                        paste0(ids2$datasetid, collapse = ", "))
     warning(warnsite)
   }
   dataset_list <- ids$datasetid
@@ -201,6 +184,6 @@ get_datasets.site <- function(x, ...) {
   } else {
     all_data <- TRUE
   }
-  output <- get_datasets(dataset_list, all_data=all_data)
+  output <- get_datasets(dataset_list, all_data = all_data)
   return(output)
 }

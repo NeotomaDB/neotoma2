@@ -23,7 +23,7 @@ getids <- function(x, order = TRUE) {
 
 #' @rdname getids
 #' @export
-getids.sites <- function (x, order = TRUE) {
+getids.sites <- function(x, order = TRUE) {
   siteids <- map(x@sites, function(y) {
     siteid <- y@siteid
     if (length(y@collunits) > 0) {
@@ -49,13 +49,13 @@ getids.sites <- function (x, order = TRUE) {
   rownames(siteids) <- seq_len(nrow(siteids))
   if (order) {
     siteids <- siteids %>%
-      arrange(siteid, collunitid, datasetid)
+      arrange(.data$siteid, .data$collunitid, .data$datasetid)
   }
   # Guaranteeing that future joins all work out
   siteids <- siteids %>%
-    mutate(siteid = siteid,
-           collunitid = collunitid,
-           datasetid = datasetid)
+    mutate(siteid = .data$siteid,
+           collunitid = .data$collunitid,
+           datasetid = .data$datasetid)
   siteids <- siteids[!is.na(siteids$datasetid), ]
   return(siteids)
 }
@@ -121,8 +121,8 @@ getids.collunit <- function(x, order = TRUE) {
     datasetids <- NA
   }
   df <- data.frame(siteid = siteid,
-                    collunitid = collunitid,
-                    datasetid = datasetids)
+                   collunitid = collunitid,
+                   datasetid = datasetids)
   df <- df[!is.na(df$datasetid), ]
   return(df)
 }

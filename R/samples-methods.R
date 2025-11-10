@@ -1,5 +1,5 @@
+#' @aliases sub-sub,samples-method
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "samples", i = "numeric"),
           definition = function(x, i) {
@@ -14,8 +14,8 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @aliases cash,samples-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "samples"),
           definition = function(x, name) {
@@ -26,24 +26,24 @@ setMethod(f = "$",
               unlist()
           })
 
+#' @aliases cash,sample-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "sample"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases length,samples-method
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "samples"),
           definition = function(x) {
             length(x@samples)
           })
 
+#' @aliases c,samples-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "samples"),
           definition = function(x, y) {
@@ -55,8 +55,8 @@ setMethod(f = "c",
             return(samp)
           })
 
+#' @aliases sub-subset,samples-method
 #' @rdname sub-subset
-#' @export
 setMethod(f = "[[<-", 
           signature = signature(x = "samples"),
           definition = function(x, i, value) {
@@ -66,8 +66,8 @@ setMethod(f = "[[<-",
             return(out)
           })
 
+#' @aliases subset,sample-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "sample", i = "character"),
           definition = function(x, i, value) {

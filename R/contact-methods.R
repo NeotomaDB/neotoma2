@@ -1,27 +1,14 @@
-#' @rdname show
-#' @export
-setMethod(f = "show",
-          signature = "contact",
-          definition = function(object) {
-            print(data.frame(contactid = testNull(object@contactid),
-                             familyname = testNull(object@familyname),
-                             givennames = testNull(object@givennames),
-                             ORCID = NA,
-                             institution = NA,
-                             contactstatus = NA,
-                             notes = testNull(object@notes)))
-          })
-
+#' @aliases names,contact-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "contact"),
           definition = function(x) {
             slotNames(x)
           })
 
+
+#' @aliases show,contacts-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "contacts",
           definition = function(object) {
@@ -38,36 +25,8 @@ setMethod(f = "show",
               print()
           })
 
-#' @rdname sub-sub
-#' @export
-setMethod(f = "[[",
-          signature = signature(x = "contacts", i = "numeric"),
-          definition = function(x, i) {
-            x@contacts[[i]]
-          })
-
-#' @rdname cash
-#' @export
-setMethod(f = "$",
-          signature = signature(x = "contact"),
-          definition = function(x, name) {
-            slot(x, name)
-          })
-
-#' @rdname cash
-#' @export
-setMethod(f = "$",
-          signature = signature(x = "contacts"),
-          definition = function(x, name) {
-            x %>%
-              map(function(y) {
-                slot(y, name)
-                }) %>%
-              unlist()
-          })
-
+#' @aliases show,contact-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
@@ -81,8 +40,36 @@ setMethod(f = "show",
               print()
           })
 
+#' @aliases sub-sub,contacts-method
+#' @rdname sub-sub
+setMethod(f = "[[",
+          signature = signature(x = "contacts", i = "numeric"),
+          definition = function(x, i) {
+            x@contacts[[i]]
+          })
+
+#' @aliases cash,contact-method
+#' @rdname cash
+setMethod(f = "$",
+          signature = signature(x = "contact"),
+          definition = function(x, name) {
+            slot(x, name)
+          })
+
+#' @aliases cash,contacts-method
+#' @rdname cash
+setMethod(f = "$",
+          signature = signature(x = "contacts"),
+          definition = function(x, name) {
+            x %>%
+              map(function(y) {
+                slot(y, name)
+              }) %>%
+              unlist()
+          })
+
+#' @aliases as.data.frame,contact-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("contact"),
           definition = function(x) {
@@ -95,8 +82,8 @@ setMethod(f = "as.data.frame",
                        notes = x@notes)
           })
 
+#' @aliases as.data.frame,contacts-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("contacts"),
           definition = function(x) {
@@ -104,8 +91,8 @@ setMethod(f = "as.data.frame",
               bind_rows()
           })
 
+#' @aliases c,contacts-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "contacts"),
           definition = function(x, y) {
@@ -121,8 +108,8 @@ setMethod(f = "c",
             return(out)
           })
 
+#' @aliases c,contact-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "contact"),
           definition = function(x, y) {

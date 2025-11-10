@@ -1,12 +1,13 @@
 #' @title set Site Information for Fossil Sites
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest
 #' @param x object to be set as dataset,
 #' @param datasetid dataset identifier
 #' @param database dataset where the dataset came from
 #' @param doi DOI
+#' @param recdatecreated date the dataset was created
 #' @param datasettype type the dataset belongs to
 #' @param datasetname name of the dataset
 #' @param age_range_old age range old

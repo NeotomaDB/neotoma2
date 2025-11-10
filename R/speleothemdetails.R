@@ -22,22 +22,22 @@ setMethod(f = "speleothemdetails",
                   function(y) speleothemdetails(y)) %>%
       bind_rows() %>%
       distinct() %>%
-      select(siteid, sitename, collectionunitid, datasetid,
-             entityid, entityname, depth, thickness,
-             chronologyid, chronologyname, 
-             agetype, ageolder, age, ageyounger, age_units,
-             sampleid, samplename,
-             taxongroup, ecologicalgroup,
-             taxonid, variablename, value, units,
+      select(.data$siteid, .data$sitename, .data$collectionunitid,
+             .data$datasetid, .data$entityid, .data$entityname,
+             .data$depth, .data$thickness, .data$chronologyid,
+             .data$chronologyname, .data$agetype, .data$ageolder,
+             .data$age, .data$ageyounger, .data$age_units, .data$sampleid,
+             .data$samplename, .data$taxongroup, .data$ecologicalgroup,
+             .data$taxonid, .data$variablename, .data$value, .data$units,
              # speleothem details
-             speleothemtype, geology,
-             relativeage, monitoring,
-             speleothemdriptype, dripheight, dripheightunits,
-             covertype, entitycoverthickness,
-             entrancedistance, entrancedistanceunits, 
-             landusecovertype, landusecoverpercent,
-             vegetationcovertype, vegetationcoverpercent) %>%
-      arrange(entityid, taxonid, depth, age)
+             .data$speleothemtype, .data$geology,
+             .data$relativeage, .data$monitoring,
+             .data$speleothemdriptype, .data$dripheight, .data$dripheightunits,
+             .data$covertype, .data$entitycoverthickness,
+             .data$entrancedistance, .data$entrancedistanceunits, 
+             .data$landusecovertype, .data$landusecoverpercent,
+             .data$vegetationcovertype, .data$vegetationcoverpercent) %>%
+      arrange(.data$entityid, .data$taxonid, .data$depth, .data$age)
     if (nrow(output) == 0) {
       warnsite <- sprintf("No assigned speleothems. Is it a speleothem 
                            dataset? \nDid you run get_speleothems()?")
@@ -52,11 +52,11 @@ setMethod(f = "speleothemdetails",
 setMethod(f = "speleothemdetails",
   signature = "site",
   definition = function(x) {
-    sampset <- map(x@collunits@collunits,
-                   function(y) speleothemdetails(y) %>%
-                     mutate(siteid = x$siteid)) %>%
-      bind_rows()
-    return(sampset)
+    map(x@collunits@collunits,
+        function(y) {
+          speleothemdetails(y) %>%
+            bind_rows()
+        })
   }
 )
 

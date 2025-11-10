@@ -7,7 +7,7 @@
 #' identifiers across objects, and because we want to avoid
 #'  conflicts between naming systems, a universally unique 
 #' identifier (UUID) is created for the object ID.
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @importFrom digest digest
 #' @importFrom uuid UUIDgenerate
 #' @param x Object to be set as a chronology

@@ -5,7 +5,8 @@
 #' @importFrom dplyr bind_rows
 #' @param object `sites`, `datasets`, `collunits`, `contacts` object
 #' @returns NULL
-#' @export
+#' @aliases show,site-method
+#' @importMethodsFrom methods show
 setMethod(f = "show",
           signature = "site",
           definition = function(object) {
@@ -16,20 +17,13 @@ setMethod(f = "show",
                              altitude = object@altitude), row.names = FALSE)
           })
 
+#' @aliases show,sites-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
-            map(object@sites, function(x) {
-              df <- data.frame(siteid = x@siteid,
-                               sitename = x@sitename,
-                               lat = mean(st_coordinates(x@geography)[, 2]),
-                               long = mean(st_coordinates(x@geography)[, 1]),
-                               altitude = x@altitude)
-              return(df)
-            }) %>%
-              bind_rows() %>%
+            object@sites %>%
+              map(as.data.frame) %>%
               print(row.names = FALSE)
           })
 
@@ -45,7 +39,8 @@ setMethod(f = "show",
 #' some_site <- get_sites(sitename = "Site%", limit=3)
 #' some_site[[2]]
 #' }
-#' @export
+#' @aliases [[,sites,numeric-method
+#' @exportMethod [[
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
           definition = function(x, i) {
@@ -66,15 +61,16 @@ setMethod(f = "[[",
 #' @param i The numeric index
 #' @returns sliced `site` object
 #' @md
-#' @export
+#' @aliases  [,sites,numeric-method
+#' @exportMethod [
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
           definition = function(x, i) {
             new("sites", sites = x@sites[i])
           })
 
+#' @aliases [,site,numeric-method
 #' @rdname sub
-#' @export
 setMethod(f = "[",
           signature = signature(x = "site", i = "numeric"),
           definition = function(x, i) {
@@ -82,8 +78,8 @@ setMethod(f = "[",
             as.data.frame(sapply(slots, function(y) slot(x, y)))
           })
 
+#' @aliases [,site,character-method
 #' @rdname sub
-#' @export
 setMethod(f = "[",
           signature = signature(x = "site", i = "character"),
           definition = function(x, i) {
@@ -92,21 +88,22 @@ setMethod(f = "[",
             return(out)
           })
 
-#' @title Get a neotoma2 object's slot names
+#' @title Get a `neotoma2` object's slot names
 #' @name names
-#' @param x A neotoma2 object.
+#' @param x A `neotoma2` object.
 #' @returns NULL.
 #' @description Get all names for elements' slots within a `collunit` object.
 #' @md
-#' @export
+#' @aliases names,site-method
+#' @exportMethod names
 setMethod(f = "names",
           signature = signature(x = "site"),
           definition = function(x) {
             slotNames(x)
           })
 
+#' @aliases names,sites-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "sites"),
           definition = function(x) {
@@ -115,13 +112,14 @@ setMethod(f = "names",
 
 #' @title sub-subset
 #' @name sub-subset
-#' @param x neotoma2 object
-#' @param i iteration in neotoma2 object
+#' @param x `neotoma2` object
+#' @param i iteration in `neotoma2` object
 #' @param value The value to be used
-#' @description Obtain one of the elements within a nested neotoma2 object
+#' @description Obtain one of the elements within a nested `neotoma2` object
 #' @returns `sites` object with reassigned values
 #' @md
-#' @export
+#' @aliases [[<-,sites-method
+#' @exportMethod [[<-
 setMethod(f = "[[<-",
           signature = signature(x = "sites"),
           definition = function(x, i, value) {
@@ -138,7 +136,8 @@ setMethod(f = "[[<-",
 #' @param value The value to be used.
 #' @returns `site` object with reassigned character values
 #' @md
-#' @export
+#' @aliases [<-,site,character-method
+#' @exportMethod [<-
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
           definition = function(x, i, value) {
@@ -148,8 +147,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases [<-,site,numeric-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "numeric"),
           definition = function(x, i, value) {
@@ -167,7 +166,8 @@ setMethod(f = "[<-",
 #' @param value The value to be used.
 #' @returns `neotoma2` object with reassigned values
 #' @md
-#' @export
+#' @aliases $<-,site-method
+#' @exportMethod $<-
 setMethod(f = "$<-",
           signature = signature(x = "site"),
           definition = function(x, name, value) {
@@ -179,18 +179,19 @@ setMethod(f = "$<-",
 #' @name cash
 #' @param x `neotoma2` object
 #' @param name name of the slot
-#' @description Obtain slots of a site without using at-mark
+#' @description Obtain slots of a `neotoma2` without using at-mark
 #' @returns value at chosen slot in the `site` object
 #' @md
-#' @export
+#' @aliases $,site-method
+#' @exportMethod $
 setMethod(f = "$",
           signature = signature(x = "site"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases $,sites-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "sites"),
           definition = function(x, name) {
@@ -204,11 +205,13 @@ setMethod(f = "$",
 #' @title as.data.frame
 #' @name as.data.frame
 #' @importFrom sf st_coordinates
+#' @importFrom dplyr bind_cols
 #' @param x `neotoma2` object
 #' @returns `data.frame` object
 #' @description Returns `neotoma2` object's data as a `data.frame`.
 #' @md
-#' @export
+#' @aliases as.data.frame,site-method
+#' @exportMethod as.data.frame
 setMethod(f = "as.data.frame",
           signature = signature("site"),
           definition = function(x) {
@@ -222,8 +225,8 @@ setMethod(f = "as.data.frame",
                        elev = x@altitude)
           })
 
+#' @aliases as.data.frame,sites-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("sites"),
           definition = function(x) {
@@ -245,7 +248,8 @@ setMethod(f = "as.list",
 #' @param x `neotoma2` object
 #' @returns `int` representing length of a `neotoma2` object
 #' @md
-#' @export
+#' @aliases length,sites-method
+#' @exportMethod length
 setMethod(f = "length",
           signature = signature(x = "sites"),
           definition = function(x) {
@@ -254,15 +258,15 @@ setMethod(f = "length",
 
 #' @title c - Combine `neotoma2` objects
 #' @name c
-#' @param x `neotoma` object 1 or NULL
-#' @param y `neotoma` object 2 or NULL
+#' @importFrom methods is
+#' @param x `neotoma2` object 1 or NULL
+#' @param y `neotoma2` object 2 or NULL
 #' @returns concatenated and cleaned `sites` object
 #' @md
-#' @export
+#' @exportMethod c
 setClassUnion("missingOrNULL", c("missing", "NULL"))
 
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = "missingOrNULL",
           definition = function(x = "missingORNULL", y) {
@@ -270,15 +274,14 @@ setMethod(f = "c",
           })
 
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = "missingOrNULL",
           definition = function(x = "missingORNULL", y) {
             y
           })
 
+#' @aliases c,sites-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "sites"),
           definition = function(x, y) {
@@ -301,7 +304,8 @@ setMethod(f = "c",
 #' @param ... Other options to pass to \code{write.csv()}.
 #' @importFrom utils write.csv
 #' @returns NULL side effect from saving a csv file
-#' @export
+#' @aliases write.csv,sites-method
+#' @exportMethod write.csv
 setMethod(f = "write.csv",
           signature = "sites",
           definition = function(x, ...) {
@@ -313,7 +317,8 @@ setMethod(f = "write.csv",
 #' @param obj A sites object
 #' @param ... Additional parameters associated with the call.
 #' @returns `data.frame` object with site coordinates.
-#' @export
+#' @aliases coordinates,sites-method
+#' @exportMethod coordinates
 setMethod(f = "coordinates",
           signature = "sites",
           definition = function(obj, ...) {
@@ -323,12 +328,14 @@ setMethod(f = "coordinates",
 
 #' @title Plot site coordinates using a basic plot.
 #' @param x sites object
+#' @param y *Ignored.*
 #' @param ... Additional parameters associated with the call.
 #' @returns `plot` object with site coordinates.
-#' @export
+#' @aliases plot,sites-method
+#' @exportMethod plot
 setMethod(f = "plot",
           signature = "sites",
-          definition = function(x, ...) {
+          definition = function(x, y, ...) {
             coords <- as.data.frame(x)[, c("long", "lat")]
             plot(coords, ...)
           })
@@ -342,7 +349,8 @@ setMethod(f = "plot",
 #' and types of datasets within the site.
 #' @importFrom dplyr bind_rows mutate select
 #' @returns `data.frame` object with site summary information
-#' @export
+#' @aliases summary,sites-method
+#' @exportMethod summary
 setMethod(f = "summary",
           signature = "sites",
           definition = function(object, ...) {
@@ -395,7 +403,8 @@ setMethod(f = "summary",
 #' ds <- get_datasets(1)
 #' doi(ds)
 #' }
-#' @export
+#' @aliases doi,sites-method
+#' @exportMethod doi
 setMethod(f = "doi",
           signature = "sites",
           definition = function(x) {
@@ -406,18 +415,17 @@ setMethod(f = "doi",
                          doi = doi)
             }) %>%
               bind_rows() %>%
-              mutate(datasetid = datasetid) %>%
               full_join(ids, by = "datasetid") %>%
-              select(siteid, collunitid, datasetid, doi) %>%
-              group_by(siteid, collunitid, datasetid) %>%
-              arrange(doi) %>%
-              filter(row_number() == 1) %>%
-              as.data.frame()
+              select(.data$siteid, .data$collunitid,
+                     .data$datasetid, .data$doi) %>%
+              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
+              arrange(.data$doi) %>%
+              filter(row_number() == 1)
             return(dois)
           })
 
+#' @aliases doi,site-method
 #' @rdname doi
-#' @export
 setMethod(f = "doi",
           signature = "site",
           definition = function(x) {
@@ -429,11 +437,11 @@ setMethod(f = "doi",
             }) %>%
               bind_rows() %>%
               full_join(ids, by = "datasetid") %>%
-              select(siteid, collunitid, datasetid, doi) %>%
-              group_by(siteid, collunitid, datasetid) %>%
-              arrange(doi) %>%
-              filter(row_number() == 1) %>%
-              as.data.frame()
+              select(.data$siteid, .data$collunitid,
+                     .data$datasetid, .data$doi) %>%
+              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
+              arrange(.data$doi) %>%
+              filter(row_number() == 1)
             return(dois)
           })
 
@@ -449,65 +457,66 @@ setMethod(f = "doi",
 #' ds <- get_datasets(1)
 #' cite_data(ds)
 #' }
-#' @export
+#' @aliases cite_data,sites-method
+#' @exportMethod cite_data
 setMethod(f = "cite_data",
           signature = "sites",
           definition = function(x) {
+            if (is.null(x)){
+              warning("No sites to filter")
+              return(NULL)
+            }
             strn <- paste0("%s. %s; %s dataset. ",
                            "In %s. Neotoma Paleoecology Database. doi:%s")
-            ids <- getids(x) %>%
-              mutate(collunitid = as.numeric(collunitid),
-                     datasetid = as.numeric(datasetid))
-            sitenames <- x  %>%
-              as.data.frame() %>%
-              select(siteid, sitename)
-            datasets <- datasets(x) %>%
-              as.data.frame() %>%
-              select(datasetid, datasettype, database) %>%
-              mutate(datasetid = as.numeric(datasetid))
-            dois <- map(datasets(get_datasets(x))@datasets, function(x) {
-              doi <- unlist((x$doi  %>% map(testNull)))
-              pi_list <- unlist((x$pi_list  %>% map(testNull)))
-              data.frame(datasetid = x$datasetid,
-                         doi = doi,
-                         pi_list = paste0(sort(pi_list), collapse = "; "))
-            }) %>%
-              do.call(rbind, .) %>%
-              mutate(datasetid = as.numeric(datasetid))
+            ids <- getids(x)
+            sitenames <- as.data.frame(x)  %>%
+              select(.data$siteid, .data$sitename)
+            datasets <- as.data.frame(datasets(x)) %>%
+              select(.data$datasetid, .data$datasettype, .data$database)
+            dois <- map(datasets(get_datasets(x))@datasets, 
+                        function(x) {
+                          doi <- unlist((x$doi  %>% map(testNull)))
+                          pi_list <- unlist((x$pi_list  %>% map(testNull)))
+                          data.frame(datasetid = x$datasetid,
+                                     doi = doi,
+                                     pi_list = paste0(sort(pi_list),
+                                                      collapse = "; "))
+                        })
+            dois <- do.call(rbind, dois)
             citations <- ids %>%
               full_join(sitenames, by = "siteid") %>%
               full_join(datasets, by = "datasetid") %>%
               full_join(dois, by = "datasetid") %>%
-              select(siteid, sitename, collunitid, datasetid,
-                     datasettype, database, doi, pi_list) %>%
-              group_by(siteid, collunitid, datasetid) %>%
-              arrange(doi) %>%
+              select(.data$siteid, .data$sitename, .data$collunitid,
+                     .data$datasetid, .data$datasettype, .data$database,
+                     .data$doi, .data$pi_list) %>%
+              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
+              arrange(.data$doi) %>%
               filter(row_number() == 1) %>%
               as.data.frame() %>%
-              mutate(citation = sprintf(strn, pi_list, sitename,
-                                        datasettype, database, doi)) %>%
-              select(datasetid, citation) %>%
-              mutate(datasetid = as.numeric(datasetid))
+              mutate(citation = sprintf(strn, .data$pi_list,
+                                        .data$sitename, .data$datasettype,
+                                        .data$database, .data$doi)) %>%
+              select(.data$datasetid, .data$citation)
             return(citations)
           })
 
+#' @aliases cite_data,site-method
 #' @rdname cite_data
-#' @export
 setMethod(f = "cite_data",
           signature = "site",
           definition = function(x) {
+            if (is.null(x)){
+              warning("No sites to filter")
+              return(NULL)
+            }
             strn <- paste0("%s. %s; %s dataset. ",
                            "In %s. Neotoma Paleoecology Database. doi:%s")
-            ids <- getids(x) %>% 
-              mutate(collunitid = as.numeric(collunitid),
-                     datasetid = as.numeric(datasetid))
-            sitenames <- x  %>%
-              as.data.frame() %>%
-              select(siteid, sitename)
-            datasets <- datasets(x) %>%
-              as.data.frame() %>%
-              select(datasetid, datasettype, database) %>%
-              mutate(datasetid = as.numeric(datasetid))
+            ids <- getids(x)
+            sitenames <- as.data.frame(x)  %>%
+              select(.data$siteid, .data$sitename)
+            datasets <- as.data.frame(datasets(x)) %>%
+              select(.data$datasetid, .data$datasettype, .data$database)
             dois <- map(datasets(get_datasets(x))@datasets, function(x) {
               doi <- unlist((x$doi  %>% map(testNull)))
               pi_list <- unlist((x$pi_list  %>% map(testNull)))
@@ -515,20 +524,21 @@ setMethod(f = "cite_data",
                          doi = doi,
                          pi_list = paste0(sort(pi_list), collapse = "; "))
             }) %>%
-              bind_rows() %>%
-              mutate(datasetid = as.numeric(datasetid))
+              bind_rows()
             citations <- ids %>%
               full_join(sitenames, by = "siteid") %>%
               full_join(datasets, by = "datasetid") %>%
               full_join(dois, by = "datasetid") %>%
-              select(siteid, sitename, collunitid, datasetid,
-                     datasettype, database, doi, pi_list) %>%
-              group_by(siteid, collunitid, datasetid) %>%
-              arrange(doi) %>%
+              select(.data$siteid, .data$sitename, .data$collunitid,
+                     .data$datasetid, .data$datasettype, .data$database,
+                     .data$doi, .data$pi_list) %>%
+              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
+              arrange(.data$doi) %>%
               filter(row_number() == 1) %>%
               as.data.frame() %>%
-              mutate(citation = sprintf(strn, pi_list, sitename,
-                                        datasettype, database, doi)) %>%
-              select(datasetid, citation)
+              mutate(citation = sprintf(strn, .data$pi_list,
+                                        .data$sitename, .data$datasettype,
+                                        .data$database, .data$doi)) %>%
+              select(.data$datasetid, .data$citation)
             return(citations)
           })

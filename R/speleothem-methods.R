@@ -1,5 +1,5 @@
+#' @aliases show,speleothem-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "speleothem",
           definition = function(object) {
@@ -25,8 +25,8 @@ setMethod(f = "show",
                   ), row.names = FALSE)
           })
 
+#' @aliases show,speleothems-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "speleothems",
           definition = function(object) {
@@ -55,8 +55,8 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
+#' @aliases sub-sub,speleothems-method
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "speleothems", i = "numeric"),
           definition = function(x, i) {
@@ -71,16 +71,16 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @aliases names,speleothem-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "speleothem"),
           definition = function(x) {
             slotNames(x)
           })
 
+#' @aliases sub-subset,speleothems-method
 #' @rdname sub-subset
-#' @export
 setMethod(f = "[[<-",
           signature = signature(x = "speleothems"),
           definition = function(x, i, value) {
@@ -90,8 +90,8 @@ setMethod(f = "[[<-",
             return(out)
           })
 
+#' @aliases subset,speleothem-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "character"),
           definition = function(x, i, value) {
@@ -101,8 +101,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases subset,speleothem-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "numeric"),
           definition = function(x, i, value) {
@@ -113,8 +113,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases cash-set,speleothem-method
 #' @rdname cash-set
-#' @export
 setMethod(f = "$<-",
           signature = signature(x = "speleothem"),
           definition = function(x, name, value) {
@@ -122,24 +122,24 @@ setMethod(f = "$<-",
             return(x)
           })
 
+#' @aliases sub,speleothems-method
 #' @rdname sub
-#' @export
 setMethod(f = "[",
           signature = signature(x = "speleothems", i = "numeric"),
           definition = function(x, i) {
             new("speleothems", speleothems = x@speleothems[i])
           })
 
+#' @aliases cash,speleothem-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "speleothem"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases cash,speleothems-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "speleothems"),
           definition = function(x, name) {
@@ -150,8 +150,8 @@ setMethod(f = "$",
               unlist()
           })
 
+#' @aliases as.data.frame,speleothem-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("speleothem"),
           definition = function(x) {
@@ -176,24 +176,24 @@ setMethod(f = "as.data.frame",
                        entitycovertype = x@entitycovertype)
           })
 
+#' @aliases as.data.frame,speleothems-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("speleothems"),
           definition = function(x) {
             x@speleothems %>% map(as.data.frame) %>% bind_rows()
           })
 
+#' @aliases length,speleothems-method
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "speleothems"),
           definition = function(x) {
             length(x@speleothems)
           })
 
+#' @aliases c,speleothems-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "speleothems"),
           definition = function(x, y) {

@@ -1,5 +1,5 @@
+#' @aliases show,taxon-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "taxon",
           definition = function(object) {
@@ -16,8 +16,8 @@ setMethod(f = "show",
                   row.names = FALSE)
           })
 
+#' @aliases show,taxa-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "taxa",
           definition = function(object) {
@@ -37,8 +37,8 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
+#' @aliases sub-sub,taxa-method
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "taxa", i = "numeric"),
           definition = function(x, i) {
@@ -53,16 +53,16 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @aliases names,taxon-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "taxon"),
           definition = function(x) {
             slotNames(x)
           })
 
+#' @aliases sub-subset,taxa-method
 #' @rdname sub-subset
-#' @export
 setMethod(f = "[[<-",
           signature = signature(x = "taxa"),
           definition = function(x, i, value) {
@@ -72,8 +72,8 @@ setMethod(f = "[[<-",
             return(out)
           })
 
+#' @aliases subset,taxon-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "taxon", i = "character"),
           definition = function(x, i, value) {
@@ -83,8 +83,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases subset,taxon-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "taxon", i = "numeric"),
           definition = function(x, i, value) {
@@ -95,8 +95,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases cash-set,taxon-method
 #' @rdname cash-set
-#' @export
 setMethod(f = "$<-",
           signature = signature(x = "taxon"),
           definition = function(x, name, value) {
@@ -104,24 +104,24 @@ setMethod(f = "$<-",
             return(x)
           })
 
+#' @aliases sub,taxa-method
 #' @rdname sub
-#' @export
 setMethod(f = "[",
           signature = signature(x = "taxa", i = "numeric"),
           definition = function(x, i) {
             new("taxa", taxa = x@taxa[i])
           })
 
+#' @aliases cash,taxon-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "taxon"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases cash,taxa-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "taxa"),
           definition = function(x, name) {
@@ -132,8 +132,8 @@ setMethod(f = "$",
               unlist()
           })
 
+#' @aliases as.data.frame,taxon-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("taxon"),
           definition = function(x) {
@@ -149,8 +149,8 @@ setMethod(f = "as.data.frame",
                        publication = x@publication)
           })
 
+#' @aliases as.data.frame,taxa-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
   signature = "taxa",
   definition = function(x) {
@@ -173,16 +173,16 @@ setMethod(f = "as.data.frame",
   }
 )
 
+#' @aliases length,taxa-method
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "taxa"),
           definition = function(x) {
             length(x@taxa)
           })
 
+#' @aliases c,taxa-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "taxa"),
           definition = function(x, y) {

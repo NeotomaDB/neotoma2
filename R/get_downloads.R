@@ -65,11 +65,7 @@
 #' @md
 #' @export
 get_downloads <- function(x = NA, verbose = TRUE, ...) {
-  if (!missing(x)) {
-    UseMethod("get_downloads", x)
-  }else {
-    UseMethod("get_downloads", NA)
-  }
+  UseMethod("get_downloads")
 }
 
 #' @rdname get_downloads
@@ -101,7 +97,7 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   ids <- ids %>%
-    select(datasetid) %>%
+    select(.data$datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()

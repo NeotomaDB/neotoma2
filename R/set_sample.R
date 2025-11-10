@@ -2,7 +2,7 @@
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @param x Object to be set as a sample
 #' @param ages ages
 #' @param igsn IGSN character

@@ -44,9 +44,9 @@
 \S4method{c}{taxa}(x, y)
 }
 \arguments{
-\item{x}{\code{neotoma} object 1 or NULL}
+\item{x}{\code{neotoma2} object 1 or NULL}
 
-\item{y}{\code{neotoma} object 2 or NULL}
+\item{y}{\code{neotoma2} object 2 or NULL}
 }
 \value{
 concatenated and cleaned \code{sites} object

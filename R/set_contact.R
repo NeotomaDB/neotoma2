@@ -5,7 +5,7 @@
 #' and because we want to avoid conflicts between naming systems, a 
 #' universally unique identifier (UUID) is created for the object ID.This is not
 #' to be updated to the database.
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest
 #' @param x Object to be set as a contact
@@ -47,9 +47,7 @@ set_contact <- function(x = NA,
                         url = NA_character_,
                         address = NA_character_,
                         notes = NA_character_) {
-  
   function_call <- match.call()
-  
   if (suppressWarnings(is.na(x))) {
     x <- new("contact")
     if (is.na(contactid)) {

@@ -1,6 +1,6 @@
 #' @title Extract taxonomic data from a set of sites.
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom dplyr bind_rows distinct group_by summarise
+#' @importFrom dplyr bind_rows distinct group_by summarise n
 #' @importFrom purrr map
 #' @param object A \code{sites} object.
 #' @returns A \code{data.frame} reporting the taxa/data objects, units,
@@ -28,7 +28,7 @@ setMethod(f = "taxa",
                .data$variablename,
                .data$ecologicalgroup) %>%
       summarise(samples = sum(samples),
-                sites = sum(sites), .groups = "keep")
+                sites = sum(.data$sites), .groups = "keep")
     if (nrow(output) == 0) {
       warnsite <- sprintf("No assigned samples. Did you run get_downloads()?")
       warning(warnsite)

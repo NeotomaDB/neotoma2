@@ -1,5 +1,5 @@
+#' @aliases show,dataset-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "dataset",
           definition = function(object) {
@@ -13,27 +13,27 @@ setMethod(f = "show",
                              notes = object@notes), row.names = FALSE)
           })
 
+#' @aliases show,datasets-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
             map(object@datasets, function(y) {
-              df <- data.frame(datasetid = y@datasetid,
-                               database = y@database,
-                               datasettype = y@datasettype,
-                               age_range_old =  y@age_range_old,
-                               age_range_young =  y@age_range_young,
-                               age_units = y@age_units,
-                               recdatecreated = y@recdatecreated,
-                               notes = y@notes)
+              data.frame(datasetid = y@datasetid,
+                         database = y@database,
+                         datasettype = y@datasettype,
+                         age_range_old =  y@age_range_old,
+                         age_range_young =  y@age_range_young,
+                         age_units = y@age_units,
+                         recdatecreated = y@recdatecreated,
+                         notes = y@notes)
             }) %>%
               bind_rows() %>%
               print(row.names = FALSE)
           })
 
+#' @aliases sub-sub,datasets-method
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "datasets", i = "numeric"),
           definition = function(x, i) {
@@ -48,16 +48,16 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @aliases names,dataset-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "dataset"),
           definition = function(x) {
             slotNames(x)
           })
 
+#' @aliases sub-subset,datasets-method
 #' @rdname sub-subset
-#' @export
 setMethod(f = "[[<-",
           signature = signature(x = "datasets"),
           definition = function(x, i, value) {
@@ -67,8 +67,8 @@ setMethod(f = "[[<-",
             return(out)
           })
 
+#' @aliases subset,dataset-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "character"),
           definition = function(x, i, value) {
@@ -78,8 +78,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases subset,dataset-method
 #' @rdname subset
-#' @export
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "numeric"),
           definition = function(x, i, value) {
@@ -90,8 +90,8 @@ setMethod(f = "[<-",
             return(x)
           })
 
+#' @aliases cash-set,dataset-method
 #' @rdname cash-set
-#' @export
 setMethod(f = "$<-",
           signature = signature(x = "dataset"),
           definition = function(x, name, value) {
@@ -99,24 +99,24 @@ setMethod(f = "$<-",
             return(x)
           })
 
+#' @aliases sub,datasets-method
 #' @rdname sub
-#' @export
 setMethod(f = "[",
           signature = signature(x = "datasets", i = "numeric"),
           definition = function(x, i) {
             new("datasets", datasets = x@datasets[i])
           })
 
+#' @aliases cash,dataset-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "dataset"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases cash,datasets-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "datasets"),
           definition = function(x, name) {
@@ -127,8 +127,8 @@ setMethod(f = "$",
               unlist()
           })
 
+#' @aliases as.data.frame,dataset-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("dataset"),
           definition = function(x) {
@@ -142,24 +142,24 @@ setMethod(f = "as.data.frame",
                        notes = x@notes)
           })
 
+#' @aliases as.data.frame,datasets-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("datasets"),
           definition = function(x) {
             x@datasets %>% map(as.data.frame) %>% bind_rows()
           })
 
+#' @aliases length,datasets-method
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "datasets"),
           definition = function(x) {
             length(x@datasets)
           })
 
+#' @aliases c,datasets-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "datasets"),
           definition = function(x, y) {

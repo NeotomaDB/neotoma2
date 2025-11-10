@@ -57,21 +57,21 @@ speleo_helper <- function(sites) {
 #'  * `x`  The unique dataset ID (integer) in Neotoma. Can be passed as a
 #' vector of dataset IDs.
 #'  * `sites`  A `sites` R object.
-#' @md
-#' @export
-get_speleothems <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_speleothems", x)
-  } else {
-    UseMethod("get_speleothems", NA)
-  }
-}
-
-#' @rdname get_speleothems
 #' @examples {
 #' ## Find speleothems by numeric datasetid:
 #' speleo <- get_speleothems(c(2,5))
 #' }
+#' @md
+#' @export
+get_speleothems <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_speleothems", "default")
+  } else {
+    UseMethod("get_speleothems", x)
+  }
+}
+
+#' @rdname get_speleothems
 #' @export
 get_speleothems.numeric <- function(x, ...) {
   st <- get_datasets(x)
@@ -88,7 +88,7 @@ get_speleothems.numeric <- function(x, ...) {
 get_speleothems.sites <- function(x, ...) {
   pared_ds <- speleo_helper(x)
   if (is.null(pared_ds)) {
-    st
+    x
   } else {
     new("sites", sites = pared_ds)
   }

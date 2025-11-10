@@ -77,8 +77,9 @@ setMethod(f = "samples",
                                        dateprepared = y@dateprepared)
                           }) %>%
         bind_rows() %>%
-        mutate(modelrank = match(modelagetype, rev(precedence)),
-               order = isdefault * match(modelagetype, rev(precedence)))
+        mutate(modelrank = match(.data$modelagetype, rev(precedence)),
+               order = .data$isdefault * match(.data$modelagetype,
+                                               rev(precedence)))
       # Validation of default chrons, we want to check whether there
       # exists either multiple default chronologies for the same
       # time-frame or, alternately, no default chronology.
@@ -113,38 +114,40 @@ setMethod(f = "samples",
     } else {
       defaultchron <- data.frame(chronologyid = NULL)
     }
-    sampset <- map(
-      datasets(x)@datasets, function(y) {
-        dsid <- y$datasetid
-        allsamp <- map(y@samples@samples,
-                       function(z) {
-                         whichage <- which(
-                           z@ages$chronologyid == defaultchron$chronologyid)
-                         if (length(whichage) == 0) {
-                           whichage <- 1
-                         }
-                         if (dim(z@datum)[1] > 0) {
-                           df <-
-                             data.frame(z@ages[whichage,],
-                                        z@datum,
-                                        analysisunitid = z@analysisunitid,
-                                        sampleanalyst = toString(unique(unlist(
-                                                            z@sampleanalyst,
-                                                            use.names = FALSE))
-                                        ),
-                                        sampleid = z@sampleid,
-                                        depth = z@depth,
-                                        thickness = z@thickness,
-                                        samplename = z@samplename,
-                                        row.names = NULL)
-                         } else {
-                           df <- data.frame()
-                         }
-                         return(df)
-                       }) %>%
+    sampset <- map(datasets(x)@datasets,
+                   function(y) {
+                     dsid <- y$datasetid
+                     allsamp <-
+                       map(y@samples@samples,
+                           function(z) {
+                             whichage <-
+                               which(z@ages$chronologyid ==
+                                     defaultchron$chronologyid)
+                             if (length(whichage) == 0) {
+                               whichage <- 1
+                             }
+                             if (dim(z@datum)[1] > 0) {
+                               df <-
+                                 data.frame(z@ages[whichage,],
+                                            z@datum,
+                                            analysisunitid = z@analysisunitid,
+                                            sampleanalyst =
+                                            toString(unique(unlist(
+                                                          z@sampleanalyst,
+                                                          use.names = FALSE))),
+                                            sampleid = z@sampleid,
+                                            depth = z@depth,
+                                            thickness = z@thickness,
+                                            samplename = z@samplename,
+                                            row.names = NULL)
+                             } else {
+                               df <- data.frame()
+                             }
+                             return(df)
+                           }) %>%
                        bind_rows() %>%
                        mutate(datasetid = dsid)
-                    return(allsamp)
+                     return(allsamp)
                    }) %>%
       bind_rows() %>%
       left_join(as.data.frame(datasets(x)), by = "datasetid") %>%

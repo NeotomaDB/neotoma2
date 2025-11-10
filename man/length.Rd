@@ -9,6 +9,7 @@
 \alias{length,publications-method}
 \alias{length,samples-method}
 \alias{length}
+\alias{length,sites-method}
 \alias{length,speleothems-method}
 \alias{length,taxa-method}
 \title{length}

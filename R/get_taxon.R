@@ -49,10 +49,10 @@ parse_taxon <- function(data) {
 #' @md
 #' @export
 get_taxon <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_taxon", x)
+  if (missing(x)) {
+    UseMethod("get_taxon", "default")
   } else {
-    UseMethod("get_taxon", NA)
+    UseMethod("get_taxon", x)
   }
 }
 

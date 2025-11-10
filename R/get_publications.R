@@ -26,11 +26,7 @@
 #' @md
 #' @export
 get_publications <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_publications", x)
-  } else {
-    UseMethod("get_publications", NA)
-  }
+  UseMethod("get_publications")
 }
 
 #' @rdname get_publications

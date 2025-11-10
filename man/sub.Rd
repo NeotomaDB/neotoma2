@@ -3,12 +3,17 @@
 %   R/site-methods.R, R/speleothem-methods.R, R/taxon-methods.R
 \name{[,collunits,numeric-method}
 \alias{[,collunits,numeric-method}
+\alias{sub,collunits-method}
 \alias{[,datasets,numeric-method}
+\alias{sub,datasets-method}
 \alias{[}
+\alias{[,sites,numeric-method}
 \alias{[,site,numeric-method}
 \alias{[,site,character-method}
 \alias{[,speleothems,numeric-method}
+\alias{sub,speleothems-method}
 \alias{[,taxa,numeric-method}
+\alias{sub,taxa-method}
 \title{sub}
 \usage{
 \S4method{[}{collunits,numeric}(x, i)

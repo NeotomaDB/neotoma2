@@ -6,13 +6,21 @@
 \name{[[,chronologies,numeric-method}
 \alias{[[,chronologies,numeric-method}
 \alias{[[,collunits,numeric-method}
+\alias{sub-sub,collunits-method}
 \alias{[[,contacts,numeric-method}
+\alias{sub-sub,contacts-method}
 \alias{[[,datasets,numeric-method}
+\alias{sub-sub,datasets-method}
 \alias{[[,publications,numeric-method}
+\alias{sub-sub,publications-method}
 \alias{[[,samples,numeric-method}
+\alias{sub-sub,samples-method}
 \alias{sub-sub}
+\alias{[[,sites,numeric-method}
 \alias{[[,speleothems,numeric-method}
+\alias{sub-sub,speleothems-method}
 \alias{[[,taxa,numeric-method}
+\alias{sub-sub,taxa-method}
 \title{sub-sub}
 \usage{
 \S4method{[[}{chronologies,numeric}(x, i)

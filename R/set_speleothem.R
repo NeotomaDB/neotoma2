@@ -1,6 +1,6 @@
 #' @title Set Speleothem
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest
 #' @param x Object to be set as a speleothem

@@ -1,7 +1,7 @@
 #' @title set Site Information for Fossil Sites
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @author Simon Goring \email{goring@wisc.edu}
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @importFrom sf st_as_sf st_sfc
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest

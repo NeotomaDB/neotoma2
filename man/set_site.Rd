@@ -8,7 +8,7 @@ set_site(
   x = NA,
   siteid = NA_integer_,
   sitename = NA_character_,
-  geography = st_as_sf(st_sfc()),
+  geography = sf::st_as_sf(sf::st_sfc()),
   altitude = NA_integer_,
   geopolitical = list(),
   area = NA_integer_,
@@ -51,7 +51,7 @@ set Site Information for Fossil Sites
 \examples{
 {
 # Create a site called "My Lake", to
-x = st_as_sf(st_sfc(st_point(c(5,5))))
+x = sf::st_as_sf(sf::st_sfc(sf::st_point(c(5,5))))
 my_site <- set_site(sitename = "My Lake",
                     geography = x,
                     description = "my lake",

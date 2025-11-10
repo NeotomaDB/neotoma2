@@ -1,21 +1,21 @@
+#' @aliases names,publication-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "publication"),
           definition = function(x) {
             slotNames("publication")
           })
 
+#' @aliases names,publications-method
 #' @rdname names
-#' @export
 setMethod(f = "names",
           signature = signature(x = "publications"),
           definition = function(x) {
             slotNames("publication")
           })
 
+#' @aliases show,publications-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = signature(object = "publications"),
           definition = function(object) {
@@ -28,16 +28,16 @@ setMethod(f = "show",
               print()
           })
 
+#' @aliases cash,publication-method
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "publication"),
           definition = function(x, name) {
             slot(x, name)
           })
 
+#' @aliases sub-sub,publications-method
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "publications", i = "numeric"),
           definition = function(x, i) {
@@ -52,8 +52,8 @@ setMethod(f = "[[",
             return(out)
           })
 
+#' @aliases sub-subset,publications-method
 #' @rdname sub-subset
-#' @export
 setMethod(f = "[[<-",
           signature = signature(x = "publications"),
           definition = function(x, i, value) {
@@ -66,16 +66,16 @@ setMethod(f = "[[<-",
             }
           })
 
+#' @aliases length,publications-method
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "publications"),
           definition = function(x) {
             length(x@publications)
           })
 
+#' @aliases c,publications-method
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "publications"),
           definition = function(x, y) {
@@ -85,8 +85,8 @@ setMethod(f = "c",
                                       recursive = FALSE))
           })
 
+#' @aliases show,publication-method
 #' @rdname show
-#' @export
 setMethod(f = "show",
           signature = signature(object = "publication"),
           definition = function(object) {
@@ -108,20 +108,16 @@ setMethod(f = "showMatch",
             }
           })
 
-#' @title Get a publication DOI.
-#' @param x A \code{publication} object.
-#' @importFrom methods slotNames
-#' @returns `DOI` from a publication
-#' @md
-#' @export
+#' @aliases doi,publication-method
+#' @rdname doi
 setMethod(f = "doi",
           signature = signature(x = "publication"),
           definition = function(x) {
             x@doi
           })
 
+#' @aliases as.data.frame,publication-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "authors"),
           definition = function(x) {
@@ -134,8 +130,8 @@ setMethod(f = "as.data.frame",
             return(authors)
           })
 
+#' @aliases as.data.frame,publication-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "publication"),
           definition = function(x) {
@@ -154,8 +150,8 @@ setMethod(f = "as.data.frame",
             return(table)
           })
 
+#' @aliases as.data.frame,publication-method
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature(x = "publications"),
           definition = function(x) {
@@ -183,8 +179,8 @@ setMethod(f = "selectMatch",
             }
           })
 
+#' @aliases selectMatch,publication-method
 #' @rdname selectMatch
-#' @export
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {

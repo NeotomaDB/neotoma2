@@ -15,6 +15,7 @@
 \alias{as.data.frame,publication-method}
 \alias{as.data.frame,publications-method}
 \alias{as.data.frame}
+\alias{as.data.frame,site-method}
 \alias{as.data.frame,sites-method}
 \alias{as.data.frame,speleothem-method}
 \alias{as.data.frame,speleothems-method}

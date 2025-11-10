@@ -3,7 +3,7 @@
 #' @importFrom sf st_as_sf st_sfc
 #' @importFrom uuid UUIDgenerate
 #' @importFrom digest digest
-#' @importFrom methods new slot<-
+#' @importFrom methods is new slot<-
 #' @param x Object to be set as a site
 #' @param siteid The unique `site id` for a site.
 #' If this site is new to Neotoma then leave the ID as NA.
@@ -21,7 +21,7 @@
 #' @returns `site` object
 #' @examples {
 #' # Create a site called "My Lake", to
-#' x = st_as_sf(st_sfc(st_point(c(5,5))))
+#' x = sf::st_as_sf(sf::st_sfc(sf::st_point(c(5,5))))
 #' my_site <- set_site(sitename = "My Lake",
 #'                     geography = x,
 #'                     description = "my lake",
@@ -32,7 +32,7 @@
 set_site <- function(x = NA,
                      siteid = NA_integer_,
                      sitename = NA_character_,
-                     geography = st_as_sf(st_sfc()),
+                     geography = sf::st_as_sf(sf::st_sfc()),
                      altitude = NA_integer_,
                      geopolitical = list(),
                      area = NA_integer_,

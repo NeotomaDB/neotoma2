@@ -7,20 +7,34 @@
 \alias{$,chronology-method}
 \alias{$,chronologies-method}
 \alias{$,collunit-method}
+\alias{cash,collunit-method}
 \alias{$,collunits-method}
+\alias{cash,collunits-method}
 \alias{$,contact-method}
+\alias{cash,contact-method}
 \alias{$,contacts-method}
+\alias{cash,contacts-method}
 \alias{$,dataset-method}
+\alias{cash,dataset-method}
 \alias{$,datasets-method}
+\alias{cash,datasets-method}
 \alias{$,publication-method}
+\alias{cash,publication-method}
 \alias{$,samples-method}
+\alias{cash,samples-method}
 \alias{$,sample-method}
+\alias{cash,sample-method}
 \alias{cash}
+\alias{$,site-method}
 \alias{$,sites-method}
 \alias{$,speleothem-method}
+\alias{cash,speleothem-method}
 \alias{$,speleothems-method}
+\alias{cash,speleothems-method}
 \alias{$,taxon-method}
+\alias{cash,taxon-method}
 \alias{$,taxa-method}
+\alias{cash,taxa-method}
 \title{cash}
 \usage{
 \S4method{$}{chronology}(x, name)
@@ -66,5 +80,5 @@
 value at chosen slot in the \code{site} object
 }
 \description{
-Obtain slots of a site without using at-mark
+Obtain slots of a \code{neotoma2} without using at-mark
 }

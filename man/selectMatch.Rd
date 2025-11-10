@@ -4,6 +4,7 @@
 \name{selectMatch}
 \alias{selectMatch}
 \alias{selectMatch,publication,logical-method}
+\alias{selectMatch,publication-method}
 \title{Select the best match for an object.}
 \usage{
 selectMatch(x, n)

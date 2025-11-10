@@ -1,12 +1,16 @@
+#' @importFrom rlang .data
+NULL
+
 setClassUnion("id", c("character", "integer", "numeric"))
 #' @title An S4 class for multi-contact information from the Neotoma
 #' Paleoecology Database.
-#' @name contacts
+#' @name contacts_classes
 #' @description An unordered list of individual S4 `contact` objects.
 #' @export
 #' @examples
 #' new("contact", familyname = "Goring", givennames = "Simon J.")
 #' @returns object of class `contact`
+#' @aliases contact-class
 #' @md
 #' @export
 setClass("contact",
@@ -41,7 +45,8 @@ setClass("contact",
                    address = NA_character_,
                    notes = NA_character_))
 
-#' @rdname contacts
+#' @aliases contacts-class
+#' @rdname contacts_classes
 #' @export
 setClass("contacts",
          representation(contacts  = "list"),
@@ -53,7 +58,6 @@ setClass("contacts",
          })
 
 #' @title An S4 class for the authors of a Neotoma publication.
-#' @name authors
 #' @description This class combines the S4 class `contact` with a numeric
 #' author order. This allows us to reuse `contact` objects, and to assign
 #' the authorship order within a publication. The full set of authors for
@@ -64,7 +68,9 @@ setClass("contacts",
 #' firstauthor <- new("author", author = simon, order = 1)
 #' }
 #' @returns object of class `author`
+#' @aliases author-class
 #' @md
+#' @name author_classes
 #' @export
 setClass("author",
          representation(author = "contact",
@@ -72,19 +78,20 @@ setClass("author",
          prototype(author = new("contact"),
                    order = NA_integer_))
 
-#' @rdname authors
+#' @aliases authors-class
+#' @rdname author_classes
 #' @export
 setClass("authors",
          representation(authors = "list"),
          validity = function(object) {
            all(map(object@authors,
-            function(x) {
-              class(x) == "author"}) %>%
+                   function(x) {
+                     class(x) == "author"}) %>%
              unlist())
          })
 
 #' @title An S4 class for Neotoma `publications`.
-#' @name publications
+#' @name publications_classes
 #' @description A publication is liked to an individual Neotoma dataset object
 #' They are grouped using an S4 `publications` class.
 #' This `publications` class allows a single dataset to have one
@@ -103,6 +110,7 @@ setClass("authors",
 #'            author = author_list)
 #'            }
 #' @returns object of class `publication`
+#' @aliases publication-class
 #' @md
 #' @export
 setClass("publication",
@@ -159,7 +167,8 @@ setClass("publication",
                    notes = NA_character_,
                    author = new("authors")))
 
-#' @rdname publications
+#' @aliases publications-class
+#' @rdname publications_classes
 #' @export
 setClass("publications",
          representation(publications  = "list"),
@@ -172,12 +181,13 @@ setClass("publications",
          })
 
 #' @title S4 class for `chronologies` information
-#' @name chronologies
+#' @name chronologies_classes
 #' @description The class for chronologies from the
 #' Neotoma Paleoecology Database. A single collection unit may
 #' have one or more chronology. The individual chronology
 #' classes are grouped into an S4 `chronologies` class.
 #' @returns object of class `chronologies`
+#' @aliases chronology-class
 #' @md
 #' @export
 setClass("chronology",
@@ -204,7 +214,8 @@ setClass("chronology",
                    chronologyname = NA_character_,
                    chroncontrols = data.frame()))
 
-#' @rdname chronologies
+#' @aliases chronologies-class
+#' @rdname chronologies_classes
 #' @export
 setClass("chronologies",
          representation(chronologies = "list"),
@@ -215,9 +226,11 @@ setClass("chronologies",
          })
 
 #' @title S4 class for `samples` information
+#' @name samples_classes
 #' @description The standard object class for `samples`
 #'  in the Neotoma Paleoecology Database.
 #' @returns object of class `sample`
+#' @aliases sample-class
 #' @md
 #' @export
 setClass("sample",
@@ -242,16 +255,18 @@ setClass("sample",
                    analysisunitid = NA_integer_,
                    analysisunitname = NA_character_))
 
-#' @rdname samples
+#' @aliases samples-class
+#' @rdname samples_classes
 #' @export
 setClass("samples",
          representation(samples = "list"))
 
 #' @title S4 class for `repository` information
-#' @name repositories
+#' @name repositories_classes
 #' @description The standard object class for `repository`
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `repository`
+#' @aliases repository-class
 #' @md
 #' @export
 setClass("repository",
@@ -266,16 +281,18 @@ setClass("repository",
                    repositoryid = NA_integer_,
                    repositorynotes = NA_character_))
 
-#' @rdname repositories
+#' @aliases repositories-class
+#' @rdname repositories_classes
 #' @export
 setClass("repositories",
          representation(repositories = "list"))
 
 #' @title S4 class for `specimens` information
-#' @name specimens
+#' @name specimens_classes
 #' @description The standard object class for `specimens`
 #'  from the Neotoma Paleoecology Database.
 #' @returns object of class `specimens`
+#' @aliases specimen-class
 #' @md
 #' @export
 setClass("specimen",
@@ -312,15 +329,18 @@ setClass("specimen",
                    maturity = NA_character_,
                    samplenotes = NA_character_))
 
-#' @rdname specimens
+#' @aliases specimens-class
+#' @rdname specimens_classes
 #' @export
 setClass("specimens",
          representation(specimens = "list"))
 
 setClassUnion("samplesOrNULL", c("samples", "NULL"))
 setClassUnion("specimensOrNULL", c("specimens", "NULL"))
+
 #' @title S4 class for `datasets` information
-#' @name datasets
+#' @aliases dataset-class
+#' @rdname datasets_classes
 #' @description The standard object class for `datasets`
 #'  from the Neotoma Paleoecology Database.
 #' @export
@@ -354,15 +374,17 @@ setClass("dataset",
             specimens = NULL)
 )
 
-#' @rdname datasets
+#' @aliases datasets-class
+#' @rdname datasets_classes
 #' @export
 setClass("datasets",
          representation(datasets = "list"))
 
 #' @title S4 class for `speleothem` information
-#' @name speleothems
+#' @name speleothems_classes
 #' @description The S4 class for `speleothem` data.
 #' @returns object of class `speleothems`
+#' @aliases speleothem-class
 #' @md
 #' @export
 setClass("speleothem",
@@ -405,7 +427,8 @@ setClass("speleothem",
                    entitycoverthickness = NA_integer_,
                    vegetationcoverpercent = NA_integer_))
 
-#' @rdname speleothems
+#' @aliases speleothems-class
+#' @rdname speleothems_classes
 #' @export
 setClass("speleothems", representation(speleothems = "list"),
          validity = function(object) {
@@ -419,10 +442,12 @@ setClassUnion("datasetsOrNULL", c("datasets", "NULL"))
 setClassUnion("speleothemsOrNULL", c("speleothems", "NULL"))
 setClassUnion("chronologiesOrNULL", c("chronologies", "NULL"))
 #' @title S4 class for `collection units` information.
+#' @name collunits_classes
 #' @description A `collection unit` represents a collection event from within
 #' a `site`. For example, a lake sediment core, or a single dig site within an
 #' archaeological site.
 #' @returns object of class `collunits`
+#' @aliases collunit-class
 #' @md
 #' @export
 setClass("collunit",
@@ -457,7 +482,8 @@ setClass("collunit",
                    defaultchronology = NA_integer_,
                    speleothems = NULL))
 
-#' @rdname collunits
+#' @aliases collunits-class
+#' @rdname collunits_classes
 #' @export
 setClass("collunits",
          representation(collunits = "list"),
@@ -471,9 +497,10 @@ setClass("collunits",
 
 setClassUnion("collunitsOrNULL", c("collunits", "NULL"))
 #' @title An S4 class for `sites` information
-#' @name sites
+#' @name sites_classes
 #' @description The S4 class for sites in the Neotoma Paleoecology Database.
 #' @returns object of class `sites`
+#' @aliases site-class
 #' @md
 #' @export
 setClass("site",
@@ -496,7 +523,8 @@ setClass("site",
                    description = NA_character_,
                    collunits = NULL))
 
-#' @rdname sites
+#' @aliases sites-class
+#' @rdname sites_classes
 #' @export
 setClass("sites",
          representation(sites = "list"),
@@ -508,9 +536,11 @@ setClass("sites",
          })
 
 #' @title S4 class for taxa information
-#' @name taxa
+#' @name taxa_classes
 #' @description Taxa details from the Neotoma Paleoecology Database.
 #' @returns object of class `taxon`
+#' @aliases taxon-class
+#' @md
 #' @export
 setClass("taxon",
          representation(taxonid = "numeric",
@@ -534,7 +564,8 @@ setClass("taxon",
                    publicationid = NA_integer_,
                    publication = NA_character_))
 
-#' @rdname taxa
+#' @aliases taxa-class
+#' @rdname taxa_classes
 #' @export
 setClass("taxa", representation(taxa = "list"),
          validity = function(object) {

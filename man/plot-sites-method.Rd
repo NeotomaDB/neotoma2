@@ -9,6 +9,8 @@
 \arguments{
 \item{x}{sites object}
 
+\item{y}{\emph{Ignored.}}
+
 \item{...}{Additional parameters associated with the call.}
 }
 \value{

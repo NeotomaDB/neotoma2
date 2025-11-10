@@ -2,34 +2,41 @@
 % Please edit documentation in R/collunits-methods.R, R/dataset-methods.R,
 %   R/publication-methods.R, R/samples-methods.R, R/site-methods.R,
 %   R/speleothem-methods.R, R/taxon-methods.R
-\name{[[<-,collunits,ANY,ANY,ANY-method}
-\alias{[[<-,collunits,ANY,ANY,ANY-method}
-\alias{[[<-,datasets,ANY,ANY,ANY-method}
-\alias{[[<-,publications,ANY,ANY,ANY-method}
-\alias{[[<-,samples,ANY,ANY,ANY-method}
+\name{[[<-,collunits-method}
+\alias{[[<-,collunits-method}
+\alias{sub-subset,collunits-method}
+\alias{[[<-,datasets-method}
+\alias{sub-subset,datasets-method}
+\alias{[[<-,publications-method}
+\alias{sub-subset,publications-method}
+\alias{[[<-,samples-method}
+\alias{sub-subset,samples-method}
 \alias{sub-subset}
-\alias{[[<-,speleothems,ANY,ANY,ANY-method}
-\alias{[[<-,taxa,ANY,ANY,ANY-method}
+\alias{[[<-,sites-method}
+\alias{[[<-,speleothems-method}
+\alias{sub-subset,speleothems-method}
+\alias{[[<-,taxa-method}
+\alias{sub-subset,taxa-method}
 \title{sub-subset}
 \usage{
-\S4method{[[}{collunits,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{collunits}(x, i) <- value
 
-\S4method{[[}{datasets,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{datasets}(x, i) <- value
 
-\S4method{[[}{publications,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{publications}(x, i) <- value
 
-\S4method{[[}{samples,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{samples}(x, i) <- value
 
-\S4method{[[}{sites,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{sites}(x, i) <- value
 
-\S4method{[[}{speleothems,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{speleothems}(x, i) <- value
 
-\S4method{[[}{taxa,ANY,ANY,ANY}(x, i) <- value
+\S4method{[[}{taxa}(x, i) <- value
 }
 \arguments{
-\item{x}{neotoma2 object}
+\item{x}{\code{neotoma2} object}
 
-\item{i}{iteration in neotoma2 object}
+\item{i}{iteration in \code{neotoma2} object}
 
 \item{value}{The value to be used}
 }
@@ -37,5 +44,5 @@
 \code{sites} object with reassigned values
 }
 \description{
-Obtain one of the elements within a nested neotoma2 object
+Obtain one of the elements within a nested \code{neotoma2} object
 }

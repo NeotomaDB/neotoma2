@@ -16,10 +16,10 @@
 #' @md
 #' @export
 get_taxa <- function(x = NA, ...) {
-  if (!missing(x)) {
-    UseMethod("get_taxa", x)
+  if (missing(x)) {
+    UseMethod("get_taxa", "default")
   } else {
-    UseMethod("get_taxa", NA)
+    UseMethod("get_taxa", x)
   }
 }
 

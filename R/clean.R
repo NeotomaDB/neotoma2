@@ -58,14 +58,14 @@ clean.sites <- function(x, verbose = TRUE, ...) {
   siteids <- as.data.frame(x)$siteid
   if (any(duplicated(siteids))) {
     matched <- unique(siteids[duplicated(siteids)])
-    clean_sites <- filter(x, !siteid %in% matched)
-    messy_sites <- neotoma2::filter(x, siteid %in% matched)
+    clean_sites <- filter(x, !x$siteid %in% matched)
+    messy_sites <- neotoma2::filter(x, x$siteid %in% matched)
     pb <- progress_bar$new(total = length(matched))
     for (i in matched) {
       if (verbose == TRUE) {
         pb$tick()
       }
-      messy_site <- neotoma2::filter(messy_sites, siteid == i)
+      messy_site <- neotoma2::filter(messy_sites, messy_sites$siteid == i)
       messy_cus <- clean(collunits(messy_site))
       new_site <- messy_site[1]
       new_site@sites[[1]]@collunits <- messy_cus

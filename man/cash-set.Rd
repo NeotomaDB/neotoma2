@@ -5,10 +5,15 @@
 \name{$<-,chronology-method}
 \alias{$<-,chronology-method}
 \alias{$<-,collunit-method}
+\alias{cash-set,collunit-method}
 \alias{$<-,dataset-method}
+\alias{cash-set,dataset-method}
 \alias{cash-set}
+\alias{$<-,site-method}
 \alias{$<-,speleothem-method}
+\alias{cash-set,speleothem-method}
 \alias{$<-,taxon-method}
+\alias{cash-set,taxon-method}
 \title{cash-set}
 \usage{
 \S4method{$}{chronology}(x, name) <- value

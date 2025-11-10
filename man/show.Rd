@@ -5,13 +5,14 @@
 \name{show,collunits-method}
 \alias{show,collunits-method}
 \alias{show,collunit-method}
-\alias{show,contact-method}
 \alias{show,contacts-method}
+\alias{show,contact-method}
 \alias{show,dataset-method}
 \alias{show,datasets-method}
 \alias{show,publications-method}
 \alias{show,publication-method}
 \alias{show}
+\alias{show,site-method}
 \alias{show,sites-method}
 \alias{show,speleothem-method}
 \alias{show,speleothems-method}
@@ -22,8 +23,6 @@
 \S4method{show}{collunits}(object)
 
 \S4method{show}{collunit}(object)
-
-\S4method{show}{contact}(object)
 
 \S4method{show}{contacts}(object)
 

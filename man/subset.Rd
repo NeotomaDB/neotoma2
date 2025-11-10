@@ -2,41 +2,47 @@
 % Please edit documentation in R/collunits-methods.R, R/dataset-methods.R,
 %   R/samples-methods.R, R/site-methods.R, R/speleothem-methods.R,
 %   R/taxon-methods.R
-\name{[<-,collunit,character,ANY,ANY-method}
-\alias{[<-,collunit,character,ANY,ANY-method}
-\alias{[<-,collunit,numeric,ANY,ANY-method}
-\alias{[<-,dataset,character,ANY,ANY-method}
-\alias{[<-,dataset,numeric,ANY,ANY-method}
-\alias{[<-,sample,character,ANY,ANY-method}
+\name{[<-,collunit,character-method}
+\alias{[<-,collunit,character-method}
+\alias{subset,collunit-method}
+\alias{[<-,collunit,numeric-method}
+\alias{[<-,dataset,character-method}
+\alias{subset,dataset-method}
+\alias{[<-,dataset,numeric-method}
+\alias{[<-,sample,character-method}
+\alias{subset,sample-method}
 \alias{subset}
-\alias{[<-,site,numeric,ANY,ANY-method}
-\alias{[<-,speleothem,character,ANY,ANY-method}
-\alias{[<-,speleothem,numeric,ANY,ANY-method}
-\alias{[<-,taxon,character,ANY,ANY-method}
-\alias{[<-,taxon,numeric,ANY,ANY-method}
+\alias{[<-,site,character-method}
+\alias{[<-,site,numeric-method}
+\alias{[<-,speleothem,character-method}
+\alias{subset,speleothem-method}
+\alias{[<-,speleothem,numeric-method}
+\alias{[<-,taxon,character-method}
+\alias{subset,taxon-method}
+\alias{[<-,taxon,numeric-method}
 \title{subset}
 \usage{
-\S4method{[}{collunit,character,ANY,ANY}(x, i) <- value
+\S4method{[}{collunit,character}(x, i) <- value
 
-\S4method{[}{collunit,numeric,ANY,ANY}(x, i) <- value
+\S4method{[}{collunit,numeric}(x, i) <- value
 
-\S4method{[}{dataset,character,ANY,ANY}(x, i) <- value
+\S4method{[}{dataset,character}(x, i) <- value
 
-\S4method{[}{dataset,numeric,ANY,ANY}(x, i) <- value
+\S4method{[}{dataset,numeric}(x, i) <- value
 
-\S4method{[}{sample,character,ANY,ANY}(x, i) <- value
+\S4method{[}{sample,character}(x, i) <- value
 
-\S4method{[}{site,character,ANY,ANY}(x, i) <- value
+\S4method{[}{site,character}(x, i) <- value
 
-\S4method{[}{site,numeric,ANY,ANY}(x, i) <- value
+\S4method{[}{site,numeric}(x, i) <- value
 
-\S4method{[}{speleothem,character,ANY,ANY}(x, i) <- value
+\S4method{[}{speleothem,character}(x, i) <- value
 
-\S4method{[}{speleothem,numeric,ANY,ANY}(x, i) <- value
+\S4method{[}{speleothem,numeric}(x, i) <- value
 
-\S4method{[}{taxon,character,ANY,ANY}(x, i) <- value
+\S4method{[}{taxon,character}(x, i) <- value
 
-\S4method{[}{taxon,numeric,ANY,ANY}(x, i) <- value
+\S4method{[}{taxon,numeric}(x, i) <- value
 }
 \arguments{
 \item{x}{A \code{neotoma2} object.}

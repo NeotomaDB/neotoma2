@@ -31,3 +31,13 @@ setMethod(f = "plotLeaflet",
                                options = markerOptions(riseOnHover = TRUE))
             return(map1)
           })
+
+#' @rdname plotLeaflet
+setMethod(f = "plotLeaflet",
+          signature = "ANY",
+          definition = function(object) {
+            if (is.null(object)) {
+              warning("No sites to plot")
+              return(NULL)
+            }
+          })

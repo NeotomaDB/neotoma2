@@ -1,5 +1,4 @@
 #' @rdname sub-sub
-#' @export
 setMethod(f = "[[",
           signature = signature(x = "chronologies", i = "numeric"),
           definition = function(x, i) {
@@ -15,24 +14,14 @@ setMethod(f = "[[",
           })
 
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "chronology"),
           definition = function(x, name) {
             slot(x, name)
           })
 
-#' @rdname cash-set
-#' @export
-setMethod(f = "$<-",
-          signature = signature(x = "chronology"),
-          definition = function(x, name, value) {
-            slot(x, name) <- value
-            return(x)
-          })
 
 #' @rdname cash
-#' @export
 setMethod(f = "$",
           signature = signature(x = "chronologies"),
           definition = function(x, name) {
@@ -43,8 +32,15 @@ setMethod(f = "$",
               unlist()
           })
 
+#' @rdname cash-set
+setMethod(f = "$<-",
+          signature = signature(x = "chronology"),
+          definition = function(x, name, value) {
+            slot(x, name) <- value
+            return(x)
+          })
+
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronology"),
           definition = function(x) {
@@ -54,15 +50,12 @@ setMethod(f = "as.data.frame",
                        ageboundolder = x@ageboundolder,
                        ageboundyounger = x@ageboundyounger,
                        isdefault = x@isdefault,
-                       dateprepared =
-                         as_date(ifelse(is.null(x@dateprepared),
-                                        NA, x@dateprepared)),
+                       dateprepared = x@dateprepared,
                        modelagetype = x@modelagetype,
                        chronologyname = x@chronologyname)
           })
 
 #' @rdname as.data.frame
-#' @export
 setMethod(f = "as.data.frame",
           signature = signature("chronologies"),
           definition = function(x) {
@@ -70,7 +63,6 @@ setMethod(f = "as.data.frame",
           })
 
 #' @rdname length
-#' @export
 setMethod(f = "length",
           signature = signature(x = "chronologies"),
           definition = function(x) {
@@ -78,7 +70,6 @@ setMethod(f = "length",
           })
 
 #' @rdname c
-#' @export
 setMethod(f = "c",
           signature = signature(x = "chronologies"),
           definition = function(x, y) {

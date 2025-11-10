@@ -2,14 +2,19 @@
 % Please edit documentation in R/check_contacts.R
 \name{check_contacts}
 \alias{check_contacts}
+\alias{check_contacts.contacts}
 \title{Check contact information for a record against Neotoma contributors}
 \usage{
 check_contacts(x, ...)
+
+\method{check_contacts}{contacts}(x, similarity = 0.5, ...)
 }
 \arguments{
 \item{x}{contacts A \code{contacts} object associated with a set of names.}
 
 \item{...}{Additional parameters associated with the call.}
+
+\item{similarity}{The similarity score between matched records (from 0 - 1).}
 }
 \value{
 contacts object

@@ -9,10 +9,11 @@
 \alias{names,publication-method}
 \alias{names,publications-method}
 \alias{names}
+\alias{names,site-method}
 \alias{names,sites-method}
 \alias{names,speleothem-method}
 \alias{names,taxon-method}
-\title{Get a neotoma2 object's slot names}
+\title{Get a \code{neotoma2} object's slot names}
 \usage{
 \S4method{names}{collunit}(x)
 
@@ -33,7 +34,7 @@
 \S4method{names}{taxon}(x)
 }
 \arguments{
-\item{x}{A neotoma2 object.}
+\item{x}{A \code{neotoma2} object.}
 }
 \value{
 NULL.

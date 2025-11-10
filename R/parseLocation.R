@@ -5,6 +5,7 @@
 #' @importFrom geojsonsf geojson_sf sfc_geojson sf_geojson
 #' @importFrom sf st_as_sfc st_bbox st_crs st_sfc
 #' @importFrom assertthat assert_that
+#' @importFrom stats na.omit
 #' @description An internal helper function used to connect to the Neotoma API
 #' in a standard manner, and to provide basic validation of any response.
 #' @param x location parameter

@@ -1,6 +1,7 @@
 #' @title toWide
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom dplyr filter mutate arrange select group_by_at group_by
+#' @importFrom dplyr filter mutate arrange select group_by_at
+#' @importFrom dplyr group_by desc all_of case_when
 #' @importFrom tidyr pivot_wider
 #' @param x dataframe object with samples
 #' @param variablenames Optional vector to filter by specific variable names.
@@ -34,13 +35,13 @@ toWide <- function(x,
                    groupby = "age",
                    operation = "prop") {
   if (!is.na(variablenames)) {
-    x <- x %>% filter(variablename %in% variablenames)
+    x <- x %>% filter(.data$variablename %in% variablenames)
   }
   if (!is.na(ecologicalgroups)) {
-    x <- x %>% filter(ecologicalgroup %in% ecologicalgroups)
+    x <- x %>% filter(.data$ecologicalgroup %in% ecologicalgroups)
   }
   if (!is.na(elementtypes)) {
-    x <- x %>% filter(elementtype %in% elementtypes)
+    x <- x %>% filter(.data$elementtype %in% elementtypes)
   }
   if (is.na(unit)) {
     x <- x %>% filter(units %in% unit)
@@ -48,10 +49,10 @@ toWide <- function(x,
   # Get proportion values
   onesite <- x %>%
     group_by_at(groupby) %>%
-    mutate(counter = sum(value, na.rm = TRUE)) %>%
-    group_by(variablename) %>% 
-    mutate(prop = value / counter,
-           n = value) %>%
+    mutate(counter = sum(.data$value, na.rm = TRUE)) %>%
+    group_by(.data$variablename) %>% 
+    mutate(prop = .data$value / .data$counter,
+           n = .data$value) %>%
     arrange(desc(groupby))
   if (unit == "present/absent") {
     if (operation != "presence") {
@@ -60,14 +61,14 @@ toWide <- function(x,
     operation <- "presence"
   }
   widetable <- onesite %>%
-    mutate(prop = as.numeric(prop),
-           sum = as.numeric(value),
+    mutate(prop = as.numeric(.data$prop),
+           sum = as.numeric(.data$value),
            presence = case_when(counter > 0 ~ 1,
                                 counter == 0 ~ 0)) %>%
-    select(all_of(groupby), variablename, all_of(operation))
+    select(all_of(groupby), .data$variablename, all_of(operation))
   counts <- pivot_wider(widetable,
                         id_cols = groupby,
-                        names_from = variablename,
+                        names_from = .data$variablename,
                         values_from = operation,
                         values_fill = 0,
                         values_fn = sum)

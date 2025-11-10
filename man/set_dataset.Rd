@@ -32,6 +32,8 @@ set_dataset(
 
 \item{doi}{DOI}
 
+\item{recdatecreated}{date the dataset was created}
+
 \item{datasettype}{type the dataset belongs to}
 
 \item{age_range_old}{age range old}

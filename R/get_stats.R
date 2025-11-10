@@ -23,7 +23,7 @@
 get_stats <- function(start, end) {
   baseURL <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(baseURL),
     error = function(e) {
       message("API call failed: ", e$message)
       NULL

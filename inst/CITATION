@@ -14,7 +14,7 @@ bibentry(
   doi      = "10.5281/zenodo.8114874",
   journal  = "GitHub",
   year = "2023",
-  url = "https://open.neotomadb.org/neotoma2/inst/doc/neotoma2-package.html",
+  url = "https://open.neotomadb.org/neotoma2/articles/neotoma2-package.html",
   textVersion = paste("Dominguez S, Goring S. 2023. Working with the Neotoma Paleoecology Database. GitHub. url: https://github.com/NeotomaDB/neotoma2"
   )
 )

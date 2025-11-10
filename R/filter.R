@@ -41,11 +41,13 @@
 #'   device.
 #'  * `depositionalenvironment` A fixed vocabulary name for the
 #'   depositional environment.
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter inner_join
 #' @importFrom purrr map
 #' @importFrom stringr str_detect
-#' @param x A site, dataset or download.
-#' @param ... arguments to filter by.
+#' @param .data A site, dataset, download, or data frame
+#' @param ... Additional arguments passed to `filter()`
+#' @param .by Grouping variables (for dplyr data.frames)
+#' @param .preserve Whether to preserve grouping (for dplyr data.frames)
 #' @returns filtered `sites` object
 #' @examples \donttest{
 #' # Download 10 sites, but only keep the sites that are close to sea level.
@@ -59,13 +61,25 @@
 #' }
 #' @md
 #' @export
-filter <- function(x, ...) {
-  UseMethod("filter", x)
+filter <- function(.data, ...) {
+  UseMethod("filter", .data)
 }
 
 #' @rdname filter
 #' @export
-filter.sites <- function(x, ...) {
+filter.NULL <- function(.data, ..., .by = NULL, .preserve = FALSE) {
+  warning("No sites to filter")
+  return(NULL)
+}
+
+#' @rdname filter
+#' @export
+filter.sites <- function(.data, ..., .by = NULL, .preserve = FALSE) {
+  x <- .data
+  if (is.null(x)) {
+    warning("No sites to filter")
+    return(NULL)
+  }
   # Joining only what we need:
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
@@ -95,8 +109,8 @@ filter.sites <- function(x, ...) {
   if (collunitcols == TRUE) {
     ids <- ids %>%
       inner_join(
-        as.data.frame(collunits(x)),
-        by = c("collunitid" = "collectionunitid"))
+                 as.data.frame(collunits(x)),
+                 by = c("collunitid" = "collectionunitid"))
   }
   if (datasetcols == TRUE) {
     ids <- ids %>%
@@ -128,7 +142,9 @@ filter.sites <- function(x, ...) {
   return(new("sites", sites = pared_ds))
 }
 
+
 #' @rdname filter
+#' @keywords internal
 #' @export
 filter.data.frame <- getS3method("filter",
                                  "data.frame",
