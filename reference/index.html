@@ -39,11 +39,18 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/NeotomaDB/neotoma2/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-
-  </a>
+  <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/neotoma2-package.html">The neotoma2 R Package</a>
+    </li>
+  </ul></li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -61,19 +68,15 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="add_chronology-collunit-chronology-data.frame-method.html">add_chronology(<i>&lt;collunit&gt;</i>,<i>&lt;chronology&gt;</i>,<i>&lt;data.frame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Add a new chronology into an existing collectionunit.</p></td>
-      </tr><tr><td>
           <p><code><a href="add_chronology.html">add_chronology()</a></code> </p>
         </td>
-        <td><p>Add a new chronology to a collection unit.</p></td>
+        <td><p>Add a new chronology into an existing collectionunit.</p></td>
       </tr><tr><td>
           <p><code><a href="as.data.frame.html">as.data.frame(<i>&lt;chronology&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;chronologies&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;collunit&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;collunits&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;contact&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;contacts&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;dataset&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;datasets&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;authors&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;publication&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;publications&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;site&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;sites&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;speleothem&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;speleothems&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;taxon&gt;</i>)</a></code> <code><a href="as.data.frame.html">as.data.frame(<i>&lt;taxa&gt;</i>)</a></code> </p>
         </td>
         <td><p>as.data.frame</p></td>
       </tr><tr><td>
-          <p><code><a href="authors.html">authors</a></code> <code><a href="authors.html">authors-class</a></code> </p>
+          <p><code><a href="author_classes.html">author_classes</a></code> <code><a href="author_classes.html">author-class</a></code> <code><a href="author_classes.html">authors-class</a></code> </p>
         </td>
         <td><p>An S4 class for the authors of a Neotoma publication.</p></td>
       </tr><tr><td>
@@ -93,10 +96,6 @@
         </td>
         <td><p>Check contact information for a record against Neotoma contributors</p></td>
       </tr><tr><td>
-          <p><code><a href="check_contacts.contacts.html">check_contacts(<i>&lt;contacts&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Get contact information for Neotoma contributors</p></td>
-      </tr><tr><td>
           <p><code><a href="chroncontrols-site-method.html">chroncontrols(<i>&lt;site&gt;</i>)</a></code> </p>
         </td>
         <td><p>Recover information about the chron controls for a collectionunit.</p></td>
@@ -115,6 +114,10 @@
       </tr><tr><td>
           <p><code><a href="chronologies.html">chronologies()</a></code> </p>
         </td>
+        <td><p>Obtain the chronology from a record or multiple records.</p></td>
+      </tr><tr><td>
+          <p><code><a href="chronologies_classes.html">chronologies_classes</a></code> <code><a href="chronologies_classes.html">chronology-class</a></code> <code><a href="chronologies_classes.html">chronologies-class</a></code> </p>
+        </td>
         <td><p>S4 class for <code>chronologies</code> information</p></td>
       </tr><tr><td>
           <p><code><a href="cite_data-sites-method.html">cite_data(<i>&lt;sites&gt;</i>)</a></code> </p>
@@ -129,10 +132,6 @@
         </td>
         <td><p>clean Neotoma objects to remove duplicates and empty objects.</p></td>
       </tr><tr><td>
-          <p><code><a href="collunit-class.html">collunit-class</a></code> </p>
-        </td>
-        <td><p>S4 class for <code>collection units</code> information.</p></td>
-      </tr><tr><td>
           <p><code><a href="collunits-sites-method.html">collunits(<i>&lt;sites&gt;</i>)</a></code> </p>
         </td>
         <td><p>Extract <code>collunits</code> from a <code>sites</code> object.</p></td>
@@ -141,7 +140,11 @@
         </td>
         <td><p>Extract collection units from a sites object</p></td>
       </tr><tr><td>
-          <p><code><a href="contacts.html">contacts</a></code> <code><a href="contacts.html">contacts-class</a></code> </p>
+          <p><code><a href="collunits_classes.html">collunits_classes</a></code> <code><a href="collunits_classes.html">collunit-class</a></code> <code><a href="collunits_classes.html">collunits-class</a></code> </p>
+        </td>
+        <td><p>S4 class for <code>collection units</code> information.</p></td>
+      </tr><tr><td>
+          <p><code><a href="contacts_classes.html">contacts_classes</a></code> <code><a href="contacts_classes.html">contact-class</a></code> <code><a href="contacts_classes.html">contacts-class</a></code> </p>
         </td>
         <td><p>An S4 class for multi-contact information from the Neotoma Paleoecology Database.</p></td>
       </tr><tr><td>
@@ -159,11 +162,11 @@
       </tr><tr><td>
           <p><code><a href="datasets.html">datasets()</a></code> </p>
         </td>
-        <td><p>S4 class for <code>datasets</code> information</p></td>
+        <td><p>Extract datasets from a sites object.</p></td>
       </tr><tr><td>
-          <p><code><a href="doi-publication-method.html">doi(<i>&lt;publication&gt;</i>)</a></code> </p>
+          <p><code><a href="datasets_classes.html">dataset-class</a></code> <code><a href="datasets_classes.html">datasets-class</a></code> </p>
         </td>
-        <td><p>Get a publication DOI.</p></td>
+        <td><p>S4 class for <code>datasets</code> information</p></td>
       </tr><tr><td>
           <p><code><a href="doi-sites-method.html">doi(<i>&lt;sites&gt;</i>)</a></code> </p>
         </td>
@@ -172,10 +175,6 @@
           <p><code><a href="doi.html">doi()</a></code> </p>
         </td>
         <td><p>Obtain the DOI for publications or datasets.</p></td>
-      </tr><tr><td>
-          <p><code><a href="filter.html">filter()</a></code> </p>
-        </td>
-        <td><p>Apply a <code>filter</code> for Neotoma sites objects.</p></td>
       </tr><tr><td>
           <p><code><a href="get_contacts.html">get_contacts()</a></code> </p>
         </td>
@@ -239,7 +238,7 @@
       </tr><tr><td>
           <p><code><a href="names.html">names(<i>&lt;collunit&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;contact&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;dataset&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;publication&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;publications&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;site&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;sites&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;speleothem&gt;</i>)</a></code> <code><a href="names.html">names(<i>&lt;taxon&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Get a neotoma2 object's slot names</p></td>
+        <td><p>Get a <code>neotoma2</code> object's slot names</p></td>
       </tr><tr><td>
           <p><code><a href="pingNeotoma.html">pingNeotoma()</a></code> </p>
         </td>
@@ -257,17 +256,13 @@
         </td>
         <td><p>plotLeaflet</p></td>
       </tr><tr><td>
-          <p><code><a href="publications.html">publications</a></code> <code><a href="publications.html">publications-class</a></code> </p>
+          <p><code><a href="publications_classes.html">publications_classes</a></code> <code><a href="publications_classes.html">publication-class</a></code> <code><a href="publications_classes.html">publications-class</a></code> </p>
         </td>
         <td><p>An S4 class for Neotoma <code>publications</code>.</p></td>
       </tr><tr><td>
-          <p><code><a href="repositories.html">repositories</a></code> <code><a href="repositories.html">repositories-class</a></code> </p>
+          <p><code><a href="repositories_classes.html">repositories_classes</a></code> <code><a href="repositories_classes.html">repository-class</a></code> <code><a href="repositories_classes.html">repositories-class</a></code> </p>
         </td>
         <td><p>S4 class for <code>repository</code> information</p></td>
-      </tr><tr><td>
-          <p><code><a href="sample-class.html">sample-class</a></code> </p>
-        </td>
-        <td><p>S4 class for <code>samples</code> information</p></td>
       </tr><tr><td>
           <p><code><a href="samples-sites-method.html">samples(<i>&lt;sites&gt;</i>)</a></code> </p>
         </td>
@@ -276,6 +271,10 @@
           <p><code><a href="samples.html">samples()</a></code> </p>
         </td>
         <td><p>Obtain samples from a record or multiple records.</p></td>
+      </tr><tr><td>
+          <p><code><a href="samples_classes.html">samples_classes</a></code> <code><a href="samples_classes.html">sample-class</a></code> <code><a href="samples_classes.html">samples-class</a></code> </p>
+        </td>
+        <td><p>S4 class for <code>samples</code> information</p></td>
       </tr><tr><td>
           <p><code><a href="selectMatch-publication-numeric-method.html">selectMatch(<i>&lt;publication&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> </p>
         </td>
@@ -329,7 +328,7 @@
         </td>
         <td><p>Set Speleothem</p></td>
       </tr><tr><td>
-          <p><code><a href="show.html">show(<i>&lt;collunits&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;collunit&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;contact&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;contacts&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;dataset&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;datasets&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;publications&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;publication&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;site&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;sites&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;speleothem&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;speleothems&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;taxon&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;taxa&gt;</i>)</a></code> </p>
+          <p><code><a href="show.html">show(<i>&lt;collunits&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;collunit&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;contacts&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;contact&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;dataset&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;datasets&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;publications&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;publication&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;site&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;sites&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;speleothem&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;speleothems&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;taxon&gt;</i>)</a></code> <code><a href="show.html">show(<i>&lt;taxa&gt;</i>)</a></code> </p>
         </td>
         <td><p>Display a <code>sites</code> object or nested slots.</p></td>
       </tr><tr><td>
@@ -341,11 +340,11 @@
         </td>
         <td><p>Show matches for objects.</p></td>
       </tr><tr><td>
-          <p><code><a href="sites.html">sites</a></code> <code><a href="sites.html">sites-class</a></code> </p>
+          <p><code><a href="sites_classes.html">sites_classes</a></code> <code><a href="sites_classes.html">site-class</a></code> <code><a href="sites_classes.html">sites-class</a></code> </p>
         </td>
         <td><p>An S4 class for <code>sites</code> information</p></td>
       </tr><tr><td>
-          <p><code><a href="specimens.html">specimens</a></code> <code><a href="specimens.html">specimens-class</a></code> </p>
+          <p><code><a href="specimens_classes.html">specimens_classes</a></code> <code><a href="specimens_classes.html">specimen-class</a></code> <code><a href="specimens_classes.html">specimens-class</a></code> </p>
         </td>
         <td><p>S4 class for <code>specimens</code> information</p></td>
       </tr><tr><td>
@@ -363,13 +362,17 @@
       </tr><tr><td>
           <p><code><a href="speleothems.html">speleothems()</a></code> </p>
         </td>
+        <td><p>Obtain speleothems from a record or multiple records.</p></td>
+      </tr><tr><td>
+          <p><code><a href="speleothems_classes.html">speleothems_classes</a></code> <code><a href="speleothems_classes.html">speleothem-class</a></code> <code><a href="speleothems_classes.html">speleothems-class</a></code> </p>
+        </td>
         <td><p>S4 class for <code>speleothem</code> information</p></td>
       </tr><tr><td>
           <p><code><a href="sub-sub.html">`[[`(<i>&lt;chronologies&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;collunits&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;contacts&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;datasets&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;publications&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;samples&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;sites&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;speleothems&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="sub-sub.html">`[[`(<i>&lt;taxa&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> </p>
         </td>
         <td><p>sub-sub</p></td>
       </tr><tr><td>
-          <p><code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;collunits&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;datasets&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;publications&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;samples&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;sites&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;speleothems&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;taxa&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> </p>
+          <p><code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;collunits&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;datasets&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;publications&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;samples&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;sites&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;speleothems&gt;</i>)</a></code> <code><a href="sub-subset.html">`[[&lt;-`(<i>&lt;taxa&gt;</i>)</a></code> </p>
         </td>
         <td><p>sub-subset</p></td>
       </tr><tr><td>
@@ -377,7 +380,7 @@
         </td>
         <td><p>sub</p></td>
       </tr><tr><td>
-          <p><code><a href="subset.html">`[&lt;-`(<i>&lt;collunit&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;collunit&gt;</i>,<i>&lt;numeric&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;dataset&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;dataset&gt;</i>,<i>&lt;numeric&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;sample&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;site&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;site&gt;</i>,<i>&lt;numeric&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;speleothem&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;speleothem&gt;</i>,<i>&lt;numeric&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;taxon&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;taxon&gt;</i>,<i>&lt;numeric&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> </p>
+          <p><code><a href="subset.html">`[&lt;-`(<i>&lt;collunit&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;collunit&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;dataset&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;dataset&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;sample&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;site&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;site&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;speleothem&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;speleothem&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;taxon&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="subset.html">`[&lt;-`(<i>&lt;taxon&gt;</i>,<i>&lt;numeric&gt;</i>)</a></code> </p>
         </td>
         <td><p>subset</p></td>
       </tr><tr><td>
@@ -390,6 +393,10 @@
         <td><p>Extract taxonomic data from a set of sites.</p></td>
       </tr><tr><td>
           <p><code><a href="taxa.html">taxa()</a></code> </p>
+        </td>
+        <td><p>taxa</p></td>
+      </tr><tr><td>
+          <p><code><a href="taxa_classes.html">taxa_classes</a></code> <code><a href="taxa_classes.html">taxon-class</a></code> <code><a href="taxa_classes.html">taxa-class</a></code> </p>
         </td>
         <td><p>S4 class for taxa information</p></td>
       </tr><tr><td>
