@@ -34,8 +34,6 @@ setMethod(f = "speleothems",
         distinct() %>%
         arrange(.data$entityid, .data$siteid, .data$collectionunitid)
     }
-    print('output:')
-    print(output)
     if (nrow(output) == 0) {
       msg <- "No assigned speleothems. Is it a speleothem dataset? \n
                           Did you run get_speleothems()?"
@@ -92,12 +90,10 @@ setMethod(f = "speleothems",
 setMethod(f = "speleothems",
   signature = "collunit",
   definition = function(x) {
-    print('got here')
     dsids <- as.data.frame(datasets(x)) %>%
       filter(.data$datasettype == "speleothem") %>%
       mutate(collectionunitid = x@collectionunitid) %>%
       select(.data$collectionunitid, .data$datasetid)
-    print(dsids)
     if (length(x@speleothems@speleothems) == 0) {
       warning(sprintf("No assigned speleothems. Is it a speleothems dataset?
               Did you run `get_speleothems()`?"))
