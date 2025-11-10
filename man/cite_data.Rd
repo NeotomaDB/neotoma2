@@ -3,11 +3,14 @@
 \name{cite_data}
 \alias{cite_data}
 \alias{cite_data,site-method}
+\alias{cite_data,NULL-method}
 \title{Generate a data citation from a Neotoma2 object.}
 \usage{
 cite_data(x)
 
 \S4method{cite_data}{site}(x)
+
+\S4method{cite_data}{NULL}(x)
 }
 \arguments{
 \item{x}{Object with DOIs associated to it.}

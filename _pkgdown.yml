@@ -1,6 +1,6 @@
 navbar:
   structure:
-    right: [home, reference, articles, external]
+    right: [home, reference, articles, workshops]
   components:
     external:
       text: "Workshop Links"

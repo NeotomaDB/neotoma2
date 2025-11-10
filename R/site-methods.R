@@ -542,3 +542,14 @@ setMethod(f = "cite_data",
               select(.data$datasetid, .data$citation)
             return(citations)
           })
+
+#' @aliases cite_data,NULL-method
+#' @rdname cite_data
+setMethod(f = "cite_data",
+          signature = "NULL",
+          definition = function(x) {
+            if (is.null(x)){
+              warning("No sites to cite.")
+              return(NULL)
+            }
+          })
