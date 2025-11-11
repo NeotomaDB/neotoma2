@@ -47,7 +47,6 @@ setMethod(f = "length",
 setMethod(f = "c",
           signature = signature(x = "samples"),
           definition = function(x, y) {
-            print("im using this function")
             samp <- new("samples",
                         samples = unlist(c(x@samples,
                                            y@samples),

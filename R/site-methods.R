@@ -1,3 +1,6 @@
+setClassUnion("missingOrNULL", c("missing", "NULL"))
+setClassUnion("sitesOrsite", c("site", "sites"))
+
 #' @title Display a `sites` object or nested slots.
 #' @name show
 #' @importFrom sf st_coordinates
@@ -22,8 +25,16 @@ setMethod(f = "show",
 setMethod(f = "show",
           signature = "sites",
           definition = function(object) {
-            object@sites %>%
-              map(as.data.frame) %>%
+            map(object@sites, function(x) {
+              data.frame(
+                siteid = x@siteid,
+                sitename = x@sitename,
+                lat = mean(st_coordinates(x@geography)[, 2]),
+                long = mean(st_coordinates(x@geography)[, 1]),
+                altitude = x@altitude
+              )
+            }) %>%
+              bind_rows() %>%
               print(row.names = FALSE)
           })
 
@@ -195,11 +206,9 @@ setMethod(f = "$",
 setMethod(f = "$",
           signature = signature(x = "sites"),
           definition = function(x, name) {
-            x %>%
-              map(function(y) {
-                slot(y, name)
-              }) %>%
-              unlist()
+            vals <- lapply(x@sites, function(y) slot(y, name))
+            out <- unlist(vals, recursive = FALSE)
+            return(out)
           })
 
 #' @title as.data.frame
@@ -259,29 +268,13 @@ setMethod(f = "length",
 #' @title c - Combine `neotoma2` objects
 #' @name c
 #' @importFrom methods is
-#' @param x `neotoma2` object 1 or NULL
-#' @param y `neotoma2` object 2 or NULL
+#' @param x `neotoma2` object or NULL
+#' @param y `neotoma2` object or NULL
 #' @returns concatenated and cleaned `sites` object
 #' @md
-#' @exportMethod c
-setClassUnion("missingOrNULL", c("missing", "NULL"))
-
 #' @rdname c
-setMethod(f = "c",
-          signature = "missingOrNULL",
-          definition = function(x = "missingORNULL", y) {
-            y
-          })
-
-#' @rdname c
-setMethod(f = "c",
-          signature = "missingOrNULL",
-          definition = function(x = "missingORNULL", y) {
-            y
-          })
-
 #' @aliases c,sites-method
-#' @rdname c
+#' @exportMethod c
 setMethod(f = "c",
           signature = signature(x = "sites"),
           definition = function(x, y) {
@@ -297,6 +290,13 @@ setMethod(f = "c",
               out <- clean(out)
             }
             return(out)
+          })
+
+#' @rdname c
+setMethod(f = "c",
+          signature = "missingOrNULL",
+          definition = function(x = "missingORNULL", y) {
+            y
           })
 
 #' @title write CSV

@@ -76,8 +76,9 @@ setMethod(f = "show",
             result <- map(object@collunits, function(x) {
               as.data.frame(x)
             }) %>%
-              bind_rows()
-            print(result)
+              bind_rows() %>%
+              unique()
+            print(result, row.names = FALSE)
           })
 
 #' @aliases show,collunit-method
@@ -86,7 +87,7 @@ setMethod(f = "show",
           signature = signature(object = "collunit"),
           definition = function(object) {
             result <- as.data.frame(object)
-            print(result)
+            print(result, row.names = FALSE)
           })
 
 #' @aliases sub,collunits-method
@@ -223,14 +224,12 @@ setMethod(f = "c",
           signature = signature(x = "collunits"),
           definition = function(x, y) {
             if (is(y, "collunits")) {
-              cu <- unlist(c(x@collunits, y@collunits),
-                           recursive = FALSE)
               out <- new("collunits",
-                         collunits = cu) %>%
-                clean()
+                         collunits = unlist(c(x@collunits,
+                                              y@collunits),
+                                            recursive = FALSE))
             } else if (is(y, "collunit")) {
               collunitset <- c(x@collunits, y)
-              collunitset <- neotoma2::clean(collunitset)
               out <- new("collunits", collunits = collunitset)
             }
             return(out)

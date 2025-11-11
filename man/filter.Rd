@@ -4,25 +4,18 @@
 \alias{filter}
 \alias{filter.NULL}
 \alias{filter.sites}
-\alias{filter.data.frame}
 \title{Apply a \code{filter} for Neotoma sites objects.}
 \usage{
 filter(.data, ...)
 
 \method{filter}{`NULL`}(.data, ..., .by = NULL, .preserve = FALSE)
 
-\method{filter}{sites}(.data, ..., .by = NULL, .preserve = FALSE)
-
-\method{filter}{data.frame}(.data, ..., .by = NULL, .preserve = FALSE)
+\method{filter}{sites}(x, ...)
 }
 \arguments{
-\item{.data}{A site, dataset, download, or data frame}
-
 \item{...}{Additional arguments passed to \code{filter()}}
 
-\item{.by}{Grouping variables (for dplyr data.frames)}
-
-\item{.preserve}{Whether to preserve grouping (for dplyr data.frames)}
+\item{x}{A site, dataset, download, or data frame}
 }
 \value{
 filtered \code{sites} object
@@ -87,4 +80,3 @@ Simon Goring \email{goring@wisc.edu}
 
 Socorro Dominguez \email{dominguezvid@wisc.edu}
 }
-\keyword{internal}

@@ -31,12 +31,13 @@ get_publications <- function(x = NA, ...) {
 
 #' @rdname get_publications
 #' @export
+#' @method get_publications default
 get_publications.default <- function(...) {
   . <- ""
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
-  params <- get_params("publications")
+  get_params("publications")
   baseURL <- paste0("data/publications")
   result <- tryCatch(
     parseURL(baseURL, ...),
@@ -83,6 +84,7 @@ get_publications.default <- function(...) {
 #' get_publications(666)
 #' }
 #' @export
+#' @method get_publications numeric
 get_publications.numeric <- function(x, ...) {
   . <- ""
   if (length(x) > 0) {
@@ -142,6 +144,7 @@ get_publications.numeric <- function(x, ...) {
 #' updated_pubs <- attr(updated_pubs, "matches")[[3]]
 #' }
 #' @export
+#' @method get_publications publication
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {
     if (!is.na(x@citation)) {
@@ -172,6 +175,7 @@ get_publications.publication <- function(x, ...) {
 #' updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
 #' }
 #' @export
+#' @method get_publications publications
 get_publications.publications <- function(x, ...) {
   for (i in seq_len(length(x))) {
     pub <- x[[i]]

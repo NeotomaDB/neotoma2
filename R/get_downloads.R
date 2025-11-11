@@ -70,6 +70,7 @@ get_downloads <- function(x = NA, verbose = TRUE, ...) {
 
 #' @rdname get_downloads
 #' @export
+#' @method get_downloads numeric
 get_downloads.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
@@ -92,6 +93,7 @@ get_downloads.numeric <- function(x, ...) {
 
 #' @rdname get_downloads
 #' @export
+#' @method get_downloads sites
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)
   cl <- as.list(match.call())

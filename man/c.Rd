@@ -3,7 +3,6 @@
 %   R/contact-methods.R, R/dataset-methods.R, R/publication-methods.R,
 %   R/samples-methods.R, R/site-methods.R, R/speleothem-methods.R,
 %   R/taxon-methods.R
-\docType{class}
 \name{c,chronologies-method}
 \alias{c,chronologies-method}
 \alias{c,collunits-method}
@@ -13,8 +12,8 @@
 \alias{c,publications-method}
 \alias{c,samples-method}
 \alias{c}
+\alias{c,sitesOrsite-method}
 \alias{c,missingOrNULL-method}
-\alias{c,sites-method}
 \alias{c,speleothems-method}
 \alias{c,taxa-method}
 \title{c - Combine \code{neotoma2} objects}
@@ -33,20 +32,18 @@
 
 \S4method{c}{samples}(x, y)
 
-\S4method{c}{missingOrNULL}(x = "missingORNULL", y)
+\S4method{c}{sitesOrsite}(x, y)
 
 \S4method{c}{missingOrNULL}(x = "missingORNULL", y)
-
-\S4method{c}{sites}(x, y)
 
 \S4method{c}{speleothems}(x, y)
 
 \S4method{c}{taxa}(x, y)
 }
 \arguments{
-\item{x}{\code{neotoma2} object 1 or NULL}
+\item{x}{\code{neotoma2} object or NULL}
 
-\item{y}{\code{neotoma2} object 2 or NULL}
+\item{y}{\code{neotoma2} object or NULL}
 }
 \value{
 concatenated and cleaned \code{sites} object

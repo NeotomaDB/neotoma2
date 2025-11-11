@@ -97,7 +97,7 @@ parse_site <- function(result, verbose = FALSE) {
              speleothems = speleothems)
       do.call(build_collunits, cu_l)
     })
-    cu <- new("collunits", collunits = cus) %>% clean()
+    cu <- new("collunits", collunits = cus)
     st <- if (!is.null(x$site)) x$site else x
     st_l <- list(sitename = st$sitename,
                  siteid = st$siteid,

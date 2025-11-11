@@ -21,6 +21,7 @@ check_contacts <- function(x, ...) {
 
 #' @rdname check_contacts
 #' @export
+#' @method check_contacts contacts
 check_contacts.contacts <- function(x, similarity = 0.5, ...) {
   checked <- map(x@contacts, function(y) {
     if (is.na(y@contactid) | !is(y@contactid, "numeric")) {

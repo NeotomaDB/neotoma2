@@ -58,6 +58,7 @@ get_taxon <- function(x = NA, ...) {
 
 #' @rdname get_taxon
 #' @export
+#' @method get_taxon default
 get_taxon.default <- function(...) {
   oo <- options(scipen = 9999)
   on.exit(options(oo))
@@ -99,6 +100,7 @@ get_taxon.default <- function(...) {
 
 #' @rdname get_taxon
 #' @export
+#' @method get_taxon numeric
 get_taxon.numeric <- function(x, ...) {
   if (length(x) > 0) {
     taxa_id <- paste0(x, collapse = ",")

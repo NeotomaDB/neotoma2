@@ -98,6 +98,7 @@ get_sites <- function(x, ...) {
 
 #' @rdname get_sites
 #' @export
+#' @method get_sites numeric
 get_sites.numeric <- function(x, ...) {
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
@@ -120,6 +121,7 @@ get_sites.numeric <- function(x, ...) {
 
 #' @rdname get_sites
 #' @export
+#' @method get_sites default
 get_sites.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL
