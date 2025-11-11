@@ -79,9 +79,11 @@ setMethod(f = "show",
               bind_rows() %>%
               unique()
             df_clean <- result %>%
+              mutate(na_count = rowSums(is.na(.))) %>%
               group_by(.data$collectionunitid) %>%
-              filter(n() == 1 | rowSums(is.na(.)) != max(rowSums(is.na(.)))) %>%
+              filter(na_count != max(na_count) | n() == 1) %>%
               dplyr::ungroup() %>%
+              select(-na_count) %>%
               as.data.frame()
             print(df_clean, row.names = FALSE)
           })
