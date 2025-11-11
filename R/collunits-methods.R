@@ -207,7 +207,7 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("collunits"),
           definition = function(x) {
-            x@collunits %>% map(as.data.frame) %>% bind_rows()
+            x@collunits %>% map(as.data.frame) %>% bind_rows() %>% unique()
           })
 
 #' @aliases length,collunits-method

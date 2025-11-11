@@ -9,7 +9,7 @@
 \usage{
 clean(x = NA, verbose = TRUE, ...)
 
-\method{clean}{sites}(x, verbose = FALSE, ...)
+\method{clean}{sites}(x, verbose = TRUE, ...)
 
 \method{clean}{collunits}(x, verbose = TRUE, ...)
 

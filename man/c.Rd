@@ -12,7 +12,7 @@
 \alias{c,publications-method}
 \alias{c,samples-method}
 \alias{c}
-\alias{c,sitesOrsite-method}
+\alias{c,sites-method}
 \alias{c,missingOrNULL-method}
 \alias{c,speleothems-method}
 \alias{c,taxa-method}
@@ -32,7 +32,7 @@
 
 \S4method{c}{samples}(x, y)
 
-\S4method{c}{sitesOrsite}(x, y)
+\S4method{c}{sites}(x, y)
 
 \S4method{c}{missingOrNULL}(x = "missingORNULL", y)
 
