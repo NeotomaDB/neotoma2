@@ -78,7 +78,12 @@ setMethod(f = "show",
             }) %>%
               bind_rows() %>%
               unique()
-            print(result, row.names = FALSE)
+            df_clean <- result %>%
+              group_by(.data$collectionunitid) %>%
+              filter(n() == 1 | rowSums(is.na(.)) != max(rowSums(is.na(.)))) %>%
+              dplyr::ungroup() %>%
+              as.data.frame()
+            print(df_clean, row.names = FALSE)
           })
 
 #' @aliases show,collunit-method
@@ -207,7 +212,7 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("collunits"),
           definition = function(x) {
-            x@collunits %>% map(as.data.frame) %>% bind_rows() %>% unique()
+            df <- x@collunits %>% map(as.data.frame) %>% bind_rows() %>% unique()
           })
 
 #' @aliases length,collunits-method

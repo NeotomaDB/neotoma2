@@ -11,6 +11,7 @@ setMethod(f = "collunits",
               x@collunits
             })
             final <- reduce(output, c)
+            final <- clean(final)
             return(final)
           })
 
@@ -56,7 +57,7 @@ setMethod(f = "datasets",
 setMethod(f = "datasets",
           signature = "sites",
           definition = function(object) {
-            datasets(collunits(object))
+            clean(datasets(collunits(object)))
           })
 
 #' @rdname datasets

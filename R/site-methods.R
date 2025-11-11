@@ -17,7 +17,8 @@ setMethod(f = "show",
                              sitename = object@sitename,
                              lat = mean(st_coordinates(object@geography)[, 2]),
                              long = mean(st_coordinates(object@geography)[, 1]),
-                             altitude = object@altitude), row.names = FALSE)
+                             altitude = object@altitude), row.names = FALSE) %>%
+              unique()
           })
 
 #' @aliases show,sites-method
@@ -35,6 +36,7 @@ setMethod(f = "show",
               )
             }) %>%
               bind_rows() %>%
+              unique() %>%
               print(row.names = FALSE)
           })
 
@@ -239,7 +241,7 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("sites"),
           definition = function(x) {
-            x@sites %>% map(as.data.frame) %>% bind_rows()
+            x@sites %>% map(as.data.frame) %>% bind_rows() %>% unique()
           })
 
 #' @title  as.list sites
@@ -283,11 +285,11 @@ setMethod(f = "c",
                          sites = unlist(c(x@sites,
                                           y@sites),
                                         recursive = FALSE))
-              out <- clean(out)
+              #out <- clean(out)
             } else if (is(y, "site")) {
               siteset <- c(x@sites, y)
               out <- new("sites", sites = siteset)
-              out <- clean(out)
+              #out <- clean(out)
             }
             return(out)
           })

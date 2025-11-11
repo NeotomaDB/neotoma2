@@ -18,7 +18,7 @@ setMethod(f = "show",
 setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
-            map(object@datasets, function(y) {
+            result <- map(object@datasets, function(y) {
               data.frame(datasetid = y@datasetid,
                          database = y@database,
                          datasettype = y@datasettype,
@@ -29,7 +29,15 @@ setMethod(f = "show",
                          notes = y@notes)
             }) %>%
               bind_rows() %>%
-              print(row.names = FALSE)
+              unique()
+            df_clean <- result %>%
+              mutate(na_count = rowSums(is.na(.))) %>%
+              group_by(.data$datasetid) %>%
+              filter(na_count != max(na_count) | n() == 1) %>%
+              dplyr::ungroup() %>%
+              select(-na_count) %>%
+              as.data.frame()
+            print(df_clean, row.names = FALSE)
           })
 
 #' @aliases sub-sub,datasets-method
