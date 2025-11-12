@@ -39,6 +39,47 @@ device.
 depositionalenvironment A fixed vocabulary name for the
 depositional environment.
 
+
+The filter function takes a sites object
+and allows a user to filter on a number of properties. Since a sites object
+is a nested object (it contains collection units, datasets, samples, etc.)
+the degree to which filtering occurs depends on the amount of data contained
+within the sites object. Filtering parameters include:
+siteid A numeric site identifier from the Neotoma Database.
+sitename The character string sitename.
+lat A numeric latitude value.
+long A numeric longitude value.
+altitude The elevation of the site. Note that some sites do not
+include elevation information. For these an NA value appears, and they
+would be removed when using an elevation filter.
+datasetid A numeric datasetid from Neotoma.
+database A character string naming the constituent database
+from which the dataset is drawn.
+datasettype A character string representing one of the many
+dataset types within Neotoma.
+age_range_old A dataset-level parameter indicating the oldest
+date covered by the dataset chronology.
+age_range_young A dataset-level parameter indicating the youngest
+date covered by the dataset chronology.
+notes Free-form dataset notes provided by the dataset PI(s),
+analysts or data stewards.
+collectionunitid A numeric collection unit identifier from
+Neotoma.
+handle A character string identifying the collection unit. These
+are often shorter form names (originally a default 8 character length).
+collectionunitname A character string identifying the collection
+unit name.
+colldate The date on which the collection unit was sampled. Many
+of these are empty.
+location A free-form character string indicating the location of
+the collection unit within the site.
+waterdepth A numeric depth at which the core was obtained.
+collunittype A character string for the collection unit type.
+collectiondevice A fixed vocabulary term for the collection
+device.
+depositionalenvironment A fixed vocabulary name for the
+depositional environment.
+
 "><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -100,7 +141,7 @@ depositional environment.
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Apply a <code>filter</code> for Neotoma sites objects.</h1>
+    <h1>Apply a filter for Neotoma sites objects.</h1>
     <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/R/filter.R" class="external-link"><code>R/filter.R</code></a></small>
     <div class="hidden name"><code>filter.Rd</code></div>
     </div>
@@ -144,31 +185,67 @@ the collection unit within the site.</p></li>
 device.</p></li>
 <li><p><code>depositionalenvironment</code> A fixed vocabulary name for the
 depositional environment.</p></li>
+</ul><p>The <code>filter</code> function takes a <code>sites</code> object
+and allows a user to filter on a number of properties. Since a sites object
+is a nested object (it contains collection units, datasets, samples, etc.)
+the degree to which filtering occurs depends on the amount of data contained
+within the sites object. Filtering parameters include:</p><ul><li><p><code>siteid</code> A numeric site identifier from the Neotoma Database.</p></li>
+<li><p><code>sitename</code> The character string sitename.</p></li>
+<li><p><code>lat</code> A numeric latitude value.</p></li>
+<li><p><code>long</code> A numeric longitude value.</p></li>
+<li><p><code>altitude</code> The elevation of the site. Note that some sites do not
+include elevation information. For these an NA value appears, and they
+would be removed when using an elevation filter.</p></li>
+<li><p><code>datasetid</code> A numeric datasetid from Neotoma.</p></li>
+<li><p><code>database</code> A character string naming the constituent database
+from which the dataset is drawn.</p></li>
+<li><p><code>datasettype</code> A character string representing one of the many
+dataset types within Neotoma.</p></li>
+<li><p><code>age_range_old</code> A dataset-level parameter indicating the oldest
+date covered by the dataset chronology.</p></li>
+<li><p><code>age_range_young</code> A dataset-level parameter indicating the youngest
+date covered by the dataset chronology.</p></li>
+<li><p><code>notes</code> Free-form dataset notes provided by the dataset PI(s),
+analysts or data stewards.</p></li>
+<li><p><code>collectionunitid</code> A numeric collection unit identifier from
+Neotoma.</p></li>
+<li><p><code>handle</code> A character string identifying the collection unit. These
+are often shorter form names (originally a default 8 character length).</p></li>
+<li><p><code>collectionunitname</code> A character string identifying the collection
+unit name.</p></li>
+<li><p><code>colldate</code> The date on which the collection unit was sampled. Many
+of these are empty.</p></li>
+<li><p><code>location</code> A free-form character string indicating the location of
+the collection unit within the site.</p></li>
+<li><p><code>waterdepth</code> A numeric depth at which the core was obtained.</p></li>
+<li><p><code>collunittype</code> A character string for the collection unit type.</p></li>
+<li><p><code>collectiondevice</code> A fixed vocabulary term for the collection
+device.</p></li>
+<li><p><code>depositionalenvironment</code> A fixed vocabulary name for the
+depositional environment.</p></li>
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class '`NULL`'</span></span>
-<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'sites'</span></span>
-<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'data.frame'</span></span>
-<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg--data">.data<a class="anchor" aria-label="anchor" href="#arg--data"></a></dt>
-<dd><p>A site, dataset, download, or data frame</p></dd>
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+<dd><p>A site, dataset or download.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to <code>filter()</code></p></dd>
+
+
+<dt id="arg--data">.data<a class="anchor" aria-label="anchor" href="#arg--data"></a></dt>
+<dd><p>A site, dataset, download, or data frame</p></dd>
 
 
 <dt id="arg--by">.by<a class="anchor" aria-label="anchor" href="#arg--by"></a></dt>
@@ -182,6 +259,7 @@ depositional environment.</p></li>
     <div id="value">
     <h2>Value</h2>
     <p>filtered <code>sites</code> object</p>
+<p>filtered <code>sites</code> object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -195,9 +273,6 @@ depositional environment.</p></li>
 <span class="r-in"><span><span class="co"># Download 10 sites, but only keep the sites that are close to sea level.</span></span></span>
 <span class="r-in"><span><span class="va">some_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Lake%"</span>, limit <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">site_subset</span> <span class="op">&lt;-</span> <span class="va">some_sites</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">filter</span><span class="op">(</span><span class="va">altitude</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in filter(., ...):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `altitude &lt; 100`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'altitude' not found</span>
 <span class="r-in"><span><span class="co"># Download 10 sites, get all associated datasets, but keep only</span></span></span>
 <span class="r-in"><span><span class="co"># sites/datasets that are of datasettype "pollen":</span></span></span>
 <span class="r-in"><span><span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>

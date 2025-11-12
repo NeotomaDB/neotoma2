@@ -78,7 +78,7 @@ The user may define all or none of the possible fields.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_datasets</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_datasets</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'numeric'</span></span>
 <span><span class="fu">get_datasets</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -170,7 +170,6 @@ For the complete records, use <code>all_data=TRUE</code></p></li>
 <span class="r-in"><span><span class="va">allds</span> <span class="op">&lt;-</span> <span class="fu">get_datasets</span><span class="op">(</span><span class="va">random_sites</span>, limit<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># To find all datasets with a min altitude of 12 and a max altitude of 25:</span></span></span>
 <span class="r-in"><span><span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_datasets</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">12</span>, altmax<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_datasets.numeric(altmin = 12, altmax = 25):</span> argument "x" is missing, with no default</span>
 <span class="r-in"><span><span class="co"># To find all datasets in Brazil</span></span></span>
 <span class="r-in"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span></span>
 <span class="r-in"><span><span class="st">"coordinates": [[</span></span></span>

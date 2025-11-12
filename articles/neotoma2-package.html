@@ -258,20 +258,15 @@ site records already.</p>
 <code class="sourceCode R"><span><span class="co"># Search for site by a single numeric ID:</span></span>
 <span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span></span>
 <span><span class="va">alex</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt;  siteid       sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333   NA  &lt;NA&gt;        &lt;NA&gt;   73</span></span>
+<span><span class="co">#&gt;  siteid       sitename      lat      long altitude</span></span>
+<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333       73</span></span>
 <span></span>
 <span><span class="co"># Search for sites with multiple IDs using c():</span></span>
 <span><span class="va">multiple_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span><span class="fu"><a href="../reference/c.html">c</a></span><span class="op">(</span><span class="fl">24</span>, <span class="fl">47</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">multiple_sites</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt;  siteid       sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333   NA  &lt;NA&gt;        &lt;NA&gt;   73</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt;  siteid sitename   lat   long area notes description elev</span></span>
-<span><span class="co">#&gt;      47  Liberty 43.52 -90.78   NA  &lt;NA&gt;        &lt;NA&gt;  353</span></span></code></pre></div>
+<span><span class="co">#&gt;  siteid       sitename      lat      long altitude</span></span>
+<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333       73</span></span>
+<span><span class="co">#&gt;      47        Liberty 43.52000 -90.78000      353</span></span></code></pre></div>
 <p>Once you search for a site, the <code>neotoma2</code> R package makes
 a call to the Neotoma Database, and returns a structured
 <code>sites</code> object that contains metadata about the sites, and
@@ -300,9 +295,8 @@ use <code><a href="../reference/c.html">c()</a></code>).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Alexander Lake"</span><span class="op">)</span></span>
 <span><span class="va">alex</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt;  siteid       sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333   NA  &lt;NA&gt;        &lt;NA&gt;   73</span></span></code></pre></div>
+<span><span class="co">#&gt;  siteid       sitename      lat      long altitude</span></span>
+<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333       73</span></span></code></pre></div>
 <p>Neotoma uses a Postgres Database to manage data. Postgres uses the
 <code>%</code> sign as a general wildcard, so we can use the
 <code>%</code> in the <code>sitename</code> argument operator to help us
@@ -312,21 +306,11 @@ case <strong>insensitive</strong> so a search for <code>alex%</code> or
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">'Alex%'</span><span class="op">)</span></span>
 <span><span class="va">alex</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt;  siteid       sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333   NA  &lt;NA&gt;        &lt;NA&gt;   73</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt;  siteid    sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      25 Alexis Lake 52.51667 -57.03333   NA  &lt;NA&gt;        &lt;NA&gt;  193</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt;  siteid           sitename   lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;    4478 Alexander [3CN117] 35.25 -92.61667   NA  &lt;NA&gt;        &lt;NA&gt;  180</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt;  siteid       sitename     lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;   26226 Alexandra Lake 43.2903 -74.16966   NA  &lt;NA&gt;        &lt;NA&gt;  351</span></span></code></pre></div>
+<span><span class="co">#&gt;  siteid           sitename      lat      long altitude</span></span>
+<span><span class="co">#&gt;      24     Alexander Lake 53.33333 -60.58333       73</span></span>
+<span><span class="co">#&gt;      25        Alexis Lake 52.51667 -57.03333      193</span></span>
+<span><span class="co">#&gt;    4478 Alexander [3CN117] 35.25000 -92.61667      180</span></span>
+<span><span class="co">#&gt;   26226     Alexandra Lake 43.29030 -74.16966      351</span></span></code></pre></div>
 <p>Since this new <code>sites</code> object has 4. elements that belong
 to <code>site</code>, we may want to access only one of the objects, or
 sets of metadata from our variable <code>alex</code>.</p>
@@ -430,8 +414,8 @@ information such as <code>sitename</code>, <code>lat</code>, and
 <span>                    description <span class="op">=</span> <span class="st">"my lake"</span>, </span>
 <span>                    altitude <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span><span class="va">my_site</span></span>
-<span><span class="co">#&gt;     siteid sitename lat long altitude</span></span>
-<span><span class="co">#&gt;  163690603  My Lake   2    1       30</span></span></code></pre></div>
+<span><span class="co">#&gt;    siteid sitename lat long altitude</span></span>
+<span><span class="co">#&gt;  91698034  My Lake   2    1       30</span></span></code></pre></div>
 <p>If we have a set of sites that we are analyzing, we can add the new
 site to the set of sites, either by appending it to the end, using
 <code><a href="../reference/c.html">c()</a></code>, or by replacing a particular element using
@@ -485,151 +469,42 @@ can pass a sites object.</p>
 <code class="sourceCode R"><span><span class="co"># Getting datasets by ID</span></span>
 <span><span class="va">my_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_datasets.html">get_datasets</a></span><span class="op">(</span><span class="fu"><a href="../reference/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">my_datasets</span></span>
-<span><span class="co">#&gt; $`5`</span></span>
-<span><span class="co">#&gt;  siteid sitename   lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;       5     17/2 55.25 -74.93333   NA  &lt;NA&gt;        &lt;NA&gt;  300</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`10`</span></span>
-<span><span class="co">#&gt;  siteid                   sitename   lat   long area notes description elev</span></span>
-<span><span class="co">#&gt;      10 Site 1 (Cohen unpublished) 30.83 -82.33   NA  &lt;NA&gt;        &lt;NA&gt;   36</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`15`</span></span>
-<span><span class="co">#&gt;  siteid sitename       lat   long area notes description elev</span></span>
-<span><span class="co">#&gt;      15  Aguilar -23.83333 -65.75   NA  &lt;NA&gt;        &lt;NA&gt; 3828</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`20`</span></span>
-<span><span class="co">#&gt;  siteid sitename      lat     long area notes description elev</span></span>
-<span><span class="co">#&gt;      20 Akuvaara 69.12326 27.67406   NA  &lt;NA&gt;        &lt;NA&gt;  159</span></span></code></pre></div>
+<span><span class="co">#&gt;  siteid                   sitename       lat      long altitude</span></span>
+<span><span class="co">#&gt;       5                       17/2  55.25000 -74.93333      300</span></span>
+<span><span class="co">#&gt;      10 Site 1 (Cohen unpublished)  30.83000 -82.33000       36</span></span>
+<span><span class="co">#&gt;      15                    Aguilar -23.83333 -65.75000     3828</span></span>
+<span><span class="co">#&gt;      20                   Akuvaara  69.12326  27.67406      159</span></span></code></pre></div>
 <p>You can also retrieve datasets by type directly from the API.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Getting datasets by type</span></span>
 <span><span class="va">my_pollen_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_datasets.html">get_datasets</a></span><span class="op">(</span>datasettype <span class="op">=</span> <span class="st">"pollen"</span>, limit <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">my_pollen_datasets</span></span>
-<span><span class="co">#&gt; $`7`</span></span>
-<span><span class="co">#&gt;  siteid        sitename lat      long area</span></span>
-<span><span class="co">#&gt;       7 Three Pines Bog  47 -80.11667   NA</span></span>
-<span><span class="co">#&gt;                                                   notes description elev</span></span>
-<span><span class="co">#&gt;  Bog is adjacent to the Three Pines archeological site.        &lt;NA&gt;  329</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`8`</span></span>
-<span><span class="co">#&gt;  siteid            sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;       8 Abalone Rocks Marsh 33.95639 -119.9767   NA  &lt;NA&gt;        &lt;NA&gt;    9</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`9`</span></span>
-<span><span class="co">#&gt;  siteid sitename      lat     long area</span></span>
-<span><span class="co">#&gt;       9   Adange 43.30556 41.33333   NA</span></span>
-<span><span class="co">#&gt;                                                 notes description elev</span></span>
-<span><span class="co">#&gt;  The site is the wide part of the mouth of the river.        &lt;NA&gt; 2065</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`11`</span></span>
-<span><span class="co">#&gt;  siteid                     sitename   lat     long area</span></span>
-<span><span class="co">#&gt;      11 Konus Exposure, Adycha River 67.75 135.5833   NA</span></span>
-<span><span class="co">#&gt;                            notes description elev</span></span>
-<span><span class="co">#&gt;  Adycha River, Lower Yana River.        &lt;NA&gt;  137</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`12`</span></span>
-<span><span class="co">#&gt;  siteid      sitename      lat     long area</span></span>
-<span><span class="co">#&gt;      12 Ageröds Mosse 55.93329 13.42559   NA</span></span>
-<span><span class="co">#&gt;                                    notes description elev</span></span>
-<span><span class="co">#&gt;  Surrounding vegetation: birch woodland.        &lt;NA&gt;   47</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`13`</span></span>
-<span><span class="co">#&gt;  siteid        sitename       lat  long area notes description elev</span></span>
-<span><span class="co">#&gt;      13 Aguas Calientes -23.08333 -67.4   NA  &lt;NA&gt;        &lt;NA&gt; 4233</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`14`</span></span>
-<span><span class="co">#&gt;  siteid          sitename   lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      14 Aguas Calientes 2 -23.5 -67.58333   NA  &lt;NA&gt;        &lt;NA&gt; 4198</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`15`</span></span>
-<span><span class="co">#&gt;  siteid sitename       lat   long area notes description elev</span></span>
-<span><span class="co">#&gt;      15  Aguilar -23.83333 -65.75   NA  &lt;NA&gt;        &lt;NA&gt; 3828</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`16`</span></span>
-<span><span class="co">#&gt;  siteid  sitename      lat    long area notes description elev</span></span>
-<span><span class="co">#&gt;      16 Ahlenmoor 53.69908 8.74688   NA  &lt;NA&gt;        &lt;NA&gt;    5</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`17`</span></span>
-<span><span class="co">#&gt;  siteid sitename    lat  long area notes description elev</span></span>
-<span><span class="co">#&gt;      17    Ajata -18.25 -69.2   NA  &lt;NA&gt;        &lt;NA&gt; 4773</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`18`</span></span>
-<span><span class="co">#&gt;  siteid         sitename  lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      18 South Soefje Bog 29.6 -97.51694   NA  &lt;NA&gt;        &lt;NA&gt;  100</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`19`</span></span>
-<span><span class="co">#&gt;  siteid                sitename      lat   long area</span></span>
-<span><span class="co">#&gt;      19 Akulinin Exposure P1282 47.11667 138.55   NA</span></span>
-<span><span class="co">#&gt;                                                 notes description elev</span></span>
-<span><span class="co">#&gt;  Floodplain vegetation: Salix, Populus, and Chosenia.        &lt;NA&gt;  367</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`20`</span></span>
-<span><span class="co">#&gt;  siteid sitename      lat     long area notes description elev</span></span>
-<span><span class="co">#&gt;      20 Akuvaara 69.12326 27.67406   NA  &lt;NA&gt;        &lt;NA&gt;  159</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`21`</span></span>
-<span><span class="co">#&gt;  siteid                            sitename  lat  long area notes description</span></span>
-<span><span class="co">#&gt;      21 Alazeya River Exposure, 8 m Terrace 68.5 154.5   NA  &lt;NA&gt;        &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;  elev</span></span>
-<span><span class="co">#&gt;    50</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`22`</span></span>
-<span><span class="co">#&gt;  siteid                            sitename      lat  long area notes</span></span>
-<span><span class="co">#&gt;      22 Alazeya River Exposure, 9 m Terrace 64.33333 154.5   NA  &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;  description elev</span></span>
-<span><span class="co">#&gt;         &lt;NA&gt;  125</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`24`</span></span>
-<span><span class="co">#&gt;  siteid       sitename      lat      long area</span></span>
-<span><span class="co">#&gt;      24 Alexander Lake 53.33333 -60.58333   NA</span></span>
-<span><span class="co">#&gt;                                                                                                                                                                            notes</span></span>
-<span><span class="co">#&gt;  Lake area from Topographic Dataset of Canada (CanVec).  Added on 7/14/21 by Grace Roper, UW-Madison.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes</span></span>
-<span><span class="co">#&gt;  description elev</span></span>
-<span><span class="co">#&gt;         &lt;NA&gt;   73</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`25`</span></span>
-<span><span class="co">#&gt;  siteid    sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      25 Alexis Lake 52.51667 -57.03333   NA  &lt;NA&gt;        &lt;NA&gt;  193</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`27`</span></span>
-<span><span class="co">#&gt;  siteid   sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      27 Aliuk Pond 54.58333 -57.36667   NA  &lt;NA&gt;        &lt;NA&gt;    9</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`29`</span></span>
-<span><span class="co">#&gt;  siteid   sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      29 Lake Allie 44.80156 -94.55982   NA  &lt;NA&gt;        &lt;NA&gt;  320</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`30`</span></span>
-<span><span class="co">#&gt;  siteid    sitename      lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      30 Almora Lake 46.20611 -95.29361   NA  &lt;NA&gt;        &lt;NA&gt;  437</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`31`</span></span>
-<span><span class="co">#&gt;  siteid  sitename      lat     long area notes description elev</span></span>
-<span><span class="co">#&gt;      31 Alut Lake 60.13667 152.3128   NA  &lt;NA&gt;        &lt;NA&gt;  488</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`32`</span></span>
-<span><span class="co">#&gt;  siteid sitename       lat      long area notes description elev</span></span>
-<span><span class="co">#&gt;      32  Amarete -15.23333 -68.98333   NA  &lt;NA&gt;        &lt;NA&gt; 3755</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`33`</span></span>
-<span><span class="co">#&gt;  siteid                sitename      lat     long area</span></span>
-<span><span class="co">#&gt;      33 Amba River Exposure 596 43.31667 131.8167   NA</span></span>
-<span><span class="co">#&gt;                                                                                notes</span></span>
-<span><span class="co">#&gt;  Main tree species are Quercus, Carpinus cordata, Tilia, Acer, and Abies holophylla.</span></span>
-<span><span class="co">#&gt;  description elev</span></span>
-<span><span class="co">#&gt;         &lt;NA&gt;    0</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`68`</span></span>
-<span><span class="co">#&gt;  siteid                        sitename   lat  long area</span></span>
-<span><span class="co">#&gt;      68 Amguema River Valley Exposure 1 67.75 178.7   NA</span></span>
-<span><span class="co">#&gt;                                            notes description elev</span></span>
-<span><span class="co">#&gt;  Site located on the left bank of Amguema River.        &lt;NA&gt;  493</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`69`</span></span>
-<span><span class="co">#&gt;  siteid                        sitename      lat  long area</span></span>
-<span><span class="co">#&gt;      69 Amguema River Valley Exposure 2 67.66667 178.6   NA</span></span>
-<span><span class="co">#&gt;                                        notes description elev</span></span>
-<span><span class="co">#&gt;  Site located on left bank of Amguema River.        &lt;NA&gt;  376</span></span></code></pre></div>
+<span><span class="co">#&gt;  siteid                            sitename       lat       long altitude</span></span>
+<span><span class="co">#&gt;       7                     Three Pines Bog  47.00000  -80.11667      329</span></span>
+<span><span class="co">#&gt;       8                 Abalone Rocks Marsh  33.95639 -119.97667        9</span></span>
+<span><span class="co">#&gt;       9                              Adange  43.30556   41.33333     2065</span></span>
+<span><span class="co">#&gt;      11        Konus Exposure, Adycha River  67.75000  135.58333      137</span></span>
+<span><span class="co">#&gt;      12                       Ageröds Mosse  55.93329   13.42559       47</span></span>
+<span><span class="co">#&gt;      13                     Aguas Calientes -23.08333  -67.40000     4233</span></span>
+<span><span class="co">#&gt;      14                   Aguas Calientes 2 -23.50000  -67.58333     4198</span></span>
+<span><span class="co">#&gt;      15                             Aguilar -23.83333  -65.75000     3828</span></span>
+<span><span class="co">#&gt;      16                           Ahlenmoor  53.69908    8.74688        5</span></span>
+<span><span class="co">#&gt;      17                               Ajata -18.25000  -69.20000     4773</span></span>
+<span><span class="co">#&gt;      18                    South Soefje Bog  29.60000  -97.51694      100</span></span>
+<span><span class="co">#&gt;      19             Akulinin Exposure P1282  47.11667  138.55000      367</span></span>
+<span><span class="co">#&gt;      20                            Akuvaara  69.12326   27.67406      159</span></span>
+<span><span class="co">#&gt;      21 Alazeya River Exposure, 8 m Terrace  68.50000  154.50000       50</span></span>
+<span><span class="co">#&gt;      22 Alazeya River Exposure, 9 m Terrace  64.33333  154.50000      125</span></span>
+<span><span class="co">#&gt;      24                      Alexander Lake  53.33333  -60.58333       73</span></span>
+<span><span class="co">#&gt;      25                         Alexis Lake  52.51667  -57.03333      193</span></span>
+<span><span class="co">#&gt;      27                          Aliuk Pond  54.58333  -57.36667        9</span></span>
+<span><span class="co">#&gt;      29                          Lake Allie  44.80156  -94.55982      320</span></span>
+<span><span class="co">#&gt;      30                         Almora Lake  46.20611  -95.29361      437</span></span>
+<span><span class="co">#&gt;      31                           Alut Lake  60.13667  152.31278      488</span></span>
+<span><span class="co">#&gt;      32                             Amarete -15.23333  -68.98333     3755</span></span>
+<span><span class="co">#&gt;      33             Amba River Exposure 596  43.31667  131.81667        0</span></span>
+<span><span class="co">#&gt;      68     Amguema River Valley Exposure 1  67.75000  178.70000      493</span></span>
+<span><span class="co">#&gt;      69     Amguema River Valley Exposure 2  67.66667  178.60000      376</span></span></code></pre></div>
 <p>It can be computationally intensive to obtain the full set of records
 for <code>sites</code> or <code>datasets</code>. By default the
 <code>limit</code> for all queries is <code>25</code>. The default
