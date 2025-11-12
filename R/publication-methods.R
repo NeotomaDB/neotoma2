@@ -135,7 +135,6 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature(x = "publication"),
           definition = function(x) {
-            print(x)
             slots <- slotNames(x)
             slots <- slots[!slots == "author"]
             table <- slots %>%

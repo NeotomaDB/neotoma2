@@ -51,21 +51,22 @@ clean <- function(x = NA, verbose = TRUE, ...) {
     UseMethod("clean", NA)
   }
 }
-
 #' @rdname clean
 #' @export
 clean.sites <- function(x, verbose = TRUE, ...) {
   siteids <- as.data.frame(x)$siteid
-  if (any(duplicated(siteids))) {
-    matched <- unique(siteids[duplicated(siteids)])
-    clean_sites <- filter(x, !x$siteid %in% matched)
-    messy_sites <- neotoma2::filter(x, x$siteid %in% matched)
+  matched <- unique(siteids[duplicated(siteids)])
+  non_dupes <- siteids[!duplicated(siteids) & !duplicated(siteids, fromLast = TRUE)]
+  if (length(matched) > 0) {
+    inter <- intersect(x$siteid, matched)
+    clean_sites <- x %>% neotoma2::filter(!(siteid %in% inter))
+    messy_sites <- x %>% neotoma2::filter((siteid %in% inter))
     pb <- progress_bar$new(total = length(matched))
-    for (i in matched) {
+    for (i in inter) {
       if (verbose == TRUE) {
         pb$tick()
       }
-      messy_site <- neotoma2::filter(messy_sites, messy_sites$siteid == i)
+      messy_site <- neotoma2::filter(messy_sites, siteid == i)
       messy_cus <- clean(collunits(messy_site))
       new_site <- messy_site[1]
       new_site@sites[[1]]@collunits <- messy_cus
@@ -82,6 +83,7 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 clean.collunits <- function(x, verbose = TRUE, ...) {
   cuids <- as.data.frame(x)$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
+  non_dupes <- cuids[!duplicated(cuids) & !duplicated(cuids, fromLast = TRUE)]
   if (length(matched) == 0) {
     return(x)
   } else {

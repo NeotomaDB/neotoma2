@@ -29,15 +29,7 @@ setMethod(f = "show",
                          notes = y@notes)
             }) %>%
               bind_rows() %>%
-              unique()
-            df_clean <- result %>%
-              mutate(na_count = rowSums(is.na(.))) %>%
-              group_by(.data$datasetid) %>%
-              filter(na_count != max(na_count) | n() == 1) %>%
-              dplyr::ungroup() %>%
-              select(-na_count) %>%
-              as.data.frame()
-            print(df_clean, row.names = FALSE)
+              print(row.names = FALSE)
           })
 
 #' @aliases sub-sub,datasets-method

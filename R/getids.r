@@ -58,6 +58,7 @@ getids.sites <- function(x, order = TRUE) {
            collunitid = .data$collunitid,
            datasetid = .data$datasetid)
   siteids <- siteids[!is.na(siteids$datasetid), ]
+  siteids <- unique(siteids)
   return(siteids)
 }
 

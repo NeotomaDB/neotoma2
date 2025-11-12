@@ -77,15 +77,7 @@ setMethod(f = "show",
               as.data.frame(x)
             }) %>%
               bind_rows() %>%
-              unique()
-            df_clean <- result %>%
-              mutate(na_count = rowSums(is.na(.))) %>%
-              group_by(.data$collectionunitid) %>%
-              filter(na_count != max(na_count) | n() == 1) %>%
-              dplyr::ungroup() %>%
-              select(-na_count) %>%
-              as.data.frame()
-            print(df_clean, row.names = FALSE)
+              print(row.names = FALSE)
           })
 
 #' @aliases show,collunit-method
@@ -214,7 +206,7 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("collunits"),
           definition = function(x) {
-            df <- x@collunits %>% map(as.data.frame) %>% bind_rows() %>% unique()
+            df <- x@collunits %>% map(as.data.frame) %>% bind_rows()
           })
 
 #' @aliases length,collunits-method
@@ -231,9 +223,18 @@ setMethod(f = "c",
           signature = signature(x = "collunits"),
           definition = function(x, y) {
             if (is(y, "collunits")) {
+              cus_l <- c(x@collunits,
+                           y@collunits)
+              
+              if (is.null(names(cus_l)) || all(names(cus_l) == "")) {
+                # Case 1: Remove duplicates by content
+                cus_l <- cus_l[!duplicated(cus_l)]
+              } else {
+                # Case 2: Remove duplicates by name
+                cus_l <- cus_l[!duplicated(names(cus_l))]
+              }
               out <- new("collunits",
-                         collunits = unlist(c(x@collunits,
-                                              y@collunits),
+                         collunits = unlist(cus_l,
                                             recursive = FALSE))
             } else if (is(y, "collunit")) {
               collunitset <- c(x@collunits, y)

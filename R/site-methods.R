@@ -241,7 +241,7 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("sites"),
           definition = function(x) {
-            x@sites %>% map(as.data.frame) %>% bind_rows() %>% unique()
+            x@sites %>% map(as.data.frame) %>% bind_rows() #%>% unique()
           })
 
 #' @title  as.list sites
@@ -278,21 +278,18 @@ setMethod(f = "length",
 #' @aliases c,sites-method
 #' @exportMethod c
 setMethod(f = "c",
-          signature = signature(x = "sites"),
+          signature = "sites",
           definition = function(x, y) {
             if (is(y, "sites")) {
-              out <- new("sites",
-                         sites = unlist(c(x@sites,
-                                          y@sites),
-                                        recursive = FALSE))
-              #out <- clean(out)
+              x@sites <- unlist(c(x@sites, y@sites), recursive = FALSE)
             } else if (is(y, "site")) {
-              siteset <- c(x@sites, y)
-              out <- new("sites", sites = siteset)
-              #out <- clean(out)
+              x@sites <- c(x@sites, y)
             }
-            return(out)
-          })
+            x <- clean(x)
+            x <- new("sites", sites = x@sites)
+            return(x)
+          }
+)
 
 #' @rdname c
 setMethod(f = "c",
