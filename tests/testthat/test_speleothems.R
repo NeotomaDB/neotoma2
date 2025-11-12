@@ -19,7 +19,7 @@ test_that("no duplicate rows in speleothems data frame", {
   spel_data<- get_datasets(datasettype='speleothem', limit=10)
   spel_data <- speleothems(get_speleothems(spel_data))
   
-  expect_equal(nrow(spel_data), nrow(unique(spel_data)))
+  testthat::expect_equal(nrow(spel_data), nrow(unique(spel_data)))
 })
 
 # Tests for speleothemdetails() function

@@ -1,3 +1,9 @@
+library("testthat")
+library("neotoma2")
+
+context("Verifying that neotoma objects do not have duplicates and
+         are nested properly respecting Neotoma's data object:
+        site <- cu <- ds")
 test_that("Doubling a set of records results and cleaning results in a clean set.", {
   # c calls clean internally but we can call it again to be sure
   skip_on_cran()

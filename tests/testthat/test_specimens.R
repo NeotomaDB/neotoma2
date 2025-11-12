@@ -27,6 +27,6 @@ test_that("Building a specimen works.", {
     repo = c("Manhattan", "Banana"),
     taxonid = seq(1, 12))
   # Build error when we pass multiple rows.
-  new_spec <- expect_error(build_specimen(dataset))
-  new_spec <- expect_is(build_specimen(dataset[1, ]), "specimen")
+  new_spec <- testthat::expect_error(build_specimen(dataset))
+  new_spec <- testthat::expect_is(build_specimen(dataset[1, ]), "specimen")
 })

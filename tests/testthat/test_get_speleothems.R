@@ -2,11 +2,9 @@ library("testthat")
 library("neotoma2")
 
 context("Run Neotoma `test_speleothems` only when not on CRAN")
-
 test_that("get_speleothems runs with numeric datasetid", {
   skip_on_cran()
   kesang <- get_speleothems(68552)
-  
   testthat::expect_is(kesang, "sites")
   testthat::expect_true(length(kesang) > 0)
 })
@@ -39,9 +37,7 @@ test_that("get_speleothems works with sites object", {
 
 test_that("get_speleothems returns correct structure", {
   skip_on_cran()
-  
   spel_data <- get_speleothems(68552)
-  
   if (!is.null(spel_data) && length(spel_data) > 0) {
     summary <- summary(spel_data)
     testthat::expect_true("speleothem" %in% summary$types)
@@ -50,9 +46,7 @@ test_that("get_speleothems returns correct structure", {
 
 test_that("get_speleothems handles empty results", {
   skip_on_cran()
-  # Dataset 1 is pollen surf. sample
   no_spel <- get_speleothems(1)
-  
   testthat::expect_true(is.null(no_spel) || length(no_spel) >= 0)
   testthat::expect_is(no_spel, "sites")
 })
@@ -64,12 +58,9 @@ test_that("if API has error, get_speleothems also breaks", {
 
 test_that("get_speleothems integrates with summary", {
   skip_on_cran()
-  
   spel_data <- get_speleothems(68552)
-  
   if (!is.null(spel_data) && length(spel_data) > 0) {
     sum_data <- summary(spel_data)
-    
     testthat::expect_is(sum_data, "data.frame")
     testthat::expect_true(nrow(sum_data) > 0)
   }

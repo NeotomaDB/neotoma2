@@ -8,8 +8,9 @@ test_that("`datasets()`", {
   sumDl <- summary(dls)
   ids <- getids(dls)
   dss <- datasets(dls)
-  testthat::expect_identical(length(dss), nrow(ids))
+  cus <- collunits(dls)
   testthat::expect_identical(sum(sumDl$n_datasets), nrow(ids))
-  testthat::expect_identical(length(unique(dss$datasetid)),
-                             length(unique(ids$datasetid)))
+  testthat::expect_identical(length(unique(sumDl$siteid)), length(dls))
+  testthat::expect_true(all(sumDl$collunit_name %in% cus$handle))
+  testthat::expect_true(all(cus$handle %in% sumDl$collunit_name))
 })
