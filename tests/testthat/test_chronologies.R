@@ -5,7 +5,7 @@ context("`chronologies()` function displays all chronologies for a download obje
 test_that("`get_downloads()` fills up chronologies' slots.", {
   skip_on_cran()
   dl <- get_downloads(4716)
-  chron <- dl %>%
+  chron <- dl
     chronologies() %>%
     as.data.frame()
 
