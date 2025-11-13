@@ -10,6 +10,7 @@ set_contact(
   familyname = NA_character_,
   leadinginitials = NA_character_,
   givennames = NA_character_,
+  contactname = NA_character_,
   suffix = NA_character_,
   ORCID = NA_character_,
   title = NA_character_,

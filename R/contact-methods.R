@@ -12,17 +12,9 @@ setMethod(f = "names",
 setMethod(f = "show",
           signature = "contacts",
           definition = function(object) {
-            map(object@contacts, function(x) {
-              data.frame(contactid = testNull(x@contactid),
-                         familyname = testNull(x@familyname),
-                         givennames = testNull(x@givennames),
-                         ORCID = NA,
-                         institution = NA,
-                         contactstatus = NA,
-                         notes = testNull(x@notes))
-            }) %>%
+            as.data.frame(object) %>%
               bind_rows() %>%
-              print()
+              print(row.names = FALSE)
           })
 
 #' @aliases show,contact-method
@@ -30,14 +22,8 @@ setMethod(f = "show",
 setMethod(f = "show",
           signature = "contact",
           definition = function(object) {
-            data.frame(contactid = object@contactid,
-                       familyname = object@familyname,
-                       givennames = object@givennames,
-                       ORCID = NA,
-                       institution = NA,
-                       contactstatus = NA,
-                       notes = object@notes) %>%
-              print()
+            as.data.frame(object) %>%
+              print(row.names = FALSE)
           })
 
 #' @aliases sub-sub,contacts-method
@@ -73,13 +59,14 @@ setMethod(f = "$",
 setMethod(f = "as.data.frame",
           signature = signature("contact"),
           definition = function(x) {
-            data.frame(contactid = x@contactid,
-                       familyname = x@familyname,
-                       givennames = x@givennames,
-                       ORCID = NA,
-                       institution = NA,
-                       contactstatus = NA,
-                       notes = x@notes)
+            data.frame(contactid = testNull(x@contactid),
+                       familyname = testNull(x@familyname),
+                       givennames = testNull(x@givennames),
+                       contactname = testNull(x@contactname),
+                       ORCID = testNull(x@ORCID),
+                       url = testNull(x@url),
+                       contactstatus = testNull(x@contactstatus),
+                       notes = testNull(x@notes))
           })
 
 #' @aliases as.data.frame,contacts-method
@@ -87,8 +74,17 @@ setMethod(f = "as.data.frame",
 setMethod(f = "as.data.frame",
           signature = signature("contacts"),
           definition = function(x) {
-            x@contacts %>% map(as.data.frame) %>% 
+            x@contacts %>%
+              map(as.data.frame) %>%
               bind_rows()
+          })
+
+#' @aliases length,contacts-method
+#' @rdname length
+setMethod(f = "length",
+          signature = signature(x = "contacts"),
+          definition = function(x) {
+            length(x@contacts)
           })
 
 #' @aliases c,contacts-method

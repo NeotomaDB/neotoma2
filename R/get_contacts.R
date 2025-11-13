@@ -39,23 +39,27 @@ get_contacts.numeric <- function(x, ...) {
   result <- result %>% cleanNULL()
   contact <- map(result$data,
                  function(x) {
-                              x[is.null(x)] <- NA_character_
-                              new("contact",
-                                  contactid = x$contactid,
-                                  familyname = as.character(x$lastname),
-                                  leadinginitials = NA_character_,
-                                  givennames = as.character(x$firstname),
-                                  suffix = NA_character_,
-                                  ORCID = NA_character_,
-                                  title = NA_character_,
-                                  institution = NA_character_,
-                                  email = as.character(x$email),
-                                  phone = NA_character_,
-                                  contactstatus = NA_character_,
-                                  fax = NA_character_,
-                                  url = as.character(x$url),
-                                  address = as.character(x$address),
-                                  notes = NA_character_) })
+                   x[is.null(x)] <- NA_character_
+                   new("contact",
+                       contactid = use_na(x$contactid, "int"),
+                       familyname = use_na(x$familyname, "char"),
+                       leadinginitials = use_na(x$leadinginitials,
+                                                "char"),
+                       givennames = use_na(x$givennames, "char"),
+                       contactname = use_na(x$contactname, "char"),
+                       suffix = use_na(x$suffix, "char"),
+                       ORCID = use_na(x$ORCID, "char"),
+                       title = use_na(x$title, "char"),
+                       institution = use_na(x$institution, "char"),
+                       email = use_na(x$email, "char"),
+                       phone = use_na(x$phone, "char"),
+                       contactstatus = use_na(x$contactstatus,
+                                              "char"),
+                       fax = use_na(x$fax, "char"),
+                       url = use_na(x$url, "char"),
+                       address = use_na(x$address, "char"),
+                       notes = use_na(x$notes, "char"))
+                 })
   contacts <- new("contacts", contacts = contact)
   return(contacts)
 }
@@ -72,25 +76,38 @@ get_contacts.default <- function(x, ...) {
       NULL
     }
   )
+  params <- get_params("contacts")
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  if (!all(names(cl) %in% params)) {
+    warning("Some parameters seem invalid. 
+             The current accepted parameters are: ",
+            paste(unlist(params), collapse = ", "))
+  }
   result <- result %>% cleanNULL()
-  contact <- map(result$data$result,
+  contact <- map(result$data,
                  function(x) {
-                              new("contact",
-                                  contactid = x$contactid,
-                                  familyname = as.character(x$familyname),
-                                  leadinginitials = NA_character_,
-                                  givennames = as.character(x$givennames),
-                                  suffix = NA_character_,
-                                  ORCID = NA_character_,
-                                  title = NA_character_,
-                                  institution = NA_character_,
-                                  email = as.character(x$email),
-                                  phone = NA_character_,
-                                  contactstatus = NA_character_,
-                                  fax = NA_character_,
-                                  url = as.character(x$url),
-                                  address = as.character(x$address),
-                                  notes = NA_character_) })
+                   new("contact",
+                       contactid = use_na(x$contactid, "int"),
+                       familyname = use_na(x$familyname, "char"),
+                       leadinginitials = use_na(x$leadinginitials,
+                                                "char"),
+                       givennames = use_na(x$givennames, "char"),
+                       contactname = use_na(x$contactname, "char"),
+                       suffix = use_na(x$suffix, "char"),
+                       ORCID = use_na(x$ORCID, "char"),
+                       title = use_na(x$title, "char"),
+                       institution = use_na(x$institution, "char"),
+                       email = use_na(x$email, "char"),
+                       phone = use_na(x$phone, "char"),
+                       contactstatus = use_na(x$contactstatus,
+                                              "char"),
+                       fax = use_na(x$fax, "char"),
+                       url = use_na(x$url, "char"),
+                       address = use_na(x$address, "char"),
+                       notes = use_na(x$notes, "char"))
+                 })
   contacts <- new("contacts", contacts = contact)
   return(contacts)
 }

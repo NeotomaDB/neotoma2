@@ -23,7 +23,7 @@
 #' # Set an empty sample
 #' my_sample <- set_sample()
 #' }
-set_sample <- function(x=NA,
+set_sample <- function(x = NA,
                        ages = list(),
                        igsn = NA_character_,
                        datum = data.frame(),

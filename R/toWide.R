@@ -34,23 +34,23 @@ toWide <- function(x,
                    unit = NA,
                    groupby = "age",
                    operation = "prop") {
-  if (!is.na(variablenames)) {
+  if (!(length(variablenames) == 1 && is.na(variablenames)))  {
     x <- x %>% filter(.data$variablename %in% variablenames)
   }
-  if (!is.na(ecologicalgroups)) {
+  if (!(length(ecologicalgroups) == 1 && is.na(ecologicalgroups)))  {
     x <- x %>% filter(.data$ecologicalgroup %in% ecologicalgroups)
   }
-  if (!is.na(elementtypes)) {
+  if (!(length(elementtypes) == 1 && is.na(elementtypes)))  {
     x <- x %>% filter(.data$elementtype %in% elementtypes)
   }
-  if (is.na(unit)) {
+  if (!(length(unit) == 1 && is.na(unit)))  {
     x <- x %>% filter(units %in% unit)
   }
   # Get proportion values
   onesite <- x %>%
     group_by_at(groupby) %>%
     mutate(counter = sum(.data$value, na.rm = TRUE)) %>%
-    group_by(.data$variablename) %>% 
+    group_by(.data$variablename) %>%
     mutate(prop = .data$value / .data$counter,
            n = .data$value) %>%
     arrange(desc(groupby))

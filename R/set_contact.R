@@ -36,8 +36,9 @@ set_contact <- function(x = NA,
                         familyname = NA_character_,
                         leadinginitials = NA_character_,
                         givennames = NA_character_,
+                        contactname = NA_character_,
                         suffix = NA_character_,
-                        ORCID = NA_character_,  # nolint
+                        ORCID = NA_character_,
                         title = NA_character_,
                         institution = NA_character_,
                         email = NA_character_,
@@ -59,6 +60,7 @@ set_contact <- function(x = NA,
     x@familyname <- familyname
     x@givennames <- givennames
     x@leadinginitials <- leadinginitials
+    x@contactname <- contactname
     x@suffix <- suffix
     x@ORCID <- ORCID
     x@title <- title

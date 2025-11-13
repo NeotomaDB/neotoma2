@@ -1,21 +1,18 @@
-# load libraries
-testthat::test_that("We can download records and plot them 
-  with plot leaflet.", {
+library("testthat")
+library("neotoma2")
 
+context("Test leaflet plots")
+
+testthat::test_that("Plot records with plotLeaflet.", {
   skip_on_cran()
-  fiftyds <- get_sites(limit = 50)
-
-  output <- plotLeaflet(fiftyds)
+  ten <- get_sites(limit = 10)
+  output <- plotLeaflet(ten)
   testthat::expect_is(output, "leaflet")
-
 })
 
-testthat::test_that("We can download records and plot a single site
-  with plot leaflet.", {
-
+testthat::test_that("Plot a single record with plotLeaflet.", {
   skip_on_cran()
-  fiftyds <- get_sites(limit = 50)
-
-  output <- plotLeaflet(fiftyds[[1]])
+  five <- get_sites(limit = 5)
+  output <- plotLeaflet(five[[1]])
   testthat::expect_is(output, "leaflet")
 })

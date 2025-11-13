@@ -2,7 +2,6 @@ library("testthat")
 library("neotoma2")
 
 context("Concatenation of c()  in `neotoma2` objects works appropriately.")
-
 test_that("c() concats properly.", {
   skip_on_cran()
   alex <- get_sites(24)

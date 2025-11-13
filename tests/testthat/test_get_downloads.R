@@ -49,3 +49,8 @@ test_that("get_downloads from get_sites sites", {
   testthat::expect_lte(nrow(df1), nrow(df2))
   testthat::expect_true(all(unique(df1$datasetid) %in% unique(df2$datasetid)))
 })
+
+test_that("Faunmap dataset", {
+  mydataset <- get_downloads(7032)
+  testthat::expect_is(mydataset, "sites")
+})
