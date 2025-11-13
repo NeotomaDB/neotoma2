@@ -45,7 +45,7 @@ setMethod(f = "add_chronology",
                             auid <- a@analysisunitid
                             if (auid %in% y$analysisunitid) {
                               sampleagerow <- y %>%
-                                filter(.data$analysisunitid == auid)
+                                dplyr::filter(.data$analysisunitid == auid)
                               sample_ages <-
                                 data.frame(age = sampleagerow$age,
                                            agetype = sampleagerow$agetype,

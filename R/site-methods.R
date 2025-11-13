@@ -374,7 +374,8 @@ setMethod(f = "summary",
                                                  datasets = datasets,
                                                  types = types)
                                     }) %>%
-                  bind_rows()
+                  bind_rows() %>%
+                  na.omit()
               } else {
                 collunits <- data.frame(collectionunit = NA,
                                         chronologies = 0,
@@ -385,7 +386,11 @@ setMethod(f = "summary",
                          sitename = x$sitename,
                          collunits = collunits)
             }) %>%
-              bind_rows()
+              bind_rows() %>%
+              rename(collunit_name = collunits.collectionunit,
+                     n_chronologies = collunits.chronologies,
+                     n_datasets = collunits.datasets,
+                     dataset_types = collunits.types)
             return(datasettype)
           })
 

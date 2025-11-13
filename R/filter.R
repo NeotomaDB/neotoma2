@@ -1,57 +1,3 @@
-utils::globalVariables(c("elev", "notes"))
-#' @title Apply a filter for Neotoma sites objects.
-#' @description The \code{filter} function takes a \code{sites} object
-#' and allows a user to filter on a number of properties. Since a sites object
-#' is a nested object (it contains collection units, datasets, samples, etc.)
-#' the degree to which filtering occurs depends on the amount of data contained
-#' within the sites object. Filtering parameters include:
-#'  * `siteid` A numeric site identifier from the Neotoma Database.
-#'  * `sitename` The character string sitename.
-#'  * `lat` A numeric latitude value.
-#'  * `long` A numeric longitude value.
-#'  * `altitude` The elevation of the site. Note that some sites do not
-#'   include elevation information. For these an NA value appears, and they
-#'   would be removed when using an elevation filter.
-#'  * `datasetid` A numeric datasetid from Neotoma.
-#'  * `database` A character string naming the constituent database
-#'   from which the dataset is drawn.
-#'  * `datasettype` A character string representing one of the many
-#'   dataset types within Neotoma.
-#'  * `age_range_old` A dataset-level parameter indicating the oldest
-#'   date covered by the dataset chronology.
-#'  * `age_range_young` A dataset-level parameter indicating the youngest
-#'   date covered by the dataset chronology.
-#'  * `notes` Free-form dataset notes provided by the dataset PI(s),
-#'   analysts or data stewards.
-#'  * `collectionunitid` A numeric collection unit identifier from
-#'   Neotoma.
-#'  * `handle` A character string identifying the collection unit. These
-#'   are often shorter form names (originally a default 8 character length).
-#'  * `collectionunitname` A character string identifying the collection
-#'   unit name.
-#'  * `colldate` The date on which the collection unit was sampled. Many
-#'   of these are empty.
-#'  * `location` A free-form character string indicating the location of
-#'   the collection unit within the site.
-#'  * `waterdepth` A numeric depth at which the core was obtained.
-#'  * `collunittype` A character string for the collection unit type.
-#'  * `collectiondevice` A fixed vocabulary term for the collection
-#'   device.
-#'  * `depositionalenvironment` A fixed vocabulary name for the
-#'   depositional environment.
-#' @import sf
-#' @import dplyr
-#' @importFrom purrr map
-#' @importFrom stringr str_detect
-#' @param x A site, dataset or download.
-#' @param ... arguments to filter by.
-#' @returns filtered `sites` object 
-#' @export
-filter <- function(x, ...) {
-  UseMethod("filter", x)
-}
-
-
 #' @title Apply a `filter` for Neotoma sites objects.
 #' @name filter
 #' @author Simon Goring \email{goring@wisc.edu}
@@ -113,10 +59,24 @@ filter <- function(x, ...) {
 #'   get_datasets()
 #' pollen_subset <- sites %>% filter(datasettype == "pollen")
 #' }
+#' @md
 #' @export
-filter.sites <- function(x, ...) {  # nolint
-  # It is time consuming to do all the joining.  So here we
-  # do a thing to try to speed stuff up by only joining the stuff we need:
+filter <- function(x, ...) {
+  UseMethod("filter", x)
+}
+
+#' @rdname filter
+#' @export
+#' @method filter NULL
+filter.NULL <- function(.data, ..., .by = NULL, .preserve = FALSE) {
+  warning("No sites to filter")
+  return(NULL)
+}
+
+#' @rdname filter
+#' @export
+#' @method filter sites
+filter.sites <- function(x, ...) {
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
   sitecols <- c("sitename", "lat", "long", "altitude") %>%
@@ -144,15 +104,14 @@ filter.sites <- function(x, ...) {  # nolint
   }
   if (collunitcols == TRUE) {
     ids <- ids %>%
-      inner_join(
-        as.data.frame(collunits(x)), 
-        by = c("collunitid" = "collectionunitid"))
+      inner_join(as.data.frame(collunits(x)),
+                 by = c("collunitid" = "collectionunitid"))
   }
   if (datasetcols == TRUE) {
     ids <- ids %>%
-      inner_join(
-        mutate(as.data.frame(datasets(x)), datasetid = as.numeric(datasetid)),
-        by = "datasetid")
+      inner_join(mutate(as.data.frame(datasets(x)),
+                        datasetid = as.numeric(.data$datasetid)),
+                 by = "datasetid")
   }
   cleanids <- ids %>%
     dplyr::filter(...)
@@ -161,7 +120,7 @@ filter.sites <- function(x, ...) {  # nolint
   }
   siteids <- unique(as.data.frame(x)$siteid)
   pared_sites <- x[which(siteids %in% cleanids$siteid)]
-  # Sites are cleared.  Now need to clear datasets:
+  # Clear datasets:
   good_dsid <- unique(cleanids$datasetid)
   good_cuid <- unique(cleanids$collunitid)
   pared_ds <- purrr::map(pared_sites@sites, function(x) {
@@ -178,3 +137,10 @@ filter.sites <- function(x, ...) {  # nolint
   })
   return(new("sites", sites = pared_ds))
 }
+
+#' @rdname filter
+#' @keywords internal
+#' @export
+filter.data.frame <- getS3method("filter",
+                                 "data.frame",
+                                 envir = asNamespace("dplyr"))
