@@ -27,7 +27,6 @@ use_na <- function(x, type) {
                     "df"   = data.frame(),
                     NA))
     }
-    
     x
   }, error = function(e) {
     # Fallback

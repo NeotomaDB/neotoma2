@@ -1,0 +1,14 @@
+library("testthat")
+library("neotoma2")
+
+context("`get_taxa()` and `get_taxon()` functions")
+test_that("get_taxa() sites object", {
+  abies <- get_taxa(1)
+  testthat::expect_is(abies, "sites")
+  abies_df <- abies %>% get_downloads() %>% taxa() %>% suppressWarnings()
+  testthat::expect_true(any(grepl("Abies", abies_df$variablename)))
+  abies <- get_taxa(taxonname = 'abies')
+  testthat::expect_is(abies, "sites")
+  abies_df <- abies %>% get_downloads() %>% taxa() %>% suppressWarnings()
+  testthat::expect_true(any(grepl("Abies", abies_df$variablename)))
+})

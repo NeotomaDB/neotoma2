@@ -466,43 +466,11 @@ setMethod(f = "doi",
 setMethod(f = "cite_data",
           signature = "sites",
           definition = function(x) {
-            if (is.null(x)){
-              warning("No sites to filter")
-              return(NULL)
-            }
-            strn <- paste0("%s. %s; %s dataset. ",
-                           "In %s. Neotoma Paleoecology Database. doi:%s")
-            ids <- getids(x)
-            sitenames <- as.data.frame(x)  %>%
-              select(.data$siteid, .data$sitename)
-            datasets <- as.data.frame(datasets(x)) %>%
-              select(.data$datasetid, .data$datasettype, .data$database)
-            dois <- map(datasets(get_datasets(x))@datasets, 
-                        function(x) {
-                          doi <- unlist((x$doi  %>% map(testNull)))
-                          pi_list <- unlist((x$pi_list  %>% map(testNull)))
-                          data.frame(datasetid = x$datasetid,
-                                     doi = doi,
-                                     pi_list = paste0(sort(pi_list),
-                                                      collapse = "; "))
-                        })
-            dois <- do.call(rbind, dois)
-            citations <- ids %>%
-              full_join(sitenames, by = "siteid") %>%
-              full_join(datasets, by = "datasetid") %>%
-              full_join(dois, by = "datasetid") %>%
-              select(.data$siteid, .data$sitename, .data$collunitid,
-                     .data$datasetid, .data$datasettype, .data$database,
-                     .data$doi, .data$pi_list) %>%
-              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
-              arrange(.data$doi) %>%
-              filter(row_number() == 1) %>%
-              as.data.frame() %>%
-              mutate(citation = sprintf(strn, .data$pi_list,
-                                        .data$sitename, .data$datasettype,
-                                        .data$database, .data$doi)) %>%
-              select(.data$datasetid, .data$citation)
-            return(citations)
+            map(x@sites,
+                function(y) {
+                  cite_data(y)
+                }) %>%
+              bind_rows()
           })
 
 #' @aliases cite_data,site-method
@@ -510,7 +478,7 @@ setMethod(f = "cite_data",
 setMethod(f = "cite_data",
           signature = "site",
           definition = function(x) {
-            if (is.null(x)){
+            if (is.null(x)) {
               warning("No sites to filter")
               return(NULL)
             }
@@ -519,19 +487,29 @@ setMethod(f = "cite_data",
             ids <- getids(x)
             sitenames <- as.data.frame(x)  %>%
               select(.data$siteid, .data$sitename)
-            datasets <- as.data.frame(datasets(x)) %>%
-              select(.data$datasetid, .data$datasettype, .data$database)
-            dois <- map(datasets(get_datasets(x))@datasets, function(x) {
-              doi <- unlist((x$doi  %>% map(testNull)))
-              pi_list <- unlist((x$pi_list  %>% map(testNull)))
-              data.frame(datasetid = x$datasetid,
-                         doi = doi,
-                         pi_list = paste0(sort(pi_list), collapse = "; "))
-            }) %>%
+            ds <- get_datasets(x)
+            ds_df <- as.data.frame(datasets(ds)) %>%
+              select(.data$datasetid,
+                     .data$datasettype,
+                     .data$database)
+            dois <-
+              map(datasets(ds)@datasets,
+                  function(x) {
+                    doi <- x@doi
+                    doi <- unlist(doi, recursive = TRUE, use.names = FALSE)
+                    doi <- use_na(testNull(doi), "char")
+                    pi_list <- testNull(unlist(x@pi_list))
+                    data.frame(datasetid = rep(x$datasetid, length(doi)),
+                               doi = doi,
+                               pi_list = rep(paste0(sort(pi_list),
+                                                    collapse = "; "),
+                                             length(doi)))
+                  }) %>%
               bind_rows()
+
             citations <- ids %>%
               full_join(sitenames, by = "siteid") %>%
-              full_join(datasets, by = "datasetid") %>%
+              full_join(ds_df, by = "datasetid") %>%
               full_join(dois, by = "datasetid") %>%
               select(.data$siteid, .data$sitename, .data$collunitid,
                      .data$datasetid, .data$datasettype, .data$database,
@@ -552,7 +530,7 @@ setMethod(f = "cite_data",
 setMethod(f = "cite_data",
           signature = "NULL",
           definition = function(x) {
-            if (is.null(x)){
+            if (is.null(x)) {
               warning("No sites to cite.")
               return(NULL)
             }

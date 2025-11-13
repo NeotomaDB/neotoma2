@@ -18,7 +18,7 @@ setMethod(f = "show",
 setMethod(f = "show",
           signature = "datasets",
           definition = function(object) {
-            result <- map(object@datasets, function(y) {
+            map(object@datasets, function(y) {
               data.frame(datasetid = y@datasetid,
                          database = y@database,
                          datasettype = y@datasettype,
