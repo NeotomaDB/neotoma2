@@ -63,17 +63,12 @@ speleo_helper <- function(sites) {
 #' }
 #' @md
 #' @export
-get_speleothems <- function(x = NA, ...) {
-  if (missing(x)) {
-    UseMethod("get_speleothems", "default")
-  } else {
-    UseMethod("get_speleothems", x)
-  }
+get_speleothems <- function(x, ...) {
+  UseMethod("get_speleothems")
 }
 
 #' @rdname get_speleothems
 #' @export
-#' @method get_speleothems numeric
 get_speleothems.numeric <- function(x, ...) {
   st <- get_datasets(x)
   pared_ds <- speleo_helper(st)
@@ -86,7 +81,6 @@ get_speleothems.numeric <- function(x, ...) {
 
 #' @rdname get_speleothems
 #' @export
-#' @method get_speleothems sites
 get_speleothems.sites <- function(x, ...) {
   pared_ds <- speleo_helper(x)
   if (is.null(pared_ds)) {

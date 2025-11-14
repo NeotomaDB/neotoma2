@@ -64,13 +64,12 @@
 #' }
 #' @md
 #' @export
-get_downloads <- function(x = NA, verbose = TRUE, ...) {
+get_downloads <- function(x, verbose = TRUE, ...) {
   UseMethod("get_downloads")
 }
 
 #' @rdname get_downloads
-#' @export
-#' @method get_downloads numeric
+#' @exportS3Method get_downloads numeric
 get_downloads.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
@@ -92,8 +91,7 @@ get_downloads.numeric <- function(x, ...) {
 }
 
 #' @rdname get_downloads
-#' @export
-#' @method get_downloads sites
+#' @exportS3Method get_downloads sites
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)
   cl <- as.list(match.call())

@@ -8,7 +8,7 @@
 \alias{get_publications.publications}
 \title{Get publication information for Neotoma records}
 \usage{
-get_publications(x = NA, ...)
+get_publications(x, ...)
 
 \method{get_publications}{default}(...)
 
@@ -45,7 +45,7 @@ mammoth_papers <- get_publications(search="mammut") \%>\%
   as.data.frame()
 hist(as.numeric(mammoth_papers$year))
 }
-{
+\donttest{
 # We want the paper identified in Neotoma as 666:
 get_publications(666)
 }
@@ -59,19 +59,5 @@ updated_pubs <- get_publications(bad_pub[[1]])
 attr(updated_pubs, "matches")
 # we see the proper citation in the record:
 updated_pubs <- attr(updated_pubs, "matches")[[3]]
-}
-\donttest{
-# Take a publication object and purposely degrade the metadata:
-bad_pub <- get_publications(c(666, 667, 668))
-# Note this only changes the reported year, not the citation string.
-bad_pub[[1]]@year <- "1923"
-bad_pub[[1]]@publicationid <- NA_integer_
-updated_pubs <- get_publications(bad_pub)
-# Only the first publication object has any matches. It's the only one
-# that is missing its publicaitonid.
-attr(updated_pubs[[1]], "matches")
-attr(updated_pubs[[2]], "matches")
-# we see the proper citation in the record:
-updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
 }
 }

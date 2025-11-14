@@ -89,16 +89,11 @@
 #' @md
 #' @export
 get_sites <- function(x, ...) {
-  if (missing(x)) {
-    UseMethod("get_sites", "default")
-  } else {
-    UseMethod("get_sites", x)
-  }
+  UseMethod("get_sites")
 }
 
 #' @rdname get_sites
 #' @export
-#' @method get_sites numeric
 get_sites.numeric <- function(x, ...) {
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")

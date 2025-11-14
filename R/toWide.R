@@ -67,7 +67,7 @@ toWide <- function(x,
                                 counter == 0 ~ 0)) %>%
     select(all_of(groupby), .data$variablename, all_of(operation))
   counts <- pivot_wider(widetable,
-                        id_cols = groupby,
+                        id_cols = all_of(groupby),
                         names_from = .data$variablename,
                         values_from = operation,
                         values_fill = 0,

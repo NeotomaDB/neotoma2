@@ -23,36 +23,15 @@
 #' length(long_set)
 #' # By removing duplicates we get a smaller object.
 #' length(clean(long_set))
-#' # We can do the same thing with collection units:
-#' clean_cols <- get_sites(sitename = "L%", limit = 20) %>%
-#'   collunits()
-#' more_cols <- get_sites(sitename = "La%", limit = 20) %>%
-#'   collunits()
-#' long_set <- c(clean_cols, more_cols)
-#' length(long_set)
-#' # By removing duplicates we get a smaller object.
-#' length(clean(long_set))
-#' # And datasets:
-#' clean_ds <- get_sites(sitename = "L%", limit = 20) %>%
-#'   get_downloads() %>% datasets()
-#' more_ds <- get_sites(sitename = "La%", limit = 20) %>%
-#'   get_downloads() %>% datasets()
-#' long_set <- c(clean_ds, more_ds)
-#' length(long_set)
-#' # By removing duplicates we get a smaller object.
-#' length(clean(long_set))
 #' }
 #' @md
 #' @export
-clean <- function(x = NA, verbose = TRUE, ...) {
-  if (!missing(x)) {
-    UseMethod("clean", x)
-  } else {
-    UseMethod("clean", NA)
-  }
+clean <- function(x, verbose = TRUE, ...) {
+  UseMethod("clean")
 }
+
 #' @rdname clean
-#' @export
+#' @exportS3Method clean sites
 clean.sites <- function(x, verbose = TRUE, ...) {
   siteids <- as.data.frame(x)$siteid
   matched <- unique(siteids[duplicated(siteids)])
@@ -79,7 +58,7 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 }
 
 #' @rdname clean
-#' @export
+#' @exportS3Method clean collunits
 clean.collunits <- function(x, verbose = TRUE, ...) {
   cuids <- as.data.frame(x)$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
@@ -100,7 +79,7 @@ clean.collunits <- function(x, verbose = TRUE, ...) {
 }
 
 #' @rdname clean
-#' @export
+#' @exportS3Method clean datasets
 clean.datasets <- function(x, verbose = TRUE, ...) {
   dsids <- as.data.frame(x)$datasetid
   return(x[which(!duplicated(dsids))])

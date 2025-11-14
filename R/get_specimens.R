@@ -10,12 +10,8 @@
 # #' @returns The function returns a specimens list
 # #' @keywords internal
 # #' @noRd
-# get_specimens <- function(x = NA, ...) {
-#   if (!missing(x)) {
-#     UseMethod("get_specimens", x)
-#   }else {
-#     UseMethod("get_specimens", NA)
-#   }
+# get_specimens <- function(x, ...) {
+#   UseMethod("get_specimens")
 # }
 
 # parse_specimen <- function(result, ds) {

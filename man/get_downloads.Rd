@@ -6,7 +6,7 @@
 \alias{get_downloads.sites}
 \title{get_downloads}
 \usage{
-get_downloads(x = NA, verbose = TRUE, ...)
+get_downloads(x, verbose = TRUE, ...)
 
 \method{get_downloads}{numeric}(x, ...)
 

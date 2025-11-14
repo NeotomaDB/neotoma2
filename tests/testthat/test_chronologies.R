@@ -5,9 +5,7 @@ context("`chronologies()` function displays all chronologies for a download obje
 test_that("`get_downloads()` fills up chronologies' slots.", {
   skip_on_cran()
   dl <- get_downloads(4716)
-  chron <- dl
-    chronologies() %>%
-    as.data.frame()
+  chron <- dl %>% chronologies() %>% as.data.frame()
 
   testthat::expect_is(dl[[1]]@collunits[[1]]@chronologies, "chronologies")
   testthat::expect_true(nrow(chron) > 1)

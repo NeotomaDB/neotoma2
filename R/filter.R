@@ -62,20 +62,18 @@
 #' @md
 #' @export
 filter <- function(x, ...) {
-  UseMethod("filter", x)
+  UseMethod("filter")
 }
 
 #' @rdname filter
-#' @export
-#' @method filter NULL
+#' @exportS3Method filter NULL
 filter.NULL <- function(.data, ..., .by = NULL, .preserve = FALSE) {
   warning("No sites to filter")
   return(NULL)
 }
 
 #' @rdname filter
-#' @export
-#' @method filter sites
+#' @exportS3Method filter sites
 filter.sites <- function(x, ...) {
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
@@ -139,8 +137,7 @@ filter.sites <- function(x, ...) {
 }
 
 #' @rdname filter
-#' @keywords internal
-#' @export
+#' @exportS3Method filter data.frame
 filter.data.frame <- getS3method("filter",
                                  "data.frame",
                                  envir = asNamespace("dplyr"))

@@ -7,7 +7,7 @@
 \alias{clean.datasets}
 \title{clean Neotoma objects to remove duplicates and empty objects.}
 \usage{
-clean(x = NA, verbose = TRUE, ...)
+clean(x, verbose = TRUE, ...)
 
 \method{clean}{sites}(x, verbose = TRUE, ...)
 

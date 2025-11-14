@@ -6,7 +6,7 @@
 \alias{get_speleothems.sites}
 \title{get_speleothems}
 \usage{
-get_speleothems(x = NA, ...)
+get_speleothems(x, ...)
 
 \method{get_speleothems}{numeric}(x, ...)
 

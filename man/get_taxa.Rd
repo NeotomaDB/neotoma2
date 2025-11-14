@@ -6,7 +6,7 @@
 \alias{get_taxa.default}
 \title{get_taxa}
 \usage{
-get_taxa(x = NA, ...)
+get_taxa(x, ...)
 
 \method{get_taxa}{numeric}(x, ...)
 

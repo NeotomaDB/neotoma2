@@ -78,16 +78,11 @@
 #' @md
 #' @export
 get_datasets <- function(x, ...) {
-  if (missing(x)) {
-    UseMethod("get_datasets", "default")
-  } else {
-    UseMethod("get_datasets", x)
-  }
+  UseMethod("get_datasets")
 }
 
 #' @rdname get_datasets
-#' @export
-#' @method get_datasets numeric
+#' @exportS3Method get_datasets numeric
 get_datasets.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
@@ -109,8 +104,7 @@ get_datasets.numeric <- function(x, ...) {
 }
 
 #' @rdname get_datasets
-#' @export
-#' @method get_datasets default
+#' @exportS3Method get_datasets default
 get_datasets.default <- function(x, ...) {
   params <- get_params("datasets")
   oo <- options(scipen = 9999)
@@ -143,8 +137,7 @@ get_datasets.default <- function(x, ...) {
 }
 
 #' @rdname get_datasets
-#' @export
-#' @method get_datasets sites
+#' @exportS3Method get_datasets sites
 get_datasets.sites <- function(x, ...) {
   ids <- getids(x)
   cl <- as.list(match.call())
@@ -164,8 +157,7 @@ get_datasets.sites <- function(x, ...) {
 }
 
 #' @rdname get_datasets
-#' @export
-#' @method get_datasets site
+#' @exportS3Method get_datasets site
 get_datasets.site <- function(x, ...) {
   # List of datasets ids
   cl <- as.list(match.call())

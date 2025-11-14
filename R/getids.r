@@ -16,14 +16,11 @@
 #' @md
 #' @export
 getids <- function(x, order = TRUE) {
-  if (!missing(x)) {
-    UseMethod("getids", x)
-  }
+  UseMethod("getids")
 }
 
 #' @rdname getids
 #' @export
-#' @method getids sites
 getids.sites <- function(x, order = TRUE) {
   siteids <- map(x@sites, function(y) {
     siteid <- y@siteid
@@ -64,7 +61,6 @@ getids.sites <- function(x, order = TRUE) {
 
 #' @rdname getids
 #' @export
-#' @method getids site
 getids.site <- function(x, order = TRUE) {
   siteid <- x@siteid
   if (length(x@collunits) > 0) {
@@ -89,7 +85,6 @@ getids.site <- function(x, order = TRUE) {
 
 #' @rdname getids
 #' @export
-#' @method getids collunits
 getids.collunits <- function(x, order = TRUE) {
   siteid <- NA
   if (length(x) > 0) {
@@ -114,7 +109,6 @@ getids.collunits <- function(x, order = TRUE) {
 
 #' @rdname getids
 #' @export
-#' @method getids collunit
 getids.collunit <- function(x, order = TRUE) {
   siteid <- NA
   collunitid <- x@collectionunitid

@@ -224,8 +224,7 @@ setMethod(f = "c",
           definition = function(x, y) {
             if (is(y, "collunits")) {
               cus_l <- c(x@collunits,
-                           y@collunits)
-              
+                         y@collunits)
               if (is.null(names(cus_l)) || all(names(cus_l) == "")) {
                 # Case 1: Remove duplicates by content
                 cus_l <- cus_l[!duplicated(cus_l)]

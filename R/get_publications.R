@@ -23,15 +23,29 @@
 #'   as.data.frame()
 #' hist(as.numeric(mammoth_papers$year))
 #' }
+#' \donttest{
+#' # We want the paper identified in Neotoma as 666:
+#' get_publications(666)
+#' }
+#' \donttest{
+#' # Take a publication object and purposely degrade the metadata:
+#' bad_pub <- get_publications(666)
+#' # Note this only changes the reported year, not the citation string.
+#' bad_pub[[1]]@year <- "1923"
+#' bad_pub[[1]]@publicationid <- NA_integer_
+#' updated_pubs <- get_publications(bad_pub[[1]])
+#' attr(updated_pubs, "matches")
+#' # we see the proper citation in the record:
+#' updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#' }
 #' @md
 #' @export
-get_publications <- function(x = NA, ...) {
+get_publications <- function(x, ...) {
   UseMethod("get_publications")
 }
 
 #' @rdname get_publications
 #' @export
-#' @method get_publications default
 get_publications.default <- function(...) {
   . <- ""
   cl <- as.list(match.call())
@@ -79,12 +93,7 @@ get_publications.default <- function(...) {
 }
 
 #' @rdname get_publications
-#' @examples {
-#' # We want the paper identified in Neotoma as 666:
-#' get_publications(666)
-#' }
 #' @export
-#' @method get_publications numeric
 get_publications.numeric <- function(x, ...) {
   . <- ""
   if (length(x) > 0) {
@@ -105,7 +114,6 @@ get_publications.numeric <- function(x, ...) {
       NULL
     }
   )
-
   if (is.null(result$data)) {
     return(NULL)
   } else {
@@ -132,19 +140,7 @@ get_publications.numeric <- function(x, ...) {
 }
 
 #' @rdname get_publications
-#' @examples \donttest{
-#' # Take a publication object and purposely degrade the metadata:
-#' bad_pub <- get_publications(666)
-#' # Note this only changes the reported year, not the citation string.
-#' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- NA_integer_
-#' updated_pubs <- get_publications(bad_pub[[1]])
-#' attr(updated_pubs, "matches")
-#' # we see the proper citation in the record:
-#' updated_pubs <- attr(updated_pubs, "matches")[[3]]
-#' }
 #' @export
-#' @method get_publications publication
 get_publications.publication <- function(x, ...) {
   if (is.na(x@publicationid)) {
     if (!is.na(x@citation)) {
@@ -160,20 +156,6 @@ get_publications.publication <- function(x, ...) {
 }
 
 #' @rdname get_publications
-#' @examples \donttest{
-#' # Take a publication object and purposely degrade the metadata:
-#' bad_pub <- get_publications(c(666, 667, 668))
-#' # Note this only changes the reported year, not the citation string.
-#' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- NA_integer_
-#' updated_pubs <- get_publications(bad_pub)
-#' # Only the first publication object has any matches. It's the only one
-#' # that is missing its publicaitonid.
-#' attr(updated_pubs[[1]], "matches")
-#' attr(updated_pubs[[2]], "matches")
-#' # we see the proper citation in the record:
-#' updated_pubs[[1]] <- attr(updated_pubs[[1]], "matches")[[1]]
-#' }
 #' @export
 #' @method get_publications publications
 get_publications.publications <- function(x, ...) {
