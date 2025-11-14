@@ -98,8 +98,8 @@ setMethod(f = "show",
 #' @title Show matched publication objects.
 #' @param x A \code{publication} object.
 #' @returns NULL
-#' @md
-#' @export
+#' @noRd
+#' @keywords internal
 setMethod(f = "showMatch",
           signature = signature(x = "publication"),
           definition = function(x) {
@@ -164,8 +164,8 @@ setMethod(f = "as.data.frame",
 #' @param x A \code{publication} object
 #' @param n The match number.
 #' @returns the best match to the selected publication.
-#' @md
-#' @export
+#' @noRd
+#' @keywords internal
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "numeric"),
           definition = function(x, n) {
@@ -178,8 +178,8 @@ setMethod(f = "selectMatch",
             }
           })
 
-#' @aliases selectMatch,publication-method
-#' @rdname selectMatch
+#' @noRd
+#' @keywords internal
 setMethod(f = "selectMatch",
           signature = signature(x = "publication", n = "logical"),
           definition = function(x, n) {

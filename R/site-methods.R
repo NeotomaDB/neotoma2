@@ -298,20 +298,6 @@ setMethod(f = "c",
             y
           })
 
-#' @title write CSV
-#' @param x A sites object
-#' @param ... Other options to pass to \code{write.csv()}.
-#' @importFrom utils write.csv
-#' @returns NULL side effect from saving a csv file
-#' @aliases write.csv,sites-method
-#' @exportMethod write.csv
-setMethod(f = "write.csv",
-          signature = "sites",
-          definition = function(x, ...) {
-            df1 <- as.data.frame(x)
-            write.csv(df1, ...)
-          })
-
 #' @title Return the latitude and longitude of sites
 #' @param obj A sites object
 #' @param ... Additional parameters associated with the call.
@@ -321,7 +307,7 @@ setMethod(f = "write.csv",
 setMethod(f = "coordinates",
           signature = "sites",
           definition = function(obj, ...) {
-            coords <- as.data.frame(obj)[, c("long", "lat")]
+            coords <- as.data.frame(obj)[, c("siteid", "long", "lat")]
             return(coords)
           })
 
@@ -334,6 +320,15 @@ setMethod(f = "coordinates",
 #' @exportMethod plot
 setMethod(f = "plot",
           signature = "sites",
+          definition = function(x, y, ...) {
+            coords <- as.data.frame(x)[, c("long", "lat")]
+            plot(coords, ...)
+          })
+
+#' @aliases plot,site-method
+#' @exportMethod plot
+setMethod(f = "plot",
+          signature = "site",
           definition = function(x, y, ...) {
             coords <- as.data.frame(x)[, c("long", "lat")]
             plot(coords, ...)
@@ -412,20 +407,10 @@ setMethod(f = "summary",
 setMethod(f = "doi",
           signature = "sites",
           definition = function(x) {
-            ids <- getids(x)
-            dois <- map(datasets(x)@datasets, function(x) {
-              doi <- unlist((x$doi  %>% map(testNull)))
-              data.frame(datasetid = x$datasetid,
-                         doi = doi)
+            map(x@sites, function(y) {
+              doi(y)
             }) %>%
-              bind_rows() %>%
-              full_join(ids, by = "datasetid") %>%
-              select(.data$siteid, .data$collunitid,
-                     .data$datasetid, .data$doi) %>%
-              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
-              arrange(.data$doi) %>%
-              filter(row_number() == 1)
-            return(dois)
+              bind_rows()
           })
 
 #' @aliases doi,site-method
@@ -434,18 +419,23 @@ setMethod(f = "doi",
           signature = "site",
           definition = function(x) {
             ids <- getids(x)
-            dois <- map(datasets(x)@datasets, function(x) {
-              doi <- unlist((x$doi  %>% map(testNull)))
-              data.frame(datasetid = x$datasetid,
-                         doi = doi)
-            }) %>%
-              bind_rows() %>%
+            ds <- get_datasets(x)
+            dois <-
+              map(datasets(ds)@datasets,
+                  function(x) {
+                    doi <- x@doi
+                    doi <- unlist(doi, recursive = TRUE, use.names = FALSE)
+                    doi <- use_na(testNull(doi), "char")
+                    data.frame(datasetid = rep(x$datasetid, length(doi)),
+                               doi = doi)
+                  }) %>%
+              bind_rows()
+
+            dois <- dois %>%
               full_join(ids, by = "datasetid") %>%
               select(.data$siteid, .data$collunitid,
                      .data$datasetid, .data$doi) %>%
-              group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
-              arrange(.data$doi) %>%
-              filter(row_number() == 1)
+              arrange(.data$siteid, .data$collunitid, .data$datasetid)
             return(dois)
           })
 
@@ -513,7 +503,7 @@ setMethod(f = "cite_data",
               full_join(ds_df, by = "datasetid") %>%
               select(.data$siteid, .data$sitename, .data$collunitid,
                      .data$datasetid, .data$datasettype, .data$database,
-                     .data$doi, .data$pi_list) %>%
+                     .data$doi, pi_list) %>%
               group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
               arrange(.data$doi) %>%
               filter(row_number() == 1) %>%

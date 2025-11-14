@@ -32,7 +32,8 @@ setGeneric("plotLeaflet", function(object) {
 #' @title Show matches for objects.
 #' @param x object to show matches for
 #' @returns data.frame that marks if a `site` exists in another `sites` object
-#' @export
+#' @noRd
+#' @keywords internal
 setGeneric("showMatch", function(x) {
   standardGeneric(f = "showMatch")
 })
@@ -91,7 +92,8 @@ setGeneric("cite_data", function(x) {
 #' @param x object
 #' @param n n elements that are a best match
 #' @returns attr Select the match between a local record and a Neotoma match
-#' @export
+#' @noRd
+#' @keywords internal
 setGeneric("selectMatch", function(x, n) {
   standardGeneric(f = "selectMatch")
 })

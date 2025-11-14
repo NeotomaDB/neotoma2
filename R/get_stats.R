@@ -11,17 +11,32 @@
 #' information about the overall number of sites/datasets (using an arbitrarily
 #' high value for `end`).
 #' @param start The starting month (from present == 0) for
-#' which to generate the summary.
+#' which to generate the summary. Default is 0 (the current month).
 #' @param end The ending month (from present == 0) for which
-#' to generate the summary.
+#' to generate the summary. Default is 1 (one month ago).
+#' @param type A character string indicating the type of summary
+#' to return. Options are \code{dsdbmonth} (the number of datasets
+#' in the Neotoma Database added per month), \code{rawbymonth} (the
+#' number of datasets, sites, publications, authors, countries and observations
+#' added per month), and \code{dstypemonth} (the number of datasets added
+#' per dataset type per month). Default is \code{dsdbmonth}.
 #' @returns `data.frame` with summary statistics
 #' @examples \donttest{
-#' last_month <- get_stats(start = 0, end = 1)
+#' last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
 #' }
 #' @md
 #' @export
-get_stats <- function(start, end) {
-  baseURL <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
+get_stats <- function(start = 0, end = 1, type = "dsdbmonth") {
+  if (!(type %in% c("dsdbmonth", "rawbymonth", "dstypemonth"))) {
+    stop("type must be either 'dsdbmonth', 'dstypemonth' or 'rawbymonth'.")
+  }
+  if (type == "dsdbmonth") {
+    baseURL <- paste0("data/summary/dsdbmonth?start=", start, "&end=", end)
+  } else if (type == "rawbymonth") {
+    baseURL <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
+  } else if (type == "dstypemonth") {
+    baseURL <- paste0("data/summary/dstypemonth?start=", start, "&end=", end)
+  }
   result <- tryCatch(
     parseURL(baseURL),
     error = function(e) {
@@ -30,15 +45,32 @@ get_stats <- function(start, end) {
     }
   )
   if (is.null(result) || is.null(result$data)) {
+    message("No results returned from Neotoma API.")
     return(NULL)
-  } else {
+  }
+  if (type == "dsdbmonth") {
+    result <- result$data$data
+    df <- result %>% map_df(~ data.frame(
+      databasename = .$databasename,
+      counts = as.integer(.$counts)
+    ))
+    return(df)
+  } else if (type == "dstypemonth") {
+    result <- result$data$data
+    df <- result %>% map_df(~ data.frame(
+      datasettype = .$datasettype,
+      counts = as.integer(.$counts)
+    ))
+    return(df)
+  } else if (type == "rawbymonth") {
     result <- result$data$data
     df <- result %>% map_df(~ data.frame(
       datasets = .$datasets,
       sites = .$sites,
       publications = .$publications,
       authors = .$authors,
-      countrygpid = .$countrygpid
+      countrygpid = .$countrygpid,
+      observations = .$observations
     ))
     return(df)
   }

@@ -4,14 +4,21 @@
 \alias{get_stats}
 \title{get_stats}
 \usage{
-get_stats(start, end)
+get_stats(start = 0, end = 1, type = "dsdbmonth")
 }
 \arguments{
 \item{start}{The starting month (from present == 0) for
-which to generate the summary.}
+which to generate the summary. Default is 0 (the current month).}
 
 \item{end}{The ending month (from present == 0) for which
-to generate the summary.}
+to generate the summary. Default is 1 (one month ago).}
+
+\item{type}{A character string indicating the type of summary
+to return. Options are \code{dsdbmonth} (the number of datasets
+in the Neotoma Database added per month), \code{rawbymonth} (the
+number of datasets, sites, publications, authors, countries and observations
+added per month), and \code{dstypemonth} (the number of datasets added
+per dataset type per month). Default is \code{dsdbmonth}.}
 }
 \value{
 \code{data.frame} with summary statistics
@@ -30,7 +37,7 @@ high value for \code{end}).
 }
 \examples{
 \donttest{
-last_month <- get_stats(start = 0, end = 1)
+last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
 }
 }
 \author{

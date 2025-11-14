@@ -126,6 +126,16 @@ get_sites.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
+  if ("siteid" %in% names(cl)) {
+    # redirect to numeric method
+    if ("all_data" %in% names(cl)) {
+      all_data <- cl$all_data
+    } else {
+      all_data <- FALSE
+    }
+    output <- get_sites(x = cl$siteid, all_data = all_data)
+    return(output)
+  }
   params <- get_params("sites")
   if (!all(names(cl) %in% params)) {
     warning("Some parameters seem invalid.

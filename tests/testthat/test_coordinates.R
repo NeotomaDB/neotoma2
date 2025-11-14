@@ -1,0 +1,16 @@
+library("testthat")
+library("neotoma2")
+
+context("`coordinates()` function")
+testthat::test_that("coordinates() returns correct coordinates", {
+  skip_on_cran()
+  sts <- get_sites(c(101, 102))
+  sts_df <- as.data.frame(sts)
+  coords <- coordinates(sts)
+  testthat::expect_is(coords, "data.frame")
+  testthat::expect_equal(nrow(coords), 2)
+  testthat::expect_equal(ncol(coords), 3)
+  testthat::expect_equal(coords$siteid, sts_df$siteid)
+  testthat::expect_equal(coords$latitude, sts_df$latitude, tolerance = 0.01)
+  testthat::expect_equal(coords$longitude, sts_df$longitude, tolerance = 0.01)
+})

@@ -34,6 +34,28 @@ setMethod(f = "plotLeaflet",
 
 #' @rdname plotLeaflet
 setMethod(f = "plotLeaflet",
+          signature = "site",
+          definition = function(object) {
+            explorerURL <- "http://apps.neotomadb.org/explorer/"
+            df1 <- as.data.frame(object)
+            map1 <- leaflet(df1) %>%
+              addTiles() %>%
+              addCircleMarkers(lng = df1$long,
+                               lat = df1$lat,
+                               popup = paste0("<b>", df1$sitename,
+                                              "</b><br><b>Description:</b> ",
+                                              df1$description,
+                                              "<br><a href=", 
+                                              explorerURL, "?siteids=",
+                                              df1$siteid,
+                                              ">Explorer Link</a>"),
+                               clusterOptions = markerClusterOptions(),
+                               options = markerOptions(riseOnHover = TRUE))
+            return(map1)
+          })
+
+#' @rdname plotLeaflet
+setMethod(f = "plotLeaflet",
           signature = "ANY",
           definition = function(object) {
             if (is.null(object)) {

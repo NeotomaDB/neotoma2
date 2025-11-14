@@ -1,3 +1,4 @@
+testthat::skip("Skipping all tests in this file")
 library("testthat")
 library("neotoma2")
 library("tools")

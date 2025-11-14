@@ -2,10 +2,13 @@
 % Please edit documentation in R/02_genericDefinitions.R, R/plotLeaflet.R
 \name{plotLeaflet}
 \alias{plotLeaflet}
+\alias{plotLeaflet,site-method}
 \alias{plotLeaflet,ANY-method}
 \title{plotLeaflet}
 \usage{
 plotLeaflet(object)
+
+\S4method{plotLeaflet}{site}(object)
 
 \S4method{plotLeaflet}{ANY}(object)
 }
