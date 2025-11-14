@@ -507,10 +507,10 @@ setMethod(f = "cite_data",
                   }) %>%
               bind_rows()
 
-            citations <- ids %>%
+            citations <- dois %>%
+              full_join(ids, by = "datasetid") %>%
               full_join(sitenames, by = "siteid") %>%
               full_join(ds_df, by = "datasetid") %>%
-              full_join(dois, by = "datasetid") %>%
               select(.data$siteid, .data$sitename, .data$collunitid,
                      .data$datasetid, .data$datasettype, .data$database,
                      .data$doi, .data$pi_list) %>%
