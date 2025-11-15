@@ -29,15 +29,14 @@ jobs:
             any::xml2
             any::covr
       
-      - name: Install devtools
-        run: |
-          Rscript -e "install.packages('devtools')"
-          
-      - name: Run tests
-        run: Rscript -e 'devtools::test()'
-      
       - name: Test coverage
-        run: Rscript -e 'cov <- covr::package_coverage(); covr::codecov(coverage = cov)'
+        run: |
+          covr::codecov(
+            quiet = FALSE,
+            clean = FALSE,
+            install_path = file.path(Sys.getenv("RUNNER_TEMP"), "package")
+          )
+        shell: Rscript {0}
 
       - name: Show testthat output
         if: always()
