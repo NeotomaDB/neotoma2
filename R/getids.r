@@ -67,9 +67,7 @@ getids.sites <- function(x, order = TRUE) {
 getids.site <- function(x, order = TRUE) {
   siteid <- x@siteid
   if (length(x@collunits) > 0) {
-    print(x@collunits)
     cuids <- map(x@collunits@collunits, function(z) {
-      print(z)
       collunitid <- z@collectionunitid
       if (length(z@datasets) > 0) {
         datasetids <- map(z@datasets@datasets, function(a) {

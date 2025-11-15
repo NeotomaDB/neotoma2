@@ -6,7 +6,6 @@ library("tools")
 context("Test that all examples run without error")
 csv_path <- testthat::test_path("all_aliases.csv")
 topics <- read.csv(csv_path, stringsAsFactors = FALSE)$alias
-print(head(topics))
 for (topic in topics) {
   topic <- sub(",.*$", "", topic)
   local({
@@ -17,7 +16,7 @@ for (topic in topics) {
         example(topic = t,
                 package = "neotoma2",
                 ask = FALSE,
-                character.only = TRUE, 
+                character.only = TRUE,
                 run.dontrun = TRUE,
                 echo = FALSE),
         NA)
