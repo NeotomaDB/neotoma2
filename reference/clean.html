@@ -87,7 +87,7 @@ array of datasets.</p></li>
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clean</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NA</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clean</span><span class="op">(</span><span class="va">x</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'sites'</span></span>
 <span><span class="fu">clean</span><span class="op">(</span><span class="va">x</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -127,39 +127,9 @@ array of datasets.</p></li>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">clean_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"L%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">more_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"La%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">long_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="va">clean_sites</span>, <span class="va">more_sites</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in map(x@sites, function(y) {    siteid &lt;- y@siteid    if (length(y@collunits) &gt; 0) {        collunits &lt;- map(y@collunits@collunits, function(z) {            collunitid &lt;- z@collectionunitid            if (length(z@datasets) &gt; 0) {                datasetids &lt;- map(z@datasets@datasets, function(a) {                  a@datasetid                })            }            else {                datasetids &lt;- NA            }            return(data.frame(collunitid = collunitid, datasetid = unlist(datasetids)))        }) %&gt;% bind_rows()    }    else {        data.frame(collunitid = NA, datasetid = NA)    }    return(data.frame(siteid = siteid, collunits))}):</span> <span style="color: #00BBBB;">ℹ</span> In index: 4.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `as.data.frame.default()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> cannot coerce class ‘structure("nonstandardGenericFunction", package = "methods")’ to a data.frame</span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'long_set' not found</span>
-<span class="r-in"><span><span class="co"># By removing duplicates we get a smaller object.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="fu">clean</span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'long_set' not found</span>
-<span class="r-in"><span><span class="co"># We can do the same thing with collection units:</span></span></span>
-<span class="r-in"><span><span class="va">clean_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"L%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="collunits.html">collunits</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">more_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"La%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="collunits.html">collunits</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">long_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="va">clean_cols</span>, <span class="va">more_cols</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26</span>
-<span class="r-in"><span><span class="co"># By removing duplicates we get a smaller object.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="fu">clean</span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26</span>
-<span class="r-in"><span><span class="co"># And datasets:</span></span></span>
-<span class="r-in"><span><span class="va">clean_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"L%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="get_downloads.html">get_downloads</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="datasets.html">datasets</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">more_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"La%"</span>, limit <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="get_downloads.html">get_downloads</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="datasets.html">datasets</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">long_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="va">clean_ds</span>, <span class="va">more_ds</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 91</span>
-<span class="r-in"><span><span class="co"># By removing duplicates we get a smaller object.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="fu">clean</span><span class="op">(</span><span class="va">long_set</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 52</span>
+<span class="r-in"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Alex%"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">alex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="va">alex</span>, <span class="va">alex2</span><span class="op">)</span> <span class="co"># cleaned internally</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

@@ -65,22 +65,18 @@
 <url><loc>/reference/samples-sites-method.html</loc></url>
 <url><loc>/reference/samples.html</loc></url>
 <url><loc>/reference/samples_classes.html</loc></url>
-<url><loc>/reference/selectMatch-publication-numeric-method.html</loc></url>
-<url><loc>/reference/selectMatch.html</loc></url>
 <url><loc>/reference/set_chronology.html</loc></url>
 <url><loc>/reference/set_collunit.html</loc></url>
 <url><loc>/reference/set_contact.html</loc></url>
 <url><loc>/reference/set_dataset.html</loc></url>
 <url><loc>/reference/set_default-chronologies-method.html</loc></url>
 <url><loc>/reference/set_default.html</loc></url>
-<url><loc>/reference/set_publications.html</loc></url>
+<url><loc>/reference/set_publication.html</loc></url>
 <url><loc>/reference/set_sample.html</loc></url>
 <url><loc>/reference/set_server.html</loc></url>
 <url><loc>/reference/set_site.html</loc></url>
 <url><loc>/reference/set_speleothem.html</loc></url>
 <url><loc>/reference/show.html</loc></url>
-<url><loc>/reference/showMatch-publication-method.html</loc></url>
-<url><loc>/reference/showMatch.html</loc></url>
 <url><loc>/reference/sites_classes.html</loc></url>
 <url><loc>/reference/specimens_classes.html</loc></url>
 <url><loc>/reference/speleothemdetails-sites-method.html</loc></url>
@@ -97,6 +93,5 @@
 <url><loc>/reference/taxa.html</loc></url>
 <url><loc>/reference/taxa_classes.html</loc></url>
 <url><loc>/reference/toWide.html</loc></url>
-<url><loc>/reference/write.csv-sites-method.html</loc></url>
 </urlset>
 

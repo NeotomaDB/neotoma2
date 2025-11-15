@@ -415,7 +415,7 @@ information such as <code>sitename</code>, <code>lat</code>, and
 <span>                    altitude <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span><span class="va">my_site</span></span>
 <span><span class="co">#&gt;    siteid sitename lat long altitude</span></span>
-<span><span class="co">#&gt;  91698034  My Lake   2    1       30</span></span></code></pre></div>
+<span><span class="co">#&gt;  35454122  My Lake   2    1       30</span></span></code></pre></div>
 <p>If we have a set of sites that we are analyzing, we can add the new
 site to the set of sites, either by appending it to the end, using
 <code><a href="../reference/c.html">c()</a></code>, or by replacing a particular element using
@@ -750,12 +750,12 @@ numeric vector (<code>c(1, 2, 3)</code>)):</p>
 </h4>
 <p>Just as we can use the <code>set_sites()</code> function to set new
 site information, we can also create new publication information using
-<code><a href="../reference/set_publications.html">set_publications()</a></code>. With <code><a href="../reference/set_publications.html">set_publications()</a></code>
+<code>set_publications()</code>. With <code>set_publications()</code>
 you can enter as much or as little of the article metadata as you’d
 like, but it’s designed (in part) to use the CrossRef API to return
 information from a DOI.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new_pub</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_publications.html">set_publications</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">new_pub</span> <span class="op">&lt;-</span> <span class="fu">set_publications</span><span class="op">(</span></span>
 <span>articletitle <span class="op">=</span> <span class="st">"Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota"</span>,</span>
 <span>journal <span class="op">=</span> <span class="st">"Canadian Journal of Botany"</span>,</span>
 <span>volume <span class="op">=</span> <span class="fl">46</span><span class="op">)</span></span></code></pre></div>
