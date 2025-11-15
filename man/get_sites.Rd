@@ -6,7 +6,7 @@
 \alias{get_sites.default}
 \title{get_sites}
 \usage{
-get_sites(x, ...)
+get_sites(x = NA, ...)
 
 \method{get_sites}{numeric}(x, ...)
 

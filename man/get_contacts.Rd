@@ -6,7 +6,7 @@
 \alias{get_contacts.default}
 \title{Get \code{contact} information for Neotoma contributors}
 \usage{
-get_contacts(x, ...)
+get_contacts(x = NA, ...)
 
 \method{get_contacts}{numeric}(x, ...)
 

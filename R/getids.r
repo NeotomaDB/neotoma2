@@ -20,12 +20,14 @@ getids <- function(x, order = TRUE) {
 }
 
 #' @rdname getids
-#' @export
+#' @method getids sites
+#' @export getids.sites
+#' @exportS3Method getids sites
 getids.sites <- function(x, order = TRUE) {
   siteids <- map(x@sites, function(y) {
     siteid <- y@siteid
     if (length(y@collunits) > 0) {
-      collunits <- map(y@collunits@collunits, function(z) {
+      cuids <- map(y@collunits@collunits, function(z) {
         collunitid <- z@collectionunitid
         if (length(z@datasets) > 0) {
           datasetids <- map(z@datasets@datasets, function(a) {
@@ -39,9 +41,9 @@ getids.sites <- function(x, order = TRUE) {
       }) %>%
         bind_rows()
     } else {
-      data.frame(collunitid = NA, datasetid = NA)
+      cuids <- data.frame(collunitid = NA, datasetid = NA)
     }
-    return(data.frame(siteid = siteid, collunits))
+    return(data.frame(siteid = siteid, cuids))
   })
   siteids <- do.call("rbind.data.frame", args = siteids)
   rownames(siteids) <- seq_len(nrow(siteids))
@@ -60,11 +62,14 @@ getids.sites <- function(x, order = TRUE) {
 }
 
 #' @rdname getids
-#' @export
+#' @method getids site
+#' @exportS3Method neotoma2::getids site
 getids.site <- function(x, order = TRUE) {
   siteid <- x@siteid
   if (length(x@collunits) > 0) {
-    collunits <- map(x@collunits@collunits, function(z) {
+    print(x@collunits)
+    cuids <- map(x@collunits@collunits, function(z) {
+      print(z)
       collunitid <- z@collectionunitid
       if (length(z@datasets) > 0) {
         datasetids <- map(z@datasets@datasets, function(a) {
@@ -78,17 +83,18 @@ getids.site <- function(x, order = TRUE) {
     }) %>%
       bind_rows()
   } else {
-    data.frame(collunitid = NA, datasetid = NA)
+    cuids <- data.frame(collunitid = NA, datasetid = NA)
   }
-  return(data.frame(siteid = (siteid), collunits))
+  return(data.frame(siteid = (siteid), cuids))
 }
 
 #' @rdname getids
-#' @export
+#' @method getids collunits
+#' @exportS3Method getids collunits
 getids.collunits <- function(x, order = TRUE) {
   siteid <- NA
   if (length(x) > 0) {
-    collunits <- map(x@collunits, function(z) {
+    cuids <- map(x@collunits, function(z) {
       collunitid <- z@collectionunitid
       if (length(z@datasets) > 0) {
         datasetids <- map(z@datasets@datasets, function(a) {
@@ -102,13 +108,14 @@ getids.collunits <- function(x, order = TRUE) {
     }) %>%
       bind_rows()
   } else {
-    data.frame(collunitid = NA, datasetid = NA)
+    cuids <- data.frame(collunitid = NA, datasetid = NA)
   }
-  return(data.frame(siteid = (siteid), collunits))
+  return(data.frame(siteid = (siteid), cuids))
 }
 
 #' @rdname getids
-#' @export
+#' @method getids collunit
+#' @exportS3Method getids collunit
 getids.collunit <- function(x, order = TRUE) {
   siteid <- NA
   collunitid <- x@collectionunitid

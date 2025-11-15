@@ -40,30 +40,9 @@ array of datasets.
 }
 \examples{
 \donttest{
-clean_sites <- get_sites(sitename = "L\%", limit = 20)
-more_sites <- get_sites(sitename = "La\%", limit = 20)
-long_set <- c(clean_sites, more_sites)
-length(long_set)
-# By removing duplicates we get a smaller object.
-length(clean(long_set))
-# We can do the same thing with collection units:
-clean_cols <- get_sites(sitename = "L\%", limit = 20) \%>\%
-  collunits()
-more_cols <- get_sites(sitename = "La\%", limit = 20) \%>\%
-  collunits()
-long_set <- c(clean_cols, more_cols)
-length(long_set)
-# By removing duplicates we get a smaller object.
-length(clean(long_set))
-# And datasets:
-clean_ds <- get_sites(sitename = "L\%", limit = 20) \%>\%
-  get_downloads() \%>\% datasets()
-more_ds <- get_sites(sitename = "La\%", limit = 20) \%>\%
-  get_downloads() \%>\% datasets()
-long_set <- c(clean_ds, more_ds)
-length(long_set)
-# By removing duplicates we get a smaller object.
-length(clean(long_set))
+alex <- get_sites(sitename = "Alex\%")
+alex2 <- get_sites(24)
+c <- c(alex, alex2) # cleaned internally
 }
 }
 \author{

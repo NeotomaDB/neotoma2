@@ -10,6 +10,9 @@ setMethod(f = "collunits",
             output <- map(object@sites, function(x) {
               x@collunits
             })
+            if (length(output) == 0) {
+              return(new("collunits", collunits = list()))
+            }
             final <- reduce(output, c)
             final <- clean(final)
             return(final)

@@ -286,7 +286,11 @@ setMethod(f = "c",
               x@sites <- c(x@sites, y)
             }
             x <- clean(x)
-            x <- new("sites", sites = x@sites)
+            if (length(x) == 0){
+              x <- NULL
+            } else {
+              x <- new("sites", sites = x@sites)
+            }
             return(x)
           }
 )

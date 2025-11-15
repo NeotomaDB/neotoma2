@@ -15,12 +15,17 @@
 #' @returns A Neotoma2 sites object with datasets with the requested taxa.
 #' @md
 #' @export
-get_taxa <- function(x, ...) {
-  UseMethod("get_taxa")
+get_taxa <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_taxa", "default")
+  } else {
+    UseMethod("get_taxa", x)
+  }
 }
 
 #' @rdname get_taxa
-#' @export
+#' @method get_taxa numeric
+#' @exportS3Method get_taxa numeric
 get_taxa.numeric <- function(x, ...) {
   oo <- options(scipen = 9999)
   on.exit(options(oo))
@@ -49,7 +54,8 @@ get_taxa.numeric <- function(x, ...) {
 }
 
 #' @rdname get_taxa
-#' @export
+#' @method get_taxa default
+#' @exportS3Method get_taxa default
 get_taxa.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL

@@ -17,12 +17,9 @@
 #' So the site is gathered, and the datasets are now part of an
 #' array of datasets.
 #' @examples \donttest{
-#' clean_sites <- get_sites(sitename = "L%", limit = 20)
-#' more_sites <- get_sites(sitename = "La%", limit = 20)
-#' long_set <- c(clean_sites, more_sites)
-#' length(long_set)
-#' # By removing duplicates we get a smaller object.
-#' length(clean(long_set))
+#' alex <- get_sites(sitename = "Alex%")
+#' alex2 <- get_sites(24)
+#' c <- c(alex, alex2) # cleaned internally
 #' }
 #' @md
 #' @export
@@ -31,6 +28,7 @@ clean <- function(x, verbose = TRUE, ...) {
 }
 
 #' @rdname clean
+#' @method clean sites
 #' @exportS3Method clean sites
 clean.sites <- function(x, verbose = TRUE, ...) {
   siteids <- as.data.frame(x)$siteid
@@ -58,9 +56,10 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 }
 
 #' @rdname clean
+#' @method clean collunits
 #' @exportS3Method clean collunits
 clean.collunits <- function(x, verbose = TRUE, ...) {
-  cuids <- as.data.frame(x)$collectionunitid
+  cuids <- x$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
   non_dupes <- cuids[!duplicated(cuids) & !duplicated(cuids, fromLast = TRUE)]
   if (length(matched) == 0) {
@@ -79,6 +78,7 @@ clean.collunits <- function(x, verbose = TRUE, ...) {
 }
 
 #' @rdname clean
+#' @method clean datasets
 #' @exportS3Method clean datasets
 clean.datasets <- function(x, verbose = TRUE, ...) {
   dsids <- as.data.frame(x)$datasetid

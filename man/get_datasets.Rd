@@ -8,7 +8,7 @@
 \alias{get_datasets.site}
 \title{get_datasets}
 \usage{
-get_datasets(x, ...)
+get_datasets(x = NA, ...)
 
 \method{get_datasets}{numeric}(x, ...)
 

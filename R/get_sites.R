@@ -88,12 +88,17 @@
 #' }}
 #' @md
 #' @export
-get_sites <- function(x, ...) {
-  UseMethod("get_sites")
+get_sites <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_sites", "default")
+  } else {
+    UseMethod("get_sites", x)
+  }
 }
 
 #' @rdname get_sites
-#' @export
+#' @method get_sites numeric
+#' @exportS3Method get_sites numeric
 get_sites.numeric <- function(x, ...) {
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
@@ -115,8 +120,8 @@ get_sites.numeric <- function(x, ...) {
 }
 
 #' @rdname get_sites
-#' @export
 #' @method get_sites default
+#' @exportS3Method get_sites default
 get_sites.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL

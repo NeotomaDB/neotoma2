@@ -17,11 +17,17 @@
 #'  the data in the Neotoma Paleoecology Database
 #' @md
 #' @export
-get_contacts <- function(x, ...) {
-  UseMethod("get_contacts")
+get_contacts <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_contacts", "default")
+  } else {
+    UseMethod("get_contacts", x)
+  }
 }
 
+
 #' @rdname get_contacts
+#' @method get_contacts numeric
 #' @exportS3Method get_contacts numeric
 get_contacts.numeric <- function(x, ...) {
   if (length(x) > 0) {
@@ -64,6 +70,7 @@ get_contacts.numeric <- function(x, ...) {
 }
 
 #' @rdname get_contacts
+#' @method get_contacts default
 #' @exportS3Method get_contacts default
 get_contacts.default <- function(x, ...) {
   baseURL <- paste0("data/contacts")

@@ -77,11 +77,16 @@
 #' }
 #' @md
 #' @export
-get_datasets <- function(x, ...) {
-  UseMethod("get_datasets")
+get_datasets <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_datasets", "default")
+  } else {
+    UseMethod("get_datasets", x)
+  }
 }
 
 #' @rdname get_datasets
+#' @method get_datasets numeric
 #' @exportS3Method get_datasets numeric
 get_datasets.numeric <- function(x, ...) {
   if (length(x) > 0) {
@@ -104,6 +109,7 @@ get_datasets.numeric <- function(x, ...) {
 }
 
 #' @rdname get_datasets
+#' @method get_datasets default
 #' @exportS3Method get_datasets default
 get_datasets.default <- function(x, ...) {
   params <- get_params("datasets")
