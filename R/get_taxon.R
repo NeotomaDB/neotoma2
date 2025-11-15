@@ -79,7 +79,7 @@ get_taxon.default <- function(...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )
@@ -109,7 +109,7 @@ get_taxon.numeric <- function(x, ...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )

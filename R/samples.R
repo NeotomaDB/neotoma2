@@ -4,8 +4,12 @@
 #' @param x sites object
 #' @description Obtain all samples within a sites object
 #' @examples {
+#' tryCatch({
 #' dw <- get_downloads(1)
 #' pollen <- samples(dw)
+#' }, error = function(e) {
+#'  message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @importFrom dplyr bind_rows left_join rename mutate
 #' @importFrom purrr map

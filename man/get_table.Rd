@@ -15,7 +15,7 @@ for a complete list of table names.}
 \item{offset}{Default 0.}
 }
 \value{
-selected \code{table} values from the Database
+selected \code{table} values from the Database.
 }
 \description{
 Call Neotoma and return a table
@@ -24,6 +24,10 @@ Call Neotoma and return a table
 \examples{
 {
 # Returns only the first 25 specimen records.
+tryCatch({
 someSpec <- get_table('specimens')
+}, error = function(e) {
+ message("Neotoma server not responding. Try again later.")
+})
 }
 }

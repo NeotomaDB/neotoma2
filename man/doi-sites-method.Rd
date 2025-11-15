@@ -19,7 +19,11 @@ DOI for the record.
 }
 \examples{
 {
+tryCatch({
 ds <- get_datasets(1)
 doi(ds)
+}, error = function(e) {
+message("Neotoma server not responding. Try again later.")
+})
 }
 }

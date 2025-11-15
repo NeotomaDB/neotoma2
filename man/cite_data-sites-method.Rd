@@ -19,7 +19,11 @@ citation for the record, including the dataset DOI.
 }
 \examples{
 {
+tryCatch({
 ds <- get_datasets(1)
 cite_data(ds)
+}, error = function(e) {
+message("Neotoma server not responding. Try again later.")
+})
 }
 }

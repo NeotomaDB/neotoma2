@@ -49,8 +49,12 @@ setMethod(f = "show",
 #' `collectionunits`, `datasets`, etc... Neotoma objects.
 #' @returns sliced `site` object
 #' @examples \donttest{
-#' some_site <- get_sites(sitename = "Site%", limit=3)
-#' some_site[[2]]
+#' tryCatch({
+#'   some_site <- get_sites(sitename = "Site%", limit=3)
+#'   some_site[[2]]
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases [[,sites,numeric-method
 #' @exportMethod [[
@@ -403,8 +407,12 @@ setMethod(f = "summary",
 #' @importFrom dplyr mutate group_by row_number
 #' @returns `data.frame` object with DOIs information.
 #' @examples {
+#' tryCatch({
 #' ds <- get_datasets(1)
 #' doi(ds)
+#' }, error = function(e) {
+#' message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases doi,sites-method
 #' @exportMethod doi
@@ -452,8 +460,12 @@ setMethod(f = "doi",
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @returns `data.frame` object with citation information.
 #' @examples {
+#' tryCatch({
 #' ds <- get_datasets(1)
 #' cite_data(ds)
+#' }, error = function(e) {
+#' message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases cite_data,sites-method
 #' @exportMethod cite_data

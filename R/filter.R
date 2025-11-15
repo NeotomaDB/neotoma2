@@ -51,13 +51,21 @@
 #' @returns filtered `sites` object
 #' @examples \donttest{
 #' # Download 10 sites, but only keep the sites that are close to sea level.
-#' some_sites <- get_sites(sitename = "Lake%", limit = 3)
-#' site_subset <- some_sites %>% filter(altitude < 100)
+#' tryCatch({
+#'  some_sites <- get_sites(sitename = "Lake%", limit = 3)
+#'   site_subset <- some_sites %>% filter(altitude < 100)
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' # Download 10 sites, get all associated datasets, but keep only
 #' # sites/datasets that are of datasettype "pollen":
-#' sites <- get_sites(limit = 10) %>%
-#'   get_datasets()
-#' pollen_subset <- sites %>% filter(datasettype == "pollen")
+#' tryCatch({
+#'   sites <- get_sites(limit = 10) %>%
+#'     get_datasets()
+#'   pollen_subset <- sites %>% filter(datasettype == "pollen")
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.") 
+#' })
 #' }
 #' @md
 #' @export

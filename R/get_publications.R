@@ -19,24 +19,32 @@
 #' @returns `publications` object
 #' @examples \donttest{
 #' # How old are the papers in Neotoma that include the term "mammut"?
-#' mammoth_papers <- get_publications(search="mammut") %>%
-#'   as.data.frame()
-#' hist(as.numeric(mammoth_papers$year))
-#' }
-#' \donttest{
+#' tryCatch({
+#'   mammoth_papers <- get_publications(search="mammut") %>%
+#'     as.data.frame()
+#'   hist(as.numeric(mammoth_papers$year))
+#' }, error = function(e) {
+#'  message("Neotoma server not responding. Try again later.")
+#' })
 #' # We want the paper identified in Neotoma as 666:
+#' #' tryCatch({
 #' get_publications(666)
-#' }
-#' \donttest{
+#' }, error = function(e) {
+#' message("Neotoma server not responding. Try again later.")
+#' })
 #' # Take a publication object and purposely degrade the metadata:
-#' bad_pub <- get_publications(666)
-#' # Note this only changes the reported year, not the citation string.
-#' bad_pub[[1]]@year <- "1923"
-#' bad_pub[[1]]@publicationid <- NA_integer_
-#' updated_pubs <- get_publications(bad_pub[[1]])
-#' attr(updated_pubs, "matches")
-#' # we see the proper citation in the record:
-#' updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#' tryCatch({
+#'   bad_pub <- get_publications(666)
+#'   # Note this only changes the reported year, not the citation string.
+#'   bad_pub[[1]]@year <- "1923"
+#'   bad_pub[[1]]@publicationid <- NA_integer_
+#'   updated_pubs <- get_publications(bad_pub[[1]])
+#'   attr(updated_pubs, "matches")
+#'   # we see the proper citation in the record:
+#'   updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#' }, error = function(e) {
+#'  message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export
@@ -56,7 +64,7 @@ get_publications.default <- function(...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )
@@ -110,7 +118,7 @@ get_publications.numeric <- function(x, ...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )

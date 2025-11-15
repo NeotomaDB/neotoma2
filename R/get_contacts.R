@@ -37,7 +37,7 @@ get_contacts.numeric <- function(x, ...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )
@@ -77,7 +77,7 @@ get_contacts.default <- function(x, ...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )

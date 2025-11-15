@@ -18,9 +18,13 @@ Extract taxonomic data from a set of sites.
 }
 \examples{
 \donttest{
+tryCatch({
 somesites <- get_sites(datasettype = "diatom") \%>\%
   get_downloads()
 diatomtaxa <- taxa(somesites)
+}, error = function(e) {
+message("Neotoma server not responding. Try again later.")
+})
   }
 }
 \author{

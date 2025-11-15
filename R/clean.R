@@ -17,9 +17,13 @@
 #' So the site is gathered, and the datasets are now part of an
 #' array of datasets.
 #' @examples \donttest{
-#' alex <- get_sites(sitename = "Alex%")
-#' alex2 <- get_sites(24)
-#' c <- c(alex, alex2) # cleaned internally
+#' tryCatch({
+#'   alex <- get_sites(sitename = "Alex%")
+#'   alex2 <- get_sites(24)
+#'   c <- c(alex, alex2) #uncleaned
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export

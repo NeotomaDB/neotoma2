@@ -61,10 +61,18 @@
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
 #' @examples \donttest{
-#' random_sites <- get_sites(1)
-#' allds <- get_datasets(random_sites, limit=3)
+#' tryCatch({
+#'   random_sites <- get_sites(1)
+#'   allds <- get_datasets(random_sites, limit=3)
+#' }, error = function(e) {
+#'    message("Neotoma server not responding. Try again later.")
+#' })
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
-#' sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#' tryCatch({
+#'   sites_12to25 <- get_datasets(altmin=12, altmax=25)
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' # To find all datasets in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -73,7 +81,11 @@
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
-#' brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
+#' tryCatch({
+#'   brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export
@@ -96,7 +108,7 @@ get_datasets.numeric <- function(x, ...) {
   result <- tryCatch(
     parseURL(baseURL, ...),
     error = function(e) {
-      message("API call failed: ", e$message)
+      stop("API call failed: ", e$message)
       NULL
     }
   )

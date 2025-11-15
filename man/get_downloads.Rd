@@ -70,7 +70,11 @@ For the complete records, use \code{all_data=TRUE}
 \examples{
 \donttest{
 # To find the downloads object of dataset 24:
-downloads24 <- get_downloads(24)
+tryCatch({
+  downloads24 <- get_downloads(24)
+}, error = function(e) {
+ message("Neotoma server not responding. Try again later.")
+})
 # To find all downloads in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
@@ -79,8 +83,12 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-brazil_datasets <- get_datasets(loc = brazil[1])
-brazil_downloads <- get_downloads(brazil_datasets)
+tryCatch({
+  brazil_datasets <- get_datasets(loc = brazil[1])
+  brazil_downloads <- get_downloads(brazil_datasets)
+}, error = function(e) {
+  message("Neotoma server not responding. Try again later.")
+})
 }
 }
 \author{

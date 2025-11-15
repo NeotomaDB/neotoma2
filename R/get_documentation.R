@@ -5,7 +5,9 @@
 #' @importFrom rlang is_interactive
 #' @returns NULL
 #' @examples \donttest{
+#' if (interactive()) {
 #'  get_documentation()
+#' }
 #' }
 #' @md
 #' @export
