@@ -8,7 +8,7 @@ set_site(
   x = NA,
   siteid = NA_integer_,
   sitename = NA_character_,
-  geography = st_as_sf(st_sfc()),
+  geography = sf::st_as_sf(sf::st_sfc()),
   altitude = NA_integer_,
   geopolitical = list(),
   area = NA_integer_,
@@ -20,21 +20,25 @@ set_site(
 \arguments{
 \item{x}{Object to be set as a site}
 
-\item{siteid}{The unique site id for a site.  If this site is new to Neotoma then leave the ID as NA (the default).}
+\item{siteid}{The unique \verb{site id} for a site.
+If this site is new to Neotoma then leave the ID as NA.}
 
-\item{sitename}{Actual site name as a character string.}
+\item{sitename}{Name of a site.}
 
-\item{geography}{An \code{sf} object representing the site location, either as a polygon or point.}
+\item{geography}{A \code{sf} object representing the site location,
+either as a polygon or point.}
 
 \item{altitude}{altitude/elevation of the site.}
 
 \item{geopolitical}{The geopolitical unit in which the site is located.}
 
-\item{area}{The area of the site or depositional basin in \emph{ha}.  Can be calculated from the polygon.}
+\item{area}{The area of the site or depositional basin in \emph{ha}.
+Can be calculated from the polygon.}
 
 \item{notes}{additional information of the site}
 
-\item{description}{Function to create new site objects for personal analysis. The new object will not be uploaded to the database.}
+\item{description}{Function to create new site objects.
+The new object will not be uploaded to the database.}
 
 \item{collunits}{Collection units in the site}
 }
@@ -53,4 +57,7 @@ my_site <- set_site(sitename = "My Lake",
                     description = "my lake",
                     altitude = 30)
 }
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

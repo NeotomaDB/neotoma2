@@ -2,18 +2,46 @@
 % Please edit documentation in R/get_taxon.R
 \name{get_taxon}
 \alias{get_taxon}
+\alias{get_taxon.default}
+\alias{get_taxon.numeric}
 \title{get_taxon}
 \usage{
 get_taxon(x = NA, ...)
+
+\method{get_taxon}{default}(...)
+
+\method{get_taxon}{numeric}(x, ...)
 }
 \arguments{
-\item{x}{string taxa name or names}
+\item{x}{taxon ID}
 
-\item{...}{accepted arguments, see details for more information.}
+\item{...}{accepted arguments, see \strong{details} for more information.}
 }
 \value{
-A Neotoma2 sites object with datasets with the requested taxa.
+A Neotoma2 \code{taxa} object with datasets with the requested taxa.
 }
 \description{
-a sites object with the requested taxa.
+a \code{taxon} object with detailed information
+}
+\details{
+A \code{taxa} may have one or more taxa associated with it.
+The \code{get_taxon} function searches for \code{taxa} detail data within Neotoma
+while the \code{get_taxa} function searches for sites that contain the requested
+taxa. The function searches for each taxon by using a SQL query which
+accepts any one of the following parameters:
+\itemize{
+\item \code{taxonid}  The unique taxon ID (integer) in Neotoma. Can be passed as a
+vector of taxa IDs.
+\item \code{taxonname} Taxon name or partial name. You can pass wildcard characters
+using \%.
+\item \code{taxagroup} The taxonomic grouping the taxon belongs to, from the Neotoma
+taxagrouptypes table.
+\item \code{ecolgroup} The ecological group of interest for the Neotoma taxon (from
+the Neotoma ecolgrouptypes table)
+\item \code{status} The taxonomic extinction status of the taxon, either extinct
+(1, True) or extant (0, False).
+}
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

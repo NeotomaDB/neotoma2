@@ -1,5 +1,3 @@
-utils::globalVariables(c("analysisunitid"))
-
 #' @title Extract datasets from a sites object.
 #' @description If the sites object contains datasets, then the datasets
 #' will be returned. If the sites object does not contain datasets then
@@ -34,7 +32,8 @@ setGeneric("plotLeaflet", function(object) {
 #' @title Show matches for objects.
 #' @param x object to show matches for
 #' @returns data.frame that marks if a `site` exists in another `sites` object
-#' @export
+#' @noRd
+#' @keywords internal
 setGeneric("showMatch", function(x) {
   standardGeneric(f = "showMatch")
 })
@@ -45,15 +44,23 @@ setGeneric("showMatch", function(x) {
 #' @export
 setGeneric("samples", function(x) {
   standardGeneric(f = "samples")
+  })
+
+#' @title Obtain speleothems from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothems", function(x) {
+  standardGeneric(f = "speleothems")
 })
 
-# #' @title Obtain specimens from a record or multiple records.
-# #' @param x sites object
-# #' @returns data.frame with record information regarding specimens
-# #' @export
-# setGeneric("specimens", function(x) {
-#   standardGeneric(f = "specimens")
-# })
+#' @title Obtain speleothems and samples from a record or multiple records.
+#' @param x sites object
+#' @returns data.frame with record information at speleothem level
+#' @export
+setGeneric("speleothemdetails", function(x) {
+  standardGeneric(f = "speleothemdetails")
+})
 
 #' @title Obtain the chronology from a record or multiple records.
 #' @param x sites object that contains chronologies
@@ -85,7 +92,8 @@ setGeneric("cite_data", function(x) {
 #' @param x object
 #' @param n n elements that are a best match
 #' @returns attr Select the match between a local record and a Neotoma match
-#' @export
+#' @noRd
+#' @keywords internal
 setGeneric("selectMatch", function(x, n) {
   standardGeneric(f = "selectMatch")
 })
@@ -99,7 +107,6 @@ setGeneric("chroncontrols", function(x) {
   standardGeneric(f = "chroncontrols")
 })
 
-
 #' @title taxa
 #' @description Show the samples table
 #' @param object Sites object to extract taxa table from
@@ -109,24 +116,28 @@ setGeneric("taxa", function(object) {
   standardGeneric(f = "taxa")
 })
 
-# @title toJSON
-# @author Socorro Dominguez 
-# @description Export toJSON
-# @param x Sites object to extract taxa table from
-# @returns JSON translation of `sites` object to JSON
-# @keywords internal
-# @noRd
-# # comment out for now
-# setGeneric("toJSON", function(x) {
-#   standardGeneric(f = "toJSON")
-# })
-
-#' @title Add a new chronology to a collection unit.
-#' @param object A collectionunit object
-#' @param x A chronology object
-#' @param y A \code{data.frame} of sample ages
-#' @returns chronology object defined by user,
-#' @export
+#' @title Add a new chronology into an existing collectionunit.
+#' @name add_chronology
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom purrr map
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr filter
+#' @param object A collection unit object
+#' @param x A chronology object generated using \code{set_chronology()}
+#' @param y A data.frame of sample ages, with required columns:
+#'   `"analysisunitid"`, `"age"`, `"agetype"`, `"ageolder"`, and `"ageyounger"`.
+#' @returns `chronologies` with new added chronology
+#' @description Given a collunit, add a new chronology object to the unit
+#' with both the chronology metadata and the age information (as `y`)
+#' @details When undertaking analysis we may wish to add a new chronology to
+#' existing records within Neotoma. To do this we must first build the
+#' chronology, but also link it to existing analysis units within the
+#' collection unit.
+#' For examples from this function, see the
+#' https://open.neotomadb.org/EPD_binder/complex_workflow.html
+#' documentation online.
+#' @md
+#' @exportMethod add_chronology
 setGeneric("add_chronology",
            function(object, x, y) {
              standardGeneric(f = "add_chronology")
@@ -151,3 +162,11 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+#TODO
+# #' @title Obtain specimens from a record or multiple records.
+# #' @param x sites object
+# #' @returns data.frame with record information regarding specimens
+# #' @export
+# setGeneric("specimens", function(x) {
+#   standardGeneric(f = "specimens")
+#   })

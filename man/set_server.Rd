@@ -26,3 +26,6 @@ set_server(server = "local")
 set_server(server = "neotoma")
 }
 }
+\author{
+Simon Goring \email{goring@wisc.edu}
+}

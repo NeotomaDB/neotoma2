@@ -21,3 +21,8 @@ dw <- get_downloads(1)
 pollen <- samples(dw)
 }
 }
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+
+Simon Goring \email{goring@wisc.edu}
+}

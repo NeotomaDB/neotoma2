@@ -2,7 +2,8 @@
 % Please edit documentation in R/utils-pipe.R
 \name{\%>\%}
 \alias{\%>\%}
-\title{Pipe operator}
+\title{Pipe operator
+See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.}
 \usage{
 lhs \%>\% rhs
 }
@@ -10,6 +11,7 @@ lhs \%>\% rhs
 NULL; allows using tidyverse pipe operator.
 }
 \description{
+Pipe operator
 See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
 }
 \keyword{internal}

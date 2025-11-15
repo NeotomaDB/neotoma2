@@ -19,7 +19,8 @@ set_collunit(
   depositionalenvironment = NA_character_,
   datasets = NULL,
   chronologies = NULL,
-  defaultchronology = NA_integer_
+  defaultchronology = NA_integer_,
+  speleothems = NULL
 )
 }
 \arguments{
@@ -53,12 +54,15 @@ set_collunit(
 
 \item{defaultchronology}{best chronology model identifier to
 be used with this collection unit}
+
+\item{speleothems}{speleothems associated with the collection unit}
 }
 \value{
 \code{collunit} object
 }
 \description{
-Function to create new collection unit objects for personal analysis.
+Function to create new collection unit objects for
+personal analysis.
 The new object will not be uploaded to the database.
 }
 \examples{
@@ -66,4 +70,9 @@ The new object will not be uploaded to the database.
 # Create a collunit
 my_collunit <- set_collunit(notes = "my lake")
 }
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
+
+Simon Goring \email{goring@wisc.edu}
 }

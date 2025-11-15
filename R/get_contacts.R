@@ -1,8 +1,8 @@
-#' @title Get contact information for Neotoma contributors
+#' @title Get `contact` information for Neotoma contributors
+#' @name get_contacts
+#' @author Simon Goring \email{goring@wisc.edu}
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom methods new
-#' @description Uses the Neotoma API to search and access
-#'  information about individuals who have contributed to
-#'  the data in the Neotoma Paleoecology Database
 #' @param x integer A contact ID
 #' @param ...
 #' (\code{contactname})  A full or partial name for an individual
@@ -10,90 +10,109 @@
 #' (\code{familyname})  The full or partial last name for an
 #'  individual contributor to the database.
 #' (\code{status}) The current status of the contributor
-#'  (\code{active} or \code{retired})
+#' (\code{active} or \code{retired})
 #' @returns `contacts` object
+#' @description Uses the Neotoma API to search and access
+#'  information about individuals who have contributed to
+#'  the data in the Neotoma Paleoecology Database
+#' @md
 #' @export
 get_contacts <- function(x = NA, ...) {
-  UseMethod("get_contacts")
+  if (missing(x)) {
+    UseMethod("get_contacts", "default")
+  } else {
+    UseMethod("get_contacts", x)
+  }
 }
 
-#' @title Get contact information for Neotoma contributors
-#' @description Uses the Neotoma API to search and access
-#'  information about individuals who have contributed to
-#'  the data in the Neotoma Paleoecology Database
-#' @param x integer A contact ID
-#' @param ...
-#' (\code{contactname})  A full or partial name for an individual
-#'  contributor to the database.
-#' (\code{familyname})  The full or partial last name for an
-#'  individual contributor to the database.
-#' (\code{status}) The current status of the contributor
-#'  (\code{active} or \code{retired})
-#' @returns `contacts` object
-#' @export
+
+#' @rdname get_contacts
+#' @method get_contacts numeric
+#' @exportS3Method get_contacts numeric
 get_contacts.numeric <- function(x, ...) {
   if (length(x) > 0) {
     contactname <- paste0(x, collapse = ",")
   }
-  
-  baseURL <- paste0("data/contacts/", contactname) # nolint
-  result <- parseURL(baseURL) %>% cleanNULL() # nolint
-  contact <- map(result$data, function(x) {
-    x[is.null(x)] <- NA_character_
-    new("contact",
-        contactid = x$contactid,
-        familyname = as.character(x$lastname),
-        leadinginitials = NA_character_,
-        givennames = as.character(x$firstname),
-        suffix = NA_character_,
-        ORCID = NA_character_,
-        title = NA_character_,
-        institution = NA_character_,
-        email = as.character(x$email),
-        phone = NA_character_,
-        contactstatus = NA_character_,
-        fax = NA_character_,
-        url = as.character(x$url),
-        address = as.character(x$address),
-        notes = NA_character_) })
+  baseURL <- paste0("data/contacts/", contactname)
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
+  result <- result %>% cleanNULL()
+  contact <- map(result$data,
+                 function(x) {
+                   x[is.null(x)] <- NA_character_
+                   new("contact",
+                       contactid = use_na(x$contactid, "int"),
+                       familyname = use_na(x$familyname, "char"),
+                       leadinginitials = use_na(x$leadinginitials,
+                                                "char"),
+                       givennames = use_na(x$givennames, "char"),
+                       contactname = use_na(x$contactname, "char"),
+                       suffix = use_na(x$suffix, "char"),
+                       ORCID = use_na(x$ORCID, "char"),
+                       title = use_na(x$title, "char"),
+                       institution = use_na(x$institution, "char"),
+                       email = use_na(x$email, "char"),
+                       phone = use_na(x$phone, "char"),
+                       contactstatus = use_na(x$contactstatus,
+                                              "char"),
+                       fax = use_na(x$fax, "char"),
+                       url = use_na(x$url, "char"),
+                       address = use_na(x$address, "char"),
+                       notes = use_na(x$notes, "char"))
+                 })
   contacts <- new("contacts", contacts = contact)
   return(contacts)
 }
 
-#' @title Get contact information for Neotoma contributors
-#' @description Uses the Neotoma API to search and access
-#'  information about individuals who have contributed to
-#'  the data in the Neotoma Paleoecology Database
-#' @param x integer A contact ID
-#' @param ...
-#' (\code{contactname})  A full or partial name for an individual
-#'  contributor to the database.
-#' (\code{familyname})  The full or partial last name for an
-#'  individual contributor to the database.
-#' (\code{status}) The current status of the contributor
-#'  (\code{active} or \code{retired})
-#' @returns `contacts` object
-#' @export
+#' @rdname get_contacts
+#' @method get_contacts default
+#' @exportS3Method get_contacts default
 get_contacts.default <- function(x, ...) {
-  baseURL <- paste0("data/contacts") # nolint
-  result <- parseURL(baseURL, ...) %>% cleanNULL() #nolint
-  contact <- map(result$data$result, function(x) {
-    new("contact",
-        contactid = x$contactid,
-        familyname = as.character(x$familyname),
-        leadinginitials = NA_character_,
-        givennames = as.character(x$givennames),
-        suffix = NA_character_,
-        ORCID = NA_character_,
-        title = NA_character_,
-        institution = NA_character_,
-        email = as.character(x$email),
-        phone = NA_character_,
-        contactstatus = NA_character_,
-        fax = NA_character_,
-        url = as.character(x$url),
-        address = as.character(x$address),
-        notes = NA_character_) })
+  baseURL <- paste0("data/contacts")
+  result <- tryCatch(
+    parseURL(baseURL, ...),
+    error = function(e) {
+      message("API call failed: ", e$message)
+      NULL
+    }
+  )
+  params <- get_params("contacts")
+  cl <- as.list(match.call())
+  cl[[1]] <- NULL
+  cl <- lapply(cl, eval, envir = parent.frame())
+  if (!all(names(cl) %in% params)) {
+    warning("Some parameters seem invalid. 
+             The current accepted parameters are: ",
+            paste(unlist(params), collapse = ", "))
+  }
+  result <- result %>% cleanNULL()
+  contact <- map(result$data,
+                 function(x) {
+                   new("contact",
+                       contactid = use_na(x$contactid, "int"),
+                       familyname = use_na(x$familyname, "char"),
+                       leadinginitials = use_na(x$leadinginitials,
+                                                "char"),
+                       givennames = use_na(x$givennames, "char"),
+                       contactname = use_na(x$contactname, "char"),
+                       suffix = use_na(x$suffix, "char"),
+                       ORCID = use_na(x$ORCID, "char"),
+                       title = use_na(x$title, "char"),
+                       institution = use_na(x$institution, "char"),
+                       email = use_na(x$email, "char"),
+                       phone = use_na(x$phone, "char"),
+                       contactstatus = use_na(x$contactstatus,
+                                              "char"),
+                       fax = use_na(x$fax, "char"),
+                       url = use_na(x$url, "char"),
+                       address = use_na(x$address, "char"),
+                       notes = use_na(x$notes, "char"))
+                 })
   contacts <- new("contacts", contacts = contact)
   return(contacts)
 }

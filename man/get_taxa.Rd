@@ -2,12 +2,18 @@
 % Please edit documentation in R/get_taxa.R
 \name{get_taxa}
 \alias{get_taxa}
+\alias{get_taxa.numeric}
+\alias{get_taxa.default}
 \title{get_taxa}
 \usage{
 get_taxa(x = NA, ...)
+
+\method{get_taxa}{numeric}(x, ...)
+
+\method{get_taxa}{default}(...)
 }
 \arguments{
-\item{x}{string taxa name or names}
+\item{x}{A \code{taxon} ID to extract site information}
 
 \item{...}{accepted arguments, see details for more information.}
 }
@@ -15,5 +21,19 @@ get_taxa(x = NA, ...)
 A Neotoma2 sites object with datasets with the requested taxa.
 }
 \description{
-a sites object with the requested taxa.
+a \code{sites} object with sites that contain the requested \code{taxa.}
+}
+\details{
+The \code{get_taxa} function searches for a sites within Neotoma
+that contain the requested taxa.
+The \code{get_taxa} command wraps the Neotoma API`.
+The call itself accepts any one of the following
+parameters:
+\itemize{
+\item \code{taxonid}  The unique taxon ID (integer) in Neotoma. Can be passed as a
+vector of site IDs.
+}
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }

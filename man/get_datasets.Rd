@@ -2,9 +2,21 @@
 % Please edit documentation in R/get_datasets.R
 \name{get_datasets}
 \alias{get_datasets}
+\alias{get_datasets.numeric}
+\alias{get_datasets.default}
+\alias{get_datasets.sites}
+\alias{get_datasets.site}
 \title{get_datasets}
 \usage{
 get_datasets(x = NA, ...)
+
+\method{get_datasets}{numeric}(x, ...)
+
+\method{get_datasets}{default}(x, ...)
+
+\method{get_datasets}{sites}(x, ...)
+
+\method{get_datasets}{site}(x, ...)
 }
 \arguments{
 \item{x}{A single datasetid, or a vector of unique dataset ids.}
@@ -74,6 +86,8 @@ For the complete records, use \code{all_data=TRUE}
 }
 \examples{
 \donttest{
+random_sites <- get_sites(1)
+allds <- get_datasets(random_sites, limit=3)
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
 sites_12to25 <- get_datasets(altmin=12, altmax=25)
 # To find all datasets in Brazil
@@ -85,12 +99,6 @@ brazil <- '{"type": "Polygon",
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
 brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
-# To obtain the dataset metadata:
-datasets(brazil_datasets)
-# There is insufficient metadata at this point to obtain information
-# about taxa present at the site. We must use get_downloads() to
-# obtain the full set of sample information:
-# This fails: taxa(brazil_datasets)
 }
 }
 \author{

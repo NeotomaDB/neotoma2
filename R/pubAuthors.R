@@ -1,21 +1,20 @@
 #' @title Reformat API author list to Neotoma contacts.
+#' @author Simon Goring \email{goring@wisc.edu}
 #' @param x A list coming from the `author` element of
 #'  the Neotoma publicaiton API
 #' @importFrom purrr map
+#' @importFrom methods new
 #' @returns `author` object
 #' @noRd
-pubAuthors <- function(x) { # nolint
-
+pubAuthors <- function(x) {
+  x <- cleanNULL(x)
   result <- new("authors",
                 authors = map(x$author, function(y) {
-                  y[is.null(y)] <- NA_character_
-                  y[is.na(y)] <- NA_character_
                   new("author",
                       author = new("contact",
-                      familyname = testNull(y$familyname, NA_character_),
-                      givennames = testNull(y$givennames, NA_character_)),
+                      familyname = use_na(y$familyname, "char"),
+                      givennames = use_na(y$givennames, "char")),
                       order = y$order)
                 }))
-
   return(result)
 }

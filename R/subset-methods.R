@@ -2,20 +2,23 @@
 #' @param object A `sites` object
 #' @importFrom purrr map reduce
 #' @returns `collunits` from a `sites` object
+#' @md
 #' @export
 setMethod(f = "collunits",
           signature = "sites",
           definition = function(object) {
-            output <- purrr::map(object@sites, function(x) {
+            output <- map(object@sites, function(x) {
               x@collunits
             })
-            final <- purrr::reduce(output, c)
+            if (length(output) == 0) {
+              return(new("collunits", collunits = list()))
+            }
+            final <- reduce(output, c)
+            final <- clean(final)
             return(final)
           })
 
-#' @title Extract `collunits` from a `site` object.
-#' @param object A `site` object
-#' @returns `collunits` from a `site` object
+#' @rdname collunits
 #' @export
 setMethod(f = "collunits",
           signature = "site",
@@ -25,28 +28,25 @@ setMethod(f = "collunits",
             return(output)
           })
 
-#' @title Extract `datasets` from a `collunits` object.
-#' @param object A `collunits` object
+#' @title Extract `datasets` from a `sites` or `collunits` object.
 #' @importFrom purrr map reduce
-#' @returns `datasets` from a `collunits` object
+#' @param object A `sites` or`collunits` object
+#' @returns `datasets` object
 #' @export
 setMethod(f = "datasets",
           signature = "collunits",
           definition = function(object) {
-            result <- purrr::map(object@collunits,
+            result <- map(object@collunits,
               function(x) x@datasets)
             if (length(result) == 1) {
               out <- result[[1]]
             } else {
-              out <- purrr::reduce(result, c)
+              out <- reduce(result, c)
             }
             return(out)
           })
 
-#' @title Extract `datasets` from a `collunit` object.
-#' @param object A `collunit` object
-#' @importFrom purrr map
-#' @returns `datasets` from a `collunit` object
+#' @rdname datasets
 #' @export
 setMethod(f = "datasets",
           signature = "collunit",
@@ -55,39 +55,35 @@ setMethod(f = "datasets",
             return(result)
           })
 
-#' @title Extract `datasets` from a `sites` object.
-#' @param object A `sites` object
-#' @importFrom purrr map
-#' @returns `datasets` from a `sites` object
+#' @rdname datasets
 #' @export
 setMethod(f = "datasets",
           signature = "sites",
           definition = function(object) {
-            datasets(collunits(object))
+            clean(datasets(collunits(object)))
           })
 
-#' @title Extract `datasets` from a `site` object.
-#' @param object A `site` object
-#' @importFrom purrr map
-#' @returns `datasets` from a `site` object
+#' @rdname datasets
 #' @export
 setMethod(f = "datasets",
           signature = "site",
           definition = function(object) {
             cunits <- collunits(object)
-            result <- purrr::map(cunits@collunits,
+            result <- map(cunits@collunits,
               function(x) x@datasets)
             if (length(result) == 1) {
               out <- result[[1]]
             } else {
-              out <- purrr::reduce(result, c)
+              out <- reduce(result, c)
             }
             return(out)
           })
 
-#' @title Extract `chronologies` from a `collunit` object.
-#' @param x A `collunit` object
+#' @title Extract `chronologies` from a `site`s or `collunits` object.
+#' @importFrom purrr map
+#' @param x A `sites` or `collunits` object
 #' @returns `chronologies` from a `collunit` object
+#' @md
 #' @export
 setMethod(f = "chronologies",
           signature = "collunit",
@@ -105,9 +101,7 @@ setMethod(f = "chronologies",
             return(returner)
           })
 
-#' @title Extract `chronologies` from a `collunits` object.
-#' @param x A `collunits` object
-#' @returns `chronologies` from a `collunits` object
+#' @rdname chronologies
 #' @export
 setMethod(f = "chronologies",
           signature = "collunits",
@@ -115,13 +109,11 @@ setMethod(f = "chronologies",
             output <- map(x@collunits, function(y) {
               chronologies(y)
             })
-            output <- purrr::reduce(output, c)
+            output <- reduce(output, c)
             return(output)
           })
 
-#' @title Extract `chronologies` from a `site` object.
-#' @param x A `site` object
-#' @returns `chronologies` from a `site` object
+#' @rdname chronologies
 #' @export
 setMethod(f = "chronologies",
           signature = "site",
@@ -133,9 +125,7 @@ setMethod(f = "chronologies",
             return(output)
           })
 
-#' @title Extract `chronologies` from a `sites` object.
-#' @param x A `sites` object
-#' @returns `chronologies` from a `sites` object
+#' @rdname chronologies
 #' @export
 setMethod(f = "chronologies",
           signature = "sites",
@@ -143,6 +133,6 @@ setMethod(f = "chronologies",
             output <- map(x@sites, function(y) {
               chronologies(y)
             })
-            output <- purrr::reduce(output, c)
+            output <- reduce(output, c)
             return(output)
           })

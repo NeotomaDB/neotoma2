@@ -1,7 +1,10 @@
 #' @title set Site Information for Fossil Sites
-#' @import lubridate
-#' @importFrom methods new
-#' @importFrom methods slot<-
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @author Simon Goring \email{goring@wisc.edu}
+#' @importFrom methods is new slot<-
+#' @importFrom sf st_as_sf st_sfc
+#' @importFrom uuid UUIDgenerate
+#' @importFrom digest digest
 #' @param x object to be set as collunit
 #' @param collectionunitid collection unit identifier
 #' @param notes notes
@@ -16,12 +19,15 @@
 #' @param depositionalenvironment depositional environment
 #' @param datasets datasets that the collection unit has
 #' @param chronologies chronologies taken from the collection unit
-#' @param defaultchronology best chronology model identifier to 
+#' @param defaultchronology best chronology model identifier to
 #' be used with this collection unit
-#' @description Function to create new collection unit objects for personal analysis. 
+#' @param speleothems speleothems associated with the collection unit
+#' @returns `collunit` object
+#' @description Function to create new collection unit objects for
+#' personal analysis.
 #' The new object will not be uploaded to the database.
 #' @export
-#' @returns `collunit` object
+#' @md
 #' @examples {
 #' # Create a collunit
 #' my_collunit <- set_collunit(notes = "my lake")
@@ -40,14 +46,13 @@ set_collunit <- function(x = NA,
                          depositionalenvironment = NA_character_,
                          datasets = NULL,
                          chronologies = NULL,
-                         defaultchronology = NA_integer_) {
-
+                         defaultchronology = NA_integer_,
+                         speleothems = NULL) {
   function_call <- match.call()
-
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
     if (is.na(collectionunitid)) {
-      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      hash <- digest(UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
       x@collectionunitid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@collectionunitid <- collectionunitid
@@ -65,10 +70,10 @@ set_collunit <- function(x = NA,
     x@datasets <- datasets
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
-
+    x@speleothems <- speleothems
   } else {
     if (is(x, "collunit")) {
-      if(length(function_call)>2){
+      if (length(function_call) > 2) {
         for (i in 3:length(function_call)) {
           slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
         }

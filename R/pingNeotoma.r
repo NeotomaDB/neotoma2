@@ -13,14 +13,15 @@
 #' }
 #' @export
 pingNeotoma <- function(server = "neotoma") {
-    valid_local <- stringr::str_detect(server,
-        "(http?:////){0,1}localhost:\\d{1,5}$")
-    assertthat::assert_that(valid_local | (server %in% c("neotoma", "dev")),
-        msg = "The parameter `server` must be a valid localhost (e.g., localhost:3005), or `neotoma` or `dev`.")
-    server <- switch(server,
-        neotoma = "https://api.neotomadb.org",
-        dev = "https://api-dev.neotomadb.org",
-        server)
-    status <- httr::HEAD(server)
-    return(status)
+  valid_local <- str_detect(server,
+                            "(http?:////){0,1}localhost:\\d{1,5}$")
+  assert_that(valid_local | (server %in% c("neotoma", "dev")),
+              msg = "The parameter `server` must be a valid 
+                    localhost (e.g., localhost:3005), or `neotoma` or `dev`.")
+  server <- switch(server,
+                   neotoma = "https://api.neotomadb.org",
+                   dev = "https://api-dev.neotomadb.org",
+                   server)
+  status <- HEAD(server)
+  return(status)
 }

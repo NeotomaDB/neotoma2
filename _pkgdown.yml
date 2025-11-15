@@ -1,0 +1,13 @@
+navbar:
+  structure:
+    right: [home, reference, articles, workshops]
+  components:
+    external:
+      text: "Workshop Links"
+      menu:
+        - text: "JOSS Paper"
+          href: "https://joss.theoj.org/papers/10.21105/joss.05561"
+        - text: "Simple Workflow"
+          href: "https://open.neotomadb.org/Current_Workshop/simple_workflow.html"
+        - text: "Not So Simple Workflow"
+          href: "https://open.neotomadb.org/Current_Workshop/complex_workflow.html"

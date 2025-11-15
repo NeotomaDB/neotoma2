@@ -2,9 +2,21 @@
 % Please edit documentation in R/get_publications.R
 \name{get_publications}
 \alias{get_publications}
+\alias{get_publications.default}
+\alias{get_publications.numeric}
+\alias{get_publications.publication}
+\alias{get_publications.publications}
 \title{Get publication information for Neotoma records}
 \usage{
-get_publications(x = NA, ...)
+get_publications(x, ...)
+
+\method{get_publications}{default}(...)
+
+\method{get_publications}{numeric}(x, ...)
+
+\method{get_publications}{publication}(x, ...)
+
+\method{get_publications}{publications}(x, ...)
 }
 \arguments{
 \item{x}{integer A contact ID}
@@ -32,5 +44,20 @@ about publications associated with data in the Neotoma Paleoecology Database
 mammoth_papers <- get_publications(search="mammut") \%>\%
   as.data.frame()
 hist(as.numeric(mammoth_papers$year))
+}
+\donttest{
+# We want the paper identified in Neotoma as 666:
+get_publications(666)
+}
+\donttest{
+# Take a publication object and purposely degrade the metadata:
+bad_pub <- get_publications(666)
+# Note this only changes the reported year, not the citation string.
+bad_pub[[1]]@year <- "1923"
+bad_pub[[1]]@publicationid <- NA_integer_
+updated_pubs <- get_publications(bad_pub[[1]])
+attr(updated_pubs, "matches")
+# we see the proper citation in the record:
+updated_pubs <- attr(updated_pubs, "matches")[[3]]
 }
 }

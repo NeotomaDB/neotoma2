@@ -1,8 +1,8 @@
 #' @title set Sample Information
-#' @import lubridate
-#' @import sf
-#' @importFrom methods new
-#' @importFrom methods slot<-
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom uuid UUIDgenerate
+#' @importFrom digest digest
+#' @importFrom methods is new slot<-
 #' @param x Object to be set as a sample
 #' @param ages ages
 #' @param igsn IGSN character
@@ -14,15 +14,16 @@
 #' @param sampleanalyst Analyst's contact name
 #' @param analysisunitid Which analysis unit it is
 #' @param analysisunitname Analysis Unit's name
+#' @returns `sample` object
 #' @description Function to create new samples objects for analysis. 
 #' The new object will not be uploaded to the database.
 #' @export
-#' @returns `sample` object
+#' @md
 #' @examples {
 #' # Set an empty sample
 #' my_sample <- set_sample()
 #' }
-set_sample <- function(x=NA,
+set_sample <- function(x = NA,
                        ages = list(),
                        igsn = NA_character_,
                        datum = data.frame(),
@@ -33,13 +34,11 @@ set_sample <- function(x=NA,
                        sampleanalyst = list(),
                        analysisunitid = NA_integer_,
                        analysisunitname = NA_character_){
-  
   function_call <- match.call()
-  
   if (suppressWarnings(is.na(x))) {
     x <- new("sample")
     if (is.na(sampleid)) {
-      hash <- digest::digest(uuid::UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
+      hash <- digest(UUIDgenerate(), algo = "xxhash32", serialize = FALSE)
       x@sampleid <- as.integer(strtoi(substr(hash, 1, 7), base = 16L))
     } else {
       x@sampleid <- sampleid
@@ -55,7 +54,7 @@ set_sample <- function(x=NA,
     x@analysisunitname <- analysisunitname
   } else {
     if (is(x, "sample")) {
-      if(length(function_call)>2){
+      if (length(function_call) > 2) {
         for (i in 3:length(function_call)) {
           slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
         }

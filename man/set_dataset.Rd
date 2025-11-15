@@ -10,6 +10,7 @@ set_dataset(
   datasetname = NA_character_,
   database = NA_character_,
   doi = NA,
+  recdatecreated = as.Date(character(1)),
   datasettype = NA_character_,
   age_range_old = NA_integer_,
   age_range_young = NA_integer_,
@@ -30,6 +31,8 @@ set_dataset(
 \item{database}{dataset where the dataset came from}
 
 \item{doi}{DOI}
+
+\item{recdatecreated}{date the dataset was created}
 
 \item{datasettype}{type the dataset belongs to}
 
@@ -61,4 +64,7 @@ my_dataset <- set_dataset(database = "EPD",
                     datasettype = "pollen",
                     notes = "my lake")
 }
+}
+\author{
+Socorro Dominguez \email{dominguezvid@wisc.edu}
 }
