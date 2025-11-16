@@ -38,6 +38,8 @@ without spaces (e.g. \code{G.G.}).}
 \code{George Gaylord}). Initials with spaces are used if full
 given names are not known (e.g. \code{G. G}).}
 
+\item{contactname}{Full name of a person (e.g. \code{George Gaylord Simpson}).}
+
 \item{suffix}{Suffix of a person’s name (e.g. \code{Jr.}, \code{III}).}
 
 \item{ORCID}{A unique ORCID (see \url{https://orcid.org}).}

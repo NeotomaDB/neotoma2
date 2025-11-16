@@ -46,8 +46,8 @@
 #' @importFrom stringr str_detect
 #' @param .data A site, dataset, download, or data frame
 #' @param ... Additional arguments passed to `filter()`
-#' @param .by Grouping variables (for dplyr data.frames)
-#' @param .preserve Whether to preserve grouping (for dplyr data.frames)
+#' @param .by (only used for filtering `data.frame` objects)
+#' @param .preserve (only used for filtering `data.frame` objects)
 #' @returns filtered `sites` object
 #' @examples \donttest{
 #' # Download 10 sites, but only keep the sites that are close to sea level.
@@ -69,20 +69,21 @@
 #' }
 #' @md
 #' @export
-filter <- function(x, ...) {
+filter <- function(.data, ..., .by = NULL, .preserve = FALSE) {
   UseMethod("filter")
 }
 
 #' @rdname filter
 #' @exportS3Method filter NULL
-filter.NULL <- function(.data, ..., .by = NULL, .preserve = FALSE) {
+filter.NULL <- function(.data, ...) {
   warning("No sites to filter")
   return(NULL)
 }
 
 #' @rdname filter
 #' @exportS3Method filter sites
-filter.sites <- function(x, ...) {
+filter.sites <- function(.data, ...) {
+  x <- .data
   ellipsis <- as.list(substitute(list(...), environment()))[-1L][[1]] %>%
     as.character()
   sitecols <- c("sitename", "lat", "long", "altitude") %>%
@@ -105,8 +106,8 @@ filter.sites <- function(x, ...) {
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
-      rename(altitude = elev,
-             sitenotes = notes)
+      rename(altitude = .data$elev,
+             sitenotes = .data$notes)
   }
   if (collunitcols == TRUE) {
     ids <- ids %>%
@@ -144,6 +145,7 @@ filter.sites <- function(x, ...) {
   return(new("sites", sites = pared_ds))
 }
 
+#' This is a re-export of \code{dplyr::filter} for data frames.
 #' @rdname filter
 #' @exportS3Method filter data.frame
 filter.data.frame <- getS3method("filter",
