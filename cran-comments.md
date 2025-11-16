@@ -5,10 +5,6 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
-
 -----
 
 ## Upgrade 1.0.8
@@ -37,6 +33,10 @@ Worked on improving `get_taxa()` and `get_taxon()` functions. The first one work
 When API is down for whichever reason, instead of stopping, any `get_()` function will return `NULL` with a warning message. This will prevent violating **CRAN** policies when building vignettes or running examples if the API is not available.
 
 Maintainer's email updated.
+
+0 errors | 0 warnings | 1 note
+
+* This is a new release.
 
 -----
 

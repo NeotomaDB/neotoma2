@@ -27,7 +27,7 @@
 #'  message("Neotoma server not responding. Try again later.")
 #' })
 #' # We want the paper identified in Neotoma as 666:
-#' #' tryCatch({
+#' tryCatch({
 #' get_publications(666)
 #' }, error = function(e) {
 #' message("Neotoma server not responding. Try again later.")

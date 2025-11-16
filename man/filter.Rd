@@ -7,22 +7,22 @@
 \alias{filter.data.frame}
 \title{Apply a \code{filter} for Neotoma sites objects.}
 \usage{
-filter(x, ...)
+filter(.data, ..., .by = NULL, .preserve = FALSE)
 
-\method{filter}{`NULL`}(.data, ..., .by = NULL, .preserve = FALSE)
+\method{filter}{`NULL`}(.data, ...)
 
-\method{filter}{sites}(x, ...)
+\method{filter}{sites}(.data, ...)
 
 \method{filter}{data.frame}(.data, ..., .by = NULL, .preserve = FALSE)
 }
 \arguments{
-\item{...}{Additional arguments passed to \code{filter()}}
-
 \item{.data}{A site, dataset, download, or data frame}
 
-\item{.by}{Grouping variables (for dplyr data.frames)}
+\item{...}{Additional arguments passed to \code{filter()}}
 
-\item{.preserve}{Whether to preserve grouping (for dplyr data.frames)}
+\item{.by}{(only used for filtering \code{data.frame} objects)}
+
+\item{.preserve}{(only used for filtering \code{data.frame} objects)}
 }
 \value{
 filtered \code{sites} object

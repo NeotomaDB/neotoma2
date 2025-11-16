@@ -16,6 +16,7 @@ of particular interest:
 * `get_speleothems()`
 * `speleothems()`
 * `speleothemdetails()`
+They are still in beta stage, so please report any issues you may find.
 
 Upgraded `filter()` so that it is no longer needed to specify `dplyr::` or `neotoma2::` when using the function. `filter()` also works on `recdatecreated` and `DOI` fields.
 
