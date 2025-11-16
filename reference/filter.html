@@ -147,13 +147,13 @@ depositional environment.</p></li>
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class '`NULL`'</span></span>
-<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'sites'</span></span>
-<span><span class="fu">filter</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'data.frame'</span></span>
 <span><span class="fu">filter</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, .preserve <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -163,20 +163,20 @@ depositional environment.</p></li>
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code>filter()</code></p></dd>
-
-
-<dt id="arg--data">.data<a class="anchor" aria-label="anchor" href="#arg--data"></a></dt>
+<dl><dt id="arg--data">.data<a class="anchor" aria-label="anchor" href="#arg--data"></a></dt>
 <dd><p>A site, dataset, download, or data frame</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to <code>filter()</code></p></dd>
+
+
 <dt id="arg--by">.by<a class="anchor" aria-label="anchor" href="#arg--by"></a></dt>
-<dd><p>Grouping variables (for dplyr data.frames)</p></dd>
+<dd><p>(only used for filtering <code>data.frame</code> objects)</p></dd>
 
 
 <dt id="arg--preserve">.preserve<a class="anchor" aria-label="anchor" href="#arg--preserve"></a></dt>
-<dd><p>Whether to preserve grouping (for dplyr data.frames)</p></dd>
+<dd><p>(only used for filtering <code>data.frame</code> objects)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -193,13 +193,21 @@ depositional environment.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Download 10 sites, but only keep the sites that are close to sea level.</span></span></span>
-<span class="r-in"><span><span class="va">some_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Lake%"</span>, limit <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">site_subset</span> <span class="op">&lt;-</span> <span class="va">some_sites</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">filter</span><span class="op">(</span><span class="va">altitude</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="va">some_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Lake%"</span>, limit <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">site_subset</span> <span class="op">&lt;-</span> <span class="va">some_sites</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">filter</span><span class="op">(</span><span class="va">altitude</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Download 10 sites, get all associated datasets, but keep only</span></span></span>
 <span class="r-in"><span><span class="co"># sites/datasets that are of datasettype "pollen":</span></span></span>
-<span class="r-in"><span><span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="get_datasets.html">get_datasets</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pollen_subset</span> <span class="op">&lt;-</span> <span class="va">sites</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">filter</span><span class="op">(</span><span class="va">datasettype</span> <span class="op">==</span> <span class="st">"pollen"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_sites.html">get_sites</a></span><span class="op">(</span>limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="get_datasets.html">get_datasets</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">pollen_subset</span> <span class="op">&lt;-</span> <span class="va">sites</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">filter</span><span class="op">(</span><span class="va">datasettype</span> <span class="op">==</span> <span class="st">"pollen"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

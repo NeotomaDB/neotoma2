@@ -116,43 +116,39 @@ with a publication.
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># How old are the papers in Neotoma that include the term "mammut"?</span></span></span>
-<span class="r-in"><span><span class="va">mammoth_papers</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span>search<span class="op">=</span><span class="st">"mammut"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">mammoth_papers</span><span class="op">$</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">mammoth_papers</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span>search<span class="op">=</span><span class="st">"mammut"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">mammoth_papers</span><span class="op">$</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="get_publications-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># We want the paper identified in Neotoma as 666:</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">get_publications</span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1           666</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                   citation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Nichols, H. 1967. Pollen diagrams from sub-arctic Central Canada. Science 155:1665-1668.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Take a publication object and purposely degrade the metadata:</span></span></span>
-<span class="r-in"><span><span class="va">bad_pub</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Note this only changes the reported year, not the citation string.</span></span></span>
-<span class="r-in"><span><span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="st">"1923"</span></span></span>
-<span class="r-in"><span><span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">publicationid</span> <span class="op">&lt;-</span> <span class="cn">NA_integer_</span></span></span>
-<span class="r-in"><span><span class="va">updated_pubs</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span><span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">updated_pubs</span>, <span class="st">"matches"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   publicationid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1           666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2          8023</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3           221</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                     citation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   Nichols, H. 1967. Pollen diagrams from sub-arctic Central Canada. Science 155:1665-1668.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                                                                           Shay, C.T. 1967.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Richard, P.J.H. 1971. Two pollens diagrams from the Québec city area, Canada. Pollen et Spores 13:523-559.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    doi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 &lt;NA&gt;</span>
-<span class="r-in"><span><span class="co"># we see the proper citation in the record:</span></span></span>
-<span class="r-in"><span><span class="va">updated_pubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">updated_pubs</span>, <span class="st">"matches"</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">bad_pub</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span><span class="fl">666</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Note this only changes the reported year, not the citation string.</span></span></span>
+<span class="r-in"><span>  <span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="st">"1923"</span></span></span>
+<span class="r-in"><span>  <span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">publicationid</span> <span class="op">&lt;-</span> <span class="cn">NA_integer_</span></span></span>
+<span class="r-in"><span>  <span class="va">updated_pubs</span> <span class="op">&lt;-</span> <span class="fu">get_publications</span><span class="op">(</span><span class="va">bad_pub</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">updated_pubs</span>, <span class="st">"matches"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># we see the proper citation in the record:</span></span></span>
+<span class="r-in"><span>  <span class="va">updated_pubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">updated_pubs</span>, <span class="st">"matches"</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

@@ -164,10 +164,18 @@ and datasets located at that site.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co">## Find sites with a min altitude of 12m and a max altitude of 25m</span></span></span>
-<span class="r-in"><span><span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">12</span>, altmax<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">12</span>, altmax<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## Return all sites, using a minimum altitude of 2500m (returns &gt;500 sites):</span></span></span>
-<span class="r-in"><span><span class="va">sites_2500</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">2500</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co">## To find sites in Brazil</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">sites_2500</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">2500</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co">## To find sites in Brazil</span></span></span>
 <span class="r-in"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span></span>
 <span class="r-in"><span><span class="st">"coordinates": [[</span></span></span>
 <span class="r-in"><span><span class="st"> [-73.125, -9.102096738726443],</span></span></span>
@@ -175,6 +183,7 @@ and datasets located at that site.</p></li>
 <span class="r-in"><span><span class="st"> [-36.5625,-7.710991655433217],</span></span></span>
 <span class="r-in"><span><span class="st"> [-68.203125,13.923403897723347],</span></span></span>
 <span class="r-in"><span><span class="st"> [-73.125,-9.102096738726443]]]}'</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">brazil_sites</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>loc <span class="op">=</span> <span class="va">brazil</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Finding all sites with Liliaceae pollen in 1000 year bins:</span></span></span>
 <span class="r-in"><span><span class="va">lilysites</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -184,7 +193,11 @@ and datasets located at that site.</p></li>
 <span class="r-in"><span>                    ageold <span class="op">=</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">500</span>,</span></span>
 <span class="r-in"><span>                    all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">lilysites</span> <span class="op">&lt;-</span> <span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="va">lilysites</span>, <span class="fu"><a href="length.html">length</a></span><span class="op">(</span><span class="va">lily</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>

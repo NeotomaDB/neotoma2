@@ -97,7 +97,8 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>The <code>get_speleothems()</code> command wraps the Neotoma API
+    <p>Experimental function: API and behavior may change.
+The <code>get_speleothems()</code> command wraps the Neotoma API
 (<a href="https://api.neotomadb.org" class="external-link">api.neotomadb.org</a>) call for <code>speleothems</code>.
 The call itself uses a SQL query which accepts any one of the following
 parameters:</p><ul><li><p><code>x</code>  The unique dataset ID (integer) in Neotoma. Can be passed as a
@@ -113,7 +114,11 @@ vector of dataset IDs.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co">## Find speleothems by numeric datasetid:</span></span></span>
-<span class="r-in"><span><span class="va">speleo</span> <span class="op">&lt;-</span> <span class="fu">get_speleothems</span><span class="op">(</span><span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">speleo</span> <span class="op">&lt;-</span> <span class="fu">get_speleothems</span><span class="op">(</span><span class="fu"><a href="c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Neotoma server not responding. Try again later."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
