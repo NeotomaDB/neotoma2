@@ -55,7 +55,11 @@ Obtain one of the elements within a \code{sites},
 }
 \examples{
 \donttest{
-some_site <- get_sites(sitename = "Site\%", limit=3)
-some_site[[2]]
+tryCatch({
+  some_site <- get_sites(sitename = "Site\%", limit=3)
+  some_site[[2]]
+}, error = function(e) {
+  message("Neotoma server not responding. Try again later.")
+})
 }
 }

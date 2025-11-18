@@ -11,7 +11,9 @@ Open up the Neotoma R homepage.
 }
 \examples{
 \donttest{
+if (interactive()) {
  get_documentation()
+}
 }
 }
 \author{

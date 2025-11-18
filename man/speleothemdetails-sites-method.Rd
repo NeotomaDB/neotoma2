@@ -14,14 +14,19 @@
 }
 \description{
 Obtain elements on the speleothems level
+Experimental function: API and behavior may change.
 }
 \examples{
 \donttest{
+tryCatch({
 kesang <- get_sites(sitename = "Kesang cave") \%>\%
   get_datasets() \%>\%
   filter(datasettype == "pollen") \%>\%
   get_speleothems()
 sp <- speleothemdetails(kesang)
+}, error = function(e) {
+message("Neotoma server not responding. Try again later.")
+})
 }
 }
 \author{

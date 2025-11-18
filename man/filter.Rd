@@ -7,22 +7,22 @@
 \alias{filter.data.frame}
 \title{Apply a \code{filter} for Neotoma sites objects.}
 \usage{
-filter(x, ...)
+filter(.data, ..., .by = NULL, .preserve = FALSE)
 
-\method{filter}{`NULL`}(.data, ..., .by = NULL, .preserve = FALSE)
+\method{filter}{`NULL`}(.data, ...)
 
-\method{filter}{sites}(x, ...)
+\method{filter}{sites}(.data, ...)
 
 \method{filter}{data.frame}(.data, ..., .by = NULL, .preserve = FALSE)
 }
 \arguments{
-\item{...}{Additional arguments passed to \code{filter()}}
-
 \item{.data}{A site, dataset, download, or data frame}
 
-\item{.by}{Grouping variables (for dplyr data.frames)}
+\item{...}{Additional arguments passed to \code{filter()}}
 
-\item{.preserve}{Whether to preserve grouping (for dplyr data.frames)}
+\item{.by}{(only used for filtering \code{data.frame} objects)}
+
+\item{.preserve}{(only used for filtering \code{data.frame} objects)}
 }
 \value{
 filtered \code{sites} object
@@ -73,13 +73,21 @@ depositional environment.
 \examples{
 \donttest{
 # Download 10 sites, but only keep the sites that are close to sea level.
-some_sites <- get_sites(sitename = "Lake\%", limit = 3)
-site_subset <- some_sites \%>\% filter(altitude < 100)
+tryCatch({
+ some_sites <- get_sites(sitename = "Lake\%", limit = 3)
+  site_subset <- some_sites \%>\% filter(altitude < 100)
+}, error = function(e) {
+  message("Neotoma server not responding. Try again later.")
+})
 # Download 10 sites, get all associated datasets, but keep only
 # sites/datasets that are of datasettype "pollen":
-sites <- get_sites(limit = 10) \%>\%
-  get_datasets()
-pollen_subset <- sites \%>\% filter(datasettype == "pollen")
+tryCatch({
+  sites <- get_sites(limit = 10) \%>\%
+    get_datasets()
+  pollen_subset <- sites \%>\% filter(datasettype == "pollen")
+}, error = function(e) {
+  message("Neotoma server not responding. Try again later.") 
+})
 }
 }
 \author{

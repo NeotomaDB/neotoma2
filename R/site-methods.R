@@ -49,8 +49,12 @@ setMethod(f = "show",
 #' `collectionunits`, `datasets`, etc... Neotoma objects.
 #' @returns sliced `site` object
 #' @examples \donttest{
-#' some_site <- get_sites(sitename = "Site%", limit=3)
-#' some_site[[2]]
+#' tryCatch({
+#'   some_site <- get_sites(sitename = "Site%", limit=3)
+#'   some_site[[2]]
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases [[,sites,numeric-method
 #' @exportMethod [[
@@ -316,6 +320,7 @@ setMethod(f = "coordinates",
           })
 
 #' @title Plot site coordinates using a basic plot.
+#' @name plot
 #' @param x sites object
 #' @param y *Ignored.*
 #' @param ... Additional parameters associated with the call.
@@ -330,7 +335,7 @@ setMethod(f = "plot",
           })
 
 #' @aliases plot,site-method
-#' @exportMethod plot
+#' @rdname plot
 setMethod(f = "plot",
           signature = "site",
           definition = function(x, y, ...) {
@@ -386,10 +391,10 @@ setMethod(f = "summary",
                          collunits = collunits)
             }) %>%
               bind_rows() %>%
-              rename(collunit_name = collunits.collectionunit,
-                     n_chronologies = collunits.chronologies,
-                     n_datasets = collunits.datasets,
-                     dataset_types = collunits.types)
+              rename(collunit_name = .data$collunits.collectionunit,
+                     n_chronologies = .data$collunits.chronologies,
+                     n_datasets = .data$collunits.datasets,
+                     dataset_types = .data$collunits.types)
             return(datasettype)
           })
 
@@ -403,8 +408,12 @@ setMethod(f = "summary",
 #' @importFrom dplyr mutate group_by row_number
 #' @returns `data.frame` object with DOIs information.
 #' @examples {
+#' tryCatch({
 #' ds <- get_datasets(1)
 #' doi(ds)
+#' }, error = function(e) {
+#' message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases doi,sites-method
 #' @exportMethod doi
@@ -452,8 +461,12 @@ setMethod(f = "doi",
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @returns `data.frame` object with citation information.
 #' @examples {
+#' tryCatch({
 #' ds <- get_datasets(1)
 #' cite_data(ds)
+#' }, error = function(e) {
+#' message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @aliases cite_data,sites-method
 #' @exportMethod cite_data
@@ -507,10 +520,10 @@ setMethod(f = "cite_data",
               full_join(ds_df, by = "datasetid") %>%
               select(.data$siteid, .data$sitename, .data$collunitid,
                      .data$datasetid, .data$datasettype, .data$database,
-                     .data$doi, pi_list) %>%
+                     .data$doi, .data$pi_list) %>%
               group_by(.data$siteid, .data$collunitid, .data$datasetid) %>%
               arrange(.data$doi) %>%
-              filter(row_number() == 1) %>%
+              dplyr::filter(row_number() == 1) %>%
               as.data.frame() %>%
               mutate(citation = sprintf(strn, .data$pi_list,
                                         .data$sitename, .data$datasettype,

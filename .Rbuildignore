@@ -5,6 +5,7 @@
 ^\.github$
 
 ^codecov\.yml$
+^_pkgdown\.yml$
 checkout\.txt$
 lintoutput\.txt$
 ^LICENSE\.md$

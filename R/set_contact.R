@@ -13,9 +13,10 @@
 #' @param familyname Family or surname name of a person.
 #' @param leadinginitials Leading initials for given or forenames
 #' without spaces (e.g. \code{G.G.}).
-#' @param givennames Given or forenames of a person (e.g. 
+#' @param givennames Given or forenames of a person (e.g.
 #' \code{George Gaylord}). Initials with spaces are used if full
 #' given names are not known (e.g. \code{G. G}).
+#' @param contactname Full name of a person (e.g. \code{George Gaylord Simpson}).
 #' @param suffix Suffix of a person’s name (e.g. \code{Jr.}, \code{III}).
 #' @param ORCID A unique ORCID (see \url{https://orcid.org}).
 #' @param title A person’s title (e.g. \code{Dr.}, \code{Prof.},

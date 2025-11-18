@@ -24,6 +24,7 @@ get_speleothems(x = NA, ...)
 get_speleothems
 }
 \details{
+Experimental function: API and behavior may change.
 The \code{get_speleothems()} command wraps the Neotoma API
 (\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{speleothems}.
 The call itself uses a SQL query which accepts any one of the following
@@ -37,7 +38,11 @@ vector of dataset IDs.
 \examples{
 {
 ## Find speleothems by numeric datasetid:
-speleo <- get_speleothems(c(2,5))
+tryCatch({
+  speleo <- get_speleothems(c(2,5))
+}, error = function(e) {
+  message("Neotoma server not responding. Try again later.")
+})
 }
 }
 \author{

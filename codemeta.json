@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/NeotomaDB/neotoma2",
   "issueTracker": "https://github.com/NeotomaDB/neotoma2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -25,7 +25,7 @@
       "@type": "Person",
       "givenName": "Dominguez Vidana",
       "familyName": "Socorro",
-      "email": "s.dominguez@ht-data.com",
+      "email": "dominguezvid@wisc.edu",
       "@id": "https://orcid.org/0000-0002-7926-4935"
     },
     {
@@ -41,7 +41,7 @@
       "@type": "Person",
       "givenName": "Dominguez Vidana",
       "familyName": "Socorro",
-      "email": "s.dominguez@ht-data.com",
+      "email": "dominguezvid@wisc.edu",
       "@id": "https://orcid.org/0000-0002-7926-4935"
     }
   ],
@@ -206,18 +206,6 @@
     },
     "7": {
       "@type": "SoftwareApplication",
-      "identifier": "lubridate",
-      "name": "lubridate",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=lubridate"
-    },
-    "8": {
-      "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
       "provider": {
@@ -228,7 +216,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=httr"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -240,12 +228,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
@@ -257,19 +245,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
-    "12": {
-      "@type": "SoftwareApplication",
-      "identifier": "gtools",
-      "name": "gtools",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=gtools"
-    },
-    "13": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
@@ -281,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=leaflet"
     },
-    "14": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "assertthat",
       "name": "assertthat",
@@ -293,7 +269,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=assertthat"
     },
-    "15": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
@@ -305,7 +281,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
-    "16": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "progress",
       "name": "progress",
@@ -317,7 +293,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=progress"
     },
-    "17": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "uuid",
       "name": "uuid",
@@ -329,12 +305,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=uuid"
     },
-    "18": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "19": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
@@ -348,7 +324,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "8071.224KB",
+  "fileSize": "7778.874KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -384,7 +360,7 @@
       }
     }
   ],
-  "releaseNotes": "https://github.com/NeotomaDB/neotoma2/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/NeotomaDB/neotoma2/blob/main/NEWS.md",
   "readme": "https://github.com/NeotomaDB/neotoma2/blob/production/README.md",
   "contIntegration": "https://app.codecov.io/gh/NeotomaDB/neotoma2?branch=production",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental",

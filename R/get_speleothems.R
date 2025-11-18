@@ -50,6 +50,7 @@ speleo_helper <- function(sites) {
 #' @param ... accepted arguments
 #' @returns `sites` object with speleothem data
 #' @details
+#' Experimental function: API and behavior may change.
 #' The `get_speleothems()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `speleothems`.
 #' The call itself uses a SQL query which accepts any one of the following
@@ -59,7 +60,11 @@ speleo_helper <- function(sites) {
 #'  * `sites`  A `sites` R object.
 #' @examples {
 #' ## Find speleothems by numeric datasetid:
-#' speleo <- get_speleothems(c(2,5))
+#' tryCatch({
+#'   speleo <- get_speleothems(c(2,5))
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export

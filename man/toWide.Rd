@@ -41,6 +41,7 @@ samples grouped by variablename and depth/age.
 }
 \examples{
 \donttest{
+tryCatch({
 fc_sites <- neotoma2::get_datasets(limit=5, datasettype = "vertebrate fauna")
 fc_ds <- fc_sites \%>\%
    neotoma2::get_downloads()
@@ -48,6 +49,9 @@ fc_dl1 <- fc_dl[[1]]
 fc_smp <- samples(fc_dl1)
 toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'),
        elementtypes='bone/tooth', unit='present/absent')
+}, error = function(e) {
+message("Neotoma server not responding. Try again later.")
+})
 }
 }
 \author{

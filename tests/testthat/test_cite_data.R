@@ -16,7 +16,7 @@ test_that("cite_data() returns correct DOIs for each dataset", {
   st <- get_datasets(c(24, 100))
   citation <- cite_data(st)
   cit24 <- citation %>% 
-    filter(datasetid == 24)
+    dplyr::filter(datasetid == 24)
   cit24 <- cit24$citation
   doi24 <- st[[1]]@collunits[[1]]@datasets[[1]]@doi %>% unlist()
   # expect that doi is in citation string

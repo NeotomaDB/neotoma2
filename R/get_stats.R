@@ -22,7 +22,11 @@
 #' per dataset type per month). Default is \code{dsdbmonth}.
 #' @returns `data.frame` with summary statistics
 #' @examples \donttest{
+#' tryCatch({
 #' last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
+#' }, error = function(e) {
+#'  message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export

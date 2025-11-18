@@ -17,9 +17,13 @@
 #' So the site is gathered, and the datasets are now part of an
 #' array of datasets.
 #' @examples \donttest{
-#' alex <- get_sites(sitename = "Alex%")
-#' alex2 <- get_sites(24)
-#' c <- c(alex, alex2) # cleaned internally
+#' tryCatch({
+#'   alex <- get_sites(sitename = "Alex%")
+#'   alex2 <- get_sites(24)
+#'   c <- c(alex, alex2) #uncleaned
+#' }, error = function(e) {
+#'   message("Neotoma server not responding. Try again later.")
+#' })
 #' }
 #' @md
 #' @export
@@ -36,14 +40,14 @@ clean.sites <- function(x, verbose = TRUE, ...) {
   non_dupes <- siteids[!duplicated(siteids) & !duplicated(siteids, fromLast = TRUE)]
   if (length(matched) > 0) {
     inter <- intersect(x$siteid, matched)
-    clean_sites <- x %>% neotoma2::filter(!(siteid %in% inter))
-    messy_sites <- x %>% neotoma2::filter((siteid %in% inter))
+    clean_sites <- x %>% neotoma2::filter(!(.data$siteid %in% inter))
+    messy_sites <- x %>% neotoma2::filter((.data$siteid %in% inter))
     pb <- progress_bar$new(total = length(matched))
     for (i in inter) {
       if (verbose == TRUE) {
         pb$tick()
       }
-      messy_site <- neotoma2::filter(messy_sites, siteid == i)
+      messy_site <- neotoma2::filter(messy_sites, .data$siteid == i)
       messy_cus <- clean(collunits(messy_site))
       new_site <- messy_site[1]
       new_site@sites[[1]]@collunits <- messy_cus
