@@ -114,6 +114,11 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
   } else {
     all_data <- TRUE
   }
-  output <- get_downloads(x = ids, all_data = all_data, ...)
+  
+  dots <- list(...)
+  if ("all_data" %in% names(dots)) {
+    dots$all_data <- NULL
+  }
+  output <- get_downloads(x = ids, all_data = all_data)
   return(output)
 }

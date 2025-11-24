@@ -54,3 +54,21 @@ test_that("Faunmap dataset", {
   mydataset <- get_downloads(7032)
   testthat::expect_is(mydataset, "sites")
 })
+
+test_that("get_downloads with or without all_data works.", {
+            skip_on_cran()
+  uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
+  uk_datasets <- get_datasets(
+    loc = uk_bbox_geojson,
+    datasettype = 'pollen',
+    limit=5
+  )
+  uk_dl <- get_downloads(uk_datasets, all_data=TRUE)
+  uk_dl2 <- get_downloads(uk_datasets)
+  testthat::expect_equal(nrow(as.data.frame(datasets(uk_dl))), 
+                         nrow(as.data.frame(datasets(uk_dl2))))
+  # expect no error
+  testthat::expect_error(get_downloads(uk_datasets, all_data=TRUE), NA)
+  testthat::expect_error(get_downloads(uk_datasets, all_data=FALSE), NA)
+  testthat::expect_error(get_downloads(uk_datasets), NA)
+          })

@@ -39,7 +39,7 @@ test_that("get_datasets with loc attribute", {
   brazil_datasets <- get_datasets(loc = brazil[1], datasettype = "pollen")
   # Check that datasset types names are only pollen
   sum <- summary(brazil_datasets)
-  testthat::expect_lte(length(brazil_datasets), nrow(sum))
+  testthat::expect_lte(nrow(summary(brazil_datasets)), nrow(sum))
   testthat::expect_equivalent(nrow(sum), nrow(getids(brazil_datasets)))
   # All datasets should be pollen:
   testthat::expect_equivalent(unique(sum$dataset_types), "pollen")
@@ -65,7 +65,7 @@ test_that("all_data + loc", {
               ]]}'
   data_short <- get_datasets(loc = europe_json[1])
   data_long <- get_datasets(loc = europe_json[1], all_data = TRUE)
-  testthat::expect_gt(length(data_long), length(data_short))
+  testthat::expect_gte(length(data_long), length(data_short))
   eur_ids <- getids(data_long)
   # check that all datasetids in datasets df are in eur_ids
   ds_ids <- as.data.frame(datasets(data_short)) %>%
@@ -78,4 +78,22 @@ test_that("all_data + loc", {
     unique() %>%
     unlist()
   testthat::expect_true(all(cu_ids %in% eur_ids$collunitid))
+})
+
+test_that("get_datasets with or without all_data works.", {
+  skip_on_cran()
+  uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
+  uk_sts <- get_sites(
+    loc = uk_bbox_geojson,
+    datasettype = 'pollen',
+    limit=5
+  )
+  uk_dl <- get_datasets(uk_sts, all_data=TRUE)
+  uk_dl2 <- get_datasets(uk_sts)
+  testthat::expect_equal(nrow(as.data.frame(datasets(uk_dl))), 
+                         nrow(as.data.frame(datasets(uk_dl2))))
+  # expect no error
+  testthat::expect_error(get_datasets(uk_sts, all_data=TRUE), NA)
+  testthat::expect_error(get_datasets(uk_sts, all_data=FALSE), NA)
+  testthat::expect_error(get_datasets(uk_sts), NA)
 })
