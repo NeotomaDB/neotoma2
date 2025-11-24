@@ -75,3 +75,15 @@ for (i in datasetids) {
                      testthat::expect_false(is(counts, "warning"))
                    })
 }
+
+test_that("Samples of all sites has the same nrow as samples of each site combined", {
+  skip_on_cran()
+  si <- get_sites(limit=3)
+  dl <- get_downloads(si)
+  df1 <- nrow(samples(dl[[1]]))
+  df2 <- nrow(samples(dl[[2]]))
+  df3 <- nrow(samples(dl[[3]]))
+  
+  all_df <- nrow(samples(dl))
+  testthat::expect_equal(all_df, df1 + df2 + df3)
+})

@@ -20,9 +20,9 @@ setMethod(f = "samples",
   signature = "sites",
   definition = function(x) {
     output <- map(x@sites, function(y) samples(y)) %>%
-      bind_rows()  %>%
+      bind_rows() # %>%
       # Handle NAs to allow distinct to work properly
-      distinct(.data$sampleid, .keep_all = TRUE)
+      #distinct(.data$sampleid, .keep_all = TRUE)
     if (nrow(output) == 0) {
       warnsite <- sprintf("No assigned samples. Did you run get_downloads()?")
       warning(warnsite)
