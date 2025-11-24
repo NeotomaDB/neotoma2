@@ -3,12 +3,13 @@
 \name{plot}
 \alias{plot}
 \alias{plot,sites-method}
+\alias{plot,site,ANY-method}
 \alias{plot,site-method}
 \title{Plot site coordinates using a basic plot.}
 \usage{
-\S4method{plot}{sites}(x, y, ...)
+\S4method{plot}{sites,ANY}(x, y, ...)
 
-\S4method{plot}{site}(x, y, ...)
+\S4method{plot}{site,ANY}(x, y, ...)
 }
 \arguments{
 \item{x}{sites object}

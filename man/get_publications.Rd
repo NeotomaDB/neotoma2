@@ -6,9 +6,10 @@
 \alias{get_publications.numeric}
 \alias{get_publications.publication}
 \alias{get_publications.publications}
+\alias{get_publications.sites}
 \title{Get publication information for Neotoma records}
 \usage{
-get_publications(x, ...)
+get_publications(x = NA, ...)
 
 \method{get_publications}{default}(...)
 
@@ -17,6 +18,8 @@ get_publications(x, ...)
 \method{get_publications}{publication}(x, ...)
 
 \method{get_publications}{publications}(x, ...)
+
+\method{get_publications}{sites}(...)
 }
 \arguments{
 \item{x}{integer A contact ID}

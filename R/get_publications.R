@@ -48,8 +48,12 @@
 #' }
 #' @md
 #' @export
-get_publications <- function(x, ...) {
-  UseMethod("get_publications")
+get_publications <- function(x = NA, ...) {
+  if (missing(x)) {
+    UseMethod("get_publications", "default")
+  } else {
+    UseMethod("get_publications", x)
+  }
 }
 
 #' @rdname get_publications
@@ -178,4 +182,17 @@ get_publications.publications <- function(x, ...) {
     }
   }
   return(x)
+}
+
+#' @rdname get_publications
+#' @export
+get_publications.sites <- function(x, ...) {
+  ds_ids <- getids(x)$datasetid %>%
+    unique() %>%
+    unlist() %>%
+    as.numeric()
+  l <- nrow(ds_ids)
+  ds_ids <- paste0(ds_ids, collapse = ",")
+  output <- get_publications(datasetid = ds_ids, limit=l)
+  return(output)
 }
