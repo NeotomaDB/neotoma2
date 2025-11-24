@@ -6,6 +6,7 @@
 \alias{get_datasets.default}
 \alias{get_datasets.sites}
 \alias{get_datasets.site}
+\alias{get_datasets.NULL}
 \title{get_datasets}
 \usage{
 get_datasets(x = NA, ...)
@@ -17,6 +18,8 @@ get_datasets(x = NA, ...)
 \method{get_datasets}{sites}(x, ...)
 
 \method{get_datasets}{site}(x, ...)
+
+\method{get_datasets}{`NULL`}(x, ...)
 }
 \arguments{
 \item{x}{A single datasetid, or a vector of unique dataset ids.}

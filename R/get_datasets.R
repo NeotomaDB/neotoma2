@@ -206,12 +206,17 @@ get_datasets.site <- function(x, ...) {
   } else {
     all_data <- TRUE
   }
-  
   dots <- list(...)
   if ("all_data" %in% names(dots)) {
     dots$all_data <- NULL
   }
-  
   output <- get_datasets(dataset_list, all_data = all_data)
   return(output)
+}
+
+#' @rdname get_datasets
+#' @exportS3Method get_datasets NULL
+get_datasets.NULL <- function(x, ...) {
+  message("Input is NULL, returning NULL")
+  return(NULL)
 }

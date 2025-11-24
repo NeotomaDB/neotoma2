@@ -4,6 +4,7 @@
 \alias{get_sites}
 \alias{get_sites.numeric}
 \alias{get_sites.default}
+\alias{get_sites.NULL}
 \title{get_sites}
 \usage{
 get_sites(x = NA, ...)
@@ -11,6 +12,8 @@ get_sites(x = NA, ...)
 \method{get_sites}{numeric}(x, ...)
 
 \method{get_sites}{default}(...)
+
+\method{get_sites}{`NULL`}(x, ...)
 }
 \arguments{
 \item{x}{Use a single integer or vector of integers representing

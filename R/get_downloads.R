@@ -72,8 +72,8 @@
 #' }
 #' @md
 #' @export
-get_downloads <- function(x, verbose = TRUE, ...) {
-  UseMethod("get_downloads")
+get_downloads <- function(x = NA, ...) {
+  UseMethod("get_downloads", x)
 }
 
 #' @rdname get_downloads
@@ -85,9 +85,13 @@ get_downloads.numeric <- function(x, ...) {
   baseURL <- paste0("data/downloads?datasetid=", dataset)
   result <- tryCatch(
     parseURL(baseURL, ...),
-    error = function(e) {
-      stop("API call failed: ", e$message)
-      NULL
+    error = function(e1) {
+      tryCatch(
+        parseURL(baseURL),
+        error = function(e2) {
+          stop("API call failed: ", e2$message)
+        }
+      )
     }
   )
   if (!is.null(result[2]$data) || (length(result[2]$data) > 0)) {
@@ -101,24 +105,16 @@ get_downloads.numeric <- function(x, ...) {
 #' @rdname get_downloads
 #' @exportS3Method get_downloads sites
 get_downloads.sites <- function(x, verbose = TRUE, ...) {
-  ids <- getids(x)
+  ids <- getids(x)$datasetid
   cl <- as.list(match.call())
   cl[[1]] <- NULL
-  ids <- ids %>%
-    select(.data$datasetid) %>%
-    unique() %>%
-    unlist() %>%
-    as.numeric()
-  if ("all_data" %in% cl) {
-    all_data <- cl$all_data
-  } else {
-    all_data <- TRUE
-  }
-  
-  dots <- list(...)
-  if ("all_data" %in% names(dots)) {
-    dots$all_data <- NULL
-  }
-  output <- get_downloads(x = ids, all_data = all_data)
+  output <- get_downloads(x = ids)
   return(output)
+}
+
+#' @rdname get_downloads
+#' @exportS3Method get_downloads NULL
+get_downloads.NULL <- function(x, ...) {
+  message("Input is NULL, returning NULL")
+  return(NULL)
 }

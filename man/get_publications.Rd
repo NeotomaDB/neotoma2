@@ -19,7 +19,7 @@ get_publications(x = NA, ...)
 
 \method{get_publications}{publications}(x, ...)
 
-\method{get_publications}{sites}(...)
+\method{get_publications}{sites}(x, ...)
 }
 \arguments{
 \item{x}{integer A contact ID}

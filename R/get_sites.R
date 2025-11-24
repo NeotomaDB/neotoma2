@@ -174,3 +174,10 @@ get_sites.default <- function(...) {
     return(output)
   }
 }
+
+#' @rdname get_sites
+#' @exportS3Method get_sites NULL
+get_sites.NULL <- function(x, ...) {
+  message("Input is NULL, returning NULL")
+  return(NULL)
+}

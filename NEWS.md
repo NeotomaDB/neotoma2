@@ -1,5 +1,16 @@
 # News neotoma2 R package
 
+## neotoma2 1.0.9
+
+Fixed 2 neotoma2R package bugs:
+
+- `samples.sites()` was not binding properly all rows.
+- `all_data` could cause a multiple argument error.
+- Fixed passing arguments in `get_downloads()` - added a second tryCatch for .sites objects
+
+Added function:
+* `get_publications.sites()`
+
 ## neotoma2 1.0.8
 
 Updated neotoma2R package documentation, simplifying the volume of .Rd documents.

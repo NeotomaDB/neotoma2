@@ -4,20 +4,23 @@
 \alias{get_downloads}
 \alias{get_downloads.numeric}
 \alias{get_downloads.sites}
+\alias{get_downloads.NULL}
 \title{get_downloads}
 \usage{
-get_downloads(x, verbose = TRUE, ...)
+get_downloads(x = NA, ...)
 
 \method{get_downloads}{numeric}(x, ...)
 
 \method{get_downloads}{sites}(x, verbose = TRUE, ...)
+
+\method{get_downloads}{`NULL`}(x, ...)
 }
 \arguments{
 \item{x}{Use a single number to extract site information}
 
-\item{verbose}{Status bar of items being downloaded}
-
 \item{...}{accepted arguments: sites, datasets}
+
+\item{verbose}{Status bar of items being downloaded}
 }
 \value{
 The function returns either a single item of class

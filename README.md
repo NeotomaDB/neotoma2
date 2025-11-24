@@ -72,7 +72,7 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
-* CRAN release 1.0.8 with speleothem data support and improved documentation. **Target** December, 2025
+* CRAN release 1.0.8 with speleothem data support and improved documentation.**DONE** November 18, 2025
 * Maintenance Github 1.0.7 release **DONE** June 15, 2025
 * Maintenance Github 1.0.6 release **DONE** June 23, 2025
 * Maintenance Github 1.0.5 release, **DONE** December 27, 2024
