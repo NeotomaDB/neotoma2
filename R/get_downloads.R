@@ -108,13 +108,18 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
   ids <- getids(x)$datasetid
   cl <- as.list(match.call())
   cl[[1]] <- NULL
-  output <- get_downloads(x = ids)
+  if ("all_data" %in% cl) {
+    all_data <- cl$all_data
+  } else {
+    all_data <- TRUE
+  }
+  output <- get_downloads(x = ids, all_data = all_data)
   return(output)
 }
 
+## for null x
 #' @rdname get_downloads
 #' @exportS3Method get_downloads NULL
 get_downloads.NULL <- function(x, ...) {
-  message("Input is NULL, returning NULL")
   return(NULL)
 }
