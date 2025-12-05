@@ -1,4 +1,5 @@
 testthat::test_that("Parse location fails with an incomplete bounding box:", {
+  skip_on_cran()
   testthat::expect_error(parseLocation(c(1, 2)))
 })
 

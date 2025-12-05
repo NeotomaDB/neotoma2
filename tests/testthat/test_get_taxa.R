@@ -3,6 +3,7 @@ library("neotoma2")
 
 context("`get_taxa()` and `get_taxon()` functions")
 test_that("get_taxa() sites object", {
+  skip_on_cran()
   abies <- get_taxa(1)
   testthat::expect_is(abies, "sites")
   abies_df <- abies %>% get_downloads() %>% taxa() %>% suppressWarnings()

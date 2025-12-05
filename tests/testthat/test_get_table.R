@@ -8,6 +8,7 @@ test_that("Call a single database table:", {
 })
 
 test_that("Apply limits for get_table()", {
+  skip_on_cran()
   tb <- get_table("agetypes", limit = 1)
   testthat::expect_equal(nrow(tb), 1)
   tb <- get_table("agetypes", limit = 3)
@@ -16,6 +17,7 @@ test_that("Apply limits for get_table()", {
 
 test_that("Limit and offsets work as expected.
           Offsetting by one returns a different result.", {
+            skip_on_cran()
             tb1 <- get_table("agetypes", limit = 1)
             tb2 <- get_table("agetypes", limit = 1, offset = 1)
             testthat::expect_false(rlang::hash(tb1) ==
@@ -23,8 +25,9 @@ test_that("Limit and offsets work as expected.
           })
 
 test_that("Correct table", {
-            tb1 <- get_table("agetypes", limit = 1)
-            cols <- c("agetypeid", "agetype", "precedence",
-                      "shortagetype", "recdatecreated", "recdatemodified")
-            testthat::expect_identical(colnames(tb1), cols)
-          })
+  skip_on_cran()
+  tb1 <- get_table("agetypes", limit = 1)
+  cols <- c("agetypeid", "agetype", "precedence",
+            "shortagetype", "recdatecreated", "recdatemodified")
+  testthat::expect_identical(colnames(tb1), cols)
+})

@@ -14,7 +14,8 @@ test_that("filter datasettype", {
   testthat::expect_equal(pollen_types, "pollen")
 })
 
-test_that("filter datasettype + loc", {  
+test_that("filter datasettype + loc", {
+  skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
@@ -58,6 +59,7 @@ test_that("filter get_datasets('datasettype') by datasettype
           })
 
 test_that("filter by 2 datasettypes", {
+  skip_on_cran()
   sts <- get_sites()
   filtered <- sts %>%
     neotoma2::filter(datasettype == "pollen" | datasettype == "charcoal")
