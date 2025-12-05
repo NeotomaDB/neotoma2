@@ -1,5 +1,10 @@
 # News neotoma2 R package
 
+## neotoma2 1.0.10
+
+Fixed tests to not be run on CRAN as API may be down.
+Changed vignette to not run when API is down - order of code was not correct for this chunk.
+
 ## neotoma2 1.0.9
 
 Fixed 2 neotoma2R package bugs:
