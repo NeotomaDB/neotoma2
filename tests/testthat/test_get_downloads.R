@@ -51,6 +51,7 @@ test_that("get_downloads from get_sites sites", {
 })
 
 test_that("Faunmap dataset", {
+  skip_on_cran()
   mydataset <- get_downloads(7032)
   testthat::expect_is(mydataset, "sites")
 })

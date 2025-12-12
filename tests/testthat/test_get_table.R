@@ -3,6 +3,7 @@ library("neotoma2")
 
 context("Working with general data from the database:")
 test_that("Call a single database table:", {
+  skip_on_cran()
   tb <- get_table("agetypes")
   testthat::expect_is(tb, "data.frame")
 })
