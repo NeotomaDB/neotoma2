@@ -1,5 +1,9 @@
 # News neotoma2 R package
 
+## neotoma2 1.0.11
+
+Added flag error=True to all vignette codechunks to not run when API is down in case API comes down in between a knitting.
+
 ## neotoma2 1.0.10
 
 Fixed tests to not be run on CRAN as API may be down.
