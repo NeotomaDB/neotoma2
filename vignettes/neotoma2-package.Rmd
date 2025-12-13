@@ -25,11 +25,11 @@ if (res$status_code == 200) {
     api_available <- TRUE
   }
 # Disable evaluation globally if API is down
-knitr::opts_chunk$set(eval = api_available,
+knitr::opts_chunk$set(eval = FALSE,
                       error = TRUE)
 ```
 
-```{r setup_md, include=FALSE,error=TRUE}
+```{r setup_md, include=FALSE, error=TRUE}
 safe_eval <- function(expr, fallback = "N/A") {
   tryCatch(eval(expr, envir = .GlobalEnv), error = function(e) fallback)
 }
@@ -89,7 +89,7 @@ All sites in Neotoma have a unique numeric identifier.  With the `neotoma2` pack
 
 If we're looking for a site and we know its specific identifier, we can use the simplest implementation of `get_sites()`.  Here we are searching for a site (Alexander Lake), where we know that the siteid for the record in Neotoma is `24`. We can get these siteids using the [Neotoma Explorer web application](https://apps.neotomadb.org/explorer/), or if we have some familiarity with the site records already.
 
-```{r getSiteBySiteID, error=TRUE}
+```{r getSiteBySiteID, error=TRUE, eval=FALSE}
 # Search for site by a single numeric ID:
 alex <- get_sites(24)
 alex

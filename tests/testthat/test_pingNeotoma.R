@@ -3,6 +3,7 @@ library("neotoma2")
 
 context("Ping Neotoma API to check availability")
 test_that("The Pings work", {
+  skip_on_cran()
   ping_head <- try(httr::HEAD("https://api.neotomadb.org"))
   ping_call <- try(pingNeotoma("neotoma"))
   testthat::expect_equal(ping_head$status_code,
