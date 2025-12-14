@@ -16,13 +16,10 @@
 Obtain all samples within a sites object
 }
 \examples{
-{
-tryCatch({
+\dontrun{
+# Get full data download from API and create a long table with samples data.
 dw <- get_downloads(1)
 pollen <- samples(dw)
-}, error = function(e) {
- message("Neotoma server not responding. Try again later.")
-})
 }
 }
 \author{

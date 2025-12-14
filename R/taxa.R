@@ -6,15 +6,11 @@
 #' @returns A \code{data.frame} reporting the taxa/data objects, units,
 #' elements and other features within a set of records.
 #' @description Extract taxonomic data from a set of sites.
-#' @examples \donttest{
-#' tryCatch({
+#' @examples \dontrun{
 #' somesites <- get_sites(datasettype = "diatom") %>%
 #'   get_downloads()
 #' diatomtaxa <- taxa(somesites)
-#' }, error = function(e) {
-#' message("Neotoma server not responding. Try again later.")
-#' })
-#'   }
+#' }
 #' @md
 #' @export
 setMethod(f = "taxa",

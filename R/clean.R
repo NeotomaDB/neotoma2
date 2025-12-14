@@ -16,7 +16,7 @@
 #'   * After: \{site: 1, dataset: \[1, 2\]\}
 #' So the site is gathered, and the datasets are now part of an
 #' array of datasets.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tryCatch({
 #'   alex <- get_sites(sitename = "Alex%")
 #'   alex2 <- get_sites(24)

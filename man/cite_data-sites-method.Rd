@@ -18,12 +18,8 @@ Given complete dataset objects in Neotoma (must have used
 citation for the record, including the dataset DOI.
 }
 \examples{
-{
-tryCatch({
+\dontrun{
+# Get datasets metadata from API
 ds <- get_datasets(1)
-cite_data(ds)
-}, error = function(e) {
-message("Neotoma server not responding. Try again later.")
-})
 }
 }

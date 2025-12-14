@@ -54,12 +54,8 @@ Obtain one of the elements within a \code{sites},
 \code{collectionunits}, \code{datasets}, etc... Neotoma objects.
 }
 \examples{
-\donttest{
-tryCatch({
-  some_site <- get_sites(sitename = "Site\%", limit=3)
-  some_site[[2]]
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+\dontrun{
+some_site <- get_sites(sitename = "Site\%", limit=3)
+some_site[[2]]
 }
 }

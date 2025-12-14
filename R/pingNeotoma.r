@@ -8,7 +8,7 @@
 #' numeric port), \code{neotoma} or \code{dev}.
 #' @returns A valid HTTP status code or returns an error if a connection
 #' is refused.
-#' @examples {
+#' @examples \dontrun{
 #' test_connection <- pingNeotoma("neotoma")
 #' }
 #' @export
