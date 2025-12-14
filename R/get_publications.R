@@ -17,7 +17,7 @@
 #' `year` The year the publication was released.
 #' `search` A plain text search string used to search the citation.
 #' @returns `publications` object
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # How old are the papers in Neotoma that include the term "mammut"?
 #' tryCatch({
 #'   mammoth_papers <- get_publications(search="mammut") %>%

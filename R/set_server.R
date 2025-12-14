@@ -3,7 +3,7 @@
 #' @importFrom assertthat assert_that
 #' @param server One of \code{local} (when the API is running locally on
 #' port 3005), \code{neotoma} or \code{dev}.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # The user is running the API locally using the node/express API
 #' # cloned from github: https://github.com/NeotomaDB/api_nodetest
 #' set_server(server = "local")

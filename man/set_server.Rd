@@ -18,7 +18,7 @@ Choose to pull Neotoma data from the main Neotoma server, the development
 server or from a local instance of the API.
 }
 \examples{
-\donttest{
+\dontrun{
 # The user is running the API locally using the node/express API
 # cloned from github: https://github.com/NeotomaDB/api_nodetest
 set_server(server = "local")

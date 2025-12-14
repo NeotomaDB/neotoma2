@@ -58,13 +58,9 @@ speleo_helper <- function(sites) {
 #'  * `x`  The unique dataset ID (integer) in Neotoma. Can be passed as a
 #' vector of dataset IDs.
 #'  * `sites`  A `sites` R object.
-#' @examples {
+#' @examples \dontrun{
 #' ## Find speleothems by numeric datasetid:
-#' tryCatch({
-#'   speleo <- get_speleothems(c(2,5))
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' speleo <- get_speleothems(c(2,5))
 #' }
 #' @md
 #' @export

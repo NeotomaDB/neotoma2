@@ -60,7 +60,7 @@
 #' record.
 #'  * `all_data` The API only downloads the first 25 records of the query. 
 #'  For the complete records, use `all_data=TRUE`
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tryCatch({
 #'   random_sites <- get_sites(1)
 #'   allds <- get_datasets(random_sites, limit=3)

@@ -7,8 +7,9 @@ setClassUnion("id", c("character", "integer", "numeric"))
 #' @name contacts_classes
 #' @description An unordered list of individual S4 `contact` objects.
 #' @export
-#' @examples
+#' @examples {
 #' new("contact", familyname = "Goring", givennames = "Simon J.")
+#' }
 #' @returns object of class `contact`
 #' @aliases contact-class
 #' @md

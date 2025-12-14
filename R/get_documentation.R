@@ -4,7 +4,7 @@
 #' @importFrom utils browseURL
 #' @importFrom rlang is_interactive
 #' @returns NULL
-#' @examples \donttest{
+#' @examples \dontrun{
 #' if (interactive()) {
 #'  get_documentation()
 #' }

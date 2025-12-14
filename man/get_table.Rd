@@ -22,12 +22,8 @@ Call Neotoma and return a table
 (with limits & offsets for large tables)
 }
 \examples{
-{
+\dontrun{
 # Returns only the first 25 specimen records.
-tryCatch({
 someSpec <- get_table('specimens')
-}, error = function(e) {
- message("Neotoma server not responding. Try again later.")
-})
 }
 }

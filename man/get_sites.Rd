@@ -88,20 +88,11 @@ and datasets located at that site.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 ## Find sites with a min altitude of 12m and a max altitude of 25m
-tryCatch({
-  sites_12to25 <- get_sites(altmin=12, altmax=25)
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
-## Return all sites, using a minimum altitude of 2500m (returns >500 sites):
-tryCatch({
-  sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
-  ## To find sites in Brazil
+sites_12to25 <- get_sites(altmin=12, altmax=25)
+sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
+## To find sites in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
  [-73.125, -9.102096738726443],
@@ -109,20 +100,7 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-tryCatch({
 brazil_sites <- get_sites(loc = brazil[1])
-# Finding all sites with Liliaceae pollen in 1000 year bins:
-lilysites <- c()
-for (i in seq(0, 10000, by = 1000)) {
-  lily <- get_sites(taxa=c("Liliaceae"),
-                    ageyoung = i - 500,
-                    ageold = i + 500,
-                    all_data = TRUE)
-  lilysites <- c(lilysites, length(lily))
-}
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
 }
 }
 \author{

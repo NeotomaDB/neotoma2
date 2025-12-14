@@ -71,7 +71,7 @@ depositional environment.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 # Download 10 sites, but only keep the sites that are close to sea level.
 tryCatch({
  some_sites <- get_sites(sitename = "Lake\%", limit = 3)

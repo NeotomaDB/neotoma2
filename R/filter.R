@@ -49,7 +49,7 @@
 #' @param .by (only used for filtering `data.frame` objects)
 #' @param .preserve (only used for filtering `data.frame` objects)
 #' @returns filtered `sites` object
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Download 10 sites, but only keep the sites that are close to sea level.
 #' tryCatch({
 #'  some_sites <- get_sites(sitename = "Lake%", limit = 3)

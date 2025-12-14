@@ -10,7 +10,7 @@ get_documentation()
 Open up the Neotoma R homepage.
 }
 \examples{
-\donttest{
+\dontrun{
 if (interactive()) {
  get_documentation()
 }

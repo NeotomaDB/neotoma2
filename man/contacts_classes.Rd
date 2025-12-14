@@ -14,5 +14,7 @@ object of class \code{contact}
 An unordered list of individual S4 \code{contact} objects.
 }
 \examples{
+{
 new("contact", familyname = "Goring", givennames = "Simon J.")
+}
 }

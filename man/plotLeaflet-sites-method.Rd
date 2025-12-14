@@ -16,7 +16,7 @@
 Plot sites on a leaflet map
 }
 \examples{
-\donttest{
+\dontrun{
 # Note that by default the limit for queries is 25 records:
 tryCatch({
 modernSites <- get_sites(keyword = "Modern")

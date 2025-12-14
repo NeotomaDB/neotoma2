@@ -3,13 +3,10 @@
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @param x sites object
 #' @description Obtain all samples within a sites object
-#' @examples {
-#' tryCatch({
+#' @examples \dontrun{
+#' # Get full data download from API and create a long table with samples data.
 #' dw <- get_downloads(1)
 #' pollen <- samples(dw)
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
 #' }
 #' @importFrom dplyr bind_rows left_join rename mutate
 #' @importFrom purrr map

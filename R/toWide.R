@@ -14,9 +14,7 @@
 #' @param operation label or vector of operations to be chosen from:
 #' 'prop', 'sum', 'presence'.
 #' @returns wide `data.frame` obtained from long `samples` `data.frame`
-#' @examples
-#' \donttest{
-#' tryCatch({
+#' @examples \dontrun{
 #' fc_sites <- neotoma2::get_datasets(limit=5, datasettype = "vertebrate fauna")
 #' fc_ds <- fc_sites %>%
 #'    neotoma2::get_downloads()
@@ -24,10 +22,7 @@
 #' fc_smp <- samples(fc_dl1)
 #' toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'),
 #'        elementtypes='bone/tooth', unit='present/absent')
-#' }, error = function(e) {
-#' message("Neotoma server not responding. Try again later.")
-#' })
-#'}
+#' }
 #' @description Obtain a wide table with information regarding of
 #' samples grouped by variablename and depth/age.
 #' @export

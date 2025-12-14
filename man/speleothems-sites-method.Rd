@@ -17,13 +17,9 @@ Obtain all speleothems within a sites object
 Experimental function: API and behavior may change.
 }
 \examples{
-{
-tryCatch({
+\dontrun{
 ds <- get_datasets(37302)
 sp <- speleothems(ds)
-}, error = function(e) {
-message("Neotoma server not responding. Try again later.")
-})
 }
 }
 \author{

@@ -71,7 +71,7 @@ For the complete records, use \code{all_data=TRUE}
 }
 }
 \examples{
-\donttest{
+\dontrun{
 # To find the downloads object of dataset 24:
 tryCatch({
   downloads24 <- get_downloads(24)

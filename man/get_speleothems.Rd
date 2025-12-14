@@ -36,13 +36,9 @@ vector of dataset IDs.
 }
 }
 \examples{
-{
+\dontrun{
 ## Find speleothems by numeric datasetid:
-tryCatch({
-  speleo <- get_speleothems(c(2,5))
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+speleo <- get_speleothems(c(2,5))
 }
 }
 \author{

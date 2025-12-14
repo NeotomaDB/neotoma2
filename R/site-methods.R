@@ -48,13 +48,9 @@ setMethod(f = "show",
 #' @description Obtain one of the elements within a `sites`,
 #' `collectionunits`, `datasets`, etc... Neotoma objects.
 #' @returns sliced `site` object
-#' @examples \donttest{
-#' tryCatch({
-#'   some_site <- get_sites(sitename = "Site%", limit=3)
-#'   some_site[[2]]
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' @examples \dontrun{
+#' some_site <- get_sites(sitename = "Site%", limit=3)
+#' some_site[[2]]
 #' }
 #' @aliases [[,sites,numeric-method
 #' @exportMethod [[
@@ -407,13 +403,10 @@ setMethod(f = "summary",
 #' @importFrom dplyr bind_rows full_join select arrange filter 
 #' @importFrom dplyr mutate group_by row_number
 #' @returns `data.frame` object with DOIs information.
-#' @examples {
-#' tryCatch({
+#' @examples \dontrun{
+#' # Get datasets metadata from API and retrieve DOIs
 #' ds <- get_datasets(1)
 #' doi(ds)
-#' }, error = function(e) {
-#' message("Neotoma server not responding. Try again later.")
-#' })
 #' }
 #' @aliases doi,sites-method
 #' @exportMethod doi
@@ -460,13 +453,9 @@ setMethod(f = "doi",
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows full_join select arrange filter
 #' @returns `data.frame` object with citation information.
-#' @examples {
-#' tryCatch({
+#' @examples \dontrun{
+#' # Get datasets metadata from API
 #' ds <- get_datasets(1)
-#' cite_data(ds)
-#' }, error = function(e) {
-#' message("Neotoma server not responding. Try again later.")
-#' })
 #' }
 #' @aliases cite_data,sites-method
 #' @exportMethod cite_data
