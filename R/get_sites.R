@@ -139,6 +139,9 @@ get_sites.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
+  if ("gpid" %in% names(cl)) {
+    cl$gpid = paste(cl$gpid,collapse=",")
+  }
   if ("siteid" %in% names(cl)) {
     # redirect to numeric method
     if ("all_data" %in% names(cl)) {
@@ -159,7 +162,7 @@ get_sites.default <- function(...) {
   on.exit(options(oo))
   baseURL <- paste0("data/sites")
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    do.call(parseURL, c(list(baseURL), cl)),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
