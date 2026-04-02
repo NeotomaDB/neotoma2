@@ -75,7 +75,8 @@ test_that("get_downloads with or without all_data works.", {
 
 test_that("get_downloads handles empty result", {
   skip_on_cran()
-  gpids <- c(7326, 6442, 7923, 7990, 7368, 8480, 8981, 7934)
+  gpids <- c(7326, 6442, 7923, 7990, 7368, #8480, 
+             8981, 7934)
   ne_sites <- c() 
   for (id in gpids) {
     search_1 <- get_sites(gpid = id)

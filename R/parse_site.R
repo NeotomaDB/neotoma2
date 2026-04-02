@@ -94,6 +94,7 @@ parse_site <- function(result, verbose = FALSE) {
              depositionalenvironment = use_na(y$depositionalenvironment,
                                               "char"),
              defaultchronology = use_na(y$defaultchronology, "int"),
+             notes = use_na(y$notes,"char"),
              speleothems = speleothems)
       do.call(build_collunits, cu_l)
     })
