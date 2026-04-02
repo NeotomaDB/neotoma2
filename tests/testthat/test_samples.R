@@ -87,3 +87,4 @@ test_that("Samples of all sites has the same nrow as samples of each site combin
   all_df <- nrow(samples(dl))
   testthat::expect_equal(all_df, df1 + df2 + df3)
 })
+

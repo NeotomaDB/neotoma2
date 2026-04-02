@@ -42,9 +42,8 @@ setGeneric("showMatch", function(x) {
 #' @param x sites object
 #' @returns data.frame with record information at sample level
 #' @export
-setGeneric("samples", function(x) {
-  standardGeneric(f = "samples")
-  })
+setGeneric("samples",
+           function(object, chronname=NULL) standardGeneric("samples"))
 
 #' @title Obtain speleothems from a record or multiple records.
 #' @param x sites object
