@@ -7,6 +7,20 @@
 
 -----
 
+## DESCRIPTION modification neotoma2 1.0.12
+
+DESCRIPTION Authors@R field.
+
+Complaints seem to be about mis-writing the ORCID info.  This should
+be of the form
+
+ comment = c(ORCID = .......)
+
+and not
+
+ comment(ORCID = .......)
+ ORCID = ........
+ 
 ## Bugfix neotoma2 1.0.11
 
 Set examples to \dontrun{} to avoid violating CRAN's policy that allows access to internet.

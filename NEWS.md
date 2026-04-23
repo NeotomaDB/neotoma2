@@ -1,5 +1,11 @@
 # News neotoma2 R package
 
+## neotoma2 1.0.12
+Updated description file to match CRAN's comments.
+Now follows:
+ comment = c(ORCID = .......)
+
+
 ## neotoma2 1.0.11
 
 Set examples to \dontrun{} to avoid violating CRAN's policy that allows access to internet.

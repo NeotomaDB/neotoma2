@@ -1,18 +1,18 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2025-12-13
-Version: 1.0.11
+Date: 2026-04-23
+Version: 1.0.12
 Authors@R:
     c(person(given = "Dominguez Vidana",
              family = "Socorro",
              role = c("aut", "cre"),
              email = "dominguezvid@wisc.edu",
-             comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
+             comment = c(ORCID="0000-0002-7926-4935")),
       person(given = "Simon",
              family = "Goring",
              role = c("aut"),
              email = "goring@wisc.edu",
-             comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
+             comment = c(ORCID="0000-0002-2700-4605")))
 URL: https://github.com/NeotomaDB/neotoma2
 BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulation of data using the Neotoma Paleoecology Database.
