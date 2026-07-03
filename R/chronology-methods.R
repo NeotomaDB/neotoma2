@@ -1,3 +1,181 @@
+#' @title Display a `chronology` object
+#' @name show
+#' @export
+setMethod(
+  "show",
+  "chronology",
+  function(object) {
+    
+    df <- data.frame(
+      chronologyid = object@chronologyid,
+      chronologyname = object@chronologyname,
+      agemodel = object@agemodel,
+      ageboundolder = object@ageboundolder,
+      ageboundyounger = object@ageboundyounger,
+      dateprepared = object@dateprepared,
+      modelagetype = object@modelagetype,
+      isdefault = object@isdefault,
+      n_controls = sum(!is.na(object@chroncontrols$chroncontrolid))
+    )
+    
+    df <- subset(
+      df,
+      !(is.na(chronologyname) &
+          is.na(agemodel) &
+          is.na(ageboundolder) &
+          is.na(ageboundyounger) &
+          is.na(dateprepared) &
+          is.na(modelagetype) &
+          is.na(isdefault) &
+          n_controls == 0)
+    )
+    
+    if (nrow(df) > 0) {
+      print(df, row.names = FALSE)
+    } else {
+      cat("No chronology information available.\n")
+    }
+  }
+)
+#' @title Display a `chronologies` object
+#' @name show
+#' @export
+setMethod(
+  "show",
+  "chronologies",
+  function(object) {
+    
+    if (length(object@chronologies) == 0) {
+      cat("No chronology information available.\n")
+      return(invisible(NULL))
+    }
+    
+    df <- purrr::map(object@chronologies, function(ch) {
+      data.frame(
+        chronologyid = ch@chronologyid,
+        chronologyname = ch@chronologyname,
+        agemodel = ch@agemodel,
+        ageboundolder = ch@ageboundolder,
+        ageboundyounger = ch@ageboundyounger,
+        dateprepared = ch@dateprepared,
+        modelagetype = ch@modelagetype,
+        isdefault = ch@isdefault,
+        n_controls = sum(!is.na(ch@chroncontrols$chroncontrolid))
+      )
+    }) |>
+      dplyr::bind_rows()
+    
+    df <- subset(
+      df,
+      !(is.na(chronologyname) &
+          is.na(agemodel) &
+          is.na(ageboundolder) &
+          is.na(ageboundyounger) &
+          is.na(dateprepared) &
+          is.na(modelagetype) &
+          is.na(isdefault) &
+          n_controls == 0)
+    )
+    
+    if (nrow(df) > 0) {
+      print(df, row.names = FALSE)
+    } else {
+      cat("No chronology information available.\n")
+    }
+  }
+)
+
+#' @export
+setMethod(
+  "chroncontrols",
+  "chronologies",
+  function(x) {
+    
+    if (length(x@chronologies) == 0) {
+      return(
+        data.frame(
+          chronologyid = integer(),
+          chronologyname = character(),
+          depth = numeric(),
+          thickness = numeric(),
+          agelimityounger = numeric(),
+          agelimitolder = numeric(),
+          chroncontrolid = integer(),
+          chroncontrolage = numeric(),
+          chroncontroltype = character()
+        )
+      )
+    }
+    
+    df <- purrr::map(x@chronologies, function(ch) {
+      
+      data.frame(
+        chronologyid = ch@chronologyid,
+        chronologyname = ch@chronologyname,
+        ch@chroncontrols
+      )
+      
+    }) |>
+      dplyr::bind_rows()
+    
+    df <- subset(
+      df,
+      !(is.na(depth) &
+          is.na(thickness) &
+          is.na(agelimityounger) &
+          is.na(agelimitolder) &
+          is.na(chroncontrolid) &
+          is.na(chroncontrolage) &
+          is.na(chroncontroltype))
+    )
+    
+    df
+  }
+)
+#' @export
+setMethod(
+  "chroncontrols",
+  "chronology",
+  function(x) {
+    
+    df <- x@chroncontrols
+    
+    df <- subset(
+      df,
+      !(is.na(depth) &
+          is.na(thickness) &
+          is.na(agelimityounger) &
+          is.na(agelimitolder) &
+          is.na(chroncontrolid) &
+          is.na(chroncontrolage) &
+          is.na(chroncontroltype))
+    )
+    
+    df
+  }
+)
+
+setMethod(
+  "chroncontrols",
+  "site",
+  function(x) {
+    
+    siteid <- as.data.frame(x)$siteid
+    
+    chronset <- chroncontrols(chronologies(x))
+    
+    if (nrow(chronset) == 0) {
+      chronset$siteid <- integer(0)
+    } else {
+      chronset$siteid <- siteid
+    }
+    
+    chronset <- dplyr::select(chronset, siteid, dplyr::everything())
+    
+    chronset
+  }
+)
+
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "chronologies", i = "numeric"),

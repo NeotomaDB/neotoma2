@@ -15,3 +15,11 @@ test_that("Chroncontrols gets record", {
   testthat::expect_gt(length(unique(multi$chronologyid)), 4)
   testthat::expect_is(mamchron, "data.frame")
 })
+
+context("Chronology controls return nothing when nothing.")
+test_that("Chroncontrols returns nothing", {
+  skip_on_cran()
+  empty <- chroncontrols(get_downloads(100))
+
+  testthat::expect_equal(length(empty[,0]), 0)
+})

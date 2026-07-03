@@ -15,3 +15,15 @@ test_that("`get_downloads()` fills up chronologies' slots.", {
   testthat::expect_equal(sum(chron$isdefault), 1)
   testthat::expect_is(chron, "data.frame")
 })
+
+
+
+context("`chronologies()` function is empty for empty downloads")
+test_that("`get_downloads()` is empty for empty download", {
+  skip_on_cran()
+  dl <- get_downloads(100)
+  chron <- dl %>% chronologies()
+  
+  testthat::expect_equal(length(chron@chronologies),0)
+
+})
