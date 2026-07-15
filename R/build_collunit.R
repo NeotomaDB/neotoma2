@@ -1,30 +1,40 @@
 #' @title Build a collection unit from the API response
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @importFrom assertthat assert_that
-#' @param args The structured JSON from a Neotoma API v2.0 response that
-#'   returns a collection unit in any form.
-#' @returns An simple `collunit` object
+#' @description
+#' Helper function to build a collection unit from the API JSON response. This
+#' is the one place where the API's collection unit field names are mapped onto
+#' the slots of a `collunit`.
+#'
+#' Two of those fields are spelled differently depending on the endpoint that
+#' answered, so `pick()` is used to take whichever spelling arrived:
+#' the unit type is `collectionunittype` from `sites`, `unittype` from
+#' `datasets` and `collunittype` from `downloads`.
+#' @param x The structured JSON from a Neotoma API v2.0 response that
+#'   returns a collection unit in any form. `datasets`, `chronologies` and
+#'   `speleothems`, if present, are already built objects.
+#' @returns A simple `collunit` object
 #' @noRd
-build_collunits <- function(...) {
-  args <- list(...)
-  assert_that(is.list(args), msg = "Parsed object must be a list.")
-  args <- cleanNULL(args)
+build_collunits <- function(x) {
+  assert_that(is.list(x), msg = "Parsed object must be a list.")
   cu <- set_collunit(
-    collectionunitid = use_na(args$collectionunitid, "int"),
-    collunittype = use_na(args$collunittype, "char"),
-    handle = use_na(args$handle, "char"),
-    collectiondevice = use_na(args$collectiondevice, "char"),
-    collectionunitname = use_na(args$collectionunitname, "char"),
-    waterdepth = use_na(args$waterdepth, "int"),
-    colldate = use_na(args$colldate, "date"),
-    depositionalenvironment = use_na(args$depositionalenvironment, "char"),
-    location = use_na(args$location, "char"),
-    gpslocation = use_na(args$gpslocation, "sf"),
-    notes = use_na(args$notes, "char"),
-    datasets = testNull(args$datasets, NULL),
-    defaultchronology = use_na(args$defaultchronology, "int"),
-    chronologies = testNull(args$chronologies, NULL),
-    speleothems = testNull(args$speleothems, NULL)
+    collectionunitid = use_na(x$collectionunitid, "int"),
+    collunittype = use_na(pick(x, "collectionunittype", "unittype",
+                               "collunittype"), "char"),
+    handle = use_na(x$handle, "char"),
+    collectiondevice = use_na(x$collectiondevice, "char"),
+    collectionunitname = use_na(pick(x, "collectionunitname",
+                                     "collectionunit"), "char"),
+    waterdepth = use_na(x$waterdepth, "int"),
+    colldate = use_na(as.Date(x$colldate), "date"),
+    depositionalenvironment = use_na(x$depositionalenvironment, "char"),
+    location = use_na(x$location, "char"),
+    gpslocation = use_na(x$gpslocation, "sf"),
+    notes = use_na(x$notes, "char"),
+    datasets = testNull(x$datasets, NULL),
+    defaultchronology = use_na(x$defaultchronology, "int"),
+    chronologies = testNull(x$chronologies, NULL),
+    speleothems = testNull(x$speleothems, NULL)
   )
   return(cu)
 }
