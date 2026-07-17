@@ -51,11 +51,11 @@ test_that("parse_site reads the same site from every endpoint format", {
   for (site in sites) {
     testthat::expect_length(site, 1)
     testthat::expect_equal(site[[1]]@siteid, 24)
-    testthat::expect_equal(site[[1]]@sitename, "Alexander Lake")
+    testthat::expect_equal(site[[1]]@sitename, "A Place in Neotoma")
     # `sitedescription` used to be dropped on the way to `build_site()`.
     testthat::expect_true(!is.na(site[[1]]@description))
     cu <- site[[1]]@collunits@collunits[[1]]
-    testthat::expect_equal(cu@handle, "ALEXLAKE")
+    testthat::expect_equal(cu@handle, "NEOPLACE")
     # Spelled `collectionunittype`, `unittype` and `collunittype` in turn.
     testthat::expect_equal(cu@collunittype, "Core")
   }
@@ -69,9 +69,9 @@ test_that("parse_site keeps the dataset fields the API reports", {
   sites <- neotoma2:::parse_site(result)
   ds <- sites[[1]]@collunits@collunits[[1]]@datasets@datasets[[1]]
   testthat::expect_equal(ds@age_units, "Calendar years BP")
-  testthat::expect_equal(ds@age_range_old, 7602)
-  testthat::expect_equal(ds@age_range_young, 3472)
-  testthat::expect_equal(unlist(ds@pi_list), "Jordan, Richard H.")
+  testthat::expect_equal(ds@age_range_old, 8100)
+  testthat::expect_equal(ds@age_range_young, 2900)
+  testthat::expect_equal(unlist(ds@pi_list), "Doe, Jane A.")
   testthat::expect_true(grepl("Taxon counts", ds@notes))
 })
 
@@ -80,7 +80,7 @@ test_that("parse_site reads the geopolitical units from a download", {
                                simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
   testthat::expect_setequal(unlist(sites[[1]]@geopolitical),
-                            c("Canada", "Newfoundland and Labrador"))
+                            c("Freedonia", "Northern Province"))
 })
 
 test_that("parse_site reads chronology metadata from a download", {
