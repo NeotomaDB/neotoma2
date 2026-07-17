@@ -103,6 +103,132 @@ test_that("filter by datasetid keeps all other collection units
              testthat::expect_equal(meerId, 29576)
            })
 
+test_that("multi-condition filter across two levels (regression)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>% filter(altitude < 3000, datasettype == "pollen")
+  testthat::expect_s4_class(result, "sites")
+  dts <- as.data.frame(datasets(result))
+  testthat::expect_true(all(dts$datasettype == "pollen"))
+})
+
+test_that("order of conditions does not matter", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  a <- sites %>% filter(altitude < 3000, datasettype == "pollen")
+  b <- sites %>% filter(datasettype == "pollen", altitude < 3000)
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("single-condition filters still work (no regression)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  s_site <- sites %>% filter(altitude < 3000)
+  s_ds   <- sites %>% filter(datasettype == "pollen")
+  testthat::expect_s4_class(s_site, "sites")
+  testthat::expect_s4_class(s_ds, "sites")
+})
+
+test_that("three levels at once", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>%
+    filter(altitude < 5000, datasettype == "pollen", waterdepth > 0)
+  testthat::expect_s4_class(result, "sites")
+})
+
+test_that("substring false-positive guard (value contains a column substring)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  # "LONGCORE" contains "long", but the referenced column is `handle`
+  # (a collunit column), so only the collunit join should be triggered.
+  result <- sites %>% filter(handle == "SOME-LONG-HANDLE")
+  testthat::expect_s4_class(result, "sites")
+})
+
+test_that("no matches returns an empty sites", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>% filter(altitude < -100000)
+  testthat::expect_s4_class(result, "sites")
+  testthat::expect_equal(length(result@sites), 0)
+})
+
+test_that("filter(NULL) warns and returns NULL", {
+  testthat::expect_warning(res <- filter(NULL), "No sites to filter")
+  testthat::expect_null(res)
+})
+
+test_that("spatial loc filter keeps only sites inside the region", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  result <- sites %>% filter(loc == brazil_sf)
+  testthat::expect_s4_class(result, "sites")
+  testthat::expect_lte(length(result@sites), length(sites))
+})
+
+test_that("loc combines with an ordinary condition", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  result <- sites %>% filter(altitude < 3000, loc == brazil_sf)
+  testthat::expect_s4_class(result, "sites")
+  elev <- as.data.frame(result)$elev
+  testthat::expect_true(all(elev < 3000 | is.na(elev)))
+})
+
+test_that("geography is an alias for loc", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  a <- sites %>% filter(loc == brazil_sf)
+  b <- sites %>% filter(geography == brazil_sf)
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("filter(loc == WKT) matches filter(loc == GeoJSON)", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  sites <- get_datasets(loc = brazil_geojson, limit = 20)
+  a <- sites %>% filter(loc == brazil_geojson)
+  b <- sites %>% filter(loc == brazil_wkt)
+  testthat::expect_s4_class(b, "sites")
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("WKT loc combines with an ordinary condition (geography alias)", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  sites <- get_datasets(loc = brazil_geojson, limit = 20)
+  r <- sites %>% filter(altitude < 3000, geography == brazil_wkt)
+  testthat::expect_s4_class(r, "sites")
+  elev <- as.data.frame(r)$elev
+  testthat::expect_true(all(elev < 3000 | is.na(elev)))
+})
+
 test_that("filter works before/after get_downloads", {
   skip_on_cran()
   core_sites <- c(13949, 11904, 13319, 728, 
