@@ -1,5 +1,6 @@
 library("testthat")
 library("neotoma2")
+library("purrr")
 
 context("`length()` retrieves correct number of 'sites', 'collection units', and
         'datasets'")
