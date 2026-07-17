@@ -1,5 +1,6 @@
 library("testthat")
 library("neotoma2")
+library(tidyr)
 
 context("`samples()` retrieves a data.frame of all data.")
 test_that("`samples` retrieve df.", {
