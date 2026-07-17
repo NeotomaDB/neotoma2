@@ -61,6 +61,13 @@ setMethod(f = "samples",
 setMethod(f = "samples",
   signature = "collunit",
   definition = function(x) {
+    # A collection unit with no datasets (e.g. its datasets were deleted
+    # upstream) contributes no samples. Return an empty data.frame so the
+    # bind_rows() in the site/sites/collunits methods simply skips it instead
+    # of erroring on an empty/NULL datasets slot.
+    if (length(datasets(x)) == 0) {
+      return(data.frame())
+    }
     precedence <- c("Calendar years BP",
                     "Calibrated radiocarbon years BP",
                     "Radiocarbon years BP", "Varve years BP")

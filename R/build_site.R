@@ -14,6 +14,13 @@
 #' @noRd
 build_site <- function(x) {
   assert_that(is.list(x), msg = "Parsed object must be a list.")
+  # A site coming from the API must carry a real siteid. When it does not, the
+  # element is malformed/empty, so we drop it rather than fabricate a phantom
+  # site with a random id (see set_site()). The caller null-filters before
+  # building the `sites` container.
+  if (is.null(x$siteid)) {
+    return(NULL)
+  }
   geography <- use_na(read_geography(x$geography), "sf")
   site <- set_site(siteid = use_na(x$siteid, "int"),
                    sitename = use_na(x$sitename, "char"),

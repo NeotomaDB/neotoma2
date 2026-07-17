@@ -17,6 +17,13 @@
 #' @noRd
 build_collunits <- function(x) {
   assert_that(is.list(x), msg = "Parsed object must be a list.")
+  # A collection unit coming from the API must carry a real collectionunitid.
+  # When it does not, the element is malformed/empty, so we drop it rather than
+  # fabricate a phantom collunit with a random id (see set_collunit()). The
+  # caller null-filters before building the `collunits` container.
+  if (is.null(x$collectionunitid)) {
+    return(NULL)
+  }
   cu <- set_collunit(
     collectionunitid = use_na(x$collectionunitid, "int"),
     collunittype = use_na(pick(x, "collectionunittype", "unittype",

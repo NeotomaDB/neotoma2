@@ -44,6 +44,12 @@ records_to_df <- function(records, tibble = TRUE) {
 #' @returns A simple `sample` object
 #' @noRd
 build_sample <- function(x) {
+  # A sample coming from the API must carry a real sampleid. When it does not,
+  # the element is malformed/empty, so we drop it rather than build a phantom
+  # sample. The caller null-filters before building the `samples` container.
+  if (is.null(x$sampleid)) {
+    return(NULL)
+  }
   df <- records_to_df(x$datum)
   df_age <- records_to_df(x$ages, tibble = FALSE)
   analyst_list_helper <- x$sampleanalyst %>%

@@ -39,6 +39,11 @@ build_chron <- function(x) {
   }) %>%
     bind_rows()
   chron_table <- df[!duplicated(df), ]
+  # Drop chroncontrol rows that carry no real chroncontrolid: those are
+  # malformed/empty controls and would otherwise become phantom NA rows.
+  if ("chroncontrolid" %in% names(chron_table)) {
+    chron_table <- chron_table[!is.na(chron_table$chroncontrolid), ]
+  }
   chronology <- set_chronology(chronologyid = use_na(ch$chronologyid, "int"),
                                notes = use_na(meta$notes, "char"),
                                contact = use_na(meta$contact, "list"),

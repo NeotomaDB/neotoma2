@@ -12,6 +12,13 @@
 #' @noRd
 build_dataset <- function(x) {
   assert_that(is.list(x), msg = "Parsed object must be a list.")
+  # A dataset coming from the API must carry a real datasetid. When it does
+  # not, the element is malformed/empty, so we drop it rather than fabricate a
+  # phantom dataset with a random id (see set_dataset()). The caller
+  # null-filters before building the `datasets` container.
+  if (is.null(x$datasetid)) {
+    return(NULL)
+  }
   agerange <- first_agerange(x$agerange)
   pi_list <- map(testNull(x$datasetpi, list()), function(y) {
     use_na(y$contactname, "char")
