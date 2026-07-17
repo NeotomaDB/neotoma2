@@ -7,12 +7,18 @@ Authors@R:
              family = "Socorro",
              role = c("aut", "cre"),
              email = "dominguezvid@wisc.edu",
-             comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0002-7926-4935")),
       person(given = "Simon",
              family = "Goring",
              role = c("aut"),
              email = "goring@wisc.edu",
-             comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
+             comment = c(ORCID = "0000-0002-2700-4605")),
+      person(given = "Nick",
+             family = "Hoffman",
+             role = c("aut"),
+             email = "nickhoff@sas.upenn.edu",
+             comment = c(ORCID = "0000-0002-6626-5015"))
+             )
 URL: https://github.com/NeotomaDB/neotoma2
 BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulation of data using the Neotoma Paleoecology Database.
