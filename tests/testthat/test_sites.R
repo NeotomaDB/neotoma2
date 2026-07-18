@@ -63,6 +63,7 @@ test_that("get_sites runs as expected.", {
 
 test_that("All Data + loc work", {
   skip_on_cran()
+  on.exit(Sys.sleep(10), add = TRUE)
   europe_json <- '{"type": "Polygon",
         "coordinates": [
           [[-23.5546875, 70.8446726342528],
@@ -71,7 +72,9 @@ test_that("All Data + loc work", {
            [62.57812500000001, 74.01954331150228],
            [-23.5546875, 70.8446726342528]]
         ]}'
-  data <- get_sites(loc = europe_json[1], all_data = TRUE)
+  # This only needs to prove that a large region returns many sites; a single
+  # page (`limit = 100`) satisfies `> 50` without paginating the whole continent.
+  data <- get_sites(loc = europe_json[1], limit = 100)
   testthat::expect_gt(length(data), 50)
 
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],

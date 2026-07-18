@@ -88,16 +88,13 @@ test_that("a loc string that is neither WKT nor GeoJSON errors clearly", {
 
 test_that("all_data + loc", {
   skip_on_cran()
-  europe_json <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-  data_short <- get_datasets(loc = europe_json[1])
-  data_long <- get_datasets(loc = europe_json[1], all_data = TRUE)
+  # This is the one spatial test that genuinely validates `all_data` pagination
+  # (the long result must be a superset of a single page), so it keeps the loop.
+  # Space it out, and use the shared `brazil_json` from setup.R -- this polygon
+  # was previously (mis)named `europe_json` but holds Brazil coordinates.
+  on.exit(Sys.sleep(10), add = TRUE)
+  data_short <- get_datasets(loc = brazil_json[1])
+  data_long <- get_datasets(loc = brazil_json[1], all_data = TRUE)
   testthat::expect_gte(length(data_long), length(data_short))
   eur_ids <- getids(data_long)
   # check that all datasetids in datasets df are in eur_ids
@@ -115,6 +112,7 @@ test_that("all_data + loc", {
 
 test_that("get_datasets with or without all_data works.", {
   skip_on_cran()
+  on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_sts <- get_sites(
     loc = uk_bbox_geojson,
