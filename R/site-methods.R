@@ -531,3 +531,83 @@ setMethod(f = "cite_data",
               return(NULL)
             }
           })
+
+#' @alias count-data, sites-method
+setMethod(
+  "count",
+  "sites",
+  function(x, level = c("sites", "collunits", "datasets")) {
+    
+    level <- match.arg(level)
+    
+    switch(
+      level,
+      sites = length(x@sites),
+      collunits = {
+        ids <- unlist(
+          lapply(
+            x@sites,
+            function(site) {
+              vapply(
+                site@collunits@collunits,
+                function(cu) cu@collectionunitid,
+                integer(1)
+              )}))
+        length(unique(ids))},
+      datasets = {
+        ids <- unlist(
+          lapply(x@sites,function(site) {
+              unlist(lapply(
+                  site@collunits@collunits,
+                  function(cu) {
+                    vapply(cu@datasets@datasets,
+                      function(ds) ds@datasetid,
+                      integer(1)
+                    )}))}))
+        length(unique(ids))
+      }
+    )}
+)
+
+#' @alias count-data, site-method
+setMethod(
+  "count",
+  "site",
+  function(x, level = c("sites", "collunits", "datasets")) {
+    
+    level <- match.arg(level)
+    
+    switch(
+      level,
+      
+      sites = 1L,
+      
+      collunits = {
+        ids <- vapply(
+          x@collunits@collunits,
+          function(cu) cu@collectionunitid,
+          integer(1)
+        )
+        
+        length(unique(ids))
+      },
+      
+      datasets = {
+        ids <- unlist(
+          lapply(
+            x@collunits@collunits,
+            function(cu) {
+              vapply(
+                cu@datasets@datasets,
+                function(ds) ds@datasetid,
+                integer(1)
+              )
+            }
+          )
+        )
+        
+        length(unique(ids))
+      }
+    )
+  }
+)
