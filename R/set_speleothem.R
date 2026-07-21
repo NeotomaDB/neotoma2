@@ -11,7 +11,7 @@
 #' @param dripheight drip height
 #' @param monitoring Is the speleothem being monitored? TRUE/FALSE
 #' @param geology rock type of the speleothem
-#' @param relativeage relative age of the speleothem
+#' @param rockage relative age of the speleothem
 #' @param speleothemtype type of speleothem
 #' @param dripheightunits Units for drip height
 #' @param entitycovertype type of cover around the speleothem
@@ -33,7 +33,7 @@ set_speleothem <- function(x = NA,
                            dripheight = NA_integer_,
                            monitoring = FALSE,
                            geology = NA_character_,
-                           relativeage = NA_character_,
+                           rockage = NA_character_,
                            speleothemtype = NA_character_,
                            dripheightunits = NA_character_,
                            entitycovertype = NA_character_,
@@ -60,7 +60,7 @@ set_speleothem <- function(x = NA,
     x$dripheight <- dripheight
     x$monitoring <- monitoring
     x$geology <- geology
-    x$relativeage <- relativeage
+    x$rockage <- rockage
     x$speleothemtype <- speleothemtype
     x$dripheightunits <- dripheightunits
     x$entitycovertype <- entitycovertype

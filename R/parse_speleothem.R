@@ -23,7 +23,7 @@ parse_speleothem <- function(data) {
            dripheight = use_na(x$dripheight, "int"),
            monitoring = use_na(x$monitoring, "bool"),
            geology = use_na(x$geology, "char"),
-           relativeage = use_na(x$rockage, "char"),
+           rockage = use_na(x$rockage, "char"),
            speleothemtype = use_na(x$speleothemtype, "char"),
            dripheightunits = use_na(x$dripheightunits, "char"),
            entitycovertype = use_na(x$entitycovertype, "char"),
