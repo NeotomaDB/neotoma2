@@ -30,11 +30,12 @@ Suggests:
     rmarkdown,
     ggplot2,
     Bchron,
-    covr,
+    covr
 Imports:
     rlang,
-    magrittr,
     sf,
+    leaflet,
+    magrittr,
     digest,
     geojsonsf,
     purrr,
@@ -42,7 +43,6 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    leaflet,
     assertthat,
     stringr,
     progress,
