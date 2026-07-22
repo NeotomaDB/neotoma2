@@ -17,20 +17,17 @@ test_that("get_downloads numeric", {
 test_that("get_downloads from get_datasets()
           sites object.", {
             skip_on_cran()
-            brazil <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-            brazil_sf <- geojsonsf::geojson_sf(brazil)
-            brazil_datasets <- get_datasets(loc = brazil_sf, all_data = TRUE)
+            # Space this out; it downloads full sample data.
+            on.exit(Sys.sleep(10), add = TRUE)
+            # `brazil_sf` comes from setup.R. A small `limit` is enough to prove
+            # that downloading a multi-dataset object preserves the id set --
+            # `all_data = TRUE` over the whole region is unnecessary here and was
+            # the single heaviest call in the suite.
+            brazil_datasets <- get_datasets(loc = brazil_sf, limit = 5)
             brazil_dl <- get_downloads(brazil_datasets)
             testthat::expect_identical(nrow(getids(brazil_datasets)),
                                        nrow(getids(brazil_dl)))
-            testthat::expect_equal(getids(brazil_datasets), 
+            testthat::expect_equal(getids(brazil_datasets),
                                    getids(brazil_dl))
           })
 
@@ -58,6 +55,7 @@ test_that("Faunmap dataset", {
 
 test_that("get_downloads with or without all_data works.", {
   skip_on_cran()
+  on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_datasets <- get_datasets(
     loc = uk_bbox_geojson,

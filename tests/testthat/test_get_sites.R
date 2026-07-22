@@ -26,16 +26,8 @@ test_that("get_sites numeric vector", {
 
 test_that("get_sites with loc attribute", {
   skip_on_cran()
-  brazil <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-  brazil_sf <- geojsonsf::geojson_sf(brazil)
-  brazil_sites <- get_sites(loc = brazil[1], datasettype = "pollen")
+  # `brazil_json` / `brazil_sf` come from setup.R.
+  brazil_sites <- get_sites(loc = brazil_json[1], datasettype = "pollen")
   sum <- summary(brazil_sites)
   testthat::expect_lte(length(brazil_sites), nrow(sum))
   testthat::expect_equivalent(nrow(sum), nrow(getids(brazil_sites)))
@@ -49,16 +41,12 @@ test_that("get_sites with loc attribute", {
 
 test_that("all_data + loc", {
   skip_on_cran()
-  europe_json <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-  data_short <- get_sites(loc = europe_json[1])
-  data_long <- get_sites(loc = europe_json[1], all_data = TRUE)
+  # Validates `all_data` pagination on the sites endpoint (superset check), so
+  # it keeps the loop; space it out. Uses the shared `brazil_json` from setup.R
+  # (previously duplicated here mislabelled as `europe_json`).
+  on.exit(Sys.sleep(10), add = TRUE)
+  data_short <- get_sites(loc = brazil_json[1])
+  data_long <- get_sites(loc = brazil_json[1], all_data = TRUE)
   testthat::expect_gt(length(data_long), length(data_short))
   eur_ids <- getids(data_long)
   # check that all siteids are in eur_ids
@@ -74,6 +62,9 @@ test_that("If B is contained in A region,
           get_sites() from B will be contained
           in get_sites() from A", {
             skip_on_cran()
+            # Heavy spatial query (limit = 20000); space it out to reduce load
+            # spikes on the API.
+            on.exit(Sys.sleep(10), add = TRUE)
             location <- '{"type": "Polygon",
             "coordinates": [[
                 [-169, 24],
