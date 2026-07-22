@@ -83,7 +83,7 @@ test_that("a loc string that is neither WKT nor GeoJSON errors clearly", {
   # the GeoJSON branch, where parsing raises a clear error. `parseLocation()` is
   # the layer that builds the request body; `get_datasets()` itself catches this
   # and returns NULL with a message, so we assert on the parse layer directly.
-  testthat::expect_error(parseLocation("not a geometry at all"), "GeoJSON")
+testthat::expect_error(neotoma2:::parseLocation("not a geometry at all"), "GeoJSON")
 })
 
 test_that("all_data + loc", {
