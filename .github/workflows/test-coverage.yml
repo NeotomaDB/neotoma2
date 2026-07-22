@@ -28,6 +28,7 @@ jobs:
             any::rcmdcheck
             any::xml2
             any::covr
+            any::httptest
       
       - name: Test coverage
         run: |
