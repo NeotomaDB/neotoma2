@@ -72,6 +72,30 @@ neotoma_id_param <- function(x) {
   }
 }
 
+#' @title neotoma_retry
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @importFrom httr RETRY
+#' @description An internal helper that issues a single request, retrying with
+#' exponential backoff when the failure is transient. Slow queries (wildcard
+#' site searches, large downloads) intermittently return a gateway timeout from
+#' the API, and rate limiting returns a 429; both succeed on a later attempt, so
+#' they are retried rather than raised. Client errors (400-level) are returned
+#' immediately -- a malformed or not-found request cannot succeed on a retry.
+#' @param verb The HTTP verb, "GET" or "POST".
+#' @param url The request URL.
+#' @param ... Further arguments passed to `httr::RETRY()` (headers, query,
+#' body, encode).
+#' @param times Maximum number of attempts, including the first.
+#' @returns The `httr` response from the last attempt.
+#' @noRd
+neotoma_retry <- function(verb, url, ..., times = 4) {
+  RETRY(verb, url, ...,
+        times = times,
+        pause_base = 2,
+        pause_cap = 30,
+        terminate_on = c(400, 401, 403, 404, 405, 410, 422))
+}
+
 #' @title neotoma_request
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description An internal helper that runs a single API request and maps
@@ -140,7 +164,7 @@ neotoma_content <- function(response) {
 
 #' @title neotoma_post_ids
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom httr POST http_error
+#' @importFrom httr http_error
 #' @importFrom stringr str_extract_all
 #' @description An internal helper that POSTs a query whose identifier list is
 #' too long for a `GET`. When no other query parameters are supplied the ids are
@@ -169,7 +193,8 @@ neotoma_post_ids <- function(baseurl, x, query, chunk = 50) {
       query[[resource]] <- batch
       body <- neotoma_body(query)
       response <- neotoma_request(function() {
-        POST(url, body = body, encode = "raw", neotoma_headers(json = TRUE))
+        neotoma_retry("POST", url, body = body, encode = "raw",
+                      neotoma_headers(json = TRUE))
       })
       if (http_error(response)) {
         warning("Skipping failed request with status ", response$status_code)
@@ -188,7 +213,8 @@ neotoma_post_ids <- function(baseurl, x, query, chunk = 50) {
   }
   body <- neotoma_body(query)
   response <- neotoma_request(function() {
-    POST(url, body = body, encode = "raw", neotoma_headers(json = TRUE))
+    neotoma_retry("POST", url, body = body, encode = "raw",
+                  neotoma_headers(json = TRUE))
   })
   neotoma_status_check(response)
   neotoma_content(response)
@@ -196,7 +222,7 @@ neotoma_post_ids <- function(baseurl, x, query, chunk = 50) {
 
 #' @title neotoma_fetch
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom httr GET POST modify_url
+#' @importFrom httr modify_url
 #' @description An internal helper that performs a single (non-paginated) API
 #' request. A `GET` is used for short URLs; a `POST` is used for spatial (`loc`)
 #' queries and for URLs long enough to be rejected by the server.
@@ -214,7 +240,8 @@ neotoma_fetch <- function(baseurl, x, query) {
 
   if (!use_loc && !too_long) {
     response <- neotoma_request(function() {
-      GET(paste0(baseurl, x), neotoma_headers(), query = query)
+      neotoma_retry("GET", paste0(baseurl, x), neotoma_headers(),
+                    query = query)
     })
     neotoma_status_check(response)
     return(neotoma_content(response))
@@ -226,7 +253,8 @@ neotoma_fetch <- function(baseurl, x, query) {
     url <- paste0(baseurl, paste(parts[seq_len(min(2, length(parts)))],
                                  collapse = "/"))
     response <- neotoma_request(function() {
-      POST(url, body = body, encode = "raw", neotoma_headers(json = TRUE))
+      neotoma_retry("POST", url, body = body, encode = "raw",
+                    neotoma_headers(json = TRUE))
     })
     neotoma_status_check(response)
     return(neotoma_content(response))
