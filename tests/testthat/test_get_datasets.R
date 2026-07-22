@@ -53,6 +53,39 @@ test_that("get_datasets with loc attribute", {
   testthat::expect_equal(brazil_ds_length, brazil_unique_dsids)
 })
 
+test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  ds_geo <- get_datasets(loc = brazil_geojson, limit = 10)
+  ds_wkt <- get_datasets(loc = brazil_wkt, limit = 10)
+  testthat::expect_s4_class(ds_wkt, "sites")
+  # Same shape, two encodings -> identical siteids.
+  testthat::expect_setequal(getids(ds_geo)$siteid, getids(ds_wkt)$siteid)
+})
+
+test_that("get_datasets GeoJSON loc still works (no regression)", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  ds_geo <- get_datasets(loc = brazil_geojson, limit = 5)
+  testthat::expect_s4_class(ds_geo, "sites")
+})
+
+test_that("a loc string that is neither WKT nor GeoJSON errors clearly", {
+  # A garbage string is not WKT (fails the leading-keyword test) so it falls to
+  # the GeoJSON branch, where parsing raises a clear error. `parseLocation()` is
+  # the layer that builds the request body; `get_datasets()` itself catches this
+  # and returns NULL with a message, so we assert on the parse layer directly.
+  testthat::expect_error(parseLocation("not a geometry at all"), "GeoJSON")
+})
+
 test_that("all_data + loc", {
   skip_on_cran()
   europe_json <- '{"type": "Polygon",
