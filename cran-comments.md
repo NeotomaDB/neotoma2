@@ -7,9 +7,26 @@
 
 -----
 
+## DESCRIPTION modification neotoma2 1.0.12
+
+DESCRIPTION Authors@R field.
+
+Complaints seem to be about mis-writing the ORCID info.  This should
+be of the form
+
+ comment = c(ORCID = .......)
+
+and not
+
+ comment(ORCID = .......)
+ ORCID = ........
+ 
 ## Bugfix neotoma2 1.0.11
 
-Added flag error=True to all vignette codechunks to not run when API is down in case API comes down in between a knitting.
+Set examples to \dontrun{} to avoid violating CRAN's policy that allows access to internet.
+Set vignettes to `eval=FALSE` as to avoid calling APIs that require access to internet.
+Set all tests that require API call to `skip on CRAN`.
+
 
 ## Bugfix neotoma2 1.0.10
 

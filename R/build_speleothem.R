@@ -8,6 +8,13 @@ build_speleothem <- function(...) {
   args <- list(...)
   args <- cleanNULL(args)
   assert_that(is.list(args), msg = "Parsed object must be a list.")
+  # A speleothem coming from the API must carry a real entityid. When it does
+  # not, the element is malformed/empty, so we drop it rather than fabricate a
+  # phantom speleothem with a random id (see set_speleothem()). The caller
+  # null-filters before building the `speleothems` container.
+  if (is.null(args$entityid)) {
+    return(NULL)
+  }
   speleothem <- set_speleothem(
                   entityid = use_na(args$entityid, "int"),
                   entityname = use_na(args$entityname, "char"),

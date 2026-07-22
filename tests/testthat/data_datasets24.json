@@ -1,0 +1,49 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "site": {
+        "siteid": 24,
+        "sitename": "A Place in Neotoma",
+        "sitedescription": "Physiography: gentle rolling hills with scattered wetlands.",
+        "sitenotes": "Lake area from a regional hydrography dataset.  Added on 3/2/22 by Sample Analyst, Example University.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+        "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-95.25,45.75]}",
+        "altitude": 128,
+        "collectionunitid": 24,
+        "collectionunit": null,
+        "handle": "NEOPLACE",
+        "unittype": "Core",
+        "datasets": [
+          {
+            "doi": [
+              "10.21233/x0aa11",
+              "10.21233/x0bb22"
+            ],
+            "agerange": [
+              {
+                "units": "Calendar years BP",
+                "ageold": 8100,
+                "ageyoung": 2900
+              }
+            ],
+            "database": "North American Pollen Database",
+            "datasetid": 24,
+            "datasetpi": [
+              {
+                "initials": "J.A.",
+                "contactid": 52,
+                "firstname": "Jane A.",
+                "familyname": "Doe",
+                "contactname": "Doe, Jane A."
+              }
+            ],
+            "datasettype": "pollen",
+            "datasetnotes": "Taxon counts and names were unclear on the original data sheets - errors are possible.",
+            "recdatecreated": "2016-05-11T09:18:07"
+          }
+        ]
+      }
+    }
+  ],
+  "message": "Retrieved all tables"
+}

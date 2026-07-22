@@ -29,7 +29,7 @@ setMethod(f = "collunits",
           })
 
 #' @title Extract `datasets` from a `sites` or `collunits` object.
-#' @importFrom purrr map reduce
+#' @importFrom purrr map map_lgl reduce
 #' @param object A `sites` or`collunits` object
 #' @returns `datasets` object
 #' @export
@@ -38,7 +38,12 @@ setMethod(f = "datasets",
           definition = function(object) {
             result <- map(object@collunits,
               function(x) x@datasets)
-            if (length(result) == 1) {
+            # Drop collection units with no datasets so reduce()/c() never
+            # dereferences a NULL slot or runs on an empty list.
+            result <- result[!map_lgl(result, is.null)]
+            if (length(result) == 0) {
+              out <- new("datasets", datasets = list())
+            } else if (length(result) == 1) {
               out <- result[[1]]
             } else {
               out <- reduce(result, c)
@@ -71,7 +76,12 @@ setMethod(f = "datasets",
             cunits <- collunits(object)
             result <- map(cunits@collunits,
               function(x) x@datasets)
-            if (length(result) == 1) {
+            # Drop collection units with no datasets so reduce()/c() never
+            # dereferences a NULL slot or runs on an empty list.
+            result <- result[!map_lgl(result, is.null)]
+            if (length(result) == 0) {
+              out <- new("datasets", datasets = list())
+            } else if (length(result) == 1) {
               out <- result[[1]]
             } else {
               out <- reduce(result, c)
@@ -88,6 +98,13 @@ setMethod(f = "datasets",
 setMethod(f = "chronologies",
           signature = "collunit",
           definition = function(x) {
+            # A collection unit with no chronologies (NULL or empty slot)
+            # contributes none; return an empty container instead of
+            # dereferencing a NULL slot.
+            if (is.null(x@chronologies) ||
+                  length(x@chronologies@chronologies) == 0) {
+              return(new("chronologies", chronologies = list()))
+            }
             output <- map(x@chronologies@chronologies, function(y) {
               attr(y, "collunitid") <- x$collectionunitid
               return(y)
@@ -109,6 +126,9 @@ setMethod(f = "chronologies",
             output <- map(x@collunits, function(y) {
               chronologies(y)
             })
+            if (length(output) == 0) {
+              return(new("chronologies", chronologies = list()))
+            }
             output <- reduce(output, c)
             return(output)
           })
@@ -121,6 +141,9 @@ setMethod(f = "chronologies",
             output <- map(x@collunits@collunits, function(y) {
               chronologies(y)
             })
+            if (length(output) == 0) {
+              return(new("chronologies", chronologies = list()))
+            }
             output <- purrr::reduce(output, c)
             return(output)
           })
@@ -133,6 +156,9 @@ setMethod(f = "chronologies",
             output <- map(x@sites, function(y) {
               chronologies(y)
             })
+            if (length(output) == 0) {
+              return(new("chronologies", chronologies = list()))
+            }
             output <- reduce(output, c)
             return(output)
           })
