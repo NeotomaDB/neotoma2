@@ -1,0 +1,1335 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "publicationid": null,
+            "datasetid": null,
+            "siteid": null,
+            "doi": null,
+            "familyname": null,
+            "pubtype": null,
+            "year": null,
+            "search": "pollen",
+            "limit": 25,
+            "offset": 0
+        },
+        "result": [
+            {
+                "publication": {
+                    "publicationid": 21902,
+                    "pubtypeid": 9,
+                    "pubtype": "Other Authored",
+                    "year": "2024",
+                    "citation": "Ammann, B. 2024. Pollen data of Gomnis Tba, Georgia. Notes: Unpublished pollen data",
+                    "articletitle": "Pollen data of Gomnis Tba, Georgia",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": "Unpublished pollen data",
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Ammann",
+                            "givennames": "Brigitta"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.10769231
+            },
+            {
+                "publication": {
+                    "publicationid": 21901,
+                    "pubtypeid": 9,
+                    "pubtype": "Other Authored",
+                    "year": "2024",
+                    "citation": "Ammann, B. 2024. Pollen data of Cheliagele, Georgia. Notes: Ubpublished",
+                    "articletitle": "Pollen data of Cheliagele, Georgia",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": "Ubpublished",
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Ammann",
+                            "givennames": "Brigitta"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.10606061
+            },
+            {
+                "publication": {
+                    "publicationid": 10620,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1786",
+                    "citation": "Wulfen, F.X. 1786. Collectanea 1.",
+                    "articletitle": null,
+                    "journal": "Collectanea",
+                    "volume": "1",
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Wulfen",
+                            "givennames": "F. X."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.1
+            },
+            {
+                "publication": {
+                    "publicationid": 3696,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1976",
+                    "citation": "Srivastava, S. K. 1976. The fossil pollen genus Classopollis. Lethaia 9:437-457.",
+                    "articletitle": "The fossil pollen genus Classopollis",
+                    "journal": "Lethaia",
+                    "volume": "9",
+                    "issue": "4",
+                    "pages": "437-457",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Srivastava",
+                            "givennames": "Satish K."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.09859155
+            },
+            {
+                "publication": {
+                    "publicationid": 551,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1947",
+                    "citation": "Potzger, J.E., and B.C. Tharp. 1947. Pollen profile from a Texas Bog. Ecology 28:274-280.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Potzger",
+                            "givennames": "J. E."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Tharp",
+                            "givennames": "B. C."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 1803,
+                            "primary": null,
+                            "datasetid": 1865
+                        }
+                    ]
+                },
+                "match": 0.097222224
+            },
+            {
+                "publication": {
+                    "publicationid": 21908,
+                    "pubtypeid": 9,
+                    "pubtype": "Other Authored",
+                    "year": "2015",
+                    "citation": "Janssen, C.R. 2015. Pollen data from the Vosges Mountains, France. Notes: Unpublished",
+                    "articletitle": "Pollen data from the Vosges Mountains, France",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": "Unpublished",
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Janssen",
+                            "givennames": "C. Roel"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.09210526
+            },
+            {
+                "publication": {
+                    "publicationid": 549,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1954",
+                    "citation": "Potzger, J.E., and B.C. Tharp. 1954. Pollen study of two bogs in Texas. Ecology 35:462-466.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Potzger",
+                            "givennames": "J. E."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Tharp",
+                            "givennames": "B. C."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 834,
+                            "primary": null,
+                            "datasetid": 861
+                        }
+                    ]
+                },
+                "match": 0.09210526
+            },
+            {
+                "publication": {
+                    "publicationid": 666,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1967",
+                    "citation": "Nichols, H. 1967. Pollen diagrams from sub-arctic Central Canada. Science 155:1665-1668.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Nichols",
+                            "givennames": "Harvey"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 783,
+                            "primary": null,
+                            "datasetid": 803
+                        },
+                        {
+                            "siteid": 1629,
+                            "primary": null,
+                            "datasetid": 1684
+                        }
+                    ]
+                },
+                "match": 0.09090909
+            },
+            {
+                "publication": {
+                    "publicationid": 1377,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1963",
+                    "citation": "Watts, W.A. 1963. Late-glacial pollen zones in western Ireland. Irish Geography 4:367-376.",
+                    "articletitle": "Late-glacial pollen zones in western Ireland",
+                    "journal": "Irish Geography",
+                    "volume": "4",
+                    "issue": null,
+                    "pages": "367-376",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Watts",
+                            "givennames": "William A."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 3213,
+                            "primary": null,
+                            "datasetid": 4172
+                        },
+                        {
+                            "siteid": 3386,
+                            "primary": false,
+                            "datasetid": 9162
+                        },
+                        {
+                            "siteid": 3386,
+                            "primary": true,
+                            "datasetid": 4390
+                        }
+                    ]
+                },
+                "match": 0.088607594
+            },
+            {
+                "publication": {
+                    "publicationid": 555,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1958",
+                    "citation": "Graham, A.K. 1958. Pollen studies of some Texas peat deposits. Thesis. University of Texas, Austin, Texas, USA.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Graham",
+                            "givennames": "Alan Keith"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 18,
+                            "primary": null,
+                            "datasetid": 3772
+                        }
+                    ]
+                },
+                "match": 0.085365854
+            },
+            {
+                "publication": {
+                    "publicationid": 18676,
+                    "pubtypeid": 9,
+                    "pubtype": "Other Authored",
+                    "year": "2001",
+                    "citation": "van Mannekes, M. 2001. Pollen anaylsis of the holocene section of the Naaldwijk core 37B0300.",
+                    "articletitle": "Pollen anaylsis of the holocene section of the Naaldwijk core 37B0300",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "van Mannekes",
+                            "givennames": "Marije"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 29062,
+                            "primary": true,
+                            "datasetid": 54506
+                        }
+                    ]
+                },
+                "match": 0.085365854
+            },
+            {
+                "publication": {
+                    "publicationid": 16336,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1966",
+                    "citation": "Krutzsch, W. 1966. Zur Kenntnis praquartarer periporater Pollenformen. Geologie 15(55):16-72.",
+                    "articletitle": "Zur Kenntnis praquartarer periporater Pollenformen",
+                    "journal": "Geologie",
+                    "volume": "15",
+                    "issue": "55",
+                    "pages": "16-72",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Krutzsch",
+                            "givennames": "Wilfried"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.085365854
+            },
+            {
+                "publication": {
+                    "publicationid": 1051,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1979",
+                    "citation": "Bottema, S. 1979. Pollen analytical investigations in Thessaly (Greece). Palaeohistoria 21(19-40).",
+                    "articletitle": "Pollen analytical investigations in Thessaly (Greece)",
+                    "journal": "Palaeohistoria",
+                    "volume": "21",
+                    "issue": "19-40",
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Bottema",
+                            "givennames": "Sytze"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 3496,
+                            "primary": true,
+                            "datasetid": 4521
+                        },
+                        {
+                            "siteid": 15838,
+                            "primary": false,
+                            "datasetid": 24372
+                        },
+                        {
+                            "siteid": 15838,
+                            "primary": true,
+                            "datasetid": 24373
+                        }
+                    ]
+                },
+                "match": 0.08235294
+            },
+            {
+                "publication": {
+                    "publicationid": 18480,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "2002",
+                    "citation": "Bakels, C.C. 2002. De venige en humeus-zandige afzettingen in de voormalige geul, pollen en zaden. ARCHOL 11.",
+                    "articletitle": "De venige en humeus-zandige afzettingen in de voormalige geul, pollen en zaden",
+                    "journal": "ARCHOL",
+                    "volume": "11",
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Bakels",
+                            "givennames": "Corrie"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 28530,
+                            "primary": true,
+                            "datasetid": 53334
+                        }
+                    ]
+                },
+                "match": 0.08235294
+            },
+            {
+                "publication": {
+                    "publicationid": 16166,
+                    "pubtypeid": 11,
+                    "pubtype": "Website",
+                    "year": "2017",
+                    "citation": "Julier, A., and W. Gosling. 2017. Modern pollen types, Ghana. https://figshare.com/articles/Modern_pollen_types_Ghana_/5240956.",
+                    "articletitle": "Modern pollen types, Ghana",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": "https://figshare.com/articles/Modern_pollen_types_Ghana_/5240956",
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Julier",
+                            "givennames": "Adele Charlotte Mary"
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Gosling",
+                            "givennames": "William D."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.08139535
+            },
+            {
+                "publication": {
+                    "publicationid": 17503,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1992",
+                    "citation": "Shulmeister, J. 1992. A Holocene pollen record from lowland tropical Australia. The Holocene 2(2):107-116.",
+                    "articletitle": "A Holocene pollen record from lowland tropical Australia",
+                    "journal": "The Holocene",
+                    "volume": "2",
+                    "issue": "2",
+                    "pages": "107-116",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Shulmeister",
+                            "givennames": "James"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 30434,
+                            "primary": false,
+                            "datasetid": 57639
+                        }
+                    ]
+                },
+                "match": 0.08139535
+            },
+            {
+                "publication": {
+                    "publicationid": 548,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1960",
+                    "citation": "Graham, A.K., and C. Heimsch. 1960. Pollen studies of some Texas peat deposits. Ecology 41:751-763.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Graham",
+                            "givennames": "Alan Keith"
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Heimsch",
+                            "givennames": "C."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 18,
+                            "primary": null,
+                            "datasetid": 18
+                        },
+                        {
+                            "siteid": 18,
+                            "primary": null,
+                            "datasetid": 3772
+                        },
+                        {
+                            "siteid": 834,
+                            "primary": null,
+                            "datasetid": 861
+                        }
+                    ]
+                },
+                "match": 0.07954545
+            },
+            {
+                "publication": {
+                    "publicationid": 17410,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "2000",
+                    "citation": "Björkman, L. 2000. Pollenanlys av en lagerföljd från Uddared, Laholms kommun. LUNDQUA Uppdrag:1-8.",
+                    "articletitle": "Pollenanlys av en lagerföljd från Uddared, Laholms kommun",
+                    "journal": "LUNDQUA Uppdrag",
+                    "volume": null,
+                    "issue": "31",
+                    "pages": "1-8",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Björkman",
+                            "givennames": "Leif"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 28813,
+                            "primary": true,
+                            "datasetid": 53771
+                        }
+                    ]
+                },
+                "match": 0.07954545
+            },
+            {
+                "publication": {
+                    "publicationid": 155,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1970",
+                    "citation": "Morrison, A. 1970. Pollen diagrams from interior Labrador. Canadian Journal of Botany 48:1957-1975.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Morrison",
+                            "givennames": "Alastair"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.07954545
+            },
+            {
+                "publication": {
+                    "publicationid": 349,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1995",
+                    "citation": "Fredlund, G.G. 1995. Late Quaternary pollen record from Cheyenne Bottoms, Kansas. Quaternary Research 43:67-79.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Fredlund",
+                            "givennames": "Glen G."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 358,
+                            "primary": null,
+                            "datasetid": 366
+                        },
+                        {
+                            "siteid": 358,
+                            "primary": null,
+                            "datasetid": 367
+                        }
+                    ]
+                },
+                "match": 0.07954545
+            },
+            {
+                "publication": {
+                    "publicationid": 20071,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1973",
+                    "citation": "Heusser, C.J. 1973. Modern Pollen Spectra from Mount Rainer, Washington. Northwest Science 47(1):1-8.",
+                    "articletitle": "Modern Pollen Spectra from Mount Rainer, Washington",
+                    "journal": "Northwest Science",
+                    "volume": "47",
+                    "issue": "1",
+                    "pages": "1-8",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Heusser",
+                            "givennames": "Calvin J."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 32521,
+                            "primary": false,
+                            "datasetid": 60815
+                        },
+                        {
+                            "siteid": 32522,
+                            "primary": false,
+                            "datasetid": 60816
+                        },
+                        {
+                            "siteid": 32523,
+                            "primary": false,
+                            "datasetid": 60817
+                        },
+                        {
+                            "siteid": 32524,
+                            "primary": false,
+                            "datasetid": 60818
+                        },
+                        {
+                            "siteid": 32525,
+                            "primary": false,
+                            "datasetid": 60819
+                        },
+                        {
+                            "siteid": 32526,
+                            "primary": false,
+                            "datasetid": 60820
+                        },
+                        {
+                            "siteid": 32527,
+                            "primary": false,
+                            "datasetid": 60821
+                        },
+                        {
+                            "siteid": 32528,
+                            "primary": false,
+                            "datasetid": 60822
+                        },
+                        {
+                            "siteid": 32529,
+                            "primary": false,
+                            "datasetid": 60823
+                        },
+                        {
+                            "siteid": 32530,
+                            "primary": false,
+                            "datasetid": 60824
+                        },
+                        {
+                            "siteid": 32531,
+                            "primary": false,
+                            "datasetid": 60825
+                        },
+                        {
+                            "siteid": 32532,
+                            "primary": false,
+                            "datasetid": 60826
+                        },
+                        {
+                            "siteid": 32533,
+                            "primary": false,
+                            "datasetid": 60827
+                        },
+                        {
+                            "siteid": 32534,
+                            "primary": false,
+                            "datasetid": 60828
+                        },
+                        {
+                            "siteid": 32535,
+                            "primary": false,
+                            "datasetid": 60829
+                        },
+                        {
+                            "siteid": 32536,
+                            "primary": false,
+                            "datasetid": 60830
+                        },
+                        {
+                            "siteid": 32537,
+                            "primary": false,
+                            "datasetid": 60831
+                        },
+                        {
+                            "siteid": 32538,
+                            "primary": false,
+                            "datasetid": 60832
+                        },
+                        {
+                            "siteid": 32539,
+                            "primary": false,
+                            "datasetid": 60833
+                        },
+                        {
+                            "siteid": 32540,
+                            "primary": false,
+                            "datasetid": 60834
+                        },
+                        {
+                            "siteid": 32541,
+                            "primary": false,
+                            "datasetid": 60835
+                        },
+                        {
+                            "siteid": 32542,
+                            "primary": false,
+                            "datasetid": 60836
+                        },
+                        {
+                            "siteid": 32543,
+                            "primary": false,
+                            "datasetid": 60837
+                        },
+                        {
+                            "siteid": 32544,
+                            "primary": false,
+                            "datasetid": 60838
+                        },
+                        {
+                            "siteid": 32545,
+                            "primary": false,
+                            "datasetid": 60839
+                        }
+                    ]
+                },
+                "match": 0.07954545
+            },
+            {
+                "publication": {
+                    "publicationid": 10975,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1970",
+                    "citation": "Planchais, N. 1970. Tardiglaciaire et Postglaciaire à Mur-de -Sologne (Loir-et-Cher). Pollen et Spores 12(3):381-428.",
+                    "articletitle": "Tardiglaciaire et Postglaciaire à Mur-de -Sologne (Loir-et-Cher).",
+                    "journal": "Pollen et Spores",
+                    "volume": "12",
+                    "issue": "3",
+                    "pages": "381-428",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Planchais",
+                            "givennames": "Nadine"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 16173,
+                            "primary": false,
+                            "datasetid": 25002
+                        },
+                        {
+                            "siteid": 16173,
+                            "primary": true,
+                            "datasetid": 25003
+                        }
+                    ]
+                },
+                "match": 0.07865169
+            },
+            {
+                "publication": {
+                    "publicationid": 17297,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1981",
+                    "citation": "Sowunmi, M.A. 1981. Late Quaternary environmental changes in Nigeria. Pollen et Spores 23(1):125-148.",
+                    "articletitle": "Late Quaternary environmental changes in Nigeria",
+                    "journal": "Pollen et Spores",
+                    "volume": "23",
+                    "issue": "1",
+                    "pages": "125-148",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Sowunmi",
+                            "givennames": "Margaret Adebisi"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 28310,
+                            "primary": false,
+                            "datasetid": 52752
+                        }
+                    ]
+                },
+                "match": 0.07865169
+            },
+            {
+                "publication": {
+                    "publicationid": 470,
+                    "pubtypeid": 0,
+                    "pubtype": "Legacy",
+                    "year": "1978",
+                    "citation": "Mott, R.J. 1978. Populus in late-Pleistocene pollen spectra. Candian Journal of Botany 56:1021-1031.",
+                    "articletitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Mott",
+                            "givennames": "Robert J."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 1840,
+                            "primary": null,
+                            "datasetid": 1904
+                        },
+                        {
+                            "siteid": 1954,
+                            "primary": null,
+                            "datasetid": 2023
+                        }
+                    ]
+                },
+                "match": 0.07865169
+            },
+            {
+                "publication": {
+                    "publicationid": 699,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1975",
+                    "citation": "Hyvärinen, H. 1975. Absolute and relative pollen diagrams from northernmost Fennoscandia. Fennia 142(1):1-23.",
+                    "articletitle": "Absolute and relative pollen diagrams from northernmost Fennoscandia",
+                    "journal": "Fennia",
+                    "volume": "142",
+                    "issue": "1",
+                    "pages": "1-23",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Hyvärinen",
+                            "givennames": "Hannu"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 20,
+                            "primary": false,
+                            "datasetid": 7867
+                        },
+                        {
+                            "siteid": 20,
+                            "primary": true,
+                            "datasetid": 20
+                        },
+                        {
+                            "siteid": 310,
+                            "primary": false,
+                            "datasetid": 7958
+                        },
+                        {
+                            "siteid": 310,
+                            "primary": true,
+                            "datasetid": 317
+                        },
+                        {
+                            "siteid": 3451,
+                            "primary": false,
+                            "datasetid": 9215
+                        },
+                        {
+                            "siteid": 3451,
+                            "primary": true,
+                            "datasetid": 4468
+                        }
+                    ]
+                },
+                "match": 0.07865169
+            }
+        ]
+    },
+    "message": "Publications returned"
+}

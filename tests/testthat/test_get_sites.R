@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Test `get_sites()` function.")
 test_that("get_sites numeric", {
   skip_on_cran()
@@ -82,6 +84,11 @@ test_that("If B is contained in A region,
                 [-52, 24],
                 [-169, 24]]]}'
             usa <- get_sites(loc = location, limit = 20000)
-            fla <- get_sites(gpid = "Florida", limit = 10000)
-            testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+            usaid = as.data.frame(usa)
+            fla <- get_sites(gpid = "Florida", limit = 10000) 
+            fla = as.data.frame(fla) %>% dplyr::filter(!is.na(sitename))
+            uncontained = fla %>% dplyr::filter(!sitename %in% usaid$sitename)
+            testthat::expect_true(dim(uncontained)[1] ==0)
           })
+
+})

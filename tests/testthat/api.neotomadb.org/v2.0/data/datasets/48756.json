@@ -1,0 +1,70 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 27254,
+                "sitename": "La Calderilla",
+                "sitedescription": "Dry caldera located within the high-elevation belt of Gran Canaria. La Calderilla volcanic complex is located at uppermost peaks in the centre of Gran Canaria Island and it is composed of a strombolian cone and phreatomagmatic maar ~200 m in diameter. The site is located in a belt of Pinus canariensis forest.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-15.5534,27.96268]}",
+                "altitude": 1767,
+                "collectionunitid": 35120,
+                "collectionunit": "CAL1",
+                "handle": "CALDERIL",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/7nay-4102",
+                            "10.21233/7NAY-4102"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 4723,
+                                "ageyoung": 0
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 48756,
+                        "datasetpi": [
+                            {
+                                "initials": "C.",
+                                "contactid": 9445,
+                                "firstname": "Cesare",
+                                "familyname": "Ravazzi",
+                                "contactname": "Ravazzi, Cesare"
+                            },
+                            {
+                                "initials": "L.",
+                                "contactid": 16582,
+                                "firstname": "Lorena",
+                                "familyname": "Garozzo",
+                                "contactname": "Garozzo, Lorena"
+                            },
+                            {
+                                "initials": "M.",
+                                "contactid": 10242,
+                                "firstname": "Michela",
+                                "familyname": "Mariani",
+                                "contactname": "Mariani, Michela"
+                            },
+                            {
+                                "initials": "R.",
+                                "contactid": 9757,
+                                "firstname": "Roberta",
+                                "familyname": "Pini",
+                                "contactname": "Pini, Roberta"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2020-11-13T04:49:14"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

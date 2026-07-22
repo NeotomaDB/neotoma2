@@ -1,4 +1,7 @@
-testthat::skip("Skipping all tests in this file")
+library("httptest")
+
+httptest::with_mock_api({
+  testthat::skip("Skipping all tests in this file")
 test_that("Manual loading fails if interactive is false.", {
   skip_on_cran()
   get_specimens(datasetid = c(19832, 41610))
@@ -24,4 +27,5 @@ test_that("Building a specimen works.", {
   # Build error when we pass multiple rows.
   new_spec <- testthat::expect_error(build_specimen(dataset))
   new_spec <- testthat::expect_is(build_specimen(dataset[1, ]), "specimen")
+})
 })

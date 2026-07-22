@@ -1,0 +1,531 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 120,
+            "sitename": "Site 50 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-78.75,42.1]}",
+            "altitude": 448,
+            "collectionunits": [
+                {
+                    "handle": "AMS050",
+                    "datasets": [
+                        {
+                            "datasetid": 120,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ALLP411",
+                    "collectionunitid": 120,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 148,
+            "sitename": "Site 78 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.45,42.02]}",
+            "altitude": 515,
+            "collectionunits": [
+                {
+                    "handle": "AMS078",
+                    "datasets": [
+                        {
+                            "datasetid": 148,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "OQUL404",
+                    "collectionunitid": 148,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 149,
+            "sitename": "Site 79 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.93,42.2]}",
+            "altitude": 442,
+            "collectionunits": [
+                {
+                    "handle": "AMS079",
+                    "datasets": [
+                        {
+                            "datasetid": 149,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "STJO405",
+                    "collectionunitid": 149,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 150,
+            "sitename": "Site 80 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-76.05,42.25]}",
+            "altitude": 365,
+            "collectionunits": [
+                {
+                    "handle": "AMS080",
+                    "datasets": [
+                        {
+                            "datasetid": 150,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "SPEL406",
+                    "collectionunitid": 150,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 151,
+            "sitename": "Site 81 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-77.27,42.22]}",
+            "altitude": 381,
+            "collectionunits": [
+                {
+                    "handle": "AMS081",
+                    "datasets": [
+                        {
+                            "datasetid": 151,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "THUP407",
+                    "collectionunitid": 151,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 152,
+            "sitename": "Site 82 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-77.57,42.48]}",
+            "altitude": 530,
+            "collectionunits": [
+                {
+                    "handle": "AMS082",
+                    "datasets": [
+                        {
+                            "datasetid": 152,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "LOON408",
+                    "collectionunitid": 152,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 153,
+            "sitename": "Site 83 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-77.98,42.23]}",
+            "altitude": 587,
+            "collectionunits": [
+                {
+                    "handle": "AMS083",
+                    "datasets": [
+                        {
+                            "datasetid": 153,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "PHCR409",
+                    "collectionunitid": 153,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 154,
+            "sitename": "Site 84 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-78.32,42.23]}",
+            "altitude": 601,
+            "collectionunits": [
+                {
+                    "handle": "AMS084",
+                    "datasets": [
+                        {
+                            "datasetid": 154,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "CUBA410",
+                    "collectionunitid": 154,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 155,
+            "sitename": "Site 85 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.07,41.55]}",
+            "altitude": 156,
+            "collectionunits": [
+                {
+                    "handle": "AMS085",
+                    "datasets": [
+                        {
+                            "datasetid": 155,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "CHDL382",
+                    "collectionunitid": 155,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 156,
+            "sitename": "Site 86 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.05,42.2]}",
+            "altitude": 689,
+            "collectionunits": [
+                {
+                    "handle": "AMS086",
+                    "datasets": [
+                        {
+                            "datasetid": 156,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "NORL384",
+                    "collectionunitid": 156,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 157,
+            "sitename": "Site 87 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.82,43.55]}",
+            "altitude": 242,
+            "collectionunits": [
+                {
+                    "handle": "AMS087",
+                    "datasets": [
+                        {
+                            "datasetid": 157,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "PKFL389",
+                    "collectionunitid": 157,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 158,
+            "sitename": "Site 88 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.13,43.97]}",
+            "altitude": 468,
+            "collectionunits": [
+                {
+                    "handle": "AMS088",
+                    "datasets": [
+                        {
+                            "datasetid": 158,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "HRSL390",
+                    "collectionunitid": 158,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 159,
+            "sitename": "Site 89 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.78,42.93]}",
+            "altitude": 47,
+            "collectionunits": [
+                {
+                    "handle": "AMS089",
+                    "datasets": [
+                        {
+                            "datasetid": 159,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "RNDL387",
+                    "collectionunitid": 159,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 160,
+            "sitename": "Site 90 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.03,44.52]}",
+            "altitude": 537,
+            "collectionunits": [
+                {
+                    "handle": "AMS090",
+                    "datasets": [
+                        {
+                            "datasetid": 160,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "CRPN394",
+                    "collectionunitid": 160,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 161,
+            "sitename": "Site 91 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.75,44.15]}",
+            "altitude": 622,
+            "collectionunits": [
+                {
+                    "handle": "AMS091",
+                    "datasets": [
+                        {
+                            "datasetid": 161,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "CHPL392",
+                    "collectionunitid": 161,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 162,
+            "sitename": "Site 92 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.45,43.98]}",
+            "altitude": 540,
+            "collectionunits": [
+                {
+                    "handle": "AMS092",
+                    "datasets": [
+                        {
+                            "datasetid": 162,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "EATN398",
+                    "collectionunitid": 162,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 163,
+            "sitename": "Site 93 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.25,44.45]}",
+            "altitude": 503,
+            "collectionunits": [
+                {
+                    "handle": "AMS093",
+                    "datasets": [
+                        {
+                            "datasetid": 163,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "CHRH395",
+                    "collectionunitid": 163,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 164,
+            "sitename": "Site 94 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.72,43.23]}",
+            "altitude": 172,
+            "collectionunits": [
+                {
+                    "handle": "AMS094",
+                    "datasets": [
+                        {
+                            "datasetid": 164,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "MRAU388",
+                    "collectionunitid": 164,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 165,
+            "sitename": "Site 95 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.42,44.32]}",
+            "altitude": 490,
+            "collectionunits": [
+                {
+                    "handle": "AMS095",
+                    "datasets": [
+                        {
+                            "datasetid": 165,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "RLNS396",
+                    "collectionunitid": 165,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 166,
+            "sitename": "Site 96 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.05,43.43]}",
+            "altitude": 516,
+            "collectionunits": [
+                {
+                    "handle": "AMS096",
+                    "datasets": [
+                        {
+                            "datasetid": 166,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "OXBO401",
+                    "collectionunitid": 166,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 167,
+            "sitename": "Site 97 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.25,43.78]}",
+            "altitude": 518,
+            "collectionunits": [
+                {
+                    "handle": "AMS097",
+                    "datasets": [
+                        {
+                            "datasetid": 167,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ADRK399",
+                    "collectionunitid": 167,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 168,
+            "sitename": "Site 98 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.52,44.08]}",
+            "altitude": 535,
+            "collectionunits": [
+                {
+                    "handle": "AMS098",
+                    "datasets": [
+                        {
+                            "datasetid": 168,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "SPRY397",
+                    "collectionunitid": 168,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 169,
+            "sitename": "Site 99 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.3,43.38]}",
+            "altitude": 389,
+            "collectionunits": [
+                {
+                    "handle": "AMS099",
+                    "datasets": [
+                        {
+                            "datasetid": 169,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ALGQ402",
+                    "collectionunitid": 169,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 170,
+            "sitename": "Site 100 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.7,43.92]}",
+            "altitude": 379,
+            "collectionunits": [
+                {
+                    "handle": "AMS100",
+                    "datasets": [
+                        {
+                            "datasetid": 170,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "JHSN391",
+                    "collectionunitid": 170,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 191,
+            "sitename": "Site 121 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.08,41.88]}",
+            "altitude": 85,
+            "collectionunits": [
+                {
+                    "handle": "AMS121",
+                    "datasets": [
+                        {
+                            "datasetid": 191,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "WILL.383",
+                    "collectionunitid": 191,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

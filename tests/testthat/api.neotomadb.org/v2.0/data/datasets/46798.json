@@ -1,0 +1,56 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 26737,
+                "sitename": "Driehoek Vlei",
+                "sitedescription": "Upland wetland site within the Driehoek Valley in the central Cederberg Mountain range, southwestern Cape, South Africa. Vegetation is mountain fynbos.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[19.16,-32.44]}",
+                "altitude": 888,
+                "collectionunitid": 33407,
+                "collectionunit": "DRK",
+                "handle": "DRIEHOEK",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/8mn4-hf50",
+                            "10.21233/8MN4-HF50"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 15451,
+                                "ageyoung": -50
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 46798,
+                        "datasetpi": [
+                            {
+                                "initials": "J.M.",
+                                "contactid": 16121,
+                                "firstname": "Jean Mary",
+                                "familyname": "Sugden",
+                                "contactname": "Sugden, Jean Mary"
+                            },
+                            {
+                                "initials": "M.E.",
+                                "contactid": 16052,
+                                "firstname": "Michael Edward",
+                                "familyname": "Meadows",
+                                "contactname": "Meadows, Michael Edward"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Only percentage data is presented in the original thesis (Sugden, 1989).",
+                        "recdatecreated": "2020-02-09T12:59:05"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

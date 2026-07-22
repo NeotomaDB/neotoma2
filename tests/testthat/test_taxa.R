@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("`taxa()` function")
 test_that("taxa() returns only unique results", {
   skip_on_cran()
@@ -8,4 +10,5 @@ test_that("taxa() returns only unique results", {
   df <- taxa(mydataset)
   testthat::expect_false(any(duplicated(df)))
   testthat::expect_is(df, "data.frame")
+})
 })

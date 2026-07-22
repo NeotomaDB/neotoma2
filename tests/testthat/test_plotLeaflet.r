@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Test leaflet plots")
 
 testthat::test_that("Plot records with plotLeaflet.", {
@@ -15,4 +17,5 @@ testthat::test_that("Plot a single record with plotLeaflet.", {
   five <- get_sites(limit = 5)
   output <- plotLeaflet(five[[1]])
   testthat::expect_is(output, "leaflet")
+})
 })

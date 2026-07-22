@@ -1,0 +1,27 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 1,
+            "sitename": "15/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.25,55.09167]}",
+            "altitude": 244,
+            "collectionunits": [
+                {
+                    "handle": "15-1",
+                    "datasets": [
+                        {
+                            "datasetid": 1,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "15/1",
+                    "collectionunitid": 1,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,0 +1,298 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "publication": {
+                "publicationid": 1,
+                "pubtypeid": 7,
+                "pubtype": "Authored Report",
+                "year": "2006",
+                "citation": "International Organization for Standardization. 2006. Codes for the representation of names of countries and their subdivisions — Part 1: Country codes. ISO 3166-1, Geneva, Switzerland.",
+                "articletitle": "Codes for the representation of names of countries and their subdivisions — Part 1: Country codes",
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "citationnumber": null,
+                "doi": "10.3403/01306604",
+                "booktitle": null,
+                "numvolumes": null,
+                "edition": null,
+                "volumetitle": null,
+                "seriestitle": "ISO",
+                "seriesvolume": "3166-1",
+                "publisher": null,
+                "url": null,
+                "city": "Geneva",
+                "state": null,
+                "country": "Switzerland",
+                "originallanguage": null,
+                "notes": null,
+                "author": [
+                    {
+                        "order": 1,
+                        "familyname": "International Organization for Standardization",
+                        "givennames": null
+                    }
+                ],
+                "datasets": [
+                    {
+                        "siteid": null,
+                        "primary": null,
+                        "datasetid": null
+                    }
+                ]
+            }
+        },
+        {
+            "publication": {
+                "publicationid": 2,
+                "pubtypeid": 7,
+                "pubtype": "Authored Report",
+                "year": "2004",
+                "citation": "United States Central Intelligence Agency. 2004. CIA World Factbook. Washington, DC, USA.",
+                "articletitle": "CIA World Factbook",
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "citationnumber": null,
+                "doi": null,
+                "booktitle": null,
+                "numvolumes": null,
+                "edition": null,
+                "volumetitle": null,
+                "seriestitle": null,
+                "seriesvolume": null,
+                "publisher": null,
+                "url": null,
+                "city": "Washington, DC",
+                "state": null,
+                "country": "USA",
+                "originallanguage": null,
+                "notes": null,
+                "author": [
+                    {
+                        "order": 1,
+                        "familyname": "United States Central Intelligence Agency",
+                        "givennames": null
+                    }
+                ],
+                "datasets": [
+                    {
+                        "siteid": null,
+                        "primary": null,
+                        "datasetid": null
+                    }
+                ]
+            }
+        },
+        {
+            "publication": {
+                "publicationid": 3,
+                "pubtypeid": 2,
+                "pubtype": "Book Chapter",
+                "year": "1978",
+                "citation": "Davis, M.B. 1978. Climatic interpretation of pollen in Quaternary sediments. Pages 35-51 in D. Walker and J.C. Guppy, editors. Biology and Quaternary environments. Australian Academy of Science, Canberra City, Australia.",
+                "articletitle": "Climatic interpretation of pollen in Quaternary sediments",
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": "35-51",
+                "citationnumber": null,
+                "doi": null,
+                "booktitle": "Biology and Quaternary environments",
+                "numvolumes": null,
+                "edition": null,
+                "volumetitle": null,
+                "seriestitle": null,
+                "seriesvolume": null,
+                "publisher": "Australian Academy of Science",
+                "url": null,
+                "city": "Canberra City",
+                "state": null,
+                "country": "Australia",
+                "originallanguage": null,
+                "notes": null,
+                "author": [
+                    {
+                        "order": 1,
+                        "familyname": "Davis",
+                        "givennames": "Margaret B."
+                    }
+                ],
+                "datasets": [
+                    {
+                        "siteid": null,
+                        "primary": null,
+                        "datasetid": null
+                    }
+                ]
+            }
+        },
+        {
+            "publication": {
+                "publicationid": 4,
+                "pubtypeid": 1,
+                "pubtype": "Journal Article",
+                "year": "2026",
+                "citation": "Soukupová, M.G., P. Bobek, and S. Svobodová. 2026. Natural treeless areas in the Krkonoše mountains: insights from two decades of pollen monitoring. Vegetation History and Archaeobotany. https://link.springer.com/article/10.1007/s00334-025-01084-1. [DOI: 10.1007/s00334-025-01084-1]",
+                "articletitle": "Natural treeless areas in the Krkonoše mountains: insights from two decades of pollen monitoring",
+                "journal": "Vegetation History and Archaeobotany",
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "citationnumber": null,
+                "doi": "10.1007/s00334-025-01084-1",
+                "booktitle": null,
+                "numvolumes": null,
+                "edition": null,
+                "volumetitle": null,
+                "seriestitle": null,
+                "seriesvolume": null,
+                "publisher": null,
+                "url": "https://link.springer.com/article/10.1007/s00334-025-01084-1",
+                "city": null,
+                "state": null,
+                "country": null,
+                "originallanguage": null,
+                "notes": null,
+                "author": [
+                    {
+                        "order": 1,
+                        "familyname": "Švarcová",
+                        "givennames": "Markéta G."
+                    },
+                    {
+                        "order": 2,
+                        "familyname": "Bobek",
+                        "givennames": "Přemysl"
+                    },
+                    {
+                        "order": 3,
+                        "familyname": "Svitavská Svobodová",
+                        "givennames": "Helena"
+                    }
+                ],
+                "datasets": [
+                    {
+                        "siteid": 10330,
+                        "primary": true,
+                        "datasetid": 15691
+                    },
+                    {
+                        "siteid": 10330,
+                        "primary": true,
+                        "datasetid": 15692
+                    },
+                    {
+                        "siteid": 15730,
+                        "primary": false,
+                        "datasetid": 66493
+                    },
+                    {
+                        "siteid": 15732,
+                        "primary": false,
+                        "datasetid": 66480
+                    },
+                    {
+                        "siteid": 32804,
+                        "primary": false,
+                        "datasetid": 61138
+                    },
+                    {
+                        "siteid": 32804,
+                        "primary": true,
+                        "datasetid": 61139
+                    },
+                    {
+                        "siteid": 36717,
+                        "primary": false,
+                        "datasetid": 66462
+                    },
+                    {
+                        "siteid": 36718,
+                        "primary": false,
+                        "datasetid": 66463
+                    },
+                    {
+                        "siteid": 36719,
+                        "primary": false,
+                        "datasetid": 66464
+                    },
+                    {
+                        "siteid": 36723,
+                        "primary": false,
+                        "datasetid": 66481
+                    },
+                    {
+                        "siteid": 36724,
+                        "primary": false,
+                        "datasetid": 66482
+                    },
+                    {
+                        "siteid": 36725,
+                        "primary": false,
+                        "datasetid": 66483
+                    },
+                    {
+                        "siteid": 36726,
+                        "primary": false,
+                        "datasetid": 66484
+                    },
+                    {
+                        "siteid": 36727,
+                        "primary": false,
+                        "datasetid": 66485
+                    },
+                    {
+                        "siteid": 36728,
+                        "primary": false,
+                        "datasetid": 66486
+                    },
+                    {
+                        "siteid": 36729,
+                        "primary": false,
+                        "datasetid": 66487
+                    },
+                    {
+                        "siteid": 36730,
+                        "primary": false,
+                        "datasetid": 66488
+                    },
+                    {
+                        "siteid": 36731,
+                        "primary": true,
+                        "datasetid": 66489
+                    },
+                    {
+                        "siteid": 36732,
+                        "primary": false,
+                        "datasetid": 66490
+                    },
+                    {
+                        "siteid": 36733,
+                        "primary": false,
+                        "datasetid": 66491
+                    },
+                    {
+                        "siteid": 36734,
+                        "primary": false,
+                        "datasetid": 66492
+                    },
+                    {
+                        "siteid": 36792,
+                        "primary": false,
+                        "datasetid": 66658
+                    },
+                    {
+                        "siteid": 36793,
+                        "primary": false,
+                        "datasetid": 66659
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

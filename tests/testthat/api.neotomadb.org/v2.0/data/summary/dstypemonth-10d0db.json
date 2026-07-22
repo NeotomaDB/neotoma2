@@ -1,0 +1,68 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "start": 0,
+            "end": 1
+        },
+        "data": [
+            {
+                "datasettype": "charcoal",
+                "counts": "10"
+            },
+            {
+                "datasettype": "diatom",
+                "counts": "29"
+            },
+            {
+                "datasettype": "geochemistry",
+                "counts": "10"
+            },
+            {
+                "datasettype": "geochronologic",
+                "counts": "35"
+            },
+            {
+                "datasettype": "loss-on-ignition",
+                "counts": "10"
+            },
+            {
+                "datasettype": "microcharcoal",
+                "counts": "3"
+            },
+            {
+                "datasettype": "ostracode surface sample",
+                "counts": "1"
+            },
+            {
+                "datasettype": "physical sedimentology",
+                "counts": "10"
+            },
+            {
+                "datasettype": "plant macrofossil",
+                "counts": "8"
+            },
+            {
+                "datasettype": "pollen",
+                "counts": "41"
+            },
+            {
+                "datasettype": "pollen surface sample",
+                "counts": "141"
+            },
+            {
+                "datasettype": "stable isotope",
+                "counts": "1"
+            },
+            {
+                "datasettype": "vertebrate fauna",
+                "counts": "13"
+            },
+            {
+                "datasettype": "X-ray fluorescence (XRF)",
+                "counts": "6"
+            }
+        ]
+    },
+    "message": "Retrieved all tables"
+}

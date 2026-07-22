@@ -1,0 +1,1083 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 171,
+            "sitename": "Site 101 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.17,44.8]}",
+            "altitude": 384,
+            "collectionunits": [
+                {
+                    "handle": "AMS101",
+                    "datasets": [
+                        {
+                            "datasetid": 171,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "LIT.AKER",
+                    "collectionunitid": 171,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 172,
+            "sitename": "Site 102 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.15,43.02]}",
+            "altitude": 432,
+            "collectionunits": [
+                {
+                    "handle": "AMS102",
+                    "datasets": [
+                        {
+                            "datasetid": 172,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "GRANITE",
+                    "collectionunitid": 172,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 657,
+            "sitename": "Deer Lake Bog",
+            "sitedescription": "Physiography: on Mount Moosilauke.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.83333,44.03333]}",
+            "altitude": 1264,
+            "collectionunits": [
+                {
+                    "handle": "DEER",
+                    "datasets": [
+                        {
+                            "datasetid": 673,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 657,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DEER",
+                    "datasets": [
+                        {
+                            "datasetid": 8051,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 657,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "RWS007",
+                    "datasets": [
+                        {
+                            "datasetid": 3592,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3474,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS008",
+                    "datasets": [
+                        {
+                            "datasetid": 3593,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3475,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS009",
+                    "datasets": [
+                        {
+                            "datasetid": 3594,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3476,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS011",
+                    "datasets": [
+                        {
+                            "datasetid": 3596,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3478,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS013",
+                    "datasets": [
+                        {
+                            "datasetid": 3598,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3480,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 757,
+            "sitename": "Eagle Lake Bog",
+            "sitedescription": "Physiography: on Mount Lafayette.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.66667,44.16667]}",
+            "altitude": 1000,
+            "collectionunits": [
+                {
+                    "handle": "EAGLE",
+                    "datasets": [
+                        {
+                            "datasetid": 776,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 756,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "EAGLE",
+                    "datasets": [
+                        {
+                            "datasetid": 8078,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 756,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "RWS002",
+                    "datasets": [
+                        {
+                            "datasetid": 3587,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3469,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS005",
+                    "datasets": [
+                        {
+                            "datasetid": 3590,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3472,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS006",
+                    "datasets": [
+                        {
+                            "datasetid": 3591,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3473,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS010",
+                    "datasets": [
+                        {
+                            "datasetid": 3595,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3477,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS014",
+                    "datasets": [
+                        {
+                            "datasetid": 3599,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3481,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS016",
+                    "datasets": [
+                        {
+                            "datasetid": 3601,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3483,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS018",
+                    "datasets": [
+                        {
+                            "datasetid": 3603,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3485,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 1129,
+            "sitename": "Lake of the Clouds",
+            "sitedescription": "Physiography: on Mount Washington. Surrounding vegetation: Picea/Abies/Poaceae/Rosaceae.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.31667,44.26667]}",
+            "altitude": 1472,
+            "collectionunits": [
+                {
+                    "handle": "JAMMBD1",
+                    "datasets": [
+                        {
+                            "datasetid": 1164,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "sample 1",
+                    "collectionunitid": 1128,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "JAMMBD2",
+                    "datasets": [
+                        {
+                            "datasetid": 3139,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "sample 2",
+                    "collectionunitid": 3038,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LKCLDNHA",
+                    "datasets": [
+                        {
+                            "datasetid": 8813,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core A",
+                    "collectionunitid": 3377,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LKCLDNHB",
+                    "datasets": [
+                        {
+                            "datasetid": 8814,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core B",
+                    "collectionunitid": 3378,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "RWS001",
+                    "datasets": [
+                        {
+                            "datasetid": 3586,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3468,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS003",
+                    "datasets": [
+                        {
+                            "datasetid": 3588,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3470,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS004",
+                    "datasets": [
+                        {
+                            "datasetid": 3589,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3471,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS012",
+                    "datasets": [
+                        {
+                            "datasetid": 3597,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3479,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS015",
+                    "datasets": [
+                        {
+                            "datasetid": 3600,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3482,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS017",
+                    "datasets": [
+                        {
+                            "datasetid": 3602,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3484,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS019",
+                    "datasets": [
+                        {
+                            "datasetid": 3604,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3486,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS020",
+                    "datasets": [
+                        {
+                            "datasetid": 3605,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3487,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "RWS023",
+                    "datasets": [
+                        {
+                            "datasetid": 3606,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3488,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 1130,
+            "sitename": "Hermit Lake",
+            "sitedescription": "Small tarn. Physiography: Mount Washington. Surrounding vegetation: Abies/Picea/Betula/Acer/Alnus/Viburnum.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.31667,44.26667]}",
+            "altitude": 1472,
+            "collectionunits": [
+                {
+                    "handle": "JAMMBD3",
+                    "datasets": [
+                        {
+                            "datasetid": 1165,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1129,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 1481,
+            "sitename": "Kinsman Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.73333,44.13333]}",
+            "altitude": 1134,
+            "collectionunits": [
+                {
+                    "handle": "KINSMAN",
+                    "datasets": [
+                        {
+                            "datasetid": 1518,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1480,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KINSMAN",
+                    "datasets": [
+                        {
+                            "datasetid": 8252,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1480,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1607,
+            "sitename": "Lonesome Lake",
+            "sitedescription": "Lake. Physiography: White Mountains. Surrounding vegetation: spruce-fir.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.70111,44.14]}",
+            "altitude": 834,
+            "collectionunits": [
+                {
+                    "handle": "LONESOME",
+                    "datasets": [
+                        {
+                            "datasetid": 1658,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1606,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LONESOME",
+                    "datasets": [
+                        {
+                            "datasetid": 8347,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1606,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1615,
+            "sitename": "Lost P.",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.25139,44.24694]}",
+            "altitude": 614,
+            "collectionunits": [
+                {
+                    "handle": "LOST_PIR",
+                    "datasets": [
+                        {
+                            "datasetid": 44800,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "PIRLA_NENG255",
+                    "collectionunitid": 31716,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LOSTPOND",
+                    "datasets": [
+                        {
+                            "datasetid": 1667,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1614,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LOSTPOND",
+                    "datasets": [
+                        {
+                            "datasetid": 8354,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1614,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LOST_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 44867,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "PIRLA_NENG255_WC",
+                    "collectionunitid": 31779,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2236,
+            "sitename": "Garfield Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.35,44.18]}",
+            "altitude": 522,
+            "collectionunits": [
+                {
+                    "handle": "RWS021",
+                    "datasets": [
+                        {
+                            "datasetid": 2315,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2235,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2237,
+            "sitename": "Red Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.35,44.25]}",
+            "altitude": 1003,
+            "collectionunits": [
+                {
+                    "handle": "RWS022",
+                    "datasets": [
+                        {
+                            "datasetid": 2316,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2236,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 5659,
+            "sitename": "Molls Rock",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.11667,44.75]}",
+            "altitude": 547,
+            "collectionunits": [
+                {
+                    "handle": "MOLLSRCK",
+                    "datasets": [
+                        {
+                            "datasetid": 6981,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6836,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5705,
+            "sitename": "Seabrook [NH-47-22]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71,43]}",
+            "altitude": 23,
+            "collectionunits": [
+                {
+                    "handle": "SEABROOK",
+                    "datasets": [
+                        {
+                            "datasetid": 7031,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6886,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SEABROOK",
+                    "datasets": [
+                        {
+                            "datasetid": 10183,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6886,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5722,
+            "sitename": "Whipple",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.3,42.88333]}",
+            "altitude": 143,
+            "collectionunits": [
+                {
+                    "handle": "WHIPPLE",
+                    "datasets": [
+                        {
+                            "datasetid": 7048,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6903,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "WHIPPLE",
+                    "datasets": [
+                        {
+                            "datasetid": 10189,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6903,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 9788,
+            "sitename": "Berry Pond",
+            "sitedescription": "Glacial origin pond with large wetland draining into it. Aquatic vegetation: Utricularia, Pontederia, Nymphea, Nuphar, and Cyperaceae.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.39543,43.75738],[-71.39055,43.75738],[-71.39055,43.76581],[-71.39543,43.76581],[-71.39543,43.75738]]]}",
+            "altitude": 172,
+            "collectionunits": [
+                {
+                    "handle": "NANODE344",
+                    "datasets": [
+                        {
+                            "datasetid": 14475,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NH/AJS/LCO198",
+                    "collectionunitid": 11049,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE344",
+                    "datasets": [
+                        {
+                            "datasetid": 14476,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "NH/AJS/LCO198",
+                    "collectionunitid": 11049,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 9967,
+            "sitename": "Dollof Pond",
+            "sitedescription": "Glacial origin pond with very dark brown water stained with tannic acids. Upland vegetation: northern hardwoods-conifer forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.09481,43.94471],[-71.09029,43.94471],[-71.09029,43.9487],[-71.09481,43.9487],[-71.09481,43.94471]]]}",
+            "altitude": 168,
+            "collectionunits": [
+                {
+                    "handle": "NANODE347",
+                    "datasets": [
+                        {
+                            "datasetid": 14870,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NH/AJS/LCO201",
+                    "collectionunitid": 11260,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE347",
+                    "datasets": [
+                        {
+                            "datasetid": 14871,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "NH/AJS/LCO201",
+                    "collectionunitid": 11260,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 11804,
+            "sitename": "HF077 Cental Plot",
+            "sitedescription": "Surrounding vegetation: Tsuga canadensis and Fagus grandifolia are the dominant tree species, along with Acer rubrum, Betula lenta, Betula papyrifera, Betula alleghaniensis, Quercus rubra, Fraxinus americana, and Pinus strobus.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.45895,42.81014],[-72.38325,42.81014],[-72.38325,42.84614],[-72.45895,42.84614],[-72.45895,42.81014]]]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "HF077CEN",
+                    "datasets": [
+                        {
+                            "datasetid": 17878,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13311,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 11805,
+            "sitename": "Lost Swamp",
+            "sitedescription": "Surrounding vegetation: Tsuga canadensis and Fagus grandifolia are the dominant tree species, along with Acer rubrum, Betula lenta, Betula papyrifera, Betula alleghaniensis, Quercus rubra, Fraxinus americana, and Pinus strobus.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.45895,42.81014],[-72.38325,42.81014],[-72.38325,42.84614],[-72.45895,42.84614],[-72.45895,42.81014]]]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "LOSTSWAM",
+                    "datasets": [
+                        {
+                            "datasetid": 17879,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13312,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LOSTSWAM",
+                    "datasets": [
+                        {
+                            "datasetid": 17880,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13312,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11808,
+            "sitename": "HF077 South Plot",
+            "sitedescription": "Surrounding vegetation: Tsuga canadensis and Fagus grandifolia are the dominant tree species, along with Acer rubrum, Betula lenta, Betula papyrifera, Betula alleghaniensis, Quercus rubra, Fraxinus americana, and Pinus strobus.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.45895,42.81014],[-72.38325,42.81014],[-72.38325,42.84614],[-72.45895,42.84614],[-72.45895,42.81014]]]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "HF077SOU",
+                    "datasets": [
+                        {
+                            "datasetid": 17883,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13315,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 13046,
+            "sitename": "Otter Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.06619,43.42649],[-72.04997,43.42649],[-72.04997,43.44077],[-72.06619,43.44077],[-72.06619,43.42649]]]}",
+            "altitude": 343,
+            "collectionunits": [
+                {
+                    "handle": "OTTER08",
+                    "datasets": [
+                        {
+                            "datasetid": 19364,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14581,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13047,
+            "sitename": "Little Diamond Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.33015,44.94305],[-71.31891,44.94305],[-71.31891,44.94864],[-71.33015,44.94864],[-71.33015,44.94305]]]}",
+            "altitude": 686,
+            "collectionunits": [
+                {
+                    "handle": "LITTLE08",
+                    "datasets": [
+                        {
+                            "datasetid": 19365,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14582,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13061,
+            "sitename": "Sip Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.10807,42.7287],[-72.09801,42.7287],[-72.09801,42.73857],[-72.10807,42.73857],[-72.10807,42.7287]]]}",
+            "altitude": 271,
+            "collectionunits": [
+                {
+                    "handle": "NLA0162D",
+                    "datasets": [
+                        {
+                            "datasetid": 51593,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NLA-DIAT06608-0162",
+                    "collectionunitid": 37482,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NLA0162D",
+                    "datasets": [
+                        {
+                            "datasetid": 55060,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "NLA-DIAT06608-0162",
+                    "collectionunitid": 37482,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NLA0162WC",
+                    "datasets": [
+                        {
+                            "datasetid": 43406,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0162",
+                    "collectionunitid": 30398,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "SIPPON08",
+                    "datasets": [
+                        {
+                            "datasetid": 19382,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14597,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "SIP POND",
+                    "datasets": [
+                        {
+                            "datasetid": 42794,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Sip Pond NLA17_NH-10004",
+                    "collectionunitid": 29809,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13106,
+            "sitename": "Lake Mascoma",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.18258,43.60563],[-72.12009,43.60563],[-72.12009,43.65061],[-72.18258,43.65061],[-72.18258,43.60563]]]}",
+            "altitude": 228,
+            "collectionunits": [
+                {
+                    "handle": "MASCOM08",
+                    "datasets": [
+                        {
+                            "datasetid": 19456,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14644,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13107,
+            "sitename": "Success Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.05099,44.56332],[-71.03537,44.56332],[-71.03537,44.57959],[-71.05099,44.57959],[-71.05099,44.56332]]]}",
+            "altitude": 488,
+            "collectionunits": [
+                {
+                    "handle": "SUCCES08",
+                    "datasets": [
+                        {
+                            "datasetid": 19457,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14645,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13108,
+            "sitename": "Flints Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.55056,42.7475]}",
+            "altitude": 60,
+            "collectionunits": [
+                {
+                    "handle": "FLINTS08",
+                    "datasets": [
+                        {
+                            "datasetid": 19458,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14646,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NH006",
+                    "datasets": [
+                        {
+                            "datasetid": 49684,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NH006_91_1",
+                    "collectionunitid": 35661,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NH006",
+                    "datasets": [
+                        {
+                            "datasetid": 55277,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "NH006_91_1",
+                    "collectionunitid": 35661,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NH006_2",
+                    "datasets": [
+                        {
+                            "datasetid": 49990,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NH006_92_2",
+                    "collectionunitid": 35945,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NH006_2",
+                    "datasets": [
+                        {
+                            "datasetid": 55494,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "NH006_92_2",
+                    "collectionunitid": 35945,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NH006_WC",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "NH006_WC",
+                    "collectionunitid": 32704,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NH006_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 45872,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NH006_WC",
+                    "collectionunitid": 32635,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

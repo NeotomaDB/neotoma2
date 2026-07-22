@@ -1,0 +1,500 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 728,
+                "sitename": "Heart Lake",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+                "altitude": 660,
+                "collectionunitid": 728,
+                "collectionunit": "Heart L._C90_PIRLA I Cal",
+                "handle": "HART_C90",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/8qb8-mj63"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -29,
+                                "ageyoung": -29
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 40468,
+                        "datasetpi": [
+                            {
+                                "initials": "D.F.",
+                                "contactid": 448,
+                                "firstname": "Donald F.",
+                                "familyname": "Charles",
+                                "contactname": "Charles, Donald F."
+                            },
+                            {
+                                "initials": "K.E.",
+                                "contactid": 442,
+                                "firstname": "Keith E.",
+                                "familyname": "Camburn",
+                                "contactname": "Camburn, Keith E."
+                            },
+                            {
+                                "initials": "S.S.",
+                                "contactid": 3628,
+                                "firstname": "Sushil S.",
+                                "familyname": "Dixit",
+                                "contactname": "Dixit, Sushil S."
+                            }
+                        ],
+                        "datasettype": "diatom surface sample",
+                        "datasetnotes": "This aggregate dataset (Adirondack Diatom Calibration - Charles 1985)  Contains diatom counts made by Don Charles as part of his PhD thesis and used in subsequent PIRLA studies.  For some lakes replicate counts were made by other analysts (See Cumming et al 1990) - these counts are to be included as part of a separate dataset.\r\n\r\nMicroscope slides are in the Diatom Herbarium at the Academy of Natural Sciences of Drexel University.\r\n\r\nMost sediment cores were taken by Don Charles, Robert Wise, Ron Wuestefeld, and Mike Barkman.",
+                        "recdatecreated": "2018-10-10T16:06:38"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/n3598q",
+                            "10.21233/n3k90d"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 748,
+                        "datasetpi": [
+                            {
+                                "initials": "D.R.",
+                                "contactid": 109,
+                                "firstname": "Donald R.",
+                                "familyname": "Whitehead",
+                                "contactname": "Whitehead, Donald R."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 728,
+                "sitename": "Heart Lake",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+                "altitude": 660,
+                "collectionunitid": 3029,
+                "collectionunit": null,
+                "handle": "HEARTADIR",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/9m48-6d37",
+                            "10.21233/9M48-6D37"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 12651,
+                                "ageyoung": -32
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 49250,
+                        "datasetpi": [
+                            {
+                                "initials": "S.E.",
+                                "contactid": 9368,
+                                "firstname": "Susan Elizabeth",
+                                "familyname": "Reed",
+                                "contactname": "Reed, Susan Elizabeth"
+                            }
+                        ],
+                        "datasettype": "diatom",
+                        "datasetnotes": "Diatom slides in Academy of Natural Sciences Diatom Herbarium \nThis dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2021-04-15T19:17:00"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/n37j60"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 12000,
+                                "ageyoung": 0
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 3130,
+                        "datasetpi": [
+                            {
+                                "initials": "D.R.",
+                                "contactid": 109,
+                                "firstname": "Donald R.",
+                                "familyname": "Whitehead",
+                                "contactname": "Whitehead, Donald R."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Questions: some herbs data inconsistencies in original data.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 8799,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 728,
+                "sitename": "Heart Lake",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+                "altitude": 660,
+                "collectionunitid": 30115,
+                "collectionunit": "HEART-WC",
+                "handle": "HEART-WC",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/fvsw-2w23"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -28,
+                                "ageyoung": -38
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 43118,
+                        "datasetpi": [
+                            {
+                                "initials": null,
+                                "contactid": 12662,
+                                "firstname": null,
+                                "familyname": "USEPA and Collaborators",
+                                "contactname": "USEPA and Collaborators"
+                            },
+                            {
+                                "initials": "A.H.",
+                                "contactid": 15369,
+                                "firstname": "Alan H.",
+                                "familyname": "Driscoll",
+                                "contactname": "Driscoll, Alan H."
+                            },
+                            {
+                                "initials": "B.F.",
+                                "contactid": 608,
+                                "firstname": "Brian F.",
+                                "familyname": "Cumming",
+                                "contactname": "Cumming, Brian F."
+                            },
+                            {
+                                "initials": "D.F.",
+                                "contactid": 448,
+                                "firstname": "Donald F.",
+                                "familyname": "Charles",
+                                "contactname": "Charles, Donald F."
+                            },
+                            {
+                                "initials": "D.H.",
+                                "contactid": 15568,
+                                "firstname": "Dixon",
+                                "familyname": "Landers",
+                                "contactname": "Landers, Dixon"
+                            },
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "S.S.",
+                                "contactid": 3628,
+                                "firstname": "Sushil S.",
+                                "familyname": "Dixit",
+                                "contactname": "Dixit, Sushil S."
+                            }
+                        ],
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "These notes pertain to the Neotoma Aggregate Dataset \"Adirondack water chemistry - PIRLA study lakes\"\r\nPIRLA = Paleoecological Investigation of Lake Acidification\r\nText from Camburn and Charles 2000 (page 10), which contains tables of chemistry data for the lakes in the aggregate dataset:\r\n\"Chemistry data come from several sources.  All values are arithmetic averages of measurements made on surface samples collected during the summer or fall.  Data for PIRLA Phase I lakes come from Charles (1982,1985) and RILWAS (Regionalized Integrated Lake Water Acidification Study; Driscoll and Newton 1985), and are further documented in Charles et al. (1990). Charles (1985) data are for 2 to 7 samples (usually at least 5) taken from 38 lakes during the summers of 1978 and 1979. The RILWAS data include samples from 7 lakes taken on 6 to 13 occasions from May through September 1984. The chemistry data for PIRLA Phase II lakes come primarily from the U.S. EPA=s Eastern Lake Survey (ELS), Phases I and II.  The ELS-I survey data are used for 45 lakes; single samples were taken during the fall of 1984 (Kanciruk et al. 1986; Landers et al., 1988).  ELS-II data were used for 28 of the study lakes; 1 to 3 measurements were taken during the fall of 1986 (Herlihy et al. 1991).  C.T. Driscoll (Syracuse University, personnel communication) provided supplemental data on pH, aluminum, and DOC for 13 lakes; samples were collected once from each lake during August and September 1988.\"",
+                        "recdatecreated": "2019-06-07T21:24:46"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 11904,
+                "sitename": "Sandy Lake",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.70989,44.72731],[-63.69294,44.72731],[-63.69294,44.74067],[-63.70989,44.74067],[-63.70989,44.72731]]]}",
+                "altitude": 30,
+                "collectionunitid": 13425,
+                "collectionunit": "Sandy2015",
+                "handle": "SANDY15",
+                "unittype": "Composite",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/ce30-1h30"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -56
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 18048,
+                        "datasetpi": [
+                            {
+                                "initials": "B.K.",
+                                "contactid": 7345,
+                                "firstname": "Brian K.",
+                                "familyname": "Ginn",
+                                "contactname": "Ginn, Brian K."
+                            },
+                            {
+                                "initials": "P.",
+                                "contactid": 7460,
+                                "firstname": "P.",
+                                "familyname": "Clement",
+                                "contactname": "Clement, P."
+                            }
+                        ],
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2016-01-08T20:43:26"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/d95z-4116"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -56
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 18049,
+                        "datasetpi": [
+                            {
+                                "initials": "B.F.",
+                                "contactid": 608,
+                                "firstname": "Brian F.",
+                                "familyname": "Cumming",
+                                "contactname": "Cumming, Brian F."
+                            },
+                            {
+                                "initials": "B.K.",
+                                "contactid": 7345,
+                                "firstname": "Brian K.",
+                                "familyname": "Ginn",
+                                "contactname": "Ginn, Brian K."
+                            },
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "T.",
+                                "contactid": 7346,
+                                "firstname": "T.",
+                                "familyname": "Rajaratnam",
+                                "contactname": "Rajaratnam, T."
+                            }
+                        ],
+                        "datasettype": "diatom",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2016-01-08T20:43:27"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 13319,
+                "sitename": "Crow Hill",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-75.74477,40.13735],[-75.74185,40.13735],[-75.74185,40.13805],[-75.74477,40.13805],[-75.74477,40.13735]]]}",
+                "altitude": 153,
+                "collectionunitid": 14890,
+                "collectionunit": "Top Bottom Core  ",
+                "handle": "CROWHI05",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/99z6-qj79"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -55
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 19875,
+                        "datasetpi": [
+                            {
+                                "initials": "G.W.",
+                                "contactid": 4146,
+                                "firstname": "G.W.",
+                                "familyname": "Fairchild",
+                                "contactname": "Fairchild, G.W."
+                            }
+                        ],
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2016-05-27T16:19:42"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/nrah-7z14"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -55
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 19876,
+                        "datasetpi": [
+                            {
+                                "initials": "G.W.",
+                                "contactid": 4146,
+                                "firstname": "G.W.",
+                                "familyname": "Fairchild",
+                                "contactname": "Fairchild, G.W."
+                            }
+                        ],
+                        "datasettype": "diatom",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2016-05-27T16:19:44"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 13949,
+                "sitename": "Lake Joseph, Frazer Island",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.76667,45.25]}",
+                "altitude": 245,
+                "collectionunitid": 15674,
+                "collectionunit": null,
+                "handle": "FRAZER17",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/e706-9742"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -42,
+                                "ageyoung": -42
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 21480,
+                        "datasetpi": [
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "R.I.",
+                                "contactid": 3663,
+                                "firstname": "Roland I.",
+                                "familyname": "Hall",
+                                "contactname": "Hall, Roland I."
+                            }
+                        ],
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2017-03-16T18:25:39"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/y1w5-9r26"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -42,
+                                "ageyoung": -42
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 21481,
+                        "datasetpi": [
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "R.I.",
+                                "contactid": 3663,
+                                "firstname": "Roland I.",
+                                "familyname": "Hall",
+                                "contactname": "Hall, Roland I."
+                            }
+                        ],
+                        "datasettype": "diatom",
+                        "datasetnotes": "Sediment samples are stored in PEARL, Department of Biology, Queen's University, Kingston, Ontario\nThis dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "recdatecreated": "2017-03-16T18:25:41"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

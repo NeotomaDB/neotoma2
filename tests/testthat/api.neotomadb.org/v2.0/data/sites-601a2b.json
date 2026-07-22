@@ -1,0 +1,111 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 1,
+            "sitename": "15/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.25,55.09167]}",
+            "altitude": 244,
+            "collectionunits": [
+                {
+                    "handle": "15-1",
+                    "datasets": [
+                        {
+                            "datasetid": 1,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "15/1",
+                    "collectionunitid": 1,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2,
+            "sitename": "15/2",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.01667,55.83333]}",
+            "altitude": 261,
+            "collectionunits": [
+                {
+                    "handle": "15-2",
+                    "datasets": [
+                        {
+                            "datasetid": 2,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "15/2",
+                    "collectionunitid": 2,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 3,
+            "sitename": "16/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.06667,55.41333]}",
+            "altitude": 290,
+            "collectionunits": [
+                {
+                    "handle": "16-1",
+                    "datasets": [
+                        {
+                            "datasetid": 3,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "16/1",
+                    "collectionunitid": 3,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 4,
+            "sitename": "17/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.7,55.06667]}",
+            "altitude": 235,
+            "collectionunits": [
+                {
+                    "handle": "17-1",
+                    "datasets": [
+                        {
+                            "datasetid": 4,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/1",
+                    "collectionunitid": 4,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 5,
+            "sitename": "17/2",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.93333,55.25]}",
+            "altitude": 300,
+            "collectionunits": [
+                {
+                    "handle": "17-2",
+                    "datasets": [
+                        {
+                            "datasetid": 5,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/2",
+                    "collectionunitid": 5,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,0 +1,1785 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "publicationid": null,
+            "datasetid": null,
+            "siteid": null,
+            "doi": null,
+            "familyname": null,
+            "pubtype": null,
+            "year": null,
+            "search": null,
+            "limit": 25,
+            "offset": 0
+        },
+        "result": [
+            {
+                "publication": {
+                    "publicationid": 1,
+                    "pubtypeid": 7,
+                    "pubtype": "Authored Report",
+                    "year": "2006",
+                    "citation": "International Organization for Standardization. 2006. Codes for the representation of names of countries and their subdivisions — Part 1: Country codes. ISO 3166-1, Geneva, Switzerland.",
+                    "articletitle": "Codes for the representation of names of countries and their subdivisions — Part 1: Country codes",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": "10.3403/01306604",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": "ISO",
+                    "seriesvolume": "3166-1",
+                    "publisher": null,
+                    "url": null,
+                    "city": "Geneva",
+                    "state": null,
+                    "country": "Switzerland",
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "International Organization for Standardization",
+                            "givennames": null
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 2,
+                    "pubtypeid": 7,
+                    "pubtype": "Authored Report",
+                    "year": "2004",
+                    "citation": "United States Central Intelligence Agency. 2004. CIA World Factbook. Washington, DC, USA.",
+                    "articletitle": "CIA World Factbook",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": "Washington, DC",
+                    "state": null,
+                    "country": "USA",
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "United States Central Intelligence Agency",
+                            "givennames": null
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 3,
+                    "pubtypeid": 2,
+                    "pubtype": "Book Chapter",
+                    "year": "1978",
+                    "citation": "Davis, M.B. 1978. Climatic interpretation of pollen in Quaternary sediments. Pages 35-51 in D. Walker and J.C. Guppy, editors. Biology and Quaternary environments. Australian Academy of Science, Canberra City, Australia.",
+                    "articletitle": "Climatic interpretation of pollen in Quaternary sediments",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": "35-51",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": "Biology and Quaternary environments",
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": "Australian Academy of Science",
+                    "url": null,
+                    "city": "Canberra City",
+                    "state": null,
+                    "country": "Australia",
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Davis",
+                            "givennames": "Margaret B."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 4,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "2026",
+                    "citation": "Soukupová, M.G., P. Bobek, and S. Svobodová. 2026. Natural treeless areas in the Krkonoše mountains: insights from two decades of pollen monitoring. Vegetation History and Archaeobotany. https://link.springer.com/article/10.1007/s00334-025-01084-1. [DOI: 10.1007/s00334-025-01084-1]",
+                    "articletitle": "Natural treeless areas in the Krkonoše mountains: insights from two decades of pollen monitoring",
+                    "journal": "Vegetation History and Archaeobotany",
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": "10.1007/s00334-025-01084-1",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": "https://link.springer.com/article/10.1007/s00334-025-01084-1",
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Švarcová",
+                            "givennames": "Markéta G."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Bobek",
+                            "givennames": "Přemysl"
+                        },
+                        {
+                            "order": 3,
+                            "familyname": "Svitavská Svobodová",
+                            "givennames": "Helena"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 10330,
+                            "primary": true,
+                            "datasetid": 15691
+                        },
+                        {
+                            "siteid": 10330,
+                            "primary": true,
+                            "datasetid": 15692
+                        },
+                        {
+                            "siteid": 15730,
+                            "primary": false,
+                            "datasetid": 66493
+                        },
+                        {
+                            "siteid": 15732,
+                            "primary": false,
+                            "datasetid": 66480
+                        },
+                        {
+                            "siteid": 32804,
+                            "primary": false,
+                            "datasetid": 61138
+                        },
+                        {
+                            "siteid": 32804,
+                            "primary": true,
+                            "datasetid": 61139
+                        },
+                        {
+                            "siteid": 36717,
+                            "primary": false,
+                            "datasetid": 66462
+                        },
+                        {
+                            "siteid": 36718,
+                            "primary": false,
+                            "datasetid": 66463
+                        },
+                        {
+                            "siteid": 36719,
+                            "primary": false,
+                            "datasetid": 66464
+                        },
+                        {
+                            "siteid": 36723,
+                            "primary": false,
+                            "datasetid": 66481
+                        },
+                        {
+                            "siteid": 36724,
+                            "primary": false,
+                            "datasetid": 66482
+                        },
+                        {
+                            "siteid": 36725,
+                            "primary": false,
+                            "datasetid": 66483
+                        },
+                        {
+                            "siteid": 36726,
+                            "primary": false,
+                            "datasetid": 66484
+                        },
+                        {
+                            "siteid": 36727,
+                            "primary": false,
+                            "datasetid": 66485
+                        },
+                        {
+                            "siteid": 36728,
+                            "primary": false,
+                            "datasetid": 66486
+                        },
+                        {
+                            "siteid": 36729,
+                            "primary": false,
+                            "datasetid": 66487
+                        },
+                        {
+                            "siteid": 36730,
+                            "primary": false,
+                            "datasetid": 66488
+                        },
+                        {
+                            "siteid": 36731,
+                            "primary": true,
+                            "datasetid": 66489
+                        },
+                        {
+                            "siteid": 36732,
+                            "primary": false,
+                            "datasetid": 66490
+                        },
+                        {
+                            "siteid": 36733,
+                            "primary": false,
+                            "datasetid": 66491
+                        },
+                        {
+                            "siteid": 36734,
+                            "primary": false,
+                            "datasetid": 66492
+                        },
+                        {
+                            "siteid": 36792,
+                            "primary": false,
+                            "datasetid": 66658
+                        },
+                        {
+                            "siteid": 36793,
+                            "primary": false,
+                            "datasetid": 66659
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 5,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1968",
+                    "citation": "Janssen, C.R. 1968. Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota. Canadian Journal of Botany 46(11):1397-1410. [DOI: 10.1139/b68-190]",
+                    "articletitle": "Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota",
+                    "journal": "Canadian Journal of Botany",
+                    "volume": "46",
+                    "issue": "11",
+                    "pages": "1397-1410",
+                    "citationnumber": null,
+                    "doi": "10.1139/b68-190",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Janssen",
+                            "givennames": "C. Roel"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 1729,
+                            "primary": null,
+                            "datasetid": 1786
+                        },
+                        {
+                            "siteid": 1729,
+                            "primary": false,
+                            "datasetid": 8423
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 6,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1977",
+                    "citation": "Sirkin, L.A., C.S. Denny, and M. Rubin. 1977. Late Pleistocene environment of the central Delmarva Peninsula, Delaware-Maryland. Geological Society of America Bulletin 88:139-142.",
+                    "articletitle": "Late Pleistocene environment of the central Delmarva Peninsula, Delaware-Maryland",
+                    "journal": "Geological Society of America Bulletin",
+                    "volume": "88",
+                    "issue": null,
+                    "pages": "139-142",
+                    "citationnumber": null,
+                    "doi": "10.1130/0016-7606(1977)88<139:lpeotc>2.0.co;2",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Sirkin",
+                            "givennames": "Leslie A."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Denny",
+                            "givennames": "Charles S."
+                        },
+                        {
+                            "order": 3,
+                            "familyname": "Denny",
+                            "givennames": "Charles S."
+                        },
+                        {
+                            "order": 3,
+                            "familyname": "Rubin",
+                            "givennames": "Meyer"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 7,
+                    "pubtypeid": 2,
+                    "pubtype": "Book Chapter",
+                    "year": "1982",
+                    "citation": "Maher, L.J., Jr. 1982. The palynology of Devils Lake, Sauk County, Wisconsin. Pages 119-135 in J.C. Knox, L. Clayton, and D.M. Mickelson, editors. Quaternary History of the Driftless Area. Field Trip Guide Book 5. University of Wisconsin-Extension, Geological and Natural History Survey, Madison, Wisconsin, USA. Notes: Prepared for 29th Annual Meeting Midwest Friends of the Pleistocene, Prairie du Chien, Wisconsin, May 22 and 23, 1982.",
+                    "articletitle": "The palynology of Devils Lake, Sauk County, Wisconsin",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": "119-135",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": "Quaternary History of the Driftless Area",
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": "Field Trip Guide Book",
+                    "seriesvolume": "5",
+                    "publisher": "University of Wisconsin-Extension, Geological and Natural History Survey",
+                    "url": null,
+                    "city": "Madison",
+                    "state": "Wisconsin",
+                    "country": "USA",
+                    "originallanguage": null,
+                    "notes": "Prepared for 29th Annual Meeting Midwest Friends of the Pleistocene, Prairie du Chien, Wisconsin, May 22 and 23, 1982.",
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Maher",
+                            "givennames": "Louis J."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 666,
+                            "primary": true,
+                            "datasetid": 684
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 8,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1986",
+                    "citation": "Jacobson, G.L., Jr., and E.C. Grimm. 1986. A numerical analysis of Holocene forest and prairie vegetation in central Minnesota. Ecology 67(4):958-966. [DOI: 10.2307/1939818]",
+                    "articletitle": "A numerical analysis of Holocene forest and prairie vegetation in central Minnesota",
+                    "journal": "Ecology",
+                    "volume": "67",
+                    "issue": "4",
+                    "pages": "958-966",
+                    "citationnumber": null,
+                    "doi": "10.2307/1939818",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Jacobson",
+                            "givennames": "G.L."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Grimm",
+                            "givennames": "Eric Christopher"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 269,
+                            "primary": null,
+                            "datasetid": 275
+                        },
+                        {
+                            "siteid": 269,
+                            "primary": false,
+                            "datasetid": 7929
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 9,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1972",
+                    "citation": "Craig, A.J. 1972. Pollen influx to laminated sediments: a pollen diagram from northeastern Minnesota. Ecology 53(1):46-57. [DOI: 10.2307/1935709]",
+                    "articletitle": "Pollen influx to laminated sediments: a pollen diagram from northeastern Minnesota",
+                    "journal": "Ecology",
+                    "volume": "53",
+                    "issue": "1",
+                    "pages": "46-57",
+                    "citationnumber": null,
+                    "doi": "10.2307/1935709",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Craig",
+                            "givennames": "Alan J."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 1649
+                        },
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 3482
+                        },
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 3483
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 10,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1979",
+                    "citation": "Delcourt, H.R. 1979. Late Quaternary vegetation history of the eastern Highland Rim and adjacent Cumberland Plateau of Tennessee. Ecological Monographs 49(3):255-280. [DOI: 10.2307/1942485]",
+                    "articletitle": "Late Quaternary vegetation history of the eastern Highland Rim and adjacent Cumberland Plateau of Tennessee",
+                    "journal": "Ecological Monographs",
+                    "volume": "49",
+                    "issue": "3",
+                    "pages": "255-280",
+                    "citationnumber": null,
+                    "doi": "10.2307/1942485",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Delcourt",
+                            "givennames": "Hazel R."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 203,
+                            "primary": null,
+                            "datasetid": 203
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 11,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1979",
+                    "citation": "Watts, W.A. 1979. Late Quaternary vegetation of central Appalachia and the New Jersey coastal plain. Ecological Monographs 49:427-469.",
+                    "articletitle": "Late Quaternary vegetation of central Appalachia and the New Jersey coastal plain",
+                    "journal": "Ecological Monographs",
+                    "volume": "49",
+                    "issue": null,
+                    "pages": "427-469",
+                    "citationnumber": null,
+                    "doi": "10.2307/1942471",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Watts",
+                            "givennames": "William A."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 268,
+                            "primary": null,
+                            "datasetid": 274
+                        },
+                        {
+                            "siteid": 505,
+                            "primary": null,
+                            "datasetid": 518
+                        },
+                        {
+                            "siteid": 510,
+                            "primary": null,
+                            "datasetid": 523
+                        },
+                        {
+                            "siteid": 998,
+                            "primary": null,
+                            "datasetid": 1031
+                        },
+                        {
+                            "siteid": 1610,
+                            "primary": null,
+                            "datasetid": 1661
+                        },
+                        {
+                            "siteid": 1789,
+                            "primary": null,
+                            "datasetid": 1848
+                        },
+                        {
+                            "siteid": 1907,
+                            "primary": null,
+                            "datasetid": 1972
+                        },
+                        {
+                            "siteid": 2533,
+                            "primary": null,
+                            "datasetid": 2623
+                        },
+                        {
+                            "siteid": 2536,
+                            "primary": null,
+                            "datasetid": 2626
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 12,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1973",
+                    "citation": "King, J.E. 1973. Late Pleistocene palynology and biogeography of the western Missouri Ozarks. Ecological Monographs 43:539-565.",
+                    "articletitle": "Late Pleistocene palynology and biogeography of the western Missouri Ozarks",
+                    "journal": "Ecological Monographs",
+                    "volume": "43",
+                    "issue": null,
+                    "pages": "539-565",
+                    "citationnumber": null,
+                    "doi": "10.2307/1942305",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "King",
+                            "givennames": "James E."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 295,
+                            "primary": null,
+                            "datasetid": 3067
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 13,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1985",
+                    "citation": "Overpeck, J.T. 1985. A pollen study of a late Quaternary peat bog, south-central Adirondack Mountains, New York. York. Geological Society of America Bulletin 96:145-154.",
+                    "articletitle": "A pollen study of a late Quaternary peat bog, south-central Adirondack Mountains, New York",
+                    "journal": "York. Geological Society of America Bulletin",
+                    "volume": "96",
+                    "issue": null,
+                    "pages": "145-154",
+                    "citationnumber": null,
+                    "doi": "10.1130/0016-7606(1985)96<145:apsoal>2.0.co;2",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Overpeck",
+                            "givennames": "Jonathan T."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 303,
+                            "primary": null,
+                            "datasetid": 309
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 14,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1986",
+                    "citation": "Baker, R.G., R.S. Rhodes II, D.P. Schwert, A.C. Ashworth, T.J. Frest, G.R. Hallberg, and J.A. Janssens. 1986. A full- glacial biota from southeastern Iowa, USA. Journal of Quaternary Science 1(2):91-107.",
+                    "articletitle": "A full- glacial biota from southeastern Iowa, USA",
+                    "journal": "Journal of Quaternary Science",
+                    "volume": "1",
+                    "issue": "2",
+                    "pages": "91-107",
+                    "citationnumber": null,
+                    "doi": "10.1002/jqs.3390010202",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Baker",
+                            "givennames": "Richard G."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Rhodes",
+                            "givennames": "R. Sanders"
+                        },
+                        {
+                            "order": 3,
+                            "familyname": "Schwert",
+                            "givennames": "Donald P."
+                        },
+                        {
+                            "order": 4,
+                            "familyname": "Ashworth",
+                            "givennames": "Allan C."
+                        },
+                        {
+                            "order": 5,
+                            "familyname": "Frest",
+                            "givennames": "Terrence J."
+                        },
+                        {
+                            "order": 6,
+                            "familyname": "Hallberg",
+                            "givennames": "George R."
+                        },
+                        {
+                            "order": 7,
+                            "familyname": "Janssens",
+                            "givennames": "Jan A."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 490,
+                            "primary": null,
+                            "datasetid": 502
+                        },
+                        {
+                            "siteid": 490,
+                            "primary": null,
+                            "datasetid": 5162
+                        },
+                        {
+                            "siteid": 490,
+                            "primary": false,
+                            "datasetid": 15077
+                        },
+                        {
+                            "siteid": 490,
+                            "primary": true,
+                            "datasetid": 15078
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 15,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1985",
+                    "citation": "Winkler, M.G. 1985. A 12,000-year history of vegetation and climate for Cape Cod, Massachusetts. Quaternary Research 23:301-312.",
+                    "articletitle": "A 12,000-year history of vegetation and climate for Cape Cod, Massachusetts",
+                    "journal": "Quaternary Research",
+                    "volume": "23",
+                    "issue": null,
+                    "pages": "301-312",
+                    "citationnumber": null,
+                    "doi": "10.1016/0033-5894(85)90037-7",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Winkler",
+                            "givennames": "Marjorie Green"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 753,
+                            "primary": null,
+                            "datasetid": 772
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": null,
+                            "datasetid": 3490
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": null,
+                            "datasetid": 3491
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": false,
+                            "datasetid": 61270
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": false,
+                            "datasetid": 61288
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": false,
+                            "datasetid": 61306
+                        },
+                        {
+                            "siteid": 1686,
+                            "primary": null,
+                            "datasetid": 1742
+                        },
+                        {
+                            "siteid": 1687,
+                            "primary": null,
+                            "datasetid": 1743
+                        },
+                        {
+                            "siteid": 1687,
+                            "primary": false,
+                            "datasetid": 61109
+                        },
+                        {
+                            "siteid": 1687,
+                            "primary": false,
+                            "datasetid": 61299
+                        },
+                        {
+                            "siteid": 1687,
+                            "primary": false,
+                            "datasetid": 61300
+                        },
+                        {
+                            "siteid": 1688,
+                            "primary": null,
+                            "datasetid": 1744
+                        },
+                        {
+                            "siteid": 1689,
+                            "primary": null,
+                            "datasetid": 1745
+                        },
+                        {
+                            "siteid": 1690,
+                            "primary": null,
+                            "datasetid": 1746
+                        },
+                        {
+                            "siteid": 1691,
+                            "primary": null,
+                            "datasetid": 1747
+                        },
+                        {
+                            "siteid": 1692,
+                            "primary": null,
+                            "datasetid": 1748
+                        },
+                        {
+                            "siteid": 1693,
+                            "primary": null,
+                            "datasetid": 1749
+                        },
+                        {
+                            "siteid": 1694,
+                            "primary": null,
+                            "datasetid": 1750
+                        },
+                        {
+                            "siteid": 1695,
+                            "primary": null,
+                            "datasetid": 1751
+                        },
+                        {
+                            "siteid": 1696,
+                            "primary": null,
+                            "datasetid": 1752
+                        },
+                        {
+                            "siteid": 1697,
+                            "primary": null,
+                            "datasetid": 1753
+                        },
+                        {
+                            "siteid": 32771,
+                            "primary": false,
+                            "datasetid": 61097
+                        },
+                        {
+                            "siteid": 32771,
+                            "primary": false,
+                            "datasetid": 61284
+                        },
+                        {
+                            "siteid": 32775,
+                            "primary": false,
+                            "datasetid": 61098
+                        },
+                        {
+                            "siteid": 32775,
+                            "primary": false,
+                            "datasetid": 61285
+                        },
+                        {
+                            "siteid": 32776,
+                            "primary": false,
+                            "datasetid": 61099
+                        },
+                        {
+                            "siteid": 32776,
+                            "primary": false,
+                            "datasetid": 61286
+                        },
+                        {
+                            "siteid": 32777,
+                            "primary": false,
+                            "datasetid": 61100
+                        },
+                        {
+                            "siteid": 32777,
+                            "primary": false,
+                            "datasetid": 61287
+                        },
+                        {
+                            "siteid": 32778,
+                            "primary": false,
+                            "datasetid": 61101
+                        },
+                        {
+                            "siteid": 32778,
+                            "primary": false,
+                            "datasetid": 61290
+                        },
+                        {
+                            "siteid": 32779,
+                            "primary": false,
+                            "datasetid": 61102
+                        },
+                        {
+                            "siteid": 32779,
+                            "primary": false,
+                            "datasetid": 61291
+                        },
+                        {
+                            "siteid": 32780,
+                            "primary": false,
+                            "datasetid": 61103
+                        },
+                        {
+                            "siteid": 32780,
+                            "primary": false,
+                            "datasetid": 61292
+                        },
+                        {
+                            "siteid": 32781,
+                            "primary": false,
+                            "datasetid": 61104
+                        },
+                        {
+                            "siteid": 32781,
+                            "primary": false,
+                            "datasetid": 61293
+                        },
+                        {
+                            "siteid": 32781,
+                            "primary": false,
+                            "datasetid": 61294
+                        },
+                        {
+                            "siteid": 32782,
+                            "primary": false,
+                            "datasetid": 61105
+                        },
+                        {
+                            "siteid": 32782,
+                            "primary": false,
+                            "datasetid": 61295
+                        },
+                        {
+                            "siteid": 32783,
+                            "primary": false,
+                            "datasetid": 61106
+                        },
+                        {
+                            "siteid": 32783,
+                            "primary": false,
+                            "datasetid": 61296
+                        },
+                        {
+                            "siteid": 32784,
+                            "primary": false,
+                            "datasetid": 61107
+                        },
+                        {
+                            "siteid": 32784,
+                            "primary": false,
+                            "datasetid": 61297
+                        },
+                        {
+                            "siteid": 32785,
+                            "primary": false,
+                            "datasetid": 61108
+                        },
+                        {
+                            "siteid": 32785,
+                            "primary": false,
+                            "datasetid": 61298
+                        },
+                        {
+                            "siteid": 32856,
+                            "primary": false,
+                            "datasetid": 61265
+                        },
+                        {
+                            "siteid": 32856,
+                            "primary": false,
+                            "datasetid": 61289
+                        },
+                        {
+                            "siteid": 35951,
+                            "primary": false,
+                            "datasetid": 64575
+                        },
+                        {
+                            "siteid": 35952,
+                            "primary": false,
+                            "datasetid": 64576
+                        },
+                        {
+                            "siteid": 35953,
+                            "primary": false,
+                            "datasetid": 64577
+                        },
+                        {
+                            "siteid": 35954,
+                            "primary": false,
+                            "datasetid": 64578
+                        },
+                        {
+                            "siteid": 35955,
+                            "primary": false,
+                            "datasetid": 64579
+                        },
+                        {
+                            "siteid": 35956,
+                            "primary": false,
+                            "datasetid": 64580
+                        },
+                        {
+                            "siteid": 35957,
+                            "primary": false,
+                            "datasetid": 64581
+                        },
+                        {
+                            "siteid": 35958,
+                            "primary": false,
+                            "datasetid": 64582
+                        },
+                        {
+                            "siteid": 35959,
+                            "primary": false,
+                            "datasetid": 64583
+                        },
+                        {
+                            "siteid": 35960,
+                            "primary": false,
+                            "datasetid": 64584
+                        },
+                        {
+                            "siteid": 35961,
+                            "primary": false,
+                            "datasetid": 64585
+                        },
+                        {
+                            "siteid": 35962,
+                            "primary": false,
+                            "datasetid": 64586
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 16,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1988",
+                    "citation": "Winkler, M.G. 1988. Paleolimnology of a Cape Cod kettle pond: diatoms and reconstructed pH. Ecological Monographs 58:197-214.",
+                    "articletitle": "Paleolimnology of a Cape Cod kettle pond: diatoms and reconstructed pH",
+                    "journal": "Ecological Monographs",
+                    "volume": "58",
+                    "issue": null,
+                    "pages": "197-214",
+                    "citationnumber": null,
+                    "doi": "10.2307/1942540",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Winkler",
+                            "givennames": "Marjorie Green"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 753,
+                            "primary": null,
+                            "datasetid": 772
+                        },
+                        {
+                            "siteid": 753,
+                            "primary": true,
+                            "datasetid": 61306
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 17,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1967",
+                    "citation": "Nichols, H. 1967. The post-glacial history of vegetation and climate at Ennadai Lake, Keewatin, and Lynn Lake, Manitoba (Canada). Eiszeitalter und Gegenwart 18:176-197.",
+                    "articletitle": "The post-glacial history of vegetation and climate at Ennadai Lake, Keewatin, and Lynn Lake, Manitoba (Canada)",
+                    "journal": "Eiszeitalter und Gegenwart",
+                    "volume": "18",
+                    "issue": null,
+                    "pages": "176-197",
+                    "citationnumber": null,
+                    "doi": "10.3285/eg.18.1.12",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Nichols",
+                            "givennames": "Harvey"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 783,
+                            "primary": null,
+                            "datasetid": 803
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 18,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1974",
+                    "citation": "Kerfoot, W.C. 1974. Net accumulation rates and the history of cladoceran communities. Ecology 55:51-61.",
+                    "articletitle": "Net accumulation rates and the history of cladoceran communities",
+                    "journal": "Ecology",
+                    "volume": "55",
+                    "issue": null,
+                    "pages": "51-61",
+                    "citationnumber": null,
+                    "doi": "10.2307/1934617",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Kerfoot",
+                            "givennames": "Wilson Charles"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 821,
+                            "primary": null,
+                            "datasetid": 847
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 19,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1973",
+                    "citation": "Swain, A.M. 1973. A history of fire and vegetation in northeastern Minnesota as recorded in lake sediments. Quaternary Research 3(3):383-396. [DOI: 10.1016/0033-5894(73)900]",
+                    "articletitle": "A history of fire and vegetation in northeastern Minnesota as recorded in lake sediments",
+                    "journal": "Quaternary Research",
+                    "volume": "3",
+                    "issue": "3",
+                    "pages": "383-396",
+                    "citationnumber": null,
+                    "doi": "10.1016/0033-5894(73)90004-5 ",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Swain",
+                            "givennames": "Albert M."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 195,
+                            "primary": null,
+                            "datasetid": 195
+                        },
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 1649
+                        },
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 3482
+                        },
+                        {
+                            "siteid": 1598,
+                            "primary": null,
+                            "datasetid": 3483
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 20,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1979",
+                    "citation": "Whitehead, D.R. 1979. Late-glacial and postglacial vegetational history of the Berkshires, western Massachusetts. Quaternary Research 12:333-357.",
+                    "articletitle": "Late-glacial and postglacial vegetational history of the Berkshires, western Massachusetts",
+                    "journal": "Quaternary Research",
+                    "volume": "12",
+                    "issue": null,
+                    "pages": "333-357",
+                    "citationnumber": null,
+                    "doi": "10.1016/0033-5894(79)90033-4",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Whitehead",
+                            "givennames": "Donald R."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 254,
+                            "primary": null,
+                            "datasetid": 260
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 21,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1975",
+                    "citation": "Watts, W.A. 1975. Vegetation record for the last 20,000 years from a small marsh on Lookout Mountain, northwestern Georgia. Geological Society of America Bulletin 86(3):287-291. [DOI: 10.1130/0016-7606(1975)86<287:VRFTLY>2.0.CO;2]",
+                    "articletitle": "Vegetation record for the last 20,000 years from a small marsh on Lookout Mountain, northwestern Georgia",
+                    "journal": "Geological Society of America Bulletin",
+                    "volume": "86",
+                    "issue": "3",
+                    "pages": "287-291",
+                    "citationnumber": null,
+                    "doi": "10.1130/0016-7606(1975)86<287:vrftly>2.0.co;2",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Watts",
+                            "givennames": "William A."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 10461,
+                            "primary": false,
+                            "datasetid": 16008
+                        },
+                        {
+                            "siteid": 10461,
+                            "primary": true,
+                            "datasetid": 16009
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 22,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1953",
+                    "citation": "Niering, W.A. 1953. The past and present vegetation of High Point State Park, New Jersey. Ecological Monographs 23:127-148.",
+                    "articletitle": "The past and present vegetation of High Point State Park, New Jersey",
+                    "journal": "Ecological Monographs",
+                    "volume": "23",
+                    "issue": null,
+                    "pages": "127-148",
+                    "citationnumber": null,
+                    "doi": "10.2307/1948517",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Niering",
+                            "givennames": "William A."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 23,
+                    "pubtypeid": 2,
+                    "pubtype": "Book Chapter",
+                    "year": "1967",
+                    "citation": "Whitehead, D.R. 1967. Studies of full-glacial vegetation and climate in southeastern United States. Pages 237-248 in E.J. Cushing and H.E. Wright, Jr., editors. Quaternary Paleoecology. Yale University Press, New Haven, Connecticut, USA.",
+                    "articletitle": "Studies of full-glacial vegetation and climate in southeastern United States",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": "237-248",
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": "Quaternary Paleoecology",
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": "Yale University Press",
+                    "url": null,
+                    "city": "New Haven",
+                    "state": "Connecticut",
+                    "country": "USA",
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Whitehead",
+                            "givennames": "Donald R."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 24,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1991",
+                    "citation": "Cwynar, L.C., and R.W. Spear. 1991. Reversion of forest to tundra in the central Yukon. Ecology 72:202-212.",
+                    "articletitle": "Reversion of forest to tundra in the central Yukon",
+                    "journal": "Ecology",
+                    "volume": "72",
+                    "issue": null,
+                    "pages": "202-212",
+                    "citationnumber": null,
+                    "doi": "10.2307/1938915",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Cwynar",
+                            "givennames": "Les C."
+                        },
+                        {
+                            "order": 2,
+                            "familyname": "Spear",
+                            "givennames": "Ray W."
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 1074,
+                            "primary": null,
+                            "datasetid": 1107
+                        }
+                    ]
+                },
+                "match": 1
+            },
+            {
+                "publication": {
+                    "publicationid": 25,
+                    "pubtypeid": 1,
+                    "pubtype": "Journal Article",
+                    "year": "1969",
+                    "citation": "Waddington, J.C.B. 1969. A stratigraphic record of the pollen influx to a lake in the Big Woods of Minnesota. Geological Society of America Special Paper 123:263-282.",
+                    "articletitle": "A stratigraphic record of the pollen influx to a lake in the Big Woods of Minnesota",
+                    "journal": "Geological Society of America Special Paper",
+                    "volume": "123",
+                    "issue": null,
+                    "pages": "263-282",
+                    "citationnumber": null,
+                    "doi": "10.1130/spe123-p263",
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": null,
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Waddington",
+                            "givennames": "Jean Constance Bassett"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": 2235,
+                            "primary": null,
+                            "datasetid": 2314
+                        },
+                        {
+                            "siteid": 2235,
+                            "primary": false,
+                            "datasetid": 8576
+                        },
+                        {
+                            "siteid": 36027,
+                            "primary": false,
+                            "datasetid": 64658
+                        },
+                        {
+                            "siteid": 36028,
+                            "primary": false,
+                            "datasetid": 64659
+                        },
+                        {
+                            "siteid": 36029,
+                            "primary": false,
+                            "datasetid": 64660
+                        },
+                        {
+                            "siteid": 36030,
+                            "primary": false,
+                            "datasetid": 64661
+                        },
+                        {
+                            "siteid": 36031,
+                            "primary": false,
+                            "datasetid": 64662
+                        },
+                        {
+                            "siteid": 36032,
+                            "primary": false,
+                            "datasetid": 64663
+                        },
+                        {
+                            "siteid": 36033,
+                            "primary": false,
+                            "datasetid": 64664
+                        },
+                        {
+                            "siteid": 36034,
+                            "primary": false,
+                            "datasetid": 64665
+                        },
+                        {
+                            "siteid": 36035,
+                            "primary": false,
+                            "datasetid": 64666
+                        },
+                        {
+                            "siteid": 36036,
+                            "primary": false,
+                            "datasetid": 64667
+                        },
+                        {
+                            "siteid": 36037,
+                            "primary": false,
+                            "datasetid": 64668
+                        },
+                        {
+                            "siteid": 36038,
+                            "primary": false,
+                            "datasetid": 64669
+                        },
+                        {
+                            "siteid": 36039,
+                            "primary": false,
+                            "datasetid": 64670
+                        },
+                        {
+                            "siteid": 36040,
+                            "primary": false,
+                            "datasetid": 64671
+                        },
+                        {
+                            "siteid": 36041,
+                            "primary": false,
+                            "datasetid": 64672
+                        },
+                        {
+                            "siteid": 36042,
+                            "primary": false,
+                            "datasetid": 64673
+                        },
+                        {
+                            "siteid": 36043,
+                            "primary": false,
+                            "datasetid": 64674
+                        },
+                        {
+                            "siteid": 36044,
+                            "primary": false,
+                            "datasetid": 64675
+                        }
+                    ]
+                },
+                "match": 1
+            }
+        ]
+    },
+    "message": "Publications returned"
+}

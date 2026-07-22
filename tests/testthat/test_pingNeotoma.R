@@ -14,3 +14,4 @@ test_that("The Pings work", {
   testthat::expect_equal(ping_head$status_code,
                          ping_call$status_code)
 })
+

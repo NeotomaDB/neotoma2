@@ -1,0 +1,64 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "publicationid": null,
+            "datasetid": null,
+            "siteid": null,
+            "doi": null,
+            "familyname": null,
+            "pubtype": null,
+            "year": null,
+            "search": "pollen",
+            "limit": 1,
+            "offset": 0
+        },
+        "result": [
+            {
+                "publication": {
+                    "publicationid": 21902,
+                    "pubtypeid": 9,
+                    "pubtype": "Other Authored",
+                    "year": "2024",
+                    "citation": "Ammann, B. 2024. Pollen data of Gomnis Tba, Georgia. Notes: Unpublished pollen data",
+                    "articletitle": "Pollen data of Gomnis Tba, Georgia",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "citationnumber": null,
+                    "doi": null,
+                    "booktitle": null,
+                    "numvolumes": null,
+                    "edition": null,
+                    "volumetitle": null,
+                    "seriestitle": null,
+                    "seriesvolume": null,
+                    "publisher": null,
+                    "url": null,
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "originallanguage": null,
+                    "notes": "Unpublished pollen data",
+                    "author": [
+                        {
+                            "order": 1,
+                            "familyname": "Ammann",
+                            "givennames": "Brigitta"
+                        }
+                    ],
+                    "datasets": [
+                        {
+                            "siteid": null,
+                            "primary": null,
+                            "datasetid": null
+                        }
+                    ]
+                },
+                "match": 0.10769231
+            }
+        ]
+    },
+    "message": "Publications returned"
+}

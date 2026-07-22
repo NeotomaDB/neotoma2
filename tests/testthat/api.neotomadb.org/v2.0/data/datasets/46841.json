@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 26755,
+                "sitename": "Malahlapanga",
+                "sitedescription": "Spring-fed sediment basins, smaller than 50 m in diameter. Spring-fed.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[31.0405,-22.88889]}",
+                "altitude": 367,
+                "collectionunitid": 33442,
+                "collectionunit": "Malahlapanga",
+                "handle": "MALAHLAPAN",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/hp7d-sq69",
+                            "10.21233/HP7D-SQ69"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 6107,
+                                "ageyoung": -13
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 46841,
+                        "datasetpi": [
+                            {
+                                "initials": "L.",
+                                "contactid": 16053,
+                                "firstname": "Lindsey",
+                                "familyname": "Gillson",
+                                "contactname": "Gillson, Lindsey"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2020-02-13T08:45:51"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

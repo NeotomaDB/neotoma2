@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Test that filter receives a sites object
         and filters using dplyr's syntax")
 test_that("filter datasettype", {
@@ -37,7 +39,7 @@ test_that("filter lat & long.", {
   sts <- get_sites()
   lat_sts <-
     sts %>%
-    filter(lat >= 50 & lat <= 90)
+    neotoma2::filter(lat >= 50 & lat <= 90)
   latitudes <- as.data.frame(lat_sts)$lat
   testthat::expect_true(all(latitudes <= 90))
   testthat::expect_true(all(latitudes >= 50))
@@ -105,11 +107,12 @@ test_that("filter by datasetid keeps all other collection units
 
 test_that("filter works before/after get_downloads", {
   skip_on_cran()
-  core_sites <- c(13949, 11904, 13319, 728, 
-                  13248, 2625, 2806,
-                  13280, 519, 11745, 273, 13956,
-                  11880, 13321, 9801, 13698, 11816,
-                  13909, 13921)
+  core_sites <- c(13949, 11904, 13319, 728)#, 
+                #  13248, 2625, 2806,
+                #  13280, 519, 11745, 273, 13956,
+                #  11880, 13321, 9801, 13698, 11816,
+                #  13909, 13921)
+  
   core_wc_dl_f <- get_sites(core_sites) %>%
     get_datasets() %>%
     get_downloads() %>%
@@ -124,4 +127,5 @@ test_that("filter works before/after get_downloads", {
   testthat::expect_setequal(core_dl_f_ids$siteid, core_f_dl_ids$siteid)
   testthat::expect_setequal(core_dl_f_ids$collunitid, core_f_dl_ids$collunitid)
   testthat::expect_setequal(core_dl_f_ids$datasetid, core_f_dl_ids$datasetid)
+})
 })

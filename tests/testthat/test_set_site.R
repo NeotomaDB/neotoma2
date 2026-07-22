@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Creating sites from scratch or updating existing site objects.")
 test_that("`set_sites()` for new site.", {
@@ -29,4 +32,5 @@ test_that("Updating existing site.", {
   testthat::expect_equal(updatedSample@altitude, -9999)
   # Cannot use invalid data types
   testthat::expect_error(set_site(x = downloadSite[[2]], altitude = "33a"))
+})
 })

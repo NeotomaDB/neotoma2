@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 test_that("collunits()`", {
   skip_on_cran()
@@ -11,4 +14,5 @@ test_that("collunits()`", {
   testthat::expect_identical(length(unique(cus$collectionunitid)),
                              length(unique(ids$collunitid)))
   testthat::expect_true(all(sumDl$collunit_name %in% cus$handle))
+})
 })

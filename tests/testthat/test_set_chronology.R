@@ -1,6 +1,9 @@
 library("testthat")
 library("neotoma2")
 library("dplyr")
+library("httptest")
+
+httptest::with_mock_api({
 
 test_that("Add a new chronology to a record:", {
   skip_on_cran()
@@ -49,4 +52,5 @@ test_that("Add a new chronology to a record:", {
     select(age) %>%
     unique()
   testthat::expect_true(last_age == new_sample_ages$age[nrow(new_sample_ages)])
+})
 })

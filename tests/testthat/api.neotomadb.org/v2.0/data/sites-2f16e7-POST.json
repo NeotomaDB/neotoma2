@@ -1,0 +1,579 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 32,
+            "sitename": "Amarete",
+            "sitedescription": "Mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.98333,-15.23333]}",
+            "altitude": 3755,
+            "collectionunits": [
+                {
+                    "handle": "AMARETE",
+                    "datasets": [
+                        {
+                            "datasetid": 32,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 211,
+            "sitename": "Lago do Aquiri",
+            "sitedescription": "Natural lake, sometimes flooded by river. Physiography: soft rolling area with flood plains. Surrounding vegetation: anthropog. palm forest, swamp savanna.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-44.98333,-3.16667]}",
+            "altitude": 13,
+            "collectionunits": [
+                {
+                    "handle": "AQUIRI",
+                    "datasets": [
+                        {
+                            "datasetid": 212,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 211,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 323,
+            "sitename": "Cala Conto",
+            "sitedescription": "Interandean plain.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.93333,-17.56667]}",
+            "altitude": 2699,
+            "collectionunits": [
+                {
+                    "handle": "CALACONT",
+                    "datasets": [
+                        {
+                            "datasetid": 330,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 323,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 347,
+            "sitename": "Chacaltaya 1",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+            "altitude": 4746,
+            "collectionunits": [
+                {
+                    "handle": "CHACALT1",
+                    "datasets": [
+                        {
+                            "datasetid": 355,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 347,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 348,
+            "sitename": "Chacaltaya 2",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+            "altitude": 4746,
+            "collectionunits": [
+                {
+                    "handle": "CHACALT2",
+                    "datasets": [
+                        {
+                            "datasetid": 356,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 348,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 523,
+            "sitename": "Cumbre Unduavi",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.04167,-16.35]}",
+            "altitude": 4628,
+            "collectionunits": [
+                {
+                    "handle": "CUMBREUN",
+                    "datasets": [
+                        {
+                            "datasetid": 537,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 523,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 526,
+            "sitename": "Lagoa da Curuça",
+            "sitedescription": "Lake. Physiography: isolated lake, 15 km from the Atlantic. Surrounding vegetation: Amazon rain forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.85,-0.76667]}",
+            "altitude": 19,
+            "collectionunits": [
+                {
+                    "handle": "CURUCAA",
+                    "datasets": [
+                        {
+                            "datasetid": 540,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Profile A",
+                    "collectionunitid": 526,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "CURUCAB",
+                    "datasets": [
+                        {
+                            "datasetid": 3074,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Profile B",
+                    "collectionunitid": 2973,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 532,
+            "sitename": "Lagoa das Patas",
+            "sitedescription": "Lake, 300m x 7m on low inselberg. Physiography: small closed basin with flat bottom. Surrounding vegetation: dense, lowland tropical rain forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-66.68333,0.26667]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "DASPATAS",
+                    "datasets": [
+                        {
+                            "datasetid": 547,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 532,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 843,
+            "sitename": "Serra Campos Gerais",
+            "sitedescription": "Peat bog. Physiography: highland plain, next to a river vally. Surrounding vegetation: farmland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-50.21667,-24.66667]}",
+            "altitude": 1237,
+            "collectionunits": [
+                {
+                    "handle": "GERAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 872,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 842,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1406,
+            "sitename": "Katantica",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-69.18333,-14.8]}",
+            "altitude": 4840,
+            "collectionunits": [
+                {
+                    "handle": "KATANTI",
+                    "datasets": [
+                        {
+                            "datasetid": 1443,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1405,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1717,
+            "sitename": "Monte Blanco",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.35,-17.025]}",
+            "altitude": 4866,
+            "collectionunits": [
+                {
+                    "handle": "MTBLANC2",
+                    "datasets": [
+                        {
+                            "datasetid": 1774,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 1716,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MTBLANCO",
+                    "datasets": [
+                        {
+                            "datasetid": 3494,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 3391,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1994,
+            "sitename": "Río Kaluyo",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.13333,-16.43333]}",
+            "altitude": 4194,
+            "collectionunits": [
+                {
+                    "handle": "RIOKALUY",
+                    "datasets": [
+                        {
+                            "datasetid": 2069,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1993,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2248,
+            "sitename": "Lagoa Campestre de Salitre",
+            "sitedescription": "Peat bog in a depression. Physiography: depression. Surrounding vegetation: semideciduous forest/dry forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.76667,-19]}",
+            "altitude": 1011,
+            "collectionunits": [
+                {
+                    "handle": "SALILC3",
+                    "datasets": [
+                        {
+                            "datasetid": 2327,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2247,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SALILC91",
+                    "datasets": [
+                        {
+                            "datasetid": 3610,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3492,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2827,
+            "sitename": "Wasa Mayu",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.81667,-17.53333]}",
+            "altitude": 2750,
+            "collectionunits": [
+                {
+                    "handle": "WASAMAYU",
+                    "datasets": [
+                        {
+                            "datasetid": 2924,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2826,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9685,
+            "sitename": "Laguna Granja",
+            "sitedescription": "Oxbow lake 300 m from the modern San Martín River. Upland vegetation: seasonal southern Amazonian rainforest; immediate vegetation is riverine forest dominated by Vochysia mapirensis and Buchenavia oxycarpa; wider region dominated by closed-canopy terra firme evergreen rainforest, which is degraded by modern anthropogenic disturbance to a distance of 5 km from the lake. Littoral margins of the lake dominated by floating mats of aquatic vegetation, including Marsilea polycarpa and Eichhornia azurea. The ring-ditch archaeological site Granja del Padre lies 100 m from the eastern shore of the lake.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.71168,-13.26535],[-63.70811,-13.26535],[-63.70811,-13.26049],[-63.71168,-13.26049],[-63.71168,-13.26535]]]}",
+            "altitude": 138,
+            "collectionunits": [
+                {
+                    "handle": "GRANJA",
+                    "datasets": [
+                        {
+                            "datasetid": 14264,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10925,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9686,
+            "sitename": "Laguna Orícore",
+            "sitedescription": "Large, shallow, flat-bottomed lake in the Beni Basin. Upland vegetation: seasonal southern Amazonian rainforest; the Beni Basin is seasonally inundated savanna mosaic. Terra firma pre-Cambrian shield outcrops at the northeast margin of the lake and lies 3 km north of the lake. The terra firma is covered with evergreen humid rainforest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.54318,-13.3626],[-63.50514,-13.3626],[-63.50514,-13.32692],[-63.54318,-13.32692],[-63.54318,-13.3626]]]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ORICORE",
+                    "datasets": [
+                        {
+                            "datasetid": 14266,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10926,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11877,
+            "sitename": "Lake Consuelo",
+            "sitedescription": "Lake Consuelo is constantly immersed in ground-level clouds on most days and sits at 1360 m asl, 2500 m down slope from the Bolivian Altiplano and Lake Titicaca. The lake is located within a small, closed basin with moderately steep slopes that result in thin soils with duff layers thickening above 1400 m asl. Lake Consuelo is located very close to the Manu super-humid region identified by Killeen et al., (2007) as biodiversity hotspots.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-68.99309,-13.9532],[-68.98941,-13.9532],[-68.98941,-13.94833],[-68.99309,-13.94833],[-68.99309,-13.9532]]]}",
+            "altitude": 1392,
+            "collectionunits": [
+                {
+                    "handle": "CONSUELO1",
+                    "datasets": [
+                        {
+                            "datasetid": 17995,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CON1",
+                    "collectionunitid": 13398,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CONSUELO2",
+                    "datasets": [
+                        {
+                            "datasetid": 18051,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CON2",
+                    "collectionunitid": 13426,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11923,
+            "sitename": "Lake Valencia",
+            "sitedescription": "Large graben. Physiography: valley between coastal mountains. Surrounding vegetation: savanna, crops and seral vegetation.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.88831,10.09484],[-67.58642,10.09484],[-67.58642,10.27213],[-67.88831,10.27213],[-67.88831,10.09484]]]}",
+            "altitude": 400,
+            "collectionunits": [
+                {
+                    "handle": "VAL77",
+                    "datasets": [
+                        {
+                            "datasetid": 18100,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1-14-77",
+                    "collectionunitid": 13448,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13964,
+            "sitename": "Lake Chalalán",
+            "sitedescription": "The lake, which lies approximately 10 m above the modern level of Rio Tuichi, has an oval basin c. 900 m long by 500 m at its widest part. This steepsided lake reaches depths of 5 m within 5 m of the current shoreline. Secchi depth in Lake Chalalan is reached at c. 2 m, suggesting mesotrophic conditions. Surrounding modern vegetation is lowland evergreen forest dominated by Iriartea deltoidea, Mauritia flexuosa, Oenocarpus bataua, Hura crepitans, Ceiba pentandra, Pentaplaris davidsmithii, and Cecropia spp. Located west of the rural community of Rurrenabaque in the Upper Beni River, in the Bolivian Amazon. Mean annual precipitation at Rurrenabaque is 2550 mm while mean annual temperature is 26°C.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.92396,-14.43169],[-67.91718,-14.43169],[-67.91718,-14.42417],[-67.92396,-14.42417],[-67.92396,-14.43169]]]}",
+            "altitude": 341,
+            "collectionunits": [
+                {
+                    "handle": "CHALALAN",
+                    "datasets": [
+                        {
+                            "datasetid": 21537,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15700,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13968,
+            "sitename": "Laguna Sardinas",
+            "sitedescription": "Fluvial origin lake in floodplain of the Rio Torno. Surrounding vegetation: savanna and gallery forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-69.52371,4.96818],[-69.51868,4.96818],[-69.51868,4.97254],[-69.52371,4.97254],[-69.52371,4.96818]]]}",
+            "altitude": 104,
+            "collectionunits": [
+                {
+                    "handle": "SARDINAS",
+                    "datasets": [
+                        {
+                            "datasetid": 21545,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15704,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13976,
+            "sitename": "Lake Santa Rosa",
+            "sitedescription": "The long, narrow lake lies on a terrace ~15 m above Rio Tiuchi in a sharply defined depression ~7–10 m deep, suggesting that its catchment area is fairly small relative to the water surface area. Bathymetrically, the lake slopes gently down from 1 to 6 m depth in about 2 km. A small farm located about 300 m from the northern shore, where crops and fruits are cultivated, is the only evident human disturbance in this landscape. The rest of the vegetation around the lake is forest dominated by Iriartea deltoidea, Mauritia flexuosa, Oenocarpus bataua, Hura crepitans, Ceiba pentandra, Pentaplaris davidsmithii, and Cecropia spp. Cyperaceae, Liliaceace, and Sagittaria grow as a narrow marsh around the lake.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.88893,-14.50063],[-67.85748,-14.50063],[-67.85748,-14.46123],[-67.88893,-14.46123],[-67.88893,-14.50063]]]}",
+            "altitude": 359,
+            "collectionunits": [
+                {
+                    "handle": "SANTROSA",
+                    "datasets": [
+                        {
+                            "datasetid": 21580,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15717,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26166,
+            "sitename": "Lake Caranã",
+            "sitedescription": "Flat bottomed lake located on the fluvial terrace on the eastern bank of the Rio Tapajós at the base of the Belterra Plateau. The lake occupies a small closed basin separated from the main river channel except during extreme flood events by a depositional sand berm. Vegetation is dense terra firme humid evergreen rainforest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-55.0444,-2.83807],[-55.03917,-2.83807],[-55.03917,-2.83122],[-55.0444,-2.83122],[-55.0444,-2.83807]]]}",
+            "altitude": -14,
+            "collectionunits": [
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45629,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26675,
+            "sitename": "Bosque de Avicennia",
+            "sitedescription": "The site is located on the relatively high central southern part of the Braganca peninsula. Tidal creeks and channels are at least 500 m distant from core site, and the area seems to be little disturbed by tidal inundations. Only Avicennia trees form the mangrove forest. A high number of dead trees are found in this area.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.70221,-0.92777]}",
+            "altitude": 4,
+            "collectionunits": [
+                {
+                    "handle": "AVICENNIA",
+                    "datasets": [
+                        {
+                            "datasetid": 46724,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33342,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26897,
+            "sitename": "Lago Amapá",
+            "sitedescription": "It is a 3 km-long, U-shaped oxbow lake of the Acre River. The current vegetation in the area is strongly altered and consists of large areas of pastures, crops and urban settlement. The natural vegetation is semi-evergreen tropical rainforest with a mixture of palm trees and bamboo. The lake is surrounded by small patches of tropical rain forest, crops and fishery ponds.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.85506,-10.04542]}",
+            "altitude": 129,
+            "collectionunits": [
+                {
+                    "handle": "AMAPA",
+                    "datasets": [
+                        {
+                            "datasetid": 46993,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Lago Amapá",
+                    "collectionunitid": 33593,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26898,
+            "sitename": "Furo do Chato",
+            "sitedescription": "Rhizophora trees dominate in the mangrove, but Avicennia trees occur close to the site. The core site is near tidal channels and is more influenced by inundation than the two other sites in the study (Bosque de Avicennia and Campo Salgado).",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.65,-0.87361]}",
+            "altitude": 15,
+            "collectionunits": [
+                {
+                    "handle": "FURCHATO",
+                    "datasets": [
+                        {
+                            "datasetid": 46995,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33594,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

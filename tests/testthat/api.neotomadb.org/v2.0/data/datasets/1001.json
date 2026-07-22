@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 970,
+                "sitename": "Hail Lake",
+                "sitedescription": "Small lake. Surrounding vegetation: Picea mariana, P. glauca, Pinus contorta.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-129.01667,60.03333]}",
+                "altitude": 743,
+                "collectionunitid": 969,
+                "collectionunit": null,
+                "handle": "HAIL",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n31d9w",
+                            "10.21233/n3f91j"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 9944,
+                                "ageyoung": 67
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 1001,
+                        "datasetpi": [
+                            {
+                                "initials": "L.C.",
+                                "contactid": 129,
+                                "firstname": "Les C.",
+                                "familyname": "Cwynar",
+                                "contactname": "Cwynar, Les C."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

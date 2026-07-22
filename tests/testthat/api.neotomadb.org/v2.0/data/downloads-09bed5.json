@@ -1,0 +1,1845 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "area": 19342.020465135574,
+                "notes": null,
+                "siteid": 13319,
+                "dataset": {
+                    "doi": [
+                        "10.21233/99z6-qj79"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Calendar years BP",
+                            "ageold": -55,
+                            "ageyoung": -55
+                        }
+                    ],
+                    "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                    "datasetid": 19875,
+                    "datasetpi": [
+                        {
+                            "initials": "G.W.",
+                            "contactid": 4146,
+                            "firstname": "G.W.",
+                            "familyname": "Fairchild",
+                            "contactname": "Fairchild, G.W."
+                        }
+                    ],
+                    "datasetname": "GGCWH1_20020702",
+                    "datasettype": "water chemistry",
+                    "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026."
+                },
+                "altitude": 153,
+                "sitename": "Crow Hill",
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-75.74477,40.13735],[-75.74185,40.13735],[-75.74185,40.13805],[-75.74477,40.13805],[-75.74477,40.13735]]]}",
+                "geopolitical": [
+                    "United States",
+                    "Pennsylvania",
+                    "Chester"
+                ],
+                "collectionunit": {
+                    "notes": null,
+                    "handle": "CROWHI05",
+                    "colldate": null,
+                    "location": "Middle in the pond ",
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": 40.13805,
+                        "longitude": -75.742727,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": "Core",
+                    "collectionunit": "Top Bottom Core  ",
+                    "collectiondevice": "Gravity corer ",
+                    "collectionunitid": 14890,
+                    "depositionalenvironment": "Lacustrine",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/99z6-qj79"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -55
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 19875,
+                        "datasetpi": [
+                            {
+                                "initials": "G.W.",
+                                "contactid": 4146,
+                                "firstname": "G.W.",
+                                "familyname": "Fairchild",
+                                "contactname": "Fairchild, G.W."
+                            }
+                        ],
+                        "datasetname": "GGCWH1_20020702",
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": -55,
+                                        "agetype": "Calendar years BP",
+                                        "ageolder": null,
+                                        "ageyounger": null,
+                                        "chronologyid": 11498,
+                                        "chronologyname": "Collection date"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": null,
+                                        "value": 7.05,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21266,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "pH",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": null,
+                                        "value": 13,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27429,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Forel Color",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "m",
+                                        "value": 0.8,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25382,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Secchi depth",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 4.835,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25197,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Dissolved organic carbon",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 7.5,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27434,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Total suspended solids",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 12.75,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25196,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Alkalinity",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 18.25,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27430,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Hardness",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "NTU",
+                                        "value": 8.85,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27435,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Turbidity",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 1.25,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27220,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Orthophosphate as P",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 1.5,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27431,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Nitrate + Nitrite",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 3,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27427,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Dissolved organic phosphorus",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 10.25,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25201,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Phosphorus",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 12.5,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27425,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Ammonia",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 20.1,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25380,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Chlorophyll A",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 245.25,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27433,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Particulate nitrogen",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 258.75,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27426,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Dissolved organic nitrogen",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 518,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25200,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Nitrogen",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 2381.33,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27432,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Particulate carbon",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 6515,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21272,
+                                        "symmetry": null,
+                                        "taxongroup": "Chemical substance",
+                                        "elementtype": null,
+                                        "variablename": "Silicon dioxide",
+                                        "ecologicalgroup": "IORG"
+                                    },
+                                    {
+                                        "units": "μmho/cm",
+                                        "value": 55,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21269,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Specific conductance",
+                                        "ecologicalgroup": "WCHM"
+                                    }
+                                ],
+                                "depth": null,
+                                "sampleid": 172561,
+                                "thickness": null,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": null,
+                                        "contactid": null,
+                                        "firstname": null,
+                                        "familyname": null,
+                                        "contactname": null
+                                    }
+                                ],
+                                "analysisunitid": 138094,
+                                "analysisunitname": "CrowHill_WCh"
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 8614,
+                                            "givenname": "Kelsey",
+                                            "familyname": "Boone",
+                                            "contactname": "Boone, Kelsey",
+                                            "leadinginitial": "K."
+                                        }
+                                    ],
+                                    "agemodel": "collection date",
+                                    "agerange": {
+                                        "ageboundolder": -55,
+                                        "ageboundyounger": -55
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": "2016-05-27",
+                                    "modelagetype": "Calendar years BP",
+                                    "chronologyname": "Collection date"
+                                },
+                                "chronologyid": 11498,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 39798,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -55,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 39799,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -55,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 39800,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -55,
+                                        "chroncontroltype": "Collection date"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 11498
+                },
+                "sitedescription": null
+            }
+        },
+        {
+            "site": {
+                "area": null,
+                "notes": null,
+                "siteid": 13949,
+                "dataset": {
+                    "doi": [
+                        "10.21233/e706-9742"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Calendar years BP",
+                            "ageold": -42,
+                            "ageyoung": -42
+                        }
+                    ],
+                    "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                    "datasetid": 21480,
+                    "datasetpi": [
+                        {
+                            "initials": "J.P.",
+                            "contactid": 314,
+                            "firstname": "John P.",
+                            "familyname": "Smol",
+                            "contactname": "Smol, John P."
+                        },
+                        {
+                            "initials": "R.I.",
+                            "contactid": 3663,
+                            "firstname": "Roland I.",
+                            "familyname": "Hall",
+                            "contactname": "Hall, Roland I."
+                        }
+                    ],
+                    "datasetname": "Paleolimnological assessment of long-term water quality changes in south-central",
+                    "datasettype": "water chemistry",
+                    "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026."
+                },
+                "altitude": 245,
+                "sitename": "Lake Joseph, Frazer Island",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.76667,45.25]}",
+                "geopolitical": [
+                    "Canada",
+                    "Ontario"
+                ],
+                "collectionunit": {
+                    "notes": "Sample collected in Autumn 1992",
+                    "handle": "FRAZER17",
+                    "colldate": null,
+                    "location": "Deepwater regions",
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": "Core",
+                    "collectionunit": null,
+                    "collectiondevice": "Glew Gravity corer",
+                    "collectionunitid": 15674,
+                    "depositionalenvironment": "Lacustrine",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/e706-9742"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -42,
+                                "ageyoung": -42
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 21480,
+                        "datasetpi": [
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "R.I.",
+                                "contactid": 3663,
+                                "firstname": "Roland I.",
+                                "familyname": "Hall",
+                                "contactname": "Hall, Roland I."
+                            }
+                        ],
+                        "datasetname": "Paleolimnological assessment of long-term water quality changes in south-central",
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": -42,
+                                        "agetype": "Calendar years BP",
+                                        "ageolder": null,
+                                        "ageyounger": null,
+                                        "chronologyid": 12337,
+                                        "chronologyname": "Collection date"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": null,
+                                        "value": 6.7,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21266,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "pH",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.32,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 28932,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Silicon ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.58,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21267,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Potassium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.8,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21265,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Magnesium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 2,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25197,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Dissolved organic carbon",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 3.43,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25196,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Alkalinity",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 3.61,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21262,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Calcium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 3.88,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21268,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Sodium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 8.05,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21270,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Sulfate ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 160,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25200,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Nitrogen",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 231,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25381,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Nitrate",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 3.15,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25201,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Phosphorus",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 8,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27425,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Ammonia",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μS/cm",
+                                        "value": 51.9,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21269,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Specific conductance",
+                                        "ecologicalgroup": "WCHM"
+                                    }
+                                ],
+                                "depth": null,
+                                "sampleid": 198074,
+                                "thickness": null,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": null,
+                                        "contactid": null,
+                                        "firstname": null,
+                                        "familyname": null,
+                                        "contactname": null
+                                    }
+                                ],
+                                "analysisunitid": 154050,
+                                "analysisunitname": "WCH_Frazer"
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 8890,
+                                            "givenname": "Adrian",
+                                            "familyname": "Elkind",
+                                            "contactname": "Elkind, Adrian",
+                                            "leadinginitial": "A."
+                                        }
+                                    ],
+                                    "agemodel": "collection date",
+                                    "agerange": {
+                                        "ageboundolder": -42,
+                                        "ageboundyounger": -42
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": "2017-03-16",
+                                    "modelagetype": "Calendar years BP",
+                                    "chronologyname": "Collection date"
+                                },
+                                "chronologyid": 12337,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 45134,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -42,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 45135,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -42,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 45136,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": -42,
+                                        "chroncontroltype": "Collection date"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 12337
+                },
+                "sitedescription": null
+            }
+        },
+        {
+            "site": {
+                "area": 1993327.1704416275,
+                "notes": null,
+                "siteid": 11904,
+                "dataset": {
+                    "doi": [
+                        "10.21233/ce30-1h30"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Calendar years BP",
+                            "ageold": -55,
+                            "ageyoung": -56
+                        }
+                    ],
+                    "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                    "datasetid": 18048,
+                    "datasetpi": [
+                        {
+                            "initials": "B.K.",
+                            "contactid": 7345,
+                            "firstname": "Brian K.",
+                            "familyname": "Ginn",
+                            "contactname": "Ginn, Brian K."
+                        },
+                        {
+                            "initials": "P.",
+                            "contactid": 7460,
+                            "firstname": "P.",
+                            "familyname": "Clement",
+                            "contactname": "Clement, P."
+                        }
+                    ],
+                    "datasetname": "Halifax Lakes",
+                    "datasettype": "water chemistry",
+                    "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026."
+                },
+                "altitude": 30,
+                "sitename": "Sandy Lake",
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.70989,44.72731],[-63.69294,44.72731],[-63.69294,44.74067],[-63.70989,44.74067],[-63.70989,44.72731]]]}",
+                "geopolitical": [
+                    "Canada",
+                    "Nova Scotia"
+                ],
+                "collectionunit": {
+                    "notes": "Collected in July 2005 and July 2006.\r\nTop sample is 0 to .5 cm interval, Bottom sample is ~16.5 to ~25.5 cm.\r\nCount data calculated from relative abundance, based upon the assumption that the lowest relative abundance corresponds to a count of 1.",
+                    "handle": "SANDY15",
+                    "colldate": null,
+                    "location": "not specified",
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": "Composite",
+                    "collectionunit": "Sandy2015",
+                    "collectiondevice": "7.6 cm diameter gravity corer",
+                    "collectionunitid": 13425,
+                    "depositionalenvironment": null,
+                    "dataset": {
+                        "doi": [
+                            "10.21233/ce30-1h30"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -55,
+                                "ageyoung": -56
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 18048,
+                        "datasetpi": [
+                            {
+                                "initials": "B.K.",
+                                "contactid": 7345,
+                                "firstname": "Brian K.",
+                                "familyname": "Ginn",
+                                "contactname": "Ginn, Brian K."
+                            },
+                            {
+                                "initials": "P.",
+                                "contactid": 7460,
+                                "firstname": "P.",
+                                "familyname": "Clement",
+                                "contactname": "Clement, P."
+                            }
+                        ],
+                        "datasetname": "Halifax Lakes",
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "This dataset was originally uploaded to the Academy of Natural Sciences of Drexel University constituent database, which was merged into the Diatom Paleolimnology Data Cooperative (DPDC) constituent database in July 2026.",
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": null,
+                                        "agetype": "Calendar years BP",
+                                        "ageolder": -55,
+                                        "ageyounger": -56,
+                                        "chronologyid": 10024,
+                                        "chronologyname": "Collection date"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": null,
+                                        "value": 5.91,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21266,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "pH",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.02,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25553,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Ammonium",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.03,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21272,
+                                        "symmetry": null,
+                                        "taxongroup": "Chemical substance",
+                                        "elementtype": null,
+                                        "variablename": "Silicon dioxide",
+                                        "ecologicalgroup": "IORG"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.1,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25381,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Nitrate",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.17,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25200,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Nitrogen",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.19,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 27026,
+                                        "symmetry": null,
+                                        "taxongroup": "Chemical substance",
+                                        "elementtype": null,
+                                        "variablename": "Aluminum",
+                                        "ecologicalgroup": "ELEM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.2,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 24853,
+                                        "symmetry": null,
+                                        "taxongroup": "Chemical substance",
+                                        "elementtype": null,
+                                        "variablename": "Iron",
+                                        "ecologicalgroup": "ELEM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.66,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21267,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Potassium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.66,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25380,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Chlorophyll A",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.99,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21265,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Magnesium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21262,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Calcium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 5.1,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25197,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Dissolved organic carbon",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 9.07,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21270,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Sulfate ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 17.7,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21268,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Sodium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 30.2,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21263,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Chloride ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L CaCO3",
+                                        "value": 0.21,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25196,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Alkalinity",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 0.11,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 24855,
+                                        "symmetry": null,
+                                        "taxongroup": "Chemical substance",
+                                        "elementtype": null,
+                                        "variablename": "Manganese",
+                                        "ecologicalgroup": "ELEM"
+                                    },
+                                    {
+                                        "units": "μg/L",
+                                        "value": 8,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 25201,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": null,
+                                        "variablename": "Total Phosphorus",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "μS",
+                                        "value": 132,
+                                        "context": null,
+                                        "element": null,
+                                        "taxonid": 21269,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": null,
+                                        "variablename": "Specific conductance",
+                                        "ecologicalgroup": "WCHM"
+                                    }
+                                ],
+                                "depth": 21,
+                                "sampleid": 166931,
+                                "thickness": 9,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": null,
+                                        "contactid": null,
+                                        "firstname": null,
+                                        "familyname": null,
+                                        "contactname": null
+                                    }
+                                ],
+                                "analysisunitid": 133290,
+                                "analysisunitname": "Sandy_bottom"
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 7126,
+                                            "givenname": "Chris",
+                                            "familyname": "Vito",
+                                            "contactname": "Vito, Chris",
+                                            "leadinginitial": "C."
+                                        }
+                                    ],
+                                    "agemodel": "collection date",
+                                    "agerange": {
+                                        "ageboundolder": -55,
+                                        "ageboundyounger": -56
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": "2016-01-08",
+                                    "modelagetype": "Calendar years BP",
+                                    "chronologyname": "Collection date"
+                                },
+                                "chronologyid": 10024,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": -55,
+                                        "chroncontrolid": 38481,
+                                        "agelimityounger": -56,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": -55,
+                                        "chroncontrolid": 38482,
+                                        "agelimityounger": -56,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": "Collection date"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": -55,
+                                        "chroncontrolid": 38483,
+                                        "agelimityounger": -56,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": "Collection date"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 10024
+                },
+                "sitedescription": null
+            }
+        },
+        {
+            "site": {
+                "area": 206177.8831372261,
+                "notes": null,
+                "siteid": 728,
+                "dataset": {
+                    "doi": [
+                        "10.21233/fvsw-2w23"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Calendar years BP",
+                            "ageold": -28,
+                            "ageyoung": -38
+                        }
+                    ],
+                    "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                    "datasetid": 43118,
+                    "datasetpi": [
+                        {
+                            "initials": "J.P.",
+                            "contactid": 314,
+                            "firstname": "John P.",
+                            "familyname": "Smol",
+                            "contactname": "Smol, John P."
+                        },
+                        {
+                            "initials": "D.F.",
+                            "contactid": 448,
+                            "firstname": "Donald F.",
+                            "familyname": "Charles",
+                            "contactname": "Charles, Donald F."
+                        },
+                        {
+                            "initials": "B.F.",
+                            "contactid": 608,
+                            "firstname": "Brian F.",
+                            "familyname": "Cumming",
+                            "contactname": "Cumming, Brian F."
+                        },
+                        {
+                            "initials": "S.S.",
+                            "contactid": 3628,
+                            "firstname": "Sushil S.",
+                            "familyname": "Dixit",
+                            "contactname": "Dixit, Sushil S."
+                        },
+                        {
+                            "initials": null,
+                            "contactid": 12662,
+                            "firstname": null,
+                            "familyname": "USEPA and Collaborators",
+                            "contactname": "USEPA and Collaborators"
+                        },
+                        {
+                            "initials": "A.H.",
+                            "contactid": 15369,
+                            "firstname": "Alan H.",
+                            "familyname": "Driscoll",
+                            "contactname": "Driscoll, Alan H."
+                        },
+                        {
+                            "initials": "D.H.",
+                            "contactid": 15568,
+                            "firstname": "Dixon",
+                            "familyname": "Landers",
+                            "contactname": "Landers, Dixon"
+                        }
+                    ],
+                    "datasetname": null,
+                    "datasettype": "water chemistry",
+                    "datasetnotes": "These notes pertain to the Neotoma Aggregate Dataset \"Adirondack water chemistry - PIRLA study lakes\"\r\nPIRLA = Paleoecological Investigation of Lake Acidification\r\nText from Camburn and Charles 2000 (page 10), which contains tables of chemistry data for the lakes in the aggregate dataset:\r\n\"Chemistry data come from several sources.  All values are arithmetic averages of measurements made on surface samples collected during the summer or fall.  Data for PIRLA Phase I lakes come from Charles (1982,1985) and RILWAS (Regionalized Integrated Lake Water Acidification Study; Driscoll and Newton 1985), and are further documented in Charles et al. (1990). Charles (1985) data are for 2 to 7 samples (usually at least 5) taken from 38 lakes during the summers of 1978 and 1979. The RILWAS data include samples from 7 lakes taken on 6 to 13 occasions from May through September 1984. The chemistry data for PIRLA Phase II lakes come primarily from the U.S. EPA=s Eastern Lake Survey (ELS), Phases I and II.  The ELS-I survey data are used for 45 lakes; single samples were taken during the fall of 1984 (Kanciruk et al. 1986; Landers et al., 1988).  ELS-II data were used for 28 of the study lakes; 1 to 3 measurements were taken during the fall of 1986 (Herlihy et al. 1991).  C.T. Driscoll (Syracuse University, personnel communication) provided supplemental data on pH, aluminum, and DOC for 13 lakes; samples were collected once from each lake during August and September 1988.\""
+                },
+                "altitude": 660,
+                "sitename": "Heart Lake",
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+                "geopolitical": [
+                    "United States",
+                    "New York",
+                    "Essex",
+                    "Adirondack Park"
+                ],
+                "collectionunit": {
+                    "notes": null,
+                    "handle": "HEART-WC",
+                    "colldate": null,
+                    "location": "Deepest point",
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": "Modern",
+                    "collectionunit": "HEART-WC",
+                    "collectiondevice": "Van Dorn bottle",
+                    "collectionunitid": 30115,
+                    "depositionalenvironment": "Unknown",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/fvsw-2w23"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": -28,
+                                "ageyoung": -38
+                            }
+                        ],
+                        "database": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                        "datasetid": 43118,
+                        "datasetpi": [
+                            {
+                                "initials": "J.P.",
+                                "contactid": 314,
+                                "firstname": "John P.",
+                                "familyname": "Smol",
+                                "contactname": "Smol, John P."
+                            },
+                            {
+                                "initials": "D.F.",
+                                "contactid": 448,
+                                "firstname": "Donald F.",
+                                "familyname": "Charles",
+                                "contactname": "Charles, Donald F."
+                            },
+                            {
+                                "initials": "B.F.",
+                                "contactid": 608,
+                                "firstname": "Brian F.",
+                                "familyname": "Cumming",
+                                "contactname": "Cumming, Brian F."
+                            },
+                            {
+                                "initials": "S.S.",
+                                "contactid": 3628,
+                                "firstname": "Sushil S.",
+                                "familyname": "Dixit",
+                                "contactname": "Dixit, Sushil S."
+                            },
+                            {
+                                "initials": null,
+                                "contactid": 12662,
+                                "firstname": null,
+                                "familyname": "USEPA and Collaborators",
+                                "contactname": "USEPA and Collaborators"
+                            },
+                            {
+                                "initials": "A.H.",
+                                "contactid": 15369,
+                                "firstname": "Alan H.",
+                                "familyname": "Driscoll",
+                                "contactname": "Driscoll, Alan H."
+                            },
+                            {
+                                "initials": "D.H.",
+                                "contactid": 15568,
+                                "firstname": "Dixon",
+                                "familyname": "Landers",
+                                "contactname": "Landers, Dixon"
+                            }
+                        ],
+                        "datasetname": null,
+                        "datasettype": "water chemistry",
+                        "datasetnotes": "These notes pertain to the Neotoma Aggregate Dataset \"Adirondack water chemistry - PIRLA study lakes\"\r\nPIRLA = Paleoecological Investigation of Lake Acidification\r\nText from Camburn and Charles 2000 (page 10), which contains tables of chemistry data for the lakes in the aggregate dataset:\r\n\"Chemistry data come from several sources.  All values are arithmetic averages of measurements made on surface samples collected during the summer or fall.  Data for PIRLA Phase I lakes come from Charles (1982,1985) and RILWAS (Regionalized Integrated Lake Water Acidification Study; Driscoll and Newton 1985), and are further documented in Charles et al. (1990). Charles (1985) data are for 2 to 7 samples (usually at least 5) taken from 38 lakes during the summers of 1978 and 1979. The RILWAS data include samples from 7 lakes taken on 6 to 13 occasions from May through September 1984. The chemistry data for PIRLA Phase II lakes come primarily from the U.S. EPA=s Eastern Lake Survey (ELS), Phases I and II.  The ELS-I survey data are used for 45 lakes; single samples were taken during the fall of 1984 (Kanciruk et al. 1986; Landers et al., 1988).  ELS-II data were used for 28 of the study lakes; 1 to 3 measurements were taken during the fall of 1986 (Herlihy et al. 1991).  C.T. Driscoll (Syracuse University, personnel communication) provided supplemental data on pH, aluminum, and DOC for 13 lakes; samples were collected once from each lake during August and September 1988.\"",
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": null,
+                                        "agetype": "Calendar years BP",
+                                        "ageolder": -28,
+                                        "ageyounger": -38,
+                                        "chronologyid": 27425,
+                                        "chronologyname": "Collection date"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": "µg/L",
+                                        "value": 1.575,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 28592,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Pheophytin",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "µg/L",
+                                        "value": 3.9,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 25380,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": "lab",
+                                        "variablename": "Chlorophyll A",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "µg/L",
+                                        "value": 6.675,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 25402,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Total Phosphorus (unfiltered)",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "µg/L",
+                                        "value": 36,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 35660,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Aluminium Total",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "Index",
+                                        "value": 11.4,
+                                        "context": null,
+                                        "element": "field",
+                                        "taxonid": 27429,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": "field",
+                                        "variablename": "Forel Color",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "m",
+                                        "value": 4.857143,
+                                        "context": null,
+                                        "element": "field",
+                                        "taxonid": 25382,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": "field",
+                                        "variablename": "Secchi depth",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.09774999,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21267,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Potassium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.30375,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21265,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Magnesium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.372225,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21263,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Chloride ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 0.494285,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21268,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Sodium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 2.021429,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 25196,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": "lab",
+                                        "variablename": "Alkalinity",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 2.4048,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21262,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Calcium ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 4.428866,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 28932,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Silicon ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "mg/L",
+                                        "value": 5.47542,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 21270,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "Sulfate ions",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "Pt-Co units",
+                                        "value": 13,
+                                        "context": null,
+                                        "element": "field",
+                                        "taxonid": 35662,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "field",
+                                        "variablename": "Color True",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "µS/cm 25°C",
+                                        "value": 20.71428,
+                                        "context": null,
+                                        "element": "field",
+                                        "taxonid": 21269,
+                                        "symmetry": null,
+                                        "taxongroup": "Aquatic parameters",
+                                        "elementtype": "field",
+                                        "variablename": "Specific conductance",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "units",
+                                        "value": 6.550743,
+                                        "context": null,
+                                        "element": "field",
+                                        "taxonid": 30576,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "field",
+                                        "variablename": "pH non-aerated",
+                                        "ecologicalgroup": "WCHM"
+                                    },
+                                    {
+                                        "units": "units",
+                                        "value": 6.562523,
+                                        "context": null,
+                                        "element": "lab",
+                                        "taxonid": 35664,
+                                        "symmetry": null,
+                                        "taxongroup": "Water chemistry",
+                                        "elementtype": "lab",
+                                        "variablename": "pH aerated",
+                                        "ecologicalgroup": "WCHM"
+                                    }
+                                ],
+                                "depth": 50,
+                                "sampleid": 371569,
+                                "thickness": 100,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": "D.F.",
+                                        "contactid": 448,
+                                        "firstname": "Donald F.",
+                                        "familyname": "Charles",
+                                        "contactname": "Charles, Donald F."
+                                    }
+                                ],
+                                "analysisunitid": 290864,
+                                "analysisunitname": "Heart L."
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 448,
+                                            "givenname": "Donald F.",
+                                            "familyname": "Charles",
+                                            "contactname": "Charles, Donald F.",
+                                            "leadinginitial": "D.F."
+                                        }
+                                    ],
+                                    "agemodel": "collection date",
+                                    "agerange": {
+                                        "ageboundolder": -30,
+                                        "ageboundyounger": -50
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": "2019-06-07",
+                                    "modelagetype": "Calendar years BP",
+                                    "chronologyname": "Collection date"
+                                },
+                                "chronologyid": 27425,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": -28,
+                                        "chroncontrolid": 89265,
+                                        "agelimityounger": -38,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": "Collection date"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 27425
+                },
+                "sitedescription": null
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

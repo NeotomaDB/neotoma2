@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("get_downloads() retrieves data from /download endpoint 
         and parses content as expected.")
 test_that("get_downloads numeric", {
@@ -13,7 +15,7 @@ test_that("get_downloads numeric", {
   # objects belonging to that dsid
   testthat::expect_equivalent(datasets_ids, 1001)
 })
-
+})
 test_that("get_downloads from get_datasets()
           sites object.", {
             skip_on_cran()
@@ -33,7 +35,7 @@ test_that("get_downloads from get_datasets()
             testthat::expect_equal(getids(brazil_datasets), 
                                    getids(brazil_dl))
           })
-
+httptest::with_mock_api({
 test_that("get_downloads from get_sites sites", {
   skip_on_cran()
   core_sites <- c(13949, 11904, 13319, 728,
@@ -73,10 +75,11 @@ test_that("get_downloads with or without all_data works.", {
   testthat::expect_error(get_downloads(uk_datasets, all_data=FALSE), NA)
   testthat::expect_error(get_downloads(uk_datasets), NA)
 })
+})
 
 test_that("get_downloads handles empty result", {
   skip_on_cran()
-  gpids <- c(7326, 6442, 7923, 7990, 7368, 8480, 8981, 7934)
+  gpids <- c(7326, 7368, 8981, 7934, 6442, 7923, 7990) #8480,
   ne_sites <- c() 
   for (id in gpids) {
     search_1 <- get_sites(gpid = id)

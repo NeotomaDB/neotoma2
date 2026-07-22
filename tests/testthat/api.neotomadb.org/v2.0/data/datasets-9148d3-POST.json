@@ -1,0 +1,422 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 1,
+                "sitename": "15/1",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.25,55.09167]}",
+                "altitude": 244,
+                "collectionunitid": 1,
+                "collectionunit": "15/1",
+                "handle": "15-1",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/9twd-s570",
+                            "10.21233/n3159g",
+                            "10.21233/n3f596"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 1,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 2,
+                "sitename": "15/2",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.01667,55.83333]}",
+                "altitude": 261,
+                "collectionunitid": 2,
+                "collectionunit": "15/2",
+                "handle": "15-2",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/hhsf-6760",
+                            "10.21233/n3wc7j"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 2,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 3,
+                "sitename": "16/1",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.06667,55.41333]}",
+                "altitude": 290,
+                "collectionunitid": 3,
+                "collectionunit": "16/1",
+                "handle": "16-1",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/g2yc-7s57",
+                            "10.21233/n3rp48"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 3,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 4,
+                "sitename": "17/1",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.7,55.06667]}",
+                "altitude": 235,
+                "collectionunitid": 4,
+                "collectionunit": "17/1",
+                "handle": "17-1",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/7s96-8m25",
+                            "10.21233/n39g6x",
+                            "10.21233/n3qp4z",
+                            "10.21233/n3wh55"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 4,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 5,
+                "sitename": "17/2",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.93333,55.25]}",
+                "altitude": 300,
+                "collectionunitid": 5,
+                "collectionunit": "17/2",
+                "handle": "17-2",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/8rvx-be32",
+                            "10.21233/n35p40",
+                            "10.21233/n3kw21",
+                            "10.21233/n3rt1h"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 5,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 6,
+                "sitename": "17/3",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.95,55.11667]}",
+                "altitude": 278,
+                "collectionunitid": 6,
+                "collectionunit": "17/3",
+                "handle": "17-3",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n32011",
+                            "10.21233/n3g59h",
+                            "10.21233/n3n09b"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 6,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 7,
+                "sitename": "Three Pines Bog",
+                "sitedescription": "Bog.",
+                "sitenotes": "Bog is adjacent to the Three Pines archeological site.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-80.11667,47]}",
+                "altitude": 329,
+                "collectionunitid": 7,
+                "collectionunit": null,
+                "handle": "3PINES",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3bc7k",
+                            "10.21233/n3h98t",
+                            "10.21233/n3x59j"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 6485,
+                                "ageyoung": -26
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 7,
+                        "datasetpi": [
+                            {
+                                "initials": "J.H.",
+                                "contactid": 69,
+                                "firstname": "John H.",
+                                "familyname": "McAndrews",
+                                "contactname": "McAndrews, John H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 8,
+                "sitename": "Abalone Rocks Marsh",
+                "sitedescription": "Small estuarine marsh. Physiography: Santa Rosa Island. Surrounding vegetation: coastal marsh and grassland.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-119.97667,33.95639]}",
+                "altitude": 9,
+                "collectionunitid": 8,
+                "collectionunit": null,
+                "handle": "ABALONE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n36p49",
+                            "10.21233/n3ch5h",
+                            "10.21233/n3sg68"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 6904,
+                                "ageyoung": -43
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 8,
+                        "datasetpi": [
+                            {
+                                "initials": "K.L.",
+                                "contactid": 127,
+                                "firstname": "Kenneth L.",
+                                "familyname": "Cole",
+                                "contactname": "Cole, Kenneth L."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 9,
+                "sitename": "Adange",
+                "sitedescription": "Meander of Adange river. Physiography: Fluvial terrace above flood-plain. Surrounding vegetation: Subalpine tall herbaceous vegetation.",
+                "sitenotes": "The site is the wide part of the mouth of the river.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.33333,43.30556]}",
+                "altitude": 2065,
+                "collectionunitid": 9,
+                "collectionunit": null,
+                "handle": "ADANGE",
+                "unittype": "Section",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3301b",
+                            "10.21233/n37t27",
+                            "10.21233/n3np4b"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 6051,
+                                "ageyoung": -475
+                            },
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 4000,
+                                "ageyoung": 0
+                            }
+                        ],
+                        "database": "European Pollen Database",
+                        "datasetid": 9,
+                        "datasetpi": [
+                            {
+                                "initials": "E.V.",
+                                "contactid": 558,
+                                "firstname": "Eliso V.",
+                                "familyname": "Kvavadze",
+                                "contactname": "Kvavadze, Eliso V."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Data contributed by Kvavadze Eliso V.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 10,
+                "sitename": "Site 1 (Cohen unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-82.33,30.83]}",
+                "altitude": 36,
+                "collectionunitid": 10,
+                "collectionunit": null,
+                "handle": "ADC001",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3409p",
+                            "10.21233/n3j01c"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 10,
+                        "datasetpi": [
+                            {
+                                "initials": "A.D.",
+                                "contactid": 726,
+                                "firstname": "A. D.",
+                                "familyname": "Cohen",
+                                "contactname": "Cohen, A. D."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

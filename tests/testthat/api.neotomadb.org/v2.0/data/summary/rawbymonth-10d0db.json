@@ -1,0 +1,20 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "start": 0,
+            "end": 1
+        },
+        "data": [
+            {
+                "datasets": "318",
+                "sites": "175",
+                "publications": "50",
+                "authors": "130",
+                "countrygpid": "15",
+                "observations": "174175"
+            }
+        ]
+    },
+    "message": "Retrieved all tables"
+}

@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("`get_stats()` function returns different kinds of summary statistics")
 test_that("get_stats with the default values", {
@@ -24,4 +27,5 @@ test_that("get_stats dstypemonth", {
   stats <- get_stats(type="dstypemonth")
   testthat::expect_is(stats, "data.frame")
   testthat::expect_true(all(c("datasettype", "counts") %in% colnames(stats)))
+})
 })

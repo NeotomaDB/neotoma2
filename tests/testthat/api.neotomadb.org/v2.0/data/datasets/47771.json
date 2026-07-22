@@ -1,0 +1,63 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 27148,
+                "sitename": "Grootdrift - Verlorenvlei",
+                "sitedescription": "Grootdrift is located ~15 km inland of the coast, within the Verlorenvlei catchment, west coast South Africa.\r\n\r\nSeven sediment cores were extracted from a shore to shore transect across the riverine-lacustrine transition at Grootdrift.\r\nThe south bank core, demarcated as GDV1 and two cores derived from within the shallow-waters of the marsh, GDV2 and GDV4 were subsampled for radiocarbon dating and pollen analysis.",
+                "sitenotes": "Altitude listed above is the average of GDV1 (1.4) and GDV2 (0.7) m. a.s.l.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[18.47406,-32.4007]}",
+                "altitude": 6,
+                "collectionunitid": 34248,
+                "collectionunit": "GDV4",
+                "handle": "GDV4",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/km96-3e06",
+                            "10.21233/KM96-3E06"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 695,
+                                "ageyoung": -56
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 47771,
+                        "datasetpi": [
+                            {
+                                "initials": "A.J.",
+                                "contactid": 16087,
+                                "firstname": "Andrew James",
+                                "familyname": "Baxter",
+                                "contactname": "Baxter, Andrew James"
+                            },
+                            {
+                                "initials": "J",
+                                "contactid": 16313,
+                                "firstname": "John",
+                                "familyname": "Parkington",
+                                "contactname": "Parkington, John"
+                            },
+                            {
+                                "initials": "M.E.",
+                                "contactid": 16052,
+                                "firstname": "Michael Edward",
+                                "familyname": "Meadows",
+                                "contactname": "Meadows, Michael Edward"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2020-06-05T12:28:28"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

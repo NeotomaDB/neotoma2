@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("`get_contacts()` tests")
 test_that("`get_contacts()` numeric", {
   skip_on_cran()
@@ -23,4 +25,5 @@ test_that("`get_contacts()` query", {
   testthat::expect_gt(length(goring), 0)
   testthat::expect_true(class(goring) == "contacts")
   testthat::expect_true(class(goring[[1]]) == "contact")
+})
 })

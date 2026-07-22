@@ -1,0 +1,62 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 23664,
+                "sitename": "Bambili 2",
+                "sitedescription": "Bambili upper crater (swamp)",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[10.24036,5.92223],[10.24642,5.92223],[10.24642,5.9292],[10.24036,5.9292],[10.24036,5.92223]]]}",
+                "altitude": 2305,
+                "collectionunitid": 28383,
+                "collectionunit": "10-BB-02",
+                "handle": "BAMBILI2",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/3epn-hs17"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 88932,
+                                "ageyoung": 20312
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 40945,
+                        "datasetpi": [
+                            {
+                                "initials": "A.-M.",
+                                "contactid": 6414,
+                                "firstname": "Anne-Marie",
+                                "familyname": "Lézine",
+                                "contactname": "Lézine, Anne-Marie"
+                            },
+                            {
+                                "initials": "K.",
+                                "contactid": 13823,
+                                "firstname": "Kévin",
+                                "familyname": "Lemonnier",
+                                "contactname": "Lemonnier, Kévin"
+                            },
+                            {
+                                "initials": "L.",
+                                "contactid": 13821,
+                                "firstname": "Louis",
+                                "familyname": "Février",
+                                "contactname": "Février, Louis"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Pollen was counted by Louis Février and Kévin Lemonnier.",
+                        "recdatecreated": "2018-11-29T23:14:22"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

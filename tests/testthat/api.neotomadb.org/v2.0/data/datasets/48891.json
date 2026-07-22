@@ -1,0 +1,56 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 27312,
+                "sitename": "Cova Galinha caldera",
+                "sitedescription": "A caldera in the middle of Brava Island, currently used for low-intensity agriculture (mostly maize cultivation and cattle grazing).",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-24.70264,14.85728]}",
+                "altitude": 790,
+                "collectionunitid": 35193,
+                "collectionunit": "CG",
+                "handle": "GALINHA",
+                "unittype": "Section",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/tgp5-y471",
+                            "10.21233/TGP5-Y471"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 10081,
+                                "ageyoung": -72
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 48891,
+                        "datasetpi": [
+                            {
+                                "initials": "A.",
+                                "contactid": 16206,
+                                "firstname": "Alvaro",
+                                "familyname": "Castilla-Beltrán",
+                                "contactname": "Castilla-Beltrán, Alvaro"
+                            },
+                            {
+                                "initials": "S.",
+                                "contactid": 15945,
+                                "firstname": "Sandra",
+                                "familyname": "Nogué",
+                                "contactname": "Nogué, Sandra"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2021-01-22T07:48:48"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

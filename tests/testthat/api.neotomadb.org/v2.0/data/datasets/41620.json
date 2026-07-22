@@ -1,0 +1,48 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 23947,
+                "sitename": "Kitandara Lake",
+                "sitedescription": "Moraine dammed or rock depression lake in the Ruwenzori Mountains, formed during the Omurubaho glaciation. The lake lies just below the upper tree heather. Most of the catchment is alpine vegetation. ",
+                "sitenotes": "The lake is the lower of the two Kitandara Lakes.",
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[29.88565,0.34666],[29.88709,0.34666],[29.88709,0.34924],[29.88565,0.34924],[29.88565,0.34666]]]}",
+                "altitude": 3964,
+                "collectionunitid": 28743,
+                "collectionunit": "Core 1",
+                "handle": "KITANDRA",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/b1w4-ga26"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 5742,
+                                "ageyoung": 18
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 41620,
+                        "datasetpi": [
+                            {
+                                "initials": "D.A.",
+                                "contactid": 65,
+                                "firstname": "Daniel A.",
+                                "familyname": "Livingstone",
+                                "contactname": "Livingstone, Daniel A."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2019-04-03T06:55:30"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

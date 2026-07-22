@@ -1,0 +1,54 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 28346,
+                "sitename": "Kouka",
+                "sitedescription": "Steppe-like savanna with a low density of trees. Hyphaene thebatca ocasionally forms dense stands. Surrounding vegetation: Acacia thicket.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[15.63333,13.1]}",
+                "altitude": 279,
+                "collectionunitid": 38315,
+                "collectionunit": "[Maley81] KOUKA",
+                "handle": "KOUKA",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/4JHM-M018",
+                            "10.21233/6jvm-yj41"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 11002,
+                                "ageyoung": 11002
+                            },
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 9690,
+                                "ageyoung": 9690
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 52833,
+                        "datasetpi": [
+                            {
+                                "initials": "J.",
+                                "contactid": 15872,
+                                "firstname": "Jean",
+                                "familyname": "Maley",
+                                "contactname": "Maley, Jean"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2022-02-22T15:42:09"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

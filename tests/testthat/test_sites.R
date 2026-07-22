@@ -1,7 +1,9 @@
 ## load packages
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Run Neotoma `test_sites` only when not on CRAN")
 test_that("get_sites runs as expected.", {
   skip_on_cran()
@@ -32,6 +34,7 @@ test_that("get_sites runs as expected.", {
   sites.vec <- unique(sites.vec$siteid)
   testthat::expect_setequal(sites.vec, c(1001, 2001, 15, 24))
 })
+
 
 # test_that("All Czech sites work with different spatial bounds:", {
 #   skip_on_cran()
@@ -76,4 +79,5 @@ test_that("All Data + loc work", {
 
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
   # but the bounding box strategy means that the reverse is not true:
+})
 })

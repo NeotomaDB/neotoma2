@@ -1,0 +1,56 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 26665,
+                "sitename": "Lake Malawi MAL05-1",
+                "sitedescription": "Rift lake that borders Mozambique, Malawi, and Tanzania.  Surrounded mostly by miombo woodland as well as Afromontane forest and grassland in the higher elevations above 1500 masl.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[34.43583,-11.29433]}",
+                "altitude": 482,
+                "collectionunitid": 33332,
+                "collectionunit": "MAL05-1C",
+                "handle": "MAL05-1C",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/r7em-cs91",
+                            "10.21233/R7EM-CS91"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 143777.8412,
+                                "ageyoung": 20749.88384
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 46700,
+                        "datasetpi": [
+                            {
+                                "initials": "K.R.M.",
+                                "contactid": 15192,
+                                "firstname": "Kristina R. M.",
+                                "familyname": "Beuning",
+                                "contactname": "Beuning, Kristina R. M."
+                            },
+                            {
+                                "initials": "S.",
+                                "contactid": 16030,
+                                "firstname": "Sarah",
+                                "familyname": "Ivory",
+                                "contactname": "Ivory, Sarah"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "depths in meters below lake floor",
+                        "recdatecreated": "2020-01-29T16:00:08"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Verifying that neotoma objects do not have duplicates and
          are nested properly respecting Neotoma's data object:
         site <- cu <- ds")
@@ -16,4 +18,5 @@ test_that("Doubling a set of records results and cleaning results in a clean set
   doubled <- c(fiftyds, nextds)
   testthat::expect_equal(getids(doubled), getids(nextds))
   testthat::expect_equal(length(doubled), length(fiftyds))
+})
 })

@@ -1,0 +1,52 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "start": 0,
+            "end": 1
+        },
+        "data": [
+            {
+                "databasename": "Academy of Natural Sciences of Drexel University",
+                "counts": "1"
+            },
+            {
+                "databasename": "Diatom Paleolimnology Data Cooperative (DPDC)",
+                "counts": "27"
+            },
+            {
+                "databasename": "East Asian Nonmarine Ostracod Database",
+                "counts": "1"
+            },
+            {
+                "databasename": "European Pollen Database",
+                "counts": "131"
+            },
+            {
+                "databasename": "FAUNMAP",
+                "counts": "13"
+            },
+            {
+                "databasename": "Indo-Pacific Pollen Database",
+                "counts": "32"
+            },
+            {
+                "databasename": "Neotoma",
+                "counts": "49"
+            },
+            {
+                "databasename": "Neotoma Charcoal Data",
+                "counts": "6"
+            },
+            {
+                "databasename": "Nonmarine Ostracod Distribution in Europe Database",
+                "counts": "1"
+            },
+            {
+                "databasename": "North American Pollen Database",
+                "counts": "57"
+            }
+        ]
+    },
+    "message": "Retrieved all tables"
+}

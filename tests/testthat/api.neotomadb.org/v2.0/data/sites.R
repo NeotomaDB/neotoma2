@@ -1,0 +1,15 @@
+structure(list(url = "https://api.neotomadb.org/v2.0/data/sites", 
+    status_code = 502L, headers = structure(list(date = "Wed, 22 Jul 2026 14:04:19 GMT", 
+        `content-length` = "0", `x-envoy-upstream-service-time` = "1", 
+        server = "envoy"), class = c("insensitive", "list")), 
+    all_headers = list(list(status = 502L, version = "HTTP/1.1", 
+        headers = structure(list(date = "Wed, 22 Jul 2026 14:04:19 GMT", 
+            `content-length` = "0", `x-envoy-upstream-service-time` = "1", 
+            server = "envoy"), class = c("insensitive", "list"
+        )))), cookies = structure(list(domain = logical(0), flag = logical(0), 
+        path = logical(0), secure = logical(0), expiration = structure(numeric(0), class = c("POSIXct", 
+        "POSIXt")), name = logical(0), value = logical(0)), row.names = integer(0), class = "data.frame"), 
+    content = raw(0), date = structure(1784729059, class = c("POSIXct", 
+    "POSIXt"), tzone = "GMT"), times = c(redirect = 0, namelookup = 0, 
+    connect = 0, pretransfer = 0.000125, starttransfer = 0.048197, 
+    total = 0.048224)), class = "response")

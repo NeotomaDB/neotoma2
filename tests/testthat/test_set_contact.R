@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Contact object is set up properly.")
 test_that("check_contacts works properly.", {
   skip_on_cran()
@@ -12,4 +14,5 @@ test_that("check_contacts works properly.", {
   na_name <- c(set_contact(familyname = "Goring", contactid = NA),
     set_contact(familyname = "Cullen"))
   testthat::expect_is(check_contacts(na_name), "list")
+})
 })

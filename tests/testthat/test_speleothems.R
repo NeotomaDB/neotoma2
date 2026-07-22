@@ -1,6 +1,10 @@
-testthat::skip("Skipping all tests in this file")
+library("httptest")
 library("testthat")
 library("neotoma2")
+
+httptest::with_mock_api({
+testthat::skip("Skipping all tests in this file")
+
 
 context("Run Neotoma `test_speleothems` only when not on CRAN")
 test_that("speleothems method extracts data correctly", {
@@ -112,4 +116,5 @@ test_that("speleothemdetails joins speleothems and samples for collunit", {
       testthat::expect_true(has_sample_cols)
     }
   }
+})
 })

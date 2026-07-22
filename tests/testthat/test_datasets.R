@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 test_that("`datasets()`", {
   skip_on_cran()
@@ -12,4 +15,5 @@ test_that("`datasets()`", {
   testthat::expect_identical(sum(sumDl$n_datasets), nrow(ids))
   testthat::expect_identical(length(unique(dss$datasetid)),
                              length(unique(ids$datasetid)))
+})
 })

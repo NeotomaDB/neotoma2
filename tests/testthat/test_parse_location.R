@@ -1,4 +1,7 @@
-testthat::test_that("Parse location fails with an incomplete bounding box:", {
+library("httptest")
+
+httptest::with_mock_api({
+  testthat::test_that("Parse location fails with an incomplete bounding box:", {
   skip_on_cran()
   testthat::expect_error(parseLocation(c(1, 2)))
 })
@@ -13,3 +16,4 @@ testthat::test_that("Parse location fails with an incomplete bounding box:", {
 #   poly <- parse_location("POLYGON ((40 40, 20 45, 45 30, 40 40))")
 #   testthat::expect_is(parseLocation(poly), "geojson")
 # })
+})

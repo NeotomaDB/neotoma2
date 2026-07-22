@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 28305,
+                "sitename": "Lake Langeno",
+                "sitedescription": "Lake. Physiography: Ethiopian rift. Surrounding vegetation: semi-evergreen bushland.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[38.5,7.5]}",
+                "altitude": 1545,
+                "collectionunitid": 38264,
+                "collectionunit": "[Langeno]Core",
+                "handle": "LC",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/11X5-6C36",
+                            "10.21233/z6q1-2z98"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 2329,
+                                "ageyoung": 1127
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 52742,
+                        "datasetpi": [
+                            {
+                                "initials": "M.U.",
+                                "contactid": 17261,
+                                "firstname": "Mohammed Umer",
+                                "familyname": "Mohammed",
+                                "contactname": "Mohammed, Mohammed Umer"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2022-02-15T15:52:13"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

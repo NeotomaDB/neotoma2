@@ -1,0 +1,1059 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 176,
+            "sitename": "Site 106 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.95,41.45]}",
+            "altitude": 29,
+            "collectionunits": [
+                {
+                    "handle": "AMS106",
+                    "datasets": [
+                        {
+                            "datasetid": 176,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "LONGPOND",
+                    "collectionunitid": 176,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 177,
+            "sitename": "Site 107 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.9,41.87]}",
+            "altitude": 89,
+            "collectionunits": [
+                {
+                    "handle": "AMS107",
+                    "datasets": [
+                        {
+                            "datasetid": 177,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ALEXAND",
+                    "collectionunitid": 177,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 558,
+            "sitename": "Mohawk Pond",
+            "sitedescription": "Kettle lake in the southern Berkshires.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.2945,41.80939],[-73.29087,41.80939],[-73.29087,41.81291],[-73.2945,41.81291],[-73.2945,41.80939]]]}",
+            "altitude": 360,
+            "collectionunits": [
+                {
+                    "handle": "DCG05",
+                    "datasets": [
+                        {
+                            "datasetid": 574,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 558,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "MOHAWK",
+                    "datasets": [
+                        {
+                            "datasetid": 3493,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3390,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MOHAWK",
+                    "datasets": [
+                        {
+                            "datasetid": 8824,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3390,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1499,
+            "sitename": "Lantern Hill Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.95,41.46]}",
+            "altitude": 47,
+            "collectionunits": [
+                {
+                    "handle": "KMT001",
+                    "datasets": [
+                        {
+                            "datasetid": 1537,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1498,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2194,
+            "sitename": "Rogers Lake",
+            "sitedescription": "Two basin lake. Physiography: irregular topography. Surrounding vegetation: oak, maple, hickory, birch, ash.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.3027,41.3491],[-72.2956,41.3491],[-72.2956,41.3559],[-72.3027,41.3559],[-72.3027,41.3491]]]}",
+            "altitude": 11,
+            "collectionunits": [
+                {
+                    "handle": "ROGERSLK",
+                    "datasets": [
+                        {
+                            "datasetid": 2270,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core ROG-2",
+                    "collectionunitid": 2193,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ROGERSLK",
+                    "datasets": [
+                        {
+                            "datasetid": 8565,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core ROG-2",
+                    "collectionunitid": 2193,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 5649,
+            "sitename": "Grannis Island",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.88333,41.31667]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "GRANNIS",
+                    "datasets": [
+                        {
+                            "datasetid": 6968,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6823,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "GRANNIS",
+                    "datasets": [
+                        {
+                            "datasetid": 10863,
+                            "datasettype": "macroinvertebrate"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6823,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5902,
+            "sitename": "Woodruff Rockshelter [6LF126]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.25,41.61667]}",
+            "altitude": 269,
+            "collectionunits": [
+                {
+                    "handle": "WOODRFRS",
+                    "datasets": [
+                        {
+                            "datasetid": 7237,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7092,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "WOODRFRS",
+                    "datasets": [
+                        {
+                            "datasetid": 10893,
+                            "datasettype": "macroinvertebrate"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7092,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5938,
+            "sitename": "Fort Shantok",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.11667,41.36667]}",
+            "altitude": 31,
+            "collectionunits": [
+                {
+                    "handle": "SHANTOK",
+                    "datasets": [
+                        {
+                            "datasetid": 7276,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7131,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SHANTOK",
+                    "datasets": [
+                        {
+                            "datasetid": 61480,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7131,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5939,
+            "sitename": "Manakaway",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.5,41]}",
+            "altitude": -24,
+            "collectionunits": [
+                {
+                    "handle": "MANAKWAY",
+                    "datasets": [
+                        {
+                            "datasetid": 7277,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7132,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "MANAKWAY",
+                    "datasets": [
+                        {
+                            "datasetid": 10897,
+                            "datasettype": "macroinvertebrate"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 7132,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 9708,
+            "sitename": "Linsley Pond",
+            "sitedescription": "Kettle lake. Physiography: bedrock escarpment and glacial deposits. Surrounding vegetation: oak, hickory, maple, beech.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.78609,41.31492],[-72.78258,41.31492],[-72.78258,41.31931],[-72.78609,41.31931],[-72.78609,41.31492]]]}",
+            "altitude": 9,
+            "collectionunits": [
+                {
+                    "handle": "LINSLEY",
+                    "datasets": [
+                        {
+                            "datasetid": 14369,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10964,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LINSLEY",
+                    "datasets": [
+                        {
+                            "datasetid": 14370,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10964,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9791,
+            "sitename": "Black Pond",
+            "sitedescription": "Glaical origin lake. Area is heavily forested with some private homes. Lake is dilute and tannic acid with extensive wetlands along the shore. Upland vegetation: Fagus, Quercus, Acer, Tsuga, Pinus strobus, Vaccinium corymbosum, Castanea, Cornus, and Betula.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.07446,41.96713],[-72.06545,41.96713],[-72.06545,41.97288],[-72.07446,41.97288],[-72.07446,41.96713]]]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "NANODE463",
+                    "datasets": [
+                        {
+                            "datasetid": 14481,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "CT/AJS/LCO330",
+                    "collectionunitid": 11052,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE463",
+                    "datasets": [
+                        {
+                            "datasetid": 14482,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "CT/AJS/LCO330",
+                    "collectionunitid": 11052,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 9936,
+            "sitename": "Crystal Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.37194,41.93576]}",
+            "altitude": 194,
+            "collectionunits": [
+                {
+                    "handle": "CRYSLKE",
+                    "datasets": [
+                        {
+                            "datasetid": 69684,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Crystal Lake",
+                    "collectionunitid": 51143,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "CYTLLKBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73892,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Crystal Lake",
+                    "collectionunitid": 55337,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NANODE462",
+                    "datasets": [
+                        {
+                            "datasetid": 14773,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "CT/AJS/LCO329",
+                    "collectionunitid": 11214,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE462",
+                    "datasets": [
+                        {
+                            "datasetid": 14774,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "CT/AJS/LCO329",
+                    "collectionunitid": 11214,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 13050,
+            "sitename": "Pocotopaug Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.51217,41.58483],[-72.49054,41.58483],[-72.49054,41.60376],[-72.51217,41.60376],[-72.51217,41.58483]]]}",
+            "altitude": 141,
+            "collectionunits": [
+                {
+                    "handle": "POCOTO08",
+                    "datasets": [
+                        {
+                            "datasetid": 19368,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14585,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13054,
+            "sitename": "Morris Reservoir",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.23503,41.68522],[-73.20311,41.68522],[-73.20311,41.71829],[-73.23503,41.71829],[-73.23503,41.68522]]]}",
+            "altitude": 272,
+            "collectionunits": [
+                {
+                    "handle": "BANTAM08",
+                    "datasets": [
+                        {
+                            "datasetid": 19373,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14590,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "MORRIS R",
+                    "datasets": [
+                        {
+                            "datasetid": 42752,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Morris Reservoir NLA17_CT-10004",
+                    "collectionunitid": 29768,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13055,
+            "sitename": "Hatch Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.48351,41.68006],[-73.4733,41.68006],[-73.4733,41.68875],[-73.48351,41.68875],[-73.48351,41.68006]]]}",
+            "altitude": 118,
+            "collectionunits": [
+                {
+                    "handle": "HATCH08",
+                    "datasets": [
+                        {
+                            "datasetid": 19374,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14591,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13056,
+            "sitename": "Wyassup Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.87741,41.48529],[-71.86849,41.48529],[-71.86849,41.49349],[-71.87741,41.49349],[-71.87741,41.48529]]]}",
+            "altitude": 91,
+            "collectionunits": [
+                {
+                    "handle": "CT004",
+                    "datasets": [
+                        {
+                            "datasetid": 49877,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "CT004_91_1",
+                    "collectionunitid": 35853,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT004",
+                    "datasets": [
+                        {
+                            "datasetid": 55480,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "CT004_91_1",
+                    "collectionunitid": 35853,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT004_2",
+                    "datasets": [
+                        {
+                            "datasetid": 50024,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "CT004_92_2",
+                    "collectionunitid": 35979,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT004_2",
+                    "datasets": [
+                        {
+                            "datasetid": 55528,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "CT004_92_2",
+                    "collectionunitid": 35979,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT004_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 46126,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "CT004_WC",
+                    "collectionunitid": 32895,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "WYASLKBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73922,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Wyassup Lake",
+                    "collectionunitid": 55365,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "WYASSLKE",
+                    "datasets": [
+                        {
+                            "datasetid": 69660,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Wyassup Lake",
+                    "collectionunitid": 51129,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "WYASSU08",
+                    "datasets": [
+                        {
+                            "datasetid": 19375,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14592,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13093,
+            "sitename": "Uncas Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.32248,41.37092],[-72.30939,41.37092],[-72.30939,41.37913],[-72.32248,41.37913],[-72.32248,41.37092]]]}",
+            "altitude": 16,
+            "collectionunits": [
+                {
+                    "handle": "UNCAS08",
+                    "datasets": [
+                        {
+                            "datasetid": 19442,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14631,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "UNCASLK",
+                    "datasets": [
+                        {
+                            "datasetid": 69628,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Uncas Lake",
+                    "collectionunitid": 51097,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13096,
+            "sitename": "Billings Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.87383,41.50885]}",
+            "altitude": 109,
+            "collectionunits": [
+                {
+                    "handle": "BILLGSWC",
+                    "datasets": [
+                        {
+                            "datasetid": 73997,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Billings Lake",
+                    "collectionunitid": 55386,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BILLIN08",
+                    "datasets": [
+                        {
+                            "datasetid": 19446,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "BillingsLake_2008",
+                    "collectionunitid": 14634,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BILLINGS",
+                    "datasets": [
+                        {
+                            "datasetid": 42757,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Billings Lake NLA17_CT-10023",
+                    "collectionunitid": 29773,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BLAKEBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73871,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Billings Lake",
+                    "collectionunitid": 55316,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BLLNGSLK",
+                    "datasets": [
+                        {
+                            "datasetid": 69619,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Billings Lake",
+                    "collectionunitid": 51088,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13098,
+            "sitename": "Beseck Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.73619,41.50768],[-72.72709,41.50768],[-72.72709,41.52092],[-72.73619,41.52092],[-72.73619,41.50768]]]}",
+            "altitude": 96,
+            "collectionunits": [
+                {
+                    "handle": "BESECK08",
+                    "datasets": [
+                        {
+                            "datasetid": 19448,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14636,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13101,
+            "sitename": "Bashan Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.42471,41.48363],[-72.40359,41.48363],[-72.40359,41.49951],[-72.42471,41.49951],[-72.42471,41.48363]]]}",
+            "altitude": 118,
+            "collectionunits": [
+                {
+                    "handle": "BASHAN08",
+                    "datasets": [
+                        {
+                            "datasetid": 19451,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14639,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BASHANLK",
+                    "datasets": [
+                        {
+                            "datasetid": 69630,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Bashan Lake",
+                    "collectionunitid": 51099,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BASHANWC",
+                    "datasets": [
+                        {
+                            "datasetid": 73996,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Bashan Lake",
+                    "collectionunitid": 55385,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BSHNLKBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73882,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Bashan Lake",
+                    "collectionunitid": 55327,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 23274,
+            "sitename": "Beach Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.78943,41.57777]}",
+            "altitude": 90,
+            "collectionunits": [
+                {
+                    "handle": "BEACHPBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73924,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Beach Pond",
+                    "collectionunitid": 55367,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BEACHPND",
+                    "datasets": [
+                        {
+                            "datasetid": 69686,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Beach Pond",
+                    "collectionunitid": 51145,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA3890",
+                    "datasets": [
+                        {
+                            "datasetid": 40058,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-3890",
+                    "collectionunitid": 27868,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA3890",
+                    "datasets": [
+                        {
+                            "datasetid": 40083,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-3890",
+                    "collectionunitid": 27868,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA3890D",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "NLA06608-3890",
+                    "collectionunitid": 36144,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA3890WC",
+                    "datasets": [
+                        {
+                            "datasetid": 42916,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-3890",
+                    "collectionunitid": 29914,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 23275,
+            "sitename": "Beardsley Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.4472,41.89706]}",
+            "altitude": 258,
+            "collectionunits": [
+                {
+                    "handle": "NLA0805",
+                    "datasets": [
+                        {
+                            "datasetid": 40060,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0805",
+                    "collectionunitid": 27870,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0805",
+                    "datasets": [
+                        {
+                            "datasetid": 40085,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0805",
+                    "collectionunitid": 27870,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0805D",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0805",
+                    "collectionunitid": 36146,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0805WC",
+                    "datasets": [
+                        {
+                            "datasetid": 42918,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0805",
+                    "collectionunitid": 29916,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 23285,
+            "sitename": "Bissonette Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.22245,41.92042],[-72.21576,41.92042],[-72.21576,41.92917],[-72.22245,41.92917],[-72.22245,41.92042]]]}",
+            "altitude": 206,
+            "collectionunits": [
+                {
+                    "handle": "BISSONET",
+                    "datasets": [
+                        {
+                            "datasetid": 42749,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Bissonette Pond NLA17_CT-10001",
+                    "collectionunitid": 29765,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "CT002",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "CT002_91_1",
+                    "collectionunitid": 35252,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT002",
+                    "datasets": [
+                        {
+                            "datasetid": 49034,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "CT002_91_1",
+                    "collectionunitid": 35273,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CT002_WC",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "CT002_WC",
+                    "collectionunitid": 32668,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "CT002_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 45836,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "CT002_WC",
+                    "collectionunitid": 32599,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA1414",
+                    "datasets": [
+                        {
+                            "datasetid": 40075,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-1414",
+                    "collectionunitid": 27885,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA1414",
+                    "datasets": [
+                        {
+                            "datasetid": 40100,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-1414",
+                    "collectionunitid": 27885,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA1414WC",
+                    "datasets": [
+                        {
+                            "datasetid": 42932,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-1414",
+                    "collectionunitid": 29930,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 23683,
+            "sitename": "East Thompson Pond, CT",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.81335,42.0141],[-71.813,42.0141],[-71.813,42.01603],[-71.81335,42.01603],[-71.81335,42.0141]]]}",
+            "altitude": 156,
+            "collectionunits": [
+                {
+                    "handle": "SJNE3",
+                    "datasets": [
+                        {
+                            "datasetid": 40979,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "East Thompson Pond",
+                    "collectionunitid": 28403,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 23708,
+            "sitename": "Umpawaug Pond",
+            "sitedescription": "Tsuga candensis, Fagus grandifolia, Acer saccharum, Pinus strobus, and Betula species are common in the northern, inland, and higher-elevation parts of New England. Quercus, Carya, and Castanea dentata dominate in the warmer southern part of the region. Acer rubrum is common across New England. Pinus rigida is prevalent on sites with well-drained sandy soils.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.451,41.304],[-73.448,41.304],[-73.448,41.308],[-73.451,41.308],[-73.451,41.304]]]}",
+            "altitude": 137,
+            "collectionunits": [
+                {
+                    "handle": "UMPAWAU",
+                    "datasets": [
+                        {
+                            "datasetid": 41015,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 28429,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "UMPAWAU",
+                    "datasets": [
+                        {
+                            "datasetid": 41016,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 28429,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

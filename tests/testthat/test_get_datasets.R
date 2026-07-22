@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("get_datasets() retrieves data from /dataset endpoint 
         and parses content as expected.")
@@ -96,4 +99,5 @@ test_that("get_datasets with or without all_data works.", {
   testthat::expect_error(get_datasets(uk_sts, all_data=TRUE), NA)
   testthat::expect_error(get_datasets(uk_sts, all_data=FALSE), NA)
   testthat::expect_error(get_datasets(uk_sts), NA)
+})
 })

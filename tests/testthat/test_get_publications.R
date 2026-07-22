@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("get_publications tests")
 test_that("`get_publications` numeric", {
   skip_on_cran()
@@ -25,4 +27,5 @@ test_that("`get_publications` publications", {
   counts <- get_publications(c(1, 2, 3, 4))
   frompubs <- get_publications(counts)
   testthat::expect_identical(counts, frompubs)
+})
 })

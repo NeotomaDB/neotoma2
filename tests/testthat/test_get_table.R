@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Working with general data from the database:")
 test_that("Call a single database table:", {
   skip_on_cran()
@@ -31,4 +33,5 @@ test_that("Correct table", {
   cols <- c("agetypeid", "agetype", "precedence",
             "shortagetype", "recdatecreated", "recdatemodified")
   testthat::expect_identical(colnames(tb1), cols)
+})
 })

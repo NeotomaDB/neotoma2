@@ -1,0 +1,311 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "area": null,
+                "notes": "Altitude estimated using tool at https://www.geoplaner.com/.",
+                "siteid": 5706,
+                "dataset": {
+                    "doi": [
+                        "10.21233/57jz-mp77"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Radiocarbon years BP",
+                            "ageold": 11320,
+                            "ageyoung": 10920
+                        }
+                    ],
+                    "database": "FAUNMAP",
+                    "datasetid": 7032,
+                    "datasetpi": null,
+                    "datasetname": null,
+                    "datasettype": "vertebrate fauna",
+                    "datasetnotes": null
+                },
+                "altitude": 232,
+                "sitename": "Grandville",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-85.61667,42.86667]}",
+                "geopolitical": [
+                    "United States",
+                    "Michigan",
+                    "Kent"
+                ],
+                "collectionunit": {
+                    "notes": null,
+                    "handle": "GRANDVMS",
+                    "colldate": "1985-07-01",
+                    "location": null,
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": null,
+                    "collectionunit": null,
+                    "collectiondevice": null,
+                    "collectionunitid": 6887,
+                    "depositionalenvironment": "Lacustrine",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/57jz-mp77"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 11320,
+                                "ageyoung": 10920
+                            }
+                        ],
+                        "database": "FAUNMAP",
+                        "datasetid": 7032,
+                        "datasetpi": null,
+                        "datasetname": null,
+                        "datasettype": "vertebrate fauna",
+                        "datasetnotes": null,
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": null,
+                                        "agetype": "Radiocarbon years BP",
+                                        "ageolder": 11320,
+                                        "ageyounger": 10920,
+                                        "chronologyid": 4498,
+                                        "chronologyname": "FAUNMAP 1.1"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6172,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Mammut americanum",
+                                        "ecologicalgroup": "PROB"
+                                    }
+                                ],
+                                "depth": null,
+                                "sampleid": 106911,
+                                "thickness": null,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": null,
+                                        "contactid": null,
+                                        "firstname": null,
+                                        "familyname": null,
+                                        "contactname": null
+                                    }
+                                ],
+                                "analysisunitid": 83963,
+                                "analysisunitname": "Assemblage"
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": null,
+                                    "agemodel": "Individually dated analysis units",
+                                    "agerange": {
+                                        "ageboundolder": 11320,
+                                        "ageboundyounger": 10920
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": null,
+                                    "modelagetype": "Radiocarbon years BP",
+                                    "chronologyname": "FAUNMAP 1.1"
+                                },
+                                "chronologyid": 4498,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 11300,
+                                        "chroncontrolid": 23571,
+                                        "agelimityounger": 10540,
+                                        "chroncontrolage": 10920,
+                                        "chroncontroltype": "Radiocarbon"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 11600,
+                                        "chroncontrolid": 23572,
+                                        "agelimityounger": 11040,
+                                        "chroncontrolage": 11320,
+                                        "chroncontroltype": "Radiocarbon"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 1904,
+                                            "givenname": "James S.",
+                                            "familyname": "Oliver",
+                                            "contactname": "Oliver, James S.",
+                                            "leadinginitial": "J.S."
+                                        }
+                                    ],
+                                    "agemodel": "individually dated",
+                                    "agerange": {
+                                        "ageboundolder": 14670,
+                                        "ageboundyounger": 13730
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": "2018-08-14",
+                                    "modelagetype": "Calibrated radiocarbon years BP",
+                                    "chronologyname": "Neotoma 1"
+                                },
+                                "chronologyid": 24144,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 14666,
+                                        "chroncontrolid": 77137,
+                                        "agelimityounger": 13735,
+                                        "chroncontrolage": 14059,
+                                        "chroncontroltype": "Radiocarbon, calibrated"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 1904,
+                                            "givenname": "James S.",
+                                            "familyname": "Oliver",
+                                            "contactname": "Oliver, James S.",
+                                            "leadinginitial": "J.S."
+                                        }
+                                    ],
+                                    "agemodel": "individually dated",
+                                    "agerange": {
+                                        "ageboundolder": 14650,
+                                        "ageboundyounger": 13740
+                                    },
+                                    "isdefault": false,
+                                    "dateprepared": "2018-08-14",
+                                    "modelagetype": "Calibrated radiocarbon years BP",
+                                    "chronologyname": "Neotoma 2"
+                                },
+                                "chronologyid": 24145,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 14641,
+                                        "chroncontrolid": 77138,
+                                        "agelimityounger": 13741,
+                                        "chroncontrolage": 14060,
+                                        "chroncontroltype": "Radiocarbon, calibrated, combined"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 4498
+                },
+                "sitedescription": null
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

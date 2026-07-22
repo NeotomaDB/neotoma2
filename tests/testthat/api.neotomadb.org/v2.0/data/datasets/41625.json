@@ -1,0 +1,48 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 23949,
+                "sitename": "Bujuku Lake",
+                "sitedescription": "Lake possibly dammed by a landslide in the upper Bujuku valley in the Ruwenzori Mountains. Lake lies just above the upper limit of tree heather. Vegetation around the lake dominated by Alchemilla, Helichrysum and aborescent Dendrosenecio.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[29.89192,0.37519],[29.89549,0.37519],[29.89549,0.37831],[29.89192,0.37831],[29.89192,0.37519]]]}",
+                "altitude": 3892,
+                "collectionunitid": 28746,
+                "collectionunit": "Bujuku",
+                "handle": "BUJUKU",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/b1vm-5t37"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 3578,
+                                "ageyoung": 10
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 41625,
+                        "datasetpi": [
+                            {
+                                "initials": "D.A.",
+                                "contactid": 65,
+                                "firstname": "Daniel A.",
+                                "familyname": "Livingstone",
+                                "contactname": "Livingstone, Daniel A."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2019-04-03T16:37:45"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

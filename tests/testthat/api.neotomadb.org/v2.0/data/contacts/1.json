@@ -1,0 +1,23 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "contactid": 1,
+            "stewardid": null,
+            "contactname": "International Organization for Standardization",
+            "familyname": "International Organization for Standardization",
+            "leadinginitials": null,
+            "givennames": null,
+            "suffix": null,
+            "title": null,
+            "phone": "+41 22 749 02 22",
+            "fax": "+41 22 749 01 55",
+            "email": "countrycodes@iso.org",
+            "url": "http://www.iso.org/",
+            "address": "ISO 3166 Maintenance Agency\r\nCase postale 56\r\nCH-1211 Genève 20\r\nSWITZERLAND",
+            "notes": null,
+            "contactstatus": "extant"
+        }
+    ],
+    "message": "Retrieved all tables"
+}

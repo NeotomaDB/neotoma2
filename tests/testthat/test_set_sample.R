@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Creating samples from scratch or updating existing sample objects.")
 test_that("Creating samples for the neotoma2 package.", {
   skip_on_cran()
@@ -27,4 +29,5 @@ test_that("Updating samples for the neotoma2 package.", {
   testthat::expect_equal(updatedSample@depth, 40)
   # Cannot use invalid data types
   testthat::expect_error(set_sample(x = oneSample, depth = "33a"))
+})
 })

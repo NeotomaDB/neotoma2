@@ -1,0 +1,18 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "taxonid": 1,
+            "taxoncode": "Abi",
+            "taxonname": "Abies",
+            "author": "Miller, 1754",
+            "ecolgroup": "TRSH",
+            "highertaxonid": 329,
+            "status": "extant",
+            "taxagroupid": "VPL",
+            "publicationid": 299,
+            "publication": "Flora of North America Editorial Committee. 1993. Flora of North America north of Mexico. Volume 2. Pteridophytes and Gymnosperms. Oxford University Press, New York, New York, USA."
+        }
+    ],
+    "message": "Retrieved all tables"
+}

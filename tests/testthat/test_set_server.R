@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 context("Switching servers works between local, dev and neotoma APIs.")
 testthat::test_that("`Switching server with `set_server()`.", {
   skip_on_cran()
@@ -15,4 +17,5 @@ testthat::test_that("`Switching server with `set_server()`.", {
 testthat::test_that("Invalid server throws error.", {
   skip_on_cran()
   testthat::expect_error(set_server("invalid_server_name"))
+})
 })

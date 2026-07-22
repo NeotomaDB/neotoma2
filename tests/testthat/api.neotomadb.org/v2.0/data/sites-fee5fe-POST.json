@@ -1,0 +1,123 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 214,
+            "sitename": "Arts Lough",
+            "sitedescription": "Eroding blanket peat. Physiography: Steep cliffs to south rising to 800m. Surrounding vegetation: Heathland vegetation.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.43333,52.95]}",
+            "altitude": 613,
+            "collectionunits": [
+                {
+                    "handle": "ARTSLOUG",
+                    "datasets": [
+                        {
+                            "datasetid": 215,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 214,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 223,
+            "sitename": "Ballinloghig Lake",
+            "sitedescription": "Lake with marginal fen. Physiography: Southern slope of Slieve Mish mountains. Surrounding vegetation: Blanket bog, heath, pasture and woodland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-10.30833,52.2]}",
+            "altitude": 66,
+            "collectionunits": [
+                {
+                    "handle": "BALLIN",
+                    "datasets": [
+                        {
+                            "datasetid": 225,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 223,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 224,
+            "sitename": "Ballybetagh",
+            "sitedescription": "Spring-fed marsh or spring. Physiography: On the edge of the Dublin mountains.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.25,53.16667]}",
+            "altitude": 431,
+            "collectionunits": [
+                {
+                    "handle": "BALLYBET",
+                    "datasets": [
+                        {
+                            "datasetid": 226,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 224,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2965,
+            "sitename": "Abernethy Forest",
+            "sitedescription": "Peat hollow in a small clearing of pine. Physiography: shallow valley in hummocky morraine. Surrounding vegetation: mire surrounded by Pinus woods + Betula.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.71056,57.23528]}",
+            "altitude": 221,
+            "collectionunits": [
+                {
+                    "handle": "AF1970",
+                    "datasets": [
+                        {
+                            "datasetid": 3864,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3740,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AF1974",
+                    "datasets": [
+                        {
+                            "datasetid": 3865,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 3741,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2977,
+            "sitename": "Allt na Feithe Sheilich",
+            "sitedescription": "Eroding blanket bog. Physiography: watershed plateau. Surrounding vegetation: calluneto-Eriophoretum (McKean, 1962).",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.90841,57.31333]}",
+            "altitude": 581,
+            "collectionunits": [
+                {
+                    "handle": "ANFSHEIL",
+                    "datasets": [
+                        {
+                            "datasetid": 3879,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3755,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,6 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
+httptest::with_mock_api({
 test_that("`get_taxon` yields specific taxon information", {
   skip_on_cran()
   abies_num <- get_taxon(1)
@@ -11,4 +13,5 @@ test_that("`get_taxon` yields specific taxon information", {
   testthat::expect_is(abies_name, "taxa")
   testthat::expect_is(abies_name[[1]], "taxon")
   testthat::expect_equal(as.data.frame(abies_num), as.data.frame(abies_name))
+})
 })

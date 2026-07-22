@@ -1,0 +1,37 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "table": "agetypes",
+            "limit": 3,
+            "offset": 0
+        },
+        "data": [
+            {
+                "agetypeid": 1,
+                "agetype": "Calendar years AD/BC",
+                "precedence": null,
+                "shortagetype": "yr AD/BC",
+                "recdatecreated": "2013-09-30T14:02:29.000Z",
+                "recdatemodified": "2013-09-30T14:02:29.000Z"
+            },
+            {
+                "agetypeid": 2,
+                "agetype": "Calendar years BP",
+                "precedence": 1,
+                "shortagetype": "calendar yr BP",
+                "recdatecreated": "2013-09-30T14:02:29.000Z",
+                "recdatemodified": "2013-09-30T14:02:29.000Z"
+            },
+            {
+                "agetypeid": 3,
+                "agetype": "Calibrated radiocarbon years BP",
+                "precedence": 2,
+                "shortagetype": "cal yr BP",
+                "recdatecreated": "2013-09-30T14:02:29.000Z",
+                "recdatemodified": "2013-09-30T14:02:29.000Z"
+            }
+        ]
+    },
+    "message": "Retrieved rows from agetypes"
+}

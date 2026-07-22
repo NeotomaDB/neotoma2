@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 27027,
+                "sitename": "Lake Malawi MAL05-2",
+                "sitedescription": "Rift lake that borders Mozambique, Malawi, and Tanzania.  Surrounded mostly by miombo woodland as well as Afromontane forest and grassland in the higher elevations above 1500 masl.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[34.18667,-10.01833]}",
+                "altitude": 478,
+                "collectionunitid": 34114,
+                "collectionunit": "MAL05-2A",
+                "handle": "MAL05-2A",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/yvfh-5b51",
+                            "10.21233/YVFH-5B51"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 18103.2,
+                                "ageyoung": 9546.7
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 47608,
+                        "datasetpi": [
+                            {
+                                "initials": "S.",
+                                "contactid": 16030,
+                                "firstname": "Sarah",
+                                "familyname": "Ivory",
+                                "contactname": "Ivory, Sarah"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2020-05-20T01:11:26"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

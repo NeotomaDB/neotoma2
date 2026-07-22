@@ -1,0 +1,186 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 728,
+            "sitename": "Heart Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+            "altitude": 660,
+            "collectionunits": [
+                {
+                    "handle": "HART_C90",
+                    "datasets": [
+                        {
+                            "datasetid": 748,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "Heart L._C90_PIRLA I Cal",
+                    "collectionunitid": 728,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HART_C90",
+                    "datasets": [
+                        {
+                            "datasetid": 40468,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Heart L._C90_PIRLA I Cal",
+                    "collectionunitid": 728,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 3130,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 8799,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 49250,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEART-WC",
+                    "datasets": [
+                        {
+                            "datasetid": 43118,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "HEART-WC",
+                    "collectionunitid": 30115,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 11904,
+            "sitename": "Sandy Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.70989,44.72731],[-63.69294,44.72731],[-63.69294,44.74067],[-63.70989,44.74067],[-63.70989,44.72731]]]}",
+            "altitude": 30,
+            "collectionunits": [
+                {
+                    "handle": "SANDY15",
+                    "datasets": [
+                        {
+                            "datasetid": 18048,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Sandy2015",
+                    "collectionunitid": 13425,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "SANDY15",
+                    "datasets": [
+                        {
+                            "datasetid": 18049,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Sandy2015",
+                    "collectionunitid": 13425,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 13319,
+            "sitename": "Crow Hill",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-75.74477,40.13735],[-75.74185,40.13735],[-75.74185,40.13805],[-75.74477,40.13805],[-75.74477,40.13735]]]}",
+            "altitude": 153,
+            "collectionunits": [
+                {
+                    "handle": "CROWHI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19875,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Top Bottom Core  ",
+                    "collectionunitid": 14890,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CROWHI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19876,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Top Bottom Core  ",
+                    "collectionunitid": 14890,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13949,
+            "sitename": "Lake Joseph, Frazer Island",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.76667,45.25]}",
+            "altitude": 245,
+            "collectionunits": [
+                {
+                    "handle": "FRAZER17",
+                    "datasets": [
+                        {
+                            "datasetid": 21480,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15674,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "FRAZER17",
+                    "datasets": [
+                        {
+                            "datasetid": 21481,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15674,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

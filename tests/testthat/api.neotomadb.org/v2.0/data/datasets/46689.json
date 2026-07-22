@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 26661,
+                "sitename": "Klaarfontein Springs",
+                "sitedescription": "Following field reconnaissance, a series of artesian springs on the farm Klaarfontein was identified as a potential source of organic sediments. Located approximately 3 km upstream from the key Velorenvlei coring site at Grootdrift, the Klaarfontein Springs are located in an inconspicuous valley alcove among the rolling hills on the northeastern shore of Verlorenvlei. The principal spring feeds a small perennial\r\nstream and marsh system that drains perpendicularly to the Verlorenvlei River. Somewhat below the elevation of the main road to Elands Bay, three supplementary springs breach the surface and contribute to the boggy colluvial-alluvial marsh that protrudes towards an indistinct junction with the Verlorenvlei River. The lobe-shaped marsh remains perched above the river and is mantled by reeds and sedges including: Typha latifolia, Juncus\r\nkraussii, Cyperus fastigiatus, Cyperus marginatus and Scirpus fluvitans, while Phragmites australis occupies the deeper standing water along the vlei transition itself at the southern end of the site.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[18.49444,-32.42389]}",
+                "altitude": 8,
+                "collectionunitid": 33327,
+                "collectionunit": "KFN",
+                "handle": "KLAARFONT",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/t58b-sn37",
+                            "10.21233/T58B-SN37"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 8425,
+                                "ageyoung": -41
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 46689,
+                        "datasetpi": [
+                            {
+                                "initials": "A.J.",
+                                "contactid": 16087,
+                                "firstname": "Andrew James",
+                                "familyname": "Baxter",
+                                "contactname": "Baxter, Andrew James"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2020-01-29T13:54:57"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

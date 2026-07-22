@@ -1,0 +1,57 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "contactid": 2,
+            "stewardid": null,
+            "contactname": "United States Central Intelligence Agency",
+            "familyname": "United States Central Intelligence Agency",
+            "leadinginitials": "",
+            "givennames": null,
+            "suffix": null,
+            "title": null,
+            "phone": "703-482-0623",
+            "fax": "703-482-1739",
+            "email": null,
+            "url": "http://www.cia.gov/cia/publications/factbook/",
+            "address": "Office of Public Affairs\r\nWashington, DC 20505\r\nUSA",
+            "notes": null,
+            "contactstatus": "extant"
+        },
+        {
+            "contactid": 1,
+            "stewardid": null,
+            "contactname": "International Organization for Standardization",
+            "familyname": "International Organization for Standardization",
+            "leadinginitials": null,
+            "givennames": null,
+            "suffix": null,
+            "title": null,
+            "phone": "+41 22 749 02 22",
+            "fax": "+41 22 749 01 55",
+            "email": "countrycodes@iso.org",
+            "url": "http://www.iso.org/",
+            "address": "ISO 3166 Maintenance Agency\r\nCase postale 56\r\nCH-1211 Genève 20\r\nSWITZERLAND",
+            "notes": null,
+            "contactstatus": "extant"
+        },
+        {
+            "contactid": 3,
+            "stewardid": null,
+            "contactname": "Ahearn, P. J.",
+            "familyname": "Ahearn",
+            "leadinginitials": "P.J.",
+            "givennames": "P. J.",
+            "suffix": null,
+            "title": null,
+            "phone": null,
+            "fax": null,
+            "email": null,
+            "url": null,
+            "address": null,
+            "notes": null,
+            "contactstatus": "active"
+        }
+    ],
+    "message": "Retrieved all tables"
+}

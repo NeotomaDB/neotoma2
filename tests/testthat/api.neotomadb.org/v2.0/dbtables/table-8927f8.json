@@ -1,0 +1,21 @@
+{
+    "status": "success",
+    "data": {
+        "query": {
+            "table": "agetypes",
+            "limit": 1,
+            "offset": 1
+        },
+        "data": [
+            {
+                "agetypeid": 2,
+                "agetype": "Calendar years BP",
+                "precedence": 1,
+                "shortagetype": "calendar yr BP",
+                "recdatecreated": "2013-09-30T14:02:29.000Z",
+                "recdatemodified": "2013-09-30T14:02:29.000Z"
+            }
+        ]
+    },
+    "message": "Retrieved rows from agetypes"
+}

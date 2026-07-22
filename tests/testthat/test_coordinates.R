@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("`coordinates()` function")
 testthat::test_that("coordinates() returns correct coordinates", {
@@ -13,4 +16,5 @@ testthat::test_that("coordinates() returns correct coordinates", {
   testthat::expect_equal(coords$siteid, sts_df$siteid)
   testthat::expect_equal(coords$latitude, sts_df$latitude, tolerance = 0.01)
   testthat::expect_equal(coords$longitude, sts_df$longitude, tolerance = 0.01)
+})
 })

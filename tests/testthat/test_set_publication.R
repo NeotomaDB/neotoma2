@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Creating publications from scratch or updating existing objects.")
 test_that("`set_publication()` for a new publication", {
@@ -21,4 +24,5 @@ test_that("Updating existing publication", {
   testthat::expect_is(set_publication(x = downloadPub[[1]], doi = "fake.doi/10.1234/fake"), "publication")
   updatedPub <- set_publication(x = downloadPub[[1]], doi = "fake.doi/10.1234/fake")
   testthat::expect_equal(updatedPub@doi, "fake.doi/10.1234/fake")
+})
 })

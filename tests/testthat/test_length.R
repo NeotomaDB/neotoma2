@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("`length()` retrieves correct number of 'sites', 'collection units', and
         'datasets'")
@@ -38,4 +41,5 @@ test_that("length of datasets is correct", {
   stid <- getids(sts[[1]])$siteid %>% unique()
   dsids <- filter(getids(sts), siteid == stid)$datasetid %>% length()
   testthat::expect_equal(len, dsids)
+})
 })

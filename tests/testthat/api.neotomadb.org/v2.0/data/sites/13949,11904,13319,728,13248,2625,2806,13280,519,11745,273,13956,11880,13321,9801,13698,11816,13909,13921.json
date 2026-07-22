@@ -1,0 +1,933 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 273,
+            "sitename": "Blacktail Pond",
+            "sitedescription": "Blacktail Pond is situated in a remnant late-Pleistocene meltwater channel; surrounding vegetation is Pseudotsuga menziesii (Douglas-fir) parkland, which includes grassland and steppe communities dominated by Artemisia tridentata (big sagebrush), Festuca idahoensis (Idaho fescue), and Ericameria nauseosa (rabbitbrush).",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-110.60615,44.95312],[-110.59527,44.95312],[-110.59527,44.9591],[-110.60615,44.9591],[-110.60615,44.95312]]]}",
+            "altitude": 2012,
+            "collectionunits": [
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 20307,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 20308,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 53766,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 53961,
+                            "datasettype": "X-ray fluorescence (XRF)"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 53962,
+                            "datasettype": "paleomagnetic"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 55950,
+                            "datasettype": "geochemistry"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLACKTA",
+                    "datasets": [
+                        {
+                            "datasetid": 55951,
+                            "datasettype": "X-ray fluorescence (XRF)"
+                        }
+                    ],
+                    "collectionunit": "BTP08B",
+                    "collectionunitid": 15110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLAKTAIL",
+                    "datasets": [
+                        {
+                            "datasetid": 279,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "P-1013",
+                    "collectionunitid": 273,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLAKTAIL",
+                    "datasets": [
+                        {
+                            "datasetid": 7932,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "P-1013",
+                    "collectionunitid": 273,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BTP06",
+                    "datasets": [
+                        {
+                            "datasetid": 49411,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "BTP06A, BTP06B",
+                    "collectionunitid": 35471,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BTP06",
+                    "datasets": [
+                        {
+                            "datasetid": 49412,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BTP06A, BTP06B",
+                    "collectionunitid": 35471,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 519,
+            "sitename": "Cub Creek Pond",
+            "sitedescription": "Small pond with sedge mat. Situated in the Yellowstone plateau ecoregion adjacent to the Absaroka Range. Surrounding vegetation is Pinus contorta forest and Picea engelamnnii-Abies lasiocarpa-Pinus albicaulis forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-110.248,44.5048],[-110.2445,44.5048],[-110.2445,44.5064],[-110.248,44.5064],[-110.248,44.5048]]]}",
+            "altitude": 2505,
+            "collectionunits": [
+                {
+                    "handle": "CUBCKDIA",
+                    "datasets": [
+                        {
+                            "datasetid": 53803,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Cub Creek Pond Diatoms 2009 Lu",
+                    "collectionunitid": 39066,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUBCKDIA",
+                    "datasets": [
+                        {
+                            "datasetid": 53804,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Cub Creek Pond Diatoms 2009 Lu",
+                    "collectionunitid": 39066,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUBCKDIA",
+                    "datasets": [
+                        {
+                            "datasetid": 54103,
+                            "datasettype": "paleomagnetic"
+                        }
+                    ],
+                    "collectionunit": "Cub Creek Pond Diatoms 2009 Lu",
+                    "collectionunitid": 39066,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUBCRK17",
+                    "datasets": [
+                        {
+                            "datasetid": 49417,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CUB17-1B",
+                    "collectionunitid": 35474,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUBCRKPD",
+                    "datasets": [
+                        {
+                            "datasetid": 533,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core A",
+                    "collectionunitid": 519,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUBCRKPD",
+                    "datasets": [
+                        {
+                            "datasetid": 8036,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core A",
+                    "collectionunitid": 519,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 728,
+            "sitename": "Heart Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.97256,44.18038],[-73.9667,44.18038],[-73.9667,44.18434],[-73.97256,44.18434],[-73.97256,44.18038]]]}",
+            "altitude": 660,
+            "collectionunits": [
+                {
+                    "handle": "HART_C90",
+                    "datasets": [
+                        {
+                            "datasetid": 748,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "Heart L._C90_PIRLA I Cal",
+                    "collectionunitid": 728,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HART_C90",
+                    "datasets": [
+                        {
+                            "datasetid": 40468,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Heart L._C90_PIRLA I Cal",
+                    "collectionunitid": 728,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 3130,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 8799,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEARTADIR",
+                    "datasets": [
+                        {
+                            "datasetid": 49250,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HEART-WC",
+                    "datasets": [
+                        {
+                            "datasetid": 43118,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "HEART-WC",
+                    "collectionunitid": 30115,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2625,
+            "sitename": "Berry Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.47944,44.88833]}",
+            "altitude": 257,
+            "collectionunits": [
+                {
+                    "handle": "NLA0627",
+                    "datasets": [
+                        {
+                            "datasetid": 40066,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0627",
+                    "collectionunitid": 27876,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0627",
+                    "datasets": [
+                        {
+                            "datasetid": 40091,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0627",
+                    "collectionunitid": 27876,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0627WC",
+                    "datasets": [
+                        {
+                            "datasetid": 42924,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0627",
+                    "collectionunitid": 29922,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "TW043",
+                    "datasets": [
+                        {
+                            "datasetid": 2720,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "TW043",
+                    "collectionunitid": 2624,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2806,
+            "sitename": "Van Nostrand Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.38,44]}",
+            "altitude": 304,
+            "collectionunits": [
+                {
+                    "handle": "VANNOSTR",
+                    "datasets": [
+                        {
+                            "datasetid": 2903,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2805,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VANNOSTR",
+                    "datasets": [
+                        {
+                            "datasetid": 8725,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2805,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VNOSTRA82",
+                    "datasets": [
+                        {
+                            "datasetid": 17666,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13183,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9801,
+            "sitename": "Stockade Lake",
+            "sitedescription": "Reservoir surrounded by Pinus ponderosa forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-103.52912,43.76456],[-103.50985,43.76456],[-103.50985,43.77331],[-103.52912,43.77331],[-103.52912,43.76456]]]}",
+            "altitude": 1580,
+            "collectionunits": [
+                {
+                    "handle": "NLA0979",
+                    "datasets": [
+                        {
+                            "datasetid": 39913,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0979",
+                    "collectionunitid": 27754,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NLA0979WC",
+                    "datasets": [
+                        {
+                            "datasetid": 42432,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NLA06608-0979",
+                    "collectionunitid": 29499,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "SDCUST",
+                    "datasets": [
+                        {
+                            "datasetid": 14502,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "SDCUST",
+                    "collectionunitid": 11063,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 11745,
+            "sitename": "Fish (Dakota)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-93.16798,44.81966],[-93.16019,44.81966],[-93.16019,44.82373],[-93.16798,44.82373],[-93.16798,44.81966]]]}",
+            "altitude": 255,
+            "collectionunits": [
+                {
+                    "handle": "FISHD83",
+                    "datasets": [
+                        {
+                            "datasetid": 17706,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13204,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "FISHD83",
+                    "datasets": [
+                        {
+                            "datasetid": 17707,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 13204,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "FISHDAWC",
+                    "datasets": [
+                        {
+                            "datasetid": 46561,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Fish-Dak_WC",
+                    "collectionunitid": 33232,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "FISHDK_4",
+                    "datasets": [
+                        {
+                            "datasetid": 47371,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Fish (Dakota)- 4 intervals",
+                    "collectionunitid": 33952,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11816,
+            "sitename": "Brenton Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-66.07143,43.95325],[-66.06199,43.95325],[-66.06199,43.96715],[-66.07143,43.96715],[-66.07143,43.95325]]]}",
+            "altitude": 26,
+            "collectionunits": [
+                {
+                    "handle": "BRENTON07",
+                    "datasets": [
+                        {
+                            "datasetid": 17893,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "BGY-3",
+                    "collectionunitid": 13324,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11880,
+            "sitename": "Whimsical Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.61083,44.62317],[-63.60888,44.62317],[-63.60888,44.62671],[-63.61083,44.62671],[-63.61083,44.62317]]]}",
+            "altitude": 34,
+            "collectionunits": [
+                {
+                    "handle": "WHIMS15",
+                    "datasets": [
+                        {
+                            "datasetid": 18000,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Whimsical2015",
+                    "collectionunitid": 13401,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "WHIMS15",
+                    "datasets": [
+                        {
+                            "datasetid": 18001,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Whimsical2015",
+                    "collectionunitid": 13401,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 11904,
+            "sitename": "Sandy Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.70989,44.72731],[-63.69294,44.72731],[-63.69294,44.74067],[-63.70989,44.74067],[-63.70989,44.72731]]]}",
+            "altitude": 30,
+            "collectionunits": [
+                {
+                    "handle": "SANDY15",
+                    "datasets": [
+                        {
+                            "datasetid": 18048,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Sandy2015",
+                    "collectionunitid": 13425,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "SANDY15",
+                    "datasets": [
+                        {
+                            "datasetid": 18049,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Sandy2015",
+                    "collectionunitid": 13425,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 13248,
+            "sitename": "Marcia Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-74.66882,41.31495],[-74.66534,41.31495],[-74.66534,41.31959],[-74.66882,41.31959],[-74.66882,41.31495]]]}",
+            "altitude": 478,
+            "collectionunits": [
+                {
+                    "handle": "MARCIA14",
+                    "datasets": [
+                        {
+                            "datasetid": 19744,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14806,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "MARCIA14",
+                    "datasets": [
+                        {
+                            "datasetid": 19745,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14806,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13280,
+            "sitename": "Hoh Lake",
+            "sitedescription": "mountain hemlock, silver fir, yellow cedar, juniperus, heather, vaccinium, saxifrage, grass, lily carex, asteraceae",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-123.78876,47.89771],[-123.78421,47.89771],[-123.78421,47.90028],[-123.78876,47.90028],[-123.78876,47.89771]]]}",
+            "altitude": 1385,
+            "collectionunits": [
+                {
+                    "handle": "HOHLAK09",
+                    "datasets": [
+                        {
+                            "datasetid": 19804,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "HohLake_2013",
+                    "collectionunitid": 14847,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HOHLAK13",
+                    "datasets": [
+                        {
+                            "datasetid": 19791,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "HohLake_2013",
+                    "collectionunitid": 14840,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HOHLAK13",
+                    "datasets": [
+                        {
+                            "datasetid": 19792,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "HohLake_2013",
+                    "collectionunitid": 14840,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "HOLAKE09",
+                    "datasets": [
+                        {
+                            "datasetid": 19805,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "HohLake_2013",
+                    "collectionunitid": 14848,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "L13",
+                    "datasets": [
+                        {
+                            "datasetid": 49296,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "Hoh-Lake-1992-SS",
+                    "collectionunitid": 35393,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13319,
+            "sitename": "Crow Hill",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-75.74477,40.13735],[-75.74185,40.13735],[-75.74185,40.13805],[-75.74477,40.13805],[-75.74477,40.13735]]]}",
+            "altitude": 153,
+            "collectionunits": [
+                {
+                    "handle": "CROWHI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19875,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "Top Bottom Core  ",
+                    "collectionunitid": 14890,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CROWHI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19876,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "Top Bottom Core  ",
+                    "collectionunitid": 14890,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13321,
+            "sitename": "Georgia Farm",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.65335,39.94468]}",
+            "altitude": 92,
+            "collectionunits": [
+                {
+                    "handle": "GEORGI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19879,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "GeorgiaFarm_2005",
+                    "collectionunitid": 14892,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "GEORGI05",
+                    "datasets": [
+                        {
+                            "datasetid": 19880,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "GeorgiaFarm_2005",
+                    "collectionunitid": 14892,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13698,
+            "sitename": "Murderkill River",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.4125,39.02592]}",
+            "altitude": 0,
+            "collectionunits": [
+                {
+                    "handle": "MURD3B08",
+                    "datasets": [
+                        {
+                            "datasetid": 20890,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "MK-3B",
+                    "collectionunitid": 15376,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13909,
+            "sitename": "Big Cedar Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-88.28442,43.35464],[-88.24219,43.35464],[-88.24219,43.426],[-88.28442,43.426],[-88.28442,43.35464]]]}",
+            "altitude": 317,
+            "collectionunits": [
+                {
+                    "handle": "BCEDAR1A",
+                    "datasets": [
+                        {
+                            "datasetid": 21385,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "BC-1a",
+                    "collectionunitid": 15620,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BCEDAR2B",
+                    "datasets": [
+                        {
+                            "datasetid": 21386,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "BC-2B",
+                    "collectionunitid": 15621,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13921,
+            "sitename": "Geneva Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-88.57504,42.54081],[-88.4269,42.54081],[-88.4269,42.59555],[-88.57504,42.59555],[-88.57504,42.54081]]]}",
+            "altitude": 263,
+            "collectionunits": [
+                {
+                    "handle": "GENEVABH",
+                    "datasets": [
+                        {
+                            "datasetid": 21431,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "GV-3",
+                    "collectionunitid": 15649,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GENEVAGB",
+                    "datasets": [
+                        {
+                            "datasetid": 21429,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "GV-4",
+                    "collectionunitid": 15647,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GENEVAWB",
+                    "datasets": [
+                        {
+                            "datasetid": 21416,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "GV-2",
+                    "collectionunitid": 15638,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13949,
+            "sitename": "Lake Joseph, Frazer Island",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.76667,45.25]}",
+            "altitude": 245,
+            "collectionunits": [
+                {
+                    "handle": "FRAZER17",
+                    "datasets": [
+                        {
+                            "datasetid": 21480,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15674,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "FRAZER17",
+                    "datasets": [
+                        {
+                            "datasetid": 21481,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15674,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13956,
+            "sitename": "Three Mile Lake, Hammel Bay",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-79.45,45.16667]}",
+            "altitude": 257,
+            "collectionunits": [
+                {
+                    "handle": "HAMMLB24",
+                    "datasets": [
+                        {
+                            "datasetid": 21494,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15681,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HAMMLB24",
+                    "datasets": [
+                        {
+                            "datasetid": 21495,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15681,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

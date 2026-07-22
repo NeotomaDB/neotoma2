@@ -1,6 +1,9 @@
 testthat::skip("Skipping all tests in this file")
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Run Neotoma `test_speleothems` only when not on CRAN")
 test_that("get_speleothems runs with numeric datasetid", {
@@ -65,4 +68,5 @@ test_that("get_speleothems integrates with summary", {
     testthat::expect_is(sum_data, "data.frame")
     testthat::expect_true(nrow(sum_data) > 0)
   }
+})
 })

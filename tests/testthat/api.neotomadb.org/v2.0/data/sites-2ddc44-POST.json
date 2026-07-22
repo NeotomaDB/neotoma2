@@ -1,0 +1,4098 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 32,
+            "sitename": "Amarete",
+            "sitedescription": "Mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.98333,-15.23333]}",
+            "altitude": 3755,
+            "collectionunits": [
+                {
+                    "handle": "AMARETE",
+                    "datasets": [
+                        {
+                            "datasetid": 32,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMARETE",
+                    "datasets": [
+                        {
+                            "datasetid": 7874,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 211,
+            "sitename": "Lago do Aquiri",
+            "sitedescription": "Natural lake, sometimes flooded by river. Physiography: soft rolling area with flood plains. Surrounding vegetation: anthropog. palm forest, swamp savanna.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-44.98333,-3.16667]}",
+            "altitude": 13,
+            "collectionunits": [
+                {
+                    "handle": "AQUIRI",
+                    "datasets": [
+                        {
+                            "datasetid": 212,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 211,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AQUIRI",
+                    "datasets": [
+                        {
+                            "datasetid": 7889,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 211,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 323,
+            "sitename": "Cala Conto",
+            "sitedescription": "Interandean plain.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.93333,-17.56667]}",
+            "altitude": 2699,
+            "collectionunits": [
+                {
+                    "handle": "CALACONT",
+                    "datasets": [
+                        {
+                            "datasetid": 330,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 323,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CALACONT",
+                    "datasets": [
+                        {
+                            "datasetid": 7968,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 323,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 347,
+            "sitename": "Chacaltaya 1",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+            "altitude": 4746,
+            "collectionunits": [
+                {
+                    "handle": "CHACALT1",
+                    "datasets": [
+                        {
+                            "datasetid": 355,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 347,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHACALT1",
+                    "datasets": [
+                        {
+                            "datasetid": 7987,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 347,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 348,
+            "sitename": "Chacaltaya 2",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+            "altitude": 4746,
+            "collectionunits": [
+                {
+                    "handle": "CHACALT2",
+                    "datasets": [
+                        {
+                            "datasetid": 356,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 348,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHACALT2",
+                    "datasets": [
+                        {
+                            "datasetid": 7988,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 348,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 523,
+            "sitename": "Cumbre Unduavi",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.04167,-16.35]}",
+            "altitude": 4628,
+            "collectionunits": [
+                {
+                    "handle": "CUMBREUN",
+                    "datasets": [
+                        {
+                            "datasetid": 537,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 523,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CUMBREUN",
+                    "datasets": [
+                        {
+                            "datasetid": 8040,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 523,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 526,
+            "sitename": "Lagoa da Curuça",
+            "sitedescription": "Lake. Physiography: isolated lake, 15 km from the Atlantic. Surrounding vegetation: Amazon rain forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.85,-0.76667]}",
+            "altitude": 19,
+            "collectionunits": [
+                {
+                    "handle": "CURUCAA",
+                    "datasets": [
+                        {
+                            "datasetid": 540,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Profile A",
+                    "collectionunitid": 526,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "CURUCAA",
+                    "datasets": [
+                        {
+                            "datasetid": 8043,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Profile A",
+                    "collectionunitid": 526,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "CURUCAA",
+                    "datasets": [
+                        {
+                            "datasetid": 10477,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "Profile A",
+                    "collectionunitid": 526,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "CURUCAB",
+                    "datasets": [
+                        {
+                            "datasetid": 3074,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Profile B",
+                    "collectionunitid": 2973,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CURUCAB",
+                    "datasets": [
+                        {
+                            "datasetid": 8786,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Profile B",
+                    "collectionunitid": 2973,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CURUCAB",
+                    "datasets": [
+                        {
+                            "datasetid": 10504,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "Profile B",
+                    "collectionunitid": 2973,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 532,
+            "sitename": "Lagoa das Patas",
+            "sitedescription": "Lake, 300m x 7m on low inselberg. Physiography: small closed basin with flat bottom. Surrounding vegetation: dense, lowland tropical rain forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-66.68333,0.26667]}",
+            "altitude": 197,
+            "collectionunits": [
+                {
+                    "handle": "DASPATAS",
+                    "datasets": [
+                        {
+                            "datasetid": 547,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 532,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DASPATAS",
+                    "datasets": [
+                        {
+                            "datasetid": 8046,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 532,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 843,
+            "sitename": "Serra Campos Gerais",
+            "sitedescription": "Peat bog. Physiography: highland plain, next to a river vally. Surrounding vegetation: farmland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-50.21667,-24.66667]}",
+            "altitude": 1237,
+            "collectionunits": [
+                {
+                    "handle": "GERAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 872,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 842,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GERAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 8138,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 842,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GERAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 10483,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 842,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1406,
+            "sitename": "Katantica",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-69.18333,-14.8]}",
+            "altitude": 4840,
+            "collectionunits": [
+                {
+                    "handle": "KATANTI",
+                    "datasets": [
+                        {
+                            "datasetid": 1443,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1405,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KATANTI",
+                    "datasets": [
+                        {
+                            "datasetid": 8239,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1405,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1717,
+            "sitename": "Monte Blanco",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.35,-17.025]}",
+            "altitude": 4866,
+            "collectionunits": [
+                {
+                    "handle": "MTBLANC2",
+                    "datasets": [
+                        {
+                            "datasetid": 1774,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 1716,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MTBLANC2",
+                    "datasets": [
+                        {
+                            "datasetid": 8416,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 1716,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MTBLANCO",
+                    "datasets": [
+                        {
+                            "datasetid": 3494,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 3391,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MTBLANCO",
+                    "datasets": [
+                        {
+                            "datasetid": 8825,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 3391,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1994,
+            "sitename": "Río Kaluyo",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.13333,-16.43333]}",
+            "altitude": 4194,
+            "collectionunits": [
+                {
+                    "handle": "RIOKALUY",
+                    "datasets": [
+                        {
+                            "datasetid": 2069,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1993,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "RIOKALUY",
+                    "datasets": [
+                        {
+                            "datasetid": 8559,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1993,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2248,
+            "sitename": "Lagoa Campestre de Salitre",
+            "sitedescription": "Peat bog in a depression. Physiography: depression. Surrounding vegetation: semideciduous forest/dry forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.76667,-19]}",
+            "altitude": 1011,
+            "collectionunits": [
+                {
+                    "handle": "SALILC3",
+                    "datasets": [
+                        {
+                            "datasetid": 2327,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2247,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SALILC3",
+                    "datasets": [
+                        {
+                            "datasetid": 8584,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2247,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SALILC91",
+                    "datasets": [
+                        {
+                            "datasetid": 3610,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3492,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SALILC91",
+                    "datasets": [
+                        {
+                            "datasetid": 8849,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3492,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2827,
+            "sitename": "Wasa Mayu",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.81667,-17.53333]}",
+            "altitude": 2750,
+            "collectionunits": [
+                {
+                    "handle": "WASAMAYU",
+                    "datasets": [
+                        {
+                            "datasetid": 2924,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2826,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "WASAMAYU",
+                    "datasets": [
+                        {
+                            "datasetid": 8738,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2826,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9685,
+            "sitename": "Laguna Granja",
+            "sitedescription": "Oxbow lake 300 m from the modern San Martín River. Upland vegetation: seasonal southern Amazonian rainforest; immediate vegetation is riverine forest dominated by Vochysia mapirensis and Buchenavia oxycarpa; wider region dominated by closed-canopy terra firme evergreen rainforest, which is degraded by modern anthropogenic disturbance to a distance of 5 km from the lake. Littoral margins of the lake dominated by floating mats of aquatic vegetation, including Marsilea polycarpa and Eichhornia azurea. The ring-ditch archaeological site Granja del Padre lies 100 m from the eastern shore of the lake.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.71168,-13.26535],[-63.70811,-13.26535],[-63.70811,-13.26049],[-63.71168,-13.26049],[-63.71168,-13.26535]]]}",
+            "altitude": 138,
+            "collectionunits": [
+                {
+                    "handle": "GRANJA",
+                    "datasets": [
+                        {
+                            "datasetid": 14263,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10925,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GRANJA",
+                    "datasets": [
+                        {
+                            "datasetid": 14264,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10925,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9686,
+            "sitename": "Laguna Orícore",
+            "sitedescription": "Large, shallow, flat-bottomed lake in the Beni Basin. Upland vegetation: seasonal southern Amazonian rainforest; the Beni Basin is seasonally inundated savanna mosaic. Terra firma pre-Cambrian shield outcrops at the northeast margin of the lake and lies 3 km north of the lake. The terra firma is covered with evergreen humid rainforest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-63.54318,-13.3626],[-63.50514,-13.3626],[-63.50514,-13.32692],[-63.54318,-13.32692],[-63.54318,-13.3626]]]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ORICORE",
+                    "datasets": [
+                        {
+                            "datasetid": 14265,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10926,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ORICORE",
+                    "datasets": [
+                        {
+                            "datasetid": 14266,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10926,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11877,
+            "sitename": "Lake Consuelo",
+            "sitedescription": "Lake Consuelo is constantly immersed in ground-level clouds on most days and sits at 1360 m asl, 2500 m down slope from the Bolivian Altiplano and Lake Titicaca. The lake is located within a small, closed basin with moderately steep slopes that result in thin soils with duff layers thickening above 1400 m asl. Lake Consuelo is located very close to the Manu super-humid region identified by Killeen et al., (2007) as biodiversity hotspots.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-68.99309,-13.9532],[-68.98941,-13.9532],[-68.98941,-13.94833],[-68.99309,-13.94833],[-68.99309,-13.9532]]]}",
+            "altitude": 1392,
+            "collectionunits": [
+                {
+                    "handle": "B20_158",
+                    "datasets": [
+                        {
+                            "datasetid": 56929,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S158, Bush et al. 2020",
+                    "collectionunitid": 40920,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "B20_159",
+                    "datasets": [
+                        {
+                            "datasetid": 56930,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S159, Bush et al. 2020",
+                    "collectionunitid": 40921,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "CONSUELO1",
+                    "datasets": [
+                        {
+                            "datasetid": 17994,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CON1",
+                    "collectionunitid": 13398,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CONSUELO1",
+                    "datasets": [
+                        {
+                            "datasetid": 17995,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CON1",
+                    "collectionunitid": 13398,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CONSUELO2",
+                    "datasets": [
+                        {
+                            "datasetid": 18050,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CON2",
+                    "collectionunitid": 13426,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CONSUELO2",
+                    "datasets": [
+                        {
+                            "datasetid": 18051,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CON2",
+                    "collectionunitid": 13426,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 11923,
+            "sitename": "Lake Valencia",
+            "sitedescription": "Large graben. Physiography: valley between coastal mountains. Surrounding vegetation: savanna, crops and seral vegetation.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.88831,10.09484],[-67.58642,10.09484],[-67.58642,10.27213],[-67.88831,10.27213],[-67.88831,10.09484]]]}",
+            "altitude": 400,
+            "collectionunits": [
+                {
+                    "handle": "VAL77",
+                    "datasets": [
+                        {
+                            "datasetid": 18099,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 1-14-77",
+                    "collectionunitid": 13448,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VAL77",
+                    "datasets": [
+                        {
+                            "datasetid": 18100,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1-14-77",
+                    "collectionunitid": 13448,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13964,
+            "sitename": "Lake Chalalán",
+            "sitedescription": "The lake, which lies approximately 10 m above the modern level of Rio Tuichi, has an oval basin c. 900 m long by 500 m at its widest part. This steepsided lake reaches depths of 5 m within 5 m of the current shoreline. Secchi depth in Lake Chalalan is reached at c. 2 m, suggesting mesotrophic conditions. Surrounding modern vegetation is lowland evergreen forest dominated by Iriartea deltoidea, Mauritia flexuosa, Oenocarpus bataua, Hura crepitans, Ceiba pentandra, Pentaplaris davidsmithii, and Cecropia spp. Located west of the rural community of Rurrenabaque in the Upper Beni River, in the Bolivian Amazon. Mean annual precipitation at Rurrenabaque is 2550 mm while mean annual temperature is 26°C.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.92396,-14.43169],[-67.91718,-14.43169],[-67.91718,-14.42417],[-67.92396,-14.42417],[-67.92396,-14.43169]]]}",
+            "altitude": 341,
+            "collectionunits": [
+                {
+                    "handle": "CHALALAN",
+                    "datasets": [
+                        {
+                            "datasetid": 21536,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15700,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHALALAN",
+                    "datasets": [
+                        {
+                            "datasetid": 21537,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15700,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13968,
+            "sitename": "Laguna Sardinas",
+            "sitedescription": "Fluvial origin lake in floodplain of the Rio Torno. Surrounding vegetation: savanna and gallery forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-69.52371,4.96818],[-69.51868,4.96818],[-69.51868,4.97254],[-69.52371,4.97254],[-69.52371,4.96818]]]}",
+            "altitude": 104,
+            "collectionunits": [
+                {
+                    "handle": "SARDINAS",
+                    "datasets": [
+                        {
+                            "datasetid": 21544,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15704,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SARDINAS",
+                    "datasets": [
+                        {
+                            "datasetid": 21545,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15704,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13976,
+            "sitename": "Lake Santa Rosa",
+            "sitedescription": "The long, narrow lake lies on a terrace ~15 m above Rio Tiuchi in a sharply defined depression ~7–10 m deep, suggesting that its catchment area is fairly small relative to the water surface area. Bathymetrically, the lake slopes gently down from 1 to 6 m depth in about 2 km. A small farm located about 300 m from the northern shore, where crops and fruits are cultivated, is the only evident human disturbance in this landscape. The rest of the vegetation around the lake is forest dominated by Iriartea deltoidea, Mauritia flexuosa, Oenocarpus bataua, Hura crepitans, Ceiba pentandra, Pentaplaris davidsmithii, and Cecropia spp. Cyperaceae, Liliaceace, and Sagittaria grow as a narrow marsh around the lake.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-67.88893,-14.50063],[-67.85748,-14.50063],[-67.85748,-14.46123],[-67.88893,-14.46123],[-67.88893,-14.50063]]]}",
+            "altitude": 359,
+            "collectionunits": [
+                {
+                    "handle": "SANTROSA",
+                    "datasets": [
+                        {
+                            "datasetid": 21578,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15717,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SANTROSA",
+                    "datasets": [
+                        {
+                            "datasetid": 21579,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15717,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SANTROSA",
+                    "datasets": [
+                        {
+                            "datasetid": 21580,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15717,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 14202,
+            "sitename": "Lake Titicaca",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-70.17242,-16.84398],[-68.5,-16.84398],[-68.5,-15.05621],[-70.17242,-15.05621],[-70.17242,-16.84398]]]}",
+            "altitude": 3809,
+            "collectionunits": [
+                {
+                    "handle": "04-VI971",
+                    "datasets": [
+                        {
+                            "datasetid": 53794,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-1",
+                    "collectionunitid": 39057,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI972",
+                    "datasets": [
+                        {
+                            "datasetid": 53795,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-2",
+                    "collectionunitid": 39058,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI973",
+                    "datasets": [
+                        {
+                            "datasetid": 53797,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-3",
+                    "collectionunitid": 39060,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI974",
+                    "datasets": [
+                        {
+                            "datasetid": 53796,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-4",
+                    "collectionunitid": 39059,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI975",
+                    "datasets": [
+                        {
+                            "datasetid": 53798,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-5",
+                    "collectionunitid": 39061,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI976",
+                    "datasets": [
+                        {
+                            "datasetid": 53799,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-6",
+                    "collectionunitid": 39062,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "04-VI977",
+                    "datasets": [
+                        {
+                            "datasetid": 53800,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "04-VI-97-7",
+                    "collectionunitid": 39063,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI971",
+                    "datasets": [
+                        {
+                            "datasetid": 53788,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-1",
+                    "collectionunitid": 39051,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI972",
+                    "datasets": [
+                        {
+                            "datasetid": 53789,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-2",
+                    "collectionunitid": 39052,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI973",
+                    "datasets": [
+                        {
+                            "datasetid": 53790,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-3",
+                    "collectionunitid": 39053,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI974",
+                    "datasets": [
+                        {
+                            "datasetid": 53791,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-4",
+                    "collectionunitid": 39054,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI975",
+                    "datasets": [
+                        {
+                            "datasetid": 53792,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-5",
+                    "collectionunitid": 39055,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "05-VI976",
+                    "datasets": [
+                        {
+                            "datasetid": 53793,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "05-VI-97-6",
+                    "collectionunitid": 39056,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "08-VI973",
+                    "datasets": [
+                        {
+                            "datasetid": 53786,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "08-VI-97-3",
+                    "collectionunitid": 39049,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "B20_601",
+                    "datasets": [
+                        {
+                            "datasetid": 56931,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S601, Bush et al. 2020",
+                    "collectionunitid": 40922,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LT01-2B",
+                    "datasets": [
+                        {
+                            "datasetid": 22191,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "LT01-2B",
+                    "collectionunitid": 16110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LT01-2B",
+                    "datasets": [
+                        {
+                            "datasetid": 22192,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "LT01-2B",
+                    "collectionunitid": 16110,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NE98-10B",
+                    "datasets": [
+                        {
+                            "datasetid": 53801,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-10BXB",
+                    "collectionunitid": 39064,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-11B",
+                    "datasets": [
+                        {
+                            "datasetid": 53802,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-11BXB",
+                    "collectionunitid": 39065,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-1BX",
+                    "datasets": [
+                        {
+                            "datasetid": 53785,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-1BXB",
+                    "collectionunitid": 39048,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-3BXB",
+                    "datasets": [
+                        {
+                            "datasetid": 53782,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-3BXB",
+                    "collectionunitid": 39045,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-4BXB",
+                    "datasets": [
+                        {
+                            "datasetid": 53783,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-4BXB",
+                    "collectionunitid": 39046,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-5BXB",
+                    "datasets": [
+                        {
+                            "datasetid": 53784,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-5BXB",
+                    "collectionunitid": 39047,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-6B",
+                    "datasets": [
+                        {
+                            "datasetid": 53781,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-6BXB",
+                    "collectionunitid": 39044,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NE98-9BX",
+                    "datasets": [
+                        {
+                            "datasetid": 53787,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "NE98-9BXB",
+                    "collectionunitid": 39050,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-100",
+                    "datasets": [
+                        {
+                            "datasetid": 53772,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-100",
+                    "collectionunitid": 39035,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-101",
+                    "datasets": [
+                        {
+                            "datasetid": 53773,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-101",
+                    "collectionunitid": 39036,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-61",
+                    "datasets": [
+                        {
+                            "datasetid": 53774,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-61",
+                    "collectionunitid": 39037,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-67",
+                    "datasets": [
+                        {
+                            "datasetid": 53775,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-67",
+                    "collectionunitid": 39038,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-84",
+                    "datasets": [
+                        {
+                            "datasetid": 53776,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-84",
+                    "collectionunitid": 39039,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-85",
+                    "datasets": [
+                        {
+                            "datasetid": 53777,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-85",
+                    "collectionunitid": 39040,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-86",
+                    "datasets": [
+                        {
+                            "datasetid": 53778,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-86",
+                    "collectionunitid": 39041,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-87",
+                    "datasets": [
+                        {
+                            "datasetid": 53779,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-87",
+                    "collectionunitid": 39042,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "YU-88",
+                    "datasets": [
+                        {
+                            "datasetid": 53780,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "YU-88",
+                    "collectionunitid": 39043,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 26166,
+            "sitename": "Lake Caranã",
+            "sitedescription": "Flat bottomed lake located on the fluvial terrace on the eastern bank of the Rio Tapajós at the base of the Belterra Plateau. The lake occupies a small closed basin separated from the main river channel except during extreme flood events by a depositional sand berm. Vegetation is dense terra firme humid evergreen rainforest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-55.0444,-2.83807],[-55.03917,-2.83807],[-55.03917,-2.83122],[-55.0444,-2.83122],[-55.0444,-2.83807]]]}",
+            "altitude": -14,
+            "collectionunits": [
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45628,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45629,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45630,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45632,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARANA",
+                    "datasets": [
+                        {
+                            "datasetid": 45633,
+                            "datasettype": "paleomagnetic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 32443,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26675,
+            "sitename": "Bosque de Avicennia",
+            "sitedescription": "The site is located on the relatively high central southern part of the Braganca peninsula. Tidal creeks and channels are at least 500 m distant from core site, and the area seems to be little disturbed by tidal inundations. Only Avicennia trees form the mangrove forest. A high number of dead trees are found in this area.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.70221,-0.92777]}",
+            "altitude": 4,
+            "collectionunits": [
+                {
+                    "handle": "AVICENNIA",
+                    "datasets": [
+                        {
+                            "datasetid": 46723,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33342,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AVICENNIA",
+                    "datasets": [
+                        {
+                            "datasetid": 46724,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33342,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26897,
+            "sitename": "Lago Amapá",
+            "sitedescription": "It is a 3 km-long, U-shaped oxbow lake of the Acre River. The current vegetation in the area is strongly altered and consists of large areas of pastures, crops and urban settlement. The natural vegetation is semi-evergreen tropical rainforest with a mixture of palm trees and bamboo. The lake is surrounded by small patches of tropical rain forest, crops and fishery ponds.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.85506,-10.04542]}",
+            "altitude": 129,
+            "collectionunits": [
+                {
+                    "handle": "AMAPA",
+                    "datasets": [
+                        {
+                            "datasetid": 46992,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Lago Amapá",
+                    "collectionunitid": 33593,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMAPA",
+                    "datasets": [
+                        {
+                            "datasetid": 46993,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Lago Amapá",
+                    "collectionunitid": 33593,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26898,
+            "sitename": "Furo do Chato",
+            "sitedescription": "Rhizophora trees dominate in the mangrove, but Avicennia trees occur close to the site. The core site is near tidal channels and is more influenced by inundation than the two other sites in the study (Bosque de Avicennia and Campo Salgado).",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.65,-0.87361]}",
+            "altitude": 15,
+            "collectionunits": [
+                {
+                    "handle": "FURCHATO",
+                    "datasets": [
+                        {
+                            "datasetid": 46994,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33594,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "FURCHATO",
+                    "datasets": [
+                        {
+                            "datasetid": 46995,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33594,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 26901,
+            "sitename": "Serra do Tepequém",
+            "sitedescription": "Serra do Tepequém sediment record was retrieved from an exposed wall in a spring area. The main vegetation growing in the coring area are Mauritia flexuosa stands, ferns and grasslands. On the plateau the vegetation is mainly composed of grasses with some shrubs, from open grass savannas on the plains to arboreal savannas in the valleys.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-61.70433,3.79201]}",
+            "altitude": 617,
+            "collectionunits": [
+                {
+                    "handle": "TEPEQUEM",
+                    "datasets": [
+                        {
+                            "datasetid": 47002,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33597,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "TEPEQUEM",
+                    "datasets": [
+                        {
+                            "datasetid": 47003,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33597,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "TEPEQUEM",
+                    "datasets": [
+                        {
+                            "datasetid": 47004,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 33597,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 26984,
+            "sitename": "Campo Salgado",
+            "sitedescription": "Cyperaceae-dominated open salt marsh in the central part of the peninsula.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.68306,-0.91278]}",
+            "altitude": 4,
+            "collectionunits": [
+                {
+                    "handle": "SALGADO",
+                    "datasets": [
+                        {
+                            "datasetid": 47493,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 34054,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SALGADO",
+                    "datasets": [
+                        {
+                            "datasetid": 47494,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 34054,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27005,
+            "sitename": "Laguna Mandioré",
+            "sitedescription": "Laguna Mandioré is a large, shallow, flat bottomed lake (~152 km2, 92 m a.s.l., depth ~4-6m) located along a fault between the Bolivian Chiquitano semi-deciduous dry forest to the west and the Brazilian Pantanal wetlands to the east.  On the eastern shore of Laguna Mandiorée dry forest grades into cerrado upland savannah as elevation increases, and soils become thinner, up a series of large hills (Amolar hills, ~900 m a.s.l.) which separate the majority of the lake margin from the Pantanal wetlands. The geology of the surrounding area is a complex of coalesced alluvial fans from incoming rivers across the Pantanal, as well as outcrops of crystalline rock, limestone and iron and manganese oxides which form the Amolar hills (~900 m.a.s.l.) (Hamilton, 2002).",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.56267,-18.09183]}",
+            "altitude": 93,
+            "collectionunits": [
+                {
+                    "handle": "MANDIORE",
+                    "datasets": [
+                        {
+                            "datasetid": 47560,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Mandiore 5",
+                    "collectionunitid": 34091,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MANDIORE",
+                    "datasets": [
+                        {
+                            "datasetid": 47561,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Mandiore 5",
+                    "collectionunitid": 34091,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MANDIORE",
+                    "datasets": [
+                        {
+                            "datasetid": 52163,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "Mandiore 5",
+                    "collectionunitid": 34091,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27006,
+            "sitename": "Lago Rogaguado",
+            "sitedescription": "Located in the Llanos de Moxos. Lake likely formed within a river valley flooded as a result of neotectonic events. No major permanent inflows or outflows, but receives floodwater during the rainy season from swamp areas located southwest of the lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGUADO",
+                    "datasets": [
+                        {
+                            "datasetid": 47562,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "C1a/C1b",
+                    "collectionunitid": 34092,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ROGAGUADO",
+                    "datasets": [
+                        {
+                            "datasetid": 47563,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "C1a/C1b",
+                    "collectionunitid": 34092,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ROGAGUADO",
+                    "datasets": [
+                        {
+                            "datasetid": 47564,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "C1a/C1b",
+                    "collectionunitid": 34092,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27010,
+            "sitename": "Lake Acarabixi",
+            "sitedescription": "The Lake Acarabixi is a floodplain lake in the middle-upper part of Rio Negro. The vegetation growing near the lake is igapó forest.The canopy height averages about 15–20m with few emergent trees up to 30m. Lake has a direct connection to the Rio Negro during extreme high water stands.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-64.49889,-0.34583]}",
+            "altitude": 26,
+            "collectionunits": [
+                {
+                    "handle": "ACARABIX",
+                    "datasets": [
+                        {
+                            "datasetid": 47569,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ACA 02/03",
+                    "collectionunitid": 34096,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ACARABIX",
+                    "datasets": [
+                        {
+                            "datasetid": 47570,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "ACA 02/03",
+                    "collectionunitid": 34096,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ACARABIX",
+                    "datasets": [
+                        {
+                            "datasetid": 47571,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ACA 02/03",
+                    "collectionunitid": 34096,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27297,
+            "sitename": "Lake Pata",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Mature",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-66.67672,0.28602]}",
+            "altitude": 284,
+            "collectionunits": [
+                {
+                    "handle": "PATA",
+                    "datasets": [
+                        {
+                            "datasetid": 48835,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "LPTV-9",
+                    "collectionunitid": 35170,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PATA",
+                    "datasets": [
+                        {
+                            "datasetid": 48836,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "LPTV-9",
+                    "collectionunitid": 35170,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PATA",
+                    "datasets": [
+                        {
+                            "datasetid": 48837,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "LPTV-9",
+                    "collectionunitid": 35170,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27353,
+            "sitename": "Laguna Bella Vista",
+            "sitedescription": "The site is situated in the Noel Kempff Mercado National Park near the southern margin of Amazonia. The site is located ~120 km north of the southern limit of the Amazon humid evergreen rain forest",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-61.55,-13.61667]}",
+            "altitude": 172,
+            "collectionunits": [
+                {
+                    "handle": "BELLVIS",
+                    "datasets": [
+                        {
+                            "datasetid": 49062,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "LBV",
+                    "collectionunitid": 35291,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELLVIS",
+                    "datasets": [
+                        {
+                            "datasetid": 49063,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "LBV",
+                    "collectionunitid": 35291,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 28189,
+            "sitename": "Laguna Chaplin",
+            "sitedescription": "The site is located in the Noel Kempff Mercado\r\nNational Park, ~120 km north of the southern limit of Amazon humid evergreen rain forest",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-61.06667,-14.46667]}",
+            "altitude": 187,
+            "collectionunits": [
+                {
+                    "handle": "CHAPLIN",
+                    "datasets": [
+                        {
+                            "datasetid": 52453,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 38107,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHAPLIN",
+                    "datasets": [
+                        {
+                            "datasetid": 52454,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 38107,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 28342,
+            "sitename": "Caño Tigre",
+            "sitedescription": "Deltaic monospecific palm stand",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-62.68203,9.50228]}",
+            "altitude": 4,
+            "collectionunits": [
+                {
+                    "handle": "CTIGRE",
+                    "datasets": [
+                        {
+                            "datasetid": 52823,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "PATAM18_A12",
+                    "collectionunitid": 38310,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CTIGRE",
+                    "datasets": [
+                        {
+                            "datasetid": 52824,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PATAM18_A12",
+                    "collectionunitid": 38310,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 28347,
+            "sitename": "Vereda São José",
+            "sitedescription": "Palm swamp in the Paracatu hydrographic basic on the Buritizeiro plateau. Previously would have been Cerrado vegetation but now mostly pasture and crops",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-45.1114,-17.07932]}",
+            "altitude": 669,
+            "collectionunits": [
+                {
+                    "handle": "SAOJOSE",
+                    "datasets": [
+                        {
+                            "datasetid": 52834,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "TFSJ",
+                    "collectionunitid": 38316,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SAOJOSE",
+                    "datasets": [
+                        {
+                            "datasetid": 52835,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "TFSJ",
+                    "collectionunitid": 38316,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 28876,
+            "sitename": "Rogaguado site 1",
+            "sitedescription": "Inundated savannah",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU01",
+                    "datasets": [
+                        {
+                            "datasetid": 54006,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU01",
+                    "collectionunitid": 39245,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28877,
+            "sitename": "Rogaguado site 2",
+            "sitedescription": "Inundated savannah",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU02",
+                    "datasets": [
+                        {
+                            "datasetid": 54007,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU02",
+                    "collectionunitid": 39246,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28878,
+            "sitename": "Rogaguado site 3",
+            "sitedescription": "Cerrado",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU03",
+                    "datasets": [
+                        {
+                            "datasetid": 54008,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU03",
+                    "collectionunitid": 39247,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28879,
+            "sitename": "Rogaguado site 4",
+            "sitedescription": "Wetland",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU04",
+                    "datasets": [
+                        {
+                            "datasetid": 54009,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU04",
+                    "collectionunitid": 39248,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28880,
+            "sitename": "Rogaguado site 5",
+            "sitedescription": "Wetland",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU05",
+                    "datasets": [
+                        {
+                            "datasetid": 54010,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU05",
+                    "collectionunitid": 39249,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28881,
+            "sitename": "Rogaguado site 6",
+            "sitedescription": "Gallery forest",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU06",
+                    "datasets": [
+                        {
+                            "datasetid": 54011,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU06",
+                    "collectionunitid": 39250,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28882,
+            "sitename": "Rogaguado site 7",
+            "sitedescription": "Gallery forest",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU07",
+                    "datasets": [
+                        {
+                            "datasetid": 54012,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU07",
+                    "collectionunitid": 39251,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28883,
+            "sitename": "Rogaguado site 8",
+            "sitedescription": "Sediment surface",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU08",
+                    "datasets": [
+                        {
+                            "datasetid": 54013,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU08",
+                    "collectionunitid": 39252,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 28884,
+            "sitename": "Rogaguado site 9",
+            "sitedescription": "Sediment surface",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.98614,-12.99739]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "ROGAGU09",
+                    "datasets": [
+                        {
+                            "datasetid": 54014,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROGAGU09",
+                    "collectionunitid": 39253,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 29848,
+            "sitename": "Comprida0.01",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Secondary",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-53.81799,-1.71878]}",
+            "altitude": null,
+            "collectionunits": [
+                {
+                    "handle": "B20_157",
+                    "datasets": [
+                        {
+                            "datasetid": 56737,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S157, Bush et al. 2020",
+                    "collectionunitid": 40796,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 29890,
+            "sitename": "Geral10cm",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Secondary",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-53.59553,-1.6469]}",
+            "altitude": null,
+            "collectionunits": [
+                {
+                    "handle": "B20_266",
+                    "datasets": [
+                        {
+                            "datasetid": 56782,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S266, Bush et al. 2020",
+                    "collectionunitid": 40838,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 29919,
+            "sitename": "Sloaneaswamp",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Mature",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-70.11,-12.63]}",
+            "altitude": 242,
+            "collectionunits": [
+                {
+                    "handle": "B20_535",
+                    "datasets": [
+                        {
+                            "datasetid": 56897,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S535, Bush et al. 2020",
+                    "collectionunitid": 40898,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 29965,
+            "sitename": "Estrellani",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Grazed",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.0426,-16.33795]}",
+            "altitude": 4633,
+            "collectionunits": [
+                {
+                    "handle": "B20_240",
+                    "datasets": [
+                        {
+                            "datasetid": 56960,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S240, Bush et al. 2020",
+                    "collectionunitid": 40951,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 29976,
+            "sitename": "KharaKkotaNorth",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Grazed",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.3617,-16.1327]}",
+            "altitude": 4908,
+            "collectionunits": [
+                {
+                    "handle": "B20_293",
+                    "datasets": [
+                        {
+                            "datasetid": 56971,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S293, Bush et al. 2020",
+                    "collectionunitid": 40962,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30008,
+            "sitename": "MuruKkota",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Grazed",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.14258,-16.42715]}",
+            "altitude": 4245,
+            "collectionunits": [
+                {
+                    "handle": "B20_394",
+                    "datasets": [
+                        {
+                            "datasetid": 57003,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S394, Bush et al. 2020",
+                    "collectionunitid": 40994,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30030,
+            "sitename": "SoraKkota",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Grazed",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.33817,-16.18325]}",
+            "altitude": 4293,
+            "collectionunits": [
+                {
+                    "handle": "B20_539",
+                    "datasets": [
+                        {
+                            "datasetid": 57025,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S539, Bush et al. 2020",
+                    "collectionunitid": 41016,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30198,
+            "sitename": "Tapajos0cm",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Secondary",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-61.67917,0.62889]}",
+            "altitude": 31,
+            "collectionunits": [
+                {
+                    "handle": "B20_572",
+                    "datasets": [
+                        {
+                            "datasetid": 57205,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S572, Bush et al. 2020",
+                    "collectionunitid": 41186,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30330,
+            "sitename": "Werth0cm",
+            "sitedescription": "Bush et al. 2020, \"Habitat Quality\" field: Secondary",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-69.09765,-12.17731]}",
+            "altitude": 229,
+            "collectionunits": [
+                {
+                    "handle": "B20_623",
+                    "datasets": [
+                        {
+                            "datasetid": 57369,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S623, Bush et al. 2020",
+                    "collectionunitid": 41323,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30331,
+            "sitename": "SantaMaria",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-53.59,-1.63]}",
+            "altitude": 9,
+            "collectionunits": [
+                {
+                    "handle": "B20_519",
+                    "datasets": [
+                        {
+                            "datasetid": 57372,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "S519, Bush et al. 2020",
+                    "collectionunitid": 41325,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 30988,
+            "sitename": "Escalerani",
+            "sitedescription": "Eastern side of Cordillera Real near glacier formations. Water originates from a nearly extinct glcaier 600 m higher. Wet summers, dry winters. Cushions of Plantago tubulosa dominate accompanied by Poaceae and Gentianaceae. Polylepis pepei forest grows in the vicinity. Site is grazed.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.27653,-15.845]}",
+            "altitude": 4004,
+            "collectionunits": [
+                {
+                    "handle": "ESCALERANI",
+                    "datasets": [
+                        {
+                            "datasetid": 58631,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 42250,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ESCALERANI",
+                    "datasets": [
+                        {
+                            "datasetid": 58632,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 42250,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 30989,
+            "sitename": "Ginebra",
+            "sitedescription": "Located on the palaeofloodplain of the River Beni. The Beni area comprises seasonally flooded savannas, wetlands with forest islands, gallery forests on poorly drained Quaternary fluvial deposits in central and southern Beni, and neotropical woody savannas called Cerrado Beniano, on lateritic soils in northern Beni. The plains form a complex mosaic of humid seasonal forest in a matrix of seasonal savanna where annual flooding and fire are important ecological factors.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.57617,-12.97288]}",
+            "altitude": 154,
+            "collectionunits": [
+                {
+                    "handle": "GINEBRA",
+                    "datasets": [
+                        {
+                            "datasetid": 58633,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 42251,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GINEBRA",
+                    "datasets": [
+                        {
+                            "datasetid": 58634,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 42251,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 31400,
+            "sitename": "Siberia",
+            "sitedescription": "The modern-day vegetation of the area comprises three main ecosystems, the distribution of which is related to the presence of the cloud moisture supply in winter: cloud forest with Escallonia myrtilloides, Weinmannia microphylla, and Symplocos, as dominants; open forest (transition) represented by Vallea, Brachyotum, Senna, Alnus acuminata and Puna, a high-elevation grassland with herbs such as Cerastium, Azorella villoba, Polyclita, Perezia, and Gentianaceae sp.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-64.71889,-17.83413]}",
+            "altitude": 2874,
+            "collectionunits": [
+                {
+                    "handle": "SIBERIA",
+                    "datasets": [
+                        {
+                            "datasetid": 59189,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "SIBERIA",
+                    "collectionunitid": 42714,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SIBERIA",
+                    "datasets": [
+                        {
+                            "datasetid": 59190,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "SIBERIA",
+                    "collectionunitid": 42714,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 36970,
+            "sitename": "Paixão Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-41.0184,-12.6182]}",
+            "altitude": 598,
+            "collectionunits": [
+                {
+                    "handle": "PX5-611",
+                    "datasets": [
+                        {
+                            "datasetid": 68840,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "113-PX5",
+                    "collectionunitid": 50635,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PX5-611",
+                    "datasets": [
+                        {
+                            "datasetid": 68841,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "113-PX5",
+                    "collectionunitid": 50635,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PX7_2015",
+                    "datasets": [
+                        {
+                            "datasetid": 67028,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "113-PX7",
+                    "collectionunitid": 49713,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PX7_2015",
+                    "datasets": [
+                        {
+                            "datasetid": 67029,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "113-PX7",
+                    "collectionunitid": 49713,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PX7_2018-6",
+                    "datasets": [
+                        {
+                            "datasetid": 68848,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "113-PX7",
+                    "collectionunitid": 50642,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PX7_2018-6",
+                    "datasets": [
+                        {
+                            "datasetid": 68849,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "113-PX7",
+                    "collectionunitid": 50642,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37003,
+            "sitename": "Lapa Doce Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-41.6043,-12.3344]}",
+            "altitude": 680,
+            "collectionunits": [
+                {
+                    "handle": "LD12",
+                    "datasets": [
+                        {
+                            "datasetid": 67115,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "103-LD12",
+                    "collectionunitid": 49757,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LD12",
+                    "datasets": [
+                        {
+                            "datasetid": 67116,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "103-LD12",
+                    "collectionunitid": 49757,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37067,
+            "sitename": "Jaraguá Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-56.583,-21.083]}",
+            "altitude": 570,
+            "collectionunits": [
+                {
+                    "handle": "JAR1",
+                    "datasets": [
+                        {
+                            "datasetid": 67263,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR1",
+                    "collectionunitid": 49833,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR1",
+                    "datasets": [
+                        {
+                            "datasetid": 67264,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR1",
+                    "collectionunitid": 49833,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR13",
+                    "datasets": [
+                        {
+                            "datasetid": 68233,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR13",
+                    "collectionunitid": 50328,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR13",
+                    "datasets": [
+                        {
+                            "datasetid": 68234,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR13",
+                    "collectionunitid": 50328,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR14",
+                    "datasets": [
+                        {
+                            "datasetid": 67727,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR14",
+                    "collectionunitid": 50065,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR14",
+                    "datasets": [
+                        {
+                            "datasetid": 67728,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR14",
+                    "collectionunitid": 50065,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR2",
+                    "datasets": [
+                        {
+                            "datasetid": 67375,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR2",
+                    "collectionunitid": 49889,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR2",
+                    "datasets": [
+                        {
+                            "datasetid": 67376,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR2",
+                    "collectionunitid": 49889,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR4",
+                    "datasets": [
+                        {
+                            "datasetid": 68319,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR4",
+                    "collectionunitid": 50371,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR4",
+                    "datasets": [
+                        {
+                            "datasetid": 68320,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR4",
+                    "collectionunitid": 50371,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR7",
+                    "datasets": [
+                        {
+                            "datasetid": 68275,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR7",
+                    "collectionunitid": 50349,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR7",
+                    "datasets": [
+                        {
+                            "datasetid": 68276,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR7",
+                    "collectionunitid": 50349,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR_compos",
+                    "datasets": [
+                        {
+                            "datasetid": 67261,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "10-JAR-COMP",
+                    "collectionunitid": 49832,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "JAR_compos",
+                    "datasets": [
+                        {
+                            "datasetid": 67262,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "10-JAR-COMP",
+                    "collectionunitid": 49832,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37079,
+            "sitename": "Tamboril Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47,-16]}",
+            "altitude": 200,
+            "collectionunits": [
+                {
+                    "handle": "TM0",
+                    "datasets": [
+                        {
+                            "datasetid": 68359,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "27-TM0",
+                    "collectionunitid": 50390,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TM0",
+                    "datasets": [
+                        {
+                            "datasetid": 68360,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "27-TM0",
+                    "collectionunitid": 50390,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TM2",
+                    "datasets": [
+                        {
+                            "datasetid": 67299,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "27-TM2",
+                    "collectionunitid": 49853,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TM2",
+                    "datasets": [
+                        {
+                            "datasetid": 67300,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "27-TM2",
+                    "collectionunitid": 49853,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TM6",
+                    "datasets": [
+                        {
+                            "datasetid": 68487,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "27-TM6",
+                    "collectionunitid": 50452,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TM6",
+                    "datasets": [
+                        {
+                            "datasetid": 68488,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "27-TM6",
+                    "collectionunitid": 50452,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37091,
+            "sitename": "Paraiso Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-55.45,-4.0667]}",
+            "altitude": 60,
+            "collectionunits": [
+                {
+                    "handle": "PAR01",
+                    "datasets": [
+                        {
+                            "datasetid": 68679,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR01",
+                    "collectionunitid": 50550,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR01",
+                    "datasets": [
+                        {
+                            "datasetid": 68680,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR01",
+                    "collectionunitid": 50550,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR03",
+                    "datasets": [
+                        {
+                            "datasetid": 68617,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR03",
+                    "collectionunitid": 50519,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR03",
+                    "datasets": [
+                        {
+                            "datasetid": 68618,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR03",
+                    "collectionunitid": 50519,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR06",
+                    "datasets": [
+                        {
+                            "datasetid": 68717,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR06",
+                    "collectionunitid": 50569,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR06",
+                    "datasets": [
+                        {
+                            "datasetid": 68718,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR06",
+                    "collectionunitid": 50569,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR07",
+                    "datasets": [
+                        {
+                            "datasetid": 68791,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR07",
+                    "collectionunitid": 50607,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR07",
+                    "datasets": [
+                        {
+                            "datasetid": 68792,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR07",
+                    "collectionunitid": 50607,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR08",
+                    "datasets": [
+                        {
+                            "datasetid": 68515,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR08",
+                    "collectionunitid": 50466,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR08",
+                    "datasets": [
+                        {
+                            "datasetid": 68516,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR08",
+                    "collectionunitid": 50466,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR15",
+                    "datasets": [
+                        {
+                            "datasetid": 67377,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR15",
+                    "collectionunitid": 49890,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR15",
+                    "datasets": [
+                        {
+                            "datasetid": 67378,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR15",
+                    "collectionunitid": 49890,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR16",
+                    "datasets": [
+                        {
+                            "datasetid": 68575,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR16",
+                    "collectionunitid": 50497,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR16",
+                    "datasets": [
+                        {
+                            "datasetid": 68576,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR16",
+                    "collectionunitid": 50497,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR24",
+                    "datasets": [
+                        {
+                            "datasetid": 68467,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR24",
+                    "collectionunitid": 50442,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR24",
+                    "datasets": [
+                        {
+                            "datasetid": 68468,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR24",
+                    "collectionunitid": 50442,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR27",
+                    "datasets": [
+                        {
+                            "datasetid": 67329,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PAR27",
+                    "collectionunitid": 49867,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PAR27",
+                    "datasets": [
+                        {
+                            "datasetid": 67330,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PAR27",
+                    "collectionunitid": 49867,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Paraiso co",
+                    "datasets": [
+                        {
+                            "datasetid": 68755,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "3-PARAISO-COMP",
+                    "collectionunitid": 50588,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Paraiso co",
+                    "datasets": [
+                        {
+                            "datasetid": 68756,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "3-PARAISO-COMP",
+                    "collectionunitid": 50588,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37097,
+            "sitename": "São Bernardo Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.35,-13.81]}",
+            "altitude": 631,
+            "collectionunits": [
+                {
+                    "handle": "SBE3_2021",
+                    "datasets": [
+                        {
+                            "datasetid": 67341,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "205-SBE3",
+                    "collectionunitid": 49873,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SBE3_2021",
+                    "datasets": [
+                        {
+                            "datasetid": 67342,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "205-SBE3",
+                    "collectionunitid": 49873,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37106,
+            "sitename": "Chiflonkhakha Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.7739,-18.1222]}",
+            "altitude": 2660,
+            "collectionunits": [
+                {
+                    "handle": "Boto 1",
+                    "datasets": [
+                        {
+                            "datasetid": 67637,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO1",
+                    "collectionunitid": 50021,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 1",
+                    "datasets": [
+                        {
+                            "datasetid": 67638,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO1",
+                    "collectionunitid": 50021,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 1_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67365,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO1",
+                    "collectionunitid": 49884,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 1_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67366,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO1",
+                    "collectionunitid": 49884,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 3",
+                    "datasets": [
+                        {
+                            "datasetid": 67431,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO3",
+                    "collectionunitid": 49918,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 3",
+                    "datasets": [
+                        {
+                            "datasetid": 67432,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO3",
+                    "collectionunitid": 49918,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 3_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67551,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO3",
+                    "collectionunitid": 49978,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 3_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67552,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO3",
+                    "collectionunitid": 49978,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 7",
+                    "datasets": [
+                        {
+                            "datasetid": 67449,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO7",
+                    "collectionunitid": 49926,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 7",
+                    "datasets": [
+                        {
+                            "datasetid": 67450,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO7",
+                    "collectionunitid": 49926,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 7_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67523,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO7",
+                    "collectionunitid": 49965,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 7_202",
+                    "datasets": [
+                        {
+                            "datasetid": 67524,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "225-BOTO7",
+                    "collectionunitid": 49965,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37138,
+            "sitename": "Lapa Sem Fim Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-44.6281,-16.1503]}",
+            "altitude": 341,
+            "collectionunits": [
+                {
+                    "handle": "LSF11-606",
+                    "datasets": [
+                        {
+                            "datasetid": 68850,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF11",
+                    "collectionunitid": 50643,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF11-606",
+                    "datasets": [
+                        {
+                            "datasetid": 68851,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF11",
+                    "collectionunitid": 50643,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13_2018",
+                    "datasets": [
+                        {
+                            "datasetid": 68888,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50672,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13_2018",
+                    "datasets": [
+                        {
+                            "datasetid": 68889,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50672,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13_2021",
+                    "datasets": [
+                        {
+                            "datasetid": 68872,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50661,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13_2021",
+                    "datasets": [
+                        {
+                            "datasetid": 68873,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50661,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13-605",
+                    "datasets": [
+                        {
+                            "datasetid": 68838,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50634,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF13-605",
+                    "datasets": [
+                        {
+                            "datasetid": 68839,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF13",
+                    "collectionunitid": 50634,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF15-603-",
+                    "datasets": [
+                        {
+                            "datasetid": 68810,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF15",
+                    "collectionunitid": 50616,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF15-603-",
+                    "datasets": [
+                        {
+                            "datasetid": 68811,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF15",
+                    "collectionunitid": 50616,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF16-91",
+                    "datasets": [
+                        {
+                            "datasetid": 69080,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF16",
+                    "collectionunitid": 50778,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF16-91",
+                    "datasets": [
+                        {
+                            "datasetid": 69081,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF16",
+                    "collectionunitid": 50778,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF17",
+                    "datasets": [
+                        {
+                            "datasetid": 67467,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF17",
+                    "collectionunitid": 49934,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF17",
+                    "datasets": [
+                        {
+                            "datasetid": 67468,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF17",
+                    "collectionunitid": 49934,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF19-709",
+                    "datasets": [
+                        {
+                            "datasetid": 69074,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF19",
+                    "collectionunitid": 50775,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF19-709",
+                    "datasets": [
+                        {
+                            "datasetid": 69075,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF19",
+                    "collectionunitid": 50775,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF3_2015-",
+                    "datasets": [
+                        {
+                            "datasetid": 68890,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF3",
+                    "collectionunitid": 50673,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF3_2015-",
+                    "datasets": [
+                        {
+                            "datasetid": 68891,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF3",
+                    "collectionunitid": 50673,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF3_2018-",
+                    "datasets": [
+                        {
+                            "datasetid": 69390,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF3",
+                    "collectionunitid": 50934,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF3_2018-",
+                    "datasets": [
+                        {
+                            "datasetid": 69391,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF3",
+                    "collectionunitid": 50934,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF9-607",
+                    "datasets": [
+                        {
+                            "datasetid": 68854,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "24-LSF9",
+                    "collectionunitid": 50646,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LSF9-607",
+                    "datasets": [
+                        {
+                            "datasetid": 68855,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "24-LSF9",
+                    "collectionunitid": 50646,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37283,
+            "sitename": "Diva Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-41.5733,-12.3819]}",
+            "altitude": 680,
+            "collectionunits": [
+                {
+                    "handle": "DV2",
+                    "datasets": [
+                        {
+                            "datasetid": 67913,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "38-DV2",
+                    "collectionunitid": 50168,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "DV2",
+                    "datasets": [
+                        {
+                            "datasetid": 67914,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "38-DV2",
+                    "collectionunitid": 50168,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37291,
+            "sitename": "Curupira Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-56.7839,-15.2002]}",
+            "altitude": 420,
+            "collectionunits": [
+                {
+                    "handle": "CUR4",
+                    "datasets": [
+                        {
+                            "datasetid": 67959,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "35-CUR4",
+                    "collectionunitid": 50192,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "CUR4",
+                    "datasets": [
+                        {
+                            "datasetid": 67960,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "35-CUR4",
+                    "collectionunitid": 50192,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37320,
+            "sitename": "Toca Da Boa Vista",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-40.8605,-10.1602]}",
+            "altitude": 600,
+            "collectionunits": [
+                {
+                    "handle": "TBV13-735",
+                    "datasets": [
+                        {
+                            "datasetid": 69072,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "236-TBV13",
+                    "collectionunitid": 50774,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV13-735",
+                    "datasets": [
+                        {
+                            "datasetid": 69073,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "236-TBV13",
+                    "collectionunitid": 50774,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV40-516",
+                    "datasets": [
+                        {
+                            "datasetid": 69398,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "236-TBV40",
+                    "collectionunitid": 50938,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV40-516",
+                    "datasets": [
+                        {
+                            "datasetid": 69399,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "236-TBV40",
+                    "collectionunitid": 50938,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV5",
+                    "datasets": [
+                        {
+                            "datasetid": 68095,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "236-TBV5",
+                    "collectionunitid": 50260,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV5",
+                    "datasets": [
+                        {
+                            "datasetid": 68096,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "236-TBV5",
+                    "collectionunitid": 50260,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV63-517",
+                    "datasets": [
+                        {
+                            "datasetid": 69060,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "236-TBV63",
+                    "collectionunitid": 50768,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBV63-517",
+                    "datasets": [
+                        {
+                            "datasetid": 69061,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "236-TBV63",
+                    "collectionunitid": 50768,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37327,
+            "sitename": "Toca Da Barriguda",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-40.86,-10.16]}",
+            "altitude": 600,
+            "collectionunits": [
+                {
+                    "handle": "TBR10-13",
+                    "datasets": [
+                        {
+                            "datasetid": 68173,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "350-TBR1013",
+                    "collectionunitid": 50298,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBR10-13",
+                    "datasets": [
+                        {
+                            "datasetid": 68174,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "350-TBR1013",
+                    "collectionunitid": 50298,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBR14",
+                    "datasets": [
+                        {
+                            "datasetid": 68117,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "350-TBR14",
+                    "collectionunitid": 50271,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TBR14",
+                    "datasets": [
+                        {
+                            "datasetid": 68118,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "350-TBR14",
+                    "collectionunitid": 50271,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37350,
+            "sitename": "Umajalanta Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.77,-18.12]}",
+            "altitude": 2830,
+            "collectionunits": [
+                {
+                    "handle": "Boto 10",
+                    "datasets": [
+                        {
+                            "datasetid": 68249,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "237-BOTO10",
+                    "collectionunitid": 50336,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "Boto 10",
+                    "datasets": [
+                        {
+                            "datasetid": 68250,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "237-BOTO10",
+                    "collectionunitid": 50336,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37416,
+            "sitename": "Mata Virgem Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.49,-11.62]}",
+            "altitude": 365,
+            "collectionunits": [
+                {
+                    "handle": "MV3",
+                    "datasets": [
+                        {
+                            "datasetid": 68627,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "328-MV3",
+                    "collectionunitid": 50524,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "MV3",
+                    "datasets": [
+                        {
+                            "datasetid": 68628,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "328-MV3",
+                    "collectionunitid": 50524,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37433,
+            "sitename": "Cuíca Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.6431,-11.6822]}",
+            "altitude": 310,
+            "collectionunits": [
+                {
+                    "handle": "PIM4",
+                    "datasets": [
+                        {
+                            "datasetid": 68785,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "306-PIM4",
+                    "collectionunitid": 50604,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PIM4",
+                    "datasets": [
+                        {
+                            "datasetid": 68786,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "306-PIM4",
+                    "collectionunitid": 50604,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PIM5",
+                    "datasets": [
+                        {
+                            "datasetid": 68723,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "306-PIM5",
+                    "collectionunitid": 50572,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "PIM5",
+                    "datasets": [
+                        {
+                            "datasetid": 68724,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "306-PIM5",
+                    "collectionunitid": 50572,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37437,
+            "sitename": "São Matheus Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.35,-13.81]}",
+            "altitude": 631,
+            "collectionunits": [
+                {
+                    "handle": "SMT5",
+                    "datasets": [
+                        {
+                            "datasetid": 68749,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "206-SMT5",
+                    "collectionunitid": 50585,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SMT5",
+                    "datasets": [
+                        {
+                            "datasetid": 68750,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "206-SMT5",
+                    "collectionunitid": 50585,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37439,
+            "sitename": "São Bernardo Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-46.35,-13.81]}",
+            "altitude": 631,
+            "collectionunits": [
+                {
+                    "handle": "SBE3",
+                    "datasets": [
+                        {
+                            "datasetid": 68761,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "205-SBE3",
+                    "collectionunitid": 50591,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SBE3",
+                    "datasets": [
+                        {
+                            "datasetid": 68762,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "205-SBE3",
+                    "collectionunitid": 50591,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37448,
+            "sitename": "Lapa Grande Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-44.28,-14.37]}",
+            "altitude": 590,
+            "collectionunits": [
+                {
+                    "handle": "LG10-615",
+                    "datasets": [
+                        {
+                            "datasetid": 68832,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "23-LG10",
+                    "collectionunitid": 50629,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG10-615",
+                    "datasets": [
+                        {
+                            "datasetid": 68833,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "23-LG10",
+                    "collectionunitid": 50629,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG11-89",
+                    "datasets": [
+                        {
+                            "datasetid": 68870,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "23-LG11",
+                    "collectionunitid": 50660,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG11-89",
+                    "datasets": [
+                        {
+                            "datasetid": 68871,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "23-LG11",
+                    "collectionunitid": 50660,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG12B-614",
+                    "datasets": [
+                        {
+                            "datasetid": 68830,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "23-LG12B",
+                    "collectionunitid": 50627,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG12B-614",
+                    "datasets": [
+                        {
+                            "datasetid": 68831,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "23-LG12B",
+                    "collectionunitid": 50627,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG25-616-6",
+                    "datasets": [
+                        {
+                            "datasetid": 68814,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "23-LG25",
+                    "collectionunitid": 50618,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG25-616-6",
+                    "datasets": [
+                        {
+                            "datasetid": 68815,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "23-LG25",
+                    "collectionunitid": 50618,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG3-90",
+                    "datasets": [
+                        {
+                            "datasetid": 68898,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "23-LG3",
+                    "collectionunitid": 50677,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "LG3-90",
+                    "datasets": [
+                        {
+                            "datasetid": 68899,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "23-LG3",
+                    "collectionunitid": 50677,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37472,
+            "sitename": "Marota Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-41.0216,-12.6227]}",
+            "altitude": 560,
+            "collectionunits": [
+                {
+                    "handle": "MAG-508",
+                    "datasets": [
+                        {
+                            "datasetid": 68896,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "230-MAG",
+                    "collectionunitid": 50676,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "MAG-508",
+                    "datasets": [
+                        {
+                            "datasetid": 68897,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "230-MAG",
+                    "collectionunitid": 50676,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37559,
+            "sitename": "Pau D'Alho Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-56.8,-15.2055]}",
+            "altitude": 340,
+            "collectionunits": [
+                {
+                    "handle": "ALHO6",
+                    "datasets": [
+                        {
+                            "datasetid": 69324,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "52-ALHO6",
+                    "collectionunitid": 50902,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "ALHO6",
+                    "datasets": [
+                        {
+                            "datasetid": 69325,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "52-ALHO6",
+                    "collectionunitid": 50902,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 37582,
+            "sitename": "Torrinha Cave",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-41.6038,-12.3495]}",
+            "altitude": 680,
+            "collectionunits": [
+                {
+                    "handle": "TR5-146",
+                    "datasets": [
+                        {
+                            "datasetid": 69484,
+                            "datasettype": "speleothem"
+                        }
+                    ],
+                    "collectionunit": "62-TR5",
+                    "collectionunitid": 50981,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "TR5-146",
+                    "datasets": [
+                        {
+                            "datasetid": 69485,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "62-TR5",
+                    "collectionunitid": 50981,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 40385,
+            "sitename": "Vereda do Dodo",
+            "sitedescription": "Mauritia palm swamp",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.44676,-7.10839]}",
+            "altitude": 307,
+            "collectionunits": [
+                {
+                    "handle": "VEREDADO",
+                    "datasets": [
+                        {
+                            "datasetid": 72522,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 53979,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VEREDADO",
+                    "datasets": [
+                        {
+                            "datasetid": 72523,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 53979,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,0 +1,1095 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 27550,
+            "sitename": "Doda Pilii",
+            "sitedescription": "Little doline in Apuseni Natural Park. Physiography: alluvial plain.\r\nSurrounding vegetation: forest of Picea abies and Fagus sylvatica.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[22.85947,46.64239]}",
+            "altitude": 1041,
+            "collectionunits": [
+                {
+                    "handle": "DODAPILI",
+                    "datasets": [
+                        {
+                            "datasetid": 49488,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Doda Pilii",
+                    "collectionunitid": 35515,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DODAPILI",
+                    "datasets": [
+                        {
+                            "datasetid": 49489,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Doda Pilii",
+                    "collectionunitid": 35515,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27559,
+            "sitename": "Belanské Lúky",
+            "sitedescription": "The largest spring fen in Slovakia. The wetland complex of about 100 ha is situated in the northern part of Slovakia near the High Tatra\r\nMountains on the southern slope of the River Belá valley close to the former village of Šarpanec.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[20.37976,49.21119],[20.37976,49.21873],[20.39563,49.21873],[20.39563,49.21119],[20.37976,49.21119]]]}",
+            "altitude": 675,
+            "collectionunits": [
+                {
+                    "handle": "SARPANEC",
+                    "datasets": [
+                        {
+                            "datasetid": 49510,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "SAR-1",
+                    "collectionunitid": 35526,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "SARPANEC",
+                    "datasets": [
+                        {
+                            "datasetid": 49511,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "SAR-1",
+                    "collectionunitid": 35526,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 27560,
+            "sitename": "Hybkaňa",
+            "sitedescription": "Located in the westernmost part of the Eastern Carpathians, in the Vihorlat Mts in eastern Slovakia. The recent vege- tation is dominated by Eriophorum vaginatum, Oxycoccus palustris, Vaccinium myrtillus and Molinia caerulea in the herbaceous layer and Sphagnum recurvum agg., S. magellanicum and Polytrichum commune in the bryophyte layer. The surrounding landscape is overgrown by beech forests.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[22.1626,48.91295],[22.1626,48.91382],[22.16432,48.91382],[22.16432,48.91295],[22.1626,48.91295]]]}",
+            "altitude": 848,
+            "collectionunits": [
+                {
+                    "handle": "HYPKANA",
+                    "datasets": [
+                        {
+                            "datasetid": 49512,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Hypkaňa",
+                    "collectionunitid": 35527,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HYPKANA",
+                    "datasets": [
+                        {
+                            "datasetid": 49513,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Hypkaňa",
+                    "collectionunitid": 35527,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27564,
+            "sitename": "Estanilles",
+            "sitedescription": "Filled lake. Physiography: circular basin in Pyrenees valley. Surrounding vegetation: forest of Pinus uni. &amp; Rhododendron fer..",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[1.29611,42.62611]}",
+            "altitude": 2271,
+            "collectionunits": [
+                {
+                    "handle": "ESTANILL",
+                    "datasets": [
+                        {
+                            "datasetid": 49520,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "EST-IV",
+                    "collectionunitid": 35531,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ESTANILL",
+                    "datasets": [
+                        {
+                            "datasetid": 49521,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "EST-IV",
+                    "collectionunitid": 35531,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27565,
+            "sitename": "Lago Lungo",
+            "sitedescription": "Lake. Physiography: basin drained by Velino river. Surrounding vegetation: agriculture and forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[12.84722,42.47556]}",
+            "altitude": 360,
+            "collectionunits": [
+                {
+                    "handle": "LLUNGO",
+                    "datasets": [
+                        {
+                            "datasetid": 49522,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "LUN12-2B,LUN09,LUN12-2C,surfac",
+                    "collectionunitid": 35532,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LLUNGO",
+                    "datasets": [
+                        {
+                            "datasetid": 49523,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "LUN12-2B,LUN09,LUN12-2C,surfac",
+                    "collectionunitid": 35532,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27569,
+            "sitename": "Lago Trifoglietti",
+            "sitedescription": "Lake. Physiography: mountain. Surrounding vegetation: forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[16.02222,39.54889]}",
+            "altitude": 1066,
+            "collectionunits": [
+                {
+                    "handle": "TRIFOHOL",
+                    "datasets": [
+                        {
+                            "datasetid": 49529,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "S2A and S2B twin cores",
+                    "collectionunitid": 35536,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "TRIFOHOL",
+                    "datasets": [
+                        {
+                            "datasetid": 49530,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "S2A and S2B twin cores",
+                    "collectionunitid": 35536,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27632,
+            "sitename": "Saint Florent",
+            "sitedescription": "Swampland and lagoon. Physiography: valley close to the sea. Surrounding vegetation: shrubs forest and cultivated fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[9.30444,42.67222]}",
+            "altitude": 3,
+            "collectionunits": [
+                {
+                    "handle": "STFLOREN",
+                    "datasets": [
+                        {
+                            "datasetid": 49608,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core SF [2017]",
+                    "collectionunitid": 35612,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "STFLOREN",
+                    "datasets": [
+                        {
+                            "datasetid": 49609,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core SF [2017]",
+                    "collectionunitid": 35612,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27633,
+            "sitename": "Esmeer",
+            "sitedescription": "A core collected from the Esmeer, the largest pingoruin of the Netherlands. This pingoruin originates from the Weicheselian and is situated in the Fochteloërveen. ",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.45873,53.00652]}",
+            "altitude": 26,
+            "collectionunits": [
+                {
+                    "handle": "ESMEB12",
+                    "datasets": [
+                        {
+                            "datasetid": 55800,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B12C0263",
+                    "collectionunitid": 40009,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ESMEER",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "B12C0263",
+                    "collectionunitid": 35613,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27634,
+            "sitename": "Dzelve Bog",
+            "sitedescription": "Ombrotrophic raised bog. Physiography: lowland. Surrounding vegetation: Carex, Andromeda, Oxycoccus, Ledum, Drosera.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[24.50472,57.23111]}",
+            "altitude": 14,
+            "collectionunits": [
+                {
+                    "handle": "DZELV",
+                    "datasets": [
+                        {
+                            "datasetid": 49611,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Dzelve",
+                    "collectionunitid": 35614,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DZELV",
+                    "datasets": [
+                        {
+                            "datasetid": 49612,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Dzelve",
+                    "collectionunitid": 35614,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27635,
+            "sitename": "Piantarella lagoon",
+            "sitedescription": "Swamp in lagoon. Physiography: lagoon behind the sea. Surrounding vegetation: shrubs forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[9.21972,41.37361]}",
+            "altitude": -4,
+            "collectionunits": [
+                {
+                    "handle": "PIANTAR1",
+                    "datasets": [
+                        {
+                            "datasetid": 49613,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 1",
+                    "collectionunitid": 35615,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PIANTAR1",
+                    "datasets": [
+                        {
+                            "datasetid": 49614,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 1",
+                    "collectionunitid": 35615,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PIANTAR2",
+                    "datasets": [
+                        {
+                            "datasetid": 49617,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 2",
+                    "collectionunitid": 35617,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PIANTAR2",
+                    "datasets": [
+                        {
+                            "datasetid": 49618,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 2",
+                    "collectionunitid": 35617,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PIANTAR3",
+                    "datasets": [
+                        {
+                            "datasetid": 52410,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 3",
+                    "collectionunitid": 38079,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PIANTAR3",
+                    "datasets": [
+                        {
+                            "datasetid": 52411,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Piantarella 3",
+                    "collectionunitid": 38079,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27636,
+            "sitename": "Eini peatland",
+            "sitedescription": "Bog. Physiography: peatland in Lubans plain. Surrounding vegetation: agriculture, forest and bogs/lakes.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[26.88722,56.85306]}",
+            "altitude": 94,
+            "collectionunits": [
+                {
+                    "handle": "EINI",
+                    "datasets": [
+                        {
+                            "datasetid": 49615,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Eini core",
+                    "collectionunitid": 35616,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "EINI",
+                    "datasets": [
+                        {
+                            "datasetid": 49616,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Eini core",
+                    "collectionunitid": 35616,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27637,
+            "sitename": "Creil",
+            "sitedescription": "Core with Eemian sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.6907,52.77528]}",
+            "altitude": -17,
+            "collectionunits": [
+                {
+                    "handle": "CREIL",
+                    "datasets": [
+                        {
+                            "datasetid": 50135,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B15H0057",
+                    "collectionunitid": 35618,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27638,
+            "sitename": "Lichtmis",
+            "sitedescription": "Core with Eemian sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.19,52.58341]}",
+            "altitude": 8,
+            "collectionunits": [
+                {
+                    "handle": "LICHT",
+                    "datasets": [
+                        {
+                            "datasetid": 49620,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B21G0547",
+                    "collectionunitid": 35619,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LICHT",
+                    "datasets": [
+                        {
+                            "datasetid": 50136,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B21G0547",
+                    "collectionunitid": 35619,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27639,
+            "sitename": "Tollebeek NO Polder",
+            "sitedescription": "Core with Eemian/Middle Pleistocene sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.67765,52.68364]}",
+            "altitude": -12,
+            "collectionunits": [
+                {
+                    "handle": "TOLPOL",
+                    "datasets": [
+                        {
+                            "datasetid": 50138,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B20F0175",
+                    "collectionunitid": 35620,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27640,
+            "sitename": "Eindhoven 51D/343",
+            "sitedescription": "Core with Early Pleistocene sediments. The borehole reveals up to ten, 6-30 m thick stacked fluvial fining-upwards cycles present between the Kieseloolite and Sterksel Formations.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.43922,51.40667]}",
+            "altitude": 12,
+            "collectionunits": [
+                {
+                    "handle": "EINDH",
+                    "datasets": [
+                        {
+                            "datasetid": 50137,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B51D0343",
+                    "collectionunitid": 35621,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27643,
+            "sitename": "Aelbertsberg",
+            "sitedescription": "The Aelbertsberg site is located on the edge of a former depression present in the Oude Duin, which was later filled with peat. The Oude Duinen are formed on shell-bearing sands (beach sands) brought in by the sea.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[4.6117,52.41052]}",
+            "altitude": 6,
+            "collectionunits": [
+                {
+                    "handle": "AELBERG",
+                    "datasets": [
+                        {
+                            "datasetid": 49631,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B25A0753",
+                    "collectionunitid": 35624,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AELBERG",
+                    "datasets": [
+                        {
+                            "datasetid": 54469,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B25A0753",
+                    "collectionunitid": 35624,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27644,
+            "sitename": "Halder",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.31484,51.65016]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "HALDER",
+                    "datasets": [
+                        {
+                            "datasetid": 49633,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B45D0699",
+                    "collectionunitid": 35625,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "HALDER",
+                    "datasets": [
+                        {
+                            "datasetid": 49634,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B45D0699",
+                    "collectionunitid": 35625,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27645,
+            "sitename": "Eipurs bog",
+            "sitedescription": "Raised bog.\r\nPhysiography: lowland.\r\nSurrounding vegetation: Carex, Andromeda, Oxycoccus, Ledum, Eriophorum",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[24.61667,57.24806]}",
+            "altitude": 24,
+            "collectionunits": [
+                {
+                    "handle": "EIPURS",
+                    "datasets": [
+                        {
+                            "datasetid": 49635,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Eipurs",
+                    "collectionunitid": 35626,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "EIPURS",
+                    "datasets": [
+                        {
+                            "datasetid": 49636,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Eipurs",
+                    "collectionunitid": 35626,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27646,
+            "sitename": "Rutten Gemaalweg",
+            "sitedescription": "Undisturbed core with Eemian sediments. This research core provides important new evidence to constrain the position of the Blake Event with respect to the NW European Eemian pollen zonation.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.69856,52.82572]}",
+            "altitude": -14,
+            "collectionunits": [
+                {
+                    "handle": "RUTGEM",
+                    "datasets": [
+                        {
+                            "datasetid": 49637,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B15F1501",
+                    "collectionunitid": 35627,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "RUTGEM",
+                    "datasets": [
+                        {
+                            "datasetid": 49638,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B15F1501",
+                    "collectionunitid": 35627,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27647,
+            "sitename": "Kalna bog",
+            "sitedescription": "Bog in coastal zone of Vidzeme.\r\nPhysiography: glacial basin.\r\nSurrounding vegetation: Pine forest and agriculture.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[24.58722,57.95417]}",
+            "altitude": 34,
+            "collectionunits": [
+                {
+                    "handle": "KALNA07",
+                    "datasets": [
+                        {
+                            "datasetid": 49639,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Kalna-07 core",
+                    "collectionunitid": 35628,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KALNA07",
+                    "datasets": [
+                        {
+                            "datasetid": 49640,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Kalna-07 core",
+                    "collectionunitid": 35628,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27648,
+            "sitename": "Lake Kuzi",
+            "sitedescription": "Lake.\r\nPhysiography: hilly area.\r\nSurrounding vegetation: meadows and agriculture land.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[25.3329,57.03001],[25.3329,57.03194],[25.33857,57.03194],[25.33857,57.03001],[25.3329,57.03001]]]}",
+            "altitude": 183,
+            "collectionunits": [
+                {
+                    "handle": "KC081",
+                    "datasets": [
+                        {
+                            "datasetid": 49641,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "KC081 core",
+                    "collectionunitid": 35629,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KC081",
+                    "datasets": [
+                        {
+                            "datasetid": 49642,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "KC081 core",
+                    "collectionunitid": 35629,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27649,
+            "sitename": "Middenmeer",
+            "sitedescription": "Core with Eemian sediments from a downstream site.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[4.9955,52.75269]}",
+            "altitude": -14,
+            "collectionunits": [
+                {
+                    "handle": "MIDM",
+                    "datasets": [
+                        {
+                            "datasetid": 49643,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B14G0973",
+                    "collectionunitid": 35630,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27653,
+            "sitename": "Pantene Mire",
+            "sitedescription": "Mire.\r\nPhysiography: shallow basin in plain. Surrounding vegetation: peatland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[25.21806,57.86306]}",
+            "altitude": 41,
+            "collectionunits": [
+                {
+                    "handle": "PANTENE",
+                    "datasets": [
+                        {
+                            "datasetid": 49653,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Pantene",
+                    "collectionunitid": 35634,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PANTENE",
+                    "datasets": [
+                        {
+                            "datasetid": 49654,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Pantene",
+                    "collectionunitid": 35634,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27654,
+            "sitename": "Sarnate",
+            "sitedescription": "Archaeological site.\r\nPhysiography: coastal lagoon in lowland. Surrounding vegetation: peatland and cultivated fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[21.44083,57.10861]}",
+            "altitude": 8,
+            "collectionunits": [
+                {
+                    "handle": "SARNATE",
+                    "datasets": [
+                        {
+                            "datasetid": 49655,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Sarnate",
+                    "collectionunitid": 35635,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SARNATE",
+                    "datasets": [
+                        {
+                            "datasetid": 49656,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Sarnate",
+                    "collectionunitid": 35635,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27655,
+            "sitename": "Svetinu lake",
+            "sitedescription": "Lake. Physiography: Lubans lowland. Surrounding vegetation: forest(Betula,Picea,Pinus) and fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[27.14944,56.76028]}",
+            "altitude": 104,
+            "collectionunits": [
+                {
+                    "handle": "SVETI",
+                    "datasets": [
+                        {
+                            "datasetid": 49657,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core LS (Lielais Svetinu)",
+                    "collectionunitid": 35636,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SVETI",
+                    "datasets": [
+                        {
+                            "datasetid": 49658,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core LS (Lielais Svetinu)",
+                    "collectionunitid": 35636,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27656,
+            "sitename": "Viki Mire",
+            "sitedescription": "Mire. Physiography: peatland. Surrounding vegetation: forest, peatland, cultivated fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[22.91472,56.51722]}",
+            "altitude": 94,
+            "collectionunits": [
+                {
+                    "handle": "VIKIM",
+                    "datasets": [
+                        {
+                            "datasetid": 49659,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Viki",
+                    "collectionunitid": 35637,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VIKIM",
+                    "datasets": [
+                        {
+                            "datasetid": 49660,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Viki",
+                    "collectionunitid": 35637,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27657,
+            "sitename": "Zilai bog",
+            "sitedescription": "Bog. Physiography: coastal depression.\r\nSurrounding vegetation: forest and cultivated fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[24.54556,57.92139]}",
+            "altitude": 26,
+            "collectionunits": [
+                {
+                    "handle": "ZILAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 49686,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core Zilais-07",
+                    "collectionunitid": 35663,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ZILAIS",
+                    "datasets": [
+                        {
+                            "datasetid": 49687,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core Zilais-07",
+                    "collectionunitid": 35663,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27660,
+            "sitename": "Schalkhaar",
+            "sitedescription": "Core with Eemian sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.20211,52.28403]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "SCHAL",
+                    "datasets": [
+                        {
+                            "datasetid": 49879,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B27H0282",
+                    "collectionunitid": 35855,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SCHAL",
+                    "datasets": [
+                        {
+                            "datasetid": 49880,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B27H0282",
+                    "collectionunitid": 35855,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27661,
+            "sitename": "Diepenveen exercitieveld 27G/118 (W.268)",
+            "sitedescription": "Core with Eemian sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.18489,52.27553]}",
+            "altitude": 7,
+            "collectionunits": [
+                {
+                    "handle": "DIEPV",
+                    "datasets": [
+                        {
+                            "datasetid": 49881,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B27G0118",
+                    "collectionunitid": 35856,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27662,
+            "sitename": "Amsterdam terminal 821",
+            "sitedescription": "A borehole near the passenger terminal in Amsterdam harbour to provide a record throughout the Eemian interglacial.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[4.91417,52.37917]}",
+            "altitude": 2,
+            "collectionunits": [
+                {
+                    "handle": "AMSTER",
+                    "datasets": [
+                        {
+                            "datasetid": 49882,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B25E0913",
+                    "collectionunitid": 35857,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMSTER",
+                    "datasets": [
+                        {
+                            "datasetid": 49883,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B25E0913",
+                    "collectionunitid": 35857,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27663,
+            "sitename": "Willemsluizen",
+            "sitedescription": "Core with Eemian sediments.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[4.90984,52.38421]}",
+            "altitude": -2,
+            "collectionunits": [
+                {
+                    "handle": "WILLEM",
+                    "datasets": [
+                        {
+                            "datasetid": 49884,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B25E0907",
+                    "collectionunitid": 35858,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "WILLEM",
+                    "datasets": [
+                        {
+                            "datasetid": 49885,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "B25E0907",
+                    "collectionunitid": 35858,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27664,
+            "sitename": "Bantega",
+            "sitedescription": "Core with Eemian sediments",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.78465,52.82513]}",
+            "altitude": -11,
+            "collectionunits": [
+                {
+                    "handle": "BANT292",
+                    "datasets": [
+                        {
+                            "datasetid": 49886,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "B16A1292",
+                    "collectionunitid": 35859,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": null,
+            "sitename": null,
+            "sitedescription": null,
+            "geography": null,
+            "altitude": null,
+            "collectionunits": [
+                {
+                    "handle": "LUDERHO1",
+                    "datasets": [
+                        {
+                            "datasetid": 41375,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Lüderholz 1",
+                    "collectionunitid": 28629,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LUDERHO1",
+                    "datasets": [
+                        {
+                            "datasetid": 41376,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Lüderholz 1",
+                    "collectionunitid": 28629,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LUDERHO1",
+                    "datasets": [
+                        {
+                            "datasetid": 41399,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Lüderholz 1",
+                    "collectionunitid": 28629,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MAUJAHN3",
+                    "datasets": [
+                        {
+                            "datasetid": 41676,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Maujahn 3",
+                    "collectionunitid": 28775,
+                    "collectionunittype": "Section"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -2,6 +2,9 @@ testthat::skip("Skipping all tests in this file")
 library("testthat")
 library("neotoma2")
 library("tools")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Test that all examples run without error")
 csv_path <- testthat::test_path("all_aliases.csv")
@@ -23,3 +26,4 @@ for (topic in topics) {
     })
   })
 }
+})

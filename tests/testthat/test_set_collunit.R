@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Creating collection units from scratch or updating existing objects.")
 test_that("`set_collunit()` for new collection unit", {
@@ -32,4 +35,5 @@ test_that("Updating existing collection unit", {
   testthat::expect_equal(updatedSample@waterdepth, -9999)
   # Cannot use invalid data types
   testthat::expect_error(set_collunit(x = downloadSite[[1]]@collunits[[1]], waterdepth = "33a"))
+})
 })

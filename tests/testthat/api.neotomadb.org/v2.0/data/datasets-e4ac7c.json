@@ -1,0 +1,1029 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 6,
+                "sitename": "17/3",
+                "sitedescription": "Lake.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.95,55.11667]}",
+                "altitude": 278,
+                "collectionunitid": 6,
+                "collectionunit": "17/3",
+                "handle": "17-3",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n32011",
+                            "10.21233/n3g59h",
+                            "10.21233/n3n09b"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 6,
+                        "datasetpi": [
+                            {
+                                "initials": "K.J.",
+                                "contactid": 40,
+                                "firstname": "Konrad J.",
+                                "familyname": "Gajewski",
+                                "contactname": "Gajewski, Konrad J."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 7,
+                "sitename": "Three Pines Bog",
+                "sitedescription": "Bog.",
+                "sitenotes": "Bog is adjacent to the Three Pines archeological site.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-80.11667,47]}",
+                "altitude": 329,
+                "collectionunitid": 7,
+                "collectionunit": null,
+                "handle": "3PINES",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3bc7k",
+                            "10.21233/n3h98t",
+                            "10.21233/n3x59j"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 6485,
+                                "ageyoung": -26
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 7,
+                        "datasetpi": [
+                            {
+                                "initials": "J.H.",
+                                "contactid": 69,
+                                "firstname": "John H.",
+                                "familyname": "McAndrews",
+                                "contactname": "McAndrews, John H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 16,
+                "sitename": "Ahlenmoor",
+                "sitedescription": "Excavated bog. Physiography: Raised bog. Surrounding vegetation: Sphagnetum.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[8.715,53.66],[8.82,53.66],[8.82,53.705],[8.715,53.705],[8.715,53.66]]]}",
+                "altitude": 5,
+                "collectionunitid": 16,
+                "collectionunit": "AHL V",
+                "handle": "AHL5",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3bh6k",
+                            "10.21233/n3rg6z"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 4276,
+                                "ageyoung": 990
+                            }
+                        ],
+                        "database": "European Pollen Database",
+                        "datasetid": 16,
+                        "datasetpi": [
+                            {
+                                "initials": "D.",
+                                "contactid": 597,
+                                "firstname": "Dusanka",
+                                "familyname": "Kucan",
+                                "contactname": "Kucan, Dusanka"
+                            },
+                            {
+                                "initials": "K.-E.",
+                                "contactid": 596,
+                                "firstname": "Karl-Ernst",
+                                "familyname": "Behre",
+                                "contactname": "Behre, Karl-Ernst"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 16,
+                "sitename": "Ahlenmoor",
+                "sitedescription": "Excavated bog. Physiography: Raised bog. Surrounding vegetation: Sphagnetum.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[8.715,53.66],[8.82,53.66],[8.82,53.705],[8.715,53.705],[8.715,53.66]]]}",
+                "altitude": 5,
+                "collectionunitid": 55531,
+                "collectionunit": "AFM 2012",
+                "handle": "AFM2012",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 6794,
+                                "ageyoung": 3930
+                            }
+                        ],
+                        "database": "European Pollen Database",
+                        "datasetid": 74154,
+                        "datasetpi": [
+                            {
+                                "initials": "A.",
+                                "contactid": 18068,
+                                "firstname": "Annette",
+                                "familyname": "Kramer",
+                                "contactname": "Kramer, Annette"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2026-04-16T16:52:27"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 19,
+                "sitename": "Akulinin Exposure P1282",
+                "sitedescription": "Exposure in river terrace. Physiography: river valley in mountains. Surrounding vegetation: secondary Betula forest.",
+                "sitenotes": "Floodplain vegetation: Salix, Populus, and Chosenia.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[138.55,47.11667]}",
+                "altitude": 367,
+                "collectionunitid": 19,
+                "collectionunit": "P1282",
+                "handle": "AKULININ",
+                "unittype": "Section",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3c887",
+                            "10.21233/n3z97g"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 44478,
+                                "ageyoung": 529
+                            }
+                        ],
+                        "database": "Pollen Database of Siberia and the Russian Far East",
+                        "datasetid": 19,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 827,
+                                "firstname": "A. M.",
+                                "familyname": "Korotky",
+                                "contactname": "Korotky, A. M."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 24,
+                "sitename": "Alexander Lake",
+                "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+                "sitenotes": "Lake area from Topographic Dataset of Canada (CanVec).  Added on 7/14/21 by Grace Roper, UW-Madison.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+                "altitude": 73,
+                "collectionunitid": 24,
+                "collectionunit": null,
+                "handle": "ALEXLAKE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3f97t",
+                            "10.21233/n3v88k"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 7602,
+                                "ageyoung": 3472
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 24,
+                        "datasetpi": [
+                            {
+                                "initials": "R.H.",
+                                "contactid": 52,
+                                "firstname": "Richard H.",
+                                "familyname": "Jordan",
+                                "contactname": "Jordan, Richard H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Taxon counts and names were unclear on original Jordan data sheets - errors are possible.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 25,
+                "sitename": "Alexis Lake",
+                "sitedescription": "Lake in Alexis River watershed. Physiography: Mecatina Plateau/Laurentian region. Surrounding vegetation: Black Spruce, Lichen Barrens.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.03333,52.51667]}",
+                "altitude": 193,
+                "collectionunitid": 25,
+                "collectionunit": null,
+                "handle": "ALEXISLK",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n39m4j",
+                            "10.21233/n3qg6n"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 25594,
+                                "ageyoung": 30
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 25,
+                        "datasetpi": [
+                            {
+                                "initials": "H.F.",
+                                "contactid": 60,
+                                "firstname": "Henry F.",
+                                "familyname": "Lamb",
+                                "contactname": "Lamb, Henry F."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 27,
+                "sitename": "Aliuk Pond",
+                "sitedescription": "Small glacial scour lake. Physiography: coastal lowlands. Surrounding vegetation: sedge-shrub and lichen-heath tundra.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.36667,54.58333]}",
+                "altitude": 9,
+                "collectionunitid": 27,
+                "collectionunit": null,
+                "handle": "ALIUK",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n35t17",
+                            "10.21233/n3ks3c"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 9965,
+                                "ageyoung": 2255
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 27,
+                        "datasetpi": [
+                            {
+                                "initials": "R.H.",
+                                "contactid": 52,
+                                "firstname": "Richard H.",
+                                "familyname": "Jordan",
+                                "contactname": "Jordan, Richard H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Taxon counts and names were unclear on original Jordan data sheets - errors are possible.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 29,
+                "sitename": "Lake Allie",
+                "sitedescription": "Kettle lake. Physiography: rolling stagnation moraine.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-94.5675,44.7934],[-94.5483,44.7934],[-94.5483,44.8138],[-94.5675,44.8138],[-94.5675,44.7934]]]}",
+                "altitude": 320,
+                "collectionunitid": 29,
+                "collectionunit": null,
+                "handle": "ALLIE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n32401",
+                            "10.21233/n3g01r"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 654,
+                                "ageyoung": -27
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 29,
+                        "datasetpi": [
+                            {
+                                "initials": "J.H.",
+                                "contactid": 69,
+                                "firstname": "John H.",
+                                "familyname": "McAndrews",
+                                "contactname": "McAndrews, John H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 33,
+                "sitename": "Amba River Exposure 596",
+                "sitedescription": "Exposure of alluvial and lagoon sediment. Physiography: coastal plain. Surrounding vegetation: Quercus-Carpinus-Abies holophylla forest.",
+                "sitenotes": "Main tree species are Quercus, Carpinus cordata, Tilia, Acer, and Abies holophylla.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[131.81667,43.31667]}",
+                "altitude": 0,
+                "collectionunitid": 33,
+                "collectionunit": "P596-598",
+                "handle": "AMBA",
+                "unittype": "Section",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3j39f",
+                            "10.21233/n3z30r"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 5486,
+                                "ageyoung": 2500
+                            }
+                        ],
+                        "database": "Pollen Database of Siberia and the Russian Far East",
+                        "datasetid": 33,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 827,
+                                "firstname": "A. M.",
+                                "familyname": "Korotky",
+                                "contactname": "Korotky, A. M."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 40,
+                "sitename": "Hanover",
+                "sitedescription": "Physiography: driftless area.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-90.28,42.27]}",
+                "altitude": 190,
+                "collectionunitid": 40,
+                "collectionunit": null,
+                "handle": "AMD007",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n31s3d",
+                            "10.21233/n3mx2p"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 40,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 28,
+                                "firstname": "Anthony M.",
+                                "familyname": "Davis",
+                                "contactname": "Davis, Anthony M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 69,
+                "sitename": "Amguema River Valley Exposure 2",
+                "sitedescription": "Exposure in river bank. Physiography: river valley in glacial outwash. Surrounding vegetation: shrub tundra.",
+                "sitenotes": "Site located on left bank of Amguema River.",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[178.6,67.66667]}",
+                "altitude": 376,
+                "collectionunitid": 69,
+                "collectionunit": "Site 2",
+                "handle": "AMGUEMA2",
+                "unittype": "Section",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3959z",
+                            "10.21233/n3w67t"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 2972,
+                                "ageyoung": 1870
+                            }
+                        ],
+                        "database": "Pollen Database of Siberia and the Russian Far East",
+                        "datasetid": 69,
+                        "datasetpi": [
+                            {
+                                "initials": "A.N.",
+                                "contactid": 828,
+                                "firstname": "A. N.",
+                                "familyname": "Kotov",
+                                "contactname": "Kotov, A. N."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 79,
+                "sitename": "Site 9 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.8,45.32]}",
+                "altitude": 483,
+                "collectionunitid": 79,
+                "collectionunit": "C138MRYS",
+                "handle": "AMS009",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n30p4f",
+                            "10.21233/n3kq42"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 79,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 80,
+                "sitename": "Site 10 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.17,45.48]}",
+                "altitude": 318,
+                "collectionunitid": 80,
+                "collectionunit": "C139LAYS",
+                "handle": "AMS010",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3g10q",
+                            "10.21233/n3w01g"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 80,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 81,
+                "sitename": "Site 11 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-87.62,45.7]}",
+                "altitude": 267,
+                "collectionunitid": 81,
+                "collectionunit": "C141HRMS",
+                "handle": "AMS011",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3b97w",
+                            "10.21233/n3r590"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 81,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 82,
+                "sitename": "Site 12 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-87.83,46.07]}",
+                "altitude": 358,
+                "collectionunitid": 82,
+                "collectionunit": "C142NORS",
+                "handle": "AMS012",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n36h4k",
+                            "10.21233/n3mg6q"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 82,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 83,
+                "sitename": "Site 13 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-87.53,46.3]}",
+                "altitude": 365,
+                "collectionunitid": 83,
+                "collectionunit": "C143MUDS",
+                "handle": "AMS013",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n32t2p",
+                            "10.21233/n3gp4s"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 83,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 84,
+                "sitename": "Site 14 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-87.97,46.05]}",
+                "altitude": 402,
+                "collectionunitid": 84,
+                "collectionunit": "C144PRHS",
+                "handle": "AMS014",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3c01t",
+                            "10.21233/n3z094"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 84,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 86,
+                "sitename": "Site 16 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.45,46.57]}",
+                "altitude": 495,
+                "collectionunitid": 86,
+                "collectionunit": "C146PARS",
+                "handle": "AMS016",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n33g62",
+                            "10.21233/n3ph4x"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 86,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 87,
+                "sitename": "Site 17 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.85,46.6]}",
+                "altitude": 433,
+                "collectionunitid": 87,
+                "collectionunit": "C148ECHS",
+                "handle": "AMS017",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3jt4s",
+                            "10.21233/n3zp44"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 87,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 88,
+                "sitename": "Site 18 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.88,46.35]}",
+                "altitude": 486,
+                "collectionunitid": 88,
+                "collectionunit": "C149SLKS",
+                "handle": "AMS018",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3f10d",
+                            "10.21233/n3v015"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 88,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 89,
+                "sitename": "Site 19 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-88.88,46.15]}",
+                "altitude": 520,
+                "collectionunitid": 89,
+                "collectionunit": "C150GLDS",
+                "handle": "AMS019",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3998z",
+                            "10.21233/n3q59p"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 89,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 91,
+                "sitename": "Site 21 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-89.07,46.18]}",
+                "altitude": 542,
+                "collectionunitid": 91,
+                "collectionunit": "C152IMPS",
+                "handle": "AMS021",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n31t3r",
+                            "10.21233/n3fs34"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 91,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 92,
+                "sitename": "Site 22 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-89.42,46.25]}",
+                "altitude": 523,
+                "collectionunitid": 92,
+                "collectionunit": "C153CLWS",
+                "handle": "AMS022",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3b01h",
+                            "10.21233/n3x114"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 92,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 93,
+                "sitename": "Site 23 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-89.95,46.48]}",
+                "altitude": 463,
+                "collectionunitid": 93,
+                "collectionunit": "C154SDYS",
+                "handle": "AMS023",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3688p",
+                            "10.21233/n3s97x"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 93,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

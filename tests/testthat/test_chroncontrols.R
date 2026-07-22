@@ -1,7 +1,9 @@
 library("testthat")
 library("neotoma2")
 library("dplyr")
+library("httptest")
 
+httptest::with_mock_api({
 context("Chronology controls functions work as expected.")
 test_that("Chroncontrols gets record", {
   skip_on_cran()
@@ -14,4 +16,5 @@ test_that("Chroncontrols gets record", {
   testthat::expect_is(multi, "data.frame")
   testthat::expect_gt(length(unique(multi$chronologyid)), 4)
   testthat::expect_is(mamchron, "data.frame")
+})
 })

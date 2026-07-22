@@ -1,0 +1,98 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 27416,
+                "sitename": "Mbalang [M4]",
+                "sitedescription": "Lake Mbalang is located 15 km east of the town of Ngaundéré in Central Cameroon.\r\nThe lake lies today in the wooded Sudanian savannah zone, characterized by the presence of two main trees: Daniella oliveri (Caesalpiniaceae) and Lophira lanceolata (Ochnaceae).",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[13.73333,7.31667]}",
+                "altitude": 1101,
+                "collectionunitid": 35359,
+                "collectionunit": "M4",
+                "handle": "MBALA",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/dc9d-0h35",
+                            "10.21233/DC9D-0H35"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 7053,
+                                "ageyoung": 2
+                            }
+                        ],
+                        "database": "African Pollen Database",
+                        "datasetid": 49238,
+                        "datasetpi": [
+                            {
+                                "initials": "A",
+                                "contactid": 16095,
+                                "firstname": "Annie",
+                                "familyname": "Vincens",
+                                "contactname": "Vincens, Annie"
+                            },
+                            {
+                                "initials": "C. E.",
+                                "contactid": 774,
+                                "firstname": "Charles E.",
+                                "familyname": "Barton",
+                                "contactname": "Barton, Charles E."
+                            },
+                            {
+                                "initials": "F.",
+                                "contactid": 16090,
+                                "firstname": "F.",
+                                "familyname": "Nguetsop",
+                                "contactname": "Nguetsop, F."
+                            },
+                            {
+                                "initials": "G.",
+                                "contactid": 497,
+                                "firstname": "Guillaume",
+                                "familyname": "Buchet",
+                                "contactname": "Buchet, Guillaume"
+                            },
+                            {
+                                "initials": "M.",
+                                "contactid": 429,
+                                "firstname": "Michel",
+                                "familyname": "Servant",
+                                "contactname": "Servant, Michel"
+                            },
+                            {
+                                "initials": "M.",
+                                "contactid": 16092,
+                                "firstname": "M.",
+                                "familyname": "Tchotsoua",
+                                "contactname": "Tchotsoua, M."
+                            },
+                            {
+                                "initials": "S.",
+                                "contactid": 7384,
+                                "firstname": "Simone",
+                                "familyname": "Servant-Vildary",
+                                "contactname": "Servant-Vildary, Simone"
+                            },
+                            {
+                                "initials": "S.",
+                                "contactid": 16091,
+                                "firstname": "S.",
+                                "familyname": "Ngos",
+                                "contactname": "Ngos, S."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2021-04-12T23:36:26"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,0 +1,951 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 173,
+            "sitename": "Site 103 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.28,44.7]}",
+            "altitude": 624,
+            "collectionunits": [
+                {
+                    "handle": "AMS103",
+                    "datasets": [
+                        {
+                            "datasetid": 173,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "HARTWELL",
+                    "collectionunitid": 173,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 174,
+            "sitename": "Site 104 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.58,44.07]}",
+            "altitude": 471,
+            "collectionunits": [
+                {
+                    "handle": "AMS104",
+                    "datasets": [
+                        {
+                            "datasetid": 174,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "ROODPOND",
+                    "collectionunitid": 174,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 175,
+            "sitename": "Site 105 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73,43.28]}",
+            "altitude": 312,
+            "collectionunits": [
+                {
+                    "handle": "AMS105",
+                    "datasets": [
+                        {
+                            "datasetid": 175,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "EMERALD",
+                    "collectionunitid": 175,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 3870,
+            "sitename": "Boucher [VTFr-26]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.05,44.95]}",
+            "altitude": 89,
+            "collectionunits": [
+                {
+                    "handle": "BOUCHER",
+                    "datasets": [
+                        {
+                            "datasetid": 4940,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 4795,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "BOUCHER",
+                    "datasets": [
+                        {
+                            "datasetid": 9452,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 4795,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "BOUCHER",
+                    "datasets": [
+                        {
+                            "datasetid": 10633,
+                            "datasettype": "macroinvertebrate"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 4795,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 4418,
+            "sitename": "Shelburne Pond Ewing Site [VT-CH-5]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.11667,44.36667]}",
+            "altitude": 232,
+            "collectionunits": [
+                {
+                    "handle": "SHELBURN",
+                    "datasets": [
+                        {
+                            "datasetid": 5565,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 5420,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "SHELBURN",
+                    "datasets": [
+                        {
+                            "datasetid": 9697,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 5420,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5658,
+            "sitename": "McNeil Generating Plant [VT-CH-93]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.11667,44.36667]}",
+            "altitude": 232,
+            "collectionunits": [
+                {
+                    "handle": "MCNEILGP",
+                    "datasets": [
+                        {
+                            "datasetid": 6980,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6835,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 5704,
+            "sitename": "Rivers [VT-AD-2]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-73.11667,44.11667]}",
+            "altitude": 140,
+            "collectionunits": [
+                {
+                    "handle": "RIVERS19",
+                    "datasets": [
+                        {
+                            "datasetid": 7029,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Pit 19",
+                    "collectionunitid": 6884,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "RIVERSUP",
+                    "datasets": [
+                        {
+                            "datasetid": 7030,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 6885,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 8587,
+            "sitename": "Bald Hill",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.98117,44.73511],[-71.97289,44.73511],[-71.97289,44.74452],[-71.98117,44.74452],[-71.98117,44.73511]]]}",
+            "altitude": 548,
+            "collectionunits": [
+                {
+                    "handle": "BALD HIL",
+                    "datasets": [
+                        {
+                            "datasetid": 42844,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Bald Hill NLA17_VT-10091",
+                    "collectionunitid": 29859,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BALDHL",
+                    "datasets": [
+                        {
+                            "datasetid": 49957,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Bald Hill T-B",
+                    "collectionunitid": 35918,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BALDHL",
+                    "datasets": [
+                        {
+                            "datasetid": 55166,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Bald Hill T-B",
+                    "collectionunitid": 35918,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BALDHWC",
+                    "datasets": [
+                        {
+                            "datasetid": 51856,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "BALDHL_WCH",
+                    "collectionunitid": 37735,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "NANODE349",
+                    "datasets": [
+                        {
+                            "datasetid": 13100,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO203",
+                    "collectionunitid": 9820,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE349",
+                    "datasets": [
+                        {
+                            "datasetid": 13101,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO203",
+                    "collectionunitid": 9820,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 9718,
+            "sitename": "Baker Pond",
+            "sitedescription": "Pond is somewhat drained and very shallow. Abundant myriophyllum. The mud is organic-rich and gel-like.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.63745,44.06491],[-72.63305,44.06491],[-72.63305,44.07107],[-72.63745,44.07107],[-72.63745,44.06491]]]}",
+            "altitude": 395,
+            "collectionunits": [
+                {
+                    "handle": "NANODE340",
+                    "datasets": [
+                        {
+                            "datasetid": 14383,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO194",
+                    "collectionunitid": 10974,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE340",
+                    "datasets": [
+                        {
+                            "datasetid": 14384,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO194",
+                    "collectionunitid": 10974,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 9779,
+            "sitename": "Bean Pond",
+            "sitedescription": "Terrestrial Plant Community: mixed hardwoods, conifers, and alder.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.08867,44.69559],[-72.07998,44.69559],[-72.07998,44.70003],[-72.08867,44.70003],[-72.08867,44.69559]]]}",
+            "altitude": 363,
+            "collectionunits": [
+                {
+                    "handle": "NANODE350",
+                    "datasets": [
+                        {
+                            "datasetid": 14460,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO204",
+                    "collectionunitid": 11040,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE350",
+                    "datasets": [
+                        {
+                            "datasetid": 14461,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO204",
+                    "collectionunitid": 11040,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 9975,
+            "sitename": "Dunmore Lake",
+            "sitedescription": "Lake lies within basin within a syncline scoured by glaciers. It is located along the western edge of the Green Mountains and the eastern edge of the Champlain Valley. Upland vegetation: northern hardwoods-conifer forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.0878,43.87589],[-73.06467,43.87589],[-73.06467,43.92481],[-73.0878,43.92481],[-73.0878,43.87589]]]}",
+            "altitude": 173,
+            "collectionunits": [
+                {
+                    "handle": "NANODE339",
+                    "datasets": [
+                        {
+                            "datasetid": 14885,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO193",
+                    "collectionunitid": 11268,
+                    "collectionunittype": "Composite"
+                },
+                {
+                    "handle": "NANODE339",
+                    "datasets": [
+                        {
+                            "datasetid": 14886,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT/AJS/LCO193",
+                    "collectionunitid": 11268,
+                    "collectionunittype": "Composite"
+                }
+            ]
+        },
+        {
+            "siteid": 13048,
+            "sitename": "Branch P.",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.02278,43.07644],[-73.01569,43.07644],[-73.01569,43.08503],[-73.02278,43.08503],[-73.02278,43.07644]]]}",
+            "altitude": 802,
+            "collectionunits": [
+                {
+                    "handle": "BRANCH08",
+                    "datasets": [
+                        {
+                            "datasetid": 19366,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Branch Pond_2008 ",
+                    "collectionunitid": 14583,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "BRAN_PIR",
+                    "datasets": [
+                        {
+                            "datasetid": 44769,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "PIRLA_NENG310",
+                    "collectionunitid": 31684,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BRAN_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 44835,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "PIRLA_NENG310_WC",
+                    "collectionunitid": 31747,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13049,
+            "sitename": "Little Averill",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.72559,44.94652],[-71.70628,44.94652],[-71.70628,44.96377],[-71.72559,44.96377],[-71.72559,44.94652]]]}",
+            "altitude": 531,
+            "collectionunits": [
+                {
+                    "handle": "AVERIL08",
+                    "datasets": [
+                        {
+                            "datasetid": 19367,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14584,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LIT AVER",
+                    "datasets": [
+                        {
+                            "datasetid": 42835,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Little Averill NLA17_VT-10003",
+                    "collectionunitid": 29850,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LITAVEWC",
+                    "datasets": [
+                        {
+                            "datasetid": 51874,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "LT-AVERL_WCH",
+                    "collectionunitid": 37753,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LITTAVWC",
+                    "datasets": [
+                        {
+                            "datasetid": 51875,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "LITTL-AV_WCH",
+                    "collectionunitid": 37754,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "LITTL-AV",
+                    "datasets": [
+                        {
+                            "datasetid": 50090,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Little Averill",
+                    "collectionunitid": 36035,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LITTL-AV",
+                    "datasets": [
+                        {
+                            "datasetid": 55195,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Little Averill",
+                    "collectionunitid": 36035,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LT-AVERL",
+                    "datasets": [
+                        {
+                            "datasetid": 50202,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Little Averill_T-B",
+                    "collectionunitid": 36117,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LT-AVERL",
+                    "datasets": [
+                        {
+                            "datasetid": 55231,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Little Averill_T-B",
+                    "collectionunitid": 36117,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13104,
+            "sitename": "Reservoir Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.69867,43.43901]}",
+            "altitude": 325,
+            "collectionunits": [
+                {
+                    "handle": "RESERV08",
+                    "datasets": [
+                        {
+                            "datasetid": 19454,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14642,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13105,
+            "sitename": "North Springfield Reservoir",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.5065,43.3468]}",
+            "altitude": 143,
+            "collectionunits": [
+                {
+                    "handle": "NSPRIN08",
+                    "datasets": [
+                        {
+                            "datasetid": 19455,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14643,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "VT750",
+                    "datasets": [
+                        {
+                            "datasetid": 49787,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT750_94_1",
+                    "collectionunitid": 35763,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT750",
+                    "datasets": [
+                        {
+                            "datasetid": 55387,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "VT750_94_1",
+                    "collectionunitid": 35763,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT750_2",
+                    "datasets": [
+                        {
+                            "datasetid": 50009,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT750_95_2",
+                    "collectionunitid": 35964,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT750_2",
+                    "datasets": [
+                        {
+                            "datasetid": 55513,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "VT750_95_2",
+                    "collectionunitid": 35964,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT750_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 46037,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT750_WC",
+                    "collectionunitid": 32805,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13131,
+            "sitename": "Sunset Lake",
+            "sitedescription": "Lake access is on the West side of a floating bridge. Terrestrial Plant Community: conifers.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-71.31835,43.46582],[-71.2956,43.46582],[-71.2956,43.47927],[-71.31835,43.47927],[-71.31835,43.46582]]]}",
+            "altitude": 246,
+            "collectionunits": [
+                {
+                    "handle": "SUNSET08",
+                    "datasets": [
+                        {
+                            "datasetid": 19490,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14669,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13132,
+            "sitename": "Carmi",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.89557,44.95298],[-72.85352,44.95298],[-72.85352,44.99002],[-72.89557,44.99002],[-72.89557,44.95298]]]}",
+            "altitude": 133,
+            "collectionunits": [
+                {
+                    "handle": "CARMI",
+                    "datasets": [
+                        {
+                            "datasetid": 50194,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Carmi_T-B",
+                    "collectionunitid": 36109,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARMI",
+                    "datasets": [
+                        {
+                            "datasetid": 55223,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Carmi_T-B",
+                    "collectionunitid": 36109,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARMI08",
+                    "datasets": [
+                        {
+                            "datasetid": 19491,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14670,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "CARMIWC",
+                    "datasets": [
+                        {
+                            "datasetid": 51861,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "CARMI_WCH",
+                    "collectionunitid": 37740,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13133,
+            "sitename": "Doughty Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.28537,43.75612],[-73.28027,43.75612],[-73.28027,43.76177],[-73.28537,43.76177],[-73.28537,43.75612]]]}",
+            "altitude": 191,
+            "collectionunits": [
+                {
+                    "handle": "DOUGHT08",
+                    "datasets": [
+                        {
+                            "datasetid": 19492,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14671,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13141,
+            "sitename": "Lake Elmore",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-72.52535,44.53465]}",
+            "altitude": 344,
+            "collectionunits": [
+                {
+                    "handle": "ELMORE08",
+                    "datasets": [
+                        {
+                            "datasetid": 19506,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14679,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13142,
+            "sitename": "Peacham Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.27124,44.32382],[-72.25082,44.32382],[-72.25082,44.33886],[-72.27124,44.33886],[-72.27124,44.32382]]]}",
+            "altitude": 427,
+            "collectionunits": [
+                {
+                    "handle": "PEACHAM",
+                    "datasets": [
+                        {
+                            "datasetid": 50206,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "Peacham_T-B",
+                    "collectionunitid": 36121,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PEACHAM",
+                    "datasets": [
+                        {
+                            "datasetid": 55235,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Peacham_T-B",
+                    "collectionunitid": 36121,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "PEACHAWC",
+                    "datasets": [
+                        {
+                            "datasetid": 51888,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "PEACHAM_WCH",
+                    "collectionunitid": 37767,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "PEACHE08",
+                    "datasets": [
+                        {
+                            "datasetid": 19507,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14680,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13143,
+            "sitename": "Lake Bomoseen",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.23452,43.60153],[-73.18474,43.60153],[-73.18474,43.70486],[-73.23452,43.70486],[-73.23452,43.60153]]]}",
+            "altitude": 149,
+            "collectionunits": [
+                {
+                    "handle": "BOMOSE08",
+                    "datasets": [
+                        {
+                            "datasetid": 19508,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14681,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13144,
+            "sitename": "Sabin Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.42185,44.39971],[-72.41035,44.39971],[-72.41035,44.40744],[-72.42185,44.40744],[-72.42185,44.39971]]]}",
+            "altitude": 283,
+            "collectionunits": [
+                {
+                    "handle": "SABIN08",
+                    "datasets": [
+                        {
+                            "datasetid": 19509,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14682,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "VT003",
+                    "datasets": [
+                        {
+                            "datasetid": 49812,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": "VT003_91_1",
+                    "collectionunitid": 35788,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT003",
+                    "datasets": [
+                        {
+                            "datasetid": 55411,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "VT003_91_1",
+                    "collectionunitid": 35788,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VT003_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 46062,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "VT003_WC",
+                    "collectionunitid": 32830,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13145,
+            "sitename": "Indian Brook Reservoir",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-73.10316,44.53057],[-73.09552,44.53057],[-73.09552,44.54247],[-73.10316,44.54247],[-73.10316,44.53057]]]}",
+            "altitude": 161,
+            "collectionunits": [
+                {
+                    "handle": "INDBRO08",
+                    "datasets": [
+                        {
+                            "datasetid": 19510,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14683,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13146,
+            "sitename": "Salem Little",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.10276,44.91176],[-72.08465,44.91176],[-72.08465,44.9196],[-72.10276,44.9196],[-72.10276,44.91176]]]}",
+            "altitude": 293,
+            "collectionunits": [
+                {
+                    "handle": "SALEM08",
+                    "datasets": [
+                        {
+                            "datasetid": 19511,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14684,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 13148,
+            "sitename": "East Long Pond",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-72.36291,44.43586],[-72.34583,44.43586],[-72.34583,44.45186],[-72.36291,44.45186],[-72.36291,44.43586]]]}",
+            "altitude": 368,
+            "collectionunits": [
+                {
+                    "handle": "ELONGP08",
+                    "datasets": [
+                        {
+                            "datasetid": 19514,
+                            "datasettype": "diatom surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14686,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

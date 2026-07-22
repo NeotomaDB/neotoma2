@@ -1,5 +1,8 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
+
+httptest::with_mock_api({
 
 context("Creating datasets from scratch or updating existing objects.")
 test_that("`set_dataset()` for a new dataset", {
@@ -28,4 +31,5 @@ test_that("Updating existing dataset", {
   testthat::expect_equal(updatedSample@datasetid, -9999)
   # Cannot use invalid data types
   testthat::expect_error(set_dataset(x = downloadSite[[1]]@collunits[[1]]@datasets[[1]], waterdepth = "33a"))
+})
 })
