@@ -19,6 +19,10 @@ jobs:
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
+    # The check itself runs in well under a minute; the default is GitHub's
+    # 6 hours, which turns a hang into a very long silence.
+    timeout-minutes: 45
+
     strategy:
       fail-fast: false
       matrix:
@@ -56,5 +60,5 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual", "--ignore-vignettes", "--no-build-vignettes")'
-          build_args: 'c("--no-manual", "--ignore-vignettes", "--no-build-vignettes")'
+          build_args: 'c("--no-manual", "--no-build-vignettes")'
           upload-snapshots: true
