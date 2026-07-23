@@ -1,3 +1,10 @@
+library(httptest)
+# Recorded API responses (and the hand-made parser fixtures) live under
+# tests/testthat/fixtures/. Pointing httptest's mock path there keeps every
+# `with_mock_api()` recording and replay in one folder instead of scattering a
+# `api.neotomadb.org/` tree at the testthat root.
+httptest::.mockPaths(testthat::test_path("fixtures"))
+
 # Shared test fixtures, sourced once by testthat before any test file runs.
 # Single source of truth for the Brazil polygon used across several spatial
 # tests (previously duplicated inline, and in two files mislabelled as

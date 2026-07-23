@@ -1,0 +1,216 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 24,
+            "sitename": "Alexander Lake",
+            "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 24,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 7870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 25,
+            "sitename": "Alexis Lake",
+            "sitedescription": "Lake in Alexis River watershed. Physiography: Mecatina Plateau/Laurentian region. Surrounding vegetation: Black Spruce, Lichen Barrens.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.03333,52.51667]}",
+            "altitude": 193,
+            "collectionunits": [
+                {
+                    "handle": "ALEXISLK",
+                    "datasets": [
+                        {
+                            "datasetid": 25,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 25,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXISLK",
+                    "datasets": [
+                        {
+                            "datasetid": 7871,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 25,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 4478,
+            "sitename": "Alexander [3CN117]",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-92.61667,35.25]}",
+            "altitude": 180,
+            "collectionunits": [
+                {
+                    "handle": "ALEXANDR",
+                    "datasets": [
+                        {
+                            "datasetid": 5638,
+                            "datasettype": "vertebrate fauna"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 5493,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "ALEXANDR",
+                    "datasets": [
+                        {
+                            "datasetid": 10750,
+                            "datasettype": "macroinvertebrate"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 5493,
+                    "collectionunittype": null
+                },
+                {
+                    "handle": "ALEXANDR",
+                    "datasets": [
+                        {
+                            "datasetid": 61392,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Locality",
+                    "collectionunitid": 5493,
+                    "collectionunittype": null
+                }
+            ]
+        },
+        {
+            "siteid": 26226,
+            "sitename": "Alexandra Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-74.1708,43.28972],[-74.16794,43.28972],[-74.16794,43.29118],[-74.1708,43.29118],[-74.1708,43.28972]]]}",
+            "altitude": 351,
+            "collectionunits": [
+                {
+                    "handle": "NY258",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "NY258_92_1",
+                    "collectionunitid": 35242,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NY258",
+                    "datasets": [
+                        {
+                            "datasetid": 49024,
+                            "datasettype": "diatom"
+                        }
+                    ],
+                    "collectionunit": "NY258_92_1",
+                    "collectionunitid": 35263,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "NY258_WC",
+                    "datasets": [
+                        {
+                            "datasetid": 45826,
+                            "datasettype": "water chemistry"
+                        }
+                    ],
+                    "collectionunit": "NY258_WC",
+                    "collectionunitid": 32589,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 37682,
+            "sitename": "Alexander Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.90076,41.86029]}",
+            "altitude": 77,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLKBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73926,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Alexander Lake",
+                    "collectionunitid": 55369,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "ALXDRLKE",
+                    "datasets": [
+                        {
+                            "datasetid": 69663,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Alexander Lake",
+                    "collectionunitid": 51132,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 41687,
+            "sitename": "Alexander Morrison NP",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[115.567,-30.067]}",
+            "altitude": 330,
+            "collectionunits": [
+                {
+                    "handle": "AMNP",
+                    "datasets": [
+                        {
+                            "datasetid": 74101,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "AlexanderMorrison",
+                    "collectionunitid": 55483,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

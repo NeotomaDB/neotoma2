@@ -1,0 +1,38 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 24,
+                "sitename": "Alexander Lake",
+                "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+                "sitenotes": "Lake area from Topographic Dataset of Canada (CanVec).  Added on 7/14/21 by Grace Roper, UW-Madison.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+                "altitude": 73,
+                "collectionunitid": 24,
+                "collectionunit": null,
+                "handle": "ALEXLAKE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 7870,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

@@ -1,0 +1,771 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 1,
+            "sitename": "15/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.25,55.09167]}",
+            "altitude": 244,
+            "collectionunits": [
+                {
+                    "handle": "15-1",
+                    "datasets": [
+                        {
+                            "datasetid": 1,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "15/1",
+                    "collectionunitid": 1,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2,
+            "sitename": "15/2",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.01667,55.83333]}",
+            "altitude": 261,
+            "collectionunits": [
+                {
+                    "handle": "15-2",
+                    "datasets": [
+                        {
+                            "datasetid": 2,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "15/2",
+                    "collectionunitid": 2,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 3,
+            "sitename": "16/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.06667,55.41333]}",
+            "altitude": 290,
+            "collectionunits": [
+                {
+                    "handle": "16-1",
+                    "datasets": [
+                        {
+                            "datasetid": 3,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "16/1",
+                    "collectionunitid": 3,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 4,
+            "sitename": "17/1",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.7,55.06667]}",
+            "altitude": 235,
+            "collectionunits": [
+                {
+                    "handle": "17-1",
+                    "datasets": [
+                        {
+                            "datasetid": 4,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/1",
+                    "collectionunitid": 4,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 5,
+            "sitename": "17/2",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.93333,55.25]}",
+            "altitude": 300,
+            "collectionunits": [
+                {
+                    "handle": "17-2",
+                    "datasets": [
+                        {
+                            "datasetid": 5,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/2",
+                    "collectionunitid": 5,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 6,
+            "sitename": "17/3",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-75.95,55.11667]}",
+            "altitude": 278,
+            "collectionunits": [
+                {
+                    "handle": "17-3",
+                    "datasets": [
+                        {
+                            "datasetid": 6,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/3",
+                    "collectionunitid": 6,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 7,
+            "sitename": "Three Pines Bog",
+            "sitedescription": "Bog.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-80.11667,47]}",
+            "altitude": 329,
+            "collectionunits": [
+                {
+                    "handle": "3PINES",
+                    "datasets": [
+                        {
+                            "datasetid": 7,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 7,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "3PINES",
+                    "datasets": [
+                        {
+                            "datasetid": 7857,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 7,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 8,
+            "sitename": "Abalone Rocks Marsh",
+            "sitedescription": "Small estuarine marsh. Physiography: Santa Rosa Island. Surrounding vegetation: coastal marsh and grassland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-119.97667,33.95639]}",
+            "altitude": 9,
+            "collectionunits": [
+                {
+                    "handle": "ABALONE",
+                    "datasets": [
+                        {
+                            "datasetid": 8,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 8,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ABALONE",
+                    "datasets": [
+                        {
+                            "datasetid": 7858,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 8,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ABALONE",
+                    "datasets": [
+                        {
+                            "datasetid": 10469,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 8,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 9,
+            "sitename": "Adange",
+            "sitedescription": "Meander of Adange river. Physiography: Fluvial terrace above flood-plain. Surrounding vegetation: Subalpine tall herbaceous vegetation.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.33333,43.30556]}",
+            "altitude": 2065,
+            "collectionunits": [
+                {
+                    "handle": "ADANGE",
+                    "datasets": [
+                        {
+                            "datasetid": 9,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 9,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "ADANGE",
+                    "datasets": [
+                        {
+                            "datasetid": 7859,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 9,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 10,
+            "sitename": "Site 1 (Cohen unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-82.33,30.83]}",
+            "altitude": 36,
+            "collectionunits": [
+                {
+                    "handle": "ADC001",
+                    "datasets": [
+                        {
+                            "datasetid": 10,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 10,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 11,
+            "sitename": "Konus Exposure, Adycha River",
+            "sitedescription": "Exposure on slope. Surrounding vegetation: open Larix dahurica forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[135.58333,67.75]}",
+            "altitude": 137,
+            "collectionunits": [
+                {
+                    "handle": "ADYCHA",
+                    "datasets": [
+                        {
+                            "datasetid": 11,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 11,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "ADYCHA",
+                    "datasets": [
+                        {
+                            "datasetid": 7860,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 11,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 12,
+            "sitename": "Ageröds Mosse",
+            "sitedescription": "Forested Sphagnum bog. Physiography: till. Surrounding vegetation: pasture and arable land.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[13.41701,55.92856],[13.43847,55.92856],[13.43847,55.94039],[13.41701,55.94039],[13.41701,55.92856]]]}",
+            "altitude": 47,
+            "collectionunits": [
+                {
+                    "handle": "AGE",
+                    "datasets": [
+                        {
+                            "datasetid": 12,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 12,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AGE",
+                    "datasets": [
+                        {
+                            "datasetid": 7861,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 12,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 13,
+            "sitename": "Aguas Calientes",
+            "sitedescription": "Mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.4,-23.08333]}",
+            "altitude": 4233,
+            "collectionunits": [
+                {
+                    "handle": "AGUASC1",
+                    "datasets": [
+                        {
+                            "datasetid": 13,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 13,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 14,
+            "sitename": "Aguas Calientes 2",
+            "sitedescription": "Mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-67.58333,-23.5]}",
+            "altitude": 4198,
+            "collectionunits": [
+                {
+                    "handle": "AGUASC2",
+                    "datasets": [
+                        {
+                            "datasetid": 14,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AGUASC2",
+                    "datasets": [
+                        {
+                            "datasetid": 7862,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 14,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 15,
+            "sitename": "Aguilar",
+            "sitedescription": "Fen along creek above Mina Aguilar. Physiography: bog cut by creek draining endmoraines. Surrounding vegetation: Altiplano paramo grassland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.75,-23.83333]}",
+            "altitude": 3828,
+            "collectionunits": [
+                {
+                    "handle": "AGUILAR",
+                    "datasets": [
+                        {
+                            "datasetid": 15,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "AGUILAR",
+                    "datasets": [
+                        {
+                            "datasetid": 7863,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 15,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 16,
+            "sitename": "Ahlenmoor",
+            "sitedescription": "Excavated bog. Physiography: Raised bog. Surrounding vegetation: Sphagnetum.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[8.715,53.66],[8.82,53.66],[8.82,53.705],[8.715,53.705],[8.715,53.66]]]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "AFM2012",
+                    "datasets": [
+                        {
+                            "datasetid": 74153,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AFM 2012",
+                    "collectionunitid": 55531,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AFM2012",
+                    "datasets": [
+                        {
+                            "datasetid": 74154,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AFM 2012",
+                    "collectionunitid": 55531,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AHL5",
+                    "datasets": [
+                        {
+                            "datasetid": 16,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AHL V",
+                    "collectionunitid": 16,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AHL5",
+                    "datasets": [
+                        {
+                            "datasetid": 7864,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AHL V",
+                    "collectionunitid": 16,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 17,
+            "sitename": "Ajata",
+            "sitedescription": "Mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-69.2,-18.25]}",
+            "altitude": 4773,
+            "collectionunits": [
+                {
+                    "handle": "AJATA",
+                    "datasets": [
+                        {
+                            "datasetid": 17,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 17,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AJATA",
+                    "datasets": [
+                        {
+                            "datasetid": 7865,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 17,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 18,
+            "sitename": "South Soefje Bog",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-97.51694,29.6]}",
+            "altitude": 100,
+            "collectionunits": [
+                {
+                    "handle": "AKG001",
+                    "datasets": [
+                        {
+                            "datasetid": 18,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 18,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "SOEFJES",
+                    "datasets": [
+                        {
+                            "datasetid": 3772,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3654,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 19,
+            "sitename": "Akulinin Exposure P1282",
+            "sitedescription": "Exposure in river terrace. Physiography: river valley in mountains. Surrounding vegetation: secondary Betula forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[138.55,47.11667]}",
+            "altitude": 367,
+            "collectionunits": [
+                {
+                    "handle": "AKULININ",
+                    "datasets": [
+                        {
+                            "datasetid": 19,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "P1282",
+                    "collectionunitid": 19,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "AKULININ",
+                    "datasets": [
+                        {
+                            "datasetid": 7866,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "P1282",
+                    "collectionunitid": 19,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 20,
+            "sitename": "Akuvaara",
+            "sitedescription": "Lake. Physiography: Hill of sandy/gravelly outwash. Surrounding vegetation: Thin pine forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[27.67406,69.12326]}",
+            "altitude": 159,
+            "collectionunits": [
+                {
+                    "handle": "AKUV",
+                    "datasets": [
+                        {
+                            "datasetid": 20,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 20,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AKUV",
+                    "datasets": [
+                        {
+                            "datasetid": 7867,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 20,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 21,
+            "sitename": "Alazeya River Exposure, 8 m Terrace",
+            "sitedescription": "Peat horizon exposed in river terrace. Physiography: yedoma-alas relief. Surrounding vegetation: Larix dahurica forest-tundra.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[154.5,68.5]}",
+            "altitude": 50,
+            "collectionunits": [
+                {
+                    "handle": "ALAZE",
+                    "datasets": [
+                        {
+                            "datasetid": 21,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 21,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "ALAZE",
+                    "datasets": [
+                        {
+                            "datasetid": 7868,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 21,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 22,
+            "sitename": "Alazeya River Exposure, 9 m Terrace",
+            "sitedescription": "Section with alluvium with insitu shrubs. Physiography: yedoma-alas relief. Surrounding vegetation: Larix dahurica forest-tundra.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[154.5,64.33333]}",
+            "altitude": 125,
+            "collectionunits": [
+                {
+                    "handle": "ALAZE1",
+                    "datasets": [
+                        {
+                            "datasetid": 22,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 22,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "ALAZE1",
+                    "datasets": [
+                        {
+                            "datasetid": 7869,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 22,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 24,
+            "sitename": "Alexander Lake",
+            "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 24,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 7870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 25,
+            "sitename": "Alexis Lake",
+            "sitedescription": "Lake in Alexis River watershed. Physiography: Mecatina Plateau/Laurentian region. Surrounding vegetation: Black Spruce, Lichen Barrens.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.03333,52.51667]}",
+            "altitude": 193,
+            "collectionunits": [
+                {
+                    "handle": "ALEXISLK",
+                    "datasets": [
+                        {
+                            "datasetid": 25,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 25,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXISLK",
+                    "datasets": [
+                        {
+                            "datasetid": 7871,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 25,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 27,
+            "sitename": "Aliuk Pond",
+            "sitedescription": "Small glacial scour lake. Physiography: coastal lowlands. Surrounding vegetation: sedge-shrub and lichen-heath tundra.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.36667,54.58333]}",
+            "altitude": 9,
+            "collectionunits": [
+                {
+                    "handle": "ALIUK",
+                    "datasets": [
+                        {
+                            "datasetid": 27,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 27,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALIUK",
+                    "datasets": [
+                        {
+                            "datasetid": 7872,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 27,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

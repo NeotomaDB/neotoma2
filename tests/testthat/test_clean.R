@@ -1,12 +1,15 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Verifying that neotoma objects do not have duplicates and
          are nested properly respecting Neotoma's data object:
         site <- cu <- ds")
+httptest::with_mock_api({
 test_that("Doubling a set of records results and cleaning results in a clean set.", {
-  # c calls clean internally but we can call it again to be sure
   skip_on_cran()
+  # c calls clean internally but we can call it again to be sure
+  # Runs offline against recorded fixtures (see tests/testthat/fixtures/).
   # Site 24 is one of the sites returned by the "Alex%" search, so combining
   # the two sets must not grow the set: `c()` cleans internally, and a second
   # explicit `clean()` must be a no-op rather than dropping or duplicating.
@@ -26,4 +29,5 @@ test_that("Doubling a set of records results and cleaning results in a clean set
   doubled <- c(fiftyds, nextds)
   testthat::expect_equal(getids(doubled), getids(nextds))
   testthat::expect_equal(length(doubled), length(fiftyds))
+})
 })
