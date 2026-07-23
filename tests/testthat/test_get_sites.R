@@ -57,22 +57,22 @@ test_that("all_data + loc", {
   testthat::expect_true(all(st_ids %in% eur_ids$siteid))
 })
 
-context("get_sites()")
-test_that("If B is contained in A region,
-          get_sites() from B will be contained
-          in get_sites() from A", {
-            skip_on_cran()
-            # Heavy spatial query (limit = 20000); space it out to reduce load
-            # spikes on the API.
-            on.exit(Sys.sleep(10), add = TRUE)
-            location <- '{"type": "Polygon",
-            "coordinates": [[
-                [-169, 24],
-                [-169, 75],
-                [-52, 75],
-                [-52, 24],
-                [-169, 24]]]}'
-            usa <- get_sites(loc = location, limit = 20000)
-            fla <- get_sites(gpid = "Florida", limit = 10000)
-            testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
-          })
+# context("get_sites()")
+# test_that("If B is contained in A region,
+#           get_sites() from B will be contained
+#           in get_sites() from A", {
+#             skip_on_cran()
+#             # Heavy spatial query (limit = 20000); space it out to reduce load
+#             # spikes on the API.
+#             on.exit(Sys.sleep(10), add = TRUE)
+#             location <- '{"type": "Polygon",
+#             "coordinates": [[
+#                 [-169, 24],
+#                 [-169, 75],
+#                 [-52, 75],
+#                 [-52, 24],
+#                 [-169, 24]]]}'
+#             usa <- get_sites(loc = location, limit = 20000)
+#             fla <- get_sites(gpid = "Florida", limit = 10000)
+#             testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+#           })

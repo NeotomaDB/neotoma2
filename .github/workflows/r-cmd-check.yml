@@ -36,6 +36,11 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      # r-lib/actions/setup-r exports NOT_CRAN=true unless it is already set.
+      # That makes testthat's skip_on_cran() a no-op, so the whole suite runs
+      # against the live Neotoma API and the check sits in "checking tests"
+      # for ~100 minutes. R-CMD-check should mirror CRAN, which skips them.
+      NOT_CRAN: false
 
     steps:
       - uses: actions/checkout@v4

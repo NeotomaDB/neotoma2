@@ -72,27 +72,51 @@ neotoma_id_param <- function(x) {
   }
 }
 
+#' @title neotoma_env_num
+#' @description An internal helper that reads a positive number from an
+#' environment variable, falling back to a default when the variable is unset
+#' or cannot be read as a positive number.
+#' @param name The environment variable to read.
+#' @param default The value to use when `name` is unset or unusable.
+#' @returns A single positive numeric value.
+#' @noRd
+neotoma_env_num <- function(name, default) {
+  value <- suppressWarnings(as.numeric(Sys.getenv(name, "")))
+  if (length(value) != 1 || is.na(value) || value <= 0) default else value
+}
+
 #' @title neotoma_retry
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom httr RETRY
+#' @importFrom httr RETRY timeout
 #' @description An internal helper that issues a single request, retrying with
 #' exponential backoff when the failure is transient. Slow queries (wildcard
 #' site searches, large downloads) intermittently return a gateway timeout from
 #' the API, and rate limiting returns a 429; both succeed on a later attempt, so
 #' they are retried rather than raised. Client errors (400-level) are returned
 #' immediately -- a malformed or not-found request cannot succeed on a retry.
+#'
+#' Every attempt carries a timeout. Without one, a server that accepts the
+#' connection and then never responds blocks forever, and retrying multiplies
+#' that wait by `times` -- turning an outage into a hang rather than an error.
+#' Both bounds can be lowered through `NEOTOMA_TIMEOUT` (seconds per attempt)
+#' and `NEOTOMA_RETRIES` (attempts), which lets test runs fail fast while
+#' leaving interactive use generous.
 #' @param verb The HTTP verb, "GET" or "POST".
 #' @param url The request URL.
 #' @param ... Further arguments passed to `httr::RETRY()` (headers, query,
 #' body, encode).
 #' @param times Maximum number of attempts, including the first.
+#' @param seconds Maximum seconds to wait for any single attempt.
 #' @returns The `httr` response from the last attempt.
 #' @noRd
-neotoma_retry <- function(verb, url, ..., times = 4) {
+neotoma_retry <- function(verb, url, ...,
+                          times = neotoma_env_num("NEOTOMA_RETRIES", 4),
+                          seconds = neotoma_env_num("NEOTOMA_TIMEOUT", 60)) {
   RETRY(verb, url, ...,
         times = times,
         pause_base = 2,
         pause_cap = 30,
+        timeout(seconds),
         terminate_on = c(400, 401, 403, 404, 405, 410, 422))
 }
 
