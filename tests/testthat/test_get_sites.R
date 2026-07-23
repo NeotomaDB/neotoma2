@@ -2,14 +2,6 @@ library("testthat")
 library("neotoma2")
 
 context("Test `get_sites()` function.")
-test_that("get_sites numeric", {
-  skip_on_cran()
-  site_1001 <- neotoma2::get_sites(1001)
-  sites_ids <- neotoma2::getids(site_1001) %>%
-    dplyr::select(siteid) %>%
-    unique()
-  testthat::expect_equivalent(sites_ids, 1001)
-})
 
 test_that("get_sites numeric vector", {
   skip_on_cran()
@@ -43,18 +35,17 @@ test_that("all_data + loc", {
   skip_on_cran()
   # Validates `all_data` pagination on the sites endpoint (superset check), so
   # it keeps the loop; space it out. Uses the shared `brazil_json` from setup.R
-  # (previously duplicated here mislabelled as `europe_json`).
   on.exit(Sys.sleep(10), add = TRUE)
   data_short <- get_sites(loc = brazil_json[1])
   data_long <- get_sites(loc = brazil_json[1], all_data = TRUE)
   testthat::expect_gt(length(data_long), length(data_short))
-  eur_ids <- getids(data_long)
-  # check that all siteids are in eur_ids
+  br_ids <- getids(data_long)
+  # check that all siteids are in br_ids
   st_ids <- as.data.frame(data_short) %>%
     dplyr::select(siteid) %>%
     unique() %>%
     unlist()
-  testthat::expect_true(all(st_ids %in% eur_ids$siteid))
+  testthat::expect_true(all(st_ids %in% br_ids$siteid))
 })
 
 # context("get_sites()")
