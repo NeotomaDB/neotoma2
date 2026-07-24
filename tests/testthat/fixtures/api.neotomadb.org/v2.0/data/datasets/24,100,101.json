@@ -1,0 +1,129 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 24,
+                "sitename": "Alexander Lake",
+                "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+                "sitenotes": "Lake area from Topographic Dataset of Canada (CanVec).  Added on 7/14/21 by Grace Roper, UW-Madison.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+                "altitude": 73,
+                "collectionunitid": 24,
+                "collectionunit": null,
+                "handle": "ALEXLAKE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3f97t",
+                            "10.21233/n3v88k"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 7602,
+                                "ageyoung": 3472
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 24,
+                        "datasetpi": [
+                            {
+                                "initials": "R.H.",
+                                "contactid": 52,
+                                "firstname": "Richard H.",
+                                "familyname": "Jordan",
+                                "contactname": "Jordan, Richard H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Taxon counts and names were unclear on original Jordan data sheets - errors are possible.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 100,
+                "sitename": "Site 30 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.35,46.35]}",
+                "altitude": 391,
+                "collectionunitid": 100,
+                "collectionunit": "C165PDGS",
+                "handle": "AMS030",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/2hd8-pn42",
+                            "10.21233/m0zx-1008",
+                            "10.21233/n39016",
+                            "10.21233/n3w40g"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 100,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 101,
+                "sitename": "Site 31 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.72,46.05]}",
+                "altitude": 355,
+                "collectionunitid": 101,
+                "collectionunit": "C167NEBS",
+                "handle": "AMS031",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3588c",
+                            "10.21233/n3r967"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 101,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

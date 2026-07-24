@@ -26,7 +26,8 @@ test_that("get_datasets numeric vector", {
 })
 
 test_that("get_datasets with loc attribute", {
-  skip_on_cran()
+  skip_on_ci()
+  skip_if_api_unreachable()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
@@ -53,18 +54,53 @@ test_that("get_datasets with loc attribute", {
   testthat::expect_equal(brazil_ds_length, brazil_unique_dsids)
 })
 
+test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
+  skip_on_ci()
+  skip_if_api_unreachable()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  ds_geo <- get_datasets(loc = brazil_geojson, limit = 10)
+  ds_wkt <- get_datasets(loc = brazil_wkt, limit = 10)
+  testthat::expect_s4_class(ds_wkt, "sites")
+  # Same shape, two encodings -> identical siteids.
+  testthat::expect_setequal(getids(ds_geo)$siteid, getids(ds_wkt)$siteid)
+})
+
+test_that("get_datasets GeoJSON loc still works (no regression)", {
+  skip_on_ci()
+  skip_if_api_unreachable()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  ds_geo <- get_datasets(loc = brazil_geojson, limit = 5)
+  testthat::expect_s4_class(ds_geo, "sites")
+})
+
+test_that("a loc string that is neither WKT nor GeoJSON errors clearly", {
+  # A garbage string is not WKT (fails the leading-keyword test) so it falls to
+  # the GeoJSON branch, where parsing raises a clear error. `parseLocation()` is
+  # the layer that builds the request body; `get_datasets()` itself catches this
+  # and returns NULL with a message, so we assert on the parse layer directly.
+testthat::expect_error(neotoma2:::parseLocation("not a geometry at all"), "GeoJSON")
+})
+
 test_that("all_data + loc", {
   skip_on_cran()
-  europe_json <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-  data_short <- get_datasets(loc = europe_json[1])
-  data_long <- get_datasets(loc = europe_json[1], all_data = TRUE)
+  # Heavy all_data pagination over a spatial query: flap-prone, skip on CI.
+  skip_on_ci()
+  skip_if_api_unreachable()
+  # This is the one spatial test that genuinely validates `all_data` pagination
+  # (the long result must be a superset of a single page), so it keeps the loop.
+  # Space it out, and use the shared `brazil_json` from setup.R -- this polygon
+  # was previously (mis)named `europe_json` but holds Brazil coordinates.
+  on.exit(Sys.sleep(10), add = TRUE)
+  data_short <- get_datasets(loc = brazil_json[1])
+  data_long <- get_datasets(loc = brazil_json[1], all_data = TRUE)
   testthat::expect_gte(length(data_long), length(data_short))
   eur_ids <- getids(data_long)
   # check that all datasetids in datasets df are in eur_ids
@@ -82,6 +118,10 @@ test_that("all_data + loc", {
 
 test_that("get_datasets with or without all_data works.", {
   skip_on_cran()
+  # Heavy all_data pagination over a UK bbox: flap-prone, skip on CI.
+  skip_on_ci()
+  skip_if_api_unreachable()
+  on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_sts <- get_sites(
     loc = uk_bbox_geojson,

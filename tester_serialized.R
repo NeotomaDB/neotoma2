@@ -4,7 +4,7 @@ logfile <- "tests_071726"
 
 sink(logfile, append = TRUE, split = TRUE)
 
-testes = c(
+tests = c(
   "tests/testthat/test_add_chronology.R",
   "tests/testthat/test_c.R",
   "tests/testthat/test_chroncontrols.R",
@@ -54,7 +54,7 @@ testes = c(
   "tests/testthat/test_toWide.R"
 )
 
-for (i in testes) {
+for (i in tests) {
   print(i)
   source(i)
   Sys.sleep(0.5)

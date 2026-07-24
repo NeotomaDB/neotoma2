@@ -1,0 +1,27 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 5,
+            "sitename": "17/2",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-74.93333,55.25]}",
+            "altitude": 300,
+            "collectionunits": [
+                {
+                    "handle": "17-2",
+                    "datasets": [
+                        {
+                            "datasetid": 5,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "17/2",
+                    "collectionunitid": 5,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}
