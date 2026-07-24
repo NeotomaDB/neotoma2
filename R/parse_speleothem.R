@@ -1,6 +1,6 @@
 #' @title parse_speleothem
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom purrr map
+#' @importFrom purrr map map_lgl
 #' @importFrom methods new
 #' @description An internal helper function used to parse the Neotoma API
 #' content of speleothems into `neotoma2R` objects.
@@ -37,10 +37,9 @@ parse_speleothem <- function(data) {
            vegetationcoverpercent = use_na(x$vegetationcoverpercent, "int"))
     do.call(build_speleothem, sp)
   })
-  if (is.null(speleothems) || all(sapply(speleothems, is.null))) {
-    speleo <- new("speleothems", speleothems = list())
-  } else {
-    speleo <- new("speleothems", speleothems = speleothems)
-  }
+  # Drop malformed/empty speleothems (build_speleothem() returns NULL for them)
+  # individually, so a partially-malformed list keeps its valid entries.
+  speleothems <- speleothems[!map_lgl(speleothems, is.null)]
+  speleo <- new("speleothems", speleothems = speleothems)
   return(speleo)
 }

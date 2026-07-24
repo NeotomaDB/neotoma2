@@ -17,15 +17,11 @@ elements and other features within a set of records.
 Extract taxonomic data from a set of sites.
 }
 \examples{
-\donttest{
-tryCatch({
+\dontrun{
 somesites <- get_sites(datasettype = "diatom") \%>\%
   get_downloads()
 diatomtaxa <- taxa(somesites)
-}, error = function(e) {
-message("Neotoma server not responding. Try again later.")
-})
-  }
+}
 }
 \author{
 Socorro Dominguez \email{dominguezvid@wisc.edu}

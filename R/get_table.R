@@ -6,13 +6,9 @@
 #' @param limit Default 25 records
 #' @param offset Default 0.
 #' @returns selected `table` values from the Database.
-#' @examples {
+#' @examples \dontrun{
 #' # Returns only the first 25 specimen records.
-#' tryCatch({
 #' someSpec <- get_table('specimens')
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
 #' }
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map

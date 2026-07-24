@@ -39,7 +39,7 @@ array of datasets.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 tryCatch({
   alex <- get_sites(sitename = "Alex\%")
   alex2 <- get_sites(24)

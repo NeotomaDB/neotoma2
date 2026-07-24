@@ -42,7 +42,7 @@ Uses the Neotoma API to search and access information
 about publications associated with data in the Neotoma Paleoecology Database
 }
 \examples{
-\donttest{
+\dontrun{
 # How old are the papers in Neotoma that include the term "mammut"?
 tryCatch({
   mammoth_papers <- get_publications(search="mammut") \%>\%

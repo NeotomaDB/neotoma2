@@ -1,38 +1,48 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2025-11-25
-Version: 1.0.9
+Date: 2026-07-23
+Version: 1.1.0
 Authors@R:
     c(person(given = "Dominguez Vidana",
              family = "Socorro",
              role = c("aut", "cre"),
              email = "dominguezvid@wisc.edu",
-             comment = structure("0000-0002-7926-4935", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0002-7926-4935")),
       person(given = "Simon",
              family = "Goring",
              role = c("aut"),
              email = "goring@wisc.edu",
-             comment = structure("0000-0002-2700-4605", .Names = "ORCID")))
+             comment = c(ORCID = "0000-0002-2700-4605")),
+      person(given = "Nick",
+             family = "Hoffman",
+             role = c("aut"),
+             email = "nickhoff@sas.upenn.edu",
+             comment = c(ORCID = "0000-0002-6626-5015"))
+             )
 URL: https://github.com/NeotomaDB/neotoma2
 BugReports: https://github.com/NeotomaDB/neotoma2/issues
 Description: Access and manipulation of data using the Neotoma Paleoecology Database.
         <https://api.neotomadb.org/api-docs/>.
+        Examples in functions that require API access are not executed during CRAN checks.
+        Vignettes do not execute as to avoid API calls during CRAN checks.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Suggests:
-    testthat,
+Suggests: 
+    Bchron,
+    covr,
+    ggplot2,
+    httptest,
     knitr,
     pkgdown,
     rmarkdown,
-    ggplot2,
-    Bchron,
-    covr,
-Imports:
+    testthat
+Imports: 
     rlang,
-    magrittr,
     sf,
+    leaflet,
+    magrittr,
     digest,
     geojsonsf,
     purrr,
@@ -40,7 +50,6 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    leaflet,
     assertthat,
     stringr,
     progress,

@@ -36,7 +36,7 @@ information about the overall number of sites/datasets (using an arbitrarily
 high value for \code{end}).
 }
 \examples{
-\donttest{
+\dontrun{
 tryCatch({
 last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
 }, error = function(e) {

@@ -4,7 +4,7 @@
 #' @importFrom leaflet leaflet addTiles addCircleMarkers 
 #' @importFrom leaflet markerOptions markerClusterOptions
 #' @param object Sites object to plot
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Note that by default the limit for queries is 25 records:
 #' tryCatch({
 #' modernSites <- get_sites(keyword = "Modern")

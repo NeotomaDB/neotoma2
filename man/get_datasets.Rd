@@ -88,7 +88,7 @@ For the complete records, use \code{all_data=TRUE}
 }
 }
 \examples{
-\donttest{
+\dontrun{
 tryCatch({
   random_sites <- get_sites(1)
   allds <- get_datasets(random_sites, limit=3)

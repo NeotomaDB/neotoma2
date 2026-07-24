@@ -9,13 +9,9 @@
 #' @param x A Neotoma2 \code{sites} or \code{collunits} object.
 #' @param order sort items by `siteid`, `collunitid`, `datasetid`
 #' @returns `data.frame` containing `siteid`, `datasetid`, and `collunitid`
-#' @examples \donttest{
-#' tryCatch({
+#' @examples \dontrun{
 #' marion <- get_sites(sitename = "Marion Lake")
 #' collunitids <- getids(collunits(marion))
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
 #' }
 #' @md
 #' @export

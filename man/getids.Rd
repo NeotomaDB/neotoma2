@@ -32,13 +32,9 @@ This function parses a site object, from \code{site} to
 site, collectionunit and dataset IDs for each element within the site.
 }
 \examples{
-\donttest{
-tryCatch({
+\dontrun{
 marion <- get_sites(sitename = "Marion Lake")
 collunitids <- getids(collunits(marion))
-}, error = function(e) {
- message("Neotoma server not responding. Try again later.")
-})
 }
 }
 \author{

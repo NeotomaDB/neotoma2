@@ -48,7 +48,7 @@
 #' \item{ \code{pi list} }{P.I. info}
 #' \item{ \code{analyst} }{analyst info}
 #' \item{ \code{metadata} }{dataset metadata}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # To find the downloads object of dataset 24:
 #' tryCatch({
 #'   downloads24 <- get_downloads(24)

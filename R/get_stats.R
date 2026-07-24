@@ -21,7 +21,7 @@
 #' added per month), and \code{dstypemonth} (the number of datasets added
 #' per dataset type per month). Default is \code{dsdbmonth}.
 #' @returns `data.frame` with summary statistics
-#' @examples \donttest{
+#' @examples \dontrun{
 #' tryCatch({
 #' last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
 #' }, error = function(e) {

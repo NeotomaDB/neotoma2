@@ -4,6 +4,7 @@
 ^\.git$
 ^\.github$
 
+
 ^codecov\.yml$
 ^_pkgdown\.yml$
 checkout\.txt$
@@ -23,3 +24,9 @@ lintoutput\.txt$
 paper.*
 
 ^\.Rbuildignore$
+
+# Recorded httptest API responses: used only by the mocked (offline) tests,
+# which skip_on_cran(). Kept out of the CRAN tarball to hold its size down. The
+# hand-made parser fixtures at fixtures/*.json are NOT ignored — the offline
+# parser tests run on CRAN and need them.
+^tests/testthat/fixtures/api\.neotomadb\.org/
