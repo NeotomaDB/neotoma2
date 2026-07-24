@@ -1,0 +1,72 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 24,
+            "sitename": "Alexander Lake",
+            "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 24,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 7870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 37682,
+            "sitename": "Alexander Lake",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-71.90076,41.86029]}",
+            "altitude": 77,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLKBS",
+                    "datasets": [
+                        {
+                            "datasetid": 73926,
+                            "datasettype": "diatom bottom sample"
+                        }
+                    ],
+                    "collectionunit": "Alexander Lake",
+                    "collectionunitid": 55369,
+                    "collectionunittype": "Modern"
+                },
+                {
+                    "handle": "ALXDRLKE",
+                    "datasets": [
+                        {
+                            "datasetid": 69663,
+                            "datasettype": "diatom top-bottom"
+                        }
+                    ],
+                    "collectionunit": "Alexander Lake",
+                    "collectionunitid": 51132,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

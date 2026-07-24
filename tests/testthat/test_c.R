@@ -1,7 +1,9 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Concatenation of c()  in `neotoma2` objects works appropriately.")
+httptest::with_mock_api({
 test_that("c() concats properly.", {
   skip_on_cran()
   alex <- get_sites(24)
@@ -11,6 +13,7 @@ test_that("c() concats properly.", {
 })
 
 test_that("c() removes duplicates properly.", {
+  skip_on_cran()
   alex <- get_sites(24)
   alex2 <- get_datasets(7870)
   sites <- c(alex, alex2)
@@ -19,4 +22,5 @@ test_that("c() removes duplicates properly.", {
   site5 <- get_sites(5)
   sites <- c(sites, site5)
   testthat::expect_equal(length(sites), 2)
+})
 })

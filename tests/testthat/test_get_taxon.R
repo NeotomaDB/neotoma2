@@ -2,6 +2,7 @@ library("testthat")
 library("neotoma2")
 
 test_that("`get_taxon` yields specific taxon information", {
+  skip_on_cran()
   abies_num <- get_taxon(1)
   testthat::expect_is(abies_num, "taxa")
   testthat::expect_is(abies_num[[1]], "taxon")

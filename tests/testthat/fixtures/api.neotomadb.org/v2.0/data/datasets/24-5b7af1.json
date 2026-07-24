@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 24,
+                "sitename": "Alexander Lake",
+                "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+                "sitenotes": "Lake area from Topographic Dataset of Canada (CanVec).  Added on 7/14/21 by Grace Roper, UW-Madison.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+                "altitude": 73,
+                "collectionunitid": 24,
+                "collectionunit": null,
+                "handle": "ALEXLAKE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3f97t",
+                            "10.21233/n3v88k"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calendar years BP",
+                                "ageold": 7602,
+                                "ageyoung": 3472
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 24,
+                        "datasetpi": [
+                            {
+                                "initials": "R.H.",
+                                "contactid": 52,
+                                "firstname": "Richard H.",
+                                "familyname": "Jordan",
+                                "contactname": "Jordan, Richard H."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Taxon counts and names were unclear on original Jordan data sheets - errors are possible.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

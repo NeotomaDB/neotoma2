@@ -1,8 +1,14 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Test that filter receives a sites object
         and filters using dplyr's syntax")
+
+# These tests exercise filter() logic against recorded fixtures (offline). The
+# one heavy integration test (19-site get_downloads chain) stays live below the
+# wrapper because its multi-site dataset URL is unmockable (filename too long).
+httptest::with_mock_api({
 test_that("filter datasettype", {
   skip_on_cran()
   sts <- get_sites()
@@ -14,7 +20,8 @@ test_that("filter datasettype", {
   testthat::expect_equal(pollen_types, "pollen")
 })
 
-test_that("filter datasettype + loc", {  
+test_that("filter datasettype + loc", {
+  skip_on_cran()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
@@ -58,6 +65,7 @@ test_that("filter get_datasets('datasettype') by datasettype
           })
 
 test_that("filter by 2 datasettypes", {
+  skip_on_cran()
   sts <- get_sites()
   filtered <- sts %>%
     neotoma2::filter(datasettype == "pollen" | datasettype == "charcoal")
@@ -80,8 +88,144 @@ test_that("filter datasets returns a clean object", {
   testthat::expect_lte(length(sts), nrow(summary(sts)))
 })
 
+test_that("multi-condition filter across two levels (regression)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>% filter(altitude < 3000, datasettype == "pollen")
+  testthat::expect_s4_class(result, "sites")
+  dts <- as.data.frame(datasets(result))
+  testthat::expect_true(all(dts$datasettype == "pollen"))
+})
+
+test_that("order of conditions does not matter", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  a <- sites %>% filter(altitude < 3000, datasettype == "pollen")
+  b <- sites %>% filter(datasettype == "pollen", altitude < 3000)
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("single-condition filters still work (no regression)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  s_site <- sites %>% filter(altitude < 3000)
+  s_ds   <- sites %>% filter(datasettype == "pollen")
+  testthat::expect_s4_class(s_site, "sites")
+  testthat::expect_s4_class(s_ds, "sites")
+})
+
+test_that("three levels at once", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>%
+    filter(altitude < 5000, datasettype == "pollen", waterdepth > 0)
+  testthat::expect_s4_class(result, "sites")
+})
+
+test_that("substring false-positive guard (value contains a column substring)", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  # "LONGCORE" contains "long", but the referenced column is `handle`
+  # (a collunit column), so only the collunit join should be triggered.
+  result <- sites %>% filter(handle == "SOME-LONG-HANDLE")
+  testthat::expect_s4_class(result, "sites")
+})
+
+test_that("no matches returns an empty sites", {
+  skip_on_cran()
+  sites <- get_sites(limit = 10) %>% get_datasets()
+  result <- sites %>% filter(altitude < -100000)
+  testthat::expect_s4_class(result, "sites")
+  testthat::expect_equal(length(result@sites), 0)
+})
+
+test_that("filter(NULL) warns and returns NULL", {
+  skip_on_cran()
+  testthat::expect_warning(res <- filter(NULL), "No sites to filter")
+  testthat::expect_null(res)
+})
+
+test_that("spatial loc filter keeps only sites inside the region", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  result <- sites %>% filter(loc == brazil_sf)
+  testthat::expect_s4_class(result, "sites")
+  testthat::expect_lte(length(result@sites), length(sites))
+})
+
+test_that("loc combines with an ordinary condition", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  result <- sites %>% filter(altitude < 3000, loc == brazil_sf)
+  testthat::expect_s4_class(result, "sites")
+  elev <- as.data.frame(result)$elev
+  testthat::expect_true(all(elev < 3000 | is.na(elev)))
+})
+
+test_that("geography is an alias for loc", {
+  skip_on_cran()
+  brazil <- paste0('{"type": "Polygon", "coordinates": [[',
+                   '[-73.125, -9.102], [-56.953, -33.138],',
+                   '[-36.563, -7.711], [-68.203, 13.923],',
+                   '[-73.125, -9.102]]]}')
+  brazil_sf <- geojsonsf::geojson_sf(brazil)
+  sites <- get_datasets(loc = brazil, limit = 20)
+  a <- sites %>% filter(loc == brazil_sf)
+  b <- sites %>% filter(geography == brazil_sf)
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("filter(loc == WKT) matches filter(loc == GeoJSON)", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  sites <- get_datasets(loc = brazil_geojson, limit = 20)
+  a <- sites %>% filter(loc == brazil_geojson)
+  b <- sites %>% filter(loc == brazil_wkt)
+  testthat::expect_s4_class(b, "sites")
+  testthat::expect_equal(length(a@sites), length(b@sites))
+})
+
+test_that("WKT loc combines with an ordinary condition (geography alias)", {
+  skip_on_cran()
+  brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
+                           '[-73.125, -9.102], [-56.953, -33.138],',
+                           '[-36.563, -7.711], [-68.203, 13.923],',
+                           '[-73.125, -9.102]]]}')
+  brazil_wkt <- paste0("POLYGON ((-73.125 -9.102, -56.953 -33.138, ",
+                       "-36.563 -7.711, -68.203 13.923, -73.125 -9.102))")
+  sites <- get_datasets(loc = brazil_geojson, limit = 20)
+  r <- sites %>% filter(altitude < 3000, geography == brazil_wkt)
+  testthat::expect_s4_class(r, "sites")
+  elev <- as.data.frame(r)$elev
+  testthat::expect_true(all(elev < 3000 | is.na(elev)))
+})
+})  # end with_mock_api
+
+# ---------------------------------------------------------------------------
+# Live integration tests. These download whole records that are too large to
+# ship as fixtures (the meerfeld cores alone are ~17 MB / 21k samples, and the
+# 19-site chain builds a dataset URL that exceeds the OS filename limit), so
+# they are not mocked. They skip on CRAN and on CI (GitHub Actions) but still
+# run in a local, network-connected session.
+# ---------------------------------------------------------------------------
 test_that("filter by collunitid removes samples", {
   skip_on_cran()
+  skip_on_ci()
   meer <- get_sites(sitename = "meerfeld%") %>%
     get_downloads()
   meerDS42510 <- meer %>%
@@ -93,6 +237,7 @@ test_that("filter by collunitid removes samples", {
 test_that("filter by datasetid keeps all other collection units
            where the dataset does not belong", {
              skip_on_cran()
+             skip_on_ci()
              meer <- get_sites(sitename = "meerfeld%") %>%
                get_downloads()
              meerDS42510 <- meer %>%
@@ -103,7 +248,8 @@ test_that("filter by datasetid keeps all other collection units
 
 test_that("filter works before/after get_downloads", {
   skip_on_cran()
-  core_sites <- c(13949, 11904, 13319, 728, 
+  skip_on_ci()
+  core_sites <- c(13949, 11904, 13319, 728,
                   13248, 2625, 2806,
                   13280, 519, 11745, 273, 13956,
                   11880, 13321, 9801, 13698, 11816,

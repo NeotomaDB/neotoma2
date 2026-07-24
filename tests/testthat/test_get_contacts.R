@@ -3,6 +3,7 @@ library("neotoma2")
 
 context("`get_contacts()` tests")
 test_that("`get_contacts()` numeric", {
+  skip_on_cran()
   single <- get_contacts(x = 1)
   testthat::expect_equal(length(single), 1)
   testthat::expect_true(class(single) == "contacts")
@@ -17,6 +18,7 @@ test_that("`get_contacts()` numeric", {
 })
 
 test_that("`get_contacts()` query", {
+  skip_on_cran()
   goring <- get_contacts(familyname ="Goring")
   testthat::expect_gt(length(goring), 0)
   testthat::expect_true(class(goring) == "contacts")

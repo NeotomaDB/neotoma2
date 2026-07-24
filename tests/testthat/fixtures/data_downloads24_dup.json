@@ -1,0 +1,406 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "site": {
+        "area": null,
+        "notes": "Lake area from a regional hydrography dataset.  Added on 3/2/22 by Sample Analyst, Example University.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+        "siteid": 24,
+        "dataset": {
+          "doi": null,
+          "agerange": [
+            {
+              "units": null,
+              "ageold": null,
+              "ageyoung": null
+            }
+          ],
+          "database": "North American Pollen Database",
+          "datasetid": 7870,
+          "datasetpi": null,
+          "datasetname": null,
+          "datasettype": "geochronologic",
+          "datasetnotes": null
+        },
+        "altitude": 128,
+        "sitename": "A Place in Neotoma",
+        "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-95.25,45.75]}",
+        "geopolitical": [
+          "Freedonia",
+          "Northern Province"
+        ],
+        "collectionunit": {
+          "notes": null,
+          "handle": "NEOPLACE",
+          "colldate": "1985-06-14",
+          "location": null,
+          "waterdepth": null,
+          "gpslocation": {
+            "gpserror": null,
+            "latitude": null,
+            "longitude": null,
+            "gpsaltitude": null
+          },
+          "collunittype": "Core",
+          "collectionunit": null,
+          "collectiondevice": "modified Livingstone corer (3.8cm)",
+          "collectionunitid": 24,
+          "depositionalenvironment": "Lacustrine",
+          "dataset": {
+            "doi": null,
+            "agerange": [
+              {
+                "units": null,
+                "ageold": null,
+                "ageyoung": null
+              }
+            ],
+            "database": "North American Pollen Database",
+            "datasetid": 7870,
+            "datasetpi": null,
+            "datasetname": null,
+            "datasettype": "geochronologic",
+            "datasetnotes": null,
+            "samples": [
+              {
+                "ages": [
+                  {
+                    "age": null,
+                    "agetype": null,
+                    "ageolder": null,
+                    "ageyounger": null,
+                    "chronologyid": null,
+                    "chronologyname": null
+                  }
+                ],
+                "igsn": null,
+                "datum": [
+                  {
+                    "units": null,
+                    "value": null,
+                    "context": null,
+                    "element": null,
+                    "taxonid": null,
+                    "symmetry": null,
+                    "taxongroup": null,
+                    "elementtype": null,
+                    "variablename": null,
+                    "ecologicalgroup": null
+                  }
+                ],
+                "depth": null,
+                "sampleid": null,
+                "thickness": null,
+                "samplename": null,
+                "sampleanalyst": [
+                  {
+                    "initials": null,
+                    "contactid": null,
+                    "firstname": null,
+                    "familyname": null,
+                    "contactname": null
+                  }
+                ],
+                "analysisunitid": null,
+                "analysisunitname": null
+              }
+            ]
+          },
+          "chronologies": [
+            {
+              "chronology": {
+                "chronology": {
+                  "notes": "Chron uses one C14 date and one averaged C14 date (LB-2011 and LB-1331).",
+                  "contact": [
+                    {
+                      "contactid": 430,
+                      "givenname": "Mary B.",
+                      "familyname": "Roe",
+                      "contactname": "Roe, Mary B.",
+                      "leadinginitial": "M.B."
+                    },
+                    {
+                      "contactid": 430,
+                      "givenname": "Mary B.",
+                      "familyname": "Roe",
+                      "contactname": "Roe, Mary B.",
+                      "leadinginitial": "M.B."
+                    }
+                  ],
+                  "agemodel": "linear interpolation",
+                  "agerange": {
+                    "ageboundolder": 6410,
+                    "ageboundyounger": 2810
+                  },
+                  "isdefault": false,
+                  "dateprepared": "2001-08-19",
+                  "modelagetype": "Radiocarbon years BP",
+                  "chronologyname": "NEO 1"
+                },
+                "chronologyid": 15,
+                "chroncontrols": [
+                  {
+                    "depth": 50,
+                    "geochron": {
+                      "agetype": "Radiocarbon years BP",
+                      "delta13c": null,
+                      "delta15n": null,
+                      "infinite": false,
+                      "percentc": null,
+                      "percentn": null,
+                      "labnumber": "LB-2010",
+                      "reservoir": null,
+                      "geochronid": 63,
+                      "geochronage": 3720,
+                      "geochrontype": "Carbon-14",
+                      "geochronnotes": null,
+                      "percentcollagen": null,
+                      "radiocarbonmethod": "proportional gas counting",
+                      "geochronerrorolder": 90,
+                      "geochronerroryounger": 90,
+                      "geochronmaterialdated": "gyttja"
+                    },
+                    "thickness": 20,
+                    "agelimitolder": 3960,
+                    "chroncontrolid": 77,
+                    "agelimityounger": 3480,
+                    "chroncontrolage": 3720,
+                    "chroncontroltype": "Radiocarbon"
+                  }
+                ]
+              }
+            }
+          ],
+          "defaultchronology": 24854
+        },
+        "sitedescription": "Physiography: gentle rolling hills with scattered wetlands."
+      }
+    },
+    {
+      "site": {
+        "area": null,
+        "notes": "Lake area from a regional hydrography dataset.  Added on 3/2/22 by Sample Analyst, Example University.  Lake-area scripts available at https://github.com/NeotomaDB/neotoma_lakes",
+        "siteid": 24,
+        "dataset": {
+          "doi": [
+            "10.21233/x0bb22",
+            "10.21233/x0aa11"
+          ],
+          "agerange": [
+            {
+              "units": "Calendar years BP",
+              "ageold": 8100,
+              "ageyoung": 2900
+            }
+          ],
+          "database": "North American Pollen Database",
+          "datasetid": 24,
+          "datasetpi": [
+            {
+              "initials": "J.A.",
+              "contactid": 52,
+              "firstname": "Jane A.",
+              "familyname": "Doe",
+              "contactname": "Doe, Jane A."
+            }
+          ],
+          "datasetname": null,
+          "datasettype": "pollen",
+          "datasetnotes": "Taxon counts and names were unclear on the original data sheets - errors are possible."
+        },
+        "altitude": 128,
+        "sitename": "A Place in Neotoma",
+        "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-95.25,45.75]}",
+        "geopolitical": [
+          "Freedonia",
+          "Northern Province"
+        ],
+        "collectionunit": {
+          "notes": null,
+          "handle": "NEOPLACE",
+          "colldate": "1985-06-14",
+          "location": null,
+          "waterdepth": null,
+          "gpslocation": {
+            "gpserror": null,
+            "latitude": null,
+            "longitude": null,
+            "gpsaltitude": null
+          },
+          "collunittype": "Core",
+          "collectionunit": null,
+          "collectiondevice": "modified Livingstone corer (3.8cm)",
+          "collectionunitid": 24,
+          "depositionalenvironment": "Lacustrine",
+          "dataset": {
+            "doi": [
+              "10.21233/x0bb22",
+              "10.21233/x0aa11"
+            ],
+            "agerange": [
+              {
+                "units": "Calendar years BP",
+                "ageold": 8100,
+                "ageyoung": 2900
+              }
+            ],
+            "database": "North American Pollen Database",
+            "datasetid": 24,
+            "datasetpi": [
+              {
+                "initials": "J.A.",
+                "contactid": 52,
+                "firstname": "Jane A.",
+                "familyname": "Doe",
+                "contactname": "Doe, Jane A."
+              }
+            ],
+            "datasetname": null,
+            "datasettype": "pollen",
+            "datasetnotes": "Taxon counts and names were unclear on the original data sheets - errors are possible.",
+            "samples": [
+              {
+                "ages": [
+                  {
+                    "age": 1800,
+                    "agetype": "Radiocarbon years BP",
+                    "ageolder": null,
+                    "ageyounger": null,
+                    "chronologyid": 16,
+                    "chronologyname": "REGIONAL chron 2"
+                  },
+                  {
+                    "age": 3100,
+                    "agetype": "Radiocarbon years BP",
+                    "ageolder": null,
+                    "ageyounger": null,
+                    "chronologyid": 15,
+                    "chronologyname": "NEO 1"
+                  },
+                  {
+                    "age": 3600,
+                    "agetype": "Calendar years BP",
+                    "ageolder": 4200,
+                    "ageyounger": 2900,
+                    "chronologyid": 24854,
+                    "chronologyname": "Smith et al."
+                  }
+                ],
+                "igsn": null,
+                "datum": [
+                  {
+                    "units": "NISP",
+                    "value": 1,
+                    "context": null,
+                    "element": "pollen",
+                    "taxonid": 190,
+                    "symmetry": null,
+                    "taxongroup": "Vascular plants",
+                    "elementtype": "pollen",
+                    "variablename": "Nuphar",
+                    "ecologicalgroup": "AQVP"
+                  },
+                  {
+                    "units": "NISP",
+                    "value": 1,
+                    "context": null,
+                    "element": "spore",
+                    "taxonid": 91,
+                    "symmetry": null,
+                    "taxongroup": "Vascular plants",
+                    "elementtype": "spore",
+                    "variablename": "Equisetum",
+                    "ecologicalgroup": "VACR"
+                  }
+                ],
+                "depth": 0,
+                "sampleid": 700,
+                "thickness": null,
+                "samplename": null,
+                "sampleanalyst": [
+                  {
+                    "initials": "J.A.",
+                    "contactid": 52,
+                    "firstname": "Jane A.",
+                    "familyname": "Doe",
+                    "contactname": "Doe, Jane A."
+                  }
+                ],
+                "analysisunitid": 500,
+                "analysisunitname": null
+              }
+            ]
+          },
+          "chronologies": [
+            {
+              "chronology": {
+                "chronology": {
+                  "notes": "Chron uses one C14 date and one averaged C14 date (LB-2011 and LB-1331).",
+                  "contact": [
+                    {
+                      "contactid": 430,
+                      "givenname": "Mary B.",
+                      "familyname": "Roe",
+                      "contactname": "Roe, Mary B.",
+                      "leadinginitial": "M.B."
+                    },
+                    {
+                      "contactid": 430,
+                      "givenname": "Mary B.",
+                      "familyname": "Roe",
+                      "contactname": "Roe, Mary B.",
+                      "leadinginitial": "M.B."
+                    }
+                  ],
+                  "agemodel": "linear interpolation",
+                  "agerange": {
+                    "ageboundolder": 6410,
+                    "ageboundyounger": 2810
+                  },
+                  "isdefault": false,
+                  "dateprepared": "2001-08-19",
+                  "modelagetype": "Radiocarbon years BP",
+                  "chronologyname": "NEO 1"
+                },
+                "chronologyid": 15,
+                "chroncontrols": [
+                  {
+                    "depth": 195,
+                    "geochron": {
+                      "agetype": "Radiocarbon years BP",
+                      "delta13c": null,
+                      "delta15n": null,
+                      "infinite": false,
+                      "percentc": null,
+                      "percentn": null,
+                      "labnumber": "LB-2011",
+                      "reservoir": null,
+                      "geochronid": 64,
+                      "geochronage": 5410,
+                      "geochrontype": "Carbon-14",
+                      "geochronnotes": null,
+                      "percentcollagen": null,
+                      "radiocarbonmethod": "proportional gas counting",
+                      "geochronerrorolder": 90,
+                      "geochronerroryounger": 90,
+                      "geochronmaterialdated": "gyttja"
+                    },
+                    "thickness": 90,
+                    "agelimitolder": 5620,
+                    "chroncontrolid": 78,
+                    "agelimityounger": 5220,
+                    "chroncontrolage": 5420,
+                    "chroncontroltype": "Radiocarbon, average of two or more dates"
+                  }
+                ]
+              }
+            }
+          ],
+          "defaultchronology": 24854
+        },
+        "sitedescription": "Physiography: gentle rolling hills with scattered wetlands."
+      }
+    }
+  ],
+  "message": "Retrieved all tables"
+}
