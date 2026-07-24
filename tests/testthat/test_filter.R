@@ -1,9 +1,14 @@
-testthat::skip("Skipping all tests in this file")
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Test that filter receives a sites object
         and filters using dplyr's syntax")
+
+# These tests exercise filter() logic against recorded fixtures (offline). The
+# one heavy integration test (19-site get_downloads chain) stays live below the
+# wrapper because its multi-site dataset URL is unmockable (filename too long).
+httptest::with_mock_api({
 test_that("filter datasettype", {
   skip_on_cran()
   sts <- get_sites()
@@ -83,27 +88,6 @@ test_that("filter datasets returns a clean object", {
   testthat::expect_lte(length(sts), nrow(summary(sts)))
 })
 
-test_that("filter by collunitid removes samples", {
-  skip_on_cran()
-  meer <- get_sites(sitename = "meerfeld%") %>%
-    get_downloads()
-  meerDS42510 <- meer %>%
-    neotoma2::filter(collunitid == 29576) %>%
-    samples()
-  testthat::expect_true(all(meerDS42510$collectionunitid == 29576))
-})
-
-test_that("filter by datasetid keeps all other collection units
-           where the dataset does not belong", {
-             skip_on_cran()
-             meer <- get_sites(sitename = "meerfeld%") %>%
-               get_downloads()
-             meerDS42510 <- meer %>%
-               neotoma2::filter(datasetid == 42510)
-             meerId <-  as.data.frame(collunits(meerDS42510))$collectionunitid
-             testthat::expect_equal(meerId, 29576)
-           })
-
 test_that("multi-condition filter across two levels (regression)", {
   skip_on_cran()
   sites <- get_sites(limit = 10) %>% get_datasets()
@@ -156,6 +140,7 @@ test_that("no matches returns an empty sites", {
 })
 
 test_that("filter(NULL) warns and returns NULL", {
+  skip_on_cran()
   testthat::expect_warning(res <- filter(NULL), "No sites to filter")
   testthat::expect_null(res)
 })
@@ -229,10 +214,42 @@ test_that("WKT loc combines with an ordinary condition (geography alias)", {
   elev <- as.data.frame(r)$elev
   testthat::expect_true(all(elev < 3000 | is.na(elev)))
 })
+})  # end with_mock_api
+
+# ---------------------------------------------------------------------------
+# Live integration tests. These download whole records that are too large to
+# ship as fixtures (the meerfeld cores alone are ~17 MB / 21k samples, and the
+# 19-site chain builds a dataset URL that exceeds the OS filename limit), so
+# they are not mocked. They skip on CRAN and on CI (GitHub Actions) but still
+# run in a local, network-connected session.
+# ---------------------------------------------------------------------------
+test_that("filter by collunitid removes samples", {
+  skip_on_cran()
+  skip_on_ci()
+  meer <- get_sites(sitename = "meerfeld%") %>%
+    get_downloads()
+  meerDS42510 <- meer %>%
+    neotoma2::filter(collunitid == 29576) %>%
+    samples()
+  testthat::expect_true(all(meerDS42510$collectionunitid == 29576))
+})
+
+test_that("filter by datasetid keeps all other collection units
+           where the dataset does not belong", {
+             skip_on_cran()
+             skip_on_ci()
+             meer <- get_sites(sitename = "meerfeld%") %>%
+               get_downloads()
+             meerDS42510 <- meer %>%
+               neotoma2::filter(datasetid == 42510)
+             meerId <-  as.data.frame(collunits(meerDS42510))$collectionunitid
+             testthat::expect_equal(meerId, 29576)
+           })
 
 test_that("filter works before/after get_downloads", {
   skip_on_cran()
-  core_sites <- c(13949, 11904, 13319, 728, 
+  skip_on_ci()
+  core_sites <- c(13949, 11904, 13319, 728,
                   13248, 2625, 2806,
                   13280, 519, 11745, 273, 13956,
                   11880, 13321, 9801, 13698, 11816,

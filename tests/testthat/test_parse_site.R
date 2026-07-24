@@ -4,7 +4,7 @@ library("neotoma2")
 context("Test `parse_site()` builds the right number of objects.")
 
 test_that("parse_site keeps one site, one collection unit and both datasets", {
-  result <- jsonlite::fromJSON(test_path("data_sites24.json"),
+  result <- jsonlite::fromJSON(test_path("fixtures", "data_sites24.json"),
                                simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
   ids <- getids(sites)
@@ -17,7 +17,7 @@ test_that("parse_site keeps one site, one collection unit and both datasets", {
 })
 
 test_that("parse_site of a datasets response keeps the site and dataset", {
-  result <- jsonlite::fromJSON(test_path("data_datasets24.json"),
+  result <- jsonlite::fromJSON(test_path("fixtures", "data_datasets24.json"),
                                simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
   ids <- getids(sites)
@@ -27,7 +27,7 @@ test_that("parse_site of a datasets response keeps the site and dataset", {
 })
 
 test_that("parse_site of a downloads response folds the repeated unit", {
-  result <- jsonlite::fromJSON(test_path("data_downloads24_dup.json"),
+  result <- jsonlite::fromJSON(test_path("fixtures", "data_downloads24_dup.json"),
                                simplifyVector = FALSE)
   # `downloads` returns one element per dataset, so collection unit 24 arrives
   # twice, once for dataset 24 and once for dataset 7870. We keep one unit.
@@ -45,7 +45,7 @@ test_that("parse_site reads the same site from every endpoint format", {
   files <- c("data_sites24.json", "data_datasets24.json",
              "data_downloads24_dup.json")
   sites <- lapply(files, function(f) {
-    neotoma2:::parse_site(jsonlite::fromJSON(test_path(f),
+    neotoma2:::parse_site(jsonlite::fromJSON(test_path("fixtures", f),
                                              simplifyVector = FALSE))
   })
   for (site in sites) {
@@ -64,7 +64,7 @@ test_that("parse_site reads the same site from every endpoint format", {
 test_that("parse_site keeps the dataset fields the API reports", {
   # `datasetnotes`, `agerange$units` and `datasetpi` each used to be lost
   # between `parse_site()` and `build_dataset()`.
-  result <- jsonlite::fromJSON(test_path("data_datasets24.json"),
+  result <- jsonlite::fromJSON(test_path("fixtures", "data_datasets24.json"),
                                simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
   ds <- sites[[1]]@collunits@collunits[[1]]@datasets@datasets[[1]]
@@ -76,7 +76,7 @@ test_that("parse_site keeps the dataset fields the API reports", {
 })
 
 test_that("parse_site reads the geopolitical units from a download", {
-  result <- jsonlite::fromJSON(test_path("data_downloads24_dup.json"),
+  result <- jsonlite::fromJSON(test_path("fixtures", "data_downloads24_dup.json"),
                                simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
   testthat::expect_setequal(unlist(sites[[1]]@geopolitical),

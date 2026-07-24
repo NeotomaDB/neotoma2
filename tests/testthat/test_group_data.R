@@ -30,7 +30,8 @@ test_that("group_response gives every endpoint the same shape", {
   files <- c("data_sites24.json", "data_datasets24.json",
              "data_downloads24_dup.json")
   for (f in files) {
-    result <- jsonlite::fromJSON(test_path(f), simplifyVector = FALSE)
+    result <- jsonlite::fromJSON(test_path("fixtures", f),
+                                 simplifyVector = FALSE)
     grouped <- neotoma2:::group_response(result$data)
     # One site, reached the same way regardless of which endpoint answered.
     testthat::expect_length(grouped, 1)

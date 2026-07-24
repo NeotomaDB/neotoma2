@@ -1,7 +1,9 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("`chronologies()` function displays all chronologies for a download object")
+httptest::with_mock_api({
 test_that("`get_downloads()` fills up chronologies' slots.", {
   skip_on_cran()
   dl <- get_downloads(4716)
@@ -14,4 +16,5 @@ test_that("`get_downloads()` fills up chronologies' slots.", {
   # Careful, if the DB is wrong, so will the API and this test will fail
   testthat::expect_equal(sum(chron$isdefault), 1)
   testthat::expect_is(chron, "data.frame")
+})
 })

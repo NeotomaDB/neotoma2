@@ -1,0 +1,3786 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 9,
+            "sitename": "Adange",
+            "sitedescription": "Meander of Adange river. Physiography: Fluvial terrace above flood-plain. Surrounding vegetation: Subalpine tall herbaceous vegetation.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.33333,43.30556]}",
+            "altitude": 2065,
+            "collectionunits": [
+                {
+                    "handle": "ADANGE",
+                    "datasets": [
+                        {
+                            "datasetid": 9,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 9,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "ADANGE",
+                    "datasets": [
+                        {
+                            "datasetid": 7859,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 9,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 12,
+            "sitename": "Ageröds Mosse",
+            "sitedescription": "Forested Sphagnum bog. Physiography: till. Surrounding vegetation: pasture and arable land.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[13.41701,55.92856],[13.43847,55.92856],[13.43847,55.94039],[13.41701,55.94039],[13.41701,55.92856]]]}",
+            "altitude": 47,
+            "collectionunits": [
+                {
+                    "handle": "AGE",
+                    "datasets": [
+                        {
+                            "datasetid": 12,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 12,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AGE",
+                    "datasets": [
+                        {
+                            "datasetid": 7861,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 12,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 16,
+            "sitename": "Ahlenmoor",
+            "sitedescription": "Excavated bog. Physiography: Raised bog. Surrounding vegetation: Sphagnetum.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[8.715,53.66],[8.82,53.66],[8.82,53.705],[8.715,53.705],[8.715,53.66]]]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "AFM2012",
+                    "datasets": [
+                        {
+                            "datasetid": 74153,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AFM 2012",
+                    "collectionunitid": 55531,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AFM2012",
+                    "datasets": [
+                        {
+                            "datasetid": 74154,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AFM 2012",
+                    "collectionunitid": 55531,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AHL5",
+                    "datasets": [
+                        {
+                            "datasetid": 16,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AHL V",
+                    "collectionunitid": 16,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AHL5",
+                    "datasets": [
+                        {
+                            "datasetid": 7864,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AHL V",
+                    "collectionunitid": 16,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 20,
+            "sitename": "Akuvaara",
+            "sitedescription": "Lake. Physiography: Hill of sandy/gravelly outwash. Surrounding vegetation: Thin pine forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[27.67406,69.12326]}",
+            "altitude": 159,
+            "collectionunits": [
+                {
+                    "handle": "AKUV",
+                    "datasets": [
+                        {
+                            "datasetid": 20,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 20,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AKUV",
+                    "datasets": [
+                        {
+                            "datasetid": 7867,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 20,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 200,
+            "sitename": "Amtkel",
+            "sitedescription": "Lower part of glacial trough. Physiography: Head of river Amtkel. Surrounding vegetation: Subalpine beech elfin woodland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.30833,43.26806]}",
+            "altitude": 2635,
+            "collectionunits": [
+                {
+                    "handle": "AMTKEL",
+                    "datasets": [
+                        {
+                            "datasetid": 200,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL",
+                    "collectionunitid": 200,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMTKEL",
+                    "datasets": [
+                        {
+                            "datasetid": 7879,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL",
+                    "collectionunitid": 200,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 214,
+            "sitename": "Arts Lough",
+            "sitedescription": "Eroding blanket peat. Physiography: Steep cliffs to south rising to 800m. Surrounding vegetation: Heathland vegetation.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.43333,52.95]}",
+            "altitude": 613,
+            "collectionunits": [
+                {
+                    "handle": "ARTSLOUG",
+                    "datasets": [
+                        {
+                            "datasetid": 215,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 214,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ARTSLOUG",
+                    "datasets": [
+                        {
+                            "datasetid": 7892,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 214,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ARTSLOUG",
+                    "datasets": [
+                        {
+                            "datasetid": 10470,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "1",
+                    "collectionunitid": 214,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 223,
+            "sitename": "Ballinloghig Lake",
+            "sitedescription": "Lake with marginal fen. Physiography: Southern slope of Slieve Mish mountains. Surrounding vegetation: Blanket bog, heath, pasture and woodland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-10.30833,52.2]}",
+            "altitude": 66,
+            "collectionunits": [
+                {
+                    "handle": "BALLIN",
+                    "datasets": [
+                        {
+                            "datasetid": 225,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 223,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BALLIN",
+                    "datasets": [
+                        {
+                            "datasetid": 7898,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 223,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 224,
+            "sitename": "Ballybetagh",
+            "sitedescription": "Spring-fed marsh or spring. Physiography: On the edge of the Dublin mountains.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.25,53.16667]}",
+            "altitude": 431,
+            "collectionunits": [
+                {
+                    "handle": "BALLYBET",
+                    "datasets": [
+                        {
+                            "datasetid": 226,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 224,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BALLYBET",
+                    "datasets": [
+                        {
+                            "datasetid": 7899,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 224,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 310,
+            "sitename": "Bruvatnet [Rovvejávri]",
+            "sitedescription": "Lake. Physiography: Bedrock hills mantled by gl. drift (till. Surrounding vegetation: Thin mountain birch scrub.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[28.39012,70.17739],[28.42429,70.17739],[28.42429,70.18479],[28.39012,70.18479],[28.39012,70.17739]]]}",
+            "altitude": 110,
+            "collectionunits": [
+                {
+                    "handle": "BRUVAT",
+                    "datasets": [
+                        {
+                            "datasetid": 317,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 310,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BRUVAT",
+                    "datasets": [
+                        {
+                            "datasetid": 7958,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 310,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 335,
+            "sitename": "Selle di Carnino",
+            "sitedescription": "Large peaty depression. Surrounding vegetation: Subalpine meadows.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.69444,44.15]}",
+            "altitude": 1975,
+            "collectionunits": [
+                {
+                    "handle": "CARNINO",
+                    "datasets": [
+                        {
+                            "datasetid": 342,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core I",
+                    "collectionunitid": 335,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CARNINO",
+                    "datasets": [
+                        {
+                            "datasetid": 7978,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core I",
+                    "collectionunitid": 335,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 355,
+            "sitename": "Chernikhovo",
+            "sitedescription": "Bog. Physiography: Outwash plain. Surrounding vegetation: Pinus-Betula, Alnus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[26.43333,53.41667]}",
+            "altitude": 178,
+            "collectionunits": [
+                {
+                    "handle": "CHERNIH",
+                    "datasets": [
+                        {
+                            "datasetid": 363,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CHERNIH",
+                    "collectionunitid": 355,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHERNIH",
+                    "datasets": [
+                        {
+                            "datasetid": 7992,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CHERNIH",
+                    "collectionunitid": 355,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 363,
+            "sitename": "Le Marais St Boetien",
+            "sitedescription": "Marsh. Physiogramphy: basin. Surrounding vegetation: Betula, Populus, Salix, Quercus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[3.81667,49.61667]}",
+            "altitude": 61,
+            "collectionunits": [
+                {
+                    "handle": "CHIVRES",
+                    "datasets": [
+                        {
+                            "datasetid": 374,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CHIVRES",
+                    "collectionunitid": 363,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CHIVRES",
+                    "datasets": [
+                        {
+                            "datasetid": 7999,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CHIVRES",
+                    "collectionunitid": 363,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 516,
+            "sitename": "Voros-mocsar",
+            "sitedescription": "Marsh formed in a dead channel of Danube. Surrounding vegetation: Cultivated plain with meadows,pasture.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[19.19083,46.47722]}",
+            "altitude": 88,
+            "collectionunits": [
+                {
+                    "handle": "CS-4",
+                    "datasets": [
+                        {
+                            "datasetid": 530,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 516,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CS-4",
+                    "datasets": [
+                        {
+                            "datasetid": 8033,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 516,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 517,
+            "sitename": "Starniki",
+            "sitedescription": "Fen bog. Physiography: depression. Surrounding vegetation: Forests.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[26.01667,50.26667]}",
+            "altitude": 243,
+            "collectionunits": [
+                {
+                    "handle": "CTAR",
+                    "datasets": [
+                        {
+                            "datasetid": 531,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CTAR",
+                    "collectionunitid": 517,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CTAR",
+                    "datasets": [
+                        {
+                            "datasetid": 8034,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CTAR",
+                    "collectionunitid": 517,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 700,
+            "sitename": "Domsvatnet",
+            "sitedescription": "The lake occupies a shallow oblong basin, measuring about 150 m by 600 m, between gently sloping hills covered by drift. There are no apparent influents and only a small stream as an outflow. The dominant vegetation on the surrounding slopes is a dwarf-shrub tundra with Betula nana, Empetrum, Salix, Arctostaphylos alpinum, and Rubus chamaemorus as prominent elements. Cottongrass-sedge communities are abundant in wetter depressions.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[31.01975,70.32333],[31.03198,70.32333],[31.03198,70.32834],[31.01975,70.32834],[31.01975,70.32333]]]}",
+            "altitude": 107,
+            "collectionunits": [
+                {
+                    "handle": "DOMSV",
+                    "datasets": [
+                        {
+                            "datasetid": 720,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 700,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DOMSV",
+                    "datasets": [
+                        {
+                            "datasetid": 8071,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 700,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 703,
+            "sitename": "Dovjok Swamp",
+            "sitedescription": "Floodplain Phragmites fen. Physiography: floodplain in Murafa Basin. Surrounding vegetation: herb steppe, Quercus/Carpinus forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[28.25,48.75]}",
+            "altitude": 276,
+            "collectionunits": [
+                {
+                    "handle": "DOVJOK",
+                    "datasets": [
+                        {
+                            "datasetid": 723,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 703,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "DOVJOK",
+                    "datasets": [
+                        {
+                            "datasetid": 8073,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 703,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 765,
+            "sitename": "Edessa",
+            "sitedescription": "Marsh. Surrounding vegetation: Brushwood of deciduous oak.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[21.9525,40.81806]}",
+            "altitude": 610,
+            "collectionunits": [
+                {
+                    "handle": "EDESSA",
+                    "datasets": [
+                        {
+                            "datasetid": 784,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 764,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "EDESSA",
+                    "datasets": [
+                        {
+                            "datasetid": 8082,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 764,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 831,
+            "sitename": "Gagra",
+            "sitedescription": "Marine terrace. Physiography: River month Kolkhidka. Surrounding vegetation: Anthropogenic.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[40.26667,43.28333]}",
+            "altitude": -4,
+            "collectionunits": [
+                {
+                    "handle": "GAGRA",
+                    "datasets": [
+                        {
+                            "datasetid": 858,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core Ga",
+                    "collectionunitid": 830,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "GAGRA",
+                    "datasets": [
+                        {
+                            "datasetid": 8131,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core Ga",
+                    "collectionunitid": 830,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 839,
+            "sitename": "Gel'myazevskoye",
+            "sitedescription": "Fen bog. Physiography: depression. Surrounding vegetation: Forests and meadow steppes.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[31.83333,49.66667]}",
+            "altitude": 71,
+            "collectionunits": [
+                {
+                    "handle": "GELMT",
+                    "datasets": [
+                        {
+                            "datasetid": 867,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "GELMT",
+                    "collectionunitid": 838,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GELMT",
+                    "datasets": [
+                        {
+                            "datasetid": 8136,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "GELMT",
+                    "collectionunitid": 838,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 947,
+            "sitename": "Grasvatn",
+            "sitedescription": "Shallow lake on the island of Frøya. Overgrown by aquatics. Physiography: Shellsand on gneisses. Surrounding vegetation: Heather, fens and bogs.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[8.68656,63.70186],[8.69161,63.70186],[8.69161,63.70395],[8.68656,63.70395],[8.68656,63.70186]]]}",
+            "altitude": 25,
+            "collectionunits": [
+                {
+                    "handle": "GRASVATN",
+                    "datasets": [
+                        {
+                            "datasetid": 977,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 946,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "GRASVATN",
+                    "datasets": [
+                        {
+                            "datasetid": 8154,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 946,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1121,
+            "sitename": "Ivanovskoye Peat Bog",
+            "sitedescription": "Peat bog. Physiography: periglacial lake of middle Pleistocene. Surrounding vegetation: birch-pine forest and Carex assosiations.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[38.76667,56.81667]}",
+            "altitude": 152,
+            "collectionunits": [
+                {
+                    "handle": "IVAN3",
+                    "datasets": [
+                        {
+                            "datasetid": 1155,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Profile 3",
+                    "collectionunitid": 1120,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "IVAN3",
+                    "datasets": [
+                        {
+                            "datasetid": 8212,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Profile 3",
+                    "collectionunitid": 1120,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "IVAN4",
+                    "datasets": [
+                        {
+                            "datasetid": 4116,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "profile 4",
+                    "collectionunitid": 3987,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "IVAN4",
+                    "datasets": [
+                        {
+                            "datasetid": 9006,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "profile 4",
+                    "collectionunitid": 3987,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "IVAN5",
+                    "datasets": [
+                        {
+                            "datasetid": 4117,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "profile 5",
+                    "collectionunitid": 3988,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "IVAN5",
+                    "datasets": [
+                        {
+                            "datasetid": 9007,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "profile 5",
+                    "collectionunitid": 3988,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1398,
+            "sitename": "Kalsa Mire",
+            "sitedescription": "Mire, peat cutting at the edges. Physiography: undulating moraine topography. Surrounding vegetation: Pinus, Betula, Picea forest. in SW field.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[27.41146,58.19142]}",
+            "altitude": 28,
+            "collectionunits": [
+                {
+                    "handle": "KALSA",
+                    "datasets": [
+                        {
+                            "datasetid": 1434,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1397,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KALSA",
+                    "datasets": [
+                        {
+                            "datasetid": 8231,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1397,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1399,
+            "sitename": "Kameničky",
+            "sitedescription": "Drained sloping spring mire. Physiography: Kameničská kotlina Basin at its N margin. Surrounding vegetation: Alder carr.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[15.96947,49.72562],[15.9723,49.72562],[15.9723,49.7274],[15.96947,49.7274],[15.96947,49.72562]]]}",
+            "altitude": 618,
+            "collectionunits": [
+                {
+                    "handle": "KAMEN",
+                    "datasets": [
+                        {
+                            "datasetid": 1435,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Core CV-34-C",
+                    "collectionunitid": 1398,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "KAMEN",
+                    "datasets": [
+                        {
+                            "datasetid": 8232,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Core CV-34-C",
+                    "collectionunitid": 1398,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "KAMEN",
+                    "datasets": [
+                        {
+                            "datasetid": 10544,
+                            "datasettype": "testate amoebae"
+                        }
+                    ],
+                    "collectionunit": "Core CV-34-C",
+                    "collectionunitid": 1398,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 1401,
+            "sitename": "Kansjön",
+            "sitedescription": "Lake. Physiography: Rolling till surface. Surrounding vegetation: Pinus, Betula.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[14.53458,57.64055]}",
+            "altitude": 299,
+            "collectionunits": [
+                {
+                    "handle": "KANSJON",
+                    "datasets": [
+                        {
+                            "datasetid": 1438,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1400,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KANSJON",
+                    "datasets": [
+                        {
+                            "datasetid": 8234,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1400,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1403,
+            "sitename": "Kardashinski Swamp",
+            "sitedescription": "Phragmites fen. Physiography: Floodplain of Dniepr River. Vegetation formation: Steppe.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[32.61667,46.51667]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "KARDAS",
+                    "datasets": [
+                        {
+                            "datasetid": 1440,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "KARDAS",
+                    "collectionunitid": 1402,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KARDAS",
+                    "datasets": [
+                        {
+                            "datasetid": 8236,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "KARDAS",
+                    "collectionunitid": 1402,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KARDAS",
+                    "datasets": [
+                        {
+                            "datasetid": 45319,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "KARDAS",
+                    "collectionunitid": 1402,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KARDAS",
+                    "datasets": [
+                        {
+                            "datasetid": 45320,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "KARDAS",
+                    "collectionunitid": 1402,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1484,
+            "sitename": "Kirikumae",
+            "sitedescription": "Lake, west + southern part paludified. Physiography: Hummocky moraine, esker. Surrounding vegetation: Pinus and Picea forest + mire.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[27.25128,57.68291]}",
+            "altitude": 199,
+            "collectionunits": [
+                {
+                    "handle": "KIRIKU",
+                    "datasets": [
+                        {
+                            "datasetid": 1522,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Core 63",
+                    "collectionunitid": 1483,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KIRIKU",
+                    "datasets": [
+                        {
+                            "datasetid": 8254,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Core 63",
+                    "collectionunitid": 1483,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "KIRIKU",
+                    "datasets": [
+                        {
+                            "datasetid": 58497,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": "Core 63",
+                    "collectionunitid": 1483,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1537,
+            "sitename": "Lago de Ajo",
+            "sitedescription": "Lake dammed in 1915 for hydroelectric. Physiography: On limestone at the head of the valley. Surrounding vegetation: Pasture, Quercus scrub, Fagus woodland.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-6.14159,43.03849],[-6.13597,43.03849],[-6.13597,43.04488],[-6.14159,43.04488],[-6.14159,43.03849]]]}",
+            "altitude": 1569,
+            "collectionunits": [
+                {
+                    "handle": "LAGOAJO",
+                    "datasets": [
+                        {
+                            "datasetid": 1576,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1536,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LAGOAJO",
+                    "datasets": [
+                        {
+                            "datasetid": 1577,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1536,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "LAGOAJO",
+                    "datasets": [
+                        {
+                            "datasetid": 8290,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1536,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2255,
+            "sitename": "Sanabria Marsh",
+            "sitedescription": "Small marsh in former lake. Physiography: In a morraine at the head of the valley. Surrounding vegetation: Quercus pyrenaica in valley, heather.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.73333,42.1]}",
+            "altitude": 1425,
+            "collectionunits": [
+                {
+                    "handle": "SANABRIA",
+                    "datasets": [
+                        {
+                            "datasetid": 2334,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": "SANABRIA",
+                    "collectionunitid": 2254,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SANABRIA",
+                    "datasets": [
+                        {
+                            "datasetid": 2335,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "SANABRIA",
+                    "collectionunitid": 2254,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "SANABRIA",
+                    "datasets": [
+                        {
+                            "datasetid": 8589,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "SANABRIA",
+                    "collectionunitid": 2254,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2960,
+            "sitename": "Black Sea (Southwest 1)",
+            "sitedescription": "Marine core from southwest slope B.Sea.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[28.91667,42.18417]}",
+            "altitude": -1351,
+            "collectionunits": [
+                {
+                    "handle": "A159",
+                    "datasets": [
+                        {
+                            "datasetid": 3859,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3735,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "A159",
+                    "datasets": [
+                        {
+                            "datasetid": 8870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3735,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2961,
+            "sitename": "Aborregöl",
+            "sitedescription": "Small lake with marginal fen. Physiography: in hummocky morraine with exposed bedroc. Surrounding vegetation: mainly spruce with pine.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[16.15584,57.20045]}",
+            "altitude": 81,
+            "collectionunits": [
+                {
+                    "handle": "ABBOREG",
+                    "datasets": [
+                        {
+                            "datasetid": 3860,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3736,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2963,
+            "sitename": "Akgöl Adatepe",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[30.56203,41.03612]}",
+            "altitude": 15,
+            "collectionunits": [
+                {
+                    "handle": "ADATEPE",
+                    "datasets": [
+                        {
+                            "datasetid": 3862,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3738,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2964,
+            "sitename": "Aegelsee",
+            "sitedescription": "Raised bog with small lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.54333,46.64583]}",
+            "altitude": 1064,
+            "collectionunits": [
+                {
+                    "handle": "AE1",
+                    "datasets": [
+                        {
+                            "datasetid": 3863,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3739,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AE3",
+                    "datasets": [
+                        {
+                            "datasetid": 40626,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 3",
+                    "collectionunitid": 28183,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AE3",
+                    "datasets": [
+                        {
+                            "datasetid": 40627,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 3",
+                    "collectionunitid": 28183,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2965,
+            "sitename": "Abernethy Forest",
+            "sitedescription": "Peat hollow in a small clearing of pine. Physiography: shallow valley in hummocky morraine. Surrounding vegetation: mire surrounded by Pinus woods + Betula.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.71056,57.23528]}",
+            "altitude": 221,
+            "collectionunits": [
+                {
+                    "handle": "AF1970",
+                    "datasets": [
+                        {
+                            "datasetid": 3864,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3740,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AF1974",
+                    "datasets": [
+                        {
+                            "datasetid": 3865,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 3741,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AF1974",
+                    "datasets": [
+                        {
+                            "datasetid": 8872,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "2",
+                    "collectionunitid": 3741,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2966,
+            "sitename": "Aholammi",
+            "sitedescription": "Lake with mesic forest. Physiography: hilly morainic country. Surrounding vegetation: mesic spruce forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[25.21692,61.8947]}",
+            "altitude": 87,
+            "collectionunits": [
+                {
+                    "handle": "AHOLAMMI",
+                    "datasets": [
+                        {
+                            "datasetid": 3866,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3742,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AHOLAMMI",
+                    "datasets": [
+                        {
+                            "datasetid": 8873,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3742,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2967,
+            "sitename": "Aiguillettes des Ouches",
+            "sitedescription": "little lake. Physiography: larg cirquein mountain. Surrounding vegetation: herb.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.80944,45.92333]}",
+            "altitude": 2206,
+            "collectionunits": [
+                {
+                    "handle": "AIG_HOU",
+                    "datasets": [
+                        {
+                            "datasetid": 3867,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AIG_HOU",
+                    "collectionunitid": 3743,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2968,
+            "sitename": "Algendar",
+            "sitedescription": "South coast of Minorca Island. Physiography: littoral core. Surrounding vegetation: Quercus ilex.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[3.95861,39.94056]}",
+            "altitude": 12,
+            "collectionunits": [
+                {
+                    "handle": "ALGENDAR",
+                    "datasets": [
+                        {
+                            "datasetid": 3868,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ALGENDAR",
+                    "collectionunitid": 3744,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALGENDAR",
+                    "datasets": [
+                        {
+                            "datasetid": 8874,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ALGENDAR",
+                    "collectionunitid": 3744,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2969,
+            "sitename": "Plan du Laus",
+            "sitedescription": "Meandring stream in a flat meadow. Physiography: glacial depression. Surrounding vegetation: larch on rocky slopes.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.70222,44.24167]}",
+            "altitude": 2130,
+            "collectionunits": [
+                {
+                    "handle": "ALLOS",
+                    "datasets": [
+                        {
+                            "datasetid": 3869,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ALLOS",
+                    "collectionunitid": 3745,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALLOS",
+                    "datasets": [
+                        {
+                            "datasetid": 8875,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ALLOS",
+                    "collectionunitid": 3745,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2970,
+            "sitename": "Alsa",
+            "sitedescription": "Peat bog. Physiography: the peat is situated on Trias. Surrounding vegetation: Ericaceae-Coniferous forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-4.01667,43.11778]}",
+            "altitude": 543,
+            "collectionunits": [
+                {
+                    "handle": "ALSA",
+                    "datasets": [
+                        {
+                            "datasetid": 3870,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3746,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALSA",
+                    "datasets": [
+                        {
+                            "datasetid": 8876,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3746,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2971,
+            "sitename": "Hières sur Amby",
+            "sitedescription": "lake. Physiography: depression in Würmian moraine. Surounding vegetation: cultivated field with reforested Populus zones.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.28333,45.79083]}",
+            "altitude": 222,
+            "collectionunits": [
+                {
+                    "handle": "AMBY80",
+                    "datasets": [
+                        {
+                            "datasetid": 25284,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Hières sur Amby AI (S1)",
+                    "collectionunitid": 18405,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMBY80",
+                    "datasets": [
+                        {
+                            "datasetid": 25285,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Hières sur Amby AI (S1)",
+                    "collectionunitid": 18405,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMBY86",
+                    "datasets": [
+                        {
+                            "datasetid": 3871,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core AII (S2)",
+                    "collectionunitid": 3747,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMBY86",
+                    "datasets": [
+                        {
+                            "datasetid": 8877,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core AII (S2)",
+                    "collectionunitid": 3747,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2972,
+            "sitename": "Ampoix",
+            "sitedescription": "Mire. Physiography: Explosion crater (maar). Surrounding vegetation: Meadows.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[2.93333,45.63333]}",
+            "altitude": 1114,
+            "collectionunits": [
+                {
+                    "handle": "AMPOIX",
+                    "datasets": [
+                        {
+                            "datasetid": 3872,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AMPOIX",
+                    "collectionunitid": 3748,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMPOIX",
+                    "datasets": [
+                        {
+                            "datasetid": 8878,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AMPOIX",
+                    "collectionunitid": 3748,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2973,
+            "sitename": "Amsoldingersee",
+            "sitedescription": "Lake surrounded by fields and meadows. Surrounding vegetation: agricultural landscape.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.575,46.725]}",
+            "altitude": 643,
+            "collectionunits": [
+                {
+                    "handle": "AMSOPO1",
+                    "datasets": [
+                        {
+                            "datasetid": 3873,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PO1",
+                    "collectionunitid": 3749,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMSOPO2",
+                    "datasets": [
+                        {
+                            "datasetid": 3874,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PO2",
+                    "collectionunitid": 3750,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMSOPO2",
+                    "datasets": [
+                        {
+                            "datasetid": 8879,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "PO2",
+                    "collectionunitid": 3750,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMSOPO3",
+                    "datasets": [
+                        {
+                            "datasetid": 3875,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PO3",
+                    "collectionunitid": 3751,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMSOPO3",
+                    "datasets": [
+                        {
+                            "datasetid": 8880,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "PO3",
+                    "collectionunitid": 3751,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2974,
+            "sitename": "Amtkel 1",
+            "sitedescription": "Bottom of the trough valley on Amtkel mn. Physiography: toe of slope foot of morainic ridge. Surrounding vegetation: subalpine foot of morainic ridge.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.29167,43.28333]}",
+            "altitude": 1896,
+            "collectionunits": [
+                {
+                    "handle": "AMTKEL1",
+                    "datasets": [
+                        {
+                            "datasetid": 3876,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL1",
+                    "collectionunitid": 3752,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMTKEL1",
+                    "datasets": [
+                        {
+                            "datasetid": 8881,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL1",
+                    "collectionunitid": 3752,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2975,
+            "sitename": "Amtkel 2",
+            "sitedescription": "Bottom of old trough. Physiography: depression between morenic ridges. Surrounding vegetation: subalpine beech elfin woodland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.28417,43.29167]}",
+            "altitude": 1808,
+            "collectionunits": [
+                {
+                    "handle": "AMTKEL2",
+                    "datasets": [
+                        {
+                            "datasetid": 3877,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL2",
+                    "collectionunitid": 3753,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMTKEL2",
+                    "datasets": [
+                        {
+                            "datasetid": 8882,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL2",
+                    "collectionunitid": 3753,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2976,
+            "sitename": "Amtkel 3",
+            "sitedescription": "Slope of the old glacial trough. Physiography: depression between the morains. Surrounding vegetation: subalpine beech elfin woodland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.29167,43.26667]}",
+            "altitude": 1826,
+            "collectionunits": [
+                {
+                    "handle": "AMTKEL3",
+                    "datasets": [
+                        {
+                            "datasetid": 3878,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL3",
+                    "collectionunitid": 3754,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AMTKEL3",
+                    "datasets": [
+                        {
+                            "datasetid": 8883,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "AMTKEL3",
+                    "collectionunitid": 3754,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2977,
+            "sitename": "Allt na Feithe Sheilich",
+            "sitedescription": "Eroding blanket bog. Physiography: watershed plateau. Surrounding vegetation: calluneto-Eriophoretum (McKean, 1962).",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.90841,57.31333]}",
+            "altitude": 581,
+            "collectionunits": [
+                {
+                    "handle": "ANFSHEIL",
+                    "datasets": [
+                        {
+                            "datasetid": 3879,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3755,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ANFSHEIL",
+                    "datasets": [
+                        {
+                            "datasetid": 8884,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3755,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2979,
+            "sitename": "Åntu Sinijarv",
+            "sitedescription": "Lake, spring-fed, closed, thin fen margi. Physiography: Near esker ridge on Pandivere uplands. Surrounding vegetation: Pine and  Corylus, Betula and Alnus rare,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[26.24178,59.0608]}",
+            "altitude": 87,
+            "collectionunits": [
+                {
+                    "handle": "ANTU",
+                    "datasets": [
+                        {
+                            "datasetid": 3882,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 11",
+                    "collectionunitid": 3757,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ANTU",
+                    "datasets": [
+                        {
+                            "datasetid": 8886,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 11",
+                    "collectionunitid": 3757,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ANTU",
+                    "datasets": [
+                        {
+                            "datasetid": 56080,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": "core 11",
+                    "collectionunitid": 3757,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2980,
+            "sitename": "Arkutino Lake",
+            "sitedescription": "Lake.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[27.72198,42.32802],[27.72711,42.32802],[27.72711,42.33165],[27.72198,42.33165],[27.72198,42.32802]]]}",
+            "altitude": 5,
+            "collectionunits": [
+                {
+                    "handle": "AR1",
+                    "datasets": [
+                        {
+                            "datasetid": 3883,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3758,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AR1",
+                    "datasets": [
+                        {
+                            "datasetid": 8887,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3758,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AR2",
+                    "datasets": [
+                        {
+                            "datasetid": 3884,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3759,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AR2",
+                    "datasets": [
+                        {
+                            "datasetid": 8888,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3759,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BUL/MF/05",
+                    "datasets": [
+                        {
+                            "datasetid": null,
+                            "datasettype": null
+                        }
+                    ],
+                    "collectionunit": "BUL/MF/05",
+                    "collectionunitid": 49498,
+                    "collectionunittype": "Trap"
+                },
+                {
+                    "handle": "BUL/MF/05",
+                    "datasets": [
+                        {
+                            "datasetid": 66650,
+                            "datasettype": "pollen trap"
+                        }
+                    ],
+                    "collectionunit": "BUL/MF/05",
+                    "collectionunitid": 49498,
+                    "collectionunittype": "Trap"
+                }
+            ]
+        },
+        {
+            "siteid": 2981,
+            "sitename": "Lake Aral",
+            "sitedescription": "Salt lake without outflow. Physiography: depression bordered by not high plains.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[59.98333,44.42]}",
+            "altitude": 19,
+            "collectionunits": [
+                {
+                    "handle": "ARAL86",
+                    "datasets": [
+                        {
+                            "datasetid": 3885,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 86",
+                    "collectionunitid": 3760,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ARAL86",
+                    "datasets": [
+                        {
+                            "datasetid": 46524,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 86",
+                    "collectionunitid": 3760,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2982,
+            "sitename": "Plan Dechaud",
+            "sitedescription": "Lake. Physiography: rounded top in mountain. Surrounding vegetation: herb, rare Larix,Pinus cemb/unic.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.83083,45.56722]}",
+            "altitude": 2160,
+            "collectionunits": [
+                {
+                    "handle": "ARC",
+                    "datasets": [
+                        {
+                            "datasetid": 3886,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3761,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2983,
+            "sitename": "Aronde",
+            "sitedescription": "Bogs ans little lakes close to Aronde river. Physiography: valley of Aonde. Surrounding vegetation: cultivated fields, forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[2.69111,49.4625]}",
+            "altitude": 77,
+            "collectionunits": [
+                {
+                    "handle": "ARONDE",
+                    "datasets": [
+                        {
+                            "datasetid": 3887,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ARONDE",
+                    "collectionunitid": 3762,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ARONDE",
+                    "datasets": [
+                        {
+                            "datasetid": 8889,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ARONDE",
+                    "collectionunitid": 3762,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2984,
+            "sitename": "Lago de Arreo",
+            "sitedescription": "Lake. Physiography: valley of Erbre Rio Ebro. Surrounding vegetation: Quercus forest, agriculture.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-2.98333,42.78333]}",
+            "altitude": 693,
+            "collectionunits": [
+                {
+                    "handle": "ARREO03",
+                    "datasets": [
+                        {
+                            "datasetid": 3888,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core A3",
+                    "collectionunitid": 3763,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2985,
+            "sitename": "Lake Varna",
+            "sitedescription": "Lake connected with the Black sea. Surrounding vegetation: halophytic vegetation and Phragmites. From Wikipedia: \"Until the 20th century, fresh water from the lake emptied into the Black Sea through the Devnya River, but following the construction of the modern Port of Varna East (and the subsequent draining of the river), a canal was dug through the strip of sand between the sea and the lake between 1906 and 1909, which led to the lake's level dropping by 1.40 m and the incursion of sea water into the lake, which became brackish.\"",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[27.76434,43.1809],[27.8912,43.1809],[27.8912,43.21018],[27.76434,43.21018],[27.76434,43.1809]]]}",
+            "altitude": 3,
+            "collectionunits": [
+                {
+                    "handle": "ARS1",
+                    "datasets": [
+                        {
+                            "datasetid": 3889,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Arsenala",
+                    "collectionunitid": 3764,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ARS1",
+                    "datasets": [
+                        {
+                            "datasetid": 8890,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Arsenala",
+                    "collectionunitid": 3764,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VARNA3",
+                    "datasets": [
+                        {
+                            "datasetid": 22922,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Core-3",
+                    "collectionunitid": 16564,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "VARNA3",
+                    "datasets": [
+                        {
+                            "datasetid": 22923,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Core-3",
+                    "collectionunitid": 16564,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2986,
+            "sitename": "Åsbotorpsjön",
+            "sitedescription": "Small lake.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[13.81996,58.40981]}",
+            "altitude": 284,
+            "collectionunits": [
+                {
+                    "handle": "ASBOTOR",
+                    "datasets": [
+                        {
+                            "datasetid": 3890,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3765,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ASBOTOR",
+                    "datasets": [
+                        {
+                            "datasetid": 8891,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3765,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2987,
+            "sitename": "Atteköps Mosse",
+            "sitedescription": "Very small bog. Physiography: on a bedrock ridge \"Horst\". Surrounding vegetation: mixed forest with spruce and birch.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[12.88333,56.38333]}",
+            "altitude": 177,
+            "collectionunits": [
+                {
+                    "handle": "ATTEKOP",
+                    "datasets": [
+                        {
+                            "datasetid": 3891,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3766,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ATTEKOP",
+                    "datasets": [
+                        {
+                            "datasetid": 8892,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3766,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2988,
+            "sitename": "Altenweiher",
+            "sitedescription": "Lake sediment with Alnus peat on top. Physiography: cirque lake. Surrounding vegetation: montane forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.99444,48.01333]}",
+            "altitude": 915,
+            "collectionunits": [
+                {
+                    "handle": "ATW",
+                    "datasets": [
+                        {
+                            "datasetid": 3892,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ATW",
+                    "collectionunitid": 3767,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ATW",
+                    "datasets": [
+                        {
+                            "datasetid": 8893,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ATW",
+                    "collectionunitid": 3767,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ATW",
+                    "datasets": [
+                        {
+                            "datasetid": 10569,
+                            "datasettype": "testate amoebae"
+                        }
+                    ],
+                    "collectionunit": "ATW",
+                    "collectionunitid": 3767,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2989,
+            "sitename": "Atxuri",
+            "sitedescription": "Peat bog. Physiography: top of Pena Plata. Surrounding vegetation: Pinus and Fagus forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-1.55111,43.25028]}",
+            "altitude": 485,
+            "collectionunits": [
+                {
+                    "handle": "ATXURI01",
+                    "datasets": [
+                        {
+                            "datasetid": 3893,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "ATX",
+                    "collectionunitid": 3768,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ATXURI01",
+                    "datasets": [
+                        {
+                            "datasetid": 8894,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "ATX",
+                    "collectionunitid": 3768,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2990,
+            "sitename": "Auneau",
+            "sitedescription": "Swamp. Physiography: alluvial valley. Surrounding vegetation: wet meadow.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[1.79361,48.45611]}",
+            "altitude": 125,
+            "collectionunits": [
+                {
+                    "handle": "A400",
+                    "datasets": [
+                        {
+                            "datasetid": 24658,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring A400",
+                    "collectionunitid": 18030,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "A41",
+                    "datasets": [
+                        {
+                            "datasetid": 24657,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring A41",
+                    "collectionunitid": 18029,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AUNEAU",
+                    "datasets": [
+                        {
+                            "datasetid": 3894,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring A10",
+                    "collectionunitid": 3769,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "AUNEAU",
+                    "datasets": [
+                        {
+                            "datasetid": 8895,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "boring A10",
+                    "collectionunitid": 3769,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2992,
+            "sitename": "Babozero",
+            "sitedescription": "Lake. Physiography: end moraine. Surrounding vegetation: Pinus-Picea-Betula forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[37.51667,66.375]}",
+            "altitude": 136,
+            "collectionunits": [
+                {
+                    "handle": "BABOZ1",
+                    "datasets": [
+                        {
+                            "datasetid": 3896,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3771,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BABOZ1",
+                    "datasets": [
+                        {
+                            "datasetid": 8896,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3771,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2993,
+            "sitename": "Badentarbat",
+            "sitedescription": "Blanket bog (very exposed). Physiography: gently undulating blanket bog. Surrounding vegetation: blanket bog and mire communities.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-5.36375,58.03399]}",
+            "altitude": 6,
+            "collectionunits": [
+                {
+                    "handle": "BADENTAR",
+                    "datasets": [
+                        {
+                            "datasetid": 3897,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3772,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BADENTAR",
+                    "datasets": [
+                        {
+                            "datasetid": 8897,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3772,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2996,
+            "sitename": "Basse-Ville",
+            "sitedescription": "Marsh. Physiography: alluvial plain. Surrounding vegetation: meadows.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-1.85806,47.18611]}",
+            "altitude": 4,
+            "collectionunits": [
+                {
+                    "handle": "BASVILLE",
+                    "datasets": [
+                        {
+                            "datasetid": 3900,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 4",
+                    "collectionunitid": 3775,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BASVILLE",
+                    "datasets": [
+                        {
+                            "datasetid": 8899,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 4",
+                    "collectionunitid": 3775,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2997,
+            "sitename": "Beanrig Moss",
+            "sitedescription": "Valley mire ca 150m from Blackpool Moss. Physiography: one of 5 eutrophic mires within 1.5 km. Surrounding vegetation: pasture.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-2.78854,55.54891],[-2.76656,55.54891],[-2.76656,55.55656],[-2.78854,55.55656],[-2.78854,55.54891]]]}",
+            "altitude": 248,
+            "collectionunits": [
+                {
+                    "handle": "BEANRIG",
+                    "datasets": [
+                        {
+                            "datasetid": 3901,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "4c",
+                    "collectionunitid": 3776,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BEANRIG",
+                    "datasets": [
+                        {
+                            "datasetid": 10570,
+                            "datasettype": "testate amoebae"
+                        }
+                    ],
+                    "collectionunit": "4c",
+                    "collectionunitid": 3776,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 2999,
+            "sitename": "Bois de Buchelbush",
+            "sitedescription": "Mardelle (voir avec JLB pour traduc). Physiography: small depression with organic deposits. Surrounding vegetation: Quercus forest with Carpinus and Corylus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.82972,49.71389]}",
+            "altitude": 364,
+            "collectionunits": [
+                {
+                    "handle": "BEBUCH1",
+                    "datasets": [
+                        {
+                            "datasetid": 3903,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3778,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BEBUCH2",
+                    "datasets": [
+                        {
+                            "datasetid": 3904,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3779,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEBUCH5",
+                    "datasets": [
+                        {
+                            "datasetid": 3905,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 5",
+                    "collectionunitid": 3780,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3000,
+            "sitename": "Buzenol",
+            "sitedescription": "Calcareous deposits on the hill side. Physiography: Cron (local french word). Surrounding vegetation: Cratoneurum commutatum ...",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.60889,49.625]}",
+            "altitude": 271,
+            "collectionunits": [
+                {
+                    "handle": "BEBUZDEN",
+                    "datasets": [
+                        {
+                            "datasetid": 3906,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3781,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3001,
+            "sitename": "Bedlno",
+            "sitedescription": "Moraine-dammed lake. Physiography: Depression. Surrounding vegetation: cultivated fields and forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[20.28333,51.20417]}",
+            "altitude": 231,
+            "collectionunits": [
+                {
+                    "handle": "BEDLNO",
+                    "datasets": [
+                        {
+                            "datasetid": 3907,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BEDLNO",
+                    "collectionunitid": 3782,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3002,
+            "sitename": "Ethe source du Cron",
+            "sitedescription": "Calcareous deposits on the hill. Physiography: cron (Belgium). Surrounding vegetation: mixed forest of Fagus and Quercus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.595,49.60667]}",
+            "altitude": 265,
+            "collectionunits": [
+                {
+                    "handle": "BEETHECR",
+                    "datasets": [
+                        {
+                            "datasetid": 3908,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3783,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3003,
+            "sitename": "Tontelange Heideknapp",
+            "sitedescription": "Fen. Physiography: small undulating hills. Surrounding vegetation: Picea, Pinus sylvestris.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.82,49.71944]}",
+            "altitude": 332,
+            "collectionunits": [
+                {
+                    "handle": "BEHEIDEK",
+                    "datasets": [
+                        {
+                            "datasetid": 3909,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3784,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3004,
+            "sitename": "Puerto de Belate",
+            "sitedescription": "Peat bog. Physiography: mountain pass. Surrounding vegetation: pasture and Fagus forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-2.05,43.03333]}",
+            "altitude": 1066,
+            "collectionunits": [
+                {
+                    "handle": "BELATE01",
+                    "datasets": [
+                        {
+                            "datasetid": 3910,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BEL1",
+                    "collectionunitid": 3785,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELATE01",
+                    "datasets": [
+                        {
+                            "datasetid": 8901,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "BEL1",
+                    "collectionunitid": 3785,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELATE05",
+                    "datasets": [
+                        {
+                            "datasetid": 3911,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BEL5",
+                    "collectionunitid": 3786,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3005,
+            "sitename": "Bellefontaine",
+            "sitedescription": "Lake. Physiography: valley. Surrounding vegetation: Picea-Fagus-Abies.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.09306,46.57528]}",
+            "altitude": 1085,
+            "collectionunits": [
+                {
+                    "handle": "BELLFONT",
+                    "datasets": [
+                        {
+                            "datasetid": 3912,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring I",
+                    "collectionunitid": 3787,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELLFONT",
+                    "datasets": [
+                        {
+                            "datasetid": 8902,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "boring I",
+                    "collectionunitid": 3787,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELLFONT",
+                    "datasets": [
+                        {
+                            "datasetid": 43593,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring I",
+                    "collectionunitid": 3787,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3006,
+            "sitename": "Belle Lake",
+            "sitedescription": "Marsh on infilled lake basin. Surrounding vegetation: pasture surrounds this Phragmites fen.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-7.03333,52.18333]}",
+            "altitude": 32,
+            "collectionunits": [
+                {
+                    "handle": "BELLE",
+                    "datasets": [
+                        {
+                            "datasetid": 3913,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3788,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BELLE",
+                    "datasets": [
+                        {
+                            "datasetid": 8903,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3788,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3007,
+            "sitename": "Bois des Amerois",
+            "sitedescription": "Flat peat bog. Physiography: flat landscape.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.12917,49.74389]}",
+            "altitude": 429,
+            "collectionunits": [
+                {
+                    "handle": "BEMUNO",
+                    "datasets": [
+                        {
+                            "datasetid": 3914,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3789,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BEMUNO",
+                    "datasets": [
+                        {
+                            "datasetid": 8904,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3789,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3008,
+            "sitename": "Abbaye d'Orval",
+            "sitedescription": "Ancient peat below a building. Surrounding vegetation: mixed forest of Quercus and Fagus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[5.34722,49.64194]}",
+            "altitude": 230,
+            "collectionunits": [
+                {
+                    "handle": "BEORV622",
+                    "datasets": [
+                        {
+                            "datasetid": 3915,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3790,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV622",
+                    "datasets": [
+                        {
+                            "datasetid": 10571,
+                            "datasettype": "testate amoebae"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3790,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV623",
+                    "datasets": [
+                        {
+                            "datasetid": 3916,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 3",
+                    "collectionunitid": 3791,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV624",
+                    "datasets": [
+                        {
+                            "datasetid": 3917,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 4",
+                    "collectionunitid": 3792,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV641",
+                    "datasets": [
+                        {
+                            "datasetid": 3918,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 641",
+                    "collectionunitid": 3793,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV642",
+                    "datasets": [
+                        {
+                            "datasetid": 3919,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 642",
+                    "collectionunitid": 3794,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV643",
+                    "datasets": [
+                        {
+                            "datasetid": 3920,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 643",
+                    "collectionunitid": 3795,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORV644",
+                    "datasets": [
+                        {
+                            "datasetid": 3921,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 644",
+                    "collectionunitid": 3796,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BEORVA63",
+                    "datasets": [
+                        {
+                            "datasetid": 3922,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3797,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3009,
+            "sitename": "Bergakyllen",
+            "sitedescription": "Large lake-considerable input from north. Physiography: hummocky morraine and exposed bedrock. Surrounding vegetation: mainly spruce and pine.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[16.14528,57.18367]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "BERGAKYL",
+                    "datasets": [
+                        {
+                            "datasetid": 3923,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3798,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BERGAKYL",
+                    "datasets": [
+                        {
+                            "datasetid": 8905,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3798,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3011,
+            "sitename": "Berlare",
+            "sitedescription": "Drained (dry) channel. Physiography: abandoned river channel - peat excavated. Surrounding vegetation: popular plantation + some bushes.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[3.98167,51.03806]}",
+            "altitude": 6,
+            "collectionunits": [
+                {
+                    "handle": "BERLARE",
+                    "datasets": [
+                        {
+                            "datasetid": 3925,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3800,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BERLARE",
+                    "datasets": [
+                        {
+                            "datasetid": 8906,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3800,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3012,
+            "sitename": "Besbog",
+            "sitedescription": "Glacial lake. Surrounding vegetation: subalpine herb vegetation, Pinus mugo tur.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[23.52349,41.73224],[23.52486,41.73224],[23.52486,41.7338],[23.52349,41.7338],[23.52349,41.73224]]]}",
+            "altitude": 2249,
+            "collectionunits": [
+                {
+                    "handle": "BESBOG",
+                    "datasets": [
+                        {
+                            "datasetid": 3926,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3801,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BESBOG",
+                    "datasets": [
+                        {
+                            "datasetid": 8907,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3801,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3014,
+            "sitename": "Bezdonnoe",
+            "sitedescription": "Drained mire. Physiography: rolling moraine. Surrounding vegetation: Pinus, Picea.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[32.76667,62.03333]}",
+            "altitude": 64,
+            "collectionunits": [
+                {
+                    "handle": "BEZDON",
+                    "datasets": [
+                        {
+                            "datasetid": 3928,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3803,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BEZDON",
+                    "datasets": [
+                        {
+                            "datasetid": 8909,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3803,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3015,
+            "sitename": "Bezymiannoe",
+            "sitedescription": "Lake. Physiography: lake. Surrounding vegetation: mixed Pinus, Betula and Alnus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[30.00028,54.21667]}",
+            "altitude": 180,
+            "collectionunits": [
+                {
+                    "handle": "BEZYMIAN",
+                    "datasets": [
+                        {
+                            "datasetid": 3929,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BEZYMIAN",
+                    "collectionunitid": 3804,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3016,
+            "sitename": "Biot",
+            "sitedescription": "Plain sediment in Brague river. Physiography: Plateau. Surrounding vegetation: Quercus pubescens, Quercus suber, Quercus ilex.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.1,43.8]}",
+            "altitude": 853,
+            "collectionunits": [
+                {
+                    "handle": "BIOT",
+                    "datasets": [
+                        {
+                            "datasetid": 3930,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BIOT",
+                    "collectionunitid": 3805,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BIOT",
+                    "datasets": [
+                        {
+                            "datasetid": 8910,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "BIOT",
+                    "collectionunitid": 3805,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3017,
+            "sitename": "Bjärsjöholmssjön",
+            "sitedescription": "Overgrown ancient lake, pasture land. Physiography: hummocky dead-ice tills. Surrounding vegetation: Fagus forests, pasture land.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[13.77798,55.45303],[13.78253,55.45303],[13.78253,55.45489],[13.77798,55.45489],[13.77798,55.45303]]]}",
+            "altitude": 36,
+            "collectionunits": [
+                {
+                    "handle": "BJARHG",
+                    "datasets": [
+                        {
+                            "datasetid": 3931,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3806,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJARHG",
+                    "datasets": [
+                        {
+                            "datasetid": 10508,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3806,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJARHG",
+                    "datasets": [
+                        {
+                            "datasetid": 46282,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3806,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJARHG",
+                    "datasets": [
+                        {
+                            "datasetid": 46283,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3806,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3018,
+            "sitename": "Bjärsjon",
+            "sitedescription": "A small lake. Physiography: on a plateau mountain. Surrounding vegetation: coniferous forest.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[13.64862,58.33331],[13.66351,58.33331],[13.66351,58.33581],[13.64862,58.33581],[13.64862,58.33331]]]}",
+            "altitude": 263,
+            "collectionunits": [
+                {
+                    "handle": "BJARSJON",
+                    "datasets": [
+                        {
+                            "datasetid": 3932,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3807,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJARSJON",
+                    "datasets": [
+                        {
+                            "datasetid": 8911,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3807,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3019,
+            "sitename": "Björkeröds Mosse",
+            "sitedescription": "Open fen dammed and flooded in 1970's to create a bird pond. \r\nPhysiography: Exposed hillslope of Björkeröd plateau. Surrounding vegetation: Alder fen, beech wood, pasture, arable.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[12.51975,56.28109],[12.52703,56.28109],[12.52703,56.28321],[12.51975,56.28321],[12.51975,56.28109]]]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "BJORKE69",
+                    "datasets": [
+                        {
+                            "datasetid": 3933,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "A6",
+                    "collectionunitid": 3808,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJORKE69",
+                    "datasets": [
+                        {
+                            "datasetid": 8912,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "A6",
+                    "collectionunitid": 3808,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3020,
+            "sitename": "Björksjödamm",
+            "sitedescription": "Bog pool, lake previously much bigger. Physiography: in a small valley surrounded by slopes. Surrounding vegetation: forests with pine and spruce.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[12.32813,57.70368],[12.36469,57.70368],[12.36469,57.71432],[12.32813,57.71432],[12.32813,57.70368]]]}",
+            "altitude": 94,
+            "collectionunits": [
+                {
+                    "handle": "BJORKSJO",
+                    "datasets": [
+                        {
+                            "datasetid": 3934,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3809,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BJORKSJO",
+                    "datasets": [
+                        {
+                            "datasetid": 8913,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3809,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3021,
+            "sitename": "Bláto",
+            "sitedescription": "After deep drainage quite mineral peat. Physiography: broad flat closure of a brook valley. Surrounding vegetation: present: secondary spruce plantations.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[15.19097,49.04174]}",
+            "altitude": 649,
+            "collectionunits": [
+                {
+                    "handle": "BLATO1",
+                    "datasets": [
+                        {
+                            "datasetid": 3935,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CV-5-A",
+                    "collectionunitid": 3810,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLATO1",
+                    "datasets": [
+                        {
+                            "datasetid": 8914,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "CV-5-A",
+                    "collectionunitid": 3810,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLATO2",
+                    "datasets": [
+                        {
+                            "datasetid": 3936,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "CV-5-D",
+                    "collectionunitid": 3811,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BLATO2",
+                    "datasets": [
+                        {
+                            "datasetid": 10572,
+                            "datasettype": "testate amoebae"
+                        }
+                    ],
+                    "collectionunit": "CV-5-D",
+                    "collectionunitid": 3811,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3022,
+            "sitename": "Blåvasstjønn",
+            "sitedescription": "Lake with surrounding fen. Physiography: underlying bedrock (Amphibole/Gneiss). Surrounding vegetation: mixed pine/spruce forest/ombrogenic mire.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[11.65442,64.90934],[11.66687,64.90934],[11.66687,64.91285],[11.65442,64.91285],[11.65442,64.90934]]]}",
+            "altitude": 93,
+            "collectionunits": [
+                {
+                    "handle": "BLAVASS",
+                    "datasets": [
+                        {
+                            "datasetid": 3937,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3812,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLAVASS",
+                    "datasets": [
+                        {
+                            "datasetid": 8915,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3812,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3023,
+            "sitename": "Bledowo Lake",
+            "sitedescription": "Lake with reedswamp zone. Physiography: pingo scar, erosion or dead ice kettle. Surrounding vegetation: grasslands, pine and mixed linden forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[20.67577,52.54316]}",
+            "altitude": 80,
+            "collectionunits": [
+                {
+                    "handle": "BLEDOWO3",
+                    "datasets": [
+                        {
+                            "datasetid": 3938,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3813,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLEDOWO3",
+                    "datasets": [
+                        {
+                            "datasetid": 8916,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3813,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3024,
+            "sitename": "Black Loch",
+            "sitedescription": "Small lake with marginal Salix carr. Physiography: ice scoured hollow. Surrounding vegetation: Salix carr and agriculture.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.19472,56.32083]}",
+            "altitude": 82,
+            "collectionunits": [
+                {
+                    "handle": "BLKLOCH2",
+                    "datasets": [
+                        {
+                            "datasetid": 3939,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring 2",
+                    "collectionunitid": 3814,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLKLOCH4",
+                    "datasets": [
+                        {
+                            "datasetid": 3940,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring 4",
+                    "collectionunitid": 3815,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLKLOCH4",
+                    "datasets": [
+                        {
+                            "datasetid": 8917,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "boring 4",
+                    "collectionunitid": 3815,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3025,
+            "sitename": "Blomoy",
+            "sitedescription": "Bog. Physiography: bedrock depression. Surrounding vegetation: heath.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[4.88333,60.53333]}",
+            "altitude": 9,
+            "collectionunits": [
+                {
+                    "handle": "BLOMOY",
+                    "datasets": [
+                        {
+                            "datasetid": 3941,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3816,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BLOMOY",
+                    "datasets": [
+                        {
+                            "datasetid": 8918,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3816,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3026,
+            "sitename": "Blusovie",
+            "sitedescription": "Close to lake Bluzovoe. Physiography: lake glade. Surrounding vegetation: alpine meadow.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[41.12027,43.612]}",
+            "altitude": 2896,
+            "collectionunits": [
+                {
+                    "handle": "BLUS",
+                    "datasets": [
+                        {
+                            "datasetid": 3942,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core BL",
+                    "collectionunitid": 3817,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3027,
+            "sitename": "Lake Bobriza",
+            "sitedescription": "Lake. Physiography: End-morene flat. Surrounding vegetation: Picea, Pinus, Corylus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[28.8,54.95]}",
+            "altitude": 176,
+            "collectionunits": [
+                {
+                    "handle": "BOBRIZA",
+                    "datasets": [
+                        {
+                            "datasetid": 3943,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "boring 1",
+                    "collectionunitid": 3818,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3028,
+            "sitename": "Bogdanovskoe Lake",
+            "sitedescription": "Kettle lake. Physiography: glacial-lake flat. Surrounding vegetation: Picea, Pinus, Betula, Sphagnum.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[29.64611,54.86917]}",
+            "altitude": 147,
+            "collectionunits": [
+                {
+                    "handle": "BOGDAN",
+                    "datasets": [
+                        {
+                            "datasetid": 3944,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BOGDAN",
+                    "collectionunitid": 3819,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3030,
+            "sitename": "Boehnigsee Goldmoos",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.84306,46.25917]}",
+            "altitude": 2059,
+            "collectionunits": [
+                {
+                    "handle": "BOHINGSE",
+                    "datasets": [
+                        {
+                            "datasetid": 3946,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3821,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BOHINGSE",
+                    "datasets": [
+                        {
+                            "datasetid": 8920,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3821,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3031,
+            "sitename": "Loch Borralan",
+            "sitedescription": "Small loch. Surrounding vegetation: moorland.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-4.95768,58.04749],[-4.93377,58.04749],[-4.93377,58.05764],[-4.95768,58.05764],[-4.95768,58.04749]]]}",
+            "altitude": 131,
+            "collectionunits": [
+                {
+                    "handle": "BORR-LG",
+                    "datasets": [
+                        {
+                            "datasetid": 3947,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3822,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BORR-PG",
+                    "datasets": [
+                        {
+                            "datasetid": 3948,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PG",
+                    "collectionunitid": 3823,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3034,
+            "sitename": "Saint Michel de Braspart",
+            "sitedescription": "A bog. Physiography: On the top of the Montagne d'Arrée. Surrounding vegetation: cultivated fields and forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-3.66667,48.41667]}",
+            "altitude": 145,
+            "collectionunits": [
+                {
+                    "handle": "BRASPART",
+                    "datasets": [
+                        {
+                            "datasetid": 3951,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core I",
+                    "collectionunitid": 3826,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BRASPART",
+                    "datasets": [
+                        {
+                            "datasetid": 8922,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core I",
+                    "collectionunitid": 3826,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3035,
+            "sitename": "Brede Bridge",
+            "sitedescription": "Floodplain mire, peat overlain by alluvi. Physiography: floodplain. Surrounding vegetation: arable and some pastoral farming.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[0.67685,50.90621]}",
+            "altitude": 6,
+            "collectionunits": [
+                {
+                    "handle": "BREDCOUN",
+                    "datasets": [
+                        {
+                            "datasetid": 3953,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3827,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BREDCOUN",
+                    "datasets": [
+                        {
+                            "datasetid": 8923,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3827,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BREDCOUN",
+                    "datasets": [
+                        {
+                            "datasetid": 58499,
+                            "datasettype": "loss-on-ignition"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3827,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3036,
+            "sitename": "Tourbière de Bresles",
+            "sitedescription": "Peat bog. Physiography: Landscape with irregular appearance. Surrounding vegetation: cultivated fields and forest.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[2.25,49.4]}",
+            "altitude": 35,
+            "collectionunits": [
+                {
+                    "handle": "BRESLES",
+                    "datasets": [
+                        {
+                            "datasetid": 3954,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3828,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3037,
+            "sitename": "Ballyscullion East",
+            "sitedescription": "Cutover lowland raised bog. Physiography: flood plain of lower Bann river. Surrounding vegetation: agricultural grazing land.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.44908,54.79555]}",
+            "altitude": 13,
+            "collectionunits": [
+                {
+                    "handle": "BSCUL",
+                    "datasets": [
+                        {
+                            "datasetid": 3955,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3829,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BSCUL",
+                    "datasets": [
+                        {
+                            "datasetid": 10509,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3829,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BSCUL",
+                    "datasets": [
+                        {
+                            "datasetid": 46266,
+                            "datasettype": "charcoal"
+                        }
+                    ],
+                    "collectionunit": "core 1",
+                    "collectionunitid": 3829,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3039,
+            "sitename": "Burgmoos",
+            "sitedescription": "Raised bog near Lake Buräschi. Physiography: moraine landscape. Surrounding vegetation: Quercus robur/Fagus sylvatica/Carpinus.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[7.67444,47.17222]}",
+            "altitude": 467,
+            "collectionunits": [
+                {
+                    "handle": "BURG-0",
+                    "datasets": [
+                        {
+                            "datasetid": 3957,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/",
+                    "collectionunitid": 3831,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG1",
+                    "datasets": [
+                        {
+                            "datasetid": 3958,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/1",
+                    "collectionunitid": 3832,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG11",
+                    "datasets": [
+                        {
+                            "datasetid": 3959,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/11",
+                    "collectionunitid": 3833,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG3",
+                    "datasets": [
+                        {
+                            "datasetid": 3960,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/3",
+                    "collectionunitid": 3834,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG4A",
+                    "datasets": [
+                        {
+                            "datasetid": 3961,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/4A",
+                    "collectionunitid": 3835,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG4B",
+                    "datasets": [
+                        {
+                            "datasetid": 3962,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/4B",
+                    "collectionunitid": 3836,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG5-6",
+                    "datasets": [
+                        {
+                            "datasetid": 3963,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "5-6",
+                    "collectionunitid": 3837,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG9",
+                    "datasets": [
+                        {
+                            "datasetid": 3964,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/9",
+                    "collectionunitid": 3838,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "BURG9B",
+                    "datasets": [
+                        {
+                            "datasetid": 3965,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "I/9B",
+                    "collectionunitid": 3839,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3040,
+            "sitename": "Butter Mountain",
+            "sitedescription": "Ombrogenous blanket-bog. Physiography: near summit of mountain. Surrounding vegetation: heather / rough grassland.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-6.04608,54.18523]}",
+            "altitude": 489,
+            "collectionunits": [
+                {
+                    "handle": "BUTTER",
+                    "datasets": [
+                        {
+                            "datasetid": 3966,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3840,
+                    "collectionunittype": "Section"
+                },
+                {
+                    "handle": "BUTTER",
+                    "datasets": [
+                        {
+                            "datasetid": 8925,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 3840,
+                    "collectionunittype": "Section"
+                }
+            ]
+        },
+        {
+            "siteid": 3041,
+            "sitename": "Büyük Gölü",
+            "sitedescription": "Small lake. Physiography: depression from karst and tectonic action. Surrounding vegetation: cultivated fields.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[37.38333,39.86667]}",
+            "altitude": 1291,
+            "collectionunits": [
+                {
+                    "handle": "BUYUK",
+                    "datasets": [
+                        {
+                            "datasetid": 3967,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "BUYUK",
+                    "collectionunitid": 3841,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3042,
+            "sitename": "Cairn",
+            "sitedescription": "Peat bog. Phusiography: depression in mountain. Surrounding vegetation: rock.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.55694,45.33111]}",
+            "altitude": 2332,
+            "collectionunits": [
+                {
+                    "handle": "CAIRN2",
+                    "datasets": [
+                        {
+                            "datasetid": 3968,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3842,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CAIRN2",
+                    "datasets": [
+                        {
+                            "datasetid": 44826,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "core 2",
+                    "collectionunitid": 3842,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 3043,
+            "sitename": "Cam Loch",
+            "sitedescription": "A large lake with rocky shore, no marginal hydrosere. Vigorous inflow streams",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[-5.06656,58.06234],[-5.0045,58.06234],[-5.0045,58.08517],[-5.06656,58.08517],[-5.06656,58.06234]]]}",
+            "altitude": 135,
+            "collectionunits": [
+                {
+                    "handle": "CAM-LG",
+                    "datasets": [
+                        {
+                            "datasetid": 3969,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "Penn_late-glacial",
+                    "collectionunitid": 3843,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CAM-LG",
+                    "datasets": [
+                        {
+                            "datasetid": 8926,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": "Penn_late-glacial",
+                    "collectionunitid": 3843,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "CAM-PG",
+                    "datasets": [
+                        {
+                            "datasetid": 3970,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "PG",
+                    "collectionunitid": 3844,
+                    "collectionunittype": "Core"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

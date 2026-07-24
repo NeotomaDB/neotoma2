@@ -1,8 +1,10 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Apply a similar version to `tidyr::toWide` for
         `neotoma2` samples dataframes.")
+httptest::with_mock_api({
 test_that("`toWide()` on a samples dataframe.", {
   skip_on_cran()
   fauna1 <- samples(get_downloads(4716))
@@ -49,4 +51,5 @@ test_that("`toWide()` sum operation works", {
   # extract the sum from the wide data frame
   nuph_sum_wide_4129 <- alext$Nuphar[alext$age == 4129]
   testthat::expect_equal(nuph_sum_4129, nuph_sum_wide_4129)
+})
 })

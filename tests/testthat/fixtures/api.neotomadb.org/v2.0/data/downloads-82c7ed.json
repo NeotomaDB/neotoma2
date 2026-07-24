@@ -1,0 +1,579 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "area": null,
+                "notes": "Lundelius provided notes for locs. 1-3, surface",
+                "siteid": 3670,
+                "dataset": {
+                    "doi": [
+                        "10.21233/rf04-tw42"
+                    ],
+                    "agerange": [
+                        {
+                            "units": "Radiocarbon years BP",
+                            "ageold": 35000,
+                            "ageyoung": 1
+                        }
+                    ],
+                    "database": "FAUNMAP",
+                    "datasetid": 4716,
+                    "datasetpi": null,
+                    "datasetname": null,
+                    "datasettype": "vertebrate fauna",
+                    "datasetnotes": "Synonymizations made from original publication:\r\nCervus merriami -> Cervus canadensis\r\nErethizon epixanthum epixanthum -> Erethizon dorsatum\r\nFelis oregonensis hippolestes -> Puma concolor\r\nLynx rufus baileyi -> Lynx rufus\r\nLepus californicus texianus -> Lepus californicus\r\nOvis canadensis audonboni and texianus -> Ovis canadensis\r\nCratogeomys castanops -> Pappogeomys castanops\r\nUrsus horribilis -> Ursus arctos\r\nUrocyon cinereoargenteus scotti -> Urocyon cinereoargenteus"
+                },
+                "altitude": 1491,
+                "sitename": "Williams Cave",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-104.75,31.86667]}",
+                "geopolitical": [
+                    "United States",
+                    "Texas",
+                    "Culberson"
+                ],
+                "collectionunit": {
+                    "notes": null,
+                    "handle": "WILMSCV",
+                    "colldate": null,
+                    "location": null,
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": null,
+                    "collectionunit": "Locality",
+                    "collectiondevice": null,
+                    "collectionunitid": 4571,
+                    "depositionalenvironment": "Neotoma Midden",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/rf04-tw42"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 35000,
+                                "ageyoung": 1
+                            }
+                        ],
+                        "database": "FAUNMAP",
+                        "datasetid": 4716,
+                        "datasetpi": null,
+                        "datasetname": null,
+                        "datasettype": "vertebrate fauna",
+                        "datasetnotes": "Synonymizations made from original publication:\r\nCervus merriami -> Cervus canadensis\r\nErethizon epixanthum epixanthum -> Erethizon dorsatum\r\nFelis oregonensis hippolestes -> Puma concolor\r\nLynx rufus baileyi -> Lynx rufus\r\nLepus californicus texianus -> Lepus californicus\r\nOvis canadensis audonboni and texianus -> Ovis canadensis\r\nCratogeomys castanops -> Pappogeomys castanops\r\nUrsus horribilis -> Ursus arctos\r\nUrocyon cinereoargenteus scotti -> Urocyon cinereoargenteus",
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": null,
+                                        "agetype": "Calibrated radiocarbon years BP",
+                                        "ageolder": 15504,
+                                        "ageyounger": 12734,
+                                        "chronologyid": 47129,
+                                        "chronologyname": "Syverson-Blois: bounds"
+                                    },
+                                    {
+                                        "age": null,
+                                        "agetype": "Radiocarbon years BP",
+                                        "ageolder": 35000,
+                                        "ageyounger": 1,
+                                        "chronologyid": 2195,
+                                        "chronologyname": "FAUNMAP 1.1"
+                                    },
+                                    {
+                                        "age": 14064,
+                                        "agetype": "Calibrated radiocarbon years BP",
+                                        "ageolder": 14594,
+                                        "ageyounger": 13654,
+                                        "chronologyid": 47130,
+                                        "chronologyname": "Syverson-Blois: event"
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/bill",
+                                        "taxonid": 5856,
+                                        "symmetry": null,
+                                        "taxongroup": "Birds",
+                                        "elementtype": "bone/bill",
+                                        "variablename": "Aves",
+                                        "ecologicalgroup": "AVES"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 5840,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Antilocapra americana",
+                                        "ecologicalgroup": "ARTI"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 5912,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Canis dirus",
+                                        "ecologicalgroup": "CARN"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 5960,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Cynomys gunnisoni",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6020,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Equus conversidens",
+                                        "ecologicalgroup": "PRSS"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6047,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Erethizon dorsata",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6156,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Lepus californicus",
+                                        "ecologicalgroup": "LAGO"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6294,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Neotoma albigula",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6309,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Nothrotheriops shastensis",
+                                        "ecologicalgroup": "PILO"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6330,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Odocoileus hemionus",
+                                        "ecologicalgroup": "ARTI"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6332,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Odocoileus virginianus",
+                                        "ecologicalgroup": "ARTI"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6350,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Ovis canadensis",
+                                        "ecologicalgroup": "ARTI"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6574,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Spermophilus variegatus",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6591,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Sylvilagus audubonii",
+                                        "ecologicalgroup": "LAGO"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6682,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Urocyon cinereoargenteus",
+                                        "ecologicalgroup": "CARN"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6688,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Ursus arctos",
+                                        "ecologicalgroup": "CARN"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6740,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Puma concolor",
+                                        "ecologicalgroup": "CARN"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 6749,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Lynx rufus",
+                                        "ecologicalgroup": "CARN"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 7013,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Chaetodipus intermedius",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 7018,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Cervus elaphus canadensis",
+                                        "ecologicalgroup": "ARTI"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth",
+                                        "taxonid": 7047,
+                                        "symmetry": null,
+                                        "taxongroup": "Mammals",
+                                        "elementtype": "bone/tooth",
+                                        "variablename": "Cratogeomys castanops",
+                                        "ecologicalgroup": "RODE"
+                                    },
+                                    {
+                                        "units": "present/absent",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "bone/tooth/shell",
+                                        "taxonid": 6461,
+                                        "symmetry": null,
+                                        "taxongroup": "Reptiles and amphibians",
+                                        "elementtype": "bone/tooth/shell",
+                                        "variablename": "Reptilia",
+                                        "ecologicalgroup": "HERP"
+                                    }
+                                ],
+                                "depth": null,
+                                "sampleid": 103412,
+                                "thickness": null,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": null,
+                                        "contactid": null,
+                                        "firstname": null,
+                                        "familyname": null,
+                                        "contactname": null
+                                    }
+                                ],
+                                "analysisunitid": 80464,
+                                "analysisunitname": "Assemblage"
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": null,
+                                    "agemodel": "Individually dated analysis units",
+                                    "agerange": {
+                                        "ageboundolder": 35000,
+                                        "ageboundyounger": 1
+                                    },
+                                    "isdefault": true,
+                                    "dateprepared": null,
+                                    "modelagetype": "Radiocarbon years BP",
+                                    "chronologyname": "FAUNMAP 1.1"
+                                },
+                                "chronologyid": 2195,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 12460,
+                                        "chroncontrolid": 23098,
+                                        "agelimityounger": 11620,
+                                        "chroncontrolage": 12040,
+                                        "chroncontroltype": "Radiocarbon"
+                                    },
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": 24872,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": "Biostratigraphic"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 6539,
+                                            "givenname": "Valerie J.",
+                                            "familyname": "Syverson",
+                                            "contactname": "Syverson, Valerie J.",
+                                            "leadinginitial": "V.J."
+                                        }
+                                    ],
+                                    "agemodel": "OxCal bounds",
+                                    "agerange": {
+                                        "ageboundolder": 15504,
+                                        "ageboundyounger": 12734
+                                    },
+                                    "isdefault": false,
+                                    "dateprepared": "2025-01-21",
+                                    "modelagetype": "Calibrated radiocarbon years BP",
+                                    "chronologyname": "Syverson-Blois: bounds"
+                                },
+                                "chronologyid": 47129,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 14784,
+                                        "chroncontrolid": 138628,
+                                        "agelimityounger": 13584,
+                                        "chroncontrolage": 13984,
+                                        "chroncontroltype": "Radiocarbon, calibrated, Bayesian modelled"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "chronology": {
+                                "chronology": {
+                                    "notes": null,
+                                    "contact": [
+                                        {
+                                            "contactid": 6539,
+                                            "givenname": "Valerie J.",
+                                            "familyname": "Syverson",
+                                            "contactname": "Syverson, Valerie J.",
+                                            "leadinginitial": "V.J."
+                                        }
+                                    ],
+                                    "agemodel": "OxCal event",
+                                    "agerange": {
+                                        "ageboundolder": 14594,
+                                        "ageboundyounger": 13654
+                                    },
+                                    "isdefault": false,
+                                    "dateprepared": "2025-01-21",
+                                    "modelagetype": "Calibrated radiocarbon years BP",
+                                    "chronologyname": "Syverson-Blois: event"
+                                },
+                                "chronologyid": 47130,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": 14784,
+                                        "chroncontrolid": 146419,
+                                        "agelimityounger": 13584,
+                                        "chroncontrolage": 13984,
+                                        "chroncontroltype": "Radiocarbon, calibrated, Bayesian modelled"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": 2195
+                },
+                "sitedescription": null
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}
