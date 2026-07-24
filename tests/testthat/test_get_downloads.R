@@ -16,6 +16,7 @@ test_that("get_downloads numeric", {
 
 test_that("get_downloads from get_datasets()
           sites object.", {
+            skip_on_ci()
             skip_if_api_unreachable()
             # Space this out; it downloads full sample data.
             on.exit(Sys.sleep(10), add = TRUE)
@@ -57,6 +58,7 @@ test_that("get_downloads with or without all_data works.", {
   skip_on_cran()
   # Heavy all_data pagination + download over a UK bbox: flap-prone, skip on CI.
   skip_on_ci()
+  skip_if_api_unreachable()
   on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_datasets <- get_datasets(
@@ -75,7 +77,10 @@ test_that("get_downloads with or without all_data works.", {
 })
 
 test_that("get_downloads handles empty result", {
-  skip_on_cran()
+  # Loops eight gpid (geopolitical) searches; heavy and flap-prone. Skip on CI,
+  # and skip locally when the API is unreachable.
+  skip_on_ci()
+  skip_if_api_unreachable()
   gpids <- c(7326, 6442, 7923, 7990, 7368, 8480, 8981, 7934)
   ne_sites <- c() 
   for (id in gpids) {

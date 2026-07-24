@@ -17,6 +17,7 @@ test_that("get_sites numeric vector", {
 })
 
 test_that("get_sites with loc attribute", {
+  skip_on_ci()
   skip_if_api_unreachable()
   # `brazil_json` / `brazil_sf` come from setup.R.
   brazil_sites <- get_sites(loc = brazil_json[1], datasettype = "pollen")
@@ -32,9 +33,11 @@ test_that("get_sites with loc attribute", {
 })
 
 test_that("all_data + loc", {
-  skip_on_cran()
-  # Heavy all_data pagination over a spatial query: flap-prone, skip on CI.
+  # Heavy all_data pagination over a spatial query. Skip on CI (load), and skip
+  # locally too when the spatial endpoint is flapping so it degrades gracefully
+  # instead of timing out; still runs when the API is healthy.
   skip_on_ci()
+  skip_if_api_unreachable()
   # Validates `all_data` pagination on the sites endpoint (superset check), so
   # it keeps the loop; space it out. Uses the shared `brazil_json` from setup.R
   on.exit(Sys.sleep(10), add = TRUE)

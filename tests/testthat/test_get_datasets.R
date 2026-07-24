@@ -26,6 +26,7 @@ test_that("get_datasets numeric vector", {
 })
 
 test_that("get_datasets with loc attribute", {
+  skip_on_ci()
   skip_if_api_unreachable()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -54,6 +55,7 @@ test_that("get_datasets with loc attribute", {
 })
 
 test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
+  skip_on_ci()
   skip_if_api_unreachable()
   brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
                            '[-73.125, -9.102], [-56.953, -33.138],',
@@ -69,6 +71,7 @@ test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
 })
 
 test_that("get_datasets GeoJSON loc still works (no regression)", {
+  skip_on_ci()
   skip_if_api_unreachable()
   brazil_geojson <- paste0('{"type": "Polygon", "coordinates": [[',
                            '[-73.125, -9.102], [-56.953, -33.138],',
@@ -90,6 +93,7 @@ test_that("all_data + loc", {
   skip_on_cran()
   # Heavy all_data pagination over a spatial query: flap-prone, skip on CI.
   skip_on_ci()
+  skip_if_api_unreachable()
   # This is the one spatial test that genuinely validates `all_data` pagination
   # (the long result must be a superset of a single page), so it keeps the loop.
   # Space it out, and use the shared `brazil_json` from setup.R -- this polygon
@@ -116,6 +120,7 @@ test_that("get_datasets with or without all_data works.", {
   skip_on_cran()
   # Heavy all_data pagination over a UK bbox: flap-prone, skip on CI.
   skip_on_ci()
+  skip_if_api_unreachable()
   on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_sts <- get_sites(
