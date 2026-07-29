@@ -70,16 +70,16 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span>, chronname <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'site'</span></span>
-<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span>, chronname <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'collunits'</span></span>
-<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span>, chronname <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'collunit'</span></span>
-<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">samples</span><span class="op">(</span><span class="va">x</span>, chronname <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -88,6 +88,13 @@
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>sites object</p></dd>
+
+
+<dt id="arg-chronname">chronname<a class="anchor" aria-label="anchor" href="#arg-chronname"></a></dt>
+<dd><p>Optional character name of a chronology to report ages
+against. When <code>NULL</code> (default) the Neotoma default-chronology precedence
+is applied. If the named chronology is not present for a dataset, the
+default is used and a warning is issued.</p></dd>
 
 </dl></div>
     <div id="value">
