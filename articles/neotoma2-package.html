@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">neotoma2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <h1 data-toc-skip>The neotoma2 R Package</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/CRANv1.0.12/vignettes/neotoma2-package.Rmd" class="external-link"><code>vignettes/neotoma2-package.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/vignettes/neotoma2-package.Rmd" class="external-link"><code>vignettes/neotoma2-package.Rmd</code></a></small>
       <div class="hidden name"><code>neotoma2-package.Rmd</code></div>
 
     </div>
@@ -356,7 +356,7 @@ the <code>$</code> symbol.</p>
 <code class="sourceCode R"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Alexander Lake"</span><span class="op">)</span></span>
 <span><span class="va">alex</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">siteid</span></span></code></pre></div>
 <p>The elements within a <code>site</code> are the same as the defined
-columns within the Neotoma <a href="https://open.neotomadb.org/dbschema/tables/sites.html" class="external-link"><code>ndb.sites</code></a>
+columns within the Neotoma <a href="https://open.neotomadb.org/dbschema/ndb/tables/sites.html" class="external-link"><code>ndb.sites</code></a>
 table, with the exception of the <code>collunits</code> slot, which
 contains the collection units and associated datasets that are found
 within a site. You can see all the <code>site</code> slots using the
@@ -610,7 +610,7 @@ first in the resulting variable <code>count_by_site</code>.</p>
 </h2>
 <p>Many Neotoma records have publications associated with them. The
 <code>publication</code> object (and the <code>publications</code>
-collection) provide the opportunity to do this. The <a href="https://open.neotomadb.org/dbschema/tables/publications.html" class="external-link"><code>publication</code></a>
+collection) provide the opportunity to do this. The <a href="https://open.neotomadb.org/dbschema/ndb/tables/publications.html" class="external-link"><code>publication</code></a>
 table in Neotoma contains an extensive number of fields. The methods for
 <code>publications</code> in the <code>neotoma2</code> package provide
 us with tools to retrieve publication data from Neotoma, to set and
@@ -716,48 +716,48 @@ publication is defined:</p>
 </h2>
 <ul>
 <li>2022 International AL/IPA Meeting; Bariloche, Argentina</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_IAL-IPA/simple_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow.html" class="external-link">English
 Language Simple Workflow</a></li>
 <li>Topics: Simple search, climate gradients, stratigraphic
 plotting</li>
 <li>Spatial Domain: South America</li>
 <li>Dataset Types: Diatoms</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_IAL-IPA/simple_workflow_ES.html" class="external-link">Spanish
+<li><a href="https://open.neotomadb.org/Workshops/IAL_IPA-November2022/simple_workflow_ES.html" class="external-link">Spanish
 Language Simple Workflow</a></li>
 <li>Topics: Simple search, climate gradients, stratigraphic
 plotting</li>
 <li>Spatial Domain: South America</li>
 <li>Dataset Types: Diatoms</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_IAL-IPA/complex_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow.html" class="external-link">English
 Language Complex Workflow</a></li>
 <li>Topics: Chronology building, Bchron</li>
 <li>Spatial Domain: South America</li>
 <li>Dataset Types: Diatoms</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_IAL-IPA/complex_workflow_ES.html" class="external-link">Spanish
+<li><a href="https://open.neotomadb.org/Workshops/IAL_IPA-November2022/complex_workflow_ES.html" class="external-link">Spanish
 Language Complex Workflow</a></li>
 <li>Topics: Chronology building, Bchron</li>
 <li>Spatial Domain: South America</li>
 <li>Dataset Types: Diatoms</li>
 <li>2022 European Pollen Database Meeting; Prague, Czech Republic</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_EPD/simple_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/EPD-May2022/simple_workflow.html" class="external-link">English
 Language Simple Workflow</a></li>
 <li>Topics: Simple search, climate gradients, stratigraphic plotting,
 taxonomic harmonization</li>
 <li>Spatial Domain: Europe/Czech Republic</li>
 <li>Dataset Types: Pollen</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_EPD/complex_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/EPD-May2022/complex_workflow.html" class="external-link">English
 Language Complex Workflow</a></li>
 <li>Topics: Chronology building, Bchron</li>
 <li>Spatial Domain: Europe/Czech Republic</li>
 <li>Dataset Types: Pollen</li>
 <li>2022 American Quaternary Association Meeting</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_AMQUA/simple_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/AMQUA-June2022/simple_workflow.html" class="external-link">English
 Language Simple Workflow</a></li>
 <li>Topics: Simple search, climate gradients, stratigraphic
 plotting</li>
 <li>Spatial Domain: North America</li>
 <li>Dataset Types: Pollen</li>
-<li><a href="https://open.neotomadb.org/Workshops/2022_AMQUA/complex_workflow.html" class="external-link">English
+<li><a href="https://open.neotomadb.org/Workshops/AMQUA-June2022/complex_workflow.html" class="external-link">English
 Language Complex Workflow</a></li>
 <li>Topics: Chronologies</li>
 <li>Spatial Domain: North America</li>
@@ -783,7 +783,7 @@ Language Workflow</a></li>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Dominguez Vidana Socorro, Simon Goring.</p>
+<p>Developed by Socorro Dominguez Vidana, Simon Goring, Nick Hoffman.</p>
 </div>
 
 <div class="pkgdown">

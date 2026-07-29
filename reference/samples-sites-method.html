@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">neotoma2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>samples</h1>
-    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/CRANv1.0.12/R/samples.R" class="external-link"><code>R/samples.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/R/samples.R" class="external-link"><code>R/samples.R</code></a></small>
     <div class="hidden name"><code>samples-sites-method.Rd</code></div>
     </div>
 
@@ -71,7 +71,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for class 'sites'</span></span>
-<span><span class="fu"><a href="samples.html">samples</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="samples.html">samples</a></span><span class="op">(</span><span class="va">x</span>, chronname <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,6 +80,13 @@
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>sites object</p></dd>
+
+
+<dt id="arg-chronname">chronname<a class="anchor" aria-label="anchor" href="#arg-chronname"></a></dt>
+<dd><p>Optional character name of a chronology to report ages
+against. When <code>NULL</code> (default) the Neotoma default-chronology precedence
+is applied. If the named chronology is not present for a dataset, the
+default is used and a warning is issued.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -109,7 +116,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Dominguez Vidana Socorro, Simon Goring.</p>
+  <p></p><p>Developed by Socorro Dominguez Vidana, Simon Goring, Nick Hoffman.</p>
 </div>
 
 <div class="pkgdown">
