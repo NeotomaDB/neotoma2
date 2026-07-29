@@ -35,6 +35,20 @@ test_that("get_sites runs as expected.", {
   testthat::expect_setequal(sites.vec, c(1001, 2001, 15, 24))
 })
 
+test_that("count() counts sites correctly.", {
+  skip_on_cran()
+  sites.ob <- get_sites(c(1001, 2001, 15, 24))
+  length_sites = length(sites.ob)
+  count_sites = count(sites.ob)
+  number_collunit_names = summary(sites.ob) %>% distinct(collunit_name) %>% dplyr::count()
+  count_collunits = count(sites.ob, level = "collunits")
+  count_datasets = count(sites.ob, level = "datasets")
+  sum_datasets = sum(summary(sites.ob)$n_datasets)
+  testthat::expect_equal(number_collunit_names$n[[1]], count_collunits)
+  testthat::expect_equal(sum_datasets, count_datasets)
+  testthat::expect_equal(length_sites, count_sites)
+})
+
 # test_that("All Czech sites work with different spatial bounds:", {
 #   skip_on_cran()
 #   cz_json <- '{"type": "Polygon",

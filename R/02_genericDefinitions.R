@@ -162,6 +162,14 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+
+#' @title Count the number of sites, datasets, or collectionunits associated with a site object.
+#' @param level The level at which you want to count. Can be sites, collunits, or datasets. Default is sites.
+#' @returns A count of the specified level in the object
+#' @export
+setGeneric("count", function(x, level="sites")
+  standardGeneric("count"))
+
 #TODO
 # #' @title Obtain specimens from a record or multiple records.
 # #' @param x sites object
