@@ -7,16 +7,21 @@
 \alias{samples,collunit-method}
 \title{Obtain samples from a record or multiple records.}
 \usage{
-samples(x)
+samples(x, chronname = NULL)
 
-\S4method{samples}{site}(x)
+\S4method{samples}{site}(x, chronname = NULL)
 
-\S4method{samples}{collunits}(x)
+\S4method{samples}{collunits}(x, chronname = NULL)
 
-\S4method{samples}{collunit}(x)
+\S4method{samples}{collunit}(x, chronname = NULL)
 }
 \arguments{
 \item{x}{sites object}
+
+\item{chronname}{Optional character name of a chronology to report ages
+against. When \code{NULL} (default) the Neotoma default-chronology precedence
+is applied. If the named chronology is not present for a dataset, the
+default is used and a warning is issued.}
 }
 \value{
 data.frame with record information at sample level

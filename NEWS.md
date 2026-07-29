@@ -1,6 +1,15 @@
 # News neotoma2 R package
 
+## neotoma2 1.1.0
+
+* Added `count()` to tally sites, collection units, or datasets in a record object.
+* `samples()` gains a `chronname` argument to report ages against a chosen chronology.
+* `filter()` now handles multiple conditions together with spatial (`loc`) filters.
+* More robust parsing of malformed API records (empty slots no longer create phantom IDs).
+* Faster `parseURL()` and automatic retry when the API is temporarily unavailable.
+
 ## neotoma2 1.0.12
+
 Updated description file to match CRAN's comments.
 Now follows:
  comment = c(ORCID = .......)

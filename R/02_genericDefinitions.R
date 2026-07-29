@@ -40,9 +40,13 @@ setGeneric("showMatch", function(x) {
 
 #' @title Obtain samples from a record or multiple records.
 #' @param x sites object
+#' @param chronname Optional character name of a chronology to report ages
+#'   against. When `NULL` (default) the Neotoma default-chronology precedence
+#'   is applied. If the named chronology is not present for a dataset, the
+#'   default is used and a warning is issued.
 #' @returns data.frame with record information at sample level
 #' @export
-setGeneric("samples", function(x) {
+setGeneric("samples", function(x, chronname = NULL) {
   standardGeneric(f = "samples")
   })
 
