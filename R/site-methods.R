@@ -532,7 +532,7 @@ setMethod(f = "cite_data",
             }
           })
 
-#' @alias count-data, sites-method
+#' @rdname count
 setMethod(
   "count",
   "sites",
@@ -569,7 +569,7 @@ setMethod(
     )}
 )
 
-#' @alias count-data, site-method
+#' @rdname count
 setMethod(
   "count",
   "site",

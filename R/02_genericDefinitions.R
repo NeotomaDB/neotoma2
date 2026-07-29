@@ -164,8 +164,10 @@ setGeneric("set_default",
            })
 
 #' @title Count the number of sites, datasets, or collectionunits associated with a site object.
+#' @param x A \code{sites} or \code{site} object.
 #' @param level The level at which you want to count. Can be sites, collunits, or datasets. Default is sites.
 #' @returns A count of the specified level in the object
+#' @rdname count
 #' @export
 setGeneric("count", function(x, level="sites")
   standardGeneric("count"))
