@@ -3,6 +3,7 @@
 \name{plot}
 \alias{plot}
 \alias{plot,sites-method}
+\alias{plot,sites,ANY-method}
 \alias{plot,site,ANY-method}
 \alias{plot,site-method}
 \title{Plot site coordinates using a basic plot.}

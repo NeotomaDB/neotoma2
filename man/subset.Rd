@@ -13,6 +13,7 @@
 \alias{subset,sample-method}
 \alias{subset}
 \alias{[<-,site,character-method}
+\alias{[<-,site,character,ANY-method}
 \alias{[<-,site,numeric,ANY-method}
 \alias{[<-,site,numeric-method}
 \alias{[<-,speleothem,character,ANY-method}

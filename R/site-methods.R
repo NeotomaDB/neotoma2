@@ -52,7 +52,7 @@ setMethod(f = "show",
 #' some_site <- get_sites(sitename = "Site%", limit=3)
 #' some_site[[2]]
 #' }
-#' @aliases [[,sites,numeric-method
+#' @aliases [[,sites,numeric-method [[,sites,numeric,ANY-method
 #' @exportMethod [[
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
@@ -74,7 +74,7 @@ setMethod(f = "[[",
 #' @param i The numeric index
 #' @returns sliced `site` object
 #' @md
-#' @aliases  [,sites,numeric-method
+#' @aliases [,sites,numeric-method [,sites,numeric,ANY-method
 #' @exportMethod [
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
@@ -131,7 +131,7 @@ setMethod(f = "names",
 #' @description Obtain one of the elements within a nested `neotoma2` object
 #' @returns `sites` object with reassigned values
 #' @md
-#' @aliases [[<-,sites-method
+#' @aliases [[<-,sites-method [[<-,sites,ANY,ANY-method
 #' @exportMethod [[<-
 setMethod(f = "[[<-",
           signature = signature(x = "sites"),
@@ -149,7 +149,7 @@ setMethod(f = "[[<-",
 #' @param value The value to be used.
 #' @returns `site` object with reassigned character values
 #' @md
-#' @aliases [<-,site,character-method
+#' @aliases [<-,site,character-method [<-,site,character,ANY-method
 #' @exportMethod [<-
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
@@ -321,7 +321,7 @@ setMethod(f = "coordinates",
 #' @param y *Ignored.*
 #' @param ... Additional parameters associated with the call.
 #' @returns `plot` object with site coordinates.
-#' @aliases plot,sites-method
+#' @aliases plot,sites-method plot,sites,ANY-method
 #' @exportMethod plot
 setMethod(f = "plot",
           signature = "sites",

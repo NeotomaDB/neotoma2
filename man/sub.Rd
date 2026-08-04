@@ -8,6 +8,7 @@
 \alias{sub,datasets-method}
 \alias{[}
 \alias{[,sites,numeric-method}
+\alias{[,sites,numeric,ANY-method}
 \alias{[,site,numeric,ANY-method}
 \alias{[,site,numeric-method}
 \alias{[,site,character,ANY-method}

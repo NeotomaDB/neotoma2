@@ -13,6 +13,7 @@
 \alias{sub-subset,samples-method}
 \alias{sub-subset}
 \alias{[[<-,sites-method}
+\alias{[[<-,sites,ANY,ANY-method}
 \alias{[[<-,speleothems,ANY,ANY-method}
 \alias{sub-subset,speleothems-method}
 \alias{[[<-,taxa,ANY,ANY-method}

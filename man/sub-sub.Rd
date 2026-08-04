@@ -17,6 +17,7 @@
 \alias{sub-sub,samples-method}
 \alias{sub-sub}
 \alias{[[,sites,numeric-method}
+\alias{[[,sites,numeric,ANY-method}
 \alias{[[,speleothems,numeric,ANY-method}
 \alias{sub-sub,speleothems-method}
 \alias{[[,taxa,numeric,ANY-method}
