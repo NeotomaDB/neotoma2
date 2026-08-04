@@ -40,15 +40,47 @@ neotoma_headers <- function(json = FALSE) {
 #' @importFrom jsonlite toJSON
 #' @description An internal helper that builds the JSON body for a POST request.
 #' If a `loc` (spatial) parameter is present it is first converted to GeoJSON
-#' with `parseLocation()`.
+#' with `parseLocation()`. A `loc` that has already been converted is passed
+#' through untouched, so a paginated query converts the geometry once rather
+#' than on every page.
 #' @param query A named list of query parameters.
 #' @returns `character` JSON body.
 #' @noRd
 neotoma_body <- function(query) {
   if ("loc" %in% names(query)) {
-    query$loc <- parseLocation(query$loc)
+    query$loc <- neotoma_location(query$loc)
   }
   toJSON(query, auto_unbox = TRUE, null = "null")
+}
+
+#' @title neotoma_location
+#' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+#' @description An internal helper that converts a spatial `loc` argument to the
+#' GeoJSON body the API expects, and recognises a value that has already been
+#' converted. `parseLocation()` round-trips the geometry through `sf`
+#' (`geojson_sf()` -> `sf_geojson()` -> `fromJSON()` -> `toJSON()`), which is
+#' cheap for a handful of vertices and expensive for a boundary read from a
+#' shapefile. Converting once per query rather than once per page keeps that
+#' cost off the pagination loop.
+#' @param loc A `loc` argument, either raw (`sf`, WKT, GeoJSON, bbox) or the
+#' result of an earlier `parseLocation()` call.
+#' @returns `list` of length one holding the GeoJSON body.
+#' @noRd
+neotoma_location <- function(loc) {
+  if (is_parsed_location(loc)) {
+    return(loc)
+  }
+  parseLocation(loc)
+}
+
+#' @title is_parsed_location
+#' @description An internal helper that tests whether a `loc` value is already
+#' the output of `parseLocation()` -- a length-one list holding a JSON string.
+#' @param loc The value to test.
+#' @returns `logical` TRUE when `loc` has already been converted.
+#' @noRd
+is_parsed_location <- function(loc) {
+  is.list(loc) && length(loc) == 1 && inherits(loc[[1]], "json")
 }
 
 #' @title neotoma_id_param
@@ -85,10 +117,48 @@ neotoma_env_num <- function(name, default) {
   if (length(value) != 1 || is.na(value) || value <= 0) default else value
 }
 
+#' @title neotoma_terminal_status
+#' @description An internal helper listing the HTTP statuses that cannot succeed
+#' on a retry. A malformed or not-found request will fail the same way every
+#' time, so it is raised immediately.
+#' @returns `numeric` vector of terminal status codes.
+#' @noRd
+neotoma_terminal_status <- function() {
+  c(400, 401, 403, 404, 405, 410, 422)
+}
+
+#' @title neotoma_is_timeout
+#' @description An internal helper that recognises a request aborted by our own
+#' client-side timeout, as distinct from a refused connection or a DNS failure.
+#' @param response The `httr` response or the condition raised by the attempt.
+#' @returns `logical` TRUE when the attempt timed out.
+#' @noRd
+neotoma_is_timeout <- function(response) {
+  inherits(response, "condition") &&
+    grepl("timed? ?out", conditionMessage(response), ignore.case = TRUE)
+}
+
+#' @title neotoma_should_retry
+#' @importFrom httr http_error
+#' @description An internal helper that decides whether an attempt is worth
+#' repeating: any error, and any HTTP failure that is not terminal.
+#' @param response The `httr` response or the condition raised by the attempt.
+#' @returns `logical` TRUE when another attempt may succeed.
+#' @noRd
+neotoma_should_retry <- function(response) {
+  if (inherits(response, "condition")) {
+    return(TRUE)
+  }
+  if (!http_error(response)) {
+    return(FALSE)
+  }
+  !(response$status_code %in% neotoma_terminal_status())
+}
+
 #' @title neotoma_retry
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @importFrom httr RETRY timeout
-#' @description An internal helper that issues a single request, retrying with
+#' @importFrom httr VERB timeout
+#' @description An internal helper that issues a request, retrying with
 #' exponential backoff when the failure is transient. Slow queries (wildcard
 #' site searches, large downloads) intermittently return a gateway timeout from
 #' the API, and rate limiting returns a 429; both succeed on a later attempt, so
@@ -96,14 +166,22 @@ neotoma_env_num <- function(name, default) {
 #' immediately -- a malformed or not-found request cannot succeed on a retry.
 #'
 #' Every attempt carries a timeout. Without one, a server that accepts the
-#' connection and then never responds blocks forever, and retrying multiplies
-#' that wait by `times` -- turning an outage into a hang rather than an error.
+#' connection and then never responds blocks forever. A timeout is retried at
+#' most once, and deliberately not `times` times: the API keeps working on a
+#' query we have already abandoned, so a client that retries a slow request
+#' stacks concurrent work onto an endpoint that is by definition already
+#' struggling. The spatial (`loc`) endpoints are slow enough that this
+#' matters -- a polygon matching no sites at all still costs tens of seconds
+#' server-side -- so the default timeout is set well above their observed
+#' latency rather than inside it, where it would abort healthy requests
+#' mid-flight.
+#'
 #' Both bounds can be lowered through `NEOTOMA_TIMEOUT` (seconds per attempt)
 #' and `NEOTOMA_RETRIES` (attempts), which lets test runs fail fast while
 #' leaving interactive use generous.
 #' @param verb The HTTP verb, "GET" or "POST".
 #' @param url The request URL.
-#' @param ... Further arguments passed to `httr::RETRY()` (headers, query,
+#' @param ... Further arguments passed to `httr::VERB()` (headers, query,
 #' body, encode).
 #' @param times Maximum number of attempts, including the first.
 #' @param seconds Maximum seconds to wait for any single attempt.
@@ -111,13 +189,31 @@ neotoma_env_num <- function(name, default) {
 #' @noRd
 neotoma_retry <- function(verb, url, ...,
                           times = neotoma_env_num("NEOTOMA_RETRIES", 4),
-                          seconds = neotoma_env_num("NEOTOMA_TIMEOUT", 60)) {
-  RETRY(verb, url, ...,
-        times = times,
-        pause_base = 2,
-        pause_cap = 30,
-        timeout(seconds),
-        terminate_on = c(400, 401, 403, 404, 405, 410, 422))
+                          seconds = neotoma_env_num("NEOTOMA_TIMEOUT", 180)) {
+  budget <- max(1, times)
+  attempt <- 1
+  repeat {
+    response <- tryCatch(VERB(verb, url, ..., timeout(seconds)),
+                         error = function(e) e)
+    if (neotoma_is_timeout(response)) {
+      budget <- min(budget, 2)
+    }
+    if (attempt >= budget || !neotoma_should_retry(response)) {
+      break
+    }
+    Sys.sleep(min(30, 2^attempt))
+    attempt <- attempt + 1
+  }
+  if (neotoma_is_timeout(response)) {
+    stop("The Neotoma API did not respond within ", seconds, " seconds for ",
+         url, " (", attempt, " attempt(s)).\nSpatial (loc) queries are slow ",
+         "server-side; try a smaller area, or raise the wait with ",
+         "Sys.setenv(NEOTOMA_TIMEOUT = ", seconds * 2, ").")
+  }
+  if (inherits(response, "condition")) {
+    stop(response)
+  }
+  response
 }
 
 #' @title neotoma_request
@@ -291,7 +387,21 @@ neotoma_fetch <- function(baseurl, x, query) {
 #' @title neotoma_paginate
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description An internal helper that walks every page of a query, requesting
-#' `page` records at a time until the API returns no more data.
+#' `page` records at a time.
+#'
+#' The walk stops as soon as a page comes back shorter than the number of
+#' records requested, rather than spending one further request to see an empty
+#' page. On the spatial endpoints, where a single request costs tens of seconds
+#' whatever it returns, that confirming request doubles the cost of any query
+#' whose results fit in one page.
+#'
+#' `page` is deliberately large and deliberately fixed. The API's `limit` and
+#' `offset` do not compose: the same query walked in smaller pages returns
+#' *fewer* records overall (`sitename=Lake%` yields 1315 records at
+#' `limit = 2000`, but only 605 when walked 500 at a time, because the second
+#' page comes back short). Until that is fixed server-side, asking for the
+#' largest page we can is what keeps results complete, so this is not a knob to
+#' tune for speed.
 #' @param baseurl The API base URL.
 #' @param x The endpoint path.
 #' @param query A named list of query parameters.
@@ -299,16 +409,29 @@ neotoma_fetch <- function(baseurl, x, query) {
 #' @returns `list` with all pages of data combined.
 #' @noRd
 neotoma_paginate <- function(baseurl, x, query, page = 2000) {
+  # Convert the geometry once, not once per page.
+  if ("loc" %in% names(query)) {
+    query$loc <- neotoma_location(query$loc)
+  }
   query$offset <- 0
   query$limit <- page
   responses <- list()
+  pages <- 0
   repeat {
+    pages <- pages + 1
+    if (pages > 1 && interactive()) {
+      message("Fetching page ", pages, " (records ", query$offset + 1,
+              "+) ...")
+    }
     r <- neotoma_fetch(baseurl, x, query)
     r <- cleanNULL(r)
     if (is.null(r$data) || length(r$data) == 0) {
       break
     }
     responses <- c(responses, r$data)
+    if (length(r$data) < query$limit) {
+      break
+    }
     query$offset <- query$offset + query$limit
   }
   list(status = 200, data = responses, message = "Success")

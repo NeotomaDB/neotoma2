@@ -354,33 +354,42 @@ setMethod(f = "summary",
           signature = "sites",
           definition = function(object, ...) {
             datasettype <- lapply(object@sites, function(x) {
-              collunits <- length(x@collunits@collunits)
-              if (length(x) > 0) {
-                collunits <- lapply(x@collunits@collunits,
-                                    function(y) {
-                                      chrons <- length(y@chronologies)
-                                      datasets <- length(y@datasets)
-                                      if (datasets > 0) {
-                                        types <- sapply(y@datasets@datasets,
-                                                        function(r) {
-                                                          r@datasettype
-                                                        }) %>%
-                                          paste0(collapse = ",")
-                                      } else {
-                                        types <- NA
-                                      }
-                                      data.frame(collectionunit = y@handle,
-                                                 chronologies = chrons,
-                                                 datasets = datasets,
-                                                 types = types)
-                                    }) %>%
-                  bind_rows() %>%
-                  na.omit()
+              # `collunits` is an optional slot, and a site returned by
+              # get_sites() may hold collection units that carry no datasets
+              # yet. Either way the site still gets one row, so that summary()
+              # always accounts for every site it was given.
+              units <- if (is.null(x@collunits)) {
+                list()
               } else {
-                collunits <- data.frame(collectionunit = NA,
+                x@collunits@collunits
+              }
+              collunits <- lapply(units,
+                                  function(y) {
+                                    chrons <- length(y@chronologies)
+                                    datasets <- length(y@datasets)
+                                    if (datasets > 0) {
+                                      types <- sapply(y@datasets@datasets,
+                                                      function(r) {
+                                                        r@datasettype
+                                                      }) %>%
+                                        paste0(collapse = ",")
+                                    } else {
+                                      types <- NA
+                                    }
+                                    data.frame(collectionunit = y@handle,
+                                               chronologies = chrons,
+                                               datasets = datasets,
+                                               types = types)
+                                  }) %>%
+                bind_rows()
+              if (nrow(collunits) > 0) {
+                collunits <- na.omit(collunits)
+              }
+              if (nrow(collunits) == 0) {
+                collunits <- data.frame(collectionunit = NA_character_,
                                         chronologies = 0,
                                         datasets = 0,
-                                        types = NA)
+                                        types = NA_character_)
               }
               data.frame(siteid = x$siteid,
                          sitename = x$sitename,

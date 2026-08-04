@@ -7,6 +7,19 @@
 * `filter()` now handles multiple conditions together with spatial (`loc`) filters.
 * More robust parsing of malformed API records (empty slots no longer create phantom IDs).
 * Faster `parseURL()` and automatic retry when the API is temporarily unavailable.
+* `all_data = TRUE` stops as soon as a page comes back short, rather than spending
+  an extra request to confirm the end of the results. Queries whose results fit in
+  one page now cost one request instead of two.
+* A request that times out is retried at most once. Retrying a slow query stacks
+  work onto an API that is already struggling, which made spatial (`loc`) queries
+  worse rather than better; other transient failures still retry as before.
+* Raised the default request timeout to 180 seconds, above the observed latency of
+  the spatial endpoints, so healthy-but-slow queries are no longer aborted
+  mid-flight. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
+* A spatial geometry is now converted once per query rather than once per page,
+  and the API's parameter list is fetched once per session rather than on every
+  `get_*()` call.
+* Paginated queries report their progress in interactive sessions.
 
 ## neotoma2 1.0.12
 

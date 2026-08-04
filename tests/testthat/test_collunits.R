@@ -17,3 +17,23 @@ test_that("collunits()`", {
   testthat::expect_true(all(sumDl$collunit_name %in% cus$handle))
 })
 })
+
+## Not every site has collection units -- the API returns some with none at all.
+## `c()` used to fail on those, because `unlist()` returns NULL rather than an
+## empty list when there is nothing to flatten, and the `collunits` slot must
+## hold a list. That made `collunits()` unusable on any set containing such a
+## site, since it reduces the per-site objects with `c()`.
+test_that("collection units combine when some sites have none", {
+  empty <- methods::new("collunits", collunits = list())
+  one <- methods::new("collunits",
+                      collunits = list(set_collunit(handle = "CU1")))
+  two <- methods::new("collunits",
+                      collunits = list(set_collunit(handle = "CU2")))
+
+  testthat::expect_equal(length(c(empty, empty)), 0)
+  testthat::expect_equal(length(c(empty, one)), 1)
+  testthat::expect_equal(length(c(one, empty)), 1)
+  testthat::expect_equal(length(c(one, two)), 2)
+  # Combining a set with itself must still drop the duplicate.
+  testthat::expect_equal(length(c(one, one)), 1)
+})

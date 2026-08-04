@@ -232,9 +232,14 @@ setMethod(f = "c",
                 # Case 2: Remove duplicates by name
                 cus_l <- cus_l[!duplicated(names(cus_l))]
               }
-              out <- new("collunits",
-                         collunits = unlist(cus_l,
-                                            recursive = FALSE))
+              cus_l <- unlist(cus_l, recursive = FALSE)
+              # `unlist()` returns NULL rather than an empty list when there is
+              # nothing to flatten, and the slot must hold a list. This is
+              # reached whenever every site in the set has no collection units.
+              if (is.null(cus_l)) {
+                cus_l <- list()
+              }
+              out <- new("collunits", collunits = cus_l)
             } else if (is(y, "collunit")) {
               collunitset <- c(x@collunits, y)
               out <- new("collunits", collunits = collunitset)

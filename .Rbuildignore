@@ -15,6 +15,16 @@ lintoutput\.txt$
 ^cran-comments\.md$
 ^CODE_OF_CONDUCT\.md$
 
+^CLAUDE\.md$
+^\.claude$
+
+# Measurements of API-side pagination and latency problems, written to be filed
+# against the API repo. Not package documentation.
+^NEOTOMA-API-ISSUES\.md$
+
+# Hand-run script that prepares the cached objects the workshop vignettes read.
+^data-raw$
+
 ^doc$
 ^Meta$
 ^.*\.tar\.gz$
@@ -30,3 +40,11 @@ paper.*
 # hand-made parser fixtures at fixtures/*.json are NOT ignored — the offline
 # parser tests run on CRAN and need them.
 ^tests/testthat/fixtures/api\.neotomadb\.org/
+
+## Vignettes
+^vignettes/SISAL
+^vignettes/complex_workflow
+^vignettes/simple_workflow
+^vignettes/images/
+^vignettes/data/
+^data-raw/

@@ -1,6 +1,6 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2026-07-29
+Date: 2026-08-04
 Version: 1.1.0
 Authors@R:
     c(person(given = "Socorro",
