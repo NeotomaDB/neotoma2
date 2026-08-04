@@ -5,22 +5,31 @@
 %   R/taxon-methods.R
 \name{[[,chronologies,numeric,ANY-method}
 \alias{[[,chronologies,numeric,ANY-method}
+\alias{[[,chronologies,numeric-method}
 \alias{[[,collunits,numeric,ANY-method}
 \alias{sub-sub,collunits-method}
+\alias{[[,collunits,numeric-method}
 \alias{[[,contacts,numeric,ANY-method}
 \alias{sub-sub,contacts-method}
+\alias{[[,contacts,numeric-method}
 \alias{[[,datasets,numeric,ANY-method}
 \alias{sub-sub,datasets-method}
+\alias{[[,datasets,numeric-method}
 \alias{[[,publications,numeric,ANY-method}
 \alias{sub-sub,publications-method}
+\alias{[[,publications,numeric-method}
 \alias{[[,samples,numeric,ANY-method}
 \alias{sub-sub,samples-method}
+\alias{[[,samples,numeric-method}
 \alias{sub-sub}
 \alias{[[,sites,numeric-method}
+\alias{[[,sites,numeric,ANY-method}
 \alias{[[,speleothems,numeric,ANY-method}
 \alias{sub-sub,speleothems-method}
+\alias{[[,speleothems,numeric-method}
 \alias{[[,taxa,numeric,ANY-method}
 \alias{sub-sub,taxa-method}
+\alias{[[,taxa,numeric-method}
 \title{sub-sub}
 \usage{
 \S4method{[[}{chronologies,numeric,ANY}(x, i)

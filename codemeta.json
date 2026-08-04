@@ -343,7 +343,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "6808.455KB",
+  "fileSize": "5384.122KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -351,9 +351,9 @@
       "author": [
         {
           "@type": "Person",
-          "givenName": "Dominguez Vidana",
-          "familyName": "Socorro",
-          "email": "s.dominguez@ht-data.com",
+          "givenName": "Socorro",
+          "familyName": "Dominguez Vidana",
+          "email": "dominguezvid@wisc.edu",
           "@id": "https://orcid.org/0000-0002-7926-4935"
         },
         {

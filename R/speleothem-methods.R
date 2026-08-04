@@ -55,7 +55,7 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @aliases sub-sub,speleothems-method
+#' @aliases sub-sub,speleothems-method [[,speleothems,numeric-method [[,speleothems,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "speleothems", i = "numeric"),
@@ -79,7 +79,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @aliases sub-subset,speleothems-method
+#' @aliases sub-subset,speleothems-method [[<-,speleothems-method [[<-,speleothems,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-",
           signature = signature(x = "speleothems"),
@@ -90,7 +90,7 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-#' @aliases subset,speleothem-method
+#' @aliases subset,speleothem-method [<-,speleothem,character-method [<-,speleothem,character,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "character"),
@@ -101,7 +101,7 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @aliases subset,speleothem-method
+#' @aliases subset,speleothem-method [<-,speleothem,numeric-method [<-,speleothem,numeric,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "speleothem", i = "numeric"),
@@ -122,7 +122,7 @@ setMethod(f = "$<-",
             return(x)
           })
 
-#' @aliases sub,speleothems-method
+#' @aliases sub,speleothems-method [,speleothems,numeric-method [,speleothems,numeric,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "speleothems", i = "numeric"),

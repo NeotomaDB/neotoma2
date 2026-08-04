@@ -89,7 +89,7 @@ setMethod(f = "show",
             print(result, row.names = FALSE)
           })
 
-#' @aliases sub,collunits-method
+#' @aliases sub,collunits-method [,collunits,numeric-method [,collunits,numeric,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "collunits", i = "numeric"),
@@ -97,7 +97,7 @@ setMethod(f = "[",
             new("collunits", collunits = x@collunits[i])
           })
 
-#' @aliases sub-sub,collunits-method
+#' @aliases sub-sub,collunits-method [[,collunits,numeric-method [[,collunits,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "collunits", i = "numeric"),
@@ -121,7 +121,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @aliases sub-subset,collunits-method
+#' @aliases sub-subset,collunits-method [[<-,collunits-method [[<-,collunits,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-",
           signature = signature(x = "collunits"),
@@ -132,7 +132,7 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-#' @aliases subset,collunit-method
+#' @aliases subset,collunit-method [<-,collunit,character-method [<-,collunit,character,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "character"),
@@ -143,7 +143,7 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @aliases subset,collunit-method
+#' @aliases subset,collunit-method [<-,collunit,numeric-method [<-,collunit,numeric,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "collunit", i = "numeric"),

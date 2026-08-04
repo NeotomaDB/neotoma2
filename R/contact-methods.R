@@ -26,7 +26,7 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @aliases sub-sub,contacts-method
+#' @aliases sub-sub,contacts-method [[,contacts,numeric-method [[,contacts,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "contacts", i = "numeric"),

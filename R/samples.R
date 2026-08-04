@@ -202,7 +202,7 @@ setMethod(f = "samples",
     # carry that chronology (their ages were set to NA above).
     if (!is.null(chronname) &&
         sum(defaultchron$chronologyname == chronname, na.rm = TRUE) != 0) {
-      sampset <- sampset %>% dplyr::filter(!is.na(chronologyid))
+      sampset <- sampset %>% dplyr::filter(!is.na(.data$chronologyid))
     }
     return(sampset)
   }
