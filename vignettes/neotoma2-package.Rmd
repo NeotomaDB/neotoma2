@@ -409,10 +409,10 @@ subPub
 
 #### Create (or Import) New Publications
 
-Just as we can use the `set_sites()` function to set new site information, we can also create new publication information using `set_publications()`.  With `set_publications()` you can enter as much or as little of the article metadata as you'd like, but it's designed (in part) to use the CrossRef API to return information from a DOI.
+Just as we can use the `set_sites()` function to set new site information, we can also create new publication information using `set_publication()`.  With `set_publication()` you can enter as much or as little of the article metadata as you'd like, but it's designed (in part) to use the CrossRef API to return information from a DOI.
 
 ```{r setNewPub}
-new_pub <- set_publications(
+new_pub <- set_publication(
 articletitle = "Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota",
 journal = "Canadian Journal of Botany",
 volume = 46)
