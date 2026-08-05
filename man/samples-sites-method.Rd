@@ -4,10 +4,15 @@
 \alias{samples,sites-method}
 \title{samples}
 \usage{
-\S4method{samples}{sites}(x)
+\S4method{samples}{sites}(x, chronname = NULL)
 }
 \arguments{
 \item{x}{sites object}
+
+\item{chronname}{Optional character name of a chronology to report ages
+against. When \code{NULL} (default) the Neotoma default-chronology precedence
+is applied. If the named chronology is not present for a dataset, the
+default is used and a warning is issued.}
 }
 \value{
 \code{data.frame} with sample records

@@ -8,9 +8,16 @@
 .DS_Store
 
 doc/
+data-raw/
 Meta/
 inst/doc/
 *.tar.gz
 *.rds
 *.RDS
 CRAN-SUBMISSION
+
+vignettes/SISAL*
+vignettes/complex_workflow*
+vignettes/simple_workflow*
+vignettes/images/
+vignettes/data/

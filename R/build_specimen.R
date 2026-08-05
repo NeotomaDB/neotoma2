@@ -10,6 +10,12 @@
 #' @noRd
 build_specimen <- function(x) {
   x <- cleanNULL(x)
+  # A specimen coming from the API must carry a real specimenid. When it does
+  # not, the element is malformed/empty, so we drop it rather than build a
+  # phantom specimen. The caller null-filters before building the container.
+  if (is.null(x$specimenid)) {
+    return(NULL)
+  }
   repo <- x$repository %>% cleanNULL()
   sp <- new("specimen",
             datasetid = use_na(x$datasetid, "int"),

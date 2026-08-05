@@ -1,7 +1,9 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("`doi()` function")
+httptest::with_mock_api({
 test_that("", {
   skip_on_cran()
   sts <- get_datasets(c(24, 100, 101))
@@ -34,4 +36,5 @@ test_that("", {
   dois101_df <- dois %>% dplyr::filter(siteid == 101) %>% dplyr::pull(doi) %>% unlist()
   testthat::expect_true(all(doi101 %in% dois101_df))
   testthat::expect_true(all(dois101_df %in% doi101))
+})
 })

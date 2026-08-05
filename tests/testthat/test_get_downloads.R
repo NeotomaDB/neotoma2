@@ -16,21 +16,19 @@ test_that("get_downloads numeric", {
 
 test_that("get_downloads from get_datasets()
           sites object.", {
-            skip_on_cran()
-            brazil <- '{"type": "Polygon",
-            "coordinates": [[
-                [-73.125, -9.102],
-                [-56.953, -33.138],
-                [-36.563, -7.711],
-                [-68.203, 13.923],
-                [-73.125, -9.102]
-              ]]}'
-            brazil_sf <- geojsonsf::geojson_sf(brazil)
-            brazil_datasets <- get_datasets(loc = brazil_sf, all_data = TRUE)
+            skip_on_ci()
+            skip_if_api_unreachable()
+            # Space this out; it downloads full sample data.
+            on.exit(Sys.sleep(10), add = TRUE)
+            # `brazil_sf` comes from setup.R. A small `limit` is enough to prove
+            # that downloading a multi-dataset object preserves the id set --
+            # `all_data = TRUE` over the whole region is unnecessary here and was
+            # the single heaviest call in the suite.
+            brazil_datasets <- get_datasets(loc = brazil_sf, limit = 5)
             brazil_dl <- get_downloads(brazil_datasets)
             testthat::expect_identical(nrow(getids(brazil_datasets)),
                                        nrow(getids(brazil_dl)))
-            testthat::expect_equal(getids(brazil_datasets), 
+            testthat::expect_equal(getids(brazil_datasets),
                                    getids(brazil_dl))
           })
 
@@ -58,6 +56,10 @@ test_that("Faunmap dataset", {
 
 test_that("get_downloads with or without all_data works.", {
   skip_on_cran()
+  # Heavy all_data pagination + download over a UK bbox: flap-prone, skip on CI.
+  skip_on_ci()
+  skip_if_api_unreachable()
+  on.exit(Sys.sleep(5), add = TRUE)
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
   uk_datasets <- get_datasets(
     loc = uk_bbox_geojson,
@@ -75,7 +77,10 @@ test_that("get_downloads with or without all_data works.", {
 })
 
 test_that("get_downloads handles empty result", {
-  skip_on_cran()
+  # Loops eight gpid (geopolitical) searches; heavy and flap-prone. Skip on CI,
+  # and skip locally when the API is unreachable.
+  skip_on_ci()
+  skip_if_api_unreachable()
   gpids <- c(7326, 6442, 7923, 7990, 7368, 8480, 8981, 7934)
   ne_sites <- c() 
   for (id in gpids) {

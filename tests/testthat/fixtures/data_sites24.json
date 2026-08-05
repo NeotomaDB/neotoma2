@@ -1,0 +1,39 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "siteid": 24,
+      "sitename": "A Place in Neotoma",
+      "sitedescription": "Physiography: gentle rolling hills with scattered wetlands.",
+      "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-95.25,45.75]}",
+      "altitude": 128,
+      "collectionunits": [
+        {
+          "handle": "NEOPLACE",
+          "datasets": [
+            {
+              "datasetid": 24,
+              "datasettype": "pollen"
+            }
+          ],
+          "collectionunit": null,
+          "collectionunitid": 24,
+          "collectionunittype": "Core"
+        },
+        {
+          "handle": "NEOPLACE",
+          "datasets": [
+            {
+              "datasetid": 7870,
+              "datasettype": "geochronologic"
+            }
+          ],
+          "collectionunit": null,
+          "collectionunitid": 24,
+          "collectionunittype": "Core"
+        }
+      ]
+    }
+  ],
+  "message": "Retrieved all tables"
+}

@@ -13,7 +13,7 @@ set_speleothem(
   dripheight = NA_integer_,
   monitoring = FALSE,
   geology = NA_character_,
-  relativeage = NA_character_,
+  rockage = NA_character_,
   speleothemtype = NA_character_,
   dripheightunits = NA_character_,
   entitycovertype = NA_character_,
@@ -44,7 +44,7 @@ set_speleothem(
 
 \item{geology}{rock type of the speleothem}
 
-\item{relativeage}{relative age of the speleothem}
+\item{rockage}{relative age of the speleothem}
 
 \item{speleothemtype}{type of speleothem}
 

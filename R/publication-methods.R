@@ -36,7 +36,7 @@ setMethod(f = "$",
             slot(x, name)
           })
 
-#' @aliases sub-sub,publications-method
+#' @aliases sub-sub,publications-method [[,publications,numeric-method [[,publications,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "publications", i = "numeric"),
@@ -52,7 +52,7 @@ setMethod(f = "[[",
             return(out)
           })
 
-#' @aliases sub-subset,publications-method
+#' @aliases sub-subset,publications-method [[<-,publications-method [[<-,publications,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-",
           signature = signature(x = "publications"),

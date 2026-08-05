@@ -1,4 +1,4 @@
-#' @aliases sub-sub,samples-method
+#' @aliases sub-sub,samples-method [[,samples,numeric-method [[,samples,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "samples", i = "numeric"),
@@ -54,7 +54,7 @@ setMethod(f = "c",
             return(samp)
           })
 
-#' @aliases sub-subset,samples-method
+#' @aliases sub-subset,samples-method [[<-,samples-method [[<-,samples,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-", 
           signature = signature(x = "samples"),
@@ -65,7 +65,7 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-#' @aliases subset,sample-method
+#' @aliases subset,sample-method [<-,sample,character-method [<-,sample,character,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "sample", i = "character"),

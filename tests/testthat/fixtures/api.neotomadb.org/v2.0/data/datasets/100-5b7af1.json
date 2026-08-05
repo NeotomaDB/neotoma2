@@ -1,0 +1,47 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 100,
+                "sitename": "Site 30 (Swain unpublished)",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.35,46.35]}",
+                "altitude": 391,
+                "collectionunitid": 100,
+                "collectionunit": "C165PDGS",
+                "handle": "AMS030",
+                "unittype": "Modern",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/2hd8-pn42",
+                            "10.21233/m0zx-1008",
+                            "10.21233/n39016",
+                            "10.21233/n3w40g"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 100,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

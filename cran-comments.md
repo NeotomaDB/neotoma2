@@ -6,7 +6,29 @@
 ## R CMD check results
 
 -----
+## Upgrade neotoma2 1.1.0
 
+Added `count()` and a `chronname` argument to `samples()` for chronology selection.
+Improved `filter()`, more robust parsing of malformed API records, and faster,
+more resilient API calls.
+
+0 errors | 0 warnings | 1 note
+
+-----
+## DESCRIPTION modification neotoma2 1.0.12
+
+DESCRIPTION Authors@R field.
+
+Complaints seem to be about mis-writing the ORCID info.  This should
+be of the form
+
+ comment = c(ORCID = .......)
+
+and not
+
+ comment(ORCID = .......)
+ ORCID = ........
+ 
 ## Bugfix neotoma2 1.0.11
 
 Set examples to \dontrun{} to avoid violating CRAN's policy that allows access to internet.

@@ -1,0 +1,60 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 24,
+            "sitename": "Alexander Lake",
+            "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 24,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 7870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 100,
+            "sitename": "Site 30 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.35,46.35]}",
+            "altitude": 391,
+            "collectionunits": [
+                {
+                    "handle": "AMS030",
+                    "datasets": [
+                        {
+                            "datasetid": 100,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "C165PDGS",
+                    "collectionunitid": 100,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

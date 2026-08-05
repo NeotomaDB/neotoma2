@@ -32,7 +32,7 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @aliases sub-sub,datasets-method
+#' @aliases sub-sub,datasets-method [[,datasets,numeric-method [[,datasets,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "datasets", i = "numeric"),
@@ -56,7 +56,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @aliases sub-subset,datasets-method
+#' @aliases sub-subset,datasets-method [[<-,datasets-method [[<-,datasets,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-",
           signature = signature(x = "datasets"),
@@ -67,7 +67,7 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-#' @aliases subset,dataset-method
+#' @aliases subset,dataset-method [<-,dataset,character-method [<-,dataset,character,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "character"),
@@ -78,7 +78,7 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @aliases subset,dataset-method
+#' @aliases subset,dataset-method [<-,dataset,numeric-method [<-,dataset,numeric,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "dataset", i = "numeric"),
@@ -99,7 +99,7 @@ setMethod(f = "$<-",
             return(x)
           })
 
-#' @aliases sub,datasets-method
+#' @aliases sub,datasets-method [,datasets,numeric-method [,datasets,numeric,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "datasets", i = "numeric"),

@@ -68,6 +68,12 @@ the collection unit within the site.
 device.
 \item \code{depositionalenvironment} A fixed vocabulary name for the
 depositional environment.
+\item \code{loc} A spatial filter. Keeps only sites whose geography falls within
+the supplied region. The region may be an \code{sf}/\code{sfc}/\code{sfg} object, a
+GeoJSON string, a WKT string (e.g. \code{"POLYGON ((...))"}), or a numeric
+bounding box \code{c(xmin, ymin, xmax, ymax)}, e.g.
+\code{filter(altitude < 100, loc == my_polygon)}. \code{geography} is accepted
+as an alias for \code{loc}.
 }
 }
 \examples{

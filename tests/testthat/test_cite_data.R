@@ -2,8 +2,10 @@ library("testthat")
 library("neotoma2")
 library("dplyr")
 library("stringr")
+library("httptest")
 
 context("`cite_data()` function")
+httptest::with_mock_api({
 test_that("cite_data() returns dataframe", {
   skip_on_cran()
   st <- get_sites(c(24, 100))
@@ -29,4 +31,5 @@ test_that("cite_data() returns correct DOIs for each dataset", {
   testthat::expect_true(any(str_detect(cit100, fixed(doi100))))
   testthat::expect_false(any(str_detect(cit100, fixed(doi24))))
   testthat::expect_false(any(str_detect(cit24, fixed(doi100))))
+})
 })

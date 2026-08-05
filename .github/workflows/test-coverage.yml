@@ -11,9 +11,22 @@ name: test-coverage
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+
+    # NOT_CRAN must stay true here: covr measures coverage by executing the
+    # tests, so skip_on_cran() has to be a no-op or only the two offline test
+    # files would run. That means this job does hit the live Neotoma API and is
+    # inherently slow -- the cap stops it occupying a runner for GitHub's
+    # default 6 hours when the API is slow or unreachable.
+    timeout-minutes: 60
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NOT_CRAN: true
+      # Bound each request so an unresponsive API fails instead of hanging.
+      # Kept generous enough for the genuinely slow queries (wildcard site
+      # searches, large downloads) that this suite makes when the API is well.
+      NEOTOMA_TIMEOUT: 30
+      NEOTOMA_RETRIES: 2
 
     steps:
       - uses: actions/checkout@v3

@@ -40,9 +40,13 @@ setGeneric("showMatch", function(x) {
 
 #' @title Obtain samples from a record or multiple records.
 #' @param x sites object
+#' @param chronname Optional character name of a chronology to report ages
+#'   against. When `NULL` (default) the Neotoma default-chronology precedence
+#'   is applied. If the named chronology is not present for a dataset, the
+#'   default is used and a warning is issued.
 #' @returns data.frame with record information at sample level
 #' @export
-setGeneric("samples", function(x) {
+setGeneric("samples", function(x, chronname = NULL) {
   standardGeneric(f = "samples")
   })
 
@@ -162,6 +166,16 @@ setGeneric("set_default",
            function(x, n) {
              standardGeneric(f = "set_default")
            })
+
+#' @title Count the number of sites, datasets, or collectionunits associated with a site object.
+#' @param x A \code{sites} or \code{site} object.
+#' @param level The level at which you want to count. Can be sites, collunits, or datasets. Default is sites.
+#' @returns A count of the specified level in the object
+#' @rdname count
+#' @export
+setGeneric("count", function(x, level="sites")
+  standardGeneric("count"))
+
 #TODO
 # #' @title Obtain specimens from a record or multiple records.
 # #' @param x sites object

@@ -1,0 +1,81 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 24,
+            "sitename": "Alexander Lake",
+            "sitedescription": "Physiography: rolling glacial till, eskers, kettles,.",
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-60.58333,53.33333]}",
+            "altitude": 73,
+            "collectionunits": [
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 24,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "ALEXLAKE",
+                    "datasets": [
+                        {
+                            "datasetid": 7870,
+                            "datasettype": "geochronologic"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 24,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 1001,
+            "sitename": "Site 1 (Lamb 1982)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-57.2,51.45]}",
+            "altitude": 47,
+            "collectionunits": [
+                {
+                    "handle": "HFL01",
+                    "datasets": [
+                        {
+                            "datasetid": 1034,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 1000,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 2001,
+            "sitename": "Turtle Lake Area",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-108.48333,53.78333]}",
+            "altitude": 686,
+            "collectionunits": [
+                {
+                    "handle": "RJM008",
+                    "datasets": [
+                        {
+                            "datasetid": 2076,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": null,
+                    "collectionunitid": 2000,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

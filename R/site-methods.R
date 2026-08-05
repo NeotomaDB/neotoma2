@@ -52,7 +52,7 @@ setMethod(f = "show",
 #' some_site <- get_sites(sitename = "Site%", limit=3)
 #' some_site[[2]]
 #' }
-#' @aliases [[,sites,numeric-method
+#' @aliases [[,sites,numeric-method [[,sites,numeric,ANY-method
 #' @exportMethod [[
 setMethod(f = "[[",
           signature = signature(x = "sites", i = "numeric"),
@@ -74,7 +74,7 @@ setMethod(f = "[[",
 #' @param i The numeric index
 #' @returns sliced `site` object
 #' @md
-#' @aliases  [,sites,numeric-method
+#' @aliases [,sites,numeric-method [,sites,numeric,ANY-method
 #' @exportMethod [
 setMethod(f = "[",
           signature = signature(x = "sites", i = "numeric"),
@@ -131,7 +131,7 @@ setMethod(f = "names",
 #' @description Obtain one of the elements within a nested `neotoma2` object
 #' @returns `sites` object with reassigned values
 #' @md
-#' @aliases [[<-,sites-method
+#' @aliases [[<-,sites-method [[<-,sites,ANY,ANY-method
 #' @exportMethod [[<-
 setMethod(f = "[[<-",
           signature = signature(x = "sites"),
@@ -149,7 +149,7 @@ setMethod(f = "[[<-",
 #' @param value The value to be used.
 #' @returns `site` object with reassigned character values
 #' @md
-#' @aliases [<-,site,character-method
+#' @aliases [<-,site,character-method [<-,site,character,ANY-method
 #' @exportMethod [<-
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "character"),
@@ -321,7 +321,7 @@ setMethod(f = "coordinates",
 #' @param y *Ignored.*
 #' @param ... Additional parameters associated with the call.
 #' @returns `plot` object with site coordinates.
-#' @aliases plot,sites-method
+#' @aliases plot,sites-method plot,sites,ANY-method
 #' @exportMethod plot
 setMethod(f = "plot",
           signature = "sites",
@@ -354,33 +354,42 @@ setMethod(f = "summary",
           signature = "sites",
           definition = function(object, ...) {
             datasettype <- lapply(object@sites, function(x) {
-              collunits <- length(x@collunits@collunits)
-              if (length(x) > 0) {
-                collunits <- lapply(x@collunits@collunits,
-                                    function(y) {
-                                      chrons <- length(y@chronologies)
-                                      datasets <- length(y@datasets)
-                                      if (datasets > 0) {
-                                        types <- sapply(y@datasets@datasets,
-                                                        function(r) {
-                                                          r@datasettype
-                                                        }) %>%
-                                          paste0(collapse = ",")
-                                      } else {
-                                        types <- NA
-                                      }
-                                      data.frame(collectionunit = y@handle,
-                                                 chronologies = chrons,
-                                                 datasets = datasets,
-                                                 types = types)
-                                    }) %>%
-                  bind_rows() %>%
-                  na.omit()
+              # `collunits` is an optional slot, and a site returned by
+              # get_sites() may hold collection units that carry no datasets
+              # yet. Either way the site still gets one row, so that summary()
+              # always accounts for every site it was given.
+              units <- if (is.null(x@collunits)) {
+                list()
               } else {
-                collunits <- data.frame(collectionunit = NA,
+                x@collunits@collunits
+              }
+              collunits <- lapply(units,
+                                  function(y) {
+                                    chrons <- length(y@chronologies)
+                                    datasets <- length(y@datasets)
+                                    if (datasets > 0) {
+                                      types <- sapply(y@datasets@datasets,
+                                                      function(r) {
+                                                        r@datasettype
+                                                      }) %>%
+                                        paste0(collapse = ",")
+                                    } else {
+                                      types <- NA
+                                    }
+                                    data.frame(collectionunit = y@handle,
+                                               chronologies = chrons,
+                                               datasets = datasets,
+                                               types = types)
+                                  }) %>%
+                bind_rows()
+              if (nrow(collunits) > 0) {
+                collunits <- na.omit(collunits)
+              }
+              if (nrow(collunits) == 0) {
+                collunits <- data.frame(collectionunit = NA_character_,
                                         chronologies = 0,
                                         datasets = 0,
-                                        types = NA)
+                                        types = NA_character_)
               }
               data.frame(siteid = x$siteid,
                          sitename = x$sitename,
@@ -531,3 +540,83 @@ setMethod(f = "cite_data",
               return(NULL)
             }
           })
+
+#' @rdname count
+setMethod(
+  "count",
+  "sites",
+  function(x, level = c("sites", "collunits", "datasets")) {
+    
+    level <- match.arg(level)
+    
+    switch(
+      level,
+      sites = length(x@sites),
+      collunits = {
+        ids <- unlist(
+          lapply(
+            x@sites,
+            function(site) {
+              vapply(
+                site@collunits@collunits,
+                function(cu) cu@collectionunitid,
+                integer(1)
+              )}))
+        length(unique(ids))},
+      datasets = {
+        ids <- unlist(
+          lapply(x@sites,function(site) {
+              unlist(lapply(
+                  site@collunits@collunits,
+                  function(cu) {
+                    vapply(cu@datasets@datasets,
+                      function(ds) ds@datasetid,
+                      integer(1)
+                    )}))}))
+        length(unique(ids))
+      }
+    )}
+)
+
+#' @rdname count
+setMethod(
+  "count",
+  "site",
+  function(x, level = c("sites", "collunits", "datasets")) {
+    
+    level <- match.arg(level)
+    
+    switch(
+      level,
+      
+      sites = 1L,
+      
+      collunits = {
+        ids <- vapply(
+          x@collunits@collunits,
+          function(cu) cu@collectionunitid,
+          integer(1)
+        )
+        
+        length(unique(ids))
+      },
+      
+      datasets = {
+        ids <- unlist(
+          lapply(
+            x@collunits@collunits,
+            function(cu) {
+              vapply(
+                cu@datasets@datasets,
+                function(ds) ds@datasetid,
+                integer(1)
+              )
+            }
+          )
+        )
+        
+        length(unique(ids))
+      }
+    )
+  }
+)
