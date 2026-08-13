@@ -25,3 +25,5 @@ test_that("Chroncontrols returns nothing", {
 
   testthat::expect_equal(length(empty[,0]), 0)
 })
+
+})
