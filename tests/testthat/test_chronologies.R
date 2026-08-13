@@ -29,3 +29,4 @@ test_that("`get_downloads()` is empty for empty download", {
   testthat::expect_equal(length(chron@chronologies),0)
 
 })
+})
