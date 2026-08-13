@@ -2,12 +2,12 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "neotoma2",
-  "description": "Access and manipulation of data using the Neotoma Paleoecology Database. <https://api.neotomadb.org/api-docs/>.",
+  "description": "Access and manipulation of data using the Neotoma Paleoecology Database. <https://api.neotomadb.org/api-docs/>. Examples in functions that require API access are not executed during CRAN checks. Vignettes do not execute as to avoid API calls during CRAN checks.",
   "name": "neotoma2: Working with the Neotoma Paleoecology Database",
   "codeRepository": "https://github.com/NeotomaDB/neotoma2",
   "issueTracker": "https://github.com/NeotomaDB/neotoma2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.11",
+  "version": "1.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -23,8 +23,8 @@
   "author": [
     {
       "@type": "Person",
-      "givenName": "Dominguez Vidana",
-      "familyName": "Socorro",
+      "givenName": "Socorro",
+      "familyName": "Dominguez Vidana",
       "email": "dominguezvid@wisc.edu",
       "@id": "https://orcid.org/0000-0002-7926-4935"
     },
@@ -34,13 +34,20 @@
       "familyName": "Goring",
       "email": "goring@wisc.edu",
       "@id": "https://orcid.org/0000-0002-2700-4605"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Nick",
+      "familyName": "Hoffman",
+      "email": "nickhoff@sas.upenn.edu",
+      "@id": "https://orcid.org/0000-0002-6626-5015"
     }
   ],
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Dominguez Vidana",
-      "familyName": "Socorro",
+      "givenName": "Socorro",
+      "familyName": "Dominguez Vidana",
       "email": "dominguezvid@wisc.edu",
       "@id": "https://orcid.org/0000-0002-7926-4935"
     }
@@ -48,15 +55,51 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
+      "identifier": "Bchron",
+      "name": "Bchron",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
+      "sameAs": "https://CRAN.R-project.org/package=Bchron"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "httptest",
+      "name": "httptest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=httptest"
     },
     {
       "@type": "SoftwareApplication",
@@ -96,39 +139,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "ggplot2",
-      "name": "ggplot2",
+      "identifier": "testthat",
+      "name": "testthat",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "Bchron",
-      "name": "Bchron",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=Bchron"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
   "softwareRequirements": {
@@ -146,18 +165,6 @@
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "magrittr",
-      "name": "magrittr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=magrittr"
-    },
-    "3": {
-      "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
       "provider": {
@@ -168,7 +175,31 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "leaflet",
+      "name": "leaflet",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=leaflet"
+    },
     "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "magrittr",
+      "name": "magrittr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=magrittr"
+    },
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "digest",
       "name": "digest",
@@ -180,7 +211,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=digest"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "geojsonsf",
       "name": "geojsonsf",
@@ -192,7 +223,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=geojsonsf"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -204,7 +235,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
@@ -216,7 +247,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=httr"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -228,12 +259,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
@@ -244,18 +275,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    "11": {
-      "@type": "SoftwareApplication",
-      "identifier": "leaflet",
-      "name": "leaflet",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=leaflet"
     },
     "12": {
       "@type": "SoftwareApplication",
@@ -324,7 +343,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "9142.596KB",
+  "fileSize": "5384.122KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -332,9 +351,9 @@
       "author": [
         {
           "@type": "Person",
-          "givenName": "Dominguez Vidana",
-          "familyName": "Socorro",
-          "email": "s.dominguez@ht-data.com",
+          "givenName": "Socorro",
+          "familyName": "Dominguez Vidana",
+          "email": "dominguezvid@wisc.edu",
           "@id": "https://orcid.org/0000-0002-7926-4935"
         },
         {

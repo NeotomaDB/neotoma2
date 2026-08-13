@@ -1,0 +1,93 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 24177,
+            "sitename": "Meerfelder Maar",
+            "sitedescription": "Lake. Physiography: Maar.",
+            "geography": "{\"type\":\"Polygon\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[[[6.75027,50.0978],[6.76529,50.0978],[6.76529,50.10361],[6.75027,50.10361],[6.75027,50.0978]]]}",
+            "altitude": 348,
+            "collectionunits": [
+                {
+                    "handle": "MFM09AD",
+                    "datasets": [
+                        {
+                            "datasetid": 48664,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "MFM09-A/D",
+                    "collectionunitid": 35088,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MFM6",
+                    "datasets": [
+                        {
+                            "datasetid": 42720,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "MFM6 V-X",
+                    "collectionunitid": 29739,
+                    "collectionunittype": "Core"
+                },
+                {
+                    "handle": "MFM6T",
+                    "datasets": [
+                        {
+                            "datasetid": 42510,
+                            "datasettype": "pollen"
+                        }
+                    ],
+                    "collectionunit": "MFM6 I-V",
+                    "collectionunitid": 29576,
+                    "collectionunittype": "Core"
+                }
+            ]
+        },
+        {
+            "siteid": 39069,
+            "sitename": "Meerfelder Maar + ",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.7575,50.10083]}",
+            "altitude": null,
+            "collectionunits": [
+                {
+                    "handle": "NODE-R2297",
+                    "datasets": [
+                        {
+                            "datasetid": 71127,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "NODE-R2297",
+                    "collectionunitid": 52585,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 40524,
+            "sitename": "Meerfelder Maar + ",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[6.7575,50.10083]}",
+            "altitude": null,
+            "collectionunits": [
+                {
+                    "handle": "NODE-R2298",
+                    "datasets": [
+                        {
+                            "datasetid": 72668,
+                            "datasettype": "ostracode surface sample"
+                        }
+                    ],
+                    "collectionunit": "NODE-R2298",
+                    "collectionunitid": 54125,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

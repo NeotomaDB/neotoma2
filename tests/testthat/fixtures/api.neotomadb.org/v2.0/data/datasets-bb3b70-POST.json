@@ -1,0 +1,662 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "siteid": 32,
+                "sitename": "Amarete",
+                "sitedescription": "Mire.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.98333,-15.23333]}",
+                "altitude": 3755,
+                "collectionunitid": 32,
+                "collectionunit": null,
+                "handle": "AMARETE",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n32s3q",
+                            "10.21233/n3nt2z"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 9321,
+                                "ageyoung": 0
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 32,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 7874,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 211,
+                "sitename": "Lago do Aquiri",
+                "sitedescription": "Natural lake, sometimes flooded by river. Physiography: soft rolling area with flood plains. Surrounding vegetation: anthropog. palm forest, swamp savanna.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-44.98333,-3.16667]}",
+                "altitude": 13,
+                "collectionunitid": 211,
+                "collectionunit": null,
+                "handle": "AQUIRI",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3j69g",
+                            "10.21233/n3z314"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 7453,
+                                "ageyoung": 6190
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 212,
+                        "datasetpi": [
+                            {
+                                "initials": "H.",
+                                "contactid": 422,
+                                "firstname": "Hermann",
+                                "familyname": "Behling",
+                                "contactname": "Behling, Hermann"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 7889,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 323,
+                "sitename": "Cala Conto",
+                "sitedescription": "Interandean plain.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-65.93333,-17.56667]}",
+                "altitude": 2699,
+                "collectionunitid": 323,
+                "collectionunit": null,
+                "handle": "CALACONT",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3801w",
+                            "10.21233/n3v11h"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 36533,
+                                "ageyoung": 10077
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 330,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 7968,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 347,
+                "sitename": "Chacaltaya 1",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+                "altitude": 4746,
+                "collectionunitid": 347,
+                "collectionunit": null,
+                "handle": "CHACALT1",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n38s3k",
+                            "10.21233/n3vt4k"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 7655,
+                                "ageyoung": 89
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 355,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 7987,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 348,
+                "sitename": "Chacaltaya 2",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.15,-16.36667]}",
+                "altitude": 4746,
+                "collectionunitid": 348,
+                "collectionunit": null,
+                "handle": "CHACALT2",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n35310",
+                            "10.21233/n3r399"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 10920,
+                                "ageyoung": 0
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 356,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 7988,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 523,
+                "sitename": "Cumbre Unduavi",
+                "sitedescription": null,
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-68.04167,-16.35]}",
+                "altitude": 4628,
+                "collectionunitid": 523,
+                "collectionunit": null,
+                "handle": "CUMBREUN",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n3cx14",
+                            "10.21233/n3sw4n"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 27904,
+                                "ageyoung": -219
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 537,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 8040,
+                        "datasetpi": [
+                            {
+                                "initials": "K.",
+                                "contactid": 515,
+                                "firstname": "Kurt",
+                                "familyname": "Graf",
+                                "contactname": "Graf, Kurt"
+                            }
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 526,
+                "sitename": "Lagoa da Curuça",
+                "sitedescription": "Lake. Physiography: isolated lake, 15 km from the Atlantic. Surrounding vegetation: Amazon rain forest.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.85,-0.76667]}",
+                "altitude": 19,
+                "collectionunitid": 526,
+                "collectionunit": "Profile A",
+                "handle": "CURUCAA",
+                "unittype": "Composite",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n30q55",
+                            "10.21233/n3dk78"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 13686,
+                                "ageyoung": 10721
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 540,
+                        "datasetpi": [
+                            {
+                                "initials": "H.",
+                                "contactid": 422,
+                                "firstname": "Hermann",
+                                "familyname": "Behling",
+                                "contactname": "Behling, Hermann"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 8043,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/ts2n-1r28"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": null,
+                        "datasetid": 10477,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "charcoal",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 526,
+                "sitename": "Lagoa da Curuça",
+                "sitedescription": "Lake. Physiography: isolated lake, 15 km from the Atlantic. Surrounding vegetation: Amazon rain forest.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-47.85,-0.76667]}",
+                "altitude": 19,
+                "collectionunitid": 2973,
+                "collectionunit": "Profile B",
+                "handle": "CURUCAB",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n36v28"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Radiocarbon years BP",
+                                "ageold": 9437,
+                                "ageyoung": -44
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 3074,
+                        "datasetpi": [
+                            {
+                                "initials": "H.",
+                                "contactid": 422,
+                                "firstname": "Hermann",
+                                "familyname": "Behling",
+                                "contactname": "Behling, Hermann"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 8786,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/xakj-dm95"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": null,
+                        "datasetid": 10504,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "charcoal",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 532,
+                "sitename": "Lagoa das Patas",
+                "sitedescription": "Lake, 300m x 7m on low inselberg. Physiography: small closed basin with flat bottom. Surrounding vegetation: dense, lowland tropical rain forest.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-66.68333,0.26667]}",
+                "altitude": 197,
+                "collectionunitid": 532,
+                "collectionunit": null,
+                "handle": "DASPATAS",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n37710",
+                            "10.21233/n3n600"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 62604,
+                                "ageyoung": -124
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 547,
+                        "datasetpi": [
+                            {
+                                "initials": "P.A.",
+                                "contactid": 128,
+                                "firstname": "Paul A.",
+                                "familyname": "Colinvaux",
+                                "contactname": "Colinvaux, Paul A."
+                            },
+                            {
+                                "initials": "P.E.",
+                                "contactid": 675,
+                                "firstname": "Paulo E.",
+                                "familyname": "De Oliveira",
+                                "contactname": "De Oliveira, Paulo E."
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": "Replaced author var <Arecaceae (excluding Mauritia)> with its equivalent <Arecaceae undiff.> since both Iriartea and Mauritia are also present.",
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 8046,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        },
+        {
+            "site": {
+                "siteid": 843,
+                "sitename": "Serra Campos Gerais",
+                "sitedescription": "Peat bog. Physiography: highland plain, next to a river vally. Surrounding vegetation: farmland.",
+                "sitenotes": null,
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-50.21667,-24.66667]}",
+                "altitude": 1237,
+                "collectionunitid": 842,
+                "collectionunit": null,
+                "handle": "GERAIS",
+                "unittype": "Core",
+                "datasets": [
+                    {
+                        "doi": [
+                            "10.21233/n39h81",
+                            "10.21233/n3qc9r"
+                        ],
+                        "agerange": [
+                            {
+                                "units": "Calibrated radiocarbon years BP",
+                                "ageold": 15354,
+                                "ageyoung": -47
+                            }
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 872,
+                        "datasetpi": [
+                            {
+                                "initials": "H.",
+                                "contactid": 422,
+                                "firstname": "Hermann",
+                                "familyname": "Behling",
+                                "contactname": "Behling, Hermann"
+                            }
+                        ],
+                        "datasettype": "pollen",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": "Latin American Pollen Database",
+                        "datasetid": 8138,
+                        "datasetpi": [
+                            {
+                                "initials": "H.",
+                                "contactid": 422,
+                                "firstname": "Hermann",
+                                "familyname": "Behling",
+                                "contactname": "Behling, Hermann"
+                            }
+                        ],
+                        "datasettype": "geochronologic",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    },
+                    {
+                        "doi": [
+                            "10.21233/8fby-c666"
+                        ],
+                        "agerange": [
+
+                        ],
+                        "database": null,
+                        "datasetid": 10483,
+                        "datasetpi": [
+
+                        ],
+                        "datasettype": "charcoal",
+                        "datasetnotes": null,
+                        "recdatecreated": "2013-09-30T14:02:42"
+                    }
+                ]
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}

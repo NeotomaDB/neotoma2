@@ -1,8 +1,10 @@
 library("testthat")
 library("neotoma2")
 library("dplyr")
+library("httptest")
 
 context("Chronology controls functions work as expected.")
+httptest::with_mock_api({
 test_that("Chroncontrols gets record", {
   skip_on_cran()
   single <- chroncontrols(get_downloads(4716))

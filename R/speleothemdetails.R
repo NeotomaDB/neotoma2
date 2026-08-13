@@ -32,7 +32,7 @@ setMethod(f = "speleothemdetails",
              .data$taxonid, .data$variablename, .data$value, .data$units,
              # speleothem details
              .data$speleothemtype, .data$geology,
-             .data$relativeage, .data$monitoring,
+             .data$rockage, .data$monitoring,
              .data$speleothemdriptype, .data$dripheight, .data$dripheightunits,
              .data$covertype, .data$entitycoverthickness,
              .data$entrancedistance, .data$entrancedistanceunits, 

@@ -177,6 +177,7 @@ setMethod(
 )
 
 #' @rdname sub-sub
+#' @aliases [[,chronologies,numeric-method [[,chronologies,numeric,ANY-method
 setMethod(f = "[[",
           signature = signature(x = "chronologies", i = "numeric"),
           definition = function(x, i) {

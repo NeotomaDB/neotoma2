@@ -37,7 +37,7 @@ setMethod(f = "show",
               print(row.names = FALSE)
           })
 
-#' @aliases sub-sub,taxa-method
+#' @aliases sub-sub,taxa-method [[,taxa,numeric-method [[,taxa,numeric,ANY-method
 #' @rdname sub-sub
 setMethod(f = "[[",
           signature = signature(x = "taxa", i = "numeric"),
@@ -61,7 +61,7 @@ setMethod(f = "names",
             slotNames(x)
           })
 
-#' @aliases sub-subset,taxa-method
+#' @aliases sub-subset,taxa-method [[<-,taxa-method [[<-,taxa,ANY,ANY-method
 #' @rdname sub-subset
 setMethod(f = "[[<-",
           signature = signature(x = "taxa"),
@@ -72,7 +72,7 @@ setMethod(f = "[[<-",
             return(out)
           })
 
-#' @aliases subset,taxon-method
+#' @aliases subset,taxon-method [<-,taxon,character-method [<-,taxon,character,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "taxon", i = "character"),
@@ -83,7 +83,7 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @aliases subset,taxon-method
+#' @aliases subset,taxon-method [<-,taxon,numeric-method [<-,taxon,numeric,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "taxon", i = "numeric"),
@@ -104,7 +104,7 @@ setMethod(f = "$<-",
             return(x)
           })
 
-#' @aliases sub,taxa-method
+#' @aliases sub,taxa-method [,taxa,numeric-method [,taxa,numeric,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "taxa", i = "numeric"),

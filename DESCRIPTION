@@ -1,10 +1,10 @@
 Package: neotoma2
 Title: Working with the Neotoma Paleoecology Database
-Date: 2025-12-13
-Version: 1.0.11
+Date: 2026-08-04
+Version: 1.1.0
 Authors@R:
-    c(person(given = "Dominguez Vidana",
-             family = "Socorro",
+    c(person(given = "Socorro",
+             family = "Dominguez Vidana",
              role = c("aut", "cre"),
              email = "dominguezvid@wisc.edu",
              comment = c(ORCID = "0000-0002-7926-4935")),
@@ -29,18 +29,20 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Suggests:
-    testthat,
+Suggests: 
+    Bchron,
+    covr,
+    ggplot2,
+    httptest,
     knitr,
     pkgdown,
     rmarkdown,
-    ggplot2,
-    Bchron,
-    covr,
-Imports:
+    testthat
+Imports: 
     rlang,
-    magrittr,
     sf,
+    leaflet,
+    magrittr,
     digest,
     geojsonsf,
     purrr,
@@ -48,7 +50,6 @@ Imports:
     jsonlite,
     methods,
     dplyr,
-    leaflet,
     assertthat,
     stringr,
     progress,

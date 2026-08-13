@@ -4,6 +4,9 @@ library("dplyr")
 
 test_that("Add a new chronology to a record:", {
   skip_on_cran()
+  # Live: heavy Bchron age-model computation over a ~0.5 MB download; not
+  # mocked, skips on CI (GitHub Actions).
+  skip_on_ci()
   stara <- get_downloads(24238)
   stara_chron <- chronologies(stara)
   controls <- chroncontrols(stara) %>%

@@ -1,8 +1,10 @@
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("`getids()` retrieves all 'site', 'collection unit', and
         'dataset' IDs from Neotoma2 objects")
+httptest::with_mock_api({
 test_that("getids gets correct site IDs", {
   skip_on_cran()
   sts <- get_sites(c(1001, 2001, 15, 24))
@@ -51,4 +53,5 @@ test_that("getids gets correct IDs and correct alignment", {
     dplyr::filter(siteid == 2001)
   testthat::expect_setequal(st2001_ids$datasetid, st2001_map$datasetid)
   testthat::expect_setequal(st2001_ids$collunitid, st2001_map$collectionunitid)
+})
 })

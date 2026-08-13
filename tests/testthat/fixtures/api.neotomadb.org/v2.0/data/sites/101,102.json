@@ -1,0 +1,48 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "siteid": 101,
+            "sitename": "Site 31 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.72,46.05]}",
+            "altitude": 355,
+            "collectionunits": [
+                {
+                    "handle": "AMS031",
+                    "datasets": [
+                        {
+                            "datasetid": 101,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "C167NEBS",
+                    "collectionunitid": 101,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        },
+        {
+            "siteid": 102,
+            "sitename": "Site 32 (Swain unpublished)",
+            "sitedescription": null,
+            "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.8,46.22]}",
+            "altitude": 326,
+            "collectionunits": [
+                {
+                    "handle": "AMS032",
+                    "datasets": [
+                        {
+                            "datasetid": 102,
+                            "datasettype": "pollen surface sample"
+                        }
+                    ],
+                    "collectionunit": "C169HLFS",
+                    "collectionunitid": 102,
+                    "collectionunittype": "Modern"
+                }
+            ]
+        }
+    ],
+    "message": "Retrieved all tables"
+}

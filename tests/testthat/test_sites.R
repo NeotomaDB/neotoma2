@@ -1,8 +1,10 @@
 ## load packages
 library("testthat")
 library("neotoma2")
+library("httptest")
 
 context("Run Neotoma `test_sites` only when not on CRAN")
+httptest::with_mock_api({
 test_that("get_sites runs as expected.", {
   skip_on_cran()
   alexander_lake <- get_sites(sitename = "Alexander Lake")
@@ -31,6 +33,20 @@ test_that("get_sites runs as expected.", {
   sites.vec <- getids(sites.ob)
   sites.vec <- unique(sites.vec$siteid)
   testthat::expect_setequal(sites.vec, c(1001, 2001, 15, 24))
+})
+
+test_that("count() counts sites correctly.", {
+  skip_on_cran()
+  sites.ob <- get_sites(c(1001, 2001, 15, 24))
+  length_sites = length(sites.ob)
+  count_sites = count(sites.ob)
+  number_collunit_names = summary(sites.ob) %>% distinct(collunit_name) %>% dplyr::count()
+  count_collunits = count(sites.ob, level = "collunits")
+  count_datasets = count(sites.ob, level = "datasets")
+  sum_datasets = sum(summary(sites.ob)$n_datasets)
+  testthat::expect_equal(number_collunit_names$n[[1]], count_collunits)
+  testthat::expect_equal(sum_datasets, count_datasets)
+  testthat::expect_equal(length_sites, count_sites)
 })
 
 # test_that("All Czech sites work with different spatial bounds:", {
@@ -63,6 +79,7 @@ test_that("get_sites runs as expected.", {
 
 test_that("All Data + loc work", {
   skip_on_cran()
+  on.exit(Sys.sleep(10), add = TRUE)
   europe_json <- '{"type": "Polygon",
         "coordinates": [
           [[-23.5546875, 70.8446726342528],
@@ -71,9 +88,12 @@ test_that("All Data + loc work", {
            [62.57812500000001, 74.01954331150228],
            [-23.5546875, 70.8446726342528]]
         ]}'
-  data <- get_sites(loc = europe_json[1], all_data = TRUE)
+  # This only needs to prove that a large region returns many sites; a single
+  # page (`limit = 100`) satisfies `> 50` without paginating the whole continent.
+  data <- get_sites(loc = europe_json[1], limit = 100)
   testthat::expect_gt(length(data), 50)
 
   # Now, we know that all sites in cz_sites[[1]] should be in cz_sites[[3]],
   # but the bounding box strategy means that the reverse is not true:
+})
 })
