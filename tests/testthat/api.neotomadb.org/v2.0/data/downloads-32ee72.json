@@ -1,0 +1,420 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "site": {
+                "area": null,
+                "notes": null,
+                "siteid": 100,
+                "dataset": {
+                    "doi": [
+                        "10.21233/n39016",
+                        "10.21233/n3w40g",
+                        "10.21233/m0zx-1008",
+                        "10.21233/2hd8-pn42"
+                    ],
+                    "agerange": [
+                        {
+                            "units": null,
+                            "ageold": null,
+                            "ageyoung": null
+                        }
+                    ],
+                    "database": "North American Pollen Database",
+                    "datasetid": 100,
+                    "datasetpi": [
+                        {
+                            "initials": "A.M.",
+                            "contactid": 98,
+                            "firstname": "Albert M.",
+                            "familyname": "Swain",
+                            "contactname": "Swain, Albert M."
+                        }
+                    ],
+                    "datasetname": null,
+                    "datasettype": "pollen surface sample",
+                    "datasetnotes": null
+                },
+                "altitude": 391,
+                "sitename": "Site 30 (Swain unpublished)",
+                "geography": "{\"type\":\"Point\",\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}},\"coordinates\":[-91.35,46.35]}",
+                "geopolitical": [
+                    "United States",
+                    "Wisconsin"
+                ],
+                "collectionunit": {
+                    "notes": null,
+                    "handle": "AMS030",
+                    "colldate": null,
+                    "location": null,
+                    "waterdepth": null,
+                    "gpslocation": {
+                        "gpserror": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "gpsaltitude": null
+                    },
+                    "collunittype": "Modern",
+                    "collectionunit": "C165PDGS",
+                    "collectiondevice": null,
+                    "collectionunitid": 100,
+                    "depositionalenvironment": "Unknown",
+                    "dataset": {
+                        "doi": [
+                            "10.21233/n39016",
+                            "10.21233/n3w40g",
+                            "10.21233/m0zx-1008",
+                            "10.21233/2hd8-pn42"
+                        ],
+                        "agerange": [
+                            {
+                                "units": null,
+                                "ageold": null,
+                                "ageyoung": null
+                            }
+                        ],
+                        "database": "North American Pollen Database",
+                        "datasetid": 100,
+                        "datasetpi": [
+                            {
+                                "initials": "A.M.",
+                                "contactid": 98,
+                                "firstname": "Albert M.",
+                                "familyname": "Swain",
+                                "contactname": "Swain, Albert M."
+                            }
+                        ],
+                        "datasetname": null,
+                        "datasettype": "pollen surface sample",
+                        "datasetnotes": null,
+                        "samples": [
+                            {
+                                "ages": [
+                                    {
+                                        "age": null,
+                                        "agetype": null,
+                                        "ageolder": null,
+                                        "ageyounger": null,
+                                        "chronologyid": null,
+                                        "chronologyname": null
+                                    }
+                                ],
+                                "igsn": null,
+                                "datum": [
+                                    {
+                                        "units": "NISP",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 67,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Corylus",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 127,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Angiospermae undiff. (herbs)",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 271,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Salix",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 372,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Juglans",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 1,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 702,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Polygonaceae",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 2,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 338,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Acer",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 3,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 25,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Artemisia",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 3,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 210,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Picea",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 3,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 310,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Ulmus",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 3,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 417,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Poaceae",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 1,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Abies",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 61,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Asteraceae undiff.",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 74,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Cyperaceae",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 364,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Juniperus/Thuja",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 389,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Populus",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 4,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 391,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Amaranthaceae",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 17,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 330,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Alnus",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 22,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 16,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Ambrosia-type",
+                                        "ecologicalgroup": "UPHE"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 39,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 251,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Quercus",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 79,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 29,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Betula",
+                                        "ecologicalgroup": "TRSH"
+                                    },
+                                    {
+                                        "units": "NISP",
+                                        "value": 104,
+                                        "context": null,
+                                        "element": "pollen",
+                                        "taxonid": 385,
+                                        "symmetry": null,
+                                        "taxongroup": "Vascular plants",
+                                        "elementtype": "pollen",
+                                        "variablename": "Pinus",
+                                        "ecologicalgroup": "TRSH"
+                                    }
+                                ],
+                                "depth": 0,
+                                "sampleid": 1177,
+                                "thickness": null,
+                                "samplename": null,
+                                "sampleanalyst": [
+                                    {
+                                        "initials": "A.M.",
+                                        "contactid": 98,
+                                        "firstname": "Albert M.",
+                                        "familyname": "Swain",
+                                        "contactname": "Swain, Albert M."
+                                    }
+                                ],
+                                "analysisunitid": 932,
+                                "analysisunitname": null
+                            }
+                        ]
+                    },
+                    "chronologies": [
+                        {
+                            "chronology": {
+                                "chronology": null,
+                                "chronologyid": null,
+                                "chroncontrols": [
+                                    {
+                                        "depth": null,
+                                        "geochron": {
+                                            "agetype": null,
+                                            "delta13c": null,
+                                            "delta15n": null,
+                                            "infinite": null,
+                                            "percentc": null,
+                                            "percentn": null,
+                                            "labnumber": null,
+                                            "reservoir": null,
+                                            "geochronid": null,
+                                            "geochronage": null,
+                                            "geochrontype": null,
+                                            "geochronnotes": null,
+                                            "percentcollagen": null,
+                                            "radiocarbonmethod": null,
+                                            "geochronerrorolder": null,
+                                            "geochronerroryounger": null,
+                                            "geochronmaterialdated": null
+                                        },
+                                        "thickness": null,
+                                        "agelimitolder": null,
+                                        "chroncontrolid": null,
+                                        "agelimityounger": null,
+                                        "chroncontrolage": null,
+                                        "chroncontroltype": null
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "defaultchronology": null
+                },
+                "sitedescription": null
+            }
+        }
+    ],
+    "message": "Retrieved all tables"
+}
