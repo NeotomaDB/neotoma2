@@ -2,7 +2,7 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![NSF-1948926](https://img.shields.io/badge/NSF-1948926-blue.svg)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1948926)
 [![Codecov test coverage](https://codecov.io/gh/NeotomaDB/neotoma2/branch/production/graph/badge.svg)](https://app.codecov.io/gh/NeotomaDB/neotoma2?branch=production)
-[![DOI](https://zenodo.org/badge/265675258.svg)](https://zenodo.org/badge/latestdoi/265675258) 
+[![Zenodo doi badge](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21683439-blue.svg)](https://zenodo.org/doi/10.5281/zenodo.21683439)
 [![status](https://joss.theoj.org/papers/80636d1e6d32175f13edb7e7ed14089a/status.svg)](https://joss.theoj.org/papers/10.21105/joss.05561)
 <!-- badges: end -->
 
@@ -72,7 +72,7 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
-* CRAN release 1.1.0 **Pending** July 2026.
+* CRAN release 1.1.0 **Pending** August 2026.
 * CRAN release 1.0.12 April 2026
 * CRAN release 1.0.11 Bug fix: Set examples to \dontrun{} to avoid conflicts with CRAN's policy. **DONE** December 14, 2025
 * CRAN release 1.0.10 . **DONE** December 06, 2025
