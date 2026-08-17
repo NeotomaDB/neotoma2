@@ -82,7 +82,7 @@ setMethod(f = "[",
             new("sites", sites = x@sites[i])
           })
 
-#' @aliases [,site,numeric-method
+#' @aliases [,site,numeric-method [,site,numeric,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "site", i = "numeric"),
@@ -91,7 +91,7 @@ setMethod(f = "[",
             as.data.frame(sapply(slots, function(y) slot(x, y)))
           })
 
-#' @aliases [,site,character-method
+#' @aliases [,site,character-method [,site,character,ANY-method
 #' @rdname sub
 setMethod(f = "[",
           signature = signature(x = "site", i = "character"),
@@ -160,7 +160,7 @@ setMethod(f = "[<-",
             return(x)
           })
 
-#' @aliases [<-,site,numeric-method
+#' @aliases [<-,site,numeric-method [<-,site,numeric,ANY-method
 #' @rdname subset
 setMethod(f = "[<-",
           signature = signature(x = "site", i = "numeric"),
@@ -330,7 +330,7 @@ setMethod(f = "plot",
             plot(coords, ...)
           })
 
-#' @aliases plot,site-method
+#' @aliases plot,site-method plot,site,ANY-method
 #' @rdname plot
 setMethod(f = "plot",
           signature = "site",

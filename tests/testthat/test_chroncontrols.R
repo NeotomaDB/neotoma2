@@ -18,3 +18,14 @@ test_that("Chroncontrols gets record", {
   testthat::expect_is(mamchron, "data.frame")
 })
 })
+
+context("Chronology controls return nothing when nothing.")
+httptest::with_mock_api({
+test_that("Chroncontrols is empty for a record with no chronology", {
+  skip_on_cran()
+  empty <- chroncontrols(get_downloads(100))
+
+  testthat::expect_s3_class(empty, "data.frame")
+  testthat::expect_equal(nrow(empty), 0)
+})
+})

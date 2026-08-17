@@ -11,6 +11,7 @@
 Added `count()` and a `chronname` argument to `samples()` for chronology selection.
 Improved `filter()`, more robust parsing of malformed API records, and faster,
 more resilient API calls.
+Improved `chronologies()` function to show a data frame instead of the raw format of chronologies data.
 
 0 errors | 0 warnings | 1 note
 

@@ -2,43 +2,43 @@
 % Please edit documentation in R/collunits-methods.R, R/dataset-methods.R,
 %   R/publication-methods.R, R/samples-methods.R, R/site-methods.R,
 %   R/speleothem-methods.R, R/taxon-methods.R
-\name{[[<-,collunits,ANY,ANY-method}
-\alias{[[<-,collunits,ANY,ANY-method}
-\alias{sub-subset,collunits-method}
+\name{[[<-,collunits-method}
 \alias{[[<-,collunits-method}
-\alias{[[<-,datasets,ANY,ANY-method}
-\alias{sub-subset,datasets-method}
+\alias{sub-subset,collunits-method}
+\alias{[[<-,collunits,ANY,ANY-method}
 \alias{[[<-,datasets-method}
-\alias{[[<-,publications,ANY,ANY-method}
-\alias{sub-subset,publications-method}
+\alias{sub-subset,datasets-method}
+\alias{[[<-,datasets,ANY,ANY-method}
 \alias{[[<-,publications-method}
-\alias{[[<-,samples,ANY,ANY-method}
-\alias{sub-subset,samples-method}
+\alias{sub-subset,publications-method}
+\alias{[[<-,publications,ANY,ANY-method}
 \alias{[[<-,samples-method}
+\alias{sub-subset,samples-method}
+\alias{[[<-,samples,ANY,ANY-method}
 \alias{sub-subset}
 \alias{[[<-,sites-method}
 \alias{[[<-,sites,ANY,ANY-method}
-\alias{[[<-,speleothems,ANY,ANY-method}
-\alias{sub-subset,speleothems-method}
 \alias{[[<-,speleothems-method}
-\alias{[[<-,taxa,ANY,ANY-method}
-\alias{sub-subset,taxa-method}
+\alias{sub-subset,speleothems-method}
+\alias{[[<-,speleothems,ANY,ANY-method}
 \alias{[[<-,taxa-method}
+\alias{sub-subset,taxa-method}
+\alias{[[<-,taxa,ANY,ANY-method}
 \title{sub-subset}
 \usage{
-\S4method{[[}{collunits,ANY,ANY}(x, i) <- value
+\S4method{[[}{collunits}(x, i) <- value
 
-\S4method{[[}{datasets,ANY,ANY}(x, i) <- value
+\S4method{[[}{datasets}(x, i) <- value
 
-\S4method{[[}{publications,ANY,ANY}(x, i) <- value
+\S4method{[[}{publications}(x, i) <- value
 
-\S4method{[[}{samples,ANY,ANY}(x, i) <- value
+\S4method{[[}{samples}(x, i) <- value
 
-\S4method{[[}{sites,ANY,ANY}(x, i) <- value
+\S4method{[[}{sites}(x, i) <- value
 
-\S4method{[[}{speleothems,ANY,ANY}(x, i) <- value
+\S4method{[[}{speleothems}(x, i) <- value
 
-\S4method{[[}{taxa,ANY,ANY}(x, i) <- value
+\S4method{[[}{taxa}(x, i) <- value
 }
 \arguments{
 \item{x}{\code{neotoma2} object}

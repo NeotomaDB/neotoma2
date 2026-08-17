@@ -43,7 +43,7 @@ test_that("filter lat & long.", {
   sts <- get_sites()
   lat_sts <-
     sts %>%
-    filter(lat >= 50 & lat <= 90)
+    neotoma2::filter(lat >= 50 & lat <= 90)
   latitudes <- as.data.frame(lat_sts)$lat
   testthat::expect_true(all(latitudes <= 90))
   testthat::expect_true(all(latitudes >= 50))
