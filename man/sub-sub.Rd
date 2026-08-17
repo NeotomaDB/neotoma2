@@ -3,52 +3,52 @@
 %   R/contact-methods.R, R/dataset-methods.R, R/publication-methods.R,
 %   R/samples-methods.R, R/site-methods.R, R/speleothem-methods.R,
 %   R/taxon-methods.R
-\name{[[,chronologies,numeric,ANY-method}
-\alias{[[,chronologies,numeric,ANY-method}
+\name{[[,chronologies,numeric-method}
 \alias{[[,chronologies,numeric-method}
-\alias{[[,collunits,numeric,ANY-method}
-\alias{sub-sub,collunits-method}
+\alias{[[,chronologies,numeric,ANY-method}
 \alias{[[,collunits,numeric-method}
-\alias{[[,contacts,numeric,ANY-method}
-\alias{sub-sub,contacts-method}
+\alias{sub-sub,collunits-method}
+\alias{[[,collunits,numeric,ANY-method}
 \alias{[[,contacts,numeric-method}
-\alias{[[,datasets,numeric,ANY-method}
-\alias{sub-sub,datasets-method}
+\alias{sub-sub,contacts-method}
+\alias{[[,contacts,numeric,ANY-method}
 \alias{[[,datasets,numeric-method}
-\alias{[[,publications,numeric,ANY-method}
-\alias{sub-sub,publications-method}
+\alias{sub-sub,datasets-method}
+\alias{[[,datasets,numeric,ANY-method}
 \alias{[[,publications,numeric-method}
-\alias{[[,samples,numeric,ANY-method}
-\alias{sub-sub,samples-method}
+\alias{sub-sub,publications-method}
+\alias{[[,publications,numeric,ANY-method}
 \alias{[[,samples,numeric-method}
+\alias{sub-sub,samples-method}
+\alias{[[,samples,numeric,ANY-method}
 \alias{sub-sub}
 \alias{[[,sites,numeric-method}
 \alias{[[,sites,numeric,ANY-method}
-\alias{[[,speleothems,numeric,ANY-method}
-\alias{sub-sub,speleothems-method}
 \alias{[[,speleothems,numeric-method}
-\alias{[[,taxa,numeric,ANY-method}
-\alias{sub-sub,taxa-method}
+\alias{sub-sub,speleothems-method}
+\alias{[[,speleothems,numeric,ANY-method}
 \alias{[[,taxa,numeric-method}
+\alias{sub-sub,taxa-method}
+\alias{[[,taxa,numeric,ANY-method}
 \title{sub-sub}
 \usage{
-\S4method{[[}{chronologies,numeric,ANY}(x, i)
+\S4method{[[}{chronologies,numeric}(x, i)
 
-\S4method{[[}{collunits,numeric,ANY}(x, i)
+\S4method{[[}{collunits,numeric}(x, i)
 
-\S4method{[[}{contacts,numeric,ANY}(x, i)
+\S4method{[[}{contacts,numeric}(x, i)
 
-\S4method{[[}{datasets,numeric,ANY}(x, i)
+\S4method{[[}{datasets,numeric}(x, i)
 
-\S4method{[[}{publications,numeric,ANY}(x, i)
+\S4method{[[}{publications,numeric}(x, i)
 
-\S4method{[[}{samples,numeric,ANY}(x, i)
+\S4method{[[}{samples,numeric}(x, i)
 
-\S4method{[[}{sites,numeric,ANY}(x, i)
+\S4method{[[}{sites,numeric}(x, i)
 
-\S4method{[[}{speleothems,numeric,ANY}(x, i)
+\S4method{[[}{speleothems,numeric}(x, i)
 
-\S4method{[[}{taxa,numeric,ANY}(x, i)
+\S4method{[[}{taxa,numeric}(x, i)
 }
 \arguments{
 \item{x}{Neotoma2 nested object}

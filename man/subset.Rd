@@ -2,58 +2,58 @@
 % Please edit documentation in R/collunits-methods.R, R/dataset-methods.R,
 %   R/samples-methods.R, R/site-methods.R, R/speleothem-methods.R,
 %   R/taxon-methods.R
-\name{[<-,collunit,character,ANY-method}
-\alias{[<-,collunit,character,ANY-method}
-\alias{subset,collunit-method}
+\name{[<-,collunit,character-method}
 \alias{[<-,collunit,character-method}
-\alias{[<-,collunit,numeric,ANY-method}
+\alias{subset,collunit-method}
+\alias{[<-,collunit,character,ANY-method}
 \alias{[<-,collunit,numeric-method}
-\alias{[<-,dataset,character,ANY-method}
-\alias{subset,dataset-method}
+\alias{[<-,collunit,numeric,ANY-method}
 \alias{[<-,dataset,character-method}
-\alias{[<-,dataset,numeric,ANY-method}
+\alias{subset,dataset-method}
+\alias{[<-,dataset,character,ANY-method}
 \alias{[<-,dataset,numeric-method}
-\alias{[<-,sample,character,ANY-method}
-\alias{subset,sample-method}
+\alias{[<-,dataset,numeric,ANY-method}
 \alias{[<-,sample,character-method}
+\alias{subset,sample-method}
+\alias{[<-,sample,character,ANY-method}
 \alias{subset}
 \alias{[<-,site,character-method}
 \alias{[<-,site,character,ANY-method}
-\alias{[<-,site,numeric,ANY-method}
 \alias{[<-,site,numeric-method}
-\alias{[<-,speleothem,character,ANY-method}
-\alias{subset,speleothem-method}
+\alias{[<-,site,numeric,ANY-method}
 \alias{[<-,speleothem,character-method}
-\alias{[<-,speleothem,numeric,ANY-method}
+\alias{subset,speleothem-method}
+\alias{[<-,speleothem,character,ANY-method}
 \alias{[<-,speleothem,numeric-method}
-\alias{[<-,taxon,character,ANY-method}
-\alias{subset,taxon-method}
+\alias{[<-,speleothem,numeric,ANY-method}
 \alias{[<-,taxon,character-method}
-\alias{[<-,taxon,numeric,ANY-method}
+\alias{subset,taxon-method}
+\alias{[<-,taxon,character,ANY-method}
 \alias{[<-,taxon,numeric-method}
+\alias{[<-,taxon,numeric,ANY-method}
 \title{subset}
 \usage{
-\S4method{[}{collunit,character,ANY}(x, i) <- value
+\S4method{[}{collunit,character}(x, i) <- value
 
-\S4method{[}{collunit,numeric,ANY}(x, i) <- value
+\S4method{[}{collunit,numeric}(x, i) <- value
 
-\S4method{[}{dataset,character,ANY}(x, i) <- value
+\S4method{[}{dataset,character}(x, i) <- value
 
-\S4method{[}{dataset,numeric,ANY}(x, i) <- value
+\S4method{[}{dataset,numeric}(x, i) <- value
 
-\S4method{[}{sample,character,ANY}(x, i) <- value
+\S4method{[}{sample,character}(x, i) <- value
 
-\S4method{[}{site,character,ANY}(x, i) <- value
+\S4method{[}{site,character}(x, i) <- value
 
-\S4method{[}{site,numeric,ANY}(x, i) <- value
+\S4method{[}{site,numeric}(x, i) <- value
 
-\S4method{[}{speleothem,character,ANY}(x, i) <- value
+\S4method{[}{speleothem,character}(x, i) <- value
 
-\S4method{[}{speleothem,numeric,ANY}(x, i) <- value
+\S4method{[}{speleothem,numeric}(x, i) <- value
 
-\S4method{[}{taxon,character,ANY}(x, i) <- value
+\S4method{[}{taxon,character}(x, i) <- value
 
-\S4method{[}{taxon,numeric,ANY}(x, i) <- value
+\S4method{[}{taxon,numeric}(x, i) <- value
 }
 \arguments{
 \item{x}{A \code{neotoma2} object.}

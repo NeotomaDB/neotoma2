@@ -1,3 +1,77 @@
+#' @title Summarise one `chronology` as a single data.frame row.
+#' @description Shared by the `show` methods for `chronology` and
+#' `chronologies` so both print the same columns in the same order.
+#' `n_controls` counts controls with a real `chroncontrolid`; a hand-built
+#' chronology whose table lacks that column yields `sum(!is.na(NULL))`, i.e. 0.
+#' @param x A `chronology` object.
+#' @returns A one-row data.frame.
+#' @noRd
+chron_summary_row <- function(x) {
+  data.frame(chronologyid = x@chronologyid,
+             chronologyname = x@chronologyname,
+             agemodel = x@agemodel,
+             ageboundolder = x@ageboundolder,
+             ageboundyounger = x@ageboundyounger,
+             dateprepared = x@dateprepared,
+             modelagetype = x@modelagetype,
+             isdefault = x@isdefault,
+             n_controls = sum(!is.na(x@chroncontrols$chroncontrolid)))
+}
+
+#' @title Drop chronology rows that carry no information.
+#' @description A `chronology` slot can be populated with nothing but its id
+#' (for instance from a `get_sites()` record that was never downloaded). Those
+#' rows are noise in a printed summary, so drop any row whose metadata is
+#' entirely `NA` and which has no chronological controls.
+#' @param df A data.frame of `chron_summary_row()` rows.
+#' @returns The data.frame with uninformative rows removed.
+#' @noRd
+drop_empty_chron_rows <- function(df) {
+  meta <- c("chronologyname", "agemodel", "ageboundolder", "ageboundyounger",
+            "dateprepared", "modelagetype", "isdefault")
+  empty <- Reduce(`&`, lapply(df[meta], is.na)) & df$n_controls == 0
+  df[!empty, , drop = FALSE]
+}
+
+#' @title Print a data.frame of chronology summaries.
+#' @param df A data.frame of `chron_summary_row()` rows.
+#' @returns Called for its side effect.
+#' @noRd
+print_chron_summary <- function(df) {
+  df <- drop_empty_chron_rows(df)
+  if (nrow(df) > 0) {
+    print(df, row.names = FALSE)
+  } else {
+    cat("No chronology information available.\n")
+  }
+  invisible(NULL)
+}
+
+#' @aliases show,chronology-method
+#' @rdname show
+setMethod(f = "show",
+          signature = signature(object = "chronology"),
+          definition = function(object) {
+            print_chron_summary(chron_summary_row(object))
+          })
+
+#' @aliases show,chronologies-method
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows
+#' @rdname show
+setMethod(f = "show",
+          signature = signature(object = "chronologies"),
+          definition = function(object) {
+            if (length(object@chronologies) == 0) {
+              cat("No chronology information available.\n")
+              return(invisible(NULL))
+            }
+            object@chronologies %>%
+              map(chron_summary_row) %>%
+              bind_rows() %>%
+              print_chron_summary()
+          })
+
 #' @rdname sub-sub
 #' @aliases [[,chronologies,numeric-method [[,chronologies,numeric,ANY-method
 setMethod(f = "[[",

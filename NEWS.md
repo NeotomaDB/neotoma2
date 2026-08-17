@@ -20,6 +20,8 @@
   and the API's parameter list is fetched once per session rather than on every
   `get_*()` call.
 * Paginated queries report their progress in interactive sessions.
+* Improved `chronologies()` function to show a data frame instead of the raw format of chronologies data.
+
 
 ## neotoma2 1.0.12
 
@@ -33,6 +35,7 @@ Now follows:
 Set examples to \dontrun{} to avoid violating CRAN's policy that allows access to internet.
 Set vignettes to `eval=FALSE` as to avoid calling APIs that require access to internet.
 Set all tests that require API call to `skip on CRAN`.
+
 
 ## neotoma2 1.0.10
 
