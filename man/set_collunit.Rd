@@ -67,8 +67,8 @@ The new object will not be uploaded to the database.
 }
 \examples{
 {
-# Create a collunit
-my_collunit <- set_collunit(notes = "my lake")
+  # Create a collunit
+  my_collunit <- set_collunit(notes = "my lake")
 }
 }
 \author{

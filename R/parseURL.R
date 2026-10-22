@@ -13,10 +13,11 @@ neotoma_baseurl <- function(use = "neotoma") {
     use <- apipoint
   }
   switch(use,
-         "dev" = "https://api-dev.neotomadb.org/v2.0/",
-         "neotoma" = "https://api.neotomadb.org/v2.0/",
-         "local" = "http://localhost:3001/v2.0/",
-         use)
+    "dev" = "https://api-dev.neotomadb.org/v2.0/",
+    "neotoma" = "https://api.neotomadb.org/v2.0/",
+    "local" = "http://localhost:3001/v2.0/",
+    use
+  )
 }
 
 #' @title neotoma_cache
@@ -59,13 +60,17 @@ neotoma_cache_clear <- function() {
 neotoma_user_agent <- function() {
   if (is.null(neotoma_cache$user_agent)) {
     version <- tryCatch(as.character(utils::packageVersion("neotoma2")),
-                        error = function(e) "unknown")
-    neotoma_cache$user_agent <- paste0("neotoma2/", version, " (R ",
-                                       getRversion())
+      error = function(e) "unknown"
+    )
+    neotoma_cache$user_agent <- paste0(
+      "neotoma2/", version, " (R ",
+      getRversion()
+    )
   }
   contact <- getOption("neotoma2.contact", Sys.getenv("NEOTOMA_CONTACT", ""))
-  if (is.character(contact) && length(contact) == 1 && !is.na(contact) &&
-        nzchar(contact)) {
+  has_contact <- is.character(contact) && length(contact) == 1 &&
+    !is.na(contact) && nzchar(contact)
+  if (has_contact) {
     paste0(neotoma_cache$user_agent, "; contact: ", contact, ")")
   } else {
     paste0(neotoma_cache$user_agent, ")")
@@ -81,8 +86,10 @@ neotoma_user_agent <- function() {
 #' @noRd
 neotoma_headers <- function(json = FALSE) {
   if (json) {
-    add_headers("User-Agent" = neotoma_user_agent(),
-                "Content-Type" = "application/json")
+    add_headers(
+      "User-Agent" = neotoma_user_agent(),
+      "Content-Type" = "application/json"
+    )
   } else {
     add_headers("User-Agent" = neotoma_user_agent())
   }
@@ -237,8 +244,10 @@ neotoma_wait <- function(response, attempt) {
     }
   }
   if (neotoma_is_busy(response) || seconds >= 10) {
-    message("The Neotoma API is busy; waiting ", round(seconds),
-            " s before trying again.")
+    message(
+      "The Neotoma API is busy; waiting ", round(seconds),
+      " s before trying again."
+    )
   }
   neotoma_sleep(seconds)
   invisible(seconds)
@@ -313,7 +322,8 @@ neotoma_retry <- function(verb, url, ...,
   attempt <- 1
   repeat {
     response <- tryCatch(VERB(verb, url, ..., timeout(seconds)),
-                         error = function(e) e)
+      error = function(e) e
+    )
     if (neotoma_is_timeout(response) || neotoma_is_busy(response)) {
       budget <- min(budget, 2)
     }
@@ -324,10 +334,12 @@ neotoma_retry <- function(verb, url, ...,
     attempt <- attempt + 1
   }
   if (neotoma_is_timeout(response)) {
-    stop("The Neotoma API did not respond within ", seconds, " seconds for ",
-         url, " (", attempt, " attempt(s)).\nSpatial (loc) queries are slow ",
-         "server-side; try a smaller area, or raise the wait with ",
-         "Sys.setenv(NEOTOMA_TIMEOUT = ", seconds * 2, ").")
+    stop(
+      "The Neotoma API did not respond within ", seconds, " seconds for ",
+      url, " (", attempt, " attempt(s)).\nSpatial (loc) queries are slow ",
+      "server-side; try a smaller area, or raise the wait with ",
+      "Sys.setenv(NEOTOMA_TIMEOUT = ", seconds * 2, ")."
+    )
   }
   if (inherits(response, "condition")) {
     stop(response)
@@ -347,12 +359,16 @@ neotoma_request <- function(expr) {
     expr(),
     error = function(e) {
       if (grepl("SSL certificate", conditionMessage(e), ignore.case = TRUE)) {
-        stop("SSL certificate error: ", conditionMessage(e),
-             "\nPlease contact the Neotoma team.")
+        stop(
+          "SSL certificate error: ", conditionMessage(e),
+          "\nPlease contact the Neotoma team."
+        )
       } else {
-        stop("API request failed: ", conditionMessage(e),
-             "\nCheck that the API path is valid or visit:
-               http://data.neotomadb.org")
+        stop(
+          "API request failed: ", conditionMessage(e),
+          "\nCheck that the API path is valid or visit:
+               http://data.neotomadb.org"
+        )
       }
     }
   )
@@ -376,22 +392,25 @@ neotoma_status_check <- function(response) {
       stop("Error 429: Too many requests. Please wait and retry.")
     } else if (neotoma_is_busy(response)) {
       stop("Error ", response$status_code, ": the Neotoma API is busy or ",
-           "restarting. Try again later, or reduce the size of the query ",
-           "(fewer ids, a smaller area, a narrower taxon or name filter).",
-           call. = FALSE)
+        "restarting. Try again later, or reduce the size of the query ",
+        "(fewer ids, a smaller area, a narrower taxon or name filter).",
+        call. = FALSE
+      )
     } else {
       detail <- neotoma_api_message(response)
       tryCatch(
         stop_for_status(response,
-                        task = "Could not connect to the Neotoma API.
+          task = "Could not connect to the Neotoma API.
                                 Check that the path is valid, and
                                 check the current status of the
                                 Neotoma API services at
-                                http://data.neotomadb.org"),
+                                http://data.neotomadb.org"
+        ),
         error = function(e) {
           stop(conditionMessage(e),
-               if (!is.na(detail)) paste0("\nThe API said: ", detail),
-               call. = FALSE)
+            if (!is.na(detail)) paste0("\nThe API said: ", detail),
+            call. = FALSE
+          )
         }
       )
     }
@@ -412,7 +431,8 @@ neotoma_status_check <- function(response) {
 neotoma_api_message <- function(response) {
   parsed <- tryCatch(
     fromJSON(content(response, as = "text", encoding = "UTF-8"),
-             simplifyVector = FALSE),
+      simplifyVector = FALSE
+    ),
     error = function(e) NULL
   )
   if (!is.list(parsed)) {
@@ -444,9 +464,11 @@ neotoma_content <- function(response) {
   text <- content(response, as = "text", encoding = "UTF-8")
   if (grepl("^\\s*<", text)) {
     stop("The Neotoma API returned a web page instead of data, which usually ",
-         "means the request was redirected (for example to the API ",
-         "documentation). Check that the endpoint accepts this kind of ",
-         "request: ", response$url, call. = FALSE)
+      "means the request was redirected (for example to the API ",
+      "documentation). Check that the endpoint accepts this kind of ",
+      "request: ", response$url,
+      call. = FALSE
+    )
   }
   fromJSON(text, flatten = FALSE, simplifyVector = FALSE)
 }
@@ -463,7 +485,8 @@ neotoma_content <- function(response) {
 neotoma_get <- function(baseurl, x, query) {
   response <- neotoma_request(function() {
     neotoma_retry("GET", paste0(baseurl, x), neotoma_headers(),
-                  query = query)
+      query = query
+    )
   })
   neotoma_status_check(response)
   neotoma_content(response)
@@ -503,8 +526,10 @@ neotoma_post_route <- function(x) {
 neotoma_post <- function(url, query) {
   body <- neotoma_body(query)
   response <- neotoma_request(function() {
-    neotoma_retry("POST", url, body = body, encode = "raw",
-                  neotoma_headers(json = TRUE), config(postredir = 7))
+    neotoma_retry("POST", url,
+      body = body, encode = "raw",
+      neotoma_headers(json = TRUE), config(postredir = 7)
+    )
   })
   neotoma_status_check(response)
   neotoma_content(response)
@@ -566,12 +591,16 @@ neotoma_get_ids <- function(baseurl, x, query, chunk = 100) {
       r <- neotoma_post(paste0(baseurl, endpoint), query)
       if (!neotoma_ids_applied(r$data, id_key, batch)) {
         stop("The Neotoma API returned records that do not match the ",
-             length(batch), " ids requested from ", endpoint, ". The ids ",
-             "were not applied to the query.", call. = FALSE)
+          length(batch), " ids requested from ", endpoint, ". The ids ",
+          "were not applied to the query.",
+          call. = FALSE
+        )
       }
     } else {
-      r <- neotoma_get(baseurl, paste0(prefix, paste(batch, collapse = ",")),
-                       query)
+      r <- neotoma_get(
+        baseurl, paste0(prefix, paste(batch, collapse = ",")),
+        query
+      )
     }
     if (!is.null(r$data)) {
       results <- c(results, r$data)
@@ -596,13 +625,15 @@ neotoma_get_ids <- function(baseurl, x, query, chunk = 100) {
 #' @noRd
 neotoma_fetch <- function(baseurl, x, query) {
   full_url <- modify_url(baseurl,
-                         path = file.path("v2.0", x),
-                         query = query[setdiff(names(query), "loc")])
+    path = file.path("v2.0", x),
+    query = query[setdiff(names(query), "loc")]
+  )
 
   if ("loc" %in% names(query)) {
     parts <- strsplit(x, "/")[[1]]
     url <- paste0(baseurl, paste(parts[seq_len(min(2, length(parts)))],
-                                 collapse = "/"))
+      collapse = "/"
+    ))
     return(neotoma_post(url, query))
   }
 
@@ -653,8 +684,10 @@ neotoma_paginate <- function(baseurl, x, query, page = 2000) {
   repeat {
     pages <- pages + 1
     if (pages > 1 && interactive()) {
-      message("Fetching page ", pages, " (records ", query$offset + 1,
-              "+) ...")
+      message(
+        "Fetching page ", pages, " (records ", query$offset + 1,
+        "+) ..."
+      )
     }
     r <- neotoma_fetch(baseurl, x, query)
     r <- cleanNULL(r)

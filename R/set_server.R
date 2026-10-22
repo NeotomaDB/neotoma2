@@ -17,12 +17,14 @@
 #' @export
 set_server <- function(server = "neotoma") {
   assert_that(server %in% c("neotoma", "dev", "local"),
-              msg = "The parameter `server` must be `local`, 
-                    `neotoma` or `dev`.")
+    msg = "The parameter `server` must be `local`,
+                    `neotoma` or `dev`."
+  )
   server <- switch(server,
-                   neotoma = "neotoma",
-                   dev = "dev",
-                   local = "local")
+    neotoma = "neotoma",
+    dev = "dev",
+    local = "local"
+  )
 
   Sys.setenv("APIPOINT" = server)
 }

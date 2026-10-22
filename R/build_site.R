@@ -23,16 +23,18 @@ build_site <- function(x) {
     return(NULL)
   }
   geography <- use_na(read_geography(x$geography), "sf")
-  site <- set_site(siteid = use_na(x$siteid, "int"),
-                   sitename = use_na(x$sitename, "char"),
-                   geography = geography,
-                   altitude = use_na(x$altitude, "int"),
-                   geopolitical = use_na(x$geopolitical, "list"),
-                   area = use_na(x$area, "int"),
-                   notes = use_na(pick(x, "sitenotes", "notes"), "char"),
-                   description = use_na(x$sitedescription, "char"),
-                   collunits = x$collunits)
-  return(site)
+  site <- set_site(
+    siteid = use_na(x$siteid, "int"),
+    sitename = use_na(x$sitename, "char"),
+    geography = geography,
+    altitude = use_na(x$altitude, "int"),
+    geopolitical = use_na(x$geopolitical, "list"),
+    area = use_na(x$area, "int"),
+    notes = use_na(pick(x, "sitenotes", "notes"), "char"),
+    description = use_na(x$sitedescription, "char"),
+    collunits = x$collunits
+  )
+  site
 }
 
 #' @title read_geography

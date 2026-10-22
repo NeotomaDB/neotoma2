@@ -50,8 +50,8 @@ The new object will not be uploaded to the database.
 }
 \examples{
 {
-# Set an empty sample
-my_sample <- set_sample()
+  # Set an empty sample
+  my_sample <- set_sample()
 }
 }
 \author{

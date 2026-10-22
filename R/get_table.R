@@ -13,7 +13,7 @@
 #' @returns selected `table` values from the Database.
 #' @examples \dontrun{
 #' # Returns only the first 25 specimen records.
-#' someSpec <- get_table('specimens')
+#' someSpec <- get_table("specimens")
 #' }
 #' @importFrom dplyr bind_rows
 #' @importFrom purrr map

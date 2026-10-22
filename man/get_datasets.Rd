@@ -94,18 +94,24 @@ For the complete records, use \code{all_data=TRUE}
 }
 \examples{
 \dontrun{
-tryCatch({
-  random_sites <- get_sites(1)
-  allds <- get_datasets(random_sites, limit=3)
-}, error = function(e) {
-   message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    random_sites <- get_sites(1)
+    allds <- get_datasets(random_sites, limit = 3)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 # To find all datasets with a min altitude of 12 and a max altitude of 25:
-tryCatch({
-  sites_12to25 <- get_datasets(altmin=12, altmax=25)
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    sites_12to25 <- get_datasets(altmin = 12, altmax = 25)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 # To find all datasets in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
@@ -114,11 +120,14 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-tryCatch({
-  brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    brazil_datasets <- get_datasets(loc = brazil[1], limit = 2)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 }
 }
 \author{

@@ -1,7 +1,7 @@
 library("testthat")
 library("neotoma2")
 
-context("get_downloads() retrieves data from /download endpoint 
+context("get_downloads() retrieves data from /download endpoint
         and parses content as expected.")
 test_that("get_downloads numeric", {
   skip_on_cran()
@@ -14,30 +14,35 @@ test_that("get_downloads numeric", {
   testthat::expect_equivalent(datasets_ids, 1001)
 })
 
-test_that("get_downloads from get_datasets()
-          sites object.", {
-            skip_on_ci()
-            skip_if_api_unreachable()
-            # Space this out; it downloads full sample data.
-            on.exit(Sys.sleep(10), add = TRUE)
-            # `brazil_sf` comes from setup.R. A small `limit` is enough to prove
-            # that downloading a multi-dataset object preserves the id set --
-            # `all_data = TRUE` over the whole region is unnecessary here and
-            # was the single heaviest call in the suite.
-            brazil_datasets <- get_datasets(loc = brazil_sf, limit = 5)
-            brazil_dl <- get_downloads(brazil_datasets)
-            testthat::expect_identical(nrow(getids(brazil_datasets)),
-                                       nrow(getids(brazil_dl)))
-            testthat::expect_equal(getids(brazil_datasets),
-                                   getids(brazil_dl))
-          })
+test_that("get_downloads works on a get_datasets() sites object", {
+  skip_on_ci()
+  skip_if_api_unreachable()
+  # Space this out; it downloads full sample data.
+  on.exit(Sys.sleep(10), add = TRUE)
+  # `brazil_sf` comes from setup.R. A small `limit` is enough to prove
+  # that downloading a multi-dataset object preserves the id set --
+  # `all_data = TRUE` over the whole region is unnecessary here and
+  # was the single heaviest call in the suite.
+  brazil_datasets <- get_datasets(loc = brazil_sf, limit = 5)
+  brazil_dl <- get_downloads(brazil_datasets)
+  testthat::expect_identical(
+    nrow(getids(brazil_datasets)),
+    nrow(getids(brazil_dl))
+  )
+  testthat::expect_equal(
+    getids(brazil_datasets),
+    getids(brazil_dl)
+  )
+})
 
 test_that("get_downloads from get_sites sites", {
   skip_on_cran()
-  core_sites <- c(13949, 11904, 13319, 728,
-                  13248, 2625, 2806, 13280, 519, 11745,
-                  273, 13956, 11880, 13321, 9801, 13698,
-                  11816, 13909, 13921)
+  core_sites <- c(
+    13949, 11904, 13319, 728,
+    13248, 2625, 2806, 13280, 519, 11745,
+    273, 13956, 11880, 13321, 9801, 13698,
+    11816, 13909, 13921
+  )
   df1 <- get_sites(core_sites) %>%
     get_downloads() %>%
     getids()
@@ -60,7 +65,9 @@ test_that("get_downloads with or without all_data works.", {
   skip_on_ci()
   skip_if_api_unreachable()
   on.exit(Sys.sleep(5), add = TRUE)
+  # nolint start
   uk_bbox_geojson <- "{\n\"type\": \"FeatureCollection\",\n\"name\": \"out\",\n\"crs\": { \"type\": \"name\", \"properties\": { \"name\": \"urn:ogc:def:crs:OGC:1.3:CRS84\" } },\n\"features\": [\n{ \"type\": \"Feature\", \"properties\": { }, \"geometry\": { \"type\": \"Polygon\", \"coordinates\": [ [ [ -10.390234374999977, 50.021386718749994 ], [ 1.74658203125, 50.021386718749994 ], [ 1.74658203125, 60.831884765624991 ], [ -10.390234374999977, 60.831884765624991 ], [ -10.390234374999977, 50.021386718749994 ] ] ] } }\n]\n}"
+  # nolint end
   uk_datasets <- get_datasets(
     loc = uk_bbox_geojson,
     datasettype = "pollen",
@@ -68,8 +75,10 @@ test_that("get_downloads with or without all_data works.", {
   )
   uk_dl <- get_downloads(uk_datasets, all_data = TRUE)
   uk_dl2 <- get_downloads(uk_datasets)
-  testthat::expect_equal(nrow(as.data.frame(datasets(uk_dl))),
-                         nrow(as.data.frame(datasets(uk_dl2))))
+  testthat::expect_equal(
+    nrow(as.data.frame(datasets(uk_dl))),
+    nrow(as.data.frame(datasets(uk_dl2)))
+  )
   # expect no error
   testthat::expect_error(get_downloads(uk_datasets, all_data = TRUE), NA)
   testthat::expect_error(get_downloads(uk_datasets, all_data = FALSE), NA)
@@ -108,11 +117,15 @@ mock_downloads <- function(log, fail_on = NULL) {
     log$ids <- c(log$ids, list(ids))
     log$args <- c(log$args, list(list(...)))
     if (!is.null(fail_on) && fail_on %in% ids) stop("HTTP 504")
-    list(status = "success",
-         data = lapply(ids, function(i) list(datasetid = i)))
+    list(
+      status = "success",
+      data = lapply(ids, function(i) list(datasetid = i))
+    )
   }
-  local_mocked_bindings(parseURL = fake_parse_url, parse_site = function(x) x,
-                        .package = "neotoma2", .env = parent.frame())
+  local_mocked_bindings(
+    parseURL = fake_parse_url, parse_site = function(x) x,
+    .package = "neotoma2", .env = parent.frame()
+  )
 }
 
 test_that("get_downloads fetches a long id vector in sequential batches", {
@@ -186,8 +199,10 @@ test_that("get_downloads(sites) lets a caller turn all_data off", {
     seen <<- list(...)
     NULL
   }
-  local_mocked_bindings(getids = function(x) data.frame(datasetid = c(1, 2)),
-                        get_downloads = record_args, .package = "neotoma2")
+  local_mocked_bindings(
+    getids = function(x) data.frame(datasetid = c(1, 2)),
+    get_downloads = record_args, .package = "neotoma2"
+  )
   # Call the method itself: get_downloads() is the thing being replaced.
   neotoma2:::get_downloads.sites(new("sites", sites = list()), all_data = FALSE)
   expect_false(seen$all_data)

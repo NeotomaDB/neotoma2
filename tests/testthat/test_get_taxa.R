@@ -11,11 +11,17 @@ test_that("get_taxa() sites object", {
   skip_if_api_unreachable()
   abies <- get_taxa(1)
   testthat::expect_is(abies, "sites")
-  abies_df <- abies %>% get_downloads() %>% taxa() %>% suppressWarnings()
+  abies_df <- abies %>%
+    get_downloads() %>%
+    taxa() %>%
+    suppressWarnings()
   testthat::expect_true(any(grepl("Abies", abies_df$variablename)))
   abies <- get_taxa(taxonname = "abies")
   testthat::expect_is(abies, "sites")
-  abies_df <- abies %>% get_downloads() %>% taxa() %>% suppressWarnings()
+  abies_df <- abies %>%
+    get_downloads() %>%
+    taxa() %>%
+    suppressWarnings()
   testthat::expect_true(any(grepl("Abies", abies_df$variablename)))
 })
 
@@ -25,7 +31,9 @@ test_that("get_taxa() sites object", {
 fake_taxon <- function(names) {
   force(names)
   function(...) {
-    if (is.null(names)) return(NULL)
+    if (is.null(names)) {
+      return(NULL)
+    }
     new("taxa", taxa = lapply(seq_along(names), function(i) {
       new("taxon", taxonid = i, taxonname = names[[i]])
     }))
@@ -38,9 +46,11 @@ mock_taxa_steps <- function(names, log, .env = parent.frame()) {
     log$calls <- c(log$calls, list(list(...)))
     "datasets"
   }
-  local_mocked_bindings(get_taxon = fake_taxon(names),
-                        get_datasets = record_datasets,
-                        .package = "neotoma2", .env = .env)
+  local_mocked_bindings(
+    get_taxon = fake_taxon(names),
+    get_datasets = record_datasets,
+    .package = "neotoma2", .env = .env
+  )
 }
 
 test_that("get_taxa(taxa=) sends the names, not the taxa() generic", {
@@ -63,15 +73,19 @@ test_that("get_taxa honours a caller's all_data in both calls", {
 test_that("get_taxa(taxonname=) forwards the dataset arguments", {
   log <- new.env()
   mock_taxa_steps("Pinus", log)
-  get_taxa(taxonname = "Pinus", datasettype = c("pollen", "macrofossil"),
-           loc = c(-80, 40, -70, 50), limit = 5, offset = 10,
-           ageyoung = 100, ageold = 5000)
+  get_taxa(
+    taxonname = "Pinus", datasettype = c("pollen", "macrofossil"),
+    loc = c(-80, 40, -70, 50), limit = 5, offset = 10,
+    ageyoung = 100, ageold = 5000
+  )
   call <- log$calls[[1]]
   expect_equal(call$taxa, "Pinus")
   expect_equal(call$datasettype, c("pollen", "macrofossil"))
   expect_equal(call$loc, c(-80, 40, -70, 50))
-  expect_equal(call[c("limit", "offset", "ageyoung", "ageold")],
-               list(limit = 5, offset = 10, ageyoung = 100, ageold = 5000))
+  expect_equal(
+    call[c("limit", "offset", "ageyoung", "ageold")],
+    list(limit = 5, offset = 10, ageyoung = 100, ageold = 5000)
+  )
   expect_false("taxonname" %in% names(call))
 })
 
@@ -90,9 +104,11 @@ test_that("get_taxa sends only the id to the taxa endpoint", {
     seen <<- list(...)
     new("taxa", taxa = list(new("taxon", taxonid = 1, taxonname = "Abies")))
   }
-  local_mocked_bindings(get_taxon = fake_get_taxon,
-                        get_datasets = function(...) "datasets",
-                        .package = "neotoma2")
+  local_mocked_bindings(
+    get_taxon = fake_get_taxon,
+    get_datasets = function(...) "datasets",
+    .package = "neotoma2"
+  )
   get_taxa(1, limit = 5, offset = 2, all_data = TRUE, loc = c(1, 2, 3, 4))
   expect_equal(seen, list(1))
 })
@@ -100,13 +116,17 @@ test_that("get_taxa sends only the id to the taxa endpoint", {
 test_that("get_taxa never asks for datasets without a taxon filter", {
   log <- new.env()
   mock_taxa_steps(NULL, log)
-  expect_message(res <- get_taxa(taxonname = "Zzzzz not a taxon"),
-                 "No datasets were requested")
+  expect_message(
+    res <- get_taxa(taxonname = "Zzzzz not a taxon"),
+    "No datasets were requested"
+  )
   expect_null(res)
   expect_message(res <- get_taxa(999999999), "No datasets were requested")
   expect_null(res)
-  expect_message(res <- get_taxa(taxa = character(0)),
-                 "No datasets were requested")
+  expect_message(
+    res <- get_taxa(taxa = character(0)),
+    "No datasets were requested"
+  )
   expect_null(log$calls)
 })
 
@@ -129,9 +149,11 @@ test_that("get_taxa(<taxonid>) searches datasets for that taxon, not all", {
   # passed its id to get_taxa(). The datasets that came back were pollen surface
   # samples with none of the taxon: the old get_taxa(<id>) called get_datasets()
   # with no taxon filter, so it returned the API's first page of datasets.
-  bison_taxa <- list(new("taxon", taxonid = 6774, taxonname = "Bison"),
-                     new("taxon", taxonid = 5868, taxonname = "Bison bison"),
-                     new("taxon", taxonid = 6772, taxonname = "Bison priscus"))
+  bison_taxa <- list(
+    new("taxon", taxonid = 6774, taxonname = "Bison"),
+    new("taxon", taxonid = 5868, taxonname = "Bison bison"),
+    new("taxon", taxonid = 6772, taxonname = "Bison priscus")
+  )
   bison <- new("taxa", taxa = bison_taxa)
   seen <- new.env()
   fake_get_taxon <- function(x = NULL, ...) {
@@ -146,9 +168,11 @@ test_that("get_taxa(<taxonid>) searches datasets for that taxon, not all", {
     seen$datasets <- c(seen$datasets, list(list(...)))
     "datasets"
   }
-  local_mocked_bindings(get_taxon = fake_get_taxon,
-                        get_datasets = fake_get_datasets,
-                        .package = "neotoma2")
+  local_mocked_bindings(
+    get_taxon = fake_get_taxon,
+    get_datasets = fake_get_datasets,
+    .package = "neotoma2"
+  )
 
   second <- get_taxon(taxonname = "Bison*")[2]
   expect_equal(second$taxonid, 5868)

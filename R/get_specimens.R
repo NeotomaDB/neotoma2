@@ -1,6 +1,8 @@
 # #' @title get_specimens
 # ##' @name get_specimens
+# nolint start
 # #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
+# nolint end
 # #' @importFrom purrr map
 # #' @importFrom dplyr bind_rows select filter
 # #' @description
@@ -11,6 +13,7 @@
 # #' @keywords internal
 # #' @noRd
 # get_specimens <- function(x, ...) {
+# nolint start
 #   UseMethod("get_specimens")
 # }
 
@@ -44,16 +47,21 @@
 #       newsp <- build_specimen(sps[[i]])
 
 #       # Attach built specimen slot to datasets
-#       datasets <- ds[[st]]@collunits@collunits[[cuid]]@datasets@datasets[[dsid]]
+#       datasets <-
+# ds[[st]]@collunits@collunits[[cuid]]@datasets@datasets[[dsid]]
+# nolint end
 #       datasets@specimens@specimens <- c(datasets@specimens@specimens,
 #                                         newsp)
 #       datasets@samples@samples <-
 #         ds[[st]]@collunits@collunits[[
 #           cuid]]@datasets@datasets[[dsid]]@samples@samples
-#       ds[[st]]@collunits@collunits[[cuid]]@datasets@datasets[[dsid]] <- datasets
+#       ds[[st]]@collunits@collunits[[cuid]]@datasets@datasets[[dsid]] <-
+# datasets
 #     }
 #   }
+# nolint start
 #   return(ds)
+# nolint end
 # }
 
 # ##' @rdname get_specimens
@@ -61,21 +69,24 @@
 # # remove meanwhile
 # get_specimens.numeric <- function(x, ...) {
 #   if (length(x) > 0) {
+# nolint start
 #     specimenid <- paste0(x, collapse = ",")
 #   }
 
-#   baseURL <- paste0("data/specimens/", specimenid)
+#   base_url <- paste0("data/specimens/", specimenid)
 #   result <- tryCatch(
-#     parseURL(baseURL),
+#     parseURL(base_url),
 #     error = function(e) {
 #       message("API call failed: ", e$message)
+# nolint end
 #       NULL
 #     }
 #   )
 #   if ((is.null(result)) | (length(result$data) == 0)) {
-#     stop("Specimen ID not found. 
+#     stop("Specimen ID not found.
 #          If you meant dataset ID, use parameter datasetid")
 #   }
+# nolint start
 #   sps <- result$data %>%
 #     cleanNULL()
 #   #if sps is empty list, exit and return error No Specimen ID available.
@@ -85,12 +96,14 @@
 #   dw <- get_downloads(sp_index$datasetid)
 #   ds <- parse_specimen(result, dw)
 #   return(ds)
+# nolint end
 
 # }
 
 # ##' @rdname get_specimens
 # ##' @export
 # get_specimens.default <- function(...) {
+# nolint start
 #   cl <- as.list(match.call())
 #   cl[[1]] <- NULL
 #   cl <- lapply(cl, eval, envir = parent.frame())
@@ -98,27 +111,31 @@
 #   if (length(dsid) > 0) {
 #     dsid <- paste0(dsid, collapse = ",")
 #   }
-#   baseURL <- paste0("data/datasets/", as.character(dsid), "/specimens")
+#   base_url <- paste0("data/datasets/", as.character(dsid), "/specimens")
 #   result <- tryCatch(
 #     parseURL(base_url, ...),
 #     error = function(e) {
 #       message("API call failed: ", e$message)
+# nolint end
 #       NULL
 #     }
 #   )
 #   if(length(result$data) == 0) {
+# nolint start
 #     warning("No specimens found for the provided dataset ID.")
 #     return(NULL)
 #   } else {
 #     dw <- get_downloads(cl$datasetid)
 #     ds <- parse_specimen(result, dw)
 #     return(ds)
+# nolint end
 #   }
 # }
 
 # ##' @rdname get_specimens
 # ##' @export
 # get_specimens.sites <- function(x,...) {
+# nolint start
 #   output <- getids(x) %>%
 #     select(datasetid) %>%
 #     stats::na.omit() %>%
@@ -127,15 +144,17 @@
 #   if (length(output) > 0) {
 #     output <- paste0(output, collapse = ",")
 #   }
-#   baseURL <- paste0("data/datasets/", output, "/specimens/")
+#   base_url <- paste0("data/datasets/", output, "/specimens/")
 #   result <- tryCatch(
-#     parseURL(baseURL, ...),
+#     parseURL(base_url, ...),
 #     error = function(e) {
 #       message("API call failed: ", e$message)
+# nolint end
 #       NULL
 #     }
 #   )
 #   if (length(result$data) == 0) {
+# nolint start
 #     warning("No specimens found for the provided dataset ID.")
 #     return(NULL)
 #   } else {
@@ -145,5 +164,6 @@
 #     }
 #     ds <- parse_specimen(result, x)
 #     return(ds)
+# nolint end
 #   }
 # }

@@ -16,29 +16,33 @@ test_that("Apply limits for get_table()", {
   testthat::expect_equal(nrow(tb), 3)
 })
 
-test_that("Limit and offsets work as expected.
-          Offsetting by one returns a different result.", {
-            skip_on_cran()
-            tb1 <- get_table("agetypes", limit = 1)
-            tb2 <- get_table("agetypes", limit = 1, offset = 1)
-            testthat::expect_false(rlang::hash(tb1) ==
-                                     rlang::hash(tb2))
-          })
+test_that("Limit and offsets work: offsetting by one changes the result", {
+  skip_on_cran()
+  tb1 <- get_table("agetypes", limit = 1)
+  tb2 <- get_table("agetypes", limit = 1, offset = 1)
+  testthat::expect_false(rlang::hash(tb1) == rlang::hash(tb2))
+})
 
 test_that("Correct table", {
   skip_on_cran()
   tb1 <- get_table("agetypes", limit = 1)
-  cols <- c("agetypeid", "agetype", "precedence",
-            "shortagetype", "recdatecreated", "recdatemodified")
+  cols <- c(
+    "agetypeid", "agetype", "precedence",
+    "shortagetype", "recdatecreated", "recdatemodified"
+  )
   testthat::expect_identical(colnames(tb1), cols)
 })
 
 ## Offline tests: parseURL() is replaced, so these touch no API.
 
 table_result <- function() {
-  list(status = "success",
-       data = list(data = list(list(agetypeid = 1, agetype = "A"),
-                               list(agetypeid = 2, agetype = "B"))))
+  list(
+    status = "success",
+    data = list(data = list(
+      list(agetypeid = 1, agetype = "A"),
+      list(agetypeid = 2, agetype = "B")
+    ))
+  )
 }
 
 test_that("get_table asks the API once for the same table in one session", {

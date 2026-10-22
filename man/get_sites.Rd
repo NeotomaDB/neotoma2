@@ -94,8 +94,8 @@ and datasets located at that site.
 \examples{
 \dontrun{
 ## Find sites with a min altitude of 12m and a max altitude of 25m
-sites_12to25 <- get_sites(altmin=12, altmax=25)
-sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
+sites_12to25 <- get_sites(altmin = 12, altmax = 25)
+sites_2500 <- get_sites(altmin = 2500, all_data = TRUE)
 ## To find sites in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[

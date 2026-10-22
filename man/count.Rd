@@ -4,7 +4,8 @@
 \alias{count}
 \alias{count,sites-method}
 \alias{count,site-method}
-\title{Count the number of sites, datasets, or collectionunits associated with a site object.}
+\title{Count the number of sites, datasets, or collectionunits associated
+with a site object.}
 \usage{
 count(x, level = "sites")
 
@@ -15,11 +16,13 @@ count(x, level = "sites")
 \arguments{
 \item{x}{A \code{sites} or \code{site} object.}
 
-\item{level}{The level at which you want to count. Can be sites, collunits, or datasets. Default is sites.}
+\item{level}{The level at which you want to count. Can be sites, collunits,
+or datasets. Default is sites.}
 }
 \value{
 A count of the specified level in the object
 }
 \description{
-Count the number of sites, datasets, or collectionunits associated with a site object.
+Count the number of sites, datasets, or collectionunits associated
+with a site object.
 }

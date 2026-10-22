@@ -18,14 +18,16 @@
 #' @param pi_list pi list
 #' @param samples taxa objects
 #' @export
-#' @description Function to create new `dataset` objects for personal analysis. 
+#' @description Function to create new `dataset` objects for personal analysis.
 #' The new object will not be uploaded to the database.
 #' @returns `dataset` object
 #' @examples {
-#' # Create a dataset
-#' my_dataset <- set_dataset(database = "EPD",
-#'                     datasettype = "pollen",
-#'                     notes = "my lake")
+#'   # Create a dataset
+#'   my_dataset <- set_dataset(
+#'     database = "EPD",
+#'     datasettype = "pollen",
+#'     notes = "my lake"
+#'   )
 #' }
 set_dataset <- function(x = NA,
                         datasetid = NA_integer_,
@@ -63,7 +65,7 @@ set_dataset <- function(x = NA,
     x@samples <- samples
   } else {
     if (is(x, "dataset")) {
-      if(length(function_call)>2){
+      if (length(function_call) > 2) {
         for (i in 3:length(function_call)) {
           slot(x, names(function_call)[[i]]) <- eval(function_call[[i]])
         }

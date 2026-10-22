@@ -3,246 +3,305 @@ setClassUnion("missingOrNULL", c("missing", "NULL"))
 
 #' @aliases add_chronology,collunit-method
 #' @rdname add_chronology
-setMethod(f = "add_chronology",
-          signature = signature(object = "collunit",
-                                x = "chronology",
-                                y = "data.frame"),
-          definition <- function(object, x, y) {
-            existingIds <- as.data.frame(object@chronologies)$chronologyid
-            existinganalysisIds <- map(object@datasets@datasets,
-                                       function(x) {
-                                         map(x@samples@samples,
-                                             function(y) {
-                                               y$analysisunitid
-                                             }) %>%
-                                           unlist()
-                                       })
-            if (x$chronologyid %in% existingIds) {
-              stop("There is already a chronology with the same ID as your 
+setMethod(
+  f = "add_chronology",
+  signature = signature(
+    object = "collunit",
+    x = "chronology",
+    y = "data.frame"
+  ),
+  definition <- function(object, x, y) {
+    existing_ids <- as.data.frame(object@chronologies)$chronologyid
+    existing_analysis_ids <- map(
+      object@datasets@datasets,
+      function(x) {
+        map(
+          x@samples@samples,
+          function(y) {
+            y$analysisunitid
+          }
+        ) %>%
+          unlist()
+      }
+    )
+    if (x$chronologyid %in% existing_ids) {
+      stop("There is already a chronology with the same ID as your
                     new chronology.  Please change the new chronologyid.")
-            }
-            assert_that(all(c("analysisunitid", "age", "agetype", "ageolder",
-                              "ageyounger") %in% colnames(y)),
-                        msg = "The data.frame for sample ages must
+    }
+    assert_that(
+      all(c(
+        "analysisunitid", "age", "agetype", "ageolder",
+        "ageyounger"
+      ) %in% colnames(y)),
+      msg = "The data.frame for sample ages must
                               contain the columns analysisunitid,
-                              age, agetype, ageolder and ageyounger.")
-            if (!any(unlist(existinganalysisIds) %in% y$analysisunitid)) {
-              stop("There is no overlap between the existing analysis units and
+                              age, agetype, ageolder and ageyounger."
+    )
+    if (!any(unlist(existing_analysis_ids) %in% y$analysisunitid)) {
+      stop("There is no overlap between the existing analysis units and
                     the anaysis units in your new sample ages data.frame.")
-            } else if (!all(unlist(existinganalysisIds)
-                            %in% y$analysisunitid)) {
-              warning("Not all of the existing analysis units are 
-                          represented in the new sample ages data.frame. 
+    } else if (!all(unlist(existing_analysis_ids) %in% y$analysisunitid)) {
+      warning("Not all of the existing analysis units are
+                          represented in the new sample ages data.frame.
                           Analysis units without ages will have NA
                           values assigned.")
-            }
-            object@datasets@datasets <-
-              map(object@datasets@datasets,
-                  function(z) {
-                    z@samples@samples <-
-                      map(z@samples@samples,
-                          function(a) {
-                            auid <- a@analysisunitid
-                            if (auid %in% y$analysisunitid) {
-                              sampleagerow <- y %>%
-                                dplyr::filter(.data$analysisunitid == auid)
-                              sample_ages <-
-                                data.frame(age = sampleagerow$age,
-                                           agetype = sampleagerow$agetype,
-                                           ageolder = sampleagerow$ageolder,
-                                           ageyounger = sampleagerow$ageyounger,
-                                           chronologyid = x$chronologyid,
-                                           chronologyname =
-                                           x$chronologyname)
-                              a@ages <- rbind(sample_ages, a@ages)
-                            }
-                      return(a)
-                    })
-                    return(z)
-                  })
-            object@chronologies <- c(object@chronologies, x)
-            if (x@isdefault == 1) {
-              object@chronologies <- set_default(object@chronologies,
-                                                 x$chronologyid)
-            }
-            return(object)
-          })
+    }
+    object@datasets@datasets <-
+      map(
+        object@datasets@datasets,
+        function(z) {
+          z@samples@samples <-
+            map(
+              z@samples@samples,
+              function(a) {
+                auid <- a@analysisunitid
+                if (auid %in% y$analysisunitid) {
+                  sampleagerow <- y %>%
+                    dplyr::filter(.data$analysisunitid == auid)
+                  sample_ages <-
+                    data.frame(
+                      age = sampleagerow$age,
+                      agetype = sampleagerow$agetype,
+                      ageolder = sampleagerow$ageolder,
+                      ageyounger = sampleagerow$ageyounger,
+                      chronologyid = x$chronologyid,
+                      chronologyname = x$chronologyname
+                    )
+                  a@ages <- rbind(sample_ages, a@ages)
+                }
+                a
+              }
+            )
+          z
+        }
+      )
+    object@chronologies <- c(object@chronologies, x)
+    if (x@isdefault == 1) {
+      object@chronologies <- set_default(
+        object@chronologies,
+        x$chronologyid
+      )
+    }
+    object
+  }
+)
 
 #' @aliases show,collunits-method
 #' @rdname show
-setMethod(f = "show",
-          signature = signature(object = "collunits"),
-          definition = function(object) {
-            result <- map(object@collunits, function(x) {
-              as.data.frame(x)
-            }) %>%
-              bind_rows() %>%
-              print(row.names = FALSE)
-          })
+setMethod(
+  f = "show",
+  signature = signature(object = "collunits"),
+  definition = function(object) {
+    map(object@collunits, function(x) {
+      as.data.frame(x)
+    }) %>%
+      bind_rows() %>%
+      print(row.names = FALSE)
+  }
+)
 
 #' @aliases show,collunit-method
 #' @rdname show
-setMethod(f = "show",
-          signature = signature(object = "collunit"),
-          definition = function(object) {
-            result <- as.data.frame(object)
-            print(result, row.names = FALSE)
-          })
+setMethod(
+  f = "show",
+  signature = signature(object = "collunit"),
+  definition = function(object) {
+    result <- as.data.frame(object)
+    print(result, row.names = FALSE)
+  }
+)
 
-#' @aliases sub,collunits-method [,collunits,numeric-method [,collunits,numeric,ANY-method
+#' @aliases sub,collunits-method [,collunits,numeric-method
+#' [,collunits,numeric,ANY-method
 #' @rdname sub
-setMethod(f = "[",
-          signature = signature(x = "collunits", i = "numeric"),
-          definition = function(x, i) {
-            new("collunits", collunits = x@collunits[i])
-          })
+setMethod(
+  f = "[",
+  signature = signature(x = "collunits", i = "numeric"),
+  definition = function(x, i) {
+    new("collunits", collunits = x@collunits[i])
+  }
+)
 
-#' @aliases sub-sub,collunits-method [[,collunits,numeric-method [[,collunits,numeric,ANY-method
+#' @aliases sub-sub,collunits-method [[,collunits,numeric-method
+#' [[,collunits,numeric,ANY-method
 #' @rdname sub-sub
-setMethod(f = "[[",
-          signature = signature(x = "collunits", i = "numeric"),
-          definition = function(x, i) {
-            if (length(i) == 1) {
-              out <- new("collunit", x@collunits[[i]])
-            } else {
-              out <- map(i, function(z) {
-                new("collunit", x@collunits[[z]])
-              })
-              out <- new("collunits", collunits = out)
-            }
-            return(out)
-          })
+setMethod(
+  f = "[[",
+  signature = signature(x = "collunits", i = "numeric"),
+  definition = function(x, i) {
+    if (length(i) == 1) {
+      out <- new("collunit", x@collunits[[i]])
+    } else {
+      out <- map(i, function(z) {
+        new("collunit", x@collunits[[z]])
+      })
+      out <- new("collunits", collunits = out)
+    }
+    out
+  }
+)
 
 #' @aliases names,collunit-method
 #' @rdname names
-setMethod(f = "names",
-          signature = signature(x = "collunit"),
-          definition = function(x) {
-            slotNames(x)
-          })
+setMethod(
+  f = "names",
+  signature = signature(x = "collunit"),
+  definition = function(x) {
+    slotNames(x)
+  }
+)
 
-#' @aliases sub-subset,collunits-method [[<-,collunits-method [[<-,collunits,ANY,ANY-method
+#' @aliases sub-subset,collunits-method [[<-,collunits-method
+#' [[<-,collunits,ANY,ANY-method
 #' @rdname sub-subset
-setMethod(f = "[[<-",
-          signature = signature(x = "collunits"),
-          definition = function(x, i, value) {
-            collunitset <- x@collunits
-            collunitset[[i]] <- value
-            out <- new("collunits", collunits = collunitset)
-            return(out)
-          })
+setMethod(
+  f = "[[<-",
+  signature = signature(x = "collunits"),
+  definition = function(x, i, value) {
+    collunitset <- x@collunits
+    collunitset[[i]] <- value
+    out <- new("collunits", collunits = collunitset)
+    out
+  }
+)
 
-#' @aliases subset,collunit-method [<-,collunit,character-method [<-,collunit,character,ANY-method
+#' @aliases subset,collunit-method [<-,collunit,character-method
+#' [<-,collunit,character,ANY-method
 #' @rdname subset
-setMethod(f = "[<-",
-          signature = signature(x = "collunit", i = "character"),
-          definition = function(x, i, value) {
-            for (idx in 1:length(i)) {
-              slot(x, i[idx]) <- value[idx]
-            }
-            return(x)
-          })
+setMethod(
+  f = "[<-",
+  signature = signature(x = "collunit", i = "character"),
+  definition = function(x, i, value) {
+    for (idx in seq_along(i)) {
+      slot(x, i[idx]) <- value[idx]
+    }
+    x
+  }
+)
 
-#' @aliases subset,collunit-method [<-,collunit,numeric-method [<-,collunit,numeric,ANY-method
+#' @aliases subset,collunit-method [<-,collunit,numeric-method
+#' [<-,collunit,numeric,ANY-method
 #' @rdname subset
-setMethod(f = "[<-",
-          signature = signature(x = "collunit", i = "numeric"),
-          definition = function(x, i, value) {
-            slots <- slotNames(x)
-            for (idx in seq_along()(i)) {
-              slot(x, slots[i[idx]]) <- value[idx]
-            }
-            return(x)
-          })
+setMethod(
+  f = "[<-",
+  signature = signature(x = "collunit", i = "numeric"),
+  definition = function(x, i, value) {
+    slots <- slotNames(x)
+    for (idx in seq_along()(i)) {
+      slot(x, slots[i[idx]]) <- value[idx]
+    }
+    x
+  }
+)
 
 #' @aliases cash-set,collunit-method
 #' @rdname cash-set
-setMethod(f = "$<-",
-          signature = signature(x = "collunit"),
-          definition = function(x, name, value) {
-            slot(x, name) <- value
-            return(x)
-          })
+setMethod(
+  f = "$<-",
+  signature = signature(x = "collunit"),
+  definition = function(x, name, value) {
+    slot(x, name) <- value
+    x
+  }
+)
 
 #' @aliases cash,collunit-method
 #' @rdname cash
-setMethod(f = "$",
-          signature = signature(x = "collunit"),
-          definition = function(x, name) {
-            slot(x, name)
-          })
+setMethod(
+  f = "$",
+  signature = signature(x = "collunit"),
+  definition = function(x, name) {
+    slot(x, name)
+  }
+)
 
 #' @aliases cash,collunits-method
 #' @rdname cash
-setMethod(f = "$",
-          signature = signature(x = "collunits"),
-          definition = function(x, name) {
-            x %>%
-              map(function(y) {
-                slot(y, name)
-              }) %>%
-              unlist()
-          })
+setMethod(
+  f = "$",
+  signature = signature(x = "collunits"),
+  definition = function(x, name) {
+    x %>%
+      map(function(y) {
+        slot(y, name)
+      }) %>%
+      unlist()
+  }
+)
 
 #' @aliases as.data.frame,collunit-method
 #' @rdname as.data.frame
-setMethod(f = "as.data.frame",
-          signature = signature("collunit"),
-          definition = function(x) {
-            data.frame(collectionunitid = x@collectionunitid,
-                       handle = x@handle,
-                       colldate = x@colldate,
-                       location = x@location,
-                       waterdepth = x@waterdepth,
-                       collunittype = x@collunittype,
-                       collectiondevice = x@collectiondevice,
-                       defaultchronology = x@defaultchronology,
-                       collectionunitname = x@collectionunitname,
-                       depositionalenvironment = x@depositionalenvironment)
-          })
+setMethod(
+  f = "as.data.frame",
+  signature = signature("collunit"),
+  definition = function(x) {
+    data.frame(
+      collectionunitid = x@collectionunitid,
+      handle = x@handle,
+      colldate = x@colldate,
+      location = x@location,
+      waterdepth = x@waterdepth,
+      collunittype = x@collunittype,
+      collectiondevice = x@collectiondevice,
+      defaultchronology = x@defaultchronology,
+      collectionunitname = x@collectionunitname,
+      depositionalenvironment = x@depositionalenvironment
+    )
+  }
+)
 
 #' @aliases as.data.frame,collunits-method
 #' @rdname as.data.frame
-setMethod(f = "as.data.frame",
-          signature = signature("collunits"),
-          definition = function(x) {
-            df <- x@collunits %>% map(as.data.frame) %>% bind_rows()
-          })
+setMethod(
+  f = "as.data.frame",
+  signature = signature("collunits"),
+  definition = function(x) {
+    x@collunits %>%
+      map(as.data.frame) %>%
+      bind_rows()
+  }
+)
 
 #' @aliases length,collunits-method
 #' @rdname length
-setMethod(f = "length",
-          signature = signature(x = "collunits"),
-          definition = function(x) {
-            length(x@collunits)
-          })
+setMethod(
+  f = "length",
+  signature = signature(x = "collunits"),
+  definition = function(x) {
+    length(x@collunits)
+  }
+)
 
 #' @aliases c,collunits-method
 #' @rdname c
-setMethod(f = "c",
-          signature = signature(x = "collunits"),
-          definition = function(x, y) {
-            if (is(y, "collunits")) {
-              cus_l <- c(x@collunits,
-                         y@collunits)
-              if (is.null(names(cus_l)) || all(names(cus_l) == "")) {
-                # Case 1: Remove duplicates by content
-                cus_l <- cus_l[!duplicated(cus_l)]
-              } else {
-                # Case 2: Remove duplicates by name
-                cus_l <- cus_l[!duplicated(names(cus_l))]
-              }
-              cus_l <- unlist(cus_l, recursive = FALSE)
-              # `unlist()` returns NULL rather than an empty list when there is
-              # nothing to flatten, and the slot must hold a list. This is
-              # reached whenever every site in the set has no collection units.
-              if (is.null(cus_l)) {
-                cus_l <- list()
-              }
-              out <- new("collunits", collunits = cus_l)
-            } else if (is(y, "collunit")) {
-              collunitset <- c(x@collunits, y)
-              out <- new("collunits", collunits = collunitset)
-            }
-            return(out)
-          })
+setMethod(
+  f = "c",
+  signature = signature(x = "collunits"),
+  definition = function(x, y) {
+    if (is(y, "collunits")) {
+      cus_l <- c(
+        x@collunits,
+        y@collunits
+      )
+      if (is.null(names(cus_l)) || all(names(cus_l) == "")) {
+        # Case 1: Remove duplicates by content
+        cus_l <- cus_l[!duplicated(cus_l)]
+      } else {
+        # Case 2: Remove duplicates by name
+        cus_l <- cus_l[!duplicated(names(cus_l))]
+      }
+      cus_l <- unlist(cus_l, recursive = FALSE)
+      # `unlist()` returns NULL rather than an empty list when there is
+      # nothing to flatten, and the slot must hold a list. This is
+      # reached whenever every site in the set has no collection units.
+      if (is.null(cus_l)) {
+        cus_l <- list()
+      }
+      out <- new("collunits", collunits = cus_l)
+    } else if (is(y, "collunit")) {
+      collunitset <- c(x@collunits, y)
+      out <- new("collunits", collunits = collunitset)
+    }
+    out
+  }
+)

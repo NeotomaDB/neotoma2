@@ -71,16 +71,19 @@ taxon_names <- function(taxa_data) {
 datasets_with_taxa <- function(taxon, dots) {
   taxon <- unique(taxon)
   if (length(taxon) == 0) {
-    message("No taxon found with the provided information. ",
-            "No datasets were requested.")
+    message(
+      "No taxon found with the provided information. ",
+      "No datasets were requested."
+    )
     return(NULL)
   }
   if (length(taxon) > taxa_name_warn_limit) {
     warning(length(taxon), " taxon names will be sent to the API in one ",
-            "request. Broad `taxa` queries can take a minute or more to ",
-            "answer. Consider a narrower taxon name or ID, or add other ",
-            "filters such as `datasettype`, `loc`, or `limit`.",
-            call. = FALSE)
+      "request. Broad `taxa` queries can take a minute or more to ",
+      "answer. Consider a narrower taxon name or ID, or add other ",
+      "filters such as `datasettype`, `loc`, or `limit`.",
+      call. = FALSE
+    )
   }
   do.call(get_datasets, c(list(taxa = taxon), dots))
 }
@@ -108,8 +111,10 @@ get_taxa.default <- function(...) {
   } else if ("taxonname" %in% names(dots)) {
     taxon <- taxon_names(get_taxon(taxonname = dots$taxonname))
   } else {
-    stop("Please provide a taxon ID, a taxon name (`taxonname`), ",
-         "or exact taxon names (`taxa`) to extract site information.")
+    stop(
+      "Please provide a taxon ID, a taxon name (`taxonname`), ",
+      "or exact taxon names (`taxa`) to extract site information."
+    )
   }
   dots$taxa <- NULL
   dots$taxonname <- NULL

@@ -15,13 +15,13 @@
 #' @param analysisunitid Which analysis unit it is
 #' @param analysisunitname Analysis Unit's name
 #' @returns `sample` object
-#' @description Function to create new samples objects for analysis. 
+#' @description Function to create new samples objects for analysis.
 #' The new object will not be uploaded to the database.
 #' @export
 #' @md
 #' @examples {
-#' # Set an empty sample
-#' my_sample <- set_sample()
+#'   # Set an empty sample
+#'   my_sample <- set_sample()
 #' }
 set_sample <- function(x = NA,
                        ages = list(),
@@ -33,7 +33,7 @@ set_sample <- function(x = NA,
                        samplename = NA_character_,
                        sampleanalyst = list(),
                        analysisunitid = NA_integer_,
-                       analysisunitname = NA_character_){
+                       analysisunitname = NA_character_) {
   function_call <- match.call()
   if (suppressWarnings(is.na(x))) {
     x <- new("sample")

@@ -59,21 +59,27 @@
 #' @returns filtered `sites` object
 #' @examples \dontrun{
 #' # Download 10 sites, but only keep the sites that are close to sea level.
-#' tryCatch({
-#'  some_sites <- get_sites(sitename = "Lake%", limit = 3)
-#'   site_subset <- some_sites %>% filter(altitude < 100)
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     some_sites <- get_sites(sitename = "Lake%", limit = 3)
+#'     site_subset <- some_sites %>% filter(altitude < 100)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # Download 10 sites, get all associated datasets, but keep only
 #' # sites/datasets that are of datasettype "pollen":
-#' tryCatch({
-#'   sites <- get_sites(limit = 10) %>%
-#'     get_datasets()
-#'   pollen_subset <- sites %>% filter(datasettype == "pollen")
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.") 
-#' })
+#' tryCatch(
+#'   {
+#'     sites <- get_sites(limit = 10) %>%
+#'       get_datasets()
+#'     pollen_subset <- sites %>% filter(datasettype == "pollen")
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -85,7 +91,7 @@ filter <- function(.data, ..., .by = NULL, .preserve = FALSE) {
 #' @exportS3Method filter NULL
 filter.NULL <- function(.data, ...) {
   warning("No sites to filter")
-  return(NULL)
+  NULL
 }
 
 #' @rdname filter
@@ -103,9 +109,11 @@ filter.sites <- function(.data, ...) {
   # slot the filter actually acts on), so `filter(geography == poly)` behaves
   # exactly like `filter(loc == poly)`.
   spatial_keywords <- c("loc", "geography")
-  is_loc <- vapply(exprs,
-                   function(e) any(spatial_keywords %in% all.vars(e)),
-                   logical(1))
+  is_loc <- vapply(
+    exprs,
+    function(e) any(spatial_keywords %in% all.vars(e)),
+    logical(1)
+  )
   loc_quos <- quosures[is_loc]
   other_quos <- quosures[!is_loc]
   # Collect the referenced column names from ALL ordinary conditions, not just
@@ -114,15 +122,19 @@ filter.sites <- function(.data, ...) {
   # deparsed text (which would false-match on things like "lat" in "latitude"
   # or "long" inside a string literal such as "LONGCORE").
   referenced_vars <- unique(unlist(lapply(exprs[!is_loc], all.vars)))
-  sitecols <- any(c("sitename", "lat", "long", "altitude") %in%
-                    referenced_vars)
-  datasetcols <- any(c("datasetid", "database", "datasettype", "age_range_old",
-                       "age_range_young", "notes") %in% referenced_vars)
-  collunitcols <- any(c("collectionunitid", "handle", "colldate",
-                        "location", "waterdepth", "collunittype",
-                        "collectiondevice", "defaultchronology",
-                        "collectionunitname", "depositionalenvironment") %in%
-                        referenced_vars)
+  site_vars <- c("sitename", "lat", "long", "altitude")
+  sitecols <- any(site_vars %in% referenced_vars)
+  datasetcols <- any(c(
+    "datasetid", "database", "datasettype", "age_range_old",
+    "age_range_young", "notes"
+  ) %in% referenced_vars)
+  collunitcols <- any(c(
+    "collectionunitid", "handle", "colldate",
+    "location", "waterdepth", "collunittype",
+    "collectiondevice", "defaultchronology",
+    "collectionunitname", "depositionalenvironment"
+  ) %in%
+    referenced_vars)
   ids <- getids(x)
   if (length(loc_quos) > 0) {
     inside_ids <- loc_site_ids(x, loc_quos)
@@ -131,19 +143,25 @@ filter.sites <- function(.data, ...) {
   if (sitecols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(x), by = "siteid") %>%
-      rename(altitude = .data$elev,
-             sitenotes = .data$notes)
+      rename(
+        altitude = .data$elev,
+        sitenotes = .data$notes
+      )
   }
   if (collunitcols == TRUE) {
     ids <- ids %>%
       inner_join(as.data.frame(collunits(x)),
-                 by = c("collunitid" = "collectionunitid"))
+        by = c("collunitid" = "collectionunitid")
+      )
   }
   if (datasetcols == TRUE) {
     ids <- ids %>%
-      inner_join(mutate(as.data.frame(datasets(x)),
-                        datasetid = as.numeric(.data$datasetid)),
-                 by = "datasetid")
+      inner_join(
+        mutate(as.data.frame(datasets(x)),
+          datasetid = as.numeric(.data$datasetid)
+        ),
+        by = "datasetid"
+      )
   }
   cleanids <- ids %>%
     dplyr::filter(!!!other_quos)
@@ -162,12 +180,12 @@ filter.sites <- function(.data, ...) {
       yds <- datasets(y)
       yds <- yds[which(as.data.frame(yds)$datasetid %in% good_dsid)]
       y@datasets <- yds
-      return(y)
+      y
     })
     x@collunits@collunits <- xcu
-    return(x)
+    x
   })
-  return(new("sites", sites = pared_ds))
+  new("sites", sites = pared_ds)
 }
 
 #' @title loc_region
@@ -196,13 +214,19 @@ loc_region <- function(region) {
     if (length(stats::na.omit(region)) != 4) {
       stop("A numeric `loc` needs 4 values: c(xmin, ymin, xmax, ymax).")
     }
-    bbox <- sf::st_bbox(c(xmin = region[1], ymin = region[2],
-                          xmax = region[3], ymax = region[4]),
-                        crs = sf::st_crs(4326))
+    bbox <- sf::st_bbox(
+      c(
+        xmin = region[1], ymin = region[2],
+        xmax = region[3], ymax = region[4]
+      ),
+      crs = sf::st_crs(4326)
+    )
     geom <- sf::st_as_sfc(bbox)
   } else {
-    stop("`loc` must be an sf/sfc/sfg object, a GeoJSON string, or a ",
-         "numeric bounding box c(xmin, ymin, xmax, ymax).")
+    stop(
+      "`loc` must be an sf/sfc/sfg object, a GeoJSON string, or a ",
+      "numeric bounding box c(xmin, ymin, xmax, ymax)."
+    )
   }
   if (is.na(sf::st_crs(geom))) {
     sf::st_crs(geom) <- 4326
@@ -226,12 +250,14 @@ loc_site_ids <- function(x, loc_quos) {
     e <- rlang::quo_get_expr(q)
     env <- rlang::quo_get_env(q)
     operands <- as.list(e)[-1L]
-    keep <- !vapply(operands,
-                    function(o) {
-                      is.name(o) &&
-                        as.character(o) %in% c("loc", "geography")
-                    },
-                    logical(1))
+    keep <- !vapply(
+      operands,
+      function(o) {
+        is.name(o) &&
+          as.character(o) %in% c("loc", "geography")
+      },
+      logical(1)
+    )
     region_expr <- operands[keep][[1]]
     loc_region(rlang::eval_tidy(rlang::new_quosure(region_expr, env)))
   })
@@ -257,5 +283,6 @@ loc_site_ids <- function(x, loc_quos) {
 #' @rdname filter
 #' @exportS3Method filter data.frame
 filter.data.frame <- getS3method("filter",
-                                 "data.frame",
-                                 envir = asNamespace("dplyr"))
+  "data.frame",
+  envir = asNamespace("dplyr")
+)

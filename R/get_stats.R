@@ -22,11 +22,14 @@
 #' per dataset type per month). Default is \code{dsdbmonth}.
 #' @returns `data.frame` with summary statistics
 #' @examples \dontrun{
-#' tryCatch({
-#' last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     last_month <- get_stats(start = 0, end = 1, type = "dsdbmonth")
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -35,14 +38,14 @@ get_stats <- function(start = 0, end = 1, type = "dsdbmonth") {
     stop("type must be either 'dsdbmonth', 'dstypemonth' or 'rawbymonth'.")
   }
   if (type == "dsdbmonth") {
-    baseURL <- paste0("data/summary/dsdbmonth?start=", start, "&end=", end)
+    base_url <- paste0("data/summary/dsdbmonth?start=", start, "&end=", end)
   } else if (type == "rawbymonth") {
-    baseURL <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
+    base_url <- paste0("data/summary/rawbymonth?start=", start, "&end=", end)
   } else if (type == "dstypemonth") {
-    baseURL <- paste0("data/summary/dstypemonth?start=", start, "&end=", end)
+    base_url <- paste0("data/summary/dstypemonth?start=", start, "&end=", end)
   }
   result <- tryCatch(
-    parseURL(baseURL),
+    parseURL(base_url),
     error = function(e) {
       message("API call failed: ", e$message)
       NULL

@@ -21,8 +21,10 @@ library(neotoma2)
 > Users can run all examples locally after installation.
 
 ```{r setOpts, include = FALSE}
-knitr::opts_chunk$set(eval = FALSE,
-                      error = TRUE)
+knitr::opts_chunk$set(
+  eval = FALSE,
+  error = TRUE
+)
 ```
 
 ```{r setup_md, include=FALSE}
@@ -111,7 +113,7 @@ alex
 Neotoma uses a Postgres Database to manage data.  Postgres uses the `%` sign as a general wildcard, so we can use the `%` in the `sitename` argument operator to help us find sites when we're not sure the exact match.  Note that the search is case **insensitive** so a search for `alex%` or `Alex%` will return the same results.
 
 ```{r sitewithwildcardname}
-alex <- get_sites(sitename = 'Alex%')
+alex <- get_sites(sitename = "Alex%")
 alex
 ```
 
@@ -128,8 +130,10 @@ We offer several methods of searching because different users have different req
 We can see how these age bounds differ:
 
 ```{r agebounds}
-# Note, we are using the `all_data = TRUE` flag here to avoid the default limit of 25 records, discussed below.
-# Because these queries are searching through every record they are slow and and are not
+# Note, we are using the `all_data = TRUE` flag here to avoid the default limit
+# of 25 records, discussed below.
+# Because these queries are searching through every record they are slow and and
+# are not
 # run in knitting this vignette.
 get_sites(ageof = 8200, all_data = TRUE) %>% length()
 get_sites(ageyounger = 5000, ageolder = 8000, all_data = TRUE) %>% length()
@@ -162,7 +166,8 @@ alex[[1]]$area
 # Modify a value using [<- assignment:
 alex[[1]]["area"] <- 30
 alex[[1]]$area
-# alex[[1]][7] <- 30  This fails because the `Notes` field expects a character string.
+# alex[[1]][7] <- 30  This fails because the `Notes` field expects a character
+# string.
 ```
 
 Using assignment, we can add information programmatically, for example, by working interactively with a digital elevation model or hydrographic data to obtain lake area measurements. Although not currently implemented, the goal is to support direct upload of updated information by users.
@@ -172,10 +177,12 @@ Using assignment, we can add information programmatically, for example, by worki
 As explained above, a `site` is the fundamental unit of the Neotoma Database. If you are working with your own data, you might want to create a `site` object to allow it to interact with other data within Neotoma.  You can create a site with the `set_site()` function. It will ask you to provide important information such as `sitename`, `lat`, and `long` attributes.
 
 ```{r setsitefunction}
-my_site <- set_site(sitename = "My Lake", 
-                    geography = st_sf(a = 3, st_sfc(st_point(1:2))), 
-                    description = "my lake", 
-                    altitude = 30)
+my_site <- set_site(
+  sitename = "My Lake",
+  geography = st_sf(a = 3, st_sfc(st_point(1:2))),
+  description = "my lake",
+  altitude = 30
+)
 my_site
 ```
 
@@ -232,12 +239,13 @@ It can be computationally intensive to obtain the full set of records for `sites
 We can use that `all_data = TRUE` in R in the following way:
 
 ```{r all_data}
-allSites_dt <- get_sites(datasettype = "diatom")
-allSites_dt_all <- get_sites(datasettype = "diatom", all_data = TRUE)
+all_sites_dt <- get_sites(datasettype = "diatom")
+all_sites_dt_all <- get_sites(datasettype = "diatom", all_data = TRUE)
 
 # Because we used the `all_data = TRUE` flag, there will be more sites
-# in allSites_dt_all, because it represents all sites containing diatom datasets.
-length(allSites_dt_all) > length(allSites_dt)
+# in all_sites_dt_all, because it represents all sites containing diatom
+# datasets.
+length(all_sites_dt_all) > length(all_sites_dt)
 ```
 
 ### Spatial Searches
@@ -247,7 +255,7 @@ You can get the coordinates to create a GeoJson bounding box from [here](https:/
 Accessing datasets by bounding box:
 
 ```{r boundingBox}
-brazil <- '{"type": "Polygon", 
+brazil <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
                 [-56.953, -33.138],
@@ -277,12 +285,13 @@ plotLeaflet(brazil_datasets)
 Sometimes we take a large number of records, do some analysis, and then choose to select a subset.  For example, we may want to select all sites in a region, and then subset those by dataset type.  If we want to look at only the geochronological datasets from Brazil, we can start with the set of records returned from our `get_datasets()` query, and then use the `filter` function in `neotoma2` to select only those datasets that are geochronologic:
 
 ```{r filterBrazil}
-
-brazil_dates <- neotoma2::filter(brazil_datasets,
-                                   datasettype == "geochronologic")
+brazil_dates <- neotoma2::filter(
+  brazil_datasets,
+  datasettype == "geochronologic"
+)
 # or:
 brazil_dates <- brazil_datasets %>%
-    neotoma2::filter(datasettype == "geochronologic")
+  neotoma2::filter(datasettype == "geochronologic")
 
 # With boolean operators:
 brazil_space <- brazil_datasets %>% neotoma2::filter(lat > -18 & lat < -16)
@@ -306,7 +315,7 @@ Once we have the set of records we wish to examine, we then want to recover the 
 Assuming we continue with our example from Brazil, we want to extract records from the country, filter to only pollen records with samples covering the last 10,000 years, and then look at the relative frequency of taxa across sites.  We might do something like this:
 
 ```{r filterAndShowTaxa}
-brazil <- '{"type": "Polygon", 
+brazil <- '{"type": "Polygon",
             "coordinates": [[
                 [-73.125, -9.102],
                 [-56.953, -33.138],
@@ -319,9 +328,11 @@ brazil <- '{"type": "Polygon",
 # functionality of the `sf` package.
 brazil_sf <- geojsonsf::geojson_sf(brazil)
 
-brazil_records <- get_datasets(loc = brazil_sf, all_data=TRUE) %>%
-    neotoma2::filter(datasettype == "pollen" & age_range_young <= 1000 & age_range_old >= 10000) %>%
-    get_downloads()
+brazil_records <- get_datasets(loc = brazil_sf, all_data = TRUE) %>%
+  neotoma2::filter(
+    datasettype == "pollen" & age_range_young <= 1000 & age_range_old >= 10000
+  ) %>%
+  get_downloads()
 
 
 count_by_site <- samples(brazil_records) %>%
@@ -331,7 +342,6 @@ count_by_site <- samples(brazil_records) %>%
   group_by(variablename) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
-
 ```
 
 In this code chunk we define the bounding polygon for our sites, filter by time and dataset type, and then return the full records for those sites. We get a `sites` object with dataset and sample information (because we used `get_downloads()`). We execute the `samples()` function to extract all the samples from the `sites` objects, and then filter the resulting `data.frame` to pull only pollen (a pollen dataset may contain spores and other elements that are not, strictly speaking, pollen) that are counted using the number of identified specimens (or NISP). We then `group_by()` the unique site identifiers (`siteid`) and the taxa (`variablename`) to get a count of the number of times each taxon appears in each site. We then want to `summarize()` to a higher level, just trying to understand how many sites each taxon appears in. After that we `arrange()` so that the records show the most common taxa first in the resulting variable `count_by_site`.
@@ -376,10 +386,10 @@ We can also use search elements to search for publications.  The `get_publicatio
 * `offset`
 
 ```{r fulltestPubSearch}
-michPubs <- get_publications(search = "Michigan", limit = 2)
+mich_pubs <- get_publications(search = "Michigan", limit = 2)
 ```
 
-This results in a set of `r tryCatch(length(michPubs), error = function(e) "N/A")` publications from Neotoma, equal to the `limit`.  If the number of matching publications is less than the limit then the `length()` will be smaller.
+This results in a set of `r tryCatch(length(mich_pubs), error = function(e) "N/A")` publications from Neotoma, equal to the `limit`.  If the number of matching publications is less than the limit then the `length()` will be smaller.
 
 Text matching in Neotoma is approximate, meaning it is a measure of the overall similarity between the search string and the set of article titles.  This means that using a nonsense string may still return results results:
 
@@ -401,10 +411,10 @@ We can select an array of `publication` objects using the `[[` method, either as
 
 ```{r subsetPubs}
 # Select publications with Neotoma Publication IDs 1 - 10.
-pubArray <- get_publications(1:10)
+pub_array <- get_publications(1:10)
 # Select the first five publications:
-subPub <- pubArray[[1:5]]
-subPub
+sub_pub <- pub_array[[1:5]]
+sub_pub
 ```
 
 #### Create (or Import) New Publications
@@ -413,9 +423,11 @@ Just as we can use the `set_sites()` function to set new site information, we ca
 
 ```{r setNewPub}
 new_pub <- set_publication(
-articletitle = "Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota",
-journal = "Canadian Journal of Botany",
-volume = 46)
+  articletitle = paste("Myrtle Lake: a late- and post-glacial pollen diagram",
+                       "from northern Minnesota"),
+  journal = "Canadian Journal of Botany",
+  volume = 46
+)
 ```
 
 A `publication` has a large number of slots that can be defined.  These may be left blank, they may be set directly after the publication is defined:

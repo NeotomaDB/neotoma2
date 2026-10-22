@@ -9,9 +9,13 @@
 #' @returns The data.frame with all-NA control rows removed.
 #' @noRd
 drop_empty_controls <- function(df) {
-  cols <- intersect(c("depth", "thickness", "agelimityounger", "agelimitolder",
-                      "chroncontrolid", "chroncontrolage", "chroncontroltype"),
-                    names(df))
+  cols <- intersect(
+    c(
+      "depth", "thickness", "agelimityounger", "agelimitolder",
+      "chroncontrolid", "chroncontrolage", "chroncontroltype"
+    ),
+    names(df)
+  )
   if (length(cols) == 0 || nrow(df) == 0) {
     return(df)
   }
@@ -28,12 +32,13 @@ drop_empty_controls <- function(df) {
 #' @param x sites object
 #' @returns data.frame with chronological controls
 #' @export
-setMethod(f = "chroncontrols",
+setMethod(
+  f = "chroncontrols",
   signature = "sites",
   definition = function(x) {
     output <- map(x@sites, function(y) chroncontrols(y)) %>%
       bind_rows()
-    return(output)
+    output
   }
 )
 
@@ -44,7 +49,8 @@ setMethod(f = "chroncontrols",
 #' @param x site object
 #' @returns data.frame with chronological controls
 #' @export
-setMethod(f = "chroncontrols",
+setMethod(
+  f = "chroncontrols",
   signature = "site",
   definition = function(x) {
     siteid <- as.data.frame(x)$siteid
@@ -58,7 +64,7 @@ setMethod(f = "chroncontrols",
     }
     chronset <- chronset %>%
       select(siteid, everything())
-    return(chronset)
+    chronset
   }
 )
 
@@ -70,21 +76,24 @@ setMethod(f = "chroncontrols",
 #' @param x chronologies object
 #' @returns data.frame with chronological controls
 #' @export
-setMethod(f = "chroncontrols",
+setMethod(
+  f = "chroncontrols",
   signature = "chronologies",
   definition = function(x) {
     # Return the full column set rather than the 0x0 frame bind_rows() would
     # give for an empty list: callers (chroncontrols,site) append to it.
     if (length(x@chronologies) == 0) {
-      return(data.frame(chronologyid = integer(),
-                        chronologyname = character(),
-                        depth = numeric(),
-                        thickness = numeric(),
-                        agelimityounger = numeric(),
-                        agelimitolder = numeric(),
-                        chroncontrolid = integer(),
-                        chroncontrolage = numeric(),
-                        chroncontroltype = character()))
+      return(data.frame(
+        chronologyid = integer(),
+        chronologyname = character(),
+        depth = numeric(),
+        thickness = numeric(),
+        agelimityounger = numeric(),
+        agelimitolder = numeric(),
+        chroncontrolid = integer(),
+        chroncontrolage = numeric(),
+        chroncontroltype = character()
+      ))
     }
     output <- map(x@chronologies, function(y) {
       # A controls table that has already been through chroncontrols() once --
@@ -95,12 +104,14 @@ setMethod(f = "chroncontrols",
       controls <- y@chroncontrols
       labels <- c("siteid", "chronologyid", "chronologyname")
       controls <- controls[, !names(controls) %in% labels, drop = FALSE]
-      data.frame(chronologyid = y@chronologyid,
-                 chronologyname = y@chronologyname,
-                 controls)
+      data.frame(
+        chronologyid = y@chronologyid,
+        chronologyname = y@chronologyname,
+        controls
+      )
     }) %>%
       bind_rows()
-    return(drop_empty_controls(output))
+    drop_empty_controls(output)
   }
 )
 
@@ -110,9 +121,10 @@ setMethod(f = "chroncontrols",
 #' @param x chronology object
 #' @returns data.frame with chronological controls
 #' @export
-setMethod(f = "chroncontrols",
+setMethod(
+  f = "chroncontrols",
   signature = "chronology",
   definition = function(x) {
-    return(drop_empty_controls(x@chroncontrols))
+    drop_empty_controls(x@chroncontrols)
   }
 )

@@ -15,7 +15,7 @@
 #' parameters:
 #'  * `datasetid` The unique dataset ID (integer) in Neotoma. Can be passed
 #' as a vector of dataset IDs.
-#'  * `all_data` The API only downloads the first 25 records of the query. 
+#'  * `all_data` The API only downloads the first 25 records of the query.
 #'  For the complete records, use `all_data=TRUE`
 #'
 #' Download responses are large, and every request costs the Neotoma API real
@@ -58,11 +58,14 @@
 #' \item{ \code{metadata} }{dataset metadata}
 #' @examples \dontrun{
 #' # To find the downloads object of dataset 24:
-#' tryCatch({
-#'   downloads24 <- get_downloads(24)
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     downloads24 <- get_downloads(24)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # To find all downloads in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -71,12 +74,15 @@
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
-#' tryCatch({
-#'   brazil_datasets <- get_datasets(loc = brazil[1])
-#'   brazil_downloads <- get_downloads(brazil_datasets)
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     brazil_datasets <- get_datasets(loc = brazil[1])
+#'     brazil_downloads <- get_downloads(brazil_datasets)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -141,16 +147,18 @@ get_downloads.numeric <- function(x, ...) {
   }
   records <- list()
   for (batch in batches) {
-    baseURL <- paste0("data/downloads?datasetid=",
-                      paste0(batch, collapse = ","))
-    key <- paste(baseURL, paste(names(dots), unlist(dots), collapse = "&"))
+    base_url <- paste0(
+      "data/downloads?datasetid=",
+      paste0(batch, collapse = ",")
+    )
+    key <- paste(base_url, paste(names(dots), unlist(dots), collapse = "&"))
     # A failed request is raised as it is. It is not repeated with the
     # arguments removed: that is a different query, and it doubled the load on
     # a server that had just failed. Batches that succeeded stay cached, so a
     # second attempt only asks for the batches still missing.
     result <- downloads_cached(key, function() {
       tryCatch(
-        do.call(parseURL, c(list(baseURL), dots)),
+        do.call(parseURL, c(list(base_url), dots)),
         error = function(e) stop("API call failed: ", e$message, call. = FALSE)
       )
     })
@@ -159,9 +167,9 @@ get_downloads.numeric <- function(x, ...) {
   result <- list(status = 200, data = records, message = "Success")
   if (!is.null(result[2]$data) || (length(result[2]$data) > 0)) {
     output <- parse_site(result)
-    return(output)
+    output
   } else {
-    return(NULL)
+    NULL
   }
 }
 
@@ -179,5 +187,5 @@ get_downloads.sites <- function(x, verbose = TRUE, ...) {
 #' @rdname get_downloads
 #' @exportS3Method get_downloads NULL
 get_downloads.NULL <- function(x, ...) {
-  return(NULL)
+  NULL
 }

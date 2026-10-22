@@ -36,26 +36,35 @@ get_params <- function(obj) {
   if (!is.null(cached)) {
     return(cached)
   }
-  r <- tryCatch({
-    result <- get_swagger()
-    sw <- str_match(result,
-                    paste0("v2.0/data/", obj,
-                           "\"\\s*:\\s*(\\{[\\s\\S]+?\\})\\s*\\n"))[, 2]
-    matches <- str_match_all(
-      sw, "#/components/parameters/([a-zA-Z0-9_]+)Query\\\""
-    )[[1]][, 2]
-    matches <- unique(matches)
-    matches
-  }, error = function(e) {
-    warning("Swagger with available parameters not available in API: ",
-            conditionMessage(e))
-    NULL
-  })
+  r <- tryCatch(
+    {
+      result <- get_swagger()
+      sw <- str_match(
+        result,
+        paste0(
+          "v2.0/data/", obj,
+          "\"\\s*:\\s*(\\{[\\s\\S]+?\\})\\s*\\n"
+        )
+      )[, 2]
+      matches <- str_match_all(
+        sw, "#/components/parameters/([a-zA-Z0-9_]+)Query\\\""
+      )[[1]][, 2]
+      matches <- unique(matches)
+      matches
+    },
+    error = function(e) {
+      warning(
+        "Swagger with available parameters not available in API: ",
+        conditionMessage(e)
+      )
+      NULL
+    }
+  )
   params <- append(r, list("all_data", "limit", "offset"))
   params <- lapply(params, tolower)
   # Only a successful lookup is cached; a failed one must be retried.
   if (!is.null(r)) {
     swagger_cache[[paste0("params_", obj)]] <- params
   }
-  return(params)
+  params
 }

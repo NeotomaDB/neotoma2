@@ -17,13 +17,16 @@
 #' So the site is gathered, and the datasets are now part of an
 #' array of datasets.
 #' @examples \dontrun{
-#' tryCatch({
-#'   alex <- get_sites(sitename = "Alex%")
-#'   alex2 <- get_sites(24)
-#'   c <- c(alex, alex2) #uncleaned
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     alex <- get_sites(sitename = "Alex%")
+#'     alex2 <- get_sites(24)
+#'     c <- c(alex, alex2) # uncleaned
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -59,9 +62,11 @@ clean.sites <- function(x, verbose = TRUE, ...) {
     # de-duplicate them (this also merges their datasets). Some instances may
     # carry no collection units, which is handled gracefully.
     all_cus <- unlist(lapply(dup_sites, function(s) s@collunits@collunits),
-                      recursive = FALSE)
+      recursive = FALSE
+    )
     merged@collunits <- clean(new("collunits", collunits = all_cus),
-                              verbose = FALSE)
+      verbose = FALSE
+    )
     clean_list <- c(clean_list, merged)
   }
   return(new("sites", sites = clean_list))
@@ -73,7 +78,6 @@ clean.sites <- function(x, verbose = TRUE, ...) {
 clean.collunits <- function(x, verbose = TRUE, ...) {
   cuids <- x$collectionunitid
   matched <- unique(cuids[duplicated(cuids)])
-  non_dupes <- cuids[!duplicated(cuids) & !duplicated(cuids, fromLast = TRUE)]
   if (length(matched) == 0) {
     return(x)
   } else {
