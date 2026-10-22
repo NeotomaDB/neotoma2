@@ -65,7 +65,7 @@ The user may define all or none of the possible fields."><!-- mathjax --><script
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>get_sites</h1>
-    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/R/get_sites.R" class="external-link"><code>R/get_sites.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev-apicalls/R/get_sites.R" class="external-link"><code>R/get_sites.R</code></a></small>
     <div class="hidden name"><code>get_sites.Rd</code></div>
     </div>
 
@@ -124,6 +124,10 @@ function searches for each site within Neotoma that matches the query
 parameters, and returns them as a <code>sites</code> object, a list of <code>site</code>
 objects. The <code>get_sites()</code> command wraps the Neotoma API
 (<a href="https://api.neotomadb.org" class="external-link">api.neotomadb.org</a>) call for <code>sites</code>.
+Some queries are slow for the API however few records they return: a spatial
+query (<code>loc</code>) costs tens of seconds even when it matches no sites, and so do
+wildcard (<code>%</code>) names and broad <code>taxa</code> filters. Add other filters to narrow a
+query, test it with a small <code>limit</code> first, and avoid running it in a loop.
 The call itself uses a SQL query which accepts any one of the following
 parameters:</p><ul><li><p><code>siteid</code>  The unique site ID (integer) in Neotoma. Can be passed as a
 vector of site IDs.</p></li>
@@ -167,8 +171,8 @@ and datasets located at that site.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co">## Find sites with a min altitude of 12m and a max altitude of 25m</span></span></span>
-<span class="r-in"><span><span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">12</span>, altmax<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">sites_2500</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin<span class="op">=</span><span class="fl">2500</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sites_12to25</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin <span class="op">=</span> <span class="fl">12</span>, altmax <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sites_2500</span> <span class="op">&lt;-</span> <span class="fu">get_sites</span><span class="op">(</span>altmin <span class="op">=</span> <span class="fl">2500</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## To find sites in Brazil</span></span></span>
 <span class="r-in"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span></span>
 <span class="r-in"><span><span class="st">"coordinates": [[</span></span></span>

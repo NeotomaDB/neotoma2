@@ -89,7 +89,7 @@
       <h1 data-toc-skip>The neotoma2 R Package</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/vignettes/neotoma2-package.Rmd" class="external-link"><code>vignettes/neotoma2-package.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev-apicalls/vignettes/neotoma2-package.Rmd" class="external-link"><code>vignettes/neotoma2-package.Rmd</code></a></small>
       <div class="hidden name"><code>neotoma2-package.Rmd</code></div>
 
     </div>
@@ -297,7 +297,7 @@ find sites when we’re not sure the exact match. Note that the search is
 case <strong>insensitive</strong> so a search for <code>alex%</code> or
 <code>Alex%</code> will return the same results.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">'Alex%'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">alex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"Alex%"</span><span class="op">)</span></span>
 <span><span class="va">alex</span></span></code></pre></div>
 <p>Since this new <code>sites</code> object has N/A. elements that
 belong to <code>site</code>, we may want to access only one of the
@@ -327,8 +327,10 @@ whether the site spans that time zone or not. They would query
 <code>get_sites(minage = 5000, maxage = 8000)</code>.</p>
 <p>We can see how these age bounds differ:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Note, we are using the `all_data = TRUE` flag here to avoid the default limit of 25 records, discussed below.</span></span>
-<span><span class="co"># Because these queries are searching through every record they are slow and and are not</span></span>
+<code class="sourceCode R"><span><span class="co"># Note, we are using the `all_data = TRUE` flag here to avoid the default limit</span></span>
+<span><span class="co"># of 25 records, discussed below.</span></span>
+<span><span class="co"># Because these queries are searching through every record they are slow and and</span></span>
+<span><span class="co"># are not</span></span>
 <span><span class="co"># run in knitting this vignette.</span></span>
 <span><span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>ageof <span class="op">=</span> <span class="fl">8200</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>ageyounger <span class="op">=</span> <span class="fl">5000</span>, ageolder <span class="op">=</span> <span class="fl">8000</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -373,7 +375,8 @@ within a site. You can see all the <code>site</code> slots using the
 <span><span class="co"># Modify a value using [&lt;- assignment:</span></span>
 <span><span class="va">alex</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="st">"area"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
 <span><span class="va">alex</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">area</span></span>
-<span><span class="co"># alex[[1]][7] &lt;- 30  This fails because the `Notes` field expects a character string.</span></span></code></pre></div>
+<span><span class="co"># alex[[1]][7] &lt;- 30  This fails because the `Notes` field expects a character</span></span>
+<span><span class="co"># string.</span></span></code></pre></div>
 <p>Using assignment, we can add information programmatically, for
 example, by working interactively with a digital elevation model or
 hydrographic data to obtain lake area measurements. Although not
@@ -391,10 +394,12 @@ other data within Neotoma. You can create a site with the
 information such as <code>sitename</code>, <code>lat</code>, and
 <code>long</code> attributes.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_site</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_site.html">set_site</a></span><span class="op">(</span>sitename <span class="op">=</span> <span class="st">"My Lake"</span>, </span>
-<span>                    geography <span class="op">=</span> <span class="fu">st_sf</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">3</span>, <span class="fu">st_sfc</span><span class="op">(</span><span class="fu">st_point</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>                    description <span class="op">=</span> <span class="st">"my lake"</span>, </span>
-<span>                    altitude <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">my_site</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_site.html">set_site</a></span><span class="op">(</span></span>
+<span>  sitename <span class="op">=</span> <span class="st">"My Lake"</span>,</span>
+<span>  geography <span class="op">=</span> <span class="fu">st_sf</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">3</span>, <span class="fu">st_sfc</span><span class="op">(</span><span class="fu">st_point</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  description <span class="op">=</span> <span class="st">"my lake"</span>,</span>
+<span>  altitude <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">my_site</span></span></code></pre></div>
 <p>If we have a set of sites that we are analyzing, we can add the new
 site to the set of sites, either by appending it to the end, using
@@ -465,12 +470,13 @@ analytic workflow is mostly complete.</p>
 <p>We can use that <code>all_data = TRUE</code> in R in the following
 way:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">allSites_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>datasettype <span class="op">=</span> <span class="st">"diatom"</span><span class="op">)</span></span>
-<span><span class="va">allSites_dt_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>datasettype <span class="op">=</span> <span class="st">"diatom"</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">all_sites_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>datasettype <span class="op">=</span> <span class="st">"diatom"</span><span class="op">)</span></span>
+<span><span class="va">all_sites_dt_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sites.html">get_sites</a></span><span class="op">(</span>datasettype <span class="op">=</span> <span class="st">"diatom"</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Because we used the `all_data = TRUE` flag, there will be more sites</span></span>
-<span><span class="co"># in allSites_dt_all, because it represents all sites containing diatom datasets.</span></span>
-<span><span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="va">allSites_dt_all</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="va">allSites_dt</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># in all_sites_dt_all, because it represents all sites containing diatom</span></span>
+<span><span class="co"># datasets.</span></span>
+<span><span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="va">all_sites_dt_all</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="../reference/length.html">length</a></span><span class="op">(</span><span class="va">all_sites_dt</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="spatial-searches">Spatial Searches<a class="anchor" aria-label="anchor" href="#spatial-searches"></a>
 </h3>
@@ -479,7 +485,7 @@ pre-existing objects within R, for example, country-level data within
 the <code>spData</code> package:</p>
 <p>Accessing datasets by bounding box:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon", </span></span>
+<code class="sourceCode R"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span>
 <span><span class="st">            "coordinates": [[</span></span>
 <span><span class="st">                [-73.125, -9.102],</span></span>
 <span><span class="st">                [-56.953, -33.138],</span></span>
@@ -513,11 +519,13 @@ query, and then use the <code>filter</code> function in
 <code>neotoma2</code> to select only those datasets that are
 geochronologic:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">brazil_dates</span> <span class="op">&lt;-</span> <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">brazil_datasets</span>,</span>
-<span>                                   <span class="va">datasettype</span> <span class="op">==</span> <span class="st">"geochronologic"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">brazil_dates</span> <span class="op">&lt;-</span> <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span></span>
+<span>  <span class="va">brazil_datasets</span>,</span>
+<span>  <span class="va">datasettype</span> <span class="op">==</span> <span class="st">"geochronologic"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># or:</span></span>
 <span><span class="va">brazil_dates</span> <span class="op">&lt;-</span> <span class="va">brazil_datasets</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">datasettype</span> <span class="op">==</span> <span class="st">"geochronologic"</span><span class="op">)</span></span>
+<span>  <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">datasettype</span> <span class="op">==</span> <span class="st">"geochronologic"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># With boolean operators:</span></span>
 <span><span class="va">brazil_space</span> <span class="op">&lt;-</span> <span class="va">brazil_datasets</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lat</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">18</span> <span class="op">&amp;</span> <span class="va">lat</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">16</span><span class="op">)</span></span></code></pre></div>
@@ -563,7 +571,7 @@ records from the country, filter to only pollen records with samples
 covering the last 10,000 years, and then look at the relative frequency
 of taxa across sites. We might do something like this:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon", </span></span>
+<code class="sourceCode R"><span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="st">'{"type": "Polygon",</span></span>
 <span><span class="st">            "coordinates": [[</span></span>
 <span><span class="st">                [-73.125, -9.102],</span></span>
 <span><span class="st">                [-56.953, -33.138],</span></span>
@@ -576,9 +584,11 @@ of taxa across sites. We might do something like this:</p>
 <span><span class="co"># functionality of the `sf` package.</span></span>
 <span><span class="va">brazil_sf</span> <span class="op">&lt;-</span> <span class="fu">geojsonsf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geojsonsf/man/geojson_sf.html" class="external-link">geojson_sf</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">brazil_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_datasets.html">get_datasets</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="va">brazil_sf</span>, all_data<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">datasettype</span> <span class="op">==</span> <span class="st">"pollen"</span> <span class="op">&amp;</span> <span class="va">age_range_young</span> <span class="op">&lt;=</span> <span class="fl">1000</span> <span class="op">&amp;</span> <span class="va">age_range_old</span> <span class="op">&gt;=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../reference/get_downloads.html">get_downloads</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">brazil_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_datasets.html">get_datasets</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="va">brazil_sf</span>, all_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">neotoma2</span><span class="fu">::</span><span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span></span>
+<span>    <span class="va">datasettype</span> <span class="op">==</span> <span class="st">"pollen"</span> <span class="op">&amp;</span> <span class="va">age_range_young</span> <span class="op">&lt;=</span> <span class="fl">1000</span> <span class="op">&amp;</span> <span class="va">age_range_old</span> <span class="op">&gt;=</span> <span class="fl">10000</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/get_downloads.html">get_downloads</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="va">count_by_site</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/samples.html">samples</a></span><span class="op">(</span><span class="va">brazil_records</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -659,7 +669,7 @@ publications. We can search using the following properties:</p>
 <li><code>offset</code></li>
 </ul>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">michPubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_publications.html">get_publications</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Michigan"</span>, limit <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mich_pubs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_publications.html">get_publications</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Michigan"</span>, limit <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>This results in a set of N/A publications from Neotoma, equal to the
 <code>limit</code>. If the number of matching publications is less than
 the limit then the <code><a href="../reference/length.html">length()</a></code> will be smaller.</p>
@@ -684,10 +694,10 @@ and the class (for a single publication) will be of type
 numeric vector (<code>c(1, 2, 3)</code>)):</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select publications with Neotoma Publication IDs 1 - 10.</span></span>
-<span><span class="va">pubArray</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_publications.html">get_publications</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">pub_array</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_publications.html">get_publications</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co"># Select the first five publications:</span></span>
-<span><span class="va">subPub</span> <span class="op">&lt;-</span> <span class="va">pubArray</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="va">subPub</span></span></code></pre></div>
+<span><span class="va">sub_pub</span> <span class="op">&lt;-</span> <span class="va">pub_array</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">sub_pub</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="create-or-import-new-publications">Create (or Import) New Publications<a class="anchor" aria-label="anchor" href="#create-or-import-new-publications"></a>
@@ -700,9 +710,11 @@ but it’s designed (in part) to use the CrossRef API to return
 information from a DOI.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_pub</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set_publication.html">set_publication</a></span><span class="op">(</span></span>
-<span>articletitle <span class="op">=</span> <span class="st">"Myrtle Lake: a late- and post-glacial pollen diagram from northern Minnesota"</span>,</span>
-<span>journal <span class="op">=</span> <span class="st">"Canadian Journal of Botany"</span>,</span>
-<span>volume <span class="op">=</span> <span class="fl">46</span><span class="op">)</span></span></code></pre></div>
+<span>  articletitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Myrtle Lake: a late- and post-glacial pollen diagram"</span>,</span>
+<span>                       <span class="st">"from northern Minnesota"</span><span class="op">)</span>,</span>
+<span>  journal <span class="op">=</span> <span class="st">"Canadian Journal of Botany"</span>,</span>
+<span>  volume <span class="op">=</span> <span class="fl">46</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>A <code>publication</code> has a large number of slots that can be
 defined. These may be left blank, they may be set directly after the
 publication is defined:</p>

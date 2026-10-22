@@ -62,7 +62,7 @@ The new object will not be uploaded to the database."><!-- mathjax --><script sr
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>set Site Information for Fossil Sites</h1>
-    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev/R/set_dataset.R" class="external-link"><code>R/set_dataset.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/NeotomaDB/neotoma2/blob/dev-apicalls/R/set_dataset.R" class="external-link"><code>R/set_dataset.R</code></a></small>
     <div class="hidden name"><code>set_dataset.Rd</code></div>
     </div>
 
@@ -162,10 +162,12 @@ The new object will not be uploaded to the database.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Create a dataset</span></span></span>
-<span class="r-in"><span><span class="va">my_dataset</span> <span class="op">&lt;-</span> <span class="fu">set_dataset</span><span class="op">(</span>database <span class="op">=</span> <span class="st">"EPD"</span>,</span></span>
-<span class="r-in"><span>                    datasettype <span class="op">=</span> <span class="st">"pollen"</span>,</span></span>
-<span class="r-in"><span>                    notes <span class="op">=</span> <span class="st">"my lake"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Create a dataset</span></span></span>
+<span class="r-in"><span>  <span class="va">my_dataset</span> <span class="op">&lt;-</span> <span class="fu">set_dataset</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    database <span class="op">=</span> <span class="st">"EPD"</span>,</span></span>
+<span class="r-in"><span>    datasettype <span class="op">=</span> <span class="st">"pollen"</span>,</span></span>
+<span class="r-in"><span>    notes <span class="op">=</span> <span class="st">"my lake"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
