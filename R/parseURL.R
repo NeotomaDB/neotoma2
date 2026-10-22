@@ -584,8 +584,20 @@ neotoma_get_ids <- function(baseurl, x, query, chunk = 100) {
   batches <- split(ids, ceiling(seq_along(ids) / chunk))
   use_post <- neotoma_post_route(endpoint)
   id_key <- if (grepl("^data/sites", endpoint)) "siteid" else "datasetid"
+  # `limit` and `offset` describe the combined answer, not each batch: sent to
+  # every batch they would return limit records per batch.
+  skip <- if (is.null(query$offset)) 0 else as.numeric(query$offset)
+  want <- if (is.null(query$limit)) Inf else skip + as.numeric(query$limit)
+  query$offset <- NULL
+  query$limit <- NULL
   results <- list()
   for (batch in batches) {
+    if (length(results) >= want) {
+      break
+    }
+    if (is.finite(want)) {
+      query$limit <- want - length(results)
+    }
     if (use_post) {
       query[[id_key]] <- paste(batch, collapse = ",")
       r <- neotoma_post(paste0(baseurl, endpoint), query)
@@ -605,6 +617,11 @@ neotoma_get_ids <- function(baseurl, x, query, chunk = 100) {
     if (!is.null(r$data)) {
       results <- c(results, r$data)
     }
+  }
+  if (is.finite(want) || skip > 0) {
+    keep <- seq_along(results)
+    keep <- keep[keep > skip & keep <= want]
+    results <- results[keep]
   }
   list(status = 200, data = results, message = "Success")
 }

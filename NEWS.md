@@ -3,6 +3,7 @@
 ## neotoma2 1.1.1
 
 * The default request timeout is 125 seconds, just above the 120 seconds at which the API gateway gives up, so the client and the gateway agree and a slow query  is reported once instead of being abandoned and repeated. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
+* `limit` and `offset` now describe the whole answer when a long list of ids is split into several requests. `get_sites(1:1000, limit = 10)` returned 100 sites, because every batch of ids was given the `limit`; it returns 10, from one request.
 * Gentler on the Neotoma API:
   * An HTTP 500 is no longer retried (it cannot succeed on a repeat), and a busy
     gateway (502, 503, 504) is retried once, after a jittered wait of 30 to 60

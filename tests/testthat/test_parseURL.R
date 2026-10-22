@@ -557,9 +557,10 @@ test_that("long id lists for sites, datasets, downloads POST in chunks", {
       bodies, function(b) !is.null(b[[case$key]]),
       logical(1)
     )), info = case$path)
-    expect_true(all(vapply(bodies, function(b) b$limit == 2000, logical(1))),
-      info = case$path
-    )
+    # `limit` caps the combined answer, so each batch asks only for what is
+    # still missing
+    batch_limits <- vapply(bodies, function(b) b$limit, numeric(1))
+    expect_equal(batch_limits, 2000 - 100 * (0:14), info = case$path)
     sent <- as.numeric(unlist(strsplit(vapply(
       bodies, function(b) b[[case$key]],
       character(1)
@@ -615,6 +616,53 @@ test_that("a POST for ids that were not applied is reported, not returned", {
     returned, "siteid",
     c("24", "25", "26")
   ))
+})
+
+test_that("limit and offset describe the whole id list, not each batch", {
+  # The CI failure: get_sites(seq(1, 1000), limit = 10) returned 100 sites,
+  # because each of the ten batches of 100 ids was asked for `limit` records.
+  requests <- new.env()
+  requests$n <- 0
+  requests$limits <- c()
+  honours_body <- function(verb, url, body = NULL, ...) {
+    sent <- jsonlite::fromJSON(as.character(body))
+    ids <- as.numeric(strsplit(as.character(sent$siteid), ",")[[1]])
+    requests$n <- requests$n + 1
+    requests$limits <- c(requests$limits, sent$limit)
+    if (!is.null(sent$limit)) ids <- head(ids, sent$limit)
+    recs <- lapply(ids, function(i) list(siteid = i))
+    fake_body(as.character(jsonlite::toJSON(
+      list(status = "success", data = recs),
+      auto_unbox = TRUE
+    )))
+  }
+  local_mocked_bindings(neotoma_retry = honours_body, .package = "neotoma2")
+  api <- "https://api.neotomadb.org/v2.0/"
+  path <- paste0("data/sites/", paste(1:1000, collapse = ","))
+  ids_of <- function(r) vapply(r$data, function(z) z$siteid, numeric(1))
+
+  r <- neotoma2:::neotoma_get_ids(api, path, list(limit = 10))
+  expect_equal(ids_of(r), 1:10)
+  # Ten records fit in the first batch, so the rest of the ids are never asked.
+  expect_equal(requests$n, 1)
+  expect_equal(requests$limits, 10)
+
+  # A limit larger than one batch continues into the next one, then stops.
+  requests$n <- 0
+  r <- neotoma2:::neotoma_get_ids(api, path, list(limit = 150))
+  expect_equal(ids_of(r), 1:150)
+  expect_equal(requests$n, 2)
+
+  # offset skips records of the combined answer.
+  requests$n <- 0
+  r <- neotoma2:::neotoma_get_ids(api, path, list(limit = 5, offset = 98))
+  expect_equal(ids_of(r), 99:103)
+
+  # No limit: every id is requested, in full batches.
+  requests$n <- 0
+  r <- neotoma2:::neotoma_get_ids(api, path, list())
+  expect_equal(length(r$data), 1000)
+  expect_equal(requests$n, 10)
 })
 
 test_that("a spatial loc query is still sent as a POST body", {
