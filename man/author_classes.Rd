@@ -17,7 +17,7 @@ a publication are represented by the \code{authors} object.
 }
 \examples{
 {
-simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
-firstauthor <- new("author", author = simon, order = 1)
+  simon <- new("contact", familyname = "Goring", givennames = "Simon J.")
+  firstauthor <- new("author", author = simon, order = 1)
 }
 }

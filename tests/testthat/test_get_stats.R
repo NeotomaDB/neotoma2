@@ -12,16 +12,18 @@ test_that("get_stats with the default values", {
 
 test_that("get_stats rawbymonth", {
   skip_on_cran()
-  stats <- get_stats(type="rawbymonth")
+  stats <- get_stats(type = "rawbymonth")
   testthat::expect_is(stats, "data.frame")
   testthat::expect_true(nrow(stats) == 1)
-  testthat::expect_true(all(c("datasets", "sites", "publications",
-                              "authors", "countrygpid", "observations") %in% colnames(stats)))
+  testthat::expect_true(all(c(
+    "datasets", "sites", "publications",
+    "authors", "countrygpid", "observations"
+  ) %in% colnames(stats)))
 })
 
 test_that("get_stats dstypemonth", {
   skip_on_cran()
-  stats <- get_stats(type="dstypemonth")
+  stats <- get_stats(type = "dstypemonth")
   testthat::expect_is(stats, "data.frame")
   testthat::expect_true(all(c("datasettype", "counts") %in% colnames(stats)))
 })

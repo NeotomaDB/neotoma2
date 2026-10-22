@@ -35,14 +35,23 @@ skip_if_api_unreachable <- function(seconds = 12) {
   old_r <- Sys.getenv("NEOTOMA_RETRIES", unset = NA)
   Sys.setenv(NEOTOMA_TIMEOUT = seconds, NEOTOMA_RETRIES = 1)
   on.exit({
-    if (is.na(old_t)) Sys.unsetenv("NEOTOMA_TIMEOUT") else
+    if (is.na(old_t)) {
+      Sys.unsetenv("NEOTOMA_TIMEOUT")
+    } else {
       Sys.setenv(NEOTOMA_TIMEOUT = old_t)
-    if (is.na(old_r)) Sys.unsetenv("NEOTOMA_RETRIES") else
+    }
+    if (is.na(old_r)) {
+      Sys.unsetenv("NEOTOMA_RETRIES")
+    } else {
       Sys.setenv(NEOTOMA_RETRIES = old_r)
+    }
   })
-  ok <- tryCatch({
-    suppressWarnings(get_datasets(loc = brazil_json[1], limit = 1))
-    TRUE
-  }, error = function(e) FALSE)
+  ok <- tryCatch(
+    {
+      suppressWarnings(get_datasets(loc = brazil_json[1], limit = 1))
+      TRUE
+    },
+    error = function(e) FALSE
+  )
   if (!isTRUE(ok)) testthat::skip("Neotoma API (spatial endpoint) unreachable")
 }

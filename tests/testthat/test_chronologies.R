@@ -2,30 +2,32 @@ library("testthat")
 library("neotoma2")
 library("httptest")
 
-context("`chronologies()` function displays all chronologies for a download object")
+context("`chronologies()` displays all chronologies for a download object")
 httptest::with_mock_api({
-test_that("`get_downloads()` fills up chronologies' slots.", {
-  skip_on_cran()
-  dl <- get_downloads(4716)
-  chron <- dl %>% chronologies() %>% as.data.frame()
+  test_that("`get_downloads()` fills up chronologies' slots.", {
+    skip_on_cran()
+    dl <- get_downloads(4716)
+    chron <- dl %>%
+      chronologies() %>%
+      as.data.frame()
 
-  testthat::expect_is(dl[[1]]@collunits[[1]]@chronologies, "chronologies")
-  testthat::expect_true(nrow(chron) > 1)
-  testthat::expect_true(any(chron$chronologyid == 2195))
-  # Only one isdefault value
-  # Careful, if the DB is wrong, so will the API and this test will fail
-  testthat::expect_equal(sum(chron$isdefault), 1)
-  testthat::expect_is(chron, "data.frame")
-})
+    testthat::expect_is(dl[[1]]@collunits[[1]]@chronologies, "chronologies")
+    testthat::expect_true(nrow(chron) > 1)
+    testthat::expect_true(any(chron$chronologyid == 2195))
+    # Only one isdefault value
+    # Careful, if the DB is wrong, so will the API and this test will fail
+    testthat::expect_equal(sum(chron$isdefault), 1)
+    testthat::expect_is(chron, "data.frame")
+  })
 })
 
 context("`chronologies()` function is empty for empty downloads")
 httptest::with_mock_api({
-test_that("`chronologies()` is empty for a record with no chronology", {
-  skip_on_cran()
-  dl <- get_downloads(100)
-  chron <- dl %>% chronologies()
+  test_that("`chronologies()` is empty for a record with no chronology", {
+    skip_on_cran()
+    dl <- get_downloads(100)
+    chron <- dl %>% chronologies()
 
-  testthat::expect_equal(length(chron@chronologies), 0)
-})
+    testthat::expect_equal(length(chron@chronologies), 0)
+  })
 })

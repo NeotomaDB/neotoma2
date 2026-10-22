@@ -17,7 +17,7 @@ Open up the Neotoma manual homepage.
 # This call does not work from `source()` calls or in testing.
 # interactive() just lets us know you are interacting with the console:
 if (interactive()) {
- get_manual()
+  get_manual()
 }
 }
 }

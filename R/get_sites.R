@@ -1,7 +1,7 @@
 #' @title get_sites
 #' @name get_sites
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
-#' @param x Use a single integer or vector of integers representing 
+#' @param x Use a single integer or vector of integers representing
 #' unique Neotoma site identifiers (siteids) to extract site information.
 #' @param ... accepted arguments, see details for more information.
 #' @description
@@ -18,6 +18,10 @@
 #' parameters, and returns them as a `sites` object, a list of `site`
 #' objects. The `get_sites()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `sites`.
+#' Some queries are slow for the API however few records they return: a spatial
+#' query (`loc`) costs tens of seconds even when it matches no sites, and so do
+#' wildcard (`%`) names and broad `taxa` filters. Add other filters to narrow a
+#' query, test it with a small `limit` first, and avoid running it in a loop.
 #' The call itself uses a SQL query which accepts any one of the following
 #' parameters:
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
@@ -30,7 +34,7 @@
 #'  * `datasetid`  The unique dataset ID (integer) in Neotoma. Can be passed
 #' as a vector of dataset IDs.
 #'  * `datasettype`  Neotoma contains data for a number of datasettypes.
-#'  This returns a subset of data types. For a complete list of available 
+#'  This returns a subset of data types. For a complete list of available
 #'  datasettypes, run `neotoma2::get_table('datasettypes')`
 #'  * `doi`  The dataset DOI for a dataset contained within a site. Can be
 #' passed as a vector of DOIs.
@@ -47,7 +51,7 @@
 #' for a site.
 #'  * `taxa`  The names of taxa which must be present within samples in a
 #' record.
-#'  * `all_data`  The API only downloads the first 25 records of the query. 
+#'  * `all_data`  The API only downloads the first 25 records of the query.
 #'  For the complete records, use `all_data=TRUE`
 #' This call will then return a data object that contains site metadata for one
 #' or more sites, along with limited metadata describing the collection units
@@ -64,8 +68,8 @@
 #'  * `collunits` limited information on collunits
 #' @examples \dontrun{
 #' ## Find sites with a min altitude of 12m and a max altitude of 25m
-#' sites_12to25 <- get_sites(altmin=12, altmax=25)
-#' sites_2500 <- get_sites(altmin=2500, all_data = TRUE)
+#' sites_12to25 <- get_sites(altmin = 12, altmax = 25)
+#' sites_2500 <- get_sites(altmin = 2500, all_data = TRUE)
 #' ## To find sites in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -93,9 +97,9 @@ get_sites.numeric <- function(x, ...) {
   if (length(x) > 0) {
     siteids <- paste0(x, collapse = ",")
   }
-  baseURL <- paste0("data/sites/", siteids)
+  base_url <- paste0("data/sites/", siteids)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
@@ -103,9 +107,9 @@ get_sites.numeric <- function(x, ...) {
   )
   if (!is.null(result) && length(result[2]$data) > 0) {
     output <- parse_site(result)
-    return(output)
+    output
   } else {
-    return(NULL)
+    NULL
   }
 }
 
@@ -128,27 +132,29 @@ get_sites.default <- function(...) {
   }
   params <- get_params("sites")
   if (!all(names(cl) %in% params)) {
-    warning("Some parameters seem invalid.
+    warning(
+      "Some parameters seem invalid.
              The current accepted parameters are: ",
-            paste(unlist(params), collapse = ", "))
+      paste(unlist(params), collapse = ", ")
+    )
   }
   oo <- options(scipen = 9999)
   on.exit(options(oo))
-  baseURL <- paste0("data/sites")
+  base_url <- paste0("data/sites")
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
   if (is.null(result) || is.null(result$data[1][[1]])) {
-    return(NULL)
+    NULL
   } else {
     result <- result %>%
       cleanNULL()
     output <- parse_site(result)
-    return(output)
+    output
   }
 }
 
@@ -156,5 +162,5 @@ get_sites.default <- function(...) {
 #' @exportS3Method get_sites NULL
 get_sites.NULL <- function(x, ...) {
   message("Input is NULL, returning NULL")
-  return(NULL)
+  NULL
 }

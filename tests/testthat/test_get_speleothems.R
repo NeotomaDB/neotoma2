@@ -26,14 +26,16 @@ test_that("get_speleothems works with sites object", {
 
 
 # test_that("get_speleothems handles invalid datasetid", {
+# nolint start
 #   skip_on_cran()
 #   skip_if(TRUE, "Speleothem functionality needs verification")
-#   
+#
 #   # Test with non-existent datasetid
 #   spel_invalid <- get_speleothems(999999999)
-#   
+#
 #   # Should return NULL or empty result
 #   testthat::expect_true(is.null(spel_invalid) || length(spel_invalid) == 0)
+# nolint end
 # })
 
 test_that("get_speleothems returns correct structure", {

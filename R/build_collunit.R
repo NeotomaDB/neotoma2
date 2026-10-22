@@ -26,12 +26,16 @@ build_collunits <- function(x) {
   }
   cu <- set_collunit(
     collectionunitid = use_na(x$collectionunitid, "int"),
-    collunittype = use_na(pick(x, "collectionunittype", "unittype",
-                               "collunittype"), "char"),
+    collunittype = use_na(pick(
+      x, "collectionunittype", "unittype",
+      "collunittype"
+    ), "char"),
     handle = use_na(x$handle, "char"),
     collectiondevice = use_na(x$collectiondevice, "char"),
-    collectionunitname = use_na(pick(x, "collectionunitname",
-                                     "collectionunit"), "char"),
+    collectionunitname = use_na(pick(
+      x, "collectionunitname",
+      "collectionunit"
+    ), "char"),
     waterdepth = use_na(x$waterdepth, "int"),
     colldate = use_na(as.Date(x$colldate), "date"),
     depositionalenvironment = use_na(x$depositionalenvironment, "char"),
@@ -43,5 +47,5 @@ build_collunits <- function(x) {
     chronologies = testNull(x$chronologies, NULL),
     speleothems = testNull(x$speleothems, NULL)
   )
-  return(cu)
+  cu
 }

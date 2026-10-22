@@ -6,21 +6,22 @@
 parse_taxon <- function(data) {
   data <- data$data %>%
     cleanNULL()
-  newTaxa <- map(data, function(x) {
+  new_taxa <- map(data, function(x) {
     new("taxon",
-        taxonid = use_na(testNull(x$taxonid, NA), "int"),
-        taxoncode = use_na(testNull(x$taxoncode, NA), "char"),
-        taxonname = use_na(testNull(x$taxonname, NA), "char"),
-        author = use_na(testNull(x$author, NA), "char"),
-        ecolgroup = use_na(testNull(x$ecolgroup, NA), "char"),
-        highertaxonid = use_na(testNull(x$highertaxonid, NA), "int"),
-        status = use_na(testNull(x$status, NA), "char"),
-        taxagroupid = use_na(testNull(x$taxagroupid, NA), "int"),
-        publicationid = use_na(testNull(x$publicationid, NA), "int"),
-        publication = use_na(testNull(x$publication, NA), "char"))
+      taxonid = use_na(testNull(x$taxonid, NA), "int"),
+      taxoncode = use_na(testNull(x$taxoncode, NA), "char"),
+      taxonname = use_na(testNull(x$taxonname, NA), "char"),
+      author = use_na(testNull(x$author, NA), "char"),
+      ecolgroup = use_na(testNull(x$ecolgroup, NA), "char"),
+      highertaxonid = use_na(testNull(x$highertaxonid, NA), "int"),
+      status = use_na(testNull(x$status, NA), "char"),
+      taxagroupid = use_na(testNull(x$taxagroupid, NA), "char"),
+      publicationid = use_na(testNull(x$publicationid, NA), "int"),
+      publication = use_na(testNull(x$publication, NA), "char")
+    )
   })
-  taxa <- new("taxa", taxa = newTaxa)
-  return(taxa)
+  taxa <- new("taxa", taxa = new_taxa)
+  taxa
 }
 
 #' @title get_taxon
@@ -44,7 +45,7 @@ parse_taxon <- function(data) {
 #' taxagrouptypes table.
 #'  * `ecolgroup` The ecological group of interest for the Neotoma taxon (from
 #' the Neotoma ecolgrouptypes table)
-#'  * `status` The taxonomic extinction status of the taxon, either extinct 
+#'  * `status` The taxonomic extinction status of the taxon, either extinct
 #' (1, True) or extant (0, False).
 #' @md
 #' @export
@@ -65,7 +66,7 @@ get_taxon.default <- function(...) {
   cl <- as.list(match.call())
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
-  if ("all_data" %in% cl) {
+  if ("all_data" %in% names(cl)) {
     all_data <- cl$all_data
   } else {
     all_data <- TRUE
@@ -75,25 +76,30 @@ get_taxon.default <- function(...) {
     warning("Some parameters seem invalid. The current accepted parameters
              are: ", paste(unlist(params), collapse = ", "))
   }
-  baseURL <- paste0("data/taxa")
+  base_url <- paste0("data/taxa")
+  # `all_data` is handed to parseURL() explicitly, and taken out of `...` so it
+  # is not passed twice. Without this a wildcard such as `taxonname = "Pinus%"`
+  # came back as the API's first page only, with no warning.
+  dots <- list(...)
+  dots$all_data <- NULL
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    do.call(parseURL, c(list(base_url, all_data = all_data), dots)),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
   if (is.null(result)) {
-    return(NULL)
+    NULL
   } else {
     result <- result %>%
       cleanNULL()
     if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
       message("No taxon data found with the provided parameters.")
-      return(NULL)
+      NULL
     } else {
       output <- parse_taxon(result)
-      return(output)
+      output
     }
   }
 }
@@ -102,23 +108,36 @@ get_taxon.default <- function(...) {
 #' @export
 #' @method get_taxon numeric
 get_taxon.numeric <- function(x, ...) {
-  if (length(x) > 0) {
-    taxa_id <- paste0(x, collapse = ",")
+  # An NA would become `data/taxa/NA`, which the API answers with a database
+  # error rather than "nothing found".
+  x <- x[!is.na(x)]
+  if (length(x) == 0) {
+    message("No taxon ID provided.")
+    return(NULL)
   }
-  baseURL <- paste0("data/taxa/", taxa_id)
+  oo <- options(scipen = 9999)
+  on.exit(options(oo))
+  taxa_id <- paste0(unique(x), collapse = ",")
+  # A long vector of ids makes a URL the API will not take. parseURL() then
+  # sends the ids in several short GET requests (there is no POST route for
+  # taxa), so it is safe to pass any number of ids here.
+  base_url <- paste0("data/taxa/", taxa_id)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
-  result_length <- length(result[2]$data)
+  result_length <- length(result$data)
   if (result_length > 0) {
     output <- parse_taxon(result)
-    return(output)
+    output
   } else {
-    message("No taxon data found for taxon ID: ", taxa_id)
-    return(NULL)
+    message(
+      "No taxon data found for taxon ID: ",
+      substr(taxa_id, 1, 60), if (nchar(taxa_id) > 60) "..."
+    )
+    NULL
   }
 }

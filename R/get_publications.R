@@ -19,32 +19,41 @@
 #' @returns `publications` object
 #' @examples \dontrun{
 #' # How old are the papers in Neotoma that include the term "mammut"?
-#' tryCatch({
-#'   mammoth_papers <- get_publications(search="mammut") %>%
-#'     as.data.frame()
-#'   hist(as.numeric(mammoth_papers$year))
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     mammoth_papers <- get_publications(search = "mammut") %>%
+#'       as.data.frame()
+#'     hist(as.numeric(mammoth_papers$year))
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # We want the paper identified in Neotoma as 666:
-#' tryCatch({
-#' get_publications(666)
-#' }, error = function(e) {
-#' message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     get_publications(666)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # Take a publication object and purposely degrade the metadata:
-#' tryCatch({
-#'   bad_pub <- get_publications(666)
-#'   # Note this only changes the reported year, not the citation string.
-#'   bad_pub[[1]]@year <- "1923"
-#'   bad_pub[[1]]@publicationid <- NA_integer_
-#'   updated_pubs <- get_publications(bad_pub[[1]])
-#'   attr(updated_pubs, "matches")
-#'   # we see the proper citation in the record:
-#'   updated_pubs <- attr(updated_pubs, "matches")[[3]]
-#' }, error = function(e) {
-#'  message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     bad_pub <- get_publications(666)
+#'     # Note this only changes the reported year, not the citation string.
+#'     bad_pub[[1]]@year <- "1923"
+#'     bad_pub[[1]]@publicationid <- NA_integer_
+#'     updated_pubs <- get_publications(bad_pub[[1]])
+#'     attr(updated_pubs, "matches")
+#'     # we see the proper citation in the record:
+#'     updated_pubs <- attr(updated_pubs, "matches")[[3]]
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -64,18 +73,20 @@ get_publications.default <- function(...) {
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
   get_params("publications")
-  baseURL <- paste0("data/publications")
+  base_url <- paste0("data/publications")
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
   if (is.null(result$data)) {
-    return(NULL)
+    NULL
   } else {
-    result <- result$data %>% cleanNULL() %>% pluck("result")
+    result <- result$data %>%
+      cleanNULL() %>%
+      pluck("result")
     pubs <- map(result, function(x) {
       if ("match" %in% names(x)) {
         match <- x$match
@@ -85,22 +96,23 @@ get_publications.default <- function(...) {
       x <- x$publication
       x[is.null(x)] <- NA_character_
       output <- new("publication",
-                    publicationtype = use_na(testNull(x$pubtype), "char"),
-                    publicationid = use_na(testNull(x$publicationid), "int"),
-                    articletitle = use_na(testNull(x$articletitle), "char"),
-                    year = use_na(testNull(x$year), "char"),
-                    journal = use_na(testNull(x$journal), "char"),
-                    volume = use_na(testNull(x$volume), "char"),
-                    issue = use_na(testNull(x$issue), "char"),
-                    pages = use_na(testNull(x$pages), "char"),
-                    citation = use_na(testNull(x$citation), "char"),
-                    doi = use_na(testNull(x$doi), "char"),
-                    author = pubAuthors(x))
+        publicationtype = use_na(testNull(x$pubtype), "char"),
+        publicationid = use_na(testNull(x$publicationid), "int"),
+        articletitle = use_na(testNull(x$articletitle), "char"),
+        year = use_na(testNull(x$year), "char"),
+        journal = use_na(testNull(x$journal), "char"),
+        volume = use_na(testNull(x$volume), "char"),
+        issue = use_na(testNull(x$issue), "char"),
+        pages = use_na(testNull(x$pages), "char"),
+        citation = use_na(testNull(x$citation), "char"),
+        doi = use_na(testNull(x$doi), "char"),
+        author = pubAuthors(x)
+      )
       attr(output, "match") <- match
-      return(output)
+      output
     }) %>%
       new("publications", publications = .)
-    return(pubs)
+    pubs
   }
 }
 
@@ -113,41 +125,42 @@ get_publications.numeric <- function(x, ...) {
   }
   testNull <- function(val, out) { # nolint
     if (is.null(val)) {
-      return(out)
+      out
     } else {
-      return(val)
+      val
     }
   }
-  baseURL <- paste0("data/publications/", pubids) # nolint
+  base_url <- paste0("data/publications/", pubids) # nolint
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
   if (is.null(result$data)) {
-    return(NULL)
+    NULL
   } else {
     result <- result %>% cleanNULL() # nolint
     pubs <- map(result$data, function(x) {
       x <- x$publication
       x[is.null(x)] <- NA_character_
       new("publication",
-          publicationtype = use_na(testNull(x$pubtype), "char"),
-          publicationid = use_na(testNull(x$publicationid), "int"),
-          articletitle = use_na(testNull(x$articletitle), "char"),
-          year = use_na(testNull(x$year), "char"),
-          journal = use_na(testNull(x$journal), "char"),
-          volume = use_na(testNull(x$volume), "char"),
-          issue = use_na(testNull(x$issue), "char"),
-          pages = use_na(testNull(x$pages), "char"),
-          citation = use_na(testNull(x$citation), "char"),
-          doi = use_na(testNull(x$doi), "char"),
-          author = pubAuthors(x))
+        publicationtype = use_na(testNull(x$pubtype), "char"),
+        publicationid = use_na(testNull(x$publicationid), "int"),
+        articletitle = use_na(testNull(x$articletitle), "char"),
+        year = use_na(testNull(x$year), "char"),
+        journal = use_na(testNull(x$journal), "char"),
+        volume = use_na(testNull(x$volume), "char"),
+        issue = use_na(testNull(x$issue), "char"),
+        pages = use_na(testNull(x$pages), "char"),
+        citation = use_na(testNull(x$citation), "char"),
+        doi = use_na(testNull(x$doi), "char"),
+        author = pubAuthors(x)
+      )
     }) %>%
       new("publications", publications = .)
-    return(pubs)
+    pubs
   }
 }
 
@@ -164,7 +177,7 @@ get_publications.publication <- function(x, ...) {
       attr(x, "matches") <- test
     }
   }
-  return(x)
+  x
 }
 
 #' @rdname get_publications
@@ -181,7 +194,7 @@ get_publications.publications <- function(x, ...) {
       }
     }
   }
-  return(x)
+  x
 }
 
 #' @rdname get_publications
@@ -193,6 +206,6 @@ get_publications.sites <- function(x, ...) {
     as.numeric()
   l <- nrow(ds_ids)
   ds_ids <- paste0(ds_ids, collapse = ",")
-  output <- get_publications(datasetid = ds_ids, limit=l)
-  return(output)
+  output <- get_publications(datasetid = ds_ids, limit = l)
+  output
 }

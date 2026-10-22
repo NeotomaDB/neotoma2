@@ -13,25 +13,30 @@
 #' }
 #' @md
 #' @export
-setMethod(f = "speleothems",
+setMethod(
+  f = "speleothems",
   signature = "sites",
   definition = function(x) {
-    output <- map(x@sites,
-                  function(y) speleothems(y)) %>%
+    output <- map(
+      x@sites,
+      function(y) speleothems(y)
+    ) %>%
       bind_rows()
     if (output$datasetid %>% is.null()) {
       return(data.frame())
     } else {
       output <- output %>%
-        select(.data$siteid, .data$sitename, .data$collectionunitid,
-               .data$datasetid, .data$entityid, .data$entityname,
-               .data$speleothemtype, .data$geology, .data$rockage,
-               .data$monitoring, .data$speleothemdriptype, .data$dripheight,
-               .data$dripheightunits, .data$covertype,
-               .data$entitycoverthickness, .data$entrancedistance,
-               .data$entrancedistanceunits, .data$landusecovertype,
-               .data$landusecoverpercent, .data$vegetationcovertype,
-               .data$vegetationcoverpercent) %>%
+        select(
+          .data$siteid, .data$sitename, .data$collectionunitid,
+          .data$datasetid, .data$entityid, .data$entityname,
+          .data$speleothemtype, .data$geology, .data$rockage,
+          .data$monitoring, .data$speleothemdriptype, .data$dripheight,
+          .data$dripheightunits, .data$covertype,
+          .data$entitycoverthickness, .data$entrancedistance,
+          .data$entrancedistanceunits, .data$landusecovertype,
+          .data$landusecoverpercent, .data$vegetationcovertype,
+          .data$vegetationcoverpercent
+        ) %>%
         distinct() %>%
         arrange(.data$entityid, .data$siteid, .data$collectionunitid)
     }
@@ -41,13 +46,14 @@ setMethod(f = "speleothems",
       warnsite <- sprintf(msg)
       warning(warnsite)
     }
-    return(output)
+    output
   }
 )
 
 #' @rdname speleothems
 #' @export
-setMethod(f = "speleothems",
+setMethod(
+  f = "speleothems",
   signature = "site",
   definition = function(x) {
     allids <- getids(x) %>%
@@ -58,37 +64,41 @@ setMethod(f = "speleothems",
     dsids <- dsids$datasetid
     if (length(dsids) == 0) {
       warning(sprintf("No speleothem datasets for siteid %s", x@siteid))
-      return(data.frame())
+      data.frame()
     } else {
       allids <- allids %>%
         filter(.data$datasetid %in% dsids)
       siteinfo <- as.data.frame(x) %>%
         distinct() %>%
         left_join(allids, by = "siteid")
-      sampset <- map(x@collunits@collunits,
-                    function(y) speleothems(y)) %>%
+      sampset <- map(
+        x@collunits@collunits,
+        function(y) speleothems(y)
+      ) %>%
         bind_rows() %>%
         left_join(siteinfo, by = "datasetid") %>%
         rename(sitenotes = .data$notes)
-      return(sampset)
+      sampset
     }
   }
 )
 
 #' @rdname speleothems
 #' @export
-setMethod(f = "speleothems",
+setMethod(
+  f = "speleothems",
   signature = "collunits",
   definition = function(x) {
     df <- map(x@collunits, function(x) speleothems(x)) %>%
       bind_rows()
-    return(df)
+    df
   }
 )
 
 #' @rdname speleothems
 #' @export
-setMethod(f = "speleothems",
+setMethod(
+  f = "speleothems",
   signature = "collunit",
   definition = function(x) {
     dsids <- as.data.frame(datasets(x)) %>%
@@ -98,43 +108,45 @@ setMethod(f = "speleothems",
     if (length(x@speleothems@speleothems) == 0) {
       warning(sprintf("No assigned speleothems. Is it a speleothems dataset?
               Did you run `get_speleothems()`?"))
-      return(data.frame())
+      data.frame()
     } else {
       speleothemset <-
-        map(x@speleothems@speleothems,
-            function(y) {
-              y <- as.data.frame(y)
-              if (!is.null(y) && nrow(y) > 0) {
-                df <- data.frame(
-                  collectionunitid = y$collectionunitid,
-                  entityid = y$entityid,
-                  entityname = y$entityname,
-                  speleothemtype = y$speleothemtype,
-                  speleothemdriptype = y$speleothemdriptype,
-                  dripheight = y$dripheight,
-                  dripheightunits = y$dripheightunits,
-                  monitoring = y$monitoring,
-                  geology = y$geology,
-                  rockage = y$rockage,
-                  covertype = y$entitycovertype,
-                  entitycoverthickness = y$entitycoverthickness,
-                  entrancedistance = y$entrancedistance,
-                  entrancedistanceunits = y$entrancedistanceunits,
-                  landusecovertype = y$landusecovertype,
-                  landusecoverpercent = y$landusecoverpercent,
-                  vegetationcovertype = y$vegetationcovertype,
-                  vegetationcoverpercent = y$vegetationcoverpercent
-                ) %>%
-                  left_join(dsids, by = "collectionunitid")
-              } else {
-                df <- data.frame()
-              }
-              return(df)
-            }) %>%
+        map(
+          x@speleothems@speleothems,
+          function(y) {
+            y <- as.data.frame(y)
+            if (!is.null(y) && nrow(y) > 0) {
+              df <- data.frame(
+                collectionunitid = y$collectionunitid,
+                entityid = y$entityid,
+                entityname = y$entityname,
+                speleothemtype = y$speleothemtype,
+                speleothemdriptype = y$speleothemdriptype,
+                dripheight = y$dripheight,
+                dripheightunits = y$dripheightunits,
+                monitoring = y$monitoring,
+                geology = y$geology,
+                rockage = y$rockage,
+                covertype = y$entitycovertype,
+                entitycoverthickness = y$entitycoverthickness,
+                entrancedistance = y$entrancedistance,
+                entrancedistanceunits = y$entrancedistanceunits,
+                landusecovertype = y$landusecovertype,
+                landusecoverpercent = y$landusecoverpercent,
+                vegetationcovertype = y$vegetationcovertype,
+                vegetationcoverpercent = y$vegetationcoverpercent
+              ) %>%
+                left_join(dsids, by = "collectionunitid")
+            } else {
+              df <- data.frame()
+            }
+            df
+          }
+        ) %>%
         bind_rows()
-      speleothemset  <- speleothemset %>%
+      speleothemset <- speleothemset %>%
         distinct()
-      return(speleothemset)
+      speleothemset
     }
   }
 )

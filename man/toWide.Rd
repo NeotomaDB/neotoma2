@@ -41,13 +41,16 @@ samples grouped by variablename and depth/age.
 }
 \examples{
 \dontrun{
-fc_sites <- neotoma2::get_datasets(limit=5, datasettype = "vertebrate fauna")
+fc_sites <- neotoma2::get_datasets(limit = 5, datasettype = "vertebrate
+fauna")
 fc_ds <- fc_sites \%>\%
-   neotoma2::get_downloads()
+  neotoma2::get_downloads()
 fc_dl1 <- fc_dl[[1]]
 fc_smp <- samples(fc_dl1)
-toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'),
-       elementtypes='bone/tooth', unit='present/absent')
+toWide(fc_smp,
+  ecologicalgroups = c("AVES", "RODE"),
+  elementtypes = "bone/tooth", unit = "present/absent"
+)
 }
 }
 \author{

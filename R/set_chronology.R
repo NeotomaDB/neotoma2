@@ -3,9 +3,9 @@
 #' @author Simon Goring \email{goring@wisc.edu}
 #' @description Create a new chronology for a record.
 #' Within Neotoma all chronologies have unique numeric
-#' identifiers. Within R, because of the need to use the 
+#' identifiers. Within R, because of the need to use the
 #' identifiers across objects, and because we want to avoid
-#'  conflicts between naming systems, a universally unique 
+#'  conflicts between naming systems, a universally unique
 #' identifier (UUID) is created for the object ID.
 #' @importFrom methods is new slot<-
 #' @importFrom digest digest
@@ -33,7 +33,7 @@
 #' @param chroncontrols A data.frame containing the chronological controls
 #' for the age model.
 #' @description Function to create new chronology objects for
-#' personal analysis. 
+#' personal analysis.
 #' The new object will not be uploaded to the database.
 #' @returns `chronology` object
 #' @md

@@ -16,28 +16,37 @@ build_speleothem <- function(...) {
     return(NULL)
   }
   speleothem <- set_speleothem(
-                  entityid = use_na(args$entityid, "int"),
-                  entityname = use_na(args$entityname, "char"),
-                  siteid = use_na(args$siteid, "int"),
-                  collectionunitid = use_na(args$collectionunitid, "int"),
-                  dripheight = use_na(args$dripheight, "int"),
-                  dripheightunits = use_na(args$dripheightunits, "char"),
-                  monitoring = use_na(args$monitoring, "logic"),
-                  geology = use_na(args$geology, "char"),
-                  rockage = use_na(args$rockage, "char"),
-                  speleothemtype = use_na(args$speleothemtype, "char"),
-                  entitycovertype = use_na(args$entitycovertype, "char"),
-                  entrancedistance = use_na(args$entrancedistance, "int"),
-                  landusecovertype = use_na(args$landusecovertype, "char"),
-                  speleothemdriptype = use_na(args$speleothemdriptype, "char"),
-                  landusecoverpercent = use_na(args$landusecoverpercent, "int"),
-                  vegetationcovertype = use_na(args$vegetationcovertype,
-                                               "char"),
-                  entitycoverthickness = use_na(args$entitycoverthickness,
-                                                "int"),
-                  entrancedistanceunits = use_na(args$entrancedistanceunits,
-                                                 "char"),
-                  vegetationcoverpercent = use_na(args$vegetationcoverpercent,
-                                                  "int"))
-  return(speleothem)
+    entityid = use_na(args$entityid, "int"),
+    entityname = use_na(args$entityname, "char"),
+    siteid = use_na(args$siteid, "int"),
+    collectionunitid = use_na(args$collectionunitid, "int"),
+    dripheight = use_na(args$dripheight, "int"),
+    dripheightunits = use_na(args$dripheightunits, "char"),
+    monitoring = use_na(args$monitoring, "logic"),
+    geology = use_na(args$geology, "char"),
+    rockage = use_na(args$rockage, "char"),
+    speleothemtype = use_na(args$speleothemtype, "char"),
+    entitycovertype = use_na(args$entitycovertype, "char"),
+    entrancedistance = use_na(args$entrancedistance, "int"),
+    landusecovertype = use_na(args$landusecovertype, "char"),
+    speleothemdriptype = use_na(args$speleothemdriptype, "char"),
+    landusecoverpercent = use_na(args$landusecoverpercent, "int"),
+    vegetationcovertype = use_na(
+      args$vegetationcovertype,
+      "char"
+    ),
+    entitycoverthickness = use_na(
+      args$entitycoverthickness,
+      "int"
+    ),
+    entrancedistanceunits = use_na(
+      args$entrancedistanceunits,
+      "char"
+    ),
+    vegetationcoverpercent = use_na(
+      args$vegetationcoverpercent,
+      "int"
+    )
+  )
+  speleothem
 }

@@ -5,7 +5,7 @@ library("neotoma2")
 context("Run Neotoma `test_speleothems` only when not on CRAN")
 test_that("speleothems method extracts data correctly", {
   skip_on_cran()
-  spel_data<- get_datasets(datasettype='speleothem', limit=2)
+  spel_data <- get_datasets(datasettype = "speleothem", limit = 2)
   spel_data <- get_speleothems(spel_data)
   if (!is.null(spel_data) && length(spel_data) > 0) {
     spel_extracted <- speleothems(spel_data)
@@ -16,7 +16,7 @@ test_that("speleothems method extracts data correctly", {
 
 test_that("no duplicate rows in speleothems data frame", {
   skip_on_cran()
-  spel_data<- get_datasets(datasettype='speleothem', limit=10)
+  spel_data <- get_datasets(datasettype = "speleothem", limit = 10)
   spel_data <- speleothems(get_speleothems(spel_data))
   testthat::expect_equal(nrow(spel_data), nrow(unique(spel_data)))
 })
@@ -24,7 +24,7 @@ test_that("no duplicate rows in speleothems data frame", {
 # Tests for speleothemdetails() function
 test_that("speleothemdetails method works on sites object", {
   skip_on_cran()
-  spel_data<- get_datasets(datasettype='speleothem', limit=10)
+  spel_data <- get_datasets(datasettype = "speleothem", limit = 10)
   spel_sites <- get_speleothems(spel_data)
   if (!is.null(spel_sites) && length(spel_sites) > 0) {
     testthat::expect_warning(
@@ -92,14 +92,15 @@ test_that("speleothemdetails method works on collunits object", {
       testthat::expect_true(length(unique(result$datasetid)) == 1)
     }
   }
-})  
+})
 
 test_that("speleothemdetails joins speleothems and samples for collunit", {
   skip_on_cran()
-  spel_site <- get_datasets(datasettype="speleothem", limit=1) %>%
+  spel_site <- get_datasets(datasettype = "speleothem", limit = 1) %>%
     get_speleothems()
-  if (!is.null(spel_site) && length(spel_site) > 0 && 
-      length(spel_site[[1]]@collunits@collunits) > 0) {
+  has_collunits <- !is.null(spel_site) && length(spel_site) > 0 &&
+    length(spel_site[[1]]@collunits@collunits) > 0
+  if (has_collunits) {
     collunit_obj <- spel_site[[1]]@collunits@collunits[[1]]
     testthat::expect_warning(
       result <- speleothemdetails(collunit_obj)

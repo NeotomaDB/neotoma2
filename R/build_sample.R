@@ -53,19 +53,20 @@ build_sample <- function(x) {
   df <- records_to_df(x$datum)
   df_age <- records_to_df(x$ages, tibble = FALSE)
   analyst_list_helper <- x$sampleanalyst %>%
-                            map(function(y) {
-                              y$contactname
-                            })
+    map(function(y) {
+      y$contactname
+    })
   new_sample <- new("sample",
-                    ages = df_age,
-                    igsn = use_na(x$igsn, "char"),
-                    datum = df,
-                    depth = use_na(x$depth, "int"),
-                    sampleid = use_na(x$sampleid, "int"),
-                    thickness = use_na(x$thickness, "int"),
-                    samplename = use_na(x$samplename, "char"),
-                    sampleanalyst = analyst_list_helper,
-                    analysisunitid = use_na(x$analysisunitid, "int"),
-                    analysisunitname = use_na(x$analysisunitname, "char"))
-  return(new_sample)
+    ages = df_age,
+    igsn = use_na(x$igsn, "char"),
+    datum = df,
+    depth = use_na(x$depth, "int"),
+    sampleid = use_na(x$sampleid, "int"),
+    thickness = use_na(x$thickness, "int"),
+    samplename = use_na(x$samplename, "char"),
+    sampleanalyst = analyst_list_helper,
+    analysisunitid = use_na(x$analysisunitid, "int"),
+    analysisunitname = use_na(x$analysisunitname, "char")
+  )
+  new_sample
 }

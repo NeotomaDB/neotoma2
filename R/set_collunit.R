@@ -29,8 +29,8 @@
 #' @export
 #' @md
 #' @examples {
-#' # Create a collunit
-#' my_collunit <- set_collunit(notes = "my lake")
+#'   # Create a collunit
+#'   my_collunit <- set_collunit(notes = "my lake")
 #' }
 set_collunit <- function(x = NA,
                          collectionunitid = NA_integer_,

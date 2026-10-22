@@ -44,7 +44,7 @@ set_speleothem <- function(x = NA,
                            vegetationcovertype = NA_character_,
                            entitycoverthickness = NA_integer_,
                            entrancedistanceunits = NA_character_,
-                           vegetationcoverpercent = NA_integer_){
+                           vegetationcoverpercent = NA_integer_) {
   function_call <- match.call()
   if (suppressWarnings(is.na(x))) {
     x <- new("speleothem")

@@ -4,7 +4,7 @@
 \alias{get_table}
 \title{Get table record from Neotoma}
 \usage{
-get_table(x, limit = 25, offset = 0)
+get_table(x, limit = 25, offset = 0, refresh = FALSE)
 }
 \arguments{
 \item{x}{Table name (consult \url{https://open.neotomadb.org/dbschema/}
@@ -13,6 +13,12 @@ for a complete list of table names.}
 \item{limit}{Default 25 records}
 
 \item{offset}{Default 0.}
+
+\item{refresh}{Default \code{FALSE}. Tables in the Neotoma database change rarely,
+so the answer to a query is kept for the rest of the R session and asking
+for the same \code{x}, \code{limit} and \code{offset} again does not call the API again.
+Use \code{refresh = TRUE} to ask the API again. The session cache can be turned
+off with \code{options(neotoma2.cache = FALSE)}.}
 }
 \value{
 selected \code{table} values from the Database.
@@ -24,6 +30,6 @@ Call Neotoma and return a table
 \examples{
 \dontrun{
 # Returns only the first 25 specimen records.
-someSpec <- get_table('specimens')
+someSpec <- get_table("specimens")
 }
 }

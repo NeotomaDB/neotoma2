@@ -18,9 +18,11 @@ test_that("Manual loading fails if interactive is false.", {
 
 test_that("Building a specimen works.", {
   skip_on_cran()
-  dataset <- data.frame(datasetid = 12,
+  dataset <- data.frame(
+    datasetid = 12,
     repo = c("Manhattan", "Banana"),
-    taxonid = seq(1, 12))
+    taxonid = seq(1, 12)
+  )
   # Build error when we pass multiple rows.
   new_spec <- testthat::expect_error(build_specimen(dataset))
   new_spec <- testthat::expect_is(build_specimen(dataset[1, ]), "specimen")

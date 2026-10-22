@@ -38,7 +38,7 @@ vector of dataset IDs.
 \examples{
 \dontrun{
 ## Find speleothems by numeric datasetid:
-speleo <- get_speleothems(c(2,5))
+speleo <- get_speleothems(c(2, 5))
 }
 }
 \author{

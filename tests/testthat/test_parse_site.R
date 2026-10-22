@@ -5,7 +5,8 @@ context("Test `parse_site()` builds the right number of objects.")
 
 test_that("parse_site keeps one site, one collection unit and both datasets", {
   result <- jsonlite::fromJSON(test_path("fixtures", "data_sites24.json"),
-                               simplifyVector = FALSE)
+    simplifyVector = FALSE
+  )
   sites <- neotoma2:::parse_site(result)
   ids <- getids(sites)
   # The API returns two collection units that share id 24 but each carries a
@@ -18,7 +19,8 @@ test_that("parse_site keeps one site, one collection unit and both datasets", {
 
 test_that("parse_site of a datasets response keeps the site and dataset", {
   result <- jsonlite::fromJSON(test_path("fixtures", "data_datasets24.json"),
-                               simplifyVector = FALSE)
+    simplifyVector = FALSE
+  )
   sites <- neotoma2:::parse_site(result)
   ids <- getids(sites)
   testthat::expect_length(sites, 1)
@@ -27,8 +29,8 @@ test_that("parse_site of a datasets response keeps the site and dataset", {
 })
 
 test_that("parse_site of a downloads response folds the repeated unit", {
-  result <- jsonlite::fromJSON(test_path("fixtures", "data_downloads24_dup.json"),
-                               simplifyVector = FALSE)
+  fixture <- test_path("fixtures", "data_downloads24_dup.json")
+  result <- jsonlite::fromJSON(fixture, simplifyVector = FALSE)
   # `downloads` returns one element per dataset, so collection unit 24 arrives
   # twice, once for dataset 24 and once for dataset 7870. We keep one unit.
   testthat::expect_length(result$data, 2)
@@ -42,11 +44,14 @@ test_that("parse_site of a downloads response folds the repeated unit", {
 test_that("parse_site reads the same site from every endpoint format", {
   # The three endpoints describe site 24 in three different shapes, and spell
   # several fields differently. They should still parse to the same site.
-  files <- c("data_sites24.json", "data_datasets24.json",
-             "data_downloads24_dup.json")
+  files <- c(
+    "data_sites24.json", "data_datasets24.json",
+    "data_downloads24_dup.json"
+  )
   sites <- lapply(files, function(f) {
     neotoma2:::parse_site(jsonlite::fromJSON(test_path("fixtures", f),
-                                             simplifyVector = FALSE))
+      simplifyVector = FALSE
+    ))
   })
   for (site in sites) {
     testthat::expect_length(site, 1)
@@ -65,7 +70,8 @@ test_that("parse_site keeps the dataset fields the API reports", {
   # `datasetnotes`, `agerange$units` and `datasetpi` each used to be lost
   # between `parse_site()` and `build_dataset()`.
   result <- jsonlite::fromJSON(test_path("fixtures", "data_datasets24.json"),
-                               simplifyVector = FALSE)
+    simplifyVector = FALSE
+  )
   sites <- neotoma2:::parse_site(result)
   ds <- sites[[1]]@collunits@collunits[[1]]@datasets@datasets[[1]]
   testthat::expect_equal(ds@age_units, "Calendar years BP")
@@ -76,11 +82,13 @@ test_that("parse_site keeps the dataset fields the API reports", {
 })
 
 test_that("parse_site reads the geopolitical units from a download", {
-  result <- jsonlite::fromJSON(test_path("fixtures", "data_downloads24_dup.json"),
-                               simplifyVector = FALSE)
+  fixture <- test_path("fixtures", "data_downloads24_dup.json")
+  result <- jsonlite::fromJSON(fixture, simplifyVector = FALSE)
   sites <- neotoma2:::parse_site(result)
-  testthat::expect_setequal(unlist(sites[[1]]@geopolitical),
-                            c("Freedonia", "Northern Province"))
+  testthat::expect_setequal(
+    unlist(sites[[1]]@geopolitical),
+    c("Freedonia", "Northern Province")
+  )
 })
 
 test_that("parse_site reads chronology metadata from a download", {
@@ -99,8 +107,12 @@ test_that("a site returns the same counts from sites and datasets", {
   # end up with the same site, the same units and the same datasets.
   from_sites <- getids(get_sites(666))
   from_datasets <- getids(get_datasets(get_sites(666)))
-  testthat::expect_setequal(unique(from_sites$collunitid),
-                            unique(from_datasets$collunitid))
-  testthat::expect_setequal(unique(from_sites$datasetid),
-                            unique(from_datasets$datasetid))
+  testthat::expect_setequal(
+    unique(from_sites$collunitid),
+    unique(from_datasets$collunitid)
+  )
+  testthat::expect_setequal(
+    unique(from_sites$datasetid),
+    unique(from_datasets$datasetid)
+  )
 })

@@ -1,8 +1,8 @@
 #' @title Set contact information for a new record.
 #' @description Create a new contact for a record.
-#' Within Neotoma all chronologies have unique numeric identifiers. 
+#' Within Neotoma all chronologies have unique numeric identifiers.
 #' Within R, because of the need to use the indentifiers across objects,
-#' and because we want to avoid conflicts between naming systems, a 
+#' and because we want to avoid conflicts between naming systems, a
 #' universally unique identifier (UUID) is created for the object ID.This is not
 #' to be updated to the database.
 #' @importFrom methods is new slot<-
@@ -16,7 +16,8 @@
 #' @param givennames Given or forenames of a person (e.g.
 #' \code{George Gaylord}). Initials with spaces are used if full
 #' given names are not known (e.g. \code{G. G}).
-#' @param contactname Full name of a person (e.g. \code{George Gaylord Simpson}).
+#' @param contactname Full name of a person (e.g. \code{George Gaylord
+#' Simpson}).
 #' @param suffix Suffix of a person’s name (e.g. \code{Jr.}, \code{III}).
 #' @param ORCID A unique ORCID (see \url{https://orcid.org}).
 #' @param title A person’s title (e.g. \code{Dr.}, \code{Prof.},
