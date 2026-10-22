@@ -53,6 +53,11 @@ a list of \code{site} objects, plus returns all the additional metadata for
 the datasets at that site.
 The \code{get_datasets()} command wraps the Neotoma API
 (\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{datasets}.
+Some queries are slow for the API however few records they return: a spatial
+query (\code{loc}) costs tens of seconds even when it matches no datasets, and a
+broad \code{taxa} filter (many names, or a wildcard) can take a minute or more.
+Add other filters to narrow a query, test it with a small \code{limit} first, and
+avoid running it in a loop.
 The call itself uses a SQL query which accepts any one of the following
 parameters:
 \itemize{

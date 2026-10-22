@@ -69,6 +69,14 @@ as a vector of dataset IDs.
 \item \code{all_data} The API only downloads the first 25 records of the query.
 For the complete records, use \code{all_data=TRUE}
 }
+
+Download responses are large, and every request costs the Neotoma API real
+work. Pass all the dataset IDs you need to \strong{one} call rather than calling
+\code{get_downloads()} in a loop: a long vector is split into batches of 25
+datasets and requested one after another. The answer for a set of IDs is
+kept for the rest of the R session, so asking for the same IDs again does
+not call the API again. Set \code{options(neotoma2.cache = FALSE)} to turn this
+off.
 }
 \examples{
 \dontrun{

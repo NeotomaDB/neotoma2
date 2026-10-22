@@ -50,6 +50,10 @@ function searches for each site within Neotoma that matches the query
 parameters, and returns them as a \code{sites} object, a list of \code{site}
 objects. The \code{get_sites()} command wraps the Neotoma API
 (\href{https://api.neotomadb.org}{api.neotomadb.org}) call for \code{sites}.
+Some queries are slow for the API however few records they return: a spatial
+query (\code{loc}) costs tens of seconds even when it matches no sites, and so do
+wildcard (\verb{\%}) names and broad \code{taxa} filters. Add other filters to narrow a
+query, test it with a small \code{limit} first, and avoid running it in a loop.
 The call itself uses a SQL query which accepts any one of the following
 parameters:
 \itemize{
