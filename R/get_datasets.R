@@ -29,6 +29,11 @@
 #' the datasets at that site.
 #' The `get_datasets()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `datasets`.
+#' Some queries are slow for the API however few records they return: a spatial
+#' query (`loc`) costs tens of seconds even when it matches no datasets, and a
+#' broad `taxa` filter (many names, or a wildcard) can take a minute or more.
+#' Add other filters to narrow a query, test it with a small `limit` first, and
+#' avoid running it in a loop.
 #' The call itself uses a SQL query which accepts any one of the following
 #' parameters:
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
@@ -158,22 +163,14 @@ get_datasets.default <- function(x, ...) {
 #' @exportS3Method get_datasets sites
 get_datasets.sites <- function(x, ...) {
   ids <- getids(x)
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
   ids <- ids %>%
     select(.data$datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
-  if ("all_data" %in% cl) {
-    all_data <- cl$all_data
-  } else {
-    all_data <- TRUE
-  }
+  # `all_data` defaults to TRUE here, and a value supplied by the caller wins.
   dots <- list(...)
-  if ("all_data" %in% names(dots)) {
-    dots$all_data <- NULL
-  }
+  all_data <- if ("all_data" %in% names(dots)) dots$all_data else TRUE
   output <- get_datasets(x = ids, all_data = all_data)
   return(output)
 }
@@ -182,8 +179,6 @@ get_datasets.sites <- function(x, ...) {
 #' @exportS3Method get_datasets site
 get_datasets.site <- function(x, ...) {
   # List of datasets ids
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
   ids1 <- getids(x)
   ids <- ids1 %>%
     filter(!is.na(suppressWarnings(as.numeric(.data$siteid))),
@@ -201,15 +196,8 @@ get_datasets.site <- function(x, ...) {
   }
   dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
-  if ("all_data" %in% cl) {
-    all_data <- cl$all_data
-  } else {
-    all_data <- TRUE
-  }
   dots <- list(...)
-  if ("all_data" %in% names(dots)) {
-    dots$all_data <- NULL
-  }
+  all_data <- if ("all_data" %in% names(dots)) dots$all_data else TRUE
   output <- get_datasets(dataset_list, all_data = all_data)
   return(output)
 }

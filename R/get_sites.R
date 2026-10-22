@@ -18,6 +18,10 @@
 #' parameters, and returns them as a `sites` object, a list of `site`
 #' objects. The `get_sites()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `sites`.
+#' Some queries are slow for the API however few records they return: a spatial
+#' query (`loc`) costs tens of seconds even when it matches no sites, and so do
+#' wildcard (`%`) names and broad `taxa` filters. Add other filters to narrow a
+#' query, test it with a small `limit` first, and avoid running it in a loop.
 #' The call itself uses a SQL query which accepts any one of the following
 #' parameters:
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
