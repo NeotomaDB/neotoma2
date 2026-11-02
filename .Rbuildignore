@@ -28,6 +28,8 @@ lintoutput\.txt$
 ^doc$
 ^Meta$
 ^.*\.tar\.gz$
+^.*\.Rcheck$
+^\.DS_Store$
 
 ^codemeta\.json$
 ^CITATION\.cff$
