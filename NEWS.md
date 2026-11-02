@@ -16,6 +16,11 @@
     default there.
   * `datasettype` takes several values (`datasettype = c("pollen", "diatom")`)
     in `get_sites()` and `get_datasets()`.
+* New fields for records from `get_downloads()`: `collunit@collectors` (a list of
+  names) and, on each sample, `analysisunitnotes`, `analysisdate` and `samplenotes`.
+  `set_site()` now records `area`, and a collection unit's `gpslocation` is a
+  one-row `sf` point, so `sf::st_coordinates()` works on it. The fields are empty
+  until the Neotoma database functions that supply them are updated.
 * Gentler on the Neotoma API:
   * An HTTP 500 is no longer retried (it cannot succeed on a repeat), and a busy
     gateway (502, 503, 504) is retried once, after a jittered wait of 30 to 60
