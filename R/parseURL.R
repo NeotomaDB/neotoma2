@@ -665,6 +665,15 @@ neotoma_fetch <- function(baseurl, x, query) {
   neotoma_get(baseurl, x, query)
 }
 
+#' @title neotoma_page_size
+#' @description An internal helper: the number of records requested per page,
+#' 2000 unless `NEOTOMA_PAGE` asks for fewer.
+#' @returns A single positive integer.
+#' @noRd
+neotoma_page_size <- function() {
+  floor(neotoma_env_num("NEOTOMA_PAGE", 2000))
+}
+
 #' @title neotoma_paginate
 #' @author Socorro Dominguez \email{dominguezvid@wisc.edu}
 #' @description An internal helper that walks every page of a query, requesting
@@ -676,20 +685,21 @@ neotoma_fetch <- function(baseurl, x, query) {
 #' whatever it returns, that confirming request doubles the cost of any query
 #' whose results fit in one page.
 #'
-#' `page` is deliberately large and deliberately fixed. The API's `limit` and
-#' `offset` do not compose: the same query walked in smaller pages returns
-#' *fewer* records overall (`sitename=Lake%` yields 1315 records at
-#' `limit = 2000`, but only 605 when walked 500 at a time, because the second
-#' page comes back short). Until that is fixed server-side, asking for the
-#' largest page we can is what keeps results complete, so this is not a knob to
-#' tune for speed.
+#' The API's `limit` and `offset` now compose: the same query returns the same
+#' records whatever the page size (`sitename=Lake%` gives the same records
+#' walked 500 or 2000 at a time). Older API versions did not -- a query walked
+#' in small pages returned *fewer* records overall, because the second page
+#' came back short -- so the default stays at the largest page (2000), which
+#' also costs the fewest requests. `NEOTOMA_PAGE` lowers it, for example to
+#' keep each response small.
 #' @param baseurl The API base URL.
 #' @param x The endpoint path.
 #' @param query A named list of query parameters.
 #' @param page Number of records to request per page.
 #' @returns `list` with all pages of data combined.
 #' @noRd
-neotoma_paginate <- function(baseurl, x, query, page = 2000) {
+neotoma_paginate <- function(baseurl, x, query,
+                             page = neotoma_page_size()) {
   # Convert the geometry once, not once per page.
   if ("loc" %in% names(query)) {
     query$loc <- neotoma_location(query$loc)

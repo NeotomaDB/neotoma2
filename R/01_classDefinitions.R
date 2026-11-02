@@ -283,7 +283,10 @@ setClass(
     samplename = "character",
     sampleanalyst = "ANY",
     analysisunitid = "id",
-    analysisunitname = "character"
+    analysisunitname = "character",
+    analysisunitnotes = "character",
+    analysisdate = "Date",
+    samplenotes = "character"
   ),
   prototype(
     ages = list(),
@@ -295,7 +298,10 @@ setClass(
     samplename = NA_character_,
     sampleanalyst = list(),
     analysisunitid = NA_integer_,
-    analysisunitname = NA_character_
+    analysisunitname = NA_character_,
+    analysisunitnotes = NA_character_,
+    analysisdate = as.Date(NA_character_),
+    samplenotes = NA_character_
   )
 )
 
@@ -540,6 +546,7 @@ setClass(
     collectiondevice = "character",
     collectionunitname = "character",
     depositionalenvironment = "character",
+    collectors = "list",
     datasets = "datasetsOrNULL",
     chronologies = "chronologiesOrNULL",
     defaultchronology = "integer",
@@ -557,6 +564,7 @@ setClass(
     collectiondevice = NA_character_,
     collectionunitname = NA_character_,
     depositionalenvironment = NA_character_,
+    collectors = list(),
     datasets = NULL,
     chronologies = NULL,
     defaultchronology = NA_integer_,

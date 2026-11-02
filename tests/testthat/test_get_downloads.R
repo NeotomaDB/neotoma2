@@ -148,6 +148,35 @@ test_that("get_downloads keeps the caller's arguments on every batch", {
   expect_true(all(vapply(log$args, function(a) isTRUE(a$all_data), logical(1))))
 })
 
+test_that("more than 200 ids return all the data, not the API's 400", {
+  # The API answers 400 to more than 200 dataset ids unless the request has a
+  # `limit` (all_data adds one). The mock enforces that rule.
+  neotoma2:::neotoma_cache_clear()
+  on.exit(neotoma2:::neotoma_cache_clear())
+  log <- new.env()
+  local_mocked_bindings(
+    parseURL = function(x, ...) {
+      ids <- as.numeric(strsplit(sub(".*datasetid=", "", x), ",")[[1]])
+      args <- list(...)
+      paged <- any(c("limit", "all_data") %in% names(args))
+      if (length(ids) > 200 && !paged) stop("HTTP 400: at most 200 ids")
+      log$n <- c(log$n, length(ids))
+      list(status = "success", data = lapply(ids, function(i) {
+        list(datasetid = i)
+      }))
+    },
+    parse_site = function(x) x,
+    .package = "neotoma2"
+  )
+  out <- get_downloads(1:400)
+  expect_equal(vapply(out$data, function(r) r$datasetid, numeric(1)), 1:400)
+  expect_true(all(log$n <= 25))
+  out <- get_downloads(1:400, all_data = TRUE)
+  expect_length(out$data, 400)
+  out <- get_downloads(1:400, limit = 1000)
+  expect_length(out$data, 400)
+})
+
 test_that("a caller's limit or offset is sent as one request", {
   neotoma2:::neotoma_cache_clear()
   on.exit(neotoma2:::neotoma_cache_clear())

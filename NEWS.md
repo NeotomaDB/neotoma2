@@ -4,6 +4,18 @@
 
 * The default request timeout is 125 seconds, just above the 120 seconds at which the API gateway gives up, so the client and the gateway agree and a slow query  is reported once instead of being abandoned and repeated. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
 * `limit` and `offset` now describe the whole answer when a long list of ids is split into several requests. `get_sites(1:1000, limit = 10)` returned 100 sites, because every batch of ids was given the `limit`; it returns 10, from one request.
+* Updated API servers (api-dev now, production after its next deploy) change what queries return:
+  * Site and dataset totals are lower than before. Sites without datasets and
+    deleted datasets are no longer returned, so counts saved from earlier
+    sessions, or fixed in scripts and tests, need re-baselining.
+  * A list of IDs returns every ID asked for, not the first 25, and `limit` and
+    `offset` give the same records whatever the page size. `all_data = TRUE`
+    still requests 2000 records per page; set the environment variable
+    `NEOTOMA_PAGE` (for example `Sys.setenv(NEOTOMA_PAGE = 500)`) for smaller
+    pages. Older servers lose records when walked in small pages, so keep the
+    default there.
+  * `datasettype` takes several values (`datasettype = c("pollen", "diatom")`)
+    in `get_sites()` and `get_datasets()`.
 * Gentler on the Neotoma API:
   * An HTTP 500 is no longer retried (it cannot succeed on a repeat), and a busy
     gateway (502, 503, 504) is retried once, after a jittered wait of 30 to 60

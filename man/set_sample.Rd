@@ -15,7 +15,10 @@ set_sample(
   samplename = NA_character_,
   sampleanalyst = list(),
   analysisunitid = NA_integer_,
-  analysisunitname = NA_character_
+  analysisunitname = NA_character_,
+  analysisunitnotes = NA_character_,
+  analysisdate = as.Date(NA_character_),
+  samplenotes = NA_character_
 )
 }
 \arguments{
@@ -40,6 +43,12 @@ set_sample(
 \item{analysisunitid}{Which analysis unit it is}
 
 \item{analysisunitname}{Analysis Unit's name}
+
+\item{analysisunitnotes}{Notes about the analysis unit the sample belongs to}
+
+\item{analysisdate}{Date (class \code{Date}) on which the sample was analyzed}
+
+\item{samplenotes}{Notes about the sample}
 }
 \value{
 \code{sample} object

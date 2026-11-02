@@ -142,10 +142,34 @@ test_that("an empty result returns no data and makes one request", {
   expect_equal(log$offsets, 0)
 })
 
-test_that("pages are requested at the largest size the API supports", {
-  # The API's limit and offset do not compose: walking a query in smaller pages
-  # returns fewer records overall, because the second page comes back short.
-  # Shrinking the page size therefore loses data, and is not a speed knob.
+test_that("NEOTOMA_PAGE sets the page size, 2000 by default", {
+  old <- Sys.getenv("NEOTOMA_PAGE", NA)
+  on.exit(if (is.na(old)) {
+    Sys.unsetenv("NEOTOMA_PAGE")
+  } else {
+    Sys.setenv(NEOTOMA_PAGE = old)
+  })
+  Sys.setenv(NEOTOMA_PAGE = "500")
+  log <- new.env()
+  local_mocked_bindings(
+    neotoma_fetch = fake_api(10, log),
+    .package = "neotoma2"
+  )
+  neotoma2:::neotoma_paginate(
+    "https://api.neotomadb.org/v2.0/", "data/sites",
+    list(loc = cz_geojson)
+  )
+  expect_equal(log$limits, 500)
+})
+
+test_that("pages are requested at the largest size by default", {
+  old <- Sys.getenv("NEOTOMA_PAGE", NA)
+  on.exit(if (is.na(old)) {
+    Sys.unsetenv("NEOTOMA_PAGE")
+  } else {
+    Sys.setenv(NEOTOMA_PAGE = old)
+  })
+  Sys.unsetenv("NEOTOMA_PAGE")
   log <- new.env()
   local_mocked_bindings(
     neotoma_fetch = fake_api(10, log),

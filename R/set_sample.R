@@ -14,6 +14,9 @@
 #' @param sampleanalyst Analyst's contact name
 #' @param analysisunitid Which analysis unit it is
 #' @param analysisunitname Analysis Unit's name
+#' @param analysisunitnotes Notes about the analysis unit the sample belongs to
+#' @param analysisdate Date (class `Date`) on which the sample was analyzed
+#' @param samplenotes Notes about the sample
 #' @returns `sample` object
 #' @description Function to create new samples objects for analysis.
 #' The new object will not be uploaded to the database.
@@ -33,7 +36,10 @@ set_sample <- function(x = NA,
                        samplename = NA_character_,
                        sampleanalyst = list(),
                        analysisunitid = NA_integer_,
-                       analysisunitname = NA_character_) {
+                       analysisunitname = NA_character_,
+                       analysisunitnotes = NA_character_,
+                       analysisdate = as.Date(NA_character_),
+                       samplenotes = NA_character_) {
   function_call <- match.call()
   if (suppressWarnings(is.na(x))) {
     x <- new("sample")
@@ -52,6 +58,9 @@ set_sample <- function(x = NA,
     x@sampleanalyst <- sampleanalyst
     x@analysisunitid <- analysisunitid
     x@analysisunitname <- analysisunitname
+    x@analysisunitnotes <- analysisunitnotes
+    x@analysisdate <- analysisdate
+    x@samplenotes <- samplenotes
   } else {
     if (is(x, "sample")) {
       if (length(function_call) > 2) {

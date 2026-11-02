@@ -20,7 +20,8 @@ set_collunit(
   datasets = NULL,
   chronologies = NULL,
   defaultchronology = NA_integer_,
-  speleothems = NULL
+  speleothems = NULL,
+  collectors = list()
 )
 }
 \arguments{
@@ -56,6 +57,9 @@ set_collunit(
 be used with this collection unit}
 
 \item{speleothems}{speleothems associated with the collection unit}
+
+\item{collectors}{list of the names of the contacts who collected the
+collection unit, in collection order}
 }
 \value{
 \code{collunit} object

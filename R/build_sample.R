@@ -66,7 +66,10 @@ build_sample <- function(x) {
     samplename = use_na(x$samplename, "char"),
     sampleanalyst = analyst_list_helper,
     analysisunitid = use_na(x$analysisunitid, "int"),
-    analysisunitname = use_na(x$analysisunitname, "char")
+    analysisunitname = use_na(x$analysisunitname, "char"),
+    analysisunitnotes = use_na(x$analysisunitnotes, "char"),
+    analysisdate = as.Date(use_na(x$analysisdate, "char")),
+    samplenotes = use_na(x$samplenotes, "char")
   )
   new_sample
 }

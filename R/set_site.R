@@ -54,6 +54,7 @@ set_site <- function(x = NA,
     x@geography <- geography
     x@altitude <- altitude
     x@geopolitical <- geopolitical
+    x@area <- area
     x@notes <- notes
     x@description <- description
     x@collunits <- collunits
