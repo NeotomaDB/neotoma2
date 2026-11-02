@@ -36,14 +36,16 @@ getids.sites <- function(x, order = TRUE) {
         } else {
           datasetids <- NA
         }
-        return(data.frame(collunitid = collunitid,
-                          datasetid = unlist(datasetids)))
+        data.frame(
+          collunitid = collunitid,
+          datasetid = unlist(datasetids)
+        )
       }) %>%
         bind_rows()
     } else {
       cuids <- data.frame(collunitid = NA, datasetid = NA)
     }
-    return(data.frame(siteid = siteid, cuids))
+    data.frame(siteid = siteid, cuids)
   })
   siteids <- do.call("rbind.data.frame", args = siteids)
   rownames(siteids) <- seq_len(nrow(siteids))
@@ -53,9 +55,11 @@ getids.sites <- function(x, order = TRUE) {
   }
   # Guaranteeing that future joins all work out
   siteids <- siteids %>%
-    mutate(siteid = .data$siteid,
-           collunitid = .data$collunitid,
-           datasetid = .data$datasetid)
+    mutate(
+      siteid = .data$siteid,
+      collunitid = .data$collunitid,
+      datasetid = .data$datasetid
+    )
   siteids <- siteids[!is.na(siteids$datasetid), ]
   siteids <- unique(siteids)
   return(siteids)
@@ -76,8 +80,10 @@ getids.site <- function(x, order = TRUE) {
       } else {
         datasetids <- NA
       }
-      return(data.frame(collunitid = (collunitid),
-                        datasetid = (unlist(datasetids))))
+      data.frame(
+        collunitid = (collunitid),
+        datasetid = (unlist(datasetids))
+      )
     }) %>%
       bind_rows()
   } else {
@@ -101,8 +107,10 @@ getids.collunits <- function(x, order = TRUE) {
       } else {
         datasetids <- NA
       }
-      return(data.frame(collunitid = (collunitid),
-                        datasetid = (unlist(datasetids))))
+      data.frame(
+        collunitid = (collunitid),
+        datasetid = (unlist(datasetids))
+      )
     }) %>%
       bind_rows()
   } else {
@@ -124,9 +132,11 @@ getids.collunit <- function(x, order = TRUE) {
   } else {
     datasetids <- NA
   }
-  df <- data.frame(siteid = siteid,
-                   collunitid = collunitid,
-                   datasetid = datasetids)
+  df <- data.frame(
+    siteid = siteid,
+    collunitid = collunitid,
+    datasetid = datasetids
+  )
   df <- df[!is.na(df$datasetid), ]
   return(df)
 }

@@ -6,10 +6,10 @@
 #' @returns The values passed in \code{val} or \code{out} if
 #'   \code{val} is \code{NULL}.
 #' @examples {
-#' # Passing a null value into the function returns 12:
-#' a <- testNull(val = NULL, out = 12)
-#' # Passing a non-NULL value returns that value:
-#' b <- testNull(val = 11, out = 12)
+#'   # Passing a null value into the function returns 12:
+#'   a <- testNull(val = NULL, out = 12)
+#'   # Passing a non-NULL value returns that value:
+#'   b <- testNull(val = 11, out = 12)
 #' }
 #' @keywords internal
 #' @noRd

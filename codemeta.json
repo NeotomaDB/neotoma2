@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/NeotomaDB/neotoma2",
   "issueTracker": "https://github.com/NeotomaDB/neotoma2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",

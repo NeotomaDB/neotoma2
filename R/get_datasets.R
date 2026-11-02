@@ -29,15 +29,20 @@
 #' the datasets at that site.
 #' The `get_datasets()` command wraps the Neotoma API
 #' ([api.neotomadb.org](https://api.neotomadb.org)) call for `datasets`.
+#' Some queries are slow for the API however few records they return: a spatial
+#' query (`loc`) costs tens of seconds even when it matches no datasets, and a
+#' broad `taxa` filter (many names, or a wildcard) can take a minute or more.
+#' Add other filters to narrow a query, test it with a small `limit` first, and
+#' avoid running it in a loop.
 #' The call itself uses a SQL query which accepts any one of the following
 #' parameters:
 #'  * `siteid`  The unique site ID (integer) in Neotoma. Can be passed as a
 #' vector of site IDs.
 #'  * `sitename`  The site name, or approximate match using the % wildcard.
-#'  * `database`  The constituent database for the record. See 
+#'  * `database`  The constituent database for the record. See
 #' `get_table("constituentdatabases")`
-#'  * `datasettype` Neotoma contains data for a number of dataset types. 
-#'  This returns a subset of data types. For a complete list of available 
+#'  * `datasettype` Neotoma contains data for a number of dataset types.
+#'  This returns a subset of data types. For a complete list of available
 #'  dataset types, run `neotoma2::get_table('datasettypes')`
 #'  * `altmin`  The minimum altitude range for site elevation (in meters).
 #'  *  `altmax`  The maximum altitude range for site elevation (in meters).
@@ -58,21 +63,27 @@
 #' for a site.
 #'  * `taxa`  The names of taxa which must be present within samples in a
 #' record.
-#'  * `all_data` The API only downloads the first 25 records of the query. 
+#'  * `all_data` The API only downloads the first 25 records of the query.
 #'  For the complete records, use `all_data=TRUE`
 #' @examples \dontrun{
-#' tryCatch({
-#'   random_sites <- get_sites(1)
-#'   allds <- get_datasets(random_sites, limit=3)
-#' }, error = function(e) {
-#'    message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     random_sites <- get_sites(1)
+#'     allds <- get_datasets(random_sites, limit = 3)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # To find all datasets with a min altitude of 12 and a max altitude of 25:
-#' tryCatch({
-#'   sites_12to25 <- get_datasets(altmin=12, altmax=25)
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     sites_12to25 <- get_datasets(altmin = 12, altmax = 25)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' # To find all datasets in Brazil
 #' brazil <- '{"type": "Polygon",
 #' "coordinates": [[
@@ -81,11 +92,14 @@
 #'  [-36.5625,-7.710991655433217],
 #'  [-68.203125,13.923403897723347],
 #'  [-73.125,-9.102096738726443]]]}'
-#' tryCatch({
-#'   brazil_datasets <- get_datasets(loc = brazil[1], limit=2)
-#' }, error = function(e) {
-#'   message("Neotoma server not responding. Try again later.")
-#' })
+#' tryCatch(
+#'   {
+#'     brazil_datasets <- get_datasets(loc = brazil[1], limit = 2)
+#'   },
+#'   error = function(e) {
+#'     message("Neotoma server not responding. Try again later.")
+#'   }
+#' )
 #' }
 #' @md
 #' @export
@@ -104,9 +118,9 @@ get_datasets.numeric <- function(x, ...) {
   if (length(x) > 0) {
     dataset <- paste0(x, collapse = ",")
   }
-  baseURL <- paste0("data/datasets/", dataset)
+  base_url <- paste0("data/datasets/", dataset)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
@@ -114,9 +128,9 @@ get_datasets.numeric <- function(x, ...) {
   )
   if (length(result[2]$data) > 0) {
     output <- parse_site(result)
-    return(output)
+    output
   } else {
-    return(NULL)
+    NULL
   }
 }
 
@@ -128,15 +142,17 @@ get_datasets.default <- function(x, ...) {
   oo <- options(scipen = 9999)
   on.exit(options(oo))
   cl <- as.list(match.call())
-  if ('doidata' %in% params) {
-    params <- append(params, 'doi')
+  if ("doidata" %in% params) {
+    params <- append(params, "doi")
   }
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
   if (!all(names(cl) %in% params)) {
-    warning("Some parameters seem invalid. 
+    warning(
+      "Some parameters seem invalid.
     The current accepted parameters are: ",
-    paste(unlist(params), collapse = ", "))
+      paste(unlist(params), collapse = ", ")
+    )
   }
   base_url <- "data/datasets/"
   result <- tryCatch(
@@ -147,10 +163,10 @@ get_datasets.default <- function(x, ...) {
     }
   )
   if (is.null(result$data[1][[1]]) || is.null(result[1][[1]])) {
-    return(NULL)
+    NULL
   } else {
     output <- parse_site(result)
-    return(output)
+    output
   }
 }
 
@@ -158,65 +174,54 @@ get_datasets.default <- function(x, ...) {
 #' @exportS3Method get_datasets sites
 get_datasets.sites <- function(x, ...) {
   ids <- getids(x)
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
   ids <- ids %>%
     select(.data$datasetid) %>%
     unique() %>%
     unlist() %>%
     as.numeric()
-  if ("all_data" %in% cl) {
-    all_data <- cl$all_data
-  } else {
-    all_data <- TRUE
-  }
+  # `all_data` defaults to TRUE here, and a value supplied by the caller wins.
   dots <- list(...)
-  if ("all_data" %in% names(dots)) {
-    dots$all_data <- NULL
-  }
+  all_data <- if ("all_data" %in% names(dots)) dots$all_data else TRUE
   output <- get_datasets(x = ids, all_data = all_data)
-  return(output)
+  output
 }
 
 #' @rdname get_datasets
 #' @exportS3Method get_datasets site
 get_datasets.site <- function(x, ...) {
   # List of datasets ids
-  cl <- as.list(match.call())
-  cl[[1]] <- NULL
   ids1 <- getids(x)
   ids <- ids1 %>%
-    filter(!is.na(suppressWarnings(as.numeric(.data$siteid))),
-           !is.na(suppressWarnings(as.numeric(.data$datasetid))))
-  ids2 <- getids(x) %>% 
-    filter(is.na(suppressWarnings(as.numeric(.data$siteid))) |
-             is.na(suppressWarnings(as.numeric(.data$datasetid))))
+    filter(
+      !is.na(suppressWarnings(as.numeric(.data$siteid))),
+      !is.na(suppressWarnings(as.numeric(.data$datasetid)))
+    )
+  ids2 <- getids(x) %>%
+    filter(
+      is.na(suppressWarnings(as.numeric(.data$siteid))) |
+        is.na(suppressWarnings(as.numeric(.data$datasetid)))
+    )
   if (nrow(ids2) != 0) {
-    warnsite <- sprintf("SiteID %s or DatasetID %s does not exist in the
-                         Neotoma DB yet or it has been removed. 
+    warnsite <- sprintf(
+      "SiteID %s or DatasetID %s does not exist in the
+                         Neotoma DB yet or it has been removed.
                         It will be removed from your search.",
-                        paste0(ids2$siteid, collapse = ", "),
-                        paste0(ids2$datasetid, collapse = ", "))
+      paste0(ids2$siteid, collapse = ", "),
+      paste0(ids2$datasetid, collapse = ", ")
+    )
     warning(warnsite)
   }
   dataset_list <- ids$datasetid
   dataset_list <- as.numeric(unlist(dataset_list))
-  if ("all_data" %in% cl) {
-    all_data <- cl$all_data
-  } else {
-    all_data <- TRUE
-  }
   dots <- list(...)
-  if ("all_data" %in% names(dots)) {
-    dots$all_data <- NULL
-  }
+  all_data <- if ("all_data" %in% names(dots)) dots$all_data else TRUE
   output <- get_datasets(dataset_list, all_data = all_data)
-  return(output)
+  output
 }
 
 #' @rdname get_datasets
 #' @exportS3Method get_datasets NULL
 get_datasets.NULL <- function(x, ...) {
   message("Input is NULL, returning NULL")
-  return(NULL)
+  NULL
 }

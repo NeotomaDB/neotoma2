@@ -7,15 +7,17 @@
 #' @returns A one-row data.frame.
 #' @noRd
 chron_summary_row <- function(x) {
-  data.frame(chronologyid = x@chronologyid,
-             chronologyname = x@chronologyname,
-             agemodel = x@agemodel,
-             ageboundolder = x@ageboundolder,
-             ageboundyounger = x@ageboundyounger,
-             dateprepared = x@dateprepared,
-             modelagetype = x@modelagetype,
-             isdefault = x@isdefault,
-             n_controls = sum(!is.na(x@chroncontrols$chroncontrolid)))
+  data.frame(
+    chronologyid = x@chronologyid,
+    chronologyname = x@chronologyname,
+    agemodel = x@agemodel,
+    ageboundolder = x@ageboundolder,
+    ageboundyounger = x@ageboundyounger,
+    dateprepared = x@dateprepared,
+    modelagetype = x@modelagetype,
+    isdefault = x@isdefault,
+    n_controls = sum(!is.na(x@chroncontrols$chroncontrolid))
+  )
 }
 
 #' @title Drop chronology rows that carry no information.
@@ -27,8 +29,10 @@ chron_summary_row <- function(x) {
 #' @returns The data.frame with uninformative rows removed.
 #' @noRd
 drop_empty_chron_rows <- function(df) {
-  meta <- c("chronologyname", "agemodel", "ageboundolder", "ageboundyounger",
-            "dateprepared", "modelagetype", "isdefault")
+  meta <- c(
+    "chronologyname", "agemodel", "ageboundolder", "ageboundyounger",
+    "dateprepared", "modelagetype", "isdefault"
+  )
   empty <- Reduce(`&`, lapply(df[meta], is.na)) & df$n_controls == 0
   df[!empty, , drop = FALSE]
 }
@@ -49,120 +53,150 @@ print_chron_summary <- function(df) {
 
 #' @aliases show,chronology-method
 #' @rdname show
-setMethod(f = "show",
-          signature = signature(object = "chronology"),
-          definition = function(object) {
-            print_chron_summary(chron_summary_row(object))
-          })
+setMethod(
+  f = "show",
+  signature = signature(object = "chronology"),
+  definition = function(object) {
+    print_chron_summary(chron_summary_row(object))
+  }
+)
 
 #' @aliases show,chronologies-method
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows
 #' @rdname show
-setMethod(f = "show",
-          signature = signature(object = "chronologies"),
-          definition = function(object) {
-            if (length(object@chronologies) == 0) {
-              cat("No chronology information available.\n")
-              return(invisible(NULL))
-            }
-            object@chronologies %>%
-              map(chron_summary_row) %>%
-              bind_rows() %>%
-              print_chron_summary()
-          })
+setMethod(
+  f = "show",
+  signature = signature(object = "chronologies"),
+  definition = function(object) {
+    if (length(object@chronologies) == 0) {
+      cat("No chronology information available.\n")
+      return(invisible(NULL))
+    }
+    object@chronologies %>%
+      map(chron_summary_row) %>%
+      bind_rows() %>%
+      print_chron_summary()
+  }
+)
 
 #' @rdname sub-sub
 #' @aliases [[,chronologies,numeric-method [[,chronologies,numeric,ANY-method
-setMethod(f = "[[",
-          signature = signature(x = "chronologies", i = "numeric"),
-          definition = function(x, i) {
-            if (length(i) == 1) {
-              out <- new("chronology", x@chronologies[[i]])
-            } else {
-              out <- map(i, function(z) {
-                new("chronology", x@chronologies[[z]])
-              })
-              out <- new("chronology", chronologies = out)
-            }
-            return(out)
-          })
+setMethod(
+  f = "[[",
+  signature = signature(x = "chronologies", i = "numeric"),
+  definition = function(x, i) {
+    if (length(i) == 1) {
+      out <- new("chronology", x@chronologies[[i]])
+    } else {
+      out <- map(i, function(z) {
+        new("chronology", x@chronologies[[z]])
+      })
+      out <- new("chronology", chronologies = out)
+    }
+    out
+  }
+)
 
 #' @rdname cash
-setMethod(f = "$",
-          signature = signature(x = "chronology"),
-          definition = function(x, name) {
-            slot(x, name)
-          })
+setMethod(
+  f = "$",
+  signature = signature(x = "chronology"),
+  definition = function(x, name) {
+    slot(x, name)
+  }
+)
 
 
 #' @rdname cash
-setMethod(f = "$",
-          signature = signature(x = "chronologies"),
-          definition = function(x, name) {
-            x %>%
-              map(function(y) {
-                slot(y, name)
-              }) %>%
-              unlist()
-          })
+setMethod(
+  f = "$",
+  signature = signature(x = "chronologies"),
+  definition = function(x, name) {
+    x %>%
+      map(function(y) {
+        slot(y, name)
+      }) %>%
+      unlist()
+  }
+)
 
 #' @rdname cash-set
-setMethod(f = "$<-",
-          signature = signature(x = "chronology"),
-          definition = function(x, name, value) {
-            slot(x, name) <- value
-            return(x)
-          })
+setMethod(
+  f = "$<-",
+  signature = signature(x = "chronology"),
+  definition = function(x, name, value) {
+    slot(x, name) <- value
+    x
+  }
+)
 
 #' @rdname as.data.frame
-setMethod(f = "as.data.frame",
-          signature = signature("chronology"),
-          definition = function(x) {
-            data.frame(chronologyid = as.character(x@chronologyid),
-                       notes = x@notes,
-                       agemodel = x@agemodel,
-                       ageboundolder = x@ageboundolder,
-                       ageboundyounger = x@ageboundyounger,
-                       isdefault = x@isdefault,
-                       dateprepared = x@dateprepared,
-                       modelagetype = x@modelagetype,
-                       chronologyname = x@chronologyname)
-          })
+setMethod(
+  f = "as.data.frame",
+  signature = signature("chronology"),
+  definition = function(x) {
+    data.frame(
+      chronologyid = as.character(x@chronologyid),
+      notes = x@notes,
+      agemodel = x@agemodel,
+      ageboundolder = x@ageboundolder,
+      ageboundyounger = x@ageboundyounger,
+      isdefault = x@isdefault,
+      dateprepared = x@dateprepared,
+      modelagetype = x@modelagetype,
+      chronologyname = x@chronologyname
+    )
+  }
+)
 
 #' @rdname as.data.frame
-setMethod(f = "as.data.frame",
-          signature = signature("chronologies"),
-          definition = function(x) {
-            x@chronologies %>% map(as.data.frame) %>% bind_rows()
-          })
+setMethod(
+  f = "as.data.frame",
+  signature = signature("chronologies"),
+  definition = function(x) {
+    x@chronologies %>%
+      map(as.data.frame) %>%
+      bind_rows()
+  }
+)
 
 #' @rdname length
-setMethod(f = "length",
-          signature = signature(x = "chronologies"),
-          definition = function(x) {
-            length(x@chronologies)
-          })
+setMethod(
+  f = "length",
+  signature = signature(x = "chronologies"),
+  definition = function(x) {
+    length(x@chronologies)
+  }
+)
 
 #' @rdname c
-setMethod(f = "c",
-          signature = signature(x = "chronologies"),
-          definition = function(x, y) {
-            if ("chronology" %in% class(y)) {
-              y <- new("chronologies", chronologies = list(y))
-            }
-            tryCatch(
-              new("chronologies",
-                  chronologies = unlist(c(x@chronologies,
-                                          y@chronologies),
-                                        recursive = FALSE)),
-                     error = function(e) {
-                       stop("Use `get_downloads()` to fill chronologies details.
+setMethod(
+  f = "c",
+  signature = signature(x = "chronologies"),
+  definition = function(x, y) {
+    if ("chronology" %in% class(y)) {
+      y <- new("chronologies", chronologies = list(y))
+    }
+    tryCatch(
+      new("chronologies",
+        chronologies = unlist(
+          c(
+            x@chronologies,
+            y@chronologies
+          ),
+          recursive = FALSE
+        )
+      ),
+      error = function(e) {
+        stop("Use `get_downloads()` to fill chronologies details.
                             Current `sites` object comes from `get_sites()` or
                             `get_datasets()` which does not have chronology
                             detail")
-                     })
-          })
+      }
+    )
+  }
+)
 
 #' @title Change the default age model for a record.
 #' @importFrom purrr map
@@ -172,26 +206,30 @@ setMethod(f = "c",
 #' @returns `chronologies` object with a new defaulted `chronology`
 #' @md
 #' @export
-setMethod(f = "set_default",
-          signature = signature(x = "chronologies"),
-          definition = function(x, n) {
-            assert_that(class(x) == "chronologies")
-            chron_set <- as.data.frame(x)
-            assert_that(n %in% chron_set$chronologyid,
-                        msg = "The new default chronology 
+setMethod(
+  f = "set_default",
+  signature = signature(x = "chronologies"),
+  definition = function(x, n) {
+    assert_that(class(x) == "chronologies")
+    chron_set <- as.data.frame(x)
+    assert_that(n %in% chron_set$chronologyid,
+      msg = "The new default chronology
                         must be a valid chronologyid
-                        within the chronologies.")
-            which_replace <- chron_set$chronologyid == n
-            replacingmodel <- chron_set$modelagetype[which_replace]
-            chronout <- map(seq_len(length(x)), function(y) {
-              if (x@chronologies[[y]]$chronologyid == n) {
-                x@chronologies[[y]]@isdefault <- TRUE
-              }
-              if (x@chronologies[[y]]$chronologyid != n &
-                  x@chronologies[[y]]$modelagetype == replacingmodel) {
-                x@chronologies[[y]]@isdefault <- FALSE
-              }
-              return(x@chronologies[[y]])
-            })
-            return(new("chronologies", chronologies = chronout))
-          })
+                        within the chronologies."
+    )
+    which_replace <- chron_set$chronologyid == n
+    replacingmodel <- chron_set$modelagetype[which_replace]
+    chronout <- map(seq_len(length(x)), function(y) {
+      if (x@chronologies[[y]]$chronologyid == n) {
+        x@chronologies[[y]]@isdefault <- TRUE
+      }
+      other_chron <- x@chronologies[[y]]$chronologyid != n
+      same_model <- x@chronologies[[y]]$modelagetype == replacingmodel
+      if (other_chron & same_model) {
+        x@chronologies[[y]]@isdefault <- FALSE
+      }
+      x@chronologies[[y]]
+    })
+    new("chronologies", chronologies = chronout)
+  }
+)

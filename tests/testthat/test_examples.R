@@ -13,13 +13,16 @@ for (topic in topics) {
     test_that(paste0("Example for '", topic, "' runs without error"), {
       skip_on_cran()
       testthat::expect_error(
-        example(topic = t,
-                package = "neotoma2",
-                ask = FALSE,
-                character.only = TRUE,
-                run.dontrun = TRUE,
-                echo = FALSE),
-        NA)
+        example(
+          topic = t,
+          package = "neotoma2",
+          ask = FALSE,
+          character.only = TRUE,
+          run.dontrun = TRUE,
+          echo = FALSE
+        ),
+        NA
+      )
     })
   })
 }

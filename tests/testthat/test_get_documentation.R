@@ -19,6 +19,7 @@ test_that("Documentation loading succeeds when interactive is true:", {
   })
   on.exit(options(op), add = TRUE)
   testthat::expect_null(rlang::with_interactive(get_documentation(),
-                                                value = TRUE))
+    value = TRUE
+  ))
   testthat::expect_equal(seen, "https://open.neotomadb.org/neotoma2/")
 })

@@ -28,7 +28,7 @@ group_response <- function(data) {
     return(list())
   }
   # Detect endpoint
-  is_dataset  <- all(map_lgl(data, ~ !is.null(.x$site$datasets)))
+  is_dataset <- all(map_lgl(data, ~ !is.null(.x$site$datasets)))
   is_download <- all(map_lgl(data, function(x) {
     tryCatch(!is.null(x$site$collectionunit$dataset), error = function(e) FALSE)
   }))

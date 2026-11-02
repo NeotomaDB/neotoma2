@@ -33,49 +33,56 @@ get_contacts.numeric <- function(x, ...) {
   if (length(x) > 0) {
     contactname <- paste0(x, collapse = ",")
   }
-  baseURL <- paste0("data/contacts/", contactname)
+  base_url <- paste0("data/contacts/", contactname)
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
     }
   )
   result <- result %>% cleanNULL()
-  contact <- map(result$data,
-                 function(x) {
-                   x[is.null(x)] <- NA_character_
-                   new("contact",
-                       contactid = use_na(x$contactid, "int"),
-                       familyname = use_na(x$familyname, "char"),
-                       leadinginitials = use_na(x$leadinginitials,
-                                                "char"),
-                       givennames = use_na(x$givennames, "char"),
-                       contactname = use_na(x$contactname, "char"),
-                       suffix = use_na(x$suffix, "char"),
-                       ORCID = use_na(x$ORCID, "char"),
-                       title = use_na(x$title, "char"),
-                       institution = use_na(x$institution, "char"),
-                       email = use_na(x$email, "char"),
-                       phone = use_na(x$phone, "char"),
-                       contactstatus = use_na(x$contactstatus,
-                                              "char"),
-                       fax = use_na(x$fax, "char"),
-                       url = use_na(x$url, "char"),
-                       address = use_na(x$address, "char"),
-                       notes = use_na(x$notes, "char"))
-                 })
+  contact <- map(
+    result$data,
+    function(x) {
+      x[is.null(x)] <- NA_character_
+      new("contact",
+        contactid = use_na(x$contactid, "int"),
+        familyname = use_na(x$familyname, "char"),
+        leadinginitials = use_na(
+          x$leadinginitials,
+          "char"
+        ),
+        givennames = use_na(x$givennames, "char"),
+        contactname = use_na(x$contactname, "char"),
+        suffix = use_na(x$suffix, "char"),
+        ORCID = use_na(x$ORCID, "char"),
+        title = use_na(x$title, "char"),
+        institution = use_na(x$institution, "char"),
+        email = use_na(x$email, "char"),
+        phone = use_na(x$phone, "char"),
+        contactstatus = use_na(
+          x$contactstatus,
+          "char"
+        ),
+        fax = use_na(x$fax, "char"),
+        url = use_na(x$url, "char"),
+        address = use_na(x$address, "char"),
+        notes = use_na(x$notes, "char")
+      )
+    }
+  )
   contacts <- new("contacts", contacts = contact)
-  return(contacts)
+  contacts
 }
 
 #' @rdname get_contacts
 #' @method get_contacts default
 #' @exportS3Method get_contacts default
 get_contacts.default <- function(x, ...) {
-  baseURL <- paste0("data/contacts")
+  base_url <- paste0("data/contacts")
   result <- tryCatch(
-    parseURL(baseURL, ...),
+    parseURL(base_url, ...),
     error = function(e) {
       stop("API call failed: ", e$message)
       NULL
@@ -86,33 +93,42 @@ get_contacts.default <- function(x, ...) {
   cl[[1]] <- NULL
   cl <- lapply(cl, eval, envir = parent.frame())
   if (!all(names(cl) %in% params)) {
-    warning("Some parameters seem invalid. 
+    warning(
+      "Some parameters seem invalid.
              The current accepted parameters are: ",
-            paste(unlist(params), collapse = ", "))
+      paste(unlist(params), collapse = ", ")
+    )
   }
   result <- result %>% cleanNULL()
-  contact <- map(result$data,
-                 function(x) {
-                   new("contact",
-                       contactid = use_na(x$contactid, "int"),
-                       familyname = use_na(x$familyname, "char"),
-                       leadinginitials = use_na(x$leadinginitials,
-                                                "char"),
-                       givennames = use_na(x$givennames, "char"),
-                       contactname = use_na(x$contactname, "char"),
-                       suffix = use_na(x$suffix, "char"),
-                       ORCID = use_na(x$ORCID, "char"),
-                       title = use_na(x$title, "char"),
-                       institution = use_na(x$institution, "char"),
-                       email = use_na(x$email, "char"),
-                       phone = use_na(x$phone, "char"),
-                       contactstatus = use_na(x$contactstatus,
-                                              "char"),
-                       fax = use_na(x$fax, "char"),
-                       url = use_na(x$url, "char"),
-                       address = use_na(x$address, "char"),
-                       notes = use_na(x$notes, "char"))
-                 })
+  contact <- map(
+    result$data,
+    function(x) {
+      new("contact",
+        contactid = use_na(x$contactid, "int"),
+        familyname = use_na(x$familyname, "char"),
+        leadinginitials = use_na(
+          x$leadinginitials,
+          "char"
+        ),
+        givennames = use_na(x$givennames, "char"),
+        contactname = use_na(x$contactname, "char"),
+        suffix = use_na(x$suffix, "char"),
+        ORCID = use_na(x$ORCID, "char"),
+        title = use_na(x$title, "char"),
+        institution = use_na(x$institution, "char"),
+        email = use_na(x$email, "char"),
+        phone = use_na(x$phone, "char"),
+        contactstatus = use_na(
+          x$contactstatus,
+          "char"
+        ),
+        fax = use_na(x$fax, "char"),
+        url = use_na(x$url, "char"),
+        address = use_na(x$address, "char"),
+        notes = use_na(x$notes, "char")
+      )
+    }
+  )
   contacts <- new("contacts", contacts = contact)
-  return(contacts)
+  contacts
 }

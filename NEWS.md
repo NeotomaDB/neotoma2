@@ -1,5 +1,68 @@
 # News neotoma2 R package
 
+## neotoma2 1.1.1
+
+* The default request timeout is 125 seconds, just above the 120 seconds at which the API gateway gives up, so the client and the gateway agree and a slow query  is reported once instead of being abandoned and repeated. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
+* `limit` and `offset` now describe the whole answer when a long list of ids is split into several requests. `get_sites(1:1000, limit = 10)` returned 100 sites, because every batch of ids was given the `limit`; it returns 10, from one request.
+* Updated API servers (api-dev now, production after its next deploy) change what queries return:
+  * Site and dataset totals are lower than before. Sites without datasets and
+    deleted datasets are no longer returned, so counts saved from earlier
+    sessions, or fixed in scripts and tests, need re-baselining.
+  * A list of IDs returns every ID asked for, not the first 25, and `limit` and
+    `offset` give the same records whatever the page size. `all_data = TRUE`
+    still requests 2000 records per page; set the environment variable
+    `NEOTOMA_PAGE` (for example `Sys.setenv(NEOTOMA_PAGE = 500)`) for smaller
+    pages. Older servers lose records when walked in small pages, so keep the
+    default there.
+  * `datasettype` takes several values (`datasettype = c("pollen", "diatom")`)
+    in `get_sites()` and `get_datasets()`.
+* New fields for records from `get_downloads()`: `collunit@collectors` (a list of
+  names) and, on each sample, `analysisunitnotes`, `analysisdate` and `samplenotes`.
+  `set_site()` now records `area`, and a collection unit's `gpslocation` is a
+  one-row `sf` point, so `sf::st_coordinates()` works on it. The fields are empty
+  until the Neotoma database functions that supply them are updated.
+* Gentler on the Neotoma API:
+  * An HTTP 500 is no longer retried (it cannot succeed on a repeat), and a busy
+    gateway (502, 503, 504) is retried once, after a jittered wait of 30 to 60
+    seconds. A `Retry-After` header on a 429 or 503 is honoured.
+  * Requests identify the package: the User-Agent is now
+    `neotoma2/<version> (R <version>)`. Set `options(neotoma2.contact = "you@example.org")`
+    or the `NEOTOMA_CONTACT` environment variable to add a contact address.
+  * `get_table()` keeps its answer for the rest of the session (use `refresh = TRUE`
+    to ask again), and `get_downloads()` requests long vectors of dataset IDs in
+    batches of 25 and keeps the answers for the session. `options(neotoma2.cache = FALSE)`
+    turns the cache off.
+  * `get_downloads()` no longer repeats a failed request with its arguments removed.
+  * A long list of IDs for `data/taxa`, `data/publications` or other endpoints
+    without a POST route is now sent as several short `GET` requests, instead of a
+    `POST` the API answered with a redirect to its documentation.
+  * A long `get_downloads()` request that used `all_data = TRUE` sent a malformed
+    list of dataset IDs, which the API rejected with an HTTP 500.
+  * An answer that is a web page rather than data now raises a clear error.
+  * A failed request reports the reason the API gives (`The API said: ...`), in
+    both the current response shape (`data: null`, `message`) and the earlier one
+    (the error in `data`).
+* The development server is now reached over `https`. `http://api-dev...` redirects
+  to `https`, and the redirect turned a `POST` into a `GET` without its body, so a
+  spatial (`loc`) query sent with `set_server("dev")` came back as the unfiltered
+  first page of records. A `POST` now also keeps its method and body through any
+  redirect.
+* Long lists of IDs for `get_sites()`, `get_datasets()` and `get_downloads()` are
+  sent as `POST` requests in chunks of 100, as the API accepts them there, and a
+  long list of filter values (for example many taxon names) is sent as a `POST`
+  body instead of a URL too long to send. An answer that does not match the IDs
+  asked for raises an error instead of being returned.
+* `get_taxa()` was rewritten. `get_taxa(<id>)` used to ask for datasets with no
+  taxon filter at all; `get_taxa(taxa = )` passed a function in place of the names;
+  `all_data`, `datasettype`, `loc`, `limit` and other arguments were dropped or
+  ignored. It now forwards them, never requests datasets without a taxon filter,
+  and warns before sending more than 25 taxon names in one request.
+* `get_taxon(taxonname = "Pinus%")` now returns every page of matches (`all_data`
+  defaults to `TRUE`, as documented) instead of only the first, and a taxon record
+  without a `taxagroupid` no longer makes it fail. `get_taxon(numeric(0))` returns `NULL`.
+* `all_data` is now honoured in `get_datasets()` and `get_downloads()` when called on a
+  `sites` object; the argument was previously ignored.
+
 ## neotoma2 1.1.0
 
 * Added `count()` to tally sites, collection units, or datasets in a record object.
@@ -13,9 +76,6 @@
 * A request that times out is retried at most once. Retrying a slow query stacks
   work onto an API that is already struggling, which made spatial (`loc`) queries
   worse rather than better; other transient failures still retry as before.
-* Raised the default request timeout to 180 seconds, above the observed latency of
-  the spatial endpoints, so healthy-but-slow queries are no longer aborted
-  mid-flight. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
 * A spatial geometry is now converted once per query rather than once per page,
   and the API's parameter list is fetched once per session rather than on every
   `get_*()` call.

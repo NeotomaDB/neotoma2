@@ -44,18 +44,24 @@ build_chron <- function(x) {
   if ("chroncontrolid" %in% names(chron_table)) {
     chron_table <- chron_table[!is.na(chron_table$chroncontrolid), ]
   }
-  chronology <- set_chronology(chronologyid = use_na(ch$chronologyid, "int"),
-                               notes = use_na(meta$notes, "char"),
-                               contact = use_na(meta$contact, "list"),
-                               agemodel = use_na(meta$agemodel, "char"),
-                               ageboundolder = older,
-                               ageboundyounger = younger,
-                               isdefault = use_na(meta$isdefault, "bool"),
-                               dateprepared = use_na(as.Date(meta$dateprepared),
-                                                     "date"),
-                               modelagetype = use_na(meta$modelagetype, "char"),
-                               chronologyname = use_na(meta$chronologyname,
-                                                       "char"),
-                               chroncontrols = chron_table)
-  return(chronology)
+  chronology <- set_chronology(
+    chronologyid = use_na(ch$chronologyid, "int"),
+    notes = use_na(meta$notes, "char"),
+    contact = use_na(meta$contact, "list"),
+    agemodel = use_na(meta$agemodel, "char"),
+    ageboundolder = older,
+    ageboundyounger = younger,
+    isdefault = use_na(meta$isdefault, "bool"),
+    dateprepared = use_na(
+      as.Date(meta$dateprepared),
+      "date"
+    ),
+    modelagetype = use_na(meta$modelagetype, "char"),
+    chronologyname = use_na(
+      meta$chronologyname,
+      "char"
+    ),
+    chroncontrols = chron_table
+  )
+  chronology
 }

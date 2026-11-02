@@ -59,10 +59,12 @@ The new object will not be uploaded to the database.
 }
 \examples{
 {
-# Create a dataset
-my_dataset <- set_dataset(database = "EPD",
-                    datasettype = "pollen",
-                    notes = "my lake")
+  # Create a dataset
+  my_dataset <- set_dataset(
+    database = "EPD",
+    datasettype = "pollen",
+    notes = "my lake"
+  )
 }
 }
 \author{

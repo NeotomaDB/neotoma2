@@ -69,15 +69,26 @@ as a vector of dataset IDs.
 \item \code{all_data} The API only downloads the first 25 records of the query.
 For the complete records, use \code{all_data=TRUE}
 }
+
+Download responses are large, and every request costs the Neotoma API real
+work. Pass all the dataset IDs you need to \strong{one} call rather than calling
+\code{get_downloads()} in a loop: a long vector is split into batches of 25
+datasets and requested one after another. The answer for a set of IDs is
+kept for the rest of the R session, so asking for the same IDs again does
+not call the API again. Set \code{options(neotoma2.cache = FALSE)} to turn this
+off.
 }
 \examples{
 \dontrun{
 # To find the downloads object of dataset 24:
-tryCatch({
-  downloads24 <- get_downloads(24)
-}, error = function(e) {
- message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    downloads24 <- get_downloads(24)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 # To find all downloads in Brazil
 brazil <- '{"type": "Polygon",
 "coordinates": [[
@@ -86,12 +97,15 @@ brazil <- '{"type": "Polygon",
  [-36.5625,-7.710991655433217],
  [-68.203125,13.923403897723347],
  [-73.125,-9.102096738726443]]]}'
-tryCatch({
-  brazil_datasets <- get_datasets(loc = brazil[1])
-  brazil_downloads <- get_downloads(brazil_datasets)
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    brazil_datasets <- get_datasets(loc = brazil[1])
+    brazil_downloads <- get_downloads(brazil_datasets)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 }
 }
 \author{

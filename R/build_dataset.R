@@ -23,20 +23,22 @@ build_dataset <- function(x) {
   pi_list <- map(testNull(x$datasetpi, list()), function(y) {
     use_na(y$contactname, "char")
   })
-  ds <- set_dataset(datasetid = use_na(x$datasetid, "int"),
-                    database = use_na(x$database, "char"),
-                    doi = list(x$doi),
-                    recdatecreated = use_na(as.Date(x$recdatecreated), "date"),
-                    datasettype = use_na(x$datasettype, "char"),
-                    datasetname = use_na(x$datasetname, "char"),
-                    age_range_old = use_na(agerange$ageold, "int"),
-                    age_range_young = use_na(agerange$ageyoung, "int"),
-                    age_units = use_na(agerange$units, "char"),
-                    notes = use_na(x$datasetnotes, "char"),
-                    pi_list = pi_list,
-                    samples = testNull(x$samples, NULL),
-                    specimens = testNull(x$specimens, NULL))
-  return(ds)
+  ds <- set_dataset(
+    datasetid = use_na(x$datasetid, "int"),
+    database = use_na(x$database, "char"),
+    doi = list(x$doi),
+    recdatecreated = use_na(as.Date(x$recdatecreated), "date"),
+    datasettype = use_na(x$datasettype, "char"),
+    datasetname = use_na(x$datasetname, "char"),
+    age_range_old = use_na(agerange$ageold, "int"),
+    age_range_young = use_na(agerange$ageyoung, "int"),
+    age_units = use_na(agerange$units, "char"),
+    notes = use_na(x$datasetnotes, "char"),
+    pi_list = pi_list,
+    samples = testNull(x$samples, NULL),
+    specimens = testNull(x$specimens, NULL)
+  )
+  ds
 }
 
 #' @title first_agerange
@@ -51,8 +53,10 @@ first_agerange <- function(agerange) {
   if (is.null(agerange) || length(agerange) == 0) {
     list(ageold = NA, ageyoung = NA, units = NA)
   } else {
-    list(ageold = agerange[[1]]$ageold,
-         ageyoung = agerange[[1]]$ageyoung,
-         units = agerange[[1]]$units)
+    list(
+      ageold = agerange[[1]]$ageold,
+      ageyoung = agerange[[1]]$ageyoung,
+      units = agerange[[1]]$units
+    )
   }
 }

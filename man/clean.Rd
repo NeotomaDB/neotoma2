@@ -40,13 +40,16 @@ array of datasets.
 }
 \examples{
 \dontrun{
-tryCatch({
-  alex <- get_sites(sitename = "Alex\%")
-  alex2 <- get_sites(24)
-  c <- c(alex, alex2) #uncleaned
-}, error = function(e) {
-  message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    alex <- get_sites(sitename = "Alex\%")
+    alex2 <- get_sites(24)
+    c <- c(alex, alex2) # uncleaned
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 }
 }
 \author{

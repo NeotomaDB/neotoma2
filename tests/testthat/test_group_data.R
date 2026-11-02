@@ -15,23 +15,32 @@ test_that("pick takes the first spelling the API used", {
   # A field none of the spellings match is NULL, not an error.
   testthat::expect_null(neotoma2:::pick(list(handle = "ABC"), spellings))
   # A NULL value is skipped in favour of the next spelling.
-  testthat::expect_equal(neotoma2:::pick(list(unittype = NULL,
-                                              collunittype = "Core"),
-                                         spellings), "Core")
+  testthat::expect_equal(neotoma2:::pick(
+    list(
+      unittype = NULL,
+      collunittype = "Core"
+    ),
+    spellings
+  ), "Core")
 })
 
 test_that("pick does not partially match a field name", {
   # `$` would match `collunittype` from `collunit`; `pick()` must not.
-  testthat::expect_null(neotoma2:::pick(list(collunittype = "Core"),
-                                        "collunit"))
+  testthat::expect_null(neotoma2:::pick(
+    list(collunittype = "Core"),
+    "collunit"
+  ))
 })
 
 test_that("group_response gives every endpoint the same shape", {
-  files <- c("data_sites24.json", "data_datasets24.json",
-             "data_downloads24_dup.json")
+  files <- c(
+    "data_sites24.json", "data_datasets24.json",
+    "data_downloads24_dup.json"
+  )
   for (f in files) {
     result <- jsonlite::fromJSON(test_path("fixtures", f),
-                                 simplifyVector = FALSE)
+      simplifyVector = FALSE
+    )
     grouped <- neotoma2:::group_response(result$data)
     # One site, reached the same way regardless of which endpoint answered.
     testthat::expect_length(grouped, 1)
@@ -48,10 +57,14 @@ test_that("group_response returns an empty list for an empty response", {
 
 test_that("group_collunits folds repeated units and pools their datasets", {
   cus <- list(
-    list(collectionunitid = 24, handle = "ALEXLAKE",
-         datasets = list(list(datasetid = 24))),
-    list(collectionunitid = 24, handle = "ALEXLAKE",
-         datasets = list(list(datasetid = 7870)))
+    list(
+      collectionunitid = 24, handle = "ALEXLAKE",
+      datasets = list(list(datasetid = 24))
+    ),
+    list(
+      collectionunitid = 24, handle = "ALEXLAKE",
+      datasets = list(list(datasetid = 7870))
+    )
   )
   folded <- neotoma2:::group_collunits(cus)
   testthat::expect_length(folded, 1)
@@ -70,12 +83,16 @@ test_that("group_collunits keeps genuinely different units apart", {
 })
 
 test_that("unique_datasets reports each dataset once", {
-  datasets <- list(list(datasetid = 24), list(datasetid = 24),
-                   list(datasetid = 7870))
+  datasets <- list(
+    list(datasetid = 24), list(datasetid = 24),
+    list(datasetid = 7870)
+  )
   kept <- neotoma2:::unique_datasets(datasets)
   testthat::expect_length(kept, 2)
-  testthat::expect_setequal(sapply(kept, function(x) x$datasetid),
-                            c(24, 7870))
+  testthat::expect_setequal(
+    sapply(kept, function(x) x$datasetid),
+    c(24, 7870)
+  )
 })
 
 test_that("group_sites keeps the order the API sent", {
@@ -84,19 +101,29 @@ test_that("group_sites keeps the order the API sent", {
     list(site = list(siteid = id), collectionunits = list())
   })
   grouped <- neotoma2:::group_sites(elements)
-  testthat::expect_equal(sapply(grouped, function(x) x$site$siteid),
-                         c(24, 1001, 3))
+  testthat::expect_equal(
+    sapply(grouped, function(x) x$site$siteid),
+    c(24, 1001, 3)
+  )
 })
 
 test_that("group_sites folds elements that share a site", {
   # `downloads` reports one element per dataset, so a site can arrive twice.
   elements <- list(
-    list(site = list(siteid = 24),
-         collectionunits = list(list(collectionunitid = 24,
-                                     datasets = list(list(datasetid = 24))))),
-    list(site = list(siteid = 24),
-         collectionunits = list(list(collectionunitid = 24,
-                                     datasets = list(list(datasetid = 7870)))))
+    list(
+      site = list(siteid = 24),
+      collectionunits = list(list(
+        collectionunitid = 24,
+        datasets = list(list(datasetid = 24))
+      ))
+    ),
+    list(
+      site = list(siteid = 24),
+      collectionunits = list(list(
+        collectionunitid = 24,
+        datasets = list(list(datasetid = 7870))
+      ))
+    )
   )
   grouped <- neotoma2:::group_sites(elements)
   testthat::expect_length(grouped, 1)

@@ -13,25 +13,46 @@ get_taxa(x = NA, ...)
 \method{get_taxa}{default}(...)
 }
 \arguments{
-\item{x}{A \code{taxon} ID to extract site information}
+\item{x}{A taxon ID (integer, or a vector of IDs) in Neotoma.}
 
 \item{...}{accepted arguments, see details for more information.}
 }
 \value{
-A Neotoma2 sites object with datasets with the requested taxa.
+A Neotoma2 \code{sites} object holding the datasets with the requested
+taxa, or \code{NULL} if no taxon or no dataset was found.
 }
 \description{
-a \code{sites} object with sites that contain the requested \code{taxa.}
+Find the Neotoma datasets that contain a taxon, and return
+them as a \code{sites} object.
 }
 \details{
-The \code{get_taxa} function searches for a sites within Neotoma
-that contain the requested taxa.
-The \code{get_taxa} command wraps the Neotoma API`.
-The call itself accepts any one of the following
-parameters:
+\code{get_taxa()} works in two steps. First it resolves the taxon you supplied
+to taxon names, with \code{\link[=get_taxon]{get_taxon()}}. Then it asks Neotoma for the datasets
+that contain those names, with \code{\link[=get_datasets]{get_datasets()}}. The second step is the
+expensive one: the API can take a minute or more to answer a broad
+\verb{taxa=} filter, so a taxon ID, or a name with a wildcard, that stands for
+many names produces a slow request. \code{get_taxa()} warns when it is about to
+send more than 25 distinct names, and it never sends the dataset request
+without a taxon filter: if no taxon is found it returns \code{NULL}.
+
+The taxon can be given in any one of the following ways:
 \itemize{
-\item \code{taxonid}  The unique taxon ID (integer) in Neotoma. Can be passed as a
-vector of site IDs.
+\item \code{x} A taxon ID (integer) in Neotoma. Can be passed as a vector of IDs.
+\item \code{taxonname} A taxon name, or a partial name using \verb{\%} as a wildcard,
+which is resolved with \code{\link[=get_taxon]{get_taxon()}}.
+\item \code{taxa} One or more exact taxon names, used as they are.
+}
+
+Any other argument that \code{\link[=get_datasets]{get_datasets()}} accepts (\code{datasettype}, \code{loc},
+\code{ageyoung}, \code{ageold}, \code{limit}, \code{offset}, \code{all_data}, ...) is passed on to
+that second step.
+}
+\examples{
+\dontrun{
+# Datasets containing taxon 1 (Abies), at most five of them:
+abies <- get_taxa(1, limit = 5)
+# The same, starting from the taxon name:
+abies <- get_taxa(taxonname = "Abies", limit = 5)
 }
 }
 \author{

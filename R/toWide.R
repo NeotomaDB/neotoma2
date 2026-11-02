@@ -15,13 +15,16 @@
 #' 'prop', 'sum', 'presence'.
 #' @returns wide `data.frame` obtained from long `samples` `data.frame`
 #' @examples \dontrun{
-#' fc_sites <- neotoma2::get_datasets(limit=5, datasettype = "vertebrate fauna")
+#' fc_sites <- neotoma2::get_datasets(limit = 5, datasettype = "vertebrate
+#' fauna")
 #' fc_ds <- fc_sites %>%
-#'    neotoma2::get_downloads()
+#'   neotoma2::get_downloads()
 #' fc_dl1 <- fc_dl[[1]]
 #' fc_smp <- samples(fc_dl1)
-#' toWide(fc_smp, ecologicalgroups=c('AVES', 'RODE'),
-#'        elementtypes='bone/tooth', unit='present/absent')
+#' toWide(fc_smp,
+#'   ecologicalgroups = c("AVES", "RODE"),
+#'   elementtypes = "bone/tooth", unit = "present/absent"
+#' )
 #' }
 #' @description Obtain a wide table with information regarding of
 #' samples grouped by variablename and depth/age.
@@ -33,16 +36,16 @@ toWide <- function(x,
                    unit = NA,
                    groupby = "age",
                    operation = "prop") {
-  if (!(length(variablenames) == 1 && is.na(variablenames)))  {
+  if (!(length(variablenames) == 1 && is.na(variablenames))) {
     x <- x %>% filter(.data$variablename %in% variablenames)
   }
-  if (!(length(ecologicalgroups) == 1 && is.na(ecologicalgroups)))  {
+  if (!(length(ecologicalgroups) == 1 && is.na(ecologicalgroups))) {
     x <- x %>% filter(.data$ecologicalgroup %in% ecologicalgroups)
   }
-  if (!(length(elementtypes) == 1 && is.na(elementtypes)))  {
+  if (!(length(elementtypes) == 1 && is.na(elementtypes))) {
     x <- x %>% filter(.data$elementtype %in% elementtypes)
   }
-  if (!(length(unit) == 1 && is.na(unit)))  {
+  if (!(length(unit) == 1 && is.na(unit))) {
     x <- x %>% filter(units %in% unit)
   }
   # Get proportion values
@@ -50,8 +53,10 @@ toWide <- function(x,
     group_by_at(groupby) %>%
     mutate(counter = sum(.data$value, na.rm = TRUE)) %>%
     group_by(.data$variablename) %>%
-    mutate(prop = .data$value / .data$counter,
-           n = .data$value) %>%
+    mutate(
+      prop = .data$value / .data$counter,
+      n = .data$value
+    ) %>%
     arrange(desc(groupby))
   if (unit == "present/absent") {
     if (operation != "presence") {
@@ -60,16 +65,21 @@ toWide <- function(x,
     operation <- "presence"
   }
   widetable <- onesite %>%
-    mutate(prop = as.numeric(.data$prop),
-           sum = as.numeric(.data$value),
-           presence = case_when(counter > 0 ~ 1,
-                                counter == 0 ~ 0)) %>%
+    mutate(
+      prop = as.numeric(.data$prop),
+      sum = as.numeric(.data$value),
+      presence = case_when(
+        counter > 0 ~ 1,
+        counter == 0 ~ 0
+      )
+    ) %>%
     select(all_of(groupby), .data$variablename, all_of(operation))
   counts <- pivot_wider(widetable,
-                        id_cols = all_of(groupby),
-                        names_from = .data$variablename,
-                        values_from = operation,
-                        values_fill = 0,
-                        values_fn = sum)
+    id_cols = all_of(groupby),
+    names_from = .data$variablename,
+    values_from = operation,
+    values_fill = 0,
+    values_fn = sum
+  )
   return(counts)
 }

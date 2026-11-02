@@ -6,7 +6,7 @@
 #' @returns NULL
 #' @examples \dontrun{
 #' if (interactive()) {
-#'  get_documentation()
+#'   get_documentation()
 #' }
 #' }
 #' @md
@@ -17,5 +17,5 @@ get_documentation <- function() {
   } else {
     stop("Browser window will not open if interactive() mode is FALSE.")
   }
-  return(NULL)
+  NULL
 }

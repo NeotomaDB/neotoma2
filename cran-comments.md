@@ -1,9 +1,32 @@
 ## Test environments
-* local OS X install, R 3.5.2
-* ubuntu 14.04 (on travis-ci), R 3.5.2
-* win-builder (devel and release)
+
+* local macOS (Darwin 25), R 4.5.2
+* GitHub Actions (R CMD check on ubuntu, macOS and windows; see `.github/workflows`)
+* win-builder (devel and release): to be run before submission
 
 ## R CMD check results
+
+0 errors | 0 warnings | 0 notes (local macOS, `R CMD check --as-cran`, version 1.1.1)
+
+Tests and examples that need the Neotoma API are skipped on CRAN
+(`skip_on_cran()` and `\dontrun{}`), and vignettes do not execute, so the checks
+make no network requests.
+
+-----
+## Upgrade neotoma2 1.1.1
+
+* Gentler on the Neotoma API: HTTP 500 is no longer retried, a busy gateway
+  (502/503/504) is retried once after a long jittered wait, `Retry-After` is
+  honoured, the User-Agent names the package version, and `get_table()` and
+  `get_downloads()` keep their answers for the session.
+* `get_taxa()` and `get_taxon()` rewritten: arguments are forwarded, no dataset
+  request is made without a taxon filter, all pages are returned by default for
+  `get_taxon()`, and long ID vectors are sent as several short requests.
+* Long ID lists for sites, datasets and downloads are sent as chunked `POST`
+  requests; `limit` and `offset` describe the whole answer.
+* New fields: collection unit `collectors`, sample `analysisunitnotes`,
+  `analysisdate` and `samplenotes`, and `area` in `set_site()`.
+* `NEOTOMA_PAGE` sets the page size for `all_data = TRUE`.
 
 -----
 ## Upgrade neotoma2 1.1.0

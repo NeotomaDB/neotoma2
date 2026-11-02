@@ -25,13 +25,17 @@ check_contacts <- function(x, ...) {
 check_contacts.contacts <- function(x, similarity = 0.5, ...) {
   checked <- map(x@contacts, function(y) {
     if (is.na(y@contactid) | !is(y@contactid, "numeric")) {
-      output <- get_contacts(name = paste0(y@givennames, " ",
-                                           y@familyname),
-                             similarity = similarity, ...)
+      output <- get_contacts(
+        name = paste0(
+          y@givennames, " ",
+          y@familyname
+        ),
+        similarity = similarity, ...
+      )
     } else {
       output <- y
     }
-    return(output)
+    output
   })
   return(checked)
 }

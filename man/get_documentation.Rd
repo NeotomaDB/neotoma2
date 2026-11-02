@@ -12,7 +12,7 @@ Open up the Neotoma R homepage.
 \examples{
 \dontrun{
 if (interactive()) {
- get_documentation()
+  get_documentation()
 }
 }
 }

@@ -15,11 +15,16 @@
 parseLocation <- function(x) {
   if (is.numeric(x)) {
     assert_that(length(na.omit(x)) == 4,
-                msg = "Numeric coordinates need to be an array of
-                       4 units, c(xmin, xmax, ymax, ymin)")
-    bbox <- st_bbox(c(xmin = x[1], xmax = x[3],
-                      ymax = x[4], ymin = x[2]),
-                    crs = st_crs(4326))
+      msg = "Numeric coordinates need to be an array of
+                       4 units, c(xmin, xmax, ymax, ymin)"
+    )
+    bbox <- st_bbox(
+      c(
+        xmin = x[1], xmax = x[3],
+        ymax = x[4], ymin = x[2]
+      ),
+      crs = st_crs(4326)
+    )
     sfc <- st_as_sfc(bbox)
     geojson <- sfc_geojson(sfc)
     geojson <- fromJSON(geojson, simplifyVector = FALSE)
@@ -37,21 +42,24 @@ parseLocation <- function(x) {
       geojson <- sfc_geojson(sfc)
       geojson <- fromJSON(geojson, simplifyVector = FALSE)
     } else {
-      geojson <- tryCatch({
-        parsed <- geojson_sf(x)
-        if (inherits(parsed, "sf")) {
-          gj <- sf_geojson(parsed)
-          fromJSON(gj, simplifyVector = FALSE)
-        } else {
-          stop("Input string is not valid GeoJSON.")
+      geojson <- tryCatch(
+        {
+          parsed <- geojson_sf(x)
+          if (inherits(parsed, "sf")) {
+            gj <- sf_geojson(parsed)
+            fromJSON(gj, simplifyVector = FALSE)
+          } else {
+            stop("Input string is not valid GeoJSON.")
+          }
+        },
+        error = function(e) {
+          stop("Error parsing GeoJSON string: ", e$message)
         }
-      }, error = function(e) {
-        stop("Error parsing GeoJSON string: ", e$message)
-      })
+      )
     }
   }
   body <- list(toJSON(geojson, auto_unbox = TRUE))
-  return(body)
+  body
 }
 
 #' @title is_wkt
@@ -66,8 +74,13 @@ parseLocation <- function(x) {
 #' @noRd
 is_wkt <- function(x) {
   is.character(x) && length(x) == 1L &&
-    grepl(paste0("^\\s*(SRID=\\d+;)?\\s*",
-                 "(POINT|LINESTRING|POLYGON|MULTIPOINT|",
-                 "MULTILINESTRING|MULTIPOLYGON|GEOMETRYCOLLECTION)"),
-          x, ignore.case = TRUE)
+    grepl(
+      paste0(
+        "^\\s*(SRID=\\d+;)?\\s*",
+        "(POINT|LINESTRING|POLYGON|MULTIPOINT|",
+        "MULTILINESTRING|MULTIPOLYGON|GEOMETRYCOLLECTION)"
+      ),
+      x,
+      ignore.case = TRUE
+    )
 }

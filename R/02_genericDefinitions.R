@@ -5,10 +5,12 @@
 #' @param object A sites object
 #' @returns datasets object specific to the metadata contained in datasets
 #' @export
-setGeneric("datasets",
-           function(object) {
-             standardGeneric(f = "datasets")
-           })
+setGeneric(
+  "datasets",
+  function(object) {
+    standardGeneric(f = "datasets")
+  }
+)
 
 #' @title Obtain coordinates from a sites object.
 #' @param obj A sites object
@@ -48,7 +50,7 @@ setGeneric("showMatch", function(x) {
 #' @export
 setGeneric("samples", function(x, chronname = NULL) {
   standardGeneric(f = "samples")
-  })
+})
 
 #' @title Obtain speleothems from a record or multiple records.
 #' @param x sites object
@@ -83,7 +85,7 @@ setGeneric("doi", function(x) {
 })
 
 #' @title Generate a data citation from a Neotoma2 object.
-#' @description The function, applied to a data object with a valid dataset, 
+#' @description The function, applied to a data object with a valid dataset,
 #' will return a properly formatted data citation for the record.
 #' @param x Object with DOIs associated to it.
 #' @returns data.frame with citation data
@@ -142,45 +144,56 @@ setGeneric("taxa", function(object) {
 #' documentation online.
 #' @md
 #' @exportMethod add_chronology
-setGeneric("add_chronology",
-           function(object, x, y) {
-             standardGeneric(f = "add_chronology")
-           })
+setGeneric(
+  "add_chronology",
+  function(object, x, y) {
+    standardGeneric(f = "add_chronology")
+  }
+)
 
 #' @title Extract collection units from a sites object
 #' @param object A sites object
 #' @importFrom methods slotNames slot
 #' @returns collunits detail from a sites object
 #' @export
-setGeneric("collunits",
-           function(object) {
-             standardGeneric(f = "collunits")
-           })
+setGeneric(
+  "collunits",
+  function(object) {
+    standardGeneric(f = "collunits")
+  }
+)
 
 #' @title Set the default chronology within a collectionunit.
 #' @param x A chronologies object.
 #' @param n The particular chronology to be used as the default.
 #' @returns sites object with new default chronology
 #' @export
-setGeneric("set_default",
-           function(x, n) {
-             standardGeneric(f = "set_default")
-           })
+setGeneric(
+  "set_default",
+  function(x, n) {
+    standardGeneric(f = "set_default")
+  }
+)
 
-#' @title Count the number of sites, datasets, or collectionunits associated with a site object.
+#' @title Count the number of sites, datasets, or collectionunits associated
+#' with a site object.
 #' @param x A \code{sites} or \code{site} object.
-#' @param level The level at which you want to count. Can be sites, collunits, or datasets. Default is sites.
+#' @param level The level at which you want to count. Can be sites, collunits,
+#' or datasets. Default is sites.
 #' @returns A count of the specified level in the object
 #' @rdname count
 #' @export
-setGeneric("count", function(x, level="sites")
-  standardGeneric("count"))
+setGeneric("count", function(x, level = "sites") {
+  standardGeneric("count")
+})
 
-#TODO
+# TODO
 # #' @title Obtain specimens from a record or multiple records.
 # #' @param x sites object
 # #' @returns data.frame with record information regarding specimens
 # #' @export
 # setGeneric("specimens", function(x) {
+# nolint start
 #   standardGeneric(f = "specimens")
+# nolint end
 #   })

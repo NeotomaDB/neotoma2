@@ -18,11 +18,14 @@ Plot sites on a leaflet map
 \examples{
 \dontrun{
 # Note that by default the limit for queries is 25 records:
-tryCatch({
-modernSites <- get_sites(keyword = "Modern")
-plotLeaflet(modernSites)
-}, error = function(e) {
- message("Neotoma server not responding. Try again later.")
-})
+tryCatch(
+  {
+    modernSites <- get_sites(keyword = "Modern")
+    plotLeaflet(modernSites)
+  },
+  error = function(e) {
+    message("Neotoma server not responding. Try again later.")
+  }
+)
 }
 }

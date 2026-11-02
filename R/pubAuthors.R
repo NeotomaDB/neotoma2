@@ -9,12 +9,15 @@
 pubAuthors <- function(x) {
   x <- cleanNULL(x)
   result <- new("authors",
-                authors = map(x$author, function(y) {
-                  new("author",
-                      author = new("contact",
-                      familyname = use_na(y$familyname, "char"),
-                      givennames = use_na(y$givennames, "char")),
-                      order = y$order)
-                }))
-  return(result)
+    authors = map(x$author, function(y) {
+      new("author",
+        author = new("contact",
+          familyname = use_na(y$familyname, "char"),
+          givennames = use_na(y$givennames, "char")
+        ),
+        order = y$order
+      )
+    })
+  )
+  result
 }

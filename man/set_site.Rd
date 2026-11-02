@@ -50,12 +50,14 @@ set Site Information for Fossil Sites
 }
 \examples{
 {
-# Create a site called "My Lake", to
-x <- sf::st_as_sf(sf::st_sfc(sf::st_point(c(5,5))))
-my_site <- set_site(sitename = "My Lake",
-                    geography = x,
-                    description = "my lake",
-                    altitude = 30)
+  # Create a site called "My Lake", to
+  x <- sf::st_as_sf(sf::st_sfc(sf::st_point(c(5, 5))))
+  my_site <- set_site(
+    sitename = "My Lake",
+    geography = x,
+    description = "my lake",
+    altitude = 30
+  )
 }
 }
 \author{

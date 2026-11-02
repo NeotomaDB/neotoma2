@@ -9,35 +9,40 @@
 #' @keywords internal
 #' @noRd
 use_na <- function(x, type) {
-  tryCatch({
-    if (type == "sf") {
-      if (is.null(x) || nrow(x) == 0) {
-        return(sf::st_as_sf(sf::st_sfc()))
-      } else {
-        return(x)
+  tryCatch(
+    {
+      if (type == "sf") {
+        if (is.null(x) || nrow(x) == 0) {
+          return(sf::st_as_sf(sf::st_sfc()))
+        } else {
+          return(x)
+        }
       }
+      if (is.null(x) || (is.atomic(x) && all(is.na(x)))) {
+        return(switch(type,
+          "char" = NA_character_,
+          "int"  = NA_integer_,
+          "list" = list(),
+          "date" = as.Date(NA_character_),
+          "bool" = NA,
+          "df"   = data.frame(),
+          NA
+        ))
+      }
+      x
+    },
+    error = function(e) {
+      # Fallback
+      switch(type,
+        "char" = NA_character_,
+        "int"  = NA_integer_,
+        "sf"   = sf::st_as_sf(sf::st_sfc()),
+        "list" = list(),
+        "date" = as.Date(NA_character_),
+        "bool" = NA,
+        "df"   = data.frame(),
+        NA
+      )
     }
-    if (is.null(x) || (is.atomic(x) && all(is.na(x)))) {
-      return(switch(type,
-                    "char" = NA_character_,
-                    "int"  = NA_integer_,
-                    "list" = list(),
-                    "date" = as.Date(NA_character_),
-                    "bool" = NA,
-                    "df"   = data.frame(),
-                    NA))
-    }
-    x
-  }, error = function(e) {
-    # Fallback
-    switch(type,
-           "char" = NA_character_,
-           "int"  = NA_integer_,
-           "sf"   = sf::st_as_sf(sf::st_sfc()),
-           "list" = list(),
-           "date" = as.Date(NA_character_),
-           "bool" = NA,
-           "df"   = data.frame(),
-           NA)
-  })
+  )
 }

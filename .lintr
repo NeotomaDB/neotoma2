@@ -1,0 +1,17 @@
+exclusions: list(
+    "tests/testthat/fixtures",
+    "R/get_sites.R" = list(commented_code_linter = 80),
+    "R/get_datasets.R" = list(commented_code_linter = 94),
+    "R/get_downloads.R" = list(commented_code_linter = 76),
+    "R/cleanNULL.R" = list(object_name_linter = Inf),
+    "R/parseLocation.R" = list(object_name_linter = Inf),
+    "R/parseURL.R" = list(object_name_linter = Inf),
+    "R/pingNeotoma.r" = list(object_name_linter = Inf),
+    "R/pubAuthors.R" = list(object_name_linter = Inf),
+    "R/testNull.R" = list(object_name_linter = Inf),
+    "R/toWide.R" = list(object_name_linter = Inf),
+    "R/set_contact.R" = list(object_name_linter = Inf),
+    "R/site-methods.R" = list(object_usage_linter = Inf),
+    "R/chronology-methods.R" = list(object_usage_linter = Inf),
+    "data-raw/prepare_vignette_data.R" = list(object_usage_linter = Inf)
+  )

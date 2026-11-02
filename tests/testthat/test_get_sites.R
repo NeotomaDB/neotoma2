@@ -53,6 +53,7 @@ test_that("all_data + loc", {
   testthat::expect_true(all(st_ids %in% br_ids$siteid))
 })
 
+# nolint start
 # context("get_sites()")
 # test_that("If B is contained in A region,
 #           get_sites() from B will be contained
@@ -61,6 +62,7 @@ test_that("all_data + loc", {
 #             # Heavy spatial query (limit = 20000); space it out to reduce load
 #             # spikes on the API.
 #             on.exit(Sys.sleep(10), add = TRUE)
+# nolint end
 #             location <- '{"type": "Polygon",
 #             "coordinates": [[
 #                 [-169, 24],
@@ -68,7 +70,10 @@ test_that("all_data + loc", {
 #                 [-52, 75],
 #                 [-52, 24],
 #                 [-169, 24]]]}'
+# nolint start
 #             usa <- get_sites(loc = location, limit = 20000)
 #             fla <- get_sites(gpid = "Florida", limit = 10000)
-#             testthat::expect_true(all(getids(fla)$siteid %in% getids(usa)$siteid))
+# nolint end
+#             testthat::expect_true(all(getids(fla)$siteid %in%
+# getids(usa)$siteid))
 #           })

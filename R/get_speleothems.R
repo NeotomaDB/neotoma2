@@ -10,9 +10,9 @@ speleo_helper <- function(sites) {
   if (length(cuids) > 0) {
     cuids <- paste0(cuids, collapse = ",")
   }
-  baseURL <- paste0("data/speleothems/", cuids)
+  base_url <- paste0("data/speleothems/", cuids)
   result <- tryCatch(
-    parseURL(baseURL),
+    parseURL(base_url),
     error = function(e) {
       message("API call failed: ", e$message)
       NULL
@@ -60,7 +60,7 @@ speleo_helper <- function(sites) {
 #'  * `sites`  A `sites` R object.
 #' @examples \dontrun{
 #' ## Find speleothems by numeric datasetid:
-#' speleo <- get_speleothems(c(2,5))
+#' speleo <- get_speleothems(c(2, 5))
 #' }
 #' @md
 #' @export

@@ -20,12 +20,14 @@
 #' @param collunits Collection units in the site
 #' @returns `site` object
 #' @examples {
-#' # Create a site called "My Lake", to
-#' x <- sf::st_as_sf(sf::st_sfc(sf::st_point(c(5,5))))
-#' my_site <- set_site(sitename = "My Lake",
-#'                     geography = x,
-#'                     description = "my lake",
-#'                     altitude = 30)
+#'   # Create a site called "My Lake", to
+#'   x <- sf::st_as_sf(sf::st_sfc(sf::st_point(c(5, 5))))
+#'   my_site <- set_site(
+#'     sitename = "My Lake",
+#'     geography = x,
+#'     description = "my lake",
+#'     altitude = 30
+#'   )
 #' }
 #' @md
 #' @export
@@ -52,6 +54,7 @@ set_site <- function(x = NA,
     x@geography <- geography
     x@altitude <- altitude
     x@geopolitical <- geopolitical
+    x@area <- area
     x@notes <- notes
     x@description <- description
     x@collunits <- collunits

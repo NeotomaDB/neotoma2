@@ -22,6 +22,8 @@
 #' @param defaultchronology best chronology model identifier to
 #' be used with this collection unit
 #' @param speleothems speleothems associated with the collection unit
+#' @param collectors list of the names of the contacts who collected the
+#' collection unit, in collection order
 #' @returns `collunit` object
 #' @description Function to create new collection unit objects for
 #' personal analysis.
@@ -29,8 +31,8 @@
 #' @export
 #' @md
 #' @examples {
-#' # Create a collunit
-#' my_collunit <- set_collunit(notes = "my lake")
+#'   # Create a collunit
+#'   my_collunit <- set_collunit(notes = "my lake")
 #' }
 set_collunit <- function(x = NA,
                          collectionunitid = NA_integer_,
@@ -47,7 +49,8 @@ set_collunit <- function(x = NA,
                          datasets = NULL,
                          chronologies = NULL,
                          defaultchronology = NA_integer_,
-                         speleothems = NULL) {
+                         speleothems = NULL,
+                         collectors = list()) {
   function_call <- match.call()
   if (suppressWarnings(is.na(x))) {
     x <- new("collunit")
@@ -71,6 +74,7 @@ set_collunit <- function(x = NA,
     x@chronologies <- chronologies
     x@defaultchronology <- defaultchronology
     x@speleothems <- speleothems
+    x@collectors <- collectors
   } else {
     if (is(x, "collunit")) {
       if (length(function_call) > 2) {

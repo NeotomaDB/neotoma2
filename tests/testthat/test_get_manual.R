@@ -19,6 +19,7 @@ test_that("Manual loading succeeds when interactive is true:", {
   })
   on.exit(options(op), add = TRUE)
   testthat::expect_null(rlang::with_interactive(get_manual(),
-                                                value = TRUE))
+    value = TRUE
+  ))
   testthat::expect_equal(seen, "https://open.neotomadb.org/manual/")
 })
