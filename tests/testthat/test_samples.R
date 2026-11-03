@@ -28,6 +28,51 @@ httptest::with_mock_api({
     testthat::expect_is(dl2, "data.frame")
     testthat::expect_gt(nrow(dl2), 0)
   })
+
+  # 4716 and 21007 both carry "Syverson-Blois: bounds"; only 4716 has
+  # "FAUNMAP 1.1", so asking for it makes 21007 fall back to its default.
+  test_that("`samples(chronname=)` flags collection units that lack it.", {
+    skip_on_cran()
+    both <- c(get_downloads(4716), get_downloads(21007))
+
+    # Without chronname the output is unchanged: no flag column.
+    plain <- samples(both)
+    testthat::expect_false("chronname_matched" %in% names(plain))
+
+    # A name present everywhere: all matched, and no warning.
+    testthat::expect_no_warning(
+      same <- samples(both, chronname = "Syverson-Blois: bounds")
+    )
+    testthat::expect_true(all(same$chronname_matched))
+    # Samples without that chronology are dropped, not recycled into extra
+    # rows (21007 has samples with no "Syverson-Blois: bounds" age).
+    testthat::expect_lte(nrow(same), nrow(plain))
+    testthat::expect_false(anyNA(same$chronologyid))
+
+    # A name present in one collection unit only: exactly one warning, that
+    # names the dataset, and the flag separates the two.
+    warns <- character()
+    mixed <- withCallingHandlers(
+      samples(both, chronname = "FAUNMAP 1.1"),
+      warning = function(w) {
+        warns <<- c(warns, conditionMessage(w))
+        invokeRestart("muffleWarning")
+      }
+    )
+    testthat::expect_length(warns, 1)
+    testthat::expect_match(warns, "'FAUNMAP 1.1' was not found")
+    testthat::expect_match(warns, "21007")
+    testthat::expect_false(grepl("4716", warns, fixed = TRUE))
+    testthat::expect_true(all(mixed$chronname_matched[mixed$datasetid == 4716]))
+    testthat::expect_false(
+      any(mixed$chronname_matched[mixed$datasetid == 21007])
+    )
+    # The fallback rows are the default-chronology rows, same as `plain`.
+    testthat::expect_equal(
+      mixed$age[mixed$datasetid == 21007],
+      plain$age[plain$datasetid == 21007]
+    )
+  })
 }) # end with_mock_api
 
 test_that("Get the samples out of dataset 15692.", {
