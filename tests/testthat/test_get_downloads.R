@@ -238,3 +238,31 @@ test_that("get_downloads(sites) lets a caller turn all_data off", {
   neotoma2:::get_downloads.sites(new("sites", sites = list()))
   expect_true(seen$all_data)
 })
+
+test_that("get_downloads returns NULL when the API sends no data", {
+  neotoma2:::neotoma_cache_clear()
+  on.exit(neotoma2:::neotoma_cache_clear())
+  local_mocked_bindings(
+    parseURL = function(x, ...) list(status = "success", data = NULL),
+    .package = "neotoma2"
+  )
+  expect_null(get_downloads(c(1, 2)))
+})
+
+test_that("the downloads cache does not cross servers", {
+  neotoma2:::neotoma_cache_clear()
+  old <- Sys.getenv("APIPOINT")
+  on.exit({
+    Sys.setenv(APIPOINT = old)
+    neotoma2:::neotoma_cache_clear()
+  })
+  log <- new.env()
+  mock_downloads(log)
+  Sys.setenv(APIPOINT = "neotoma")
+  get_downloads(1:3)
+  get_downloads(1:3)
+  expect_equal(length(log$ids), 1)
+  Sys.setenv(APIPOINT = "dev")
+  get_downloads(1:3)
+  expect_equal(length(log$ids), 2)
+})

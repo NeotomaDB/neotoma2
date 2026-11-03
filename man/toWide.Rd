@@ -41,8 +41,10 @@ samples grouped by variablename and depth/age.
 }
 \examples{
 \dontrun{
-fc_sites <- neotoma2::get_datasets(limit = 5, datasettype = "vertebrate
-fauna")
+fc_sites <- neotoma2::get_datasets(
+  limit = 5,
+  datasettype = "vertebrate fauna"
+)
 fc_ds <- fc_sites \%>\%
   neotoma2::get_downloads()
 fc_dl1 <- fc_dl[[1]]

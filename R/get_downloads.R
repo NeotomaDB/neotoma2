@@ -151,7 +151,13 @@ get_downloads.numeric <- function(x, ...) {
       "data/downloads?datasetid=",
       paste0(batch, collapse = ",")
     )
-    key <- paste(base_url, paste(names(dots), unlist(dots), collapse = "&"))
+    # The server is part of the key: `set_server()` (APIPOINT) can change the
+    # server mid-session, and its answers must not be served for another one.
+    server <- neotoma_baseurl(if (is.null(dots$use)) "neotoma" else dots$use)
+    key <- paste(
+      server, base_url,
+      paste(names(dots), unlist(dots), collapse = "&")
+    )
     # A failed request is raised as it is. It is not repeated with the
     # arguments removed: that is a different query, and it doubled the load on
     # a server that had just failed. Batches that succeeded stay cached, so a
@@ -164,13 +170,13 @@ get_downloads.numeric <- function(x, ...) {
     })
     records <- c(records, result$data)
   }
-  result <- list(status = 200, data = records, message = "Success")
-  if (!is.null(result[2]$data) || (length(result[2]$data) > 0)) {
-    output <- parse_site(result)
-    output
-  } else {
-    NULL
+  # `c(list(), NULL)` is `list()`, which is not NULL: test for records, so a
+  # response with no data returns NULL rather than an empty `sites` object.
+  if (length(records) == 0) {
+    return(NULL)
   }
+  result <- list(status = 200, data = records, message = "Success")
+  parse_site(result)
 }
 
 #' @rdname get_downloads

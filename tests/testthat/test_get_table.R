@@ -101,3 +101,24 @@ test_that("a failed get_table call is not cached", {
   suppressMessages(get_table("agetypes"))
   expect_equal(calls, 2)
 })
+
+test_that("the table cache does not cross servers", {
+  neotoma2:::neotoma_cache_clear()
+  old <- Sys.getenv("APIPOINT")
+  on.exit({
+    Sys.setenv(APIPOINT = old)
+    neotoma2:::neotoma_cache_clear()
+  })
+  calls <- 0
+  local_mocked_bindings(parseURL = function(...) {
+    calls <<- calls + 1
+    table_result()
+  }, .package = "neotoma2")
+  Sys.setenv(APIPOINT = "neotoma")
+  get_table("agetypes")
+  get_table("agetypes")
+  expect_equal(calls, 1)
+  Sys.setenv(APIPOINT = "dev")
+  get_table("agetypes")
+  expect_equal(calls, 2)
+})
