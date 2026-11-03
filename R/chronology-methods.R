@@ -7,7 +7,11 @@
 #' @returns A one-row data.frame.
 #' @noRd
 chron_summary_row <- function(x) {
+  collunitid <- attr(x, "collunitid", exact = TRUE)
+  datasetids <- attr(x, "datasetids", exact = TRUE)
   data.frame(
+    collunitid = if (is.null(collunitid)) NA else collunitid[1],
+    datasetids = if (is.null(datasetids)) NA else toString(datasetids),
     chronologyid = x@chronologyid,
     chronologyname = x@chronologyname,
     agemodel = x@agemodel,
@@ -43,6 +47,10 @@ drop_empty_chron_rows <- function(df) {
 #' @noRd
 print_chron_summary <- function(df) {
   df <- drop_empty_chron_rows(df)
+  # Only show the ids when they are known (a chronology built by hand has none).
+  idcols <- c("collunitid", "datasetids")
+  unknown <- names(df) %in% idcols & vapply(df, function(v) all(is.na(v)), NA)
+  df <- df[, !unknown, drop = FALSE]
   if (nrow(df) > 0) {
     print(df, row.names = FALSE)
   } else {
@@ -136,7 +144,15 @@ setMethod(
   f = "as.data.frame",
   signature = signature("chronology"),
   definition = function(x) {
+    # Ids stamped by `chronologies()`; `NA` for a chronology built by hand.
+    stamped <- function(name) {
+      v <- attr(x, name, exact = TRUE)
+      if (is.null(v) || length(v) == 0) NA else v
+    }
     data.frame(
+      siteid = stamped("siteid")[1],
+      collunitid = stamped("collunitid")[1],
+      datasetid = stamped("datasetids"),
       chronologyid = as.character(x@chronologyid),
       notes = x@notes,
       agemodel = x@agemodel,
@@ -211,7 +227,8 @@ setMethod(
   signature = signature(x = "chronologies"),
   definition = function(x, n) {
     assert_that(class(x) == "chronologies")
-    chron_set <- as.data.frame(x)
+    # One row per chronology: the table has one row per dataset as well.
+    chron_set <- unique(as.data.frame(x)[c("chronologyid", "modelagetype")])
     assert_that(n %in% chron_set$chronologyid,
       msg = "The new default chronology
                         must be a valid chronologyid
