@@ -19,7 +19,9 @@
 #' @importFrom purrr map
 #' @export
 get_table <- function(x, limit = 25, offset = 0, refresh = FALSE) {
-  key <- paste("table", x, limit, offset, sep = "|")
+  # The server is part of the key so `set_server()` cannot return another
+  # server's cached table.
+  key <- paste("table", neotoma_baseurl(), x, limit, offset, sep = "|")
   if (!refresh && neotoma_cache_on() && !is.null(neotoma_cache[[key]])) {
     return(neotoma_cache[[key]])
   }

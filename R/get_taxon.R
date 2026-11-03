@@ -69,7 +69,9 @@ get_taxon.default <- function(...) {
   if ("all_data" %in% names(cl)) {
     all_data <- cl$all_data
   } else {
-    all_data <- TRUE
+    # A caller who sets `limit` or `offset` is asking for a particular slice;
+    # paging through everything would silently overwrite it.
+    all_data <- !any(c("limit", "offset") %in% names(cl))
   }
   params <- get_params("taxa")
   if (!all(names(cl) %in% params)) {

@@ -126,3 +126,19 @@ test_that("a missing taxon id sends no request", {
   expect_message(expect_null(get_taxon(c(NA_real_, NA_real_))), "No taxon ID")
   expect_equal(requests, 0)
 })
+
+test_that("get_taxon keeps an explicit limit/offset slice", {
+  seen <- NULL
+  fake_parse_url <- function(x, ...) {
+    seen <<- list(...)
+    taxon_result(1)
+  }
+  local_mocked_bindings(
+    get_params = taxon_params, parseURL = fake_parse_url,
+    .package = "neotoma2"
+  )
+  get_taxon(taxonname = "Pinus%", limit = 5, offset = 10)
+  expect_false(seen$all_data)
+  expect_equal(seen$limit, 5)
+  expect_equal(seen$offset, 10)
+})
