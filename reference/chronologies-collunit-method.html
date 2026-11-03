@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">neotoma2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1.9000</span>
       </span>
     </div>
 
@@ -84,7 +84,11 @@
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>chronologies</code> from a <code>collunit</code> object</p>
+    <p><code>chronologies</code> object. A chronology belongs to a collection unit
+and is shared by all of its datasets;
+<code>as.data.frame(chronologies(x))</code> returns one row per chronology and
+dataset, with the columns <code>siteid</code>, <code>collunitid</code> and <code>datasetid</code> (<code>siteid</code>
+is <code>NA</code> unless <code>x</code> is a <code>site</code> or <code>sites</code> object).</p>
     </div>
 
   </div>
