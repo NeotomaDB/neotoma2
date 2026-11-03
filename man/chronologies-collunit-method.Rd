@@ -10,7 +10,11 @@
 \item{x}{A \code{sites} or \code{collunits} object}
 }
 \value{
-\code{chronologies} from a \code{collunit} object
+\code{chronologies} object. A chronology belongs to a collection unit
+and is shared by all of its datasets;
+\code{as.data.frame(chronologies(x))} returns one row per chronology and
+dataset, with the columns \code{siteid}, \code{collunitid} and \code{datasetid} (\code{siteid}
+is \code{NA} unless \code{x} is a \code{site} or \code{sites} object).
 }
 \description{
 Extract \code{chronologies} from a \code{site}s or \code{collunits} object.

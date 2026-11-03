@@ -108,7 +108,11 @@ setMethod(
 #' @title Extract `chronologies` from a `site`s or `collunits` object.
 #' @importFrom purrr map
 #' @param x A `sites` or `collunits` object
-#' @returns `chronologies` from a `collunit` object
+#' @returns `chronologies` object. A chronology belongs to a collection unit
+#'   and is shared by all of its datasets;
+#'   `as.data.frame(chronologies(x))` returns one row per chronology and
+#'   dataset, with the columns `siteid`, `collunitid` and `datasetid` (`siteid`
+#'   is `NA` unless `x` is a `site` or `sites` object).
 #' @md
 #' @export
 setMethod(
@@ -123,8 +127,17 @@ setMethod(
     if (no_chronologies) {
       return(new("chronologies", chronologies = list()))
     }
+    # A chronology belongs to the collection unit and is shared by every
+    # dataset in it. Remember which unit and datasets, so that
+    # `as.data.frame()` can tie each chronology back to them.
+    dsids <- if (length(x@datasets) > 0) {
+      unlist(map(x@datasets@datasets, function(d) d@datasetid))
+    } else {
+      NA
+    }
     output <- map(x@chronologies@chronologies, function(y) {
       attr(y, "collunitid") <- x$collectionunitid
+      attr(y, "datasetids") <- dsids
       y
     })
     try(
@@ -161,7 +174,13 @@ setMethod(
   signature = "site",
   definition = function(x) {
     output <- map(x@collunits@collunits, function(y) {
-      chronologies(y)
+      chrons <- chronologies(y)
+      # The collection unit does not know its site, so it is added here.
+      chrons@chronologies <- map(chrons@chronologies, function(z) {
+        attr(z, "siteid") <- x@siteid
+        z
+      })
+      chrons
     })
     if (length(output) == 0) {
       return(new("chronologies", chronologies = list()))
