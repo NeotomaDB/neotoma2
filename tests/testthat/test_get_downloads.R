@@ -15,7 +15,6 @@ test_that("get_downloads numeric", {
 })
 
 test_that("get_downloads works on a get_datasets() sites object", {
-  skip_on_ci()
   skip_if_api_unreachable()
   # Space this out; it downloads full sample data.
   on.exit(Sys.sleep(10), add = TRUE)
@@ -61,8 +60,8 @@ test_that("Faunmap dataset", {
 
 test_that("get_downloads with or without all_data works.", {
   skip_on_cran()
-  # Heavy all_data pagination + download over a UK bbox: flap-prone, skip on CI.
-  skip_on_ci()
+  # Heavy all_data pagination + download over a UK bbox: flap-prone, so it
+  # skips when the spatial endpoint is unreachable.
   skip_if_api_unreachable()
   on.exit(Sys.sleep(5), add = TRUE)
   # nolint start
@@ -86,9 +85,8 @@ test_that("get_downloads with or without all_data works.", {
 })
 
 test_that("get_downloads handles empty result", {
-  # Loops eight gpid (geopolitical) searches; heavy and flap-prone. Skip on CI,
-  # and skip locally when the API is unreachable.
-  skip_on_ci()
+  # Loops eight gpid (geopolitical) searches; heavy and flap-prone. Skips when
+  # the API is unreachable.
   skip_if_api_unreachable()
   gpids <- c(7326, 6442, 7923, 7990, 7368, 8480, 8981, 7934)
   ne_sites <- c()

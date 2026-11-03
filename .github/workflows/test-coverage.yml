@@ -14,14 +14,26 @@ jobs:
 
     # NOT_CRAN must stay true here: covr measures coverage by executing the
     # tests, so skip_on_cran() has to be a no-op or only the two offline test
-    # files would run. That means this job does hit the live Neotoma API and is
-    # inherently slow -- the cap stops it occupying a runner for GitHub's
-    # default 6 hours when the API is slow or unreachable.
+    # files would run. That means this job does hit a live Neotoma API.
+    #
+    # It talks to api-dev (APIPOINT below), not production, so a CI run never
+    # loads the public endpoint. tests/testthat/setup.R aliases the mocked
+    # recordings to the dev host so the offline tests still work.
+    #
+    # continue-on-error: the live tests depend on api-dev being up, and we are
+    # still measuring how often they flap. While that is the case a red run
+    # here should be looked at, but it must not block a pull request. Remove
+    # this line to make the job a required check once it has been stable.
+    #
+    # The cap stops the job occupying a runner for GitHub's default 6 hours
+    # when the API is slow or unreachable.
+    continue-on-error: true
     timeout-minutes: 60
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NOT_CRAN: true
+      APIPOINT: dev
       # Bound each request so an unresponsive API fails instead of hanging.
       # Kept generous enough for the genuinely slow queries (wildcard site
       # searches, large downloads) that this suite makes when the API is well.

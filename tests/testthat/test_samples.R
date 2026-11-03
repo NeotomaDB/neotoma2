@@ -6,7 +6,7 @@ context("`samples()` retrieves a data.frame of all data.")
 
 # Only the first test is mocked (small downloads 4716 + 21007). The rest pull
 # large downloads (0.9-1 MB each, plus a 13-dataset loop) that are too big to
-# ship as fixtures, so they stay live and skip on CI (GitHub Actions).
+# ship as fixtures, so they stay live (CI runs them against api-dev).
 httptest::with_mock_api({
   test_that("`samples` retrieve df.", {
     skip_on_cran()
@@ -77,7 +77,6 @@ httptest::with_mock_api({
 
 test_that("Get the samples out of dataset 15692.", {
   skip_on_cran()
-  skip_on_ci()
   df <- get_downloads(15692) %>% samples()
   testthat::expect_gt(nrow(df), 1)
   testthat::expect_is(df, "data.frame")
@@ -85,7 +84,6 @@ test_that("Get the samples out of dataset 15692.", {
 
 test_that("ggplot2 on samples", {
   skip_on_cran()
-  skip_on_ci()
   my_datasets <- get_datasets(40945)
   my_sites <- get_downloads(my_datasets)
   my_counts <- neotoma2::samples(my_sites)
@@ -116,7 +114,6 @@ for (i in datasetids) {
     i, " don't exist (in the APD)"
   ), {
     skip_on_cran()
-    skip_on_ci()
     dl <- get_datasets(i) %>%
       get_downloads()
     my_counts <- samples(dl)
@@ -147,7 +144,6 @@ for (i in datasetids) {
 
 test_that("Samples of all sites have the same nrow as the sites combined", {
   skip_on_cran()
-  skip_on_ci()
   si <- get_sites(limit = 3)
   dl <- get_downloads(si)
   df1 <- nrow(samples(dl[[1]]))

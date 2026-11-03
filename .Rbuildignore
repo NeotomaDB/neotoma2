@@ -51,3 +51,4 @@ paper.*
 ^vignettes/data/
 ^data-raw/
 ^\.lintr$
+^tests/testthat/fixtures/api-dev\.neotomadb\.org

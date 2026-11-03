@@ -5,6 +5,37 @@ library(httptest)
 # `api.neotomadb.org/` tree at the testthat root.
 httptest::.mockPaths(testthat::test_path("fixtures"))
 
+# The recordings were made against the production host, so httptest looks for
+# them under `fixtures/api.neotomadb.org/`. When the suite runs with
+# `APIPOINT=dev` (CI does, to keep load off production) the live tests talk to
+# api-dev, but the mocked tests would then look under
+# `fixtures/api-dev.neotomadb.org/` and find nothing. Alias that folder to the
+# recordings for the duration of the run. It is a symlink, git-ignored and
+# removed again afterwards; if links are not available the mocked tests simply
+# need `APIPOINT` unset, as before.
+local({
+  if (!identical(Sys.getenv("APIPOINT"), "dev")) {
+    return(invisible(NULL))
+  }
+  fixtures <- normalizePath(testthat::test_path("fixtures"))
+  alias <- file.path(fixtures, "api-dev.neotomadb.org")
+  if (dir.exists(file.path(fixtures, "api.neotomadb.org")) &&
+        !file.exists(alias)) {
+    made <- tryCatch(
+      suppressWarnings(file.symlink("api.neotomadb.org", alias)),
+      error = function(e) FALSE
+    )
+    if (isTRUE(made)) {
+      # Removed when the test run ends (or R exits).
+      reg.finalizer(
+        testthat::teardown_env(),
+        function(e) file.remove(alias),
+        onexit = TRUE
+      )
+    }
+  }
+})
+
 # Shared test fixtures, sourced once by testthat before any test file runs.
 # Single source of truth for the Brazil polygon used across several spatial
 # tests (previously duplicated inline, and in two files mislabelled as
