@@ -11,14 +11,19 @@
 
 \item{chronname}{Optional character name of a chronology to report ages
 against. When \code{NULL} (default) the Neotoma default-chronology precedence
-is applied. If the named chronology is not present for a dataset, the
-default is used and a warning is issued.}
+is applied. If the named chronology is not present for a collection unit,
+the default is used for that unit, and a single warning lists the
+affected datasets.}
 }
 \value{
-\code{data.frame} with sample records
+\code{data.frame} with sample records (plus \code{chronname_matched} when
+\code{chronname} is supplied).
 }
 \description{
-Obtain all samples within a sites object
+Obtain all samples within a sites object. When \code{chronname} is
+given the result has a logical column \code{chronname_matched}: \code{TRUE} when the
+sample's age comes from the requested chronology, \code{FALSE} when the
+collection unit does not have it and the default chronology was used.
 }
 \examples{
 \dontrun{
