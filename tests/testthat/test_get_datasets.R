@@ -26,7 +26,6 @@ test_that("get_datasets numeric vector", {
 })
 
 test_that("get_datasets with loc attribute", {
-  skip_on_ci()
   skip_if_api_unreachable()
   brazil <- '{"type": "Polygon",
             "coordinates": [[
@@ -55,7 +54,6 @@ test_that("get_datasets with loc attribute", {
 })
 
 test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
-  skip_on_ci()
   skip_if_api_unreachable()
   brazil_geojson <- paste0(
     '{"type": "Polygon", "coordinates": [[',
@@ -75,7 +73,6 @@ test_that("get_datasets accepts a WKT loc equivalently to GeoJSON", {
 })
 
 test_that("get_datasets GeoJSON loc still works (no regression)", {
-  skip_on_ci()
   skip_if_api_unreachable()
   brazil_geojson <- paste0(
     '{"type": "Polygon", "coordinates": [[',
@@ -98,8 +95,8 @@ test_that("a loc string that is neither WKT nor GeoJSON errors clearly", {
 
 test_that("all_data + loc", {
   skip_on_cran()
-  # Heavy all_data pagination over a spatial query: flap-prone, skip on CI.
-  skip_on_ci()
+  # Heavy all_data pagination over a spatial query: flap-prone, so it skips
+  # when the spatial endpoint is unreachable.
   skip_if_api_unreachable()
   # This is the one spatial test that genuinely validates `all_data` pagination
   # (the long result must be a superset of a single page), so it keeps the loop.
@@ -125,8 +122,8 @@ test_that("all_data + loc", {
 
 test_that("get_datasets with or without all_data works.", {
   skip_on_cran()
-  # Heavy all_data pagination over a UK bbox: flap-prone, skip on CI.
-  skip_on_ci()
+  # Heavy all_data pagination over a UK bbox: flap-prone, so it skips when the
+  # spatial endpoint is unreachable.
   skip_if_api_unreachable()
   on.exit(Sys.sleep(5), add = TRUE)
   # nolint start

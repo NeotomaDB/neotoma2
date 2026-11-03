@@ -4,6 +4,13 @@ library("neotoma2")
 context("Test `parseURL()` transport helpers.")
 
 test_that("neotoma_baseurl resolves servers and honors APIPOINT", {
+  # CI runs the suite with APIPOINT=dev, which would override the `use`
+  # argument checked below, so start from a clean environment.
+  old <- Sys.getenv("APIPOINT")
+  Sys.unsetenv("APIPOINT")
+  on.exit({
+    if (old == "") Sys.unsetenv("APIPOINT") else Sys.setenv(APIPOINT = old)
+  })
   expect_equal(
     neotoma2:::neotoma_baseurl("neotoma"),
     "https://api.neotomadb.org/v2.0/"
@@ -16,13 +23,11 @@ test_that("neotoma_baseurl resolves servers and honors APIPOINT", {
     neotoma2:::neotoma_baseurl("local"),
     "http://localhost:3001/v2.0/"
   )
-  old <- Sys.getenv("APIPOINT")
   Sys.setenv("APIPOINT" = "local")
   expect_equal(
     neotoma2:::neotoma_baseurl("neotoma"),
     "http://localhost:3001/v2.0/"
   )
-  if (old == "") Sys.unsetenv("APIPOINT") else Sys.setenv("APIPOINT" = old)
 })
 
 test_that("neotoma_body builds a JSON body from the query", {

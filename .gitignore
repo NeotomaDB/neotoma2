@@ -21,3 +21,5 @@ vignettes/complex_workflow*
 vignettes/simple_workflow*
 vignettes/images/
 vignettes/data/
+# Temporary alias created by tests/testthat/setup.R when APIPOINT=dev
+tests/testthat/fixtures/api-dev.neotomadb.org

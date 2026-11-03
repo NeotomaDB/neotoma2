@@ -237,12 +237,11 @@ httptest::with_mock_api({
 # Live integration tests. These download whole records that are too large to
 # ship as fixtures (the meerfeld cores alone are ~17 MB / 21k samples, and the
 # 19-site chain builds a dataset URL that exceeds the OS filename limit), so
-# they are not mocked. They skip on CRAN and on CI (GitHub Actions) but still
-# run in a local, network-connected session.
+# they are not mocked. They skip on CRAN but run on CI (against api-dev) and in
+# a local, network-connected session.
 # ---------------------------------------------------------------------------
 test_that("filter by collunitid removes samples", {
   skip_on_cran()
-  skip_on_ci()
   meer <- get_sites(sitename = "meerfeld%") %>%
     get_downloads()
   meer_ds42510 <- meer %>%
@@ -253,7 +252,6 @@ test_that("filter by collunitid removes samples", {
 
 test_that("filter by datasetid keeps collection units without the dataset", {
   skip_on_cran()
-  skip_on_ci()
   meer <- get_sites(sitename = "meerfeld%") %>%
     get_downloads()
   meer_ds42510 <- meer %>%
@@ -264,7 +262,6 @@ test_that("filter by datasetid keeps collection units without the dataset", {
 
 test_that("filter works before/after get_downloads", {
   skip_on_cran()
-  skip_on_ci()
   core_sites <- c(
     13949, 11904, 13319, 728,
     13248, 2625, 2806,
