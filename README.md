@@ -72,7 +72,8 @@ The `neotoma2` R package pulls data from the [Neotoma Paleoecology Database](htt
 
 This project is to be evaluated using the following metrics:
 
-* CRAN release 1.1.1 Gentler API client (retries, caching, paging), `get_taxa()` rewrite, new collection unit and sample fields.
+* CRAN release 1.1.2 `samples(chronname = )` fallback flag, `chronologies()` ids, fixes from the 1.1.1 review (in development, planned for December 2026 or later).
+* CRAN release 1.1.1 Gentler API client (retries, caching, paging), `get_taxa()` rewrite, new collection unit and sample fields. **DONE** November 2026.
 * CRAN release 1.1.0 **DONE** September 2026.
 * CRAN release 1.0.12 April 2026
 * CRAN release 1.0.11 Bug fix: Set examples to \dontrun{} to avoid conflicts with CRAN's policy. **DONE** December 14, 2025

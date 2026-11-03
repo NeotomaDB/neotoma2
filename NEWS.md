@@ -1,5 +1,16 @@
 # News neotoma2 R package
 
+## neotoma2 1.1.1.9000 (development version)
+
+* `samples(chronname = )` now says when it could not use the chronology you asked for. A collection unit that does not have the named chronology falls back to its default chronology, and the result has a new logical column `chronname_matched` (`FALSE` for those rows). One warning, naming the collection units and datasets, replaces the previous one-per-unit warnings, whose multi-line text showed little more than `samples(y, chronname = chronname)`. Without `chronname` the output is unchanged.
+* `samples(chronname = )` no longer fails with "arguments imply differing number of rows" when some samples of a collection unit do not carry the requested chronology. Those samples are dropped, as intended.
+* `as.data.frame(chronologies(x))` gains `siteid`, `collunitid` and `datasetid`, so each chronology can be matched to its dataset. A chronology belongs to a collection unit and is shared by all of its datasets, so the table has one row per chronology and dataset. `siteid` is `NA` when `x` is a collection unit. `show()` for `chronologies` also prints the collection unit and datasets when they are known.
+* Fixes from the review of the 1.1.1 release:
+  * `get_downloads()` returns `NULL`, as before, when the API sends no data (1.1.1 returned an empty `sites` object).
+  * The session caches of `get_downloads()` and `get_table()` are kept per server, so results fetched before `set_server()` are not returned for another server.
+  * `get_taxon(taxonname = , limit = , offset = )` returns the slice asked for, rather than every page, unless `all_data = TRUE` is set.
+  * The `toWide()` example queries `"vertebrate fauna"` (a line break had split the string).
+
 ## neotoma2 1.1.1
 
 * The default request timeout is 125 seconds, just above the 120 seconds at which the API gateway gives up, so the client and the gateway agree and a slow query  is reported once instead of being abandoned and repeated. `NEOTOMA_TIMEOUT` and `NEOTOMA_RETRIES` still override both.
